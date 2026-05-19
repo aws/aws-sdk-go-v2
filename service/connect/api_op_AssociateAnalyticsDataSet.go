@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates the specified dataset for a Amazon Connect instance with the target
-// account. You can associate only one dataset in a single call.
+// Associates the specified dataset for a Connect Customer instance with the
+// target account. You can associate only one dataset in a single call.
 func (c *Client) AssociateAnalyticsDataSet(ctx context.Context, params *AssociateAnalyticsDataSetInput, optFns ...func(*Options)) (*AssociateAnalyticsDataSetOutput, error) {
 	if params == nil {
 		params = &AssociateAnalyticsDataSetInput{}
@@ -34,8 +34,8 @@ type AssociateAnalyticsDataSetInput struct {
 	// This member is required.
 	DataSetId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -43,9 +43,9 @@ type AssociateAnalyticsDataSetInput struct {
 	InstanceId *string
 
 	// The identifier of the target account. Use to associate a dataset to a different
-	// account than the one containing the Amazon Connect instance. If not specified,
-	// by default this value is the Amazon Web Services account that has the Amazon
-	// Connect instance.
+	// account than the one containing the Connect Customer instance. If not specified,
+	// by default this value is the Amazon Web Services account that has the Connect
+	// Customer instance.
 	TargetAccountId *string
 
 	noSmithyDocumentSerde
@@ -105,7 +105,7 @@ func (c *Client) addOperationAssociateAnalyticsDataSetMiddlewares(stack *middlew
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -127,9 +127,6 @@ func (c *Client) addOperationAssociateAnalyticsDataSetMiddlewares(stack *middlew
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

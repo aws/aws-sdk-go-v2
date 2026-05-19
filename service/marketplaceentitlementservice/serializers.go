@@ -6,127 +6,137 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice/types"
 	smithy "github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/encoding/httpbinding"
-	smithyjson "github.com/aws/smithy-go/encoding/json"
+	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"path"
+	"net/http"
 )
 
-type awsAwsjson11_serializeOpGetEntitlements struct {
+type smithyRpcv2cbor_serializeOpGetEntitlements struct {
 }
 
-func (*awsAwsjson11_serializeOpGetEntitlements) ID() string {
+func (*smithyRpcv2cbor_serializeOpGetEntitlements) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpGetEntitlements) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpGetEntitlements) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*GetEntitlementsInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSMPEntitlementService/operation/GetEntitlements"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_GetEntitlementsInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSMPEntitlementService.GetEntitlements")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentGetEntitlementsInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentFilterValueList(v []string, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
+func serializeCBOR_FilterValueList(v []string) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
 	for i := range v {
-		av := array.Value()
-		av.String(v[i])
+
+		ser, err := serializeCBOR_String(v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
 	}
-	return nil
+	return vl, nil
 }
 
-func awsAwsjson11_serializeDocumentGetEntitlementFilters(v map[string][]string, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
+func serializeCBOR_GetEntitlementFilterName(v types.GetEntitlementFilterName) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
 
-	for key := range v {
-		om := object.Key(key)
-		if vv := v[key]; vv == nil {
+func serializeCBOR_GetEntitlementFilters(v map[string][]string) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	for k, vv := range v {
+		if vv == nil {
+			vm[k] = &smithycbor.Nil{}
 			continue
 		}
-		if err := awsAwsjson11_serializeDocumentFilterValueList(v[key], om); err != nil {
-			return err
+		ser, err := serializeCBOR_FilterValueList(vv)
+		if err != nil {
+			return nil, err
 		}
+		vm[k] = ser
 	}
-	return nil
+	return vm, nil
 }
 
-func awsAwsjson11_serializeOpDocumentGetEntitlementsInput(v *GetEntitlementsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Filter != nil {
-		ok := object.Key("Filter")
-		if err := awsAwsjson11_serializeDocumentGetEntitlementFilters(v.Filter, ok); err != nil {
-			return err
-		}
+func serializeCBOR_Int32(v int32) (smithycbor.Value, error) {
+	if v < 0 {
+		return smithycbor.NegInt(uint64(-v)), nil
 	}
+	return smithycbor.Uint(uint64(v)), nil
+}
 
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
-	}
+func serializeCBOR_String(v string) (smithycbor.Value, error) {
+	return smithycbor.String(v), nil
+}
 
-	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
-	}
-
+func serializeCBOR_GetEntitlementsInput(v *GetEntitlementsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
 	if v.ProductCode != nil {
-		ok := object.Key("ProductCode")
-		ok.String(*v.ProductCode)
+		ser, err := serializeCBOR_String(*v.ProductCode)
+		if err != nil {
+			return nil, err
+		}
+		vm["ProductCode"] = ser
 	}
-
-	return nil
+	if v.Filter != nil {
+		ser, err := serializeCBOR_GetEntitlementFilters(v.Filter)
+		if err != nil {
+			return nil, err
+		}
+		vm["Filter"] = ser
+	}
+	if v.NextToken != nil {
+		ser, err := serializeCBOR_String(*v.NextToken)
+		if err != nil {
+			return nil, err
+		}
+		vm["NextToken"] = ser
+	}
+	if v.MaxResults != nil {
+		ser, err := serializeCBOR_Int32(*v.MaxResults)
+		if err != nil {
+			return nil, err
+		}
+		vm["MaxResults"] = ser
+	}
+	return vm, nil
 }

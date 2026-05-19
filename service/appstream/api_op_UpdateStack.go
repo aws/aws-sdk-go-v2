@@ -39,6 +39,11 @@ type UpdateStackInput struct {
 	// endpoints.
 	AccessEndpoints []types.AccessEndpoint
 
+	// The configuration for agent access on the stack. Specify this to update agent
+	// access settings. To remove agent access, use AttributesToDelete with the
+	// AGENT_ACCESS_CONFIG value.
+	AgentAccessConfig *types.AgentAccessConfigForUpdate
+
 	// The persistent application settings for users of a stack. When these settings
 	// are enabled, changes that users make to applications and Windows settings are
 	// automatically saved after each session and applied to the next session.
@@ -46,6 +51,11 @@ type UpdateStackInput struct {
 
 	// The stack attributes to delete.
 	AttributesToDelete []types.StackAttribute
+
+	// Configuration for bidirectional URL redirection between the streaming session
+	// and the local client. Use HostToClient to redirect URLs from the remote desktop
+	// to the local browser.
+	ContentRedirection *types.ContentRedirection
 
 	// Deletes the storage connectors currently enabled for the stack.
 	//
@@ -129,7 +139,7 @@ func (c *Client) addOperationUpdateStackMiddlewares(stack *middleware.Stack, opt
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -151,9 +161,6 @@ func (c *Client) addOperationUpdateStackMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

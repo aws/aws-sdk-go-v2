@@ -53,8 +53,9 @@ func (c *Client) GetPlayerConnectionDetails(ctx context.Context, params *GetPlay
 
 type GetPlayerConnectionDetailsInput struct {
 
-	// A unique identifier for the game session for which to retrieve player
-	// connection details.
+	// An identifier for the game session that is unique across all regions for which
+	// to retrieve player connection details. The value is always a full ARN in the
+	// following format: arn:aws:gamelift:::gamesession// .
 	//
 	// This member is required.
 	GameSessionId *string
@@ -70,8 +71,9 @@ type GetPlayerConnectionDetailsInput struct {
 
 type GetPlayerConnectionDetailsOutput struct {
 
-	// A unique identifier for the game session for which the player connection
-	// details were retrieved.
+	// An identifier for the game session that is unique across all regions for which
+	// the player connection details were retrieved. The value is always a full ARN in
+	// the following format: arn:aws:gamelift:::gamesession// .
 	GameSessionId *string
 
 	// A collection of player connection detail objects, one for each requested player.
@@ -87,11 +89,11 @@ func (c *Client) addOperationGetPlayerConnectionDetailsMiddlewares(stack *middle
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetPlayerConnectionDetails{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetPlayerConnectionDetails{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetPlayerConnectionDetails{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetPlayerConnectionDetails{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -117,7 +119,7 @@ func (c *Client) addOperationGetPlayerConnectionDetailsMiddlewares(stack *middle
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -141,10 +143,10 @@ func (c *Client) addOperationGetPlayerConnectionDetailsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
+	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

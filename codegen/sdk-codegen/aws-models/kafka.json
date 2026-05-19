@@ -46,6 +46,32 @@
                 "smithy.api#documentation": "<p>Details of an Amazon MSK Cluster.</p>"
             }
         },
+        "com.amazonaws.kafka#ApacheKafkaCluster": {
+            "type": "structure",
+            "members": {
+                "ApacheKafkaClusterId": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the Apache Kafka cluster.</p>",
+                        "smithy.api#jsonName": "apacheKafkaClusterId",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BootstrapBrokerString": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The bootstrap broker string of the Apache Kafka cluster.</p>",
+                        "smithy.api#jsonName": "bootstrapBrokerString",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of an Apache Kafka Cluster.</p>"
+            }
+        },
         "com.amazonaws.kafka#BadRequestException": {
             "type": "structure",
             "members": {
@@ -1493,6 +1519,26 @@
                 "smithy.api#documentation": "<p>Information about the broker access configuration.</p>"
             }
         },
+        "com.amazonaws.kafka#ConsumerGroupOffsetSyncMode": {
+            "type": "enum",
+            "members": {
+                "LEGACY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LEGACY"
+                    }
+                },
+                "ENHANCED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENHANCED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The consumer group offset synchronization mode. With LEGACY, offsets are synchronized when producers write to the source cluster. With ENHANCED, consumer offsets are synchronized regardless of producer location. ENHANCED requires a corresponding replicator that replicates data from the target cluster to the source cluster.</p>"
+            }
+        },
         "com.amazonaws.kafka#ConsumerGroupReplication": {
             "type": "structure",
             "members": {
@@ -1524,6 +1570,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Enables synchronization of consumer group offsets to target cluster. The translated offsets will be written to topic __consumer_offsets.</p>",
                         "smithy.api#jsonName": "synchroniseConsumerGroupOffsets"
+                    }
+                },
+                "ConsumerGroupOffsetSyncMode": {
+                    "target": "com.amazonaws.kafka#ConsumerGroupOffsetSyncMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The consumer group offset synchronization mode. With LEGACY, offsets are synchronized when producers write to the source cluster. With ENHANCED, consumer offsets are synchronized regardless of producer location. ENHANCED requires a corresponding replicator that replicates data from the target cluster to the source cluster.</p>",
+                        "smithy.api#jsonName": "consumerGroupOffsetSyncMode"
                     }
                 }
             },
@@ -2120,6 +2173,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of tags to attach to created Replicator.</p>",
                         "smithy.api#jsonName": "tags"
+                    }
+                },
+                "LogDelivery": {
+                    "target": "com.amazonaws.kafka#LogDelivery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for delivering replicator logs to customer destinations.</p>",
+                        "smithy.api#jsonName": "logDelivery"
                     }
                 }
             },
@@ -3579,6 +3639,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>List of tags attached to the Replicator.</p>",
                         "smithy.api#jsonName": "tags"
+                    }
+                },
+                "LogDelivery": {
+                    "target": "com.amazonaws.kafka#LogDelivery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for log delivery.</p>",
+                        "smithy.api#jsonName": "logDelivery"
                     }
                 }
             },
@@ -5672,24 +5739,58 @@
                 "AmazonMskCluster": {
                     "target": "com.amazonaws.kafka#AmazonMskCluster",
                     "traits": {
-                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Details of an Amazon MSK Cluster.</p>",
-                        "smithy.api#jsonName": "amazonMskCluster",
-                        "smithy.api#required": {}
+                        "smithy.api#jsonName": "amazonMskCluster"
+                    }
+                },
+                "ApacheKafkaCluster": {
+                    "target": "com.amazonaws.kafka#ApacheKafkaCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of an Apache Kafka Cluster.</p>",
+                        "smithy.api#jsonName": "apacheKafkaCluster"
                     }
                 },
                 "VpcConfig": {
                     "target": "com.amazonaws.kafka#KafkaClusterClientVpcConfig",
                     "traits": {
-                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.</p>",
-                        "smithy.api#jsonName": "vpcConfig",
-                        "smithy.api#required": {}
+                        "smithy.api#jsonName": "vpcConfig"
+                    }
+                },
+                "ClientAuthentication": {
+                    "target": "com.amazonaws.kafka#KafkaClusterClientAuthentication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the client authentication used by the Apache Kafka cluster.</p>",
+                        "smithy.api#jsonName": "clientAuthentication"
+                    }
+                },
+                "EncryptionInTransit": {
+                    "target": "com.amazonaws.kafka#KafkaClusterEncryptionInTransit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of encryption in transit to the Apache Kafka cluster.</p>",
+                        "smithy.api#jsonName": "encryptionInTransit"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about Kafka Cluster to be used as source / target for replication.</p>"
+            }
+        },
+        "com.amazonaws.kafka#KafkaClusterClientAuthentication": {
+            "type": "structure",
+            "members": {
+                "SaslScram": {
+                    "target": "com.amazonaws.kafka#KafkaClusterSaslScramAuthentication",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Details for SASL/SCRAM client authentication.</p>",
+                        "smithy.api#jsonName": "saslScram",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of the client authentication used by the Apache Kafka cluster.</p>"
             }
         },
         "com.amazonaws.kafka#KafkaClusterClientVpcConfig": {
@@ -5726,6 +5827,13 @@
                         "smithy.api#jsonName": "amazonMskCluster"
                     }
                 },
+                "ApacheKafkaCluster": {
+                    "target": "com.amazonaws.kafka#ApacheKafkaCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of an Apache Kafka Cluster.</p>",
+                        "smithy.api#jsonName": "apacheKafkaCluster"
+                    }
+                },
                 "KafkaClusterAlias": {
                     "target": "com.amazonaws.kafka#__string",
                     "traits": {
@@ -5739,10 +5847,108 @@
                         "smithy.api#documentation": "<p>Details of an Amazon VPC which has network connectivity to the Apache Kafka cluster.</p>",
                         "smithy.api#jsonName": "vpcConfig"
                     }
+                },
+                "ClientAuthentication": {
+                    "target": "com.amazonaws.kafka#KafkaClusterClientAuthentication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the client authentication used by the Apache Kafka cluster.</p>",
+                        "smithy.api#jsonName": "clientAuthentication"
+                    }
+                },
+                "EncryptionInTransit": {
+                    "target": "com.amazonaws.kafka#KafkaClusterEncryptionInTransit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of encryption in transit to the Apache Kafka cluster.</p>",
+                        "smithy.api#jsonName": "encryptionInTransit"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Information about Kafka Cluster used as source / target for replication.</p>"
+            }
+        },
+        "com.amazonaws.kafka#KafkaClusterEncryptionInTransit": {
+            "type": "structure",
+            "members": {
+                "EncryptionType": {
+                    "target": "com.amazonaws.kafka#KafkaClusterEncryptionInTransitType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The type of encryption in transit to the Apache Kafka cluster.</p>",
+                        "smithy.api#jsonName": "encryptionType",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RootCaCertificate": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The root CA certificate.</p>",
+                        "smithy.api#jsonName": "rootCaCertificate"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details of encryption in transit to the Apache Kafka cluster.</p>"
+            }
+        },
+        "com.amazonaws.kafka#KafkaClusterEncryptionInTransitType": {
+            "type": "enum",
+            "members": {
+                "TLS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TLS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of encryption in transit to the Apache Kafka cluster.</p>"
+            }
+        },
+        "com.amazonaws.kafka#KafkaClusterSaslScramAuthentication": {
+            "type": "structure",
+            "members": {
+                "Mechanism": {
+                    "target": "com.amazonaws.kafka#KafkaClusterSaslScramMechanism",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The SASL/SCRAM authentication mechanism.</p>",
+                        "smithy.api#jsonName": "mechanism",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret.</p>",
+                        "smithy.api#jsonName": "secretArn",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for SASL/SCRAM client authentication.</p>"
+            }
+        },
+        "com.amazonaws.kafka#KafkaClusterSaslScramMechanism": {
+            "type": "enum",
+            "members": {
+                "SHA256": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHA256"
+                    }
+                },
+                "SHA512": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SHA512"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The SASL/SCRAM authentication mechanism.</p>"
             }
         },
         "com.amazonaws.kafka#KafkaClusterSummary": {
@@ -5753,6 +5959,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Details of an Amazon MSK Cluster.</p>",
                         "smithy.api#jsonName": "amazonMskCluster"
+                    }
+                },
+                "ApacheKafkaCluster": {
+                    "target": "com.amazonaws.kafka#ApacheKafkaCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of an Apache Kafka Cluster.</p>",
+                        "smithy.api#jsonName": "apacheKafkaCluster"
                     }
                 },
                 "KafkaClusterAlias": {
@@ -7095,6 +7308,21 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.kafka#LogDelivery": {
+            "type": "structure",
+            "members": {
+                "ReplicatorLogDelivery": {
+                    "target": "com.amazonaws.kafka#ReplicatorLogDelivery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for replicator log delivery.</p>",
+                        "smithy.api#jsonName": "replicatorLogDelivery"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for log delivery to customer destinations.</p>"
+            }
+        },
         "com.amazonaws.kafka#LoggingInfo": {
             "type": "structure",
             "members": {
@@ -7153,6 +7381,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The settings for open monitoring.</p>",
                         "smithy.api#jsonName": "openMonitoring"
+                    }
+                },
+                "ZookeeperAccess": {
+                    "target": "com.amazonaws.kafka#ZookeeperAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Access control settings for zookeeper</p>",
+                        "smithy.api#jsonName": "zookeeperAccess"
                     }
                 },
                 "KafkaVersion": {
@@ -8008,10 +8243,15 @@
                 "SourceKafkaClusterArn": {
                     "target": "com.amazonaws.kafka#__string",
                     "traits": {
-                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the source Kafka cluster.</p>",
-                        "smithy.api#jsonName": "sourceKafkaClusterArn",
-                        "smithy.api#required": {}
+                        "smithy.api#jsonName": "sourceKafkaClusterArn"
+                    }
+                },
+                "SourceKafkaClusterId": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the source Kafka cluster.</p>",
+                        "smithy.api#jsonName": "sourceKafkaClusterId"
                     }
                 },
                 "TargetCompressionType": {
@@ -8026,10 +8266,15 @@
                 "TargetKafkaClusterArn": {
                     "target": "com.amazonaws.kafka#__string",
                     "traits": {
-                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the target Kafka cluster.</p>",
-                        "smithy.api#jsonName": "targetKafkaClusterArn",
-                        "smithy.api#required": {}
+                        "smithy.api#jsonName": "targetKafkaClusterArn"
+                    }
+                },
+                "TargetKafkaClusterId": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the target Kafka cluster.</p>",
+                        "smithy.api#jsonName": "targetKafkaClusterId"
                     }
                 },
                 "TopicReplication": {
@@ -8201,6 +8446,114 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The type of replicated topic name.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ReplicatorCloudWatchLogs": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Whether log delivery to CloudWatch Logs is enabled.</p>",
+                        "smithy.api#jsonName": "enabled",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LogGroup": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch log group that is the destination for log delivery.</p>",
+                        "smithy.api#jsonName": "logGroup"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about delivering logs to CloudWatch Logs.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ReplicatorFirehose": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Whether log delivery to Firehose is enabled.</p>",
+                        "smithy.api#jsonName": "enabled",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeliveryStream": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Firehose delivery stream that is the destination for log delivery.</p>",
+                        "smithy.api#jsonName": "deliveryStream"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about delivering logs to Firehose.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ReplicatorLogDelivery": {
+            "type": "structure",
+            "members": {
+                "CloudWatchLogs": {
+                    "target": "com.amazonaws.kafka#ReplicatorCloudWatchLogs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for CloudWatch Logs delivery.</p>",
+                        "smithy.api#jsonName": "cloudWatchLogs"
+                    }
+                },
+                "Firehose": {
+                    "target": "com.amazonaws.kafka#ReplicatorFirehose",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for Firehose delivery.</p>",
+                        "smithy.api#jsonName": "firehose"
+                    }
+                },
+                "S3": {
+                    "target": "com.amazonaws.kafka#ReplicatorS3",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for S3 delivery.</p>",
+                        "smithy.api#jsonName": "s3"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for replicator log delivery.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ReplicatorS3": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>Whether log delivery to S3 is enabled.</p>",
+                        "smithy.api#jsonName": "enabled",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Bucket": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket that is the destination for log delivery.</p>",
+                        "smithy.api#jsonName": "bucket"
+                    }
+                },
+                "Prefix": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 prefix that is the destination for log delivery.</p>",
+                        "smithy.api#jsonName": "prefix"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about delivering logs to S3.</p>"
             }
         },
         "com.amazonaws.kafka#ReplicatorState": {
@@ -9690,10 +10043,8 @@
                 "ConnectivityInfo": {
                     "target": "com.amazonaws.kafka#ConnectivityInfo",
                     "traits": {
-                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Information about the broker access configuration.</p>",
-                        "smithy.api#jsonName": "connectivityInfo",
-                        "smithy.api#required": {}
+                        "smithy.api#jsonName": "connectivityInfo"
                     }
                 },
                 "CurrentVersion": {
@@ -9703,6 +10054,13 @@
                         "smithy.api#documentation": "<p>The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.</p>",
                         "smithy.api#jsonName": "currentVersion",
                         "smithy.api#required": {}
+                    }
+                },
+                "ZookeeperAccess": {
+                    "target": "com.amazonaws.kafka#ZookeeperAccess",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Access control settings for zookeeper</p>",
+                        "smithy.api#jsonName": "zookeeperAccess"
                     }
                 }
             },
@@ -10001,19 +10359,29 @@
                 "SourceKafkaClusterArn": {
                     "target": "com.amazonaws.kafka#__string",
                     "traits": {
-                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the source Kafka cluster.</p>",
-                        "smithy.api#jsonName": "sourceKafkaClusterArn",
-                        "smithy.api#required": {}
+                        "smithy.api#jsonName": "sourceKafkaClusterArn"
+                    }
+                },
+                "SourceKafkaClusterId": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the source Kafka cluster.</p>",
+                        "smithy.api#jsonName": "sourceKafkaClusterId"
                     }
                 },
                 "TargetKafkaClusterArn": {
                     "target": "com.amazonaws.kafka#__string",
                     "traits": {
-                        "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The ARN of the target Kafka cluster.</p>",
-                        "smithy.api#jsonName": "targetKafkaClusterArn",
-                        "smithy.api#required": {}
+                        "smithy.api#jsonName": "targetKafkaClusterArn"
+                    }
+                },
+                "TargetKafkaClusterId": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the target Kafka cluster.</p>",
+                        "smithy.api#jsonName": "targetKafkaClusterId"
                     }
                 },
                 "TopicReplication": {
@@ -10021,6 +10389,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Updated topic replication information.</p>",
                         "smithy.api#jsonName": "topicReplication"
+                    }
+                },
+                "LogDelivery": {
+                    "target": "com.amazonaws.kafka#LogDelivery",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for delivering replicator logs to customer destinations.</p>",
+                        "smithy.api#jsonName": "logDelivery"
                     }
                 }
             },
@@ -10739,6 +11114,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details for TLS client authentication for VPC connectivity.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ZookeeperAccess": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.kafka#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Zookeeper Access was on or off for the cluster</p>",
+                        "smithy.api#jsonName": "enabled"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Access control settings for zookeeper</p>"
             }
         },
         "com.amazonaws.kafka#ZookeeperNodeInfo": {

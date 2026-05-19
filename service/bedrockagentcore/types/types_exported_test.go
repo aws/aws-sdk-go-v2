@@ -6,7 +6,144 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/document"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	"time"
 )
+
+func ExampleABTestEvaluationConfig_outputUsage() {
+	var union types.ABTestEvaluationConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ABTestEvaluationConfigMemberOnlineEvaluationConfigArn:
+		_ = v.Value // Value is string
+
+	case *types.ABTestEvaluationConfigMemberPerVariantOnlineEvaluationConfig:
+		_ = v.Value // Value is []types.PerVariantOnlineEvaluationConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.PerVariantOnlineEvaluationConfig
+var _ *string
+
+func ExampleAgentTracesConfig_outputUsage() {
+	var union types.AgentTracesConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AgentTracesConfigMemberCloudwatchLogs:
+		_ = v.Value // Value is types.CloudWatchLogsTraceConfig
+
+	case *types.AgentTracesConfigMemberSessionSpans:
+		_ = v.Value // Value is []document.Interface
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CloudWatchLogsTraceConfig
+var _ []document.Interface
+
+func ExampleBrowserAction_outputUsage() {
+	var union types.BrowserAction
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.BrowserActionMemberKeyPress:
+		_ = v.Value // Value is types.KeyPressArguments
+
+	case *types.BrowserActionMemberKeyShortcut:
+		_ = v.Value // Value is types.KeyShortcutArguments
+
+	case *types.BrowserActionMemberKeyType:
+		_ = v.Value // Value is types.KeyTypeArguments
+
+	case *types.BrowserActionMemberMouseClick:
+		_ = v.Value // Value is types.MouseClickArguments
+
+	case *types.BrowserActionMemberMouseDrag:
+		_ = v.Value // Value is types.MouseDragArguments
+
+	case *types.BrowserActionMemberMouseMove:
+		_ = v.Value // Value is types.MouseMoveArguments
+
+	case *types.BrowserActionMemberMouseScroll:
+		_ = v.Value // Value is types.MouseScrollArguments
+
+	case *types.BrowserActionMemberScreenshot:
+		_ = v.Value // Value is types.ScreenshotArguments
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MouseClickArguments
+var _ *types.KeyPressArguments
+var _ *types.MouseMoveArguments
+var _ *types.KeyShortcutArguments
+var _ *types.KeyTypeArguments
+var _ *types.MouseScrollArguments
+var _ *types.MouseDragArguments
+var _ *types.ScreenshotArguments
+
+func ExampleBrowserActionResult_outputUsage() {
+	var union types.BrowserActionResult
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.BrowserActionResultMemberKeyPress:
+		_ = v.Value // Value is types.KeyPressResult
+
+	case *types.BrowserActionResultMemberKeyShortcut:
+		_ = v.Value // Value is types.KeyShortcutResult
+
+	case *types.BrowserActionResultMemberKeyType:
+		_ = v.Value // Value is types.KeyTypeResult
+
+	case *types.BrowserActionResultMemberMouseClick:
+		_ = v.Value // Value is types.MouseClickResult
+
+	case *types.BrowserActionResultMemberMouseDrag:
+		_ = v.Value // Value is types.MouseDragResult
+
+	case *types.BrowserActionResultMemberMouseMove:
+		_ = v.Value // Value is types.MouseMoveResult
+
+	case *types.BrowserActionResultMemberMouseScroll:
+		_ = v.Value // Value is types.MouseScrollResult
+
+	case *types.BrowserActionResultMemberScreenshot:
+		_ = v.Value // Value is types.ScreenshotResult
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MouseMoveResult
+var _ *types.KeyTypeResult
+var _ *types.MouseDragResult
+var _ *types.KeyShortcutResult
+var _ *types.MouseScrollResult
+var _ *types.KeyPressResult
+var _ *types.MouseClickResult
+var _ *types.ScreenshotResult
 
 func ExampleCertificateLocation_outputUsage() {
 	var union types.CertificateLocation
@@ -80,6 +217,42 @@ func ExampleContext_outputUsage() {
 
 var _ *types.SpanContext
 
+func ExampleDataSourceConfig_outputUsage() {
+	var union types.DataSourceConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DataSourceConfigMemberCloudWatchLogs:
+		_ = v.Value // Value is types.CloudWatchLogsSource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CloudWatchLogsSource
+
+func ExampleEvaluationContent_outputUsage() {
+	var union types.EvaluationContent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluationContentMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleEvaluationInput_outputUsage() {
 	var union types.EvaluationInput
 	// type switches can be used to check the union value
@@ -97,6 +270,24 @@ func ExampleEvaluationInput_outputUsage() {
 }
 
 var _ []document.Interface
+
+func ExampleEvaluationMetadata_outputUsage() {
+	var union types.EvaluationMetadata
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.EvaluationMetadataMemberSessionMetadata:
+		_ = v.Value // Value is []types.SessionMetadataShape
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.SessionMetadataShape
 
 func ExampleEvaluationTarget_outputUsage() {
 	var union types.EvaluationTarget
@@ -138,6 +329,362 @@ func ExampleExtractionJobMessages_outputUsage() {
 
 var _ []types.MessageMetadata
 
+func ExampleFilterValue_outputUsage() {
+	var union types.FilterValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.FilterValueMemberBooleanValue:
+		_ = v.Value // Value is bool
+
+	case *types.FilterValueMemberDoubleValue:
+		_ = v.Value // Value is float64
+
+	case *types.FilterValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *bool
+var _ *float64
+
+func ExampleGroundTruthSource_outputUsage() {
+	var union types.GroundTruthSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GroundTruthSourceMemberInline:
+		_ = v.Value // Value is types.InlineGroundTruth
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.InlineGroundTruth
+
+func ExampleGroundTruthTurnInput_outputUsage() {
+	var union types.GroundTruthTurnInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.GroundTruthTurnInputMemberPrompt:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleHarnessContentBlock_outputUsage() {
+	var union types.HarnessContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessContentBlockMemberReasoningContent:
+		_ = v.Value // Value is types.HarnessReasoningContentBlock
+
+	case *types.HarnessContentBlockMemberText:
+		_ = v.Value // Value is string
+
+	case *types.HarnessContentBlockMemberToolResult:
+		_ = v.Value // Value is types.HarnessToolResultBlock
+
+	case *types.HarnessContentBlockMemberToolUse:
+		_ = v.Value // Value is types.HarnessToolUseBlock
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.HarnessReasoningContentBlock
+var _ *string
+var _ *types.HarnessToolUseBlock
+var _ *types.HarnessToolResultBlock
+
+func ExampleHarnessContentBlockDelta_outputUsage() {
+	var union types.HarnessContentBlockDelta
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessContentBlockDeltaMemberReasoningContent:
+		_ = v.Value // Value is types.HarnessReasoningContentBlockDelta
+
+	case *types.HarnessContentBlockDeltaMemberText:
+		_ = v.Value // Value is string
+
+	case *types.HarnessContentBlockDeltaMemberToolResult:
+		_ = v.Value // Value is []types.HarnessToolResultBlockDelta
+
+	case *types.HarnessContentBlockDeltaMemberToolUse:
+		_ = v.Value // Value is types.HarnessToolUseBlockDelta
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessToolUseBlockDelta
+var _ types.HarnessReasoningContentBlockDelta
+var _ *string
+var _ []types.HarnessToolResultBlockDelta
+
+func ExampleHarnessContentBlockStart_outputUsage() {
+	var union types.HarnessContentBlockStart
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessContentBlockStartMemberToolResult:
+		_ = v.Value // Value is types.HarnessToolResultBlockStart
+
+	case *types.HarnessContentBlockStartMemberToolUse:
+		_ = v.Value // Value is types.HarnessToolUseBlockStart
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessToolUseBlockStart
+var _ *types.HarnessToolResultBlockStart
+
+func ExampleHarnessGatewayOutboundAuth_outputUsage() {
+	var union types.HarnessGatewayOutboundAuth
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessGatewayOutboundAuthMemberAwsIam:
+		_ = v.Value // Value is types.Unit
+
+	case *types.HarnessGatewayOutboundAuthMemberNone:
+		_ = v.Value // Value is types.Unit
+
+	case *types.HarnessGatewayOutboundAuthMemberOauth:
+		_ = v.Value // Value is types.OAuthCredentialProvider
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OAuthCredentialProvider
+var _ *types.Unit
+
+func ExampleHarnessModelConfiguration_outputUsage() {
+	var union types.HarnessModelConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessModelConfigurationMemberBedrockModelConfig:
+		_ = v.Value // Value is types.HarnessBedrockModelConfig
+
+	case *types.HarnessModelConfigurationMemberGeminiModelConfig:
+		_ = v.Value // Value is types.HarnessGeminiModelConfig
+
+	case *types.HarnessModelConfigurationMemberOpenAiModelConfig:
+		_ = v.Value // Value is types.HarnessOpenAiModelConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessGeminiModelConfig
+var _ *types.HarnessOpenAiModelConfig
+var _ *types.HarnessBedrockModelConfig
+
+func ExampleHarnessReasoningContentBlock_outputUsage() {
+	var union types.HarnessReasoningContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessReasoningContentBlockMemberReasoningText:
+		_ = v.Value // Value is types.HarnessReasoningTextBlock
+
+	case *types.HarnessReasoningContentBlockMemberRedactedContent:
+		_ = v.Value // Value is []byte
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessReasoningTextBlock
+var _ []byte
+
+func ExampleHarnessReasoningContentBlockDelta_outputUsage() {
+	var union types.HarnessReasoningContentBlockDelta
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessReasoningContentBlockDeltaMemberRedactedContent:
+		_ = v.Value // Value is []byte
+
+	case *types.HarnessReasoningContentBlockDeltaMemberSignature:
+		_ = v.Value // Value is string
+
+	case *types.HarnessReasoningContentBlockDeltaMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ []byte
+
+func ExampleHarnessSkill_outputUsage() {
+	var union types.HarnessSkill
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessSkillMemberPath:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleHarnessSystemContentBlock_outputUsage() {
+	var union types.HarnessSystemContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessSystemContentBlockMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleHarnessToolConfiguration_outputUsage() {
+	var union types.HarnessToolConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessToolConfigurationMemberAgentCoreBrowser:
+		_ = v.Value // Value is types.HarnessAgentCoreBrowserConfig
+
+	case *types.HarnessToolConfigurationMemberAgentCoreCodeInterpreter:
+		_ = v.Value // Value is types.HarnessAgentCoreCodeInterpreterConfig
+
+	case *types.HarnessToolConfigurationMemberAgentCoreGateway:
+		_ = v.Value // Value is types.HarnessAgentCoreGatewayConfig
+
+	case *types.HarnessToolConfigurationMemberInlineFunction:
+		_ = v.Value // Value is types.HarnessInlineFunctionConfig
+
+	case *types.HarnessToolConfigurationMemberRemoteMcp:
+		_ = v.Value // Value is types.HarnessRemoteMcpConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessInlineFunctionConfig
+var _ *types.HarnessAgentCoreGatewayConfig
+var _ *types.HarnessRemoteMcpConfig
+var _ *types.HarnessAgentCoreCodeInterpreterConfig
+var _ *types.HarnessAgentCoreBrowserConfig
+
+func ExampleHarnessToolResultBlockDelta_outputUsage() {
+	var union types.HarnessToolResultBlockDelta
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessToolResultBlockDeltaMemberJson:
+		_ = v.Value // Value is document.Interface
+
+	case *types.HarnessToolResultBlockDeltaMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ document.Interface
+
+func ExampleHarnessToolResultContentBlock_outputUsage() {
+	var union types.HarnessToolResultContentBlock
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.HarnessToolResultContentBlockMemberJson:
+		_ = v.Value // Value is document.Interface
+
+	case *types.HarnessToolResultContentBlockMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ document.Interface
+
 func ExampleInvokeAgentRuntimeCommandStreamOutput_outputUsage() {
 	var union types.InvokeAgentRuntimeCommandStreamOutput
 	// type switches can be used to check the union value
@@ -155,6 +702,44 @@ func ExampleInvokeAgentRuntimeCommandStreamOutput_outputUsage() {
 }
 
 var _ *types.ResponseChunk
+
+func ExampleInvokeHarnessStreamOutput_outputUsage() {
+	var union types.InvokeHarnessStreamOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InvokeHarnessStreamOutputMemberContentBlockDelta:
+		_ = v.Value // Value is types.HarnessContentBlockDeltaEvent
+
+	case *types.InvokeHarnessStreamOutputMemberContentBlockStart:
+		_ = v.Value // Value is types.HarnessContentBlockStartEvent
+
+	case *types.InvokeHarnessStreamOutputMemberContentBlockStop:
+		_ = v.Value // Value is types.HarnessContentBlockStopEvent
+
+	case *types.InvokeHarnessStreamOutputMemberMessageStart:
+		_ = v.Value // Value is types.HarnessMessageStartEvent
+
+	case *types.InvokeHarnessStreamOutputMemberMessageStop:
+		_ = v.Value // Value is types.HarnessMessageStopEvent
+
+	case *types.InvokeHarnessStreamOutputMemberMetadata:
+		_ = v.Value // Value is types.HarnessMetadataEvent
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.HarnessContentBlockDeltaEvent
+var _ *types.HarnessMetadataEvent
+var _ *types.HarnessContentBlockStartEvent
+var _ *types.HarnessMessageStopEvent
+var _ *types.HarnessContentBlockStopEvent
+var _ *types.HarnessMessageStartEvent
 
 func ExampleLeftExpression_outputUsage() {
 	var union types.LeftExpression
@@ -174,6 +759,66 @@ func ExampleLeftExpression_outputUsage() {
 
 var _ *string
 
+func ExampleLinkedAccount_outputUsage() {
+	var union types.LinkedAccount
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.LinkedAccountMemberDeveloperJwt:
+		_ = v.Value // Value is types.LinkedAccountDeveloperJwt
+
+	case *types.LinkedAccountMemberEmail:
+		_ = v.Value // Value is types.LinkedAccountEmail
+
+	case *types.LinkedAccountMemberOAuth2:
+		_ = v.Value // Value is types.LinkedAccountOAuth2
+
+	case *types.LinkedAccountMemberSms:
+		_ = v.Value // Value is types.LinkedAccountSms
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.LinkedAccountDeveloperJwt
+var _ *types.LinkedAccountSms
+var _ *types.LinkedAccountEmail
+var _ types.LinkedAccountOAuth2
+
+func ExampleLinkedAccountOAuth2_outputUsage() {
+	var union types.LinkedAccountOAuth2
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.LinkedAccountOAuth2MemberApple:
+		_ = v.Value // Value is types.OAuth2Authentication
+
+	case *types.LinkedAccountOAuth2MemberGithub:
+		_ = v.Value // Value is types.OAuth2Authentication
+
+	case *types.LinkedAccountOAuth2MemberGoogle:
+		_ = v.Value // Value is types.OAuth2Authentication
+
+	case *types.LinkedAccountOAuth2MemberTelegram:
+		_ = v.Value // Value is types.OAuth2Authentication
+
+	case *types.LinkedAccountOAuth2MemberX:
+		_ = v.Value // Value is types.OAuth2Authentication
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.OAuth2Authentication
+
 func ExampleMemoryContent_outputUsage() {
 	var union types.MemoryContent
 	// type switches can be used to check the union value
@@ -192,6 +837,72 @@ func ExampleMemoryContent_outputUsage() {
 
 var _ *string
 
+func ExampleMemoryRecordLeftExpression_outputUsage() {
+	var union types.MemoryRecordLeftExpression
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MemoryRecordLeftExpressionMemberMetadataKey:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleMemoryRecordMetadataValue_outputUsage() {
+	var union types.MemoryRecordMetadataValue
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MemoryRecordMetadataValueMemberDateTimeValue:
+		_ = v.Value // Value is time.Time
+
+	case *types.MemoryRecordMetadataValueMemberNumberValue:
+		_ = v.Value // Value is float64
+
+	case *types.MemoryRecordMetadataValueMemberStringListValue:
+		_ = v.Value // Value is []string
+
+	case *types.MemoryRecordMetadataValueMemberStringValue:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *float64
+var _ []string
+var _ *time.Time
+
+func ExampleMemoryRecordRightExpression_outputUsage() {
+	var union types.MemoryRecordRightExpression
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.MemoryRecordRightExpressionMemberMetadataValue:
+		_ = v.Value // Value is types.MemoryRecordMetadataValue
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ types.MemoryRecordMetadataValue
+
 func ExampleMetadataValue_outputUsage() {
 	var union types.MetadataValue
 	// type switches can be used to check the union value
@@ -209,6 +920,24 @@ func ExampleMetadataValue_outputUsage() {
 }
 
 var _ *string
+
+func ExampleOutputConfig_outputUsage() {
+	var union types.OutputConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OutputConfigMemberCloudWatchConfig:
+		_ = v.Value // Value is types.CloudWatchOutputConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CloudWatchOutputConfig
 
 func ExamplePayloadType_outputUsage() {
 	var union types.PayloadType
@@ -231,6 +960,104 @@ func ExamplePayloadType_outputUsage() {
 
 var _ document.Interface
 var _ *types.Conversational
+
+func ExamplePaymentInput_outputUsage() {
+	var union types.PaymentInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PaymentInputMemberCryptoX402:
+		_ = v.Value // Value is types.CryptoX402PaymentInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CryptoX402PaymentInput
+
+func ExamplePaymentInstrumentDetails_outputUsage() {
+	var union types.PaymentInstrumentDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PaymentInstrumentDetailsMemberEmbeddedCryptoWallet:
+		_ = v.Value // Value is types.EmbeddedCryptoWallet
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.EmbeddedCryptoWallet
+
+func ExamplePaymentOutput_outputUsage() {
+	var union types.PaymentOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PaymentOutputMemberCryptoX402:
+		_ = v.Value // Value is types.CryptoX402PaymentOutput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CryptoX402PaymentOutput
+
+func ExamplePaymentTokenRequestInput_outputUsage() {
+	var union types.PaymentTokenRequestInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PaymentTokenRequestInputMemberCoinbaseCdpTokenRequest:
+		_ = v.Value // Value is types.CoinbaseCdpTokenRequestInput
+
+	case *types.PaymentTokenRequestInputMemberStripePrivyTokenRequest:
+		_ = v.Value // Value is types.StripePrivyTokenRequestInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.StripePrivyTokenRequestInput
+var _ *types.CoinbaseCdpTokenRequestInput
+
+func ExamplePaymentTokenResponseOutput_outputUsage() {
+	var union types.PaymentTokenResponseOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.PaymentTokenResponseOutputMemberCoinbaseCdpTokenResponse:
+		_ = v.Value // Value is types.CoinbaseCdpTokenResponseOutput
+
+	case *types.PaymentTokenResponseOutputMemberStripePrivyTokenResponse:
+		_ = v.Value // Value is types.StripePrivyTokenResponseOutput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CoinbaseCdpTokenResponseOutput
+var _ *types.StripePrivyTokenResponseOutput
 
 func ExampleProxy_outputUsage() {
 	var union types.Proxy
@@ -267,6 +1094,50 @@ func ExampleProxyCredentials_outputUsage() {
 }
 
 var _ *types.BasicAuth
+
+func ExampleRecommendationConfig_outputUsage() {
+	var union types.RecommendationConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RecommendationConfigMemberSystemPromptRecommendationConfig:
+		_ = v.Value // Value is types.SystemPromptRecommendationConfig
+
+	case *types.RecommendationConfigMemberToolDescriptionRecommendationConfig:
+		_ = v.Value // Value is types.ToolDescriptionRecommendationConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ToolDescriptionRecommendationConfig
+var _ *types.SystemPromptRecommendationConfig
+
+func ExampleRecommendationResult_outputUsage() {
+	var union types.RecommendationResult
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RecommendationResultMemberSystemPromptRecommendationResult:
+		_ = v.Value // Value is types.SystemPromptRecommendationResult
+
+	case *types.RecommendationResultMemberToolDescriptionRecommendationResult:
+		_ = v.Value // Value is types.ToolDescriptionRecommendationResult
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.SystemPromptRecommendationResult
+var _ *types.ToolDescriptionRecommendationResult
 
 func ExampleResourceLocation_outputUsage() {
 	var union types.ResourceLocation
@@ -321,6 +1192,68 @@ func ExampleStreamUpdate_outputUsage() {
 }
 
 var _ *types.AutomationStreamUpdate
+
+func ExampleSystemPromptConfig_outputUsage() {
+	var union types.SystemPromptConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SystemPromptConfigMemberConfigurationBundle:
+		_ = v.Value // Value is types.SystemPromptConfigurationBundle
+
+	case *types.SystemPromptConfigMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ *types.SystemPromptConfigurationBundle
+
+func ExampleToolDescriptionConfig_outputUsage() {
+	var union types.ToolDescriptionConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ToolDescriptionConfigMemberText:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
+func ExampleToolDescriptionSource_outputUsage() {
+	var union types.ToolDescriptionSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ToolDescriptionSourceMemberConfigurationBundle:
+		_ = v.Value // Value is types.ToolDescriptionConfigurationBundle
+
+	case *types.ToolDescriptionSourceMemberToolDescriptionText:
+		_ = v.Value // Value is types.ToolDescriptionTextInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ToolDescriptionConfigurationBundle
+var _ *types.ToolDescriptionTextInput
 
 func ExampleUserIdentifier_outputUsage() {
 	var union types.UserIdentifier

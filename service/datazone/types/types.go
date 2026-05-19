@@ -938,6 +938,12 @@ type BusinessNameGenerationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The information about a cell in a notebook run in Amazon SageMaker Unified
+// Studio.
+type CellInformation struct {
+	noSmithyDocumentSerde
+}
+
 // Part of the provisioning properties of the environment blueprint.
 type CloudFormationProperties struct {
 
@@ -955,6 +961,18 @@ type ColumnFilterConfiguration struct {
 
 	// Specifies whether to include column names.
 	IncludedColumnNames []string
+
+	noSmithyDocumentSerde
+}
+
+// The compute configuration for a notebook run in Amazon SageMaker Unified Studio.
+type ComputeConfig struct {
+
+	// The environment version for the notebook run compute.
+	EnvironmentVersion *string
+
+	// The instance type for the notebook run compute.
+	InstanceType *string
 
 	noSmithyDocumentSerde
 }
@@ -991,6 +1009,18 @@ type ConfigurableEnvironmentAction struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of a connection.
+type Configuration struct {
+
+	// The classification of the connection configuration.
+	Classification *string
+
+	// The properties of the connection configuration.
+	Properties map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // The credentials of a connection.
 type ConnectionCredentials struct {
 
@@ -1018,6 +1048,7 @@ type ConnectionCredentials struct {
 //	ConnectionPropertiesInputMemberGlueProperties
 //	ConnectionPropertiesInputMemberHyperPodProperties
 //	ConnectionPropertiesInputMemberIamProperties
+//	ConnectionPropertiesInputMemberLakehouseProperties
 //	ConnectionPropertiesInputMemberMlflowProperties
 //	ConnectionPropertiesInputMemberRedshiftProperties
 //	ConnectionPropertiesInputMemberS3Properties
@@ -1073,6 +1104,15 @@ type ConnectionPropertiesInputMemberIamProperties struct {
 }
 
 func (*ConnectionPropertiesInputMemberIamProperties) isConnectionPropertiesInput() {}
+
+// The lakehouse properties of a connection.
+type ConnectionPropertiesInputMemberLakehouseProperties struct {
+	Value LakehousePropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberLakehouseProperties) isConnectionPropertiesInput() {}
 
 // The MLflow properties of a connection.
 type ConnectionPropertiesInputMemberMlflowProperties struct {
@@ -1146,6 +1186,7 @@ func (*ConnectionPropertiesInputMemberWorkflowsServerlessProperties) isConnectio
 //	ConnectionPropertiesOutputMemberGlueProperties
 //	ConnectionPropertiesOutputMemberHyperPodProperties
 //	ConnectionPropertiesOutputMemberIamProperties
+//	ConnectionPropertiesOutputMemberLakehouseProperties
 //	ConnectionPropertiesOutputMemberMlflowProperties
 //	ConnectionPropertiesOutputMemberRedshiftProperties
 //	ConnectionPropertiesOutputMemberS3Properties
@@ -1201,6 +1242,15 @@ type ConnectionPropertiesOutputMemberIamProperties struct {
 }
 
 func (*ConnectionPropertiesOutputMemberIamProperties) isConnectionPropertiesOutput() {}
+
+// The lakehouse properties of a connection.
+type ConnectionPropertiesOutputMemberLakehouseProperties struct {
+	Value LakehousePropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberLakehouseProperties) isConnectionPropertiesOutput() {}
 
 // The MLflow properties of a connection.
 type ConnectionPropertiesOutputMemberMlflowProperties struct {
@@ -1274,6 +1324,7 @@ func (*ConnectionPropertiesOutputMemberWorkflowsServerlessProperties) isConnecti
 //	ConnectionPropertiesPatchMemberAthenaProperties
 //	ConnectionPropertiesPatchMemberGlueProperties
 //	ConnectionPropertiesPatchMemberIamProperties
+//	ConnectionPropertiesPatchMemberLakehouseProperties
 //	ConnectionPropertiesPatchMemberMlflowProperties
 //	ConnectionPropertiesPatchMemberRedshiftProperties
 //	ConnectionPropertiesPatchMemberS3Properties
@@ -1317,6 +1368,15 @@ type ConnectionPropertiesPatchMemberIamProperties struct {
 }
 
 func (*ConnectionPropertiesPatchMemberIamProperties) isConnectionPropertiesPatch() {}
+
+// The lakehouse properties of a connection properties patch.
+type ConnectionPropertiesPatchMemberLakehouseProperties struct {
+	Value LakehousePropertiesPatch
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesPatchMemberLakehouseProperties) isConnectionPropertiesPatch() {}
 
 // The MLflow properties of a connection.
 type ConnectionPropertiesPatchMemberMlflowProperties struct {
@@ -1386,6 +1446,9 @@ type ConnectionSummary struct {
 	//
 	// This member is required.
 	Type ConnectionType
+
+	// The configurations of a connection summary.
+	Configurations []Configuration
 
 	// The environment ID of a connection.
 	EnvironmentId *string
@@ -2356,6 +2419,19 @@ type EnvironmentBlueprintSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The environment configuration for a notebook run in Amazon SageMaker Unified
+// Studio.
+type EnvironmentConfig struct {
+
+	// The image version for the notebook run environment.
+	ImageVersion *string
+
+	// The package configuration for the notebook run environment.
+	PackageConfig *PackageConfig
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of an environment.
 type EnvironmentConfiguration struct {
 
@@ -2597,6 +2673,9 @@ type EnvironmentSummary struct {
 
 	// The configuration ID with which the environment is created.
 	EnvironmentConfigurationId *string
+
+	// The configuration name with which the environment is created.
+	EnvironmentConfigurationName *string
 
 	// The identifier of the environment profile with which the environment was
 	// created.
@@ -3341,6 +3420,14 @@ type GroupProfileSummary struct {
 	// The ID of a group profile.
 	Id *string
 
+	// The ARN of the IAM role principal. This role is associated with the group
+	// profile.
+	RolePrincipalArn *string
+
+	// The unique identifier of the IAM role principal. This principal is associated
+	// with the group profile.
+	RolePrincipalId *string
+
 	// The status of a group profile.
 	Status GroupProfileStatus
 
@@ -3414,8 +3501,15 @@ type IamUserProfileDetails struct {
 	// The ARN of the IAM user.
 	Arn *string
 
+	// The identifier of the group profile associated with the IAM user profile. This
+	// links the user to a specific group profile within the Amazon DataZone domain.
+	GroupProfileId *string
+
 	// The principal ID as part of the IAM user profile details.
 	PrincipalId *string
+
+	// The session name for IAM role sessions.
+	SessionName *string
 
 	noSmithyDocumentSerde
 }
@@ -3553,6 +3647,36 @@ type LakeFormationConfiguration struct {
 	// bucket(s) for Data Lake using Amazon Web Services Lake Formation hybrid access
 	// mode.
 	LocationRegistrationRole *string
+
+	noSmithyDocumentSerde
+}
+
+// The lakehouse properties of a connection.
+type LakehousePropertiesInput struct {
+
+	// Specifies whether to enable Glue lineage sync for tables managed by Glue
+	// crawlers.
+	GlueLineageSyncEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// The lakehouse properties of a connection.
+type LakehousePropertiesOutput struct {
+
+	// Specifies whether Glue lineage sync is enabled for tables managed by Glue
+	// crawlers.
+	GlueLineageSyncEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
+// The lakehouse properties of a connection properties patch.
+type LakehousePropertiesPatch struct {
+
+	// Specifies whether to enable Glue lineage sync for tables managed by Glue
+	// crawlers.
+	GlueLineageSyncEnabled *bool
 
 	noSmithyDocumentSerde
 }
@@ -4245,6 +4369,165 @@ type NameIdentifier struct {
 	noSmithyDocumentSerde
 }
 
+// The network configuration for a notebook run in Amazon SageMaker Unified Studio.
+type NetworkConfig struct {
+
+	// The network access type for the notebook run. Valid values are
+	// PUBLIC_INTERNET_ONLY and VPC_ONLY .
+	//
+	// This member is required.
+	NetworkAccessType NetworkAccessType
+
+	// The identifiers of the security groups for the notebook run. You can specify up
+	// to 5 security groups.
+	SecurityGroupIds []string
+
+	// The identifiers of the subnets for the notebook run. You can specify up to 10
+	// subnets.
+	SubnetIds []string
+
+	// The identifier of the VPC for the notebook run. This is required when the
+	// network access type is VPC_ONLY .
+	VpcId *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details of a notebook in Amazon SageMaker Unified Studio.
+type NotebookError struct {
+
+	// The error message. The maximum length is 256 characters.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details of a failed notebook export in Amazon SageMaker Unified
+// Studio.
+type NotebookExportError struct {
+
+	// The error message. The maximum length is 256 characters.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details of a failed notebook run in Amazon SageMaker Unified Studio.
+type NotebookRunError struct {
+
+	// The error message. The maximum length is 1024 characters.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of a notebook run in Amazon SageMaker Unified Studio.
+type NotebookRunSummary struct {
+
+	// The identifier of the Amazon SageMaker Unified Studio domain.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The identifier of the notebook run.
+	//
+	// This member is required.
+	Id *string
+
+	// The identifier of the notebook.
+	//
+	// This member is required.
+	NotebookId *string
+
+	// The identifier of the project that owns the notebook run.
+	//
+	// This member is required.
+	OwningProjectId *string
+
+	// The status of the notebook run.
+	//
+	// This member is required.
+	Status NotebookRunStatus
+
+	// The timestamp of when the notebook run completed.
+	CompletedAt *time.Time
+
+	// The timestamp of when the notebook run was created.
+	CreatedAt *time.Time
+
+	// The identifier of the user who created the notebook run.
+	CreatedBy *string
+
+	// The identifier of the schedule associated with the notebook run.
+	ScheduleId *string
+
+	// The timestamp of when the notebook run started executing.
+	StartedAt *time.Time
+
+	// The source that triggered the notebook run.
+	TriggerSource *TriggerSource
+
+	// The timestamp of when the notebook run was last updated.
+	UpdatedAt *time.Time
+
+	// The identifier of the user who last updated the notebook run.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of a notebook in Amazon SageMaker Unified Studio.
+type NotebookSummary struct {
+
+	// The identifier of the Amazon SageMaker Unified Studio domain.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The identifier of the notebook.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the notebook.
+	//
+	// This member is required.
+	Name *string
+
+	// The identifier of the project that owns the notebook.
+	//
+	// This member is required.
+	OwningProjectId *string
+
+	// The status of the notebook.
+	//
+	// This member is required.
+	Status NotebookStatus
+
+	// The timestamp of when the notebook was created.
+	CreatedAt *time.Time
+
+	// The identifier of the user who created the notebook.
+	CreatedBy *string
+
+	// The description of the notebook.
+	Description *string
+
+	// The timestamp of when the notebook was last updated.
+	UpdatedAt *time.Time
+
+	// The identifier of the user who last updated the notebook.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies that a value is not equal to the expression.
 type NotEqualToExpression struct {
 
@@ -4427,6 +4710,24 @@ type OpenLineageRunEventSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The output location for a notebook export in Amazon SageMaker Unified Studio.
+//
+// The following types satisfy this interface:
+//
+//	OutputLocationMemberS3
+type OutputLocation interface {
+	isOutputLocation()
+}
+
+// The Amazon Simple Storage Service destination for the notebook export.
+type OutputLocationMemberS3 struct {
+	Value S3Destination
+
+	noSmithyDocumentSerde
+}
+
+func (*OutputLocationMemberS3) isOutputLocation() {}
+
 // The grant details of the override domain unit owners policy.
 type OverrideDomainUnitOwnersPolicyGrantDetail struct {
 
@@ -4541,6 +4842,22 @@ type OwnerUserPropertiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+// The package configuration for a notebook run environment in Amazon SageMaker
+// Unified Studio.
+type PackageConfig struct {
+
+	// The package manager for the notebook run environment. The default value is UV .
+	//
+	// This member is required.
+	PackageManager PackageManager
+
+	// The package specification content for the notebook run environment. The maximum
+	// length is 10240 characters.
+	PackageSpecification *string
+
+	noSmithyDocumentSerde
+}
+
 // The asset permissions.
 //
 // The following types satisfy this interface:
@@ -4591,6 +4908,9 @@ type PhysicalEndpoint struct {
 
 	// The Amazon Web Services Glue connection name.
 	GlueConnectionName *string
+
+	// The Amazon Web Services Glue connection names in the physical endpoint.
+	GlueConnectionNames []string
 
 	// The host in the physical endpoints of a connection.
 	Host *string
@@ -4882,6 +5202,23 @@ type ProjectMember struct {
 	noSmithyDocumentSerde
 }
 
+// A map of user or group profiles to designations that need to be assigned in the
+// project.
+type ProjectMembershipAssignment struct {
+
+	// The designation of the project membership.
+	//
+	// This member is required.
+	Designation UserDesignation
+
+	// The details about a project member.
+	//
+	// This member is required.
+	Member Member
+
+	noSmithyDocumentSerde
+}
+
 // The project policy grant principal.
 type ProjectPolicyGrantPrincipal struct {
 
@@ -4989,6 +5326,9 @@ type ProjectSummary struct {
 	// Specifies the error message that is returned if the operation cannot be
 	// successfully completed.
 	FailureReasons []ProjectDeletionError
+
+	// The category of the project.
+	ProjectCategory *string
 
 	// The status of the project.
 	ProjectStatus ProjectStatus
@@ -5816,6 +6156,16 @@ type RunStatisticsForAssets struct {
 	noSmithyDocumentSerde
 }
 
+// The Amazon Simple Storage Service destination for a notebook export in Amazon
+// SageMaker Unified Studio.
+type S3Destination struct {
+
+	// The Amazon Simple Storage Service URI of the exported notebook.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // The Amazon S3 properties of a connection.
 type S3PropertiesInput struct {
 
@@ -5823,6 +6173,9 @@ type S3PropertiesInput struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	// Specifies whether to register the Amazon S3 Access Grant location.
+	RegisterS3AccessGrantLocation *bool
 
 	// The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties
 	// of a connection.
@@ -5842,6 +6195,9 @@ type S3PropertiesOutput struct {
 	// The error message that gets displayed.
 	ErrorMessage *string
 
+	// Specifies whether to register the Amazon S3 Access Grant location.
+	RegisterS3AccessGrantLocation *bool
+
 	// The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties
 	// of a connection.
 	S3AccessGrantLocationId *string
@@ -5859,6 +6215,9 @@ type S3PropertiesPatch struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	// Specifies whether to register the Amazon S3 Access Grant location.
+	RegisterS3AccessGrantLocation *bool
 
 	// The Amazon S3 Access Grant location ID that's part of the Amazon S3 properties
 	// patch of a connection.
@@ -6111,6 +6470,24 @@ type SingleSignOn struct {
 	noSmithyDocumentSerde
 }
 
+// The source location for a notebook import in Amazon SageMaker Unified Studio.
+//
+// The following types satisfy this interface:
+//
+//	SourceLocationMemberS3
+type SourceLocation interface {
+	isSourceLocation()
+}
+
+// The Amazon Simple Storage Service URI of the notebook source file.
+type SourceLocationMemberS3 struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SourceLocationMemberS3) isSourceLocation() {}
+
 // The Spark EMR properties.
 type SparkEmrPropertiesInput struct {
 
@@ -6235,8 +6612,14 @@ type SparkGluePropertiesInput struct {
 	AdditionalArgs *SparkGlueArgs
 
 	// The Amazon Web Services Glue connection name in the Spark Amazon Web Services
-	// Glue properties.
+	// Glue properties. Specify either glueConnectionName or glueConnectionNames , but
+	// not both.
 	GlueConnectionName *string
+
+	// The Amazon Web Services Glue connection names in the Spark Amazon Web Services
+	// Glue properties. Specify either glueConnectionName or glueConnectionNames , but
+	// not both.
+	GlueConnectionNames []string
 
 	// The Amazon Web Services Glue version in the Spark Amazon Web Services Glue
 	// properties.
@@ -6269,6 +6652,10 @@ type SparkGluePropertiesOutput struct {
 	// The Amazon Web Services Glue connection name in the Spark Amazon Web Services
 	// Glue properties.
 	GlueConnectionName *string
+
+	// The Amazon Web Services Glue connection names in the Spark Amazon Web Services
+	// Glue properties.
+	GlueConnectionNames []string
 
 	// The Amazon Web Services Glue version in the Spark Amazon Web Services Glue
 	// properties.
@@ -6303,6 +6690,18 @@ type SsoUserProfileDetails struct {
 
 	// The username as part of the SSO user profile detail.
 	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// The storage configuration for a notebook run in Amazon SageMaker Unified Studio.
+type StorageConfig struct {
+
+	// The ARN of the KMS key used for encryption.
+	KmsKeyArn *string
+
+	// The Amazon Simple Storage Service path for the project storage.
+	ProjectS3Path *string
 
 	noSmithyDocumentSerde
 }
@@ -6966,6 +7365,17 @@ type TextMatchItem struct {
 	noSmithyDocumentSerde
 }
 
+// The timeout configuration for a notebook run in Amazon SageMaker Unified Studio.
+type TimeoutConfig struct {
+
+	// The timeout for the notebook run, in minutes. The minimum value is 60 minutes
+	// (1 hour), the maximum value is 1440 minutes (24 hours), and the default value is
+	// 720 minutes (12 hours).
+	RunTimeoutInMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
 // The time series data points form.
 type TimeSeriesDataPointFormInput struct {
 
@@ -7070,6 +7480,19 @@ type Topic struct {
 	//
 	// This member is required.
 	Subject *string
+
+	noSmithyDocumentSerde
+}
+
+// The source that triggered a notebook run in Amazon SageMaker Unified Studio.
+type TriggerSource struct {
+
+	// The name of the trigger source.
+	Name *string
+
+	// The type of the trigger source. Valid values are MANUAL , SCHEDULED , and
+	// WORKFLOW .
+	Type TriggerSourceType
 
 	noSmithyDocumentSerde
 }
@@ -7255,6 +7678,7 @@ func (*UnknownUnionMember) isMatchRationaleItem()            {}
 func (*UnknownUnionMember) isMember()                        {}
 func (*UnknownUnionMember) isMemberDetails()                 {}
 func (*UnknownUnionMember) isModel()                         {}
+func (*UnknownUnionMember) isOutputLocation()                {}
 func (*UnknownUnionMember) isOwnerProperties()               {}
 func (*UnknownUnionMember) isOwnerPropertiesOutput()         {}
 func (*UnknownUnionMember) isPermissions()                   {}
@@ -7276,6 +7700,7 @@ func (*UnknownUnionMember) isSearchInventoryResultItem()     {}
 func (*UnknownUnionMember) isSearchResultItem()              {}
 func (*UnknownUnionMember) isSearchTypesResultItem()         {}
 func (*UnknownUnionMember) isSelfGrantStatusOutput()         {}
+func (*UnknownUnionMember) isSourceLocation()                {}
 func (*UnknownUnionMember) isSubscribedListingItem()         {}
 func (*UnknownUnionMember) isSubscribedPrincipal()           {}
 func (*UnknownUnionMember) isSubscribedPrincipalInput()      {}

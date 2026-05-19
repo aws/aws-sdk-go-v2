@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Submits a contact evaluation in the specified Amazon Connect instance. Answers
-// included in the request are merged with existing answers for the given
+// Submits a contact evaluation in the specified Connect Customer instance.
+// Answers included in the request are merged with existing answers for the given
 // evaluation. If no answers or notes are passed, the evaluation is submitted with
 // the existing answers and notes. You can delete an answer or note by passing an
 // empty object ( {} ) to the question identifier.
@@ -41,8 +41,8 @@ type SubmitContactEvaluationInput struct {
 	// This member is required.
 	EvaluationId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -113,7 +113,7 @@ func (c *Client) addOperationSubmitContactEvaluationMiddlewares(stack *middlewar
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -135,9 +135,6 @@ func (c *Client) addOperationSubmitContactEvaluationMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

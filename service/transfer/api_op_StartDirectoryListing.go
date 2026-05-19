@@ -41,7 +41,7 @@ import (
 //     items contained in the remote directory or not. If your Truncated output value
 //     is true, you can increase the value provided in the optional max-items input
 //     attribute to be able to list more items (up to the maximum allowed list size of
-//     10,000 items).
+//     200,000 items).
 func (c *Client) StartDirectoryListing(ctx context.Context, params *StartDirectoryListingInput, optFns ...func(*Options)) (*StartDirectoryListingOutput, error) {
 	if params == nil {
 		params = &StartDirectoryListingInput{}
@@ -136,7 +136,7 @@ func (c *Client) addOperationStartDirectoryListingMiddlewares(stack *middleware.
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -158,9 +158,6 @@ func (c *Client) addOperationStartDirectoryListingMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

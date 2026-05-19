@@ -1605,6 +1605,12 @@
                     "traits": {
                         "smithy.api#jsonName": "rec709Settings"
                     }
+                },
+                "Hlg2020Settings": {
+                    "target": "com.amazonaws.medialive#Hlg2020Settings",
+                    "traits": {
+                        "smithy.api#jsonName": "hlg2020Settings"
+                    }
                 }
             },
             "traits": {
@@ -26024,6 +26030,158 @@
                 "smithy.api#documentation": "The settings for a MediaConnect Flow."
             }
         },
+        "com.amazonaws.medialive#MediaConnectRouterContainerSettings": {
+            "type": "structure",
+            "members": {
+                "M2tsSettings": {
+                    "target": "com.amazonaws.medialive#M2tsSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "m2tsSettings"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Media Connect Router Container Settings"
+            }
+        },
+        "com.amazonaws.medialive#MediaConnectRouterGroupSettings": {
+            "type": "structure",
+            "members": {
+                "AvailabilityZones": {
+                    "target": "com.amazonaws.medialive#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "The names of the Availability Zones in which to write output to MediaConnect Router.",
+                        "smithy.api#jsonName": "availabilityZones"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Media Connect Router Group Settings"
+            }
+        },
+        "com.amazonaws.medialive#MediaConnectRouterOutputConnection": {
+            "type": "structure",
+            "members": {
+                "RouterInputArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the MediaConnect Router Input connected to this pipeline.",
+                        "smithy.api#jsonName": "routerInputArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Connection details for a single pipeline of a MediaConnect Router output."
+            }
+        },
+        "com.amazonaws.medialive#MediaConnectRouterOutputConnectionMap": {
+            "type": "structure",
+            "members": {
+                "Pipeline0": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the MediaConnect Router Input connected to pipeline 0.",
+                        "smithy.api#jsonName": "pipeline0"
+                    }
+                },
+                "Pipeline1": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the MediaConnect Router Input connected to pipeline 1.",
+                        "smithy.api#jsonName": "pipeline1"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Map of MediaLive pipeline IDs to the ARNs of the MediaConnect Router Inputs to which this Output is connected."
+            }
+        },
+        "com.amazonaws.medialive#MediaConnectRouterOutputConnections": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.medialive#__string"
+            },
+            "value": {
+                "target": "com.amazonaws.medialive#MediaConnectRouterOutputConnection"
+            },
+            "traits": {
+                "smithy.api#documentation": "A map of output names to the MediaConnect Router connection for this pipeline."
+            }
+        },
+        "com.amazonaws.medialive#MediaConnectRouterOutputDestinationSettings": {
+            "type": "structure",
+            "members": {
+                "EncryptionType": {
+                    "target": "com.amazonaws.medialive#MediaConnectRouterOutputEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "Encryption configuration for MediaConnect router. When using SECRETS_MANAGER encryption, you must provide the ARN of the secret used to encrypt data in transit. When using AUTOMATIC encryption, a service-managed secret will be used instead.",
+                        "smithy.api#jsonName": "encryptionType"
+                    }
+                },
+                "SecretArn": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "ARN of the secret used to encrypt this input. Used only with the SECRETS_MANAGER encryption type.",
+                        "smithy.api#jsonName": "secretArn"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "MediaConnect Router Output Destination Settings"
+            }
+        },
+        "com.amazonaws.medialive#MediaConnectRouterOutputEncryptionType": {
+            "type": "enum",
+            "members": {
+                "AUTOMATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOMATIC"
+                    }
+                },
+                "SECRETS_MANAGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECRETS_MANAGER"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Encryption configuration for MediaConnect router. When using SECRETS_MANAGER encryption, you must provide the ARN of the secret used to encrypt data in transit. When using AUTOMATIC encryption, a service-managed secret will be used instead."
+            }
+        },
+        "com.amazonaws.medialive#MediaConnectRouterOutputSettings": {
+            "type": "structure",
+            "members": {
+                "ConnectedRouterInputs": {
+                    "target": "com.amazonaws.medialive#MediaConnectRouterOutputConnectionMap",
+                    "traits": {
+                        "smithy.api#documentation": "This parameter is deprecated and unused.",
+                        "smithy.api#jsonName": "connectedRouterInputs"
+                    }
+                },
+                "ContainerSettings": {
+                    "target": "com.amazonaws.medialive#MediaConnectRouterContainerSettings",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#jsonName": "containerSettings",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.medialive#OutputLocationRef",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "Destination for this MediaConnect Router Output. The referenced OutputDestination must have MediaConnect Router settings configured.",
+                        "smithy.api#jsonName": "destination",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Media Connect Router Output Settings"
+            }
+        },
         "com.amazonaws.medialive#MediaLive": {
             "type": "service",
             "version": "2017-10-14",
@@ -29944,6 +30102,13 @@
                         "smithy.api#documentation": "Optional assignment of an output to a logical interface on the Node. Only applies to on premises channels.",
                         "smithy.api#jsonName": "logicalInterfaceNames"
                     }
+                },
+                "MediaConnectRouterSettings": {
+                    "target": "com.amazonaws.medialive#__listOfMediaConnectRouterOutputDestinationSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Destination settings for a MediaConnect Router output; one destination for each redundant encoder.",
+                        "smithy.api#jsonName": "mediaConnectRouterSettings"
+                    }
                 }
             },
             "traits": {
@@ -30080,6 +30245,12 @@
                     "traits": {
                         "smithy.api#jsonName": "srtGroupSettings"
                     }
+                },
+                "MediaConnectRouterGroupSettings": {
+                    "target": "com.amazonaws.medialive#MediaConnectRouterGroupSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "mediaConnectRouterGroupSettings"
+                    }
                 }
             },
             "traits": {
@@ -30188,6 +30359,12 @@
                     "traits": {
                         "smithy.api#jsonName": "srtOutputSettings"
                     }
+                },
+                "MediaConnectRouterOutputSettings": {
+                    "target": "com.amazonaws.medialive#MediaConnectRouterOutputSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "mediaConnectRouterOutputSettings"
+                    }
                 }
             },
             "traits": {
@@ -30258,6 +30435,13 @@
                     "traits": {
                         "smithy.api#documentation": "Current engine version of the encoder for this pipeline.",
                         "smithy.api#jsonName": "channelEngineVersion"
+                    }
+                },
+                "MediaConnectRouterOutputConnectionMap": {
+                    "target": "com.amazonaws.medialive#MediaConnectRouterOutputConnections",
+                    "traits": {
+                        "smithy.api#documentation": "A map of output names to the MediaConnect Router connection for this pipeline. Only present for channels with MediaConnect Router outputs.",
+                        "smithy.api#jsonName": "mediaConnectRouterOutputConnectionMap"
                     }
                 }
             },
@@ -37016,6 +37200,13 @@
                         "smithy.api#documentation": "Include this setting to include Elemental Inference features in this channel.",
                         "smithy.api#jsonName": "inferenceSettings"
                     }
+                },
+                "SpecialRouterSettings": {
+                    "target": "com.amazonaws.medialive#SpecialRouterSettings",
+                    "traits": {
+                        "smithy.api#documentation": "When using MediaConnect Router as the source of a MediaLive input there's a special handoff that occurs when a router output\nis created. This group of settings is set on your behalf by the MediaConnect Router service using this set of settings. This\nsetting object can only by used by that service.",
+                        "smithy.api#jsonName": "specialRouterSettings"
+                    }
                 }
             },
             "traits": {
@@ -40608,6 +40799,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfMediaConnectFlowRequest"
+            }
+        },
+        "com.amazonaws.medialive#__listOfMediaConnectRouterOutputDestinationSettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#MediaConnectRouterOutputDestinationSettings"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfMediaConnectRouterOutputDestinationSettings"
             }
         },
         "com.amazonaws.medialive#__listOfMediaPackageAdditionalDestinations": {

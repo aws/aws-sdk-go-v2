@@ -142,6 +142,8 @@ type UpdateApplicationOutput struct {
 	//
 	//   - Microsoft Windows Server 2022 Base ( Type=WINDOWS, Version=2022 )
 	//
+	//   - Proton 10.0-4 ( Type=PROTON, Version=20260204 )
+	//
 	//   - Proton 9.0-2 ( Type=PROTON, Version=20250516 )
 	//
 	//   - Proton 8.0-5 ( Type=PROTON, Version=20241007 )
@@ -212,7 +214,7 @@ func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -234,9 +236,6 @@ func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

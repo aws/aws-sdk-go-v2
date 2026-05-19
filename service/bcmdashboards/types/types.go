@@ -233,6 +233,29 @@ type GroupDefinition struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the health status information for a scheduled report, including the
+// status code and any reasons for an unhealthy state.
+type HealthStatus struct {
+
+	// The health status code. HEALTHY indicates the scheduled report is configured
+	// properly and has all required permissions to execute. UNHEALTHY indicates the
+	// scheduled report is unable to deliver the notification to the default Amazon
+	// EventBridge EventBus in your account and your action is needed. The reason for
+	// the unhealthy state is captured in the health status reasons.
+	//
+	// This member is required.
+	StatusCode HealthStatusCode
+
+	// The timestamp when the health status was last refreshed.
+	LastRefreshedAt *time.Time
+
+	// The list of reasons for the current health status. Only present when the status
+	// is UNHEALTHY .
+	StatusReasons []StatusReason
+
+	noSmithyDocumentSerde
+}
+
 // Defines the data retrieval parameters for a widget.
 //
 // The following types satisfy this interface:
@@ -405,8 +428,183 @@ type SavingsPlansUtilizationQuery struct {
 	// and various filter types.
 	Filter *Expression
 
-	// The time granularity of the retrieved data: HOURLY, DAILY, or MONTHLY.
+	// The time granularity of the retrieved data: HOURLY , DAILY , or MONTHLY .
 	Granularity Granularity
+
+	noSmithyDocumentSerde
+}
+
+// Defines the schedule for a scheduled report, including the cron expression,
+// time zone, active period, and the schedule state.
+type ScheduleConfig struct {
+
+	// The schedule expression that specifies when to trigger the scheduled report
+	// run. This value must be a cron expression consisting of six fields separated by
+	// white spaces: cron(minutes hours day_of_month month day_of_week year) .
+	ScheduleExpression *string
+
+	// The time zone for the schedule expression, for example, UTC .
+	ScheduleExpressionTimeZone *string
+
+	// The time period during which the schedule is active.
+	SchedulePeriod *SchedulePeriod
+
+	// The state of the schedule. ENABLED means the scheduled report runs according to
+	// its schedule expression. DISABLED means the scheduled report is paused and will
+	// not run until re-enabled.
+	State ScheduleState
+
+	noSmithyDocumentSerde
+}
+
+// Contains the full configuration and metadata of a scheduled report.
+type ScheduledReport struct {
+
+	// The ARN of the dashboard associated with the scheduled report.
+	//
+	// This member is required.
+	DashboardArn *string
+
+	// The name of the scheduled report.
+	//
+	// This member is required.
+	Name *string
+
+	// The schedule configuration that defines when and how often the report is
+	// generated.
+	//
+	// This member is required.
+	ScheduleConfig *ScheduleConfig
+
+	// The ARN of the IAM role that the scheduled report uses to execute. Amazon Web
+	// Services Billing and Cost Management Dashboards will assume this IAM role while
+	// executing the scheduled report.
+	//
+	// This member is required.
+	ScheduledReportExecutionRoleArn *string
+
+	// The ARN of the scheduled report.
+	Arn *string
+
+	// The timestamp when the scheduled report was created.
+	CreatedAt *time.Time
+
+	// A description of the scheduled report's purpose or contents.
+	Description *string
+
+	// The health status of the scheduled report at last refresh time.
+	HealthStatus *HealthStatus
+
+	// The timestamp of the most recent execution of the scheduled report.
+	LastExecutionAt *time.Time
+
+	// The timestamp when the scheduled report was last modified.
+	UpdatedAt *time.Time
+
+	// The date range override applied to widgets in the scheduled report.
+	WidgetDateRangeOverride *DateTimeRange
+
+	// The list of widget identifiers included in the scheduled report.
+	WidgetIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the configuration for creating a new scheduled report, including the
+// dashboard, schedule, execution role, and optional widget settings.
+type ScheduledReportInput struct {
+
+	// The ARN of the dashboard to generate the scheduled report from.
+	//
+	// This member is required.
+	DashboardArn *string
+
+	// The name of the scheduled report.
+	//
+	// This member is required.
+	Name *string
+
+	// The schedule configuration that defines when and how often the report is
+	// generated. If the schedule state is not specified, it defaults to ENABLED .
+	//
+	// This member is required.
+	ScheduleConfig *ScheduleConfig
+
+	// The ARN of the IAM role that the scheduled report uses to execute. Amazon Web
+	// Services Billing and Cost Management Dashboards will assume this IAM role while
+	// executing the scheduled report.
+	//
+	// This member is required.
+	ScheduledReportExecutionRoleArn *string
+
+	// A description of the scheduled report's purpose or contents.
+	Description *string
+
+	// The date range override to apply to widgets in the scheduled report.
+	WidgetDateRangeOverride *DateTimeRange
+
+	// The list of widget identifiers to include in the scheduled report. If not
+	// specified, all widgets in the dashboard are included.
+	WidgetIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains summary information for a scheduled report.
+type ScheduledReportSummary struct {
+
+	// The ARN of the scheduled report.
+	//
+	// This member is required.
+	Arn *string
+
+	// The ARN of the dashboard associated with the scheduled report.
+	//
+	// This member is required.
+	DashboardArn *string
+
+	// The health status of the scheduled report as of its last refresh time.
+	//
+	// This member is required.
+	HealthStatus *HealthStatus
+
+	// The name of the scheduled report.
+	//
+	// This member is required.
+	Name *string
+
+	// The schedule expression that defines when the report runs.
+	//
+	// This member is required.
+	ScheduleExpression *string
+
+	// The state of the schedule: ENABLED or DISABLED .
+	//
+	// This member is required.
+	State ScheduleState
+
+	// The time zone for the schedule expression, for example, UTC .
+	ScheduleExpressionTimeZone *string
+
+	// The list of widget identifiers included in the scheduled report.
+	WidgetIds []string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the active time period for execution of the scheduled report.
+type SchedulePeriod struct {
+
+	// The end time of the schedule period. If not specified, defaults to 3 years from
+	// the time of the create or update request. The maximum allowed value is 3 years
+	// from the current time. Setting an end time beyond this limit returns a
+	// ValidationException .
+	EndTime *time.Time
+
+	// The start time of the schedule period. If not specified, defaults to the time
+	// of the create or update request. The start time cannot be more than 5 minutes
+	// before the time of the request.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }

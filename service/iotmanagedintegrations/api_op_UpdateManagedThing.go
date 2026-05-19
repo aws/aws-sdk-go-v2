@@ -38,6 +38,8 @@ type UpdateManagedThingInput struct {
 	Brand *string
 
 	// The capabilities of the device such as light bulb.
+	//
+	// Deprecated: Capabilities has been deprecated, use CapabilityReport instead
 	Capabilities *string
 
 	// A report of the capabilities for the managed thing.
@@ -120,7 +122,7 @@ func (c *Client) addOperationUpdateManagedThingMiddlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -142,9 +144,6 @@ func (c *Client) addOperationUpdateManagedThingMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

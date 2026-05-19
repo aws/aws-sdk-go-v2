@@ -146,6 +146,35 @@ func (e *OperationLimitExceeded) ErrorCode() string {
 }
 func (e *OperationLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The top-level domain is currently undergoing maintenance and the request cannot
+// be processed. Try again later.
+type TLDInMaintenance struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Tld *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TLDInMaintenance) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TLDInMaintenance) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TLDInMaintenance) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TLDInMaintenance"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TLDInMaintenance) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The top-level domain does not support this operation.
 type TLDRulesViolation struct {
 	Message *string

@@ -19599,6 +19599,11 @@ func awsAwsjson11_serializeDocumentDataQualityEvaluationRunAdditionalRunOptions(
 		ok.String(string(v.CompositeRuleEvaluationMethod))
 	}
 
+	if v.CustomLogGroupPrefix != nil {
+		ok := object.Key("CustomLogGroupPrefix")
+		ok.String(*v.CustomLogGroupPrefix)
+	}
+
 	if v.ResultsS3Prefix != nil {
 		ok := object.Key("ResultsS3Prefix")
 		ok.String(*v.ResultsS3Prefix)
@@ -19724,6 +19729,11 @@ func awsAwsjson11_serializeDocumentDataQualityRulesetEvaluationRunFilter(v *type
 		if err := awsAwsjson11_serializeDocumentDataSource(v.DataSource, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.RulesetName != nil {
+		ok := object.Key("RulesetName")
+		ok.String(*v.RulesetName)
 	}
 
 	if v.StartedAfter != nil {
@@ -30714,6 +30724,11 @@ func awsAwsjson11_serializeOpDocumentGetCatalogsInput(v *GetCatalogsInput, value
 	object := value.Object()
 	defer object.Close()
 
+	if v.HasDatabases != nil {
+		ok := object.Key("HasDatabases")
+		ok.Boolean(*v.HasDatabases)
+	}
+
 	if v.IncludeRoot != nil {
 		ok := object.Key("IncludeRoot")
 		ok.Boolean(*v.IncludeRoot)
@@ -31563,6 +31578,13 @@ func awsAwsjson11_serializeOpDocumentGetPartitionInput(v *GetPartitionInput, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.AuditContext != nil {
+		ok := object.Key("AuditContext")
+		if err := awsAwsjson11_serializeDocumentAuditContext(v.AuditContext, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CatalogId != nil {
 		ok := object.Key("CatalogId")
 		ok.String(*v.CatalogId)
@@ -31591,6 +31613,13 @@ func awsAwsjson11_serializeOpDocumentGetPartitionInput(v *GetPartitionInput, val
 func awsAwsjson11_serializeOpDocumentGetPartitionsInput(v *GetPartitionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AuditContext != nil {
+		ok := object.Key("AuditContext")
+		if err := awsAwsjson11_serializeDocumentAuditContext(v.AuditContext, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CatalogId != nil {
 		ok := object.Key("CatalogId")
@@ -32033,6 +32062,13 @@ func awsAwsjson11_serializeOpDocumentGetTableVersionInput(v *GetTableVersionInpu
 	object := value.Object()
 	defer object.Close()
 
+	if v.AuditContext != nil {
+		ok := object.Key("AuditContext")
+		if err := awsAwsjson11_serializeDocumentAuditContext(v.AuditContext, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CatalogId != nil {
 		ok := object.Key("CatalogId")
 		ok.String(*v.CatalogId)
@@ -32059,6 +32095,13 @@ func awsAwsjson11_serializeOpDocumentGetTableVersionInput(v *GetTableVersionInpu
 func awsAwsjson11_serializeOpDocumentGetTableVersionsInput(v *GetTableVersionsInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AuditContext != nil {
+		ok := object.Key("AuditContext")
+		if err := awsAwsjson11_serializeDocumentAuditContext(v.AuditContext, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CatalogId != nil {
 		ok := object.Key("CatalogId")

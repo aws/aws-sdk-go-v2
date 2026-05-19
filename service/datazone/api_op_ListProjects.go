@@ -53,6 +53,9 @@ type ListProjectsInput struct {
 	// ListProjects to list the next set of projects.
 	NextToken *string
 
+	// A parameter to filter projects by their category.
+	ProjectCategory *string
+
 	// The identifier of the Amazon DataZone user.
 	UserIdentifier *string
 
@@ -111,7 +114,7 @@ func (c *Client) addOperationListProjectsMiddlewares(stack *middleware.Stack, op
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -133,9 +136,6 @@ func (c *Client) addOperationListProjectsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

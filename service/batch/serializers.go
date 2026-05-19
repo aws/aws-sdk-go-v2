@@ -5023,6 +5023,11 @@ func awsRestjson1_serializeDocumentEc2Configuration(v *types.Ec2Configuration, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.BatchImageStatus != nil {
+		ok := object.Key("batchImageStatus")
+		ok.String(*v.BatchImageStatus)
+	}
+
 	if v.ImageIdOverride != nil {
 		ok := object.Key("imageIdOverride")
 		ok.String(*v.ImageIdOverride)
@@ -6706,6 +6711,33 @@ func awsRestjson1_serializeDocumentRuntimePlatform(v *types.RuntimePlatform, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentS3FilesVolumeConfiguration(v *types.S3FilesVolumeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessPointArn != nil {
+		ok := object.Key("accessPointArn")
+		ok.String(*v.AccessPointArn)
+	}
+
+	if v.FileSystemArn != nil {
+		ok := object.Key("fileSystemArn")
+		ok.String(*v.FileSystemArn)
+	}
+
+	if v.RootDirectory != nil {
+		ok := object.Key("rootDirectory")
+		ok.String(*v.RootDirectory)
+	}
+
+	if v.TransitEncryptionPort != nil {
+		ok := object.Key("transitEncryptionPort")
+		ok.Integer(*v.TransitEncryptionPort)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSecret(v *types.Secret, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7077,6 +7109,16 @@ func awsRestjson1_serializeDocumentTaskContainerProperties(v *types.TaskContaine
 		}
 	}
 
+	if v.StartTimeout != nil {
+		ok := object.Key("startTimeout")
+		ok.Integer(*v.StartTimeout)
+	}
+
+	if v.StopTimeout != nil {
+		ok := object.Key("stopTimeout")
+		ok.Integer(*v.StopTimeout)
+	}
+
 	if v.Ulimits != nil {
 		ok := object.Key("ulimits")
 		if err := awsRestjson1_serializeDocumentUlimits(v.Ulimits, ok); err != nil {
@@ -7216,6 +7258,13 @@ func awsRestjson1_serializeDocumentVolume(v *types.Volume, value smithyjson.Valu
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.S3filesVolumeConfiguration != nil {
+		ok := object.Key("s3filesVolumeConfiguration")
+		if err := awsRestjson1_serializeDocumentS3FilesVolumeConfiguration(v.S3filesVolumeConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

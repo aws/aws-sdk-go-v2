@@ -362,15 +362,15 @@ type EphemerisInvalidReason string
 
 // Enum values for EphemerisInvalidReason
 const (
-	// Provided spacecraft identifiers such as spacecraft NORAD Id are invalid
+	// Provided spacecraft identifiers such as spacecraft NORAD ID are invalid.
 	EphemerisInvalidReasonMetadataInvalid EphemerisInvalidReason = "METADATA_INVALID"
-	// Start, end, or expiration time(s) are invalid for the provided ephemeris
+	// Start, end, or expiration time(s) are invalid for the provided ephemeris.
 	EphemerisInvalidReasonTimeRangeInvalid EphemerisInvalidReason = "TIME_RANGE_INVALID"
-	// Provided ephemeris defines invalid spacecraft trajectory
+	// Provided ephemeris defines invalid spacecraft trajectory.
 	EphemerisInvalidReasonTrajectoryInvalid EphemerisInvalidReason = "TRAJECTORY_INVALID"
-	// Provided KMS key is invalid
+	// Provided KMS key is invalid.
 	EphemerisInvalidReasonKmsKeyInvalid EphemerisInvalidReason = "KMS_KEY_INVALID"
-	// Internal Service Error occurred while processing ephemeris
+	// Internal service error occurred while processing ephemeris.
 	EphemerisInvalidReasonValidationError EphemerisInvalidReason = "VALIDATION_ERROR"
 )
 
@@ -478,6 +478,25 @@ func (FrequencyUnits) Values() []FrequencyUnits {
 	}
 }
 
+type MaintenanceType string
+
+// Enum values for MaintenanceType
+const (
+	MaintenanceTypePlanned   MaintenanceType = "PLANNED"
+	MaintenanceTypeUnplanned MaintenanceType = "UNPLANNED"
+)
+
+// Values returns all known values for MaintenanceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MaintenanceType) Values() []MaintenanceType {
+	return []MaintenanceType{
+		"PLANNED",
+		"UNPLANNED",
+	}
+}
+
 type Polarization string
 
 // Enum values for Polarization
@@ -499,6 +518,25 @@ func (Polarization) Values() []Polarization {
 	}
 }
 
+type ReservationType string
+
+// Enum values for ReservationType
+const (
+	ReservationTypeMaintenance ReservationType = "MAINTENANCE"
+	ReservationTypeContact     ReservationType = "CONTACT"
+)
+
+// Values returns all known values for ReservationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReservationType) Values() []ReservationType {
+	return []ReservationType{
+		"MAINTENANCE",
+		"CONTACT",
+	}
+}
+
 type TelemetrySinkType string
 
 // Enum values for TelemetrySinkType
@@ -513,5 +551,71 @@ const (
 func (TelemetrySinkType) Values() []TelemetrySinkType {
 	return []TelemetrySinkType{
 		"KINESIS_DATA_STREAM",
+	}
+}
+
+type VersionFailureReasonCode string
+
+// Enum values for VersionFailureReasonCode
+const (
+	VersionFailureReasonCodeInternalError                   VersionFailureReasonCode = "INTERNAL_ERROR"
+	VersionFailureReasonCodeInvalidSatelliteArn             VersionFailureReasonCode = "INVALID_SATELLITE_ARN"
+	VersionFailureReasonCodeInvalidUpdateContactRequest     VersionFailureReasonCode = "INVALID_UPDATE_CONTACT_REQUEST"
+	VersionFailureReasonCodeEphemerisNotFound               VersionFailureReasonCode = "EPHEMERIS_NOT_FOUND"
+	VersionFailureReasonCodeEphemerisTimeRangeInvalid       VersionFailureReasonCode = "EPHEMERIS_TIME_RANGE_INVALID"
+	VersionFailureReasonCodeEphemerisNotEnabled             VersionFailureReasonCode = "EPHEMERIS_NOT_ENABLED"
+	VersionFailureReasonCodeSatelliteDoesNotMatchEphemeris  VersionFailureReasonCode = "SATELLITE_DOES_NOT_MATCH_EPHEMERIS"
+	VersionFailureReasonCodeNotOnboardedToAzelEphemeris     VersionFailureReasonCode = "NOT_ONBOARDED_TO_AZEL_EPHEMERIS"
+	VersionFailureReasonCodeAzelEphemerisNotFound           VersionFailureReasonCode = "AZEL_EPHEMERIS_NOT_FOUND"
+	VersionFailureReasonCodeAzelEphemerisWrongGroundStation VersionFailureReasonCode = "AZEL_EPHEMERIS_WRONG_GROUND_STATION"
+	VersionFailureReasonCodeAzelEphemerisInvalidStatus      VersionFailureReasonCode = "AZEL_EPHEMERIS_INVALID_STATUS"
+	VersionFailureReasonCodeAzelEphemerisTimeRangeInvalid   VersionFailureReasonCode = "AZEL_EPHEMERIS_TIME_RANGE_INVALID"
+)
+
+// Values returns all known values for VersionFailureReasonCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VersionFailureReasonCode) Values() []VersionFailureReasonCode {
+	return []VersionFailureReasonCode{
+		"INTERNAL_ERROR",
+		"INVALID_SATELLITE_ARN",
+		"INVALID_UPDATE_CONTACT_REQUEST",
+		"EPHEMERIS_NOT_FOUND",
+		"EPHEMERIS_TIME_RANGE_INVALID",
+		"EPHEMERIS_NOT_ENABLED",
+		"SATELLITE_DOES_NOT_MATCH_EPHEMERIS",
+		"NOT_ONBOARDED_TO_AZEL_EPHEMERIS",
+		"AZEL_EPHEMERIS_NOT_FOUND",
+		"AZEL_EPHEMERIS_WRONG_GROUND_STATION",
+		"AZEL_EPHEMERIS_INVALID_STATUS",
+		"AZEL_EPHEMERIS_TIME_RANGE_INVALID",
+	}
+}
+
+type VersionStatus string
+
+// Enum values for VersionStatus
+const (
+	// The version is being applied to the contact.
+	VersionStatusUpdating VersionStatus = "UPDATING"
+	// The version is the current active version of the contact.
+	VersionStatusActive VersionStatus = "ACTIVE"
+	// The version has been replaced by a newer version.
+	VersionStatusSuperseded VersionStatus = "SUPERSEDED"
+	// The version update failed.
+	VersionStatusFailedToUpdate VersionStatus = "FAILED_TO_UPDATE"
+)
+
+// Values returns all known values for VersionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VersionStatus) Values() []VersionStatus {
+	return []VersionStatus{
+		"UPDATING",
+		"ACTIVE",
+		"SUPERSEDED",
+		"FAILED_TO_UPDATE",
 	}
 }

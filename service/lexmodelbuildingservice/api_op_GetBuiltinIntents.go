@@ -14,6 +14,8 @@ import (
 // Gets a list of built-in intents that meet the specified criteria.
 //
 // This operation requires permission for the lex:GetBuiltinIntents action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetBuiltinIntents(ctx context.Context, params *GetBuiltinIntentsInput, optFns ...func(*Options)) (*GetBuiltinIntentsOutput, error) {
 	if params == nil {
 		params = &GetBuiltinIntentsInput{}
@@ -104,7 +106,7 @@ func (c *Client) addOperationGetBuiltinIntentsMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -126,9 +128,6 @@ func (c *Client) addOperationGetBuiltinIntentsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

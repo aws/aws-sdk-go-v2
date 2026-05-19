@@ -110,6 +110,26 @@ func (m *validateOpCreateEventDestination) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateNotifyConfiguration struct {
+}
+
+func (*validateOpCreateNotifyConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateNotifyConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateNotifyConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateNotifyConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateOptOutList struct {
 }
 
@@ -165,6 +185,26 @@ func (m *validateOpCreateProtectConfiguration) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateProtectConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateRcsAgent struct {
+}
+
+func (*validateOpCreateRcsAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRcsAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRcsAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRcsAgentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -370,6 +410,26 @@ func (m *validateOpDeleteKeyword) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteNotifyConfiguration struct {
+}
+
+func (*validateOpDeleteNotifyConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteNotifyConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteNotifyConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteNotifyConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteOptedOutNumber struct {
 }
 
@@ -465,6 +525,26 @@ func (m *validateOpDeleteProtectConfigurationRuleSetNumberOverride) HandleInitia
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteProtectConfigurationRuleSetNumberOverrideInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRcsAgent struct {
+}
+
+func (*validateOpDeleteRcsAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRcsAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRcsAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRcsAgentInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -610,6 +690,46 @@ func (m *validateOpDescribeKeywords) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeNotifyConfigurations struct {
+}
+
+func (*validateOpDescribeNotifyConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeNotifyConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeNotifyConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeNotifyConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeNotifyTemplates struct {
+}
+
+func (*validateOpDescribeNotifyTemplates) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeNotifyTemplates) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeNotifyTemplatesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeNotifyTemplatesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeOptedOutNumbers struct {
 }
 
@@ -685,6 +805,46 @@ func (m *validateOpDescribeProtectConfigurations) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeProtectConfigurationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRcsAgentCountryLaunchStatus struct {
+}
+
+func (*validateOpDescribeRcsAgentCountryLaunchStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRcsAgentCountryLaunchStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRcsAgentCountryLaunchStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRcsAgentCountryLaunchStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeRcsAgents struct {
+}
+
+func (*validateOpDescribeRcsAgents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeRcsAgents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeRcsAgentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeRcsAgentsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1290,6 +1450,46 @@ func (m *validateOpSendMediaMessage) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSendNotifyTextMessage struct {
+}
+
+func (*validateOpSendNotifyTextMessage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendNotifyTextMessage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendNotifyTextMessageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendNotifyTextMessageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSendNotifyVoiceMessage struct {
+}
+
+func (*validateOpSendNotifyVoiceMessage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendNotifyVoiceMessage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendNotifyVoiceMessageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendNotifyVoiceMessageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSendTextMessage struct {
 }
 
@@ -1430,6 +1630,26 @@ func (m *validateOpSetMediaMessageSpendLimitOverride) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSetNotifyMessageSpendLimitOverride struct {
+}
+
+func (*validateOpSetNotifyMessageSpendLimitOverride) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetNotifyMessageSpendLimitOverride) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetNotifyMessageSpendLimitOverrideInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetNotifyMessageSpendLimitOverrideInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSetTextMessageSpendLimitOverride struct {
 }
 
@@ -1550,6 +1770,26 @@ func (m *validateOpUpdateEventDestination) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateNotifyConfiguration struct {
+}
+
+func (*validateOpUpdateNotifyConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateNotifyConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateNotifyConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateNotifyConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePhoneNumber struct {
 }
 
@@ -1630,6 +1870,26 @@ func (m *validateOpUpdateProtectConfiguration) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateRcsAgent struct {
+}
+
+func (*validateOpUpdateRcsAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateRcsAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateRcsAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateRcsAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSenderId struct {
 }
 
@@ -1690,6 +1950,10 @@ func addOpCreateEventDestinationValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpCreateEventDestination{}, middleware.After)
 }
 
+func addOpCreateNotifyConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateNotifyConfiguration{}, middleware.After)
+}
+
 func addOpCreateOptOutListValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateOptOutList{}, middleware.After)
 }
@@ -1700,6 +1964,10 @@ func addOpCreatePoolValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateProtectConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateProtectConfiguration{}, middleware.After)
+}
+
+func addOpCreateRcsAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRcsAgent{}, middleware.After)
 }
 
 func addOpCreateRegistrationAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -1742,6 +2010,10 @@ func addOpDeleteKeywordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteKeyword{}, middleware.After)
 }
 
+func addOpDeleteNotifyConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteNotifyConfiguration{}, middleware.After)
+}
+
 func addOpDeleteOptedOutNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteOptedOutNumber{}, middleware.After)
 }
@@ -1760,6 +2032,10 @@ func addOpDeleteProtectConfigurationValidationMiddleware(stack *middleware.Stack
 
 func addOpDeleteProtectConfigurationRuleSetNumberOverrideValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteProtectConfigurationRuleSetNumberOverride{}, middleware.After)
+}
+
+func addOpDeleteRcsAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRcsAgent{}, middleware.After)
 }
 
 func addOpDeleteRegistrationAttachmentValidationMiddleware(stack *middleware.Stack) error {
@@ -1790,6 +2066,14 @@ func addOpDescribeKeywordsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeKeywords{}, middleware.After)
 }
 
+func addOpDescribeNotifyConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeNotifyConfigurations{}, middleware.After)
+}
+
+func addOpDescribeNotifyTemplatesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeNotifyTemplates{}, middleware.After)
+}
+
 func addOpDescribeOptedOutNumbersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeOptedOutNumbers{}, middleware.After)
 }
@@ -1804,6 +2088,14 @@ func addOpDescribePoolsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDescribeProtectConfigurationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeProtectConfigurations{}, middleware.After)
+}
+
+func addOpDescribeRcsAgentCountryLaunchStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRcsAgentCountryLaunchStatus{}, middleware.After)
+}
+
+func addOpDescribeRcsAgentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeRcsAgents{}, middleware.After)
 }
 
 func addOpDescribeRegistrationAttachmentsValidationMiddleware(stack *middleware.Stack) error {
@@ -1926,6 +2218,14 @@ func addOpSendMediaMessageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendMediaMessage{}, middleware.After)
 }
 
+func addOpSendNotifyTextMessageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendNotifyTextMessage{}, middleware.After)
+}
+
+func addOpSendNotifyVoiceMessageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendNotifyVoiceMessage{}, middleware.After)
+}
+
 func addOpSendTextMessageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSendTextMessage{}, middleware.After)
 }
@@ -1954,6 +2254,10 @@ func addOpSetMediaMessageSpendLimitOverrideValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpSetMediaMessageSpendLimitOverride{}, middleware.After)
 }
 
+func addOpSetNotifyMessageSpendLimitOverrideValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetNotifyMessageSpendLimitOverride{}, middleware.After)
+}
+
 func addOpSetTextMessageSpendLimitOverrideValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetTextMessageSpendLimitOverride{}, middleware.After)
 }
@@ -1978,6 +2282,10 @@ func addOpUpdateEventDestinationValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpUpdateEventDestination{}, middleware.After)
 }
 
+func addOpUpdateNotifyConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateNotifyConfiguration{}, middleware.After)
+}
+
 func addOpUpdatePhoneNumberValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdatePhoneNumber{}, middleware.After)
 }
@@ -1992,6 +2300,10 @@ func addOpUpdateProtectConfigurationCountryRuleSetValidationMiddleware(stack *mi
 
 func addOpUpdateProtectConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProtectConfiguration{}, middleware.After)
+}
+
+func addOpUpdateRcsAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateRcsAgent{}, middleware.After)
 }
 
 func addOpUpdateSenderIdValidationMiddleware(stack *middleware.Stack) error {
@@ -2045,6 +2357,41 @@ func validateConfigurationSetFilterList(v []types.ConfigurationSetFilter) error 
 	invalidParams := smithy.InvalidParamsError{Context: "ConfigurationSetFilterList"}
 	for i := range v {
 		if err := validateConfigurationSetFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCountryLaunchStatusFilter(v *types.CountryLaunchStatusFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CountryLaunchStatusFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCountryLaunchStatusFilterList(v []types.CountryLaunchStatusFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CountryLaunchStatusFilterList"}
+	for i := range v {
+		if err := validateCountryLaunchStatusFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2132,6 +2479,76 @@ func validateNonEmptyTagList(v []types.Tag) error {
 	invalidParams := smithy.InvalidParamsError{Context: "NonEmptyTagList"}
 	for i := range v {
 		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotifyConfigurationFilter(v *types.NotifyConfigurationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotifyConfigurationFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotifyConfigurationFilterList(v []types.NotifyConfigurationFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotifyConfigurationFilterList"}
+	for i := range v {
+		if err := validateNotifyConfigurationFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotifyTemplateFilter(v *types.NotifyTemplateFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotifyTemplateFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNotifyTemplateFilterList(v []types.NotifyTemplateFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NotifyTemplateFilterList"}
+	for i := range v {
+		if err := validateNotifyTemplateFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2360,6 +2777,41 @@ func validateProtectConfigurationRuleSetNumberOverrideFilterItem(v *types.Protec
 	}
 	if v.Values == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsAgentFilter(v *types.RcsAgentFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsAgentFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRcsAgentFilterList(v []types.RcsAgentFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RcsAgentFilterList"}
+	for i := range v {
+		if err := validateRcsAgentFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2709,9 +3161,6 @@ func validateOpAssociateOriginationIdentityInput(v *AssociateOriginationIdentity
 	if v.OriginationIdentity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OriginationIdentity"))
 	}
-	if v.IsoCountryCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IsoCountryCode"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2808,6 +3257,32 @@ func validateOpCreateEventDestinationInput(v *CreateEventDestinationInput) error
 	}
 }
 
+func validateOpCreateNotifyConfigurationInput(v *CreateNotifyConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateNotifyConfigurationInput"}
+	if v.DisplayName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DisplayName"))
+	}
+	if len(v.UseCase) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("UseCase"))
+	}
+	if v.EnabledChannels == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledChannels"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateOptOutListInput(v *CreateOptOutListInput) error {
 	if v == nil {
 		return nil
@@ -2836,9 +3311,6 @@ func validateOpCreatePoolInput(v *CreatePoolInput) error {
 	if v.OriginationIdentity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OriginationIdentity"))
 	}
-	if v.IsoCountryCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IsoCountryCode"))
-	}
 	if len(v.MessageType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MessageType"))
 	}
@@ -2859,6 +3331,23 @@ func validateOpCreateProtectConfigurationInput(v *CreateProtectConfigurationInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateProtectConfigurationInput"}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateRcsAgentInput(v *CreateRcsAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRcsAgentInput"}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -3042,6 +3531,21 @@ func validateOpDeleteKeywordInput(v *DeleteKeywordInput) error {
 	}
 }
 
+func validateOpDeleteNotifyConfigurationInput(v *DeleteNotifyConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteNotifyConfigurationInput"}
+	if v.NotifyConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotifyConfigurationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteOptedOutNumberInput(v *DeleteOptedOutNumberInput) error {
 	if v == nil {
 		return nil
@@ -3115,6 +3619,21 @@ func validateOpDeleteProtectConfigurationRuleSetNumberOverrideInput(v *DeletePro
 	}
 	if v.DestinationPhoneNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationPhoneNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRcsAgentInput(v *DeleteRcsAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRcsAgentInput"}
+	if v.RcsAgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RcsAgentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3238,6 +3757,40 @@ func validateOpDescribeKeywordsInput(v *DescribeKeywordsInput) error {
 	}
 }
 
+func validateOpDescribeNotifyConfigurationsInput(v *DescribeNotifyConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeNotifyConfigurationsInput"}
+	if v.Filters != nil {
+		if err := validateNotifyConfigurationFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeNotifyTemplatesInput(v *DescribeNotifyTemplatesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeNotifyTemplatesInput"}
+	if v.Filters != nil {
+		if err := validateNotifyTemplateFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeOptedOutNumbersInput(v *DescribeOptedOutNumbersInput) error {
 	if v == nil {
 		return nil
@@ -3299,6 +3852,43 @@ func validateOpDescribeProtectConfigurationsInput(v *DescribeProtectConfiguratio
 	invalidParams := smithy.InvalidParamsError{Context: "DescribeProtectConfigurationsInput"}
 	if v.Filters != nil {
 		if err := validateProtectConfigurationFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRcsAgentCountryLaunchStatusInput(v *DescribeRcsAgentCountryLaunchStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRcsAgentCountryLaunchStatusInput"}
+	if v.RcsAgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RcsAgentId"))
+	}
+	if v.Filters != nil {
+		if err := validateCountryLaunchStatusFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeRcsAgentsInput(v *DescribeRcsAgentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeRcsAgentsInput"}
+	if v.Filters != nil {
+		if err := validateRcsAgentFilterList(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -3474,9 +4064,6 @@ func validateOpDisassociateOriginationIdentityInput(v *DisassociateOriginationId
 	}
 	if v.OriginationIdentity == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OriginationIdentity"))
-	}
-	if v.IsoCountryCode == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("IsoCountryCode"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3861,6 +4448,48 @@ func validateOpSendMediaMessageInput(v *SendMediaMessageInput) error {
 	}
 }
 
+func validateOpSendNotifyTextMessageInput(v *SendNotifyTextMessageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendNotifyTextMessageInput"}
+	if v.NotifyConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotifyConfigurationId"))
+	}
+	if v.DestinationPhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPhoneNumber"))
+	}
+	if v.TemplateVariables == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateVariables"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendNotifyVoiceMessageInput(v *SendNotifyVoiceMessageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendNotifyVoiceMessageInput"}
+	if v.NotifyConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotifyConfigurationId"))
+	}
+	if v.DestinationPhoneNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DestinationPhoneNumber"))
+	}
+	if v.TemplateVariables == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateVariables"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSendTextMessageInput(v *SendTextMessageInput) error {
 	if v == nil {
 		return nil
@@ -3968,6 +4597,21 @@ func validateOpSetMediaMessageSpendLimitOverrideInput(v *SetMediaMessageSpendLim
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SetMediaMessageSpendLimitOverrideInput"}
+	if v.MonthlyLimit == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MonthlyLimit"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetNotifyMessageSpendLimitOverrideInput(v *SetNotifyMessageSpendLimitOverrideInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetNotifyMessageSpendLimitOverrideInput"}
 	if v.MonthlyLimit == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MonthlyLimit"))
 	}
@@ -4096,6 +4740,21 @@ func validateOpUpdateEventDestinationInput(v *UpdateEventDestinationInput) error
 	}
 }
 
+func validateOpUpdateNotifyConfigurationInput(v *UpdateNotifyConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateNotifyConfigurationInput"}
+	if v.NotifyConfigurationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NotifyConfigurationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdatePhoneNumberInput(v *UpdatePhoneNumberInput) error {
 	if v == nil {
 		return nil
@@ -4158,6 +4817,21 @@ func validateOpUpdateProtectConfigurationInput(v *UpdateProtectConfigurationInpu
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateProtectConfigurationInput"}
 	if v.ProtectConfigurationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProtectConfigurationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateRcsAgentInput(v *UpdateRcsAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateRcsAgentInput"}
+	if v.RcsAgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RcsAgentId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

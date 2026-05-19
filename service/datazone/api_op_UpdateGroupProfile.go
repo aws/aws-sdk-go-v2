@@ -60,6 +60,14 @@ type UpdateGroupProfileOutput struct {
 	// The identifier of the group profile that is updated.
 	Id *string
 
+	// The ARN of the IAM role principal. This role is associated with the updated
+	// group profile.
+	RolePrincipalArn *string
+
+	// The unique identifier of the IAM role principal. This principal is associated
+	// with the updated group profile.
+	RolePrincipalId *string
+
 	// The status of the group profile that is updated.
 	Status types.GroupProfileStatus
 
@@ -103,7 +111,7 @@ func (c *Client) addOperationUpdateGroupProfileMiddlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -125,9 +133,6 @@ func (c *Client) addOperationUpdateGroupProfileMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

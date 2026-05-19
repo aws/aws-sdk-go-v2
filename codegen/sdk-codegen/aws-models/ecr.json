@@ -4480,7 +4480,7 @@
                 "imageStatus": {
                     "target": "com.amazonaws.ecr#ImageStatusFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>The image status with which to filter your <a>DescribeImages</a> results. Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, and <code>ACTIVATING</code>.</p>"
+                        "smithy.api#documentation": "<p>The image status with which to filter your <a>DescribeImages</a> results.\n        Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, and <code>ACTIVATING</code>. \n        If not specified, only images with <code>ACTIVE</code> status are returned.</p>"
                     }
                 }
             },
@@ -5251,7 +5251,7 @@
                 "value": {
                     "target": "com.amazonaws.ecr#AccountSettingName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The setting value for the setting name. Valid value for basic scan type: <code>AWS_NATIVE</code>.\n            Valid values for registry policy scope: <code>V1</code> or <code>V2</code>.\n            Valid values for blob mounting: <code>ENABLED</code> or <code>DISABLED</code>.</p>"
+                        "smithy.api#documentation": "<p>The setting value for the setting name. Valid value for basic scan type: <code>AWS_NATIVE</code>.\n            Valid values for registry policy scope: <code>V2</code>.\n            Valid values for blob mounting: <code>ENABLED</code> or <code>DISABLED</code>.</p>"
                     }
                 }
             },
@@ -7392,6 +7392,9 @@
                     "target": "com.amazonaws.ecr#ServerException"
                 },
                 {
+                    "target": "com.amazonaws.ecr#UnableToListUpstreamImageReferrersException"
+                },
+                {
                     "target": "com.amazonaws.ecr#ValidationException"
                 }
             ],
@@ -7556,7 +7559,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.ecr#FiftyMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of image referrer results returned by <code>ListImageReferrers</code> in paginated\n            output. When this parameter is used, <code>ListImageReferrers</code> only returns\n                <code>maxResults</code> results in a single page along with a <code>nextToken</code>\n            response element. The remaining results of the initial request can be seen by sending\n            another <code>ListImageReferrers</code> request with the returned <code>nextToken</code> value.\n            This value can be between 1 and 50. If this parameter is\n            not used, then <code>ListImageReferrers</code> returns up to 50 results and a\n                <code>nextToken</code> value, if applicable.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of image referrer results returned by <code>ListImageReferrers</code> in paginated\n            output. When this parameter is used, <code>ListImageReferrers</code> only returns\n                <code>maxResults</code> results in a single page along with a <code>nextToken</code>\n            response element. The remaining results of the initial request can be seen by sending\n            another <code>ListImageReferrers</code> request with the returned <code>nextToken</code> value.\n            This value can be between 1 and 50. If this parameter is\n            not used, then <code>ListImageReferrers</code> returns up to 20 results and a\n                <code>nextToken</code> value, if applicable.</p>"
                     }
                 }
             },
@@ -7657,7 +7660,7 @@
                 "imageStatus": {
                     "target": "com.amazonaws.ecr#ImageStatusFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>The image status with which to filter your <a>ListImages</a> results. Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, and <code>ACTIVATING</code>.</p>"
+                        "smithy.api#documentation": "<p>The image status with which to filter your <a>ListImages</a> results.\n        Valid values are <code>ACTIVE</code>, <code>ARCHIVED</code>, and <code>ACTIVATING</code>.\n        If not specified, only images with <code>ACTIVE</code> status are returned.</p>"
                     }
                 }
             },
@@ -8179,7 +8182,7 @@
                 "value": {
                     "target": "com.amazonaws.ecr#AccountSettingValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>Setting value that is specified. Valid value for basic scan type: <code>AWS_NATIVE</code>.\n            Valid values for registry policy scope: <code>V1</code> or <code>V2</code>.\n            Valid values for blob mounting: <code>ENABLED</code> or <code>DISABLED</code>.</p>",
+                        "smithy.api#documentation": "<p>Setting value that is specified. Valid value for basic scan type: <code>AWS_NATIVE</code>.\n            Valid values for registry policy scope: <code>V2</code>.\n            Valid values for blob mounting: <code>ENABLED</code> or <code>DISABLED</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10577,6 +10580,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>There was an issue getting the upstream layer matching the pull through cache\n            rule.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.ecr#UnableToListUpstreamImageReferrersException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.ecr#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The referrer or referrers were unable to be listed using the pull through cache rule. This\n            is usually caused because of an issue with the Secrets Manager secret containing the credentials\n            for the upstream registry.</p>",
                 "smithy.api#error": "client"
             }
         },

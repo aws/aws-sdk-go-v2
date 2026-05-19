@@ -98,9 +98,16 @@ type CreateWorkflowInput struct {
 	// A description for the workflow.
 	Description *string
 
-	// The workflow engine for the workflow. This is only required if you have
-	// workflow definition files from more than one engine in your zip file. Otherwise,
-	// the service can detect the engine automatically from your workflow definition.
+	// The workflow engine for the workflow. By default, Amazon Web Services
+	// HealthOmics detects the engine automatically from your workflow definition.
+	// Provide a value if you have workflow definition files from more than one engine
+	// in your zip file, or to use WDL lenient.
+	//
+	// WDL lenient is designed to handle workflows migrated from Cromwell. It supports
+	// customer Cromwell directives and some non-conformant logic. For details, see [Implicit type conversion in WDL lenient]in
+	// the Amazon Web Services HealthOmics User Guide.
+	//
+	// [Implicit type conversion in WDL lenient]: https://docs.aws.amazon.com/omics/latest/dev/workflow-wdl-type-conversion.html
 	Engine types.WorkflowEngine
 
 	// The path of the main definition file for the workflow. This parameter is not
@@ -233,7 +240,7 @@ func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -255,9 +262,6 @@ func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

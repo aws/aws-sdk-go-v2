@@ -714,6 +714,11 @@ type DescribedConnector struct {
 	// failures.
 	ErrorMessage *string
 
+	// IP address type for the connector's network connections. When set to IPV4 , the
+	// connector uses IPv4 addresses only. When set to DUALSTACK , the connector
+	// supports both IPv4 and IPv6 addresses, with IPv6 preferred when available.
+	IpAddressType ConnectorsIpAddressType
+
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that allows a connector to turn on CloudWatch logging for Amazon S3 events. When
 	// set, you can view connector activity in your CloudWatch logs.
@@ -2638,6 +2643,10 @@ func (*UpdateWebAppIdentityProviderDetailsMemberIdentityCenterConfig) isUpdateWe
 // including the subnet IDs where the endpoint should be deployed.
 type UpdateWebAppVpcConfig struct {
 
+	// The IP address type for the web app's VPC endpoint. This determines whether the
+	// endpoint is accessible over IPv4 only, or over both IPv4 and IPv6.
+	IpAddressType WebAppVpcEndpointIpAddressType
+
 	// The list of subnet IDs within the VPC where the web app endpoint should be
 	// deployed during the update operation.
 	SubnetIds []string
@@ -2730,6 +2739,10 @@ func (*WebAppUnitsMemberProvisioned) isWebAppUnits() {}
 // Contains the VPC configuration settings for hosting a web app endpoint,
 // including the VPC ID, subnet IDs, and security group IDs for access control.
 type WebAppVpcConfig struct {
+
+	// The IP address type for the web app's VPC endpoint. This determines whether the
+	// endpoint is accessible over IPv4 only, or over both IPv4 and IPv6.
+	IpAddressType WebAppVpcEndpointIpAddressType
 
 	// The list of security group IDs that control access to the web app endpoint.
 	// These security groups determine which sources can access the endpoint based on

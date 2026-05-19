@@ -815,7 +815,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Input configuration for creating a Pulse web application. Used only in CreateDomain operation input.</p>"
+                "smithy.api#documentation": "<p>Input configuration for creating a web application. Used only in CreateDomain operation input.</p>"
             }
         },
         "com.amazonaws.connecthealth#CustomTemplate": {
@@ -2796,7 +2796,7 @@
         "com.amazonaws.connecthealth#SensitiveMarkdownString": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[a-zA-Z0-9\\s\\*_\\-#\\[\\]\\(\\)\\.,:;!?'\"`<>~]+$",
+                "smithy.api#pattern": "^[a-zA-Z0-9\\s\\*_\\-#\\[\\]\\(\\)\\.,:;!?'\"`<>~/]+$",
                 "smithy.api#sensitive": {}
             }
         },

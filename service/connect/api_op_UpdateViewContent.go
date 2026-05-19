@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the view content of the given view identifier in the specified Amazon
-// Connect instance.
+// Updates the view content of the given view identifier in the specified Connect
+// Customer instance.
 //
 // It performs content validation if Status is set to SAVED and performs full
 // content validation if Status is PUBLISHED . Note that the $SAVED alias' content
@@ -44,7 +44,7 @@ type UpdateViewContentInput struct {
 	// This member is required.
 	Content *types.ViewInputContent
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// The identifier of the Connect Customer instance. You can find the instanceId in
 	// the ARN of the instance.
 	//
 	// This member is required.
@@ -110,7 +110,7 @@ func (c *Client) addOperationUpdateViewContentMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -132,9 +132,6 @@ func (c *Client) addOperationUpdateViewContentMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

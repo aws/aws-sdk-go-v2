@@ -4956,7 +4956,7 @@
         "com.amazonaws.billingconductor#PricingPlanArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(arn:aws(-cn)?:billingconductor::(aws|[0-9]{12}):pricingplan/)?(BasicPricingPlan|[a-zA-Z0-9]{10})$"
+                "smithy.api#pattern": "^(arn:aws(-cn)?:billingconductor::(aws|[0-9]{12}):pricingplan/)?(BasicPricingPlan|Passthrough|[a-zA-Z0-9]{10})$"
             }
         },
         "com.amazonaws.billingconductor#PricingPlanArns": {
@@ -4984,7 +4984,7 @@
         "com.amazonaws.billingconductor#PricingPlanFullArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(-cn)?:billingconductor::(aws|[0-9]{12}):pricingplan/(BasicPricingPlan|[a-zA-Z0-9]{10})$"
+                "smithy.api#pattern": "^arn:aws(-cn)?:billingconductor::(aws|[0-9]{12}):pricingplan/(BasicPricingPlan|Passthrough|[a-zA-Z0-9]{10})$"
             }
         },
         "com.amazonaws.billingconductor#PricingPlanList": {
@@ -5929,6 +5929,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.billingconductor#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.billingconductor#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.billingconductor#InternalServerException"

@@ -32,6 +32,9 @@ type ListBrowserProfilesInput struct {
 	// The maximum number of results to return in the response.
 	MaxResults *int32
 
+	// The name of the browser profile to filter results by.
+	Name *string
+
 	// A token to retrieve the next page of results.
 	NextToken *string
 
@@ -88,7 +91,7 @@ func (c *Client) addOperationListBrowserProfilesMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -110,9 +113,6 @@ func (c *Client) addOperationListBrowserProfilesMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

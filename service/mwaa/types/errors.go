@@ -149,6 +149,32 @@ func (e *RestApiServerException) ErrorCode() string {
 }
 func (e *RestApiServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// ServiceUnavailableException: The service is currently unavailable.
+type ServiceUnavailableException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceUnavailableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceUnavailableException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceUnavailableException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // ValidationException: The provided input is not valid.
 type ValidationException struct {
 	Message *string

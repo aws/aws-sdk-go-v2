@@ -66,6 +66,10 @@ type GetReplicationConfigurationOutput struct {
 	// The ARN of the EBS encryption key to be used during replication.
 	EbsEncryptionKeyArn *string
 
+	// Which version of the Internet Protocol to use for replication of data. (IPv4 or
+	// IPv6)
+	InternetProtocol types.InternetProtocol
+
 	// The name of the Replication Configuration.
 	Name *string
 
@@ -134,7 +138,7 @@ func (c *Client) addOperationGetReplicationConfigurationMiddlewares(stack *middl
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -156,9 +160,6 @@ func (c *Client) addOperationGetReplicationConfigurationMiddlewares(stack *middl
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

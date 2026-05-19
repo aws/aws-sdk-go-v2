@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new predefined attribute for the specified Amazon Connect instance. A
-// predefined attribute is made up of a name and a value.
+// Creates a new predefined attribute for the specified Connect Customer instance.
+// A predefined attribute is made up of a name and a value.
 //
-// For the predefined attributes per instance quota, see [Amazon Connect quotas].
+// For the predefined attributes per instance quota, see [Connect Customer quotas].
 //
 // # Use cases
 //
@@ -29,12 +29,12 @@ import (
 //     information for a contact varies between transfers or conferences. For more
 //     information, see [Use contact segment attributes].
 //
-// Endpoints: See [Amazon Connect endpoints and quotas].
+// Endpoints: See [Connect Customer endpoints and quotas].
 //
+// [Connect Customer quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas
 // [Use contact segment attributes]: https://docs.aws.amazon.com/connect/latest/adminguide/use-contact-segment-attributes.html
-// [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
-// [Amazon Connect quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas
 // [Create predefined attributes for routing contacts to agents]: https://docs.aws.amazon.com/connect/latest/adminguide/predefined-attributes.html
+// [Connect Customer endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 func (c *Client) CreatePredefinedAttribute(ctx context.Context, params *CreatePredefinedAttributeInput, optFns ...func(*Options)) (*CreatePredefinedAttributeOutput, error) {
 	if params == nil {
 		params = &CreatePredefinedAttributeInput{}
@@ -52,8 +52,8 @@ func (c *Client) CreatePredefinedAttribute(ctx context.Context, params *CreatePr
 
 type CreatePredefinedAttributeInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID in
-	// the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can find the instance ID
+	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
@@ -65,11 +65,11 @@ type CreatePredefinedAttributeInput struct {
 
 	// Custom metadata that is associated to predefined attributes to control behavior
 	// in upstream services, such as controlling how a predefined attribute should be
-	// displayed in the Amazon Connect admin website.
+	// displayed in the Connect Customer admin website.
 	AttributeConfiguration *types.InputPredefinedAttributeConfiguration
 
 	// Values that enable you to categorize your predefined attributes. You can use
-	// them in custom UI elements across the Amazon Connect admin website.
+	// them in custom UI elements across the Connect Customer admin website.
 	Purposes []string
 
 	//  The values of the predefined attribute.
@@ -119,7 +119,7 @@ func (c *Client) addOperationCreatePredefinedAttributeMiddlewares(stack *middlew
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -141,9 +141,6 @@ func (c *Client) addOperationCreatePredefinedAttributeMiddlewares(stack *middlew
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

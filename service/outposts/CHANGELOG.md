@@ -1,3 +1,26 @@
+# v1.59.2 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.59.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.59.0 (2026-04-08)
+
+* **Feature**: Add AWS Outposts APIs to view renewal pricing options and submit renewal requests for Outpost contracts
+
+# v1.58.0 (2026-04-07)
+
+* **Feature**: This change allows listAssets to surface pending and non-compute asset information. Adds the INSTALLING asset state enum and the STORAGE, POWERSHELF, SWITCH, and NETWORKING AssetTypes.
+
+# v1.57.15 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.14 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

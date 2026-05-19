@@ -844,6 +844,17 @@ func awsRestjson1_serializeDocumentArchiveRule(v *types.ArchiveRule, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAvailabilityZoneIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAvailabilityZoneList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1201,6 +1212,13 @@ func awsRestjson1_serializeDocumentExclusions(v *types.Exclusions, value smithyj
 func awsRestjson1_serializeDocumentFastRestoreRule(v *types.FastRestoreRule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AvailabilityZoneIds != nil {
+		ok := object.Key("AvailabilityZoneIds")
+		if err := awsRestjson1_serializeDocumentAvailabilityZoneIdList(v.AvailabilityZoneIds, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.AvailabilityZones != nil {
 		ok := object.Key("AvailabilityZones")

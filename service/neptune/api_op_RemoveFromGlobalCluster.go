@@ -13,7 +13,7 @@ import (
 
 // Detaches a Neptune DB cluster from a Neptune global database. A secondary
 // cluster becomes a normal standalone cluster with read-write capability instead
-// of being read-only, and no longer receives data from a the primary cluster.
+// of being read-only, and no longer receives data from the primary cluster.
 func (c *Client) RemoveFromGlobalCluster(ctx context.Context, params *RemoveFromGlobalClusterInput, optFns ...func(*Options)) (*RemoveFromGlobalClusterOutput, error) {
 	if params == nil {
 		params = &RemoveFromGlobalClusterInput{}
@@ -93,7 +93,7 @@ func (c *Client) addOperationRemoveFromGlobalClusterMiddlewares(stack *middlewar
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -115,9 +115,6 @@ func (c *Client) addOperationRemoveFromGlobalClusterMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

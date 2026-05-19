@@ -210,6 +210,26 @@ func (m *validateOpCreateLogStream) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateLookupTable struct {
+}
+
+func (*validateOpCreateLookupTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateLookupTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateLookupTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateLookupTableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateScheduledQuery struct {
 }
 
@@ -465,6 +485,26 @@ func (m *validateOpDeleteLogStream) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteLogStreamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLookupTable struct {
+}
+
+func (*validateOpDeleteLookupTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLookupTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLookupTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLookupTableInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -925,6 +965,26 @@ func (m *validateOpGetLogRecord) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetLogRecordInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetLookupTable struct {
+}
+
+func (*validateOpGetLookupTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetLookupTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetLookupTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetLookupTableInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1710,6 +1770,26 @@ func (m *validateOpUpdateLogAnomalyDetector) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateLookupTable struct {
+}
+
+func (*validateOpUpdateLookupTable) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateLookupTable) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateLookupTableInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateLookupTableInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateScheduledQuery struct {
 }
 
@@ -1770,6 +1850,10 @@ func addOpCreateLogStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLogStream{}, middleware.After)
 }
 
+func addOpCreateLookupTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateLookupTable{}, middleware.After)
+}
+
 func addOpCreateScheduledQueryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateScheduledQuery{}, middleware.After)
 }
@@ -1820,6 +1904,10 @@ func addOpDeleteLogGroupValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteLogStreamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLogStream{}, middleware.After)
+}
+
+func addOpDeleteLookupTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLookupTable{}, middleware.After)
 }
 
 func addOpDeleteMetricFilterValidationMiddleware(stack *middleware.Stack) error {
@@ -1912,6 +2000,10 @@ func addOpGetLogObjectValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetLogRecordValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLogRecord{}, middleware.After)
+}
+
+func addOpGetLookupTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetLookupTable{}, middleware.After)
 }
 
 func addOpGetQueryResultsValidationMiddleware(stack *middleware.Stack) error {
@@ -2068,6 +2160,10 @@ func addOpUpdateDeliveryConfigurationValidationMiddleware(stack *middleware.Stac
 
 func addOpUpdateLogAnomalyDetectorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLogAnomalyDetector{}, middleware.After)
+}
+
+func addOpUpdateLookupTableValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateLookupTable{}, middleware.After)
 }
 
 func addOpUpdateScheduledQueryValidationMiddleware(stack *middleware.Stack) error {
@@ -2617,6 +2713,38 @@ func validateProcessors(v []types.Processor) error {
 	}
 }
 
+func validateQueryParameter(v *types.QueryParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryParameter"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateQueryParameterList(v []types.QueryParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "QueryParameterList"}
+	for i := range v {
+		if err := validateQueryParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRenameKeyEntries(v []types.RenameKeyEntry) error {
 	if v == nil {
 		return nil
@@ -2811,6 +2939,38 @@ func validateSubstituteStringEntry(v *types.SubstituteStringEntry) error {
 	}
 	if v.To == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("To"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagFilter(v *types.TagFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagFilter"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagFilters(v []types.TagFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagFilters"}
+	for i := range v {
+		if err := validateTagFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3078,6 +3238,24 @@ func validateOpCreateLogStreamInput(v *CreateLogStreamInput) error {
 	}
 }
 
+func validateOpCreateLookupTableInput(v *CreateLookupTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateLookupTableInput"}
+	if v.LookupTableName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LookupTableName"))
+	}
+	if v.TableBody == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBody"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateScheduledQueryInput(v *CreateScheduledQueryInput) error {
 	if v == nil {
 		return nil
@@ -3288,6 +3466,21 @@ func validateOpDeleteLogStreamInput(v *DeleteLogStreamInput) error {
 	}
 	if v.LogStreamName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LogStreamName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLookupTableInput(v *DeleteLookupTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLookupTableInput"}
+	if v.LookupTableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LookupTableArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3650,6 +3843,21 @@ func validateOpGetLogRecordInput(v *GetLogRecordInput) error {
 	}
 }
 
+func validateOpGetLookupTableInput(v *GetLookupTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetLookupTableInput"}
+	if v.LookupTableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LookupTableArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetQueryResultsInput(v *GetQueryResultsInput) error {
 	if v == nil {
 		return nil
@@ -3759,6 +3967,11 @@ func validateOpListLogGroupsInput(v *ListLogGroupsInput) error {
 	if v.DataSources != nil {
 		if err := validateDataSourceFilters(v.DataSources); err != nil {
 			invalidParams.AddNested("DataSources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LogGroupTags != nil {
+		if err := validateTagFilters(v.LogGroupTags); err != nil {
+			invalidParams.AddNested("LogGroupTags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4093,6 +4306,11 @@ func validateOpPutQueryDefinitionInput(v *PutQueryDefinitionInput) error {
 	if v.QueryString == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
 	}
+	if v.Parameters != nil {
+		if err := validateQueryParameterList(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -4367,6 +4585,24 @@ func validateOpUpdateLogAnomalyDetectorInput(v *UpdateLogAnomalyDetectorInput) e
 	}
 	if v.Enabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateLookupTableInput(v *UpdateLookupTableInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateLookupTableInput"}
+	if v.LookupTableArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LookupTableArn"))
+	}
+	if v.TableBody == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TableBody"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

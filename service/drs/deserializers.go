@@ -767,6 +767,15 @@ func awsRestjson1_deserializeOpDocumentCreateReplicationConfigurationTemplateOut
 				sv.EbsEncryptionKeyArn = ptr.String(jtv)
 			}
 
+		case "internetProtocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InternetProtocol to be of type string, got %T instead", value)
+				}
+				sv.InternetProtocol = types.InternetProtocol(jtv)
+			}
+
 		case "pitPolicy":
 			if err := awsRestjson1_deserializeDocumentPITPolicy(&sv.PitPolicy, value); err != nil {
 				return err
@@ -3782,6 +3791,15 @@ func awsRestjson1_deserializeOpDocumentGetFailbackReplicationConfigurationOutput
 				sv.BandwidthThrottling = i64
 			}
 
+		case "internetProtocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InternetProtocol to be of type string, got %T instead", value)
+				}
+				sv.InternetProtocol = types.InternetProtocol(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4280,6 +4298,15 @@ func awsRestjson1_deserializeOpDocumentGetReplicationConfigurationOutput(v **Get
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.EbsEncryptionKeyArn = ptr.String(jtv)
+			}
+
+		case "internetProtocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InternetProtocol to be of type string, got %T instead", value)
+				}
+				sv.InternetProtocol = types.InternetProtocol(jtv)
 			}
 
 		case "name":
@@ -8226,6 +8253,15 @@ func awsRestjson1_deserializeOpDocumentUpdateReplicationConfigurationOutput(v **
 				sv.EbsEncryptionKeyArn = ptr.String(jtv)
 			}
 
+		case "internetProtocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InternetProtocol to be of type string, got %T instead", value)
+				}
+				sv.InternetProtocol = types.InternetProtocol(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8536,6 +8572,15 @@ func awsRestjson1_deserializeOpDocumentUpdateReplicationConfigurationTemplateOut
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.EbsEncryptionKeyArn = ptr.String(jtv)
+			}
+
+		case "internetProtocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InternetProtocol to be of type string, got %T instead", value)
+				}
+				sv.InternetProtocol = types.InternetProtocol(jtv)
 			}
 
 		case "pitPolicy":
@@ -10263,6 +10308,19 @@ func awsRestjson1_deserializeDocumentJobLogEventData(v **types.JobLogEventData, 
 
 	for key, value := range shape {
 		switch key {
+		case "attemptCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected JobEventAttemptCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AttemptCount = i64
+			}
+
 		case "conversionProperties":
 			if err := awsRestjson1_deserializeDocumentConversionProperties(&sv.ConversionProperties, value); err != nil {
 				return err
@@ -10280,6 +10338,19 @@ func awsRestjson1_deserializeDocumentJobLogEventData(v **types.JobLogEventData, 
 		case "eventResourceData":
 			if err := awsRestjson1_deserializeDocumentEventResourceData(&sv.EventResourceData, value); err != nil {
 				return err
+			}
+
+		case "maxAttemptsCount":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected JobEventAttemptCount to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAttemptsCount = i64
 			}
 
 		case "rawError":
@@ -12986,6 +13057,15 @@ func awsRestjson1_deserializeDocumentReplicationConfigurationTemplate(v **types.
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.EbsEncryptionKeyArn = ptr.String(jtv)
+			}
+
+		case "internetProtocol":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InternetProtocol to be of type string, got %T instead", value)
+				}
+				sv.InternetProtocol = types.InternetProtocol(jtv)
 			}
 
 		case "pitPolicy":

@@ -190,6 +190,26 @@ func (m *validateOpCalculateRouteMatrix) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelJob struct {
+}
+
+func (*validateOpCancelJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateGeofenceCollection struct {
 }
 
@@ -650,6 +670,26 @@ func (m *validateOpGetGeofence) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetJob struct {
+}
+
+func (*validateOpGetJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMapGlyphs struct {
 }
 
@@ -910,6 +950,26 @@ func (m *validateOpSearchPlaceIndexForText) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartJob struct {
+}
+
+func (*validateOpStartJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1126,6 +1186,10 @@ func addOpCalculateRouteMatrixValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpCalculateRouteMatrix{}, middleware.After)
 }
 
+func addOpCancelJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelJob{}, middleware.After)
+}
+
 func addOpCreateGeofenceCollectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateGeofenceCollection{}, middleware.After)
 }
@@ -1218,6 +1282,10 @@ func addOpGetGeofenceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetGeofence{}, middleware.After)
 }
 
+func addOpGetJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetJob{}, middleware.After)
+}
+
 func addOpGetMapGlyphsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMapGlyphs{}, middleware.After)
 }
@@ -1268,6 +1336,10 @@ func addOpSearchPlaceIndexForSuggestionsValidationMiddleware(stack *middleware.S
 
 func addOpSearchPlaceIndexForTextValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchPlaceIndexForText{}, middleware.After)
+}
+
+func addOpStartJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartJob{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1580,6 +1652,42 @@ func validateGeofenceGeometry(v *types.GeofenceGeometry) error {
 		if err := validateCircle(v.Circle); err != nil {
 			invalidParams.AddNested("Circle", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJobInputOptions(v *types.JobInputOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobInputOptions"}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
+	}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateJobOutputOptions(v *types.JobOutputOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "JobOutputOptions"}
+	if len(v.Format) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Format"))
+	}
+	if v.Location == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Location"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1911,6 +2019,21 @@ func validateOpCalculateRouteMatrixInput(v *CalculateRouteMatrixInput) error {
 	}
 	if v.DestinationPositions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DestinationPositions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelJobInput(v *CancelJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2303,6 +2426,21 @@ func validateOpGetGeofenceInput(v *GetGeofenceInput) error {
 	}
 }
 
+func validateOpGetJobInput(v *GetJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetJobInput"}
+	if v.JobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetMapGlyphsInput(v *GetMapGlyphsInput) error {
 	if v == nil {
 		return nil
@@ -2530,6 +2668,38 @@ func validateOpSearchPlaceIndexForTextInput(v *SearchPlaceIndexForTextInput) err
 	}
 	if v.Text == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Text"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartJobInput(v *StartJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartJobInput"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if v.ExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRoleArn"))
+	}
+	if v.InputOptions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputOptions"))
+	} else if v.InputOptions != nil {
+		if err := validateJobInputOptions(v.InputOptions); err != nil {
+			invalidParams.AddNested("InputOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputOptions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputOptions"))
+	} else if v.OutputOptions != nil {
+		if err := validateJobOutputOptions(v.OutputOptions); err != nil {
+			invalidParams.AddNested("OutputOptions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

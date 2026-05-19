@@ -657,6 +657,35 @@ func (AssociatedTranscriptFilterName) Values() []AssociatedTranscriptFilterName 
 	}
 }
 
+type AudioFillerType string
+
+// Enum values for AudioFillerType
+const (
+	AudioFillerTypeMelodyChipperChime  AudioFillerType = "MELODY_CHIPPER_CHIME"
+	AudioFillerTypeMelodyCuriousCrawl  AudioFillerType = "MELODY_CURIOUS_CRAWL"
+	AudioFillerTypeMelodyRisingRipple  AudioFillerType = "MELODY_RISING_RIPPLE"
+	AudioFillerTypeMelodyPatientPing   AudioFillerType = "MELODY_PATIENT_PING"
+	AudioFillerTypeMelodyPonderingPong AudioFillerType = "MELODY_PONDERING_PONG"
+	AudioFillerTypeTypingKineticKeys   AudioFillerType = "TYPING_KINETIC_KEYS"
+	AudioFillerTypeTypingQuietQwerty   AudioFillerType = "TYPING_QUIET_QWERTY"
+)
+
+// Values returns all known values for AudioFillerType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AudioFillerType) Values() []AudioFillerType {
+	return []AudioFillerType{
+		"MELODY_CHIPPER_CHIME",
+		"MELODY_CURIOUS_CRAWL",
+		"MELODY_RISING_RIPPLE",
+		"MELODY_PATIENT_PING",
+		"MELODY_PONDERING_PONG",
+		"TYPING_KINETIC_KEYS",
+		"TYPING_QUIET_QWERTY",
+	}
+}
+
 type AudioRecognitionStrategy string
 
 // Enum values for AudioRecognitionStrategy

@@ -27,10 +27,13 @@ type CheckType string
 
 // Enum values for CheckType
 const (
-	CheckTypeKeyReuse     CheckType = "KEY_REUSE"
-	CheckTypeKeyCoverage  CheckType = "KEY_COVERAGE"
-	CheckTypeReachability CheckType = "REACHABILITY"
-	CheckTypeHostCount    CheckType = "HOST_COUNT"
+	CheckTypeKeyReuse            CheckType = "KEY_REUSE"
+	CheckTypeKeyCoverage         CheckType = "KEY_COVERAGE"
+	CheckTypeReachability        CheckType = "REACHABILITY"
+	CheckTypeHostCount           CheckType = "HOST_COUNT"
+	CheckTypeVcenterReachability CheckType = "VCENTER_REACHABILITY"
+	CheckTypeVcenterVmSync       CheckType = "VCENTER_VM_SYNC"
+	CheckTypeVcenterVmEvent      CheckType = "VCENTER_VM_EVENT"
 )
 
 // Values returns all known values for CheckType. Note that this can be expanded
@@ -43,6 +46,99 @@ func (CheckType) Values() []CheckType {
 		"KEY_COVERAGE",
 		"REACHABILITY",
 		"HOST_COUNT",
+		"VCENTER_REACHABILITY",
+		"VCENTER_VM_SYNC",
+		"VCENTER_VM_EVENT",
+	}
+}
+
+type ConnectorState string
+
+// Enum values for ConnectorState
+const (
+	ConnectorStateCreating     ConnectorState = "CREATING"
+	ConnectorStateCreateFailed ConnectorState = "CREATE_FAILED"
+	ConnectorStateActive       ConnectorState = "ACTIVE"
+	ConnectorStateUpdating     ConnectorState = "UPDATING"
+	ConnectorStateUpdateFailed ConnectorState = "UPDATE_FAILED"
+	ConnectorStateDeleting     ConnectorState = "DELETING"
+	ConnectorStateDeleted      ConnectorState = "DELETED"
+)
+
+// Values returns all known values for ConnectorState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorState) Values() []ConnectorState {
+	return []ConnectorState{
+		"CREATING",
+		"CREATE_FAILED",
+		"ACTIVE",
+		"UPDATING",
+		"UPDATE_FAILED",
+		"DELETING",
+		"DELETED",
+	}
+}
+
+type ConnectorType string
+
+// Enum values for ConnectorType
+const (
+	ConnectorTypeVcenter ConnectorType = "VCENTER"
+)
+
+// Values returns all known values for ConnectorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorType) Values() []ConnectorType {
+	return []ConnectorType{
+		"VCENTER",
+	}
+}
+
+type EntitlementStatus string
+
+// Enum values for EntitlementStatus
+const (
+	EntitlementStatusCreating           EntitlementStatus = "CREATING"
+	EntitlementStatusCreated            EntitlementStatus = "CREATED"
+	EntitlementStatusDeleted            EntitlementStatus = "DELETED"
+	EntitlementStatusAtRisk             EntitlementStatus = "AT_RISK"
+	EntitlementStatusEntitlementRemoved EntitlementStatus = "ENTITLEMENT_REMOVED"
+	EntitlementStatusCreateFailed       EntitlementStatus = "CREATE_FAILED"
+)
+
+// Values returns all known values for EntitlementStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EntitlementStatus) Values() []EntitlementStatus {
+	return []EntitlementStatus{
+		"CREATING",
+		"CREATED",
+		"DELETED",
+		"AT_RISK",
+		"ENTITLEMENT_REMOVED",
+		"CREATE_FAILED",
+	}
+}
+
+type EntitlementType string
+
+// Enum values for EntitlementType
+const (
+	EntitlementTypeWindowsServer EntitlementType = "WINDOWS_SERVER"
+)
+
+// Values returns all known values for EntitlementType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EntitlementType) Values() []EntitlementType {
+	return []EntitlementType{
+		"WINDOWS_SERVER",
 	}
 }
 
@@ -104,7 +200,8 @@ type InstanceType string
 
 // Enum values for InstanceType
 const (
-	InstanceTypeI4iMetal InstanceType = "i4i.metal"
+	InstanceTypeI4iMetal     InstanceType = "i4i.metal"
+	InstanceTypeI7iMetal24xl InstanceType = "i7i.metal-24xl"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -114,6 +211,7 @@ const (
 func (InstanceType) Values() []InstanceType {
 	return []InstanceType{
 		"i4i.metal",
+		"i7i.metal-24xl",
 	}
 }
 

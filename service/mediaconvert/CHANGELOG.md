@@ -1,3 +1,26 @@
+# v1.91.2 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.91.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.91.0 (2026-04-16)
+
+* **Feature**: Adds support for Elemental Inference powered smart crop feature, enabling video verticalization
+
+# v1.90.0 (2026-04-10)
+
+* **Feature**: Adds support for MV-HEVC video output and clear lead for AV1 DRM output.
+
+# v1.89.1 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.89.0 (2026-03-18)
 
 * **Feature**: This update adds additional bitrate options for Dolby AC-4 audio outputs.

@@ -4583,6 +4583,12 @@
                 "smithy.api#documentation": "<p>Configures the command to treat the <code>payloadTemplate</code> as a JSON document for preprocessing.\n            This preprocessor substitutes placeholders with parameter values to generate the command execution request payload.\n            </p>"
             }
         },
+        "com.amazonaws.iot#BatchAcrossTopics": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
         "com.amazonaws.iot#BatchConfig": {
             "type": "structure",
             "members": {
@@ -4602,6 +4608,13 @@
                     "target": "com.amazonaws.iot#MaxBatchSizeBytes",
                     "traits": {
                         "smithy.api#documentation": "<p>Maximum size of a message batch, in bytes.</p>"
+                    }
+                },
+                "batchAcrossTopics": {
+                    "target": "com.amazonaws.iot#BatchAcrossTopics",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether to allow batching messages from different MQTT topics into a single HTTP request.\n         By default, only messages from the same topic are batched together. The default value is <code>false</code>.</p>"
                     }
                 }
             },

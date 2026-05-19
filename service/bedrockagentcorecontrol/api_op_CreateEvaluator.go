@@ -12,10 +12,11 @@ import (
 	"time"
 )
 
-//	Creates a custom evaluator for agent quality assessment. Custom evaluators use
+//	Creates a custom evaluator for agent quality assessment. Custom evaluators can
 //
-// LLM-as-a-Judge configurations with user-defined prompts, rating scales, and
-// model settings to evaluate agent performance at tool call, trace, or session
+// use either LLM-as-a-Judge configurations with user-defined prompts, rating
+// scales, and model settings, or code-based configurations with customer-managed
+// Lambda functions to evaluate agent performance at tool call, trace, or session
 // levels.
 func (c *Client) CreateEvaluator(ctx context.Context, params *CreateEvaluatorInput, optFns ...func(*Options)) (*CreateEvaluatorOutput, error) {
 	if params == nil {
@@ -34,8 +35,9 @@ func (c *Client) CreateEvaluator(ctx context.Context, params *CreateEvaluatorInp
 
 type CreateEvaluatorInput struct {
 
-	//  The configuration for the evaluator, including LLM-as-a-Judge settings with
-	// instructions, rating scale, and model configuration.
+	//  The configuration for the evaluator. Specify either LLM-as-a-Judge settings
+	// with instructions, rating scale, and model configuration, or code-based settings
+	// with a customer-managed Lambda function.
 	//
 	// This member is required.
 	EvaluatorConfig types.EvaluatorConfig
@@ -63,6 +65,15 @@ type CreateEvaluatorInput struct {
 	//  The description of the evaluator that explains its purpose and evaluation
 	// criteria.
 	Description *string
+
+	//  The Amazon Resource Name (ARN) of a customer managed KMS key to use for
+	// encrypting sensitive evaluator data, including instructions and rating scale. If
+	// you don't specify a KMS key, the evaluator data is encrypted with an Amazon Web
+	// Services owned key. Only symmetric encryption KMS keys are supported. For more
+	// information, see [Encryption at rest for AgentCore Evaluations].
+	//
+	// [Encryption at rest for AgentCore Evaluations]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/evaluations-encryption.html
+	KmsKeyArn *string
 
 	// A map of tag keys and values to assign to an AgentCore Evaluator. Tags enable
 	// you to categorize your resources in different ways, for example, by purpose,
@@ -134,7 +145,7 @@ func (c *Client) addOperationCreateEvaluatorMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -156,9 +167,6 @@ func (c *Client) addOperationCreateEvaluatorMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

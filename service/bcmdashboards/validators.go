@@ -30,6 +30,26 @@ func (m *validateOpCreateDashboard) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateScheduledReport struct {
+}
+
+func (*validateOpCreateScheduledReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateScheduledReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateScheduledReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateScheduledReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteDashboard struct {
 }
 
@@ -45,6 +65,46 @@ func (m *validateOpDeleteDashboard) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDashboardInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteScheduledReport struct {
+}
+
+func (*validateOpDeleteScheduledReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteScheduledReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteScheduledReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteScheduledReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpExecuteScheduledReport struct {
+}
+
+func (*validateOpExecuteScheduledReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpExecuteScheduledReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ExecuteScheduledReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpExecuteScheduledReportInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -85,6 +145,26 @@ func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetScheduledReport struct {
+}
+
+func (*validateOpGetScheduledReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetScheduledReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetScheduledReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetScheduledReportInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -170,12 +250,44 @@ func (m *validateOpUpdateDashboard) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateScheduledReport struct {
+}
+
+func (*validateOpUpdateScheduledReport) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateScheduledReport) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateScheduledReportInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateScheduledReportInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDashboard{}, middleware.After)
 }
 
+func addOpCreateScheduledReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateScheduledReport{}, middleware.After)
+}
+
 func addOpDeleteDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDashboard{}, middleware.After)
+}
+
+func addOpDeleteScheduledReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteScheduledReport{}, middleware.After)
+}
+
+func addOpExecuteScheduledReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpExecuteScheduledReport{}, middleware.After)
 }
 
 func addOpGetDashboardValidationMiddleware(stack *middleware.Stack) error {
@@ -184,6 +296,10 @@ func addOpGetDashboardValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
+}
+
+func addOpGetScheduledReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetScheduledReport{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -200,6 +316,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateDashboardValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDashboard{}, middleware.After)
+}
+
+func addOpUpdateScheduledReportValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateScheduledReport{}, middleware.After)
 }
 
 func validateCostAndUsageQuery(v *types.CostAndUsageQuery) error {
@@ -617,6 +737,35 @@ func validateSavingsPlansUtilizationQuery(v *types.SavingsPlansUtilizationQuery)
 	}
 }
 
+func validateScheduledReportInput(v *types.ScheduledReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ScheduledReportInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.DashboardArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DashboardArn"))
+	}
+	if v.ScheduledReportExecutionRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledReportExecutionRoleArn"))
+	}
+	if v.ScheduleConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduleConfig"))
+	}
+	if v.WidgetDateRangeOverride != nil {
+		if err := validateDateTimeRange(v.WidgetDateRangeOverride); err != nil {
+			invalidParams.AddNested("WidgetDateRangeOverride", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateWidget(v *types.Widget) error {
 	if v == nil {
 		return nil
@@ -726,11 +875,65 @@ func validateOpCreateDashboardInput(v *CreateDashboardInput) error {
 	}
 }
 
+func validateOpCreateScheduledReportInput(v *CreateScheduledReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateScheduledReportInput"}
+	if v.ScheduledReport == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScheduledReport"))
+	} else if v.ScheduledReport != nil {
+		if err := validateScheduledReportInput(v.ScheduledReport); err != nil {
+			invalidParams.AddNested("ScheduledReport", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceTags != nil {
+		if err := validateResourceTagList(v.ResourceTags); err != nil {
+			invalidParams.AddNested("ResourceTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteDashboardInput(v *DeleteDashboardInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDashboardInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteScheduledReportInput(v *DeleteScheduledReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteScheduledReportInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpExecuteScheduledReportInput(v *ExecuteScheduledReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExecuteScheduledReportInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
@@ -763,6 +966,21 @@ func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetResourcePolicyInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetScheduledReportInput(v *GetScheduledReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetScheduledReportInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -834,9 +1052,32 @@ func validateOpUpdateDashboardInput(v *UpdateDashboardInput) error {
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
 	if v.Widgets != nil {
 		if err := validateWidgetList(v.Widgets); err != nil {
 			invalidParams.AddNested("Widgets", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateScheduledReportInput(v *UpdateScheduledReportInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateScheduledReportInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if v.WidgetDateRangeOverride != nil {
+		if err := validateDateTimeRange(v.WidgetDateRangeOverride); err != nil {
+			invalidParams.AddNested("WidgetDateRangeOverride", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

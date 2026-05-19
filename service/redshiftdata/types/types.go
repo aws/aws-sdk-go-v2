@@ -34,7 +34,8 @@ type ColumnMetadata struct {
 	// A value that indicates whether the column is nullable.
 	Nullable int32
 
-	// The precision value of a decimal number column.
+	// The precision value of a decimal number column, or the column length for a
+	// non-numeric column.
 	Precision int32
 
 	// The scale value of a decimal number column.

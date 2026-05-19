@@ -27,20 +27,22 @@ import (
 // based on the combination of home Region and remote location. All requests must
 // specify an Amazon Web Services Region (either explicitly or as your default
 // settings). To get the limit for a remote location, you must also specify the
-// location. For example, the following requests all return different results:
+// location. To learn more about how Amazon GameLift Servers handles locations, see
+// [Amazon GameLift Servers service locations]. For example, the following requests all return different results:
 //
 //   - Request specifies the Region ap-northeast-1 with no location. The result is
-//     limits and usage data on all instance types that are deployed in us-east-2 ,
-//     by all of the fleets that reside in ap-northeast-1 .
+//     limits and usage data on all of the fleets that reside in ap-northeast-1 , for
+//     all instance types that are deployed in ap-northeast-1 .
 //
-//   - Request specifies the Region us-east-1 with location ca-central-1 . The
-//     result is limits and usage data on all instance types that are deployed in
-//     ca-central-1 , by all of the fleets that reside in us-east-2 . These limits do
-//     not affect fleets in any other Regions that deploy instances to ca-central-1 .
+//   - Request specifies the Region ap-northeast-1 with location us-west-2 . The
+//     result is limits and usage data on all of the fleets that reside in
+//     ap-northeast-1 , for all instance types that are deployed in us-west-2 .
 //
-//   - Request specifies the Region eu-west-1 with location ca-central-1 . The
-//     result is limits and usage data on all instance types that are deployed in
-//     ca-central-1 , by all of the fleets that reside in eu-west-1 .
+//   - Request specifies the Region us-east-1 with location ap-northeast-1 . The
+//     result is limits and usage data on all of the fleets that reside in us-east-1
+//     , for all instance types that are deployed in ap-northeast-1 . These limits do
+//     not affect fleets in any other Regions that deploy instances to ap-northeast-1
+//     .
 //
 // This operation can be used in the following ways:
 //
@@ -61,6 +63,7 @@ import (
 //
 // [Setting up Amazon GameLift Servers fleets]
 //
+// [Amazon GameLift Servers service locations]: https://docs.aws.amazon.com/gameliftservers/latest/developerguide/gamelift-regions.html
 // [Amazon EC2 Instance Types]: http://aws.amazon.com/ec2/instance-types/
 // [Setting up Amazon GameLift Servers fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) DescribeEC2InstanceLimits(ctx context.Context, params *DescribeEC2InstanceLimitsInput, optFns ...func(*Options)) (*DescribeEC2InstanceLimitsOutput, error) {
@@ -109,11 +112,11 @@ func (c *Client) addOperationDescribeEC2InstanceLimitsMiddlewares(stack *middlew
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeEC2InstanceLimits{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeEC2InstanceLimits{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeEC2InstanceLimits{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeEC2InstanceLimits{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -139,7 +142,7 @@ func (c *Client) addOperationDescribeEC2InstanceLimitsMiddlewares(stack *middlew
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -163,10 +166,10 @@ func (c *Client) addOperationDescribeEC2InstanceLimitsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
+	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

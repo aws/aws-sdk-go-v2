@@ -44217,6 +44217,15 @@ func awsAwsjson11_deserializeDocumentDataQualityEvaluationRunAdditionalRunOption
 				sv.CompositeRuleEvaluationMethod = types.DQCompositeRuleEvaluationMethod(jtv)
 			}
 
+		case "CustomLogGroupPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.CustomLogGroupPrefix = ptr.String(jtv)
+			}
+
 		case "ResultsS3Prefix":
 			if value != nil {
 				jtv, ok := value.(string)

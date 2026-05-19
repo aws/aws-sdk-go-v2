@@ -9184,6 +9184,12 @@
                         "smithy.api#documentation": "<p>A list of steps to run.</p>"
                     }
                 },
+                "StepExecutionRoleArn": {
+                    "target": "com.amazonaws.emr#ArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the runtime role for steps specified in the\n         RunJobFlow request. The runtime role can be a cross-account IAM role.\n         The runtime role ARN is a combination of account ID, role name, and role type using the\n         following format: <code>arn:partition:iam::account-id:role/role-name</code>.</p>\n         <p>For example, <code>arn:aws:iam::1234567890:role/ReadOnly</code> is a correctly formatted\n         runtime role ARN.</p>\n         <p>This parameter applies only to steps included in the <code>Steps</code> parameter of this\n         RunJobFlow request. It does not apply to steps added later to the cluster.</p>"
+                    }
+                },
                 "BootstrapActions": {
                     "target": "com.amazonaws.emr#BootstrapActionConfigList",
                     "traits": {

@@ -40,10 +40,19 @@ type CreateStackInput struct {
 	// endpoints.
 	AccessEndpoints []types.AccessEndpoint
 
+	// The configuration for agent access on the stack. If specified, agent access is
+	// enabled for the stack.
+	AgentAccessConfig *types.AgentAccessConfig
+
 	// The persistent application settings for users of a stack. When these settings
 	// are enabled, changes that users make to applications and Windows settings are
 	// automatically saved after each session and applied to the next session.
 	ApplicationSettings *types.ApplicationSettings
+
+	// Configuration for bidirectional URL redirection between the streaming session
+	// and the local client. Use HostToClient to redirect URLs from the remote desktop
+	// to the local browser.
+	ContentRedirection *types.ContentRedirection
 
 	// The description to display.
 	Description *string
@@ -139,7 +148,7 @@ func (c *Client) addOperationCreateStackMiddlewares(stack *middleware.Stack, opt
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -161,9 +170,6 @@ func (c *Client) addOperationCreateStackMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

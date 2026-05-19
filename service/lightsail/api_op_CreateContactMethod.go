@@ -19,6 +19,10 @@ import (
 // supported in some Amazon Web Services Regions, and SMS text messages cannot be
 // sent to some countries/regions. For more information, see [Notifications in Amazon Lightsail].
 //
+// The create contact method operation supports tag-based access control via
+// request tags. For more information, see the [Lightsail Developer Guide].
+//
+// [Lightsail Developer Guide]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags
 // [Notifications in Amazon Lightsail]: https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications
 func (c *Client) CreateContactMethod(ctx context.Context, params *CreateContactMethodInput, optFns ...func(*Options)) (*CreateContactMethodOutput, error) {
 	if params == nil {
@@ -80,6 +84,11 @@ type CreateContactMethodInput struct {
 	// This member is required.
 	Protocol types.ContactProtocol
 
+	// The tag keys and optional values to add to the contact method during create.
+	//
+	// Use the TagResource action to tag a resource after it's created.
+	Tags []types.Tag
+
 	noSmithyDocumentSerde
 }
 
@@ -130,7 +139,7 @@ func (c *Client) addOperationCreateContactMethodMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -152,9 +161,6 @@ func (c *Client) addOperationCreateContactMethodMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

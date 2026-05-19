@@ -2476,6 +2476,25 @@ func validateMediaConnectFlowRouterOutputConfiguration(v *types.MediaConnectFlow
 	}
 }
 
+func validateMediaLiveChannelRouterInputConfiguration(v *types.MediaLiveChannelRouterInputConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaLiveChannelRouterInputConfiguration"}
+	if v.SourceTransitDecryption == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceTransitDecryption"))
+	} else if v.SourceTransitDecryption != nil {
+		if err := validateMediaLiveTransitEncryption(v.SourceTransitDecryption); err != nil {
+			invalidParams.AddNested("SourceTransitDecryption", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMediaLiveInputRouterOutputConfiguration(v *types.MediaLiveInputRouterOutputConfiguration) error {
 	if v == nil {
 		return nil
@@ -2804,6 +2823,11 @@ func validateRouterInputConfiguration(v types.RouterInputConfiguration) error {
 	case *types.RouterInputConfigurationMemberMediaConnectFlow:
 		if err := validateMediaConnectFlowRouterInputConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[MediaConnectFlow]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RouterInputConfigurationMemberMediaLiveChannel:
+		if err := validateMediaLiveChannelRouterInputConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[MediaLiveChannel]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.RouterInputConfigurationMemberMerge:

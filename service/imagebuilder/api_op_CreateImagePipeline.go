@@ -76,6 +76,9 @@ type CreateImagePipelineInput struct {
 	// Contains settings for vulnerability scans.
 	ImageScanningConfiguration *types.ImageScanningConfiguration
 
+	// The tags to be applied to the images produced by this pipeline.
+	ImageTags map[string]string
+
 	// The image test configuration of the image pipeline.
 	ImageTestsConfiguration *types.ImageTestsConfiguration
 
@@ -149,7 +152,7 @@ func (c *Client) addOperationCreateImagePipelineMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -171,9 +174,6 @@ func (c *Client) addOperationCreateImagePipelineMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

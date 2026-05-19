@@ -230,6 +230,26 @@ func (m *validateOpDescribeContact) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeContactVersion struct {
+}
+
+func (*validateOpDescribeContactVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeContactVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeContactVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeContactVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeEphemeris struct {
 }
 
@@ -390,6 +410,26 @@ func (m *validateOpGetSatellite) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAntennas struct {
+}
+
+func (*validateOpListAntennas) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAntennas) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAntennasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAntennasInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListContacts struct {
 }
 
@@ -410,6 +450,26 @@ func (m *validateOpListContacts) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListContactVersions struct {
+}
+
+func (*validateOpListContactVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListContactVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListContactVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListContactVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListEphemerides struct {
 }
 
@@ -425,6 +485,26 @@ func (m *validateOpListEphemerides) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListEphemeridesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListGroundStationReservations struct {
+}
+
+func (*validateOpListGroundStationReservations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListGroundStationReservations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListGroundStationReservationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListGroundStationReservationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -570,6 +650,26 @@ func (m *validateOpUpdateConfig) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateContact struct {
+}
+
+func (*validateOpUpdateContact) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateContact) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateContactInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateContactInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEphemeris struct {
 }
 
@@ -654,6 +754,10 @@ func addOpDescribeContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeContact{}, middleware.After)
 }
 
+func addOpDescribeContactVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeContactVersion{}, middleware.After)
+}
+
 func addOpDescribeEphemerisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeEphemeris{}, middleware.After)
 }
@@ -686,12 +790,24 @@ func addOpGetSatelliteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSatellite{}, middleware.After)
 }
 
+func addOpListAntennasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAntennas{}, middleware.After)
+}
+
 func addOpListContactsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListContacts{}, middleware.After)
 }
 
+func addOpListContactVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListContactVersions{}, middleware.After)
+}
+
 func addOpListEphemeridesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEphemerides{}, middleware.After)
+}
+
+func addOpListGroundStationReservationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListGroundStationReservations{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -720,6 +836,10 @@ func addOpUpdateAgentStatusValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateConfigValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConfig{}, middleware.After)
+}
+
+func addOpUpdateContactValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateContact{}, middleware.After)
 }
 
 func addOpUpdateEphemerisValidationMiddleware(stack *middleware.Stack) error {
@@ -1586,6 +1706,21 @@ func validateKinesisDataStreamData(v *types.KinesisDataStreamData) error {
 	}
 }
 
+func validateOemProgramTrackSettings(v *types.OemProgramTrackSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OemProgramTrackSettings"}
+	if v.EphemerisId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EphemerisId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateProgramTrackSettings(v types.ProgramTrackSettings) error {
 	if v == nil {
 		return nil
@@ -1595,6 +1730,16 @@ func validateProgramTrackSettings(v types.ProgramTrackSettings) error {
 	case *types.ProgramTrackSettingsMemberAzEl:
 		if err := validateAzElProgramTrackSettings(&uv.Value); err != nil {
 			invalidParams.AddNested("[azEl]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProgramTrackSettingsMemberOem:
+		if err := validateOemProgramTrackSettings(&uv.Value); err != nil {
+			invalidParams.AddNested("[oem]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ProgramTrackSettingsMemberTle:
+		if err := validateTleProgramTrackSettings(&uv.Value); err != nil {
+			invalidParams.AddNested("[tle]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -1885,6 +2030,21 @@ func validateTLEEphemeris(v *types.TLEEphemeris) error {
 	}
 }
 
+func validateTleProgramTrackSettings(v *types.TleProgramTrackSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TleProgramTrackSettings"}
+	if v.EphemerisId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EphemerisId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTrackingConfig(v *types.TrackingConfig) error {
 	if v == nil {
 		return nil
@@ -1905,9 +2065,7 @@ func validateTrackingOverrides(v *types.TrackingOverrides) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "TrackingOverrides"}
-	if v.ProgramTrackSettings == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ProgramTrackSettings"))
-	} else if v.ProgramTrackSettings != nil {
+	if v.ProgramTrackSettings != nil {
 		if err := validateProgramTrackSettings(v.ProgramTrackSettings); err != nil {
 			invalidParams.AddNested("ProgramTrackSettings", err.(smithy.InvalidParamsError))
 		}
@@ -2242,6 +2400,24 @@ func validateOpDescribeContactInput(v *DescribeContactInput) error {
 	}
 }
 
+func validateOpDescribeContactVersionInput(v *DescribeContactVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeContactVersionInput"}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.VersionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeEphemerisInput(v *DescribeEphemerisInput) error {
 	if v == nil {
 		return nil
@@ -2371,6 +2547,21 @@ func validateOpGetSatelliteInput(v *GetSatelliteInput) error {
 	}
 }
 
+func validateOpListAntennasInput(v *ListAntennasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAntennasInput"}
+	if v.GroundStationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroundStationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListContactsInput(v *ListContactsInput) error {
 	if v == nil {
 		return nil
@@ -2397,11 +2588,47 @@ func validateOpListContactsInput(v *ListContactsInput) error {
 	}
 }
 
+func validateOpListContactVersionsInput(v *ListContactVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListContactVersionsInput"}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListEphemeridesInput(v *ListEphemeridesInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListEphemeridesInput"}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListGroundStationReservationsInput(v *ListGroundStationReservationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListGroundStationReservationsInput"}
+	if v.GroundStationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroundStationId"))
+	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
 	}
@@ -2572,6 +2799,26 @@ func validateOpUpdateConfigInput(v *UpdateConfigInput) error {
 	} else if v.ConfigData != nil {
 		if err := validateConfigTypeData(v.ConfigData); err != nil {
 			invalidParams.AddNested("ConfigData", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateContactInput(v *UpdateContactInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateContactInput"}
+	if v.ContactId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if v.TrackingOverrides != nil {
+		if err := validateTrackingOverrides(v.TrackingOverrides); err != nil {
+			invalidParams.AddNested("TrackingOverrides", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

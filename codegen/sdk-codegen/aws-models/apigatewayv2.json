@@ -11448,6 +11448,18 @@
                         "smithy.api#enumValue": "PUBLISH_FAILED"
                     }
                 },
+                "DISABLE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLE_IN_PROGRESS"
+                    }
+                },
+                "DISABLE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLE_FAILED"
+                    }
+                },
                 "DISABLED": {
                     "target": "smithy.api#Unit",
                     "traits": {

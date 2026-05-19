@@ -13,10 +13,10 @@ import (
 
 // Provides a pre-signed Amazon S3 URL in response for uploading your content.
 //
-// You may only use this API to upload attachments to an [Amazon Connect Case] or [Amazon Connect Email].
+// You may only use this API to upload attachments to an [Connect Customer Case] or [Connect Customer Email].
 //
-// [Amazon Connect Case]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
-// [Amazon Connect Email]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html
+// [Connect Customer Email]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-email-channel.html
+// [Connect Customer Case]: https://docs.aws.amazon.com/connect/latest/APIReference/API_connect-cases_CreateCase.html
 func (c *Client) StartAttachedFileUpload(ctx context.Context, params *StartAttachedFileUploadInput, optFns ...func(*Options)) (*StartAttachedFileUploadOutput, error) {
 	if params == nil {
 		params = &StartAttachedFileUploadInput{}
@@ -62,7 +62,7 @@ type StartAttachedFileUploadInput struct {
 	// This member is required.
 	FileUseCaseType types.FileUseCaseType
 
-	// The unique identifier of the Amazon Connect instance.
+	// The unique identifier of the Connect Customer instance.
 	//
 	// This member is required.
 	InstanceId *string
@@ -151,7 +151,7 @@ func (c *Client) addOperationStartAttachedFileUploadMiddlewares(stack *middlewar
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -173,9 +173,6 @@ func (c *Client) addOperationStartAttachedFileUploadMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

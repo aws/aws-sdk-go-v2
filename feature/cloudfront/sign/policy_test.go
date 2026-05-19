@@ -5,6 +5,7 @@ import (
 	"crypto"
 	"crypto/rsa"
 	"crypto/sha1"
+	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
 	"fmt"
@@ -155,7 +156,7 @@ func TestSignEncodedPolicy(t *testing.T) {
 		t.Fatalf("Unexpected priv key error, %#v", err)
 	}
 
-	b64Signature, err := signEncodedPolicy(r, jsonPolicy, privKey)
+	b64Signature, err := signEncodedPolicy(r, jsonPolicy, privKey, HashSHA1)
 	if err != nil {
 		t.Fatalf("Unexpected policy sign error, %#v", err)
 	}
@@ -172,6 +173,62 @@ func TestSignEncodedPolicy(t *testing.T) {
 
 	if err := rsa.VerifyPKCS1v15(&privKey.PublicKey, crypto.SHA1, hash.Sum(nil), decodedSig); err != nil {
 		t.Fatalf("Unable to verify signature, %#v", err)
+	}
+}
+
+func TestSignEncodedPolicySHA256(t *testing.T) {
+	p := NewCannedPolicy("https://example.com/a", testTime)
+	_, jsonPolicy, err := encodePolicy(p)
+	if err != nil {
+		t.Fatalf("Unexpected policy encode error, %#v", err)
+	}
+
+	r := newRandomReader(rand.New(rand.NewSource(1)))
+
+	privKey, err := rsa.GenerateKey(r, 1024)
+	if err != nil {
+		t.Fatalf("Unexpected priv key error, %#v", err)
+	}
+
+	b64Signature, err := signEncodedPolicy(r, jsonPolicy, privKey, HashSHA256)
+	if err != nil {
+		t.Fatalf("Unexpected policy sign error, %#v", err)
+	}
+
+	hash := sha256.New()
+	if _, err = bytes.NewReader(jsonPolicy).WriteTo(hash); err != nil {
+		t.Fatalf("Unexpected hash error, %#v", err)
+	}
+
+	decodedSig, err := base64.StdEncoding.DecodeString(string(b64Signature))
+	if err != nil {
+		t.Fatalf("Unexpected base64 decode signature, %#v", err)
+	}
+
+	if err := rsa.VerifyPKCS1v15(&privKey.PublicKey, crypto.SHA256, hash.Sum(nil), decodedSig); err != nil {
+		t.Fatalf("Unable to verify signature, %#v", err)
+	}
+}
+
+func TestSignEncodedPolicyUnsupportedAlgorithm(t *testing.T) {
+	p := NewCannedPolicy("https://example.com/a", testTime)
+	_, jsonPolicy, err := encodePolicy(p)
+	if err != nil {
+		t.Fatalf("Unexpected policy encode error, %#v", err)
+	}
+
+	r := newRandomReader(rand.New(rand.NewSource(1)))
+	privKey, err := rsa.GenerateKey(r, 1024)
+	if err != nil {
+		t.Fatalf("Unexpected priv key error, %#v", err)
+	}
+
+	_, err = signEncodedPolicy(r, jsonPolicy, privKey, HashAlgorithm("MD5"))
+	if err == nil {
+		t.Fatal("Expected error for unsupported algorithm")
+	}
+	if !strings.Contains(err.Error(), "unsupported hash algorithm") {
+		t.Errorf("Expected unsupported hash algorithm error, got: %s", err.Error())
 	}
 }
 

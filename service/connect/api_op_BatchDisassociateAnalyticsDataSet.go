@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a list of analytics datasets associated with a given Amazon Connect
+// Removes a list of analytics datasets associated with a given Connect Customer
 // instance. You can disassociate multiple datasets in a single call.
 func (c *Client) BatchDisassociateAnalyticsDataSet(ctx context.Context, params *BatchDisassociateAnalyticsDataSetInput, optFns ...func(*Options)) (*BatchDisassociateAnalyticsDataSetOutput, error) {
 	if params == nil {
@@ -35,8 +35,8 @@ type BatchDisassociateAnalyticsDataSetInput struct {
 	// This member is required.
 	DataSetIds []string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -44,9 +44,9 @@ type BatchDisassociateAnalyticsDataSetInput struct {
 	InstanceId *string
 
 	// The identifier of the target account. Use to disassociate a dataset from a
-	// different account than the one containing the Amazon Connect instance. If not
+	// different account than the one containing the Connect Customer instance. If not
 	// specified, by default this value is the Amazon Web Services account that has the
-	// Amazon Connect instance.
+	// Connect Customer instance.
 	TargetAccountId *string
 
 	noSmithyDocumentSerde
@@ -100,7 +100,7 @@ func (c *Client) addOperationBatchDisassociateAnalyticsDataSetMiddlewares(stack 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -122,9 +122,6 @@ func (c *Client) addOperationBatchDisassociateAnalyticsDataSetMiddlewares(stack 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

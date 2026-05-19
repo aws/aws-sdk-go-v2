@@ -201,6 +201,52 @@ func (AWSServicePrincipal) Values() []AWSServicePrincipal {
 	}
 }
 
+type CapabilityFailureReason string
+
+// Enum values for CapabilityFailureReason
+const (
+	CapabilityFailureReasonKmsKeyInsufficientPermission CapabilityFailureReason = "KMS_KEY_INSUFFICIENT_PERMISSION"
+)
+
+// Values returns all known values for CapabilityFailureReason. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapabilityFailureReason) Values() []CapabilityFailureReason {
+	return []CapabilityFailureReason{
+		"KMS_KEY_INSUFFICIENT_PERMISSION",
+	}
+}
+
+type CapabilityStatus string
+
+// Enum values for CapabilityStatus
+const (
+	CapabilityStatusCreating     CapabilityStatus = "creating"
+	CapabilityStatusCreateFailed CapabilityStatus = "create_failed"
+	CapabilityStatusActive       CapabilityStatus = "active"
+	CapabilityStatusUpdating     CapabilityStatus = "updating"
+	CapabilityStatusUpdateFailed CapabilityStatus = "update_failed"
+	CapabilityStatusDeleting     CapabilityStatus = "deleting"
+	CapabilityStatusDeleteFailed CapabilityStatus = "delete_failed"
+)
+
+// Values returns all known values for CapabilityStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CapabilityStatus) Values() []CapabilityStatus {
+	return []CapabilityStatus{
+		"creating",
+		"create_failed",
+		"active",
+		"updating",
+		"update_failed",
+		"deleting",
+		"delete_failed",
+	}
+}
+
 type ConfigChangeStatus string
 
 // Enum values for ConfigChangeStatus
@@ -545,6 +591,126 @@ func (InitiatedBy) Values() []InitiatedBy {
 	return []InitiatedBy{
 		"CUSTOMER",
 		"SERVICE",
+	}
+}
+
+type InsightEntityType string
+
+// Enum values for InsightEntityType
+const (
+	InsightEntityTypeAccount InsightEntityType = "Account"
+	InsightEntityTypeDomain  InsightEntityType = "DomainName"
+)
+
+// Values returns all known values for InsightEntityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightEntityType) Values() []InsightEntityType {
+	return []InsightEntityType{
+		"Account",
+		"DomainName",
+	}
+}
+
+type InsightFieldType string
+
+// Enum values for InsightFieldType
+const (
+	InsightFieldTypeText   InsightFieldType = "text"
+	InsightFieldTypeMetric InsightFieldType = "metric"
+)
+
+// Values returns all known values for InsightFieldType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightFieldType) Values() []InsightFieldType {
+	return []InsightFieldType{
+		"text",
+		"metric",
+	}
+}
+
+type InsightPriorityLevel string
+
+// Enum values for InsightPriorityLevel
+const (
+	InsightPriorityLevelCritical InsightPriorityLevel = "CRITICAL"
+	InsightPriorityLevelHigh     InsightPriorityLevel = "HIGH"
+	InsightPriorityLevelMedium   InsightPriorityLevel = "MEDIUM"
+	InsightPriorityLevelLow      InsightPriorityLevel = "LOW"
+)
+
+// Values returns all known values for InsightPriorityLevel. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightPriorityLevel) Values() []InsightPriorityLevel {
+	return []InsightPriorityLevel{
+		"CRITICAL",
+		"HIGH",
+		"MEDIUM",
+		"LOW",
+	}
+}
+
+type InsightSortOrder string
+
+// Enum values for InsightSortOrder
+const (
+	InsightSortOrderAsc  InsightSortOrder = "ASC"
+	InsightSortOrderDesc InsightSortOrder = "DESC"
+)
+
+// Values returns all known values for InsightSortOrder. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightSortOrder) Values() []InsightSortOrder {
+	return []InsightSortOrder{
+		"ASC",
+		"DESC",
+	}
+}
+
+type InsightStatus string
+
+// Enum values for InsightStatus
+const (
+	InsightStatusActive    InsightStatus = "ACTIVE"
+	InsightStatusResolved  InsightStatus = "RESOLVED"
+	InsightStatusDismissed InsightStatus = "DISMISSED"
+)
+
+// Values returns all known values for InsightStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightStatus) Values() []InsightStatus {
+	return []InsightStatus{
+		"ACTIVE",
+		"RESOLVED",
+		"DISMISSED",
+	}
+}
+
+type InsightType string
+
+// Enum values for InsightType
+const (
+	InsightTypeEvent          InsightType = "EVENT"
+	InsightTypeRecommendation InsightType = "RECOMMENDATION"
+)
+
+// Values returns all known values for InsightType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InsightType) Values() []InsightType {
+	return []InsightType{
+		"EVENT",
+		"RECOMMENDATION",
 	}
 }
 
@@ -1165,6 +1331,29 @@ func (PackageType) Values() []PackageType {
 	}
 }
 
+type PauseState string
+
+// Enum values for PauseState
+const (
+	PauseStateActive    PauseState = "Active"
+	PauseStateCompleted PauseState = "Completed"
+	PauseStateScheduled PauseState = "Scheduled"
+	PauseStateDisabled  PauseState = "Disabled"
+)
+
+// Values returns all known values for PauseState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PauseState) Values() []PauseState {
+	return []PauseState{
+		"Active",
+		"Completed",
+		"Scheduled",
+		"Disabled",
+	}
+}
+
 type PrincipalType string
 
 // Enum values for PrincipalType
@@ -1426,9 +1615,10 @@ type TLSSecurityPolicy string
 
 // Enum values for TLSSecurityPolicy
 const (
-	TLSSecurityPolicyPolicyMinTls10201907    TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"
-	TLSSecurityPolicyPolicyMinTls12201907    TLSSecurityPolicy = "Policy-Min-TLS-1-2-2019-07"
-	TLSSecurityPolicyPolicyMinTls12Pfs202310 TLSSecurityPolicy = "Policy-Min-TLS-1-2-PFS-2023-10"
+	TLSSecurityPolicyPolicyMinTls10201907            TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"
+	TLSSecurityPolicyPolicyMinTls12201907            TLSSecurityPolicy = "Policy-Min-TLS-1-2-2019-07"
+	TLSSecurityPolicyPolicyMinTls12Pfs202310         TLSSecurityPolicy = "Policy-Min-TLS-1-2-PFS-2023-10"
+	TLSSecurityPolicyPolicyMinTls12Rfc9151Fips202408 TLSSecurityPolicy = "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"
 )
 
 // Values returns all known values for TLSSecurityPolicy. Note that this can be
@@ -1440,6 +1630,7 @@ func (TLSSecurityPolicy) Values() []TLSSecurityPolicy {
 		"Policy-Min-TLS-1-0-2019-07",
 		"Policy-Min-TLS-1-2-2019-07",
 		"Policy-Min-TLS-1-2-PFS-2023-10",
+		"Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08",
 	}
 }
 

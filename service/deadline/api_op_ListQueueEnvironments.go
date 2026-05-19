@@ -27,6 +27,7 @@ func (c *Client) ListQueueEnvironments(ctx context.Context, params *ListQueueEnv
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListQueueEnvironmentsInput struct {
 
 	// The farm ID for the queue environment list.
@@ -49,6 +50,7 @@ type ListQueueEnvironmentsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListQueueEnvironmentsOutput struct {
 
 	// The environments to include in the queue environments list.
@@ -104,7 +106,7 @@ func (c *Client) addOperationListQueueEnvironmentsMiddlewares(stack *middleware.
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -126,9 +128,6 @@ func (c *Client) addOperationListQueueEnvironmentsMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

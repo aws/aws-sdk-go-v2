@@ -16,6 +16,10 @@ import (
 // temporary scoped credentials that are limited to the requested data location and
 // the caller's authorized access level.
 //
+// GetDataAccess is logged in CloudTrail whenever a principal requests temporary
+// data location credentials to access data in a data lake location that is
+// registered with Lake Formation.
+//
 // The API operation returns an error in the following scenarios:
 //
 //   - The data location is not registered with Lake Formation.
@@ -136,7 +140,7 @@ func (c *Client) addOperationGetTemporaryDataLocationCredentialsMiddlewares(stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -158,9 +162,6 @@ func (c *Client) addOperationGetTemporaryDataLocationCredentialsMiddlewares(stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

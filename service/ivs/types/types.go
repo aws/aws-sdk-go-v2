@@ -7,6 +7,63 @@ import (
 	"time"
 )
 
+// Object specifying a configuration for a server-side advertising insertion
+// (which can be triggered with the operation).
+type AdConfiguration struct {
+
+	// Ad configuration ARN.
+	//
+	// This member is required.
+	Arn *string
+
+	// List of integration configurations with media tailor resources.
+	//
+	// This member is required.
+	MediaTailorPlaybackConfigurations []MediaTailorPlaybackConfiguration
+
+	// Ad configuration name. Defaults to “”.
+	Name *string
+
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
+	//
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about an ad configuration.
+type AdConfigurationSummary struct {
+
+	// Ad configuration ARN.
+	//
+	// This member is required.
+	Arn *string
+
+	// List of integration configurations with media tailor resources.
+	//
+	// This member is required.
+	MediaTailorPlaybackConfigurations []MediaTailorPlaybackConfiguration
+
+	// Ad configuration name. Defaults to “”.
+	Name *string
+
+	// Tags attached to the resource. Array of 1-50 maps, each of the form
+	// string:string (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and
+	// Tag Editor for details, including restrictions that apply to tags and "Tag
+	// naming limits and requirements"; Amazon IVS has no service-specific constraints
+	// beyond what is documented there.
+	//
+	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Object specifying a stream’s audio configuration, as set up by the broadcaster
 // (usually in an encoder). This is part of the IngestConfigurationsobject and the deprecated IngestConfiguration object.
 // It is used for monitoring stream health.
@@ -26,7 +83,7 @@ type AudioConfiguration struct {
 	TargetBitrate int64
 
 	// Name of the audio track (if the stream has an audio track). If multitrack is
-	// not enabled, this is track0 (the sole track).
+	// not enabled, this is Track0 (the sole track).
 	Track *string
 
 	noSmithyDocumentSerde
@@ -94,6 +151,9 @@ type BatchStartViewerSessionRevocationViewerSession struct {
 
 // Object specifying a channel.
 type Channel struct {
+
+	// ARN of the ad configuration associated with the channel.
+	AdConfigurationArn *string
 
 	// Channel ARN.
 	Arn *string
@@ -170,6 +230,9 @@ type Channel struct {
 // Summary information about a channel.
 type ChannelSummary struct {
 
+	// ARN of the ad configuration associated with the channel.
+	AdConfigurationArn *string
+
 	// Channel ARN.
 	Arn *string
 
@@ -237,9 +300,9 @@ type DestinationConfiguration struct {
 //
 // Note: IngestConfiguration is deprecated in favor of IngestConfigurations but retained to ensure
 // backward compatibility. If multitrack is not enabled, IngestConfiguration and
-// IngestConfigurations contain the same data, namely information about track0 (the
+// IngestConfigurations contain the same data, namely information about Track0 (the
 // sole track). If multitrack is enabled, IngestConfiguration contains data for
-// only the first track (track0) and IngestConfigurations contains data for all
+// only the first track (Track0) and IngestConfigurations contains data for all
 // tracks.
 type IngestConfiguration struct {
 
@@ -257,8 +320,8 @@ type IngestConfiguration struct {
 //
 // Note: Use IngestConfigurations instead of IngestConfiguration (which is deprecated). If multitrack
 // is not enabled, IngestConfiguration and IngestConfigurations contain the same
-// data, namely information about track0 (the sole track). If multitrack is
-// enabled, IngestConfiguration contains data for only the first track (track0) and
+// data, namely information about Track0 (the sole track). If multitrack is
+// enabled, IngestConfiguration contains data for only the first track (Track0) and
 // IngestConfigurations contains data for all tracks.
 type IngestConfigurations struct {
 
@@ -271,6 +334,17 @@ type IngestConfigurations struct {
 	//
 	// This member is required.
 	VideoConfigurations []VideoConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Object specifying a configuration for integration with an AWS Elemental
+// MediaTailor (EMT).
+type MediaTailorPlaybackConfiguration struct {
+
+	// ARN of the customer-created EMT PlaybackConfiguration resource in the same
+	// region and account.
+	PlaybackConfigurationArn *string
 
 	noSmithyDocumentSerde
 }
@@ -718,14 +792,14 @@ type StreamSession struct {
 	// Note: ingestConfiguration is deprecated in favor of ingestConfigurations but
 	// retained to ensure backward compatibility. If multitrack is not enabled,
 	// ingestConfiguration and ingestConfigurations contain the same data, namely
-	// information about track0 (the sole track). If multitrack is enabled,
-	// ingestConfiguration contains data for only the first track (track0) and
+	// information about Track0 (the sole track). If multitrack is enabled,
+	// ingestConfiguration contains data for only the first track (Track0) and
 	// ingestConfigurations contains data for all tracks.
 	IngestConfiguration *IngestConfiguration
 
 	// The properties of the incoming RTMP stream. If multitrack is enabled,
 	// ingestConfigurations contains data for all tracks; otherwise, it contains data
-	// only for track0 (the sole track).
+	// only for Track0 (the sole track).
 	IngestConfigurations *IngestConfigurations
 
 	// The properties of recording the live stream.
@@ -841,13 +915,16 @@ type ThumbnailConfiguration struct {
 // It is used for monitoring stream health.
 type VideoConfiguration struct {
 
-	// Indicates the degree of required decoder performance for a profile. Normally
-	// this is set automatically by the encoder. For details, see the H.264
-	// specification.
+	// (Deprecated) Indicates the degree of required decoder performance for a
+	// profile. Normally this is set automatically by the encoder. For details, see the
+	// H.264 specification. This is populated only when VideoConfiguration is part of
+	// the deprecated IngestConfiguration; otherwise, this is an empty string.
 	AvcLevel *string
 
-	// Indicates to the decoder the requirements for decoding the stream. For
-	// definitions of the valid values, see the H.264 specification.
+	// (Deprecated) Indicates to the decoder the requirements for decoding the stream.
+	// For definitions of the valid values, see the H.264 specification. This is
+	// populated only when VideoConfiguration is part of the deprecated
+	// IngestConfiguration; otherwise, this is an empty string.
 	AvcProfile *string
 
 	// Codec used for the video encoding.
@@ -872,7 +949,7 @@ type VideoConfiguration struct {
 	// The expected ingest framerate. This is configured in the encoder.
 	TargetFramerate int64
 
-	// Name of the video track. If multitrack is not enabled, this is track0 (the sole
+	// Name of the video track. If multitrack is not enabled, this is Track0 (the sole
 	// track).
 	Track *string
 

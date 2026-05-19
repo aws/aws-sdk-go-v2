@@ -37,6 +37,24 @@ var _ *types.ServiceOperationEntity
 var _ *types.ServiceLevelObjectiveEntity
 var _ *types.CanaryEntity
 
+func ExampleCompositeSliComponent_outputUsage() {
+	var union types.CompositeSliComponent
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CompositeSliComponentMemberOperationName:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleInterval_outputUsage() {
 	var union types.Interval
 	// type switches can be used to check the union value

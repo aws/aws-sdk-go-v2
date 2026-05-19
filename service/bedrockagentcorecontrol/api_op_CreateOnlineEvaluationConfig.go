@@ -48,7 +48,12 @@ type CreateOnlineEvaluationConfigInput struct {
 
 	//  The Amazon Resource Name (ARN) of the IAM role that grants permissions to read
 	// from CloudWatch logs, write evaluation results, and invoke Amazon Bedrock models
-	// for evaluation.
+	// for evaluation. If the configuration references evaluators encrypted with a
+	// customer managed KMS key, this role must also have kms:Decrypt permission on
+	// the KMS key. The service validates this permission at configuration creation
+	// time. For more information, see [Encryption at rest for AgentCore Evaluations].
+	//
+	// [Encryption at rest for AgentCore Evaluations]: https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/evaluations-encryption.html
 	//
 	// This member is required.
 	EvaluationExecutionRoleArn *string
@@ -167,7 +172,7 @@ func (c *Client) addOperationCreateOnlineEvaluationConfigMiddlewares(stack *midd
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -189,9 +194,6 @@ func (c *Client) addOperationCreateOnlineEvaluationConfigMiddlewares(stack *midd
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -11,15 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Exports optimization recommendations for Amazon EC2 Auto Scaling groups.
+// Exports optimization recommendations for Auto Scaling groups.
 //
 // Recommendations are exported in a comma-separated values (.csv) file, and its
 // metadata in a JavaScript Object Notation (JSON) (.json) file, to an existing
 // Amazon Simple Storage Service (Amazon S3) bucket that you specify. For more
 // information, see [Exporting Recommendations]in the Compute Optimizer User Guide.
 //
-// You can have only one Amazon EC2 Auto Scaling group export job in progress per
-// Amazon Web Services Region.
+// You can have only one Auto Scaling group export job in progress per Amazon Web
+// Services Region.
 //
 // [Exporting Recommendations]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html
 func (c *Client) ExportAutoScalingGroupRecommendations(ctx context.Context, params *ExportAutoScalingGroupRecommendationsInput, optFns ...func(*Options)) (*ExportAutoScalingGroupRecommendationsOutput, error) {
@@ -55,8 +55,8 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	// This member is required.
 	S3DestinationConfig *types.S3DestinationConfig
 
-	// The IDs of the Amazon Web Services accounts for which to export Amazon EC2 Auto
-	// Scaling group recommendations.
+	// The IDs of the Amazon Web Services accounts for which to export Auto Scaling
+	// group recommendations.
 	//
 	// If your account is the management account of an organization, use this
 	// parameter to specify the member account for which you want to export
@@ -83,7 +83,7 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	FileFormat types.FileFormat
 
 	// An array of objects to specify a filter that exports a more specific set of
-	// Amazon EC2 Auto Scaling group recommendations.
+	// Auto Scaling group recommendations.
 	Filters []types.Filter
 
 	// Indicates whether to include recommendations for resources in all member
@@ -106,8 +106,8 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	// [Compute Optimizer and Amazon Web Services Organizations trusted access]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access
 	IncludeMemberAccounts bool
 
-	// An object to specify the preferences for the Amazon EC2 Auto Scaling group
-	// recommendations to export.
+	// An object to specify the preferences for the Auto Scaling group recommendations
+	// to export.
 	RecommendationPreferences *types.RecommendationPreferences
 
 	noSmithyDocumentSerde
@@ -134,11 +134,11 @@ func (c *Client) addOperationExportAutoScalingGroupRecommendationsMiddlewares(st
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpExportAutoScalingGroupRecommendations{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpExportAutoScalingGroupRecommendations{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpExportAutoScalingGroupRecommendations{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpExportAutoScalingGroupRecommendations{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -164,7 +164,7 @@ func (c *Client) addOperationExportAutoScalingGroupRecommendationsMiddlewares(st
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -188,10 +188,10 @@ func (c *Client) addOperationExportAutoScalingGroupRecommendationsMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
+	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

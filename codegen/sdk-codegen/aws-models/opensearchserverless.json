@@ -1020,6 +1020,11 @@
                         "documentation": "Creating collection resource"
                     },
                     {
+                        "name": "UPDATING",
+                        "value": "UPDATING",
+                        "documentation": "Updating collection resource"
+                    },
+                    {
                         "name": "DELETING",
                         "value": "DELETING",
                         "documentation": "Deleting collection resource"
@@ -1033,6 +1038,11 @@
                         "name": "FAILED",
                         "value": "FAILED",
                         "documentation": "Collection resource create or delete failed"
+                    },
+                    {
+                        "name": "UPDATE_FAILED",
+                        "value": "UPDATE_FAILED",
+                        "documentation": "Collection resource update failed"
                     }
                 ]
             }
@@ -1136,7 +1146,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>When creating a resource, thrown when a resource with the same name already exists or is being created.</p>",
+                "smithy.api#documentation": "<p>When creating a resource, thrown when a resource with the same name already exists or is being created. When deleting a resource, thrown when the resource is not in the ACTIVE, FAILED, or UPDATE_FAILED state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -5649,6 +5659,12 @@
                         "smithy.api#documentation": "<p>The description of the collection.</p>"
                     }
                 },
+                "vectorOptions": {
+                    "target": "com.amazonaws.opensearchserverless#VectorOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration options for vector search capabilities in the collection.</p>"
+                    }
+                },
                 "arn": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -5818,6 +5834,12 @@
                         "smithy.api#length": {
                             "max": 1000
                         }
+                    }
+                },
+                "vectorOptions": {
+                    "target": "com.amazonaws.opensearchserverless#VectorOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration options for vector search capabilities in the collection.</p>"
                     }
                 },
                 "clientToken": {

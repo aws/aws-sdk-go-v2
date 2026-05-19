@@ -16,6 +16,8 @@ import (
 // messaging platform.
 //
 // This operation requires permissions for the lex:GetBotChannelAssociation action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetBotChannelAssociation(ctx context.Context, params *GetBotChannelAssociationInput, optFns ...func(*Options)) (*GetBotChannelAssociationOutput, error) {
 	if params == nil {
 		params = &GetBotChannelAssociationInput{}
@@ -132,7 +134,7 @@ func (c *Client) addOperationGetBotChannelAssociationMiddlewares(stack *middlewa
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -154,9 +156,6 @@ func (c *Client) addOperationGetBotChannelAssociationMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

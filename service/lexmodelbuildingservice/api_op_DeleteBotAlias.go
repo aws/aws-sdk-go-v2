@@ -19,6 +19,8 @@ import (
 // to the alias by deleting the channel association. If you get the same exception
 // again, delete the referring association until the DeleteBotAlias operation is
 // successful.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) DeleteBotAlias(ctx context.Context, params *DeleteBotAliasInput, optFns ...func(*Options)) (*DeleteBotAliasOutput, error) {
 	if params == nil {
 		params = &DeleteBotAliasInput{}
@@ -90,7 +92,7 @@ func (c *Client) addOperationDeleteBotAliasMiddlewares(stack *middleware.Stack, 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -112,9 +114,6 @@ func (c *Client) addOperationDeleteBotAliasMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

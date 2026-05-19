@@ -67,6 +67,13 @@ type CreateResponderGatewayInput struct {
 	// The domain name for the responder gateway.
 	DomainName *string
 
+	// The type of gateway. Valid values are EXTERNAL or INTERNAL .
+	GatewayType types.GatewayType
+
+	// Listener configuration for the protocols (HTTP, HTTPS, or both) accepted by the
+	// gateway.
+	ListenerConfig *types.ListenerConfig
+
 	// The configuration for the managed endpoint.
 	ManagedEndpointConfiguration types.ManagedEndpointConfiguration
 
@@ -90,6 +97,12 @@ type CreateResponderGatewayOutput struct {
 	//
 	// This member is required.
 	Status types.ResponderGatewayStatus
+
+	// The external inbound endpoint for the responder gateway.
+	ExternalInboundEndpoint *string
+
+	// The listener configuration for the responder gateway.
+	ListenerConfig *types.ListenerConfig
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -131,7 +144,7 @@ func (c *Client) addOperationCreateResponderGatewayMiddlewares(stack *middleware
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -153,9 +166,6 @@ func (c *Client) addOperationCreateResponderGatewayMiddlewares(stack *middleware
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

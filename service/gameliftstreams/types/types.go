@@ -50,6 +50,8 @@ type ApplicationSummary struct {
 	//
 	//   - Microsoft Windows Server 2022 Base ( Type=WINDOWS, Version=2022 )
 	//
+	//   - Proton 10.0-4 ( Type=PROTON, Version=20260204 )
+	//
 	//   - Proton 9.0-2 ( Type=PROTON, Version=20250516 )
 	//
 	//   - Proton 8.0-5 ( Type=PROTON, Version=20241007 )
@@ -321,6 +323,8 @@ type ReplicationStatus struct {
 //
 //   - Microsoft Windows Server 2022 Base ( Type=WINDOWS, Version=2022 )
 //
+//   - Proton 10.0-4 ( Type=PROTON, Version=20260204 )
+//
 //   - Proton 9.0-2 ( Type=PROTON, Version=20250516 )
 //
 //   - Proton 8.0-5 ( Type=PROTON, Version=20241007 )
@@ -493,6 +497,28 @@ type StreamGroupSummary struct {
 	//   - Workload specifications: 1 vCPUs, 4 GB RAM, 2 GB VRAM
 	//
 	//   - Tenancy: Supports up to 12 concurrent stream sessions
+	//
+	//   - gen6n_medium_win2022 (NVIDIA, medium) Supports applications with low 3D
+	//   scene complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 8 vCPUs, 32 GB RAM, 6 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
+	//
+	//   - gen6n_small_win2022 (NVIDIA, small) Supports applications with low 3D scene
+	//   complexity. Uses NVIDIA L4 Tensor Core GPU.
+	//
+	//   - Reference resolution: 1080p
+	//
+	//   - Reference frame rate: 60 fps
+	//
+	//   - Workload specifications: 2 vCPUs, 8 GB RAM, 3 GB VRAM
+	//
+	//   - Tenancy: Supports 1 concurrent stream session
 	//
 	//   - gen5n_win2022 (NVIDIA, ultra) Supports applications with extremely high 3D
 	//   scene complexity. Runs applications on Microsoft Windows Server 2022 Base and
@@ -672,9 +698,6 @@ type StreamSessionSummary struct {
 	//   - connectionTimeout : The stream session was terminated because the client
 	//   failed to connect within the connection timeout period specified by
 	//   ConnectionTimeoutSeconds .
-	//
-	//   - idleTimeout : The stream session was terminated because it exceeded the idle
-	//   timeout period of 60 minutes with no user input activity.
 	//
 	//   - maxSessionLengthTimeout : The stream session was terminated because it
 	//   exceeded the maximum session length timeout period specified by

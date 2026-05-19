@@ -16,10 +16,8 @@ import (
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
-	internalmiddleware "github.com/aws/aws-sdk-go-v2/internal/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/v4a"
 	smithy "github.com/aws/smithy-go"
-	smithyauth "github.com/aws/smithy-go/auth"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/metrics"
@@ -731,10 +729,11 @@ func resolveIdempotencyTokenProvider(o *Options) {
 	o.IdempotencyTokenProvider = smithyrand.NewUUIDIdempotencyToken(cryptorand.Reader)
 }
 
-func addRetry(stack *middleware.Stack, o Options) error {
+func addRetry(stack *middleware.Stack, o Options, c *Client) error {
 	attempt := retry.NewAttemptMiddleware(o.Retryer, smithyhttp.RequestCloner, func(m *retry.Attempt) {
 		m.LogAttempts = o.ClientLogMode.IsRetries()
 		m.OperationMeter = o.MeterProvider.Meter("github.com/aws/aws-sdk-go-v2/service/partnercentralchannel")
+		m.ClientSkew = c.timeOffset
 	})
 	if err := stack.Finalize.Insert(attempt, "ResolveAuthScheme", middleware.Before); err != nil {
 		return err
@@ -775,18 +774,6 @@ func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
 	return nil
 }
 
-func resolveAccountID(identity smithyauth.Identity, mode aws.AccountIDEndpointMode) *string {
-	if mode == aws.AccountIDEndpointModeDisabled {
-		return nil
-	}
-
-	if ca, ok := identity.(*internalauthsmithy.CredentialsAdapter); ok && ca.Credentials.AccountID != "" {
-		return aws.String(ca.Credentials.AccountID)
-	}
-
-	return nil
-}
-
 type httpSignerV4a interface {
 	SignHTTP(ctx context.Context, credentials v4a.Credentials, r *http.Request, payloadHash,
 		service string, regionSet []string, signingTime time.Time,
@@ -807,13 +794,6 @@ func newDefaultV4aSigner(o Options) *v4a.Signer {
 	})
 }
 
-func addTimeOffsetBuild(stack *middleware.Stack, c *Client) error {
-	mw := internalmiddleware.AddTimeOffsetMiddleware{Offset: c.timeOffset}
-	if err := stack.Build.Add(&mw, middleware.After); err != nil {
-		return err
-	}
-	return stack.Deserialize.Insert(&mw, "RecordResponseTiming", middleware.Before)
-}
 func initializeTimeOffsetResolver(c *Client) {
 	c.timeOffset = new(atomic.Int64)
 }

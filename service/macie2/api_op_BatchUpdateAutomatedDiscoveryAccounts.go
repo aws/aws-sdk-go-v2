@@ -40,9 +40,9 @@ type BatchUpdateAutomatedDiscoveryAccountsInput struct {
 
 type BatchUpdateAutomatedDiscoveryAccountsOutput struct {
 
-	// An array of objects, one for each account whose status wasn’t changed. Each
+	// An array of objects, one for each account whose status wasn't changed. Each
 	// object identifies the account and explains why the status of automated sensitive
-	// data discovery wasn’t changed for the account. This value is null if the request
+	// data discovery wasn't changed for the account. This value is null if the request
 	// succeeded for all specified accounts.
 	Errors []types.AutomatedDiscoveryAccountUpdateError
 
@@ -86,7 +86,7 @@ func (c *Client) addOperationBatchUpdateAutomatedDiscoveryAccountsMiddlewares(st
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -108,9 +108,6 @@ func (c *Client) addOperationBatchUpdateAutomatedDiscoveryAccountsMiddlewares(st
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

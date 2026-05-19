@@ -62,17 +62,17 @@ type GetSparqlStreamInput struct {
 
 	// Can be one of:
 	//
-	//   - AT_SEQUENCE_NUMBER – Indicates that reading should start from the event
+	//   - AT_SEQUENCE_NUMBER - Indicates that reading should start from the event
 	//   sequence number specified jointly by the commitNum and opNum parameters.
 	//
-	//   - AFTER_SEQUENCE_NUMBER – Indicates that reading should start right after the
+	//   - AFTER_SEQUENCE_NUMBER - Indicates that reading should start right after the
 	//   event sequence number specified jointly by the commitNum and opNum parameters.
 	//
-	//   - TRIM_HORIZON – Indicates that reading should start at the last untrimmed
+	//   - TRIM_HORIZON - Indicates that reading should start at the last untrimmed
 	//   record in the system, which is the oldest unexpired (not yet deleted) record in
 	//   the change-log stream.
 	//
-	//   - LATEST – Indicates that reading should start at the most recent record in
+	//   - LATEST - Indicates that reading should start at the most recent record in
 	//   the system, which is the latest unexpired (not yet deleted) record in the
 	//   change-log stream.
 	IteratorType types.IteratorType
@@ -165,7 +165,7 @@ func (c *Client) addOperationGetSparqlStreamMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -187,9 +187,6 @@ func (c *Client) addOperationGetSparqlStreamMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

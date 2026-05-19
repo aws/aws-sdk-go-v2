@@ -77,8 +77,9 @@ func (c *Client) TerminateGameSession(ctx context.Context, params *TerminateGame
 
 type TerminateGameSessionInput struct {
 
-	// A unique identifier for the game session to be terminated. A game session ARN
-	// has the following format: arn:aws:gamelift:::gamesession// .
+	// An identifier for the game session that is unique across all regions to be
+	// terminated. The value is always a full ARN in the following format:
+	// arn:aws:gamelift:::gamesession// .
 	//
 	// This member is required.
 	GameSessionId *string
@@ -136,11 +137,11 @@ func (c *Client) addOperationTerminateGameSessionMiddlewares(stack *middleware.S
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpTerminateGameSession{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpTerminateGameSession{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpTerminateGameSession{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpTerminateGameSession{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -166,7 +167,7 @@ func (c *Client) addOperationTerminateGameSessionMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -190,10 +191,10 @@ func (c *Client) addOperationTerminateGameSessionMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
+	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -1,3 +1,34 @@
+# v1.64.2 (2026-05-13)
+
+* **Documentation**: Adds a billing callout to docs regarding using the CE Scale Down Delay feature
+
+# v1.64.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.64.0 (2026-04-22)
+
+* **Feature**: Support of S3Files volume type, container start and stop timeouts.
+
+# v1.63.3 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.63.2 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.63.1 (2026-03-25)
+
+* **Documentation**: Documentation-only update for AWS Batch.
+
+# v1.63.0 (2026-03-23)
+
+* **Feature**: AWS Batch AMI Visibility feature support. Adds read-only batchImageStatus to Ec2Configuration to provide visibility on the status of Batch-vended AMIs used by Compute Environments.
+
 # v1.62.0 (2026-03-19)
 
 * **Feature**: AWS Batch now supports quota management, enabling administrators to allocate shared compute resources across teams and projects through quota shares with capacity limits, resource-sharing strategies, and priority-based preemption - currently available for SageMaker Training job queues.

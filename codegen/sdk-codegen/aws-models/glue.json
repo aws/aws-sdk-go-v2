@@ -1830,7 +1830,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.glue#Timeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>JobRun</code> timeout in minutes. This is the maximum time that a job run can\n      consume resources before it is terminated and enters <code>TIMEOUT</code> status. This overrides the timeout value set in the parent job.</p>\n         <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>\n         <p>When the value is left blank, the timeout is defaulted to 2880 minutes.</p>\n         <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>\n         <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>"
+                        "smithy.api#documentation": "<p>The <code>JobRun</code> timeout in minutes. This is the maximum time that a job run can\n      consume resources before it is terminated and enters <code>TIMEOUT</code> status. This overrides the timeout value set in the parent job.</p>\n         <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>\n         <p>When the value is left blank, the timeout is defaulted to 2,880 minutes for Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.</p>\n         <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>\n         <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>"
                     }
                 },
                 "SecurityConfiguration": {
@@ -11903,7 +11903,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.glue#Timeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job timeout in minutes.  This is the maximum time that a job run\n      can consume resources before it is terminated and enters <code>TIMEOUT</code>\n      status.</p>\n         <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>\n         <p>When the value is left blank, the timeout is defaulted to 2880 minutes.</p>\n         <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>\n         <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>"
+                        "smithy.api#documentation": "<p>The job timeout in minutes.  This is the maximum time that a job run\n      can consume resources before it is terminated and enters <code>TIMEOUT</code>\n      status.</p>\n         <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>\n         <p>When the value is left blank, the timeout is defaulted to 2,880 minutes for Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.</p>\n         <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>\n         <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>"
                     }
                 },
                 "MaxCapacity": {
@@ -11933,7 +11933,7 @@
                 "GlueVersion": {
                     "target": "com.amazonaws.glue#GlueVersionString",
                     "traits": {
-                        "smithy.api#documentation": "<p>In Spark jobs, <code>GlueVersion</code> determines the versions of Apache Spark and Python\n      that Glue available in a job. The Python version indicates the version\n      supported for jobs of type Spark. </p>\n         <p>Ray jobs should set <code>GlueVersion</code> to <code>4.0</code> or greater. However,\n    the versions of Ray, Python and additional libraries available in your Ray job are determined\n    by the <code>Runtime</code> parameter of the Job command.</p>\n         <p>For more information about the available Glue versions and corresponding\n      Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer\n      guide.</p>\n         <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>"
+                        "smithy.api#documentation": "<p>In Spark jobs, <code>GlueVersion</code> determines the versions of Apache Spark and Python\n      that Glue available in a job. The Python version indicates the version\n      supported for jobs of type Spark. </p>\n         <p>Ray jobs should set <code>GlueVersion</code> to <code>4.0</code> or greater. However,\n    the versions of Ray, Python and additional libraries available in your Ray job are determined\n    by the <code>Runtime</code> parameter of the Job command.</p>\n         <p>For more information about the available Glue versions and corresponding\n      Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer\n      guide.</p>\n         <p>Jobs that are created without specifying a Glue version default to Glue 5.1.</p>"
                     }
                 },
                 "NumberOfWorkers": {
@@ -14326,6 +14326,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Set the evaluation method for composite rules in the ruleset to ROW/COLUMN</p>"
                     }
+                },
+                "CustomLogGroupPrefix": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A custom prefix for the CloudWatch log group names. When specified, evaluation run logs are written to <code><CustomLogGroupPrefix>/error</code> and <code><CustomLogGroupPrefix>/output</code> instead of the default <code>/aws-glue/data-quality/error</code> and <code>/aws-glue/data-quality/output</code> log groups.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14905,6 +14911,12 @@
                     "target": "com.amazonaws.glue#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>Filter results by runs that started after this time.</p>"
+                    }
+                },
+                "RulesetName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filter results by the name of the ruleset.</p>"
                     }
                 }
             },
@@ -20854,6 +20866,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to list the default catalog in the account and region in the response. Defaults to <code>false</code>. When <code>true</code> and <code>ParentCatalogId = NULL | Amazon Web Services Account ID</code>, all catalogs and the default catalog are enumerated in the response.</p>\n         <p>When the <code>ParentCatalogId</code> is not equal to null, and this attribute is passed as <code>false</code> or <code>true</code>, an <code>InvalidInputException</code> is thrown.</p>"
                     }
+                },
+                "HasDatabases": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When <code>true</code>, the response only includes catalogs that can contain databases. Some catalogs are organizational containers that hold only other catalogs, not databases. When this parameter is set to <code>true</code>, those container-only catalogs are excluded, and only catalogs capable of containing databases are returned. Defaults to <code>false</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -24313,6 +24331,9 @@
                         "smithy.api#documentation": "<p>The values that define the partition.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AuditContext": {
+                    "target": "com.amazonaws.glue#AuditContext"
                 }
             },
             "traits": {
@@ -24443,6 +24464,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time as of when to read the partition contents. If not set, the most recent transaction commit time will be used. Cannot be specified along with <code>TransactionId</code>.</p>"
                     }
+                },
+                "AuditContext": {
+                    "target": "com.amazonaws.glue#AuditContext"
                 }
             },
             "traits": {
@@ -25708,6 +25732,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID value of the table version to be retrieved. A <code>VersionID</code> is a string representation of an integer. Each version is incremented by 1. </p>"
                     }
+                },
+                "AuditContext": {
+                    "target": "com.amazonaws.glue#AuditContext"
                 }
             },
             "traits": {
@@ -25802,6 +25829,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of table versions to return in one response.</p>"
                     }
+                },
+                "AuditContext": {
+                    "target": "com.amazonaws.glue#AuditContext"
                 }
             },
             "traits": {
@@ -29992,7 +30022,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.glue#Timeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job timeout in minutes.  This is the maximum time that a job run\n      can consume resources before it is terminated and enters <code>TIMEOUT</code>\n      status.</p>\n         <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>\n         <p>When the value is left blank, the timeout is defaulted to 2880 minutes.</p>\n         <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>\n         <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>"
+                        "smithy.api#documentation": "<p>The job timeout in minutes.  This is the maximum time that a job run\n      can consume resources before it is terminated and enters <code>TIMEOUT</code>\n      status.</p>\n         <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>\n         <p>When the value is left blank, the timeout is defaulted to 2,880 minutes for Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.</p>\n         <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>\n         <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>"
                     }
                 },
                 "MaxCapacity": {
@@ -30028,7 +30058,7 @@
                 "GlueVersion": {
                     "target": "com.amazonaws.glue#GlueVersionString",
                     "traits": {
-                        "smithy.api#documentation": "<p>In Spark jobs, <code>GlueVersion</code> determines the versions of Apache Spark and Python\n      that Glue available in a job. The Python version indicates the version\n      supported for jobs of type Spark. </p>\n         <p>Ray jobs should set <code>GlueVersion</code> to <code>4.0</code> or greater. However,\n    the versions of Ray, Python and additional libraries available in your Ray job are determined\n    by the <code>Runtime</code> parameter of the Job command.</p>\n         <p>For more information about the available Glue versions and corresponding\n      Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer\n      guide.</p>\n         <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>"
+                        "smithy.api#documentation": "<p>In Spark jobs, <code>GlueVersion</code> determines the versions of Apache Spark and Python\n      that Glue available in a job. The Python version indicates the version\n      supported for jobs of type Spark. </p>\n         <p>Ray jobs should set <code>GlueVersion</code> to <code>4.0</code> or greater. However,\n    the versions of Ray, Python and additional libraries available in your Ray job are determined\n    by the <code>Runtime</code> parameter of the Job command.</p>\n         <p>For more information about the available Glue versions and corresponding\n      Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer\n      guide.</p>\n         <p>Jobs that are created without specifying a Glue version default to Glue 5.1.</p>"
                     }
                 },
                 "CodeGenConfigurationNodes": {
@@ -30348,7 +30378,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.glue#Timeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>JobRun</code> timeout in minutes. This is the maximum time that a job run can\n      consume resources before it is terminated and enters <code>TIMEOUT</code> status. This value overrides the timeout value set in the parent job.</p>\n         <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>\n         <p>When the value is left blank, the timeout is defaulted to 2880 minutes.</p>\n         <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>\n         <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>"
+                        "smithy.api#documentation": "<p>The <code>JobRun</code> timeout in minutes. This is the maximum time that a job run can\n      consume resources before it is terminated and enters <code>TIMEOUT</code> status. This value overrides the timeout value set in the parent job.</p>\n         <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>\n         <p>When the value is left blank, the timeout is defaulted to 2,880 minutes for Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.</p>\n         <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>\n         <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>"
                     }
                 },
                 "MaxCapacity": {
@@ -30390,7 +30420,7 @@
                 "GlueVersion": {
                     "target": "com.amazonaws.glue#GlueVersionString",
                     "traits": {
-                        "smithy.api#documentation": "<p>In Spark jobs, <code>GlueVersion</code> determines the versions of Apache Spark and Python\n      that Glue available in a job. The Python version indicates the version\n      supported for jobs of type Spark. </p>\n         <p>Ray jobs should set <code>GlueVersion</code> to <code>4.0</code> or greater. However,\n    the versions of Ray, Python and additional libraries available in your Ray job are determined\n    by the <code>Runtime</code> parameter of the Job command.</p>\n         <p>For more information about the available Glue versions and corresponding\n      Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer\n      guide.</p>\n         <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>"
+                        "smithy.api#documentation": "<p>In Spark jobs, <code>GlueVersion</code> determines the versions of Apache Spark and Python\n      that Glue available in a job. The Python version indicates the version\n      supported for jobs of type Spark. </p>\n         <p>Ray jobs should set <code>GlueVersion</code> to <code>4.0</code> or greater. However,\n    the versions of Ray, Python and additional libraries available in your Ray job are determined\n    by the <code>Runtime</code> parameter of the Job command.</p>\n         <p>For more information about the available Glue versions and corresponding\n      Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer\n      guide.</p>\n         <p>Jobs that are created without specifying a Glue version default to Glue 5.1.</p>"
                     }
                 },
                 "DPUSeconds": {
@@ -30588,7 +30618,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.glue#Timeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The job timeout in minutes.  This is the maximum time that a job run\n      can consume resources before it is terminated and enters <code>TIMEOUT</code>\n      status.</p>\n         <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>\n         <p>When the value is left blank, the timeout is defaulted to 2880 minutes.</p>\n         <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>\n         <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>"
+                        "smithy.api#documentation": "<p>The job timeout in minutes.  This is the maximum time that a job run\n      can consume resources before it is terminated and enters <code>TIMEOUT</code>\n      status.</p>\n         <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>\n         <p>When the value is left blank, the timeout is defaulted to 2,880 minutes for Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.</p>\n         <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>\n         <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>"
                     }
                 },
                 "MaxCapacity": {
@@ -30624,7 +30654,7 @@
                 "GlueVersion": {
                     "target": "com.amazonaws.glue#GlueVersionString",
                     "traits": {
-                        "smithy.api#documentation": "<p>In Spark jobs, <code>GlueVersion</code> determines the versions of Apache Spark and Python\n      that Glue available in a job. The Python version indicates the version\n      supported for jobs of type Spark. </p>\n         <p>Ray jobs should set <code>GlueVersion</code> to <code>4.0</code> or greater. However,\n    the versions of Ray, Python and additional libraries available in your Ray job are determined\n    by the <code>Runtime</code> parameter of the Job command.</p>\n         <p>For more information about the available Glue versions and corresponding\n      Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer\n      guide.</p>\n         <p>Jobs that are created without specifying a Glue version default to Glue 0.9.</p>"
+                        "smithy.api#documentation": "<p>In Spark jobs, <code>GlueVersion</code> determines the versions of Apache Spark and Python\n      that Glue available in a job. The Python version indicates the version\n      supported for jobs of type Spark. </p>\n         <p>Ray jobs should set <code>GlueVersion</code> to <code>4.0</code> or greater. However,\n    the versions of Ray, Python and additional libraries available in your Ray job are determined\n    by the <code>Runtime</code> parameter of the Job command.</p>\n         <p>For more information about the available Glue versions and corresponding\n      Spark and Python versions, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/add-job.html\">Glue version</a> in the developer\n      guide.</p>\n         <p>If not provided in the update request, the Glue version retains the value from the existing job definition.</p>"
                     }
                 },
                 "CodeGenConfigurationNodes": {
@@ -36070,12 +36100,6 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.glue#PartitionIndex"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 3
-                }
             }
         },
         "com.amazonaws.glue#PartitionIndexStatus": {
@@ -42740,7 +42764,7 @@
                 "Timeout": {
                     "target": "com.amazonaws.glue#Timeout",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>JobRun</code> timeout in minutes. This is the maximum time that a job run can\n      consume resources before it is terminated and enters <code>TIMEOUT</code> status. This value overrides the timeout value set in the parent job. </p>\n         <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>\n         <p>When the value is left blank, the timeout is defaulted to 2880 minutes.</p>\n         <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>\n         <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>"
+                        "smithy.api#documentation": "<p>The <code>JobRun</code> timeout in minutes. This is the maximum time that a job run can\n      consume resources before it is terminated and enters <code>TIMEOUT</code> status. This value overrides the timeout value set in the parent job. </p>\n         <p>Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the jobs will throw an exception.</p>\n         <p>When the value is left blank, the timeout is defaulted to 2,880 minutes for Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.</p>\n         <p>Any existing Glue jobs that had a timeout value greater than 7 days will be defaulted to 7 days. For instance if you have specified a timeout of 20 days for a batch job, it will be stopped on the 7th day.</p>\n         <p>For streaming jobs, if you have set up a maintenance window, it will be restarted during the maintenance window after 7 days.</p>"
                     }
                 },
                 "MaxCapacity": {

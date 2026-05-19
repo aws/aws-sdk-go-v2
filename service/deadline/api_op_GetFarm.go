@@ -37,9 +37,13 @@ type GetFarmInput struct {
 	noSmithyDocumentSerde
 }
 
+// Mixin that adds an optional ARN field to response structures. Apply to
+// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type GetFarmOutput struct {
 
-	// The cost scale factor applied on the farm.
+	// A multiplier applied to the farm's calculated costs for usage data and budget
+	// tracking. A value less than 1 represents a discount, a value greater than 1
+	// represents a premium, and a value of 1 represents no adjustment.
 	//
 	// This member is required.
 	CostScaleFactor *float32
@@ -124,7 +128,7 @@ func (c *Client) addOperationGetFarmMiddlewares(stack *middleware.Stack, options
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -146,9 +150,6 @@ func (c *Client) addOperationGetFarmMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

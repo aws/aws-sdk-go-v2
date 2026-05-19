@@ -682,6 +682,27 @@ func (EnvironmentStatus) Values() []EnvironmentStatus {
 	}
 }
 
+type FileFormat string
+
+// Enum values for FileFormat
+const (
+	// Export the notebook as a PDF file.
+	FileFormatPdf FileFormat = "PDF"
+	// Export the notebook as a Jupyter notebook (.ipynb) file.
+	FileFormatIpynb FileFormat = "IPYNB"
+)
+
+// Values returns all known values for FileFormat. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FileFormat) Values() []FileFormat {
+	return []FileFormat{
+		"PDF",
+		"IPYNB",
+	}
+}
+
 type FilterExpressionType string
 
 // Enum values for FilterExpressionType
@@ -938,8 +959,9 @@ type GroupSearchType string
 
 // Enum values for GroupSearchType
 const (
-	GroupSearchTypeSsoGroup         GroupSearchType = "SSO_GROUP"
-	GroupSearchTypeDatazoneSsoGroup GroupSearchType = "DATAZONE_SSO_GROUP"
+	GroupSearchTypeSsoGroup            GroupSearchType = "SSO_GROUP"
+	GroupSearchTypeDatazoneSsoGroup    GroupSearchType = "DATAZONE_SSO_GROUP"
+	GroupSearchTypeIamRoleSessionGroup GroupSearchType = "IAM_ROLE_SESSION_GROUP"
 )
 
 // Values returns all known values for GroupSearchType. Note that this can be
@@ -950,6 +972,7 @@ func (GroupSearchType) Values() []GroupSearchType {
 	return []GroupSearchType{
 		"SSO_GROUP",
 		"DATAZONE_SSO_GROUP",
+		"IAM_ROLE_SESSION_GROUP",
 	}
 }
 
@@ -1239,6 +1262,108 @@ func (MetadataGenerationTargetType) Values() []MetadataGenerationTargetType {
 	}
 }
 
+type NetworkAccessType string
+
+// Enum values for NetworkAccessType
+const (
+	// The notebook run uses public internet access only.
+	NetworkAccessTypePublicInternetOnly NetworkAccessType = "PUBLIC_INTERNET_ONLY"
+	// The notebook run uses VPC access only.
+	NetworkAccessTypeVpcOnly NetworkAccessType = "VPC_ONLY"
+)
+
+// Values returns all known values for NetworkAccessType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkAccessType) Values() []NetworkAccessType {
+	return []NetworkAccessType{
+		"PUBLIC_INTERNET_ONLY",
+		"VPC_ONLY",
+	}
+}
+
+type NotebookExportStatus string
+
+// Enum values for NotebookExportStatus
+const (
+	// The notebook export is in progress.
+	NotebookExportStatusInProgress NotebookExportStatus = "IN_PROGRESS"
+	// The notebook export succeeded.
+	NotebookExportStatusSucceeded NotebookExportStatus = "SUCCEEDED"
+	// The notebook export failed.
+	NotebookExportStatusFailed NotebookExportStatus = "FAILED"
+)
+
+// Values returns all known values for NotebookExportStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotebookExportStatus) Values() []NotebookExportStatus {
+	return []NotebookExportStatus{
+		"IN_PROGRESS",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type NotebookRunStatus string
+
+// Enum values for NotebookRunStatus
+const (
+	// The notebook run is queued.
+	NotebookRunStatusQueued NotebookRunStatus = "QUEUED"
+	// The notebook run is starting.
+	NotebookRunStatusStarting NotebookRunStatus = "STARTING"
+	// The notebook run is running.
+	NotebookRunStatusRunning NotebookRunStatus = "RUNNING"
+	// The notebook run is stopping.
+	NotebookRunStatusStopping NotebookRunStatus = "STOPPING"
+	// The notebook run was stopped.
+	NotebookRunStatusStopped NotebookRunStatus = "STOPPED"
+	// The notebook run succeeded.
+	NotebookRunStatusSucceeded NotebookRunStatus = "SUCCEEDED"
+	// The notebook run failed.
+	NotebookRunStatusFailed NotebookRunStatus = "FAILED"
+)
+
+// Values returns all known values for NotebookRunStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotebookRunStatus) Values() []NotebookRunStatus {
+	return []NotebookRunStatus{
+		"QUEUED",
+		"STARTING",
+		"RUNNING",
+		"STOPPING",
+		"STOPPED",
+		"SUCCEEDED",
+		"FAILED",
+	}
+}
+
+type NotebookStatus string
+
+// Enum values for NotebookStatus
+const (
+	// The notebook is active.
+	NotebookStatusActive NotebookStatus = "ACTIVE"
+	// The notebook is archived.
+	NotebookStatusArchived NotebookStatus = "ARCHIVED"
+)
+
+// Values returns all known values for NotebookStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotebookStatus) Values() []NotebookStatus {
+	return []NotebookStatus{
+		"ACTIVE",
+		"ARCHIVED",
+	}
+}
+
 type NotificationResourceType string
 
 // Enum values for NotificationResourceType
@@ -1370,6 +1495,24 @@ func (OverallDeploymentStatus) Values() []OverallDeploymentStatus {
 		"SUCCESSFUL",
 		"FAILED_VALIDATION",
 		"FAILED_DEPLOYMENT",
+	}
+}
+
+type PackageManager string
+
+// Enum values for PackageManager
+const (
+	// The UV package manager.
+	PackageManagerUv PackageManager = "UV"
+)
+
+// Values returns all known values for PackageManager. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PackageManager) Values() []PackageManager {
+	return []PackageManager{
+		"UV",
 	}
 }
 
@@ -2120,6 +2263,30 @@ func (Timezone) Values() []Timezone {
 	}
 }
 
+type TriggerSourceType string
+
+// Enum values for TriggerSourceType
+const (
+	// The notebook run was triggered manually.
+	TriggerSourceTypeManual TriggerSourceType = "MANUAL"
+	// The notebook run was triggered by a schedule.
+	TriggerSourceTypeScheduled TriggerSourceType = "SCHEDULED"
+	// The notebook run was triggered by a workflow.
+	TriggerSourceTypeWorkflow TriggerSourceType = "WORKFLOW"
+)
+
+// Values returns all known values for TriggerSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TriggerSourceType) Values() []TriggerSourceType {
+	return []TriggerSourceType{
+		"MANUAL",
+		"SCHEDULED",
+		"WORKFLOW",
+	}
+}
+
 type TypesSearchScope string
 
 // Enum values for TypesSearchScope
@@ -2254,9 +2421,10 @@ type UserType string
 
 // Enum values for UserType
 const (
-	UserTypeIamUser UserType = "IAM_USER"
-	UserTypeIamRole UserType = "IAM_ROLE"
-	UserTypeSsoUser UserType = "SSO_USER"
+	UserTypeIamUser        UserType = "IAM_USER"
+	UserTypeIamRole        UserType = "IAM_ROLE"
+	UserTypeSsoUser        UserType = "SSO_USER"
+	UserTypeIamRoleSession UserType = "IAM_ROLE_SESSION"
 )
 
 // Values returns all known values for UserType. Note that this can be expanded in
@@ -2268,5 +2436,6 @@ func (UserType) Values() []UserType {
 		"IAM_USER",
 		"IAM_ROLE",
 		"SSO_USER",
+		"IAM_ROLE_SESSION",
 	}
 }

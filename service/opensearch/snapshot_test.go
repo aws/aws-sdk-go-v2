@@ -350,6 +350,18 @@ func TestCheckSnapshot_DeleteVpcEndpoint(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeregisterCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeregisterCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeregisterCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDomain(context.Background(), nil, func(o *Options) {
@@ -458,6 +470,18 @@ func TestCheckSnapshot_DescribeInboundConnections(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeInsightDetails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInsightDetails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeInsightDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeInstanceTypeLimits(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeInstanceTypeLimits(context.Background(), nil, func(o *Options) {
@@ -559,6 +583,18 @@ func TestCheckSnapshot_GetApplication(t *testing.T) {
 	_, err := svc.GetApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCapability")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -746,6 +782,18 @@ func TestCheckSnapshot_ListDomainsForPackage(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListInsights")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListInstanceTypeDetails(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListInstanceTypeDetails(context.Background(), nil, func(o *Options) {
@@ -866,6 +914,18 @@ func TestCheckSnapshot_PutDefaultApplicationSetting(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RegisterCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RegisterCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RejectInboundConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RejectInboundConnection(context.Background(), nil, func(o *Options) {
@@ -895,6 +955,18 @@ func TestCheckSnapshot_RevokeVpcEndpointAccess(t *testing.T) {
 	_, err := svc.RevokeVpcEndpointAccess(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "RevokeVpcEndpointAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_RollbackServiceSoftwareUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RollbackServiceSoftwareUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RollbackServiceSoftwareUpdate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1333,6 +1405,18 @@ func TestUpdateSnapshot_DeleteVpcEndpoint(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeregisterCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeregisterCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeregisterCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeDomain(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeDomain(context.Background(), nil, func(o *Options) {
@@ -1441,6 +1525,18 @@ func TestUpdateSnapshot_DescribeInboundConnections(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeInsightDetails(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeInsightDetails(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeInsightDetails")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeInstanceTypeLimits(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeInstanceTypeLimits(context.Background(), nil, func(o *Options) {
@@ -1542,6 +1638,18 @@ func TestUpdateSnapshot_GetApplication(t *testing.T) {
 	_, err := svc.GetApplication(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCapability")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1729,6 +1837,18 @@ func TestUpdateSnapshot_ListDomainsForPackage(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListInsights(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListInsights(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListInsights")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListInstanceTypeDetails(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListInstanceTypeDetails(context.Background(), nil, func(o *Options) {
@@ -1849,6 +1969,18 @@ func TestUpdateSnapshot_PutDefaultApplicationSetting(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_RegisterCapability(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RegisterCapability(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RegisterCapability")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_RejectInboundConnection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RejectInboundConnection(context.Background(), nil, func(o *Options) {
@@ -1878,6 +2010,18 @@ func TestUpdateSnapshot_RevokeVpcEndpointAccess(t *testing.T) {
 	_, err := svc.RevokeVpcEndpointAccess(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "RevokeVpcEndpointAccess")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_RollbackServiceSoftwareUpdate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RollbackServiceSoftwareUpdate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RollbackServiceSoftwareUpdate")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

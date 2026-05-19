@@ -515,6 +515,15 @@ type IngestConfiguration struct {
 	// Ingest name
 	Name *string
 
+	// Indicates whether redundant ingest is enabled for the ingest configuration.
+	RedundantIngest bool
+
+	// A list of redundant ingest credentials, present only when redundantIngest is
+	// set to true . See [Redundant Ingest] in IVS RTMP Publishing for details.
+	//
+	// [Redundant Ingest]: https://docs.aws.amazon.com/ivs/latest/RealTimeUserGuide/rt-rtmp-publishing.html#redundant-ingest
+	RedundantIngestCredentials []RedundantIngestCredential
+
 	// Tags attached to the resource. Array of maps, each of the form string:string
 	// (key:value) . See [Best practices and strategies] in Tagging AWS Resources and Tag Editor for details,
 	// including restrictions that apply to tags and "Tag naming limits and
@@ -566,6 +575,9 @@ type IngestConfigurationSummary struct {
 	// Ingest name.
 	Name *string
 
+	// Indicates whether redundant ingest is enabled for the ingest configuration.
+	RedundantIngest bool
+
 	// Customer-assigned name to help identify the participant using the
 	// IngestConfiguration; this can be used to link a participant to a user in the
 	// customer’s own systems. This can be any UTF-8 encoded text. This field is
@@ -607,6 +619,9 @@ type Participant struct {
 	// stage session.
 	FirstJoinTime *time.Time
 
+	// The participant’s ingest configuration.
+	IngestConfigurationArn *string
+
 	// The participant’s Internet Service Provider.
 	IspName *string
 
@@ -639,6 +654,9 @@ type Participant struct {
 
 	// The participant’s recording state.
 	RecordingState ParticipantRecordingState
+
+	// Indicates whether redundant ingest is enabled for the participant.
+	RedundantIngest bool
 
 	// The participant's replication state.
 	ReplicationState ReplicationState
@@ -727,6 +745,9 @@ type ParticipantSummary struct {
 	// stage session.
 	FirstJoinTime *time.Time
 
+	// The participant’s ingest configuration.
+	IngestConfigurationArn *string
+
 	// Unique identifier for this participant, assigned by IVS.
 	ParticipantId *string
 
@@ -735,6 +756,9 @@ type ParticipantSummary struct {
 
 	// The participant’s recording state.
 	RecordingState ParticipantRecordingState
+
+	// Indicates whether redundant ingest is enabled for the participant.
+	RedundantIngest bool
 
 	// The participant's replication state.
 	ReplicationState ReplicationState
@@ -960,6 +984,18 @@ type RecordingConfiguration struct {
 	// An HLS configuration object to return information about how the recording will
 	// be configured.
 	HlsConfiguration *CompositionRecordingHlsConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// An object representing a redundant ingest credential.
+type RedundantIngestCredential struct {
+
+	// ID of the participant within the stage.
+	ParticipantId *string
+
+	// Ingest-key value.
+	StreamKey *string
 
 	noSmithyDocumentSerde
 }

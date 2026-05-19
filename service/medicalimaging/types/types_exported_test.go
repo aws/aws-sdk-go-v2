@@ -8,6 +8,24 @@ import (
 	"time"
 )
 
+func ExampleImportConfiguration_outputUsage() {
+	var union types.ImportConfiguration
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ImportConfigurationMemberDicomJsonMetadataImportConfiguration:
+		_ = v.Value // Value is types.DicomJsonMetadataImportConfiguration
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.DicomJsonMetadataImportConfiguration
+
 func ExampleMetadataUpdates_outputUsage() {
 	var union types.MetadataUpdates
 	// type switches can be used to check the union value

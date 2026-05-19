@@ -40,6 +40,9 @@ type UpdateCollectionInput struct {
 	// A description of the collection.
 	Description *string
 
+	// Configuration options for vector search capabilities in the collection.
+	VectorOptions *types.VectorOptions
+
 	noSmithyDocumentSerde
 }
 
@@ -88,7 +91,7 @@ func (c *Client) addOperationUpdateCollectionMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -110,9 +113,6 @@ func (c *Client) addOperationUpdateCollectionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

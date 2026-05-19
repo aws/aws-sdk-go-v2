@@ -111,6 +111,27 @@ func (AttachmentUploadErrorReason) Values() []AttachmentUploadErrorReason {
 	}
 }
 
+type CarrierStatus string
+
+// Enum values for CarrierStatus
+const (
+	CarrierStatusPending  CarrierStatus = "PENDING"
+	CarrierStatusActive   CarrierStatus = "ACTIVE"
+	CarrierStatusRejected CarrierStatus = "REJECTED"
+)
+
+// Values returns all known values for CarrierStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CarrierStatus) Values() []CarrierStatus {
+	return []CarrierStatus{
+		"PENDING",
+		"ACTIVE",
+		"REJECTED",
+	}
+}
+
 type ConfigurationSetFilterName string
 
 // Enum values for ConfigurationSetFilterName
@@ -162,7 +183,10 @@ const (
 	ConflictExceptionReasonPhoneNumberNotInRegistrationRegion                    ConflictExceptionReason = "PHONE_NUMBER_NOT_IN_REGISTRATION_REGION"
 	ConflictExceptionReasonRegistrationAlreadySubmitted                          ConflictExceptionReason = "REGISTRATION_ALREADY_SUBMITTED"
 	ConflictExceptionReasonRegistrationNotComplete                               ConflictExceptionReason = "REGISTRATION_NOT_COMPLETE"
+	ConflictExceptionReasonResourceAlreadyAssociated                             ConflictExceptionReason = "RESOURCE_ALREADY_ASSOCIATED"
 	ConflictExceptionReasonSenderIdAssociatedToPool                              ConflictExceptionReason = "SENDER_ID_ASSOCIATED_TO_POOL"
+	ConflictExceptionReasonRcsAgentAssociatedToPool                              ConflictExceptionReason = "RCS_AGENT_ASSOCIATED_TO_POOL"
+	ConflictExceptionReasonPoolAssociatedToNotifyConfiguration                   ConflictExceptionReason = "POOL_ASSOCIATED_TO_NOTIFY_CONFIGURATION"
 	ConflictExceptionReasonResourceAlreadyExists                                 ConflictExceptionReason = "RESOURCE_ALREADY_EXISTS"
 	ConflictExceptionReasonResourceDeletionNotAllowed                            ConflictExceptionReason = "RESOURCE_DELETION_NOT_ALLOWED"
 	ConflictExceptionReasonResourceModificationNotAllowed                        ConflictExceptionReason = "RESOURCE_MODIFICATION_NOT_ALLOWED"
@@ -178,6 +202,8 @@ const (
 	ConflictExceptionReasonProtectConfigurationNotAssociatedWithConfigurationSet ConflictExceptionReason = "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET"
 	ConflictExceptionReasonDestinationCountryBlockedByProtectConfiguration       ConflictExceptionReason = "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION"
 	ConflictExceptionReasonDestinationPhoneNumberBlockedByProtectNumberOverride  ConflictExceptionReason = "DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE"
+	ConflictExceptionReasonRcsAgentAlreadyAssociatedToRegistrationType           ConflictExceptionReason = "RCS_AGENT_ALREADY_ASSOCIATED_TO_REGISTRATION_TYPE"
+	ConflictExceptionReasonNotifyConfigurationNotActive                          ConflictExceptionReason = "NOTIFY_CONFIGURATION_NOT_ACTIVE"
 )
 
 // Values returns all known values for ConflictExceptionReason. Note that this can
@@ -206,7 +232,10 @@ func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 		"PHONE_NUMBER_NOT_IN_REGISTRATION_REGION",
 		"REGISTRATION_ALREADY_SUBMITTED",
 		"REGISTRATION_NOT_COMPLETE",
+		"RESOURCE_ALREADY_ASSOCIATED",
 		"SENDER_ID_ASSOCIATED_TO_POOL",
+		"RCS_AGENT_ASSOCIATED_TO_POOL",
+		"POOL_ASSOCIATED_TO_NOTIFY_CONFIGURATION",
 		"RESOURCE_ALREADY_EXISTS",
 		"RESOURCE_DELETION_NOT_ALLOWED",
 		"RESOURCE_MODIFICATION_NOT_ALLOWED",
@@ -222,6 +251,51 @@ func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 		"PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET",
 		"DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION",
 		"DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE",
+		"RCS_AGENT_ALREADY_ASSOCIATED_TO_REGISTRATION_TYPE",
+		"NOTIFY_CONFIGURATION_NOT_ACTIVE",
+	}
+}
+
+type CountryLaunchStatus string
+
+// Enum values for CountryLaunchStatus
+const (
+	CountryLaunchStatusCreated  CountryLaunchStatus = "CREATED"
+	CountryLaunchStatusPending  CountryLaunchStatus = "PENDING"
+	CountryLaunchStatusPartial  CountryLaunchStatus = "PARTIAL"
+	CountryLaunchStatusActive   CountryLaunchStatus = "ACTIVE"
+	CountryLaunchStatusRejected CountryLaunchStatus = "REJECTED"
+)
+
+// Values returns all known values for CountryLaunchStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CountryLaunchStatus) Values() []CountryLaunchStatus {
+	return []CountryLaunchStatus{
+		"CREATED",
+		"PENDING",
+		"PARTIAL",
+		"ACTIVE",
+		"REJECTED",
+	}
+}
+
+type CountryLaunchStatusFilterName string
+
+// Enum values for CountryLaunchStatusFilterName
+const (
+	CountryLaunchStatusFilterNameCountryLaunchStatus CountryLaunchStatusFilterName = "country-launch-status"
+)
+
+// Values returns all known values for CountryLaunchStatusFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CountryLaunchStatusFilterName) Values() []CountryLaunchStatusFilterName {
+	return []CountryLaunchStatusFilterName{
+		"country-launch-status",
 	}
 }
 
@@ -505,6 +579,162 @@ func (MessageType) Values() []MessageType {
 	}
 }
 
+type NotifyConfigurationFilterName string
+
+// Enum values for NotifyConfigurationFilterName
+const (
+	NotifyConfigurationFilterNameDisplayName               NotifyConfigurationFilterName = "display-name"
+	NotifyConfigurationFilterNameEnabledCountries          NotifyConfigurationFilterName = "enabled-countries"
+	NotifyConfigurationFilterNameEnabledChannels           NotifyConfigurationFilterName = "enabled-channels"
+	NotifyConfigurationFilterNameDefaultTemplate           NotifyConfigurationFilterName = "default-template"
+	NotifyConfigurationFilterNameDefaultPool               NotifyConfigurationFilterName = "default-pool"
+	NotifyConfigurationFilterNameUseCase                   NotifyConfigurationFilterName = "use-case"
+	NotifyConfigurationFilterNameStatus                    NotifyConfigurationFilterName = "status"
+	NotifyConfigurationFilterNameDeletionProtectionEnabled NotifyConfigurationFilterName = "deletion-protection-enabled"
+	NotifyConfigurationFilterNameTierUpgradeStatus         NotifyConfigurationFilterName = "tier-upgrade-status"
+)
+
+// Values returns all known values for NotifyConfigurationFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotifyConfigurationFilterName) Values() []NotifyConfigurationFilterName {
+	return []NotifyConfigurationFilterName{
+		"display-name",
+		"enabled-countries",
+		"enabled-channels",
+		"default-template",
+		"default-pool",
+		"use-case",
+		"status",
+		"deletion-protection-enabled",
+		"tier-upgrade-status",
+	}
+}
+
+type NotifyConfigurationStatus string
+
+// Enum values for NotifyConfigurationStatus
+const (
+	NotifyConfigurationStatusPending              NotifyConfigurationStatus = "PENDING"
+	NotifyConfigurationStatusActive               NotifyConfigurationStatus = "ACTIVE"
+	NotifyConfigurationStatusRejected             NotifyConfigurationStatus = "REJECTED"
+	NotifyConfigurationStatusRequiresVerification NotifyConfigurationStatus = "REQUIRES_VERIFICATION"
+)
+
+// Values returns all known values for NotifyConfigurationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotifyConfigurationStatus) Values() []NotifyConfigurationStatus {
+	return []NotifyConfigurationStatus{
+		"PENDING",
+		"ACTIVE",
+		"REJECTED",
+		"REQUIRES_VERIFICATION",
+	}
+}
+
+type NotifyConfigurationTier string
+
+// Enum values for NotifyConfigurationTier
+const (
+	NotifyConfigurationTierBasic    NotifyConfigurationTier = "BASIC"
+	NotifyConfigurationTierAdvanced NotifyConfigurationTier = "ADVANCED"
+)
+
+// Values returns all known values for NotifyConfigurationTier. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotifyConfigurationTier) Values() []NotifyConfigurationTier {
+	return []NotifyConfigurationTier{
+		"BASIC",
+		"ADVANCED",
+	}
+}
+
+type NotifyConfigurationUseCase string
+
+// Enum values for NotifyConfigurationUseCase
+const (
+	NotifyConfigurationUseCaseCodeVerification NotifyConfigurationUseCase = "CODE_VERIFICATION"
+)
+
+// Values returns all known values for NotifyConfigurationUseCase. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotifyConfigurationUseCase) Values() []NotifyConfigurationUseCase {
+	return []NotifyConfigurationUseCase{
+		"CODE_VERIFICATION",
+	}
+}
+
+type NotifyTemplateFilterName string
+
+// Enum values for NotifyTemplateFilterName
+const (
+	NotifyTemplateFilterNameTemplateType       NotifyTemplateFilterName = "template-type"
+	NotifyTemplateFilterNameChannels           NotifyTemplateFilterName = "channels"
+	NotifyTemplateFilterNameTierAccess         NotifyTemplateFilterName = "tier-access"
+	NotifyTemplateFilterNameSupportedCountries NotifyTemplateFilterName = "supported-countries"
+	NotifyTemplateFilterNameLanguageCode       NotifyTemplateFilterName = "language-code"
+	NotifyTemplateFilterNameSupportedVoiceIds  NotifyTemplateFilterName = "supported-voice-ids"
+)
+
+// Values returns all known values for NotifyTemplateFilterName. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotifyTemplateFilterName) Values() []NotifyTemplateFilterName {
+	return []NotifyTemplateFilterName{
+		"template-type",
+		"channels",
+		"tier-access",
+		"supported-countries",
+		"language-code",
+		"supported-voice-ids",
+	}
+}
+
+type NotifyTemplateStatus string
+
+// Enum values for NotifyTemplateStatus
+const (
+	NotifyTemplateStatusActive   NotifyTemplateStatus = "ACTIVE"
+	NotifyTemplateStatusInactive NotifyTemplateStatus = "INACTIVE"
+)
+
+// Values returns all known values for NotifyTemplateStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotifyTemplateStatus) Values() []NotifyTemplateStatus {
+	return []NotifyTemplateStatus{
+		"ACTIVE",
+		"INACTIVE",
+	}
+}
+
+type NotifyTemplateType string
+
+// Enum values for NotifyTemplateType
+const (
+	NotifyTemplateTypeOtpVerification NotifyTemplateType = "OTP_VERIFICATION"
+)
+
+// Values returns all known values for NotifyTemplateType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NotifyTemplateType) Values() []NotifyTemplateType {
+	return []NotifyTemplateType{
+		"OTP_VERIFICATION",
+	}
+}
+
 type NumberCapability string
 
 // Enum values for NumberCapability
@@ -512,6 +742,7 @@ const (
 	NumberCapabilitySms   NumberCapability = "SMS"
 	NumberCapabilityVoice NumberCapability = "VOICE"
 	NumberCapabilityMms   NumberCapability = "MMS"
+	NumberCapabilityRcs   NumberCapability = "RCS"
 )
 
 // Values returns all known values for NumberCapability. Note that this can be
@@ -523,6 +754,7 @@ func (NumberCapability) Values() []NumberCapability {
 		"SMS",
 		"VOICE",
 		"MMS",
+		"RCS",
 	}
 }
 
@@ -835,6 +1067,60 @@ func (ProtectStatus) Values() []ProtectStatus {
 	}
 }
 
+type RcsAgentFilterName string
+
+// Enum values for RcsAgentFilterName
+const (
+	RcsAgentFilterNameStatus                    RcsAgentFilterName = "status"
+	RcsAgentFilterNameTwoWayEnabled             RcsAgentFilterName = "two-way-enabled"
+	RcsAgentFilterNameSelfManagedOptOutsEnabled RcsAgentFilterName = "self-managed-opt-outs-enabled"
+	RcsAgentFilterNameOptOutListName            RcsAgentFilterName = "opt-out-list-name"
+	RcsAgentFilterNameDeletionProtectionEnabled RcsAgentFilterName = "deletion-protection-enabled"
+	RcsAgentFilterNameTwoWayChannelArn          RcsAgentFilterName = "two-way-channel-arn"
+)
+
+// Values returns all known values for RcsAgentFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RcsAgentFilterName) Values() []RcsAgentFilterName {
+	return []RcsAgentFilterName{
+		"status",
+		"two-way-enabled",
+		"self-managed-opt-outs-enabled",
+		"opt-out-list-name",
+		"deletion-protection-enabled",
+		"two-way-channel-arn",
+	}
+}
+
+type RcsAgentStatus string
+
+// Enum values for RcsAgentStatus
+const (
+	RcsAgentStatusCreated RcsAgentStatus = "CREATED"
+	RcsAgentStatusPending RcsAgentStatus = "PENDING"
+	RcsAgentStatusTesting RcsAgentStatus = "TESTING"
+	RcsAgentStatusPartial RcsAgentStatus = "PARTIAL"
+	RcsAgentStatusActive  RcsAgentStatus = "ACTIVE"
+	RcsAgentStatusDeleted RcsAgentStatus = "DELETED"
+)
+
+// Values returns all known values for RcsAgentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RcsAgentStatus) Values() []RcsAgentStatus {
+	return []RcsAgentStatus{
+		"CREATED",
+		"PENDING",
+		"TESTING",
+		"PARTIAL",
+		"ACTIVE",
+		"DELETED",
+	}
+}
+
 type RegistrationAssociationBehavior string
 
 // Enum values for RegistrationAssociationBehavior
@@ -1022,6 +1308,7 @@ const (
 	RegistrationVersionStatusDenied                 RegistrationVersionStatus = "DENIED"
 	RegistrationVersionStatusRevoked                RegistrationVersionStatus = "REVOKED"
 	RegistrationVersionStatusArchived               RegistrationVersionStatus = "ARCHIVED"
+	RegistrationVersionStatusRequiresOfflineReview  RegistrationVersionStatus = "REQUIRES_OFFLINE_REVIEW"
 )
 
 // Values returns all known values for RegistrationVersionStatus. Note that this
@@ -1040,6 +1327,7 @@ func (RegistrationVersionStatus) Values() []RegistrationVersionStatus {
 		"DENIED",
 		"REVOKED",
 		"ARCHIVED",
+		"REQUIRES_OFFLINE_REVIEW",
 	}
 }
 
@@ -1083,9 +1371,12 @@ const (
 	ResourceTypeRegistrationAttachment    ResourceType = "registration-attachment"
 	ResourceTypeVerifiedDestinationNumber ResourceType = "verified-destination-number"
 	ResourceTypeProtectConfiguration      ResourceType = "protect-configuration"
+	ResourceTypeNotifyConfiguration       ResourceType = "notify-configuration"
+	ResourceTypeNotifyTemplate            ResourceType = "notify-template"
 	ResourceTypeMessageTemplate           ResourceType = "message-template"
 	ResourceTypePolicy                    ResourceType = "policy"
 	ResourceTypeMessage                   ResourceType = "message"
+	ResourceTypeRcsAgent                  ResourceType = "rcs-agent"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1107,9 +1398,12 @@ func (ResourceType) Values() []ResourceType {
 		"registration-attachment",
 		"verified-destination-number",
 		"protect-configuration",
+		"notify-configuration",
+		"notify-template",
 		"message-template",
 		"policy",
 		"message",
+		"rcs-agent",
 	}
 }
 
@@ -1145,17 +1439,21 @@ const (
 	ServiceQuotaExceededExceptionReasonAssociationsPerRegistration          ServiceQuotaExceededExceptionReason = "ASSOCIATIONS_PER_REGISTRATION"
 	ServiceQuotaExceededExceptionReasonConfigurationSetsPerAccount          ServiceQuotaExceededExceptionReason = "CONFIGURATION_SETS_PER_ACCOUNT"
 	ServiceQuotaExceededExceptionReasonDailyDestinationCallLimit            ServiceQuotaExceededExceptionReason = "DAILY_DESTINATION_CALL_LIMIT"
+	ServiceQuotaExceededExceptionReasonDailyNotifyTierMessageLimit          ServiceQuotaExceededExceptionReason = "DAILY_NOTIFY_TIER_MESSAGE_LIMIT"
 	ServiceQuotaExceededExceptionReasonEventDestinationsPerConfigurationSet ServiceQuotaExceededExceptionReason = "EVENT_DESTINATIONS_PER_CONFIGURATION_SET"
 	ServiceQuotaExceededExceptionReasonKeywordsPerPhoneNumber               ServiceQuotaExceededExceptionReason = "KEYWORDS_PER_PHONE_NUMBER"
 	ServiceQuotaExceededExceptionReasonKeywordsPerPool                      ServiceQuotaExceededExceptionReason = "KEYWORDS_PER_POOL"
 	ServiceQuotaExceededExceptionReasonMonthlySpendLimitReachedForMedia     ServiceQuotaExceededExceptionReason = "MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA"
+	ServiceQuotaExceededExceptionReasonMonthlySpendLimitReachedForNotify    ServiceQuotaExceededExceptionReason = "MONTHLY_SPEND_LIMIT_REACHED_FOR_NOTIFY"
 	ServiceQuotaExceededExceptionReasonMonthlySpendLimitReachedForText      ServiceQuotaExceededExceptionReason = "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT"
 	ServiceQuotaExceededExceptionReasonMonthlySpendLimitReachedForVoice     ServiceQuotaExceededExceptionReason = "MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE"
+	ServiceQuotaExceededExceptionReasonNotifyConfigurationsPerAccount       ServiceQuotaExceededExceptionReason = "NOTIFY_CONFIGURATIONS_PER_ACCOUNT"
 	ServiceQuotaExceededExceptionReasonOptOutListsPerAccount                ServiceQuotaExceededExceptionReason = "OPT_OUT_LISTS_PER_ACCOUNT"
 	ServiceQuotaExceededExceptionReasonOriginationIdentitiesPerPool         ServiceQuotaExceededExceptionReason = "ORIGINATION_IDENTITIES_PER_POOL"
 	ServiceQuotaExceededExceptionReasonPhoneNumbersPerAccount               ServiceQuotaExceededExceptionReason = "PHONE_NUMBERS_PER_ACCOUNT"
 	ServiceQuotaExceededExceptionReasonPhoneNumbersPerRegistration          ServiceQuotaExceededExceptionReason = "PHONE_NUMBERS_PER_REGISTRATION"
 	ServiceQuotaExceededExceptionReasonPoolsPerAccount                      ServiceQuotaExceededExceptionReason = "POOLS_PER_ACCOUNT"
+	ServiceQuotaExceededExceptionReasonRcsAgentsPerAccount                  ServiceQuotaExceededExceptionReason = "RCS_AGENTS_PER_ACCOUNT"
 	ServiceQuotaExceededExceptionReasonRegistrationAttachmentsCreatedPerDay ServiceQuotaExceededExceptionReason = "REGISTRATION_ATTACHMENTS_CREATED_PER_DAY"
 	ServiceQuotaExceededExceptionReasonRegistrationAttachmentsPerAccount    ServiceQuotaExceededExceptionReason = "REGISTRATION_ATTACHMENTS_PER_ACCOUNT"
 	ServiceQuotaExceededExceptionReasonRegistrationVersionsCreatedPerDay    ServiceQuotaExceededExceptionReason = "REGISTRATION_VERSIONS_CREATED_PER_DAY"
@@ -1177,17 +1475,21 @@ func (ServiceQuotaExceededExceptionReason) Values() []ServiceQuotaExceededExcept
 		"ASSOCIATIONS_PER_REGISTRATION",
 		"CONFIGURATION_SETS_PER_ACCOUNT",
 		"DAILY_DESTINATION_CALL_LIMIT",
+		"DAILY_NOTIFY_TIER_MESSAGE_LIMIT",
 		"EVENT_DESTINATIONS_PER_CONFIGURATION_SET",
 		"KEYWORDS_PER_PHONE_NUMBER",
 		"KEYWORDS_PER_POOL",
 		"MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA",
+		"MONTHLY_SPEND_LIMIT_REACHED_FOR_NOTIFY",
 		"MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT",
 		"MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE",
+		"NOTIFY_CONFIGURATIONS_PER_ACCOUNT",
 		"OPT_OUT_LISTS_PER_ACCOUNT",
 		"ORIGINATION_IDENTITIES_PER_POOL",
 		"PHONE_NUMBERS_PER_ACCOUNT",
 		"PHONE_NUMBERS_PER_REGISTRATION",
 		"POOLS_PER_ACCOUNT",
+		"RCS_AGENTS_PER_ACCOUNT",
 		"REGISTRATION_ATTACHMENTS_CREATED_PER_DAY",
 		"REGISTRATION_ATTACHMENTS_PER_ACCOUNT",
 		"REGISTRATION_VERSIONS_CREATED_PER_DAY",
@@ -1204,9 +1506,10 @@ type SpendLimitName string
 
 // Enum values for SpendLimitName
 const (
-	SpendLimitNameTextMessageMonthlySpendLimit  SpendLimitName = "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT"
-	SpendLimitNameVoiceMessageMonthlySpendLimit SpendLimitName = "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT"
-	SpendLimitNameMediaMessageMonthlySpendLimit SpendLimitName = "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT"
+	SpendLimitNameTextMessageMonthlySpendLimit   SpendLimitName = "TEXT_MESSAGE_MONTHLY_SPEND_LIMIT"
+	SpendLimitNameVoiceMessageMonthlySpendLimit  SpendLimitName = "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT"
+	SpendLimitNameMediaMessageMonthlySpendLimit  SpendLimitName = "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT"
+	SpendLimitNameNotifyMessageMonthlySpendLimit SpendLimitName = "NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT"
 )
 
 // Values returns all known values for SpendLimitName. Note that this can be
@@ -1218,6 +1521,91 @@ func (SpendLimitName) Values() []SpendLimitName {
 		"TEXT_MESSAGE_MONTHLY_SPEND_LIMIT",
 		"VOICE_MESSAGE_MONTHLY_SPEND_LIMIT",
 		"MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT",
+		"NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT",
+	}
+}
+
+type TemplateVariableSource string
+
+// Enum values for TemplateVariableSource
+const (
+	TemplateVariableSourceCustomer TemplateVariableSource = "CUSTOMER"
+	TemplateVariableSourceSystem   TemplateVariableSource = "SYSTEM"
+)
+
+// Values returns all known values for TemplateVariableSource. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TemplateVariableSource) Values() []TemplateVariableSource {
+	return []TemplateVariableSource{
+		"CUSTOMER",
+		"SYSTEM",
+	}
+}
+
+type TemplateVariableType string
+
+// Enum values for TemplateVariableType
+const (
+	TemplateVariableTypeString  TemplateVariableType = "STRING"
+	TemplateVariableTypeInteger TemplateVariableType = "INTEGER"
+	TemplateVariableTypeBoolean TemplateVariableType = "BOOLEAN"
+)
+
+// Values returns all known values for TemplateVariableType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TemplateVariableType) Values() []TemplateVariableType {
+	return []TemplateVariableType{
+		"STRING",
+		"INTEGER",
+		"BOOLEAN",
+	}
+}
+
+type TestingAgentStatus string
+
+// Enum values for TestingAgentStatus
+const (
+	TestingAgentStatusCreated TestingAgentStatus = "CREATED"
+	TestingAgentStatusPending TestingAgentStatus = "PENDING"
+	TestingAgentStatusActive  TestingAgentStatus = "ACTIVE"
+)
+
+// Values returns all known values for TestingAgentStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TestingAgentStatus) Values() []TestingAgentStatus {
+	return []TestingAgentStatus{
+		"CREATED",
+		"PENDING",
+		"ACTIVE",
+	}
+}
+
+type TierUpgradeStatus string
+
+// Enum values for TierUpgradeStatus
+const (
+	TierUpgradeStatusBasic          TierUpgradeStatus = "BASIC"
+	TierUpgradeStatusPendingUpgrade TierUpgradeStatus = "PENDING_UPGRADE"
+	TierUpgradeStatusAdvanced       TierUpgradeStatus = "ADVANCED"
+	TierUpgradeStatusRejected       TierUpgradeStatus = "REJECTED"
+)
+
+// Values returns all known values for TierUpgradeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TierUpgradeStatus) Values() []TierUpgradeStatus {
+	return []TierUpgradeStatus{
+		"BASIC",
+		"PENDING_UPGRADE",
+		"ADVANCED",
+		"REJECTED",
 	}
 }
 
@@ -1227,7 +1615,9 @@ type ValidationExceptionReason string
 const (
 	ValidationExceptionReasonCannotAddOptedOutNumber                   ValidationExceptionReason = "CANNOT_ADD_OPTED_OUT_NUMBER"
 	ValidationExceptionReasonCannotParse                               ValidationExceptionReason = "CANNOT_PARSE"
+	ValidationExceptionReasonChannelNotEnabled                         ValidationExceptionReason = "CHANNEL_NOT_ENABLED"
 	ValidationExceptionReasonCountryCodeMismatch                       ValidationExceptionReason = "COUNTRY_CODE_MISMATCH"
+	ValidationExceptionReasonCountryNotEnabled                         ValidationExceptionReason = "COUNTRY_NOT_ENABLED"
 	ValidationExceptionReasonDestinationCountryBlocked                 ValidationExceptionReason = "DESTINATION_COUNTRY_BLOCKED"
 	ValidationExceptionReasonFieldValidationFailed                     ValidationExceptionReason = "FIELD_VALIDATION_FAILED"
 	ValidationExceptionReasonAttachmentTypeNotSupported                ValidationExceptionReason = "ATTACHMENT_TYPE_NOT_SUPPORTED"
@@ -1276,7 +1666,9 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
 		"CANNOT_ADD_OPTED_OUT_NUMBER",
 		"CANNOT_PARSE",
+		"CHANNEL_NOT_ENABLED",
 		"COUNTRY_CODE_MISMATCH",
+		"COUNTRY_NOT_ENABLED",
 		"DESTINATION_COUNTRY_BLOCKED",
 		"FIELD_VALIDATION_FAILED",
 		"ATTACHMENT_TYPE_NOT_SUPPORTED",
@@ -1341,8 +1733,9 @@ type VerificationStatus string
 
 // Enum values for VerificationStatus
 const (
-	VerificationStatusPending  VerificationStatus = "PENDING"
-	VerificationStatusVerified VerificationStatus = "VERIFIED"
+	VerificationStatusPending     VerificationStatus = "PENDING"
+	VerificationStatusVerified    VerificationStatus = "VERIFIED"
+	VerificationStatusUnsupported VerificationStatus = "UNSUPPORTED"
 )
 
 // Values returns all known values for VerificationStatus. Note that this can be
@@ -1353,6 +1746,7 @@ func (VerificationStatus) Values() []VerificationStatus {
 	return []VerificationStatus{
 		"PENDING",
 		"VERIFIED",
+		"UNSUPPORTED",
 	}
 }
 
@@ -1360,7 +1754,8 @@ type VerifiedDestinationNumberFilterName string
 
 // Enum values for VerifiedDestinationNumberFilterName
 const (
-	VerifiedDestinationNumberFilterNameStatus VerifiedDestinationNumberFilterName = "status"
+	VerifiedDestinationNumberFilterNameStatus     VerifiedDestinationNumberFilterName = "status"
+	VerifiedDestinationNumberFilterNameRcsAgentId VerifiedDestinationNumberFilterName = "rcs-agent-id"
 )
 
 // Values returns all known values for VerifiedDestinationNumberFilterName. Note
@@ -1371,6 +1766,7 @@ const (
 func (VerifiedDestinationNumberFilterName) Values() []VerifiedDestinationNumberFilterName {
 	return []VerifiedDestinationNumberFilterName{
 		"status",
+		"rcs-agent-id",
 	}
 }
 

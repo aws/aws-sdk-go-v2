@@ -39,6 +39,19 @@ type ListAssetsInput struct {
 	// This member is required.
 	OutpostIdentifier *string
 
+	// Filters the results by asset type.
+	//
+	//   - COMPUTE - Server asset used for customer compute
+	//
+	//   - STORAGE - Server asset used by storage services
+	//
+	//   - POWERSHELF - Powershelf assets
+	//
+	//   - SWITCH - Switch assets
+	//
+	//   - NETWORKING - Asset managed by Amazon Web Services for networking purposes
+	AssetTypeFilter []types.AssetType
+
 	// Filters the results by the host ID of a Dedicated Host.
 	HostIdFilter []string
 
@@ -102,7 +115,7 @@ func (c *Client) addOperationListAssetsMiddlewares(stack *middleware.Stack, opti
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -124,9 +137,6 @@ func (c *Client) addOperationListAssetsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

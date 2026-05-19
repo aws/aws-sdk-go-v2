@@ -29,11 +29,6 @@ func (c *Client) UpdateTrustStore(ctx context.Context, params *UpdateTrustStoreI
 
 type UpdateTrustStoreInput struct {
 
-	// The CA certificates bundle source.
-	//
-	// This member is required.
-	CaCertificatesBundleSource types.CaCertificatesBundleSource
-
 	// The trust store ID.
 	//
 	// This member is required.
@@ -43,6 +38,13 @@ type UpdateTrustStoreInput struct {
 	//
 	// This member is required.
 	IfMatch *string
+
+	// The CA certificates bundle source.
+	CaCertificatesBundleSource types.CaCertificatesBundleSource
+
+	// A Boolean that determines whether to use the CA certificate's OCSP endpoint to
+	// check certificate revocation status.
+	UseClientCertificateOCSPEndpoint *bool
 
 	noSmithyDocumentSerde
 }
@@ -95,7 +97,7 @@ func (c *Client) addOperationUpdateTrustStoreMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -117,9 +119,6 @@ func (c *Client) addOperationUpdateTrustStoreMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

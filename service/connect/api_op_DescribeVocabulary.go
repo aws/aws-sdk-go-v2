@@ -29,8 +29,8 @@ func (c *Client) DescribeVocabulary(ctx context.Context, params *DescribeVocabul
 
 type DescribeVocabularyInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -47,7 +47,7 @@ type DescribeVocabularyInput struct {
 
 type DescribeVocabularyOutput struct {
 
-	// A list of specific words that you want Contact Lens for Amazon Connect to
+	// A list of specific words that you want Contact Lens for Connect Customer to
 	// recognize in your audio input. They are generally domain-specific words and
 	// phrases, words that Contact Lens is not recognizing, or proper nouns.
 	//
@@ -94,7 +94,7 @@ func (c *Client) addOperationDescribeVocabularyMiddlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -116,9 +116,6 @@ func (c *Client) addOperationDescribeVocabularyMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

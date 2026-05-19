@@ -8964,6 +8964,15 @@ func awsRestjson1_deserializeDocumentEc2Configuration(v **types.Ec2Configuration
 
 	for key, value := range shape {
 		switch key {
+		case "batchImageStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.BatchImageStatus = ptr.String(jtv)
+			}
+
 		case "imageIdOverride":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15653,6 +15662,77 @@ func awsRestjson1_deserializeDocumentRuntimePlatform(v **types.RuntimePlatform, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentS3FilesVolumeConfiguration(v **types.S3FilesVolumeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3FilesVolumeConfiguration
+	if *v == nil {
+		sv = &types.S3FilesVolumeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accessPointArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessPointArn = ptr.String(jtv)
+			}
+
+		case "fileSystemArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FileSystemArn = ptr.String(jtv)
+			}
+
+		case "rootDirectory":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.RootDirectory = ptr.String(jtv)
+			}
+
+		case "transitEncryptionPort":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TransitEncryptionPort = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentSchedulingPolicyDetail(v **types.SchedulingPolicyDetail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17550,6 +17630,32 @@ func awsRestjson1_deserializeDocumentTaskContainerDetails(v **types.TaskContaine
 				return err
 			}
 
+		case "startTimeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartTimeout = ptr.Int32(int32(i64))
+			}
+
+		case "stopTimeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StopTimeout = ptr.Int32(int32(i64))
+			}
+
 		case "ulimits":
 			if err := awsRestjson1_deserializeDocumentUlimits(&sv.Ulimits, value); err != nil {
 				return err
@@ -17688,6 +17794,32 @@ func awsRestjson1_deserializeDocumentTaskContainerProperties(v **types.TaskConta
 		case "secrets":
 			if err := awsRestjson1_deserializeDocumentSecretList(&sv.Secrets, value); err != nil {
 				return err
+			}
+
+		case "startTimeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartTimeout = ptr.Int32(int32(i64))
+			}
+
+		case "stopTimeout":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StopTimeout = ptr.Int32(int32(i64))
 			}
 
 		case "ulimits":
@@ -17997,6 +18129,11 @@ func awsRestjson1_deserializeDocumentVolume(v **types.Volume, value interface{})
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "s3filesVolumeConfiguration":
+			if err := awsRestjson1_deserializeDocumentS3FilesVolumeConfiguration(&sv.S3filesVolumeConfiguration, value); err != nil {
+				return err
 			}
 
 		default:

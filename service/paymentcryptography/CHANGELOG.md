@@ -1,3 +1,26 @@
+# v1.29.0 (2026-04-30)
+
+* **Feature**: Adds support for resource-based policies on AWS Payment Cryptography keys, enabling cross-account key sharing. Also adds Multi-Party Approval (MPA) team association APIs for protecting sensitive import root public key operations.
+
+# v1.28.2 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.28.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.28.0 (2026-04-03)
+
+* **Feature**: Adds optional support to retrieve previously generated import and export tokens to simplify import and export functions
+
+# v1.27.5 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.4 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

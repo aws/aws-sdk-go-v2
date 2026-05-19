@@ -1,3 +1,34 @@
+# v1.76.0 (2026-05-19)
+
+* **Feature**: Adding support for exposure and vulnerability context from AWS Security Hub in GuardDuty Extended Threat Detection attack sequence findings.
+
+# v1.75.4 (2026-05-07)
+
+* **Documentation**: This is a documentation update
+
+# v1.75.3 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.75.2 (2026-04-20)
+
+* **Documentation**: Expanded support for new suppression rule fields.
+
+# v1.75.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.75.0 (2026-04-06)
+
+* **Feature**: Migrated to Smithy. No functional changes
+
+# v1.74.2 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.74.1 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

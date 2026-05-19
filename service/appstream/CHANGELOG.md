@@ -1,3 +1,34 @@
+# v1.58.0 (2026-05-01)
+
+* **Feature**: Amazon WorkSpaces Applications now enables AI agents to securely operate desktop applications. Administrators configure stacks to provide agents access to WorkSpaces. Agents can click, type, and take screenshots. Agents authenticate with AWS IAM credentials with activity logged in AWS CloudTrail.
+
+# v1.57.2 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.0 (2026-04-16)
+
+* **Feature**: Add content redirection to Update Stack
+
+# v1.56.0 (2026-04-02)
+
+* **Feature**: Amazon WorkSpaces Applications now supports drain mode for instances in multi-session fleets. This capability allows administrators to instruct individual fleet instances to stop accepting new user sessions while allowing existing sessions to continue uninterrupted.
+
+# v1.55.0 (2026-03-30)
+
+* **Feature**: Add support for URL Redirection
+
+# v1.54.4 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.3 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

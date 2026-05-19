@@ -98,6 +98,35 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The resource-based policy would grant public access to the key.
+//
+// Modify the policy to restrict access to specific principals and resubmit the
+// request.
+type PublicPolicyException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PublicPolicyException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PublicPolicyException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PublicPolicyException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "PublicPolicyException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *PublicPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request was denied due to resource not found.
 //
 // The specified key, alias, or other resource does not exist in your account or

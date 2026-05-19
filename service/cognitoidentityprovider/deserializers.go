@@ -26806,6 +26806,15 @@ func awsAwsjson11_deserializeDocumentWebAuthnConfigurationType(v **types.WebAuth
 
 	for key, value := range shape {
 		switch key {
+		case "FactorConfiguration":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WebAuthnFactorConfigurationType to be of type string, got %T instead", value)
+				}
+				sv.FactorConfiguration = types.WebAuthnFactorConfigurationType(jtv)
+			}
+
 		case "RelyingPartyId":
 			if value != nil {
 				jtv, ok := value.(string)

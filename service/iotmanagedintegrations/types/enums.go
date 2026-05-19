@@ -585,6 +585,31 @@ func (ProtocolType) Values() []ProtocolType {
 	}
 }
 
+type ProvisioningProfileStatus string
+
+// Enum values for ProvisioningProfileStatus
+const (
+	ProvisioningProfileStatusCreateInProgress ProvisioningProfileStatus = "CREATE_IN_PROGRESS"
+	ProvisioningProfileStatusCreateFailed     ProvisioningProfileStatus = "CREATE_FAILED"
+	ProvisioningProfileStatusCreated          ProvisioningProfileStatus = "CREATED"
+	ProvisioningProfileStatusDeleteInProgress ProvisioningProfileStatus = "DELETE_IN_PROGRESS"
+	ProvisioningProfileStatusDeleteFailed     ProvisioningProfileStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for ProvisioningProfileStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProvisioningProfileStatus) Values() []ProvisioningProfileStatus {
+	return []ProvisioningProfileStatus{
+		"CREATE_IN_PROGRESS",
+		"CREATE_FAILED",
+		"CREATED",
+		"DELETE_IN_PROGRESS",
+		"DELETE_FAILED",
+	}
+}
+
 type ProvisioningStatus string
 
 // Enum values for ProvisioningStatus

@@ -101,8 +101,8 @@ type CreateClusterInput struct {
 	// The node type to be provisioned for the cluster. For information about node
 	// types, go to [Working with Clusters]in the Amazon Redshift Cluster Management Guide.
 	//
-	// Valid Values: dc2.large | dc2.8xlarge | ra3.large | ra3.xlplus | ra3.4xlarge |
-	// ra3.16xlarge
+	// Valid Values: dc2.large | dc2.8xlarge | rg.xlarge | rg.4xlarge | ra3.large |
+	// ra3.xlplus | ra3.4xlarge | ra3.16xlarge
 	//
 	// [Working with Clusters]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#how-many-nodes
 	//
@@ -131,8 +131,8 @@ type CreateClusterInput struct {
 	// automated snapshots are disabled. Even if automated snapshots are disabled, you
 	// can still create manual snapshots when you want with CreateClusterSnapshot.
 	//
-	// You can't disable automated snapshots for RA3 node types. Set the automated
-	// retention period from 1-35 days.
+	// You can't disable automated snapshots for RG or RA3 node types. Set the
+	// automated retention period from 1-35 days.
 	//
 	// Default: 1
 	//
@@ -381,9 +381,9 @@ type CreateClusterInput struct {
 	//
 	// Valid Values:
 	//
-	//   - For clusters with ra3 nodes - Select a port within the ranges 5431-5455 or
-	//   8191-8215 . (If you have an existing cluster with ra3 nodes, it isn't required
-	//   that you change the port to these ranges.)
+	//   - For clusters with RG or RA3 nodes - Select a port within the ranges
+	//   5431-5455 or 8191-8215 . (If you have an existing cluster with RG or RA3
+	//   nodes, it isn't required that you change the port to these ranges.)
 	//
 	//   - For clusters with dc2 nodes - Select a port within the range 1150-65535 .
 	Port *int32
@@ -473,7 +473,7 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -495,9 +495,6 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

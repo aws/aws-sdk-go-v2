@@ -1393,6 +1393,11 @@ type IbmDb2LuwDataProviderSettings struct {
 	// The database name on the DB2 LUW data provider.
 	DatabaseName *string
 
+	//  The encryption algorithm used for securing the connection to the IBM DB2 LUW
+	// database server. You can provide an integer value corresponding to a specific
+	// encryption algorithm, or leave this parameter empty to use the default behavior.
+	EncryptionAlgorithm *int32
+
 	// The port value for the DB2 LUW data provider.
 	Port *int32
 
@@ -1402,6 +1407,12 @@ type IbmDb2LuwDataProviderSettings struct {
 	// The path for the Amazon S3 bucket that the application uses for accessing the
 	// user-defined schema.
 	S3Path *string
+
+	//  The security mechanism used for authenticating the connection to the IBM DB2
+	// LUW database server. You can provide an integer value corresponding to a
+	// specific security mechanism, or leave this parameter empty to use the default
+	// behavior.
+	SecurityMechanism *int32
 
 	// The name of the DB2 LUW server.
 	ServerName *string

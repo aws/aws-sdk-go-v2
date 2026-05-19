@@ -6700,6 +6700,11 @@ func awsAwsquery_serializeOpDocumentCreateServerlessCacheInput(v *CreateServerle
 		objectKey.String(*v.MajorEngineVersion)
 	}
 
+	if len(v.NetworkType) > 0 {
+		objectKey := object.Key("NetworkType")
+		objectKey.String(string(v.NetworkType))
+	}
+
 	if v.SecurityGroupIds != nil {
 		objectKey := object.Key("SecurityGroupIds")
 		if err := awsAwsquery_serializeDocumentSecurityGroupIdsList(v.SecurityGroupIds, objectKey); err != nil {

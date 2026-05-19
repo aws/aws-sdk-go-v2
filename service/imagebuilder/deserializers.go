@@ -7648,6 +7648,9 @@ func awsRestjson1_deserializeOpErrorImportDiskImage(response *smithyhttp.Respons
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ClientException", errorCode):
 		return awsRestjson1_deserializeErrorClientException(response, errorBody)
 
@@ -7656,6 +7659,9 @@ func awsRestjson1_deserializeOpErrorImportDiskImage(response *smithyhttp.Respons
 
 	case strings.EqualFold("ServiceUnavailableException", errorCode):
 		return awsRestjson1_deserializeErrorServiceUnavailableException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -18667,6 +18673,11 @@ func awsRestjson1_deserializeDocumentImagePipeline(v **types.ImagePipeline, valu
 
 		case "imageScanningConfiguration":
 			if err := awsRestjson1_deserializeDocumentImageScanningConfiguration(&sv.ImageScanningConfiguration, value); err != nil {
+				return err
+			}
+
+		case "imageTags":
+			if err := awsRestjson1_deserializeDocumentTagMap(&sv.ImageTags, value); err != nil {
 				return err
 			}
 

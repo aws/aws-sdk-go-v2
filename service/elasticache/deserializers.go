@@ -23223,6 +23223,19 @@ func awsAwsquery_deserializeDocumentServerlessCache(v **types.ServerlessCache, d
 				sv.MajorEngineVersion = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("NetworkType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.NetworkType = types.NetworkType(xtv)
+			}
+
 		case strings.EqualFold("ReaderEndpoint", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentEndpoint(&sv.ReaderEndpoint, nodeDecoder); err != nil {

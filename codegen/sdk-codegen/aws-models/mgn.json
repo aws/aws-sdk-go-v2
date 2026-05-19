@@ -1765,6 +1765,12 @@
                 "smithy.api#pattern": "^((25[0-4]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\\/(1[6-9]|2[0-8])$"
             }
         },
+        "com.amazonaws.mgn#CidrBlock": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^([0-9]{1,3}\\.){3}[0-9]{1,3}/[0-9]{1,2}$"
+            }
+        },
         "com.amazonaws.mgn#ClientIdempotencyToken": {
             "type": "string",
             "traits": {
@@ -3331,6 +3337,13 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.mgn#DeleteOperation": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#documentation": "<p>An operation that deletes a construct from the mapping.</p>"
             }
         },
         "com.amazonaws.mgn#DeleteReplicationConfigurationTemplate": {
@@ -9556,6 +9569,52 @@
                 }
             }
         },
+        "com.amazonaws.mgn#MergeConstruct": {
+            "type": "structure",
+            "members": {
+                "segmentID": {
+                    "target": "com.amazonaws.mgn#SegmentID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The segment ID of the construct to merge.</p>"
+                    }
+                },
+                "constructID": {
+                    "target": "com.amazonaws.mgn#ConstructID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The construct ID to merge.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A construct reference specifying the source segment and construct to merge.</p>"
+            }
+        },
+        "com.amazonaws.mgn#MergeConstructs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#MergeConstruct"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.mgn#MergeOperation": {
+            "type": "structure",
+            "members": {
+                "mergeConstructs": {
+                    "target": "com.amazonaws.mgn#MergeConstructs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of constructs to merge into the target.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An operation that merges constructs from different segments into the target construct.</p>"
+            }
+        },
         "com.amazonaws.mgn#NetworkInterface": {
             "type": "structure",
             "members": {
@@ -10004,6 +10063,12 @@
                     "target": "com.amazonaws.mgn#NetworkMigrationCodeGenerationArtifacts",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of artifacts generated for this segment.</p>"
+                    }
+                },
+                "referencedSegments": {
+                    "target": "com.amazonaws.mgn#referencedSegmentsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of other segments that this segment depends on or references.</p>"
                     }
                 },
                 "createdAt": {
@@ -10779,6 +10844,12 @@
                         "smithy.api#documentation": "<p>The logical identifier for the construct in the infrastructure code.</p>"
                     }
                 },
+                "excluded": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether this construct is excluded from the migration.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -10998,6 +11069,24 @@
         "com.amazonaws.mgn#OperationUnion": {
             "type": "union",
             "members": {
+                "merge": {
+                    "target": "com.amazonaws.mgn#MergeOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A merge operation to combine constructs from different segments.</p>"
+                    }
+                },
+                "split": {
+                    "target": "com.amazonaws.mgn#SplitOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A split operation to divide a construct into multiple constructs with specified CIDR blocks.</p>"
+                    }
+                },
+                "delete": {
+                    "target": "com.amazonaws.mgn#DeleteOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A delete operation to remove a construct from the mapping.</p>"
+                    }
+                },
                 "update": {
                     "target": "com.amazonaws.mgn#UpdateOperation",
                     "traits": {
@@ -12348,6 +12437,10 @@
                     {
                         "value": "SKIP",
                         "name": "SKIP"
+                    },
+                    {
+                        "value": "MAP_DHCP",
+                        "name": "MAP_DHCP"
                     }
                 ]
             }
@@ -12931,6 +13024,46 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mgn#SourceServer"
+            }
+        },
+        "com.amazonaws.mgn#SplitConstruct": {
+            "type": "structure",
+            "members": {
+                "cidrBlock": {
+                    "target": "com.amazonaws.mgn#CidrBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIDR block for the split construct.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A split target specifying the CIDR block for the new construct.</p>"
+            }
+        },
+        "com.amazonaws.mgn#SplitConstructs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mgn#SplitConstruct"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.mgn#SplitOperation": {
+            "type": "structure",
+            "members": {
+                "splitConstructs": {
+                    "target": "com.amazonaws.mgn#SplitConstructs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of split targets with their CIDR blocks.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An operation that splits a construct into multiple constructs with different CIDR blocks.</p>"
             }
         },
         "com.amazonaws.mgn#SsmDocument": {
@@ -15463,6 +15596,18 @@
         "com.amazonaws.mgn#UpdateOperation": {
             "type": "structure",
             "members": {
+                "name": {
+                    "target": "com.amazonaws.mgn#SegmentConstructName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated name for the construct.</p>"
+                    }
+                },
+                "excluded": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to exclude this construct from the migration.</p>"
+                    }
+                },
                 "properties": {
                     "target": "com.amazonaws.mgn#ConstructProperties",
                     "traits": {

@@ -103,6 +103,15 @@ type BusinessVerificationResponse struct {
 	// This member is required.
 	BusinessVerificationDetails *BusinessVerificationDetails
 
+	// A secure URL where the registrant can complete additional verification steps,
+	// such as document upload or identity confirmation through a third-party
+	// verification service.
+	CompletionUrl *string
+
+	// The timestamp when the completion URL expires and is no longer valid for
+	// accessing the verification workflow.
+	CompletionUrlExpiresAt *time.Time
+
 	noSmithyDocumentSerde
 }
 

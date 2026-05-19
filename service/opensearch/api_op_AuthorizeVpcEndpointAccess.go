@@ -41,6 +41,10 @@ type AuthorizeVpcEndpointAccessInput struct {
 	// The Amazon Web Services service SP to grant access to.
 	Service types.AWSServicePrincipal
 
+	// The options for the service, including the supported Regions for the endpoint
+	// access.
+	ServiceOptions *types.ServiceOptions
+
 	noSmithyDocumentSerde
 }
 
@@ -92,7 +96,7 @@ func (c *Client) addOperationAuthorizeVpcEndpointAccessMiddlewares(stack *middle
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -114,9 +118,6 @@ func (c *Client) addOperationAuthorizeVpcEndpointAccessMiddlewares(stack *middle
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

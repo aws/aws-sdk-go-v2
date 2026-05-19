@@ -92,15 +92,6 @@ type TransferDomainInput struct {
 	// This member is required.
 	DomainName *string
 
-	// The number of years that you want to register the domain for. Domains are
-	// registered for a minimum of one year. The maximum period depends on the
-	// top-level domain.
-	//
-	// Default: 1
-	//
-	// This member is required.
-	DurationInYears *int32
-
 	// Provides detailed contact information.
 	//
 	// This member is required.
@@ -123,6 +114,17 @@ type TransferDomainInput struct {
 
 	// Provides detailed contact information.
 	BillingContact *types.ContactDetail
+
+	// Reserved for future use.
+	//
+	// Currently, the effect of a domain transfer on the registration period varies by
+	// TLD. For information about how transferring a domain affects the expiration
+	// date, see the Transfer Term column in the pricing information at [Amazon Route 53 Pricing].
+	//
+	// Default: 1
+	//
+	// [Amazon Route 53 Pricing]: http://aws.amazon.com/route53/pricing/
+	DurationInYears *int32
 
 	// Reserved for future use.
 	IdnLangCode *string
@@ -224,7 +226,7 @@ func (c *Client) addOperationTransferDomainMiddlewares(stack *middleware.Stack, 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -246,9 +248,6 @@ func (c *Client) addOperationTransferDomainMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -117,6 +117,9 @@ func awsAwsjson11_deserializeOpErrorDescribeServices(response *smithyhttp.Respon
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ExpiredNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorExpiredNextTokenException(response, errorBody)
 
@@ -243,6 +246,9 @@ func awsAwsjson11_deserializeOpErrorGetAttributeValues(response *smithyhttp.Resp
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ExpiredNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorExpiredNextTokenException(response, errorBody)
 
@@ -495,6 +501,9 @@ func awsAwsjson11_deserializeOpErrorGetProducts(response *smithyhttp.Response, m
 		errorMessage = bodyInfo.Message
 	}
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
+
 	case strings.EqualFold("ExpiredNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorExpiredNextTokenException(response, errorBody)
 

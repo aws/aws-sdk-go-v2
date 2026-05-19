@@ -104,6 +104,11 @@ type CreateOriginEndpointInput struct {
 	//     "Key2": "Value2"
 	Tags map[string]string
 
+	// The separator character to use in generated URIs for this origin endpoint. This
+	// setting applies to all manifest types on the endpoint. If you don't specify a
+	// value, the default is UNDERSCORE .
+	UriSeparator types.UriSeparator
+
 	noSmithyDocumentSerde
 }
 
@@ -186,6 +191,9 @@ type CreateOriginEndpointOutput struct {
 	// The comma-separated list of tag key:value pairs assigned to the origin endpoint.
 	Tags map[string]string
 
+	// The separator character used in generated URIs for this origin endpoint.
+	UriSeparator types.UriSeparator
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -226,7 +234,7 @@ func (c *Client) addOperationCreateOriginEndpointMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -248,9 +256,6 @@ func (c *Client) addOperationCreateOriginEndpointMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

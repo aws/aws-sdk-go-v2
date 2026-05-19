@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists evaluation forms in the specified Amazon Connect instance.
+// Lists evaluation forms in the specified Connect Customer instance.
 func (c *Client) ListEvaluationForms(ctx context.Context, params *ListEvaluationFormsInput, optFns ...func(*Options)) (*ListEvaluationFormsOutput, error) {
 	if params == nil {
 		params = &ListEvaluationFormsInput{}
@@ -29,8 +29,8 @@ func (c *Client) ListEvaluationForms(ctx context.Context, params *ListEvaluation
 
 type ListEvaluationFormsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -97,7 +97,7 @@ func (c *Client) addOperationListEvaluationFormsMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -119,9 +119,6 @@ func (c *Client) addOperationListEvaluationFormsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

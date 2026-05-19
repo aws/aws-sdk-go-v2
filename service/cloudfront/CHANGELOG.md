@@ -1,3 +1,31 @@
+# v1.64.0 (2026-05-14)
+
+* **Feature**: Adding a new boolean for OCSP Revocations in Viewer mTLS Create and Update APIs, and adding a new 'Passthrough' option for TrustStore modes
+
+# v1.63.0 (2026-05-05)
+
+* **Feature**: Adds support for tagging CloudFront Functions and KeyValueStores resources.
+
+# v1.62.0 (2026-04-29)
+
+* **Feature**: Amazon CloudFront now supports cache tag. Tag objects via response headers and invalidate all matching objects in a single request, replacing manual URL tracking and broad wildcards.
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.61.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.61.0 (2026-03-31)
+
+* **Feature**: This release adds bring your own IP (BYOIP) IPv6 support to CloudFront's CreateAnycastIpList and UpdateAnycastIpList API through the IpamCidrConfigs field.
+
+# v1.60.4 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.60.3 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

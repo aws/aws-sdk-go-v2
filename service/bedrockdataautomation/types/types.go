@@ -277,6 +277,191 @@ type CustomOutputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the information of a DataAutomationLibrary.
+type DataAutomationLibrary struct {
+
+	// Time Stamp
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// ARN generated at the server side when a DataAutomationLibrary is created
+	//
+	// This member is required.
+	LibraryArn *string
+
+	// Name of the DataAutomationLibrary
+	//
+	// This member is required.
+	LibraryName *string
+
+	// Status of DataAutomationLibrary
+	//
+	// This member is required.
+	Status DataAutomationLibraryStatus
+
+	// List of info for each entity type in the DataAutomationLibrary
+	EntityTypes []EntityTypeInfo
+
+	// KMS Encryption Context
+	KmsEncryptionContext map[string]string
+
+	// KMS Key Identifier
+	KmsKeyId *string
+
+	// Description of the DataAutomationLibrary
+	LibraryDescription *string
+
+	noSmithyDocumentSerde
+}
+
+// DataAutomation Library configuration
+type DataAutomationLibraryConfiguration struct {
+
+	// List of DataAutomationLibrary Items
+	Libraries []DataAutomationLibraryItem
+
+	noSmithyDocumentSerde
+}
+
+// Summarized information about an entity
+//
+// The following types satisfy this interface:
+//
+//	DataAutomationLibraryEntitySummaryMemberVocabulary
+type DataAutomationLibraryEntitySummary interface {
+	isDataAutomationLibraryEntitySummary()
+}
+
+// Summary of a Vocabulary entity
+type DataAutomationLibraryEntitySummaryMemberVocabulary struct {
+	Value VocabularyEntitySummary
+
+	noSmithyDocumentSerde
+}
+
+func (*DataAutomationLibraryEntitySummaryMemberVocabulary) isDataAutomationLibraryEntitySummary() {}
+
+// Data Automation Library Filter
+type DataAutomationLibraryFilter struct {
+
+	// ARN generated at the server side when a DataAutomationLibrary is created
+	//
+	// This member is required.
+	LibraryArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the information of a DataAutomationLibraryIngestionJob
+type DataAutomationLibraryIngestionJob struct {
+
+	// Timestamp when the DataAutomationLibraryIngestionJob was created
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The entity type associated with DataAutomationLibraryIngestionJob
+	//
+	// This member is required.
+	EntityType EntityType
+
+	// ARN of the DataAutomationLibraryIngestionJob
+	//
+	// This member is required.
+	JobArn *string
+
+	// The status of the DataAutomationLibraryIngestionJob
+	//
+	// This member is required.
+	JobStatus LibraryIngestionJobStatus
+
+	// The operation associated with DataAutomationLibraryIngestionJob
+	//
+	// This member is required.
+	OperationType LibraryIngestionJobOperationType
+
+	// Output configuration of DataAutomationLibraryIngestionJob
+	//
+	// This member is required.
+	OutputConfiguration *OutputConfiguration
+
+	// Timestamp when the DataAutomationLibraryIngestionJob was completed
+	CompletionTime *time.Time
+
+	// Error message
+	ErrorMessage *string
+
+	// Error type
+	ErrorType *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a DataAutomationLibraryIngestionJob
+type DataAutomationLibraryIngestionJobSummary struct {
+
+	// Time Stamp
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// Entity types supported in DataAutomationLibraries
+	//
+	// This member is required.
+	EntityType EntityType
+
+	// ARN of the DataAutomationLibraryIngestionJob
+	//
+	// This member is required.
+	JobArn *string
+
+	// Status of DataAutomationLibraryIngestionJob
+	//
+	// This member is required.
+	JobStatus LibraryIngestionJobStatus
+
+	// DataAutomationLibraryIngestionJob operation type
+	//
+	// This member is required.
+	OperationType LibraryIngestionJobOperationType
+
+	// Time Stamp
+	CompletionTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// DataAutomationLibrary Item
+type DataAutomationLibraryItem struct {
+
+	// ARN generated at the server side when a DataAutomationLibrary is created
+	//
+	// This member is required.
+	LibraryArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a DataAutomationLibrary
+type DataAutomationLibrarySummary struct {
+
+	// Time Stamp
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// ARN generated at the server side when a DataAutomationLibrary is created
+	//
+	// This member is required.
+	LibraryArn *string
+
+	// Name of the DataAutomationLibrary
+	LibraryName *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the information of a DataAutomationProject.
 type DataAutomationProject struct {
 
@@ -307,6 +492,9 @@ type DataAutomationProject struct {
 
 	// Custom output configuration
 	CustomOutputConfiguration *CustomOutputConfiguration
+
+	// DataAutomation Library configuration
+	DataAutomationLibraryConfiguration *DataAutomationLibraryConfiguration
 
 	// KMS Encryption Context
 	KmsEncryptionContext map[string]string
@@ -367,6 +555,17 @@ type DataAutomationProjectSummary struct {
 
 	// Type of the DataAutomationProject
 	ProjectType DataAutomationProjectType
+
+	noSmithyDocumentSerde
+}
+
+// Input for entities needed to be deleted
+type DeleteEntitiesInfo struct {
+
+	// List of EntityId
+	//
+	// This member is required.
+	EntityIds []string
 
 	noSmithyDocumentSerde
 }
@@ -498,6 +697,49 @@ type EncryptionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Detailed information about an entity
+//
+// The following types satisfy this interface:
+//
+//	EntityDetailsMemberVocabulary
+type EntityDetails interface {
+	isEntityDetails()
+}
+
+// Vocabulary entity with detailed information
+type EntityDetailsMemberVocabulary struct {
+	Value VocabularyEntity
+
+	noSmithyDocumentSerde
+}
+
+func (*EntityDetailsMemberVocabulary) isEntityDetails() {}
+
+// Information about an entity type in the DataAutomationLibrary
+type EntityTypeInfo struct {
+
+	// Entity types supported in DataAutomationLibraries
+	//
+	// This member is required.
+	EntityType EntityType
+
+	// JSON string representing relevant metadata for the entity type
+	EntityMetadata *string
+
+	noSmithyDocumentSerde
+}
+
+// Event bridge configuration.
+type EventBridgeConfiguration struct {
+
+	// Event bridge flag.
+	//
+	// This member is required.
+	EventBridgeEnabled *bool
+
+	noSmithyDocumentSerde
+}
+
 // Bounding Box Configuration of Image Extraction
 type ImageBoundingBox struct {
 
@@ -577,6 +819,47 @@ type ImageStandardOutputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Input payload structure definition
+//
+// The following types satisfy this interface:
+//
+//	InlinePayloadMemberDeleteEntitiesInfo
+//	InlinePayloadMemberUpsertEntitiesInfo
+type InlinePayload interface {
+	isInlinePayload()
+}
+
+// Input for entities needed to be deleted
+type InlinePayloadMemberDeleteEntitiesInfo struct {
+	Value DeleteEntitiesInfo
+
+	noSmithyDocumentSerde
+}
+
+func (*InlinePayloadMemberDeleteEntitiesInfo) isInlinePayload() {}
+
+// List of UpsertEntityInfo for upserting data in a
+// DataAutomationLibraryIngestionJob
+type InlinePayloadMemberUpsertEntitiesInfo struct {
+	Value []UpsertEntityInfo
+
+	noSmithyDocumentSerde
+}
+
+func (*InlinePayloadMemberUpsertEntitiesInfo) isInlinePayload() {}
+
+// Input configuration for DataAutomationLibraryIngestionJob
+type InputConfiguration struct {
+
+	// Input Payload
+	InlinePayload InlinePayload
+
+	// S3 object
+	S3Object *S3Object
+
+	noSmithyDocumentSerde
+}
+
 // Configuration to enable/disable processing of modality
 type ModalityProcessingConfiguration struct {
 
@@ -604,6 +887,28 @@ type ModalityRoutingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Notification configuration.
+type NotificationConfiguration struct {
+
+	// Event bridge configuration.
+	//
+	// This member is required.
+	EventBridgeConfiguration *EventBridgeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Output configuration for DataAutomationLibraryIngestionJob
+type OutputConfiguration struct {
+
+	// S3 Uri
+	//
+	// This member is required.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // Override configuration
 type OverrideConfiguration struct {
 
@@ -621,6 +926,20 @@ type OverrideConfiguration struct {
 
 	// Override Configuration of Video
 	Video *VideoOverrideConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Phrase structure for vocabulary
+type Phrase struct {
+
+	// Text content of the phrase
+	//
+	// This member is required.
+	Text *string
+
+	// Text to configure how phrase is displayed in Transcript
+	DisplayAsText *string
 
 	noSmithyDocumentSerde
 }
@@ -734,6 +1053,24 @@ type TranscriptConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Input configuration for upserting data in a DataAutomationLibraryIngestionJob
+//
+// The following types satisfy this interface:
+//
+//	UpsertEntityInfoMemberVocabulary
+type UpsertEntityInfo interface {
+	isUpsertEntityInfo()
+}
+
+// Vocabulary entity info with detailed information
+type UpsertEntityInfoMemberVocabulary struct {
+	Value VocabularyEntityInfo
+
+	noSmithyDocumentSerde
+}
+
+func (*UpsertEntityInfoMemberVocabulary) isUpsertEntityInfo() {}
+
 // Stores information about a field passed inside a request that resulted in an
 // exception
 type ValidationExceptionField struct {
@@ -830,4 +1167,82 @@ type VideoStandardOutputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Vocabulary entity with detailed information
+type VocabularyEntity struct {
+
+	// Description of the entity
+	Description *string
+
+	// Unique identifier for the entity
+	EntityId *string
+
+	// Supported input languages
+	Language Language
+
+	// Time Stamp
+	LastModifiedTime *time.Time
+
+	// List of phrases
+	Phrases []Phrase
+
+	noSmithyDocumentSerde
+}
+
+// Vocabulary entity info with detailed information
+type VocabularyEntityInfo struct {
+
+	// Supported input languages
+	//
+	// This member is required.
+	Language Language
+
+	// List of phrases
+	//
+	// This member is required.
+	Phrases []Phrase
+
+	// Description of the entity
+	Description *string
+
+	// Unique identifier for the entity
+	EntityId *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary of a Vocabulary entity
+type VocabularyEntitySummary struct {
+
+	// Description of the entity
+	Description *string
+
+	// Unique identifier for the entity
+	EntityId *string
+
+	// Supported input languages
+	Language Language
+
+	// Time Stamp
+	LastModifiedTime *time.Time
+
+	// num of phrases in the entity
+	NumOfPhrases *int32
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isDataAutomationLibraryEntitySummary() {}
+func (*UnknownUnionMember) isEntityDetails()                      {}
+func (*UnknownUnionMember) isInlinePayload()                      {}
+func (*UnknownUnionMember) isUpsertEntityInfo()                   {}

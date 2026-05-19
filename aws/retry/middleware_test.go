@@ -8,10 +8,9 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
+	"sync/atomic"
 	"testing"
 	"time"
-
-	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 
 	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
@@ -531,9 +530,13 @@ func TestClockSkew(t *testing.T) {
 	}
 	for name, tt := range cases {
 		t.Run(name, func(t *testing.T) {
+			skew := &atomic.Int64{}
+			skew.Store(tt.skew.Nanoseconds())
 			am := NewAttemptMiddleware(NewStandard(func(s *StandardOptions) {
-			}), func(i any) any { return i })
-			ctx := internalcontext.SetAttemptSkewContext(context.Background(), tt.skew)
+			}), func(i any) any { return i }, func(m *Attempt) {
+				m.ClientSkew = skew
+			})
+			ctx := context.Background()
 			_, metadata, err := am.HandleFinalize(ctx, middleware.FinalizeInput{}, middleware.FinalizeHandlerFunc(
 				func(ctx context.Context, in middleware.FinalizeInput) (
 					out middleware.FinalizeOutput, metadata middleware.Metadata, err error,

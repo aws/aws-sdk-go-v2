@@ -698,6 +698,9 @@ type Key struct {
 	// the TR-31 spec.
 	DeriveKeyUsage DeriveKeyUsage
 
+	// The Multi-Party Approval (MPA) status for the key, if applicable.
+	MpaStatus *MpaStatus
+
 	// Indicates whether this key is a Multi-Region key and its role in the
 	// Multi-Region key hierarchy.
 	//
@@ -925,6 +928,54 @@ type KeySummary struct {
 	// valid Amazon Web Services Region where Amazon Web Services Payment Cryptography
 	// is available.
 	PrimaryRegion *string
+
+	noSmithyDocumentSerde
+}
+
+// The status of an MPA session.
+type MpaStatus struct {
+
+	// The date and time when the MPA session was initiated.
+	//
+	// This member is required.
+	InitiationDate *time.Time
+
+	// The ARN of the MPA session.
+	//
+	// This member is required.
+	MpaSessionArn *string
+
+	// The current status of the MPA session.
+	//
+	// This member is required.
+	Status SessionStatus
+
+	// The message providing additional information about the MPA session status.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of an MPA team association with a protected operation.
+type MpaTeamAssociation struct {
+
+	// The protected operation associated with the MPA team.
+	//
+	// This member is required.
+	Action MpaOperation
+
+	// The state of the MPA team association.
+	//
+	// This member is required.
+	AssociationState AssociationState
+
+	// The ARN of the MPA team.
+	//
+	// This member is required.
+	MpaTeamArn *string
+
+	// The MPA session status for the association, if applicable.
+	MpaStatus *MpaStatus
 
 	noSmithyDocumentSerde
 }

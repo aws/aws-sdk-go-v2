@@ -1,3 +1,30 @@
+# v1.31.0 (2026-05-14)
+
+* **Feature**: ListModels is an API that returns the available AI models for a Connect Assistant based on its region and AI prompt type.
+
+# v1.30.0 (2026-05-01)
+
+* **Feature**: Added reasoning details, statusDescription, and timeToFirstTokenMs fields to the ListSpans response in Amazon Q in Connect to provide visibility into model thinking, error diagnostics, and inference latency metrics.
+
+# v1.29.2 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.29.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.29.0 (2026-04-06)
+
+* **Feature**: Added optional originRequestId parameter to SendMessageRequest and ListSpans response in Amazon Q in Connect to support request tracing across service boundaries.
+
+# v1.28.4 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.3 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

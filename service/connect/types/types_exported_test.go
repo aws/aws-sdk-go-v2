@@ -404,6 +404,12 @@ func ExampleReferenceSummary_outputUsage() {
 	case *types.ReferenceSummaryMemberEmailMessagePlainText:
 		_ = v.Value // Value is types.EmailMessageReference
 
+	case *types.ReferenceSummaryMemberEmailMessagePlainTextRedacted:
+		_ = v.Value // Value is types.EmailMessageReference
+
+	case *types.ReferenceSummaryMemberEmailMessageRedacted:
+		_ = v.Value // Value is types.EmailMessageReference
+
 	case *types.ReferenceSummaryMemberNumber:
 		_ = v.Value // Value is types.NumberReference
 

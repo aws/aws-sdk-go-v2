@@ -110,6 +110,18 @@ func TestCheckSnapshot_CreateOutpost(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateRenewal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRenewal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateRenewal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateSite(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSite(context.Background(), nil, func(o *Options) {
@@ -235,6 +247,18 @@ func TestCheckSnapshot_GetOutpostSupportedInstanceTypes(t *testing.T) {
 	_, err := svc.GetOutpostSupportedInstanceTypes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetOutpostSupportedInstanceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetRenewalPricing(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRenewalPricing(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetRenewalPricing")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -529,6 +553,18 @@ func TestUpdateSnapshot_CreateOutpost(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateRenewal(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateRenewal(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateRenewal")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateSite(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateSite(context.Background(), nil, func(o *Options) {
@@ -654,6 +690,18 @@ func TestUpdateSnapshot_GetOutpostSupportedInstanceTypes(t *testing.T) {
 	_, err := svc.GetOutpostSupportedInstanceTypes(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetOutpostSupportedInstanceTypes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetRenewalPricing(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetRenewalPricing(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetRenewalPricing")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

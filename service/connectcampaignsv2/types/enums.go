@@ -378,6 +378,25 @@ func (InstanceOnboardingJobStatusCode) Values() []InstanceOnboardingJobStatusCod
 	}
 }
 
+type LocalTimeZoneDetectionScope string
+
+// Enum values for LocalTimeZoneDetectionScope
+const (
+	LocalTimeZoneDetectionScopePrimaryOnly  LocalTimeZoneDetectionScope = "PRIMARY_ONLY"
+	LocalTimeZoneDetectionScopeAllAvailable LocalTimeZoneDetectionScope = "ALL_AVAILABLE"
+)
+
+// Values returns all known values for LocalTimeZoneDetectionScope. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LocalTimeZoneDetectionScope) Values() []LocalTimeZoneDetectionScope {
+	return []LocalTimeZoneDetectionScope{
+		"PRIMARY_ONLY",
+		"ALL_AVAILABLE",
+	}
+}
+
 type LocalTimeZoneDetectionType string
 
 // Enum values for LocalTimeZoneDetectionType

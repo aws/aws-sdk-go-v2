@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe email address form the specified Amazon Connect instance.
+// Describe email address form the specified Connect Customer instance.
 func (c *Client) DescribeEmailAddress(ctx context.Context, params *DescribeEmailAddressInput, optFns ...func(*Options)) (*DescribeEmailAddressOutput, error) {
 	if params == nil {
 		params = &DescribeEmailAddressInput{}
@@ -34,8 +34,8 @@ type DescribeEmailAddressInput struct {
 	// This member is required.
 	EmailAddressId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -117,7 +117,7 @@ func (c *Client) addOperationDescribeEmailAddressMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -139,9 +139,6 @@ func (c *Client) addOperationDescribeEmailAddressMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

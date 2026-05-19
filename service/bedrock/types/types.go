@@ -21,14 +21,12 @@ type AccountEnforcedGuardrailInferenceInputConfiguration struct {
 	// This member is required.
 	GuardrailVersion *string
 
-	// Whether to honor or ignore input tags at runtime.
-	//
-	// This member is required.
-	InputTags InputTags
-
 	// Model-specific information for the enforced guardrail configuration. If not
 	// present, the configuration is enforced on all models
 	ModelEnforcement *ModelEnforcement
+
+	// Selective content guarding controls for enforced guardrails.
+	SelectiveContentGuarding *SelectiveContentGuarding
 
 	noSmithyDocumentSerde
 }
@@ -55,6 +53,9 @@ type AccountEnforcedGuardrailOutputConfiguration struct {
 	GuardrailVersion *string
 
 	// Whether to honor or ignore input tags at runtime.
+	//
+	// Deprecated: This field is being deprecated and will be removed once customers
+	// transition their existing policies to the new schema.
 	InputTags InputTags
 
 	// Model-specific information for the enforced guardrail configuration.
@@ -63,11 +64,65 @@ type AccountEnforcedGuardrailOutputConfiguration struct {
 	// Configuration owner type.
 	Owner ConfigurationOwner
 
+	// Selective content guarding controls for enforced guardrails.
+	SelectiveContentGuarding *SelectiveContentGuarding
+
 	// Timestamp.
 	UpdatedAt *time.Time
 
 	// The ARN of the role used to update the configuration.
 	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// Input data configuration for the advanced prompt optimization job.
+type AdvancedPromptOptimizationInputConfig struct {
+
+	// S3 URI of the input JSONL file.
+	//
+	// This member is required.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary of an advanced prompt optimization job.
+type AdvancedPromptOptimizationJobSummary struct {
+
+	// Creation time of the advanced prompt optimization job.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// ARN of the advanced prompt optimization job.
+	//
+	// This member is required.
+	JobArn *string
+
+	// Name of the advanced prompt optimization job.
+	//
+	// This member is required.
+	JobName *string
+
+	// Status of the advanced prompt optimization job.
+	//
+	// This member is required.
+	JobStatus AdvancedPromptOptimizationJobStatus
+
+	// Last modified time of the advanced prompt optimization job.
+	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Output data configuration for the advanced prompt optimization job.
+type AdvancedPromptOptimizationOutputConfig struct {
+
+	// S3 URI prefix for the output location.
+	//
+	// This member is required.
+	S3Uri *string
 
 	noSmithyDocumentSerde
 }
@@ -2285,6 +2340,41 @@ type AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets struct 
 }
 
 func (*AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets) isAutomatedReasoningPolicyWorkflowTypeContent() {
+}
+
+// Batch deletion error for an advanced prompt optimization job.
+type BatchDeleteAdvancedPromptOptimizationJobError struct {
+
+	// Error code for the deletion failure.
+	//
+	// This member is required.
+	Code *string
+
+	// Identifier of the job that failed to delete.
+	//
+	// This member is required.
+	JobIdentifier *string
+
+	// Error message describing the deletion failure.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Successfully deleted advanced prompt optimization job.
+type BatchDeleteAdvancedPromptOptimizationJobItem struct {
+
+	// Identifier of the deleted job.
+	//
+	// This member is required.
+	JobIdentifier *string
+
+	// Status of the deleted job.
+	//
+	// This member is required.
+	JobStatus AdvancedPromptOptimizationJobStatus
+
+	noSmithyDocumentSerde
 }
 
 // A JSON array that provides the status of the evaluation jobs being deleted.
@@ -4724,6 +4814,24 @@ type ImportedModelSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Inference configuration for a model.
+type InferenceConfiguration struct {
+
+	// The maximum number of tokens to generate.
+	MaxTokens *int32
+
+	// Stop sequences that end generation.
+	StopSequences []string
+
+	// The temperature for sampling.
+	Temperature *float32
+
+	// The top-p value for nucleus sampling.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about a model.
 type InferenceProfileModel struct {
 
@@ -5135,6 +5243,23 @@ type MetadataConfigurationForReranking struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for a model used in advanced prompt optimization.
+type ModelConfiguration struct {
+
+	// The model ID.
+	//
+	// This member is required.
+	ModelId *string
+
+	// Additional model request fields.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	// Inference configuration for the model.
+	InferenceConfig *InferenceConfiguration
+
+	noSmithyDocumentSerde
+}
+
 // Contains details about each model copy job.
 //
 // This data type is used in the following API operations:
@@ -5445,6 +5570,9 @@ type ModelInvocationJobSummary struct {
 	// The time at which the batch inference job ended.
 	EndTime *time.Time
 
+	// The number of records that failed to process in the batch inference job.
+	ErrorRecordCount *int64
+
 	// The time at which the batch inference job times or timed out.
 	JobExpirationTime *time.Time
 
@@ -5457,6 +5585,9 @@ type ModelInvocationJobSummary struct {
 
 	// The invocation endpoint for ModelInvocationJob
 	ModelInvocationType ModelInvocationType
+
+	// The number of records that have been processed in the batch inference job.
+	ProcessedRecordCount *int64
 
 	// The status of the batch inference job.
 	//
@@ -5505,8 +5636,15 @@ type ModelInvocationJobSummary struct {
 	// [Amazon Web Services Support Center]: https://console.aws.amazon.com/support/home/
 	Status ModelInvocationJobStatus
 
+	// The number of records that were successfully processed in the batch inference
+	// job.
+	SuccessRecordCount *int64
+
 	// The number of hours after which the batch inference job was set to time out.
 	TimeoutDurationInHours *int32
+
+	// The total number of records in the batch inference job.
+	TotalRecordCount *int64
 
 	// The configuration of the Virtual Private Cloud (VPC) for the data in the batch
 	// inference job. For more information, see [Protect batch inference jobs using a VPC].
@@ -6296,6 +6434,18 @@ type SageMakerEndpoint struct {
 
 	// The VPC configuration for the endpoint.
 	Vpc *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
+// Selective content guarding controls for enforced guardrails.
+type SelectiveContentGuarding struct {
+
+	// Selective guarding mode for user messages.
+	Messages SelectiveGuardingMode
+
+	// Selective guarding mode for system prompts."
+	System SelectiveGuardingMode
 
 	noSmithyDocumentSerde
 }

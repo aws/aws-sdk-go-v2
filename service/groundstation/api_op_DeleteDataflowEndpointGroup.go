@@ -26,6 +26,7 @@ func (c *Client) DeleteDataflowEndpointGroup(ctx context.Context, params *Delete
 	return out, nil
 }
 
+// Input for the DeleteDataflowEndpointGroup operation.
 type DeleteDataflowEndpointGroupInput struct {
 
 	// UUID of a dataflow endpoint group.
@@ -36,6 +37,7 @@ type DeleteDataflowEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response containing the ID of a dataflow endpoint group.
 type DeleteDataflowEndpointGroupOutput struct {
 
 	// UUID of a dataflow endpoint group.
@@ -81,7 +83,7 @@ func (c *Client) addOperationDeleteDataflowEndpointGroupMiddlewares(stack *middl
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -103,9 +105,6 @@ func (c *Client) addOperationDeleteDataflowEndpointGroupMiddlewares(stack *middl
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

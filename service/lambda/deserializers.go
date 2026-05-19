@@ -8595,6 +8595,15 @@ func awsRestjson1_deserializeOpErrorInvoke(response *smithyhttp.Response, metada
 	case strings.EqualFold("ResourceNotReadyException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotReadyException(response, errorBody)
 
+	case strings.EqualFold("S3FilesMountConnectivityException", errorCode):
+		return awsRestjson1_deserializeErrorS3FilesMountConnectivityException(response, errorBody)
+
+	case strings.EqualFold("S3FilesMountFailureException", errorCode):
+		return awsRestjson1_deserializeErrorS3FilesMountFailureException(response, errorBody)
+
+	case strings.EqualFold("S3FilesMountTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorS3FilesMountTimeoutException(response, errorBody)
+
 	case strings.EqualFold("SerializedRequestEntityTooLargeException", errorCode):
 		return awsRestjson1_deserializeErrorSerializedRequestEntityTooLargeException(response, errorBody)
 
@@ -8946,6 +8955,15 @@ func awsRestjson1_deserializeOpErrorInvokeWithResponseStream(response *smithyhtt
 
 	case strings.EqualFold("ResourceNotReadyException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotReadyException(response, errorBody)
+
+	case strings.EqualFold("S3FilesMountConnectivityException", errorCode):
+		return awsRestjson1_deserializeErrorS3FilesMountConnectivityException(response, errorBody)
+
+	case strings.EqualFold("S3FilesMountFailureException", errorCode):
+		return awsRestjson1_deserializeErrorS3FilesMountFailureException(response, errorBody)
+
+	case strings.EqualFold("S3FilesMountTimeoutException", errorCode):
+		return awsRestjson1_deserializeErrorS3FilesMountTimeoutException(response, errorBody)
 
 	case strings.EqualFold("SerializedRequestEntityTooLargeException", errorCode):
 		return awsRestjson1_deserializeErrorSerializedRequestEntityTooLargeException(response, errorBody)
@@ -18313,6 +18331,114 @@ func awsRestjson1_deserializeErrorResourceNotReadyException(response *smithyhttp
 	return output
 }
 
+func awsRestjson1_deserializeErrorS3FilesMountConnectivityException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.S3FilesMountConnectivityException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentS3FilesMountConnectivityException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorS3FilesMountFailureException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.S3FilesMountFailureException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentS3FilesMountFailureException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorS3FilesMountTimeoutException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.S3FilesMountTimeoutException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentS3FilesMountTimeoutException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorSerializedRequestEntityTooLargeException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.SerializedRequestEntityTooLargeException{}
 	var buff [1024]byte
@@ -26981,6 +27107,153 @@ func awsRestjson1_deserializeDocumentRuntimeVersionError(v **types.RuntimeVersio
 					return fmt.Errorf("expected SensitiveString to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3FilesMountConnectivityException(v **types.S3FilesMountConnectivityException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3FilesMountConnectivityException
+	if *v == nil {
+		sv = &types.S3FilesMountConnectivityException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3FilesMountFailureException(v **types.S3FilesMountFailureException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3FilesMountFailureException
+	if *v == nil {
+		sv = &types.S3FilesMountFailureException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentS3FilesMountTimeoutException(v **types.S3FilesMountTimeoutException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.S3FilesMountTimeoutException
+	if *v == nil {
+		sv = &types.S3FilesMountTimeoutException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
 			}
 
 		default:

@@ -1,3 +1,30 @@
+# v1.96.0 (2026-05-04)
+
+* **Feature**: Updates the type of the MediaLiveRouterOutputConnectionMap.
+
+# v1.95.2 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.95.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.95.0 (2026-04-08)
+
+* **Feature**: MediaLive is adding support for MediaConnect Router by supporting a new output type called MEDIACONNECT ROUTER. This new output type will provide seamless encrypted transport between your MediaLive channel and MediaConnect Router.
+
+# v1.94.0 (2026-04-03)
+
+* **Feature**: AWS Elemental MediaLive released a new features that allows customers to use HLG 2020 as a color space for AV1 video codec.
+
+# v1.93.3 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.93.2 (2026-03-13)
 
 * **Documentation**: Documents the VideoDescription.ScalingBehavior.SMART(underscore)CROP enum value.

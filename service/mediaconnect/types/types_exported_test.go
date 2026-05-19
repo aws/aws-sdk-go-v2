@@ -153,6 +153,9 @@ func ExampleRouterInputConfiguration_outputUsage() {
 	case *types.RouterInputConfigurationMemberMediaConnectFlow:
 		_ = v.Value // Value is types.MediaConnectFlowRouterInputConfiguration
 
+	case *types.RouterInputConfigurationMemberMediaLiveChannel:
+		_ = v.Value // Value is types.MediaLiveChannelRouterInputConfiguration
+
 	case *types.RouterInputConfigurationMemberMerge:
 		_ = v.Value // Value is types.MergeRouterInputConfiguration
 
@@ -170,6 +173,7 @@ func ExampleRouterInputConfiguration_outputUsage() {
 
 var _ *types.MergeRouterInputConfiguration
 var _ *types.FailoverRouterInputConfiguration
+var _ *types.MediaLiveChannelRouterInputConfiguration
 var _ *types.StandardRouterInputConfiguration
 var _ *types.MediaConnectFlowRouterInputConfiguration
 
@@ -264,6 +268,9 @@ func ExampleRouterInputStreamDetails_outputUsage() {
 	case *types.RouterInputStreamDetailsMemberMediaConnectFlow:
 		_ = v.Value // Value is types.MediaConnectFlowRouterInputStreamDetails
 
+	case *types.RouterInputStreamDetailsMemberMediaLiveChannel:
+		_ = v.Value // Value is types.MediaLiveChannelRouterInputStreamDetails
+
 	case *types.RouterInputStreamDetailsMemberMerge:
 		_ = v.Value // Value is types.MergeRouterInputStreamDetails
 
@@ -281,6 +288,7 @@ func ExampleRouterInputStreamDetails_outputUsage() {
 
 var _ *types.MergeRouterInputStreamDetails
 var _ *types.StandardRouterInputStreamDetails
+var _ *types.MediaLiveChannelRouterInputStreamDetails
 var _ *types.FailoverRouterInputStreamDetails
 var _ *types.MediaConnectFlowRouterInputStreamDetails
 

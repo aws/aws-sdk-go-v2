@@ -2,6 +2,46 @@
 
 package types
 
+type BillingEntity string
+
+// Enum values for BillingEntity
+const (
+	BillingEntityAws            BillingEntity = "AWS"
+	BillingEntityAwsMarketplace BillingEntity = "AWS_MARKETPLACE"
+)
+
+// Values returns all known values for BillingEntity. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BillingEntity) Values() []BillingEntity {
+	return []BillingEntity{
+		"AWS",
+		"AWS_MARKETPLACE",
+	}
+}
+
+type BillType string
+
+// Enum values for BillType
+const (
+	BillTypeAnniversary BillType = "ANNIVERSARY"
+	BillTypePurchase    BillType = "PURCHASE"
+	BillTypeRefund      BillType = "REFUND"
+)
+
+// Values returns all known values for BillType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BillType) Values() []BillType {
+	return []BillType{
+		"ANNIVERSARY",
+		"PURCHASE",
+		"REFUND",
+	}
+}
+
 type BuyerDomain string
 
 // Enum values for BuyerDomain
@@ -84,12 +124,51 @@ func (EinvoiceDeliveryDocumentType) Values() []EinvoiceDeliveryDocumentType {
 	}
 }
 
+type EinvoiceDeliveryStatus string
+
+// Enum values for EinvoiceDeliveryStatus
+const (
+	EinvoiceDeliveryStatusDelivered    EinvoiceDeliveryStatus = "DELIVERED"
+	EinvoiceDeliveryStatusNotDelivered EinvoiceDeliveryStatus = "NOT_DELIVERED"
+)
+
+// Values returns all known values for EinvoiceDeliveryStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EinvoiceDeliveryStatus) Values() []EinvoiceDeliveryStatus {
+	return []EinvoiceDeliveryStatus{
+		"DELIVERED",
+		"NOT_DELIVERED",
+	}
+}
+
+type InvoiceFrequency string
+
+// Enum values for InvoiceFrequency
+const (
+	InvoiceFrequencyOneTime   InvoiceFrequency = "ONE_TIME"
+	InvoiceFrequencyRecurring InvoiceFrequency = "RECURRING"
+)
+
+// Values returns all known values for InvoiceFrequency. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InvoiceFrequency) Values() []InvoiceFrequency {
+	return []InvoiceFrequency{
+		"ONE_TIME",
+		"RECURRING",
+	}
+}
+
 type InvoiceType string
 
 // Enum values for InvoiceType
 const (
-	InvoiceTypeInvoice    InvoiceType = "INVOICE"
-	InvoiceTypeCreditMemo InvoiceType = "CREDIT_MEMO"
+	InvoiceTypeInvoice        InvoiceType = "INVOICE"
+	InvoiceTypeCreditMemo     InvoiceType = "CREDIT_MEMO"
+	InvoiceTypePaymentReceipt InvoiceType = "PAYMENT_RECEIPT"
 )
 
 // Values returns all known values for InvoiceType. Note that this can be expanded
@@ -100,6 +179,7 @@ func (InvoiceType) Values() []InvoiceType {
 	return []InvoiceType{
 		"INVOICE",
 		"CREDIT_MEMO",
+		"PAYMENT_RECEIPT",
 	}
 }
 
@@ -206,6 +286,50 @@ func (PurchaseOrderDataSourceType) Values() []PurchaseOrderDataSourceType {
 	}
 }
 
+type ReceiverRole string
+
+// Enum values for ReceiverRole
+const (
+	ReceiverRoleSeller   ReceiverRole = "SELLER"
+	ReceiverRoleReseller ReceiverRole = "RESELLER"
+	ReceiverRoleBuyer    ReceiverRole = "BUYER"
+)
+
+// Values returns all known values for ReceiverRole. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ReceiverRole) Values() []ReceiverRole {
+	return []ReceiverRole{
+		"SELLER",
+		"RESELLER",
+		"BUYER",
+	}
+}
+
+type SupplementalDocumentType string
+
+// Enum values for SupplementalDocumentType
+const (
+	SupplementalDocumentTypeGovernmentInvoice SupplementalDocumentType = "GOVERNMENT_INVOICE"
+	SupplementalDocumentTypeTaxEInvoice       SupplementalDocumentType = "TAX_E_INVOICE"
+	SupplementalDocumentTypePaymentReceipt    SupplementalDocumentType = "PAYMENT_RECEIPT"
+	SupplementalDocumentTypeSupplement        SupplementalDocumentType = "SUPPLEMENT"
+)
+
+// Values returns all known values for SupplementalDocumentType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SupplementalDocumentType) Values() []SupplementalDocumentType {
+	return []SupplementalDocumentType{
+		"GOVERNMENT_INVOICE",
+		"TAX_E_INVOICE",
+		"PAYMENT_RECEIPT",
+		"SUPPLEMENT",
+	}
+}
+
 type SupplierDomain string
 
 // Enum values for SupplierDomain
@@ -220,6 +344,25 @@ const (
 func (SupplierDomain) Values() []SupplierDomain {
 	return []SupplierDomain{
 		"NetworkID",
+	}
+}
+
+type TaxAuthorityStatus string
+
+// Enum values for TaxAuthorityStatus
+const (
+	TaxAuthorityStatusIssued    TaxAuthorityStatus = "ISSUED"
+	TaxAuthorityStatusCancelled TaxAuthorityStatus = "CANCELLED"
+)
+
+// Values returns all known values for TaxAuthorityStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TaxAuthorityStatus) Values() []TaxAuthorityStatus {
+	return []TaxAuthorityStatus{
+		"ISSUED",
+		"CANCELLED",
 	}
 }
 

@@ -44,6 +44,9 @@ type UpdateConnectionInput struct {
 	// The location where a connection is to be updated.
 	AwsLocation *types.AwsLocation
 
+	// The configurations of the connection.
+	Configurations []types.Configuration
+
 	// The description of a connection.
 	Description *string
 
@@ -84,6 +87,9 @@ type UpdateConnectionOutput struct {
 	//
 	// This member is required.
 	Type types.ConnectionType
+
+	// The configurations of the connection.
+	Configurations []types.Configuration
 
 	// The connection description.
 	Description *string
@@ -140,7 +146,7 @@ func (c *Client) addOperationUpdateConnectionMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -162,9 +168,6 @@ func (c *Client) addOperationUpdateConnectionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

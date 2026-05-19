@@ -2,6 +2,7 @@ package software.amazon.smithy.aws.go.codegen;
 
 import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 
+import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
@@ -1433,7 +1434,8 @@ public final class AwsEventStreamUtils {
 
                     var headerBindings = targetShape.members().stream()
                             .filter(memberShape -> memberShape.hasTrait(EventHeaderTrait.class))
-                            .collect(Collectors.toSet());
+                            .sorted(Comparator.comparing(MemberShape::getMemberName))
+                            .collect(Collectors.toList());
 
                     var payloadBinding = targetShape.members().stream()
                             .filter(memberShape -> memberShape.hasTrait(EventPayloadTrait.class))
@@ -1662,7 +1664,8 @@ public final class AwsEventStreamUtils {
 
                     var headerBindings = targetShape.members().stream()
                             .filter(memberShape -> memberShape.hasTrait(EventHeaderTrait.class))
-                            .collect(Collectors.toSet());
+                            .sorted(Comparator.comparing(MemberShape::getMemberName))
+                            .collect(Collectors.toList());
 
                     var payloadBinding = targetShape.members().stream()
                             .filter(memberShape -> memberShape.hasTrait(EventPayloadTrait.class))

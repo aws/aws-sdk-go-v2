@@ -1,3 +1,1649 @@
+# Release (2026-05-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.26.0](service/bedrockagentcore/CHANGELOG.md#v1260-2026-05-19)
+  * **Feature**: Add RetryableConflictException (HTTP 409) to InvokeAgentRuntime and StopRuntimeSession to prevent orphaned VMs during concurrent session access. The SDK automatically retries this exception with backoff. Enforcement is not yet active and will be enabled in a future service update.
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.4.0](service/devopsagent/CHANGELOG.md#v140-2026-05-19)
+  * **Feature**: Added a new serviceType mcpserversigv4 service and association. This provides feature to register MCP sigv4 authorization based MCPs
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.35.0](service/grafana/CHANGELOG.md#v1350-2026-05-19)
+  * **Feature**: Introduce degraded workspace status as a possible Amazon Managed Grafana workspace status, and a new field named degraded workspace reason which informs customers why the workspace is degraded in the DescribeWorkspace API response.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.76.0](service/guardduty/CHANGELOG.md#v1760-2026-05-19)
+  * **Feature**: Adding support for exposure and vulnerability context from AWS Security Hub in GuardDuty Extended Threat Detection attack sequence findings.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.6.0](service/rtbfabric/CHANGELOG.md#v160-2026-05-19)
+  * **Feature**: This release is to deprecate 'inboundLinksCount' field in GetResponderGateway response and introduce the new field 'linksRequestedCount' to replace it.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.248.0](service/sagemaker/CHANGELOG.md#v12480-2026-05-19)
+  * **Feature**: Add support for ml.p5.4xlarge and ml.p5en.48xlarge instances on SageMaker Notebook Instances Platform.
+
+# Release (2026-05-18)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign`: [v1.11.0](feature/cloudfront/sign/CHANGELOG.md#v1110-2026-05-18)
+  * **Feature**: Support SHA-256 for CloudFront signer
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.48.0](service/accessanalyzer/CHANGELOG.md#v1480-2026-05-18)
+  * **Feature**: Services manage service-linked analyzers through dedicated APIs - CreateServiceLinkedAnalyzer and DeleteServiceLinkedAnalyzer that separate service-linked specific operations from customer-managed operations. It also shows up in ListAnalyzers and GetAnalyzer responses.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.174.0](service/connect/CHANGELOG.md#v11740-2026-05-18)
+  * **Feature**: Amazon Connect Cases now supports SLA durations of up to 2 years (1,051,200 minutes), increased from the previous maximum of 90 days (129,600 minutes). This enables you to track long-running service level agreements for cases that require extended resolution timelines.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.303.0](service/ec2/CHANGELOG.md#v13030-2026-05-18)
+  * **Feature**: Amazon VPC IP Address Manager (IPAM) now supports tags on IPAM pool allocations, enabling all standard tagging features for allocations including tag-on-create.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.80.0](service/ecs/CHANGELOG.md#v1800-2026-05-18)
+  * **Feature**: Amazon ECS now supports Pause lifecycle hooks for service deployments, allowing customers to automatically pause deployments at specified stages and use the new ContinueServiceDeployment API to continue or roll back with confidence.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.8.2](service/evs/CHANGELOG.md#v182-2026-05-18)
+  * **Documentation**: Amazon EVS now supports up to 32 hosts per EVS environment, increasing the previous host limit to allow a larger scale of VMware workload deployments and reduce operational overhead.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.110.0](service/quicksight/CHANGELOG.md#v11100-2026-05-18)
+  * **Feature**: Support for dataset enrichment and geo spatial in new data preparation experience
+
+# Release (2026-05-15)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.74.0](service/cloudwatchlogs/CHANGELOG.md#v1740-2026-05-15)
+  * **Feature**: Updating the max limit for start query api parameter.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.38.0](service/mediapackagev2/CHANGELOG.md#v1380-2026-05-15)
+  * **Feature**: This release adds support for AvailabilityStartTimeConfiguration in MediaPackageV2 DASH manifests
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.17.0](service/partnercentralselling/CHANGELOG.md#v1170-2026-05-15)
+  * **Feature**: Enable TCV intake on Opportunity to improve Opportunities Hygiene and downstream revenue attribution.
+
+# Release (2026-05-14)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.60.0](service/bedrock/CHANGELOG.md#v1600-2026-05-14)
+  * **Feature**: Advanced Prompt Optimization (AdvPO) allows you to optimize and migrate your prompts for any model on Bedrock by automatically evaluating responses and rewriting prompts to improve performance. This release provides a programmatic way to create, get, list, stop, and delete AdvPO jobs.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.64.0](service/cloudfront/CHANGELOG.md#v1640-2026-05-14)
+  * **Feature**: Adding a new boolean for OCSP Revocations in Viewer mTLS Create and Update APIs, and adding a new 'Passthrough' option for TrustStore modes
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.63.0](service/databasemigrationservice/CHANGELOG.md#v1630-2026-05-14)
+  * **Feature**: Add 9 SDK waiters for DMS Schema Conversion async operations. Eliminates manual polling for import, assessment, conversion, export, and creation jobs.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.60.0](service/datazone/CHANGELOG.md#v1600-2026-05-14)
+  * **Feature**: Adds support for SageMaker Unified Studio notebook operations, including notebook import and export
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.142.0](service/glue/CHANGELOG.md#v11420-2026-05-14)
+  * **Feature**: Release --has-databases parameter for AWS Glue get-catalogs API, which filters catalog responses to include only those capable of containing databases, excluding parent catalogs that hold only other catalogs. Remove model-level validation on partition index list size for AWS Glue tables.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.34.0](service/grafana/CHANGELOG.md#v1340-2026-05-14)
+  * **Feature**: Adds support for dual-stack (IPv4 and IPv6) connectivity to Amazon Managed Grafana workspaces. Customers can configure the ipAddressType parameter when creating or updating a workspace to choose between IPv4-only or dual-stack (IPv4 and IPv6) access.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.43.0](service/mgn/CHANGELOG.md#v1430-2026-05-14)
+  * **Feature**: Introducing new option for security groups mapping - with MAP-DHCP the service translates security rules from your source environment with DHCP compatibility.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.31.0](service/qconnect/CHANGELOG.md#v1310-2026-05-14)
+  * **Feature**: ListModels is an API that returns the available AI models for a Connect Assistant based on its region and AI prompt type.
+
+# Release (2026-05-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.7.0](service/arcregionswitch/CHANGELOG.md#v170-2026-05-13)
+  * **Feature**: Adds support for enabling and disabling Lambda event source mappings in Region switch plans.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.64.2](service/batch/CHANGELOG.md#v1642-2026-05-13)
+  * **Documentation**: Adds a billing callout to docs regarding using the CE Scale Down Delay feature
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.38.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1380-2026-05-13)
+  * **Feature**: Adds support for read-only summary APIs for Policy Engine, Policy, and Policy Generation resources, enabling metadata retrieval without KMS decryption for AWS Config integration.
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.29.0](service/billingconductor/CHANGELOG.md#v1290-2026-05-13)
+  * **Feature**: Add ConflictException to UpdateCustomLineItem operation.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.173.0](service/connect/CHANGELOG.md#v11730-2026-05-13)
+  * **Feature**: This change added three new EventSourceName for schedule notification feature
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.13.0](service/connectcampaignsv2/CHANGELOG.md#v1130-2026-05-13)
+  * **Feature**: This release added support for Outbound Campaign timezone detection using all available contact methods
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.41.0](service/connectcases/CHANGELOG.md#v1410-2026-05-13)
+  * **Feature**: Amazon Connect Cases now supports SLA durations of up to 2 years (1,051,200 minutes), increased from the previous maximum of 90 days (129,600 minutes). This enables you to track long-running service level agreements for cases that require extended resolution timelines.
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.13.0](service/dsql/CHANGELOG.md#v1130-2026-05-13)
+  * **Feature**: Added support for Amazon Aurora DSQL change data capture (CDC) streams that deliver row-level database changes to Amazon Kinesis in JSON format. Includes CreateStream, GetStream, ListStreams, and DeleteStream operations.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.302.0](service/ec2/CHANGELOG.md#v13020-2026-05-13)
+  * **Feature**: Include length limits in the SDK and documentation for text fields in Image (AMI) APIs such as the image name and description
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.41.0](service/elasticsearchservice/CHANGELOG.md#v1410-2026-05-13)
+  * **Feature**: Adds support for AutomatedSnapshotPauseOptions.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.141.1](service/glue/CHANGELOG.md#v11411-2026-05-13)
+  * **Documentation**: AWS Glue now defaults the job timeout to 480 minutes for Glue version 5.0 and later when no timeout value is specified. The default remains 2,880 minutes for Glue version 4.0 and earlier.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.54.0](service/lightsail/CHANGELOG.md#v1540-2026-05-13)
+  * **Feature**: Added OriginIpAddressTypeEnum (ipv4, ipv6, dualstack) and ipAddressType field to Origin and InputOrigin structures for Lightsail CDN distributions. Allows customers to specify how the distribution connects to origins, using IPv4, IPv6, or dualstack networking
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.69.0](service/opensearch/CHANGELOG.md#v1690-2026-05-13)
+  * **Feature**: Adds support for AutomatedSnapshotPauseOptions.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralaccount`: [v1.3.0](service/partnercentralaccount/CHANGELOG.md#v130-2026-05-13)
+  * **Feature**: Added ServiceQuotaExceededExceptions for Profile operations
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.18.0](service/pcs/CHANGELOG.md#v1180-2026-05-13)
+  * **Feature**: Add support for Amazon EC2 Interruptible-ODCR
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.109.0](service/quicksight/CHANGELOG.md#v11090-2026-05-13)
+  * **Feature**: Adds five new custom permission option for Quick Apps so that these capabilities can be controlled by public SDK and CLI.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.62.8](service/redshift/CHANGELOG.md#v1628-2026-05-13)
+  * **Documentation**: Added rg.xlarge and rg.4xlarge to valid NodeType values and updated documentation for CreateCluster, ModifyCluster, ResizeCluster, and RestoreFromClusterSnapshot APIs to reflect RG node type support.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.5.0](service/rtbfabric/CHANGELOG.md#v150-2026-05-13)
+  * **Feature**: Customers can now configure custom domain names for their RTB Fabric gateways. This enables partners to use their own branded domain for RTB traffic instead of the default rtbfabric endpoint
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.247.0](service/sagemaker/CHANGELOG.md#v12470-2026-05-13)
+  * **Feature**: Adds execution role session name mode to reflect user identity in Studio. Adds Flexible Training Plans on Studio apps. Adds restricted model packages to control access to proprietary model artifacts via IAM. Fixed instance type parity between inference endpoints and managed shadow tests.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.2.0](service/securityagent/CHANGELOG.md#v120-2026-05-13)
+  * **Feature**: Add support for code reviews, a new resource type that enables automated security-focused static analysis of source code repositories.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.41.0](service/sfn/CHANGELOG.md#v1410-2026-05-13)
+  * **Feature**: Updated default SDK endpoints for AWS Step Functions in AWS GovCloud (US) regions. The default Dual-Stack endpoints now resolve to "states-fips" prefixed hostnames. There are no changes to service behavior. No customer action is required.
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.9.0](service/socialmessaging/CHANGELOG.md#v190-2026-05-13)
+  * **Feature**: Adds parameters to call the GetWhatsAppMessageTemplate and UpdateWhatsAppMessageTemplate APIs with a template name and language code in place of the template ID. Linked WhatsApp accounts also describe whether the WABA is onboarded to Meta's Marketing Messages API.
+
+# Release (2026-05-07)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bcmdataexports`: [v1.15.0](service/bcmdataexports/CHANGELOG.md#v1150-2026-05-07)
+  * **Feature**: With this release, customers can configure their data exports to generate additional integration artifacts for Athena and Redshift.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.25.0](service/bedrockagentcore/CHANGELOG.md#v1250-2026-05-07)
+  * **Feature**: Launching AgentCore payments - a capability that provides secure, instant microtransaction payments for AI agents to access paid APIs, MCP servers, and content. It handles payment processing for x402 protocol, payment limits, and 3P wallet integrations with Coinbase CDP and Stripe (Privy).
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.37.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1370-2026-05-07)
+  * **Feature**: Launching AgentCore payments - a capability that provides secure, instant microtransaction payments for AI agents to access paid APIs, MCP servers, and content. It handles payment processing for x402 protocol, payment limits, and 3P wallet integrations with Coinbase CDP and Stripe (Privy).
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.301.0](service/ec2/CHANGELOG.md#v13010-2026-05-07)
+  * **Feature**: DescribeInstanceTypes now accepts an IncludeUnsupportedInRegion parameter. When set, the response also lists instance types that are not available in the current Region. Each instance type includes a SupportedInRegion field indicating its regional availability.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.75.4](service/guardduty/CHANGELOG.md#v1754-2026-05-07)
+  * **Documentation**: This is a documentation update
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.10.0](service/invoicing/CHANGELOG.md#v1100-2026-05-07)
+  * **Feature**: Updated ListInvoiceSummaries API to add new ReceiverRole filter in Request and Response
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.43.0](service/route53resolver/CHANGELOG.md#v1430-2026-05-07)
+  * **Feature**: Adds supports for DNS64 on inbound endpoints and IPv6 forwarding through the internet gateway (IGW) on outbound endpoints, making it easier to manage hybrid DNS across IPv4 and IPv6 networks.
+
+# Release (2026-05-06)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.36.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1360-2026-05-06)
+  * **Feature**: Adds support for bring-your-own file system in AgentCore Runtime. Developers can mount Amazon S3 Files and Amazon EFS access points directly into agent sessions using filesystemConfigurations.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.141.0](service/glue/CHANGELOG.md#v11410-2026-05-06)
+  * **Feature**: Adds support for a CustomLogGroupPrefix parameter in StartDataQualityRulesetEvaluationRun to specify custom CloudWatch log group paths, and a RulesetName filter in ListDataQualityRulesetEvaluationRuns to filter evaluation runs by ruleset name.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.54.0](service/imagebuilder/CHANGELOG.md#v1540-2026-05-06)
+  * **Feature**: The ImportDiskImage API now enforces a maximum character limit of 128 characters on the image name field.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.61.0](service/lexmodelsv2/CHANGELOG.md#v1610-2026-05-06)
+  * **Feature**: Amazon Lex V2 introduces audio filler support for speech-to-speech bots. Configure melody or typing sounds that play during backend processing to reduce perceived latency and maintain a natural conversational experience for callers.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.40.0](service/mwaa/CHANGELOG.md#v1400-2026-05-06)
+  * **Feature**: Amazon MWAA now supports a PublicAndPrivate webserver access mode. The Airflow web server is accessible over both public and private endpoints, enabling workers in VPCs without internet access to reach the Task API privately while retaining public access to the Airflow UI.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.101.0](service/s3/CHANGELOG.md#v11010-2026-05-06)
+  * **Feature**: Validate outpost access point resource name
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.246.0](service/sagemaker/CHANGELOG.md#v12460-2026-05-06)
+  * **Feature**: Amazon SageMaker HyperPod now returns ImageVersionStatus in DescribeCluster, DescribeClusterNode, and ListClusterNodes responses, indicating whether cluster instances are running the latest available image version.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.70.0](service/securityhub/CHANGELOG.md#v1700-2026-05-06)
+  * **Feature**: Release GenerateRecommendedPolicyV2 and GetRecommendedPolicyV2 APIs. This supports generating and retrieving policy recommendations to remediate unused permissions findings that are now being supported on Security Hub.
+
+# Release (2026-05-05)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.63.0](service/cloudfront/CHANGELOG.md#v1630-2026-05-05)
+  * **Feature**: Adds support for tagging CloudFront Functions and KeyValueStores resources.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.15.0](service/marketplaceagreement/CHANGELOG.md#v1150-2026-05-05)
+  * **Feature**: With this release, Agreements API provides a programmatic way to generate quotes, accept offers, track charges and entitlements, manage renewals and cancellations, and streamline operations entirely through APIs without navigating to the AWS Marketplace website or AWS Management Console.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.58.0](service/mediatailor/CHANGELOG.md#v1580-2026-05-05)
+  * **Feature**: Added support for Monetization Functions. Monetization Functions let you enrich ad requests with external data and transform session parameters using JSONata expressions, without deploying custom infrastructure.
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.25.0](service/medicalimaging/CHANGELOG.md#v1250-2026-05-05)
+  * **Feature**: Add support for DICOM Json Metadata Override features in startDICOMImportJob API
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.68.0](service/opensearch/CHANGELOG.md#v1680-2026-05-05)
+  * **Feature**: Amazon OpenSearch Service now supports VPC egress, enabling outbound traffic from your OpenSearch domain to route privately through your VPC instead of the public internet.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.35.0](service/route53domains/CHANGELOG.md#v1350-2026-05-05)
+  * **Feature**: This release adds the TLDInMaintenance exception.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.245.0](service/sagemaker/CHANGELOG.md#v12450-2026-05-05)
+  * **Feature**: Adds support for ml.p5.4xlarge instance type for SageMaker Studio JupyterLab and CodeEditor apps for IAD (us-east-1), NRT (ap-northeast-1), BOM (ap-south-1), CGK (ap-southeast-3), GRU (sa-east-1), PDX (us-west-2), CMH (us-east-2).
+
+# Release (2026-05-04)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.35.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1350-2026-05-04)
+  * **Feature**: Amazon Bedrock AgentCore gateways now support MCP Sessions and response streaming from MCP targets. Session timeouts can be set between 15 minutes and 8 hours, and response streaming enables forwarding stream events sent by MCP targets to gateway users.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.73.0](service/cloudwatchlogs/CHANGELOG.md#v1730-2026-05-04)
+  * **Feature**: Adding an additional optional deliverySourceConfiguration field to PutDeliverySource API. This enables customers to pass service-specific configurations through IngestionHub such as tracing enablement or sampling rates that will be propagated to the source resource.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.300.0](service/ec2/CHANGELOG.md#v13000-2026-05-04)
+  * **Feature**: This feature allows customers to change the tunnel bandwidth on existing VPN connections using the ModifyVpnConnectionOptions API
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.9.0](service/georoutes/CHANGELOG.md#v190-2026-05-04)
+  * **Feature**: Added support for TravelTimeExceedsDriverWorkHours, ViolatedBlockedRoad, and ViolatedVehicleRestriction notice codes to the CalculateRoutes API response.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice`: [v1.35.0](service/lexmodelbuildingservice/CHANGELOG.md#v1350-2026-05-04)
+  * **Feature**: Lex V1 is deprecated, use Lex V2 instead
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.96.0](service/medialive/CHANGELOG.md#v1960-2026-05-04)
+  * **Feature**: Updates the type of the MediaLiveRouterOutputConnectionMap.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.1.0](service/securityagent/CHANGELOG.md#v110-2026-05-04)
+  * **Feature**: AWS Security Agent is adding a new target domain verification method for private VPC penetration testing. Additionally, the target domain resource will now have a verification status reason field to surface additional details about domain verification
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.21.0](service/vpclattice/CHANGELOG.md#v1210-2026-05-04)
+  * **Feature**: Amazon VPC Lattice now supports privately resolvable DNS resources
+
+# Release (2026-05-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.58.0](service/appstream/CHANGELOG.md#v1580-2026-05-01)
+  * **Feature**: Amazon WorkSpaces Applications now enables AI agents to securely operate desktop applications. Administrators configure stacks to provide agents access to WorkSpaces. Agents can click, type, and take screenshots. Agents authenticate with AWS IAM credentials with activity logged in AWS CloudTrail.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.57.0](service/cloudwatch/CHANGELOG.md#v1570-2026-05-01)
+  * **Feature**: This release adds tag support for CloudWatch Dashboards. The PutDashboard API now accepts a Tags parameter, allowing you to tag dashboards at creation time. Additionally, the TagResource, UntagResource, and ListTagsForResource APIs now support dashboard ARNs as resources.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.72.0](service/cloudwatchlogs/CHANGELOG.md#v1720-2026-05-01)
+  * **Feature**: Adds support for filtering log groups by tags in the ListLogGroups API via the new logGroupTags parameter.
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.27.0](service/entityresolution/CHANGELOG.md#v1270-2026-05-01)
+  * **Feature**: Add support for transitive matching in AWS Entity Resolution rule-based matching workflows. When enabled, records that match through different rules are grouped together into the same match group, allowing related records to be connected across rule levels.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.53.10](service/iam/CHANGELOG.md#v15310-2026-05-01)
+  * **Documentation**: Added guidance for CreateOpenIDConnectProvider to include multiple thumbprints when OIDC discovery and JWKS endpoints use different hosts or certificates
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.73.0](service/iot/CHANGELOG.md#v1730-2026-05-01)
+  * **Feature**: AWS IoT HTTP rule actions now support cross-topic batching, combining messages from different MQTT topics into single HTTP requests.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.30.0](service/qconnect/CHANGELOG.md#v1300-2026-05-01)
+  * **Feature**: Added reasoning details, statusDescription, and timeToFirstTokenMs fields to the ListSpans response in Amazon Q in Connect to provide visibility into model thinking, error diagnostics, and inference latency metrics.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.108.0](service/quicksight/CHANGELOG.md#v11080-2026-05-01)
+  * **Feature**: Add IdentityProviderCACertificatesBundleS3Uri for private CA certs with OAuth datasources. 256-char limit for FontFamily in themes. ControlTitleFormatText on all 13 filters. ControlTitleFontConfiguration. ContextRegion for cross-region identity context. Story,scenario in CreateCustomCapability API.
+
+# Release (2026-04-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/cloudfront/sign`: [v1.10.0](feature/cloudfront/sign/CHANGELOG.md#v1100-2026-04-30)
+  * **Feature**: Support ECDSA for CloudFront sign cookies
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.1.20](feature/s3/transfermanager/CHANGELOG.md#v0120-2026-04-30)
+  * **Bug Fix**: Reinstate Location output field on Upload operations.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.24.0](service/bedrockagentcore/CHANGELOG.md#v1240-2026-04-30)
+  * **Feature**: AgentCore Identity now supports on-behalf-of token exchange OAuth2. AgentCore Memory now supports metadata for LongTerm Memory Records.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.34.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1340-2026-04-30)
+  * **Feature**: AgentCore Identity now supports on-behalf-of token exchange OAuth2. AgentCore Memory now supports metadata for LongTerm Memory Records.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.59.0](service/datazone/CHANGELOG.md#v1590-2026-04-30)
+  * **Feature**: Adds support for asynchronous notebook runs
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.83.0](service/eks/CHANGELOG.md#v1830-2026-04-30)
+  * **Feature**: Vended logs update param for capability vended logs feature
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.51.0](service/kafka/CHANGELOG.md#v1510-2026-04-30)
+  * **Feature**: Adds support for ZookeeperAccess field to control the Client-Zookeeper connectivity.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.15.0](service/observabilityadmin/CHANGELOG.md#v1150-2026-04-30)
+  * **Feature**: Observability Admin enablement launch for AWS Kafka, Bedrock Agent Core Workload Identity and OTel metric enablement.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.29.0](service/paymentcryptography/CHANGELOG.md#v1290-2026-04-30)
+  * **Feature**: Adds support for resource-based policies on AWS Payment Cryptography keys, enabling cross-account key sharing. Also adds Multi-Party Approval (MPA) team association APIs for protecting sensitive import root public key operations.
+* `github.com/aws/aws-sdk-go-v2/service/route53globalresolver`: [v1.2.0](service/route53globalresolver/CHANGELOG.md#v120-2026-04-30)
+  * **Feature**: Adds support for regions in the UpdateGlobalResolver input.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.244.0](service/sagemaker/CHANGELOG.md#v12440-2026-04-30)
+  * **Feature**: Add InstancePools support to Endpoint for flexible provisioning across a prioritized list of instance types. Add Specifications support to InferenceComponent for per-instance-type model configurations.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.38.0](service/ssoadmin/CHANGELOG.md#v1380-2026-04-30)
+  * **Feature**: Add InstanceArn and IdentityStoreArn in the response of CreateApplication API and IdentityStoreArn in the response of DescribeApplication API
+
+# Release (2026-04-29)
+
+## General Highlights
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.31.0](service/account/CHANGELOG.md#v1310-2026-04-29)
+  * **Feature**: Adds AccountState in the response for the GetAccountInformation API. Each state represents a specific phase in the account lifecycle. Use this information to manage account access, automate workflows, or trigger actions based on account state changes.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.23.0](service/bedrockagentcore/CHANGELOG.md#v1230-2026-04-29)
+  * **Feature**: Adds batch evaluation for running evaluators against multiple agent sessions with server-side orchestration, AI-powered recommendations for optimizing system prompts and tool descriptions, and AB testing with controlled traffic splitting and statistical significance reporting
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.33.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1330-2026-04-29)
+  * **Feature**: Adds configuration bundles for versioned, immutable agent configuration snapshots with branch-based lineage
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.62.0](service/cloudfront/CHANGELOG.md#v1620-2026-04-29)
+  * **Feature**: Amazon CloudFront now supports cache tag. Tag objects via response headers and invalidate all matching objects in a single request, replacing manual URL tracking and broad wildcards.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.31.0](service/deadline/CHANGELOG.md#v1310-2026-04-29)
+  * **Feature**: Adds support for rtx-pro-server-6000 GPU accelerator for service-managed fleets.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.57.2](service/ecr/CHANGELOG.md#v1572-2026-04-29)
+  * **Documentation**: Removes support for registry policy V1
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.54.0](service/gamelift/CHANGELOG.md#v1540-2026-04-29)
+  * **Feature**: Amazon GameLift Servers adds a new DescribeContainerGroupPortMappings API for container fleets, making it easy to discover which connection ports map to your container ports without needing to remotely access the compute.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.37.0](service/mediapackagev2/CHANGELOG.md#v1370-2026-04-29)
+  * **Feature**: This feature adds configuration for specifying SCTE marker handling and allow greater control over generated manifest and segment URIs
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.100.1](service/s3/CHANGELOG.md#v11001-2026-04-29)
+  * **Bug Fix**: Fix a memory leak in the credential cache used for S3 Express session credentials.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.72.0](service/transfer/CHANGELOG.md#v1720-2026-04-29)
+  * **Feature**: This launch will increase the limits for customers to list the contents from the remote directories from 10k to 200k.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.39.0](service/workspacesweb/CHANGELOG.md#v1390-2026-04-29)
+  * **Feature**: Allow admins to configure IPv6 ranges on IP Access Settings.
+
+# Release (2026-04-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.21.0](service/applicationsignals/CHANGELOG.md#v1210-2026-04-27)
+  * **Feature**: Application Signals now supports creating composite Service Level Objectives on Service Operations. Users can now create service SLO on multiple operations.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.71.0](service/cloudwatchlogs/CHANGELOG.md#v1710-2026-04-27)
+  * **Feature**: Adds support for selecting all logs sources and types in a single association.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.11.3](service/gameliftstreams/CHANGELOG.md#v1113-2026-04-27)
+  * **Documentation**: Adds Proton 10.0-4 to the list of runtime environment options available when creating an Amazon GameLift Streams application
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.140.0](service/glue/CHANGELOG.md#v11400-2026-04-27)
+  * **Feature**: Addition of AdditionalAuditContext to GetPartition, GetPartitions, GetTableVersion, and GetTableVersions
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.50.0](service/ivs/CHANGELOG.md#v1500-2026-04-27)
+  * **Feature**: Adds tags parameter to the CreateAdConfiguration operation
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.51.0](service/kms/CHANGELOG.md#v1510-2026-04-27)
+  * **Feature**: KMS GetKeyLastUsage API provides information on the last successful cryptographic operation performed on KMS keys. This new API provides KMS customers with the last timestamp, CloudTrail eventId, and the cryptographic operation that was performed on the key.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.42.0](service/mgn/CHANGELOG.md#v1420-2026-04-27)
+  * **Feature**: Added network modernization support, enabling customers to edit, resize, merge, and split VPCs and subnets during migration while retaining functional, non-conflicting IP addresses.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.41.0](service/omics/CHANGELOG.md#v1410-2026-04-27)
+  * **Feature**: Enable Public Internet or VPC configuration to BatchRun
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.67.0](service/opensearch/CHANGELOG.md#v1670-2026-04-27)
+  * **Feature**: Amazon OpenSearch Service now supports JWKS URL configuration for JWT authentication
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.243.0](service/sagemaker/CHANGELOG.md#v12430-2026-04-27)
+  * **Feature**: Updated API documentation for endpoint MetricsConfig. Added details on supported metric publish frequencies and clarified how EnableEnhancedMetrics controls utilization and invocation metric behavior.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.68.0](service/workspaces/CHANGELOG.md#v1680-2026-04-27)
+  * **Feature**: Added support for Protocol as modified resource and added update failure as modification state
+
+# Release (2026-04-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.32.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1320-2026-04-24)
+  * **Feature**: Added support for configuring identity providers and inbound authorizers within a private VPC for AWS Bedrock AgentCore, enabling secure network connection without public internet access
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.70.0](service/cloudwatchlogs/CHANGELOG.md#v1700-2026-04-24)
+  * **Feature**: Adding nextToken and maxItems to the GetQueryResults API.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.172.0](service/connect/CHANGELOG.md#v11720-2026-04-24)
+  * **Feature**: Amazon Connect is expanding attachment capabilities to give customers greater flexibility and control. Currently limited to predefined file types, the new feature will allow contact center administrators to customize which file extensions and sizes are supported across chat, email, tasks, and cases.
+* `github.com/aws/aws-sdk-go-v2/service/connecthealth`: [v1.1.0](service/connecthealth/CHANGELOG.md#v110-2026-04-24)
+  * **Feature**: Corrected CreateWebAppConfiguration documentation. Adding slash as an allowed character for the Ambient documentation agent to allow pronoun specifications.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.8.0](service/evs/CHANGELOG.md#v180-2026-04-24)
+  * **Feature**: EVS now supports i7i.metal-24xl EC2 bare metal instance type, delivering high random IOPS performance with real-time latency, ideal for IO intensive and latency-sensitive workloads such as transactional databases, real-time analytics, and AI ML pre-processing.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.71.0](service/transfer/CHANGELOG.md#v1710-2026-04-24)
+  * **Feature**: AWS Transfer Family now support configurable IP address types for Web Apps of type VPC, enabling customers to select IPv4-only or dual-stack (IPv4 and IPv6) configurations based on their network requirements.
+
+# Release (2026-04-23)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.58.0](service/datazone/CHANGELOG.md#v1580-2026-04-23)
+  * **Feature**: Releasing For LakehouseProperties attributes in the Connections API's
+* `github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations`: [v1.9.0](service/iotmanagedintegrations/CHANGELOG.md#v190-2026-04-23)
+  * **Feature**: Adds "Status" field to provisioning profile operation response types, giving users visibility into the readiness of a provisioning profile to be used for device provisioning.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.66.0](service/opensearch/CHANGELOG.md#v1660-2026-04-23)
+  * **Feature**: Amazon OpenSearch UI applications now support cross-Region domain association, enabling you to connect OpenSearch Dashboards in one AWS Region to OpenSearch domains in other Regions within the same partition for centralized data visualization.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.17.3](service/pcs/CHANGELOG.md#v1173-2026-04-23)
+  * **Documentation**: This release adds support for Slurm 25.11 with expedited requeue enabled by default for jobs failing due to node issues, configurable requeue delay, health checks at node startup only, and unauthenticated HTTP endpoints disabled by default for improved security.
+
+# Release (2026-04-22)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.64.0](service/batch/CHANGELOG.md#v1640-2026-04-22)
+  * **Feature**: Support of S3Files volume type, container start and stop timeouts.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.22.0](service/bedrockagentcore/CHANGELOG.md#v1220-2026-04-22)
+  * **Feature**: Adds support for Amazon Bedrock AgentCore Harness data plane APIs, enabling customers to invoke managed agent loops and execute commands on live agent sessions with streaming responses.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.31.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1310-2026-04-22)
+  * **Feature**: Adds support for Amazon Bedrock AgentCore Harness control plane APIs, enabling customers to create, manage, and configure managed agent loops with customizable models, tools, memory, and isolated execution environments.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.299.0](service/ec2/CHANGELOG.md#v12990-2026-04-22)
+  * **Feature**: Managed resource visibility settings control whether resources that AWS services provision on your behalf within your AWS account appear in your Amazon console views and API list operations.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.79.0](service/ecs/CHANGELOG.md#v1790-2026-04-22)
+  * **Feature**: GPU health monitoring and auto-repair for ECS Managed Instances
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.40.0](service/emrserverless/CHANGELOG.md#v1400-2026-04-22)
+  * **Feature**: This release adds support for Spark connect sessions starting with release label emr-7.13.0.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.55.0](service/iotwireless/CHANGELOG.md#v1550-2026-04-22)
+  * **Feature**: Enable customers to optionally specify a desired confidence level for Cellular and WiFi position estimates. Customers can use this to trade off confidence level and radius of uncertainty based on their needs.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.49.0](service/ivs/CHANGELOG.md#v1490-2026-04-22)
+  * **Feature**: Adds support for Amazon IVS server-side ad insertion
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.90.0](service/lambda/CHANGELOG.md#v1900-2026-04-22)
+  * **Feature**: Add Ruby 4.0 (ruby4.0) support to AWS Lambda.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.65.0](service/opensearch/CHANGELOG.md#v1650-2026-04-22)
+  * **Feature**: Adds support for RollbackServiceSoftwareUpdate API
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.100.0](service/s3/CHANGELOG.md#v11000-2026-04-22)
+  * **Feature**: This release adds five additional checksum algorithms for S3 data integrity (MD5, SHA-512, XXHash3, XXHash64, XXHash128) and support for S3 Inventory on directory buckets (S3 Express One Zone).
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.70.0](service/s3control/CHANGELOG.md#v1700-2026-04-22)
+  * **Feature**: This release adds support for five additional checksum algorithms for data integrity checking in Amazon S3 - MD5, SHA-512, XXHash3, XXHash64, and XXHash128.
+
+# Release (2026-04-21)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/comprehendmedical`: [v1.32.0](service/comprehendmedical/CHANGELOG.md#v1320-2026-04-21)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.50.0](service/computeoptimizer/CHANGELOG.md#v1500-2026-04-21)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.0. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation`: [v1.1.0](service/computeoptimizerautomation/CHANGELOG.md#v110-2026-04-21)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.0. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.53.0](service/gamelift/CHANGELOG.md#v1530-2026-04-21)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.37.0](service/marketplaceentitlementservice/CHANGELOG.md#v1370-2026-04-21)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.60.0](service/networkfirewall/CHANGELOG.md#v1600-2026-04-21)
+  * **Feature**: Support for new types of partner managed rulegroups for Network Firewall Service
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.242.0](service/sagemaker/CHANGELOG.md#v12420-2026-04-21)
+  * **Feature**: SageMaker AI now supports generative AI inference recommendations. Provide your model and workload, and SageMaker AI optimizes configurations, benchmarks them on real GPUs, and returns deployment-ready recommendations with validated metrics, accelerating the path to production from weeks to hours.
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.36.0](service/snowball/CHANGELOG.md#v1360-2026-04-21)
+  * **Feature**: This release adds Smithy RPC v2 CBOR as an additional protocol alongside the existing AWS JSON 1.1. The SDK will prioritize its most performant protocol.
+
+# Release (2026-04-20)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.20.0](service/applicationsignals/CHANGELOG.md#v1200-2026-04-20)
+  * **Feature**: Releasing Second phase of SLO Recommendations where you can create recommended SLOs out-of-the box using CreateSLO API
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.30.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1300-2026-04-20)
+  * **Feature**: Supporting listingMode for AgentCore Gateway MCP server targets
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.298.0](service/ec2/CHANGELOG.md#v12980-2026-04-20)
+  * **Feature**: Added Transit Gateway Integration into AWS Client VPN.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.7.0](service/evs/CHANGELOG.md#v170-2026-04-20)
+  * **Feature**: Amazon EVS now allows you to create connectors to your vCenter appliances and create Windows Server entitlements for virtual machines running in your EVS environments
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.75.2](service/guardduty/CHANGELOG.md#v1752-2026-04-20)
+  * **Documentation**: Expanded support for new suppression rule fields.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.50.0](service/kafka/CHANGELOG.md#v1500-2026-04-20)
+  * **Feature**: Amazon MSK Replicator now supports data migration from external Apache Kafka clusters to Amazon MSK Express brokers. This release adds SaslScram authentication with TLS encryption, enhanced consumer offset synchronization, and customer log forwarding for troubleshooting.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.51.0](service/location/CHANGELOG.md#v1510-2026-04-20)
+  * **Feature**: This release adds support for new Job APIs for bulk workloads. The initial job type supported is Address Validation. The new APIs added are StartJob, CancelJob, ListJobs, and GetJob.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.14.0](service/observabilityadmin/CHANGELOG.md#v1140-2026-04-20)
+  * **Feature**: Enablement for Security Hub v2 via Observability Admin Telemetry Rule for account and organization level.
+
+# Release (2026-04-17)
+
+## General Highlights
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.43.0](service/cleanrooms/CHANGELOG.md#v1430-2026-04-17)
+  * **Feature**: This release adds support for configurable spark properties for Cleanrooms PySpark workloads.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.171.0](service/connect/CHANGELOG.md#v11710-2026-04-17)
+  * **Feature**: Fixes in SDK for customers using TestCase APIs
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.12.0](service/connectcampaignsv2/CHANGELOG.md#v1120-2026-04-17)
+  * **Feature**: This release adds support for campaign entry limits configuration and hourly refresh frequency in Amazon Connect Outbound Campaigns.
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.41.0](service/groundstation/CHANGELOG.md#v1410-2026-04-17)
+  * **Feature**: Adds support for updating contacts, listing antennas, and listing ground station reservations. New API operations - UpdateContact, ListContactVersions, DescribeContactVersion, ListAntennas, and ListGroundStationReservations.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.53.0](service/imagebuilder/CHANGELOG.md#v1530-2026-04-17)
+  * **Feature**: ImportDiskImage API adds registerImageOptions for Secure Boot control and custom UEFI data. It adds windowsConfiguration for selecting a specific edition from multi-image .wim files during ISO import.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.44.4](service/neptune/CHANGELOG.md#v1444-2026-04-17)
+  * **Documentation**: Improving Documentation for Neptune
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.107.0](service/quicksight/CHANGELOG.md#v11070-2026-04-17)
+  * **Feature**: Public release of dashboard customization summary, S3 Tables data source type, Athena cross-account connector, custom sorting for controls, and AI-powered analysis generation.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.241.0](service/sagemaker/CHANGELOG.md#v12410-2026-04-17)
+  * **Feature**: Adds support for providing NetworkInterface for efa enabled instances and Simplified cluster creation for Slurm-orchestrated clusters with optional Lifecycle Script (LCS) configuration.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.42.0](service/sts/CHANGELOG.md#v1420-2026-04-17)
+  * **Feature**: The STS client now supports configuring SigV4a through the auth scheme preference setting. SigV4a uses asymmetric cryptography, enabling customers using long-term IAM credentials to continue making STS API calls even when a region is isolated from the partition leader.
+
+# Release (2026-04-16)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.57.0](service/appstream/CHANGELOG.md#v1570-2026-04-16)
+  * **Feature**: Add content redirection to Update Stack
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.66.0](service/autoscaling/CHANGELOG.md#v1660-2026-04-16)
+  * **Feature**: This release adds support for specifying Availability Zone IDs as an alternative to Availability Zone names when creating or updating Auto Scaling groups.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.21.0](service/bedrockagentcore/CHANGELOG.md#v1210-2026-04-16)
+  * **Feature**: Introducing NamespacePath in AgentCore Memory to support hierarchical prefix based memory record retrieval.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.56.1](service/cloudwatch/CHANGELOG.md#v1561-2026-04-16)
+  * **Documentation**: Update documentation of alarm mute rules start and end date fields
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.69.0](service/cloudwatchlogs/CHANGELOG.md#v1690-2026-04-16)
+  * **Feature**: Endpoint update for CloudWatch Logs Streaming APIs.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.60.0](service/cognitoidentityprovider/CHANGELOG.md#v1600-2026-04-16)
+  * **Feature**: Adds support for passkey-based multi-factor authentication in Cognito User Pools. Users can authenticate securely using FIDO2-compliant passkeys with user verification, enabling passwordless MFA flows while maintaining backward compatibility with password-based authentication
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.170.0](service/connect/CHANGELOG.md#v11700-2026-04-16)
+  * **Feature**: This release updates the Amazon Connect Rules CRUD APIs to support a new EventSourceName - OnEmailAnalysisAvailable. Use this event source to trigger rules when conversational analytics results are available for email contacts.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.40.0](service/connectcases/CHANGELOG.md#v1400-2026-04-16)
+  * **Feature**: Added error handling for service quota limits
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.59.0](service/customerprofiles/CHANGELOG.md#v1590-2026-04-16)
+  * **Feature**: Amazon Connect Customer Profiles adds RecommenderSchema CRUD APIs for custom ML training columns. CreateRecommender and CreateRecommenderFilter now accept optional RecommenderSchemaName.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.57.0](service/datazone/CHANGELOG.md#v1570-2026-04-16)
+  * **Feature**: Launching SMUS IAM domain SDK support
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.3.0](service/devopsagent/CHANGELOG.md#v130-2026-04-16)
+  * **Feature**: Deprecate the userId from the Chat operations. This update also removes  support of AllowVendedLogDeliveryForResource API from AWS SDKs.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.38.0](service/drs/CHANGELOG.md#v1380-2026-04-16)
+  * **Feature**: Updating regex for identification of AWS Regions.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.91.0](service/mediaconvert/CHANGELOG.md#v1910-2026-04-16)
+  * **Feature**: Adds support for Elemental Inference powered smart crop feature, enabling video verticalization
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.118.0](service/rds/CHANGELOG.md#v11180-2026-04-16)
+  * **Feature**: Adds a new DescribeServerlessV2PlatformVersions API to describe platform version properties for Aurora Serverless v2. Also introduces a new valid maintenance action value for serverless platform version updates.
+
+# Release (2026-04-13)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.58.0](service/customerprofiles/CHANGELOG.md#v1580-2026-04-13)
+  * **Feature**: This release introduces changes to SegmentDefinition APIs to support sorting by attributes.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.30.0](service/deadline/CHANGELOG.md#v1300-2026-04-13)
+  * **Feature**: Adds GetMonitorSettings and UpdateMonitorSettings APIs to Deadline Cloud. Enables reading and writing monitor settings as key-value pairs (up to 64 keys per monitor). UpdateMonitorSettings supports upsert and delete (via empty value) semantics and is idempotent.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.139.2](service/glue/CHANGELOG.md#v11392-2026-04-13)
+  * **Documentation**: AWS Glue now defaults to Glue version 5.1 for newly created jobs if the Glue version is not specified in the request, and UpdateJob now preserves the existing Glue version of a job when the Glue version is not specified in the update request.
+* `github.com/aws/aws-sdk-go-v2/service/interconnect`: [v1.0.0](service/interconnect/CHANGELOG.md#v100-2026-04-13)
+  * **Release**: New AWS service client module
+  * **Feature**: Initial release of AWS Interconnect -- a managed private connectivity service that enables you to create high-speed network connections between your AWS Virtual Private Clouds (VPCs) and your VPCs on other public clouds or your on-premise networks.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.51.0](service/macie2/CHANGELOG.md#v1510-2026-04-13)
+  * **Feature**: This release adds an optional expectedBucketOwner field to the Macie S3 export configuration, allowing customers to verify bucket ownership before Macie writes results to the destination bucket.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.69.0](service/securityhub/CHANGELOG.md#v1690-2026-04-13)
+  * **Feature**: Provide organizational unit scoping capability for GetFindingsV2, GetFindingStatisticsV2, GetResourcesV2, GetResourcesStatisticsV2 APIs.
+
+# Release (2026-04-10)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.169.0](service/connect/CHANGELOG.md#v11690-2026-04-10)
+  * **Feature**: Conversational Analytics for Email
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.2.0](service/devopsagent/CHANGELOG.md#v120-2026-04-10)
+  * **Feature**: Devops Agent now supports associate Splunk, Datadog and custom MCP server to an Agent Space.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.78.0](service/ecs/CHANGELOG.md#v1780-2026-04-10)
+  * **Feature**: Minor updates to exceptions for completeness
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.52.0](service/imagebuilder/CHANGELOG.md#v1520-2026-04-10)
+  * **Feature**: Image pipelines can now automatically apply tags to images they create. Set the imageTags property when creating or updating your pipelines to get started.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.90.0](service/mediaconvert/CHANGELOG.md#v1900-2026-04-10)
+  * **Feature**: Adds support for MV-HEVC video output and clear lead for AV1 DRM output.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.13.0](service/observabilityadmin/CHANGELOG.md#v1130-2026-04-10)
+  * **Feature**: CloudWatch Observability Admin adds support for multi-region telemetry evaluation and telemetry enablement rules.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.4.0](service/rtbfabric/CHANGELOG.md#v140-2026-04-10)
+  * **Feature**: Adds optional health check configuration for Responder Gateways with ASG Managed Endpoints. When provided, RTB Fabric continuously probes customers' instance IPs and routes traffic only to healthy ones, reducing errors during deployments, scaling events, and instance failures.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.240.0](service/sagemaker/CHANGELOG.md#v12400-2026-04-10)
+  * **Feature**: Support new SageMaker StartClusterHealthCheck API for on-demand DHC on Hyperpod EKS cluster. Support updated CreateCluster, UpdateCluster, DescribeCluster, BatchAddClusterNodes APIs for flexible instance group on HyperPod cluster
+
+# Release (2026-04-09)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bcmdashboards`: [v1.2.0](service/bcmdashboards/CHANGELOG.md#v120-2026-04-09)
+  * **Feature**: Scheduled email reports of Billing and Cost Management Dashboards
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.20.0](service/bedrockagentcore/CHANGELOG.md#v1200-2026-04-09)
+  * **Feature**: Introducing support for SearchRegistryRecords API on AgentCoreRegistry
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.29.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1290-2026-04-09)
+  * **Feature**: Initial release for CRUDL in AgentCore Registry Service
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.48.0](service/mediaconnect/CHANGELOG.md#v1480-2026-04-09)
+  * **Feature**: Adds support for MediaLive Channel-type Router Inputs.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.39.0](service/redshiftdata/CHANGELOG.md#v1390-2026-04-09)
+  * **Feature**: The BatchExecuteStatement API now supports named SQL parameters, enabling secure batch queries with parameterized values. This enhancement helps prevent SQL injection vulnerabilities and improves query reusability.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.239.0](service/sagemaker/CHANGELOG.md#v12390-2026-04-09)
+  * **Feature**: Release support for g7e instance types for SageMaker HyperPod
+
+# Release (2026-04-08)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.55.0](service/backup/CHANGELOG.md#v1550-2026-04-08)
+  * **Feature**: Adding EKS specific backup vault notification types for AWS Backup.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.37.0](service/drs/CHANGELOG.md#v1370-2026-04-08)
+  * **Feature**: This changes adds support for modifying the replication configuration to support data replication using IPv6.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.57.0](service/ecr/CHANGELOG.md#v1570-2026-04-08)
+  * **Feature**: Add UnableToListUpstreamImageReferrersException in ListImageReferrers
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.34.0](service/ivsrealtime/CHANGELOG.md#v1340-2026-04-08)
+  * **Feature**: Adds support for Amazon IVS real-time streaming redundant ingest.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacediscovery`: [v1.0.0](service/marketplacediscovery/CHANGELOG.md#v100-2026-04-08)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Marketplace Discovery API provides an interface that enables programmatic access to the AWS Marketplace catalog, including searching and browsing listings, retrieving product details and fulfillment options, and accessing public and private offer pricing and terms.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.95.0](service/medialive/CHANGELOG.md#v1950-2026-04-08)
+  * **Feature**: MediaLive is adding support for MediaConnect Router by supporting a new output type called MEDIACONNECT ROUTER. This new output type will provide seamless encrypted transport between your MediaLive channel and MediaConnect Router.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.59.0](service/outposts/CHANGELOG.md#v1590-2026-04-08)
+  * **Feature**: Add AWS Outposts APIs to view renewal pricing options and submit renewal requests for Outpost contracts
+
+# Release (2026-04-07)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.47.0](service/accessanalyzer/CHANGELOG.md#v1470-2026-04-07)
+  * **Feature**: Revert previous additions of API changes.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.19.0](service/bedrockagentcore/CHANGELOG.md#v1190-2026-04-07)
+  * **Feature**: This release includes support for 1) InvokeBrowser API, enabling OS-level control of AgentCore Browser Tool sessions through mouse actions, keyboard input, and screenshots. 2) Added documentation noting that empty sessions are automatically deleted after one day in the ListSessions API.
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.40.0](service/braket/CHANGELOG.md#v1400-2026-04-07)
+  * **Feature**: Added support for t3, g6, and g6e instance types for Hybrid Jobs.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.168.0](service/connect/CHANGELOG.md#v11680-2026-04-07)
+  * **Feature**: The voice enhancement mode used by the agent can now be viewed on the contact record via the DescribeContact api.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.56.0](service/datazone/CHANGELOG.md#v1560-2026-04-07)
+  * **Feature**: Update Configurations and registerS3AccessGrantLocation as public attributes for cfn
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.297.0](service/ec2/CHANGELOG.md#v12970-2026-04-07)
+  * **Feature**: EC2 Capacity Manager adds new dimensions for grouping and filtering capacity metrics, including tag-based dimensions and Account Name.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.77.0](service/ecs/CHANGELOG.md#v1770-2026-04-07)
+  * **Feature**: This release provides the functionality of mounting Amazon S3 Files to Amazon ECS tasks by adding support for the new S3FilesVolumeConfiguration parameter in ECS RegisterTaskDefinition API.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.82.0](service/eks/CHANGELOG.md#v1820-2026-04-07)
+  * **Feature**: EKS MNG WarmPool feature to support ASG WarmPool feature.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.89.0](service/lambda/CHANGELOG.md#v1890-2026-04-07)
+  * **Feature**: Launching Lambda integration with S3 Files as a new file system configuration.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.58.0](service/outposts/CHANGELOG.md#v1580-2026-04-07)
+  * **Feature**: This change allows listAssets to surface pending and non-compute asset information. Adds the INSTALLING asset state enum and the STORAGE, POWERSHELF, SWITCH, and NETWORKING AssetTypes.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.3.0](service/rtbfabric/CHANGELOG.md#v130-2026-04-07)
+  * **Feature**: AWS RTB Fabric External Responder gateways now support HTTP in addition to HTTPS for inbound external links. Gateways can accept bid requests on port 80 or serve both protocols simultaneously via listener configuration, giving customers flexible transport options for their bidding infrastructure
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.99.0](service/s3/CHANGELOG.md#v1990-2026-04-07)
+  * **Feature**: Updated list of the valid AWS Region values for the LocationConstraint parameter for general purpose buckets.
+* `github.com/aws/aws-sdk-go-v2/service/s3files`: [v1.0.0](service/s3files/CHANGELOG.md#v100-2026-04-07)
+  * **Release**: New AWS service client module
+  * **Feature**: Support for S3 Files, a new shared file system that connects any AWS compute directly with your data in Amazon S3. It provides fast, direct access to all of your S3 data as files with full file system semantics and low-latency performance, without your data ever leaving S3.
+
+# Release (2026-04-06)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.46.0](service/accessanalyzer/CHANGELOG.md#v1460-2026-04-06)
+  * **Feature**: Brookie helps customers preview the impact of SCPs before deployment using historical access activity. It evaluates attached policies and proposed policy updates using collected access activity through CloudTrail authorization events and reports where currently allowed access will be denied.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.29.0](service/deadline/CHANGELOG.md#v1290-2026-04-06)
+  * **Feature**: Added 8 batch APIs (BatchGetJob, BatchGetStep, BatchGetTask, BatchGetSession, BatchGetSessionAction, BatchGetWorker, BatchUpdateJob, BatchUpdateTask) for bulk operations. Monitors can now use an Identity Center instance in a different region via the identityCenterRegion parameter.
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.36.0](service/dlm/CHANGELOG.md#v1360-2026-04-06)
+  * **Feature**: This release adds support for Fast Snapshot Restore AvailabilityZone Ids in Amazon Data Lifecycle Manager EBS snapshot lifecycle policies.
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.10.1](service/geomaps/CHANGELOG.md#v1101-2026-04-06)
+  * **Documentation**: This release updates API reference documentation for Amazon Location Service Maps APIs to reflect regional restrictions for Grab Maps users
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.75.0](service/guardduty/CHANGELOG.md#v1750-2026-04-06)
+  * **Feature**: Migrated to Smithy. No functional changes
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.53.0](service/lightsail/CHANGELOG.md#v1530-2026-04-06)
+  * **Feature**: This release adds support for the Asia Pacific (Malaysia) (ap-southeast-5) Region.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.57.0](service/mediatailor/CHANGELOG.md#v1570-2026-04-06)
+  * **Feature**: This change adds support for Tagging the resource types Programs and Prefetch Schedules
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.29.0](service/qconnect/CHANGELOG.md#v1290-2026-04-06)
+  * **Feature**: Added optional originRequestId parameter to SendMessageRequest and ListSpans response in Amazon Q in Connect to support request tracing across service boundaries.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.70.0](service/transfer/CHANGELOG.md#v1700-2026-04-06)
+  * **Feature**: AWS Transfer Family Connectors now support IPv6 connectivity, enabling outbound connections to remote SFTP or AS2 servers using IPv4-only or dual-stack (IPv4 and IPv6) configurations based on network requirements.
+
+# Release (2026-04-03)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.59.0](service/bedrock/CHANGELOG.md#v1590-2026-04-03)
+  * **Feature**: Amazon Bedrock Guardrails enforcement configuration APIs now support selective guarding controls for system prompts as well as user and assistant messages, along with SDK support for Amazon Bedrock resource policy APIs.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.53.0](service/bedrockagent/CHANGELOG.md#v1530-2026-04-03)
+  * **Feature**: Added strict parameter to ToolSpecification to allow users to enforce strict JSON schema adherence for tool input schemas.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.28.1](service/bedrockagentcorecontrol/CHANGELOG.md#v1281-2026-04-03)
+  * **Documentation**: Documentation Update for Adds support for three-legged (Authorization Code grant type) OAuth along with predefined MCP tool schema configuration for Amazon Bedrock AgentCore gateway MCP server targets.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.68.0](service/cloudwatchlogs/CHANGELOG.md#v1680-2026-04-03)
+  * **Feature**: Added queryDuration, bytesScanned, and userIdentity fields to the QueryInfo response object returned by DescribeQueries. Customers can now view detailed query cost information including who ran the query, how long it took, and the volume of data scanned.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.52.0](service/lightsail/CHANGELOG.md#v1520-2026-04-03)
+  * **Feature**: Add support for tagging of Alarm resource type
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.94.0](service/medialive/CHANGELOG.md#v1940-2026-04-03)
+  * **Feature**: AWS Elemental MediaLive released a new features that allows customers to use HLG 2020 as a color space for AV1 video codec.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.51.1](service/organizations/CHANGELOG.md#v1511-2026-04-03)
+  * **Documentation**: Updates close Account quota for member accounts in an Organization.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.28.0](service/paymentcryptography/CHANGELOG.md#v1280-2026-04-03)
+  * **Feature**: Adds optional support to retrieve previously generated import and export tokens to simplify import and export functions
+
+# Release (2026-04-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.56.0](service/appstream/CHANGELOG.md#v1560-2026-04-02)
+  * **Feature**: Amazon WorkSpaces Applications now supports drain mode for instances in multi-session fleets. This capability allows administrators to instruct individual fleet instances to stop accepting new user sessions while allowing existing sessions to continue uninterrupted.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.28.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1280-2026-04-02)
+  * **Feature**: Adds support for three-legged (Authorization Code grant type) OAuth along with predefined MCP tool schema configuration for Amazon Bedrock AgentCore gateway MCP server targets.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.14.0](service/bedrockdataautomation/CHANGELOG.md#v1140-2026-04-02)
+  * **Feature**: Data Automation Library is a BDA capability that lets you create reusable entity resources to improve extraction accuracy. Libraries support Custom Vocabulary entities that enhance speech recognition for audio and video content with domain-specific terminology shared across projects
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.56.0](service/cloudwatch/CHANGELOG.md#v1560-2026-04-02)
+  * **Feature**: CloudWatch now supports OTel enrichment to make vended metrics for supported AWS resources queryable via PromQL with resource ARN and tag labels, and PromQL alarms for metrics ingested via the OTLP endpoint with multi-contributor evaluation.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.67.0](service/cloudwatchlogs/CHANGELOG.md#v1670-2026-04-02)
+  * **Feature**: We are pleased to announce that our logs transformation csv processor now has a destination field, allowing you to specify under which parent node parsed columns be placed under.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.167.0](service/connect/CHANGELOG.md#v11670-2026-04-02)
+  * **Feature**: Include CUSTOMER to evaluation target and participant role. Support Korean, Japanese and Simplified Chinese in evaluation forms.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.28.0](service/deadline/CHANGELOG.md#v1280-2026-04-02)
+  * **Feature**: AWS Deadline Cloud now supports configurable scheduling on each queue. The scheduling configuration controls how workers are distributed across jobs.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.52.0](service/gamelift/CHANGELOG.md#v1520-2026-04-02)
+  * **Feature**: Amazon GameLift Servers now includes a ComputeName field in game session API responses, making it easier to identify which compute is hosting a game session without cross-referencing IP addresses.
+* `github.com/aws/aws-sdk-go-v2/service/geoplaces`: [v1.8.6](service/geoplaces/CHANGELOG.md#v186-2026-04-02)
+  * **Documentation**: This release updates API reference documentation for Amazon Location Service Places APIs to reflect regional restrictions for Grab Maps users in ReverseGeocode, Suggest, SearchText, and GetPlace operations
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.41.0](service/pricing/CHANGELOG.md#v1410-2026-04-02)
+  * **Feature**: This release increases the MaxResults parameter of the GetAttributeValues API from 100 to 10000.
+
+# Release (2026-04-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.58.0](service/bedrock/CHANGELOG.md#v1580-2026-04-01)
+  * **Feature**: Adds support for Bedrock Batch Inference Job Progress Monitoring
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.18.0](service/bedrockagentcore/CHANGELOG.md#v1180-2026-04-01)
+  * **Feature**: Added the ability to filter out empty sessions when listing sessions. Customers can now retrieve only sessions that still contain events, eliminating the need to check each session individually. No changes required for existing integrations.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.27.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1270-2026-04-01)
+  * **Feature**: Adds support for VPC egress private endpoints for Amazon Bedrock AgentCore gateway targets, enabling private connectivity through managed VPC Lattice resources. Also adds IAM credential provider for gateway targets, enabling IAM-based authentication to target endpoints
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.76.0](service/ecs/CHANGELOG.md#v1760-2026-04-01)
+  * **Feature**: Amazon ECS now supports Managed Daemons with dedicated APIs for registering daemon task definitions, creating daemons, and managing daemon deployments.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.52.0](service/elasticache/CHANGELOG.md#v1520-2026-04-01)
+  * **Feature**: Updated SnapshotRetentionLimit documentation for ServerlessCache to correctly describe the parameter as number of days (max 35) instead of number of snapshots.
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.40.0](service/elasticsearchservice/CHANGELOG.md#v1400-2026-04-01)
+  * **Feature**: Adding Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08 as TLS Policy in Supported Regions
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.8.0](service/georoutes/CHANGELOG.md#v180-2026-04-01)
+  * **Feature**: This release makes RoutingBoundary optional in CalculateRouteMatrix, set StopDuration with a maximum value of 49999 for CalculateRoutes, set TrailerCount with a maximum value of 4, and introduces region restrictions for Grab Maps users.
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.24.0](service/medicalimaging/CHANGELOG.md#v1240-2026-04-01)
+  * **Feature**: Added new boolean flag to persist metadata updates to all primary image sets in the same study as the requested image set.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.64.0](service/opensearch/CHANGELOG.md#v1640-2026-04-01)
+  * **Feature**: Adding Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08 as TLS Policy in Supported Regions
+
+# Release (2026-03-31)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.38.0](service/acm/CHANGELOG.md#v1380-2026-03-31)
+  * **Feature**: Adds support for searching for ACM certificates using the new SearchCertificates API.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.61.0](service/cloudfront/CHANGELOG.md#v1610-2026-03-31)
+  * **Feature**: This release adds bring your own IP (BYOIP) IPv6 support to CloudFront's CreateAnycastIpList and UpdateAnycastIpList API through the IpamCidrConfigs field.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.62.0](service/databasemigrationservice/CHANGELOG.md#v1620-2026-03-31)
+  * **Feature**: To successfully connect to the IBM DB2 LUW database server, you may need to specify additional security parameters that are passed to the JDBC driver. These parameters are EncryptionAlgorithm and SecurityMechanism. Both parameters accept integer values.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.41.0](service/dataexchange/CHANGELOG.md#v1410-2026-03-31)
+  * **Feature**: Support Tags for AWS Data Exchange resource Assets
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.55.0](service/datazone/CHANGELOG.md#v1550-2026-03-31)
+  * **Feature**: Adds environmentConfigurationName field to CreateEnvironmentInput and UpdateEnvironmentInput, so that Domain Owners can now recover orphaned environments by recreating deleted configurations with the same name, and will auto-recover orphaned environments
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.1.0](service/devopsagent/CHANGELOG.md#v110-2026-03-31)
+  * **Feature**: AWS DevOps Agent service General Availability release.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.296.2](service/ec2/CHANGELOG.md#v12962-2026-03-31)
+  * **Documentation**: This release updates the examples in the documentation for DescribeRegions and DescribeAvailabilityZones.
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.10.0](service/geomaps/CHANGELOG.md#v1100-2026-03-31)
+  * **Feature**: This release expands map customization options with adjustable contour line density, dark mode support for Hybrid and Satellite views, enhanced traffic information across multiple map styles, and transit and truck travel modes for Monochrome and Hybrid map styles.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.37.0](service/kinesisanalyticsv2/CHANGELOG.md#v1370-2026-03-31)
+  * **Feature**: Support for Flink 2.2 in Managed Service for Apache Flink
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.18.0](service/mailmanager/CHANGELOG.md#v1180-2026-03-31)
+  * **Feature**: Amazon SES Mail Manager now supports optional TLS policy for accepting unencrypted connections and mTLS authentication for ingress endpoints with configurable trust stores. Two new rule actions are available, Bounce for sending non-delivery reports and Lambda invocation for custom email processing.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.14.0](service/marketplaceagreement/CHANGELOG.md#v1140-2026-03-31)
+  * **Feature**: This release adds 8 new APIs for AWS Marketplace sellers. 4 APIs for Cancellations (Send, List, Get, Cancel action on AgreementCancellationRequest), 3 APIs for Billing Adjustments (BatchCreate, List, Get action on BillingAdjustmentRequest), and 1 API to List Invoices (ListAgreementInvoiceLineItems)
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.12.0](service/observabilityadmin/CHANGELOG.md#v1120-2026-03-31)
+  * **Feature**: This release adds the Bedrock and Security Hub resource types for Omnia Enablement launch for March 31.
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.10.0](service/odb/CHANGELOG.md#v1100-2026-03-31)
+  * **Feature**: Adds support for EC2 Placement Group integration with ODB Network. The GetOdbNetwork and ListOdbNetworks API responses now include the ec2PlacementGroupIds field.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.63.0](service/opensearch/CHANGELOG.md#v1630-2026-03-31)
+  * **Feature**: Support RegisterCapability, GetCapability, DeregisterCapability API for AI Assistant feature management for OpenSearch UI Applications
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.51.0](service/organizations/CHANGELOG.md#v1510-2026-03-31)
+  * **Feature**: Added Path field to Account and OrganizationalUnit objects in AWS Organizations API responses.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.16.0](service/partnercentralselling/CHANGELOG.md#v1160-2026-03-31)
+  * **Feature**: Adding EURO Currency for MRR Amount
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.28.0](service/pinpointsmsvoicev2/CHANGELOG.md#v1280-2026-03-31)
+  * **Feature**: This release adds RCS for Business messaging and Notify support. RCS lets you create and manage agents, send and receive messages in the US and Canada via SendTextMessage API, and configure SMS fallback. Notify lets you send templated OTP messages globally in minutes with no phone number required.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.106.0](service/quicksight/CHANGELOG.md#v11060-2026-03-31)
+  * **Feature**: Adds StartAutomationJob and DescribeAutomationJob APIs for automation jobs. Adds three custom permission capabilities that allow admins to control whether users can manage Spaces and chat agents. Adds an OAuthClientCredentials structure to provide OAuth 2.0 client credentials inline to data sources.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.98.0](service/s3/CHANGELOG.md#v1980-2026-03-31)
+  * **Feature**: Add Bucket Metrics configuration support to directory buckets
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.69.0](service/s3control/CHANGELOG.md#v1690-2026-03-31)
+  * **Feature**: Adding an optional auditContext parameter to S3 Access Grants credential vending API GetDataAccess to enable job-level audit correlation in S3 CloudTrail logs
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.15.0](service/s3tables/CHANGELOG.md#v1150-2026-03-31)
+  * **Feature**: S3 Tables now supports nested types when creating tables. Users can define complex column schemas using struct, list, and map types. These types can be composed together to model complex, hierarchical data structures within table schemas.
+* `github.com/aws/aws-sdk-go-v2/service/securityagent`: [v1.0.0](service/securityagent/CHANGELOG.md#v100-2026-03-31)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS Security Agent is a service that proactively secures applications throughout the development lifecycle with automated security reviews and on-demand penetration testing.
+* `github.com/aws/aws-sdk-go-v2/service/sustainability`: [v1.0.0](service/sustainability/CHANGELOG.md#v100-2026-03-31)
+  * **Release**: New AWS service client module
+  * **Feature**: This is the first release of the AWS Sustainability SDK, which enables customers to access their sustainability impact data via API.
+
+# Release (2026-03-30)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.55.0](service/appstream/CHANGELOG.md#v1550-2026-03-30)
+  * **Feature**: Add support for URL Redirection
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.65.0](service/autoscaling/CHANGELOG.md#v1650-2026-03-30)
+  * **Feature**: Adds support for new instance lifecycle states introduced by the instance lifecycle policy and replace root volume features.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.17.0](service/bedrockagentcore/CHANGELOG.md#v1170-2026-03-30)
+  * **Feature**: Adds Ground Truth support for AgentCore Evaluations (Evaluate)
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.66.0](service/cloudwatchlogs/CHANGELOG.md#v1660-2026-03-30)
+  * **Feature**: Adds Lookup Tables to CloudWatch Logs for log enrichment using CSV key-value data with KMS encryption support.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.27.0](service/deadline/CHANGELOG.md#v1270-2026-03-30)
+  * **Feature**: AWS Deadline Cloud now supports three new fleet auto scaling settings. With scale out rate, you can configure how quickly workers launch. With worker idle duration, you can set how long workers wait before shutting down. With standby worker count, you can keep idle workers ready for fast job start.
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.0.0](service/devopsagent/CHANGELOG.md#v100-2026-03-30)
+  * **Release**: New AWS service client module
+  * **Feature**: AWS DevOps Agent General Availability.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.75.0](service/ecs/CHANGELOG.md#v1750-2026-03-30)
+  * **Feature**: Adding Local Storage support for ECS Managed Instances by introducing a new field "localStorageConfiguration" for CreateCapacityProvider and UpdateCapacityProvider APIs.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.51.4](service/gamelift/CHANGELOG.md#v1514-2026-03-30)
+  * **Documentation**: Update CreateScript API documentation.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.47.6](service/lakeformation/CHANGELOG.md#v1476-2026-03-30)
+  * **Documentation**: Add setSourceIdentity to DataLakeSettings Parameters
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.62.0](service/opensearch/CHANGELOG.md#v1620-2026-03-30)
+  * **Feature**: Added Cluster Insights API's In OpenSearch Service SDK.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralaccount`: [v1.2.0](service/partnercentralaccount/CHANGELOG.md#v120-2026-03-30)
+  * **Feature**: KYB Supplemental Form enables partners who fail business verification to submit additional details and supporting documentation through a self-service form, triggering an automated re-verification without requiring manual intervention from support teams.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.238.0](service/sagemaker/CHANGELOG.md#v12380-2026-03-30)
+  * **Feature**: Added support for placement strategy and consolidation for SageMaker inference component endpoints. Customers can now configure how inference component copies are distributed across instances and availability zones (AZs), and enable automatic consolidation to optimizes resource utilization.
+
+# Release (2026-03-27)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.16.0](service/bedrockagentcore/CHANGELOG.md#v1160-2026-03-27)
+  * **Feature**: Adding AgentCore Code Interpreter Node.js Runtime Support with an optional runtime field
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.26.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1260-2026-03-27)
+  * **Feature**: Adds support for custom code-based evaluators using customer-managed Lambda functions.
+* `github.com/aws/aws-sdk-go-v2/service/neptunedata`: [v1.17.5](service/neptunedata/CHANGELOG.md#v1175-2026-03-27)
+  * **Documentation**: Minor formatting changes to remove unnecessary symbols.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.40.0](service/omics/CHANGELOG.md#v1400-2026-03-27)
+  * **Feature**: AWS HealthOmics now supports VPC networking, allowing users to connect runs to external resources with NAT gateway, AWS VPC resources, and more. New Configuration APIs support configuring VPC settings. StartRun API now accepts networkingMode and configurationName parameters to enable VPC networking.
+
+# Release (2026-03-26)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.41.5
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/accessanalyzer`: [v1.45.12](service/accessanalyzer/CHANGELOG.md#v14512-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.30.5](service/account/CHANGELOG.md#v1305-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/acm`: [v1.37.23](service/acm/CHANGELOG.md#v13723-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/acmpca`: [v1.46.12](service/acmpca/CHANGELOG.md#v14612-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/aiops`: [v1.6.21](service/aiops/CHANGELOG.md#v1621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.42.9](service/amp/CHANGELOG.md#v1429-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.38.14](service/amplify/CHANGELOG.md#v13814-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/amplifybackend`: [v1.32.20](service/amplifybackend/CHANGELOG.md#v13220-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder`: [v1.28.20](service/amplifyuibuilder/CHANGELOG.md#v12820-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.39.1](service/apigateway/CHANGELOG.md#v1391-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi`: [v1.29.14](service/apigatewaymanagementapi/CHANGELOG.md#v12914-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.34.1](service/apigatewayv2/CHANGELOG.md#v1341-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appconfig`: [v1.43.13](service/appconfig/CHANGELOG.md#v14313-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appconfigdata`: [v1.23.22](service/appconfigdata/CHANGELOG.md#v12322-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appfabric`: [v1.16.21](service/appfabric/CHANGELOG.md#v11621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.51.12](service/appflow/CHANGELOG.md#v15112-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.37.7](service/appintegrations/CHANGELOG.md#v1377-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.41.14](service/applicationautoscaling/CHANGELOG.md#v14114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler`: [v1.27.12](service/applicationcostprofiler/CHANGELOG.md#v12712-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.35.13](service/applicationdiscoveryservice/CHANGELOG.md#v13513-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.34.20](service/applicationinsights/CHANGELOG.md#v13420-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.19.1](service/applicationsignals/CHANGELOG.md#v1191-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appmesh`: [v1.35.12](service/appmesh/CHANGELOG.md#v13512-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/apprunner`: [v1.39.14](service/apprunner/CHANGELOG.md#v13914-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appstream`: [v1.54.4](service/appstream/CHANGELOG.md#v1544-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.53.5](service/appsync/CHANGELOG.md#v1535-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.6.3](service/arcregionswitch/CHANGELOG.md#v163-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.22.23](service/arczonalshift/CHANGELOG.md#v12223-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/artifact`: [v1.15.5](service/artifact/CHANGELOG.md#v1155-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.57.4](service/athena/CHANGELOG.md#v1574-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.46.12](service/auditmanager/CHANGELOG.md#v14612-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.64.4](service/autoscaling/CHANGELOG.md#v1644-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/autoscalingplans`: [v1.30.14](service/autoscalingplans/CHANGELOG.md#v13014-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/b2bi`: [v1.0.0-preview.100](service/b2bi/CHANGELOG.md#v100-preview100-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/backup`: [v1.54.11](service/backup/CHANGELOG.md#v15411-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/backupgateway`: [v1.26.3](service/backupgateway/CHANGELOG.md#v1263-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/backupsearch`: [v1.6.23](service/backupsearch/CHANGELOG.md#v1623-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.63.2](service/batch/CHANGELOG.md#v1632-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bcmdashboards`: [v1.1.4](service/bcmdashboards/CHANGELOG.md#v114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bcmdataexports`: [v1.14.0](service/bcmdataexports/CHANGELOG.md#v1140-2026-03-26)
+  * **Feature**: With this release we are providing an option to accounts to have their export delivered to an S3 bucket that is not owned by the account.
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator`: [v1.10.9](service/bcmpricingcalculator/CHANGELOG.md#v1109-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bcmrecommendedactions`: [v1.1.5](service/bcmrecommendedactions/CHANGELOG.md#v115-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.57.1](service/bedrock/CHANGELOG.md#v1571-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagent`: [v1.52.7](service/bedrockagent/CHANGELOG.md#v1527-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.15.2](service/bedrockagentcore/CHANGELOG.md#v1152-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.25.1](service/bedrockagentcorecontrol/CHANGELOG.md#v1251-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime`: [v1.51.8](service/bedrockagentruntime/CHANGELOG.md#v1518-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.13.5](service/bedrockdataautomation/CHANGELOG.md#v1135-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomationruntime`: [v1.10.4](service/bedrockdataautomationruntime/CHANGELOG.md#v1104-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.50.4](service/bedrockruntime/CHANGELOG.md#v1504-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/billing`: [v1.10.4](service/billing/CHANGELOG.md#v1104-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/billingconductor`: [v1.28.5](service/billingconductor/CHANGELOG.md#v1285-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.39.8](service/braket/CHANGELOG.md#v1398-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.43.4](service/budgets/CHANGELOG.md#v1434-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/chatbot`: [v1.14.21](service/chatbot/CHANGELOG.md#v11421-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.41.12](service/chime/CHANGELOG.md#v14112-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkidentity`: [v1.27.20](service/chimesdkidentity/CHANGELOG.md#v12720-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines`: [v1.26.21](service/chimesdkmediapipelines/CHANGELOG.md#v12621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings`: [v1.33.15](service/chimesdkmeetings/CHANGELOG.md#v13315-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.32.17](service/chimesdkmessaging/CHANGELOG.md#v13217-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.28.13](service/chimesdkvoice/CHANGELOG.md#v12813-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cleanrooms`: [v1.42.4](service/cleanrooms/CHANGELOG.md#v1424-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cleanroomsml`: [v1.22.5](service/cleanroomsml/CHANGELOG.md#v1225-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.33.20](service/cloud9/CHANGELOG.md#v13320-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudcontrol`: [v1.29.13](service/cloudcontrol/CHANGELOG.md#v12913-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/clouddirectory`: [v1.30.12](service/clouddirectory/CHANGELOG.md#v13012-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.71.9](service/cloudformation/CHANGELOG.md#v1719-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.60.4](service/cloudfront/CHANGELOG.md#v1604-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore`: [v1.12.24](service/cloudfrontkeyvaluestore/CHANGELOG.md#v11224-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsm`: [v1.29.21](service/cloudhsm/CHANGELOG.md#v12921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.34.21](service/cloudhsmv2/CHANGELOG.md#v13421-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearch`: [v1.32.12](service/cloudsearch/CHANGELOG.md#v13212-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain`: [v1.28.20](service/cloudsearchdomain/CHANGELOG.md#v12820-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.55.9](service/cloudtrail/CHANGELOG.md#v1559-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudtraildata`: [v1.17.13](service/cloudtraildata/CHANGELOG.md#v11713-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.55.3](service/cloudwatch/CHANGELOG.md#v1553-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchevents`: [v1.32.23](service/cloudwatchevents/CHANGELOG.md#v13223-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.65.0](service/cloudwatchlogs/CHANGELOG.md#v1650-2026-03-26)
+  * **Feature**: This release adds parameter support to saved queries in CloudWatch Logs Insights. Define reusable query templates with named placeholders, invoke them using start query. Available in Console, CLI and SDK
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codeartifact`: [v1.38.21](service/codeartifact/CHANGELOG.md#v13821-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.68.13](service/codebuild/CHANGELOG.md#v16813-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.21.12](service/codecatalyst/CHANGELOG.md#v12112-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codecommit`: [v1.33.12](service/codecommit/CHANGELOG.md#v13312-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codeconnections`: [v1.10.20](service/codeconnections/CHANGELOG.md#v11020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.35.13](service/codedeploy/CHANGELOG.md#v13513-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codeguruprofiler`: [v1.29.20](service/codeguruprofiler/CHANGELOG.md#v12920-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codegurureviewer`: [v1.34.20](service/codegurureviewer/CHANGELOG.md#v13420-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codegurusecurity`: [v1.16.24](service/codegurusecurity/CHANGELOG.md#v11624-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.46.21](service/codepipeline/CHANGELOG.md#v14621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codestarconnections`: [v1.35.13](service/codestarconnections/CHANGELOG.md#v13513-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/codestarnotifications`: [v1.31.21](service/codestarnotifications/CHANGELOG.md#v13121-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentity`: [v1.33.22](service/cognitoidentity/CHANGELOG.md#v13322-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.59.3](service/cognitoidentityprovider/CHANGELOG.md#v1593-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/cognitosync`: [v1.29.12](service/cognitosync/CHANGELOG.md#v12912-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/comprehend`: [v1.40.21](service/comprehend/CHANGELOG.md#v14021-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/comprehendmedical`: [v1.31.21](service/comprehendmedical/CHANGELOG.md#v13121-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.49.8](service/computeoptimizer/CHANGELOG.md#v1498-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation`: [v1.0.8](service/computeoptimizerautomation/CHANGELOG.md#v108-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.62.1](service/configservice/CHANGELOG.md#v1621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.166.1](service/connect/CHANGELOG.md#v11661-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaigns`: [v1.20.20](service/connectcampaigns/CHANGELOG.md#v12020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.11.4](service/connectcampaignsv2/CHANGELOG.md#v1114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.39.1](service/connectcases/CHANGELOG.md#v1391-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/connectcontactlens`: [v1.33.13](service/connectcontactlens/CHANGELOG.md#v13313-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/connecthealth`: [v1.0.3](service/connecthealth/CHANGELOG.md#v103-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.36.7](service/connectparticipant/CHANGELOG.md#v1367-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/controlcatalog`: [v1.14.9](service/controlcatalog/CHANGELOG.md#v1149-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/controltower`: [v1.28.9](service/controltower/CHANGELOG.md#v1289-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/costandusagereportservice`: [v1.34.13](service/costandusagereportservice/CHANGELOG.md#v13413-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.63.6](service/costexplorer/CHANGELOG.md#v1636-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/costoptimizationhub`: [v1.22.8](service/costoptimizationhub/CHANGELOG.md#v1228-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.57.2](service/customerprofiles/CHANGELOG.md#v1572-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.61.10](service/databasemigrationservice/CHANGELOG.md#v16110-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/databrew`: [v1.39.14](service/databrew/CHANGELOG.md#v13914-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.40.14](service/dataexchange/CHANGELOG.md#v14014-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/datapipeline`: [v1.30.20](service/datapipeline/CHANGELOG.md#v13020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/datasync`: [v1.58.2](service/datasync/CHANGELOG.md#v1582-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/datazone`: [v1.54.2](service/datazone/CHANGELOG.md#v1542-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/dax`: [v1.29.16](service/dax/CHANGELOG.md#v12916-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/deadline`: [v1.26.2](service/deadline/CHANGELOG.md#v1262-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/detective`: [v1.38.13](service/detective/CHANGELOG.md#v13813-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.38.8](service/devicefarm/CHANGELOG.md#v1388-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/devopsguru`: [v1.40.12](service/devopsguru/CHANGELOG.md#v14012-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.38.15](service/directconnect/CHANGELOG.md#v13815-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.38.16](service/directoryservice/CHANGELOG.md#v13816-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/directoryservicedata`: [v1.7.21](service/directoryservicedata/CHANGELOG.md#v1721-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/dlm`: [v1.35.16](service/dlm/CHANGELOG.md#v13516-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.48.13](service/docdb/CHANGELOG.md#v14813-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.20.13](service/docdbelastic/CHANGELOG.md#v12013-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.36.13](service/drs/CHANGELOG.md#v13613-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/dsql`: [v1.12.8](service/dsql/CHANGELOG.md#v1128-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodb`: [v1.57.1](service/dynamodb/CHANGELOG.md#v1571-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/dynamodbstreams`: [v1.32.14](service/dynamodbstreams/CHANGELOG.md#v13214-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ebs`: [v1.33.14](service/ebs/CHANGELOG.md#v13314-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.296.1](service/ec2/CHANGELOG.md#v12961-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect`: [v1.32.20](service/ec2instanceconnect/CHANGELOG.md#v13220-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.56.2](service/ecr/CHANGELOG.md#v1562-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.38.13](service/ecrpublic/CHANGELOG.md#v13813-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.74.1](service/ecs/CHANGELOG.md#v1741-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.41.14](service/efs/CHANGELOG.md#v14114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.81.2](service/eks/CHANGELOG.md#v1812-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/eksauth`: [v1.12.13](service/eksauth/CHANGELOG.md#v11213-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.51.13](service/elasticache/CHANGELOG.md#v15113-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.34.2](service/elasticbeanstalk/CHANGELOG.md#v1342-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing`: [v1.33.23](service/elasticloadbalancing/CHANGELOG.md#v13323-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.54.10](service/elasticloadbalancingv2/CHANGELOG.md#v15410-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.39.2](service/elasticsearchservice/CHANGELOG.md#v1392-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/elementalinference`: [v1.0.3](service/elementalinference/CHANGELOG.md#v103-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.59.0](service/emr/CHANGELOG.md#v1590-2026-03-26)
+  * **Feature**: Add StepExecutionRoleArn to RunJobFlow API
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/emrcontainers`: [v1.40.17](service/emrcontainers/CHANGELOG.md#v14017-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/emrserverless`: [v1.39.6](service/emrserverless/CHANGELOG.md#v1396-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.26.5](service/entityresolution/CHANGELOG.md#v1265-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.45.23](service/eventbridge/CHANGELOG.md#v14523-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/evs`: [v1.6.4](service/evs/CHANGELOG.md#v164-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.33.21](service/finspace/CHANGELOG.md#v13321-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/finspacedata`: [v1.33.21](service/finspacedata/CHANGELOG.md#v13321-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.42.13](service/firehose/CHANGELOG.md#v14213-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.37.20](service/fis/CHANGELOG.md#v13720-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/fms`: [v1.44.22](service/fms/CHANGELOG.md#v14422-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.41.21](service/forecast/CHANGELOG.md#v14121-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/forecastquery`: [v1.29.21](service/forecastquery/CHANGELOG.md#v12921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.41.12](service/frauddetector/CHANGELOG.md#v14112-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/freetier`: [v1.13.14](service/freetier/CHANGELOG.md#v11314-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/fsx`: [v1.65.7](service/fsx/CHANGELOG.md#v1657-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.51.3](service/gamelift/CHANGELOG.md#v1513-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/gameliftstreams`: [v1.11.1](service/gameliftstreams/CHANGELOG.md#v1111-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.9.4](service/geomaps/CHANGELOG.md#v194-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/geoplaces`: [v1.8.5](service/geoplaces/CHANGELOG.md#v185-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.7.14](service/georoutes/CHANGELOG.md#v1714-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/glacier`: [v1.32.6](service/glacier/CHANGELOG.md#v1326-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/globalaccelerator`: [v1.35.15](service/globalaccelerator/CHANGELOG.md#v13515-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.139.1](service/glue/CHANGELOG.md#v11391-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.33.4](service/grafana/CHANGELOG.md#v1334-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/greengrass`: [v1.32.21](service/greengrass/CHANGELOG.md#v13221-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/greengrassv2`: [v1.42.12](service/greengrassv2/CHANGELOG.md#v14212-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.40.4](service/groundstation/CHANGELOG.md#v1404-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.74.2](service/guardduty/CHANGELOG.md#v1742-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.37.4](service/health/CHANGELOG.md#v1374-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/healthlake`: [v1.36.13](service/healthlake/CHANGELOG.md#v13613-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.53.7](service/iam/CHANGELOG.md#v1537-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/identitystore`: [v1.36.5](service/identitystore/CHANGELOG.md#v1365-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.51.4](service/imagebuilder/CHANGELOG.md#v1514-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/inspector`: [v1.30.20](service/inspector/CHANGELOG.md#v13020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.47.4](service/inspector2/CHANGELOG.md#v1474-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/inspectorscan`: [v1.13.5](service/inspectorscan/CHANGELOG.md#v1135-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/internetmonitor`: [v1.26.14](service/internetmonitor/CHANGELOG.md#v12614-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/invoicing`: [v1.9.8](service/invoicing/CHANGELOG.md#v198-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.72.5](service/iot/CHANGELOG.md#v1725-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotdataplane`: [v1.32.21](service/iotdataplane/CHANGELOG.md#v13221-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor`: [v1.36.21](service/iotdeviceadvisor/CHANGELOG.md#v13621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotevents`: [v1.33.13](service/iotevents/CHANGELOG.md#v13313-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ioteventsdata`: [v1.30.12](service/ioteventsdata/CHANGELOG.md#v13012-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.31.20](service/iotfleetwise/CHANGELOG.md#v13120-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotjobsdataplane`: [v1.30.13](service/iotjobsdataplane/CHANGELOG.md#v13013-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations`: [v1.8.4](service/iotmanagedintegrations/CHANGELOG.md#v184-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling`: [v1.33.21](service/iotsecuretunneling/CHANGELOG.md#v13321-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.52.19](service/iotsitewise/CHANGELOG.md#v15219-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotthingsgraph`: [v1.30.21](service/iotthingsgraph/CHANGELOG.md#v13021-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iottwinmaker`: [v1.29.21](service/iottwinmaker/CHANGELOG.md#v12921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/iotwireless`: [v1.54.9](service/iotwireless/CHANGELOG.md#v1549-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.48.14](service/ivs/CHANGELOG.md#v14814-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ivschat`: [v1.21.20](service/ivschat/CHANGELOG.md#v12120-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ivsrealtime`: [v1.33.1](service/ivsrealtime/CHANGELOG.md#v1331-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.49.2](service/kafka/CHANGELOG.md#v1492-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kafkaconnect`: [v1.30.4](service/kafkaconnect/CHANGELOG.md#v1304-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.60.21](service/kendra/CHANGELOG.md#v16021-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kendraranking`: [v1.15.25](service/kendraranking/CHANGELOG.md#v11525-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/keyspaces`: [v1.25.4](service/keyspaces/CHANGELOG.md#v1254-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/keyspacesstreams`: [v1.6.3](service/keyspacesstreams/CHANGELOG.md#v163-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.43.5](service/kinesis/CHANGELOG.md#v1435-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalytics`: [v1.30.23](service/kinesisanalytics/CHANGELOG.md#v13023-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2`: [v1.36.24](service/kinesisanalyticsv2/CHANGELOG.md#v13624-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.33.8](service/kinesisvideo/CHANGELOG.md#v1338-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia`: [v1.33.13](service/kinesisvideoarchivedmedia/CHANGELOG.md#v13313-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia`: [v1.27.20](service/kinesisvideomedia/CHANGELOG.md#v12720-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling`: [v1.28.21](service/kinesisvideosignaling/CHANGELOG.md#v12821-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideowebrtcstorage`: [v1.20.13](service/kinesisvideowebrtcstorage/CHANGELOG.md#v12013-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.50.4](service/kms/CHANGELOG.md#v1504-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.47.5](service/lakeformation/CHANGELOG.md#v1475-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.88.5](service/lambda/CHANGELOG.md#v1885-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/launchwizard`: [v1.14.4](service/launchwizard/CHANGELOG.md#v1144-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice`: [v1.34.14](service/lexmodelbuildingservice/CHANGELOG.md#v13414-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.60.2](service/lexmodelsv2/CHANGELOG.md#v1602-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimeservice`: [v1.29.21](service/lexruntimeservice/CHANGELOG.md#v12921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.35.15](service/lexruntimev2/CHANGELOG.md#v13515-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.37.10](service/licensemanager/CHANGELOG.md#v13710-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions`: [v1.20.13](service/licensemanagerlinuxsubscriptions/CHANGELOG.md#v12013-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions`: [v1.21.15](service/licensemanagerusersubscriptions/CHANGELOG.md#v12115-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.51.1](service/lightsail/CHANGELOG.md#v1511-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.50.13](service/location/CHANGELOG.md#v15013-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.36.14](service/lookoutequipment/CHANGELOG.md#v13614-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.26.14](service/m2/CHANGELOG.md#v12614-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/machinelearning`: [v1.34.14](service/machinelearning/CHANGELOG.md#v13414-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.50.13](service/macie2/CHANGELOG.md#v15013-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.17.21](service/mailmanager/CHANGELOG.md#v11721-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.31.21](service/managedblockchain/CHANGELOG.md#v13121-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchainquery`: [v1.22.13](service/managedblockchainquery/CHANGELOG.md#v12213-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.13.1](service/marketplaceagreement/CHANGELOG.md#v1131-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.39.4](service/marketplacecatalog/CHANGELOG.md#v1394-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics`: [v1.30.13](service/marketplacecommerceanalytics/CHANGELOG.md#v13013-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacedeployment`: [v1.11.20](service/marketplacedeployment/CHANGELOG.md#v11120-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice`: [v1.36.3](service/marketplaceentitlementservice/CHANGELOG.md#v1363-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.36.3](service/marketplacemetering/CHANGELOG.md#v1363-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/marketplacereporting`: [v1.7.12](service/marketplacereporting/CHANGELOG.md#v1712-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.47.5](service/mediaconnect/CHANGELOG.md#v1475-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.89.1](service/mediaconvert/CHANGELOG.md#v1891-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.93.3](service/medialive/CHANGELOG.md#v1933-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.39.21](service/mediapackage/CHANGELOG.md#v13921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.36.1](service/mediapackagev2/CHANGELOG.md#v1361-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.39.21](service/mediapackagevod/CHANGELOG.md#v13921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediastore`: [v1.29.21](service/mediastore/CHANGELOG.md#v12921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediastoredata`: [v1.29.20](service/mediastoredata/CHANGELOG.md#v12920-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mediatailor`: [v1.56.3](service/mediatailor/CHANGELOG.md#v1563-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/medicalimaging`: [v1.23.10](service/medicalimaging/CHANGELOG.md#v12310-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.33.14](service/memorydb/CHANGELOG.md#v13314-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.41.1](service/mgn/CHANGELOG.md#v1411-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhub`: [v1.31.13](service/migrationhub/CHANGELOG.md#v13113-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubconfig`: [v1.31.14](service/migrationhubconfig/CHANGELOG.md#v13114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator`: [v1.18.21](service/migrationhuborchestrator/CHANGELOG.md#v11821-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces`: [v1.25.21](service/migrationhubrefactorspaces/CHANGELOG.md#v12521-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy`: [v1.26.21](service/migrationhubstrategy/CHANGELOG.md#v12621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mpa`: [v1.7.2](service/mpa/CHANGELOG.md#v172-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.34.19](service/mq/CHANGELOG.md#v13419-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mturk`: [v1.30.20](service/mturk/CHANGELOG.md#v13020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.39.22](service/mwaa/CHANGELOG.md#v13922-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/mwaaserverless`: [v1.0.9](service/mwaaserverless/CHANGELOG.md#v109-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.44.3](service/neptune/CHANGELOG.md#v1443-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/neptunedata`: [v1.17.4](service/neptunedata/CHANGELOG.md#v1174-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/neptunegraph`: [v1.21.21](service/neptunegraph/CHANGELOG.md#v12121-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/networkfirewall`: [v1.59.7](service/networkfirewall/CHANGELOG.md#v1597-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.11.9](service/networkflowmonitor/CHANGELOG.md#v1119-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/networkmanager`: [v1.41.8](service/networkmanager/CHANGELOG.md#v1418-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/networkmonitor`: [v1.13.13](service/networkmonitor/CHANGELOG.md#v11313-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/notifications`: [v1.7.20](service/notifications/CHANGELOG.md#v1720-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/notificationscontacts`: [v1.5.23](service/notificationscontacts/CHANGELOG.md#v1523-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/novaact`: [v1.0.6](service/novaact/CHANGELOG.md#v106-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/oam`: [v1.23.15](service/oam/CHANGELOG.md#v12315-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/observabilityadmin`: [v1.11.1](service/observabilityadmin/CHANGELOG.md#v1111-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/odb`: [v1.9.3](service/odb/CHANGELOG.md#v193-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.39.1](service/omics/CHANGELOG.md#v1391-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.61.1](service/opensearch/CHANGELOG.md#v1611-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.30.1](service/opensearchserverless/CHANGELOG.md#v1301-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.50.6](service/organizations/CHANGELOG.md#v1506-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/osis`: [v1.21.14](service/osis/CHANGELOG.md#v12114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.57.15](service/outposts/CHANGELOG.md#v15715-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/panorama`: [v1.27.21](service/panorama/CHANGELOG.md#v12721-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralaccount`: [v1.1.6](service/partnercentralaccount/CHANGELOG.md#v116-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits`: [v1.0.7](service/partnercentralbenefits/CHANGELOG.md#v107-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralchannel`: [v1.1.3](service/partnercentralchannel/CHANGELOG.md#v113-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.15.3](service/partnercentralselling/CHANGELOG.md#v1153-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.27.5](service/paymentcryptography/CHANGELOG.md#v1275-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.25.5](service/paymentcryptographydata/CHANGELOG.md#v1255-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorad`: [v1.15.21](service/pcaconnectorad/CHANGELOG.md#v11521-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep`: [v1.11.4](service/pcaconnectorscep/CHANGELOG.md#v1114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.17.1](service/pcs/CHANGELOG.md#v1171-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.47.7](service/personalize/CHANGELOG.md#v1477-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/personalizeevents`: [v1.31.13](service/personalizeevents/CHANGELOG.md#v13113-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/personalizeruntime`: [v1.33.14](service/personalizeruntime/CHANGELOG.md#v13314-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.35.22](service/pi/CHANGELOG.md#v13522-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.39.21](service/pinpoint/CHANGELOG.md#v13921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointemail`: [v1.29.15](service/pinpointemail/CHANGELOG.md#v12915-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice`: [v1.29.14](service/pinpointsmsvoice/CHANGELOG.md#v12914-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2`: [v1.27.6](service/pinpointsmsvoicev2/CHANGELOG.md#v1276-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pipes`: [v1.23.20](service/pipes/CHANGELOG.md#v12320-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.57.1](service/polly/CHANGELOG.md#v1571-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/pricing`: [v1.40.15](service/pricing/CHANGELOG.md#v14015-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.39.15](service/proton/CHANGELOG.md#v13915-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/qapps`: [v1.11.20](service/qapps/CHANGELOG.md#v11120-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.34.6](service/qbusiness/CHANGELOG.md#v1346-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/qconnect`: [v1.28.4](service/qconnect/CHANGELOG.md#v1284-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.105.1](service/quicksight/CHANGELOG.md#v11051-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.36.3](service/ram/CHANGELOG.md#v1363-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/rbin`: [v1.27.9](service/rbin/CHANGELOG.md#v1279-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.117.1](service/rds/CHANGELOG.md#v11171-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.32.21](service/rdsdata/CHANGELOG.md#v13221-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.62.5](service/redshift/CHANGELOG.md#v1625-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftdata`: [v1.38.8](service/redshiftdata/CHANGELOG.md#v1388-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/redshiftserverless`: [v1.34.4](service/redshiftserverless/CHANGELOG.md#v1344-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.51.21](service/rekognition/CHANGELOG.md#v15121-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/repostspace`: [v1.14.21](service/repostspace/CHANGELOG.md#v11421-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/resiliencehub`: [v1.35.13](service/resiliencehub/CHANGELOG.md#v13513-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.23.4](service/resourceexplorer2/CHANGELOG.md#v1234-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroups`: [v1.33.24](service/resourcegroups/CHANGELOG.md#v13324-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi`: [v1.31.10](service/resourcegroupstaggingapi/CHANGELOG.md#v13110-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/rolesanywhere`: [v1.22.7](service/rolesanywhere/CHANGELOG.md#v1227-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.62.5](service/route53/CHANGELOG.md#v1625-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.34.19](service/route53domains/CHANGELOG.md#v13419-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53globalresolver`: [v1.1.2](service/route53globalresolver/CHANGELOG.md#v112-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53profiles`: [v1.9.23](service/route53profiles/CHANGELOG.md#v1923-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycluster`: [v1.28.21](service/route53recoverycluster/CHANGELOG.md#v12821-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig`: [v1.32.14](service/route53recoverycontrolconfig/CHANGELOG.md#v13214-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness`: [v1.26.21](service/route53recoveryreadiness/CHANGELOG.md#v12621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.42.5](service/route53resolver/CHANGELOG.md#v1425-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.2.10](service/rtbfabric/CHANGELOG.md#v1210-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.30.10](service/rum/CHANGELOG.md#v13010-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.97.3](service/s3/CHANGELOG.md#v1973-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/s3control`: [v1.68.4](service/s3control/CHANGELOG.md#v1684-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/s3outposts`: [v1.34.12](service/s3outposts/CHANGELOG.md#v13412-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/s3tables`: [v1.14.4](service/s3tables/CHANGELOG.md#v1144-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/s3vectors`: [v1.6.6](service/s3vectors/CHANGELOG.md#v166-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.237.0](service/sagemaker/CHANGELOG.md#v12370-2026-03-26)
+  * **Feature**: Release support for ml.r5d.16xlarge instance types for SageMaker HyperPod
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakera2iruntime`: [v1.32.21](service/sagemakera2iruntime/CHANGELOG.md#v13221-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakeredge`: [v1.31.13](service/sagemakeredge/CHANGELOG.md#v13113-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.34.21](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v13421-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial`: [v1.19.21](service/sagemakergeospatial/CHANGELOG.md#v11921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakermetrics`: [v1.18.24](service/sagemakermetrics/CHANGELOG.md#v11824-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.39.6](service/sagemakerruntime/CHANGELOG.md#v1396-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntimehttp2`: [v1.0.9](service/sagemakerruntimehttp2/CHANGELOG.md#v109-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/savingsplans`: [v1.32.2](service/savingsplans/CHANGELOG.md#v1322-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/scheduler`: [v1.17.22](service/scheduler/CHANGELOG.md#v11722-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/schemas`: [v1.34.12](service/schemas/CHANGELOG.md#v13412-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.41.5](service/secretsmanager/CHANGELOG.md#v1415-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/securityhub`: [v1.68.3](service/securityhub/CHANGELOG.md#v1683-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/securityir`: [v1.10.8](service/securityir/CHANGELOG.md#v1108-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.25.13](service/securitylake/CHANGELOG.md#v12513-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository`: [v1.30.12](service/serverlessapplicationrepository/CHANGELOG.md#v13012-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.39.12](service/servicecatalog/CHANGELOG.md#v13912-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry`: [v1.35.21](service/servicecatalogappregistry/CHANGELOG.md#v13521-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.39.26](service/servicediscovery/CHANGELOG.md#v13926-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/servicequotas`: [v1.34.5](service/servicequotas/CHANGELOG.md#v1345-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.34.22](service/ses/CHANGELOG.md#v13422-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.60.2](service/sesv2/CHANGELOG.md#v1602-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.40.10](service/sfn/CHANGELOG.md#v14010-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/shield`: [v1.34.21](service/shield/CHANGELOG.md#v13421-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/signer`: [v1.32.5](service/signer/CHANGELOG.md#v1325-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/signerdata`: [v1.0.4](service/signerdata/CHANGELOG.md#v104-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/signin`: [v1.0.9](service/signin/CHANGELOG.md#v109-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/simpledbv2`: [v1.0.2](service/simpledbv2/CHANGELOG.md#v102-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/simspaceweaver`: [v1.19.21](service/simspaceweaver/CHANGELOG.md#v11921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.35.21](service/snowball/CHANGELOG.md#v13521-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement`: [v1.25.20](service/snowdevicemanagement/CHANGELOG.md#v12520-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.39.15](service/sns/CHANGELOG.md#v13915-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.8.4](service/socialmessaging/CHANGELOG.md#v184-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.42.25](service/sqs/CHANGELOG.md#v14225-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.68.4](service/ssm/CHANGELOG.md#v1684-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.31.14](service/ssmcontacts/CHANGELOG.md#v13114-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssmguiconnect`: [v1.5.14](service/ssmguiconnect/CHANGELOG.md#v1514-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssmincidents`: [v1.39.20](service/ssmincidents/CHANGELOG.md#v13920-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssmquicksetup`: [v1.8.21](service/ssmquicksetup/CHANGELOG.md#v1821-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.26.5](service/ssmsap/CHANGELOG.md#v1265-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sso`: [v1.30.14](service/sso/CHANGELOG.md#v13014-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssoadmin`: [v1.37.5](service/ssoadmin/CHANGELOG.md#v1375-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/ssooidc`: [v1.35.18](service/ssooidc/CHANGELOG.md#v13518-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.43.14](service/storagegateway/CHANGELOG.md#v14314-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.41.10](service/sts/CHANGELOG.md#v14110-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/supplychain`: [v1.17.20](service/supplychain/CHANGELOG.md#v11720-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/support`: [v1.31.21](service/support/CHANGELOG.md#v13121-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/supportapp`: [v1.18.21](service/supportapp/CHANGELOG.md#v11821-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/swf`: [v1.33.16](service/swf/CHANGELOG.md#v13316-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.42.14](service/synthetics/CHANGELOG.md#v14214-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.16.21](service/taxsettings/CHANGELOG.md#v11621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/textract`: [v1.40.20](service/textract/CHANGELOG.md#v14020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb`: [v1.19.0](service/timestreaminfluxdb/CHANGELOG.md#v1190-2026-03-26)
+  * **Feature**: Timestream for InfluxDB adds support for customer defined maintenance windows. This allows customers to define maintenance schedule during resource creation and updates
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamquery`: [v1.36.14](service/timestreamquery/CHANGELOG.md#v13614-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/timestreamwrite`: [v1.35.20](service/timestreamwrite/CHANGELOG.md#v13520-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/tnb`: [v1.18.21](service/tnb/CHANGELOG.md#v11821-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.54.4](service/transcribe/CHANGELOG.md#v1544-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.34.5](service/transcribestreaming/CHANGELOG.md#v1345-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.69.5](service/transfer/CHANGELOG.md#v1695-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/translate`: [v1.33.21](service/translate/CHANGELOG.md#v13321-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/trustedadvisor`: [v1.14.4](service/trustedadvisor/CHANGELOG.md#v1144-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/uxc`: [v1.0.1](service/uxc/CHANGELOG.md#v101-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/verifiedpermissions`: [v1.32.1](service/verifiedpermissions/CHANGELOG.md#v1321-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.30.14](service/voiceid/CHANGELOG.md#v13014-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.20.11](service/vpclattice/CHANGELOG.md#v12011-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/waf`: [v1.30.20](service/waf/CHANGELOG.md#v13020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/wafregional`: [v1.30.21](service/wafregional/CHANGELOG.md#v13021-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.71.3](service/wafv2/CHANGELOG.md#v1713-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.39.21](service/wellarchitected/CHANGELOG.md#v13921-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/wickr`: [v1.1.3](service/wickr/CHANGELOG.md#v113-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.32.21](service/wisdom/CHANGELOG.md#v13221-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/workdocs`: [v1.30.20](service/workdocs/CHANGELOG.md#v13020-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/workmail`: [v1.36.19](service/workmail/CHANGELOG.md#v13619-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/workmailmessageflow`: [v1.28.20](service/workmailmessageflow/CHANGELOG.md#v12820-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.67.2](service/workspaces/CHANGELOG.md#v1672-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesinstances`: [v1.5.4](service/workspacesinstances/CHANGELOG.md#v154-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesthinclient`: [v1.20.21](service/workspacesthinclient/CHANGELOG.md#v12021-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.38.4](service/workspacesweb/CHANGELOG.md#v1384-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.36.21](service/xray/CHANGELOG.md#v13621-2026-03-26)
+  * **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+
+# Release (2026-03-25)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.34.0](service/apigatewayv2/CHANGELOG.md#v1340-2026-03-25)
+  * **Feature**: Added DISABLE IN PROGRESS and DISABLE FAILED Portal statuses.
+* `github.com/aws/aws-sdk-go-v2/service/applicationsignals`: [v1.19.0](service/applicationsignals/CHANGELOG.md#v1190-2026-03-25)
+  * **Feature**: This release adds support for creating SLOs on RUM appMonitors, Synthetics canaries and services.
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.63.1](service/batch/CHANGELOG.md#v1631-2026-03-25)
+  * **Documentation**: Documentation-only update for AWS Batch.
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.13.0](service/marketplaceagreement/CHANGELOG.md#v1130-2026-03-25)
+  * **Feature**: The Variable Payments APIs enable AWS Marketplace Sellers to perform manage their payment requests (send, get, list, cancel).
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.57.0](service/polly/CHANGELOG.md#v1570-2026-03-25)
+  * **Feature**: Add support for Mu-law and A-law codecs for output format
+* `github.com/aws/aws-sdk-go-v2/service/uxc`: [v1.0.0](service/uxc/CHANGELOG.md#v100-2026-03-25)
+  * **Release**: New AWS service client module
+  * **Feature**: GA release of AccountCustomizations, used to manage account color, visible services, and visible regions settings in the AWS Management Console.
+
+# Release (2026-03-24)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.25.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1250-2026-03-24)
+  * **Feature**: Adds SDK support for 1) Persist session state in AgentCore Runtime via filesystemConfigurations in CreateAgentRuntime, UpdateAgentRuntime, and GetAgentRuntime APIs, 2) Optional name-based filtering on AgentCore ListBrowserProfiles API.
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.51.2](service/gamelift/CHANGELOG.md#v1512-2026-03-24)
+  * **Documentation**: Amazon GameLift Servers launches UDP ping beacons in the Beijing and Ningxia (China) Regions to help measure real-time network latency for multiplayer games. The ListLocations API is now available in these regions to provide endpoint domain and port information as part of the locations list.
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagev2`: [v1.36.0](service/mediapackagev2/CHANGELOG.md#v1360-2026-03-24)
+  * **Feature**: Reduces the minimum allowed value for startOverWindowSeconds from 60 to 0, allowing customers to effectively disable the start-over window.
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.30.0](service/opensearchserverless/CHANGELOG.md#v1300-2026-03-24)
+  * **Feature**: Adds support for updating the vector options field for existing collections.
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.17.0](service/pcs/CHANGELOG.md#v1170-2026-03-24)
+  * **Feature**: This release adds support for custom slurmdbd and cgroup configuration in AWS PCS. Customers can now specify slurmdbd and cgroup settings to configure database accounting and reporting for their HPC workloads, and control resource allocation and limits for compute jobs.
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.117.0](service/rds/CHANGELOG.md#v11170-2026-03-24)
+  * **Feature**: Adds support in Aurora PostgreSQL serverless databases for express configuration based creation through WithExpressConfiguration in CreateDbCluster API, and for restoring clusters using RestoreDBClusterToPointInTime and RestoreDBClusterFromSnapshot APIs.
+
+# Release (2026-03-23)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/batch`: [v1.63.0](service/batch/CHANGELOG.md#v1630-2026-03-23)
+  * **Feature**: AWS Batch AMI Visibility feature support. Adds read-only batchImageStatus to Ec2Configuration to provide visibility on the status of Batch-vended AMIs used by Compute Environments.
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.39.0](service/connectcases/CHANGELOG.md#v1390-2026-03-23)
+  * **Feature**: You can now use the UpdateRelatedItem API to update the content of comments and custom related items associated with a case.
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.51.0](service/lightsail/CHANGELOG.md#v1510-2026-03-23)
+  * **Feature**: Add support for tagging of ContactMethod resource type
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.39.0](service/omics/CHANGELOG.md#v1390-2026-03-23)
+  * **Feature**: Adds support for batch workflow runs in Amazon Omics, enabling users to submit, manage, and monitor multiple runs as a single batch. Includes APIs to create, cancel, and delete batches, track submission statuses and counts, list runs within a batch, and configure default settings.
+
 # Release (2026-03-20)
 
 ## General Highlights

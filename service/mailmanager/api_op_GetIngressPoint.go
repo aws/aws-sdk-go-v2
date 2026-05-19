@@ -35,6 +35,10 @@ type GetIngressPointInput struct {
 	// This member is required.
 	IngressPointId *string
 
+	// Whether to include the trust store contents in the response. Use INCLUDE to
+	// retrieve trust store certificate and CRL contents.
+	IncludeTrustStoreContents types.TrustStoreResponseOption
+
 	noSmithyDocumentSerde
 }
 
@@ -74,6 +78,9 @@ type GetIngressPointOutput struct {
 
 	// The status of the ingress endpoint resource.
 	Status types.IngressPointStatus
+
+	// The selected Transport Layer Security (TLS) policy of the ingress point.
+	TlsPolicy types.TlsPolicy
 
 	// The identifier of the traffic policy resource associated with the ingress
 	// endpoint.
@@ -122,7 +129,7 @@ func (c *Client) addOperationGetIngressPointMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -144,9 +151,6 @@ func (c *Client) addOperationGetIngressPointMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

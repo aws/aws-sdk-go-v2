@@ -21,31 +21,10 @@ import static software.amazon.smithy.go.codegen.SmithyGoDependency.ATOMIC;
  */
 public class ClockSkewGenerator implements GoIntegration {
     private static final String TIME_OFFSET = "timeOffset";
-    private static final String ADD_CLOCK_SKEW_BUILD = "addTimeOffsetBuild";
-    private static final String ADD_CLOCK_SKEW_BUILD_MIDDLEWARE = "AddTimeOffsetMiddleware";
 
     private static final Symbol TIME_OFFSET_RESOLVER = SymbolUtils.createValueSymbolBuilder(
             "initializeTimeOffsetResolver").build();
 
-    private static final Writable CLOCK_SKEW_INSERT_TEMPLATE = goTemplate("""
-                    $dep:D
-                    func $fn:L(stack $stack:P, c *Client) error {
-                        mw := $depalias:L.$middleware:L{Offset: c.$off:L}
-                        if err := stack.Build.Add(&mw, middleware.After); err != nil {
-                            return err
-                        }
-                        return stack.Deserialize.Insert(&mw, "$after:L", middleware.Before)
-                    }
-                    """,
-            Map.of(
-                    "fn", ADD_CLOCK_SKEW_BUILD,
-                    "stack", SmithyGoDependency.SMITHY_MIDDLEWARE.struct("Stack"),
-                    "depalias", INTERNAL_MIDDLEWARE.getAlias(),
-                    "middleware", ADD_CLOCK_SKEW_BUILD_MIDDLEWARE,
-                    "after", "RecordResponseTiming",
-                    "off", TIME_OFFSET,
-                    "dep", INTERNAL_MIDDLEWARE
-            ));
     private static final Writable TIME_OFFSET_RESOLVER_TEMPLATE = goTemplate(
             """
                     $import:D
@@ -68,16 +47,10 @@ public class ClockSkewGenerator implements GoIntegration {
     private static final ClientMemberResolver TIME_OFFSET_MEMBER_RESOLVER = ClientMemberResolver.builder()
             .resolver(TIME_OFFSET_RESOLVER)
             .build();
-    private static final MiddlewareRegistrar MIDDLEWARE = MiddlewareRegistrar.builder()
-            .resolvedFunction(SymbolUtils.createValueSymbolBuilder(ADD_CLOCK_SKEW_BUILD).build())
-            .functionArguments(ListUtils.of(
-                    SymbolUtils.createValueSymbolBuilder("c").build()
-            )).build();
     private static final List<RuntimeClientPlugin> CLIENT_PLUGINS = List.of(
             RuntimeClientPlugin.builder()
                     .addClientMember(TIME_OFFSET_MEMBER)
                     .addClientMemberResolver(TIME_OFFSET_MEMBER_RESOLVER)
-                    .registerMiddleware(MIDDLEWARE)
                     .build()
     );
 
@@ -93,7 +66,6 @@ public class ClockSkewGenerator implements GoIntegration {
 
         // generate code specific to service client
         goDelegator.useShapeWriter(service, writer -> {
-            writer.write(CLOCK_SKEW_INSERT_TEMPLATE);
             writer.write(TIME_OFFSET_RESOLVER_TEMPLATE);
         });
     }

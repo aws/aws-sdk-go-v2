@@ -3,12 +3,12 @@ module github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting
 go 1.24
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.41.4
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.7
-	github.com/aws/aws-sdk-go-v2/credentials v1.19.12
+	github.com/aws/aws-sdk-go-v2 v1.41.7
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.10
+	github.com/aws/aws-sdk-go-v2/credentials v1.19.16
 )
 
-require github.com/aws/smithy-go v1.24.2 // indirect
+require github.com/aws/smithy-go v1.25.1 // indirect
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../
 
@@ -21,6 +21,8 @@ replace github.com/aws/aws-sdk-go-v2/feature/ec2/imds => ../../../feature/ec2/im
 replace github.com/aws/aws-sdk-go-v2/internal/configsources => ../../../internal/configsources/
 
 replace github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 => ../../../internal/endpoints/v2/
+
+replace github.com/aws/aws-sdk-go-v2/internal/v4a => ../../../internal/v4a/
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../../service/internal/accept-encoding/
 

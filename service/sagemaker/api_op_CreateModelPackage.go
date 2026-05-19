@@ -88,6 +88,9 @@ type CreateModelPackageInput struct {
 	//   inference.
 	InferenceSpecification *types.InferenceSpecification
 
+	// The storage type of the model package.
+	ManagedStorageType types.ManagedStorageType
+
 	// Metadata properties of the tracking entity, trial, or trial component.
 	MetadataProperties *types.MetadataProperties
 
@@ -234,7 +237,7 @@ func (c *Client) addOperationCreateModelPackageMiddlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -256,9 +259,6 @@ func (c *Client) addOperationCreateModelPackageMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -52,6 +52,13 @@ type UpdateWorkspaceInput struct {
 	// access in the workspaceOrganizationalUnits parameter.
 	AccountAccessType types.AccountAccessType
 
+	// Specifies whether the workspace supports IPv4 only, or IPv4 and IPv6. Valid
+	// values are IPv4 and DualStack . For more information about IP address types, see [Network access control]
+	// .
+	//
+	// [Network access control]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-nac.html
+	IpAddressType types.IPAddressType
+
 	// The configuration settings for network access to your workspace.
 	//
 	// When this is configured, only listed IP addresses and VPC endpoints will be
@@ -193,7 +200,7 @@ func (c *Client) addOperationUpdateWorkspaceMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -215,9 +222,6 @@ func (c *Client) addOperationUpdateWorkspaceMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

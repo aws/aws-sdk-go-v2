@@ -924,7 +924,7 @@
         "com.amazonaws.osis#CidrBlock": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[12]?[0-9])$"
+                "smithy.api#pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/24$"
             }
         },
         "com.amazonaws.osis#CloudWatchLogDestination": {
@@ -2351,7 +2351,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 24000
+                    "max": 100000
                 }
             }
         },

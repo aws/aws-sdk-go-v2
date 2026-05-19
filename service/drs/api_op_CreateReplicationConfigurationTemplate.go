@@ -29,32 +29,11 @@ func (c *Client) CreateReplicationConfigurationTemplate(ctx context.Context, par
 
 type CreateReplicationConfigurationTemplateInput struct {
 
-	// Whether to associate the default Elastic Disaster Recovery Security group with
-	// the Replication Configuration Template.
-	//
-	// This member is required.
-	AssociateDefaultSecurityGroup *bool
-
 	// Configure bandwidth throttling for the outbound data transfer rate of the
 	// Source Server in Mbps.
 	//
 	// This member is required.
 	BandwidthThrottling int64
-
-	// Whether to create a Public IP for the Recovery Instance by default.
-	//
-	// This member is required.
-	CreatePublicIP *bool
-
-	// The data plane routing mechanism that will be used for replication.
-	//
-	// This member is required.
-	DataPlaneRouting types.ReplicationConfigurationDataPlaneRouting
-
-	// The Staging Disk EBS volume type to be used during replication.
-	//
-	// This member is required.
-	DefaultLargeStagingDiskType types.ReplicationConfigurationDefaultLargeStagingDiskType
 
 	// The type of EBS encryption to be used during replication.
 	//
@@ -65,11 +44,6 @@ type CreateReplicationConfigurationTemplateInput struct {
 	//
 	// This member is required.
 	PitPolicy []types.PITPolicyRule
-
-	// The instance type to be used for the replication server.
-	//
-	// This member is required.
-	ReplicationServerInstanceType *string
 
 	// The security group IDs that will be used by the replication server.
 	//
@@ -87,21 +61,39 @@ type CreateReplicationConfigurationTemplateInput struct {
 	// This member is required.
 	StagingAreaTags map[string]string
 
-	// Whether to use a dedicated Replication Server in the replication staging area.
-	//
-	// This member is required.
-	UseDedicatedReplicationServer *bool
+	// Whether to associate the default Elastic Disaster Recovery Security group with
+	// the Replication Configuration Template.
+	AssociateDefaultSecurityGroup *bool
 
 	// Whether to allow the AWS replication agent to automatically replicate newly
 	// added disks.
 	AutoReplicateNewDisks *bool
 
+	// Whether to create a Public IP for the Recovery Instance by default.
+	CreatePublicIP *bool
+
+	// The data plane routing mechanism that will be used for replication.
+	DataPlaneRouting types.ReplicationConfigurationDataPlaneRouting
+
+	// The Staging Disk EBS volume type to be used during replication.
+	DefaultLargeStagingDiskType types.ReplicationConfigurationDefaultLargeStagingDiskType
+
 	// The ARN of the EBS encryption key to be used during replication.
 	EbsEncryptionKeyArn *string
+
+	// Which version of the Internet Protocol to use for replication of data. (IPv4 or
+	// IPv6)
+	InternetProtocol types.InternetProtocol
+
+	// The instance type to be used for the replication server.
+	ReplicationServerInstanceType *string
 
 	// A set of tags to be associated with the Replication Configuration Template
 	// resource.
 	Tags map[string]string
+
+	// Whether to use a dedicated Replication Server in the replication staging area.
+	UseDedicatedReplicationServer *bool
 
 	noSmithyDocumentSerde
 }
@@ -142,6 +134,10 @@ type CreateReplicationConfigurationTemplateOutput struct {
 
 	// The ARN of the EBS encryption key to be used during replication.
 	EbsEncryptionKeyArn *string
+
+	// Which version of the Internet Protocol to use for replication of data. (IPv4 or
+	// IPv6)
+	InternetProtocol types.InternetProtocol
 
 	// The Point in time (PIT) policy to manage snapshots taken during replication.
 	PitPolicy []types.PITPolicyRule
@@ -206,7 +202,7 @@ func (c *Client) addOperationCreateReplicationConfigurationTemplateMiddlewares(s
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -228,9 +224,6 @@ func (c *Client) addOperationCreateReplicationConfigurationTemplateMiddlewares(s
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

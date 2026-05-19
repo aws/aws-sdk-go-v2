@@ -27,6 +27,7 @@ func (c *Client) ListQueueFleetAssociations(ctx context.Context, params *ListQue
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListQueueFleetAssociationsInput struct {
 
 	// The farm ID for the queue-fleet association list.
@@ -50,6 +51,7 @@ type ListQueueFleetAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListQueueFleetAssociationsOutput struct {
 
 	// The queue-fleet associations on the list.
@@ -105,7 +107,7 @@ func (c *Client) addOperationListQueueFleetAssociationsMiddlewares(stack *middle
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -127,9 +129,6 @@ func (c *Client) addOperationListQueueFleetAssociationsMiddlewares(stack *middle
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

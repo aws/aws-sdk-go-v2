@@ -72,7 +72,9 @@ type DescribeGameSessionDetailsInput struct {
 	// fleet. You can use either the fleet ID or ARN value.
 	FleetId *string
 
-	// A unique identifier for the game session to retrieve.
+	// An identifier for the game session that is unique across all regions to
+	// retrieve. The value is always a full ARN in the following format:
+	// arn:aws:gamelift:::gamesession// .
 	GameSessionId *string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -117,11 +119,11 @@ func (c *Client) addOperationDescribeGameSessionDetailsMiddlewares(stack *middle
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeGameSessionDetails{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeGameSessionDetails{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeGameSessionDetails{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeGameSessionDetails{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -147,7 +149,7 @@ func (c *Client) addOperationDescribeGameSessionDetailsMiddlewares(stack *middle
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -171,10 +173,10 @@ func (c *Client) addOperationDescribeGameSessionDetailsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
+	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

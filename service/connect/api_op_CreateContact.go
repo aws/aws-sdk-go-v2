@@ -71,8 +71,8 @@ type CreateContactInput struct {
 	// This member is required.
 	InitiationMethod types.ContactInitiationMethod
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -80,7 +80,7 @@ type CreateContactInput struct {
 	InstanceId *string
 
 	// A custom key-value pair using an attribute map. The attributes are standard
-	// Amazon Connect attributes, and can be accessed in flows just like any other
+	// Connect Customer attributes, and can be accessed in flows just like any other
 	// contact attributes.
 	//
 	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
@@ -108,10 +108,10 @@ type CreateContactInput struct {
 	Name *string
 
 	// The ID of the previous contact when creating a transfer contact. This value can
-	// be provided only for external audio contacts. For more information, see [Integrate Amazon Connect Contact Lens with external voice systems]in the
-	// Amazon Connect Administrator Guide.
+	// be provided only for external audio contacts. For more information, see [Integrate Connect Customer Contact Lens with external voice systems]in the
+	// Connect Customer Administrator Guide.
 	//
-	// [Integrate Amazon Connect Contact Lens with external voice systems]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html
+	// [Integrate Connect Customer Contact Lens with external voice systems]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-integration.html
 	PreviousContactId *string
 
 	// A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
@@ -119,12 +119,12 @@ type CreateContactInput struct {
 	// NUMBER | STRING | DATE | EMAIL | ATTACHMENT .
 	References map[string]types.Reference
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	RelatedContactId *string
 
 	// A set of system defined key-value pairs stored on individual contact segments
-	// (unique contact ID) using an attribute map. The attributes are standard Amazon
-	// Connect attributes. They can be accessed in flows.
+	// (unique contact ID) using an attribute map. The attributes are standard Connect
+	// Customer attributes. They can be accessed in flows.
 	//
 	// Attribute keys can include only alphanumeric, -, and _.
 	//
@@ -150,7 +150,7 @@ type CreateContactOutput struct {
 	// The Amazon Resource Name (ARN) of the created contact.
 	ContactArn *string
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	ContactId *string
 
 	// Metadata pertaining to the operation's result.
@@ -193,7 +193,7 @@ func (c *Client) addOperationCreateContactMiddlewares(stack *middleware.Stack, o
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -215,9 +215,6 @@ func (c *Client) addOperationCreateContactMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

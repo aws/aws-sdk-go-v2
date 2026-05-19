@@ -7,6 +7,60 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 )
 
+func ExampleAIBenchmarkTarget_outputUsage() {
+	var union types.AIBenchmarkTarget
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AIBenchmarkTargetMemberEndpoint:
+		_ = v.Value // Value is types.AIBenchmarkEndpoint
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AIBenchmarkEndpoint
+
+func ExampleAIDatasetConfig_outputUsage() {
+	var union types.AIDatasetConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AIDatasetConfigMemberInputDataConfig:
+		_ = v.Value // Value is []types.AIWorkloadInputDataConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.AIWorkloadInputDataConfig
+
+func ExampleAIModelSource_outputUsage() {
+	var union types.AIModelSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.AIModelSourceMemberS3:
+		_ = v.Value // Value is types.AIModelSourceS3
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AIModelSourceS3
+
 func ExampleAutoMLProblemTypeConfig_outputUsage() {
 	var union types.AutoMLProblemTypeConfig
 	// type switches can be used to check the union value
@@ -280,3 +334,21 @@ func ExampleTrialComponentParameterValue_outputUsage() {
 
 var _ *string
 var _ *float64
+
+func ExampleWorkloadSpec_outputUsage() {
+	var union types.WorkloadSpec
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.WorkloadSpecMemberInline:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string

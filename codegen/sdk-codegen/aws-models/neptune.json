@@ -1793,7 +1793,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Amazon KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the Amazon\n      Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>\n         <p>If you copy an encrypted DB cluster snapshot from your Amazon account, you can specify a\n      value for <code>KmsKeyId</code> to encrypt the copy with a new KMS encryption key. If you\n      don't specify a value for <code>KmsKeyId</code>, then the copy of the DB cluster snapshot is\n      encrypted with the same KMS key as the source DB cluster snapshot.</p>\n         <p>If you copy an encrypted DB cluster snapshot that is shared from another Amazon account, then\n      you must specify a value for <code>KmsKeyId</code>.</p>\n         <p> KMS encryption keys are specific to the Amazon Region that they are created in, and you\n      can't use encryption keys from one Amazon Region in another Amazon Region.</p>\n         <p>You cannot encrypt an unencrypted DB cluster snapshot when you copy it. If you try to\n      copy an unencrypted DB cluster snapshot and specify a value for the KmsKeyId parameter, an\n      error is returned.</p>"
+                        "smithy.api#documentation": "<p>The Amazon KMS key ID for an encrypted DB cluster snapshot. The KMS key ID is the Amazon\n      Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.</p>\n         <p>If you copy an encrypted DB cluster snapshot from your Amazon account, you can specify a\n      value for <code>KmsKeyId</code> to encrypt the copy with a new KMS encryption key. If you\n      don't specify a value for <code>KmsKeyId</code>, then the copy of the DB cluster snapshot is\n      encrypted with the same KMS key as the source DB cluster snapshot.</p>\n         <p>If you copy an encrypted DB cluster snapshot that is shared from another Amazon account, then\n      you must specify a value for <code>KmsKeyId</code>.</p>\n         <p> KMS encryption keys are specific to the Amazon Region that they are created in, and you\n      can't use encryption keys from one Amazon Region in another Amazon Region.</p>\n         <p>You cannot encrypt an unencrypted DB cluster snapshot when you copy it. If you try to\n      copy an unencrypted DB cluster snapshot and specify a value for the KmsKeyId parameter, an\n      error is returned.</p>"
                     }
                 },
                 "PreSignedUrl": {
@@ -2710,7 +2710,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon KMS key identifier for an encrypted DB instance.</p>\n         <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If\n      you are creating a DB instance with the same Amazon account that owns the KMS encryption key used\n      to encrypt the new DB instance, then you can use the KMS key alias instead of the ARN for the\n      KM encryption key.</p>\n         <p>Not applicable. The KMS key identifier is managed by the DB cluster. For more information,\n      see <a>CreateDBCluster</a>.</p>\n         <p>If the <code>StorageEncrypted</code> parameter is true, and you do not specify a value for\n      the <code>KmsKeyId</code> parameter, then Amazon Neptune will use your default encryption key.\n      Amazon KMS creates the default encryption key for your Amazon account. Your Amazon account has a\n      different default encryption key for each Amazon Region.</p>"
+                        "smithy.api#documentation": "<p>The Amazon KMS key identifier for an encrypted DB instance.</p>\n         <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If\n      you are creating a DB instance with the same Amazon account that owns the KMS encryption key used\n      to encrypt the new DB instance, then you can use the KMS key alias instead of the ARN for the\n      KMS encryption key.</p>\n         <p>Not applicable. The KMS key identifier is managed by the DB cluster. For more information,\n      see <a>CreateDBCluster</a>.</p>\n         <p>If the <code>StorageEncrypted</code> parameter is true, and you do not specify a value for\n      the <code>KmsKeyId</code> parameter, then Amazon Neptune will use your default encryption key.\n      Amazon KMS creates the default encryption key for your Amazon account. Your Amazon account has a\n      different default encryption key for each Amazon Region.</p>"
                     }
                 },
                 "Domain": {
@@ -3023,7 +3023,7 @@
                 "Enabled": {
                     "target": "com.amazonaws.neptune#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p> A Boolean value; set to <b>true</b> to activate the\n      subscription, set to <b>false</b> to create the subscription but not\n      active it.</p>"
+                        "smithy.api#documentation": "<p> A Boolean value; set to <b>true</b> to activate the\n      subscription, set to <b>false</b> to create the subscription but not\n      activate it.</p>"
                     }
                 },
                 "Tags": {
@@ -3112,7 +3112,7 @@
                 "DatabaseName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the new global database (up to 64 alpha-numeric\n      characters.</p>"
+                        "smithy.api#documentation": "<p>The name for the new global database (up to 64 alpha-numeric\n      characters).</p>"
                     }
                 },
                 "Tags": {
@@ -3544,7 +3544,7 @@
                 "Marker": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> n optional pagination token provided by a previous\n      <code>DescribeDBClusterEndpoints</code> request.\n      If this parameter is specified, the response includes\n      only records beyond the marker,\n      up to the value specified by <code>MaxRecords</code>.</p>"
+                        "smithy.api#documentation": "<p>An optional pagination token provided by a previous\n      <code>DescribeDBClusterEndpoints</code> request.\n      If this parameter is specified, the response includes\n      only records beyond the marker,\n      up to the value specified by <code>MaxRecords</code>.</p>"
                     }
                 },
                 "DBClusterEndpoints": {
@@ -4879,7 +4879,7 @@
                 "DBParameterGroupName": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the DP parameter group.</p>"
+                        "smithy.api#documentation": "<p>The name of the DB parameter group.</p>"
                     }
                 },
                 "ParameterApplyStatus": {
@@ -5370,7 +5370,7 @@
                 "FinalDBSnapshotIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The DB cluster snapshot identifier of the new DB cluster snapshot created when\n      <code>SkipFinalSnapshot</code> is set to <code>false</code>.</p>\n         <note>\n            <p> Specifying this parameter and also setting the <code>SkipFinalShapshot</code> parameter\n        to true results in an error.</p>\n         </note>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 255 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> The DB cluster snapshot identifier of the new DB cluster snapshot created when\n      <code>SkipFinalSnapshot</code> is set to <code>false</code>.</p>\n         <note>\n            <p> Specifying this parameter and also setting the <code>SkipFinalSnapshot</code> parameter\n        to true results in an error.</p>\n         </note>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 255 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -5521,7 +5521,7 @@
                 "FinalDBSnapshotIdentifier": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is set to\n      <code>false</code>.</p>\n         <note>\n            <p>Specifying this parameter and also setting the SkipFinalShapshot parameter to true\n        results in an error.</p>\n         </note>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 255 letters or numbers.</p>\n            </li>\n            <li>\n               <p>First character must be a letter</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n            <li>\n               <p>Cannot be specified when deleting a Read Replica.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p> The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot is set to\n      <code>false</code>.</p>\n         <note>\n            <p>Specifying this parameter and also setting the SkipFinalSnapshot parameter to true\n        results in an error.</p>\n         </note>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must be 1 to 255 letters or numbers.</p>\n            </li>\n            <li>\n               <p>First character must be a letter</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n            <li>\n               <p>Cannot be specified when deleting a Read Replica.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -7542,13 +7542,13 @@
                 "AllowDataLoss": {
                     "target": "com.amazonaws.neptune#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to allow data loss for this global database cluster operation.\n      Allowing data loss triggers a global failover operation.</p>\n         <p>If you don't specify <code>AllowDataLoss</code>, the global database cluster operation\n      defaults to a switchover.</p>\n         <p>Constraints:Can't be specified together with the <code>Switchover</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to allow data loss for this global database cluster operation.\n      Allowing data loss triggers a global failover operation.</p>\n         <p>If you don't specify <code>AllowDataLoss</code>, the global database cluster operation\n      defaults to a switchover.</p>\n         <p>Constraints: Can't be specified together with the <code>Switchover</code> parameter.</p>"
                     }
                 },
                 "Switchover": {
                     "target": "com.amazonaws.neptune#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether to switch over this global database cluster.</p>\n         <p>Constraints:Can't be specified together with the <code>AllowDataLoss</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether to switch over this global database cluster.</p>\n         <p>Constraints: Can't be specified together with the <code>AllowDataLoss</code> parameter.</p>"
                     }
                 }
             },
@@ -7676,7 +7676,7 @@
                 "GlobalClusterResourceId": {
                     "target": "com.amazonaws.neptune#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An immutable identifier for the global database that is unique within in all\n      regions. This identifier is found in CloudTrail log entries whenever the KMS\n      key for the DB cluster is accessed.</p>"
+                        "smithy.api#documentation": "<p>An immutable identifier for the global database that is unique within all\n      regions. This identifier is found in CloudTrail log entries whenever the KMS\n      key for the DB cluster is accessed.</p>"
                     }
                 },
                 "GlobalClusterArn": {
@@ -10031,7 +10031,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detaches a Neptune DB cluster from a Neptune global database. A secondary\n      cluster becomes a normal standalone cluster with read-write capability\n      instead of being read-only, and no longer receives data from a the\n      primary cluster.</p>"
+                "smithy.api#documentation": "<p>Detaches a Neptune DB cluster from a Neptune global database. A secondary\n      cluster becomes a normal standalone cluster with read-write capability\n      instead of being read-only, and no longer receives data from the\n      primary cluster.</p>"
             }
         },
         "com.amazonaws.neptune#RemoveFromGlobalClusterMessage": {

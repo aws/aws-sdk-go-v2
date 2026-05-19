@@ -131,6 +131,25 @@ func (BlueprintStageFilter) Values() []BlueprintStageFilter {
 	}
 }
 
+type DataAutomationLibraryStatus string
+
+// Enum values for DataAutomationLibraryStatus
+const (
+	DataAutomationLibraryStatusActive   DataAutomationLibraryStatus = "ACTIVE"
+	DataAutomationLibraryStatusDeleting DataAutomationLibraryStatus = "DELETING"
+)
+
+// Values returns all known values for DataAutomationLibraryStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataAutomationLibraryStatus) Values() []DataAutomationLibraryStatus {
+	return []DataAutomationLibraryStatus{
+		"ACTIVE",
+		"DELETING",
+	}
+}
+
 type DataAutomationProjectStage string
 
 // Enum values for DataAutomationProjectStage
@@ -285,6 +304,23 @@ func (DocumentOutputTextFormatType) Values() []DocumentOutputTextFormatType {
 	}
 }
 
+type EntityType string
+
+// Enum values for EntityType
+const (
+	EntityTypeVocabulary EntityType = "VOCABULARY"
+)
+
+// Values returns all known values for EntityType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EntityType) Values() []EntityType {
+	return []EntityType{
+		"VOCABULARY",
+	}
+}
+
 type ImageExtractionCategoryType string
 
 // Enum values for ImageExtractionCategoryType
@@ -360,6 +396,49 @@ func (Language) Values() []Language {
 		"CN",
 		"TW",
 		"HK",
+	}
+}
+
+type LibraryIngestionJobOperationType string
+
+// Enum values for LibraryIngestionJobOperationType
+const (
+	LibraryIngestionJobOperationTypeUpsert LibraryIngestionJobOperationType = "UPSERT"
+	LibraryIngestionJobOperationTypeDelete LibraryIngestionJobOperationType = "DELETE"
+)
+
+// Values returns all known values for LibraryIngestionJobOperationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LibraryIngestionJobOperationType) Values() []LibraryIngestionJobOperationType {
+	return []LibraryIngestionJobOperationType{
+		"UPSERT",
+		"DELETE",
+	}
+}
+
+type LibraryIngestionJobStatus string
+
+// Enum values for LibraryIngestionJobStatus
+const (
+	LibraryIngestionJobStatusInProgress          LibraryIngestionJobStatus = "IN_PROGRESS"
+	LibraryIngestionJobStatusCompleted           LibraryIngestionJobStatus = "COMPLETED"
+	LibraryIngestionJobStatusCompletedWithErrors LibraryIngestionJobStatus = "COMPLETED_WITH_ERRORS"
+	LibraryIngestionJobStatusFailed              LibraryIngestionJobStatus = "FAILED"
+)
+
+// Values returns all known values for LibraryIngestionJobStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LibraryIngestionJobStatus) Values() []LibraryIngestionJobStatus {
+	return []LibraryIngestionJobStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"COMPLETED_WITH_ERRORS",
+		"FAILED",
 	}
 }
 

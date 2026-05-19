@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a predefined attribute from the specified Amazon Connect instance.
+// Deletes a predefined attribute from the specified Connect Customer instance.
 func (c *Client) DeletePredefinedAttribute(ctx context.Context, params *DeletePredefinedAttributeInput, optFns ...func(*Options)) (*DeletePredefinedAttributeOutput, error) {
 	if params == nil {
 		params = &DeletePredefinedAttributeInput{}
@@ -28,8 +28,8 @@ func (c *Client) DeletePredefinedAttribute(ctx context.Context, params *DeletePr
 
 type DeletePredefinedAttributeInput struct {
 
-	//  The identifier of the Amazon Connect instance. You can find the instance ID in
-	// the Amazon Resource Name (ARN) of the instance.
+	//  The identifier of the Connect Customer instance. You can find the instance ID
+	// in the Amazon Resource Name (ARN) of the instance.
 	//
 	// This member is required.
 	InstanceId *string
@@ -83,7 +83,7 @@ func (c *Client) addOperationDeletePredefinedAttributeMiddlewares(stack *middlew
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -105,9 +105,6 @@ func (c *Client) addOperationDeletePredefinedAttributeMiddlewares(stack *middlew
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

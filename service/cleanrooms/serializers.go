@@ -9729,6 +9729,13 @@ func awsRestjson1_serializeDocumentProtectedJobWorkerComputeConfiguration(v *typ
 		ok.Integer(*v.Number)
 	}
 
+	if v.Properties != nil {
+		ok := object.Key("properties")
+		if err := awsRestjson1_serializeDocumentWorkerComputeConfigurationProperties(v.Properties, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.Type) > 0 {
 		ok := object.Key("type")
 		ok.String(string(v.Type))

@@ -40,6 +40,18 @@ type GetTelemetryEvaluationStatusOutput struct {
 	// if Status is FAILED_START or FAILED_STOP .
 	FailureReason *string
 
+	//  The Amazon Web Services Region that is designated as the home region for
+	// multi-region telemetry evaluation. The home region is the single management
+	// point for all multi-region operations on this account. This field is only
+	// present when multi-region telemetry evaluation is active.
+	HomeRegion *string
+
+	//  A list of per-region telemetry evaluation statuses. Each entry indicates the
+	// evaluation status for a specific spoke region included in the multi-region
+	// configuration. This field is only present when multi-region telemetry evaluation
+	// is active.
+	RegionStatuses []types.RegionStatus
+
 	//  The onboarding status of the telemetry config feature.
 	Status types.Status
 
@@ -83,7 +95,7 @@ func (c *Client) addOperationGetTelemetryEvaluationStatusMiddlewares(stack *midd
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -105,9 +117,6 @@ func (c *Client) addOperationGetTelemetryEvaluationStatusMiddlewares(stack *midd
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

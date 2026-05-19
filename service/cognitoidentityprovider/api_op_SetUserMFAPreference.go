@@ -72,6 +72,16 @@ type SetUserMFAPreferenceInput struct {
 	// this as their preferred MFA method.
 	SoftwareTokenMfaSettings *types.SoftwareTokenMfaSettingsType
 
+	// User preferences for passkey MFA. Activates or deactivates passkey MFA for the
+	// user. When activated, passkey authentication requires user verification, and
+	// passkey sign-in is available when MFA is required. To activate this setting, the
+	// FactorConfiguration of your user pool WebAuthnConfiguration must be
+	// MULTI_FACTOR_WITH_USER_VERIFICATION . To activate this setting, your user pool
+	// must be in the [Essentials tier]or higher.
+	//
+	// [Essentials tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+	WebAuthnMfaSettings *types.WebAuthnMfaSettingsType
+
 	noSmithyDocumentSerde
 }
 
@@ -113,7 +123,7 @@ func (c *Client) addOperationSetUserMFAPreferenceMiddlewares(stack *middleware.S
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -135,9 +145,6 @@ func (c *Client) addOperationSetUserMFAPreferenceMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

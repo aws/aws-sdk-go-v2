@@ -22776,6 +22776,11 @@ func awsRestjson1_deserializeDocumentNetworkMigrationCodeGenerationSegment(v **t
 				sv.NetworkMigrationExecutionID = ptr.String(jtv)
 			}
 
+		case "referencedSegments":
+			if err := awsRestjson1_deserializeDocumentReferencedSegmentsList(&sv.ReferencedSegments, value); err != nil {
+				return err
+			}
+
 		case "segmentID":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23705,6 +23710,15 @@ func awsRestjson1_deserializeDocumentNetworkMigrationMapperSegmentConstruct(v **
 					return fmt.Errorf("expected SegmentConstructDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "excluded":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Excluded = ptr.Bool(jtv)
 			}
 
 		case "logicalID":

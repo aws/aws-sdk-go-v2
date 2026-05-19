@@ -221,9 +221,6 @@ type GetStreamSessionOutput struct {
 	//   failed to connect within the connection timeout period specified by
 	//   ConnectionTimeoutSeconds .
 	//
-	//   - idleTimeout : The stream session was terminated because it exceeded the idle
-	//   timeout period of 60 minutes with no user input activity.
-	//
 	//   - maxSessionLengthTimeout : The stream session was terminated because it
 	//   exceeded the maximum session length timeout period specified by
 	//   SessionLengthSeconds .
@@ -286,7 +283,7 @@ func (c *Client) addOperationGetStreamSessionMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -308,9 +305,6 @@ func (c *Client) addOperationGetStreamSessionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

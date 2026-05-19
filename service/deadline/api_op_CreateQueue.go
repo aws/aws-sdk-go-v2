@@ -29,6 +29,9 @@ func (c *Client) CreateQueue(ctx context.Context, params *CreateQueueInput, optF
 	return out, nil
 }
 
+// Shared displayName + description for Create operations where both are present.
+// displayName is @required here - this mixin is Create-only by design (Update has
+// optional displayName).
 type CreateQueueInput struct {
 
 	// The display name of the queue.
@@ -74,6 +77,13 @@ type CreateQueueInput struct {
 	// The IAM role ARN that workers will use while running jobs for this queue.
 	RoleArn *string
 
+	// The scheduling configuration for the queue. This configuration determines how
+	// workers are assigned to jobs in the queue.
+	//
+	// If not specified, the queue defaults to the priorityFifo scheduling
+	// configuration.
+	SchedulingConfiguration types.SchedulingConfiguration
+
 	// Each tag consists of a tag key and a tag value. Tag keys and values are both
 	// required, but tag values can be empty strings.
 	Tags map[string]string
@@ -81,6 +91,8 @@ type CreateQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+// Mixin that adds an optional ARN field to response structures. Apply to
+// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateQueueOutput struct {
 
 	// The queue ID.
@@ -128,7 +140,7 @@ func (c *Client) addOperationCreateQueueMiddlewares(stack *middleware.Stack, opt
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -150,9 +162,6 @@ func (c *Client) addOperationCreateQueueMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

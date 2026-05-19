@@ -122,6 +122,18 @@ func TestCheckSnapshot_DeleteCampaignCommunicationTime(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteCampaignEntryLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCampaignEntryLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteCampaignEntryLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteConnectInstanceConfig(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteConnectInstanceConfig(context.Background(), nil, func(o *Options) {
@@ -434,6 +446,18 @@ func TestCheckSnapshot_UpdateCampaignCommunicationTime(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCampaignEntryLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCampaignEntryLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCampaignEntryLimits")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateCampaignFlowAssociation(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateCampaignFlowAssociation(context.Background(), nil, func(o *Options) {
@@ -534,6 +558,18 @@ func TestUpdateSnapshot_DeleteCampaignCommunicationTime(t *testing.T) {
 	_, err := svc.DeleteCampaignCommunicationTime(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteCampaignCommunicationTime")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteCampaignEntryLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteCampaignEntryLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteCampaignEntryLimits")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -846,6 +882,18 @@ func TestUpdateSnapshot_UpdateCampaignCommunicationTime(t *testing.T) {
 	_, err := svc.UpdateCampaignCommunicationTime(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateCampaignCommunicationTime")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCampaignEntryLimits(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCampaignEntryLimits(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCampaignEntryLimits")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

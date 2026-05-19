@@ -16546,6 +16546,11 @@ func awsRestjson1_deserializeDocumentNodegroup(v **types.Nodegroup, value interf
 				sv.Version = ptr.String(jtv)
 			}
 
+		case "warmPoolConfig":
+			if err := awsRestjson1_deserializeDocumentWarmPoolConfig(&sv.WarmPoolConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -18871,6 +18876,90 @@ func awsRestjson1_deserializeDocumentVpcConfigResponse(v **types.VpcConfigRespon
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.VpcId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWarmPoolConfig(v **types.WarmPoolConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WarmPoolConfig
+	if *v == nil {
+		sv = &types.WarmPoolConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "maxGroupPreparedCapacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected BoxedInteger to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxGroupPreparedCapacity = ptr.Int32(int32(i64))
+			}
+
+		case "minSize":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ZeroCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinSize = ptr.Int32(int32(i64))
+			}
+
+		case "poolState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WarmPoolState to be of type string, got %T instead", value)
+				}
+				sv.PoolState = types.WarmPoolState(jtv)
+			}
+
+		case "reuseOnScaleIn":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.ReuseOnScaleIn = ptr.Bool(jtv)
 			}
 
 		default:

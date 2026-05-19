@@ -795,6 +795,23 @@ func validateAction(v *types.Action) error {
 	}
 }
 
+func validateAssetConfiguration(v *types.AssetConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssetConfiguration"}
+	if v.Tags != nil {
+		if err := validateListOfTag(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAssetDestinationEntry(v *types.AssetDestinationEntry) error {
 	if v == nil {
 		return nil
@@ -1352,6 +1369,23 @@ func validateListOfSchemaChangeDetails(v []types.SchemaChangeDetails) error {
 	}
 }
 
+func validateListOfTag(v []types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOfTag"}
+	for i := range v {
+		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNotificationDetails(v *types.NotificationDetails) error {
 	if v == nil {
 		return nil
@@ -1594,6 +1628,24 @@ func validateTableLFTagPolicyAndPermissions(v *types.TableLFTagPolicyAndPermissi
 	}
 }
 
+func validateTag(v *types.Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Tag"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAcceptDataGrantInput(v *AcceptDataGrantInput) error {
 	if v == nil {
 		return nil
@@ -1700,6 +1752,11 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateJobInput"}
+	if v.AssetConfiguration != nil {
+		if err := validateAssetConfiguration(v.AssetConfiguration); err != nil {
+			invalidParams.AddNested("AssetConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Details == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Details"))
 	} else if v.Details != nil {

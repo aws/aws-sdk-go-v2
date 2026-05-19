@@ -55,6 +55,12 @@ type GetOutpostBillingInformationOutput struct {
 	// The pagination token.
 	NextToken *string
 
+	// The payment option.
+	PaymentOption types.PaymentOption
+
+	// The payment term.
+	PaymentTerm types.PaymentTerm
+
 	// The subscription details for the specified Outpost.
 	Subscriptions []types.Subscription
 
@@ -98,7 +104,7 @@ func (c *Client) addOperationGetOutpostBillingInformationMiddlewares(stack *midd
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -120,9 +126,6 @@ func (c *Client) addOperationGetOutpostBillingInformationMiddlewares(stack *midd
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -6786,6 +6786,11 @@ func awsAwsjson11_serializeOpDocumentRunJobFlowInput(v *RunJobFlowInput, value s
 		ok.Integer(*v.StepConcurrencyLevel)
 	}
 
+	if v.StepExecutionRoleArn != nil {
+		ok := object.Key("StepExecutionRoleArn")
+		ok.String(*v.StepExecutionRoleArn)
+	}
+
 	if v.Steps != nil {
 		ok := object.Key("Steps")
 		if err := awsAwsjson11_serializeDocumentStepConfigList(v.Steps, ok); err != nil {

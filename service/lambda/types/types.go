@@ -1195,13 +1195,14 @@ type ExecutionTimedOutDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Details about the connection between a Lambda function and an [Amazon EFS file system].
+// Details about the connection between a Lambda function and an [Amazon EFS file system] or an [Amazon S3 Files file system].
 //
+// [Amazon S3 Files file system]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
 // [Amazon EFS file system]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
 type FileSystemConfig struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon EFS access point that provides
-	// access to the file system.
+	// The Amazon Resource Name (ARN) of the Amazon EFS or Amazon S3 Files access
+	// point that provides access to the file system.
 	//
 	// This member is required.
 	Arn *string
@@ -1351,8 +1352,9 @@ type FunctionConfiguration struct {
 	// [Configuring ephemeral storage (console)]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
 	EphemeralStorage *EphemeralStorage
 
-	// Connection settings for an [Amazon EFS file system].
+	// Connection settings for an [Amazon EFS file system] or an [Amazon S3 Files file system].
 	//
+	// [Amazon S3 Files file system]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
 	// [Amazon EFS file system]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
 	FileSystemConfigs []FileSystemConfig
 

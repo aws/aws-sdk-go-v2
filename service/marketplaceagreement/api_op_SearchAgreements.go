@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches across all agreements that a proposer has in AWS Marketplace. The
-// search returns a list of agreements with basic agreement information.
+// Searches across all agreements that a proposer or an acceptor has in AWS
+// Marketplace. The search returns a list of agreements with basic agreement
+// information.
 //
 // The following filter combinations are supported when the PartyType is Proposer :
 //
@@ -28,13 +29,13 @@ import (
 //
 //   - AgreementType + ResourceType + Status + EndTime
 //
-//   - AgreementType + ResourceId
+//   - AgreementType + ResourceIdentifier
 //
-//   - AgreementType + ResourceId + EndTime
+//   - AgreementType + ResourceIdentifier + EndTime
 //
-//   - AgreementType + ResourceId + Status
+//   - AgreementType + ResourceIdentifier + Status
 //
-//   - AgreementType + ResourceId + Status + EndTime
+//   - AgreementType + ResourceIdentifier + Status + EndTime
 //
 //   - AgreementType + AcceptorAccountId
 //
@@ -52,13 +53,13 @@ import (
 //
 //   - AgreementType + AcceptorAccountId + OfferId + Status + EndTime
 //
-//   - AgreementType + AcceptorAccountId + ResourceId
+//   - AgreementType + AcceptorAccountId + ResourceIdentifier
 //
-//   - AgreementType + AcceptorAccountId + ResourceId + Status
+//   - AgreementType + AcceptorAccountId + ResourceIdentifier + Status
 //
-//   - AgreementType + AcceptorAccountId + ResourceId + EndTime
+//   - AgreementType + AcceptorAccountId + ResourceIdentifier + EndTime
 //
-//   - AgreementType + AcceptorAccountId + ResourceId + Status + EndTime
+//   - AgreementType + AcceptorAccountId + ResourceIdentifier + Status + EndTime
 //
 //   - AgreementType + AcceptorAccountId + ResourceType
 //
@@ -88,8 +89,46 @@ import (
 //
 //   - AgreementType + OfferSetId + Status + EndTime
 //
-// To filter by EndTime , you can use either BeforeEndTime or AfterEndTime . Only
+// To filter by EndTime , you can use BeforeEndTime and/or AfterEndTime . Only
 // EndTime is supported for sorting.
+//
+// The following filter combinations are supported when the PartyType is Acceptor :
+//
+//   - AgreementType
+//
+//   - AgreementType + Status
+//
+//   - AgreementType + EndTime
+//
+//   - AgreementType + Status + EndTime
+//
+//   - AgreementType + ResourceIdentifier
+//
+//   - AgreementType + ResourceIdentifier + EndTime
+//
+//   - AgreementType + ResourceIdentifier + Status
+//
+//   - AgreementType + ResourceIdentifier + Status + EndTime
+//
+//   - AgreementType + ResourceType
+//
+//   - AgreementType + ResourceType + EndTime
+//
+//   - AgreementType + OfferId
+//
+//   - AgreementType + OfferId + EndTime
+//
+//   - AgreementType + OfferId + Status
+//
+//   - AgreementType + OfferId + Status + EndTime
+//
+//   - AgreementType + OfferSetId
+//
+//   - AgreementType + OfferSetId + EndTime
+//
+//   - AgreementType + OfferSetId + Status
+//
+//   - AgreementType + OfferSetId + Status + EndTime
 func (c *Client) SearchAgreements(ctx context.Context, params *SearchAgreementsInput, optFns ...func(*Options)) (*SearchAgreementsOutput, error) {
 	if params == nil {
 		params = &SearchAgreementsInput{}
@@ -120,8 +159,7 @@ type SearchAgreementsInput struct {
 	//   ContainerProduct , SaaSProduct , ProfessionalServicesProduct , or
 	//   MachineLearningProduct ).
 	//
-	//   - PartyType – The party type of the caller. For agreements where the caller is
-	//   the proposer, use the Proposer filter.
+	//   - PartyType – The party type of the caller. Use Proposer or Acceptor .
 	//
 	//   - AcceptorAccountId – The AWS account ID of the party accepting the agreement
 	//   terms.
@@ -208,7 +246,7 @@ func (c *Client) addOperationSearchAgreementsMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -230,9 +268,6 @@ func (c *Client) addOperationSearchAgreementsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

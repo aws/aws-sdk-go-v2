@@ -2150,6 +2150,26 @@ func (m *validateOpDescribeAgentStatus) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeAttachedFilesConfiguration struct {
+}
+
+func (*validateOpDescribeAttachedFilesConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAttachedFilesConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAttachedFilesConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAttachedFilesConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeAuthenticationProfile struct {
 }
 
@@ -3605,6 +3625,26 @@ func (m *validateOpListAssociatedContacts) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListAssociatedContactsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAttachedFilesConfigurations struct {
+}
+
+func (*validateOpListAttachedFilesConfigurations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAttachedFilesConfigurations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAttachedFilesConfigurationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAttachedFilesConfigurationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6010,6 +6050,26 @@ func (m *validateOpUpdateAgentStatus) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAttachedFilesConfiguration struct {
+}
+
+func (*validateOpUpdateAttachedFilesConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAttachedFilesConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAttachedFilesConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAttachedFilesConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateAuthenticationProfile struct {
 }
 
@@ -7678,6 +7738,10 @@ func addOpDescribeAgentStatusValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDescribeAgentStatus{}, middleware.After)
 }
 
+func addOpDescribeAttachedFilesConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAttachedFilesConfiguration{}, middleware.After)
+}
+
 func addOpDescribeAuthenticationProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAuthenticationProfile{}, middleware.After)
 }
@@ -7968,6 +8032,10 @@ func addOpListApprovedOriginsValidationMiddleware(stack *middleware.Stack) error
 
 func addOpListAssociatedContactsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAssociatedContacts{}, middleware.After)
+}
+
+func addOpListAttachedFilesConfigurationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAttachedFilesConfigurations{}, middleware.After)
 }
 
 func addOpListAuthenticationProfilesValidationMiddleware(stack *middleware.Stack) error {
@@ -8450,6 +8518,10 @@ func addOpUpdateAgentStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAgentStatus{}, middleware.After)
 }
 
+func addOpUpdateAttachedFilesConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAttachedFilesConfiguration{}, middleware.After)
+}
+
 func addOpUpdateAuthenticationProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateAuthenticationProfile{}, middleware.After)
 }
@@ -8776,6 +8848,38 @@ func validateAliasConfiguration(v *types.AliasConfiguration) error {
 	invalidParams := smithy.InvalidParamsError{Context: "AliasConfiguration"}
 	if v.EmailAddressId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EmailAddressId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAllowedExtension(v *types.AllowedExtension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AllowedExtension"}
+	if v.Extension == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Extension"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAllowedExtensionsList(v []types.AllowedExtension) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AllowedExtensionsList"}
+	for i := range v {
+		if err := validateAllowedExtension(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -10145,6 +10249,25 @@ func validateEventBridgeActionDefinition(v *types.EventBridgeActionDefinition) e
 	invalidParams := smithy.InvalidParamsError{Context: "EventBridgeActionDefinition"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateExtensionConfiguration(v *types.ExtensionConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExtensionConfiguration"}
+	if v.AllowedExtensions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AllowedExtensions"))
+	} else if v.AllowedExtensions != nil {
+		if err := validateAllowedExtensionsList(v.AllowedExtensions); err != nil {
+			invalidParams.AddNested("AllowedExtensions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -14368,6 +14491,24 @@ func validateOpDescribeAgentStatusInput(v *DescribeAgentStatusInput) error {
 	}
 }
 
+func validateOpDescribeAttachedFilesConfigurationInput(v *DescribeAttachedFilesConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAttachedFilesConfigurationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if len(v.AttachmentScope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentScope"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeAuthenticationProfileInput(v *DescribeAuthenticationProfileInput) error {
 	if v == nil {
 		return nil
@@ -15771,6 +15912,21 @@ func validateOpListAssociatedContactsInput(v *ListAssociatedContactsInput) error
 	}
 	if v.ContactId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAttachedFilesConfigurationsInput(v *ListAttachedFilesConfigurationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAttachedFilesConfigurationsInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -18030,6 +18186,29 @@ func validateOpUpdateAgentStatusInput(v *UpdateAgentStatusInput) error {
 	}
 	if v.AgentStatusId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentStatusId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAttachedFilesConfigurationInput(v *UpdateAttachedFilesConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAttachedFilesConfigurationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if len(v.AttachmentScope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachmentScope"))
+	}
+	if v.ExtensionConfiguration != nil {
+		if err := validateExtensionConfiguration(v.ExtensionConfiguration); err != nil {
+			invalidParams.AddNested("ExtensionConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

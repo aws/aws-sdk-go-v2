@@ -3,17 +3,17 @@ module github.com/aws/aws-sdk-go-v2/service/transcribestreaming/internal/testing
 go 1.24
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.41.4
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.7
-	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.6.38
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.34.3
-	github.com/aws/smithy-go v1.24.2
+	github.com/aws/aws-sdk-go-v2 v1.41.7
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.10
+	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.6.43
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.34.7
+	github.com/aws/smithy-go v1.25.1
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/credentials v1.19.12 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.20 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.20 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.19.16 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.23 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.23 // indirect
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../
@@ -27,6 +27,8 @@ replace github.com/aws/aws-sdk-go-v2/feature/ec2/imds => ../../../../feature/ec2
 replace github.com/aws/aws-sdk-go-v2/internal/configsources => ../../../../internal/configsources/
 
 replace github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 => ../../../../internal/endpoints/v2/
+
+replace github.com/aws/aws-sdk-go-v2/internal/v4a => ../../../../internal/v4a/
 
 replace github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding => ../../../../service/internal/accept-encoding/
 

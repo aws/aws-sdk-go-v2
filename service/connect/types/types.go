@@ -93,7 +93,7 @@ type AgentContactReference struct {
 	// The time at which the contact was connected to an agent.
 	ConnectedToAgentTimestamp *time.Time
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	ContactId *string
 
 	// How the contact was initiated.
@@ -127,8 +127,8 @@ type AgentHierarchyGroup struct {
 }
 
 // A structure that defines search criteria for contacts using agent hierarchy
-// group levels. For more information about agent hierarchies, see [Set Up Agent Hierarchies]in the Amazon
-// Connect Administrator Guide.
+// group levels. For more information about agent hierarchies, see [Set Up Agent Hierarchies]in the Connect
+// Customer Administrator Guide.
 //
 // [Set Up Agent Hierarchies]: https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html
 type AgentHierarchyGroups struct {
@@ -178,8 +178,8 @@ type AgentInfo struct {
 	AgentPauseDurationInSeconds *int32
 
 	// The configuration for the allowed video and screen sharing capabilities for
-	// participants present over the call. For more information, see [Set up in-app, web, video calling, and screen sharing capabilities]in the Amazon
-	// Connect Administrator Guide.
+	// participants present over the call. For more information, see [Set up in-app, web, video calling, and screen sharing capabilities]in the Connect
+	// Customer Administrator Guide.
 	//
 	// [Set up in-app, web, video calling, and screen sharing capabilities]: https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html
 	Capabilities *ParticipantCapabilities
@@ -201,6 +201,11 @@ type AgentInfo struct {
 
 	// List of StateTransition for a supervisor.
 	StateTransitions []StateTransition
+
+	// The voice enhancement mode used by the agent as the call is ending. Valid
+	// values: VOICE_ISOLATION | NOISE_SUPPRESSION | NONE. A value of null indicates
+	// this mode has not yet been set for this user.
+	VoiceEnhancementMode VoiceEnhancementMode
 
 	noSmithyDocumentSerde
 }
@@ -390,7 +395,19 @@ type AllowedCapabilities struct {
 	noSmithyDocumentSerde
 }
 
-// This API is in preview release for Amazon Connect and is subject to change.
+// Information about an allowed file extension.
+type AllowedExtension struct {
+
+	// The file extension. The extension must be between 1 and 10 characters and can
+	// contain only alphanumeric characters, hyphens, and underscores.
+	//
+	// This member is required.
+	Extension *string
+
+	noSmithyDocumentSerde
+}
+
+// This API is in preview release for Connect Customer and is subject to change.
 //
 // Information about associations that are successfully created: DataSetId ,
 // TargetAccountId , ResourceShareId , ResourceShareArn .
@@ -440,7 +457,7 @@ type AnswerMachineDetectionConfig struct {
 	noSmithyDocumentSerde
 }
 
-// This API is in preview release for Amazon Connect and is subject to change.
+// This API is in preview release for Connect Customer and is subject to change.
 //
 // A third-party application's metadata.
 type Application struct {
@@ -492,7 +509,7 @@ type AssociatedContactSummary struct {
 	// The Amazon Resource Name (ARN) of the contact
 	ContactArn *string
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	ContactId *string
 
 	// The date and time that the customer endpoint disconnected from the current
@@ -588,6 +605,54 @@ type AttachedFileError struct {
 
 	// The unique identifier of the attached file resource.
 	FileId *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for attached files for a specific attachment scope.
+type AttachedFilesConfiguration struct {
+
+	// The scope of the attachment. Valid values are EMAIL , CHAT , CASE , and TASK .
+	//
+	// This member is required.
+	AttachmentScope AttachmentScope
+
+	// The identifier of the Connect Customer instance.
+	//
+	// This member is required.
+	InstanceId *string
+
+	// The configuration for allowed file extensions.
+	ExtensionConfiguration *ExtensionConfiguration
+
+	// The timestamp when the configuration was last modified.
+	LastModifiedTime *time.Time
+
+	// The maximum size limit for attached files in bytes.
+	MaximumSizeLimitInBytes *int64
+
+	noSmithyDocumentSerde
+}
+
+// A summary of the attached files configuration.
+type AttachedFilesConfigurationSummary struct {
+
+	// The scope of the attachment. Valid values are EMAIL , CHAT , CASE , and TASK .
+	//
+	// This member is required.
+	AttachmentScope AttachmentScope
+
+	// The identifier of the Connect Customer instance.
+	//
+	// This member is required.
+	InstanceId *string
+
+	// The configuration for allowed file extensions.
+	ExtensionConfiguration *ExtensionConfiguration
+
+	// The maximum size limit for attached files in bytes. The minimum value is 1 and
+	// the maximum value is 104857600 (100 MB).
+	MaximumSizeLimitInBytes *int64
 
 	noSmithyDocumentSerde
 }
@@ -695,8 +760,8 @@ type AudioQualityMetricsInfo struct {
 	noSmithyDocumentSerde
 }
 
-// This API is in preview release for Amazon Connect and is subject to change. To
-// request access to this API, contact Amazon Web Services Support.
+// This API is in preview release for Connect Customer and is subject to change.
+// To request access to this API, contact Amazon Web Services Support.
 //
 // Information about an authentication profile. An authentication profile is a
 // resource that stores the authentication settings for users in your contact
@@ -706,9 +771,9 @@ type AudioQualityMetricsInfo struct {
 // [Set IP address restrictions or session timeouts]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html
 type AuthenticationProfile struct {
 
-	// A list of IP address range strings that are allowed to access the Amazon
-	// Connect instance. For more information about how to configure IP addresses, see [Configure IP address based access control]
-	// in the Amazon Connect Administrator Guide.
+	// A list of IP address range strings that are allowed to access the Connect
+	// Customer instance. For more information about how to configure IP addresses, see
+	// [Configure IP address based access control]in the Connect Customer Administrator Guide.
 	//
 	// [Configure IP address based access control]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-ip-based-ac
 	AllowedIps []string
@@ -716,9 +781,9 @@ type AuthenticationProfile struct {
 	// The Amazon Resource Name (ARN) for the authentication profile.
 	Arn *string
 
-	// A list of IP address range strings that are blocked from accessing the Amazon
-	// Connect instance. For more information about how to configure IP addresses, see [Configure IP address based access control]
-	// in the Amazon Connect Administrator Guide.
+	// A list of IP address range strings that are blocked from accessing the Connect
+	// Customer instance. For more information about how to configure IP addresses, see
+	// [Configure IP address based access control]in the Connect Customer Administrator Guide.
 	//
 	// [Configure IP address based access control]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-ip-based-ac
 	BlockedIps []string
@@ -733,8 +798,8 @@ type AuthenticationProfile struct {
 	Id *string
 
 	// Shows whether the authentication profile is the default authentication profile
-	// for the Amazon Connect instance. The default authentication profile applies to
-	// all agents in an Amazon Connect instance, unless overridden by another
+	// for the Connect Customer instance. The default authentication profile applies to
+	// all agents in an Connect Customer instance, unless overridden by another
 	// authentication profile.
 	IsDefault bool
 
@@ -745,9 +810,9 @@ type AuthenticationProfile struct {
 	// The timestamp when the authentication profile was last modified.
 	LastModifiedTime *time.Time
 
-	// The long lived session duration for users logged in to Amazon Connect, in
+	// The long lived session duration for users logged in to Connect Customer, in
 	// minutes. After this time period, users must log in again. For more information,
-	// see [Configure the session duration]in the Amazon Connect Administrator Guide.
+	// see [Configure the session duration]in the Connect Customer Administrator Guide.
 	//
 	// [Configure the session duration]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts
 	MaxSessionDuration *int32
@@ -755,9 +820,9 @@ type AuthenticationProfile struct {
 	// The name for the authentication profile.
 	Name *string
 
-	// The short lived session duration configuration for users logged in to Amazon
-	// Connect, in minutes. This value determines the maximum possible time before an
-	// agent is authenticated. For more information, see [Configure the session duration]in the Amazon Connect
+	// The short lived session duration configuration for users logged in to Connect
+	// Customer, in minutes. This value determines the maximum possible time before an
+	// agent is authenticated. For more information, see [Configure the session duration]in the Connect Customer
 	// Administrator Guide.
 	//
 	// [Configure the session duration]: https://docs.aws.amazon.com/connect/latest/adminguide/authentication-profiles.html#configure-session-timeouts
@@ -776,8 +841,8 @@ type AuthenticationProfile struct {
 	noSmithyDocumentSerde
 }
 
-// This API is in preview release for Amazon Connect and is subject to change. To
-// request access to this API, contact Amazon Web Services Support.
+// This API is in preview release for Connect Customer and is subject to change.
+// To request access to this API, contact Amazon Web Services Support.
 //
 // A summary of a given authentication profile.
 type AuthenticationProfileSummary struct {
@@ -789,8 +854,8 @@ type AuthenticationProfileSummary struct {
 	Id *string
 
 	// Shows whether the authentication profile is the default authentication profile
-	// for the Amazon Connect instance. The default authentication profile applies to
-	// all agents in an Amazon Connect instance, unless overridden by another
+	// for the Connect Customer instance. The default authentication profile applies to
+	// all agents in an Connect Customer instance, unless overridden by another
 	// authentication profile.
 	IsDefault bool
 
@@ -1182,10 +1247,10 @@ type ChatEvent struct {
 	// certain ContentTypes when Type is EVENT .
 	//
 	//   - For allowed message content, see the Content parameter in the [SendMessage]topic in the
-	//   Amazon Connect Participant Service API Reference.
+	//   Connect Customer Participant Service API Reference.
 	//
 	//   - For allowed event content, see the Content parameter in the [SendEvent]topic in the
-	//   Amazon Connect Participant Service API Reference.
+	//   Connect Customer Participant Service API Reference.
 	//
 	// [SendEvent]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendEvent.html
 	// [SendMessage]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendMessage.html
@@ -1194,10 +1259,10 @@ type ChatEvent struct {
 	// Type of content. This is required when Type is MESSAGE or EVENT .
 	//
 	//   - For allowed message content types, see the ContentType parameter in the [SendMessage]
-	//   topic in the Amazon Connect Participant Service API Reference.
+	//   topic in the Connect Customer Participant Service API Reference.
 	//
 	//   - For allowed event content types, see the ContentType parameter in the [SendEvent]topic
-	//   in the Amazon Connect Participant Service API Reference.
+	//   in the Connect Customer Participant Service API Reference.
 	//
 	// [SendEvent]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendEvent.html
 	// [SendMessage]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_SendMessage.html
@@ -1273,11 +1338,11 @@ type ChatStreamingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a phone number that has been claimed to your Amazon Connect
+// Information about a phone number that has been claimed to your Connect Customer
 // instance or traffic distribution group.
 type ClaimedPhoneNumberSummary struct {
 
-	// The identifier of the Amazon Connect instance that phone numbers are claimed
+	// The identifier of the Connect Customer instance that phone numbers are claimed
 	// to. You can [find the instance ID]in the Amazon Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
@@ -1337,7 +1402,7 @@ type ClaimedPhoneNumberSummary struct {
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
 	Tags map[string]string
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+	// The Amazon Resource Name (ARN) for Connect Customer instances or traffic
 	// distribution groups that phone number inbound traffic is routed through.
 	TargetArn *string
 
@@ -1390,7 +1455,7 @@ type Contact struct {
 	AgentInfo *AgentInfo
 
 	// Indicates how an [outbound campaign] call is actually disposed if the contact is connected to
-	// Amazon Connect.
+	// Connect Customer.
 	//
 	// [outbound campaign]: https://docs.aws.amazon.com/connect/latest/adminguide/how-to-create-campaigns.html
 	AnsweringMachineDetectionStatus AnsweringMachineDetectionStatus
@@ -1410,7 +1475,7 @@ type Contact struct {
 	// Information about how agent, bot, and customer interact in a chat contact.
 	ChatMetrics *ChatMetrics
 
-	// The timestamp when customer endpoint connected to Amazon Connect.
+	// The timestamp when customer endpoint connected to Connect Customer.
 	ConnectedToSystemTimestamp *time.Time
 
 	// This is the root contactId which is used as a unique identifier for all
@@ -1433,8 +1498,8 @@ type Contact struct {
 
 	// The customer's identification number. For example, the CustomerId may be a
 	// customer number from your CRM. You can create a Lambda function to pull the
-	// unique customer ID of the caller from your CRM system. If you enable Amazon
-	// Connect Voice ID capability, this attribute is populated with the
+	// unique customer ID of the caller from your CRM system. If you enable Connect
+	// Customer Voice ID capability, this attribute is populated with the
 	// CustomerSpeakerId of the caller.
 	CustomerId *string
 
@@ -1449,7 +1514,7 @@ type Contact struct {
 
 	// The disconnect reason for the contact. For a list and description of all the
 	// possible disconnect reasons by channel, see DisconnectReason under [ContactTraceRecord]in the
-	// Amazon Connect Administrator Guide.
+	// Connect Customer Administrator Guide.
 	//
 	// [ContactTraceRecord]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
 	DisconnectReason *string
@@ -1541,7 +1606,7 @@ type Contact struct {
 	ScheduledTimestamp *time.Time
 
 	// A set of system defined key-value pairs stored on individual contact segments
-	// using an attribute map. The attributes are standard Amazon Connect attributes
+	// using an attribute map. The attributes are standard Connect Customer attributes
 	// and can be accessed in flows. Attribute keys can include only alphanumeric, -,
 	// and _ characters. This field can be used to show channel subtype. For example,
 	// connect:Guide or connect:SMS .
@@ -1568,17 +1633,17 @@ type Contact struct {
 	// Total pause duration for a contact in seconds.
 	TotalPauseDurationInSeconds *int32
 
-	// Information about Amazon Connect Wisdom.
+	// Information about Connect Customer Wisdom.
 	WisdomInfo *WisdomInfo
 
 	noSmithyDocumentSerde
 }
 
 // A structure that defines search criteria for contacts using analysis outputs
-// from Amazon Connect Contact Lens.
+// from Connect Customer Contact Lens.
 type ContactAnalysis struct {
 
-	// Search criteria based on transcript analyzed by Amazon Connect Contact Lens.
+	// Search criteria based on transcript analyzed by Connect Customer Contact Lens.
 	Transcript *Transcript
 
 	noSmithyDocumentSerde
@@ -1620,14 +1685,14 @@ type ContactDataRequest struct {
 	// Information about the outbound strategy.
 	OutboundStrategy *OutboundStrategy
 
-	// The identifier of the queue associated with the Amazon Connect instance in
+	// The identifier of the queue associated with the Connect Customer instance in
 	// which contacts that are created will be queued.
 	QueueId *string
 
 	// Identifier to uniquely identify individual requests in the batch.
 	RequestIdentifier *string
 
-	// Endpoint associated with the Amazon Connect instance from which outbound
+	// Endpoint associated with the Connect Customer instance from which outbound
 	// contact will be initiated for the campaign.
 	SystemEndpoint *Endpoint
 
@@ -1695,11 +1760,11 @@ type ContactFlow struct {
 	// The Amazon Resource Name (ARN) of the flow.
 	Arn *string
 
-	// The JSON string that represents the content of the flow. For an example, see [Example flow in Amazon Connect Flow language].
+	// The JSON string that represents the content of the flow. For an example, see [Example flow in Connect Customer Flow language].
 	//
 	// Length Constraints: Minimum length of 1. Maximum length of 256000.
 	//
-	// [Example flow in Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
+	// [Example flow in Connect Customer Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
 	Content *string
 
 	// The description of the flow.
@@ -1731,7 +1796,7 @@ type ContactFlow struct {
 	Tags map[string]string
 
 	// The type of the flow. For descriptions of the available types, see [Choose a flow type] in the
-	// Amazon Connect Administrator Guide.
+	// Connect Customer Administrator Guide.
 	//
 	// [Choose a flow type]: https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types
 	Type ContactFlowType
@@ -1782,9 +1847,9 @@ type ContactFlowModule struct {
 	// The Amazon Resource Name (ARN).
 	Arn *string
 
-	// The JSON string that represents the content of the flow. For an example, see [Example flow in Amazon Connect Flow language].
+	// The JSON string that represents the content of the flow. For an example, see [Example flow in Connect Customer Flow language].
 	//
-	// [Example flow in Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
+	// [Example flow in Connect Customer Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
 	Content *string
 
 	// The description of the flow module.
@@ -1989,9 +2054,9 @@ type ContactFlowSearchFilter struct {
 
 // Contains summary information about a flow.
 //
-// You can also create and update flows using the [Amazon Connect Flow language].
+// You can also create and update flows using the [Connect Customer Flow language].
 //
-// [Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
+// [Connect Customer Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
 type ContactFlowSummary struct {
 
 	// The Amazon Resource Name (ARN) of the flow.
@@ -2107,7 +2172,7 @@ type ContactSearchSummary struct {
 	// How the contact reached your contact center.
 	Channel Channel
 
-	// The timestamp when the customer endpoint disconnected from Amazon Connect.
+	// The timestamp when the customer endpoint disconnected from Connect Customer.
 	DisconnectTimestamp *time.Time
 
 	// Additional routing information for contacts created in ACGR instances.
@@ -2323,14 +2388,14 @@ func (*CreatedByInfoMemberConnectUserArn) isCreatedByInfo() {}
 // Contains credentials to use for federation.
 type Credentials struct {
 
-	// An access token generated for a federated user to access Amazon Connect.
+	// An access token generated for a federated user to access Connect Customer.
 	AccessToken *string
 
 	// A token generated with an expiration time for the session a user is logged in
-	// to Amazon Connect.
+	// to Connect Customer.
 	AccessTokenExpiration *time.Time
 
-	// Renews a token generated for a user to access the Amazon Connect instance.
+	// Renews a token generated for a user to access the Connect Customer instance.
 	RefreshToken *string
 
 	// Renews the expiration timer for a generated token.
@@ -2353,7 +2418,7 @@ type CrossChannelBehavior struct {
 }
 
 // Contains information about a real-time metric. For a description of each
-// metric, see [Metrics definitions]in the Amazon Connect Administrator Guide.
+// metric, see [Metrics definitions]in the Connect Customer Administrator Guide.
 //
 // Only one of either the Name or MetricId is required.
 //
@@ -2417,8 +2482,8 @@ type CurrentMetricSortCriteria struct {
 type Customer struct {
 
 	// The configuration for the allowed video and screen sharing capabilities for
-	// participants present over the call. For more information, see [Set up in-app, web, video calling, and screen sharing capabilities]in the Amazon
-	// Connect Administrator Guide.
+	// participants present over the call. For more information, see [Set up in-app, web, video calling, and screen sharing capabilities]in the Connect
+	// Customer Administrator Guide.
 	//
 	// [Set up in-app, web, video calling, and screen sharing capabilities]: https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html
 	Capabilities *ParticipantCapabilities
@@ -2894,8 +2959,8 @@ type DecimalCondition struct {
 // Contains information about a default vocabulary.
 type DefaultVocabulary struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -2975,7 +3040,7 @@ type DisconnectDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about why a contact was disconnected. Only Amazon Connect
+// Contains details about why a contact was disconnected. Only Connect Customer
 // outbound campaigns can provide this field.
 type DisconnectReason struct {
 
@@ -3046,8 +3111,8 @@ type EffectiveOverrideHours struct {
 type EmailAddressConfig struct {
 
 	// The identifier of the email address that should be associated with the queue.
-	// This email address must already exist in the Amazon Connect instance and will be
-	// used to route incoming email contacts to the specified queue.
+	// This email address must already exist in the Connect Customer instance and will
+	// be used to route incoming email contacts to the specified queue.
 	//
 	// This member is required.
 	EmailAddressId *string
@@ -3213,7 +3278,7 @@ type EncryptionConfig struct {
 	//
 	// Be sure to provide the full ARN of the encryption key, not just the ID.
 	//
-	// Amazon Connect supports only KMS keys with the default key spec of [SYMMETRIC_DEFAULT]
+	// Connect Customer supports only KMS keys with the default key spec of [SYMMETRIC_DEFAULT]
 	// SYMMETRIC_DEFAULT .
 	//
 	// [SYMMETRIC_DEFAULT]: https://docs.aws.amazon.com/kms/latest/developerguide/asymmetric-key-specs.html#key-spec-symmetric-default
@@ -3256,7 +3321,7 @@ type EndpointInfo struct {
 	noSmithyDocumentSerde
 }
 
-// This API is in preview release for Amazon Connect and is subject to change.
+// This API is in preview release for Connect Customer and is subject to change.
 //
 // List of errors for dataset association failures.
 type ErrorResult struct {
@@ -4421,7 +4486,7 @@ type EvaluationGenAIAnswerAnalysisDetails struct {
 // Metadata information about a contact evaluation.
 type EvaluationMetadata struct {
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	//
 	// This member is required.
 	ContactId *string
@@ -4664,7 +4729,7 @@ type EvaluationSearchFilter struct {
 // Metadata information about an evaluation search.
 type EvaluationSearchMetadata struct {
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	//
 	// This member is required.
 	ContactId *string
@@ -4899,7 +4964,7 @@ type EvaluatorUserUnion interface {
 	isEvaluatorUserUnion()
 }
 
-// Represents the Amazon Connect ARN of the user.
+// Represents the Connect Customer ARN of the user.
 type EvaluatorUserUnionMemberConnectUserArn struct {
 	Value string
 
@@ -4963,6 +5028,17 @@ type Expression struct {
 
 	// List of routing expressions which will be OR-ed together.
 	OrExpression []Expression
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for allowed file extensions.
+type ExtensionConfiguration struct {
+
+	// The list of allowed file extensions.
+	//
+	// This member is required.
+	AllowedExtensions []AllowedExtension
 
 	noSmithyDocumentSerde
 }
@@ -5406,7 +5482,7 @@ type HierarchyStructureUpdate struct {
 type HistoricalMetric struct {
 
 	// The name of the metric. Following is a list of each supported metric mapped to
-	// the UI name, linked to a detailed description in the Amazon Connect
+	// the UI name, linked to a detailed description in the Connect Customer
 	// Administrator Guide.
 	//
 	// ABANDON_TIME Unit: SECONDS
@@ -5921,10 +5997,10 @@ type InboundRawMessage struct {
 
 // Custom metadata that is associated to predefined attributes to control behavior
 // in upstream services, such as controlling how a predefined attribute should be
-// displayed in the Amazon Connect admin website.
+// displayed in the Connect Customer admin website.
 type InputPredefinedAttributeConfiguration struct {
 
-	// When this parameter is set to true, Amazon Connect enforces strict validation
+	// When this parameter is set to true, Connect Customer enforces strict validation
 	// on the specific values, if the values are predefined in attributes. The contact
 	// will store only valid and predefined values for the predefined attribute key.
 	EnableValueValidationOnAssociation bool
@@ -5932,7 +6008,7 @@ type InputPredefinedAttributeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Connect instance.
+// The Connect Customer instance.
 type Instance struct {
 
 	// The Amazon Resource Name (ARN) of the instance.
@@ -5941,8 +6017,8 @@ type Instance struct {
 	// When the instance was created.
 	CreatedTime *time.Time
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	Id *string
@@ -5953,7 +6029,8 @@ type Instance struct {
 	// Whether inbound calls are enabled.
 	InboundCallsEnabled *bool
 
-	// This URL allows contact center users to access the Amazon Connect admin website.
+	// This URL allows contact center users to access the Connect Customer admin
+	// website.
 	InstanceAccessUrl *string
 
 	// The alias of instance.
@@ -6031,7 +6108,8 @@ type InstanceSummary struct {
 	// Whether inbound calls are enabled.
 	InboundCallsEnabled *bool
 
-	// This URL allows contact center users to access the Amazon Connect admin website.
+	// This URL allows contact center users to access the Connect Customer admin
+	// website.
 	InstanceAccessUrl *string
 
 	// The alias of the instance.
@@ -6052,8 +6130,8 @@ type InstanceSummary struct {
 // Contains summary information about the associated AppIntegrations.
 type IntegrationAssociationSummary struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	InstanceId *string
@@ -6090,8 +6168,8 @@ type IntervalDetails struct {
 	// .
 	//
 	// For example, if IntervalPeriod is selected THIRTY_MIN , StartTime and EndTime
-	// differs by 1 day, then Amazon Connect returns 48 results in the response. Each
-	// result is aggregated by the THIRTY_MIN period. By default Amazon Connect
+	// differs by 1 day, then Connect Customer returns 48 results in the response. Each
+	// result is aggregated by the THIRTY_MIN period. By default Connect Customer
 	// aggregates results based on the TOTAL interval period.
 	//
 	// The following list describes restrictions on StartTime and EndTime based on
@@ -6245,11 +6323,11 @@ type ListCondition struct {
 	noSmithyDocumentSerde
 }
 
-// Information about phone numbers that have been claimed to your Amazon Connect
+// Information about phone numbers that have been claimed to your Connect Customer
 // instance or traffic distribution group.
 type ListPhoneNumbersSummary struct {
 
-	// The identifier of the Amazon Connect instance that phone numbers are claimed
+	// The identifier of the Connect Customer instance that phone numbers are claimed
 	// to. You can [find the instance ID]in the Amazon Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
@@ -6280,7 +6358,7 @@ type ListPhoneNumbersSummary struct {
 	// was imported from Amazon Web Services End User Messaging.
 	SourcePhoneNumberArn *string
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+	// The Amazon Resource Name (ARN) for Connect Customer instances or traffic
 	// distribution groups that phone number inbound traffic is routed through.
 	TargetArn *string
 
@@ -6430,17 +6508,17 @@ type MetricFilterV2 struct {
 	// either a fixed set of values or a customized list, depending on the use case.
 	//
 	// For valid values of metric-level filters INITIATION_METHOD , DISCONNECT_REASON ,
-	// and ANSWERING_MACHINE_DETECTION_STATUS , see [ContactTraceRecord] in the Amazon Connect
+	// and ANSWERING_MACHINE_DETECTION_STATUS , see [ContactTraceRecord] in the Connect Customer
 	// Administrator Guide.
 	//
 	// For valid values of the metric-level filter FLOWS_OUTCOME_TYPE , see the
-	// description for the [Flow outcome]metric in the Amazon Connect Administrator Guide.
+	// description for the [Flow outcome]metric in the Connect Customer Administrator Guide.
 	//
 	// For valid values of the metric-level filter BOT_CONVERSATION_OUTCOME_TYPE , see
-	// the description for the [Bot conversations completed]in the Amazon Connect Administrator Guide.
+	// the description for the [Bot conversations completed]in the Connect Customer Administrator Guide.
 	//
 	// For valid values of the metric-level filter BOT_INTENT_OUTCOME_TYPE , see the
-	// description for the [Bot intents completed]metric in the Amazon Connect Administrator Guide.
+	// description for the [Bot intents completed]metric in the Connect Customer Administrator Guide.
 	//
 	// [Bot intents completed]: https://docs.aws.amazon.com/connect/latest/adminguide/bot-metrics.html#bot-intents-completed-metric
 	// [ContactTraceRecord]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
@@ -6500,7 +6578,7 @@ type MetricV2 struct {
 	MetricFilters []MetricFilterV2
 
 	// Historical metrics or custom metrics can be referenced via this field. This
-	// field is a valid Amazon Connect Arn or a UUID
+	// field is a valid Connect Customer Arn or a UUID
 	MetricId *string
 
 	// The name of the metric.
@@ -6554,7 +6632,7 @@ type NameCriteria struct {
 type NewSessionDetails struct {
 
 	//  A custom key-value pair using an attribute map. The attributes are standard
-	// Amazon Connect attributes. They can be accessed in flows just like any other
+	// Connect Customer attributes. They can be accessed in flows just like any other
 	// contact attributes.
 	//
 	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
@@ -6667,7 +6745,7 @@ type NotificationRecipientType struct {
 	UserIds []string
 
 	// The tags used to organize, track, or control access for this resource. For
-	// example, { "Tags": {"key1":"value1", "key2":"value2"} }. Amazon Connect users
+	// example, { "Tags": {"key1":"value1", "key2":"value2"} }. Connect Customer users
 	// with the specified tags will be notified.
 	UserTags map[string]string
 
@@ -7038,8 +7116,8 @@ type ParentHoursOfOperationConfig struct {
 }
 
 // The configuration for the allowed video and screen sharing capabilities for
-// participants present over the call. For more information, see [Set up in-app, web, video calling, and screen sharing capabilities]in the Amazon
-// Connect Administrator Guide.
+// participants present over the call. For more information, see [Set up in-app, web, video calling, and screen sharing capabilities]in the Connect
+// Customer Administrator Guide.
 //
 // [Set up in-app, web, video calling, and screen sharing capabilities]: https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html
 type ParticipantCapabilities struct {
@@ -7082,8 +7160,8 @@ type ParticipantDetailsToAdd struct {
 	DisplayName *string
 
 	// The configuration for the allowed video and screen sharing capabilities for
-	// participants present over the call. For more information, see [Set up in-app, web, video calling, and screen sharing capabilities]in the Amazon
-	// Connect Administrator Guide.
+	// participants present over the call. For more information, see [Set up in-app, web, video calling, and screen sharing capabilities]in the Connect
+	// Customer Administrator Guide.
 	//
 	// [Set up in-app, web, video calling, and screen sharing capabilities]: https://docs.aws.amazon.com/connect/latest/adminguide/inapp-calling.html
 	ParticipantCapabilities *ParticipantCapabilities
@@ -7221,9 +7299,9 @@ type PersistentChat struct {
 	//   - ENTIRE_PAST_SESSION : Rehydrates a chat from the most recently terminated
 	//   past chat contact of the specified past ended chat session. To use this type,
 	//   provide the initialContactId of the past ended chat session in the
-	//   sourceContactId field. In this type, Amazon Connect determines the most recent
-	//   chat contact on the specified chat session that has ended, and uses it to start
-	//   a persistent chat.
+	//   sourceContactId field. In this type, Connect Customer determines the most
+	//   recent chat contact on the specified chat session that has ended, and uses it to
+	//   start a persistent chat.
 	//
 	//   - FROM_SEGMENT : Rehydrates a chat from the past chat contact that is
 	//   specified in the sourceContactId field.
@@ -7357,7 +7435,7 @@ type PredefinedAttribute struct {
 
 	// Custom metadata that is associated to predefined attributes to control behavior
 	// in upstream services, such as controlling how a predefined attribute should be
-	// displayed in the Amazon Connect admin website.
+	// displayed in the Connect Customer admin website.
 	AttributeConfiguration *PredefinedAttributeConfiguration
 
 	// Last modified region.
@@ -7370,7 +7448,7 @@ type PredefinedAttribute struct {
 	Name *string
 
 	// Values that enable you to categorize your predefined attributes. You can use
-	// them in custom UI elements across the Amazon Connect admin website.
+	// them in custom UI elements across the Connect Customer admin website.
 	Purposes []string
 
 	// The values of the predefined attribute.
@@ -7381,16 +7459,16 @@ type PredefinedAttribute struct {
 
 // Custom metadata that is associated to predefined attributes to control behavior
 // in upstream services, such as controlling how a predefined attribute should be
-// displayed in the Amazon Connect admin website.
+// displayed in the Connect Customer admin website.
 type PredefinedAttributeConfiguration struct {
 
-	// When this parameter is set to true, Amazon Connect enforces strict validation
+	// When this parameter is set to true, Connect Customer enforces strict validation
 	// on the specific values, if the values are predefined in attributes. The contact
 	// will store only valid and predefined values for teh predefined attribute key.
 	EnableValueValidationOnAssociation bool
 
 	// A boolean flag used to indicate whether a predefined attribute should be
-	// displayed in the Amazon Connect admin website.
+	// displayed in the Connect Customer admin website.
 	IsReadOnly bool
 
 	noSmithyDocumentSerde
@@ -7850,9 +7928,9 @@ type QuickConnect struct {
 // Contains configuration settings for a quick connect.
 type QuickConnectConfig struct {
 
-	// The type of quick connect. In the Amazon Connect admin website, when you create
-	// a quick connect, you are prompted to assign one of the following types: Agent
-	// (USER), External (PHONE_NUMBER), or Queue (QUEUE).
+	// The type of quick connect. In the Connect Customer admin website, when you
+	// create a quick connect, you are prompted to assign one of the following types:
+	// Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).
 	//
 	// This member is required.
 	QuickConnectType QuickConnectType
@@ -7944,9 +8022,9 @@ type QuickConnectSummary struct {
 	// The name of the quick connect.
 	Name *string
 
-	// The type of quick connect. In the Amazon Connect admin website, when you create
-	// a quick connect, you are prompted to assign one of the following types: Agent
-	// (USER), External (PHONE_NUMBER), or Queue (QUEUE).
+	// The type of quick connect. In the Connect Customer admin website, when you
+	// create a quick connect, you are prompted to assign one of the following types:
+	// Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).
 	QuickConnectType QuickConnectType
 
 	noSmithyDocumentSerde
@@ -7987,7 +8065,7 @@ type RealTimeContactAnalysisAttachment struct {
 	AttachmentName *string
 
 	// Describes the MIME file type of the attachment. For a list of supported file
-	// types, see [Feature specifications]in the Amazon Connect Administrator Guide.
+	// types, see [Feature specifications]in the Connect Customer Administrator Guide.
 	//
 	// [Feature specifications]: https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html
 	ContentType *string
@@ -8531,6 +8609,8 @@ type Reference struct {
 //	ReferenceSummaryMemberEmail
 //	ReferenceSummaryMemberEmailMessage
 //	ReferenceSummaryMemberEmailMessagePlainText
+//	ReferenceSummaryMemberEmailMessagePlainTextRedacted
+//	ReferenceSummaryMemberEmailMessageRedacted
 //	ReferenceSummaryMemberNumber
 //	ReferenceSummaryMemberString
 //	ReferenceSummaryMemberUrl
@@ -8586,6 +8666,26 @@ type ReferenceSummaryMemberEmailMessagePlainText struct {
 
 func (*ReferenceSummaryMemberEmailMessagePlainText) isReferenceSummary() {}
 
+// Information about the reference when the referenceType is EMAIL_MESSAGE .
+// Otherwise, null.
+type ReferenceSummaryMemberEmailMessagePlainTextRedacted struct {
+	Value EmailMessageReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberEmailMessagePlainTextRedacted) isReferenceSummary() {}
+
+// Information about the reference when the referenceType is EMAIL_MESSAGE .
+// Otherwise, null.
+type ReferenceSummaryMemberEmailMessageRedacted struct {
+	Value EmailMessageReference
+
+	noSmithyDocumentSerde
+}
+
+func (*ReferenceSummaryMemberEmailMessageRedacted) isReferenceSummary() {}
+
 // Information about a reference when the referenceType is NUMBER . Otherwise, null.
 type ReferenceSummaryMemberNumber struct {
 	Value NumberReference
@@ -8613,29 +8713,29 @@ type ReferenceSummaryMemberUrl struct {
 
 func (*ReferenceSummaryMemberUrl) isReferenceSummary() {}
 
-// Details about the status of the replication of a source Amazon Connect instance
-// across Amazon Web Services Regions. Use these details to understand the general
-// status of a given replication. For information about why a replication process
-// may fail, see [Why a ReplicateInstance call fails]in the Create a replica of your existing Amazon Connect instance
-// topic in the Amazon Connect Administrator Guide.
+// Details about the status of the replication of a source Connect Customer
+// instance across Amazon Web Services Regions. Use these details to understand the
+// general status of a given replication. For information about why a replication
+// process may fail, see [Why a ReplicateInstance call fails]in the Create a replica of your existing Connect Customer
+// instance topic in the Connect Customer Administrator Guide.
 //
 // [Why a ReplicateInstance call fails]: https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html#why-replicateinstance-fails
 type ReplicationConfiguration struct {
 
-	// The URL that is used to sign-in to your Amazon Connect instance according to
+	// The URL that is used to sign-in to your Connect Customer instance according to
 	// your traffic distribution group configuration. For more information about
 	// sign-in and traffic distribution groups, see [Important things to know]in the Create traffic distribution
-	// groups topic in the Amazon Connect Administrator Guide.
+	// groups topic in the Connect Customer Administrator Guide.
 	//
 	// [Important things to know]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html
 	GlobalSignInEndpoint *string
 
 	// A list of replication status summaries. The summaries contain details about the
-	// replication of configuration information for Amazon Connect resources, for each
-	// Amazon Web Services Region.
+	// replication of configuration information for Connect Customer resources, for
+	// each Amazon Web Services Region.
 	ReplicationStatusSummaryList []ReplicationStatusSummary
 
-	// The Amazon Web Services Region where the source Amazon Connect instance was
+	// The Amazon Web Services Region where the source Connect Customer instance was
 	// created. This is the Region where the [ReplicateInstance]API was called to start the replication
 	// process.
 	//
@@ -8646,11 +8746,12 @@ type ReplicationConfiguration struct {
 }
 
 // Status information about the replication process, where you use the [ReplicateInstance] API to
-// create a replica of your Amazon Connect instance in another Amazon Web Services
-// Region. For more information, see [Set up Amazon Connect Global Resiliency]in the Amazon Connect Administrator Guide.
+// create a replica of your Connect Customer instance in another Amazon Web
+// Services Region. For more information, see [Set up Connect Customer Global Resiliency]in the Connect Customer
+// Administrator Guide.
 //
+// [Set up Connect Customer Global Resiliency]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-connect-global-resiliency.html
 // [ReplicateInstance]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ReplicateInstance.html
-// [Set up Amazon Connect Global Resiliency]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-connect-global-resiliency.html
 type ReplicationStatusSummary struct {
 
 	// The Amazon Web Services Region. This can be either the source or the replica
@@ -8661,7 +8762,7 @@ type ReplicationStatusSummary struct {
 	ReplicationStatus InstanceReplicationStatus
 
 	// A description of the replication status. Use this information to resolve any
-	// issues that are preventing the successful replication of your Amazon Connect
+	// issues that are preventing the successful replication of your Connect Customer
 	// instance to another Region.
 	ReplicationStatusReason *string
 
@@ -8698,7 +8799,7 @@ type RoutingCriteria struct {
 	// Information about the index of the routing criteria.
 	Index *int32
 
-	// List of routing steps. When Amazon Connect does not find an available agent
+	// List of routing steps. When Connect Customer does not find an available agent
 	// meeting the requirements in a step for a given step duration, the routing
 	// criteria will move on to the next step sequentially until a join is completed
 	// with an agent. When all steps are exhausted, the contact will be offered to any
@@ -8711,7 +8812,7 @@ type RoutingCriteria struct {
 // An object to define the RoutingCriteria.
 type RoutingCriteriaInput struct {
 
-	// When Amazon Connect does not find an available agent meeting the requirements
+	// When Connect Customer does not find an available agent meeting the requirements
 	// in a step for a given step duration, the routing criteria will move on to the
 	// next step sequentially until a join is completed with an agent. When all steps
 	// are exhausted, the contact will be offered to any agent in the queue.
@@ -8763,8 +8864,8 @@ type RoutingProfile struct {
 	// The description of the routing profile.
 	Description *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	InstanceId *string
@@ -8853,7 +8954,7 @@ type RoutingProfileManualAssignmentQueueConfigSummary struct {
 type RoutingProfileQueueConfig struct {
 
 	// The delay, in seconds, a contact should be in the queue before they are routed
-	// to an available agent. For more information, see [Queues: priority and delay]in the Amazon Connect
+	// to an available agent. For more information, see [Queues: priority and delay]in the Connect Customer
 	// Administrator Guide.
 	//
 	// [Queues: priority and delay]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html
@@ -8886,7 +8987,7 @@ type RoutingProfileQueueConfigSummary struct {
 	Channel Channel
 
 	// The delay, in seconds, that a contact should be in the queue before they are
-	// routed to an available agent. For more information, see [Queues: priority and delay]in the Amazon Connect
+	// routed to an available agent. For more information, see [Queues: priority and delay]in the Connect Customer
 	// Administrator Guide.
 	//
 	// [Queues: priority and delay]: https://docs.aws.amazon.com/connect/latest/adminguide/concepts-routing-profiles-priority.html
@@ -9391,7 +9492,7 @@ type SearchCriteria struct {
 	// The list of channels associated with contacts.
 	Channels []Channel
 
-	// Search criteria based on analysis outputs from Amazon Connect Contact Lens.
+	// Search criteria based on analysis outputs from Connect Customer Contact Lens.
 	ContactAnalysis *ContactAnalysis
 
 	// An object that can be used to specify Tag conditions inside the SearchFilter .
@@ -9415,12 +9516,12 @@ type SearchCriteria struct {
 	RoutingCriteria *SearchableRoutingCriteria
 
 	// The search criteria based on user-defined contact attributes that have been
-	// configured for contact search. For more information, see [Search by custom contact attributes]in the Amazon Connect
-	// Administrator Guide.
+	// configured for contact search. For more information, see [Search by custom contact attributes]in the Connect
+	// Customer Administrator Guide.
 	//
 	// To use SearchableContactAttributes in a search request, the GetContactAttributes
 	// action is required to perform an API request. For more information, see [https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions]Actions
-	// defined by Amazon Connect.
+	// defined by Connect Customer.
 	//
 	// [https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazonconnect.html#amazonconnect-actions-as-permissions
 	// [Search by custom contact attributes]: https://docs.aws.amazon.com/connect/latest/adminguide/search-custom-attributes.html
@@ -9452,11 +9553,11 @@ type SecurityKey struct {
 type SecurityProfile struct {
 
 	// The identifier of the hierarchy group that a security profile uses to restrict
-	// access to resources in Amazon Connect.
+	// access to resources in Connect Customer.
 	AllowedAccessControlHierarchyGroupId *string
 
 	// The list of tags that a security profile uses to restrict access to resources
-	// in Amazon Connect.
+	// in Connect Customer.
 	AllowedAccessControlTags map[string]string
 
 	// The Amazon Resource Name (ARN) for the security profile.
@@ -9470,7 +9571,7 @@ type SecurityProfile struct {
 	GranularAccessControlConfiguration *GranularAccessControlConfiguration
 
 	// The list of resources that a security profile applies hierarchy restrictions to
-	// in Amazon Connect. Following are acceptable ResourceNames: User .
+	// in Connect Customer. Following are acceptable ResourceNames: User .
 	HierarchyRestrictedResources []string
 
 	// The identifier for the security profile.
@@ -9489,7 +9590,7 @@ type SecurityProfile struct {
 	SecurityProfileName *string
 
 	// The list of resources that a security profile applies tag restrictions to in
-	// Amazon Connect.
+	// Connect Customer.
 	TagRestrictedResources []string
 
 	// The tags used to organize, track, or control access for this resource. For
@@ -9615,7 +9716,7 @@ type SegmentAttributeValue struct {
 type SendNotificationActionDefinition struct {
 
 	// Notification content. Supports variable injection. For more information, see [JSONPath reference]
-	// in the Amazon Connect Administrators Guide.
+	// in the Connect Customer Administrators Guide.
 	//
 	// [JSONPath reference]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html
 	//
@@ -9641,7 +9742,8 @@ type SendNotificationActionDefinition struct {
 	Exclusion *NotificationRecipientType
 
 	// The subject of the email if the delivery method is EMAIL . Supports variable
-	// injection. For more information, see [JSONPath reference]in the Amazon Connect Administrators Guide.
+	// injection. For more information, see [JSONPath reference]in the Connect Customer Administrators
+	// Guide.
 	//
 	// [JSONPath reference]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html
 	Subject *string
@@ -9893,8 +9995,8 @@ type TaskActionDefinition struct {
 	// This member is required.
 	ContactFlowId *string
 
-	// The name. Supports variable injection. For more information, see [JSONPath reference] in the Amazon
-	// Connect Administrators Guide.
+	// The name. Supports variable injection. For more information, see [JSONPath reference] in the
+	// Connect Customer Administrators Guide.
 	//
 	// [JSONPath reference]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html
 	//
@@ -9902,7 +10004,7 @@ type TaskActionDefinition struct {
 	Name *string
 
 	// The description. Supports variable injection. For more information, see [JSONPath reference] in the
-	// Amazon Connect Administrators Guide.
+	// Connect Customer Administrators Guide.
 	//
 	// [JSONPath reference]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-lens-variable-injection.html
 	Description *string
@@ -10105,7 +10207,8 @@ type TestCase struct {
 	// The identifier of the test case.
 	Id *string
 
-	// Defines the test attributes for precise data representation.
+	// Defines the test attributes for precise data representation. The value must be
+	// a valid JSON string.
 	InitializationData *string
 
 	// The region in which the test case was last modified.
@@ -10367,7 +10470,7 @@ type TrafficDistributionGroupUserSummary struct {
 }
 
 // A structure that defines search criteria and matching logic to search for
-// contacts by matching text with transcripts analyzed by Amazon Connect Contact
+// contacts by matching text with transcripts analyzed by Connect Customer Contact
 // Lens.
 type Transcript struct {
 
@@ -10479,7 +10582,7 @@ type UseCase struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a user account for an Amazon Connect instance.
+// Contains information about a user account for an Connect Customer instance.
 type User struct {
 
 	// The list of after contact work (ACW) timeout configuration settings for each
@@ -10637,27 +10740,27 @@ type UserHierarchyGroupSearchFilter struct {
 
 // Contains information about the identity of a user.
 //
-// For Amazon Connect instances that are created with the EXISTING_DIRECTORY
+// For Connect Customer instances that are created with the EXISTING_DIRECTORY
 // identity management type, FirstName , LastName , and Email cannot be updated
-// from within Amazon Connect because they are managed by the directory.
+// from within Connect Customer because they are managed by the directory.
 //
 // The FirstName and LastName length constraints below apply only to instances
-// using SAML for identity management. If you are using Amazon Connect for identity
-// management, the length constraints are 1-255 for FirstName , and 1-256 for
-// LastName .
+// using SAML for identity management. If you are using Connect Customer for
+// identity management, the length constraints are 1-255 for FirstName , and 1-256
+// for LastName .
 type UserIdentityInfo struct {
 
 	// The email address. If you are using SAML for identity management and include
 	// this parameter, an error is returned.
 	Email *string
 
-	// The first name. This is required if you are using Amazon Connect or SAML for
+	// The first name. This is required if you are using Connect Customer or SAML for
 	// identity management. Inputs must be in Unicode Normalization Form C (NFC). Text
 	// containing characters in a non-NFC form (for example, decomposed characters or
 	// combining marks) are not accepted.
 	FirstName *string
 
-	// The last name. This is required if you are using Amazon Connect or SAML for
+	// The last name. This is required if you are using Connect Customer or SAML for
 	// identity management. Inputs must be in Unicode Normalization Form C (NFC). Text
 	// containing characters in a non-NFC form (for example, decomposed characters or
 	// combining marks) are not accepted.
@@ -10765,13 +10868,13 @@ type UserPhoneConfig struct {
 type UserProficiency struct {
 
 	// The name of user's proficiency. You must use name of predefined attribute
-	// present in the Amazon Connect instance.
+	// present in the Connect Customer instance.
 	//
 	// This member is required.
 	AttributeName *string
 
 	// The value of user's proficiency. You must use value of predefined attribute
-	// present in the Amazon Connect instance.
+	// present in the Connect Customer instance.
 	//
 	// This member is required.
 	AttributeValue *string
@@ -10957,7 +11060,7 @@ type UserSummary struct {
 	// The timestamp when this resource was last modified.
 	LastModifiedTime *time.Time
 
-	// The Amazon Connect user name of the user account.
+	// The Connect Customer user name of the user account.
 	Username *string
 
 	noSmithyDocumentSerde
@@ -11351,7 +11454,7 @@ type VoiceRecordingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Information about Amazon Connect Wisdom.
+// Information about Connect Customer Wisdom.
 type WisdomInfo struct {
 
 	// The array of AI agents involved in the contact.

@@ -49,6 +49,7 @@
         "api_op_DescribeCompute.go",
         "api_op_DescribeContainerFleet.go",
         "api_op_DescribeContainerGroupDefinition.go",
+        "api_op_DescribeContainerGroupPortMappings.go",
         "api_op_DescribeEC2InstanceLimits.go",
         "api_op_DescribeFleetAttributes.go",
         "api_op_DescribeFleetCapacity.go",

@@ -11,6 +11,15 @@ func ExampleOperationUnion_outputUsage() {
 	var union types.OperationUnion
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.OperationUnionMemberDelete:
+		_ = v.Value // Value is types.DeleteOperation
+
+	case *types.OperationUnionMemberMerge:
+		_ = v.Value // Value is types.MergeOperation
+
+	case *types.OperationUnionMemberSplit:
+		_ = v.Value // Value is types.SplitOperation
+
 	case *types.OperationUnionMemberUpdate:
 		_ = v.Value // Value is types.UpdateOperation
 
@@ -23,7 +32,10 @@ func ExampleOperationUnion_outputUsage() {
 	}
 }
 
+var _ *types.DeleteOperation
+var _ *types.SplitOperation
 var _ *types.UpdateOperation
+var _ *types.MergeOperation
 
 func ExampleSsmExternalParameter_outputUsage() {
 	var union types.SsmExternalParameter

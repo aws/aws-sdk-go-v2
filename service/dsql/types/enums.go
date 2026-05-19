@@ -79,6 +79,98 @@ func (EncryptionType) Values() []EncryptionType {
 	}
 }
 
+type StreamFailureErrorCode string
+
+// Enum values for StreamFailureErrorCode
+const (
+	StreamFailureErrorCodeKinesisThroughputExceeded StreamFailureErrorCode = "KINESIS_THROUGHPUT_EXCEEDED"
+	StreamFailureErrorCodeKinesisStreamNotFound     StreamFailureErrorCode = "KINESIS_STREAM_NOT_FOUND"
+	StreamFailureErrorCodeRoleAccessDenied          StreamFailureErrorCode = "ROLE_ACCESS_DENIED"
+	StreamFailureErrorCodeKinesisAccessDenied       StreamFailureErrorCode = "KINESIS_ACCESS_DENIED"
+	StreamFailureErrorCodeKinesisKmsAccessDenied    StreamFailureErrorCode = "KINESIS_KMS_ACCESS_DENIED"
+	StreamFailureErrorCodeKinesisOversizeRecord     StreamFailureErrorCode = "KINESIS_OVERSIZE_RECORD"
+	StreamFailureErrorCodeClusterCmkInaccessible    StreamFailureErrorCode = "CLUSTER_CMK_INACCESSIBLE"
+	StreamFailureErrorCodeInternalError             StreamFailureErrorCode = "INTERNAL_ERROR"
+)
+
+// Values returns all known values for StreamFailureErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StreamFailureErrorCode) Values() []StreamFailureErrorCode {
+	return []StreamFailureErrorCode{
+		"KINESIS_THROUGHPUT_EXCEEDED",
+		"KINESIS_STREAM_NOT_FOUND",
+		"ROLE_ACCESS_DENIED",
+		"KINESIS_ACCESS_DENIED",
+		"KINESIS_KMS_ACCESS_DENIED",
+		"KINESIS_OVERSIZE_RECORD",
+		"CLUSTER_CMK_INACCESSIBLE",
+		"INTERNAL_ERROR",
+	}
+}
+
+type StreamFormat string
+
+// Enum values for StreamFormat
+const (
+	StreamFormatJson StreamFormat = "JSON"
+)
+
+// Values returns all known values for StreamFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StreamFormat) Values() []StreamFormat {
+	return []StreamFormat{
+		"JSON",
+	}
+}
+
+type StreamOrdering string
+
+// Enum values for StreamOrdering
+const (
+	StreamOrderingUnordered StreamOrdering = "UNORDERED"
+)
+
+// Values returns all known values for StreamOrdering. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StreamOrdering) Values() []StreamOrdering {
+	return []StreamOrdering{
+		"UNORDERED",
+	}
+}
+
+type StreamStatus string
+
+// Enum values for StreamStatus
+const (
+	StreamStatusCreating StreamStatus = "CREATING"
+	StreamStatusActive   StreamStatus = "ACTIVE"
+	StreamStatusDeleting StreamStatus = "DELETING"
+	StreamStatusDeleted  StreamStatus = "DELETED"
+	StreamStatusFailed   StreamStatus = "FAILED"
+	StreamStatusImpaired StreamStatus = "IMPAIRED"
+)
+
+// Values returns all known values for StreamStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StreamStatus) Values() []StreamStatus {
+	return []StreamStatus{
+		"CREATING",
+		"ACTIVE",
+		"DELETING",
+		"DELETED",
+		"FAILED",
+		"IMPAIRED",
+	}
+}
+
 type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason

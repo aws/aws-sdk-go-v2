@@ -138,7 +138,8 @@ type StartJobRunInput struct {
 	// Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the
 	// jobs will throw an exception.
 	//
-	// When the value is left blank, the timeout is defaulted to 2880 minutes.
+	// When the value is left blank, the timeout is defaulted to 2,880 minutes for
+	// Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.
 	//
 	// Any existing Glue jobs that had a timeout value greater than 7 days will be
 	// defaulted to 7 days. For instance if you have specified a timeout of 20 days for
@@ -236,7 +237,7 @@ func (c *Client) addOperationStartJobRunMiddlewares(stack *middleware.Stack, opt
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -258,9 +259,6 @@ func (c *Client) addOperationStartJobRunMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

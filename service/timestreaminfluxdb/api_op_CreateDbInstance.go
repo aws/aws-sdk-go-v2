@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Creates a new Timestream for InfluxDB DB instance.
@@ -96,6 +97,10 @@ type CreateDbInstanceInput struct {
 
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
+
+	// Specifies the maintenance schedule for the DB instance, including the preferred
+	// maintenance window and timezone.
+	MaintenanceSchedule *types.MaintenanceSchedule
 
 	// Specifies whether the networkType of the Timestream for InfluxDB instance is
 	// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can
@@ -192,13 +197,22 @@ type CreateDbInstanceOutput struct {
 	// Specifies the DbInstance's roles in the cluster.
 	InstanceModes []types.InstanceMode
 
+	// The timestamp of the last completed maintenance operation on the DB instance.
+	LastMaintenanceTime *time.Time
+
 	// Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
+
+	// The maintenance schedule for the DB instance.
+	MaintenanceSchedule *types.MaintenanceSchedule
 
 	// Specifies whether the networkType of the Timestream for InfluxDB instance is
 	// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can
 	// communicate over both IPv4 and IPv6 protocols.
 	NetworkType types.NetworkType
+
+	// The timestamp of the next scheduled maintenance operation on the DB instance.
+	NextMaintenanceTime *time.Time
 
 	// The port number on which InfluxDB accepts connections. The default value is
 	// 8086.
@@ -257,7 +271,7 @@ func (c *Client) addOperationCreateDbInstanceMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -279,9 +293,6 @@ func (c *Client) addOperationCreateDbInstanceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -12,6 +12,10 @@ import (
 )
 
 // Deletes a gateway target.
+//
+// You cannot delete a target that is in a pending authorization state (
+// CREATE_PENDING_AUTH , UPDATE_PENDING_AUTH , or SYNCHRONIZE_PENDING_AUTH ). Wait
+// for the authorization to complete or fail before deleting the target.
 func (c *Client) DeleteGatewayTarget(ctx context.Context, params *DeleteGatewayTargetInput, optFns ...func(*Options)) (*DeleteGatewayTargetOutput, error) {
 	if params == nil {
 		params = &DeleteGatewayTargetInput{}
@@ -102,7 +106,7 @@ func (c *Client) addOperationDeleteGatewayTargetMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -124,9 +128,6 @@ func (c *Client) addOperationDeleteGatewayTargetMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

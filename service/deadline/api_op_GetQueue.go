@@ -45,6 +45,8 @@ type GetQueueInput struct {
 	noSmithyDocumentSerde
 }
 
+// Mixin that adds an optional ARN field to response structures. Apply to
+// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type GetQueueOutput struct {
 
 	// The date and time the resource was created.
@@ -117,6 +119,10 @@ type GetQueueOutput struct {
 	// The IAM role ARN.
 	RoleArn *string
 
+	// The scheduling configuration for the queue. This configuration determines how
+	// workers are assigned to jobs in the queue.
+	SchedulingConfiguration types.SchedulingConfiguration
+
 	// The date and time the resource was updated.
 	UpdatedAt *time.Time
 
@@ -163,7 +169,7 @@ func (c *Client) addOperationGetQueueMiddlewares(stack *middleware.Stack, option
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -185,9 +191,6 @@ func (c *Client) addOperationGetQueueMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

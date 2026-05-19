@@ -35,13 +35,13 @@ import (
 //
 //   - Metrics are only available while the contact is actively in queue.
 //
-//   - For more information, see the [Position in queue]metric in the Amazon Connect Administrator
+//   - For more information, see the [Position in queue]metric in the Connect Customer Administrator
 //     Guide.
 //
-// Endpoints: See [Amazon Connect endpoints and quotas].
+// Endpoints: See [Connect Customer endpoints and quotas].
 //
 // [Position in queue]: https://docs.aws.amazon.com/connect/latest/adminguide/metrics-definitions.html
-// [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+// [Connect Customer endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 func (c *Client) GetContactMetrics(ctx context.Context, params *GetContactMetricsInput, optFns ...func(*Options)) (*GetContactMetricsOutput, error) {
 	if params == nil {
 		params = &GetContactMetricsInput{}
@@ -59,13 +59,13 @@ func (c *Client) GetContactMetrics(ctx context.Context, params *GetContactMetric
 
 type GetContactMetricsInput struct {
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	//
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -139,7 +139,7 @@ func (c *Client) addOperationGetContactMetricsMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -161,9 +161,6 @@ func (c *Client) addOperationGetContactMetricsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -16,8 +16,8 @@ import (
 // created. Returns key metadata including attributes, state, and timestamps, but
 // does not return the actual cryptographic key material.
 //
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts.
+// Cross-account use: This operation supports cross-account use when the key has a
+// resource-based policy that grants access. For more information, see [Resource-based policies].
 //
 // Related operations:
 //
@@ -29,6 +29,7 @@ import (
 //
 // [DeleteKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html
 // [ListKeys]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListKeys.html
+// [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
 // [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
 func (c *Client) GetKey(ctx context.Context, params *GetKeyInput, optFns ...func(*Options)) (*GetKeyOutput, error) {
 	if params == nil {
@@ -103,7 +104,7 @@ func (c *Client) addOperationGetKeyMiddlewares(stack *middleware.Stack, options 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -125,9 +126,6 @@ func (c *Client) addOperationGetKeyMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

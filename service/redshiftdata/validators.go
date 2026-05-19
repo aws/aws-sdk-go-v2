@@ -293,6 +293,11 @@ func validateOpBatchExecuteStatementInput(v *BatchExecuteStatementInput) error {
 	if v.Sqls == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Sqls"))
 	}
+	if v.Parameters != nil {
+		if err := validateSqlParametersList(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

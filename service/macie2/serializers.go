@@ -7285,6 +7285,11 @@ func awsRestjson1_serializeDocumentS3Destination(v *types.S3Destination, value s
 		ok.String(*v.BucketName)
 	}
 
+	if v.ExpectedBucketOwner != nil {
+		ok := object.Key("expectedBucketOwner")
+		ok.String(*v.ExpectedBucketOwner)
+	}
+
 	if v.KeyPrefix != nil {
 		ok := object.Key("keyPrefix")
 		ok.String(*v.KeyPrefix)

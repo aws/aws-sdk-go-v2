@@ -27,6 +27,7 @@ func (c *Client) DeleteConfig(ctx context.Context, params *DeleteConfigInput, op
 	return out, nil
 }
 
+// Input for the DeleteConfig operation.
 type DeleteConfigInput struct {
 
 	// UUID of a Config .
@@ -42,6 +43,7 @@ type DeleteConfigInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response containing the ARN, ID, and type of a Config .
 type DeleteConfigOutput struct {
 
 	// ARN of a Config .
@@ -93,7 +95,7 @@ func (c *Client) addOperationDeleteConfigMiddlewares(stack *middleware.Stack, op
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -115,9 +117,6 @@ func (c *Client) addOperationDeleteConfigMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -56,6 +56,15 @@ type CreateElasticsearchDomainInput struct {
 	// Specifies Auto-Tune options.
 	AutoTuneOptions *types.AutoTuneOptionsInput
 
+	// Specifies the automated snapshot pause options for the domain.
+	//
+	// Suspending snapshots reduces data protection. You cannot restore your domain to
+	// points in time when snapshots are suspended. Use this feature only for
+	// short-term operational needs such as migrations or maintenance windows.
+	//
+	// Maximum suspension duration: 3 days.
+	AutomatedSnapshotPauseOptions *types.AutomatedSnapshotPauseRequestOptions
+
 	// Options to specify the Cognito user and identity pools for Kibana
 	// authentication. For more information, see [Amazon Cognito Authentication for Kibana].
 	//
@@ -156,7 +165,7 @@ func (c *Client) addOperationCreateElasticsearchDomainMiddlewares(stack *middlew
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -178,9 +187,6 @@ func (c *Client) addOperationCreateElasticsearchDomainMiddlewares(stack *middlew
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

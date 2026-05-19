@@ -1,0 +1,831 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.uxc#AWSAccountUXSetting": {
+            "type": "service",
+            "version": "2024-07-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.uxc#GetAccountCustomizations"
+                },
+                {
+                    "target": "com.amazonaws.uxc#ListServices"
+                },
+                {
+                    "target": "com.amazonaws.uxc#UpdateAccountCustomizations"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "uxc",
+                    "arnNamespace": "uxc",
+                    "cloudFormationName": "AWSAccountUXSetting",
+                    "endpointPrefix": "uxc"
+                },
+                "aws.auth#sigv4": {
+                    "name": "uxc"
+                },
+                "aws.endpoints#dualStackOnlyEndpoints": {},
+                "aws.endpoints#standardRegionalEndpoints": {},
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "maxAge": 86400,
+                    "additionalAllowedHeaders": [
+                        "Authorization",
+                        "Date",
+                        "X-Amz-Date",
+                        "X-Amz-Security-Token",
+                        "X-Amz-Target",
+                        "Content-type",
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "Access-Control-Allow-Origin"
+                    ]
+                },
+                "smithy.api#documentation": "<p>This is the Amazon Web Services User Experience Customization (UXC) API Reference. Amazon Web Services User Experience Customization (UXC) is a utility that provides programmatic access to enable account administrators to customize the visual appearance of the Amazon Web Services Management Console and manage these settings at the account level.</p> <note> <p>The <code>visibleServices</code> and <code>visibleRegions</code> settings control only the appearance of services and Regions in the Amazon Web Services Management Console. They do not restrict access through the CLI, SDKs, or other APIs.</p> </note> <p>For more information about UXC features and console procedures, see <a href=\"https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/getting-started-uxc.html\">Getting started with Amazon Web Services User Experience Customization</a>. For information about required permissions, see <a href=\"https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/security_iam.html\">Identity and access management for Amazon Web Services Management Console</a>.</p>",
+                "smithy.api#title": "AWS User Experience Customization",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {},
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://uxc-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://uxc.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {},
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://uxc-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://uxc.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://uxc-fips.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://uxc.cn-northwest-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://uxc-fips.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://uxc.us-gov-west-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.uxc#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You don't have sufficient access to perform this operation. Verify that your IAM policy includes the required <code>uxc:</code> permissions for the operation that you are calling. For more information on IAM permissions, see <a href=\"https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/security-iam-awsmanpol.html\">Amazon Web Services managed policies for Amazon Web Services Management Console</a>.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.uxc#AccountColor": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                },
+                "PINK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "pink"
+                    }
+                },
+                "PURPLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "purple"
+                    }
+                },
+                "DARKBLUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "darkBlue"
+                    }
+                },
+                "LIGHTBLUE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "lightBlue"
+                    }
+                },
+                "TEAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "teal"
+                    }
+                },
+                "GREEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "green"
+                    }
+                },
+                "YELLOW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "yellow"
+                    }
+                },
+                "ORANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "orange"
+                    }
+                },
+                "RED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "red"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.uxc#GetAccountCustomizations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.uxc#GetAccountCustomizationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.uxc#GetAccountCustomizationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.uxc#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.uxc#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.uxc#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.uxc#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to retrieve account customizations"
+                },
+                "smithy.api#documentation": "<p>Returns the current account customization settings, including account color, visible services, and visible Regions. Settings that you have not configured return their default values: visible Regions and visible services return `null`, and account color returns `none`.</p> <note> <p>The <code>visibleServices</code> and <code>visibleRegions</code> settings control only the appearance of services and Regions in the Amazon Web Services Management Console. They do not restrict access through the CLI, SDKs, or other APIs.</p> </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Get account customizations",
+                        "documentation": "Retrieves all account customization settings",
+                        "input": {},
+                        "output": {
+                            "accountColor": "green",
+                            "visibleServices": [
+                                "s3",
+                                "ec2"
+                            ],
+                            "visibleRegions": [
+                                "us-east-1",
+                                "us-west-2"
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/account-customizations"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetAccountCustomizationsSuccess",
+                        "params": {},
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.uxc#GetAccountCustomizationsInput": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.uxc#GetAccountCustomizationsOutput": {
+            "type": "structure",
+            "members": {
+                "accountColor": {
+                    "target": "com.amazonaws.uxc#AccountColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account color preference. A value of <code>none</code> indicates that you have not set a color.</p>"
+                    }
+                },
+                "visibleServices": {
+                    "target": "com.amazonaws.uxc#ServiceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Amazon Web Services service identifiers that are visible to the account in the Amazon Web Services Management Console. A value of <code>null</code> indicates that you have not configured this feature and all services are visible. For valid service identifiers, call <a href=\"https://docs.aws.amazon.com/awsconsolehelpdocs/latest/APIReference/API_ListServices.html\">ListServices</a>.</p>"
+                    }
+                },
+                "visibleRegions": {
+                    "target": "com.amazonaws.uxc#RegionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Amazon Web Services Region codes that are visible to the account in the Amazon Web Services Management Console. A value of <code>null</code> indicates that you have not configured this feature and all Regions are visible. For a list of valid Region codes, see <a href=\"https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html\">Amazon Web Services Regions</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.uxc#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service encountered an internal error. Try your request again later.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.uxc#ListServices": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.uxc#ListServicesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.uxc#ListServicesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.uxc#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.uxc#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.uxc#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.uxc#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to list available services"
+                },
+                "smithy.api#documentation": "<p>Returns a paginated list of Amazon Web Services service identifiers that you can use as values for the <code>visibleServices</code> setting in <a href=\"https://docs.aws.amazon.com/awsconsolehelpdocs/latest/APIReference/API_UpdateAccountCustomizations.html\">UpdateAccountCustomizations</a>. The available services vary by Amazon Web Services partition. Use pagination to retrieve all results.</p> <note> <p>The <code>visibleServices</code> setting controls only the appearance of services in the Amazon Web Services Management Console. It does not restrict access through the CLI, SDKs, or other APIs.</p> </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "List available services",
+                        "documentation": "Retrieves a paginated list of available AWS services",
+                        "input": {},
+                        "output": {
+                            "services": [
+                                "s3",
+                                "ec2",
+                                "lambda"
+                            ],
+                            "nextToken": "eyJhbGciOiJIUzI1NiJ91W342Gdcs259019"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/services"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "services"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListServicesSuccess",
+                        "params": {},
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.uxc#ListServicesInput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.uxc#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for retrieving the next page of results. Use the <code>nextToken</code> value from a previous response.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.uxc#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.uxc#ListServicesOutput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.uxc#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for retrieving the next page of results. This value is <code>null</code> when no more results are available.</p>"
+                    }
+                },
+                "services": {
+                    "target": "com.amazonaws.uxc#ServiceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of available Amazon Web Services service identifiers.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.uxc#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.uxc#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[-A-Za-z0-9+/_]+=*$"
+            }
+        },
+        "com.amazonaws.uxc#Region": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-z]{2}(-[a-z]{1,10}){1,2}-[1-9]$"
+            }
+        },
+        "com.amazonaws.uxc#RegionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.uxc#Region"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.uxc#Service": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+            }
+        },
+        "com.amazonaws.uxc#ServiceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.uxc#Service"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.uxc#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied because of request throttling. Reduce the frequency of your requests.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.uxc#UpdateAccountCustomizations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.uxc#UpdateAccountCustomizationsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.uxc#UpdateAccountCustomizationsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.uxc#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.uxc#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.uxc#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.uxc#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "documentation": "Grants permission to update account customizations"
+                },
+                "smithy.api#documentation": "<p>Updates one or more account customization settings. You can update account color, visible services, and visible Regions in a single request. Only the settings that you include in the request body are modified. Omitted settings remain unchanged. To reset a setting to its default behavior, set the value to <code>null</code> for visible Regions and visible services, or <code>none</code> for account color. This operation is idempotent.</p> <note> <p>The <code>visibleServices</code> and <code>visibleRegions</code> settings control only the appearance of services and Regions in the Amazon Web Services Management Console. They do not restrict access through the CLI, SDKs, or other APIs.</p> </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Update account customizations",
+                        "documentation": "Updates account customization settings with new values",
+                        "input": {
+                            "accountColor": "green",
+                            "visibleServices": [
+                                "s3",
+                                "ec2",
+                                "lambda"
+                            ]
+                        },
+                        "output": {
+                            "accountColor": "green",
+                            "visibleServices": [
+                                "s3",
+                                "ec2",
+                                "lambda"
+                            ],
+                            "visibleRegions": [
+                                "us-east-1",
+                                "us-west-2"
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/v1/account-customizations"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.uxc#UpdateAccountCustomizationsInput": {
+            "type": "structure",
+            "members": {
+                "accountColor": {
+                    "target": "com.amazonaws.uxc#AccountColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account color preference to set. Set to <code>none</code> to reset to the default (no color).</p>"
+                    }
+                },
+                "visibleServices": {
+                    "target": "com.amazonaws.uxc#ServiceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Amazon Web Services service identifiers to make visible in the Amazon Web Services Management Console. Set to <code>null</code> to reset to the default, which makes all services visible. For valid service identifiers, call <a href=\"https://docs.aws.amazon.com/awsconsolehelpdocs/latest/APIReference/API_ListServices.html\">ListServices</a>.</p>"
+                    }
+                },
+                "visibleRegions": {
+                    "target": "com.amazonaws.uxc#RegionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Amazon Web Services Region codes to make visible in the Amazon Web Services Management Console. Set to <code>null</code> to reset to the default, which makes all Regions visible. For a list of valid Region codes, see <a href=\"https://docs.aws.amazon.com/global-infrastructure/latest/regions/aws-regions.html\">Amazon Web Services Regions</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.uxc#UpdateAccountCustomizationsOutput": {
+            "type": "structure",
+            "members": {
+                "accountColor": {
+                    "target": "com.amazonaws.uxc#AccountColor",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current account color preference after the update.</p>"
+                    }
+                },
+                "visibleServices": {
+                    "target": "com.amazonaws.uxc#ServiceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current list of visible service identifiers after the update.</p>"
+                    }
+                },
+                "visibleRegions": {
+                    "target": "com.amazonaws.uxc#RegionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current list of visible Region codes after the update.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.uxc#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldList": {
+                    "target": "com.amazonaws.uxc#ValidationExceptionFieldList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of fields that are invalid.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.uxc#ValidationExceptionField": {
+            "type": "structure",
+            "members": {
+                "path": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The field name with the validation exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the validation exception.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a validation exception for a specific field.</p>"
+            }
+        },
+        "com.amazonaws.uxc#ValidationExceptionFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.uxc#ValidationExceptionField"
+            }
+        }
+    }
+}

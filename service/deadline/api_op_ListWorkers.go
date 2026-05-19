@@ -27,6 +27,7 @@ func (c *Client) ListWorkers(ctx context.Context, params *ListWorkersInput, optF
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListWorkersInput struct {
 
 	// The farm ID connected to the workers.
@@ -49,6 +50,7 @@ type ListWorkersInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListWorkersOutput struct {
 
 	// The workers on the list.
@@ -104,7 +106,7 @@ func (c *Client) addOperationListWorkersMiddlewares(stack *middleware.Stack, opt
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -126,9 +128,6 @@ func (c *Client) addOperationListWorkersMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

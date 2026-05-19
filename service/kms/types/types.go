@@ -323,6 +323,30 @@ type GrantListEntry struct {
 	noSmithyDocumentSerde
 }
 
+// Contains usage information about the last time the KMS key was used for a
+// successful cryptographic operation.
+type KeyLastUsageData struct {
+
+	// The CloudTrail eventId associated with the last successful cryptographic
+	// operation. Absent if the key has not been used since KMS began tracking.
+	CloudTrailEventId *string
+
+	// The KMS request ID associated with the last successful cryptographic operation.
+	// Absent if the key has not been used since KMS began tracking.
+	KmsRequestId *string
+
+	// The last successful cryptographic operation the KMS key was used for. Absent if
+	// the key has not been used since KMS began tracking.
+	Operation KeyLastUsageTrackingOperation
+
+	// The date and time when the KMS key was most recently used for a successful
+	// cryptographic operation. Absent if the key has not been used since KMS began
+	// tracking.
+	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about each entry in the key list.
 type KeyListEntry struct {
 

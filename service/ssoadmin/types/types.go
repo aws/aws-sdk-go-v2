@@ -169,6 +169,10 @@ type Application struct {
 	// The description of the application.
 	Description *string
 
+	// The ARN of the identity store that is connected to the instance of IAM Identity
+	// Center.
+	IdentityStoreArn *string
+
 	// The ARN of the instance of IAM Identity Center that is configured with this
 	// application.
 	InstanceArn *string

@@ -12814,7 +12814,7 @@
                 "memberAbilities": {
                     "target": "com.amazonaws.cleanrooms#MemberAbilities",
                     "traits": {
-                        "smithy.api#documentation": "<p>The abilities granted to the collaboration member. These determine what actions the member can perform within the collaboration.</p> <note> <p>The following values are currently not supported: <code>CAN_QUERY</code>, <code>CAN_RECEIVE_RESULTS,</code> and <code>CAN_RUN_JOB</code>. </p> <p>Set the value of <code>memberAbilities</code> to <code>[]</code> to allow a member to contribute data.</p> </note>",
+                        "smithy.api#documentation": "<p>The abilities granted to the collaboration member. These determine what actions the member can perform within the collaboration.</p> <note> <p>The following values are currently not supported: <code>CAN_QUERY</code> and <code>CAN_RUN_JOB</code>. </p> <p>Set the value of <code>memberAbilities</code> to <code>[]</code> to allow a member to contribute data.</p> <p>Set the value of <code>memberAbilities</code> to <code>[CAN_RECEIVE_RESULTS]</code> to allow a member to contribute data and receive results.</p> </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -15014,9 +15014,15 @@
                         "smithy.api#documentation": "<p>The number of workers for a PySpark job.</p>",
                         "smithy.api#range": {
                             "min": 4,
-                            "max": 128
+                            "max": 1024
                         },
                         "smithy.api#required": {}
+                    }
+                },
+                "properties": {
+                    "target": "com.amazonaws.cleanrooms#WorkerComputeConfigurationProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration properties for the worker compute environment. These properties allow you to customize the compute settings for your Clean Rooms workloads.</p>"
                     }
                 }
             },
@@ -18675,7 +18681,7 @@
                 "spark": {
                     "target": "com.amazonaws.cleanrooms#SparkProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Spark configuration properties for SQL workloads. This map contains key-value pairs that configure Apache Spark settings to optimize performance for your data processing jobs. You can specify up to 50 Spark properties, with each key being 1-200 characters and each value being 0-500 characters. These properties allow you to adjust compute capacity for large datasets and complex workloads.</p>"
+                        "smithy.api#documentation": "<p>The Spark configuration properties for SQL and PySpark workloads. This map contains key-value pairs that configure Apache Spark settings to optimize performance for your data processing jobs. You can specify up to 50 Spark properties, with each key being 1-200 characters and each value being 0-500 characters. These properties allow you to adjust compute capacity for large datasets and complex workloads.</p>"
                     }
                 }
             },

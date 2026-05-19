@@ -6,6 +6,21 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// Configuration for node modes in the DbCluster.
+type ClusterConfiguration struct {
+
+	// Indicates if the compactor instance is a standalone instance or not.
+	DedicatedCompactor *bool
+
+	// The number of instances in the DbCluster which can both ingest and query.
+	IngestQueryInstances *int32
+
+	// The number of instances in the DbCluster which can only query.
+	QueryOnlyInstances *int32
+
+	noSmithyDocumentSerde
+}
+
 // Describes a summary of a Timestream for InfluxDB cluster.
 type DbClusterSummary struct {
 
@@ -912,6 +927,26 @@ type LogDeliveryConfiguration struct {
 	//
 	// This member is required.
 	S3Configuration *S3Configuration
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the maintenance schedule for a DB instance or cluster, defining when
+// maintenance operations such as patching can be performed.
+type MaintenanceSchedule struct {
+
+	// The preferred maintenance window in the format ddd:HH:MM-ddd:HH:MM (UTC). Day
+	// must be one of: Mon, Tue, Wed, Thu, Fri, Sat, Sun. For example,
+	// Sun:02:00-Sun:06:00. Provide an empty string to let the system choose a window.
+	//
+	// This member is required.
+	PreferredMaintenanceWindow *string
+
+	// The IANA timezone identifier for the maintenance window. Format: Region/City or
+	// UTC. For example, America/New_York or UTC.
+	//
+	// This member is required.
+	Timezone *string
 
 	noSmithyDocumentSerde
 }

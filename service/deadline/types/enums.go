@@ -6,10 +6,11 @@ type AcceleratorName string
 
 // Enum values for AcceleratorName
 const (
-	AcceleratorNameT4   AcceleratorName = "t4"
-	AcceleratorNameA10g AcceleratorName = "a10g"
-	AcceleratorNameL4   AcceleratorName = "l4"
-	AcceleratorNameL40s AcceleratorName = "l40s"
+	AcceleratorNameT4               AcceleratorName = "t4"
+	AcceleratorNameA10g             AcceleratorName = "a10g"
+	AcceleratorNameL4               AcceleratorName = "l4"
+	AcceleratorNameL40s             AcceleratorName = "l40s"
+	AcceleratorNameRtxProServer6000 AcceleratorName = "rtx-pro-server-6000"
 )
 
 // Values returns all known values for AcceleratorName. Note that this can be
@@ -22,6 +23,7 @@ func (AcceleratorName) Values() []AcceleratorName {
 		"a10g",
 		"l4",
 		"l40s",
+		"rtx-pro-server-6000",
 	}
 }
 
@@ -80,6 +82,199 @@ func (AutoScalingStatus) Values() []AutoScalingStatus {
 		"GROWING",
 		"STEADY",
 		"SHRINKING",
+	}
+}
+
+type BatchGetJobErrorCode string
+
+// Enum values for BatchGetJobErrorCode
+const (
+	BatchGetJobErrorCodeInternalServerErrorException BatchGetJobErrorCode = "InternalServerErrorException"
+	BatchGetJobErrorCodeResourceNotFoundException    BatchGetJobErrorCode = "ResourceNotFoundException"
+	BatchGetJobErrorCodeValidationException          BatchGetJobErrorCode = "ValidationException"
+	BatchGetJobErrorCodeAccessDeniedException        BatchGetJobErrorCode = "AccessDeniedException"
+	BatchGetJobErrorCodeThrottlingException          BatchGetJobErrorCode = "ThrottlingException"
+)
+
+// Values returns all known values for BatchGetJobErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchGetJobErrorCode) Values() []BatchGetJobErrorCode {
+	return []BatchGetJobErrorCode{
+		"InternalServerErrorException",
+		"ResourceNotFoundException",
+		"ValidationException",
+		"AccessDeniedException",
+		"ThrottlingException",
+	}
+}
+
+type BatchGetSessionActionErrorCode string
+
+// Enum values for BatchGetSessionActionErrorCode
+const (
+	BatchGetSessionActionErrorCodeInternalServerErrorException BatchGetSessionActionErrorCode = "InternalServerErrorException"
+	BatchGetSessionActionErrorCodeResourceNotFoundException    BatchGetSessionActionErrorCode = "ResourceNotFoundException"
+	BatchGetSessionActionErrorCodeValidationException          BatchGetSessionActionErrorCode = "ValidationException"
+)
+
+// Values returns all known values for BatchGetSessionActionErrorCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchGetSessionActionErrorCode) Values() []BatchGetSessionActionErrorCode {
+	return []BatchGetSessionActionErrorCode{
+		"InternalServerErrorException",
+		"ResourceNotFoundException",
+		"ValidationException",
+	}
+}
+
+type BatchGetSessionErrorCode string
+
+// Enum values for BatchGetSessionErrorCode
+const (
+	BatchGetSessionErrorCodeInternalServerErrorException BatchGetSessionErrorCode = "InternalServerErrorException"
+	BatchGetSessionErrorCodeResourceNotFoundException    BatchGetSessionErrorCode = "ResourceNotFoundException"
+	BatchGetSessionErrorCodeValidationException          BatchGetSessionErrorCode = "ValidationException"
+)
+
+// Values returns all known values for BatchGetSessionErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchGetSessionErrorCode) Values() []BatchGetSessionErrorCode {
+	return []BatchGetSessionErrorCode{
+		"InternalServerErrorException",
+		"ResourceNotFoundException",
+		"ValidationException",
+	}
+}
+
+type BatchGetStepErrorCode string
+
+// Enum values for BatchGetStepErrorCode
+const (
+	BatchGetStepErrorCodeInternalServerErrorException BatchGetStepErrorCode = "InternalServerErrorException"
+	BatchGetStepErrorCodeResourceNotFoundException    BatchGetStepErrorCode = "ResourceNotFoundException"
+	BatchGetStepErrorCodeValidationException          BatchGetStepErrorCode = "ValidationException"
+	BatchGetStepErrorCodeAccessDeniedException        BatchGetStepErrorCode = "AccessDeniedException"
+	BatchGetStepErrorCodeThrottlingException          BatchGetStepErrorCode = "ThrottlingException"
+)
+
+// Values returns all known values for BatchGetStepErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchGetStepErrorCode) Values() []BatchGetStepErrorCode {
+	return []BatchGetStepErrorCode{
+		"InternalServerErrorException",
+		"ResourceNotFoundException",
+		"ValidationException",
+		"AccessDeniedException",
+		"ThrottlingException",
+	}
+}
+
+type BatchGetTaskErrorCode string
+
+// Enum values for BatchGetTaskErrorCode
+const (
+	BatchGetTaskErrorCodeInternalServerErrorException BatchGetTaskErrorCode = "InternalServerErrorException"
+	BatchGetTaskErrorCodeResourceNotFoundException    BatchGetTaskErrorCode = "ResourceNotFoundException"
+	BatchGetTaskErrorCodeValidationException          BatchGetTaskErrorCode = "ValidationException"
+	BatchGetTaskErrorCodeAccessDeniedException        BatchGetTaskErrorCode = "AccessDeniedException"
+	BatchGetTaskErrorCodeThrottlingException          BatchGetTaskErrorCode = "ThrottlingException"
+)
+
+// Values returns all known values for BatchGetTaskErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchGetTaskErrorCode) Values() []BatchGetTaskErrorCode {
+	return []BatchGetTaskErrorCode{
+		"InternalServerErrorException",
+		"ResourceNotFoundException",
+		"ValidationException",
+		"AccessDeniedException",
+		"ThrottlingException",
+	}
+}
+
+type BatchGetWorkerErrorCode string
+
+// Enum values for BatchGetWorkerErrorCode
+const (
+	BatchGetWorkerErrorCodeInternalServerErrorException BatchGetWorkerErrorCode = "InternalServerErrorException"
+	BatchGetWorkerErrorCodeResourceNotFoundException    BatchGetWorkerErrorCode = "ResourceNotFoundException"
+	BatchGetWorkerErrorCodeValidationException          BatchGetWorkerErrorCode = "ValidationException"
+)
+
+// Values returns all known values for BatchGetWorkerErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchGetWorkerErrorCode) Values() []BatchGetWorkerErrorCode {
+	return []BatchGetWorkerErrorCode{
+		"InternalServerErrorException",
+		"ResourceNotFoundException",
+		"ValidationException",
+	}
+}
+
+type BatchUpdateJobErrorCode string
+
+// Enum values for BatchUpdateJobErrorCode
+const (
+	BatchUpdateJobErrorCodeConflictException            BatchUpdateJobErrorCode = "ConflictException"
+	BatchUpdateJobErrorCodeInternalServerErrorException BatchUpdateJobErrorCode = "InternalServerErrorException"
+	BatchUpdateJobErrorCodeResourceNotFoundException    BatchUpdateJobErrorCode = "ResourceNotFoundException"
+	BatchUpdateJobErrorCodeValidationException          BatchUpdateJobErrorCode = "ValidationException"
+	BatchUpdateJobErrorCodeAccessDeniedException        BatchUpdateJobErrorCode = "AccessDeniedException"
+	BatchUpdateJobErrorCodeThrottlingException          BatchUpdateJobErrorCode = "ThrottlingException"
+)
+
+// Values returns all known values for BatchUpdateJobErrorCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchUpdateJobErrorCode) Values() []BatchUpdateJobErrorCode {
+	return []BatchUpdateJobErrorCode{
+		"ConflictException",
+		"InternalServerErrorException",
+		"ResourceNotFoundException",
+		"ValidationException",
+		"AccessDeniedException",
+		"ThrottlingException",
+	}
+}
+
+type BatchUpdateTaskErrorCode string
+
+// Enum values for BatchUpdateTaskErrorCode
+const (
+	BatchUpdateTaskErrorCodeConflictException            BatchUpdateTaskErrorCode = "ConflictException"
+	BatchUpdateTaskErrorCodeInternalServerErrorException BatchUpdateTaskErrorCode = "InternalServerErrorException"
+	BatchUpdateTaskErrorCodeResourceNotFoundException    BatchUpdateTaskErrorCode = "ResourceNotFoundException"
+	BatchUpdateTaskErrorCodeValidationException          BatchUpdateTaskErrorCode = "ValidationException"
+	BatchUpdateTaskErrorCodeAccessDeniedException        BatchUpdateTaskErrorCode = "AccessDeniedException"
+	BatchUpdateTaskErrorCodeThrottlingException          BatchUpdateTaskErrorCode = "ThrottlingException"
+)
+
+// Values returns all known values for BatchUpdateTaskErrorCode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchUpdateTaskErrorCode) Values() []BatchUpdateTaskErrorCode {
+	return []BatchUpdateTaskErrorCode{
+		"ConflictException",
+		"InternalServerErrorException",
+		"ResourceNotFoundException",
+		"ValidationException",
+		"AccessDeniedException",
+		"ThrottlingException",
 	}
 }
 

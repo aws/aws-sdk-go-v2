@@ -13,9 +13,10 @@ import (
 )
 
 // Start importing bulk data into an ACTIVE data store. The import job imports
-// DICOM P10 files found in the S3 prefix specified by the inputS3Uri parameter.
-// The import job stores processing results in the file specified by the
-// outputS3Uri parameter.
+// DICOM P10 files or enhances existing DICOM files with JSON metadata. The
+// importConfiguration parameter specifies the import type. The data is found in
+// the S3 prefix specified by the inputS3Uri parameter. The import job stores
+// processing results in the file specified by the outputS3Uri parameter.
 func (c *Client) StartDICOMImportJob(ctx context.Context, params *StartDICOMImportJobInput, optFns ...func(*Options)) (*StartDICOMImportJobOutput, error) {
 	if params == nil {
 		params = &StartDICOMImportJobInput{}
@@ -60,6 +61,9 @@ type StartDICOMImportJobInput struct {
 	//
 	// This member is required.
 	OutputS3Uri *string
+
+	// The import configuration for the import job.
+	ImportConfiguration types.ImportConfiguration
 
 	// The account ID of the source S3 bucket owner.
 	InputOwnerAccountId *string
@@ -132,7 +136,7 @@ func (c *Client) addOperationStartDICOMImportJobMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -154,9 +158,6 @@ func (c *Client) addOperationStartDICOMImportJobMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

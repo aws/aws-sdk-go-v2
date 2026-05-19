@@ -41,6 +41,10 @@ type RevokeVpcEndpointAccessInput struct {
 	// The service SP to revoke access from.
 	Service types.AWSServicePrincipal
 
+	// The options for the service, including the supported Regions for the endpoint
+	// access.
+	ServiceOptions *types.ServiceOptions
+
 	noSmithyDocumentSerde
 }
 
@@ -85,7 +89,7 @@ func (c *Client) addOperationRevokeVpcEndpointAccessMiddlewares(stack *middlewar
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -107,9 +111,6 @@ func (c *Client) addOperationRevokeVpcEndpointAccessMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

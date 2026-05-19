@@ -40,6 +40,8 @@ type GetManagedThingCapabilitiesInput struct {
 type GetManagedThingCapabilitiesOutput struct {
 
 	// The capabilities of the device such as light bulb.
+	//
+	// Deprecated: Capabilities has been deprecated, use CapabilityReport instead
 	Capabilities *string
 
 	// A report of the capabilities for the managed thing.
@@ -88,7 +90,7 @@ func (c *Client) addOperationGetManagedThingCapabilitiesMiddlewares(stack *middl
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -110,9 +112,6 @@ func (c *Client) addOperationGetManagedThingCapabilitiesMiddlewares(stack *middl
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

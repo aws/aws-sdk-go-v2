@@ -3859,6 +3859,67 @@ func (m *awsAwsjson11_serializeOpDisassociateSoftwareFromImageBuilder) HandleSer
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpDrainSessionInstance struct {
+}
+
+func (*awsAwsjson11_serializeOpDrainSessionInstance) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDrainSessionInstance) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DrainSessionInstanceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PhotonAdminProxyService.DrainSessionInstance")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDrainSessionInstanceInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpEnableUser struct {
 }
 
@@ -5413,6 +5474,104 @@ func awsAwsjson11_serializeDocumentAccessEndpointList(v []types.AccessEndpoint, 
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAgentAccessConfig(v *types.AgentAccessConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3BucketArn != nil {
+		ok := object.Key("S3BucketArn")
+		ok.String(*v.S3BucketArn)
+	}
+
+	if len(v.ScreenImageFormat) > 0 {
+		ok := object.Key("ScreenImageFormat")
+		ok.String(string(v.ScreenImageFormat))
+	}
+
+	if len(v.ScreenResolution) > 0 {
+		ok := object.Key("ScreenResolution")
+		ok.String(string(v.ScreenResolution))
+	}
+
+	if v.ScreenshotsUploadEnabled != nil {
+		ok := object.Key("ScreenshotsUploadEnabled")
+		ok.Boolean(*v.ScreenshotsUploadEnabled)
+	}
+
+	if v.Settings != nil {
+		ok := object.Key("Settings")
+		if err := awsAwsjson11_serializeDocumentAgentAccessSettingList(v.Settings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAgentAccessConfigForUpdate(v *types.AgentAccessConfigForUpdate, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3BucketArn != nil {
+		ok := object.Key("S3BucketArn")
+		ok.String(*v.S3BucketArn)
+	}
+
+	if len(v.ScreenImageFormat) > 0 {
+		ok := object.Key("ScreenImageFormat")
+		ok.String(string(v.ScreenImageFormat))
+	}
+
+	if len(v.ScreenResolution) > 0 {
+		ok := object.Key("ScreenResolution")
+		ok.String(string(v.ScreenResolution))
+	}
+
+	if v.ScreenshotsUploadEnabled != nil {
+		ok := object.Key("ScreenshotsUploadEnabled")
+		ok.Boolean(*v.ScreenshotsUploadEnabled)
+	}
+
+	if v.Settings != nil {
+		ok := object.Key("Settings")
+		if err := awsAwsjson11_serializeDocumentAgentAccessSettingList(v.Settings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAgentAccessSetting(v *types.AgentAccessSetting, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.AgentAction) > 0 {
+		ok := object.Key("AgentAction")
+		ok.String(string(v.AgentAction))
+	}
+
+	if len(v.Permission) > 0 {
+		ok := object.Key("Permission")
+		ok.String(string(v.Permission))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAgentAccessSettingList(v []types.AgentAccessSetting, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentAgentAccessSetting(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAppBlockBuilderAttributes(v []types.AppBlockBuilderAttribute, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5558,6 +5717,20 @@ func awsAwsjson11_serializeDocumentComputeCapacity(v *types.ComputeCapacity, val
 	if v.DesiredSessions != nil {
 		ok := object.Key("DesiredSessions")
 		ok.Integer(*v.DesiredSessions)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentContentRedirection(v *types.ContentRedirection, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HostToClient != nil {
+		ok := object.Key("HostToClient")
+		if err := awsAwsjson11_serializeDocumentUrlRedirectionConfig(v.HostToClient, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -5971,6 +6144,43 @@ func awsAwsjson11_serializeDocumentThemeFooterLinks(v []types.ThemeFooterLink, v
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUrlPatternList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUrlRedirectionConfig(v *types.UrlRedirectionConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedUrls != nil {
+		ok := object.Key("AllowedUrls")
+		if err := awsAwsjson11_serializeDocumentUrlPatternList(v.AllowedUrls, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeniedUrls != nil {
+		ok := object.Key("DeniedUrls")
+		if err := awsAwsjson11_serializeDocumentUrlPatternList(v.DeniedUrls, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
 	return nil
 }
 
@@ -6889,9 +7099,23 @@ func awsAwsjson11_serializeOpDocumentCreateStackInput(v *CreateStackInput, value
 		}
 	}
 
+	if v.AgentAccessConfig != nil {
+		ok := object.Key("AgentAccessConfig")
+		if err := awsAwsjson11_serializeDocumentAgentAccessConfig(v.AgentAccessConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ApplicationSettings != nil {
 		ok := object.Key("ApplicationSettings")
 		if err := awsAwsjson11_serializeDocumentApplicationSettings(v.ApplicationSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContentRedirection != nil {
+		ok := object.Key("ContentRedirection")
+		if err := awsAwsjson11_serializeDocumentContentRedirection(v.ContentRedirection, ok); err != nil {
 			return err
 		}
 	}
@@ -7865,6 +8089,18 @@ func awsAwsjson11_serializeOpDocumentDisassociateSoftwareFromImageBuilderInput(v
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDrainSessionInstanceInput(v *DrainSessionInstanceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SessionId != nil {
+		ok := object.Key("SessionId")
+		ok.String(*v.SessionId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentEnableUserInput(v *EnableUserInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8502,6 +8738,13 @@ func awsAwsjson11_serializeOpDocumentUpdateStackInput(v *UpdateStackInput, value
 		}
 	}
 
+	if v.AgentAccessConfig != nil {
+		ok := object.Key("AgentAccessConfig")
+		if err := awsAwsjson11_serializeDocumentAgentAccessConfigForUpdate(v.AgentAccessConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ApplicationSettings != nil {
 		ok := object.Key("ApplicationSettings")
 		if err := awsAwsjson11_serializeDocumentApplicationSettings(v.ApplicationSettings, ok); err != nil {
@@ -8512,6 +8755,13 @@ func awsAwsjson11_serializeOpDocumentUpdateStackInput(v *UpdateStackInput, value
 	if v.AttributesToDelete != nil {
 		ok := object.Key("AttributesToDelete")
 		if err := awsAwsjson11_serializeDocumentStackAttributes(v.AttributesToDelete, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContentRedirection != nil {
+		ok := object.Key("ContentRedirection")
+		if err := awsAwsjson11_serializeDocumentContentRedirection(v.ContentRedirection, ok); err != nil {
 			return err
 		}
 	}

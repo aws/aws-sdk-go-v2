@@ -52,6 +52,9 @@ type AcceptLinkInput struct {
 	// Attributes of the link.
 	Attributes *types.LinkAttributes
 
+	// The timeout value in milliseconds.
+	TimeoutInMillis *int64
+
 	noSmithyDocumentSerde
 }
 
@@ -90,11 +93,17 @@ type AcceptLinkOutput struct {
 	// Attributes of the link.
 	Attributes *types.LinkAttributes
 
+	// The connectivity type of the link.
+	ConnectivityType types.ConnectivityType
+
 	// The direction of the link.
 	Direction types.LinkDirection
 
 	// The configuration of flow modules.
 	FlowModules []types.ModuleConfiguration
+
+	// Describes the settings for a link log.
+	LogSettings *types.LinkLogSettings
 
 	// The configuration of pending flow modules.
 	PendingFlowModules []types.ModuleConfiguration
@@ -139,7 +148,7 @@ func (c *Client) addOperationAcceptLinkMiddlewares(stack *middleware.Stack, opti
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -161,9 +170,6 @@ func (c *Client) addOperationAcceptLinkMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -466,7 +466,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 36
+                    "max": 64
                 }
             }
         },
@@ -1933,6 +1933,12 @@
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags of the image pipeline.</p>"
+                    }
+                },
+                "imageTags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be applied to the images produced by this pipeline.</p>"
                     }
                 },
                 "clientToken": {
@@ -6050,6 +6056,12 @@
                         "smithy.api#documentation": "<p>Contains settings for vulnerability scans.</p>"
                     }
                 },
+                "imageTags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be applied to the images produced by this pipeline.</p>"
+                    }
+                },
                 "executionRole": {
                     "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
                     "traits": {
@@ -7084,6 +7096,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.imagebuilder#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.imagebuilder#ClientException"
                 },
                 {
@@ -7091,6 +7106,9 @@
                 },
                 {
                     "target": "com.amazonaws.imagebuilder#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.imagebuilder#TooManyRequestsException"
                 }
             ],
             "traits": {
@@ -7106,7 +7124,7 @@
             "type": "structure",
             "members": {
                 "name": {
-                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "target": "com.amazonaws.imagebuilder#ResourceName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the image resource that's created from the import.</p>",
                         "smithy.api#required": {}
@@ -7169,6 +7187,18 @@
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>Tags that are attached to image resources created from the import.</p>"
+                    }
+                },
+                "registerImageOptions": {
+                    "target": "com.amazonaws.imagebuilder#RegisterImageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures Secure Boot and UEFI settings for the \n\t\t\timported image.</p>"
+                    }
+                },
+                "windowsConfiguration": {
+                    "target": "com.amazonaws.imagebuilder#WindowsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies Windows settings for ISO imports.</p>"
                     }
                 },
                 "clientToken": {
@@ -9017,7 +9047,7 @@
                     }
                 },
                 "nextToken": {
-                    "target": "com.amazonaws.imagebuilder#NonEmptyString",
+                    "target": "com.amazonaws.imagebuilder#PaginationToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token to specify where to start paginating. This is the nextToken \n\tfrom a previously truncated response.</p>"
                     }
@@ -11757,6 +11787,26 @@
                 "target": "com.amazonaws.imagebuilder#NonEmptyString"
             }
         },
+        "com.amazonaws.imagebuilder#RegisterImageOptions": {
+            "type": "structure",
+            "members": {
+                "secureBootEnabled": {
+                    "target": "com.amazonaws.imagebuilder#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether Secure Boot is enabled for the output AMI. \n\t\t\tThe default value is <code>true</code>. To disable Secure Boot \n\t\t\tfor custom unsigned drivers, set this value to <code>false</code>.</p>"
+                    }
+                },
+                "uefiData": {
+                    "target": "com.amazonaws.imagebuilder#UefiData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A Base64-encoded representation of the non-volatile UEFI variable store. \n\t\t\tYou can specify this parameter only when \n\t\t\t<code>secureBootEnabled</code> is <code>true</code> or \n\t\t\tunspecified. You can inspect and modify the UEFI data by using \n\t\t\tthe <a href=\"https://github.com/awslabs/python-uefivars\">python-uefivars tool on GitHub</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-variables.html\">UEFI \n\t\t\t\tvariables for Amazon EC2 instances</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controls Secure Boot and UEFI data settings for the resulting image \n\t\t\tduring ISO imports. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html\">UEFI Secure Boot for Amazon EC2 instances</a> in \n\t\t\tthe <i>\n               <i>Amazon EC2 User Guide</i>\n            </i>.</p>"
+            }
+        },
         "com.amazonaws.imagebuilder#Remediation": {
             "type": "structure",
             "members": {
@@ -12837,6 +12887,15 @@
                 "smithy.api#httpError": 429
             }
         },
+        "com.amazonaws.imagebuilder#UefiData": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64000
+                }
+            }
+        },
         "com.amazonaws.imagebuilder#UntagResource": {
             "type": "operation",
             "input": {
@@ -13142,6 +13201,12 @@
                     "target": "com.amazonaws.imagebuilder#RoleNameOrArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The name or Amazon Resource Name (ARN) for the IAM role you create that grants \n\t\t\tImage Builder access to perform workflow actions.</p>"
+                    }
+                },
+                "imageTags": {
+                    "target": "com.amazonaws.imagebuilder#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be applied to the images produced by this pipeline.</p>"
                     }
                 }
             },
@@ -13589,6 +13654,30 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^(?:[0-9]+|x)\\.(?:[0-9]+|x)\\.(?:[0-9]+|x)$"
+            }
+        },
+        "com.amazonaws.imagebuilder#WindowsConfiguration": {
+            "type": "structure",
+            "members": {
+                "imageIndex": {
+                    "target": "com.amazonaws.imagebuilder#WindowsConfigurationImageIndex",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The 1-based index that specifies which Windows edition to install \n\t\t\tfrom a multi-edition Windows ISO file. A Windows ISO can contain a \n\t\t\t<code>.wim</code> file with multiple image indexes, each representing \n\t\t\ta different edition.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Windows-specific configuration settings for an ISO import, including \n\t\t\tthe edition to install from a multi-edition Windows ISO file.</p>"
+            }
+        },
+        "com.amazonaws.imagebuilder#WindowsConfigurationImageIndex": {
+            "type": "long",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 4294967295
+                }
             }
         },
         "com.amazonaws.imagebuilder#Workflow": {

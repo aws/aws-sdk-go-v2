@@ -9913,6 +9913,37 @@ type AwsOpenSearchServiceDomainVpcOptionsDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies an Organizations scope. Data from the specified organization or
+// organizational unit is included in the response.
+//
+// To scope to a specific organizational unit, provide OrganizationalUnitId . You
+// can optionally include OrganizationId . If you omit OrganizationId , Security
+// Hub uses the caller's organization ID. To scope to the delegated administrator's
+// entire organization, provide only OrganizationId .
+//
+// The organization ID and organizational unit must belong to the delegated
+// administrator's own organization. Each request must use one scoping approach:
+// either scope to the entire organization by providing an AwsOrganizationScope
+// entry with only OrganizationId , or scope to specific organizational units by
+// providing AwsOrganizationScope entries with OrganizationalUnitId . You can't
+// combine both approaches in the same request.
+type AwsOrganizationScope struct {
+
+	// The unique identifier (ID) of the organization (for example, o-abcd1234567890 ).
+	// The organization must be the delegated administrator's own organization. If you
+	// omit this value and provide OrganizationalUnitId , Security Hub uses the
+	// caller's organization ID.
+	OrganizationId *string
+
+	// The unique identifier (ID) of the organizational unit (OU) (for example,
+	// ou-ab12-cd345678 ). The OU must exist within the delegated administrator's own
+	// organization. When specified, the results include only data from accounts in
+	// this OU.
+	OrganizationalUnitId *string
+
+	noSmithyDocumentSerde
+}
+
 // An IAM role that is associated with the Amazon RDS DB cluster.
 type AwsRdsDbClusterAssociatedRole struct {
 
@@ -14825,6 +14856,12 @@ type DateFilter struct {
 // A date range for the date filter.
 type DateRange struct {
 
+	// The condition to apply to a date range filter. If you specify WITHIN , Security
+	// Hub filters for dates within the specified date range. If you specify OLDER_THAN
+	// , Security Hub filters for dates before the specified date range. If you don't
+	// specify a value, the default is WITHIN .
+	Comparison DateRangeComparison
+
 	// A date range unit for the date filter.
 	Unit DateRangeUnit
 
@@ -15156,6 +15193,19 @@ type FindingProviderSeverity struct {
 	//
 	// Length Constraints: Minimum length of 1. Maximum length of 64.
 	Original *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the data boundary for a findings query. Scopes determine which
+// organizational units or organizations to retrieve data from.
+type FindingScopes struct {
+
+	// A list of Organizations scopes to include in the query results. Each entry in
+	// the list specifies an organization or organizational unit to include for the
+	// delegated administrator's account. If the list specifies multiple entries, the
+	// entries are combined using OR logic.
+	AwsOrganizations []AwsOrganizationScope
 
 	noSmithyDocumentSerde
 }
@@ -16713,7 +16763,8 @@ type ProductV2 struct {
 	// The type of integration.
 	IntegrationV2Types []IntegrationV2Type
 
-	// The identifier for the AWS Marketplace product associated with this integration.
+	// The identifier for the Amazon Web Services Marketplace product associated with
+	// this integration.
 	MarketplaceProductId *string
 
 	// The console URL where you can purchase or subscribe to products.
@@ -16867,6 +16918,38 @@ type Recommendation struct {
 
 	noSmithyDocumentSerde
 }
+
+// Contains information about the reason that the retrieval of a recommended
+// policy for a finding failed.
+type RecommendationError struct {
+
+	// The error code for a failed retrieval of a recommended policy for a finding.
+	Code *string
+
+	// The error message for a failed retrieval of a recommended policy for a finding.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a recommended step to remediate a Security Hub
+// finding.
+//
+// The following types satisfy this interface:
+//
+//	RecommendationStepMemberUnusedPermissions
+type RecommendationStep interface {
+	isRecommendationStep()
+}
+
+// A recommended step to remediate an unused permissions finding.
+type RecommendationStepMemberUnusedPermissions struct {
+	Value UnusedPermissionsRecommendationStep
+
+	noSmithyDocumentSerde
+}
+
+func (*RecommendationStepMemberUnusedPermissions) isRecommendationStep() {}
 
 // An occurrence of sensitive data in an Apache Avro object container or an Apache
 // Parquet file.
@@ -17447,6 +17530,19 @@ type ResourcesCompositeFilter struct {
 
 	// Enables filtering based on string field values.
 	StringFilters []ResourcesStringFilter
+
+	noSmithyDocumentSerde
+}
+
+// Defines the data boundary for a resources query. Scopes determine which
+// organizational units or organizations to retrieve data from.
+type ResourceScopes struct {
+
+	// A list of Organizations scopes to include in the query results. Each entry in
+	// the list specifies an organization or organizational unit to include for the
+	// delegated administrator's account. If the list specifies multiple entries, the
+	// entries are combined using OR logic.
+	AwsOrganizations []AwsOrganizationScope
 
 	noSmithyDocumentSerde
 }
@@ -19088,10 +19184,11 @@ type StringFilter struct {
 	//
 	//   - ResourceType NOT_EQUALS AwsEc2NetworkInterface
 	//
-	// CONTAINS and NOT_CONTAINS operators can be used only with automation rules V1.
-	// CONTAINS_WORD operator is only supported in GetFindingsV2 ,
-	// GetFindingStatisticsV2 , GetResourcesV2 , and GetResourceStatisticsV2 APIs. For
-	// more information, see [Automation rules]in the Security Hub CSPM User Guide.
+	// The CONTAINS operator works with automation rules V1 and V2. The NOT_CONTAINS
+	// operator works only with automation rules V1. The CONTAINS_WORD operator works
+	// only in the GetFindingsV2 , GetFindingStatisticsV2 , GetResourcesV2 , and
+	// GetResourcesStatisticsV2 APIs. For more information, see [Automation rules] in the Security Hub
+	// CSPM User Guide.
 	//
 	// [Automation rules]: https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html
 	Comparison StringFilterComparison
@@ -19378,6 +19475,32 @@ type UnprocessedStandardsControlAssociationUpdate struct {
 	// The reason why a control's enablement status in the specified standard couldn't
 	// be updated.
 	ErrorReason *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the action to take for a policy in an unused
+// permissions finding.
+type UnusedPermissionsRecommendationStep struct {
+
+	// The contents of the existing policy identified by ExistingPolicyId which needs
+	// to be replaced, when the RecommendedAction is CREATE_POLICY .
+	ExistingPolicy *string
+
+	// The ID of an existing policy to be replaced or detached.
+	ExistingPolicyId *string
+
+	// The time at which the existing policy for the unused permissions finding was
+	// last updated.
+	PolicyUpdatedAt *time.Time
+
+	// A recommendation of whether to create or detach a policy for an unused
+	// permissions finding.
+	RecommendedAction *string
+
+	// The contents of the least-privileged recommended replacement for
+	// ExistingPolicyId , when the RecommendedAction is CREATE_POLICY .
+	RecommendedPolicy *string
 
 	noSmithyDocumentSerde
 }
@@ -19733,4 +19856,5 @@ func (*UnknownUnionMember) isPolicy()                      {}
 func (*UnknownUnionMember) isProviderConfiguration()       {}
 func (*UnknownUnionMember) isProviderDetail()              {}
 func (*UnknownUnionMember) isProviderUpdateConfiguration() {}
+func (*UnknownUnionMember) isRecommendationStep()          {}
 func (*UnknownUnionMember) isTarget()                      {}

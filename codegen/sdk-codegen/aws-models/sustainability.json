@@ -1,0 +1,1422 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.sustainability#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.sustainability#AwsSustainabilityApiService": {
+            "type": "service",
+            "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.sustainability#GetEstimatedCarbonEmissions"
+                },
+                {
+                    "target": "com.amazonaws.sustainability#GetEstimatedCarbonEmissionsDimensionValues"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Sustainability",
+                    "arnNamespace": "sustainability"
+                },
+                "aws.auth#sigv4": {
+                    "name": "sustainability"
+                },
+                "aws.auth#sigv4a": {
+                    "name": "sustainability"
+                },
+                "aws.endpoints#dualStackOnlyEndpoints": {},
+                "aws.endpoints#standardPartitionalEndpoints": {
+                    "endpointPatternType": "aws_recommended",
+                    "partitionEndpointSpecialCases": {
+                        "aws": [
+                            {
+                                "endpoint": "https://api.sustainability.{region}.{dualStackDnsSuffix}",
+                                "region": "us-east-1",
+                                "dualStack": true
+                            }
+                        ]
+                    }
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4a",
+                    "aws.auth#sigv4"
+                ],
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "X-Amz-Region-Set"
+                    ]
+                },
+                "smithy.api#documentation": "<p>The AWS Sustainability service provides programmatic access to estimated carbon emissions data for your Amazon Web Services usage. Use the AWS Sustainability service to retrieve, analyze, and track the carbon footprint of your cloud infrastructure over time. </p> <p>With the AWS Sustainability service, you can:</p> <ul> <li> <p>Retrieve estimated carbon emissions for your Amazon Web Services usage across different time periods </p> </li> <li> <p>Group emissions data by dimensions such as account, region, and service</p> </li> <li> <p>Filter emissions data to focus on specific accounts, regions, or services</p> </li> <li> <p>Access multiple emissions calculation methodologies including Location-based Method (LBM) and Market-based Method (MBM) </p> </li> <li> <p>Aggregate emissions data at various time granularities including monthly, quarterly, and yearly periods </p> </li> </ul> <p> The API supports pagination for efficient data retrieval and provides dimension values to help you understand the available grouping and filtering options for your account. </p> <p> All emissions values are calculated using methodologies aligned with the Greenhouse Gas (GHG) Protocol and are provided in metric tons of carbon dioxide-equivalent (MTCO2e). </p>",
+                "smithy.api#title": "AWS Sustainability",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "endpoint": {
+                                        "url": {
+                                            "ref": "Endpoint"
+                                        },
+                                        "properties": {
+                                            "authSchemes": [
+                                                {
+                                                    "name": "sigv4a",
+                                                    "signingRegionSet": [
+                                                        "*"
+                                                    ]
+                                                },
+                                                {
+                                                    "name": "sigv4"
+                                                }
+                                            ]
+                                        },
+                                        "headers": {}
+                                    },
+                                    "type": "endpoint"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://api.sustainability.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4a",
+                                                                    "signingRegionSet": [
+                                                                        "*"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-east-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-us-gov"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                false
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://sustainability.us-gov.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4a",
+                                                                    "signingRegionSet": [
+                                                                        "*"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-gov-west-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "stringEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "fn": "getAttr",
+                                                                    "argv": [
+                                                                        {
+                                                                            "ref": "PartitionResult"
+                                                                        },
+                                                                        "name"
+                                                                    ]
+                                                                },
+                                                                "aws-us-gov"
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://sustainability-fips.us-gov.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4a",
+                                                                    "signingRegionSet": [
+                                                                        "*"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "us-gov-west-1"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "endpoint": {
+                                                        "url": "https://sustainability-fips.global.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4a",
+                                                                    "signingRegionSet": [
+                                                                        "*"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "endpoint": {
+                                                        "url": "https://sustainability.global.{PartitionResult#dualStackDnsSuffix}",
+                                                        "properties": {
+                                                            "authSchemes": [
+                                                                {
+                                                                    "name": "sigv4a",
+                                                                    "signingRegionSet": [
+                                                                        "*"
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "name": "sigv4",
+                                                                    "signingRegion": "{PartitionResult#implicitGlobalRegion}"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "headers": {}
+                                                    },
+                                                    "type": "endpoint"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            },
+                                            {
+                                                "name": "sigv4"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Endpoint": "https://example.com",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            },
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://sustainability-fips.global.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            },
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://api.sustainability.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            },
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "cn-northwest-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://sustainability-fips.global.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            },
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "cn-northwest-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://sustainability.global.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            },
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://sustainability-fips.us-gov.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4a",
+                                                "signingRegionSet": [
+                                                    "*"
+                                                ]
+                                            },
+                                            {
+                                                "name": "sigv4",
+                                                "signingRegion": "us-gov-west-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://sustainability.us-gov.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-west-1",
+                                "UseFIPS": false
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.sustainability#Dimension": {
+            "type": "enum",
+            "members": {
+                "USAGE_ACCOUNT_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID whose Amazon Web Services usage resulted in the estimated carbon emissions.</p>",
+                        "smithy.api#enumValue": "USAGE_ACCOUNT_ID"
+                    }
+                },
+                "REGION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The geographical area containing data center clusters where Amazon Web Services services are hosted.</p>",
+                        "smithy.api#enumValue": "REGION"
+                    }
+                },
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud computing product and solution offered by Amazon Web Services.</p>",
+                        "smithy.api#enumValue": "SERVICE"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the dimensions available for grouping and filtering emissions data.</p>"
+            }
+        },
+        "com.amazonaws.sustainability#DimensionEntry": {
+            "type": "structure",
+            "members": {
+                "Dimension": {
+                    "target": "com.amazonaws.sustainability#Dimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimension type that categorizes this entry.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The value for the specified dimension. Valid values vary based on the dimension type (e.g., <code>us-east-1</code> for the <code>REGION</code> dimension, <code>AmazonEC2</code> for the <code>SERVICE</code> dimension). </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a dimension and its corresponding value.</p>"
+            }
+        },
+        "com.amazonaws.sustainability#DimensionEntryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sustainability#DimensionEntry"
+            }
+        },
+        "com.amazonaws.sustainability#DimensionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sustainability#Dimension"
+            }
+        },
+        "com.amazonaws.sustainability#DimensionListMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sustainability#Dimension"
+            },
+            "value": {
+                "target": "com.amazonaws.sustainability#DimensionValueList"
+            }
+        },
+        "com.amazonaws.sustainability#DimensionValueList": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.sustainability#DimensionsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sustainability#Dimension"
+            },
+            "value": {
+                "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.sustainability#Emissions": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The numeric value of the emissions quantity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Unit": {
+                    "target": "com.amazonaws.sustainability#EmissionsUnit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of measurement for the emissions value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a carbon emissions quantity with its value and unit of measurement.</p>"
+            }
+        },
+        "com.amazonaws.sustainability#EmissionsMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.sustainability#EmissionsType"
+            },
+            "value": {
+                "target": "com.amazonaws.sustainability#Emissions"
+            }
+        },
+        "com.amazonaws.sustainability#EmissionsType": {
+            "type": "enum",
+            "members": {
+                "TOTAL_LBM_CARBON_EMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total direct, indirect, and value chain emissions, calculated using GHG Protocol's Location-based method (LBM).</p>",
+                        "smithy.api#enumValue": "TOTAL_LBM_CARBON_EMISSIONS"
+                    }
+                },
+                "TOTAL_MBM_CARBON_EMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total direct, indirect, and value chain emissions, calculated using GHG Protocol's Market-based method (MBM).</p>",
+                        "smithy.api#enumValue": "TOTAL_MBM_CARBON_EMISSIONS"
+                    }
+                },
+                "TOTAL_SCOPE_1_CARBON_EMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total direct emissions from Amazon Web Services owned or controlled sources.</p>",
+                        "smithy.api#enumValue": "TOTAL_SCOPE_1_CARBON_EMISSIONS"
+                    }
+                },
+                "TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total indirect emissions from the production of purchased energy, calculated using GHG Protocol's Location-based method (LBM).</p>",
+                        "smithy.api#enumValue": "TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS"
+                    }
+                },
+                "TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total indirect emissions from the production of purchased energy, calculated using GHG Protocol's Market-based method (MBM).</p>",
+                        "smithy.api#enumValue": "TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS"
+                    }
+                },
+                "TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total value chain emissions, calculated using GHG Protocol's Location-based method (LBM).</p>",
+                        "smithy.api#enumValue": "TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS"
+                    }
+                },
+                "TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Total value chain emissions, calculated using GHG Protocol's Market-based method (MBM).</p>",
+                        "smithy.api#enumValue": "TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the types of carbon emissions calculations available.</p>"
+            }
+        },
+        "com.amazonaws.sustainability#EmissionsTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sustainability#EmissionsType"
+            }
+        },
+        "com.amazonaws.sustainability#EmissionsUnit": {
+            "type": "enum",
+            "members": {
+                "MT_CO2E": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metric tons of carbon dioxide-equivalent (MTCO2e).</p>",
+                        "smithy.api#enumValue": "MTCO2e"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the unit of measurement for emissions.</p>"
+            }
+        },
+        "com.amazonaws.sustainability#EstimatedCarbonEmissions": {
+            "type": "structure",
+            "members": {
+                "TimePeriod": {
+                    "target": "com.amazonaws.sustainability#TimePeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reporting period for emission values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DimensionsValues": {
+                    "target": "com.amazonaws.sustainability#DimensionsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimensions used to group emissions values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ModelVersion": {
+                    "target": "com.amazonaws.sustainability#ModelVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The semantic version-formatted string that indicates the methodology version used to calculate the emission values. </p> <note> <p> The AWS Sustainability service reflects the most recent model version for every month. You will not see two entries for the same month with different <code>ModelVersion</code> values. To track the evolution of the methodology and compare emission values from previous versions, we recommend creating a <a href=\"https://docs.aws.amazon.com/cur/latest/userguide/what-is-data-exports.html\">Data Export</a>. </p> </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "EmissionsValues": {
+                    "target": "com.amazonaws.sustainability#EmissionsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The emissions values for the requested emissions types.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains estimated carbon emissions data for a specific time period and dimension grouping.</p>"
+            }
+        },
+        "com.amazonaws.sustainability#EstimatedCarbonEmissionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sustainability#EstimatedCarbonEmissions"
+            }
+        },
+        "com.amazonaws.sustainability#FilterExpression": {
+            "type": "structure",
+            "members": {
+                "Dimensions": {
+                    "target": "com.amazonaws.sustainability#DimensionListMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters emission values by specific dimension values.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filters emission values by specific dimension values.</p>"
+            }
+        },
+        "com.amazonaws.sustainability#GetEstimatedCarbonEmissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sustainability#GetEstimatedCarbonEmissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sustainability#GetEstimatedCarbonEmissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sustainability#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sustainability#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.sustainability#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sustainability#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "smithy.api#documentation": "<p>Returns estimated carbon emission values based on customer grouping and filtering parameters. We recommend using pagination to ensure that the operation returns quickly and successfully. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetEstimatedCarbonEmissionsSuccess",
+                        "input": {
+                            "TimePeriod": {
+                                "Start": "2025-01-01T00:00:00.000Z",
+                                "End": "2025-12-31T23:59:59.999Z"
+                            },
+                            "GroupBy": [
+                                "SERVICE"
+                            ],
+                            "EmissionsTypes": [
+                                "TOTAL_LBM_CARBON_EMISSIONS",
+                                "TOTAL_MBM_CARBON_EMISSIONS",
+                                "TOTAL_SCOPE_1_CARBON_EMISSIONS",
+                                "TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS",
+                                "TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS",
+                                "TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS",
+                                "TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS"
+                            ],
+                            "Granularity": "MONTHLY"
+                        },
+                        "output": {
+                            "Results": [
+                                {
+                                    "DimensionsValues": {
+                                        "SERVICE": "AmazonEC2"
+                                    },
+                                    "EmissionsValues": {
+                                        "TOTAL_LBM_CARBON_EMISSIONS": {
+                                            "Unit": "MTCO2e",
+                                            "Value": 1
+                                        },
+                                        "TOTAL_MBM_CARBON_EMISSIONS": {
+                                            "Unit": "MTCO2e",
+                                            "Value": 1
+                                        },
+                                        "TOTAL_SCOPE_1_CARBON_EMISSIONS": {
+                                            "Unit": "MTCO2e",
+                                            "Value": 1
+                                        },
+                                        "TOTAL_SCOPE_2_LBM_CARBON_EMISSIONS": {
+                                            "Unit": "MTCO2e",
+                                            "Value": 1
+                                        },
+                                        "TOTAL_SCOPE_2_MBM_CARBON_EMISSIONS": {
+                                            "Unit": "MTCO2e",
+                                            "Value": 1
+                                        },
+                                        "TOTAL_SCOPE_3_LBM_CARBON_EMISSIONS": {
+                                            "Unit": "MTCO2e",
+                                            "Value": 1
+                                        },
+                                        "TOTAL_SCOPE_3_MBM_CARBON_EMISSIONS": {
+                                            "Unit": "MTCO2e",
+                                            "Value": 1
+                                        }
+                                    },
+                                    "ModelVersion": "v3.0.0",
+                                    "TimePeriod": {
+                                        "Start": "2025-01-01T00:00:00Z",
+                                        "End": "2025-02-01T00:00:00Z"
+                                    }
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/v1/estimated-carbon-emissions"
+                },
+                "smithy.api#paginated": {
+                    "pageSize": "MaxResults",
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Results"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetEstimatedCarbonEmissionsSuccess",
+                        "params": {
+                            "TimePeriod": {
+                                "Start": 1735689600,
+                                "End": 1767225599
+                            }
+                        },
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    },
+                    {
+                        "id": "GetEstimatedCarbonEmissionsFailure",
+                        "params": {
+                            "TimePeriod": {
+                                "Start": 1767225599,
+                                "End": 1735689600
+                            }
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.sustainability#ValidationException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sustainability#GetEstimatedCarbonEmissionsDimensionValues": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sustainability#GetEstimatedCarbonEmissionsDimensionValuesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sustainability#GetEstimatedCarbonEmissionsDimensionValuesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sustainability#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.sustainability#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.sustainability#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.sustainability#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.api#dataPlane": {},
+                "smithy.api#documentation": "<p>Returns the possible dimension values available for a customer's account. We recommend using pagination to ensure that the operation returns quickly and successfully. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "GetEstimatedCarbonEmissionsDimensionValuesSuccess",
+                        "input": {
+                            "TimePeriod": {
+                                "Start": "2025-01-01T00:00:00.000Z",
+                                "End": "2025-12-31T23:59:59.999Z"
+                            },
+                            "Dimensions": [
+                                "REGION",
+                                "SERVICE",
+                                "USAGE_ACCOUNT_ID"
+                            ]
+                        },
+                        "output": {
+                            "Results": [
+                                {
+                                    "Dimension": "SERVICE",
+                                    "Value": "AmazonEC2"
+                                },
+                                {
+                                    "Dimension": "SERVICE",
+                                    "Value": "AmazonS3"
+                                },
+                                {
+                                    "Dimension": "SERVICE",
+                                    "Value": "AmazonCloudFront"
+                                },
+                                {
+                                    "Dimension": "REGION",
+                                    "Value": "global"
+                                },
+                                {
+                                    "Dimension": "REGION",
+                                    "Value": "us-east-1"
+                                },
+                                {
+                                    "Dimension": "REGION",
+                                    "Value": "us-west-2"
+                                },
+                                {
+                                    "Dimension": "USAGE_ACCOUNT_ID",
+                                    "Value": "111222333444"
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/v1/estimated-carbon-emissions-dimension-values"
+                },
+                "smithy.api#paginated": {
+                    "pageSize": "MaxResults",
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Results"
+                },
+                "smithy.api#readonly": {},
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "GetEstimatedCarbonEmissionsDimensionValuesSuccess",
+                        "params": {
+                            "TimePeriod": {
+                                "Start": 1735689600,
+                                "End": 1767225599
+                            },
+                            "Dimensions": [
+                                "REGION",
+                                "SERVICE"
+                            ]
+                        },
+                        "expect": {
+                            "success": {}
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    },
+                    {
+                        "id": "GetEstimatedCarbonEmissionsDimensionValuesFailure",
+                        "params": {
+                            "TimePeriod": {
+                                "Start": 1767225599,
+                                "End": 1735689600
+                            },
+                            "Dimensions": [
+                                "REGION",
+                                "SERVICE"
+                            ]
+                        },
+                        "expect": {
+                            "failure": {
+                                "errorId": "com.amazonaws.sustainability#ValidationException"
+                            }
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.sustainability#GetEstimatedCarbonEmissionsDimensionValuesRequest": {
+            "type": "structure",
+            "members": {
+                "TimePeriod": {
+                    "target": "com.amazonaws.sustainability#TimePeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date range for fetching the dimension values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Dimensions": {
+                    "target": "com.amazonaws.sustainability#DimensionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimensions available for grouping estimated carbon emissions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sustainability#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 1000,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Default is 40.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sustainability#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sustainability#GetEstimatedCarbonEmissionsDimensionValuesResponse": {
+            "type": "structure",
+            "members": {
+                "Results": {
+                    "target": "com.amazonaws.sustainability#DimensionEntryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of possible dimensions over which the emissions data is aggregated.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sustainability#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token indicating there are additional pages available. You can use the token in a following request to fetch the next set of results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sustainability#GetEstimatedCarbonEmissionsRequest": {
+            "type": "structure",
+            "members": {
+                "TimePeriod": {
+                    "target": "com.amazonaws.sustainability#TimePeriod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date range for fetching estimated carbon emissions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GroupBy": {
+                    "target": "com.amazonaws.sustainability#DimensionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The dimensions available for grouping estimated carbon emissions.</p>"
+                    }
+                },
+                "FilterBy": {
+                    "target": "com.amazonaws.sustainability#FilterExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria for filtering estimated carbon emissions.</p>"
+                    }
+                },
+                "EmissionsTypes": {
+                    "target": "com.amazonaws.sustainability#EmissionsTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The emission types to include in the results. If absent, returns <code>TOTAL_LBM_CARBON_EMISSIONS</code> and <code>TOTAL_MBM_CARBON_EMISSIONS</code> emissions types. </p>"
+                    }
+                },
+                "Granularity": {
+                    "target": "com.amazonaws.sustainability#TimeGranularity",
+                    "traits": {
+                        "smithy.api#default": "MONTHLY",
+                        "smithy.api#documentation": "<p>The time granularity for the results. If absent, uses <code>MONTHLY</code> time granularity.</p>"
+                    }
+                },
+                "GranularityConfiguration": {
+                    "target": "com.amazonaws.sustainability#GranularityConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for fiscal year calculations when using <code>YEARLY_FISCAL</code> or <code>QUARTERLY_FISCAL</code> granularity. </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.sustainability#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 1000,
+                        "smithy.api#documentation": "<p>The maximum number of results to return in a single call. Default is 40.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sustainability#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token specifying which page of results to return in the response. If no token is provided, the default page is the first page. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sustainability#GetEstimatedCarbonEmissionsResponse": {
+            "type": "structure",
+            "members": {
+                "Results": {
+                    "target": "com.amazonaws.sustainability#EstimatedCarbonEmissionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result of the requested inputs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sustainability#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token indicating there are additional pages available. You can use the token in a following request to fetch the next set of results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sustainability#GranularityConfiguration": {
+            "type": "structure",
+            "members": {
+                "FiscalYearStartMonth": {
+                    "target": "com.amazonaws.sustainability#Month",
+                    "traits": {
+                        "smithy.api#default": 1,
+                        "smithy.api#documentation": "<p> The month (1-12) when the fiscal year begins. Used for <code>YEARLY_FISCAL</code> and <code>QUARTERLY_FISCAL</code> granularity. Defaults to 1 (January). </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Contains configuration for the fiscal year granularities (e.g., <code>YEARLY_FISCAL</code>, <code>QUARTERLY_FISCAL</code>. </p>"
+            }
+        },
+        "com.amazonaws.sustainability#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception, or failure.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.sustainability#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 5000
+                }
+            }
+        },
+        "com.amazonaws.sustainability#ModelVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^v(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-((?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\\.(?:0|[1-9]\\d*|\\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\\+([0-9a-zA-Z-]+(?:\\.[0-9a-zA-Z-]+)*))?$"
+            }
+        },
+        "com.amazonaws.sustainability#Month": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 12
+                }
+            }
+        },
+        "com.amazonaws.sustainability#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                }
+            }
+        },
+        "com.amazonaws.sustainability#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.sustainability#TimeGranularity": {
+            "type": "enum",
+            "members": {
+                "YEARLY_CALENDAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Emissions aggregated over calendar year periods (January-December).</p>",
+                        "smithy.api#enumValue": "YEARLY_CALENDAR"
+                    }
+                },
+                "YEARLY_FISCAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Emissions aggregated over fiscal year periods starting from the month specified in GranularityConfiguration.FiscalYearStartMonth.</p>",
+                        "smithy.api#enumValue": "YEARLY_FISCAL"
+                    }
+                },
+                "QUARTERLY_CALENDAR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Emissions aggregated over calendar quarter periods (Q1: Jan-Mar, Q2: Apr-Jun, Q3: Jul-Sep, Q4: Oct-Dec).</p>",
+                        "smithy.api#enumValue": "QUARTERLY_CALENDAR"
+                    }
+                },
+                "QUARTERLY_FISCAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Emissions aggregated over fiscal quarter periods based on the fiscal year start month specified in GranularityConfiguration.FiscalYearStartMonth.</p>",
+                        "smithy.api#enumValue": "QUARTERLY_FISCAL"
+                    }
+                },
+                "MONTHLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Emissions aggregated by calendar month.</p>",
+                        "smithy.api#enumValue": "MONTHLY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the time period over which emissions data is aggregated.</p>"
+            }
+        },
+        "com.amazonaws.sustainability#TimePeriod": {
+            "type": "structure",
+            "members": {
+                "Start": {
+                    "target": "com.amazonaws.sustainability#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start (inclusive) of the time period. ISO-8601 formatted timestamp, for example: <code>YYYY-MM-DDThh:mm:ss.sssZ</code> </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "End": {
+                    "target": "com.amazonaws.sustainability#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end (exclusive) of the time period. ISO-8601 formatted timestamp, for example: <code>YYYY-MM-DDThh:mm:ss.sssZ</code> </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a duration of time defined by start and end timestamps.</p>"
+            }
+        },
+        "com.amazonaws.sustainability#Timestamp": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
+        "com.amazonaws.sustainability#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services service.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

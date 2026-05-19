@@ -74,11 +74,35 @@ func TestCheckSnapshot_AssociateEipToVlan(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateEntitlement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEntitlement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateEntitlement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateEnvironment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEnvironment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateEnvironmentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEnvironmentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateEnvironmentConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -98,11 +122,35 @@ func TestCheckSnapshot_CreateEnvironmentHost(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteEntitlement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEntitlement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteEntitlement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteEnvironment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteEnvironment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteEnvironmentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEnvironmentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteEnvironmentConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -158,6 +206,18 @@ func TestCheckSnapshot_GetVersions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListEnvironmentConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEnvironmentConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListEnvironmentConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListEnvironmentHosts(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEnvironmentHosts(context.Background(), nil, func(o *Options) {
@@ -206,6 +266,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListVmEntitlements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListVmEntitlements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListVmEntitlements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -229,11 +301,35 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateEnvironmentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEnvironmentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateEnvironmentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_AssociateEipToVlan(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AssociateEipToVlan(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AssociateEipToVlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateEntitlement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEntitlement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateEntitlement")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -253,6 +349,18 @@ func TestUpdateSnapshot_CreateEnvironment(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateEnvironmentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateEnvironmentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateEnvironmentConnector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateEnvironmentHost(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateEnvironmentHost(context.Background(), nil, func(o *Options) {
@@ -265,11 +373,35 @@ func TestUpdateSnapshot_CreateEnvironmentHost(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteEntitlement(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEntitlement(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteEntitlement")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteEnvironment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteEnvironment(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteEnvironment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteEnvironmentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteEnvironmentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteEnvironmentConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -325,6 +457,18 @@ func TestUpdateSnapshot_GetVersions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListEnvironmentConnectors(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListEnvironmentConnectors(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListEnvironmentConnectors")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListEnvironmentHosts(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListEnvironmentHosts(context.Background(), nil, func(o *Options) {
@@ -373,6 +517,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListVmEntitlements(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListVmEntitlements(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListVmEntitlements")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_TagResource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
@@ -390,6 +546,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateEnvironmentConnector(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateEnvironmentConnector(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateEnvironmentConnector")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

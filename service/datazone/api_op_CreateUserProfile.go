@@ -43,6 +43,9 @@ type CreateUserProfileInput struct {
 	// of the request.
 	ClientToken *string
 
+	// The session name for IAM role sessions.
+	SessionName *string
+
 	// The user type of the user for which the user profile is created.
 	UserType types.UserType
 
@@ -106,7 +109,7 @@ func (c *Client) addOperationCreateUserProfileMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -128,9 +131,6 @@ func (c *Client) addOperationCreateUserProfileMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

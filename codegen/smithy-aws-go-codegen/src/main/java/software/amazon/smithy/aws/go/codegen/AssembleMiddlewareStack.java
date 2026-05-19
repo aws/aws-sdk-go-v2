@@ -154,7 +154,10 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
                                                 AwsRetryMiddlewareHelper.ADD_RETRY_MIDDLEWARES_HELPER)
                                         .build())
-                                .useClientOptions()
+                                .functionArguments(List.of(
+                                        buildPackageSymbol("options"),
+                                        buildPackageSymbol("c")
+                                ))
                                 .build())
                         .build(),
 

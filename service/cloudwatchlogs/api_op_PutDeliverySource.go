@@ -83,10 +83,15 @@ type PutDeliverySourceInput struct {
 	//   - For Amazon Bedrock AgentCore Identity, the valid values are APPLICATION_LOGS
 	//   and TRACES .
 	//
+	//   - For Amazon Bedrock AgentCore Memory, the valid values are APPLICATION_LOGS
+	//   and TRACES .
+	//
 	//   - For Amazon Bedrock AgentCore Gateway, the valid values are APPLICATION_LOGS
 	//   and TRACES .
 	//
 	//   - For CloudFront, the valid value is ACCESS_LOGS .
+	//
+	//   - For DevOps Agent, the valid value is APPLICATION_LOGS .
 	//
 	//   - For Amazon CodeWhisperer, the valid value is EVENT_LOGS .
 	//
@@ -95,6 +100,10 @@ type PutDeliverySourceInput struct {
 	//
 	//   - For Elemental MediaTailor, the valid values are AD_DECISION_SERVER_LOGS ,
 	//   MANIFEST_SERVICE_LOGS , and TRANSCODE_LOGS .
+	//
+	//   - For Amazon EKS Auto Mode, the valid values are AUTO_MODE_BLOCK_STORAGE_LOGS
+	//   , AUTO_MODE_COMPUTE_LOGS , AUTO_MODE_IPAM_LOGS , and
+	//   AUTO_MODE_LOAD_BALANCING_LOGS .
 	//
 	//   - For Entity Resolution, the valid value is WORKFLOW_LOGS .
 	//
@@ -105,13 +114,20 @@ type PutDeliverySourceInput struct {
 	//
 	//   - For Network Load Balancer, the valid value is NLB_ACCESS_LOGS .
 	//
-	//   - For PCS, the valid values are PCS_SCHEDULER_LOGS and PCS_JOBCOMP_LOGS .
+	//   - For PCS, the valid values are PCS_SCHEDULER_LOGS , PCS_JOBCOMP_LOGS , and
+	//   PCS_SCHEDULER_AUDIT_LOGS .
 	//
-	//   - For Quick Suite, the valid values are CHAT_LOGS and FEEDBACK_LOGS .
+	//   - For Quick, the valid values are CHAT_LOGS and FEEDBACK_LOGS .
 	//
 	//   - For Amazon Web Services RTB Fabric, the valid values is APPLICATION_LOGS .
 	//
 	//   - For Amazon Q, the valid values are EVENT_LOGS and SYNC_JOB_LOGS .
+	//
+	//   - For Amazon Web Services Security Hub CSPM, the valid value is
+	//   SECURITY_FINDING_LOGS .
+	//
+	//   - For Amazon Web Services Security Hub, the valid value is
+	//   SECURITY_FINDING_LOGS .
 	//
 	//   - For Amazon SES mail manager, the valid values are APPLICATION_LOGS and
 	//   TRAFFIC_POLICY_DEBUG_LOGS .
@@ -135,8 +151,18 @@ type PutDeliverySourceInput struct {
 	// logs. For example,
 	// arn:aws:workmail:us-east-1:123456789012:organization/m-1234EXAMPLEabcd1234abcd1234abcd1234
 	//
+	// For the SECURITY_FINDING_LOGS logType, use a wildcard ARN for the hub resource.
+	// For Amazon Web Services Security Hub CSPM, use
+	// arn:aws:securityhub:us-east-1:111122223333:hub/* and for Amazon Web Services
+	// Security Hub, use arn:aws:securityhub:us-east-1:111122223333:hubv2/*
+	//
 	// This member is required.
 	ResourceArn *string
+
+	// A map of key-value pairs to configure the delivery source. Both keys and values
+	// must be between 1 and 255 characters in length. For example, {"samplingRate":
+	// "50"} .
+	DeliverySourceConfiguration map[string]string
 
 	// An optional list of key-value pairs to associate with the resource.
 	//
@@ -194,7 +220,7 @@ func (c *Client) addOperationPutDeliverySourceMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -216,9 +242,6 @@ func (c *Client) addOperationPutDeliverySourceMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

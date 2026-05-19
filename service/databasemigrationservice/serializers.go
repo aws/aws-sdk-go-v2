@@ -7781,6 +7781,11 @@ func awsAwsjson11_serializeDocumentIbmDb2LuwDataProviderSettings(v *types.IbmDb2
 		ok.String(*v.DatabaseName)
 	}
 
+	if v.EncryptionAlgorithm != nil {
+		ok := object.Key("EncryptionAlgorithm")
+		ok.Integer(*v.EncryptionAlgorithm)
+	}
+
 	if v.Port != nil {
 		ok := object.Key("Port")
 		ok.Integer(*v.Port)
@@ -7794,6 +7799,11 @@ func awsAwsjson11_serializeDocumentIbmDb2LuwDataProviderSettings(v *types.IbmDb2
 	if v.S3Path != nil {
 		ok := object.Key("S3Path")
 		ok.String(*v.S3Path)
+	}
+
+	if v.SecurityMechanism != nil {
+		ok := object.Key("SecurityMechanism")
+		ok.Integer(*v.SecurityMechanism)
 	}
 
 	if v.ServerName != nil {

@@ -87,6 +87,12 @@ type ListAuditFindingsInput struct {
 	//   - log - LogAuditor: Extracts insights from application logs, categorizing
 	//   error types and ranking severity by frequency during the Analysis phase
 	//
+	//   - change_indicator - ChangeIndicatorAuditor: Detects change events
+	//   (deployments, configuration changes) that occurred within 10 minutes before and
+	//   during a detected anomaly, and surfaces them as findings with deployment
+	//   timestamps in the Analysis phase. When changes are detected, the
+	//   top_contributor auditor skips its analysis to avoid redundancy.
+	//
 	// InitAuditor and Summarizer auditors are not configurable as they are
 	// automatically triggered during the audit process.
 	Auditors []string
@@ -168,7 +174,7 @@ func (c *Client) addOperationListAuditFindingsMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -190,9 +196,6 @@ func (c *Client) addOperationListAuditFindingsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

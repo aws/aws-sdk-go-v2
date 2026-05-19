@@ -118,6 +118,9 @@ const (
 	BackupVaultEventRecoveryPointIndexCompleted BackupVaultEvent = "RECOVERY_POINT_INDEX_COMPLETED"
 	BackupVaultEventRecoveryPointIndexDeleted   BackupVaultEvent = "RECOVERY_POINT_INDEX_DELETED"
 	BackupVaultEventRecoveryPointIndexingFailed BackupVaultEvent = "RECOVERY_POINT_INDEXING_FAILED"
+	BackupVaultEventEksRestoreObjectFailed      BackupVaultEvent = "EKS_RESTORE_OBJECT_FAILED"
+	BackupVaultEventEksRestoreObjectSkipped     BackupVaultEvent = "EKS_RESTORE_OBJECT_SKIPPED"
+	BackupVaultEventEksBackupObjectFailed       BackupVaultEvent = "EKS_BACKUP_OBJECT_FAILED"
 )
 
 // Values returns all known values for BackupVaultEvent. Note that this can be
@@ -147,6 +150,9 @@ func (BackupVaultEvent) Values() []BackupVaultEvent {
 		"RECOVERY_POINT_INDEX_COMPLETED",
 		"RECOVERY_POINT_INDEX_DELETED",
 		"RECOVERY_POINT_INDEXING_FAILED",
+		"EKS_RESTORE_OBJECT_FAILED",
+		"EKS_RESTORE_OBJECT_SKIPPED",
+		"EKS_BACKUP_OBJECT_FAILED",
 	}
 }
 

@@ -50,6 +50,10 @@ type UpdateAnycastIpListInput struct {
 	//   - dualstack - Allocate a list of both IPv4 and IPv6 addresses
 	IpAddressType types.IpAddressType
 
+	// A list of IPAM CIDR configurations that specify the IP address ranges and IPAM
+	// pool settings for updating the Anycast static IP list.
+	IpamCidrConfigs []types.IpamCidrConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -104,7 +108,7 @@ func (c *Client) addOperationUpdateAnycastIpListMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -126,9 +130,6 @@ func (c *Client) addOperationUpdateAnycastIpListMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

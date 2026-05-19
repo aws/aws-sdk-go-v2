@@ -154,6 +154,9 @@ func ExampleDataSourceParameters_outputUsage() {
 	case *types.DataSourceParametersMemberS3Parameters:
 		_ = v.Value // Value is types.S3Parameters
 
+	case *types.DataSourceParametersMemberS3TablesParameters:
+		_ = v.Value // Value is types.S3TablesParameters
+
 	case *types.DataSourceParametersMemberServiceNowParameters:
 		_ = v.Value // Value is types.ServiceNowParameters
 
@@ -194,6 +197,7 @@ var _ *types.RedshiftParameters
 var _ *types.DatabricksParameters
 var _ *types.S3KnowledgeBaseParameters
 var _ *types.JiraParameters
+var _ *types.S3TablesParameters
 var _ *types.ImpalaParameters
 var _ *types.MySqlParameters
 var _ *types.SnowflakeParameters

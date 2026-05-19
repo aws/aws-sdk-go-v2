@@ -63,6 +63,10 @@ type CreateMonitorInput struct {
 	// The unique token which the server uses to recognize retries of the same request.
 	ClientToken *string
 
+	// The AWS Region where IAM Identity Center is enabled. Required when IAM Identity
+	// Center is in a different Region than the monitor.
+	IdentityCenterRegion *string
+
 	// The tags to add to your monitor. Each tag consists of a tag key and a tag
 	// value. Tag keys and values are both required, but tag values can be empty
 	// strings.
@@ -71,6 +75,8 @@ type CreateMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+// Mixin that adds an optional ARN field to response structures. Apply to
+// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type CreateMonitorOutput struct {
 
 	// The Amazon Resource Name that IAM Identity Center assigns to the monitor.
@@ -123,7 +129,7 @@ func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, o
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -145,9 +151,6 @@ func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

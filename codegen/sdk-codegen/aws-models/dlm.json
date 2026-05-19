@@ -117,6 +117,28 @@
                 "smithy.api#pattern": "^([a-z]+-){2,3}\\d[a-z]$"
             }
         },
+        "com.amazonaws.dlm#AvailabilityZoneId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^[a-z]{3,4}\\d-az\\d+$"
+            }
+        },
+        "com.amazonaws.dlm#AvailabilityZoneIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.dlm#AvailabilityZoneId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
         "com.amazonaws.dlm#AvailabilityZoneList": {
             "type": "list",
             "member": {
@@ -889,9 +911,13 @@
                 "AvailabilityZones": {
                     "target": "com.amazonaws.dlm#AvailabilityZoneList",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The Availability Zones in which to enable fast snapshot restore.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Availability Zones in which to enable fast snapshot restore.</p>"
+                    }
+                },
+                "AvailabilityZoneIds": {
+                    "target": "com.amazonaws.dlm#AvailabilityZoneIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone Ids in which to enable fast snapshot restore.</p>"
                     }
                 }
             },

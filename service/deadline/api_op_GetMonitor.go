@@ -38,6 +38,8 @@ type GetMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+// Mixin that adds an optional ARN field to response structures. Apply to
+// SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.
 type GetMonitorOutput struct {
 
 	// The UNIX timestamp of the date and time that the monitor was created.
@@ -94,6 +96,9 @@ type GetMonitorOutput struct {
 	// This member is required.
 	Url *string
 
+	// The AWS Region where IAM Identity Center is enabled.
+	IdentityCenterRegion *string
+
 	// The UNIX timestamp of the last date and time that the monitor was updated.
 	UpdatedAt *time.Time
 
@@ -140,7 +145,7 @@ func (c *Client) addOperationGetMonitorMiddlewares(stack *middleware.Stack, opti
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -162,9 +167,6 @@ func (c *Client) addOperationGetMonitorMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

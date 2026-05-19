@@ -13,7 +13,7 @@ import (
 
 // Updates a security profile.
 //
-// For information about security profiles, see [Security Profiles] in the Amazon Connect
+// For information about security profiles, see [Security Profiles] in the Connect Customer
 // Administrator Guide. For a mapping of the API name and user interface name of
 // the security profile permissions, see [List of security profile permissions].
 //
@@ -36,8 +36,8 @@ func (c *Client) UpdateSecurityProfile(ctx context.Context, params *UpdateSecuri
 
 type UpdateSecurityProfileInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -50,11 +50,11 @@ type UpdateSecurityProfileInput struct {
 	SecurityProfileId *string
 
 	// The identifier of the hierarchy group that a security profile uses to restrict
-	// access to resources in Amazon Connect.
+	// access to resources in Connect Customer.
 	AllowedAccessControlHierarchyGroupId *string
 
 	// The list of tags that a security profile uses to restrict access to resources
-	// in Amazon Connect.
+	// in Connect Customer.
 	AllowedAccessControlTags map[string]string
 
 	//  A list of Flow Modules an AI Agent can invoke as a tool
@@ -71,7 +71,7 @@ type UpdateSecurityProfileInput struct {
 	GranularAccessControlConfiguration *types.GranularAccessControlConfiguration
 
 	// The list of resources that a security profile applies hierarchy restrictions to
-	// in Amazon Connect. Following are acceptable ResourceNames: User .
+	// in Connect Customer. Following are acceptable ResourceNames: User .
 	HierarchyRestrictedResources []string
 
 	// The permissions granted to a security profile. For a list of valid permissions,
@@ -81,7 +81,7 @@ type UpdateSecurityProfileInput struct {
 	Permissions []string
 
 	// The list of resources that a security profile applies tag restrictions to in
-	// Amazon Connect.
+	// Connect Customer.
 	TagRestrictedResources []string
 
 	noSmithyDocumentSerde
@@ -128,7 +128,7 @@ func (c *Client) addOperationUpdateSecurityProfileMiddlewares(stack *middleware.
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -150,9 +150,6 @@ func (c *Client) addOperationUpdateSecurityProfileMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

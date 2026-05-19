@@ -1411,6 +1411,33 @@ func validateArchiveStringExpression(v *types.ArchiveStringExpression) error {
 	}
 }
 
+func validateBounceAction(v *types.BounceAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BounceAction"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Sender == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sender"))
+	}
+	if v.StatusCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StatusCode"))
+	}
+	if v.SmtpReplyCode == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SmtpReplyCode"))
+	}
+	if v.DiagnosticMessage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DiagnosticMessage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDeliverToMailboxAction(v *types.DeliverToMailboxAction) error {
 	if v == nil {
 		return nil
@@ -1589,6 +1616,25 @@ func validateIngressIsInAddressList(v *types.IngressIsInAddressList) error {
 	}
 }
 
+func validateIngressPointConfiguration(v types.IngressPointConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IngressPointConfiguration"}
+	switch uv := v.(type) {
+	case *types.IngressPointConfigurationMemberTlsAuthConfiguration:
+		if err := validateTlsAuthConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[TlsAuthConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateIngressStringExpression(v *types.IngressStringExpression) error {
 	if v == nil {
 		return nil
@@ -1646,6 +1692,27 @@ func validateIngressTlsProtocolExpression(v *types.IngressTlsProtocolExpression)
 	}
 	if len(v.Value) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInvokeLambdaAction(v *types.InvokeLambdaAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InvokeLambdaAction"}
+	if v.FunctionArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FunctionArn"))
+	}
+	if len(v.InvocationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("InvocationType"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1863,6 +1930,11 @@ func validateRuleAction(v types.RuleAction) error {
 			invalidParams.AddNested("[Archive]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.RuleActionMemberBounce:
+		if err := validateBounceAction(&uv.Value); err != nil {
+			invalidParams.AddNested("[Bounce]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.RuleActionMemberDeliverToMailbox:
 		if err := validateDeliverToMailboxAction(&uv.Value); err != nil {
 			invalidParams.AddNested("[DeliverToMailbox]", err.(smithy.InvalidParamsError))
@@ -1871,6 +1943,11 @@ func validateRuleAction(v types.RuleAction) error {
 	case *types.RuleActionMemberDeliverToQBusiness:
 		if err := validateDeliverToQBusinessAction(&uv.Value); err != nil {
 			invalidParams.AddNested("[DeliverToQBusiness]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RuleActionMemberInvokeLambda:
+		if err := validateInvokeLambdaAction(&uv.Value); err != nil {
+			invalidParams.AddNested("[InvokeLambda]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.RuleActionMemberPublishToSns:
@@ -2294,6 +2371,38 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateTlsAuthConfiguration(v *types.TlsAuthConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TlsAuthConfiguration"}
+	if v.TrustStore != nil {
+		if err := validateTrustStore(v.TrustStore); err != nil {
+			invalidParams.AddNested("TrustStore", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTrustStore(v *types.TrustStore) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TrustStore"}
+	if v.CAContent == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CAContent"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAddonInstanceInput(v *CreateAddonInstanceInput) error {
 	if v == nil {
 		return nil
@@ -2415,6 +2524,11 @@ func validateOpCreateIngressPointInput(v *CreateIngressPointInput) error {
 	}
 	if v.TrafficPolicyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TrafficPolicyId"))
+	}
+	if v.IngressPointConfiguration != nil {
+		if err := validateIngressPointConfiguration(v.IngressPointConfiguration); err != nil {
+			invalidParams.AddNested("IngressPointConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.NetworkConfiguration != nil {
 		if err := validateNetworkConfiguration(v.NetworkConfiguration); err != nil {
@@ -3158,6 +3272,11 @@ func validateOpUpdateIngressPointInput(v *UpdateIngressPointInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateIngressPointInput"}
 	if v.IngressPointId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IngressPointId"))
+	}
+	if v.IngressPointConfiguration != nil {
+		if err := validateIngressPointConfiguration(v.IngressPointConfiguration); err != nil {
+			invalidParams.AddNested("IngressPointConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

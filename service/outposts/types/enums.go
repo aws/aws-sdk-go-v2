@@ -25,9 +25,10 @@ type AssetState string
 
 // Enum values for AssetState
 const (
-	AssetStateActive   AssetState = "ACTIVE"
-	AssetStateRetiring AssetState = "RETIRING"
-	AssetStateIsolated AssetState = "ISOLATED"
+	AssetStateActive     AssetState = "ACTIVE"
+	AssetStateRetiring   AssetState = "RETIRING"
+	AssetStateIsolated   AssetState = "ISOLATED"
+	AssetStateInstalling AssetState = "INSTALLING"
 )
 
 // Values returns all known values for AssetState. Note that this can be expanded
@@ -39,6 +40,7 @@ func (AssetState) Values() []AssetState {
 		"ACTIVE",
 		"RETIRING",
 		"ISOLATED",
+		"INSTALLING",
 	}
 }
 
@@ -46,7 +48,11 @@ type AssetType string
 
 // Enum values for AssetType
 const (
-	AssetTypeCompute AssetType = "COMPUTE"
+	AssetTypeCompute    AssetType = "COMPUTE"
+	AssetTypeStorage    AssetType = "STORAGE"
+	AssetTypePowershelf AssetType = "POWERSHELF"
+	AssetTypeSwitch     AssetType = "SWITCH"
+	AssetTypeNetworking AssetType = "NETWORKING"
 )
 
 // Values returns all known values for AssetType. Note that this can be expanded
@@ -56,6 +62,10 @@ const (
 func (AssetType) Values() []AssetType {
 	return []AssetType{
 		"COMPUTE",
+		"STORAGE",
+		"POWERSHELF",
+		"SWITCH",
+		"NETWORKING",
 	}
 }
 
@@ -211,9 +221,10 @@ type ComputeAssetState string
 
 // Enum values for ComputeAssetState
 const (
-	ComputeAssetStateActive   ComputeAssetState = "ACTIVE"
-	ComputeAssetStateIsolated ComputeAssetState = "ISOLATED"
-	ComputeAssetStateRetiring ComputeAssetState = "RETIRING"
+	ComputeAssetStateActive     ComputeAssetState = "ACTIVE"
+	ComputeAssetStateIsolated   ComputeAssetState = "ISOLATED"
+	ComputeAssetStateRetiring   ComputeAssetState = "RETIRING"
+	ComputeAssetStateInstalling ComputeAssetState = "INSTALLING"
 )
 
 // Values returns all known values for ComputeAssetState. Note that this can be
@@ -225,6 +236,7 @@ func (ComputeAssetState) Values() []ComputeAssetState {
 		"ACTIVE",
 		"ISOLATED",
 		"RETIRING",
+		"INSTALLING",
 	}
 }
 
@@ -551,6 +563,42 @@ func (PowerPhase) Values() []PowerPhase {
 	}
 }
 
+type PricingResult string
+
+// Enum values for PricingResult
+const (
+	PricingResultPriced        PricingResult = "PRICED"
+	PricingResultUnableToPrice PricingResult = "UNABLE_TO_PRICE"
+)
+
+// Values returns all known values for PricingResult. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PricingResult) Values() []PricingResult {
+	return []PricingResult{
+		"PRICED",
+		"UNABLE_TO_PRICE",
+	}
+}
+
+type QuotePricingType string
+
+// Enum values for QuotePricingType
+const (
+	QuotePricingTypeSubscription QuotePricingType = "SUBSCRIPTION"
+)
+
+// Values returns all known values for QuotePricingType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (QuotePricingType) Values() []QuotePricingType {
+	return []QuotePricingType{
+		"SUBSCRIPTION",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType
@@ -600,6 +648,7 @@ type SubscriptionStatus string
 // Enum values for SubscriptionStatus
 const (
 	SubscriptionStatusActive    SubscriptionStatus = "ACTIVE"
+	SubscriptionStatusPending   SubscriptionStatus = "PENDING"
 	SubscriptionStatusInactive  SubscriptionStatus = "INACTIVE"
 	SubscriptionStatusCancelled SubscriptionStatus = "CANCELLED"
 )
@@ -611,6 +660,7 @@ const (
 func (SubscriptionStatus) Values() []SubscriptionStatus {
 	return []SubscriptionStatus{
 		"ACTIVE",
+		"PENDING",
 		"INACTIVE",
 		"CANCELLED",
 	}

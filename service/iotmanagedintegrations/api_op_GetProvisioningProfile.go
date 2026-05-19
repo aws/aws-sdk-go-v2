@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a provisioning profile by template name.
+// Get details of a provisioning profile.
 func (c *Client) GetProvisioningProfile(ctx context.Context, params *GetProvisioningProfileInput, optFns ...func(*Options)) (*GetProvisioningProfileOutput, error) {
 	if params == nil {
 		params = &GetProvisioningProfileInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetProvisioningProfile(ctx context.Context, params *GetProvisio
 
 type GetProvisioningProfileInput struct {
 
-	// The provisioning template the device uses for the provisioning process.
+	// The id of a provisioning profile.
 	//
 	// This member is required.
 	Identifier *string
@@ -39,22 +39,24 @@ type GetProvisioningProfileInput struct {
 
 type GetProvisioningProfileOutput struct {
 
-	// The Amazon Resource Name (ARN) of the provisioning template used in the
-	// provisioning profile.
+	// The Amazon Resource Name (ARN) of the provisioning profile.
 	Arn *string
 
-	// The id of the claim certificate.
+	// The body of the PEM-encoded claim certificate.
 	ClaimCertificate *string
 
 	// The provisioning profile id.
 	Id *string
 
-	// The name of the provisioning template.
+	// The name of the provisioning profile.
 	Name *string
 
 	// The type of provisioning workflow the device uses for onboarding to IoT managed
 	// integrations.
 	ProvisioningType types.ProvisioningType
+
+	// The status of a provisioning profile.
+	Status types.ProvisioningProfileStatus
 
 	// A set of key/value pairs that are used to manage the provisioning profile.
 	Tags map[string]string
@@ -99,7 +101,7 @@ func (c *Client) addOperationGetProvisioningProfileMiddlewares(stack *middleware
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -121,9 +123,6 @@ func (c *Client) addOperationGetProvisioningProfileMiddlewares(stack *middleware
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

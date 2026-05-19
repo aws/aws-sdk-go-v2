@@ -27,6 +27,7 @@ func (c *Client) ListMonitors(ctx context.Context, params *ListMonitorsInput, op
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListMonitorsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -39,6 +40,7 @@ type ListMonitorsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListMonitorsOutput struct {
 
 	// A list of MonitorSummary objects that describe your monitors in the Deadline
@@ -95,7 +97,7 @@ func (c *Client) addOperationListMonitorsMiddlewares(stack *middleware.Stack, op
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -117,9 +119,6 @@ func (c *Client) addOperationListMonitorsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

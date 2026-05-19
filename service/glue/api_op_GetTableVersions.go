@@ -41,6 +41,9 @@ type GetTableVersionsInput struct {
 	// This member is required.
 	TableName *string
 
+	// A structure containing the Lake Formation audit context.
+	AuditContext *types.AuditContext
+
 	// The ID of the Data Catalog where the tables reside. If none is provided, the
 	// Amazon Web Services account ID is used by default.
 	CatalogId *string
@@ -103,7 +106,7 @@ func (c *Client) addOperationGetTableVersionsMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -125,9 +128,6 @@ func (c *Client) addOperationGetTableVersionsMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

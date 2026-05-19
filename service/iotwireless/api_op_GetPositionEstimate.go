@@ -32,6 +32,10 @@ func (c *Client) GetPositionEstimate(ctx context.Context, params *GetPositionEst
 
 type GetPositionEstimateInput struct {
 
+	// Optional configuration to customize position estimates. If not provided,
+	// defaults are applied.
+	AdvancedConfiguration *types.AdvancedConfiguration
+
 	// Retrieves an estimated device position by resolving measurement data from
 	// cellular radio towers. The position is resolved using HERE's cellular-based
 	// solver.
@@ -110,7 +114,7 @@ func (c *Client) addOperationGetPositionEstimateMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -132,9 +136,6 @@ func (c *Client) addOperationGetPositionEstimateMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

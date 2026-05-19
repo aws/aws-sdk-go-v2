@@ -2980,6 +2980,15 @@ type VerificationMessageTemplateType struct {
 //   - The providers that you want to allow as origins for passkey authentication.
 type WebAuthnConfigurationType struct {
 
+	// Sets whether passkeys can be used as multi-factor authentication (MFA). When
+	// set to MULTI_FACTOR_WITH_USER_VERIFICATION , passkey authentication with user
+	// verification satisfies MFA requirements. When set to SINGLE_FACTOR or not set,
+	// passkeys are a single authentication factor. To activate this setting, your user
+	// pool must be in the [Essentials tier]or higher.
+	//
+	// [Essentials tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html
+	FactorConfiguration WebAuthnFactorConfigurationType
+
 	// Sets or displays the authentication domain, typically your user pool domain,
 	// that passkey providers must use as a relying party (RP) in their configuration.
 	//
@@ -3041,6 +3050,21 @@ type WebAuthnCredentialDescription struct {
 	// on-device authenticator like a built-in fingerprint scanner, or a cross-platform
 	// device that's not attached to the device like a Bluetooth security key.
 	AuthenticatorAttachment *string
+
+	noSmithyDocumentSerde
+}
+
+// A user's preference for using passkey, or WebAuthn, multi-factor authentication
+// (MFA). Turns passkey MFA on and off for the user. Unlike other MFA settings
+// types, this type doesn't include a PreferredMfa option because passkey MFA
+// applies only when passkey is the first authentication factor.
+type WebAuthnMfaSettingsType struct {
+
+	// Specifies whether passkey MFA is activated for a user. When activated, the
+	// user's passkey authentication requires user verification, and passkey sign-in is
+	// available when MFA is required. The user must also have at least one other MFA
+	// method such as SMS, TOTP, or email activated to prevent account lockout.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }

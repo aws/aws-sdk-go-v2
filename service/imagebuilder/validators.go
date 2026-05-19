@@ -2012,6 +2012,21 @@ func validateTargetContainerRepository(v *types.TargetContainerRepository) error
 	}
 }
 
+func validateWindowsConfiguration(v *types.WindowsConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WindowsConfiguration"}
+	if v.ImageIndex == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageIndex"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateWorkflowConfiguration(v *types.WorkflowConfiguration) error {
 	if v == nil {
 		return nil
@@ -2843,6 +2858,11 @@ func validateOpImportDiskImageInput(v *ImportDiskImageInput) error {
 	}
 	if v.Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
+	}
+	if v.WindowsConfiguration != nil {
+		if err := validateWindowsConfiguration(v.WindowsConfiguration); err != nil {
+			invalidParams.AddNested("WindowsConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.ClientToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))

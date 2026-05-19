@@ -32,10 +32,13 @@ import (
 //
 // [StopBrowserSession]
 //
+// [InvokeBrowser]
+//
 // [SaveBrowserSessionProfile]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_SaveBrowserSessionProfile.html
 // [UpdateBrowserStream]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_UpdateBrowserStream.html
 // [GetBrowserSession]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_GetBrowserSession.html
 // [StopBrowserSession]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_StopBrowserSession.html
+// [InvokeBrowser]: https://docs.aws.amazon.com/bedrock-agentcore/latest/APIReference/API_InvokeBrowser.html
 func (c *Client) StartBrowserSession(ctx context.Context, params *StartBrowserSessionInput, optFns ...func(*Options)) (*StartBrowserSessionOutput, error) {
 	if params == nil {
 		params = &StartBrowserSessionInput{}
@@ -173,7 +176,7 @@ func (c *Client) addOperationStartBrowserSessionMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -195,9 +198,6 @@ func (c *Client) addOperationStartBrowserSessionMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

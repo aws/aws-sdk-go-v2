@@ -121,6 +121,13 @@ func awsRestjson1_serializeOpDocumentCreateCampaignInput(v *CreateCampaignInput,
 		ok.String(*v.ConnectInstanceId)
 	}
 
+	if v.EntryLimitsConfig != nil {
+		ok := object.Key("entryLimitsConfig")
+		if err := awsRestjson1_serializeDocumentEntryLimitsConfig(v.EntryLimitsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -437,6 +444,77 @@ func awsRestjson1_serializeOpHttpBindingsDeleteCampaignCommunicationTimeInput(v 
 
 	if len(v.Config) > 0 {
 		encoder.SetQuery("config").String(string(v.Config))
+	}
+
+	if v.Id == nil || len(*v.Id) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
+	}
+	if v.Id != nil {
+		if err := encoder.SetURI("id").String(*v.Id); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteCampaignEntryLimits struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteCampaignEntryLimits) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteCampaignEntryLimits) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteCampaignEntryLimitsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/campaigns/{id}/entry-limits")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteCampaignEntryLimitsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteCampaignEntryLimitsInput(v *DeleteCampaignEntryLimitsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
 	if v.Id == nil || len(*v.Id) == 0 {
@@ -2599,6 +2677,102 @@ func awsRestjson1_serializeOpDocumentUpdateCampaignCommunicationTimeInput(v *Upd
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateCampaignEntryLimits struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateCampaignEntryLimits) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateCampaignEntryLimits) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateCampaignEntryLimitsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v2/campaigns/{id}/entry-limits")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateCampaignEntryLimitsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateCampaignEntryLimitsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateCampaignEntryLimitsInput(v *UpdateCampaignEntryLimitsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Id == nil || len(*v.Id) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member id must not be empty")}
+	}
+	if v.Id != nil {
+		if err := encoder.SetURI("id").String(*v.Id); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateCampaignEntryLimitsInput(v *UpdateCampaignEntryLimitsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EntryLimitsConfig != nil {
+		ok := object.Key("entryLimitsConfig")
+		if err := awsRestjson1_serializeDocumentEntryLimitsConfig(v.EntryLimitsConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateCampaignFlowAssociation struct {
 }
 
@@ -3412,6 +3586,23 @@ func awsRestjson1_serializeDocumentEncryptionConfig(v *types.EncryptionConfig, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEntryLimitsConfig(v *types.EntryLimitsConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxEntryCount != nil {
+		ok := object.Key("maxEntryCount")
+		ok.Integer(*v.MaxEntryCount)
+	}
+
+	if v.MinEntryInterval != nil {
+		ok := object.Key("minEntryInterval")
+		ok.String(*v.MinEntryInterval)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEventTrigger(v *types.EventTrigger, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3553,6 +3744,11 @@ func awsRestjson1_serializeDocumentLocalTimeZoneConfig(v *types.LocalTimeZoneCon
 		if err := awsRestjson1_serializeDocumentLocalTimeZoneDetection(v.LocalTimeZoneDetection, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.LocalTimeZoneDetectionScope) > 0 {
+		ok := object.Key("localTimeZoneDetectionScope")
+		ok.String(string(v.LocalTimeZoneDetectionScope))
 	}
 
 	return nil

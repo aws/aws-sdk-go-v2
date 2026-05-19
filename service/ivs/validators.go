@@ -70,6 +70,26 @@ func (m *validateOpBatchStartViewerSessionRevocation) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAdConfiguration struct {
+}
+
+func (*validateOpCreateAdConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAdConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAdConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAdConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRecordingConfiguration struct {
 }
 
@@ -105,6 +125,26 @@ func (m *validateOpCreateStreamKey) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateStreamKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAdConfiguration struct {
+}
+
+func (*validateOpDeleteAdConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAdConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAdConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAdConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -205,6 +245,26 @@ func (m *validateOpDeleteStreamKey) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteStreamKeyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAdConfiguration struct {
+}
+
+func (*validateOpGetAdConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAdConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAdConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAdConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -365,6 +425,26 @@ func (m *validateOpImportPlaybackKeyPair) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpImportPlaybackKeyPairInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpInsertAdBreak struct {
+}
+
+func (*validateOpInsertAdBreak) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpInsertAdBreak) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*InsertAdBreakInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpInsertAdBreakInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -582,12 +662,20 @@ func addOpBatchStartViewerSessionRevocationValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpBatchStartViewerSessionRevocation{}, middleware.After)
 }
 
+func addOpCreateAdConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAdConfiguration{}, middleware.After)
+}
+
 func addOpCreateRecordingConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRecordingConfiguration{}, middleware.After)
 }
 
 func addOpCreateStreamKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateStreamKey{}, middleware.After)
+}
+
+func addOpDeleteAdConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAdConfiguration{}, middleware.After)
 }
 
 func addOpDeleteChannelValidationMiddleware(stack *middleware.Stack) error {
@@ -608,6 +696,10 @@ func addOpDeleteRecordingConfigurationValidationMiddleware(stack *middleware.Sta
 
 func addOpDeleteStreamKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteStreamKey{}, middleware.After)
+}
+
+func addOpGetAdConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAdConfiguration{}, middleware.After)
 }
 
 func addOpGetChannelValidationMiddleware(stack *middleware.Stack) error {
@@ -640,6 +732,10 @@ func addOpGetStreamSessionValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpImportPlaybackKeyPairValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportPlaybackKeyPair{}, middleware.After)
+}
+
+func addOpInsertAdBreakValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpInsertAdBreak{}, middleware.After)
 }
 
 func addOpListStreamKeysValidationMiddleware(stack *middleware.Stack) error {
@@ -798,6 +894,21 @@ func validateOpBatchStartViewerSessionRevocationInput(v *BatchStartViewerSession
 	}
 }
 
+func validateOpCreateAdConfigurationInput(v *CreateAdConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAdConfigurationInput"}
+	if v.MediaTailorPlaybackConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MediaTailorPlaybackConfigurations"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateRecordingConfigurationInput(v *CreateRecordingConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -824,6 +935,21 @@ func validateOpCreateStreamKeyInput(v *CreateStreamKeyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateStreamKeyInput"}
 	if v.ChannelArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAdConfigurationInput(v *DeleteAdConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAdConfigurationInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -897,6 +1023,21 @@ func validateOpDeleteStreamKeyInput(v *DeleteStreamKeyInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteStreamKeyInput"}
+	if v.Arn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAdConfigurationInput(v *GetAdConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAdConfigurationInput"}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
 	}
@@ -1019,6 +1160,24 @@ func validateOpImportPlaybackKeyPairInput(v *ImportPlaybackKeyPairInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ImportPlaybackKeyPairInput"}
 	if v.PublicKeyMaterial == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PublicKeyMaterial"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpInsertAdBreakInput(v *InsertAdBreakInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InsertAdBreakInput"}
+	if v.ChannelArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ChannelArn"))
+	}
+	if v.DurationSeconds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DurationSeconds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

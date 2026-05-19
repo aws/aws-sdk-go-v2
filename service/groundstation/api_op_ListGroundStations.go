@@ -27,6 +27,7 @@ func (c *Client) ListGroundStations(ctx context.Context, params *ListGroundStati
 	return out, nil
 }
 
+// Input for the ListGroundStations operation.
 type ListGroundStationsInput struct {
 
 	// Maximum number of ground stations returned.
@@ -42,6 +43,7 @@ type ListGroundStationsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Output for the ListGroundStations operation.
 type ListGroundStationsOutput struct {
 
 	// List of ground stations.
@@ -91,7 +93,7 @@ func (c *Client) addOperationListGroundStationsMiddlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -113,9 +115,6 @@ func (c *Client) addOperationListGroundStationsMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

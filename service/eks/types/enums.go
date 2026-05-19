@@ -986,46 +986,52 @@ type UpdateParamType string
 
 // Enum values for UpdateParamType
 const (
-	UpdateParamTypeVersion                  UpdateParamType = "Version"
-	UpdateParamTypePlatformVersion          UpdateParamType = "PlatformVersion"
-	UpdateParamTypeEndpointPrivateAccess    UpdateParamType = "EndpointPrivateAccess"
-	UpdateParamTypeEndpointPublicAccess     UpdateParamType = "EndpointPublicAccess"
-	UpdateParamTypeClusterLogging           UpdateParamType = "ClusterLogging"
-	UpdateParamTypeDesiredSize              UpdateParamType = "DesiredSize"
-	UpdateParamTypeLabelsToAdd              UpdateParamType = "LabelsToAdd"
-	UpdateParamTypeLabelsToRemove           UpdateParamType = "LabelsToRemove"
-	UpdateParamTypeTaintsToAdd              UpdateParamType = "TaintsToAdd"
-	UpdateParamTypeTaintsToRemove           UpdateParamType = "TaintsToRemove"
-	UpdateParamTypeMaxSize                  UpdateParamType = "MaxSize"
-	UpdateParamTypeMinSize                  UpdateParamType = "MinSize"
-	UpdateParamTypeReleaseVersion           UpdateParamType = "ReleaseVersion"
-	UpdateParamTypePublicAccessCidrs        UpdateParamType = "PublicAccessCidrs"
-	UpdateParamTypeLaunchTemplateName       UpdateParamType = "LaunchTemplateName"
-	UpdateParamTypeLaunchTemplateVersion    UpdateParamType = "LaunchTemplateVersion"
-	UpdateParamTypeIdentityProviderConfig   UpdateParamType = "IdentityProviderConfig"
-	UpdateParamTypeEncryptionConfig         UpdateParamType = "EncryptionConfig"
-	UpdateParamTypeAddonVersion             UpdateParamType = "AddonVersion"
-	UpdateParamTypeServiceAccountRoleArn    UpdateParamType = "ServiceAccountRoleArn"
-	UpdateParamTypeResolveConflicts         UpdateParamType = "ResolveConflicts"
-	UpdateParamTypeMaxUnavailable           UpdateParamType = "MaxUnavailable"
-	UpdateParamTypeMaxUnavailablePercentage UpdateParamType = "MaxUnavailablePercentage"
-	UpdateParamTypeNodeRepairEnabled        UpdateParamType = "NodeRepairEnabled"
-	UpdateParamTypeUpdateStrategy           UpdateParamType = "UpdateStrategy"
-	UpdateParamTypeConfigurationValues      UpdateParamType = "ConfigurationValues"
-	UpdateParamTypeSecurityGroups           UpdateParamType = "SecurityGroups"
-	UpdateParamTypeSubnets                  UpdateParamType = "Subnets"
-	UpdateParamTypeAuthenticationMode       UpdateParamType = "AuthenticationMode"
-	UpdateParamTypePodIdentityAssociations  UpdateParamType = "PodIdentityAssociations"
-	UpdateParamTypeUpgradePolicy            UpdateParamType = "UpgradePolicy"
-	UpdateParamTypeZonalShiftConfig         UpdateParamType = "ZonalShiftConfig"
-	UpdateParamTypeComputeConfig            UpdateParamType = "ComputeConfig"
-	UpdateParamTypeStorageConfig            UpdateParamType = "StorageConfig"
-	UpdateParamTypeKubernetesNetworkConfig  UpdateParamType = "KubernetesNetworkConfig"
-	UpdateParamTypeRemoteNetworkConfig      UpdateParamType = "RemoteNetworkConfig"
-	UpdateParamTypeDeletionProtection       UpdateParamType = "DeletionProtection"
-	UpdateParamTypeNodeRepairConfig         UpdateParamType = "NodeRepairConfig"
-	UpdateParamTypeUpdatedTier              UpdateParamType = "UpdatedTier"
-	UpdateParamTypePreviousTier             UpdateParamType = "PreviousTier"
+	UpdateParamTypeVersion                          UpdateParamType = "Version"
+	UpdateParamTypePlatformVersion                  UpdateParamType = "PlatformVersion"
+	UpdateParamTypeEndpointPrivateAccess            UpdateParamType = "EndpointPrivateAccess"
+	UpdateParamTypeEndpointPublicAccess             UpdateParamType = "EndpointPublicAccess"
+	UpdateParamTypeClusterLogging                   UpdateParamType = "ClusterLogging"
+	UpdateParamTypeDesiredSize                      UpdateParamType = "DesiredSize"
+	UpdateParamTypeLabelsToAdd                      UpdateParamType = "LabelsToAdd"
+	UpdateParamTypeLabelsToRemove                   UpdateParamType = "LabelsToRemove"
+	UpdateParamTypeTaintsToAdd                      UpdateParamType = "TaintsToAdd"
+	UpdateParamTypeTaintsToRemove                   UpdateParamType = "TaintsToRemove"
+	UpdateParamTypeMaxSize                          UpdateParamType = "MaxSize"
+	UpdateParamTypeMinSize                          UpdateParamType = "MinSize"
+	UpdateParamTypeReleaseVersion                   UpdateParamType = "ReleaseVersion"
+	UpdateParamTypePublicAccessCidrs                UpdateParamType = "PublicAccessCidrs"
+	UpdateParamTypeLaunchTemplateName               UpdateParamType = "LaunchTemplateName"
+	UpdateParamTypeLaunchTemplateVersion            UpdateParamType = "LaunchTemplateVersion"
+	UpdateParamTypeIdentityProviderConfig           UpdateParamType = "IdentityProviderConfig"
+	UpdateParamTypeEncryptionConfig                 UpdateParamType = "EncryptionConfig"
+	UpdateParamTypeAddonVersion                     UpdateParamType = "AddonVersion"
+	UpdateParamTypeServiceAccountRoleArn            UpdateParamType = "ServiceAccountRoleArn"
+	UpdateParamTypeResolveConflicts                 UpdateParamType = "ResolveConflicts"
+	UpdateParamTypeMaxUnavailable                   UpdateParamType = "MaxUnavailable"
+	UpdateParamTypeMaxUnavailablePercentage         UpdateParamType = "MaxUnavailablePercentage"
+	UpdateParamTypeNodeRepairEnabled                UpdateParamType = "NodeRepairEnabled"
+	UpdateParamTypeUpdateStrategy                   UpdateParamType = "UpdateStrategy"
+	UpdateParamTypeConfigurationValues              UpdateParamType = "ConfigurationValues"
+	UpdateParamTypeSecurityGroups                   UpdateParamType = "SecurityGroups"
+	UpdateParamTypeSubnets                          UpdateParamType = "Subnets"
+	UpdateParamTypeAuthenticationMode               UpdateParamType = "AuthenticationMode"
+	UpdateParamTypePodIdentityAssociations          UpdateParamType = "PodIdentityAssociations"
+	UpdateParamTypeUpgradePolicy                    UpdateParamType = "UpgradePolicy"
+	UpdateParamTypeZonalShiftConfig                 UpdateParamType = "ZonalShiftConfig"
+	UpdateParamTypeComputeConfig                    UpdateParamType = "ComputeConfig"
+	UpdateParamTypeStorageConfig                    UpdateParamType = "StorageConfig"
+	UpdateParamTypeKubernetesNetworkConfig          UpdateParamType = "KubernetesNetworkConfig"
+	UpdateParamTypeRemoteNetworkConfig              UpdateParamType = "RemoteNetworkConfig"
+	UpdateParamTypeDeletionProtection               UpdateParamType = "DeletionProtection"
+	UpdateParamTypeNodeRepairConfig                 UpdateParamType = "NodeRepairConfig"
+	UpdateParamTypeVendedLogs                       UpdateParamType = "VendedLogs"
+	UpdateParamTypeUpdatedTier                      UpdateParamType = "UpdatedTier"
+	UpdateParamTypePreviousTier                     UpdateParamType = "PreviousTier"
+	UpdateParamTypeWarmPoolEnabled                  UpdateParamType = "WarmPoolEnabled"
+	UpdateParamTypeWarmPoolMaxGroupPreparedCapacity UpdateParamType = "WarmPoolMaxGroupPreparedCapacity"
+	UpdateParamTypeWarmPoolMinSize                  UpdateParamType = "WarmPoolMinSize"
+	UpdateParamTypeWarmPoolState                    UpdateParamType = "WarmPoolState"
+	UpdateParamTypeWarmPoolReuseOnScaleIn           UpdateParamType = "WarmPoolReuseOnScaleIn"
 )
 
 // Values returns all known values for UpdateParamType. Note that this can be
@@ -1072,8 +1078,14 @@ func (UpdateParamType) Values() []UpdateParamType {
 		"RemoteNetworkConfig",
 		"DeletionProtection",
 		"NodeRepairConfig",
+		"VendedLogs",
 		"UpdatedTier",
 		"PreviousTier",
+		"WarmPoolEnabled",
+		"WarmPoolMaxGroupPreparedCapacity",
+		"WarmPoolMinSize",
+		"WarmPoolState",
+		"WarmPoolReuseOnScaleIn",
 	}
 }
 
@@ -1167,5 +1179,26 @@ func (VersionStatus) Values() []VersionStatus {
 		"UNSUPPORTED",
 		"STANDARD_SUPPORT",
 		"EXTENDED_SUPPORT",
+	}
+}
+
+type WarmPoolState string
+
+// Enum values for WarmPoolState
+const (
+	WarmPoolStateStopped    WarmPoolState = "STOPPED"
+	WarmPoolStateRunning    WarmPoolState = "RUNNING"
+	WarmPoolStateHibernated WarmPoolState = "HIBERNATED"
+)
+
+// Values returns all known values for WarmPoolState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WarmPoolState) Values() []WarmPoolState {
+	return []WarmPoolState{
+		"STOPPED",
+		"RUNNING",
+		"HIBERNATED",
 	}
 }

@@ -2051,6 +2051,15 @@ func awsRestjson1_deserializeOpDocumentCreateProvisioningProfileOutput(v **Creat
 				sv.ProvisioningType = types.ProvisioningType(jtv)
 			}
 
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProvisioningProfileStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ProvisioningProfileStatus(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -3224,6 +3233,9 @@ func awsRestjson1_deserializeOpErrorDeleteProvisioningProfile(response *smithyht
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
@@ -7773,6 +7785,15 @@ func awsRestjson1_deserializeOpDocumentGetProvisioningProfileOutput(v **GetProvi
 					return fmt.Errorf("expected ProvisioningType to be of type string, got %T instead", value)
 				}
 				sv.ProvisioningType = types.ProvisioningType(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProvisioningProfileStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ProvisioningProfileStatus(jtv)
 			}
 
 		case "Tags":
@@ -17992,6 +18013,15 @@ func awsRestjson1_deserializeDocumentProvisioningProfileSummary(v **types.Provis
 					return fmt.Errorf("expected ProvisioningType to be of type string, got %T instead", value)
 				}
 				sv.ProvisioningType = types.ProvisioningType(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProvisioningProfileStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ProvisioningProfileStatus(jtv)
 			}
 
 		default:

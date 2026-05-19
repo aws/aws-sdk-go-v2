@@ -65,11 +65,6 @@ type GetGatewayOutput struct {
 	// This member is required.
 	Name *string
 
-	// Protocol applied to a gateway.
-	//
-	// This member is required.
-	ProtocolType types.GatewayProtocolType
-
 	// The current status of the gateway.
 	//
 	// This member is required.
@@ -110,6 +105,9 @@ type GetGatewayOutput struct {
 	// The configuration for a gateway protocol. This structure defines how the
 	// gateway communicates with external services.
 	ProtocolConfiguration types.GatewayProtocolConfiguration
+
+	// Protocol applied to a gateway.
+	ProtocolType types.GatewayProtocolType
 
 	// The IAM role ARN that provides permissions for the gateway.
 	RoleArn *string
@@ -160,7 +158,7 @@ func (c *Client) addOperationGetGatewayMiddlewares(stack *middleware.Stack, opti
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -182,9 +180,6 @@ func (c *Client) addOperationGetGatewayMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

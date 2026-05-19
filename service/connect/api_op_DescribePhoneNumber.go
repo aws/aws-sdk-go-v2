@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets details and status of a phone number that’s claimed to your Amazon Connect
-// instance or traffic distribution group.
+// Gets details and status of a phone number that’s claimed to your Connect
+// Customer instance or traffic distribution group.
 //
 // If the number is claimed to a traffic distribution group, and you are calling
 // in the Amazon Web Services Region where the traffic distribution group was
@@ -49,7 +49,7 @@ type DescribePhoneNumberInput struct {
 
 type DescribePhoneNumberOutput struct {
 
-	// Information about a phone number that's been claimed to your Amazon Connect
+	// Information about a phone number that's been claimed to your Connect Customer
 	// instance or traffic distribution group.
 	ClaimedPhoneNumberSummary *types.ClaimedPhoneNumberSummary
 
@@ -93,7 +93,7 @@ func (c *Client) addOperationDescribePhoneNumberMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -115,9 +115,6 @@ func (c *Client) addOperationDescribePhoneNumberMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

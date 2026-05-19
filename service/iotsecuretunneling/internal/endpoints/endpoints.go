@@ -238,6 +238,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "api.iot-tunneling.eu-north-1.api.aws",
 			},
 			endpoints.EndpointKey{
+				Region: "eu-south-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "eu-south-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -312,6 +315,9 @@ var defaultPartitions = endpoints.Partitions{
 				},
 				Deprecated: aws.TrueTernary,
 			},
+			endpoints.EndpointKey{
+				Region: "il-central-1",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "me-central-1",
 			}: endpoints.Endpoint{},

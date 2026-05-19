@@ -63,12 +63,12 @@ type FailoverGlobalClusterInput struct {
 	// If you don't specify AllowDataLoss , the global database cluster operation
 	// defaults to a switchover.
 	//
-	// Constraints:Can't be specified together with the Switchover parameter.
+	// Constraints: Can't be specified together with the Switchover parameter.
 	AllowDataLoss *bool
 
 	// Specifies whether to switch over this global database cluster.
 	//
-	// Constraints:Can't be specified together with the AllowDataLoss parameter.
+	// Constraints: Can't be specified together with the AllowDataLoss parameter.
 	Switchover *bool
 
 	noSmithyDocumentSerde
@@ -121,7 +121,7 @@ func (c *Client) addOperationFailoverGlobalClusterMiddlewares(stack *middleware.
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -143,9 +143,6 @@ func (c *Client) addOperationFailoverGlobalClusterMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

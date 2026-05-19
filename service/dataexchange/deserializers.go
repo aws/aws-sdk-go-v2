@@ -1370,6 +1370,11 @@ func awsRestjson1_deserializeOpDocumentCreateJobOutput(v **CreateJobOutput, valu
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "AssetConfiguration":
+			if err := awsRestjson1_deserializeDocumentAssetConfiguration(&sv.AssetConfiguration, value); err != nil {
+				return err
+			}
+
 		case "CreatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2481,6 +2486,11 @@ func awsRestjson1_deserializeOpDocumentGetAssetOutput(v **GetAssetOutput, value 
 				sv.SourceId = ptr.String(jtv)
 			}
 
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentMapOf__string(&sv.Tags, value); err != nil {
+				return err
+			}
+
 		case "UpdatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3433,6 +3443,11 @@ func awsRestjson1_deserializeOpDocumentGetJobOutput(v **GetJobOutput, value inte
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "AssetConfiguration":
+			if err := awsRestjson1_deserializeDocumentAssetConfiguration(&sv.AssetConfiguration, value); err != nil {
+				return err
 			}
 
 		case "CreatedAt":
@@ -7665,6 +7680,42 @@ func awsRestjson1_deserializeDocumentApiGatewayApiAsset(v **types.ApiGatewayApiA
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAssetConfiguration(v **types.AssetConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AssetConfiguration
+	if *v == nil {
+		sv = &types.AssetConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Tags":
+			if err := awsRestjson1_deserializeDocumentListOfTag(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAssetDestinationEntry(v **types.AssetDestinationEntry, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9440,6 +9491,11 @@ func awsRestjson1_deserializeDocumentJobEntry(v **types.JobEntry, value interfac
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "AssetConfiguration":
+			if err := awsRestjson1_deserializeDocumentAssetConfiguration(&sv.AssetConfiguration, value); err != nil {
+				return err
+			}
+
 		case "CreatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10558,6 +10614,40 @@ func awsRestjson1_deserializeDocumentListOfTableTagPolicyLFPermissions(v *[]type
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentListOfTag(v *[]types.Tag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Tag
+	if *v == nil {
+		cv = []types.Tag{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Tag
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentTag(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMapOf__string(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11585,6 +11675,55 @@ func awsRestjson1_deserializeDocumentTableLFTagPolicyAndPermissions(v **types.Ta
 		case "Permissions":
 			if err := awsRestjson1_deserializeDocumentListOfTableTagPolicyLFPermissions(&sv.Permissions, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTag(v **types.Tag, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Tag
+	if *v == nil {
+		sv = &types.Tag{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Key":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Key = ptr.String(jtv)
+			}
+
+		case "Value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
 			}
 
 		default:

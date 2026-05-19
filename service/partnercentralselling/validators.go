@@ -1250,6 +1250,24 @@ func validateEngagementSort(v *types.EngagementSort) error {
 	}
 }
 
+func validateExpectedContractDuration(v *types.ExpectedContractDuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ExpectedContractDuration"}
+	if len(v.Term) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Term"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateExpectedCustomerSpend(v *types.ExpectedCustomerSpend) error {
 	if v == nil {
 		return nil
@@ -1691,6 +1709,11 @@ func validateProject(v *types.Project) error {
 	if v.ExpectedCustomerSpend != nil {
 		if err := validateExpectedCustomerSpendList(v.ExpectedCustomerSpend); err != nil {
 			invalidParams.AddNested("ExpectedCustomerSpend", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ExpectedContractDuration != nil {
+		if err := validateExpectedContractDuration(v.ExpectedContractDuration); err != nil {
+			invalidParams.AddNested("ExpectedContractDuration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

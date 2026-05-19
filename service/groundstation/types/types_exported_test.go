@@ -242,6 +242,12 @@ func ExampleProgramTrackSettings_outputUsage() {
 	case *types.ProgramTrackSettingsMemberAzEl:
 		_ = v.Value // Value is types.AzElProgramTrackSettings
 
+	case *types.ProgramTrackSettingsMemberOem:
+		_ = v.Value // Value is types.OemProgramTrackSettings
+
+	case *types.ProgramTrackSettingsMemberTle:
+		_ = v.Value // Value is types.TleProgramTrackSettings
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -252,6 +258,30 @@ func ExampleProgramTrackSettings_outputUsage() {
 }
 
 var _ *types.AzElProgramTrackSettings
+var _ *types.OemProgramTrackSettings
+var _ *types.TleProgramTrackSettings
+
+func ExampleReservationDetails_outputUsage() {
+	var union types.ReservationDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ReservationDetailsMemberContact:
+		_ = v.Value // Value is types.ContactReservationDetails
+
+	case *types.ReservationDetailsMemberMaintenance:
+		_ = v.Value // Value is types.MaintenanceReservationDetails
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.MaintenanceReservationDetails
+var _ *types.ContactReservationDetails
 
 func ExampleTelemetrySinkData_outputUsage() {
 	var union types.TelemetrySinkData

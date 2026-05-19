@@ -245,6 +245,9 @@ func awsAwsjson10_deserializeOpErrorCreateAddonSubscription(response *smithyhttp
 	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
 		return awsAwsjson10_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
 
@@ -1427,6 +1430,9 @@ func awsAwsjson10_deserializeOpErrorDeleteAddressList(response *smithyhttp.Respo
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
 
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -2122,6 +2128,9 @@ func awsAwsjson10_deserializeOpErrorDeregisterMemberFromAddressList(response *sm
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson10_deserializeErrorConflictException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -5489,6 +5498,9 @@ func awsAwsjson10_deserializeOpErrorRegisterMemberToAddressList(response *smithy
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson10_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -8272,6 +8284,100 @@ loop:
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentBounceAction(v **types.BounceAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BounceAction
+	if *v == nil {
+		sv = &types.BounceAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ActionFailurePolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionFailurePolicy to be of type string, got %T instead", value)
+				}
+				sv.ActionFailurePolicy = types.ActionFailurePolicy(jtv)
+			}
+
+		case "DiagnosticMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DiagnosticMessage to be of type string, got %T instead", value)
+				}
+				sv.DiagnosticMessage = ptr.String(jtv)
+			}
+
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BounceMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamRoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "Sender":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EmailAddress to be of type string, got %T instead", value)
+				}
+				sv.Sender = ptr.String(jtv)
+			}
+
+		case "SmtpReplyCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SmtpReplyCode to be of type string, got %T instead", value)
+				}
+				sv.SmtpReplyCode = ptr.String(jtv)
+			}
+
+		case "StatusCode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatusCode to be of type string, got %T instead", value)
+				}
+				sv.StatusCode = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9517,6 +9623,11 @@ func awsAwsjson10_deserializeDocumentIngressPointAuthConfiguration(v **types.Ing
 				sv.SecretArn = ptr.String(jtv)
 			}
 
+		case "TlsAuthConfiguration":
+			if err := awsAwsjson10_deserializeDocumentTlsAuthConfiguration(&sv.TlsAuthConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9820,6 +9931,86 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentInvokeLambdaAction(v **types.InvokeLambdaAction, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InvokeLambdaAction
+	if *v == nil {
+		sv = &types.InvokeLambdaAction{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ActionFailurePolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionFailurePolicy to be of type string, got %T instead", value)
+				}
+				sv.ActionFailurePolicy = types.ActionFailurePolicy(jtv)
+			}
+
+		case "FunctionArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LambdaFunctionArn to be of type string, got %T instead", value)
+				}
+				sv.FunctionArn = ptr.String(jtv)
+			}
+
+		case "InvocationType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LambdaInvocationType to be of type string, got %T instead", value)
+				}
+				sv.InvocationType = types.LambdaInvocationType(jtv)
+			}
+
+		case "RetryTimeMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected LambdaRetryTimeMinutes to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RetryTimeMinutes = ptr.Int32(int32(i64))
+			}
+
+		case "RoleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IamRoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -11111,6 +11302,16 @@ loop:
 			uv = &types.RuleActionMemberArchive{Value: mv}
 			break loop
 
+		case "Bounce":
+			var mv types.BounceAction
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentBounceAction(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RuleActionMemberBounce{Value: mv}
+			break loop
+
 		case "DeliverToMailbox":
 			var mv types.DeliverToMailboxAction
 			destAddr := &mv
@@ -11139,6 +11340,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.RuleActionMemberDrop{Value: mv}
+			break loop
+
+		case "InvokeLambda":
+			var mv types.InvokeLambdaAction
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentInvokeLambdaAction(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RuleActionMemberInvokeLambda{Value: mv}
 			break loop
 
 		case "PublishToSns":
@@ -12134,6 +12345,18 @@ loop:
 			uv = &types.RuleStringToEvaluateMemberAttribute{Value: mv}
 			break loop
 
+		case "ClientCertificateAttribute":
+			var mv types.RuleClientCertificateAttribute
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleClientCertificateAttribute to be of type string, got %T instead", value)
+				}
+				mv = types.RuleClientCertificateAttribute(jtv)
+			}
+			uv = &types.RuleStringToEvaluateMemberClientCertificateAttribute{Value: mv}
+			break loop
+
 		case "MimeHeaderAttribute":
 			var mv string
 			if value != nil {
@@ -13020,6 +13243,42 @@ func awsAwsjson10_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentTlsAuthConfiguration(v **types.TlsAuthConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TlsAuthConfiguration
+	if *v == nil {
+		sv = &types.TlsAuthConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TrustStore":
+			if err := awsAwsjson10_deserializeDocumentTrustStore(&sv.TrustStore, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentTrafficPolicy(v **types.TrafficPolicy, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13109,6 +13368,64 @@ func awsAwsjson10_deserializeDocumentTrafficPolicyList(v *[]types.TrafficPolicy,
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentTrustStore(v **types.TrustStore, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TrustStore
+	if *v == nil {
+		sv = &types.TrustStore{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CAContent":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CAContent to be of type string, got %T instead", value)
+				}
+				sv.CAContent = ptr.String(jtv)
+			}
+
+		case "CrlContent":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CrlContent to be of type string, got %T instead", value)
+				}
+				sv.CrlContent = ptr.String(jtv)
+			}
+
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KmsKeyArn to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -14739,6 +15056,15 @@ func awsAwsjson10_deserializeOpDocumentGetIngressPointOutput(v **GetIngressPoint
 					return fmt.Errorf("expected IngressPointStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.IngressPointStatus(jtv)
+			}
+
+		case "TlsPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TlsPolicy to be of type string, got %T instead", value)
+				}
+				sv.TlsPolicy = types.TlsPolicy(jtv)
 			}
 
 		case "TrafficPolicyId":

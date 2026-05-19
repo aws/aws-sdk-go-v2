@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Web Services resource association from an Amazon Connect
+// Deletes an Amazon Web Services resource association from an Connect Customer
 // instance. The association must not have any use cases associated with it.
 func (c *Client) DeleteIntegrationAssociation(ctx context.Context, params *DeleteIntegrationAssociationInput, optFns ...func(*Options)) (*DeleteIntegrationAssociationOutput, error) {
 	if params == nil {
@@ -29,8 +29,8 @@ func (c *Client) DeleteIntegrationAssociation(ctx context.Context, params *Delet
 
 type DeleteIntegrationAssociationInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -86,7 +86,7 @@ func (c *Client) addOperationDeleteIntegrationAssociationMiddlewares(stack *midd
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -108,9 +108,6 @@ func (c *Client) addOperationDeleteIntegrationAssociationMiddlewares(stack *midd
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

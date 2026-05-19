@@ -62,7 +62,8 @@ type GetDomainSuggestionsInput struct {
 	OnlyAvailable *bool
 
 	// The number of suggested domain names that you want Route 53 to return. Specify
-	// a value between 1 and 50.
+	// a value between 1 and 50. Note that fewer than the requested number might be
+	// returned.
 	//
 	// This member is required.
 	SuggestionCount int32
@@ -116,7 +117,7 @@ func (c *Client) addOperationGetDomainSuggestionsMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -138,9 +139,6 @@ func (c *Client) addOperationGetDomainSuggestionsMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

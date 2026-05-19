@@ -61,6 +61,9 @@ type Campaign struct {
 	// Amazon Resource Names(ARN)
 	ConnectCampaignFlowArn *string
 
+	// Campaign entry limits config
+	EntryLimitsConfig *EntryLimitsConfig
+
 	// Campaign schedule
 	Schedule *Schedule
 
@@ -115,6 +118,9 @@ type CampaignSummary struct {
 
 	// Amazon Resource Names(ARN)
 	ConnectCampaignFlowArn *string
+
+	// Campaign entry limits config
+	EntryLimitsConfig *EntryLimitsConfig
 
 	// Campaign schedule
 	Schedule *Schedule
@@ -410,6 +416,25 @@ type EncryptionConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Campaign entry limits config
+type EntryLimitsConfig struct {
+
+	// Maximum number of times a participant can enter the campaign. A value of 0
+	// indicates unlimited entries. Values of 1 or greater specify the exact number of
+	// entries allowed.
+	//
+	// This member is required.
+	MaxEntryCount *int32
+
+	// Minimum time interval that must pass before a participant can enter the
+	// campaign again.
+	//
+	// This member is required.
+	MinEntryInterval *string
+
+	noSmithyDocumentSerde
+}
+
 // Event trigger of the campaign
 type EventTrigger struct {
 
@@ -687,6 +712,9 @@ type LocalTimeZoneConfig struct {
 
 	// Local TimeZone Detection method list
 	LocalTimeZoneDetection []LocalTimeZoneDetectionType
+
+	// Local TimeZone Detection scope.
+	LocalTimeZoneDetectionScope LocalTimeZoneDetectionScope
 
 	noSmithyDocumentSerde
 }

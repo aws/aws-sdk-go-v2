@@ -573,6 +573,18 @@ type MatchGroup struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains configuration settings for the matching process in a
+// rule-based matching workflow.
+type MatchingConfig struct {
+
+	// Enables transitive matching for the rule-based matching workflow. When enabled,
+	// records that match through different rules are grouped together into the same
+	// match group.
+	EnableTransitiveMatching *bool
+
+	noSmithyDocumentSerde
+}
+
 // A list of MatchingWorkflowSummary objects, each of which contain the fields
 // workflowName , workflowArn , resolutionType , createdAt , updatedAt .
 type MatchingWorkflowSummary struct {
@@ -1023,6 +1035,9 @@ type RuleConditionProperties struct {
 	//
 	// This member is required.
 	Rules []RuleCondition
+
+	// An object that contains configuration settings for the matching process.
+	MatchingConfig *MatchingConfig
 
 	noSmithyDocumentSerde
 }

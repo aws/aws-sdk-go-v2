@@ -2,6 +2,36 @@
 
 package types
 
+type AdvancedPromptOptimizationJobStatus string
+
+// Enum values for AdvancedPromptOptimizationJobStatus
+const (
+	AdvancedPromptOptimizationJobStatusInProgress         AdvancedPromptOptimizationJobStatus = "InProgress"
+	AdvancedPromptOptimizationJobStatusCompleted          AdvancedPromptOptimizationJobStatus = "Completed"
+	AdvancedPromptOptimizationJobStatusFailed             AdvancedPromptOptimizationJobStatus = "Failed"
+	AdvancedPromptOptimizationJobStatusPartiallyCompleted AdvancedPromptOptimizationJobStatus = "PartiallyCompleted"
+	AdvancedPromptOptimizationJobStatusStopping           AdvancedPromptOptimizationJobStatus = "Stopping"
+	AdvancedPromptOptimizationJobStatusStopped            AdvancedPromptOptimizationJobStatus = "Stopped"
+	AdvancedPromptOptimizationJobStatusDeleting           AdvancedPromptOptimizationJobStatus = "Deleting"
+)
+
+// Values returns all known values for AdvancedPromptOptimizationJobStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AdvancedPromptOptimizationJobStatus) Values() []AdvancedPromptOptimizationJobStatus {
+	return []AdvancedPromptOptimizationJobStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
+		"PartiallyCompleted",
+		"Stopping",
+		"Stopped",
+		"Deleting",
+	}
+}
+
 type AgreementStatus string
 
 // Enum values for AgreementStatus
@@ -1470,6 +1500,25 @@ func (SearchType) Values() []SearchType {
 	return []SearchType{
 		"HYBRID",
 		"SEMANTIC",
+	}
+}
+
+type SelectiveGuardingMode string
+
+// Enum values for SelectiveGuardingMode
+const (
+	SelectiveGuardingModeSelective     SelectiveGuardingMode = "SELECTIVE"
+	SelectiveGuardingModeComprehensive SelectiveGuardingMode = "COMPREHENSIVE"
+)
+
+// Values returns all known values for SelectiveGuardingMode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SelectiveGuardingMode) Values() []SelectiveGuardingMode {
+	return []SelectiveGuardingMode{
+		"SELECTIVE",
+		"COMPREHENSIVE",
 	}
 }
 

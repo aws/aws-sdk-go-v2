@@ -1,3 +1,22 @@
+# v1.34.2 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.34.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.34.0 (2026-04-08)
+
+* **Feature**: Adds support for Amazon IVS real-time streaming redundant ingest.
+
+# v1.33.1 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2026-03-13)
 
 * **Feature**: Updates maximum reconnect window seconds from 60 to 300 for participant replication

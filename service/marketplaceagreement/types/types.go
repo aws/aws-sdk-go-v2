@@ -166,6 +166,93 @@ type Acceptor struct {
 	noSmithyDocumentSerde
 }
 
+// Summary view of an agreement cancellation request.
+type AgreementCancellationRequestSummary struct {
+
+	// The unique identifier of the cancellation request.
+	AgreementCancellationRequestId *string
+
+	// The unique identifier of the agreement associated with this cancellation
+	// request.
+	AgreementId *string
+
+	// The type of agreement.
+	AgreementType *string
+
+	// The catalog in which the agreement was created.
+	Catalog *string
+
+	// The date and time when the cancellation request was created.
+	CreatedAt *time.Time
+
+	// The reason code provided for the cancellation.
+	ReasonCode AgreementCancellationRequestReasonCode
+
+	// The current status of the cancellation request. Possible values include
+	// PENDING_APPROVAL , APPROVED , REJECTED , CANCELLED , and VALIDATION_FAILED .
+	Status AgreementCancellationRequestStatus
+
+	// The date and time when the cancellation request was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Represents an entitlement associated with an agreement, including the
+// provisioning status, resource, and type.
+type AgreementEntitlement struct {
+
+	// The Amazon Resource Name (ARN) of the AWS License Manager license associated
+	// with the entitlement.
+	LicenseArn *string
+
+	// A short-lived token required by acceptors to register their account with the
+	// product provider. The token is only valid for 30 minutes after creation and is
+	// only applicable for purchase agreements.
+	RegistrationToken *string
+
+	// The resource that the entitlement is provisioned to, such as a product.
+	Resource *Resource
+
+	// The current state of an entitlement.
+	Status AgreementEntitlementStatus
+
+	// Provides more information about the status of an entitlement.
+	StatusReasonCode AgreementEntitlementStatusReasonCode
+
+	// The type of entitlement.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of grouped billing data for an agreement invoice line item.
+type AgreementInvoiceLineItemGroupSummary struct {
+
+	// The unique identifier of the agreement.
+	AgreementId *string
+
+	// The billing period associated with this group.
+	InvoiceBillingPeriod *InvoiceBillingPeriod
+
+	// The identifier of the invoice for this group.
+	InvoiceId *string
+
+	// The type of invoice. Valid values are INVOICE and CREDIT_MEMO .
+	InvoiceType InvoiceType
+
+	// The entity that issues the invoice.
+	InvoicingEntity *InvoicingEntity
+
+	// The timestamp when the invoice containing this group was created.
+	IssuedTime *time.Time
+
+	// Monetary amounts for this invoice group.
+	PricingCurrencyAmount *PricingCurrencyAmount
+
+	noSmithyDocumentSerde
+}
+
 // A summary of the agreement, including top-level attributes (for example, the
 // agreement ID, proposer, and acceptor).
 type AgreementViewSummary struct {
@@ -180,7 +267,7 @@ type AgreementViewSummary struct {
 	// The unique identifier of the agreement.
 	AgreementId *string
 
-	// The type of agreement. Value is PurchaseAgreement .
+	// The type of agreement.
 	AgreementType *string
 
 	// The date and time when the agreement ends. The field is null for pay-as-you-go
@@ -203,13 +290,227 @@ type AgreementViewSummary struct {
 	noSmithyDocumentSerde
 }
 
+// An error for a billing adjustment request entry that failed validation.
+type BatchCreateBillingAdjustmentError struct {
+
+	// The client token of the request entry that failed.
+	//
+	// This member is required.
+	ClientToken *string
+
+	// The error code indicating the reason for failure.
+	//
+	// This member is required.
+	Code BillingAdjustmentErrorCode
+
+	// A human-readable message describing the error.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// A successfully created billing adjustment request item.
+type BatchCreateBillingAdjustmentItem struct {
+
+	// The unique identifier of the created billing adjustment request.
+	//
+	// This member is required.
+	BillingAdjustmentRequestId *string
+
+	// The client token provided in the corresponding request entry.
+	//
+	// This member is required.
+	ClientToken *string
+
+	noSmithyDocumentSerde
+}
+
+// An individual entry in a batch billing adjustment request, specifying the
+// invoice and adjustment details.
+type BatchCreateBillingAdjustmentRequestEntry struct {
+
+	// The adjustment amount as a string representation of a decimal number in the
+	// currency of the invoice.
+	//
+	// This member is required.
+	AdjustmentAmount *string
+
+	// The reason code for the billing adjustment.
+	//
+	// This member is required.
+	AdjustmentReasonCode BillingAdjustmentReasonCode
+
+	// The unique identifier of the agreement associated with the invoice.
+	//
+	// This member is required.
+	AgreementId *string
+
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
+	//
+	// This member is required.
+	ClientToken *string
+
+	// The 3-letter ISO 4217 currency code for the adjustment amount. Must match the
+	// currency code of the offer associated with the agreement (e.g., USD ).
+	//
+	// This member is required.
+	CurrencyCode *string
+
+	// The identifier of the original invoice to adjust.
+	//
+	// This member is required.
+	OriginalInvoiceId *string
+
+	// An optional detailed description of the adjustment reason.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary view of a billing adjustment request.
+type BillingAdjustmentSummary struct {
+
+	// The adjustment amount as a string representation of a decimal number.
+	//
+	// This member is required.
+	AdjustmentAmount *string
+
+	// The unique identifier of the agreement associated with this billing adjustment
+	// request.
+	//
+	// This member is required.
+	AgreementId *string
+
+	// The type of agreement.
+	//
+	// This member is required.
+	AgreementType *string
+
+	// The unique identifier of the billing adjustment request.
+	//
+	// This member is required.
+	BillingAdjustmentRequestId *string
+
+	// The catalog in which the agreement was created.
+	//
+	// This member is required.
+	Catalog *string
+
+	// The date and time when the billing adjustment request was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The currency code for the adjustment amount.
+	//
+	// This member is required.
+	CurrencyCode *string
+
+	// The identifier of the original invoice being adjusted.
+	//
+	// This member is required.
+	OriginalInvoiceId *string
+
+	// The current status of the billing adjustment request.
+	//
+	// This member is required.
+	Status BillingAdjustmentStatus
+
+	// The date and time when the billing adjustment request was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Enables you and your customers to move your existing agreements to AWS
 // Marketplace. The customer won't be charged for product usage in AWS Marketplace
 // because they already paid for the product outside of AWS Marketplace.
 type ByolPricingTerm struct {
 
+	// The unique identifier for the term.
+	Id *string
+
 	// Type of the term being updated.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a charge associated with an agreement, including amount, timing, and
+// purchase order details.
+type Charge struct {
+
+	// The unique identifier of the agreement that resulted in this charge.
+	AgreementId *string
+
+	// The type of agreement that resulted in this charge (for example,
+	// PurchaseAgreement ).
+	AgreementType *string
+
+	// The amount of the charge.
+	Amount *string
+
+	// The currency code for the charge amount.
+	CurrencyCode *string
+
+	// The unique identifier of the charge.
+	Id *string
+
+	// The purchase order reference associated with the charge, if any.
+	PurchaseOrderReference *string
+
+	// The revision number of the charge.
+	Revision *int64
+
+	// The date and time when the charge will be incurred. This is available only when
+	// the charge date is known.
+	Time *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The ChargeSummary provides a detailed breakdown of charges that are associated
+// with an agreement request. This is applicable only when a request is created for
+// a PurchaseAgreement .
+//
+// Tax and invoicing fields (such as estimatedTaxes , amountAfterTax ,
+// newAgreementValueAfterTax , and invoicingEntity ) are returned on a best-effort
+// basis and do not cause the request to fail if unavailable.
+//
+// A null tax amount can have two meanings:
+//
+//   - Tax estimation was unavailable at the time of the request.
+//
+//   - The charge timing is BILLING_PERIOD , so the charge amount is not determined
+//     at request time. In this case, the tax breakdown may still include the tax
+//     rate and type .
+type ChargeSummary struct {
+
+	// The three-letter currency code for all charges (e.g., USD).
+	CurrencyCode *string
+
+	// Provides an aggregated view of estimated tax information for the agreement.
+	EstimatedTaxes *EstimatedTaxes
+
+	// A list of expected charges for the agreement request.
+	ExpectedCharges []ExpectedCharge
+
+	// The entity responsible for issuing the invoice.
+	InvoicingEntity *InvoicingEntity
+
+	// An itemized list of charges for the agreement request.
+	ItemizedCharges []ItemizedCharge
+
+	// The total value of the agreement, which includes any amendments.
+	NewAgreementValue *string
+
+	// Expected new agreement value after estimated taxes are applied.
+	NewAgreementValueAfterTax *string
 
 	noSmithyDocumentSerde
 }
@@ -223,6 +524,9 @@ type ConfigurableUpfrontPricingTerm struct {
 
 	// Defines the currency for the prices mentioned in the term.
 	CurrencyCode *string
+
+	// The unique identifier of the term.
+	Id *string
 
 	// A rate card defines the per unit rates for product dimensions.
 	RateCards []ConfigurableUpfrontRateCardItem
@@ -373,6 +677,49 @@ type EstimatedCharges struct {
 	noSmithyDocumentSerde
 }
 
+// Provides an aggregated view of estimated tax information.
+type EstimatedTaxes struct {
+
+	// A list of tax breakdown information.
+	Breakdown []TaxBreakdownItem
+
+	// The total amount of tax aggregated from the tax breakdown.
+	TotalAmount *string
+
+	noSmithyDocumentSerde
+}
+
+// Estimated charge for the request.
+type ExpectedCharge struct {
+
+	// The tax-exclusive amount of the charge. Only available when the charge amount
+	// is known.
+	Amount *string
+
+	// The tax-inclusive amount the acceptor has to pay. The amount is only present
+	// for fixed charges.
+	AmountAfterTax *string
+
+	// Provides an aggregated view of estimated tax information for this specific
+	// charge.
+	EstimatedTaxes *EstimatedTaxes
+
+	// Unique identifier of the charge for a given agreement.
+	Id *string
+
+	// The date and time when the charge is due to be invoiced. This is available only
+	// when the charge date is known.
+	Time *time.Time
+
+	// Indicates when the charge amount will be incurred. Values include ON_ACCEPTANCE
+	// (charged immediately when the agreement request is accepted), BILLING_PERIOD
+	// (charged on each billing period), and SCHEDULED (charged at a predetermined
+	// future date).
+	Timing Timing
+
+	noSmithyDocumentSerde
+}
+
 // The filter name and value pair that is used to return a more specific list of
 // results. Filters can be used to match a set of resources by various criteria,
 // such as offerId or productId .
@@ -401,6 +748,9 @@ type FixedUpfrontPricingTerm struct {
 	// execution.
 	Grants []GrantItem
 
+	// The unique identifier for the term.
+	Id *string
+
 	// Fixed amount to be charged to the customer when this term is accepted.
 	Price *string
 
@@ -420,6 +770,9 @@ type FreeTrialPricingTerm struct {
 	// Entitlements granted to the acceptor of a free trial as part of an agreement
 	// execution.
 	Grants []GrantItem
+
+	// The unique identifier for the terms.
+	Id *string
 
 	// Category of the term.
 	Type *string
@@ -444,6 +797,57 @@ type GrantItem struct {
 	noSmithyDocumentSerde
 }
 
+// The billing period for an invoice, specified by month and year.
+type InvoiceBillingPeriod struct {
+
+	// The billing period month. Valid range: 1-12.
+	//
+	// This member is required.
+	Month *int32
+
+	// The billing period year.
+	//
+	// This member is required.
+	Year *int32
+
+	noSmithyDocumentSerde
+}
+
+// The entity responsible for issuing the invoice.
+type InvoicingEntity struct {
+
+	// The branch where the issuing entity is operating from.
+	BranchName *string
+
+	// Legal name of the entity issuing the invoice.
+	LegalName *string
+
+	noSmithyDocumentSerde
+}
+
+// A breakdown of individual charges or line items within a billing or pricing
+// context.
+type ItemizedCharge struct {
+
+	// The identifier of the expected charge that this itemized charge contributes to.
+	ChargeReference *string
+
+	// The dimension key as specified in the accepted term.
+	DimensionKey *string
+
+	// The total incremental charge amount for this dimension.
+	IncrementalChargeAmount *string
+
+	// The requested quantity for this dimension.
+	NewQuantity *int32
+
+	// The existing quantity for this dimension from the source agreement. This value
+	// is 0 for NEW intent.
+	OldQuantity *int32
+
+	noSmithyDocumentSerde
+}
+
 // Defines the list of text agreements proposed to the acceptors. An example is
 // the end user license agreement (EULA).
 type LegalTerm struct {
@@ -452,8 +856,46 @@ type LegalTerm struct {
 	// EULA.
 	Documents []DocumentItem
 
+	// The unique identifer for the term.
+	Id *string
+
 	// Category of the term being updated.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Summary view of a payment request.
+type PaymentRequestSummary struct {
+
+	// The unique identifier of the agreement associated with this payment request.
+	AgreementId *string
+
+	// The amount charged or to be charged to the buyer.
+	ChargeAmount *string
+
+	// The unique identifier of the charge created after the payment request is
+	// approved. This field is only present for approved payment requests.
+	ChargeId *string
+
+	// The date and time when the payment request was created.
+	CreatedAt *time.Time
+
+	// The currency code for the charge amount.
+	CurrencyCode *string
+
+	// The descriptive name of the payment request.
+	Name *string
+
+	// The unique identifier of the payment request.
+	PaymentRequestId *string
+
+	// The current status of the payment request. Possible values include VALIDATING ,
+	// VALIDATION_FAILED , PENDING_APPROVAL , APPROVED , REJECTED , and CANCELLED .
+	Status PaymentRequestStatus
+
+	// The date and time when the payment request was last updated.
+	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -466,12 +908,30 @@ type PaymentScheduleTerm struct {
 	// Defines the currency for the prices mentioned in the term.
 	CurrencyCode *string
 
+	// The unique identifier for the term.
+	Id *string
+
 	// List of the payment schedule where each element defines one installment of
 	// payment. It contains the information necessary for calculating the price.
 	Schedule []ScheduleItem
 
 	// Type of the term.
 	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Monetary amounts associated with an invoice line item group.
+type PricingCurrencyAmount struct {
+
+	// The monetary amount before tax.
+	Amount *string
+
+	// The 3-letter ISO 4217 currency code (e.g., USD , EUR , JPY ).
+	CurrencyCode *string
+
+	// The maximum refundable amount as a string representation of a decimal number.
+	MaxAdjustmentAmount *string
 
 	noSmithyDocumentSerde
 }
@@ -502,6 +962,27 @@ type Proposer struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a purchase order association to a charge within an
+// agreement.
+type PurchaseOrder struct {
+
+	// The unique identifier of the charge to associate the purchase order with.
+	//
+	// This member is required.
+	ChargeId *string
+
+	// The unique identifier of the agreement associated with this charge.
+	AgreementId *string
+
+	// The revision of the charge.
+	ChargeRevision *int64
+
+	// The purchase order reference to associate with the charge.
+	PurchaseOrderReference *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines the per unit rates for each individual product dimension.
 type RateCardItem struct {
 
@@ -527,6 +1008,9 @@ type RecurringPaymentTerm struct {
 	// Defines the currency for the prices mentioned in this term.
 	CurrencyCode *string
 
+	// The unique identifier for the term.
+	Id *string
+
 	// Amount charged to the buyer every billing period.
 	Price *string
 
@@ -548,6 +1032,9 @@ type RenewalTerm struct {
 	// Additional parameters specified by the acceptor while accepting the term.
 	Configuration *RenewalTermConfiguration
 
+	// The unique identifier for the term.
+	Id *string
+
 	// Category of the term being updated.
 	Type *string
 
@@ -566,6 +1053,66 @@ type RenewalTermConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Defines what is being accepted as part of the agreement creation or update
+// request, and it includes their configurations.
+type RequestedTerm struct {
+
+	// The unique identifier of the term in the agreement proposal.
+	//
+	// This member is required.
+	Id *string
+
+	// Additional configuration for the requested terms. This configuration is
+	// applicable only to the terms that accept a customer-provided configuration, such
+	// as ConfigurableUpfrontPricingTerm .
+	Configuration RequestedTermConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A tagged union that represents the term configuration provided by the acceptor.
+// Only one configuration is accepted per term.
+//
+// The following types satisfy this interface:
+//
+//	RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration
+//	RequestedTermConfigurationMemberRenewalTermConfiguration
+//	RequestedTermConfigurationMemberVariablePaymentTermConfiguration
+type RequestedTermConfiguration interface {
+	isRequestedTermConfiguration()
+}
+
+// Defines a prepaid payment model that allows buyers to configure the
+// entitlements they want to purchase and the duration.
+type RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration struct {
+	Value ConfigurableUpfrontPricingTermConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RequestedTermConfigurationMemberConfigurableUpfrontPricingTermConfiguration) isRequestedTermConfiguration() {
+}
+
+// Additional parameters specified by the acceptor while accepting the term.
+type RequestedTermConfigurationMemberRenewalTermConfiguration struct {
+	Value RenewalTermConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RequestedTermConfigurationMemberRenewalTermConfiguration) isRequestedTermConfiguration() {}
+
+// Additional parameters specified by the acceptor while accepting the variable
+// payment term.
+type RequestedTermConfigurationMemberVariablePaymentTermConfiguration struct {
+	Value VariablePaymentTermConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RequestedTermConfigurationMemberVariablePaymentTermConfiguration) isRequestedTermConfiguration() {
+}
+
 // The list of resources involved in the agreement.
 type Resource struct {
 
@@ -575,8 +1122,8 @@ type Resource struct {
 	// is also a productId .
 	Id *string
 
-	// Type of the resource, which is the product. Values include SaaSProduct or
-	// AmiProduct .
+	// Type of the resource, which is the product (for example, SaaSProduct ,
+	// AmiProduct , ContainerProduct ).
 	Type *string
 
 	noSmithyDocumentSerde
@@ -627,6 +1174,9 @@ type Sort struct {
 // software.
 type SupportTerm struct {
 
+	// The unique identifier for the term.
+	Id *string
+
 	// Free-text field about the refund policy description that will be shown to
 	// customers as is on the website and console.
 	RefundPolicy *string
@@ -637,12 +1187,40 @@ type SupportTerm struct {
 	noSmithyDocumentSerde
 }
 
+// Represents a single tax breakdown entry with amount, rate, and type.
+type TaxBreakdownItem struct {
+
+	// The estimated tax amount.
+	Amount *string
+
+	// The tax rate, in decimals.
+	Rate *string
+
+	// The type of tax (for example, VAT, ST, or GST).
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration controls for tax estimation in the agreement request.
+type TaxConfiguration struct {
+
+	// Toggle to estimate tax as part of the response. Values include ENABLED and
+	// DISABLED . Default is DISABLED .
+	TaxEstimation TaxEstimation
+
+	noSmithyDocumentSerde
+}
+
 // Defines a usage-based pricing model (typically, pay-as-you-go pricing), where
 // the customers are charged based on product usage.
 type UsageBasedPricingTerm struct {
 
 	// Defines the currency for the prices mentioned in the term.
 	CurrencyCode *string
+
+	// The unique identifier for the term.
+	Id *string
 
 	// List of rate cards.
 	RateCards []UsageBasedRateCardItem
@@ -698,6 +1276,9 @@ type ValidityTerm struct {
 	// start date is determined based on agreement signature time.
 	AgreementStartDate *time.Time
 
+	// The unique identifier for the term.
+	Id *string
+
 	// Category of the term being updated.
 	Type *string
 
@@ -714,6 +1295,9 @@ type VariablePaymentTerm struct {
 
 	// Defines the currency for the prices mentioned in the term.
 	CurrencyCode *string
+
+	// The unique identifier for the term.
+	Id *string
 
 	// The maximum total amount that can be charged to the customer through variable
 	// payment requests under this term.
@@ -755,4 +1339,5 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAcceptedTerm() {}
+func (*UnknownUnionMember) isAcceptedTerm()               {}
+func (*UnknownUnionMember) isRequestedTermConfiguration() {}

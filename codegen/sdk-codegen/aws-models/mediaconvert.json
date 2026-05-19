@@ -4306,7 +4306,7 @@
                 "ClearLead": {
                     "target": "com.amazonaws.mediaconvert#HlsClearLead",
                     "traits": {
-                        "smithy.api#documentation": "Enable Clear Lead DRM to reduce video startup latency by leaving the first segment unencrypted while DRM license retrieval occurs in parallel. This optimization allows immediate playback startup while maintaining content protection for the remainder of the stream. When enabled, the first output segment remains fully unencrypted, and encryption begins at the start of the second segment. The HLS manifest will omit #EXT-X-KEY tags during the clear segment and insert the first #EXT-X-KEY immediately before the first encrypted fragment. This feature is supported exclusively for CMAF HLS (fMP4) outputs and is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2, and Static Key encryption). Supported codecs: H.264 and H.265 video codecs, and AAC audio codec. Choose Enabled to activate Clear Lead DRM optimization. Choose Disabled to use standard encryption where all segments are encrypted from the beginning.",
+                        "smithy.api#documentation": "Enable Clear Lead DRM to reduce video startup latency by leaving the first segment unencrypted while DRM license retrieval occurs in parallel. This optimization allows immediate playback startup while maintaining content protection for the remainder of the stream. When enabled, the first output segment remains fully unencrypted, and encryption begins at the start of the second segment. The HLS manifest will omit #EXT-X-KEY tags during the clear segment and insert the first #EXT-X-KEY immediately before the first encrypted fragment. This feature is supported exclusively for CMAF HLS (fMP4) outputs and is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2, and Static Key encryption). Supported codecs: H.264, H.265, and AV1 video codecs, and AAC audio codec. Choose Enabled to activate Clear Lead DRM optimization. Choose Disabled to use standard encryption where all segments are encrypted from the beginning.",
                         "smithy.api#jsonName": "clearLead"
                     }
                 },
@@ -6037,6 +6037,13 @@
                         "smithy.api#jsonName": "format"
                     }
                 },
+                "StartTimecode": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The start timecode of the media file, in HH:MM:SS:FF format (or HH:MM:SS;FF for drop frame timecode). Note that this field is null when the container does not include an embedded start timecode.",
+                        "smithy.api#jsonName": "startTimecode"
+                    }
+                },
                 "Tracks": {
                     "target": "com.amazonaws.mediaconvert#__listOfTrack",
                     "traits": {
@@ -6367,14 +6374,14 @@
                 "Tags": {
                     "target": "com.amazonaws.mediaconvert#__mapOf__string",
                     "traits": {
-                        "smithy.api#documentation": "Optional. The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key.  Use standard AWS tags on your job for automatic integration with AWS services and for custom integrations and workflows.",
+                        "smithy.api#documentation": "Optional. The tags that you want to add to the resource. You can tag resources with a key-value pair or with only a key. Use standard AWS tags on your job for automatic integration with AWS services and for custom integrations and workflows.",
                         "smithy.api#jsonName": "tags"
                     }
                 },
                 "UserMetadata": {
                     "target": "com.amazonaws.mediaconvert#__mapOf__string",
                     "traits": {
-                        "smithy.api#documentation": "Optional. User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs.  Use only for existing integrations or workflows that rely on job metadata tags. Otherwise, we recommend that you use standard AWS tags.",
+                        "smithy.api#documentation": "Optional. User-defined metadata that you want to associate with an MediaConvert job. You specify metadata in key/value pairs. Use only for existing integrations or workflows that rely on job metadata tags. Otherwise, we recommend that you use standard AWS tags.",
                         "smithy.api#jsonName": "userMetadata"
                     }
                 }
@@ -6692,6 +6699,13 @@
                     "traits": {
                         "smithy.api#documentation": "Optional. A description of the queue that you are creating.",
                         "smithy.api#jsonName": "description"
+                    }
+                },
+                "MaximumConcurrentFeeds": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the maximum number of Elemental Inference feeds MediaConvert can process concurrently.",
+                        "smithy.api#jsonName": "maximumConcurrentFeeds"
                     }
                 },
                 "Name": {
@@ -9838,6 +9852,96 @@
             },
             "traits": {
                 "smithy.api#documentation": "When encoding 2/0 audio, sets whether Dolby Surround is matrix encoded into the two channels."
+            }
+        },
+        "com.amazonaws.mediaconvert#ElementalInferenceConfiguration": {
+            "type": "structure",
+            "members": {
+                "Features": {
+                    "target": "com.amazonaws.mediaconvert#__listOfElementalInferenceFeature",
+                    "traits": {
+                        "smithy.api#documentation": "A list of Elemental Inference features used in this job.",
+                        "smithy.api#jsonName": "features"
+                    }
+                },
+                "Feeds": {
+                    "target": "com.amazonaws.mediaconvert#__listOfElementalInferenceFeed",
+                    "traits": {
+                        "smithy.api#documentation": "A list of Elemental Inference feeds used by this job.",
+                        "smithy.api#jsonName": "feeds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The Elemental Inference configuration used in this job."
+            }
+        },
+        "com.amazonaws.mediaconvert#ElementalInferenceFeature": {
+            "type": "enum",
+            "members": {
+                "SMART_CROP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMART_CROP"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Elemental Inference feature."
+            }
+        },
+        "com.amazonaws.mediaconvert#ElementalInferenceFeed": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.mediaconvert#__string",
+                    "traits": {
+                        "smithy.api#documentation": "Feed ARN.",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "FeedManagementState": {
+                    "target": "com.amazonaws.mediaconvert#ElementalInferenceFeedManagementState",
+                    "traits": {
+                        "smithy.api#documentation": "Elemental Inference Feed management state.",
+                        "smithy.api#jsonName": "feedManagementState"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Elemental Inference Feed."
+            }
+        },
+        "com.amazonaws.mediaconvert#ElementalInferenceFeedManagementState": {
+            "type": "enum",
+            "members": {
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
+                "ASSOCIATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASSOCIATED"
+                    }
+                },
+                "PENDING_DELETION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_DELETION"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Elemental Inference Feed management state."
             }
         },
         "com.amazonaws.mediaconvert#EmbeddedConvert608To708": {
@@ -13692,7 +13796,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Enable Clear Lead DRM to reduce video startup latency by leaving the first segment unencrypted while DRM license retrieval occurs in parallel. This optimization allows immediate playback startup while maintaining content protection for the remainder of the stream. When enabled, the first output segment remains fully unencrypted, and encryption begins at the start of the second segment. The HLS manifest will omit #EXT-X-KEY tags during the clear segment and insert the first #EXT-X-KEY immediately before the first encrypted fragment. This feature is supported exclusively for CMAF HLS (fMP4) outputs and is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2, and Static Key encryption). Supported codecs: H.264 and H.265 video codecs, and AAC audio codec. Choose Enabled to activate Clear Lead DRM optimization. Choose Disabled to use standard encryption where all segments are encrypted from the beginning."
+                "smithy.api#documentation": "Enable Clear Lead DRM to reduce video startup latency by leaving the first segment unencrypted while DRM license retrieval occurs in parallel. This optimization allows immediate playback startup while maintaining content protection for the remainder of the stream. When enabled, the first output segment remains fully unencrypted, and encryption begins at the start of the second segment. The HLS manifest will omit #EXT-X-KEY tags during the clear segment and insert the first #EXT-X-KEY immediately before the first encrypted fragment. This feature is supported exclusively for CMAF HLS (fMP4) outputs and is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2, and Static Key encryption). Supported codecs: H.264, H.265, and AV1 video codecs, and AAC audio codec. Choose Enabled to activate Clear Lead DRM optimization. Choose Disabled to use standard encryption where all segments are encrypted from the beginning."
             }
         },
         "com.amazonaws.mediaconvert#HlsClientCache": {
@@ -14833,6 +14937,13 @@
                         "smithy.api#jsonName": "inputScanType"
                     }
                 },
+                "MultiViewSettings": {
+                    "target": "com.amazonaws.mediaconvert#__listOfMultiViewSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the enhancement layer input video file path for Multi View outputs. The base layer input is treated as the left eye and this Multi View input is treated as the right eye. Only one Multi View input is currently supported. MediaConvert encodes both views into a single MV-HEVC output codec. When you add MultiViewSettings to your job, you can only produce Multi View outputs. Adding any other codec output to the same job is not supported.",
+                        "smithy.api#jsonName": "multiViewSettings"
+                    }
+                },
                 "Position": {
                     "target": "com.amazonaws.mediaconvert#Rectangle",
                     "traits": {
@@ -15300,6 +15411,13 @@
                         "smithy.api#jsonName": "inputScanType"
                     }
                 },
+                "MultiViewSettings": {
+                    "target": "com.amazonaws.mediaconvert#__listOfMultiViewSettings",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the enhancement layer input video file path for Multi View outputs. The base layer input is treated as the left eye and this Multi View input is treated as the right eye. Only one Multi View input is currently supported. MediaConvert encodes both views into a single MV-HEVC output codec. When you add MultiViewSettings to your job, you can only produce Multi View outputs. Adding any other codec output to the same job is not supported.",
+                        "smithy.api#jsonName": "multiViewSettings"
+                    }
+                },
                 "Position": {
                     "target": "com.amazonaws.mediaconvert#Rectangle",
                     "traits": {
@@ -15595,6 +15713,13 @@
                     "traits": {
                         "smithy.api#documentation": "A job's phase can be PROBING, TRANSCODING OR UPLOADING",
                         "smithy.api#jsonName": "currentPhase"
+                    }
+                },
+                "ElementalInferenceConfiguration": {
+                    "target": "com.amazonaws.mediaconvert#ElementalInferenceConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "The Elemental Inference configuration used in this job.",
+                        "smithy.api#jsonName": "elementalInferenceConfiguration"
                     }
                 },
                 "ErrorCode": {
@@ -22088,6 +22213,36 @@
                 "smithy.api#documentation": "Use Manifest encoding to specify the encoding format for the server and client manifest. Valid options are utf8 and utf16."
             }
         },
+        "com.amazonaws.mediaconvert#MultiViewInput": {
+            "type": "structure",
+            "members": {
+                "FileInput": {
+                    "target": "com.amazonaws.mediaconvert#__stringPatternS3Https",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the input file S3, HTTP, or HTTPS URL for your right eye view video.",
+                        "smithy.api#jsonName": "fileInput"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Input settings for MultiView Settings. You can include exactly one input as enhancement layer."
+            }
+        },
+        "com.amazonaws.mediaconvert#MultiViewSettings": {
+            "type": "structure",
+            "members": {
+                "Input": {
+                    "target": "com.amazonaws.mediaconvert#MultiViewInput",
+                    "traits": {
+                        "smithy.api#documentation": "Input settings for MultiView Settings. You can include exactly one input as enhancement layer.",
+                        "smithy.api#jsonName": "input"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Specify the enhancement layer input video file path for Multi View outputs. The base layer input is treated as the left eye and this Multi View input is treated as the right eye. Only one Multi View input is currently supported. MediaConvert encodes both views into a single MV-HEVC output codec. When you add MultiViewSettings to your job, you can only produce Multi View outputs. Adding any other codec output to the same job is not supported."
+            }
+        },
         "com.amazonaws.mediaconvert#MxfAfdSignaling": {
             "type": "enum",
             "members": {
@@ -23963,6 +24118,13 @@
                         "smithy.api#jsonName": "lastUpdated"
                     }
                 },
+                "MaximumConcurrentFeeds": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the maximum number of Elemental Inference feeds MediaConvert can process concurrently.",
+                        "smithy.api#jsonName": "maximumConcurrentFeeds"
+                    }
+                },
                 "Name": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
@@ -24652,10 +24814,16 @@
                     "traits": {
                         "smithy.api#enumValue": "FILL"
                     }
+                },
+                "SMART_CROP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SMART_CROP"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Specify the video Scaling behavior when your output has a different resolution than your input. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html"
+                "smithy.api#documentation": "Specify the video Scaling behavior when your output has a different resolution than your input. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html Select Smart Cropping using Elemental Inference as your scaling behavior to have Elemental Inference automatically crop your video. Smart Crop requires a vertical output aspect ratio (1:1 is the widest aspect ratio supported)."
             }
         },
         "com.amazonaws.mediaconvert#SccDestinationFramerate": {
@@ -26630,6 +26798,13 @@
                         "smithy.api#jsonName": "description"
                     }
                 },
+                "MaximumConcurrentFeeds": {
+                    "target": "com.amazonaws.mediaconvert#__integerMin0",
+                    "traits": {
+                        "smithy.api#documentation": "Specify the maximum number of Elemental Inference feeds MediaConvert can process concurrently.",
+                        "smithy.api#jsonName": "maximumConcurrentFeeds"
+                    }
+                },
                 "Name": {
                     "target": "com.amazonaws.mediaconvert#__string",
                     "traits": {
@@ -27209,7 +27384,7 @@
                 "ScalingBehavior": {
                     "target": "com.amazonaws.mediaconvert#ScalingBehavior",
                     "traits": {
-                        "smithy.api#documentation": "Specify the video Scaling behavior when your output has a different resolution than your input. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html",
+                        "smithy.api#documentation": "Specify the video Scaling behavior when your output has a different resolution than your input. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html Select Smart Cropping using Elemental Inference as your scaling behavior to have Elemental Inference automatically crop your video. Smart Crop requires a vertical output aspect ratio (1:1 is the widest aspect ratio supported).",
                         "smithy.api#jsonName": "scalingBehavior"
                     }
                 },
@@ -29396,6 +29571,14 @@
         "com.amazonaws.mediaconvert#__integer": {
             "type": "integer"
         },
+        "com.amazonaws.mediaconvert#__integerMin0": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
         "com.amazonaws.mediaconvert#__integerMin0Max0": {
             "type": "integer",
             "traits": {
@@ -30422,6 +30605,18 @@
                 "target": "com.amazonaws.mediaconvert#DashAdditionalManifest"
             }
         },
+        "com.amazonaws.mediaconvert#__listOfElementalInferenceFeature": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#ElementalInferenceFeature"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOfElementalInferenceFeed": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#ElementalInferenceFeed"
+            }
+        },
         "com.amazonaws.mediaconvert#__listOfEndpoint": {
             "type": "list",
             "member": {
@@ -30522,6 +30717,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediaconvert#MsSmoothAdditionalManifest"
+            }
+        },
+        "com.amazonaws.mediaconvert#__listOfMultiViewSettings": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediaconvert#MultiViewSettings"
             }
         },
         "com.amazonaws.mediaconvert#__listOfOutput": {

@@ -30,6 +30,26 @@ func (m *validateOpAddKeyReplicationRegions) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateMpaTeam struct {
+}
+
+func (*validateOpAssociateMpaTeam) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateMpaTeam) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateMpaTeamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateMpaTeamInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAlias struct {
 }
 
@@ -110,6 +130,26 @@ func (m *validateOpDeleteKey) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteResourcePolicy struct {
+}
+
+func (*validateOpDeleteResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisableDefaultKeyReplicationRegions struct {
 }
 
@@ -125,6 +165,26 @@ func (m *validateOpDisableDefaultKeyReplicationRegions) HandleInitialize(ctx con
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisableDefaultKeyReplicationRegionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateMpaTeam struct {
+}
+
+func (*validateOpDisassociateMpaTeam) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateMpaTeam) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateMpaTeamInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateMpaTeamInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +290,26 @@ func (m *validateOpGetKey) HandleInitialize(ctx context.Context, in middleware.I
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMpaTeamAssociation struct {
+}
+
+func (*validateOpGetMpaTeamAssociation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMpaTeamAssociation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMpaTeamAssociationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMpaTeamAssociationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetParametersForExport struct {
 }
 
@@ -290,6 +370,26 @@ func (m *validateOpGetPublicKeyCertificate) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResourcePolicy struct {
+}
+
+func (*validateOpGetResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportKey struct {
 }
 
@@ -325,6 +425,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPutResourcePolicy struct {
+}
+
+func (*validateOpPutResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutResourcePolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -474,6 +594,10 @@ func addOpAddKeyReplicationRegionsValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpAddKeyReplicationRegions{}, middleware.After)
 }
 
+func addOpAssociateMpaTeamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateMpaTeam{}, middleware.After)
+}
+
 func addOpCreateAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAlias{}, middleware.After)
 }
@@ -490,8 +614,16 @@ func addOpDeleteKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteKey{}, middleware.After)
 }
 
+func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
+}
+
 func addOpDisableDefaultKeyReplicationRegionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableDefaultKeyReplicationRegions{}, middleware.After)
+}
+
+func addOpDisassociateMpaTeamValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateMpaTeam{}, middleware.After)
 }
 
 func addOpEnableDefaultKeyReplicationRegionsValidationMiddleware(stack *middleware.Stack) error {
@@ -514,6 +646,10 @@ func addOpGetKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetKey{}, middleware.After)
 }
 
+func addOpGetMpaTeamAssociationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMpaTeamAssociation{}, middleware.After)
+}
+
 func addOpGetParametersForExportValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetParametersForExport{}, middleware.After)
 }
@@ -526,12 +662,20 @@ func addOpGetPublicKeyCertificateValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpGetPublicKeyCertificate{}, middleware.After)
 }
 
+func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
+}
+
 func addOpImportKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportKey{}, middleware.After)
 }
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
 }
 
 func addOpRemoveKeyReplicationRegionsValidationMiddleware(stack *middleware.Stack) error {
@@ -1062,6 +1206,24 @@ func validateOpAddKeyReplicationRegionsInput(v *AddKeyReplicationRegionsInput) e
 	}
 }
 
+func validateOpAssociateMpaTeamInput(v *AssociateMpaTeamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateMpaTeamInput"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if v.MpaTeamArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MpaTeamArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAliasInput(v *CreateAliasInput) error {
 	if v == nil {
 		return nil
@@ -1134,6 +1296,21 @@ func validateOpDeleteKeyInput(v *DeleteKeyInput) error {
 	}
 }
 
+func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisableDefaultKeyReplicationRegionsInput(v *DisableDefaultKeyReplicationRegionsInput) error {
 	if v == nil {
 		return nil
@@ -1141,6 +1318,21 @@ func validateOpDisableDefaultKeyReplicationRegionsInput(v *DisableDefaultKeyRepl
 	invalidParams := smithy.InvalidParamsError{Context: "DisableDefaultKeyReplicationRegionsInput"}
 	if v.ReplicationRegions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationRegions"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateMpaTeamInput(v *DisassociateMpaTeamInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateMpaTeamInput"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1246,6 +1438,21 @@ func validateOpGetKeyInput(v *GetKeyInput) error {
 	}
 }
 
+func validateOpGetMpaTeamAssociationInput(v *GetMpaTeamAssociationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMpaTeamAssociationInput"}
+	if len(v.Action) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetParametersForExportInput(v *GetParametersForExportInput) error {
 	if v == nil {
 		return nil
@@ -1297,6 +1504,21 @@ func validateOpGetPublicKeyCertificateInput(v *GetPublicKeyCertificateInput) err
 	}
 }
 
+func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpImportKeyInput(v *ImportKeyInput) error {
 	if v == nil {
 		return nil
@@ -1328,6 +1550,24 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

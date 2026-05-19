@@ -125,9 +125,17 @@ type UpdateContainerFleetInput struct {
 	// Amazon GameLift Servers calculates an optimal port range based on your fleet
 	// configuration. If you previously set this parameter manually, you can't reset
 	// this to use the calculated settings.
+	//
+	// The port range must not overlap with the Amazon GameLift Servers reserved port
+	// range 4092-4191 . This range is reserved for internal Amazon GameLift Servers
+	// services.
 	InstanceConnectionPortRange *types.ConnectionPortRange
 
 	// A set of ports to add to the container fleet's inbound permissions.
+	//
+	// The port range must not overlap with the Amazon GameLift Servers reserved port
+	// range 4092-4191 . This range is reserved for internal Amazon GameLift Servers
+	// services.
 	InstanceInboundPermissionAuthorizations []types.IpPermission
 
 	// A set of ports to remove from the container fleet's inbound permissions.
@@ -183,11 +191,11 @@ func (c *Client) addOperationUpdateContainerFleetMiddlewares(stack *middleware.S
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateContainerFleet{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateContainerFleet{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateContainerFleet{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateContainerFleet{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -213,7 +221,7 @@ func (c *Client) addOperationUpdateContainerFleetMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -237,10 +245,10 @@ func (c *Client) addOperationUpdateContainerFleetMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
+	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

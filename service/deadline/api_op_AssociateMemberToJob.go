@@ -27,6 +27,9 @@ func (c *Client) AssociateMemberToJob(ctx context.Context, params *AssociateMemb
 	return out, nil
 }
 
+// Shared member fields for Associate inputs and {Resource}Member response
+// structures. principalId is excluded because it has @httpLabel on inputs but not
+// on responses.
 type AssociateMemberToJobInput struct {
 
 	// The farm ID of the job to associate with the member.
@@ -108,7 +111,7 @@ func (c *Client) addOperationAssociateMemberToJobMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -130,9 +133,6 @@ func (c *Client) addOperationAssociateMemberToJobMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

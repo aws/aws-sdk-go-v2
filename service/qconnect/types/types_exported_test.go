@@ -640,6 +640,9 @@ func ExampleSpanMessageValue_outputUsage() {
 	var union types.SpanMessageValue
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.SpanMessageValueMemberReasoning:
+		_ = v.Value // Value is types.SpanReasoningValue
+
 	case *types.SpanMessageValueMemberText:
 		_ = v.Value // Value is types.SpanTextValue
 
@@ -661,6 +664,7 @@ func ExampleSpanMessageValue_outputUsage() {
 var _ *types.SpanTextValue
 var _ *types.SpanToolResultValue
 var _ *types.SpanToolUseValue
+var _ *types.SpanReasoningValue
 
 func ExampleTagFilter_outputUsage() {
 	var union types.TagFilter

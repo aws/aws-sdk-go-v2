@@ -27,6 +27,8 @@ func (c *Client) UpdateQueueFleetAssociation(ctx context.Context, params *Update
 	return out, nil
 }
 
+// Identifier mixin for queue-fleet association operations. Composes
+// QueueIdentifierMixin (farmId + queueId) and adds fleetId.
 type UpdateQueueFleetAssociationInput struct {
 
 	// The farm ID to update.
@@ -93,7 +95,7 @@ func (c *Client) addOperationUpdateQueueFleetAssociationMiddlewares(stack *middl
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -115,9 +117,6 @@ func (c *Client) addOperationUpdateQueueFleetAssociationMiddlewares(stack *middl
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

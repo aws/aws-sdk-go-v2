@@ -3871,6 +3871,47 @@ func (Eac3SurroundMode) Values() []Eac3SurroundMode {
 	}
 }
 
+type ElementalInferenceFeature string
+
+// Enum values for ElementalInferenceFeature
+const (
+	ElementalInferenceFeatureSmartCrop ElementalInferenceFeature = "SMART_CROP"
+)
+
+// Values returns all known values for ElementalInferenceFeature. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ElementalInferenceFeature) Values() []ElementalInferenceFeature {
+	return []ElementalInferenceFeature{
+		"SMART_CROP",
+	}
+}
+
+type ElementalInferenceFeedManagementState string
+
+// Enum values for ElementalInferenceFeedManagementState
+const (
+	ElementalInferenceFeedManagementStateCreated         ElementalInferenceFeedManagementState = "CREATED"
+	ElementalInferenceFeedManagementStateAssociated      ElementalInferenceFeedManagementState = "ASSOCIATED"
+	ElementalInferenceFeedManagementStatePendingDeletion ElementalInferenceFeedManagementState = "PENDING_DELETION"
+	ElementalInferenceFeedManagementStateDeleted         ElementalInferenceFeedManagementState = "DELETED"
+)
+
+// Values returns all known values for ElementalInferenceFeedManagementState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ElementalInferenceFeedManagementState) Values() []ElementalInferenceFeedManagementState {
+	return []ElementalInferenceFeedManagementState{
+		"CREATED",
+		"ASSOCIATED",
+		"PENDING_DELETION",
+		"DELETED",
+	}
+}
+
 type EmbeddedConvert608To708 string
 
 // Enum values for EmbeddedConvert608To708
@@ -8890,6 +8931,7 @@ const (
 	ScalingBehaviorFit             ScalingBehavior = "FIT"
 	ScalingBehaviorFitNoUpscale    ScalingBehavior = "FIT_NO_UPSCALE"
 	ScalingBehaviorFill            ScalingBehavior = "FILL"
+	ScalingBehaviorSmartCrop       ScalingBehavior = "SMART_CROP"
 )
 
 // Values returns all known values for ScalingBehavior. Note that this can be
@@ -8903,6 +8945,7 @@ func (ScalingBehavior) Values() []ScalingBehavior {
 		"FIT",
 		"FIT_NO_UPSCALE",
 		"FILL",
+		"SMART_CROP",
 	}
 }
 

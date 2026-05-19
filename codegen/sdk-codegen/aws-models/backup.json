@@ -1232,6 +1232,24 @@
                     "traits": {
                         "smithy.api#enumValue": "RECOVERY_POINT_INDEXING_FAILED"
                     }
+                },
+                "EKS_RESTORE_OBJECT_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS_RESTORE_OBJECT_FAILED"
+                    }
+                },
+                "EKS_RESTORE_OBJECT_SKIPPED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS_RESTORE_OBJECT_SKIPPED"
+                    }
+                },
+                "EKS_BACKUP_OBJECT_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS_BACKUP_OBJECT_FAILED"
+                    }
                 }
             }
         },

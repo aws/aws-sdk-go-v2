@@ -233,6 +233,15 @@ type ActiveIAMPolicyAssignment struct {
 	noSmithyDocumentSerde
 }
 
+// Additional notes that provide supplementary context for a column.
+type AdditionalNotes struct {
+
+	// The additional notes text.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
 // An ad hoc (one-time) filtering option.
 type AdHocFilteringOption struct {
 
@@ -534,6 +543,11 @@ type AnalysisDefinition struct {
 
 	// The static files for the definition.
 	StaticFiles []StaticFile
+
+	// An array of tooltip sheet definitions for an analysis. Each
+	// TooltipSheetDefinition provides detailed information about a tooltip sheet
+	// within this analysis.
+	TooltipSheets []TooltipSheetDefinition
 
 	noSmithyDocumentSerde
 }
@@ -1904,6 +1918,13 @@ type AssetOptions struct {
 // Parameters for Amazon Athena.
 type AthenaParameters struct {
 
+	// Use ConsumerAccountRoleArn to perform cross-account Athena access. This is an
+	// IAM role ARN in the same AWS account as the Athena resources you want to access.
+	// Provide this along with RoleArn to enable role-chaining, where Amazon Quick
+	// Sight first assumes the RoleArn and then assumes the ConsumerAccountRoleArn to
+	// access Athena resources.
+	ConsumerAccountRoleArn *string
+
 	// An optional parameter that configures IAM Identity Center authentication to
 	// grant Quick Sight access to your workgroup.
 	//
@@ -3084,6 +3105,9 @@ type CalculatedMeasureField struct {
 // A set of actions that correspond to Amazon Quick Sight permissions.
 type Capabilities struct {
 
+	// The ability to access the native data store for new and existing apps.
+	AccessAppsNativeDataStore CapabilityState
+
 	// The ability to perform actions in external services through Action connectors.
 	// Actions allow users to interact with third-party systems.
 	Action CapabilityState
@@ -3108,6 +3132,9 @@ type Capabilities struct {
 
 	// The ability to review and approve sharing requests of Flows.
 	ApproveFlowShareRequests CapabilityState
+
+	// The ability to perform apps-related actions.
+	Apps CapabilityState
 
 	// The ability to perform actions using Asana connectors.
 	AsanaAction CapabilityState
@@ -3150,6 +3177,9 @@ type Capabilities struct {
 
 	// The ability to create and update Amazon S3 actions.
 	CreateAndUpdateAmazonSThreeAction CapabilityState
+
+	// The ability to create or update apps.
+	CreateAndUpdateApps CapabilityState
 
 	// The ability to create and update Asana actions.
 	CreateAndUpdateAsanaAction CapabilityState
@@ -3295,6 +3325,9 @@ type Capabilities struct {
 	// The ability to create shared folders.
 	CreateSharedFolders CapabilityState
 
+	// The ability to create spaces.
+	CreateSpaces CapabilityState
+
 	// The ability to perform dashboard-related actions.
 	Dashboard CapabilityState
 
@@ -3328,6 +3361,9 @@ type Capabilities struct {
 	// The ability to perform flow-related actions.
 	Flow CapabilityState
 
+	// The ability to generate analysis using AI
+	GenerateAnalyses CapabilityState
+
 	// The ability to perform actions using REST API connection connectors.
 	GenericHTTPAction CapabilityState
 
@@ -3348,6 +3384,9 @@ type Capabilities struct {
 
 	// The ability to perform actions using Intercom connectors.
 	IntercomAction CapabilityState
+
+	// The ability to add and invoke AI inference in new and existing apps.
+	InvokeAppsAIInference CapabilityState
 
 	// The ability to perform actions using Jira connectors.
 	JiraAction CapabilityState
@@ -3433,6 +3472,9 @@ type Capabilities struct {
 	// The ability to perform actions using S&P Global Energy connectors.
 	SandPGlobalEnergyAction CapabilityState
 
+	// The ability to perform Scenario-related actions.
+	Scenario CapabilityState
+
 	// The ability to enable users to upgrade their user role.
 	SelfUpgradeUserRole CapabilityState
 
@@ -3454,6 +3496,9 @@ type Capabilities struct {
 	// The ability to share analyses.
 	ShareAnalyses CapabilityState
 
+	// The ability to share apps with other users.
+	ShareApps CapabilityState
+
 	// The ability to share Asana actions.
 	ShareAsanaAction CapabilityState
 
@@ -3465,6 +3510,9 @@ type Capabilities struct {
 
 	// The ability to share Canva Agent actions.
 	ShareCanvaAgentAction CapabilityState
+
+	// The ability to share chat agents with other users and groups.
+	ShareChatAgents CapabilityState
 
 	// The ability to share Comprehend actions.
 	ShareComprehendAction CapabilityState
@@ -3577,6 +3625,9 @@ type Capabilities struct {
 	// The ability to share Smartsheet actions.
 	ShareSmartsheetAction CapabilityState
 
+	// The ability to share spaces with other users and groups.
+	ShareSpaces CapabilityState
+
 	// The ability to share Textract actions.
 	ShareTextractAction CapabilityState
 
@@ -3591,6 +3642,9 @@ type Capabilities struct {
 
 	// The ability to perform space-related actions.
 	Space CapabilityState
+
+	// The ability to perform Story-related actions.
+	Story CapabilityState
 
 	// The ability to subscribe to email reports.
 	SubscribeDashboardEmailReports CapabilityState
@@ -4240,6 +4294,31 @@ type ColumnSchema struct {
 	noSmithyDocumentSerde
 }
 
+// A semantic property for a column.
+type ColumnSemanticProperty struct {
+
+	// Additional notes for the column.
+	AdditionalNotes *AdditionalNotes
+
+	// A description of the column.
+	Description *ColumnDescription
+
+	// The semantic type of the column.
+	SemanticType *ColumnSemanticType
+
+	noSmithyDocumentSerde
+}
+
+// The semantic type information for a column in the new data preparation
+// experience.
+type ColumnSemanticType struct {
+
+	// The geographical role of the column in the new data preparation experience.
+	GeographicalRole GeoSpatialDataRole
+
+	noSmithyDocumentSerde
+}
+
 // The sort configuration for a column that is not used in a field well.
 type ColumnSort struct {
 
@@ -4813,6 +4892,47 @@ type ContributionAnalysisTimeRanges struct {
 	noSmithyDocumentSerde
 }
 
+// The sort configuration for control values. This is a tagged union type. Specify
+// either SelectableValuesSort or ControlColumnSort , but not both.
+type ControlSortConfiguration struct {
+
+	// The sort configuration for controls that are tied to a dataset column. Use this
+	// option to sort control values by an aggregate of a column.
+	ControlColumnSort *AggregationSortConfiguration
+
+	// The sort configuration for user-specified values in the control. Use this
+	// option to sort values that are manually entered by users in a dropdown or list
+	// control.
+	SelectableValuesSort *SelectableValuesSort
+
+	noSmithyDocumentSerde
+}
+
+// Configures the display properties of the control title.
+type ControlTitleFontConfiguration struct {
+
+	// Configures the font settings for the control title.
+	FontConfiguration *FontConfiguration
+
+	// Determines the alignment of the control title.
+	TextAlignment HorizontalTextAlignment
+
+	noSmithyDocumentSerde
+}
+
+// The title format text configuration for a sheet control. This is a tagged union
+// type. Specify either PlainText or RichText , but not both.
+type ControlTitleFormatText struct {
+
+	// The plain text format of the title text.
+	PlainText *string
+
+	// The rich text format of the title text.
+	RichText *string
+
+	noSmithyDocumentSerde
+}
+
 // The preference coordinate for the geocode preference.
 type Coordinate struct {
 
@@ -5153,6 +5273,17 @@ type CustomFilterListConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A custom instruction that provides guidance on how the dataset should be
+// consumed.
+type CustomInstruction struct {
+
+	// An inline custom instruction containing text and optional uploaded document
+	// metadata.
+	InlineCustomInstruction *InlineCustomInstruction
+
+	noSmithyDocumentSerde
+}
+
 // Instructions that provide additional guidance and context for response
 // generation.
 type CustomInstructions struct {
@@ -5281,6 +5412,19 @@ type Dashboard struct {
 
 	// Version.
 	Version *DashboardVersion
+
+	noSmithyDocumentSerde
+}
+
+// The dashboard customization summary configuration for an embedded Quick Sight
+// dashboard.
+type DashboardCustomizationSummaryConfigurations struct {
+
+	// The enabled status of the dashboard customization summary configuration for an
+	// embedded Quick Sight dashboard.
+	//
+	// This member is required.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }
@@ -5560,6 +5704,9 @@ type DashboardVersionDefinition struct {
 
 	// The static files for the definition.
 	StaticFiles []StaticFile
+
+	// An array of tooltip sheet definitions for a dashboard.
+	TooltipSheets []TooltipSheetDefinition
 
 	noSmithyDocumentSerde
 }
@@ -6468,6 +6615,30 @@ type DataSetSearchFilter struct {
 	noSmithyDocumentSerde
 }
 
+// A description structure for dataset-level semantic metadata.
+type DataSetSemanticDescription struct {
+
+	// The descriptive text for the dataset.
+	//
+	// This member is required.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// Semantic metadata for a dataset, including a description and custom
+// instructions.
+type DataSetSemanticMetadata struct {
+
+	// A list of custom instructions that guide how the dataset should be consumed.
+	CustomInstructions []CustomInstruction
+
+	// A description of the dataset.
+	Description *DataSetSemanticDescription
+
+	noSmithyDocumentSerde
+}
+
 // A filter condition that compares string values using operators like EQUALS ,
 // CONTAINS , or STARTS_WITH .
 type DataSetStringComparisonFilterCondition struct {
@@ -6670,6 +6841,12 @@ type DataSourceCredentials struct {
 	// The credentials for connecting using key-pair.
 	KeyPairCredentials *KeyPairCredentials
 
+	// The OAuth client credentials for connecting to a data source using OAuth 2.0
+	// client credentials (2LO) authentication. For more information, see [OAuthClientCredentials].
+	//
+	// [OAuthClientCredentials]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_OAuthClientCredentials.html
+	OAuthClientCredentials *OAuthClientCredentials
+
 	// The Amazon Resource Name (ARN) of the secret associated with the data source in
 	// Amazon Secrets Manager.
 	SecretArn *string
@@ -6721,6 +6898,7 @@ type DataSourceErrorInfo struct {
 //	DataSourceParametersMemberRedshiftParameters
 //	DataSourceParametersMemberS3KnowledgeBaseParameters
 //	DataSourceParametersMemberS3Parameters
+//	DataSourceParametersMemberS3TablesParameters
 //	DataSourceParametersMemberServiceNowParameters
 //	DataSourceParametersMemberSnowflakeParameters
 //	DataSourceParametersMemberSparkParameters
@@ -6940,6 +7118,15 @@ type DataSourceParametersMemberS3Parameters struct {
 }
 
 func (*DataSourceParametersMemberS3Parameters) isDataSourceParameters() {}
+
+// The parameters for S3 Tables.
+type DataSourceParametersMemberS3TablesParameters struct {
+	Value S3TablesParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberS3TablesParameters) isDataSourceParameters() {}
 
 // The parameters for ServiceNow.
 type DataSourceParametersMemberServiceNowParameters struct {
@@ -7591,10 +7778,11 @@ type DefaultFilterControlConfiguration struct {
 	// This member is required.
 	ControlOptions *DefaultFilterControlOptions
 
+	// The title text format configuration for the default filter control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The title of the DefaultFilterControlConfiguration . This title is shared by all
 	// controls that are tied to this filter.
-	//
-	// This member is required.
 	Title *string
 
 	noSmithyDocumentSerde
@@ -7634,6 +7822,10 @@ type DefaultFilterDropDownControlOptions struct {
 	// The visibility configuration of the Apply button on a FilterDropDownControl .
 	CommitMode CommitMode
 
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
+
 	// The display options of a control.
 	DisplayOptions *DropDownControlDisplayOptions
 
@@ -7652,6 +7844,10 @@ type DefaultFilterDropDownControlOptions struct {
 
 // The default options that correspond to the List filter control type.
 type DefaultFilterListControlOptions struct {
+
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
 
 	// The display options of a control.
 	DisplayOptions *ListControlDisplayOptions
@@ -8618,16 +8814,17 @@ type FilterDateTimePickerControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterDateTimePickerControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The visibility configurationof the Apply button on a DateTimePickerControl .
 	CommitMode CommitMode
 
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of a control.
 	DisplayOptions *DateTimePickerControlDisplayOptions
+
+	// The title of the FilterDateTimePickerControl .
+	Title *string
 
 	// The type of the FilterDropDownControl . Choose one of the following options:
 	//
@@ -8653,11 +8850,6 @@ type FilterDropDownControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterDropDownControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
@@ -8665,11 +8857,21 @@ type FilterDropDownControl struct {
 	// The visibility configuration of the Apply button on a FilterDropDownControl .
 	CommitMode CommitMode
 
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
+
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of the FilterDropDownControl .
 	DisplayOptions *DropDownControlDisplayOptions
 
 	// A list of selectable values that are used in a control.
 	SelectableValues *FilterSelectableValues
+
+	// The title of the FilterDropDownControl .
+	Title *string
 
 	// The type of the FilterDropDownControl . Choose one of the following options:
 	//
@@ -8766,20 +8968,25 @@ type FilterListControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterListControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
+
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
+
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *ListControlDisplayOptions
 
 	// A list of selectable values that are used in a control.
 	SelectableValues *FilterSelectableValues
+
+	// The title of the FilterListControl .
+	Title *string
 
 	// The type of the FilterListControl . Choose one of the following options:
 	//
@@ -8858,17 +9065,18 @@ type FilterRelativeDateTimeControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterTextAreaControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The visibility configuration of the Apply button on a
 	// FilterRelativeDateTimeControl .
 	CommitMode CommitMode
 
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of a control.
 	DisplayOptions *RelativeDateTimeControlDisplayOptions
+
+	// The title of the FilterTextAreaControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -8929,13 +9137,14 @@ type FilterSliderControl struct {
 	// This member is required.
 	StepSize float64
 
-	// The title of the FilterSliderControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *SliderControlDisplayOptions
+
+	// The title of the FilterSliderControl .
+	Title *string
 
 	// The type of the FilterSliderControl . Choose one of the following options:
 	//
@@ -8981,16 +9190,17 @@ type FilterTextAreaControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterTextAreaControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The delimiter that is used to separate the lines in text.
 	Delimiter *string
 
 	// The display options of a control.
 	DisplayOptions *TextAreaControlDisplayOptions
+
+	// The title of the FilterTextAreaControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -9008,13 +9218,14 @@ type FilterTextFieldControl struct {
 	// This member is required.
 	SourceFilterId *string
 
-	// The title of the FilterTextFieldControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *TextFieldControlDisplayOptions
+
+	// The title of the FilterTextFieldControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -11312,6 +11523,21 @@ type Ingestion struct {
 	noSmithyDocumentSerde
 }
 
+// An inline custom instruction with text content and optional file upload
+// metadata.
+type InlineCustomInstruction struct {
+
+	// The instruction text content.
+	//
+	// This member is required.
+	InstructionText *string
+
+	// Metadata about an uploaded document associated with this instruction.
+	UploadedDocumentMetadata *UploadedDocumentMetadata
+
+	noSmithyDocumentSerde
+}
+
 // The InnerFilter defines the subset of data to be used with the NestedFilter .
 type InnerFilter struct {
 
@@ -13246,6 +13472,28 @@ type NumericSeparatorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The OAuth 2.0 client credentials used for authenticating a data source
+// connection. Use this structure to provide a client ID, client secret, and
+// username directly instead of referencing a secret stored in Amazon Secrets
+// Manager. This structure supports data sources that use two-legged OAuth (2LO)
+// authentication, such as Snowflake.
+type OAuthClientCredentials struct {
+
+	// The client ID of the OAuth 2.0 application that is registered with the data
+	// source provider.
+	ClientId *string
+
+	// The client secret of the OAuth 2.0 application that is registered with the data
+	// source provider.
+	ClientSecret *string
+
+	// The username of the account that is used for OAuth 2.0 client credentials
+	// authentication with the data source provider.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains information needed to create a data source connection
 // that uses OAuth client credentials. This option is available for data source
 // connections that are made with Snowflake and Starburst.
@@ -13255,6 +13503,12 @@ type OAuthParameters struct {
 	//
 	// This member is required.
 	TokenProviderUrl *string
+
+	// The S3 URI of the identity provider's CA certificates bundle in PEM format. Use
+	// this parameter to provide a custom CA certificate bundle for the identity
+	// provider when the default trust store does not include the required
+	// certificates.
+	IdentityProviderCACertificatesBundleS3Uri *string
 
 	// The resource uri of the identity provider.
 	IdentityProviderResourceUri *string
@@ -13470,13 +13724,14 @@ type ParameterDateTimePickerControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterDateTimePickerControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *DateTimePickerControlDisplayOptions
+
+	// The title of the ParameterDateTimePickerControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -13520,11 +13775,6 @@ type ParameterDropDownControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterDropDownControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
@@ -13532,11 +13782,21 @@ type ParameterDropDownControl struct {
 	// The visibility configuration of the Apply button on a ParameterDropDownControl .
 	CommitMode CommitMode
 
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
+
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
+
 	// The display options of a control.
 	DisplayOptions *DropDownControlDisplayOptions
 
 	// A list of selectable values that are used in a control.
 	SelectableValues *ParameterSelectableValues
+
+	// The title of the ParameterDropDownControl .
+	Title *string
 
 	// The type parameter name of the ParameterDropDownControl .
 	Type SheetControlListType
@@ -13558,20 +13818,25 @@ type ParameterListControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterListControl .
-	//
-	// This member is required.
-	Title *string
-
 	// The values that are displayed in a control can be configured to only show
 	// values that are valid based on what's selected in other controls.
 	CascadingControlConfiguration *CascadingControlConfiguration
+
+	// The sort configuration for the values displayed in the control. Only one sort
+	// configuration can be applied per control.
+	ControlSortConfigurations []ControlSortConfiguration
+
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *ListControlDisplayOptions
 
 	// A list of selectable values that are used in a control.
 	SelectableValues *ParameterSelectableValues
+
+	// The title of the ParameterListControl .
+	Title *string
 
 	// The type of ParameterListControl .
 	Type SheetControlListType
@@ -13638,13 +13903,14 @@ type ParameterSliderControl struct {
 	// This member is required.
 	StepSize float64
 
-	// The title of the ParameterSliderControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *SliderControlDisplayOptions
+
+	// The title of the ParameterSliderControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -13662,16 +13928,17 @@ type ParameterTextAreaControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterTextAreaControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The delimiter that is used to separate the lines in text.
 	Delimiter *string
 
 	// The display options of a control.
 	DisplayOptions *TextAreaControlDisplayOptions
+
+	// The title of the ParameterTextAreaControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -13689,13 +13956,14 @@ type ParameterTextFieldControl struct {
 	// This member is required.
 	SourceParameterName *string
 
-	// The title of the ParameterTextFieldControl .
-	//
-	// This member is required.
-	Title *string
+	// The title text format configuration for the control.
+	ControlTitleFormatText *ControlTitleFormatText
 
 	// The display options of a control.
 	DisplayOptions *TextFieldControlDisplayOptions
+
+	// The title of the ParameterTextFieldControl .
+	Title *string
 
 	noSmithyDocumentSerde
 }
@@ -14243,6 +14511,9 @@ type PivotTableConfiguration struct {
 
 	// The table options for a pivot table visual.
 	TableOptions *PivotTableOptions
+
+	// The display options for the visual tooltip.
+	Tooltip *TooltipOptions
 
 	// The total options for a pivot table visual.
 	TotalOptions *PivotTableTotalOptions
@@ -15654,6 +15925,10 @@ type RegisteredUserConsoleFeatureConfigurations struct {
 	// The Amazon Q configurations of an embedded Amazon Quick Sight console.
 	AmazonQInQuickSight *AmazonQInQuickSightConsoleConfigurations
 
+	// The dashboard customization summary configuration for an embedded Quick Sight
+	// console.
+	DashboardCustomizationSummary *DashboardCustomizationSummaryConfigurations
+
 	// The recent snapshots configuration for an embedded Quick Sight dashboard.
 	RecentSnapshots *RecentSnapshotsConfigurations
 
@@ -15699,6 +15974,10 @@ type RegisteredUserDashboardFeatureConfigurations struct {
 
 	// The bookmarks configuration for an embedded dashboard in Amazon Quick Sight.
 	Bookmarks *BookmarksConfigurations
+
+	// The dashboard customization summary configuration for an embedded Quick Sight
+	// dashboard.
+	DashboardCustomizationSummary *DashboardCustomizationSummaryConfigurations
 
 	// The recent snapshots configuration for an Quick Sight embedded dashboard
 	RecentSnapshots *RecentSnapshotsConfigurations
@@ -16304,6 +16583,15 @@ type S3Source struct {
 	noSmithyDocumentSerde
 }
 
+// The parameters for S3 Tables.
+type S3TablesParameters struct {
+
+	// The Amazon Resource Name (ARN) of the S3 Tables bucket.
+	TableBucketArn *string
+
+	noSmithyDocumentSerde
+}
+
 // A table from a Software-as-a-Service (SaaS) data source, including connection
 // details and column definitions.
 type SaaSTable struct {
@@ -16783,6 +17071,24 @@ type SectionStyle struct {
 	noSmithyDocumentSerde
 }
 
+// The sort configuration for selectable values in a control.
+type SelectableValuesSort struct {
+
+	// The sort direction for the selectable values. Choose one of the following
+	// options:
+	//
+	//   - ASC : Sort in ascending order.
+	//
+	//   - DESC : Sort in descending order.
+	//
+	//   - USER_DEFINED_ORDER : Preserve the order in which the values were entered.
+	//
+	// This member is required.
+	Direction ControlSortDirection
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for applying a filter to specific sheets or visuals. You can
 // apply this filter to multiple visuals that are on one sheet or to all visuals on
 // a sheet.
@@ -16864,6 +17170,10 @@ type SemanticEntityType struct {
 // structured for analysis and reporting.
 type SemanticModelConfiguration struct {
 
+	// The dataset-level semantic metadata, including a description and custom
+	// instructions.
+	SemanticMetadata []DataSetSemanticMetadata
+
 	// A map of semantic tables that define the analytical structure.
 	TableMap map[string]SemanticTable
 
@@ -16887,6 +17197,9 @@ type SemanticTable struct {
 	// Configuration for row level security that control data access for this semantic
 	// table.
 	RowLevelPermissionConfiguration *RowLevelPermissionConfiguration
+
+	// The column-level semantic metadata for this semantic table.
+	SemanticMetadata *TableSemanticMetadata
 
 	noSmithyDocumentSerde
 }
@@ -16987,6 +17300,20 @@ type ShapeConditionalFormat struct {
 	//
 	// This member is required.
 	BackgroundColor *ConditionalFormattingColor
+
+	noSmithyDocumentSerde
+}
+
+// Semantic metadata shared across one or more columns.
+type SharedColumnSemanticMetadata struct {
+
+	// The semantic properties for the specified columns.
+	//
+	// This member is required.
+	ColumnProperties []ColumnSemanticProperty
+
+	// The names of the columns this metadata applies to.
+	ColumnNames []string
 
 	noSmithyDocumentSerde
 }
@@ -17341,6 +17668,15 @@ type SheetTextBox struct {
 
 	// The general textbox interactions setup for a textbox.
 	Interactions *TextBoxInteractionOptions
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the sheet tooltip.
+type SheetTooltip struct {
+
+	// The sheet ID of the tooltip sheet that is used by the tooltip.
+	SheetId *string
 
 	noSmithyDocumentSerde
 }
@@ -17792,6 +18128,44 @@ type Spacing struct {
 
 	// Define the top spacing.
 	Top *string
+
+	noSmithyDocumentSerde
+}
+
+// The options for sparklines in a table.
+type SparklinesOptions struct {
+
+	// The field ID of the value column that the sparkline is applied to.
+	//
+	// This member is required.
+	FieldId *string
+
+	// The dimension type field.
+	//
+	// This member is required.
+	XAxisField *DimensionField
+
+	// Marker styles options for a line series in LineChartVisual .
+	AllPointsMarker *LineChartMarkerStyleSettings
+
+	// The color of the sparkline line.
+	LineColor *string
+
+	// The interpolation style for the sparkline line.
+	LineInterpolation LineInterpolation
+
+	// Marker styles options for a line series in LineChartVisual .
+	MaxValueMarker *LineChartMarkerStyleSettings
+
+	// Marker styles options for a line series in LineChartVisual .
+	MinValueMarker *LineChartMarkerStyleSettings
+
+	// The type of the sparkline. Valid values are LINE and AREA_LINE .
+	VisualType SparklineVisualType
+
+	// Determines whether the Y axis is shared across all sparklines or independent
+	// for each sparkline.
+	YAxisBehavior SparklineAxisBehavior
 
 	noSmithyDocumentSerde
 }
@@ -18272,6 +18646,9 @@ type TableConfiguration struct {
 	// The table options for a table visual.
 	TableOptions *TableOptions
 
+	// The display options for the visual tooltip.
+	Tooltip *TooltipOptions
+
 	// The total options for a table visual.
 	TotalOptions *TotalOptions
 
@@ -18416,6 +18793,9 @@ type TableInlineVisualization struct {
 	// The configuration of the inline visualization of the data bars within a chart.
 	DataBars *DataBarsOptions
 
+	// The configuration of the inline visualization of the sparklines within a chart.
+	Sparklines *SparklinesOptions
+
 	noSmithyDocumentSerde
 }
 
@@ -18481,6 +18861,15 @@ type TableRowConditionalFormatting struct {
 
 	// The conditional formatting color (solid, gradient) of the text for a table row.
 	TextColor *ConditionalFormattingColor
+
+	noSmithyDocumentSerde
+}
+
+// Column-level semantic metadata for a semantic table.
+type TableSemanticMetadata struct {
+
+	// A list of column semantic metadata entries.
+	ColumnMetadata []SharedColumnSemanticMetadata
 
 	noSmithyDocumentSerde
 }
@@ -18839,6 +19228,9 @@ type TemplateVersionDefinition struct {
 
 	// The static files for the definition.
 	StaticFiles []StaticFile
+
+	// An array of tooltip sheet definitions for a template.
+	TooltipSheets []TooltipSheetDefinition
 
 	noSmithyDocumentSerde
 }
@@ -19362,8 +19754,44 @@ type TooltipOptions struct {
 	//   - DETAILED : A detailed tooltip.
 	SelectedTooltipType SelectedTooltipType
 
+	// The configuration of the sheet tooltip.
+	SheetTooltip *SheetTooltip
+
 	// Determines whether or not the tooltip is visible.
 	TooltipVisibility Visibility
+
+	noSmithyDocumentSerde
+}
+
+// A tooltip sheet is an object that contains a set of visuals that are used as a
+// tooltip. Every analysis and dashboard must contain at least one non-tooltip
+// sheet.
+type TooltipSheetDefinition struct {
+
+	// The unique identifier of a tooltip sheet.
+	//
+	// This member is required.
+	SheetId *string
+
+	// A list of images on a tooltip sheet.
+	Images []SheetImage
+
+	// Layouts define how the components of a tooltip sheet are arranged.
+	//
+	// For more information, see [Types of layout] in the Amazon Quick Suite User Guide.
+	//
+	// [Types of layout]: https://docs.aws.amazon.com/quicksight/latest/user/types-of-layout.html
+	Layouts []Layout
+
+	// The name of the tooltip sheet. This name is displayed on the sheet's tab in the
+	// Quick console.
+	Name *string
+
+	// The text boxes that are on a tooltip sheet.
+	TextBoxes []SheetTextBox
+
+	// A list of the visuals that are on a tooltip sheet.
+	Visuals []Visual
 
 	noSmithyDocumentSerde
 }
@@ -20656,6 +21084,9 @@ type Typography struct {
 	// Configures the display properties of the given text.
 	AxisTitleFontConfiguration *FontConfiguration
 
+	// Configures the display properties of the control title.
+	ControlTitleFontConfiguration *ControlTitleFontConfiguration
+
 	// Configures the display properties of the given text.
 	DataLabelFontConfiguration *FontConfiguration
 
@@ -20848,6 +21279,15 @@ type UntagColumnOperation struct {
 	//
 	// This member is required.
 	TagNames []ColumnTagName
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for an uploaded document associated with a custom instruction.
+type UploadedDocumentMetadata struct {
+
+	// The name of the uploaded document.
+	Name *string
 
 	noSmithyDocumentSerde
 }

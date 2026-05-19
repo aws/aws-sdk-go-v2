@@ -2302,6 +2302,18 @@
             "traits": {
                 "smithy.api#enum": [
                     {
+                        "value": "ml.t3.large",
+                        "name": "ML_T3_LARGE"
+                    },
+                    {
+                        "value": "ml.t3.xlarge",
+                        "name": "ML_T3_XLARGE"
+                    },
+                    {
+                        "value": "ml.t3.2xlarge",
+                        "name": "ML_T3_2XLARGE"
+                    },
+                    {
                         "value": "ml.m4.xlarge",
                         "name": "ML_M4_XLARGE"
                     },
@@ -2320,30 +2332,6 @@
                     {
                         "value": "ml.m4.16xlarge",
                         "name": "ML_M4_16XLARGE"
-                    },
-                    {
-                        "value": "ml.g4dn.xlarge",
-                        "name": "ML_G4DN_XLARGE"
-                    },
-                    {
-                        "value": "ml.g4dn.2xlarge",
-                        "name": "ML_G4DN_2XLARGE"
-                    },
-                    {
-                        "value": "ml.g4dn.4xlarge",
-                        "name": "ML_G4DN_4XLARGE"
-                    },
-                    {
-                        "value": "ml.g4dn.8xlarge",
-                        "name": "ML_G4DN_8XLARGE"
-                    },
-                    {
-                        "value": "ml.g4dn.12xlarge",
-                        "name": "ML_G4DN_12XLARGE"
-                    },
-                    {
-                        "value": "ml.g4dn.16xlarge",
-                        "name": "ML_G4DN_16XLARGE"
                     },
                     {
                         "value": "ml.m5.large",
@@ -2386,38 +2374,6 @@
                         "name": "ML_C4_8XLARGE"
                     },
                     {
-                        "value": "ml.p2.xlarge",
-                        "name": "ML_P2_XLARGE"
-                    },
-                    {
-                        "value": "ml.p2.8xlarge",
-                        "name": "ML_P2_8XLARGE"
-                    },
-                    {
-                        "value": "ml.p2.16xlarge",
-                        "name": "ML_P2_16XLARGE"
-                    },
-                    {
-                        "value": "ml.p3.2xlarge",
-                        "name": "ML_P3_2XLARGE"
-                    },
-                    {
-                        "value": "ml.p3.8xlarge",
-                        "name": "ML_P3_8XLARGE"
-                    },
-                    {
-                        "value": "ml.p3.16xlarge",
-                        "name": "ML_P3_16XLARGE"
-                    },
-                    {
-                        "value": "ml.p3dn.24xlarge",
-                        "name": "ML_P3DN_24XLARGE"
-                    },
-                    {
-                        "value": "ml.p4d.24xlarge",
-                        "name": "ML_P4D_24XLARGE"
-                    },
-                    {
                         "value": "ml.c5.xlarge",
                         "name": "ML_C5_XLARGE"
                     },
@@ -2456,6 +2412,126 @@
                     {
                         "value": "ml.c5n.18xlarge",
                         "name": "ML_C5N_18XLARGE"
+                    },
+                    {
+                        "value": "ml.p2.xlarge",
+                        "name": "ML_P2_XLARGE"
+                    },
+                    {
+                        "value": "ml.p2.8xlarge",
+                        "name": "ML_P2_8XLARGE"
+                    },
+                    {
+                        "value": "ml.p2.16xlarge",
+                        "name": "ML_P2_16XLARGE"
+                    },
+                    {
+                        "value": "ml.p3.2xlarge",
+                        "name": "ML_P3_2XLARGE"
+                    },
+                    {
+                        "value": "ml.p3.8xlarge",
+                        "name": "ML_P3_8XLARGE"
+                    },
+                    {
+                        "value": "ml.p3.16xlarge",
+                        "name": "ML_P3_16XLARGE"
+                    },
+                    {
+                        "value": "ml.p3dn.24xlarge",
+                        "name": "ML_P3DN_24XLARGE"
+                    },
+                    {
+                        "value": "ml.p4d.24xlarge",
+                        "name": "ML_P4D_24XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.xlarge",
+                        "name": "ML_G4DN_XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.2xlarge",
+                        "name": "ML_G4DN_2XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.4xlarge",
+                        "name": "ML_G4DN_4XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.8xlarge",
+                        "name": "ML_G4DN_8XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.12xlarge",
+                        "name": "ML_G4DN_12XLARGE"
+                    },
+                    {
+                        "value": "ml.g4dn.16xlarge",
+                        "name": "ML_G4DN_16XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.xlarge",
+                        "name": "ML_G6_XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.2xlarge",
+                        "name": "ML_G6_2XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.4xlarge",
+                        "name": "ML_G6_4XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.8xlarge",
+                        "name": "ML_G6_8XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.12xlarge",
+                        "name": "ML_G6_12XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.16xlarge",
+                        "name": "ML_G6_16XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.24xlarge",
+                        "name": "ML_G6_24XLARGE"
+                    },
+                    {
+                        "value": "ml.g6.48xlarge",
+                        "name": "ML_G6_48XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.xlarge",
+                        "name": "ML_G6E_XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.2xlarge",
+                        "name": "ML_G6E_2XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.4xlarge",
+                        "name": "ML_G6E_4XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.8xlarge",
+                        "name": "ML_G6E_8XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.12xlarge",
+                        "name": "ML_G6E_12XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.16xlarge",
+                        "name": "ML_G6E_16XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.24xlarge",
+                        "name": "ML_G6E_24XLARGE"
+                    },
+                    {
+                        "value": "ml.g6e.48xlarge",
+                        "name": "ML_G6E_48XLARGE"
                     }
                 ]
             }

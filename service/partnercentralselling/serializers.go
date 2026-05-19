@@ -3088,6 +3088,23 @@ func awsAwsjson10_serializeDocumentEngagementSort(v *types.EngagementSort, value
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentExpectedContractDuration(v *types.ExpectedContractDuration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Term) > 0 {
+		ok := object.Key("Term")
+		ok.String(string(v.Term))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentExpectedCustomerSpend(v *types.ExpectedCustomerSpend, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3796,6 +3813,13 @@ func awsAwsjson10_serializeDocumentProject(v *types.Project, value smithyjson.Va
 	if v.DeliveryModels != nil {
 		ok := object.Key("DeliveryModels")
 		if err := awsAwsjson10_serializeDocumentDeliveryModels(v.DeliveryModels, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExpectedContractDuration != nil {
+		ok := object.Key("ExpectedContractDuration")
+		if err := awsAwsjson10_serializeDocumentExpectedContractDuration(v.ExpectedContractDuration, ok); err != nil {
 			return err
 		}
 	}

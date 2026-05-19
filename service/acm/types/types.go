@@ -7,6 +7,163 @@ import (
 	"time"
 )
 
+// Contains ACM-specific metadata about a certificate.
+type AcmCertificateMetadata struct {
+
+	// The time at which the certificate was requested.
+	CreatedAt *time.Time
+
+	// Indicates whether the certificate can be exported.
+	ExportOption CertificateExport
+
+	// Indicates whether the certificate has been exported.
+	Exported *bool
+
+	// The date and time when the certificate was imported. This value exists only
+	// when the certificate type is IMPORTED .
+	ImportedAt *time.Time
+
+	// Indicates whether the certificate is currently in use by an Amazon Web Services
+	// service.
+	InUse *bool
+
+	// The time at which the certificate was issued. This value exists only when the
+	// certificate type is AMAZON_ISSUED .
+	IssuedAt *time.Time
+
+	// Identifies the Amazon Web Services service that manages the certificate issued
+	// by ACM.
+	ManagedBy CertificateManagedBy
+
+	// Specifies whether the certificate is eligible for renewal. At this time, only
+	// exported private certificates can be renewed with the RenewCertificatecommand.
+	RenewalEligibility RenewalEligibility
+
+	// The renewal status of the certificate.
+	RenewalStatus RenewalStatus
+
+	// The time at which the certificate was revoked. This value exists only when the
+	// certificate status is REVOKED .
+	RevokedAt *time.Time
+
+	// The status of the certificate.
+	//
+	// A certificate enters status PENDING_VALIDATION upon being requested, unless it
+	// fails for any of the reasons given in the troubleshooting topic [Certificate request fails]. ACM makes
+	// repeated attempts to validate a certificate for 72 hours and then times out. If
+	// a certificate shows status FAILED or VALIDATION_TIMED_OUT, delete the request,
+	// correct the issue with [DNS validation]or [Email validation], and try again. If validation succeeds, the
+	// certificate enters status ISSUED.
+	//
+	// [DNS validation]: https://docs.aws.amazon.com/acm/latest/userguide/dns-validation.html
+	// [Certificate request fails]: https://docs.aws.amazon.com/acm/latest/userguide/troubleshooting-failed.html
+	// [Email validation]: https://docs.aws.amazon.com/acm/latest/userguide/email-validation.html
+	Status CertificateStatus
+
+	// The source of the certificate. For certificates provided by ACM, this value is
+	// AMAZON_ISSUED . For certificates that you imported with ImportCertificate, this value is IMPORTED
+	// . ACM does not provide [managed renewal]for imported certificates. For more information about
+	// the differences between certificates that you import and those that ACM
+	// provides, see [Importing Certificates]in the Certificate Manager User Guide.
+	//
+	// [Importing Certificates]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+	// [managed renewal]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+	Type CertificateType
+
+	// Specifies the domain validation method.
+	ValidationMethod ValidationMethod
+
+	noSmithyDocumentSerde
+}
+
+// Filters certificates by ACM metadata.
+//
+// The following types satisfy this interface:
+//
+//	AcmCertificateMetadataFilterMemberExported
+//	AcmCertificateMetadataFilterMemberExportOption
+//	AcmCertificateMetadataFilterMemberInUse
+//	AcmCertificateMetadataFilterMemberManagedBy
+//	AcmCertificateMetadataFilterMemberRenewalStatus
+//	AcmCertificateMetadataFilterMemberStatus
+//	AcmCertificateMetadataFilterMemberType
+//	AcmCertificateMetadataFilterMemberValidationMethod
+type AcmCertificateMetadataFilter interface {
+	isAcmCertificateMetadataFilter()
+}
+
+// Filter by whether the certificate has been exported.
+type AcmCertificateMetadataFilterMemberExported struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberExported) isAcmCertificateMetadataFilter() {}
+
+// Filter by certificate export option.
+type AcmCertificateMetadataFilterMemberExportOption struct {
+	Value CertificateExport
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberExportOption) isAcmCertificateMetadataFilter() {}
+
+// Filter by whether the certificate is in use.
+type AcmCertificateMetadataFilterMemberInUse struct {
+	Value bool
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberInUse) isAcmCertificateMetadataFilter() {}
+
+// Filter by the entity that manages the certificate.
+type AcmCertificateMetadataFilterMemberManagedBy struct {
+	Value CertificateManagedBy
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberManagedBy) isAcmCertificateMetadataFilter() {}
+
+// Filter by certificate renewal status.
+type AcmCertificateMetadataFilterMemberRenewalStatus struct {
+	Value RenewalStatus
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberRenewalStatus) isAcmCertificateMetadataFilter() {}
+
+// Filter by certificate status.
+type AcmCertificateMetadataFilterMemberStatus struct {
+	Value CertificateStatus
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberStatus) isAcmCertificateMetadataFilter() {}
+
+// Filter by certificate type.
+type AcmCertificateMetadataFilterMemberType struct {
+	Value CertificateType
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberType) isAcmCertificateMetadataFilter() {}
+
+// Filter by validation method.
+type AcmCertificateMetadataFilterMemberValidationMethod struct {
+	Value ValidationMethod
+
+	noSmithyDocumentSerde
+}
+
+func (*AcmCertificateMetadataFilterMemberValidationMethod) isAcmCertificateMetadataFilter() {}
+
 // Contains metadata about an ACM certificate. This structure is returned in the
 // response to a DescribeCertificaterequest.
 type CertificateDetail struct {
@@ -151,6 +308,113 @@ type CertificateDetail struct {
 	noSmithyDocumentSerde
 }
 
+// Defines a filter for searching certificates by ARN, X.509 attributes, or ACM
+// metadata.
+//
+// The following types satisfy this interface:
+//
+//	CertificateFilterMemberAcmCertificateMetadataFilter
+//	CertificateFilterMemberCertificateArn
+//	CertificateFilterMemberX509AttributeFilter
+type CertificateFilter interface {
+	isCertificateFilter()
+}
+
+// Filter by ACM certificate metadata.
+type CertificateFilterMemberAcmCertificateMetadataFilter struct {
+	Value AcmCertificateMetadataFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*CertificateFilterMemberAcmCertificateMetadataFilter) isCertificateFilter() {}
+
+// Filter by certificate ARN.
+type CertificateFilterMemberCertificateArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CertificateFilterMemberCertificateArn) isCertificateFilter() {}
+
+// Filter by X.509 certificate attributes.
+type CertificateFilterMemberX509AttributeFilter struct {
+	Value X509AttributeFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*CertificateFilterMemberX509AttributeFilter) isCertificateFilter() {}
+
+// A filter statement used to search for certificates. Can contain AND, OR, NOT
+// logical operators or a single filter.
+//
+// The following types satisfy this interface:
+//
+//	CertificateFilterStatementMemberAnd
+//	CertificateFilterStatementMemberFilter
+//	CertificateFilterStatementMemberNot
+//	CertificateFilterStatementMemberOr
+type CertificateFilterStatement interface {
+	isCertificateFilterStatement()
+}
+
+// A list of filter statements that must all be true.
+type CertificateFilterStatementMemberAnd struct {
+	Value []CertificateFilterStatement
+
+	noSmithyDocumentSerde
+}
+
+func (*CertificateFilterStatementMemberAnd) isCertificateFilterStatement() {}
+
+// A single certificate filter.
+type CertificateFilterStatementMemberFilter struct {
+	Value CertificateFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*CertificateFilterStatementMemberFilter) isCertificateFilterStatement() {}
+
+// A filter statement that must not be true.
+type CertificateFilterStatementMemberNot struct {
+	Value CertificateFilterStatement
+
+	noSmithyDocumentSerde
+}
+
+func (*CertificateFilterStatementMemberNot) isCertificateFilterStatement() {}
+
+// A list of filter statements where at least one must be true.
+type CertificateFilterStatementMemberOr struct {
+	Value []CertificateFilterStatement
+
+	noSmithyDocumentSerde
+}
+
+func (*CertificateFilterStatementMemberOr) isCertificateFilterStatement() {}
+
+// Contains metadata about a certificate. Currently supports ACM certificate
+// metadata.
+//
+// The following types satisfy this interface:
+//
+//	CertificateMetadataMemberAcmCertificateMetadata
+type CertificateMetadata interface {
+	isCertificateMetadata()
+}
+
+// Metadata for an ACM certificate.
+type CertificateMetadataMemberAcmCertificateMetadata struct {
+	Value AcmCertificateMetadata
+
+	noSmithyDocumentSerde
+}
+
+func (*CertificateMetadataMemberAcmCertificateMetadata) isCertificateMetadata() {}
+
 // Structure that contains options for your certificate. You can use this
 // structure to specify whether to opt in to or out of certificate transparency
 // logging and export your certificate.
@@ -173,7 +437,24 @@ type CertificateOptions struct {
 	CertificateTransparencyLoggingPreference CertificateTransparencyLoggingPreference
 
 	// You can opt in to allow the export of your certificates by specifying ENABLED .
+	// You cannot update the value of Export after the the certificate is created.
 	Export CertificateExport
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a certificate returned by the SearchCertificates action. This
+// structure includes the certificate ARN, X.509 attributes, and ACM metadata.
+type CertificateSearchResult struct {
+
+	// The Amazon Resource Name (ARN) of the certificate.
+	CertificateArn *string
+
+	// ACM-specific metadata about the certificate.
+	CertificateMetadata CertificateMetadata
+
+	// X.509 certificate attributes such as subject, issuer, and validity period.
+	X509Attributes *X509Attributes
 
 	noSmithyDocumentSerde
 }
@@ -215,8 +496,8 @@ type CertificateSummary struct {
 	// only includes the first 100 subject alternative names included in the
 	// certificate. To display the full list of subject alternative names, use [DescribeCertificate].
 	//
-	// [DescribeCertificate]: https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html
-	// [ListCertificates]: https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html
+	// [DescribeCertificate]: https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html
+	// [ListCertificates]: https://docs.aws.amazon.com/acm/latest/APIReference/API_ListCertificates.html
 	HasAdditionalSubjectAlternativeNames *bool
 
 	// The date and time when the certificate was imported. This value exists only
@@ -282,8 +563,8 @@ type CertificateSummary struct {
 	// alternative names included in the certificate. To display the full list of
 	// subject alternative names, use [DescribeCertificate].
 	//
-	// [DescribeCertificate]: https://docs.aws.amazon.com/acm/latestAPIReference/API_DescribeCertificate.html
-	// [ListCertificates]: https://docs.aws.amazon.com/acm/latestAPIReference/API_ListCertificates.html
+	// [DescribeCertificate]: https://docs.aws.amazon.com/acm/latest/APIReference/API_DescribeCertificate.html
+	// [ListCertificates]: https://docs.aws.amazon.com/acm/latest/APIReference/API_ListCertificates.html
 	SubjectAlternativeNameSummaries []string
 
 	// The source of the certificate. For certificates provided by ACM, this value is
@@ -295,6 +576,106 @@ type CertificateSummary struct {
 	// [Importing Certificates]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
 	// [managed renewal]: https://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
 	Type CertificateType
+
+	noSmithyDocumentSerde
+}
+
+// Filters certificates by common name.
+type CommonNameFilter struct {
+
+	// The comparison operator to use.
+	//
+	// This member is required.
+	ComparisonOperator ComparisonOperator
+
+	// The value to match against.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines the X.500 relative distinguished name (RDN).
+type CustomAttribute struct {
+
+	// Specifies the object identifier (OID) of the attribute type of the relative
+	// distinguished name (RDN).
+	ObjectIdentifier *string
+
+	// Specifies the attribute value of relative distinguished name (RDN).
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains X.500 distinguished name information.
+type DistinguishedName struct {
+
+	// The common name (CN) attribute.
+	CommonName *string
+
+	// The country (C) attribute.
+	Country *string
+
+	// A list of custom attributes in the distinguished name. Each custom attribute
+	// contains an object identifier (OID) and its corresponding value.
+	CustomAttributes []CustomAttribute
+
+	// The distinguished name qualifier attribute.
+	DistinguishedNameQualifier *string
+
+	// The domain component attributes.
+	DomainComponents []string
+
+	// The generation qualifier attribute.
+	GenerationQualifier *string
+
+	// The given name attribute.
+	GivenName *string
+
+	// The initials attribute.
+	Initials *string
+
+	// The locality (L) attribute.
+	Locality *string
+
+	// The organization (O) attribute.
+	Organization *string
+
+	// The organizational unit (OU) attribute.
+	OrganizationalUnit *string
+
+	// The pseudonym attribute.
+	Pseudonym *string
+
+	// The serial number attribute.
+	SerialNumber *string
+
+	// The state or province (ST) attribute.
+	State *string
+
+	// The surname attribute.
+	Surname *string
+
+	// The title attribute.
+	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// Filters certificates by DNS name.
+type DnsNameFilter struct {
+
+	// The comparison operator to use.
+	//
+	// This member is required.
+	ComparisonOperator ComparisonOperator
+
+	// The DNS name value to match against.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -454,6 +835,93 @@ type Filters struct {
 	noSmithyDocumentSerde
 }
 
+// Describes an ASN.1 X.400 GeneralName as defined in [RFC 5280]. Only one of the following
+// naming options should be provided.
+//
+// The following types satisfy this interface:
+//
+//	GeneralNameMemberDirectoryName
+//	GeneralNameMemberDnsName
+//	GeneralNameMemberIpAddress
+//	GeneralNameMemberOtherName
+//	GeneralNameMemberRegisteredId
+//	GeneralNameMemberRfc822Name
+//	GeneralNameMemberUniformResourceIdentifier
+//
+// [RFC 5280]: https://datatracker.ietf.org/doc/html/rfc5280
+type GeneralName interface {
+	isGeneralName()
+}
+
+// Contains information about the certificate subject. The Subject field in the
+// certificate identifies the entity that owns or controls the public key in the
+// certificate. The entity can be a user, computer, device, or service. The Subject
+// must contain an X.500 distinguished name (DN). A DN is a sequence of relative
+// distinguished names (RDNs). The RDNs are separated by commas in the certificate.
+type GeneralNameMemberDirectoryName struct {
+	Value DistinguishedName
+
+	noSmithyDocumentSerde
+}
+
+func (*GeneralNameMemberDirectoryName) isGeneralName() {}
+
+// Represents GeneralName as a DNS name.
+type GeneralNameMemberDnsName struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*GeneralNameMemberDnsName) isGeneralName() {}
+
+// Represents GeneralName as an IPv4 or IPv6 address.
+type GeneralNameMemberIpAddress struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*GeneralNameMemberIpAddress) isGeneralName() {}
+
+// Represents GeneralName using an OtherName object.
+type GeneralNameMemberOtherName struct {
+	Value OtherName
+
+	noSmithyDocumentSerde
+}
+
+func (*GeneralNameMemberOtherName) isGeneralName() {}
+
+// Represents GeneralName as an object identifier (OID).
+type GeneralNameMemberRegisteredId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*GeneralNameMemberRegisteredId) isGeneralName() {}
+
+// Represents GeneralName as an [RFC 822] email address.
+//
+// [RFC 822]: https://datatracker.ietf.org/doc/html/rfc822
+type GeneralNameMemberRfc822Name struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*GeneralNameMemberRfc822Name) isGeneralName() {}
+
+// Represents GeneralName as a URI.
+type GeneralNameMemberUniformResourceIdentifier struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*GeneralNameMemberUniformResourceIdentifier) isGeneralName() {}
+
 // Contains information for HTTP-based domain validation of certificates requested
 // through Amazon CloudFront and issued by ACM. This field exists only when the
 // certificate type is AMAZON_ISSUED and the validation method is HTTP .
@@ -476,6 +944,21 @@ type KeyUsage struct {
 
 	// A string value that contains a Key Usage extension name.
 	Name KeyUsageName
+
+	noSmithyDocumentSerde
+}
+
+// Defines a custom ASN.1 X.400 GeneralName using an object identifier (OID) and
+// value. For more information, see NIST's definition of [Object Identifier (OID)].
+//
+// [Object Identifier (OID)]: https://csrc.nist.gov/glossary/term/Object_Identifier
+type OtherName struct {
+
+	// Specifies an OID.
+	ObjectIdentifier *string
+
+	// Specifies an OID value.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -537,6 +1020,42 @@ type ResourceRecord struct {
 	noSmithyDocumentSerde
 }
 
+// Filters certificates by subject alternative name attributes.
+//
+// The following types satisfy this interface:
+//
+//	SubjectAlternativeNameFilterMemberDnsName
+type SubjectAlternativeNameFilter interface {
+	isSubjectAlternativeNameFilter()
+}
+
+// Filter by DNS name in subject alternative names.
+type SubjectAlternativeNameFilterMemberDnsName struct {
+	Value DnsNameFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*SubjectAlternativeNameFilterMemberDnsName) isSubjectAlternativeNameFilter() {}
+
+// Filters certificates by subject attributes.
+//
+// The following types satisfy this interface:
+//
+//	SubjectFilterMemberCommonName
+type SubjectFilter interface {
+	isSubjectFilter()
+}
+
+// Filter by common name in the subject.
+type SubjectFilterMemberCommonName struct {
+	Value CommonNameFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*SubjectFilterMemberCommonName) isSubjectFilter() {}
+
 // A key-value pair that identifies or specifies metadata about an ACM resource.
 type Tag struct {
 
@@ -551,4 +1070,176 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+// A description of why a request was throttled.
+type ThrottlingReason struct {
+
+	// A description of why a request was throttled.
+	Reason *string
+
+	// The resource that causes the request to be throttled.
+	Resource *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies a time range for filtering certificates.
+type TimestampRange struct {
+
+	// The end of the time range. This value is inclusive.
+	End *time.Time
+
+	// The start of the time range. This value is inclusive.
+	Start *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Filters certificates by X.509 attributes.
+//
+// The following types satisfy this interface:
+//
+//	X509AttributeFilterMemberExtendedKeyUsage
+//	X509AttributeFilterMemberKeyAlgorithm
+//	X509AttributeFilterMemberKeyUsage
+//	X509AttributeFilterMemberNotAfter
+//	X509AttributeFilterMemberNotBefore
+//	X509AttributeFilterMemberSerialNumber
+//	X509AttributeFilterMemberSubject
+//	X509AttributeFilterMemberSubjectAlternativeName
+type X509AttributeFilter interface {
+	isX509AttributeFilter()
+}
+
+// Filter by extended key usage.
+type X509AttributeFilterMemberExtendedKeyUsage struct {
+	Value ExtendedKeyUsageName
+
+	noSmithyDocumentSerde
+}
+
+func (*X509AttributeFilterMemberExtendedKeyUsage) isX509AttributeFilter() {}
+
+// Filter by key algorithm.
+type X509AttributeFilterMemberKeyAlgorithm struct {
+	Value KeyAlgorithm
+
+	noSmithyDocumentSerde
+}
+
+func (*X509AttributeFilterMemberKeyAlgorithm) isX509AttributeFilter() {}
+
+// Filter by key usage.
+type X509AttributeFilterMemberKeyUsage struct {
+	Value KeyUsageName
+
+	noSmithyDocumentSerde
+}
+
+func (*X509AttributeFilterMemberKeyUsage) isX509AttributeFilter() {}
+
+// Filter by certificate expiration date. The start date is inclusive.
+type X509AttributeFilterMemberNotAfter struct {
+	Value TimestampRange
+
+	noSmithyDocumentSerde
+}
+
+func (*X509AttributeFilterMemberNotAfter) isX509AttributeFilter() {}
+
+// Filter by certificate validity start date. The start date is inclusive.
+type X509AttributeFilterMemberNotBefore struct {
+	Value TimestampRange
+
+	noSmithyDocumentSerde
+}
+
+func (*X509AttributeFilterMemberNotBefore) isX509AttributeFilter() {}
+
+// Filter by serial number.
+type X509AttributeFilterMemberSerialNumber struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*X509AttributeFilterMemberSerialNumber) isX509AttributeFilter() {}
+
+// Filter by certificate subject.
+type X509AttributeFilterMemberSubject struct {
+	Value SubjectFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*X509AttributeFilterMemberSubject) isX509AttributeFilter() {}
+
+// Filter by subject alternative names.
+type X509AttributeFilterMemberSubjectAlternativeName struct {
+	Value SubjectAlternativeNameFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*X509AttributeFilterMemberSubjectAlternativeName) isX509AttributeFilter() {}
+
+// Contains X.509 certificate attributes extracted from the certificate.
+type X509Attributes struct {
+
+	// Contains a list of Extended Key Usage X.509 v3 extension objects. Each object
+	// specifies a purpose for which the certificate public key can be used and
+	// consists of a name and an object identifier (OID).
+	ExtendedKeyUsages []ExtendedKeyUsageName
+
+	// The distinguished name of the certificate issuer.
+	Issuer *DistinguishedName
+
+	// The algorithm that was used to generate the public-private key pair.
+	KeyAlgorithm KeyAlgorithm
+
+	// A list of Key Usage X.509 v3 extension objects. Each object is a string value
+	// that identifies the purpose of the public key contained in the certificate.
+	// Possible extension values include DIGITAL_SIGNATURE, KEY_ENCHIPHERMENT,
+	// NON_REPUDIATION, and more.
+	KeyUsages []KeyUsageName
+
+	// The time after which the certificate is not valid.
+	NotAfter *time.Time
+
+	// The time before which the certificate is not valid.
+	NotBefore *time.Time
+
+	// The serial number assigned by the certificate authority.
+	SerialNumber *string
+
+	// The distinguished name of the certificate subject.
+	Subject *DistinguishedName
+
+	// One or more domain names (subject alternative names) included in the
+	// certificate. This list contains the domain names that are bound to the public
+	// key that is contained in the certificate. The subject alternative names include
+	// the canonical domain name (CN) of the certificate and additional domain names
+	// that can be used to connect to the website.
+	SubjectAlternativeNames []GeneralName
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isAcmCertificateMetadataFilter() {}
+func (*UnknownUnionMember) isCertificateFilter()            {}
+func (*UnknownUnionMember) isCertificateFilterStatement()   {}
+func (*UnknownUnionMember) isCertificateMetadata()          {}
+func (*UnknownUnionMember) isGeneralName()                  {}
+func (*UnknownUnionMember) isSubjectAlternativeNameFilter() {}
+func (*UnknownUnionMember) isSubjectFilter()                {}
+func (*UnknownUnionMember) isX509AttributeFilter()          {}

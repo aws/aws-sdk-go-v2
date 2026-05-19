@@ -68,6 +68,10 @@ type CreateIngressPointInput struct {
 	// example, { "tags": {"key1":"value1", "key2":"value2"} }.
 	Tags []types.Tag
 
+	// The Transport Layer Security (TLS) policy for the ingress point. The FIPS value
+	// is only valid in US and Canada regions.
+	TlsPolicy types.TlsPolicy
+
 	noSmithyDocumentSerde
 }
 
@@ -118,7 +122,7 @@ func (c *Client) addOperationCreateIngressPointMiddlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -140,9 +144,6 @@ func (c *Client) addOperationCreateIngressPointMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

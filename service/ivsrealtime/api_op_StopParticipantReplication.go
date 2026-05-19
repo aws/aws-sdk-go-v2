@@ -51,25 +51,39 @@ type StopParticipantReplicationInput struct {
 
 type StopParticipantReplicationOutput struct {
 
+	// See [Access-Control-Allow-Origin] in the MDN Web Docs.
 	//
+	// [Access-Control-Allow-Origin]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Allow-Origin
 	AccessControlAllowOrigin *string
 
+	// See [Access-Control-Expose-Headers] in the MDN Web Docs.
 	//
+	// [Access-Control-Expose-Headers]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Access-Control-Expose-Headers
 	AccessControlExposeHeaders *string
 
+	// See [Cache-Control] in the MDN Web Docs.
 	//
+	// [Cache-Control]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Cache-Control
 	CacheControl *string
 
+	// See [Content-Security-Policy] in the MDN Web Docs.
 	//
+	// [Content-Security-Policy]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
 	ContentSecurityPolicy *string
 
+	// See [Strict-Transport-Security] in the MDN Web Docs.
 	//
+	// [Strict-Transport-Security]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Strict-Transport-Security
 	StrictTransportSecurity *string
 
+	// See [X-Content-Type-Options] in the MDN Web Docs.
 	//
+	// [X-Content-Type-Options]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Content-Type-Options
 	XContentTypeOptions *string
 
+	// See [X-Frame-Options] in the MDN Web Docs.
 	//
+	// [X-Frame-Options]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/X-Frame-Options
 	XFrameOptions *string
 
 	// Metadata pertaining to the operation's result.
@@ -112,7 +126,7 @@ func (c *Client) addOperationStopParticipantReplicationMiddlewares(stack *middle
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -134,9 +148,6 @@ func (c *Client) addOperationStopParticipantReplicationMiddlewares(stack *middle
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

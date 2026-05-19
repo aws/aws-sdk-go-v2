@@ -41,10 +41,17 @@ type EvaluateInput struct {
 
 	//  The unique identifier of the evaluator to use for scoring. Can be a built-in
 	// evaluator (e.g., Builtin.Helpfulness , Builtin.Correctness ) or a custom
-	// evaluator ARN created through the control plane API.
+	// evaluator Id created through the control plane API.
 	//
 	// This member is required.
 	EvaluatorId *string
+
+	//  Ground truth data to compare against agent responses during evaluation. Allows
+	// to provide expected responses, assertions, and expected tool trajectories at
+	// different evaluation levels. Session-level reference inputs apply to the entire
+	// conversation, while trace-level reference inputs target specific
+	// request-response interactions identified by trace ID.
+	EvaluationReferenceInputs []types.EvaluationReferenceInput
 
 	//  The specific trace or span IDs to evaluate within the provided input. Allows
 	// targeting evaluation at different levels: individual tool calls, single
@@ -104,7 +111,7 @@ func (c *Client) addOperationEvaluateMiddlewares(stack *middleware.Stack, option
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -126,9 +133,6 @@ func (c *Client) addOperationEvaluateMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

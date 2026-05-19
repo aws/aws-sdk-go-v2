@@ -94,6 +94,9 @@ type GetEnvironmentOutput struct {
 	// The configuration ID that is used to create the environment.
 	EnvironmentConfigurationId *string
 
+	// The configuration name that is used to create the environment.
+	EnvironmentConfigurationName *string
+
 	// The ID of the environment profile with which the environment is created.
 	EnvironmentProfileId *string
 
@@ -161,7 +164,7 @@ func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -183,9 +186,6 @@ func (c *Client) addOperationGetEnvironmentMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

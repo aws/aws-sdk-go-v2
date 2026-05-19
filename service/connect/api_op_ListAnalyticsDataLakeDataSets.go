@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the data lake datasets available to associate with for a given Amazon
-// Connect instance.
+// Lists the data lake datasets available to associate with for a given Connect
+// Customer instance.
 func (c *Client) ListAnalyticsDataLakeDataSets(ctx context.Context, params *ListAnalyticsDataLakeDataSetsInput, optFns ...func(*Options)) (*ListAnalyticsDataLakeDataSetsOutput, error) {
 	if params == nil {
 		params = &ListAnalyticsDataLakeDataSetsInput{}
@@ -30,8 +30,8 @@ func (c *Client) ListAnalyticsDataLakeDataSets(ctx context.Context, params *List
 
 type ListAnalyticsDataLakeDataSetsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -97,7 +97,7 @@ func (c *Client) addOperationListAnalyticsDataLakeDataSetsMiddlewares(stack *mid
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -119,9 +119,6 @@ func (c *Client) addOperationListAnalyticsDataLakeDataSetsMiddlewares(stack *mid
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

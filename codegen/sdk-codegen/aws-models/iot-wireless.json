@@ -135,6 +135,20 @@
                 "smithy.api#default": false
             }
         },
+        "com.amazonaws.iotwireless#AdvancedConfiguration": {
+            "type": "structure",
+            "members": {
+                "WiFiCellular": {
+                    "target": "com.amazonaws.iotwireless#WiFiCellular",
+                    "traits": {
+                        "smithy.api#documentation": "Configuration for WiFi and cellular-based payloads for location estimates."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Optional configuration to customize location estimates."
+            }
+        },
         "com.amazonaws.iotwireless#AggregationPeriod": {
             "type": "enum",
             "members": {
@@ -1237,6 +1251,15 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.iotwireless#ConfidencePercent": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 50,
+                    "max": 99
+                }
             }
         },
         "com.amazonaws.iotwireless#ConflictException": {
@@ -5793,6 +5816,12 @@
                     "target": "com.amazonaws.iotwireless#CreationDate",
                     "traits": {
                         "smithy.api#documentation": "<p>Optional information that specifies the time when the position information will be\n            resolved. It uses the Unix timestamp format. If not specified, the time at which the\n            request was received will be used.</p>"
+                    }
+                },
+                "AdvancedConfiguration": {
+                    "target": "com.amazonaws.iotwireless#AdvancedConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Optional configuration to customize position estimates.\n        If not provided, defaults are applied."
                     }
                 }
             },
@@ -15579,6 +15608,21 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.iotwireless#WiFiAccessPoint"
+            }
+        },
+        "com.amazonaws.iotwireless#WiFiCellular": {
+            "type": "structure",
+            "members": {
+                "ConfidencePercent": {
+                    "target": "com.amazonaws.iotwireless#ConfidencePercent",
+                    "traits": {
+                        "smithy.api#default": 68,
+                        "smithy.api#documentation": "Confidence level for WiFi and cellular position estimates, expressed as a\n        percentage. Valid range: 50–99 inclusive. Defaults to 68 if not specified."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Configuration for WiFi and cellular location payloads."
             }
         },
         "com.amazonaws.iotwireless#WirelessDeviceArn": {

@@ -4721,11 +4721,21 @@ func awsAwsjson11_serializeOpDocumentCreateResolverEndpointInput(v *CreateResolv
 		ok.String(string(v.Direction))
 	}
 
+	if v.Dns64Enabled != nil {
+		ok := object.Key("Dns64Enabled")
+		ok.Boolean(*v.Dns64Enabled)
+	}
+
 	if v.IpAddresses != nil {
 		ok := object.Key("IpAddresses")
 		if err := awsAwsjson11_serializeDocumentIpAddressesRequest(v.IpAddresses, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Ipv6InternetAccessEnabled != nil {
+		ok := object.Key("Ipv6InternetAccessEnabled")
+		ok.Boolean(*v.Ipv6InternetAccessEnabled)
 	}
 
 	if v.Name != nil {
@@ -5915,6 +5925,16 @@ func awsAwsjson11_serializeOpDocumentUpdateResolverDnssecConfigInput(v *UpdateRe
 func awsAwsjson11_serializeOpDocumentUpdateResolverEndpointInput(v *UpdateResolverEndpointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Dns64Enabled != nil {
+		ok := object.Key("Dns64Enabled")
+		ok.Boolean(*v.Dns64Enabled)
+	}
+
+	if v.Ipv6InternetAccessEnabled != nil {
+		ok := object.Key("Ipv6InternetAccessEnabled")
+		ok.Boolean(*v.Ipv6InternetAccessEnabled)
+	}
 
 	if v.Name != nil {
 		ok := object.Key("Name")

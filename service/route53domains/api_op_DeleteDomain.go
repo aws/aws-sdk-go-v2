@@ -24,7 +24,8 @@ import (
 //
 //   - When the registration has been deleted, we'll send you a confirmation to
 //     the registrant contact. The email will come from
-//     noreply@domainnameverification.net or noreply@registrar.amazon.com .
+//     noreply@domainnameverification.net or noreply@emailverification.info or
+//     noreply@registrar.amazon .
 //
 // [Deleting a domain name registration]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-delete.html
 func (c *Client) DeleteDomain(ctx context.Context, params *DeleteDomainInput, optFns ...func(*Options)) (*DeleteDomainOutput, error) {
@@ -100,7 +101,7 @@ func (c *Client) addOperationDeleteDomainMiddlewares(stack *middleware.Stack, op
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -122,9 +123,6 @@ func (c *Client) addOperationDeleteDomainMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

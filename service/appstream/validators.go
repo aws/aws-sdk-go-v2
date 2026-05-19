@@ -990,6 +990,26 @@ func (m *validateOpDisassociateSoftwareFromImageBuilder) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDrainSessionInstance struct {
+}
+
+func (*validateOpDrainSessionInstance) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDrainSessionInstance) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DrainSessionInstanceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDrainSessionInstanceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEnableUser struct {
 }
 
@@ -1666,6 +1686,10 @@ func addOpDisassociateSoftwareFromImageBuilderValidationMiddleware(stack *middle
 	return stack.Initialize.Add(&validateOpDisassociateSoftwareFromImageBuilder{}, middleware.After)
 }
 
+func addOpDrainSessionInstanceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDrainSessionInstance{}, middleware.After)
+}
+
 func addOpEnableUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableUser{}, middleware.After)
 }
@@ -1794,6 +1818,83 @@ func validateAccessEndpointList(v []types.AccessEndpoint) error {
 	}
 }
 
+func validateAgentAccessConfig(v *types.AgentAccessConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentAccessConfig"}
+	if v.Settings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
+	} else if v.Settings != nil {
+		if err := validateAgentAccessSettingList(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.ScreenResolution) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScreenResolution"))
+	}
+	if len(v.ScreenImageFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ScreenImageFormat"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgentAccessConfigForUpdate(v *types.AgentAccessConfigForUpdate) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentAccessConfigForUpdate"}
+	if v.Settings != nil {
+		if err := validateAgentAccessSettingList(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgentAccessSetting(v *types.AgentAccessSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentAccessSetting"}
+	if len(v.AgentAction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentAction"))
+	}
+	if len(v.Permission) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Permission"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAgentAccessSettingList(v []types.AgentAccessSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AgentAccessSettingList"}
+	for i := range v {
+		if err := validateAgentAccessSetting(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAppCatalogConfig(v []types.ApplicationConfig) error {
 	if v == nil {
 		return nil
@@ -1836,6 +1937,23 @@ func validateApplicationSettings(v *types.ApplicationSettings) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ApplicationSettings"}
 	if v.Enabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateContentRedirection(v *types.ContentRedirection) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContentRedirection"}
+	if v.HostToClient != nil {
+		if err := validateUrlRedirectionConfig(v.HostToClient); err != nil {
+			invalidParams.AddNested("HostToClient", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1996,6 +2114,21 @@ func validateStorageConnectorList(v []types.StorageConnector) error {
 		if err := validateStorageConnector(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUrlRedirectionConfig(v *types.UrlRedirectionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UrlRedirectionConfig"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2526,6 +2659,16 @@ func validateOpCreateStackInput(v *CreateStackInput) error {
 			invalidParams.AddNested("AccessEndpoints", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ContentRedirection != nil {
+		if err := validateContentRedirection(v.ContentRedirection); err != nil {
+			invalidParams.AddNested("ContentRedirection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AgentAccessConfig != nil {
+		if err := validateAgentAccessConfig(v.AgentAccessConfig); err != nil {
+			invalidParams.AddNested("AgentAccessConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3033,6 +3176,21 @@ func validateOpDisassociateSoftwareFromImageBuilderInput(v *DisassociateSoftware
 	}
 }
 
+func validateOpDrainSessionInstanceInput(v *DrainSessionInstanceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DrainSessionInstanceInput"}
+	if v.SessionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SessionId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpEnableUserInput(v *EnableUserInput) error {
 	if v == nil {
 		return nil
@@ -3434,6 +3592,16 @@ func validateOpUpdateStackInput(v *UpdateStackInput) error {
 	if v.AccessEndpoints != nil {
 		if err := validateAccessEndpointList(v.AccessEndpoints); err != nil {
 			invalidParams.AddNested("AccessEndpoints", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ContentRedirection != nil {
+		if err := validateContentRedirection(v.ContentRedirection); err != nil {
+			invalidParams.AddNested("ContentRedirection", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AgentAccessConfig != nil {
+		if err := validateAgentAccessConfigForUpdate(v.AgentAccessConfig); err != nil {
+			invalidParams.AddNested("AgentAccessConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

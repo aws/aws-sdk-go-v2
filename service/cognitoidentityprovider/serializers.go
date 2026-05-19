@@ -9092,6 +9092,11 @@ func awsAwsjson11_serializeDocumentWebAuthnConfigurationType(v *types.WebAuthnCo
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.FactorConfiguration) > 0 {
+		ok := object.Key("FactorConfiguration")
+		ok.String(string(v.FactorConfiguration))
+	}
+
 	if v.RelyingPartyId != nil {
 		ok := object.Key("RelyingPartyId")
 		ok.String(*v.RelyingPartyId)
@@ -9100,6 +9105,18 @@ func awsAwsjson11_serializeDocumentWebAuthnConfigurationType(v *types.WebAuthnCo
 	if len(v.UserVerification) > 0 {
 		ok := object.Key("UserVerification")
 		ok.String(string(v.UserVerification))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentWebAuthnMfaSettingsType(v *types.WebAuthnMfaSettingsType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled {
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
 	}
 
 	return nil
@@ -9703,6 +9720,13 @@ func awsAwsjson11_serializeOpDocumentAdminSetUserMFAPreferenceInput(v *AdminSetU
 	if v.UserPoolId != nil {
 		ok := object.Key("UserPoolId")
 		ok.String(*v.UserPoolId)
+	}
+
+	if v.WebAuthnMfaSettings != nil {
+		ok := object.Key("WebAuthnMfaSettings")
+		if err := awsAwsjson11_serializeDocumentWebAuthnMfaSettingsType(v.WebAuthnMfaSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -11801,6 +11825,13 @@ func awsAwsjson11_serializeOpDocumentSetUserMFAPreferenceInput(v *SetUserMFAPref
 	if v.SoftwareTokenMfaSettings != nil {
 		ok := object.Key("SoftwareTokenMfaSettings")
 		if err := awsAwsjson11_serializeDocumentSoftwareTokenMfaSettingsType(v.SoftwareTokenMfaSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WebAuthnMfaSettings != nil {
+		ok := object.Key("WebAuthnMfaSettings")
+		if err := awsAwsjson11_serializeDocumentWebAuthnMfaSettingsType(v.WebAuthnMfaSettings, ok); err != nil {
 			return err
 		}
 	}

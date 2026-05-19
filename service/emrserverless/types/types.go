@@ -379,6 +379,10 @@ type InteractiveConfiguration struct {
 	// jobs.
 	LivyEndpointEnabled *bool
 
+	// Enables interactive sessions on the application. When set to true , you can
+	// start interactive sessions using the StartSession operation.
+	SessionEnabled *bool
+
 	// Enables you to connect an application to Amazon EMR Studio to run interactive
 	// workloads in a notebook.
 	StudioEnabled *bool
@@ -842,6 +846,172 @@ type SchedulerConfiguration struct {
 	// configuration is enabled on your application, the default value is 360 minutes
 	// (6 hours). The valid range is from 15 to 720.
 	QueueTimeoutMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about a session, including the session state, configuration, and
+// timestamps.
+type Session struct {
+
+	// The ID of the application that the session belongs to.
+	//
+	// This member is required.
+	ApplicationId *string
+
+	// The Amazon Resource Name (ARN) of the session.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time that the session was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The IAM principal that created the session.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The Amazon Resource Name (ARN) of the execution role for the session.
+	//
+	// This member is required.
+	ExecutionRoleArn *string
+
+	// The Amazon EMR release label associated with the session.
+	//
+	// This member is required.
+	ReleaseLabel *string
+
+	// The ID of the session.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The state of the session.
+	//
+	// This member is required.
+	State SessionState
+
+	// Additional details about the current state of the session.
+	//
+	// This member is required.
+	StateDetails *string
+
+	// The date and time that the session was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The aggregate vCPU, memory, and storage that Amazon Web Services has billed for
+	// the session. The billed resources include a 1-minute minimum usage for workers,
+	// plus additional storage over 20 GB per worker. Note that billed resources do not
+	// include usage for idle pre-initialized workers.
+	BilledResourceUtilization *ResourceUtilization
+
+	// The configuration overrides for the session, including runtime configuration
+	// properties.
+	ConfigurationOverrides *SessionConfigurationOverrides
+
+	// The date and time that the session was terminated or failed.
+	EndedAt *time.Time
+
+	// The date and time that the session became idle.
+	IdleSince *time.Time
+
+	// The idle timeout in minutes for the session. After the session remains idle for
+	// this duration, it is automatically terminated.
+	IdleTimeoutMinutes *int64
+
+	// The optional name of the session.
+	Name *string
+
+	// The network configuration for customer VPC connectivity for the session.
+	NetworkConfiguration *NetworkConfiguration
+
+	// The date and time that the session moved to a running state.
+	StartedAt *time.Time
+
+	// The tags assigned to the session.
+	Tags map[string]string
+
+	// The total execution duration of the session in seconds.
+	TotalExecutionDurationSeconds *int64
+
+	// The aggregate vCPU, memory, and storage resources used from the time the
+	// session starts to execute, until the time the session terminates, rounded up to
+	// the nearest second.
+	TotalResourceUtilization *TotalResourceUtilization
+
+	noSmithyDocumentSerde
+}
+
+// The configuration overrides for a session.
+type SessionConfigurationOverrides struct {
+
+	// The runtime configuration for the session. Contains Spark configuration
+	// properties specified at session creation time.
+	RuntimeConfiguration []Configuration
+
+	noSmithyDocumentSerde
+}
+
+// The summary of attributes associated with a session.
+type SessionSummary struct {
+
+	// The ID of the application that the session belongs to.
+	//
+	// This member is required.
+	ApplicationId *string
+
+	// The Amazon Resource Name (ARN) of the session.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time that the session was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The IAM principal that created the session.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The Amazon Resource Name (ARN) of the execution role for the session.
+	//
+	// This member is required.
+	ExecutionRoleArn *string
+
+	// The Amazon EMR release label associated with the session.
+	//
+	// This member is required.
+	ReleaseLabel *string
+
+	// The ID of the session.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The state of the session.
+	//
+	// This member is required.
+	State SessionState
+
+	// Additional details about the current state of the session.
+	//
+	// This member is required.
+	StateDetails *string
+
+	// The date and time that the session was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The optional name of the session.
+	Name *string
 
 	noSmithyDocumentSerde
 }

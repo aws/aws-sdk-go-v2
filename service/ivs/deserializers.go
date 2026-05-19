@@ -51,6 +51,11 @@ func (m *awsRestjson1_deserializeOpBatchGetChannel) HandleDeserialize(ctx contex
 	output := &BatchGetChannelOutput{}
 	out.Result = output
 
+	err = awsRestjson1_deserializeOpHttpBindingsBatchGetChannelOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
+
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
 
@@ -124,6 +129,15 @@ func awsRestjson1_deserializeOpErrorBatchGetChannel(response *smithyhttp.Respons
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailable", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailable(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -134,6 +148,48 @@ func awsRestjson1_deserializeOpErrorBatchGetChannel(response *smithyhttp.Respons
 	}
 }
 
+func awsRestjson1_deserializeOpHttpBindingsBatchGetChannelOutput(v *BatchGetChannelOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Allow-Origin"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlAllowOrigin = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Expose-Headers"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlExposeHeaders = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Security-Policy"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentSecurityPolicy = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Strict-Transport-Security"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.StrictTransportSecurity = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Content-Type-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XContentTypeOptions = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Frame-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XFrameOptions = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
 func awsRestjson1_deserializeOpDocumentBatchGetChannelOutput(v **BatchGetChannelOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -204,6 +260,11 @@ func (m *awsRestjson1_deserializeOpBatchGetStreamKey) HandleDeserialize(ctx cont
 	}
 	output := &BatchGetStreamKeyOutput{}
 	out.Result = output
+
+	err = awsRestjson1_deserializeOpHttpBindingsBatchGetStreamKeyOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -278,6 +339,15 @@ func awsRestjson1_deserializeOpErrorBatchGetStreamKey(response *smithyhttp.Respo
 	}
 
 	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ServiceUnavailable", errorCode):
+		return awsRestjson1_deserializeErrorServiceUnavailable(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -288,6 +358,48 @@ func awsRestjson1_deserializeOpErrorBatchGetStreamKey(response *smithyhttp.Respo
 	}
 }
 
+func awsRestjson1_deserializeOpHttpBindingsBatchGetStreamKeyOutput(v *BatchGetStreamKeyOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Allow-Origin"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlAllowOrigin = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Expose-Headers"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlExposeHeaders = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Security-Policy"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentSecurityPolicy = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Strict-Transport-Security"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.StrictTransportSecurity = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Content-Type-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XContentTypeOptions = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Frame-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XFrameOptions = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
 func awsRestjson1_deserializeOpDocumentBatchGetStreamKeyOutput(v **BatchGetStreamKeyOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -358,6 +470,11 @@ func (m *awsRestjson1_deserializeOpBatchStartViewerSessionRevocation) HandleDese
 	}
 	output := &BatchStartViewerSessionRevocationOutput{}
 	out.Result = output
+
+	err = awsRestjson1_deserializeOpHttpBindingsBatchStartViewerSessionRevocationOutput(output, response)
+	if err != nil {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response with invalid Http bindings, %w", err)}
+	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -454,6 +571,48 @@ func awsRestjson1_deserializeOpErrorBatchStartViewerSessionRevocation(response *
 	}
 }
 
+func awsRestjson1_deserializeOpHttpBindingsBatchStartViewerSessionRevocationOutput(v *BatchStartViewerSessionRevocationOutput, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Allow-Origin"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlAllowOrigin = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Expose-Headers"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlExposeHeaders = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Security-Policy"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentSecurityPolicy = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Strict-Transport-Security"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.StrictTransportSecurity = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Content-Type-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XContentTypeOptions = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Frame-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XFrameOptions = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
 func awsRestjson1_deserializeOpDocumentBatchStartViewerSessionRevocationOutput(v **BatchStartViewerSessionRevocationOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -478,6 +637,179 @@ func awsRestjson1_deserializeOpDocumentBatchStartViewerSessionRevocationOutput(v
 		switch key {
 		case "errors":
 			if err := awsRestjson1_deserializeDocumentBatchStartViewerSessionRevocationErrors(&sv.Errors, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpCreateAdConfiguration struct {
+}
+
+func (*awsRestjson1_deserializeOpCreateAdConfiguration) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpCreateAdConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorCreateAdConfiguration(response, &metadata)
+	}
+	output := &CreateAdConfigurationOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentCreateAdConfigurationOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorCreateAdConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("PendingVerification", errorCode):
+		return awsRestjson1_deserializeErrorPendingVerification(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentCreateAdConfigurationOutput(v **CreateAdConfigurationOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateAdConfigurationOutput
+	if *v == nil {
+		sv = &CreateAdConfigurationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "adConfiguration":
+			if err := awsRestjson1_deserializeDocumentAdConfiguration(&sv.AdConfiguration, value); err != nil {
 				return err
 			}
 
@@ -1154,6 +1486,112 @@ func awsRestjson1_deserializeOpDocumentCreateStreamKeyOutput(v **CreateStreamKey
 	return nil
 }
 
+type awsRestjson1_deserializeOpDeleteAdConfiguration struct {
+}
+
+func (*awsRestjson1_deserializeOpDeleteAdConfiguration) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDeleteAdConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteAdConfiguration(response, &metadata)
+	}
+	output := &DeleteAdConfigurationOutput{}
+	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDeleteAdConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsRestjson1_deserializeOpDeleteChannel struct {
 }
 
@@ -1670,6 +2108,167 @@ func awsRestjson1_deserializeOpErrorDeleteStreamKey(response *smithyhttp.Respons
 		return genericError
 
 	}
+}
+
+type awsRestjson1_deserializeOpGetAdConfiguration struct {
+}
+
+func (*awsRestjson1_deserializeOpGetAdConfiguration) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpGetAdConfiguration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorGetAdConfiguration(response, &metadata)
+	}
+	output := &GetAdConfigurationOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentGetAdConfigurationOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorGetAdConfiguration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentGetAdConfigurationOutput(v **GetAdConfigurationOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetAdConfigurationOutput
+	if *v == nil {
+		sv = &GetAdConfigurationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "adConfiguration":
+			if err := awsRestjson1_deserializeDocumentAdConfiguration(&sv.AdConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
 }
 
 type awsRestjson1_deserializeOpGetChannel struct {
@@ -2940,6 +3539,347 @@ func awsRestjson1_deserializeOpDocumentImportPlaybackKeyPairOutput(v **ImportPla
 		case "keyPair":
 			if err := awsRestjson1_deserializeDocumentPlaybackKeyPair(&sv.KeyPair, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpInsertAdBreak struct {
+}
+
+func (*awsRestjson1_deserializeOpInsertAdBreak) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpInsertAdBreak) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorInsertAdBreak(response, &metadata)
+	}
+	output := &InsertAdBreakOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentInsertAdBreakOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorInsertAdBreak(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ChannelNotBroadcasting", errorCode):
+		return awsRestjson1_deserializeErrorChannelNotBroadcasting(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentInsertAdBreakOutput(v **InsertAdBreakOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *InsertAdBreakOutput
+	if *v == nil {
+		sv = &InsertAdBreakOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "adBreakId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdBreakId to be of type string, got %T instead", value)
+				}
+				sv.AdBreakId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListAdConfigurations struct {
+}
+
+func (*awsRestjson1_deserializeOpListAdConfigurations) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListAdConfigurations) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListAdConfigurations(response, &metadata)
+	}
+	output := &ListAdConfigurationsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListAdConfigurationsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListAdConfigurations(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListAdConfigurationsOutput(v **ListAdConfigurationsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListAdConfigurationsOutput
+	if *v == nil {
+		sv = &ListAdConfigurationsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "adConfigurations":
+			if err := awsRestjson1_deserializeDocumentAdConfigurationList(&sv.AdConfigurations, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
 			}
 
 		default:
@@ -5100,6 +6040,523 @@ func awsRestjson1_deserializeOpDocumentUpdatePlaybackRestrictionPolicyOutput(v *
 	return nil
 }
 
+func awsRestjson1_deserializeOpHttpBindingsAccessDeniedException(v *types.AccessDeniedException, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Allow-Origin"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlAllowOrigin = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Expose-Headers"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlExposeHeaders = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Security-Policy"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentSecurityPolicy = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Strict-Transport-Security"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.StrictTransportSecurity = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XAmznErrorType = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Content-Type-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XContentTypeOptions = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Frame-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XFrameOptions = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpHttpBindingsChannelNotBroadcasting(v *types.ChannelNotBroadcasting, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Allow-Origin"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlAllowOrigin = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Expose-Headers"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlExposeHeaders = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Security-Policy"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentSecurityPolicy = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Strict-Transport-Security"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.StrictTransportSecurity = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XAmznErrorType = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Content-Type-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XContentTypeOptions = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Frame-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XFrameOptions = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpHttpBindingsConflictException(v *types.ConflictException, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Allow-Origin"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlAllowOrigin = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Expose-Headers"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlExposeHeaders = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Security-Policy"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentSecurityPolicy = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Strict-Transport-Security"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.StrictTransportSecurity = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XAmznErrorType = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Content-Type-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XContentTypeOptions = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Frame-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XFrameOptions = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpHttpBindingsInternalServerException(v *types.InternalServerException, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Allow-Origin"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlAllowOrigin = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Expose-Headers"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlExposeHeaders = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Security-Policy"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentSecurityPolicy = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Strict-Transport-Security"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.StrictTransportSecurity = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XAmznErrorType = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Content-Type-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XContentTypeOptions = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Frame-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XFrameOptions = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpHttpBindingsPendingVerification(v *types.PendingVerification, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Allow-Origin"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlAllowOrigin = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Expose-Headers"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlExposeHeaders = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Security-Policy"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentSecurityPolicy = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Strict-Transport-Security"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.StrictTransportSecurity = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XAmznErrorType = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Content-Type-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XContentTypeOptions = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Frame-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XFrameOptions = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpHttpBindingsResourceNotFoundException(v *types.ResourceNotFoundException, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Allow-Origin"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlAllowOrigin = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Expose-Headers"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlExposeHeaders = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Security-Policy"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentSecurityPolicy = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Strict-Transport-Security"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.StrictTransportSecurity = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XAmznErrorType = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Content-Type-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XContentTypeOptions = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Frame-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XFrameOptions = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpHttpBindingsServiceQuotaExceededException(v *types.ServiceQuotaExceededException, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Allow-Origin"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlAllowOrigin = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Expose-Headers"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlExposeHeaders = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Security-Policy"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentSecurityPolicy = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Strict-Transport-Security"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.StrictTransportSecurity = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XAmznErrorType = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Content-Type-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XContentTypeOptions = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Frame-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XFrameOptions = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpHttpBindingsServiceUnavailable(v *types.ServiceUnavailable, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Allow-Origin"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlAllowOrigin = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Expose-Headers"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlExposeHeaders = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Security-Policy"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentSecurityPolicy = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Strict-Transport-Security"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.StrictTransportSecurity = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XAmznErrorType = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Content-Type-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XContentTypeOptions = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Frame-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XFrameOptions = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpHttpBindingsStreamUnavailable(v *types.StreamUnavailable, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Allow-Origin"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlAllowOrigin = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Expose-Headers"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlExposeHeaders = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Security-Policy"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentSecurityPolicy = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Strict-Transport-Security"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.StrictTransportSecurity = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XAmznErrorType = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Content-Type-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XContentTypeOptions = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Frame-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XFrameOptions = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpHttpBindingsThrottlingException(v *types.ThrottlingException, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Allow-Origin"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlAllowOrigin = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Expose-Headers"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlExposeHeaders = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Security-Policy"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentSecurityPolicy = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Strict-Transport-Security"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.StrictTransportSecurity = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XAmznErrorType = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Content-Type-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XContentTypeOptions = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Frame-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XFrameOptions = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
+func awsRestjson1_deserializeOpHttpBindingsValidationException(v *types.ValidationException, response *smithyhttp.Response) error {
+	if v == nil {
+		return fmt.Errorf("unsupported deserialization for nil %T", v)
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Allow-Origin"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlAllowOrigin = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Access-Control-Expose-Headers"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.AccessControlExposeHeaders = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Cache-Control"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.CacheControl = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Content-Security-Policy"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.ContentSecurityPolicy = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("Strict-Transport-Security"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.StrictTransportSecurity = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("x-amzn-ErrorType"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XAmznErrorType = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Content-Type-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XContentTypeOptions = ptr.String(headerValues[0])
+	}
+
+	if headerValues := response.Header.Values("X-Frame-Options"); len(headerValues) != 0 {
+		headerValues[0] = strings.TrimSpace(headerValues[0])
+		v.XFrameOptions = ptr.String(headerValues[0])
+	}
+
+	return nil
+}
 func awsRestjson1_deserializeErrorAccessDeniedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.AccessDeniedException{}
 	var buff [1024]byte
@@ -5132,6 +6589,10 @@ func awsRestjson1_deserializeErrorAccessDeniedException(response *smithyhttp.Res
 	}
 
 	errorBody.Seek(0, io.SeekStart)
+
+	if err := awsRestjson1_deserializeOpHttpBindingsAccessDeniedException(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
 
 	return output
 }
@@ -5169,6 +6630,10 @@ func awsRestjson1_deserializeErrorChannelNotBroadcasting(response *smithyhttp.Re
 
 	errorBody.Seek(0, io.SeekStart)
 
+	if err := awsRestjson1_deserializeOpHttpBindingsChannelNotBroadcasting(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
+
 	return output
 }
 
@@ -5204,6 +6669,10 @@ func awsRestjson1_deserializeErrorConflictException(response *smithyhttp.Respons
 	}
 
 	errorBody.Seek(0, io.SeekStart)
+
+	if err := awsRestjson1_deserializeOpHttpBindingsConflictException(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
 
 	return output
 }
@@ -5241,6 +6710,10 @@ func awsRestjson1_deserializeErrorInternalServerException(response *smithyhttp.R
 
 	errorBody.Seek(0, io.SeekStart)
 
+	if err := awsRestjson1_deserializeOpHttpBindingsInternalServerException(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
+
 	return output
 }
 
@@ -5276,6 +6749,10 @@ func awsRestjson1_deserializeErrorPendingVerification(response *smithyhttp.Respo
 	}
 
 	errorBody.Seek(0, io.SeekStart)
+
+	if err := awsRestjson1_deserializeOpHttpBindingsPendingVerification(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
 
 	return output
 }
@@ -5313,6 +6790,10 @@ func awsRestjson1_deserializeErrorResourceNotFoundException(response *smithyhttp
 
 	errorBody.Seek(0, io.SeekStart)
 
+	if err := awsRestjson1_deserializeOpHttpBindingsResourceNotFoundException(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
+
 	return output
 }
 
@@ -5348,6 +6829,50 @@ func awsRestjson1_deserializeErrorServiceQuotaExceededException(response *smithy
 	}
 
 	errorBody.Seek(0, io.SeekStart)
+
+	if err := awsRestjson1_deserializeOpHttpBindingsServiceQuotaExceededException(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
+
+	return output
+}
+
+func awsRestjson1_deserializeErrorServiceUnavailable(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.ServiceUnavailable{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentServiceUnavailable(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	if err := awsRestjson1_deserializeOpHttpBindingsServiceUnavailable(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
 
 	return output
 }
@@ -5385,6 +6910,10 @@ func awsRestjson1_deserializeErrorStreamUnavailable(response *smithyhttp.Respons
 
 	errorBody.Seek(0, io.SeekStart)
 
+	if err := awsRestjson1_deserializeOpHttpBindingsStreamUnavailable(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
+
 	return output
 }
 
@@ -5420,6 +6949,10 @@ func awsRestjson1_deserializeErrorThrottlingException(response *smithyhttp.Respo
 	}
 
 	errorBody.Seek(0, io.SeekStart)
+
+	if err := awsRestjson1_deserializeOpHttpBindingsThrottlingException(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
 
 	return output
 }
@@ -5457,6 +6990,10 @@ func awsRestjson1_deserializeErrorValidationException(response *smithyhttp.Respo
 
 	errorBody.Seek(0, io.SeekStart)
 
+	if err := awsRestjson1_deserializeOpHttpBindingsValidationException(output, response); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to decode response error with invalid HTTP bindings, %w", err)}
+	}
+
 	return output
 }
 
@@ -5482,6 +7019,42 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 
 	for key, value := range shape {
 		switch key {
+		case "accessControlAllowOrigin":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlAllowOrigin = ptr.String(jtv)
+			}
+
+		case "accessControlExposeHeaders":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlExposeHeaders = ptr.String(jtv)
+			}
+
+		case "cacheControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CacheControl = ptr.String(jtv)
+			}
+
+		case "contentSecurityPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContentSecurityPolicy = ptr.String(jtv)
+			}
+
 		case "exceptionMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5489,6 +7062,194 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
 				sv.ExceptionMessage = ptr.String(jtv)
+			}
+
+		case "strictTransportSecurity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StrictTransportSecurity = ptr.String(jtv)
+			}
+
+		case "xAmznErrorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XAmznErrorType = ptr.String(jtv)
+			}
+
+		case "xContentTypeOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XContentTypeOptions = ptr.String(jtv)
+			}
+
+		case "xFrameOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XFrameOptions = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAdConfiguration(v **types.AdConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdConfiguration
+	if *v == nil {
+		sv = &types.AdConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdConfigurationArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "mediaTailorPlaybackConfigurations":
+			if err := awsRestjson1_deserializeDocumentMediaTailorPlaybackConfigurationsList(&sv.MediaTailorPlaybackConfigurations, value); err != nil {
+				return err
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdConfigurationName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAdConfigurationList(v *[]types.AdConfigurationSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AdConfigurationSummary
+	if *v == nil {
+		cv = []types.AdConfigurationSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AdConfigurationSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAdConfigurationSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAdConfigurationSummary(v **types.AdConfigurationSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AdConfigurationSummary
+	if *v == nil {
+		sv = &types.AdConfigurationSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdConfigurationArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "mediaTailorPlaybackConfigurations":
+			if err := awsRestjson1_deserializeDocumentMediaTailorPlaybackConfigurationsList(&sv.MediaTailorPlaybackConfigurations, value); err != nil {
+				return err
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdConfigurationName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "tags":
+			if err := awsRestjson1_deserializeDocumentTags(&sv.Tags, value); err != nil {
+				return err
 			}
 
 		default:
@@ -5837,6 +7598,15 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 
 	for key, value := range shape {
 		switch key {
+		case "adConfigurationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChannelAdConfigurationArn to be of type string, got %T instead", value)
+				}
+				sv.AdConfigurationArn = ptr.String(jtv)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6025,6 +7795,42 @@ func awsRestjson1_deserializeDocumentChannelNotBroadcasting(v **types.ChannelNot
 
 	for key, value := range shape {
 		switch key {
+		case "accessControlAllowOrigin":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlAllowOrigin = ptr.String(jtv)
+			}
+
+		case "accessControlExposeHeaders":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlExposeHeaders = ptr.String(jtv)
+			}
+
+		case "cacheControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CacheControl = ptr.String(jtv)
+			}
+
+		case "contentSecurityPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContentSecurityPolicy = ptr.String(jtv)
+			}
+
 		case "exceptionMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6032,6 +7838,42 @@ func awsRestjson1_deserializeDocumentChannelNotBroadcasting(v **types.ChannelNot
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
 				sv.ExceptionMessage = ptr.String(jtv)
+			}
+
+		case "strictTransportSecurity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StrictTransportSecurity = ptr.String(jtv)
+			}
+
+		case "xAmznErrorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XAmznErrorType = ptr.String(jtv)
+			}
+
+		case "xContentTypeOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XContentTypeOptions = ptr.String(jtv)
+			}
+
+		case "xFrameOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XFrameOptions = ptr.String(jtv)
 			}
 
 		default:
@@ -6099,6 +7941,15 @@ func awsRestjson1_deserializeDocumentChannelSummary(v **types.ChannelSummary, va
 
 	for key, value := range shape {
 		switch key {
+		case "adConfigurationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ChannelAdConfigurationArn to be of type string, got %T instead", value)
+				}
+				sv.AdConfigurationArn = ptr.String(jtv)
+			}
+
 		case "arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6216,6 +8067,42 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 
 	for key, value := range shape {
 		switch key {
+		case "accessControlAllowOrigin":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlAllowOrigin = ptr.String(jtv)
+			}
+
+		case "accessControlExposeHeaders":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlExposeHeaders = ptr.String(jtv)
+			}
+
+		case "cacheControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CacheControl = ptr.String(jtv)
+			}
+
+		case "contentSecurityPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContentSecurityPolicy = ptr.String(jtv)
+			}
+
 		case "exceptionMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6223,6 +8110,42 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
 				sv.ExceptionMessage = ptr.String(jtv)
+			}
+
+		case "strictTransportSecurity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StrictTransportSecurity = ptr.String(jtv)
+			}
+
+		case "xAmznErrorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XAmznErrorType = ptr.String(jtv)
+			}
+
+		case "xContentTypeOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XContentTypeOptions = ptr.String(jtv)
+			}
+
+		case "xFrameOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XFrameOptions = ptr.String(jtv)
 			}
 
 		default:
@@ -6374,6 +8297,42 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 
 	for key, value := range shape {
 		switch key {
+		case "accessControlAllowOrigin":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlAllowOrigin = ptr.String(jtv)
+			}
+
+		case "accessControlExposeHeaders":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlExposeHeaders = ptr.String(jtv)
+			}
+
+		case "cacheControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CacheControl = ptr.String(jtv)
+			}
+
+		case "contentSecurityPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContentSecurityPolicy = ptr.String(jtv)
+			}
+
 		case "exceptionMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6383,12 +8342,122 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 				sv.ExceptionMessage = ptr.String(jtv)
 			}
 
+		case "strictTransportSecurity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StrictTransportSecurity = ptr.String(jtv)
+			}
+
+		case "xAmznErrorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XAmznErrorType = ptr.String(jtv)
+			}
+
+		case "xContentTypeOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XContentTypeOptions = ptr.String(jtv)
+			}
+
+		case "xFrameOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XFrameOptions = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMediaTailorPlaybackConfiguration(v **types.MediaTailorPlaybackConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaTailorPlaybackConfiguration
+	if *v == nil {
+		sv = &types.MediaTailorPlaybackConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "playbackConfigurationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MediaTailorPlaybackConfigurationArn to be of type string, got %T instead", value)
+				}
+				sv.PlaybackConfigurationArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMediaTailorPlaybackConfigurationsList(v *[]types.MediaTailorPlaybackConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.MediaTailorPlaybackConfiguration
+	if *v == nil {
+		cv = []types.MediaTailorPlaybackConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.MediaTailorPlaybackConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentMediaTailorPlaybackConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -6472,6 +8541,42 @@ func awsRestjson1_deserializeDocumentPendingVerification(v **types.PendingVerifi
 
 	for key, value := range shape {
 		switch key {
+		case "accessControlAllowOrigin":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlAllowOrigin = ptr.String(jtv)
+			}
+
+		case "accessControlExposeHeaders":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlExposeHeaders = ptr.String(jtv)
+			}
+
+		case "cacheControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CacheControl = ptr.String(jtv)
+			}
+
+		case "contentSecurityPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContentSecurityPolicy = ptr.String(jtv)
+			}
+
 		case "exceptionMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6479,6 +8584,42 @@ func awsRestjson1_deserializeDocumentPendingVerification(v **types.PendingVerifi
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
 				sv.ExceptionMessage = ptr.String(jtv)
+			}
+
+		case "strictTransportSecurity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StrictTransportSecurity = ptr.String(jtv)
+			}
+
+		case "xAmznErrorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XAmznErrorType = ptr.String(jtv)
+			}
+
+		case "xContentTypeOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XContentTypeOptions = ptr.String(jtv)
+			}
+
+		case "xFrameOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XFrameOptions = ptr.String(jtv)
 			}
 
 		default:
@@ -7189,6 +9330,42 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 
 	for key, value := range shape {
 		switch key {
+		case "accessControlAllowOrigin":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlAllowOrigin = ptr.String(jtv)
+			}
+
+		case "accessControlExposeHeaders":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlExposeHeaders = ptr.String(jtv)
+			}
+
+		case "cacheControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CacheControl = ptr.String(jtv)
+			}
+
+		case "contentSecurityPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContentSecurityPolicy = ptr.String(jtv)
+			}
+
 		case "exceptionMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7196,6 +9373,42 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
 				sv.ExceptionMessage = ptr.String(jtv)
+			}
+
+		case "strictTransportSecurity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StrictTransportSecurity = ptr.String(jtv)
+			}
+
+		case "xAmznErrorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XAmznErrorType = ptr.String(jtv)
+			}
+
+		case "xContentTypeOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XContentTypeOptions = ptr.String(jtv)
+			}
+
+		case "xFrameOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XFrameOptions = ptr.String(jtv)
 			}
 
 		default:
@@ -7269,6 +9482,42 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 
 	for key, value := range shape {
 		switch key {
+		case "accessControlAllowOrigin":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlAllowOrigin = ptr.String(jtv)
+			}
+
+		case "accessControlExposeHeaders":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlExposeHeaders = ptr.String(jtv)
+			}
+
+		case "cacheControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CacheControl = ptr.String(jtv)
+			}
+
+		case "contentSecurityPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContentSecurityPolicy = ptr.String(jtv)
+			}
+
 		case "exceptionMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7276,6 +9525,154 @@ func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.Ser
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
 				sv.ExceptionMessage = ptr.String(jtv)
+			}
+
+		case "strictTransportSecurity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StrictTransportSecurity = ptr.String(jtv)
+			}
+
+		case "xAmznErrorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XAmznErrorType = ptr.String(jtv)
+			}
+
+		case "xContentTypeOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XContentTypeOptions = ptr.String(jtv)
+			}
+
+		case "xFrameOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XFrameOptions = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentServiceUnavailable(v **types.ServiceUnavailable, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ServiceUnavailable
+	if *v == nil {
+		sv = &types.ServiceUnavailable{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "accessControlAllowOrigin":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlAllowOrigin = ptr.String(jtv)
+			}
+
+		case "accessControlExposeHeaders":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlExposeHeaders = ptr.String(jtv)
+			}
+
+		case "cacheControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CacheControl = ptr.String(jtv)
+			}
+
+		case "contentSecurityPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContentSecurityPolicy = ptr.String(jtv)
+			}
+
+		case "exceptionMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
+				}
+				sv.ExceptionMessage = ptr.String(jtv)
+			}
+
+		case "strictTransportSecurity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StrictTransportSecurity = ptr.String(jtv)
+			}
+
+		case "xAmznErrorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XAmznErrorType = ptr.String(jtv)
+			}
+
+		case "xContentTypeOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XContentTypeOptions = ptr.String(jtv)
+			}
+
+		case "xFrameOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XFrameOptions = ptr.String(jtv)
 			}
 
 		default:
@@ -8077,6 +10474,42 @@ func awsRestjson1_deserializeDocumentStreamUnavailable(v **types.StreamUnavailab
 
 	for key, value := range shape {
 		switch key {
+		case "accessControlAllowOrigin":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlAllowOrigin = ptr.String(jtv)
+			}
+
+		case "accessControlExposeHeaders":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlExposeHeaders = ptr.String(jtv)
+			}
+
+		case "cacheControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CacheControl = ptr.String(jtv)
+			}
+
+		case "contentSecurityPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContentSecurityPolicy = ptr.String(jtv)
+			}
+
 		case "exceptionMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8084,6 +10517,42 @@ func awsRestjson1_deserializeDocumentStreamUnavailable(v **types.StreamUnavailab
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
 				sv.ExceptionMessage = ptr.String(jtv)
+			}
+
+		case "strictTransportSecurity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StrictTransportSecurity = ptr.String(jtv)
+			}
+
+		case "xAmznErrorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XAmznErrorType = ptr.String(jtv)
+			}
+
+		case "xContentTypeOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XContentTypeOptions = ptr.String(jtv)
+			}
+
+		case "xFrameOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XFrameOptions = ptr.String(jtv)
 			}
 
 		default:
@@ -8153,6 +10622,42 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 
 	for key, value := range shape {
 		switch key {
+		case "accessControlAllowOrigin":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlAllowOrigin = ptr.String(jtv)
+			}
+
+		case "accessControlExposeHeaders":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlExposeHeaders = ptr.String(jtv)
+			}
+
+		case "cacheControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CacheControl = ptr.String(jtv)
+			}
+
+		case "contentSecurityPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContentSecurityPolicy = ptr.String(jtv)
+			}
+
 		case "exceptionMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8160,6 +10665,42 @@ func awsRestjson1_deserializeDocumentThrottlingException(v **types.ThrottlingExc
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
 				sv.ExceptionMessage = ptr.String(jtv)
+			}
+
+		case "strictTransportSecurity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StrictTransportSecurity = ptr.String(jtv)
+			}
+
+		case "xAmznErrorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XAmznErrorType = ptr.String(jtv)
+			}
+
+		case "xContentTypeOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XContentTypeOptions = ptr.String(jtv)
+			}
+
+		case "xFrameOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XFrameOptions = ptr.String(jtv)
 			}
 
 		default:
@@ -8296,6 +10837,42 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 
 	for key, value := range shape {
 		switch key {
+		case "accessControlAllowOrigin":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlAllowOrigin = ptr.String(jtv)
+			}
+
+		case "accessControlExposeHeaders":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AccessControlExposeHeaders = ptr.String(jtv)
+			}
+
+		case "cacheControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.CacheControl = ptr.String(jtv)
+			}
+
+		case "contentSecurityPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ContentSecurityPolicy = ptr.String(jtv)
+			}
+
 		case "exceptionMessage":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8303,6 +10880,42 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
 				sv.ExceptionMessage = ptr.String(jtv)
+			}
+
+		case "strictTransportSecurity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.StrictTransportSecurity = ptr.String(jtv)
+			}
+
+		case "xAmznErrorType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XAmznErrorType = ptr.String(jtv)
+			}
+
+		case "xContentTypeOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XContentTypeOptions = ptr.String(jtv)
+			}
+
+		case "xFrameOptions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.XFrameOptions = ptr.String(jtv)
 			}
 
 		default:

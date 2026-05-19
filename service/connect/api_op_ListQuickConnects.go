@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information about the quick connects for the specified Amazon Connect
-// instance.
+// Provides information about the quick connects for the specified Connect
+// Customer instance.
 func (c *Client) ListQuickConnects(ctx context.Context, params *ListQuickConnectsInput, optFns ...func(*Options)) (*ListQuickConnectsOutput, error) {
 	if params == nil {
 		params = &ListQuickConnectsInput{}
@@ -30,9 +30,9 @@ func (c *Client) ListQuickConnects(ctx context.Context, params *ListQuickConnect
 
 type ListQuickConnectsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance. Both Instance ID and Instance ARN are supported
-	// input formats.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance. Both Instance ID and Instance ARN are
+	// supported input formats.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -47,9 +47,9 @@ type ListQuickConnectsInput struct {
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// The type of quick connect. In the Amazon Connect admin website, when you create
-	// a quick connect, you are prompted to assign one of the following types: Agent
-	// (USER), External (PHONE_NUMBER), or Queue (QUEUE).
+	// The type of quick connect. In the Connect Customer admin website, when you
+	// create a quick connect, you are prompted to assign one of the following types:
+	// Agent (USER), External (PHONE_NUMBER), or Queue (QUEUE).
 	QuickConnectTypes []types.QuickConnectType
 
 	noSmithyDocumentSerde
@@ -103,7 +103,7 @@ func (c *Client) addOperationListQuickConnectsMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -125,9 +125,6 @@ func (c *Client) addOperationListQuickConnectsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

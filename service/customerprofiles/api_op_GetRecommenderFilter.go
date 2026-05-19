@@ -77,6 +77,9 @@ type GetRecommenderFilterOutput struct {
 	// If the recommender filter failed, provides the reason for the failure.
 	FailureReason *string
 
+	// The name of the recommender schema associated with this recommender filter.
+	RecommenderSchemaName *string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -117,7 +120,7 @@ func (c *Client) addOperationGetRecommenderFilterMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -139,9 +142,6 @@ func (c *Client) addOperationGetRecommenderFilterMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

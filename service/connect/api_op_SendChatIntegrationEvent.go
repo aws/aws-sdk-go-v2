@@ -12,7 +12,7 @@ import (
 )
 
 // Processes chat integration events from Amazon Web Services or external
-// integrations to Amazon Connect. A chat integration event includes:
+// integrations to Connect Customer. A chat integration event includes:
 //
 //   - SourceId, DestinationId, and Subtype: a set of identifiers, uniquely
 //     representing a chat
@@ -44,10 +44,10 @@ func (c *Client) SendChatIntegrationEvent(ctx context.Context, params *SendChatI
 type SendChatIntegrationEventInput struct {
 
 	// Chat system identifier, used in part to uniquely identify chat. This is
-	// associated with the Amazon Connect instance and flow to be used to start chats.
-	// For Server Migration Service, this is the phone number destination of inbound
-	// Server Migration Service messages represented by an Amazon Web Services End User
-	// Messaging phone number ARN.
+	// associated with the Connect Customer instance and flow to be used to start
+	// chats. For Server Migration Service, this is the phone number destination of
+	// inbound Server Migration Service messages represented by an Amazon Web Services
+	// End User Messaging phone number ARN.
 	//
 	// This member is required.
 	DestinationId *string
@@ -126,7 +126,7 @@ func (c *Client) addOperationSendChatIntegrationEventMiddlewares(stack *middlewa
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -148,9 +148,6 @@ func (c *Client) addOperationSendChatIntegrationEventMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

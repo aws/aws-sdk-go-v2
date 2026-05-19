@@ -7517,6 +7517,123 @@ func awsAwsjson11_deserializeOpErrorDisassociateSoftwareFromImageBuilder(respons
 	}
 }
 
+type awsAwsjson11_deserializeOpDrainSessionInstance struct {
+}
+
+func (*awsAwsjson11_deserializeOpDrainSessionInstance) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDrainSessionInstance) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDrainSessionInstance(response, &metadata)
+	}
+	output := &DrainSessionInstanceOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDrainSessionInstanceOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDrainSessionInstance(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("ConcurrentModificationException", errorCode):
+		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
+
+	case strings.EqualFold("OperationNotPermittedException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotPermittedException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpEnableUser struct {
 }
 
@@ -11255,6 +11372,161 @@ func awsAwsjson11_deserializeDocumentAdminAppLicenseUsageRecord(v **types.AdminA
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentAgentAccessConfig(v **types.AgentAccessConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AgentAccessConfig
+	if *v == nil {
+		sv = &types.AgentAccessConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "S3BucketArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3BucketArn to be of type string, got %T instead", value)
+				}
+				sv.S3BucketArn = ptr.String(jtv)
+			}
+
+		case "ScreenImageFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScreenImageFormat to be of type string, got %T instead", value)
+				}
+				sv.ScreenImageFormat = types.ScreenImageFormat(jtv)
+			}
+
+		case "ScreenResolution":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScreenResolution to be of type string, got %T instead", value)
+				}
+				sv.ScreenResolution = types.ScreenResolution(jtv)
+			}
+
+		case "ScreenshotsUploadEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.ScreenshotsUploadEnabled = ptr.Bool(jtv)
+			}
+
+		case "Settings":
+			if err := awsAwsjson11_deserializeDocumentAgentAccessSettingList(&sv.Settings, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAgentAccessSetting(v **types.AgentAccessSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AgentAccessSetting
+	if *v == nil {
+		sv = &types.AgentAccessSetting{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AgentAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AgentAction to be of type string, got %T instead", value)
+				}
+				sv.AgentAction = types.AgentAction(jtv)
+			}
+
+		case "Permission":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Permission to be of type string, got %T instead", value)
+				}
+				sv.Permission = types.Permission(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAgentAccessSettingList(v *[]types.AgentAccessSetting, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AgentAccessSetting
+	if *v == nil {
+		cv = []types.AgentAccessSetting{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AgentAccessSetting
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentAgentAccessSetting(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentAppBlock(v **types.AppBlock, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12214,6 +12486,45 @@ func awsAwsjson11_deserializeDocumentComputeCapacityStatus(v **types.ComputeCapa
 				sv.DesiredUserSessions = ptr.Int32(int32(i64))
 			}
 
+		case "Draining":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Draining = ptr.Int32(int32(i64))
+			}
+
+		case "DrainModeActiveUserSessions":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DrainModeActiveUserSessions = ptr.Int32(int32(i64))
+			}
+
+		case "DrainModeUnusedUserSessions":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DrainModeUnusedUserSessions = ptr.Int32(int32(i64))
+			}
+
 		case "InUse":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -12278,6 +12589,42 @@ func awsAwsjson11_deserializeDocumentConcurrentModificationException(v **types.C
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentContentRedirection(v **types.ContentRedirection, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContentRedirection
+	if *v == nil {
+		sv = &types.ContentRedirection{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "HostToClient":
+			if err := awsAwsjson11_deserializeDocumentUrlRedirectionConfig(&sv.HostToClient, value); err != nil {
+				return err
 			}
 
 		default:
@@ -15237,6 +15584,15 @@ func awsAwsjson11_deserializeDocumentSession(v **types.Session, value interface{
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "InstanceDrainStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceDrainStatus to be of type string, got %T instead", value)
+				}
+				sv.InstanceDrainStatus = types.InstanceDrainStatus(jtv)
+			}
+
 		case "InstanceId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15547,6 +15903,11 @@ func awsAwsjson11_deserializeDocumentStack(v **types.Stack, value interface{}) e
 				return err
 			}
 
+		case "AgentAccessConfig":
+			if err := awsAwsjson11_deserializeDocumentAgentAccessConfig(&sv.AgentAccessConfig, value); err != nil {
+				return err
+			}
+
 		case "ApplicationSettings":
 			if err := awsAwsjson11_deserializeDocumentApplicationSettingsResponse(&sv.ApplicationSettings, value); err != nil {
 				return err
@@ -15559,6 +15920,11 @@ func awsAwsjson11_deserializeDocumentStack(v **types.Stack, value interface{}) e
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "ContentRedirection":
+			if err := awsAwsjson11_deserializeDocumentContentRedirection(&sv.ContentRedirection, value); err != nil {
+				return err
 			}
 
 		case "CreatedTime":
@@ -16200,6 +16566,92 @@ func awsAwsjson11_deserializeDocumentThemeFooterLinks(v *[]types.ThemeFooterLink
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUrlPatternList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected UrlPattern to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUrlRedirectionConfig(v **types.UrlRedirectionConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UrlRedirectionConfig
+	if *v == nil {
+		sv = &types.UrlRedirectionConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AllowedUrls":
+			if err := awsAwsjson11_deserializeDocumentUrlPatternList(&sv.AllowedUrls, value); err != nil {
+				return err
+			}
+
+		case "DeniedUrls":
+			if err := awsAwsjson11_deserializeDocumentUrlPatternList(&sv.DeniedUrls, value); err != nil {
+				return err
+			}
+
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -19271,6 +19723,37 @@ func awsAwsjson11_deserializeOpDocumentDisassociateSoftwareFromImageBuilderOutpu
 	var sv *DisassociateSoftwareFromImageBuilderOutput
 	if *v == nil {
 		sv = &DisassociateSoftwareFromImageBuilderOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentDrainSessionInstanceOutput(v **DrainSessionInstanceOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DrainSessionInstanceOutput
+	if *v == nil {
+		sv = &DrainSessionInstanceOutput{}
 	} else {
 		sv = *v
 	}

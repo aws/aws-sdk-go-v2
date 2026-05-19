@@ -1,3 +1,22 @@
+# v1.10.0 (2026-05-07)
+
+* **Feature**: Updated ListInvoiceSummaries API to add new ReceiverRole filter in Request and Response
+
+# v1.9.10 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.9 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.8 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.7 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

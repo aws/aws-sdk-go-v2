@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an email address alias with an existing email address in an Amazon
-// Connect instance. This creates a forwarding relationship where emails sent to
+// Associates an email address alias with an existing email address in an Connect
+// Customer instance. This creates a forwarding relationship where emails sent to
 // the alias email address are automatically forwarded to the primary email
 // address.
 //
@@ -29,7 +29,7 @@ import (
 //     service email during organizational restructuring.
 //
 //   - Brand management: Enable you to use familiar brand-specific email addresses
-//     that forward to the appropriate Amazon Connect instance email address.
+//     that forward to the appropriate Connect Customer instance email address.
 //
 // Important things to know
 //
@@ -50,13 +50,13 @@ import (
 //
 //   - The status of the forwarding configuration.
 //
-// Endpoints: See [Amazon Connect endpoints and quotas].
+// Endpoints: See [Connect Customer endpoints and quotas].
 //
 // # Related operations
 //
 // [DisassociateEmailAddressAlias]
-//   - : Removes the alias association between two email addresses in an Amazon
-//     Connect instance.
+//   - : Removes the alias association between two email addresses in an Connect
+//     Customer instance.
 //
 // [DescribeEmailAddress]
 //   - : View current alias configurations for an email address.
@@ -78,8 +78,8 @@ import (
 // [DisassociateEmailAddressAlias]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DisassociateEmailAddressAlias.html
 // [SearchEmailAddresses]: https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchEmailAddresses.html
 // [UpdateEmailAddressMetadata]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdateEmailAddressMetadata.html
-// [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 // [CreateEmailAddress]: https://docs.aws.amazon.com/connect/latest/APIReference/API_CreateEmailAddress.html
+// [Connect Customer endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 func (c *Client) AssociateEmailAddressAlias(ctx context.Context, params *AssociateEmailAddressAliasInput, optFns ...func(*Options)) (*AssociateEmailAddressAliasOutput, error) {
 	if params == nil {
 		params = &AssociateEmailAddressAliasInput{}
@@ -98,7 +98,7 @@ func (c *Client) AssociateEmailAddressAlias(ctx context.Context, params *Associa
 type AssociateEmailAddressAliasInput struct {
 
 	// Configuration object that specifies which email address will serve as the
-	// alias. The specified email address must already exist in the Amazon Connect
+	// alias. The specified email address must already exist in the Connect Customer
 	// instance and cannot already be configured as an alias or have an alias of its
 	// own.
 	//
@@ -110,8 +110,8 @@ type AssociateEmailAddressAliasInput struct {
 	// This member is required.
 	EmailAddressId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -169,7 +169,7 @@ func (c *Client) addOperationAssociateEmailAddressAliasMiddlewares(stack *middle
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -191,9 +191,6 @@ func (c *Client) addOperationAssociateEmailAddressAliasMiddlewares(stack *middle
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

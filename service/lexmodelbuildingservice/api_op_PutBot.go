@@ -29,6 +29,8 @@ import (
 //
 // This operation requires permissions for the lex:PutBot action. For more
 // information, see security-iam.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) PutBot(ctx context.Context, params *PutBotInput, optFns ...func(*Options)) (*PutBotOutput, error) {
 	if params == nil {
 		params = &PutBotInput{}
@@ -430,7 +432,7 @@ func (c *Client) addOperationPutBotMiddlewares(stack *middleware.Stack, options 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -452,9 +454,6 @@ func (c *Client) addOperationPutBotMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

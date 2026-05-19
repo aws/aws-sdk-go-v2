@@ -47518,6 +47518,15 @@ func awsRestjson1_deserializeDocumentBatchConfig(v **types.BatchConfig, value in
 
 	for key, value := range shape {
 		switch key {
+		case "batchAcrossTopics":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BatchAcrossTopics to be of type *bool, got %T instead", value)
+				}
+				sv.BatchAcrossTopics = jtv
+			}
+
 		case "maxBatchOpenMs":
 			if value != nil {
 				jtv, ok := value.(json.Number)

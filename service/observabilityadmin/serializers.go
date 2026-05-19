@@ -2349,6 +2349,17 @@ func (m *awsRestjson1_serializeOpStartTelemetryEvaluation) HandleSerialize(ctx c
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartTelemetryEvaluationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2361,6 +2372,25 @@ func (m *awsRestjson1_serializeOpStartTelemetryEvaluation) HandleSerialize(ctx c
 func awsRestjson1_serializeOpHttpBindingsStartTelemetryEvaluationInput(v *StartTelemetryEvaluationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartTelemetryEvaluationInput(v *StartTelemetryEvaluationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllRegions != nil {
+		ok := object.Key("AllRegions")
+		ok.Boolean(*v.AllRegions)
+	}
+
+	if v.Regions != nil {
+		ok := object.Key("Regions")
+		if err := awsRestjson1_serializeDocumentRegions(v.Regions, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -2407,6 +2437,17 @@ func (m *awsRestjson1_serializeOpStartTelemetryEvaluationForOrganization) Handle
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentStartTelemetryEvaluationForOrganizationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
 	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
@@ -2419,6 +2460,25 @@ func (m *awsRestjson1_serializeOpStartTelemetryEvaluationForOrganization) Handle
 func awsRestjson1_serializeOpHttpBindingsStartTelemetryEvaluationForOrganizationInput(v *StartTelemetryEvaluationForOrganizationInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentStartTelemetryEvaluationForOrganizationInput(v *StartTelemetryEvaluationForOrganizationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllRegions != nil {
+		ok := object.Key("AllRegions")
+		ok.Boolean(*v.AllRegions)
+	}
+
+	if v.Regions != nil {
+		ok := object.Key("Regions")
+		if err := awsRestjson1_serializeDocumentRegions(v.Regions, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3775,6 +3835,18 @@ func awsRestjson1_serializeDocumentLogTypes(v []types.LogType, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMskMonitoringParameters(v *types.MskMonitoringParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EnhancedMonitoring) > 0 {
+		ok := object.Key("EnhancedMonitoring")
+		ok.String(string(v.EnhancedMonitoring))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOrganizationUnitIdentifiers(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3964,6 +4036,13 @@ func awsRestjson1_serializeDocumentTelemetryDestinationConfiguration(v *types.Te
 		}
 	}
 
+	if v.MskMonitoringParameters != nil {
+		ok := object.Key("MskMonitoringParameters")
+		if err := awsRestjson1_serializeDocumentMskMonitoringParameters(v.MskMonitoringParameters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.RetentionInDays != nil {
 		ok := object.Key("RetentionInDays")
 		ok.Integer(*v.RetentionInDays)
@@ -4002,9 +4081,26 @@ func awsRestjson1_serializeDocumentTelemetryRule(v *types.TelemetryRule, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowFieldUpdates != nil {
+		ok := object.Key("AllowFieldUpdates")
+		ok.Boolean(*v.AllowFieldUpdates)
+	}
+
+	if v.AllRegions != nil {
+		ok := object.Key("AllRegions")
+		ok.Boolean(*v.AllRegions)
+	}
+
 	if v.DestinationConfiguration != nil {
 		ok := object.Key("DestinationConfiguration")
 		if err := awsRestjson1_serializeDocumentTelemetryDestinationConfiguration(v.DestinationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Regions != nil {
+		ok := object.Key("Regions")
+		if err := awsRestjson1_serializeDocumentRegions(v.Regions, ok); err != nil {
 			return err
 		}
 	}

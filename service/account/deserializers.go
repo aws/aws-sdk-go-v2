@@ -688,6 +688,15 @@ func awsRestjson1_deserializeOpDocumentGetAccountInformationOutput(v **GetAccoun
 				sv.AccountName = ptr.String(jtv)
 			}
 
+		case "AccountState":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountState to be of type string, got %T instead", value)
+				}
+				sv.AccountState = types.AccountState(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Web Services resource association with an Amazon Connect
+// Creates an Amazon Web Services resource association with an Connect Customer
 // instance.
 func (c *Client) CreateIntegrationAssociation(ctx context.Context, params *CreateIntegrationAssociationInput, optFns ...func(*Options)) (*CreateIntegrationAssociationOutput, error) {
 	if params == nil {
@@ -30,8 +30,8 @@ func (c *Client) CreateIntegrationAssociation(ctx context.Context, params *Creat
 
 type CreateIntegrationAssociationInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -40,9 +40,9 @@ type CreateIntegrationAssociationInput struct {
 
 	// The Amazon Resource Name (ARN) of the integration.
 	//
-	// When integrating with Amazon Web Services End User Messaging, the Amazon
-	// Connect and Amazon Web Services End User Messaging instances must be in the same
-	// account.
+	// When integrating with Amazon Web Services End User Messaging, the Connect
+	// Customer and Amazon Web Services End User Messaging instances must be in the
+	// same account.
 	//
 	// This member is required.
 	IntegrationArn *string
@@ -119,7 +119,7 @@ func (c *Client) addOperationCreateIntegrationAssociationMiddlewares(stack *midd
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -141,9 +141,6 @@ func (c *Client) addOperationCreateIntegrationAssociationMiddlewares(stack *midd
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

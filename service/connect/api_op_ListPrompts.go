@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information about the prompts for the specified Amazon Connect
+// Provides information about the prompts for the specified Connect Customer
 // instance.
 func (c *Client) ListPrompts(ctx context.Context, params *ListPromptsInput, optFns ...func(*Options)) (*ListPromptsOutput, error) {
 	if params == nil {
@@ -30,7 +30,7 @@ func (c *Client) ListPrompts(ctx context.Context, params *ListPromptsInput, optF
 
 type ListPromptsInput struct {
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Connect Customer instance.
 	//
 	// This member is required.
 	InstanceId *string
@@ -94,7 +94,7 @@ func (c *Client) addOperationListPromptsMiddlewares(stack *middleware.Stack, opt
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -116,9 +116,6 @@ func (c *Client) addOperationListPromptsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

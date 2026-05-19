@@ -1,7 +1,7 @@
 package sign
 
 import (
-	"crypto/rsa"
+	"crypto"
 	"fmt"
 	"net/http"
 	"strings"
@@ -15,6 +15,8 @@ const (
 	CookieSignatureName = "CloudFront-Signature"
 	// CookieKeyIDName name of the signing Key ID cookie
 	CookieKeyIDName = "CloudFront-Key-Pair-Id"
+	// CookieHashAlgorithmName name of the hash algorithm cookie
+	CookieHashAlgorithmName = "CloudFront-Hash-Algorithm"
 )
 
 // A CookieOptions optional additional options that can be applied to the signed
@@ -55,22 +57,24 @@ func (o CookieOptions) apply(opts ...func(*CookieOptions)) CookieOptions {
 // The signer is safe to use concurrently, but the optional cookies options
 // are not safe to modify concurrently.
 type CookieSigner struct {
-	keyID   string
-	privKey *rsa.PrivateKey
+	keyID  string
+	signer crypto.Signer
 
-	Opts CookieOptions
+	// HashAlg specifies the hash algorithm for signing. Defaults to
+	// HashSHA1. Set to HashSHA256 to produce SHA-256 signed cookies
+	// with a CloudFront-Hash-Algorithm cookie.
+	HashAlg HashAlgorithm
+	Opts    CookieOptions
 }
 
 // NewCookieSigner constructs and returns a new CookieSigner to be used to for
 // signing Amazon CloudFront URL resources with.
-func NewCookieSigner(keyID string, privKey *rsa.PrivateKey, opts ...func(*CookieOptions)) *CookieSigner {
-	signer := &CookieSigner{
-		keyID:   keyID,
-		privKey: privKey,
-		Opts:    CookieOptions{}.apply(opts...),
+func NewCookieSigner(keyID string, signer crypto.Signer, opts ...func(*CookieOptions)) *CookieSigner {
+	return &CookieSigner{
+		keyID:  keyID,
+		signer: signer,
+		Opts:   CookieOptions{}.apply(opts...),
 	}
-
-	return signer
 }
 
 // Sign returns the cookies needed to allow user agents to make arbetrary
@@ -84,7 +88,7 @@ func NewCookieSigner(keyID string, privKey *rsa.PrivateKey, opts ...func(*Cookie
 //
 // Example:
 //
-//	s := sign.NewCookieSigner(keyID, privKey)
+//	s := sign.NewCookieSigner(keyID, signer)
 //
 //	// Get Signed cookies for a resource that will expire in 1 hour
 //	cookies, err := s.Sign("*", time.Now().Add(1 * time.Hour))
@@ -127,7 +131,7 @@ func (s CookieSigner) Sign(u string, expires time.Time, opts ...func(*CookieOpti
 	}
 
 	p := NewCannedPolicy(resource, expires)
-	return createCookies(p, s.keyID, s.privKey, s.Opts.apply(opts...))
+	return createCookies(p, s.keyID, s.signer, s.HashAlg, s.Opts.apply(opts...))
 }
 
 // Returns and validates the URL's scheme.
@@ -154,7 +158,7 @@ func cookieURLScheme(u string) (string, error) {
 //
 // Example:
 //
-//	s := sign.NewCookieSigner(keyID, privKey)
+//	s := sign.NewCookieSigner(keyID, signer)
 //
 //	policy := &sign.Policy{
 //	    Statements: []sign.Statement{
@@ -204,13 +208,13 @@ func cookieURLScheme(u string) (string, error) {
 //	    }
 //	}
 func (s CookieSigner) SignWithPolicy(p *Policy, opts ...func(*CookieOptions)) ([]*http.Cookie, error) {
-	return createCookies(p, s.keyID, s.privKey, s.Opts.apply(opts...))
+	return createCookies(p, s.keyID, s.signer, s.HashAlg, s.Opts.apply(opts...))
 }
 
 // Prepares the cookies to be attached to the header. An (optional) options
 // struct is provided in case people don't want to manually edit their cookies.
-func createCookies(p *Policy, keyID string, privKey *rsa.PrivateKey, opt CookieOptions) ([]*http.Cookie, error) {
-	b64Sig, b64Policy, err := p.Sign(privKey)
+func createCookies(p *Policy, keyID string, signer crypto.Signer, hashAlg HashAlgorithm, opt CookieOptions) ([]*http.Cookie, error) {
+	b64Sig, b64Policy, err := p.SignWithAlgorithm(signer, hashAlg)
 	if err != nil {
 		return nil, err
 	}
@@ -236,6 +240,18 @@ func createCookies(p *Policy, keyID string, privKey *rsa.PrivateKey, opt CookieO
 	}
 
 	cookies := []*http.Cookie{cPolicy, cSignature, cKey}
+
+	// Hash algorithm cookie is always appended when explicitly set. When
+	// HashAlg is empty (zero value), it defaults to SHA-1 without the
+	// cookie for backward compatibility.
+	if hashAlg != "" {
+		cookies = append(cookies, &http.Cookie{
+			Name:     CookieHashAlgorithmName,
+			Value:    string(hashAlg),
+			HttpOnly: true,
+			Expires:  opt.Expires,
+		})
+	}
 
 	// Applie the cookie options
 	for _, c := range cookies {

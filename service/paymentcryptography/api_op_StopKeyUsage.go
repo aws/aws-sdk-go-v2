@@ -17,8 +17,8 @@ import (
 // You can use this operation instead of [DeleteKey] to deactivate a key. You can enable the
 // key in the future by calling [StartKeyUsage].
 //
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts.
+// Cross-account use: This operation supports cross-account use when the key has a
+// resource-based policy that grants access. For more information, see [Resource-based policies].
 //
 // Related operations:
 //
@@ -28,6 +28,7 @@ import (
 //
 // [DeleteKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html
 // [StartKeyUsage]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StartKeyUsage.html
+// [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
 func (c *Client) StopKeyUsage(ctx context.Context, params *StopKeyUsageInput, optFns ...func(*Options)) (*StopKeyUsageOutput, error) {
 	if params == nil {
 		params = &StopKeyUsageInput{}
@@ -100,7 +101,7 @@ func (c *Client) addOperationStopKeyUsageMiddlewares(stack *middleware.Stack, op
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -122,9 +123,6 @@ func (c *Client) addOperationStopKeyUsageMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -60,11 +60,17 @@ type GetRunOutput struct {
 	// The run's ARN.
 	Arn *string
 
+	// The run's batch ID.
+	BatchId *string
+
 	// The run cache behavior for the run.
 	CacheBehavior types.CacheBehavior
 
 	// The run cache associated with the run.
 	CacheId *string
+
+	// Configuration details for the workflow run.
+	Configuration *types.ConfigurationDetails
 
 	// When the run was created.
 	CreationTime *time.Time
@@ -94,6 +100,10 @@ type GetRunOutput struct {
 
 	// The run's name.
 	Name *string
+
+	// Configuration for run networking behavior. If absent, this will default to
+	// RESTRICTED.
+	NetworkingMode types.NetworkingMode
 
 	// The run's output URI.
 	OutputUri *string
@@ -150,6 +160,9 @@ type GetRunOutput struct {
 	// The universally unique identifier for a run.
 	Uuid *string
 
+	// VPC configuration for the workflow run.
+	VpcConfig *types.VpcConfigResponse
+
 	// The run's workflow ID.
 	WorkflowId *string
 
@@ -205,7 +218,7 @@ func (c *Client) addOperationGetRunMiddlewares(stack *middleware.Stack, options 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -227,9 +240,6 @@ func (c *Client) addOperationGetRunMiddlewares(stack *middleware.Stack, options 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

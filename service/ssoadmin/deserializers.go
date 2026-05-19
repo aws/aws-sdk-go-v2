@@ -10723,6 +10723,15 @@ func awsAwsjson11_deserializeDocumentApplication(v **types.Application, value in
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "IdentityStoreArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdentityStoreArn to be of type string, got %T instead", value)
+				}
+				sv.IdentityStoreArn = ptr.String(jtv)
+			}
+
 		case "InstanceArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13676,6 +13685,24 @@ func awsAwsjson11_deserializeOpDocumentCreateApplicationOutput(v **CreateApplica
 				sv.ApplicationArn = ptr.String(jtv)
 			}
 
+		case "IdentityStoreArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdentityStoreArn to be of type string, got %T instead", value)
+				}
+				sv.IdentityStoreArn = ptr.String(jtv)
+			}
+
+		case "InstanceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InstanceArn to be of type string, got %T instead", value)
+				}
+				sv.InstanceArn = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -14327,6 +14354,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeApplicationOutput(v **DescribeApp
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "IdentityStoreArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IdentityStoreArn to be of type string, got %T instead", value)
+				}
+				sv.IdentityStoreArn = ptr.String(jtv)
 			}
 
 		case "InstanceArn":

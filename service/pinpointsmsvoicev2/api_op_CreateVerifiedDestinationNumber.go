@@ -41,6 +41,10 @@ type CreateVerifiedDestinationNumberInput struct {
 	// used for the request to ensure idempotency.
 	ClientToken *string
 
+	// The unique identifier of the RCS agent to associate with the verified
+	// destination number. You can use either the RcsAgentId or RcsAgentArn.
+	RcsAgentId *string
+
 	// An array of tags (key and value pairs) to associate with the destination number.
 	Tags []types.Tag
 
@@ -79,6 +83,10 @@ type CreateVerifiedDestinationNumberOutput struct {
 	//
 	// This member is required.
 	VerifiedDestinationNumberId *string
+
+	// The unique identifier of the RCS agent associated with the verified destination
+	// number.
+	RcsAgentId *string
 
 	// An array of tags (key and value pairs) to associate with the destination number.
 	Tags []types.Tag
@@ -123,7 +131,7 @@ func (c *Client) addOperationCreateVerifiedDestinationNumberMiddlewares(stack *m
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -145,9 +153,6 @@ func (c *Client) addOperationCreateVerifiedDestinationNumberMiddlewares(stack *m
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

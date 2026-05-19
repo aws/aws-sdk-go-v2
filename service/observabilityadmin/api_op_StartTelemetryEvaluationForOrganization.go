@@ -29,6 +29,24 @@ func (c *Client) StartTelemetryEvaluationForOrganization(ctx context.Context, pa
 }
 
 type StartTelemetryEvaluationForOrganizationInput struct {
+
+	//  If set to true , telemetry evaluation for the organization starts in all Amazon
+	// Web Services Regions where Amazon CloudWatch Observability Admin is available in
+	// the current partition. The current region becomes the home region for managing
+	// multi-region evaluation for the organization. When new regions become available,
+	// evaluation automatically expands to include them. Mutually exclusive with
+	// Regions .
+	AllRegions *bool
+
+	//  An optional list of Amazon Web Services Regions to include in multi-region
+	// telemetry evaluation for the organization. The current region is always
+	// implicitly included and must not be specified in this list. When provided,
+	// telemetry evaluation starts in the current region and propagates to all
+	// specified regions for the organization. Mutually exclusive with AllRegions . If
+	// neither Regions nor AllRegions is provided, the operation applies only to the
+	// current region.
+	Regions []string
+
 	noSmithyDocumentSerde
 }
 
@@ -73,7 +91,7 @@ func (c *Client) addOperationStartTelemetryEvaluationForOrganizationMiddlewares(
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -95,9 +113,6 @@ func (c *Client) addOperationStartTelemetryEvaluationForOrganizationMiddlewares(
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

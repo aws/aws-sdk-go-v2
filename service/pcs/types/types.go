@@ -59,6 +59,30 @@ type AccountingRequest struct {
 	noSmithyDocumentSerde
 }
 
+// Additional settings that directly map to Cgroup settings.
+//
+// PCS supports a subset of Cgroup settings. For more information, see [Configuring custom Cgroup settings in PCS] in the PCS
+// User Guide.
+//
+// [Configuring custom Cgroup settings in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/cgroup-custom-settings.html
+type CgroupCustomSetting struct {
+
+	// PCS supports custom Cgroup settings for clusters. For more information, see [Configuring custom Cgroup settings in PCS] in
+	// the PCS User Guide.
+	//
+	// [Configuring custom Cgroup settings in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/cgroup-custom-settings.html
+	//
+	// This member is required.
+	ParameterName *string
+
+	// The values for the configured Cgroup settings.
+	//
+	// This member is required.
+	ParameterValue *string
+
+	noSmithyDocumentSerde
+}
+
 // The cluster resource and configuration.
 type Cluster struct {
 
@@ -146,6 +170,9 @@ type ClusterSlurmConfiguration struct {
 	// The shared Slurm key for authentication, also known as the cluster secret.
 	AuthKey *SlurmAuthKey
 
+	// Additional Cgroup-specific configuration that directly maps to Cgroup settings.
+	CgroupCustomSettings []CgroupCustomSetting
+
 	// The JWT authentication configuration for Slurm REST API access.
 	JwtAuth *JwtAuth
 
@@ -160,6 +187,10 @@ type ClusterSlurmConfiguration struct {
 	// The Slurm REST API configuration for the cluster.
 	SlurmRest *SlurmRest
 
+	// Additional SlurmDBD-specific configuration that directly maps to SlurmDBD
+	// settings.
+	SlurmdbdCustomSettings []SlurmdbdCustomSetting
+
 	noSmithyDocumentSerde
 }
 
@@ -169,6 +200,9 @@ type ClusterSlurmConfigurationRequest struct {
 	// The accounting configuration includes configurable settings for Slurm
 	// accounting.
 	Accounting *AccountingRequest
+
+	// Additional Cgroup-specific configuration that directly maps to Cgroup settings.
+	CgroupCustomSettings []CgroupCustomSetting
 
 	// The time (in seconds) before an idle node is scaled down.
 	//
@@ -180,6 +214,10 @@ type ClusterSlurmConfigurationRequest struct {
 
 	// The Slurm REST API configuration for the cluster.
 	SlurmRest *SlurmRestRequest
+
+	// Additional SlurmDBD-specific configuration that directly maps to SlurmDBD
+	// settings.
+	SlurmdbdCustomSettings []SlurmdbdCustomSetting
 
 	noSmithyDocumentSerde
 }
@@ -322,12 +360,18 @@ type ComputeNodeGroup struct {
 	ErrorInfo []ErrorInfo
 
 	// Specifies how EC2 instances are purchased on your behalf. PCS supports
-	// On-Demand Instances, Spot Instances, and Amazon EC2 Capacity Blocks for ML. For
-	// more information, see [Amazon EC2 billing and purchasing options]in the Amazon Elastic Compute Cloud User Guide. For more
+	// On-Demand Instances, Spot Instances, Interruptible Capacity Reservations,
+	// On-Demand Capacity Reservations, and Amazon EC2 Capacity Blocks for ML. For more
+	// information, see [Amazon EC2 billing and purchasing options]in the Amazon Elastic Compute Cloud User Guide. For more
 	// information about PCS support for Capacity Blocks, see [Using Amazon EC2 Capacity Blocks for ML with PCS]in the PCS User Guide.
-	// If you don't provide this option, it defaults to On-Demand.
+	// For more information about PCS support for interruptible capacity reservations,
+	// see [Using I-ODCRs with PCS]in the PCS User Guide. Choose On-Demand if you plan to use an On-Demand
+	// Capacity Reservation (ODCR). For more information, see [Using ODCRs with PCS]. If you don't provide
+	// this option, it defaults to On-Demand.
 	//
 	// [Using Amazon EC2 Capacity Blocks for ML with PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-blocks.html
+	// [Using ODCRs with PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-odcr.html
+	// [Using I-ODCRs with PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/capacity-reservations-iodcr.html
 	// [Amazon EC2 billing and purchasing options]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-purchasing-options.html
 	PurchaseOption PurchaseOption
 
@@ -774,7 +818,7 @@ type Scheduler struct {
 	// cluster scaling and job scheduling. For more information, see [Slurm versions in PCS]in the PCS User
 	// Guide.
 	//
-	// Valid Values: 23.11 | 24.05 | 24.11
+	// Valid Values: 23.11 | 24.05 | 24.11 | 25.05 | 25.11
 	//
 	// [Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
 	//
@@ -796,7 +840,7 @@ type SchedulerRequest struct {
 	// cluster scaling and job scheduling. For more information, see [Slurm versions in PCS]in the PCS User
 	// Guide.
 	//
-	// Valid Values: 23.11 | 24.05 | 24.11
+	// Valid Values: 24.11 | 25.05 | 25.11
 	//
 	// [Slurm versions in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurm-versions.html
 	//
@@ -839,6 +883,30 @@ type SlurmCustomSetting struct {
 	ParameterName *string
 
 	// The values for the configured Slurm settings.
+	//
+	// This member is required.
+	ParameterValue *string
+
+	noSmithyDocumentSerde
+}
+
+// Additional settings that directly map to SlurmDBD settings.
+//
+// PCS supports a subset of SlurmDBD settings. For more information, see [Configuring custom SlurmDBD settings in PCS] in the
+// PCS User Guide.
+//
+// [Configuring custom SlurmDBD settings in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurmdbd-custom-settings.html
+type SlurmdbdCustomSetting struct {
+
+	// PCS supports custom SlurmDBD settings for clusters. For more information, see [Configuring custom SlurmDBD settings in PCS]
+	// in the PCS User Guide.
+	//
+	// [Configuring custom SlurmDBD settings in PCS]: https://docs.aws.amazon.com/pcs/latest/userguide/slurmdbd-custom-settings.html
+	//
+	// This member is required.
+	ParameterName *string
+
+	// The values for the configured SlurmDBD settings.
 	//
 	// This member is required.
 	ParameterValue *string
@@ -918,6 +986,9 @@ type UpdateClusterSlurmConfigurationRequest struct {
 	// accounting.
 	Accounting *UpdateAccountingRequest
 
+	// Additional Cgroup-specific configuration that directly maps to Cgroup settings.
+	CgroupCustomSettings []CgroupCustomSetting
+
 	// The time (in seconds) before an idle node is scaled down.
 	//
 	// Default: 600
@@ -928,6 +999,10 @@ type UpdateClusterSlurmConfigurationRequest struct {
 
 	// The Slurm REST API configuration for the cluster.
 	SlurmRest *UpdateSlurmRestRequest
+
+	// Additional SlurmDBD-specific configuration that directly maps to SlurmDBD
+	// settings.
+	SlurmdbdCustomSettings []SlurmdbdCustomSetting
 
 	noSmithyDocumentSerde
 }

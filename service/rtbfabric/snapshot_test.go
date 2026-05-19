@@ -74,6 +74,18 @@ func TestCheckSnapshot_AcceptLink(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateCertificate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateCertificate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateInboundExternalLink(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateInboundExternalLink(context.Background(), nil, func(o *Options) {
@@ -91,6 +103,18 @@ func TestCheckSnapshot_CreateLink(t *testing.T) {
 	_, err := svc.CreateLink(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateLink")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateLinkRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLinkRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateLinkRoutingRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -158,6 +182,18 @@ func TestCheckSnapshot_DeleteLink(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteLinkRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLinkRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteLinkRoutingRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteOutboundExternalLink(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteOutboundExternalLink(context.Background(), nil, func(o *Options) {
@@ -194,6 +230,30 @@ func TestCheckSnapshot_DeleteResponderGateway(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DisassociateCertificate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateCertificate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetCertificateAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCertificateAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCertificateAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetInboundExternalLink(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInboundExternalLink(context.Background(), nil, func(o *Options) {
@@ -211,6 +271,18 @@ func TestCheckSnapshot_GetLink(t *testing.T) {
 	_, err := svc.GetLink(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetLink")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetLinkRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLinkRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetLinkRoutingRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -247,6 +319,30 @@ func TestCheckSnapshot_GetResponderGateway(t *testing.T) {
 	_, err := svc.GetResponderGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetResponderGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListCertificateAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCertificateAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListCertificateAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListLinkRoutingRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLinkRoutingRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListLinkRoutingRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -362,6 +458,18 @@ func TestCheckSnapshot_UpdateLinkModuleFlow(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateLinkRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLinkRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLinkRoutingRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateRequesterGateway(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateRequesterGateway(context.Background(), nil, func(o *Options) {
@@ -397,6 +505,18 @@ func TestUpdateSnapshot_AcceptLink(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateCertificate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateCertificate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateInboundExternalLink(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateInboundExternalLink(context.Background(), nil, func(o *Options) {
@@ -414,6 +534,18 @@ func TestUpdateSnapshot_CreateLink(t *testing.T) {
 	_, err := svc.CreateLink(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateLink")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateLinkRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLinkRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateLinkRoutingRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -481,6 +613,18 @@ func TestUpdateSnapshot_DeleteLink(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteLinkRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLinkRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteLinkRoutingRule")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteOutboundExternalLink(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteOutboundExternalLink(context.Background(), nil, func(o *Options) {
@@ -517,6 +661,30 @@ func TestUpdateSnapshot_DeleteResponderGateway(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DisassociateCertificate(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateCertificate(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetCertificateAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCertificateAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCertificateAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetInboundExternalLink(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetInboundExternalLink(context.Background(), nil, func(o *Options) {
@@ -534,6 +702,18 @@ func TestUpdateSnapshot_GetLink(t *testing.T) {
 	_, err := svc.GetLink(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetLink")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetLinkRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLinkRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetLinkRoutingRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -570,6 +750,30 @@ func TestUpdateSnapshot_GetResponderGateway(t *testing.T) {
 	_, err := svc.GetResponderGateway(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetResponderGateway")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListCertificateAssociations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListCertificateAssociations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListCertificateAssociations")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListLinkRoutingRules(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListLinkRoutingRules(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListLinkRoutingRules")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -678,6 +882,18 @@ func TestUpdateSnapshot_UpdateLinkModuleFlow(t *testing.T) {
 	_, err := svc.UpdateLinkModuleFlow(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateLinkModuleFlow")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateLinkRoutingRule(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLinkRoutingRule(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLinkRoutingRule")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

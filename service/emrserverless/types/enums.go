@@ -101,3 +101,51 @@ func (JobRunState) Values() []JobRunState {
 		"QUEUED",
 	}
 }
+
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeSession ResourceType = "SESSION"
+)
+
+// Values returns all known values for ResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"SESSION",
+	}
+}
+
+type SessionState string
+
+// Enum values for SessionState
+const (
+	SessionStateSubmitted   SessionState = "SUBMITTED"
+	SessionStateStarting    SessionState = "STARTING"
+	SessionStateStarted     SessionState = "STARTED"
+	SessionStateIdle        SessionState = "IDLE"
+	SessionStateBusy        SessionState = "BUSY"
+	SessionStateFailed      SessionState = "FAILED"
+	SessionStateTerminating SessionState = "TERMINATING"
+	SessionStateTerminated  SessionState = "TERMINATED"
+)
+
+// Values returns all known values for SessionState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SessionState) Values() []SessionState {
+	return []SessionState{
+		"SUBMITTED",
+		"STARTING",
+		"STARTED",
+		"IDLE",
+		"BUSY",
+		"FAILED",
+		"TERMINATING",
+		"TERMINATED",
+	}
+}

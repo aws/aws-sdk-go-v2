@@ -39,7 +39,7 @@ type CreateOutboundExternalLinkInput struct {
 	// This member is required.
 	GatewayId *string
 
-	// Describes the settings for a link log.
+	// Settings for the application logs.
 	//
 	// This member is required.
 	LogSettings *types.LinkLogSettings
@@ -49,7 +49,7 @@ type CreateOutboundExternalLinkInput struct {
 	// This member is required.
 	PublicEndpoint *string
 
-	// Describes the attributes of a link.
+	// Attributes of the link.
 	Attributes *types.LinkAttributes
 
 	// A map of the key-value pairs of the tag or tags to assign to the resource.
@@ -115,7 +115,7 @@ func (c *Client) addOperationCreateOutboundExternalLinkMiddlewares(stack *middle
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -137,9 +137,6 @@ func (c *Client) addOperationCreateOutboundExternalLinkMiddlewares(stack *middle
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

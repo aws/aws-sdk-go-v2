@@ -30,6 +30,7 @@ func (c *Client) UpdateMissionProfile(ctx context.Context, params *UpdateMission
 	return out, nil
 }
 
+// Input for the UpdateMissionProfile operation.
 type UpdateMissionProfileInput struct {
 
 	// UUID of a mission profile.
@@ -37,11 +38,11 @@ type UpdateMissionProfileInput struct {
 	// This member is required.
 	MissionProfileId *string
 
-	// Amount of time after a contact ends that you’d like to receive a Ground Station
+	// Amount of time after a contact ends that you'd like to receive a Ground Station
 	// Contact State Change event indicating the pass has finished.
 	ContactPostPassDurationSeconds *int32
 
-	// Amount of time after a contact ends that you’d like to receive a Ground Station
+	// Amount of time after a contact ends that you'd like to receive a Ground Station
 	// Contact State Change event indicating the pass has finished.
 	ContactPrePassDurationSeconds *int32
 
@@ -49,7 +50,7 @@ type UpdateMissionProfileInput struct {
 	// a to Config .
 	DataflowEdges [][]string
 
-	// Smallest amount of time in seconds that you’d like to see for an available
+	// Smallest amount of time in seconds that you'd like to see for an available
 	// contact. AWS Ground Station will not present you with contacts shorter than this
 	// duration.
 	MinimumViableContactDurationSeconds *int32
@@ -72,6 +73,7 @@ type UpdateMissionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response containing the ID of a mission profile.
 type UpdateMissionProfileOutput struct {
 
 	// UUID of a mission profile.
@@ -117,7 +119,7 @@ func (c *Client) addOperationUpdateMissionProfileMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -139,9 +141,6 @@ func (c *Client) addOperationUpdateMissionProfileMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

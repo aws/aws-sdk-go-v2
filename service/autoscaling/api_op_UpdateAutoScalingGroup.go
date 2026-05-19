@@ -81,6 +81,10 @@ type UpdateAutoScalingGroupInput struct {
 	//  The instance capacity distribution across Availability Zones.
 	AvailabilityZoneDistribution *types.AvailabilityZoneDistribution
 
+	//  A list of Availability Zone IDs for the Auto Scaling group. You cannot specify
+	// both AvailabilityZones and AvailabilityZoneIds in the same request.
+	AvailabilityZoneIds []string
+
 	//  The policy for Availability Zone impairment.
 	AvailabilityZoneImpairmentPolicy *types.AvailabilityZoneImpairmentPolicy
 
@@ -141,6 +145,10 @@ type UpdateAutoScalingGroupInput struct {
 	// The valid values are none , prevent-force-deletion , and prevent-all-deletion .
 	//
 	// Default: none
+	//
+	// For more information, see [Configure deletion protection for your Amazon EC2 Auto Scaling resources] in the Amazon EC2 Auto Scaling User Guide.
+	//
+	// [Configure deletion protection for your Amazon EC2 Auto Scaling resources]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/resource-deletion-protection.html
 	DeletionProtection types.DeletionProtection
 
 	// The desired capacity is the initial capacity of the Auto Scaling group after
@@ -330,7 +338,7 @@ func (c *Client) addOperationUpdateAutoScalingGroupMiddlewares(stack *middleware
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -352,9 +360,6 @@ func (c *Client) addOperationUpdateAutoScalingGroupMiddlewares(stack *middleware
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

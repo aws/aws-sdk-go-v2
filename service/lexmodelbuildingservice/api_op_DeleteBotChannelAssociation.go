@@ -14,6 +14,8 @@ import (
 //
 // This operation requires permission for the lex:DeleteBotChannelAssociation
 // action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) DeleteBotChannelAssociation(ctx context.Context, params *DeleteBotChannelAssociationInput, optFns ...func(*Options)) (*DeleteBotChannelAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteBotChannelAssociationInput{}
@@ -91,7 +93,7 @@ func (c *Client) addOperationDeleteBotChannelAssociationMiddlewares(stack *middl
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -113,9 +115,6 @@ func (c *Client) addOperationDeleteBotChannelAssociationMiddlewares(stack *middl
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

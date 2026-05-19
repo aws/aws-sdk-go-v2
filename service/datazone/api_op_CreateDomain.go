@@ -29,13 +29,6 @@ func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, op
 
 type CreateDomainInput struct {
 
-	// The domain execution role that is created when an Amazon DataZone domain is
-	// created. The domain execution role is created in the Amazon Web Services account
-	// that houses the Amazon DataZone domain.
-	//
-	// This member is required.
-	DomainExecutionRole *string
-
 	// The name of the Amazon DataZone domain.
 	//
 	// This member is required.
@@ -47,6 +40,11 @@ type CreateDomainInput struct {
 
 	// The description of the Amazon DataZone domain.
 	Description *string
+
+	// The domain execution role that is created when an Amazon DataZone domain is
+	// created. The domain execution role is created in the Amazon Web Services account
+	// that houses the Amazon DataZone domain.
+	DomainExecutionRole *string
 
 	// The version of the domain that is created.
 	DomainVersion types.DomainVersion
@@ -153,7 +151,7 @@ func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, op
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -175,9 +173,6 @@ func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

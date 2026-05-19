@@ -40,7 +40,9 @@ func (c *Client) UpdateGameSession(ctx context.Context, params *UpdateGameSessio
 
 type UpdateGameSessionInput struct {
 
-	// A unique identifier for the game session to update.
+	// An identifier for the game session that is unique across all regions to update.
+	// The value is always a full ARN in the following format:
+	// arn:aws:gamelift:::gamesession// .
 	//
 	// This member is required.
 	GameSessionId *string
@@ -100,11 +102,11 @@ func (c *Client) addOperationUpdateGameSessionMiddlewares(stack *middleware.Stac
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateGameSession{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpUpdateGameSession{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateGameSession{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpUpdateGameSession{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -130,7 +132,7 @@ func (c *Client) addOperationUpdateGameSessionMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -154,10 +156,10 @@ func (c *Client) addOperationUpdateGameSessionMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
+	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

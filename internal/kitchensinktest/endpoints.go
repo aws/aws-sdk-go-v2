@@ -13,10 +13,12 @@ import (
 	internalendpoints "github.com/aws/aws-sdk-go-v2/internal/kitchensinktest/internal/endpoints"
 	smithyauth "github.com/aws/smithy-go/auth"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
+	"github.com/aws/smithy-go/endpoints/private/bdd"
 	"github.com/aws/smithy-go/endpoints/private/rulesfn"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"net/http"
 	"net/url"
 	"os"
 	"strings"
@@ -229,23 +231,93 @@ func bindRegion(region string) (*string, error) {
 // EndpointParameters provides the parameters that influence how endpoints are
 // resolved.
 type EndpointParameters struct {
+	// The AWS region
+	//
+	// AWS::Region
+	Region *string
+
+	// The item id
+	//
+	// Parameter is required.
+	Id *string
 }
 
-type stringSlice []string
-
-func (s stringSlice) Get(i int) *string {
-	if i < 0 || i >= len(s) {
-		return nil
+// ValidateRequired validates required parameters are set.
+func (p EndpointParameters) ValidateRequired() error {
+	if p.Region == nil {
+		return fmt.Errorf("parameter Region is required")
 	}
 
-	v := s[i]
-	return &v
+	return nil
+}
+
+// WithDefaults returns a shallow copy of EndpointParameterswith default values
+// applied to members where applicable.
+func (p EndpointParameters) WithDefaults() EndpointParameters {
+
+	return p
+}
+
+const bddRoot int32 = 2
+
+var bddNodes = [6]int32{
+	-1, 1, -1, 0, 100000001, 100000002}
+
+type conditionContext struct {
+}
+
+func evalCondition(idx int, params *EndpointParameters, c *conditionContext) bool {
+	switch idx {
+	case 0:
+		return params.Id != nil
+	}
+	return false
+}
+
+func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (smithyendpoints.Endpoint, error) {
+	switch idx {
+	case 0:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint resolution failed: no matching rule")
+	case 1:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://")
+			out.WriteString(*params.Id)
+			out.WriteString(".example.")
+			out.WriteString(*params.Region)
+			out.WriteString(".amazonaws.com")
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 2:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://example.")
+			out.WriteString(*params.Region)
+			out.WriteString(".amazonaws.com")
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	}
+	return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, invalid result index: %d", idx)
 }
 
 // EndpointResolverV2 provides the interface for resolving service endpoints.
 type EndpointResolverV2 interface {
-	// ResolveEndpoint attempts to resolve the endpoint with the provided options,
-	// returning the endpoint if found. Otherwise an error is returned.
 	ResolveEndpoint(ctx context.Context, params EndpointParameters) (
 		smithyendpoints.Endpoint, error,
 	)
@@ -265,7 +337,16 @@ func (r *resolver) ResolveEndpoint(
 ) (
 	endpoint smithyendpoints.Endpoint, err error,
 ) {
-	return endpoint, fmt.Errorf("no endpoint rules defined")
+	params = params.WithDefaults()
+	if err = params.ValidateRequired(); err != nil {
+		return endpoint, fmt.Errorf("endpoint parameters are not valid, %w", err)
+	}
+
+	c := &conditionContext{}
+	ref := bdd.Evaluate(bddNodes[:], bddRoot, func(idx int) bool {
+		return evalCondition(idx, &params, c)
+	})
+	return resolveResult(ref, &params, c)
 }
 
 type endpointParamsBinder interface {
@@ -274,6 +355,12 @@ type endpointParamsBinder interface {
 
 func bindEndpointParams(ctx context.Context, input interface{}, options Options) (*EndpointParameters, error) {
 	params := &EndpointParameters{}
+
+	region, err := bindRegion(options.Region)
+	if err != nil {
+		return nil, err
+	}
+	params.Region = region
 
 	if b, ok := input.(endpointParamsBinder); ok {
 		b.bindEndpointParams(params)

@@ -115,7 +115,7 @@ type RequestCertificateInput struct {
 	//
 	// Default: RSA_2048
 	//
-	// [Key algorithms]: https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate.html#algorithms
+	// [Key algorithms]: https://docs.aws.amazon.com/acm/latest/userguide/acm-certificate-characteristics.html#algorithms-term
 	KeyAlgorithm types.KeyAlgorithm
 
 	// Identifies the Amazon Web Services service that manages the certificate issued
@@ -224,7 +224,7 @@ func (c *Client) addOperationRequestCertificateMiddlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -246,9 +246,6 @@ func (c *Client) addOperationRequestCertificateMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

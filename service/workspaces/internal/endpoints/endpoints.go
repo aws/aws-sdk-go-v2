@@ -160,6 +160,9 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ap-southeast-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region: "ap-southeast-5",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -207,6 +210,9 @@ var defaultPartitions = endpoints.Partitions{
 			}: {
 				Hostname: "workspaces-fips.us-east-1.amazonaws.com",
 			},
+			endpoints.EndpointKey{
+				Region: "us-east-2",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{},

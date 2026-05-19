@@ -368,7 +368,7 @@
                 "GeneralAuthorizationUpdate": {
                     "target": "com.amazonaws.iotmanagedintegrations#GeneralAuthorizationUpdate",
                     "traits": {
-                        "smithy.api#documentation": "<p>The General Authorization update information containing authorization materials to add or update in Kinesis Data Streams.</p>"
+                        "smithy.api#documentation": "<p>The General Authorization update information containing authorization materials to add or update.</p>"
                     }
                 }
             },
@@ -2239,6 +2239,10 @@
                     "target": "com.amazonaws.iotmanagedintegrations#Capabilities",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#deprecated": {
+                            "message": "Capabilities has been deprecated, use CapabilityReport instead",
+                            "since": "06-25-2025"
+                        },
                         "smithy.api#documentation": "<p>The capabilities of the device such as light bulb.</p>"
                     }
                 },
@@ -2651,7 +2655,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Create a provisioning profile for a device to execute the provisioning flows using a provisioning template. The provisioning template is a document that defines the set of resources and policies applied to a device during the provisioning process.</p>",
+                "smithy.api#documentation": "<p>Create a provisioning profile for executing device provisioning flows. The provisioning profile is a document that defines the set of resources and policies applied to a device during the provisioning process.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/provisioning-profiles",
@@ -2674,21 +2678,21 @@
                     "target": "com.amazonaws.iotmanagedintegrations#CaCertificate",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "create-and-read",
-                        "smithy.api#documentation": "<p>The id of the certificate authority (CA) certificate.</p>"
+                        "smithy.api#documentation": "<p>The body of the PEM-encoded certificate authority (CA) certificate.</p>"
                     }
                 },
                 "ClaimCertificate": {
                     "target": "com.amazonaws.iotmanagedintegrations#ClaimCertificate",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "create-and-read",
-                        "smithy.api#documentation": "<p>The claim certificate.</p>"
+                        "smithy.api#documentation": "<p>The body of the PEM-encoded claim certificate. If a claim certificate is provided, it will be used for the provisioning profile. Otherwise, a claim certificate will be generated.</p>"
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileName",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "create-and-read",
-                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The name of the provisioning profile.</p>"
                     }
                 },
                 "ClientToken": {
@@ -2718,14 +2722,14 @@
                     "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileArn",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "read",
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the provisioning template used in the provisioning profile.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the provisioning profile.</p>"
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileName",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "full",
-                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The name of the provisioning profile.</p>"
                     }
                 },
                 "ProvisioningType": {
@@ -2742,18 +2746,25 @@
                         "smithy.api#documentation": "<p>The identifier of the provisioning profile.</p>"
                     }
                 },
+                "Status": {
+                    "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileStatus",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read",
+                        "smithy.api#documentation": "<p>The status of a provisioning profile.</p>"
+                    }
+                },
                 "ClaimCertificate": {
                     "target": "com.amazonaws.iotmanagedintegrations#ClaimCertificate",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "read",
-                        "smithy.api#documentation": "<p>The id of the claim certificate.</p>"
+                        "smithy.api#documentation": "<p>The body of the PEM-encoded claim certificate.</p>"
                     }
                 },
                 "ClaimCertificatePrivateKey": {
                     "target": "com.amazonaws.iotmanagedintegrations#ClaimCertificatePrivateKey",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
-                        "smithy.api#documentation": "<p>The private key of the claim certificate. This is stored securely on the device for validating the connection endpoint with IoT managed integrations using the public key.</p>"
+                        "smithy.api#documentation": "<p>The private key of the claim certificate. This may be stored securely on the device for validating the connection endpoint with IoT managed integrations using the public key.</p>"
                     }
                 }
             },
@@ -3466,6 +3477,9 @@
                     "target": "com.amazonaws.iotmanagedintegrations#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.iotmanagedintegrations#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.iotmanagedintegrations#InternalServerException"
                 },
                 {
@@ -3501,7 +3515,7 @@
                     "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileId",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "read",
-                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>",
+                        "smithy.api#documentation": "<p>The id of the provisioning profile.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5826,6 +5840,10 @@
                     "target": "com.amazonaws.iotmanagedintegrations#Capabilities",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#deprecated": {
+                            "message": "Capabilities has been deprecated, use CapabilityReport instead",
+                            "since": "06-25-2025"
+                        },
                         "smithy.api#documentation": "<p>The capabilities of the device such as light bulb.</p>"
                     }
                 },
@@ -6856,7 +6874,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get a provisioning profile by template name.</p>",
+                "smithy.api#documentation": "<p>Get details of a provisioning profile.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/provisioning-profiles/{Identifier}",
@@ -6889,7 +6907,7 @@
                     "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileId",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "read",
-                        "smithy.api#documentation": "<p>The provisioning template the device uses for the provisioning process.</p>",
+                        "smithy.api#documentation": "<p>The id of a provisioning profile.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6906,14 +6924,14 @@
                     "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileArn",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "read",
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the provisioning template used in the provisioning profile.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the provisioning profile.</p>"
                     }
                 },
                 "Name": {
                     "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileName",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "full",
-                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The name of the provisioning profile.</p>"
                     }
                 },
                 "ProvisioningType": {
@@ -6930,11 +6948,18 @@
                         "smithy.api#documentation": "<p>The provisioning profile id.</p>"
                     }
                 },
+                "Status": {
+                    "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileStatus",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read",
+                        "smithy.api#documentation": "<p>The status of a provisioning profile.</p>"
+                    }
+                },
                 "ClaimCertificate": {
                     "target": "com.amazonaws.iotmanagedintegrations#ClaimCertificate",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "read",
-                        "smithy.api#documentation": "<p>The id of the claim certificate.</p>"
+                        "smithy.api#documentation": "<p>The body of the PEM-encoded claim certificate.</p>"
                     }
                 },
                 "Tags": {
@@ -11772,6 +11797,41 @@
                 }
             }
         },
+        "com.amazonaws.iotmanagedintegrations#ProvisioningProfileStatus": {
+            "type": "enum",
+            "members": {
+                "CREATE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_IN_PROGRESS"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "CREATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED"
+                    }
+                },
+                "DELETE_IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_IN_PROGRESS"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.iotmanagedintegrations#ProvisioningProfileSummary": {
             "type": "structure",
             "members": {
@@ -11779,7 +11839,7 @@
                     "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileName",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "read",
-                        "smithy.api#documentation": "<p>The name of the provisioning template.</p>"
+                        "smithy.api#documentation": "<p>The name of the provisioning profile.</p>"
                     }
                 },
                 "Id": {
@@ -11793,7 +11853,7 @@
                     "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileArn",
                     "traits": {
                         "aws.cloudformation#cfnMutability": "read",
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the provisioning template used in the provisioning profile.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the provisioning profile.</p>"
                     }
                 },
                 "ProvisioningType": {
@@ -11801,6 +11861,13 @@
                     "traits": {
                         "aws.cloudformation#cfnMutability": "read",
                         "smithy.api#documentation": "<p>The type of provisioning workflow the device uses for onboarding to IoT managed integrations.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.iotmanagedintegrations#ProvisioningProfileStatus",
+                    "traits": {
+                        "aws.cloudformation#cfnMutability": "read",
+                        "smithy.api#documentation": "<p>The status of a provisioning profile.</p>"
                     }
                 }
             },
@@ -14434,6 +14501,10 @@
                     "target": "com.amazonaws.iotmanagedintegrations#Capabilities",
                     "traits": {
                         "aws.cloudformation#cfnExcludeProperty": {},
+                        "smithy.api#deprecated": {
+                            "message": "Capabilities has been deprecated, use CapabilityReport instead",
+                            "since": "06-25-2025"
+                        },
                         "smithy.api#documentation": "<p>The capabilities of the device such as light bulb.</p>"
                     }
                 },

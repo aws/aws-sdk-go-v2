@@ -93,7 +93,7 @@ type DescribeTrainingPlanOutput struct {
 	StatusMessage *string
 
 	// The target resources (e.g., SageMaker Training Jobs, SageMaker HyperPod,
-	// SageMaker Endpoints) that can use this training plan.
+	// SageMaker Endpoints, Studio apps) that can use this training plan.
 	//
 	// Training plans are specific to their target resource.
 	//
@@ -105,6 +105,9 @@ type DescribeTrainingPlanOutput struct {
 	//
 	//   - A training plan for SageMaker endpoints can be used exclusively to provide
 	//   compute resources to SageMaker endpoints for model deployment.
+	//
+	//   - A training plan for Studio apps can be used to launch JupyterLab and Code
+	//   Editor apps on reserved training plan capacity.
 	TargetResources []types.SageMakerResourceName
 
 	// The total number of instances reserved in this training plan.
@@ -160,7 +163,7 @@ func (c *Client) addOperationDescribeTrainingPlanMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -182,9 +185,6 @@ func (c *Client) addOperationDescribeTrainingPlanMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

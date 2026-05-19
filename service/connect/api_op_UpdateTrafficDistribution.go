@@ -24,7 +24,12 @@ import (
 // non-default TrafficDistributionGroup , an InvalidRequestException is returned.
 //
 // For more information about updating a traffic distribution group, see [Update telephony traffic distribution across Amazon Web Services Regions] in the
-// Amazon Connect Administrator Guide.
+// Connect Customer Administrator Guide.
+//
+// Important things to know
+//
+//   - Invoke the UpdateTrafficDistribution API in the region that should handle
+//     traffic.
 //
 // [TrafficDistributionGroup]: https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html
 // [Update telephony traffic distribution across Amazon Web Services Regions]: https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html
@@ -106,7 +111,7 @@ func (c *Client) addOperationUpdateTrafficDistributionMiddlewares(stack *middlew
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -128,9 +133,6 @@ func (c *Client) addOperationUpdateTrafficDistributionMiddlewares(stack *middlew
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

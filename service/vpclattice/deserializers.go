@@ -1165,6 +1165,15 @@ func awsRestjson1_deserializeOpDocumentCreateResourceGatewayOutput(v **CreateRes
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "resourceConfigDnsResolution":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceConfigDnsResolution to be of type string, got %T instead", value)
+				}
+				sv.ResourceConfigDnsResolution = types.ResourceConfigDnsResolution(jtv)
+			}
+
 		case "securityGroupIds":
 			if err := awsRestjson1_deserializeDocumentSecurityGroupList(&sv.SecurityGroupIds, value); err != nil {
 				return err
@@ -6538,6 +6547,15 @@ func awsRestjson1_deserializeOpDocumentGetResourceGatewayOutput(v **GetResourceG
 				sv.LastUpdatedAt = ptr.Time(t)
 			}
 
+		case "managedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ManagedBy = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6547,9 +6565,27 @@ func awsRestjson1_deserializeOpDocumentGetResourceGatewayOutput(v **GetResourceG
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "resourceConfigDnsResolution":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceConfigDnsResolution to be of type string, got %T instead", value)
+				}
+				sv.ResourceConfigDnsResolution = types.ResourceConfigDnsResolution(jtv)
+			}
+
 		case "securityGroupIds":
 			if err := awsRestjson1_deserializeDocumentSecurityGroupList(&sv.SecurityGroupIds, value); err != nil {
 				return err
+			}
+
+		case "serviceManaged":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.ServiceManaged = ptr.Bool(jtv)
 			}
 
 		case "status":
@@ -16503,6 +16539,15 @@ func awsRestjson1_deserializeDocumentResourceGatewaySummary(v **types.ResourceGa
 					return fmt.Errorf("expected ResourceGatewayName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "resourceConfigDnsResolution":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceConfigDnsResolution to be of type string, got %T instead", value)
+				}
+				sv.ResourceConfigDnsResolution = types.ResourceConfigDnsResolution(jtv)
 			}
 
 		case "securityGroupIds":

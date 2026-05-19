@@ -3005,6 +3005,9 @@
                     "target": "com.amazonaws.route53globalresolver#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.route53globalresolver#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.route53globalresolver#InternalServerException"
                 },
                 {
@@ -6638,7 +6641,7 @@
                     "min": 1,
                     "max": 39
                 },
-                "smithy.api#pattern": "^(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}$"
+                "smithy.api#pattern": "^(?:[A-Fa-f0-9]{0,4}:){2,7}[A-Fa-f0-9]{1,4}$"
             }
         },
         "com.amazonaws.route53globalresolver#IPv6Addresses": {
@@ -9210,6 +9213,12 @@
                     "target": "com.amazonaws.route53globalresolver#GlobalResolverIpAddressType",
                     "traits": {
                         "smithy.api#documentation": "<p>The IP address type for the Global Resolver. Valid values are IPV4 or DUAL_STACK for both IPv4 and IPv6 support.</p>"
+                    }
+                },
+                "regions": {
+                    "target": "com.amazonaws.route53globalresolver#Regions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Amazon Web Services Regions where the Global Resolver will operate. The resolver will be distributed across these Regions to provide global availability and low-latency DNS resolution.</p>"
                     }
                 }
             },

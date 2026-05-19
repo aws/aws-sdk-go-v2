@@ -10,14 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Replicates an Amazon Connect instance in the specified Amazon Web Services
-// Region and copies configuration information for Amazon Connect resources across
-// Amazon Web Services Regions.
+// Replicates an Connect Customer instance in the specified Amazon Web Services
+// Region and copies configuration information for Connect Customer resources
+// across Amazon Web Services Regions.
 //
-// For more information about replicating an Amazon Connect instance, see [Create a replica of your existing Amazon Connect instance] in the
-// Amazon Connect Administrator Guide.
+// For more information about replicating an Connect Customer instance, see [Create a replica of your existing Connect Customer instance] in
+// the Connect Customer Administrator Guide.
 //
-// [Create a replica of your existing Amazon Connect instance]: https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html
+// [Create a replica of your existing Connect Customer instance]: https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html
 func (c *Client) ReplicateInstance(ctx context.Context, params *ReplicateInstanceInput, optFns ...func(*Options)) (*ReplicateInstanceOutput, error) {
 	if params == nil {
 		params = &ReplicateInstanceInput{}
@@ -35,8 +35,9 @@ func (c *Client) ReplicateInstance(ctx context.Context, params *ReplicateInstanc
 
 type ReplicateInstanceInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance. You can provide the InstanceId , or the entire ARN.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance. You can provide the InstanceId , or the
+	// entire ARN.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -48,7 +49,7 @@ type ReplicateInstanceInput struct {
 	// This member is required.
 	ReplicaAlias *string
 
-	// The Amazon Web Services Region where to replicate the Amazon Connect instance.
+	// The Amazon Web Services Region where to replicate the Connect Customer instance.
 	//
 	// This member is required.
 	ReplicaRegion *string
@@ -113,7 +114,7 @@ func (c *Client) addOperationReplicateInstanceMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -135,9 +136,6 @@ func (c *Client) addOperationReplicateInstanceMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

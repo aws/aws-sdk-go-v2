@@ -31,11 +31,12 @@ type ListServiceJobsInput struct {
 
 	// The filter to apply to the query. Only one filter can be used at a time. When
 	// the filter is used, jobStatus is ignored with the exception that
-	// SHARE_IDENTIFIER and jobStatus can be used together. The results are sorted by
-	// the createdAt field, with the most recent jobs being first.
+	// SHARE_IDENTIFIER or QUOTA_SHARE_NAME and jobStatus can be used together. The
+	// results are sorted by the createdAt field, with the most recent jobs being
+	// first.
 	//
-	// The SHARE_IDENTIFIER filter and the jobStatus field can be used together to
-	// filter results.
+	// The SHARE_IDENTIFIER or QUOTA_SHARE_NAME filter and the jobStatus field can be
+	// used together to filter results.
 	//
 	// JOB_NAME The value of the filter is a case-insensitive match for the job name.
 	// If the value ends with an asterisk (*), the filter matches any job name that
@@ -56,6 +57,8 @@ type ListServiceJobsInput struct {
 	//
 	// SHARE_IDENTIFIER The value for the filter is the fairshare scheduling share
 	// identifier.
+	//
+	// QUOTA_SHARE_NAME The value for the filter is the quota management share name.
 	Filters []types.KeyValuesPair
 
 	// The name or ARN of the job queue with which to list service jobs.
@@ -63,12 +66,12 @@ type ListServiceJobsInput struct {
 
 	// The job status used to filter service jobs in the specified queue. If the
 	// filters parameter is specified, the jobStatus parameter is ignored and jobs
-	// with any status are returned. The exception is the SHARE_IDENTIFIER filter and
-	// jobStatus can be used together. If you don't specify a status, only RUNNING
-	// jobs are returned.
+	// with any status are returned. The exceptions are the SHARE_IDENTIFIER filter
+	// and QUOTA_SHARE_NAME filter, which can be used with jobStatus . If you don't
+	// specify a status, only RUNNING jobs are returned.
 	//
-	// The SHARE_IDENTIFIER filter and the jobStatus field can be used together to
-	// filter results.
+	// The SHARE_IDENTIFIER filter or QUOTA_SHARE_NAME filter can be used with the
+	// jobStatus field to filter results.
 	JobStatus types.ServiceJobStatus
 
 	// The maximum number of results returned by ListServiceJobs in paginated output.
@@ -145,7 +148,7 @@ func (c *Client) addOperationListServiceJobsMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -167,9 +170,6 @@ func (c *Client) addOperationListServiceJobsMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

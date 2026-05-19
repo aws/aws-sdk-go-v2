@@ -57,6 +57,8 @@ import (
 // For more information, see how-it-works.
 //
 // This operation requires permissions for the lex:PutIntent action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) PutIntent(ctx context.Context, params *PutIntentInput, optFns ...func(*Options)) (*PutIntentOutput, error) {
 	if params == nil {
 		params = &PutIntentInput{}
@@ -324,7 +326,7 @@ func (c *Client) addOperationPutIntentMiddlewares(stack *middleware.Stack, optio
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -346,9 +348,6 @@ func (c *Client) addOperationPutIntentMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -7,6 +7,28 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 )
 
+func ExampleBatchRunSettings_outputUsage() {
+	var union types.BatchRunSettings
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.BatchRunSettingsMemberInlineSettings:
+		_ = v.Value // Value is []types.InlineSetting
+
+	case *types.BatchRunSettingsMemberS3UriSettings:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+var _ []types.InlineSetting
+
 func ExampleFormatOptions_outputUsage() {
 	var union types.FormatOptions
 	// type switches can be used to check the union value

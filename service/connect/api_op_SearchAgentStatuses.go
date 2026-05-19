@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches AgentStatuses in an Amazon Connect instance, with optional filtering.
+// Searches AgentStatuses in an Connect Customer instance, with optional filtering.
 func (c *Client) SearchAgentStatuses(ctx context.Context, params *SearchAgentStatusesInput, optFns ...func(*Options)) (*SearchAgentStatusesOutput, error) {
 	if params == nil {
 		params = &SearchAgentStatusesInput{}
@@ -29,7 +29,7 @@ func (c *Client) SearchAgentStatuses(ctx context.Context, params *SearchAgentSta
 
 type SearchAgentStatusesInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// The identifier of the Connect Customer instance. You can find the instanceId in
 	// the ARN of the instance.
 	//
 	// This member is required.
@@ -102,7 +102,7 @@ func (c *Client) addOperationSearchAgentStatusesMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -124,9 +124,6 @@ func (c *Client) addOperationSearchAgentStatusesMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -71,15 +71,15 @@ all: generate unit
 ###################
 # Code Generation #
 ###################
-.PHONY: generate smithy-generate smithy-build smithy-build-% smithy-clean smithy-go-publish-local format \
+.PHONY: generate smithy-generate smithy-generate-protocol-tests smithy-build-% smithy-clean smithy-go-publish-local format \
 gen-config-asserts gen-repo-mod-replace gen-mod-replace-smithy gen-mod-dropreplace-smithy-% gen-aws-ptrs tidy-modules-% \
 add-module-license-files sync-models sync-endpoints-model sync-endpoints.json clone-v1-models gen-internal-codegen \
 sync-api-models copy-attributevalue-feature min-go-version-% update-requires smithy-annotate-stable \
 update-module-metadata download-modules-%
 
-generate: smithy-generate update-requires gen-repo-mod-replace update-module-metadata smithy-annotate-stable \
+generate: smithy-generate smithy-generate-protocol-tests update-requires gen-repo-mod-replace update-module-metadata smithy-annotate-stable \
 gen-config-asserts gen-internal-codegen copy-attributevalue-feature gen-mod-dropreplace-smithy-. min-go-version-. \
-tidy-modules-. add-module-license-files gen-aws-ptrs format
+tidy-modules-. test-update-snapshot-internal_protocoltest add-module-license-files gen-aws-ptrs format
 
 generate-tmpreplace-smithy: smithy-generate update-requires gen-repo-mod-replace gen-mod-replace-smithy-. update-module-metadata smithy-annotate-stable \
 gen-config-asserts gen-internal-codegen copy-attributevalue-feature min-go-version-. \
@@ -97,11 +97,16 @@ gen-config-asserts gen-internal-codegen tidy-modules-config tidy-modules-aws tid
 reset-sum:
 	find . -name go.sum -exec git checkout -- {} \;
 
+# Codegen is split into two loops:
+#   1. smithy-generate: builds SDK services and kitchensink tests (protocol-test-codegen is excluded)
+#   2. smithy-generate-protocol-tests: builds protocol tests independently (generates smithy-build.json, runs buildSdk, copies output)
+# Both are invoked by the top-level `generate` target. To regenerate only one,
+# call the specific target directly.
 smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
 
-smithy-build:
-	cd codegen && ./gradlew clean build -Plog-tests
+smithy-generate-protocol-tests:
+	cd codegen && SMITHY_GO_BUILD_API= ./gradlew :protocol-test-codegen:build -Plog-tests && ./gradlew :protocol-test-codegen:clean
 
 # suffix-to-path pattern
 # Targets with pattern suffix -% convert the suffix to a path by:

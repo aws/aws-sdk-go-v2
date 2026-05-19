@@ -137,9 +137,10 @@ type PurchaseOption string
 
 // Enum values for PurchaseOption
 const (
-	PurchaseOptionOndemand      PurchaseOption = "ONDEMAND"
-	PurchaseOptionSpot          PurchaseOption = "SPOT"
-	PurchaseOptionCapacityBlock PurchaseOption = "CAPACITY_BLOCK"
+	PurchaseOptionOndemand                         PurchaseOption = "ONDEMAND"
+	PurchaseOptionSpot                             PurchaseOption = "SPOT"
+	PurchaseOptionCapacityBlock                    PurchaseOption = "CAPACITY_BLOCK"
+	PurchaseOptionInterruptibleCapacityReservation PurchaseOption = "INTERRUPTIBLE_CAPACITY_RESERVATION"
 )
 
 // Values returns all known values for PurchaseOption. Note that this can be
@@ -151,6 +152,7 @@ func (PurchaseOption) Values() []PurchaseOption {
 		"ONDEMAND",
 		"SPOT",
 		"CAPACITY_BLOCK",
+		"INTERRUPTIBLE_CAPACITY_RESERVATION",
 	}
 }
 

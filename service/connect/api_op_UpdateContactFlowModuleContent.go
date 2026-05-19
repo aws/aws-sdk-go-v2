@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates specified flow module for the specified Amazon Connect instance.
+// Updates specified flow module for the specified Connect Customer instance.
 //
 // Use the $SAVED alias in the request to describe the SAVED content of a Flow.
 // For example, arn:aws:.../contact-flow/{id}:$SAVED . After a flow is published,
@@ -37,17 +37,17 @@ type UpdateContactFlowModuleContentInput struct {
 	// This member is required.
 	ContactFlowModuleId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
-	// The JSON string that represents the content of the flow. For an example, see [Example flow in Amazon Connect Flow language].
+	// The JSON string that represents the content of the flow. For an example, see [Example flow in Connect Customer Flow language].
 	//
-	// [Example flow in Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
+	// [Example flow in Connect Customer Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
 	Content *string
 
 	// Serialized JSON string of the flow module Settings schema.
@@ -97,7 +97,7 @@ func (c *Client) addOperationUpdateContactFlowModuleContentMiddlewares(stack *mi
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -119,9 +119,6 @@ func (c *Client) addOperationUpdateContactFlowModuleContentMiddlewares(stack *mi
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

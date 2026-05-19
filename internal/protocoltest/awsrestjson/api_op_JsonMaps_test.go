@@ -401,38 +401,9 @@ func TestClient_JsonMaps_Deserialize(t *testing.T) {
 				},
 			},
 		},
-		// Clients SHOULD tolerate seeing a null value in a dense map, and they SHOULD
-		// drop the null key-value pair.
-		"RestJsonDeserializesDenseSetMapAndSkipsNull": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type": []string{"application/json"},
-			},
-			BodyMediaType: "application/json",
-			Body: []byte(`{
-			    "denseSetMap": {
-			        "x": [],
-			        "y": ["a", "b"],
-			        "z": null
-			    }
-			}`),
-			ExpectResult: &JsonMapsOutput{
-				DenseSetMap: map[string][]string{
-					"x": {},
-					"y": {
-						"a",
-						"b",
-					},
-				},
-			},
-		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			if name == "RestJsonDeserializesDenseSetMapAndSkipsNull" {
-				t.Skip("disabled test aws.protocoltests.restjson#RestJson aws.protocoltests.restjson#JsonMaps")
-			}
-
 			serverURL := "http://localhost:8888/"
 			client := New(Options{
 				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
@@ -552,29 +523,6 @@ func BenchmarkClient_JsonMaps_Deserialize(b *testing.B) {
 			    "denseSetMap": {
 			        "x": [],
 			        "y": ["a", "b"]
-			    }
-			}`),
-			ExpectResult: &JsonMapsOutput{
-				DenseSetMap: map[string][]string{
-					"x": {},
-					"y": {
-						"a",
-						"b",
-					},
-				},
-			},
-		},
-		"RestJsonDeserializesDenseSetMapAndSkipsNull": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type": []string{"application/json"},
-			},
-			BodyMediaType: "application/json",
-			Body: []byte(`{
-			    "denseSetMap": {
-			        "x": [],
-			        "y": ["a", "b"],
-			        "z": null
 			    }
 			}`),
 			ExpectResult: &JsonMapsOutput{

@@ -89,6 +89,27 @@ func (DataSourceType) Values() []DataSourceType {
 	}
 }
 
+type IPAddressType string
+
+// Enum values for IPAddressType
+const (
+	// Indicates that connections to this workspace can only be made over IPv4.
+	IPAddressTypeIpv4 IPAddressType = "IPv4"
+	// Indicates that connections to this workspace can be made over IPv4 or IPv6.
+	IPAddressTypeDualStack IPAddressType = "DualStack"
+)
+
+// Values returns all known values for IPAddressType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IPAddressType) Values() []IPAddressType {
+	return []IPAddressType{
+		"IPv4",
+		"DualStack",
+	}
+}
+
 type LicenseType string
 
 // Enum values for LicenseType
@@ -289,6 +310,8 @@ const (
 	WorkspaceStatusVersionUpdating WorkspaceStatus = "VERSION_UPDATING"
 	// Workspace version update failed.
 	WorkspaceStatusVersionUpdateFailed WorkspaceStatus = "VERSION_UPDATE_FAILED"
+	// Workspace is degraded.
+	WorkspaceStatusDegraded WorkspaceStatus = "DEGRADED"
 )
 
 // Values returns all known values for WorkspaceStatus. Note that this can be
@@ -310,5 +333,6 @@ func (WorkspaceStatus) Values() []WorkspaceStatus {
 		"LICENSE_REMOVAL_FAILED",
 		"VERSION_UPDATING",
 		"VERSION_UPDATE_FAILED",
+		"DEGRADED",
 	}
 }

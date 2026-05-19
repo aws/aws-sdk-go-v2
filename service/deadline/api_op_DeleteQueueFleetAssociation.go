@@ -26,6 +26,8 @@ func (c *Client) DeleteQueueFleetAssociation(ctx context.Context, params *Delete
 	return out, nil
 }
 
+// Identifier mixin for queue-fleet association operations. Composes
+// QueueIdentifierMixin (farmId + queueId) and adds fleetId.
 type DeleteQueueFleetAssociationInput struct {
 
 	// The farm ID of the farm that holds the queue-fleet association.
@@ -87,7 +89,7 @@ func (c *Client) addOperationDeleteQueueFleetAssociationMiddlewares(stack *middl
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -109,9 +111,6 @@ func (c *Client) addOperationDeleteQueueFleetAssociationMiddlewares(stack *middl
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

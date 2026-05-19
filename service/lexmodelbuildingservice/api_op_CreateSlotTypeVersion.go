@@ -24,6 +24,8 @@ import (
 // Subsequent versions increment by 1. For more information, see versioning-intro.
 //
 // This operation requires permissions for the lex:CreateSlotTypeVersion action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) CreateSlotTypeVersion(ctx context.Context, params *CreateSlotTypeVersionInput, optFns ...func(*Options)) (*CreateSlotTypeVersionOutput, error) {
 	if params == nil {
 		params = &CreateSlotTypeVersionInput{}
@@ -132,7 +134,7 @@ func (c *Client) addOperationCreateSlotTypeVersionMiddlewares(stack *middleware.
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -154,9 +156,6 @@ func (c *Client) addOperationCreateSlotTypeVersionMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

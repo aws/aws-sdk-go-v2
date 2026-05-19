@@ -1325,6 +1325,13 @@ func awsRestjson1_serializeOpDocumentStartDICOMImportJobInput(v *StartDICOMImpor
 		ok.String(*v.DataAccessRoleArn)
 	}
 
+	if v.ImportConfiguration != nil {
+		ok := object.Key("importConfiguration")
+		if err := awsRestjson1_serializeDocumentImportConfiguration(v.ImportConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InputOwnerAccountId != nil {
 		ok := object.Key("inputOwnerAccountId")
 		ok.String(*v.InputOwnerAccountId)
@@ -1618,6 +1625,10 @@ func awsRestjson1_serializeOpHttpBindingsUpdateImageSetMetadataInput(v *UpdateIm
 		}
 	}
 
+	if v.IncludeStudyImageSets != nil {
+		encoder.SetQuery("includeStudyImageSets").Boolean(*v.IncludeStudyImageSets)
+	}
+
 	if v.LatestVersionId != nil {
 		encoder.SetQuery("latestVersion").String(*v.LatestVersionId)
 	}
@@ -1682,6 +1693,55 @@ func awsRestjson1_serializeDocumentCopySourceImageSetInformation(v *types.CopySo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDicomJsonMetadataImportConfiguration(v *types.DicomJsonMetadataImportConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DicomMetadataMappings != nil {
+		ok := object.Key("dicomMetadataMappings")
+		if err := awsRestjson1_serializeDocumentDicomMetadataMappings(v.DicomMetadataMappings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDicomMetadataMapping(v *types.DicomMetadataMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetadataFilePath != nil {
+		ok := object.Key("metadataFilePath")
+		ok.String(*v.MetadataFilePath)
+	}
+
+	if v.SeriesInstanceUID != nil {
+		ok := object.Key("seriesInstanceUID")
+		ok.String(*v.SeriesInstanceUID)
+	}
+
+	if v.StudyInstanceUID != nil {
+		ok := object.Key("studyInstanceUID")
+		ok.String(*v.StudyInstanceUID)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDicomMetadataMappings(v []types.DicomMetadataMapping, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentDicomMetadataMapping(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDICOMStudyDateAndTime(v *types.DICOMStudyDateAndTime, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1725,6 +1785,24 @@ func awsRestjson1_serializeDocumentImageFrameInformation(v *types.ImageFrameInfo
 		ok.String(*v.ImageFrameId)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentImportConfiguration(v types.ImportConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.ImportConfigurationMemberDicomJsonMetadataImportConfiguration:
+		av := object.Key("dicomJsonMetadataImportConfiguration")
+		if err := awsRestjson1_serializeDocumentDicomJsonMetadataImportConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
 	return nil
 }
 

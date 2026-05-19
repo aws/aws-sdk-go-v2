@@ -23,6 +23,7 @@
         "api_op_RequestCertificate.go",
         "api_op_ResendValidationEmail.go",
         "api_op_RevokeCertificate.go",
+        "api_op_SearchCertificates.go",
         "api_op_UpdateCertificateOptions.go",
         "auth.go",
         "deserializers.go",
@@ -40,6 +41,7 @@
         "types/enums.go",
         "types/errors.go",
         "types/types.go",
+        "types/types_exported_test.go",
         "validators.go"
     ],
     "go": "1.24",

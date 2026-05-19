@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified user. You can [find the instance ID in the Amazon Connect console] (it’s the final part of the ARN). The
+// Describes the specified user. You can [find the instance ID in the Connect Customer console] (it’s the final part of the ARN). The
 // console does not display the user IDs. Instead, list the users and note the IDs
 // provided in the output.
 //
-// [find the instance ID in the Amazon Connect console]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
+// [find the instance ID in the Connect Customer console]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 func (c *Client) DescribeUser(ctx context.Context, params *DescribeUserInput, optFns ...func(*Options)) (*DescribeUserOutput, error) {
 	if params == nil {
 		params = &DescribeUserInput{}
@@ -33,8 +33,8 @@ func (c *Client) DescribeUser(ctx context.Context, params *DescribeUserInput, op
 
 type DescribeUserInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -94,7 +94,7 @@ func (c *Client) addOperationDescribeUserMiddlewares(stack *middleware.Stack, op
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -116,9 +116,6 @@ func (c *Client) addOperationDescribeUserMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

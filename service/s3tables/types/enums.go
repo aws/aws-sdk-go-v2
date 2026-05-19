@@ -143,6 +143,23 @@ func (ReplicationStatus) Values() []ReplicationStatus {
 	}
 }
 
+type SchemaV2FieldType string
+
+// Enum values for SchemaV2FieldType
+const (
+	SchemaV2FieldTypeStruct SchemaV2FieldType = "struct"
+)
+
+// Values returns all known values for SchemaV2FieldType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SchemaV2FieldType) Values() []SchemaV2FieldType {
+	return []SchemaV2FieldType{
+		"struct",
+	}
+}
+
 type SSEAlgorithm string
 
 // Enum values for SSEAlgorithm

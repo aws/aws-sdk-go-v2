@@ -12,10 +12,10 @@ import (
 )
 
 // Creates a new threat entity set. In a threat entity set, you can provide known
-// malicious IP addresses and domains for your Amazon Web Services environment.
-// GuardDuty generates findings based on the entries in the threat entity sets.
-// Only users of the administrator account can manage entity sets, which
-// automatically apply to member accounts.
+// malicious threat entities for your Amazon Web Services environment. GuardDuty
+// generates findings based on the entries in the threat entity sets. Only users of
+// the administrator account can manage entity sets, which automatically apply to
+// member accounts.
 func (c *Client) CreateThreatEntitySet(ctx context.Context, params *CreateThreatEntitySetInput, optFns ...func(*Options)) (*CreateThreatEntitySetOutput, error) {
 	if params == nil {
 		params = &CreateThreatEntitySetInput{}
@@ -134,7 +134,7 @@ func (c *Client) addOperationCreateThreatEntitySetMiddlewares(stack *middleware.
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -156,9 +156,6 @@ func (c *Client) addOperationCreateThreatEntitySetMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

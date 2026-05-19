@@ -413,6 +413,8 @@ const (
 	RouteFerryNoticeCodeViolatedAvoidRailFerry                   RouteFerryNoticeCode = "ViolatedAvoidRailFerry"
 	RouteFerryNoticeCodeSeasonalClosure                          RouteFerryNoticeCode = "SeasonalClosure"
 	RouteFerryNoticeCodePotentialViolatedVehicleRestrictionUsage RouteFerryNoticeCode = "PotentialViolatedVehicleRestrictionUsage"
+	RouteFerryNoticeCodeViolatedAvoidAreas                       RouteFerryNoticeCode = "ViolatedAvoidAreas"
+	RouteFerryNoticeCodeViolatedVehicleRestriction               RouteFerryNoticeCode = "ViolatedVehicleRestriction"
 )
 
 // Values returns all known values for RouteFerryNoticeCode. Note that this can be
@@ -428,6 +430,8 @@ func (RouteFerryNoticeCode) Values() []RouteFerryNoticeCode {
 		"ViolatedAvoidRailFerry",
 		"SeasonalClosure",
 		"PotentialViolatedVehicleRestrictionUsage",
+		"ViolatedAvoidAreas",
+		"ViolatedVehicleRestriction",
 	}
 }
 
@@ -734,6 +738,7 @@ const (
 	RoutePedestrianNoticeCodeViolatedAvoidDirtRoad       RoutePedestrianNoticeCode = "ViolatedAvoidDirtRoad"
 	RoutePedestrianNoticeCodeViolatedAvoidTunnel         RoutePedestrianNoticeCode = "ViolatedAvoidTunnel"
 	RoutePedestrianNoticeCodeViolatedPedestrianOption    RoutePedestrianNoticeCode = "ViolatedPedestrianOption"
+	RoutePedestrianNoticeCodeViolatedAvoidAreas          RoutePedestrianNoticeCode = "ViolatedAvoidAreas"
 )
 
 // Values returns all known values for RoutePedestrianNoticeCode. Note that this
@@ -747,6 +752,7 @@ func (RoutePedestrianNoticeCode) Values() []RoutePedestrianNoticeCode {
 		"ViolatedAvoidDirtRoad",
 		"ViolatedAvoidTunnel",
 		"ViolatedPedestrianOption",
+		"ViolatedAvoidAreas",
 	}
 }
 
@@ -762,9 +768,6 @@ const (
 	RoutePedestrianTravelStepTypeRoundaboutExit  RoutePedestrianTravelStepType = "RoundaboutExit"
 	RoutePedestrianTravelStepTypeRoundaboutPass  RoutePedestrianTravelStepType = "RoundaboutPass"
 	RoutePedestrianTravelStepTypeTurn            RoutePedestrianTravelStepType = "Turn"
-	RoutePedestrianTravelStepTypeExit            RoutePedestrianTravelStepType = "Exit"
-	RoutePedestrianTravelStepTypeRamp            RoutePedestrianTravelStepType = "Ramp"
-	RoutePedestrianTravelStepTypeUTurn           RoutePedestrianTravelStepType = "UTurn"
 )
 
 // Values returns all known values for RoutePedestrianTravelStepType. Note that
@@ -782,9 +785,6 @@ func (RoutePedestrianTravelStepType) Values() []RoutePedestrianTravelStepType {
 		"RoundaboutExit",
 		"RoundaboutPass",
 		"Turn",
-		"Exit",
-		"Ramp",
-		"UTurn",
 	}
 }
 
@@ -1356,6 +1356,7 @@ const (
 	RouteVehicleNoticeCodeViolatedTurnRestriction                  RouteVehicleNoticeCode = "ViolatedTurnRestriction"
 	RouteVehicleNoticeCodeViolatedVehicleRestriction               RouteVehicleNoticeCode = "ViolatedVehicleRestriction"
 	RouteVehicleNoticeCodeViolatedZoneRestriction                  RouteVehicleNoticeCode = "ViolatedZoneRestriction"
+	RouteVehicleNoticeCodeTravelTimeExceedsDriverWorkHours         RouteVehicleNoticeCode = "TravelTimeExceedsDriverWorkHours"
 )
 
 // Values returns all known values for RouteVehicleNoticeCode. Note that this can
@@ -1391,6 +1392,7 @@ func (RouteVehicleNoticeCode) Values() []RouteVehicleNoticeCode {
 		"ViolatedTurnRestriction",
 		"ViolatedVehicleRestriction",
 		"ViolatedZoneRestriction",
+		"TravelTimeExceedsDriverWorkHours",
 	}
 }
 
@@ -1542,12 +1544,8 @@ const (
 	// No such operation is supported.
 	ValidationExceptionReasonUnknownOperation ValidationExceptionReason = "UnknownOperation"
 	// The required input is missing.
-	ValidationExceptionReasonMissing ValidationExceptionReason = "Missing"
-	// The input cannot be parsed. For example a required JSON document, ARN
-	// identifier, date value, or numeric field cannot be parsed.
-	ValidationExceptionReasonCannotParse ValidationExceptionReason = "CannotParse"
-	// The input is present and parsable, but it is otherwise invalid. For example, a
-	// required numeric argument is outside the allowed range.
+	ValidationExceptionReasonMissing               ValidationExceptionReason = "Missing"
+	ValidationExceptionReasonCannotParse           ValidationExceptionReason = "CannotParse"
 	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "FieldValidationFailed"
 	// The input is invalid but no more specific reason is applicable.
 	ValidationExceptionReasonOther ValidationExceptionReason = "Other"

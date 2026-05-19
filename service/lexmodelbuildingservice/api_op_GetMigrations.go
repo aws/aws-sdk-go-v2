@@ -12,6 +12,8 @@ import (
 )
 
 // Gets a list of migrations between Amazon Lex V1 and Amazon Lex V2.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetMigrations(ctx context.Context, params *GetMigrationsInput, optFns ...func(*Options)) (*GetMigrationsOutput, error) {
 	if params == nil {
 		params = &GetMigrationsInput{}
@@ -106,7 +108,7 @@ func (c *Client) addOperationGetMigrationsMiddlewares(stack *middleware.Stack, o
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -128,9 +130,6 @@ func (c *Client) addOperationGetMigrationsMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

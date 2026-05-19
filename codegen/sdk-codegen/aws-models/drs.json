@@ -187,7 +187,7 @@
                     "min": 0,
                     "max": 255
                 },
-                "smithy.api#pattern": "^(us(-gov)?|ap|ca|cn|eu|sa|af|me|il)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9][a-z]$"
+                "smithy.api#pattern": "^(us(-gov)?|ap|ca|cn|eu|eusc|sa|af|me|il)-([a-z]{2}-)?(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9][a-z]$"
             }
         },
         "com.amazonaws.drs#AwsRegion": {
@@ -197,7 +197,7 @@
                     "min": 0,
                     "max": 255
                 },
-                "smithy.api#pattern": "^(us(-gov)?|ap|ca|cn|eu|sa|af|me|il)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$"
+                "smithy.api#pattern": "^(us(-gov)?|ap|ca|cn|eu|eusc|sa|af|me|il)-([a-z]{2}-)?(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-[0-9]$"
             }
         },
         "com.amazonaws.drs#BoundedString": {
@@ -560,8 +560,7 @@
                 "associateDefaultSecurityGroup": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Whether to associate the default Elastic Disaster Recovery Security group with the Replication Configuration Template.</p>"
                     }
                 },
                 "replicationServersSecurityGroupsIDs": {
@@ -574,22 +573,19 @@
                 "replicationServerInstanceType": {
                     "target": "com.amazonaws.drs#EC2InstanceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The instance type to be used for the replication server.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The instance type to be used for the replication server.</p>"
                     }
                 },
                 "useDedicatedReplicationServer": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to use a dedicated Replication Server in the replication staging area.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Whether to use a dedicated Replication Server in the replication staging area.</p>"
                     }
                 },
                 "defaultLargeStagingDiskType": {
                     "target": "com.amazonaws.drs#ReplicationConfigurationDefaultLargeStagingDiskType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Staging Disk EBS volume type to be used during replication.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Staging Disk EBS volume type to be used during replication.</p>"
                     }
                 },
                 "ebsEncryption": {
@@ -616,15 +612,13 @@
                 "dataPlaneRouting": {
                     "target": "com.amazonaws.drs#ReplicationConfigurationDataPlaneRouting",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data plane routing mechanism that will be used for replication.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The data plane routing mechanism that will be used for replication.</p>"
                     }
                 },
                 "createPublicIP": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to create a Public IP for the Recovery Instance by default.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Whether to create a Public IP for the Recovery Instance by default.</p>"
                     }
                 },
                 "stagingAreaTags": {
@@ -652,7 +646,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>"
                     }
+                },
+                "internetProtocol": {
+                    "target": "com.amazonaws.drs#InternetProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.drs#CreateSourceNetwork": {
@@ -3777,6 +3780,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to use Private IP for the failback replication of the Recovery Instance.</p>"
                     }
+                },
+                "internetProtocol": {
+                    "target": "com.amazonaws.drs#InternetProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>"
+                    }
                 }
             }
         },
@@ -4040,6 +4049,21 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.drs#InternetProtocol": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IPV4",
+                        "name": "IPV4"
+                    },
+                    {
+                        "value": "IPV6",
+                        "name": "IPV6"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.drs#Job": {
             "type": "structure",
             "members": {
@@ -4107,6 +4131,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A job is an asynchronous workflow.</p>"
+            }
+        },
+        "com.amazonaws.drs#JobEventAttemptCount": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 9
+                }
             }
         },
         "com.amazonaws.drs#JobID": {
@@ -4297,6 +4331,20 @@
                     "target": "com.amazonaws.drs#EventResourceData",
                     "traits": {
                         "smithy.api#documentation": "<p>Properties of resource related to a job event.</p>"
+                    }
+                },
+                "attemptCount": {
+                    "target": "com.amazonaws.drs#JobEventAttemptCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>Retries for this operation.</p>"
+                    }
+                },
+                "maxAttemptsCount": {
+                    "target": "com.amazonaws.drs#JobEventAttemptCount",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The maximum number of retries that will be attempted if this operation failed.</p>"
                     }
                 }
             },
@@ -5160,7 +5208,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of source servers on a staging account that are extensible, which means that:\n            a. The source server is not already extended into this Account.\n            b. The source server on the Account we’re reading from is not an extension of another source server.\n        </p>",
+                "smithy.api#documentation": "<p>Returns a list of source servers on a staging account that are extensible, which means that: a. The source server is not already extended into this Account. b. The source server on the Account we’re reading from is not an extension of another source server. </p>",
                 "smithy.api#http": {
                     "uri": "/ListExtensibleSourceServers",
                     "method": "POST",
@@ -6852,6 +6900,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>"
                     }
+                },
+                "internetProtocol": {
+                    "target": "com.amazonaws.drs#InternetProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>"
+                    }
                 }
             }
         },
@@ -7111,6 +7165,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>"
                     }
+                },
+                "internetProtocol": {
+                    "target": "com.amazonaws.drs#InternetProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>"
+                    }
                 }
             }
         },
@@ -7279,7 +7339,7 @@
                 "smithy.api#deprecated": {
                     "message": "WARNING: RetryDataReplication is deprecated"
                 },
-                "smithy.api#documentation": "<p>WARNING: RetryDataReplication is deprecated.\n              Causes the data replication initiation sequence to begin immediately upon next Handshake for the specified Source Server ID, regardless of when the previous initiation started. This command will work only if the Source Server is stalled or is in a DISCONNECTED or STOPPED state.\n        </p>",
+                "smithy.api#documentation": "<p>WARNING: RetryDataReplication is deprecated. Causes the data replication initiation sequence to begin immediately upon next Handshake for the specified Source Server ID, regardless of when the previous initiation started. This command will work only if the Source Server is stalled or is in a DISCONNECTED or STOPPED state. </p>",
                 "smithy.api#http": {
                     "uri": "/RetryDataReplication",
                     "method": "POST",
@@ -7341,7 +7401,7 @@
                     "drs:DescribeReplicationConfigurationTemplates",
                     "drs:DescribeSourceServers"
                 ],
-                "smithy.api#documentation": "<p>Start replication to origin / target region - applies only to protected instances that originated in EC2.\n            For recovery instances on target region - starts replication back to origin region.\n            For failback instances on origin region - starts replication to target region to re-protect them.\n        </p>",
+                "smithy.api#documentation": "<p>Start replication to origin / target region - applies only to protected instances that originated in EC2. For recovery instances on target region - starts replication back to origin region. For failback instances on origin region - starts replication to target region to re-protect them. </p>",
                 "smithy.api#http": {
                     "uri": "/ReverseReplication",
                     "method": "POST",
@@ -7503,7 +7563,7 @@
                 "replicationStatus": {
                     "target": "com.amazonaws.drs#ReplicationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status of Source Network Replication. Possible values:\n            (a) STOPPED - Source Network is not replicating.\n            (b) IN_PROGRESS - Source Network is being replicated.\n            (c) PROTECTED - Source Network was replicated successfully and is being synchronized for changes.\n            (d) ERROR - Source Network replication has failed</p>"
+                        "smithy.api#documentation": "<p>Status of Source Network Replication. Possible values: (a) STOPPED - Source Network is not replicating. (b) IN_PROGRESS - Source Network is being replicated. (c) PROTECTED - Source Network was replicated successfully and is being synchronized for changes. (d) ERROR - Source Network replication has failed</p>"
                     }
                 },
                 "replicationStatusDetails": {
@@ -7909,7 +7969,7 @@
                 "status": {
                     "target": "com.amazonaws.drs#ExtensionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status of Source server extension. Possible values:\n            (a) NOT_EXTENDED - This is a source server that is replicating in the current account.\n            (b) EXTENDED - Source server is extended from a staging source server. In this case, the value of stagingSourceServerArn is pointing to the Arn of the source server in the staging account.\n            (c) EXTENSION_ERROR - Some issue occurred when accessing staging source server. In this case, errorMessage field will contain an error message that explains what happened.</p>"
+                        "smithy.api#documentation": "<p>Status of Source server extension. Possible values: (a) NOT_EXTENDED - This is a source server that is replicating in the current account. (b) EXTENDED - Source server is extended from a staging source server. In this case, the value of stagingSourceServerArn is pointing to the Arn of the source server in the staging account. (c) EXTENSION_ERROR - Some issue occurred when accessing staging source server. In this case, errorMessage field will contain an error message that explains what happened.</p>"
                     }
                 },
                 "stagingAccountID": {
@@ -8964,6 +9024,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to use Private IP for the failback replication of the Recovery Instance.</p>"
                     }
+                },
+                "internetProtocol": {
+                    "target": "com.amazonaws.drs#InternetProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>"
+                    }
                 }
             }
         },
@@ -9320,6 +9386,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>"
                     }
+                },
+                "internetProtocol": {
+                    "target": "com.amazonaws.drs#InternetProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>"
+                    }
                 }
             }
         },
@@ -9459,6 +9531,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to allow the AWS replication agent to automatically replicate newly added disks.</p>"
+                    }
+                },
+                "internetProtocol": {
+                    "target": "com.amazonaws.drs#InternetProtocol",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Which version of the Internet Protocol to use for replication of data. (IPv4 or IPv6)</p>"
                     }
                 }
             }

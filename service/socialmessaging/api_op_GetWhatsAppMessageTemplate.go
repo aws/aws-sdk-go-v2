@@ -34,9 +34,16 @@ type GetWhatsAppMessageTemplateInput struct {
 	Id *string
 
 	// The numeric ID of the template assigned by Meta.
-	//
-	// This member is required.
 	MetaTemplateId *string
+
+	// The language code of the message template (for example, en or en_US ). Use
+	// together with templateName as an alternative to metaTemplateId to identify a
+	// template.
+	TemplateLanguageCode *string
+
+	// The name of the message template. Use together with templateLanguageCode as an
+	// alternative to metaTemplateId to identify a template.
+	TemplateName *string
 
 	noSmithyDocumentSerde
 }
@@ -86,7 +93,7 @@ func (c *Client) addOperationGetWhatsAppMessageTemplateMiddlewares(stack *middle
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -108,9 +115,6 @@ func (c *Client) addOperationGetWhatsAppMessageTemplateMiddlewares(stack *middle
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

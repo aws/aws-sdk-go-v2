@@ -52,6 +52,7 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<fullname>AWS Marketplace Entitlement Service</fullname>\n         <p>This reference provides descriptions of the AWS Marketplace Entitlement Service\n   API.</p>\n         <p>AWS Marketplace Entitlement Service is used to determine the entitlement of a customer to\n      a given product. An entitlement represents capacity in a product owned by the customer. For\n      example, a customer might own some number of users or seats in an SaaS application or some\n      amount of data capacity in a multi-tenant database.</p>\n         <p>\n            <b>Getting Entitlement Records</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <i>GetEntitlements</i>- Gets the entitlements for a Marketplace\n     product.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS Marketplace Entitlement Service",
+                "smithy.protocols#rpcv2Cbor": {},
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {

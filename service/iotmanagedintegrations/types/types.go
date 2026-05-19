@@ -81,7 +81,7 @@ type AuthConfig struct {
 type AuthConfigUpdate struct {
 
 	// The General Authorization update information containing authorization materials
-	// to add or update in Kinesis Data Streams.
+	// to add or update.
 	GeneralAuthorizationUpdate *GeneralAuthorizationUpdate
 
 	// The updated OAuth configuration settings for the authentication configuration.
@@ -1031,19 +1031,21 @@ type ProactiveRefreshTokenRenewal struct {
 // Structure describing a provisioning profile.
 type ProvisioningProfileSummary struct {
 
-	// The Amazon Resource Name (ARN) of the provisioning template used in the
-	// provisioning profile.
+	// The Amazon Resource Name (ARN) of the provisioning profile.
 	Arn *string
 
 	// The identifier of the provisioning profile.
 	Id *string
 
-	// The name of the provisioning template.
+	// The name of the provisioning profile.
 	Name *string
 
 	// The type of provisioning workflow the device uses for onboarding to IoT managed
 	// integrations.
 	ProvisioningType ProvisioningType
+
+	// The status of a provisioning profile.
+	Status ProvisioningProfileStatus
 
 	noSmithyDocumentSerde
 }

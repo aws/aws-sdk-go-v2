@@ -17,6 +17,8 @@ import (
 // specify the intent version.
 //
 // This operation requires permissions to perform the lex:GetIntent action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetIntent(ctx context.Context, params *GetIntentInput, optFns ...func(*Options)) (*GetIntentOutput, error) {
 	if params == nil {
 		params = &GetIntentInput{}
@@ -152,7 +154,7 @@ func (c *Client) addOperationGetIntentMiddlewares(stack *middleware.Stack, optio
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -174,9 +176,6 @@ func (c *Client) addOperationGetIntentMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

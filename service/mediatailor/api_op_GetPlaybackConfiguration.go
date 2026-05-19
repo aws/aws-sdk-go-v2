@@ -85,6 +85,14 @@ type GetPlaybackConfigurationOutput struct {
 	// The configuration for DASH content.
 	DashConfiguration *types.DashConfiguration
 
+	// A map of lifecycle hook event names to function identifiers. The function
+	// mapping specifies which function MediaTailor executes at each lifecycle hook
+	// during ad insertion. Valid keys are PRE_SESSION_INITIALIZATION and
+	// PRE_ADS_REQUEST . For more information, see [Functions lifecycle hooks] in the MediaTailor User Guide.
+	//
+	// [Functions lifecycle hooks]: https://docs.aws.amazon.com/mediatailor/latest/ug/monetization-functions-hooks.html
+	FunctionMapping map[string]string
+
 	// The configuration for HLS content.
 	HlsConfiguration *types.HlsConfiguration
 
@@ -196,7 +204,7 @@ func (c *Client) addOperationGetPlaybackConfigurationMiddlewares(stack *middlewa
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -218,9 +226,6 @@ func (c *Client) addOperationGetPlaybackConfigurationMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

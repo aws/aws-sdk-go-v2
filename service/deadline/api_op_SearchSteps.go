@@ -27,6 +27,8 @@ func (c *Client) SearchSteps(ctx context.Context, params *SearchStepsInput, optF
 	return out, nil
 }
 
+// Shared input fields for all Search operations (filterExpressions,
+// sortExpressions, itemOffset, pageSize).
 type SearchStepsInput struct {
 
 	// The farm ID to use for the step search.
@@ -59,6 +61,7 @@ type SearchStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared output fields for all Search operations (nextItemOffset, totalResults).
 type SearchStepsOutput struct {
 
 	// The steps in the search.
@@ -114,7 +117,7 @@ func (c *Client) addOperationSearchStepsMiddlewares(stack *middleware.Stack, opt
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -136,9 +139,6 @@ func (c *Client) addOperationSearchStepsMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

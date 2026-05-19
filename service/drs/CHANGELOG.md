@@ -1,3 +1,26 @@
+# v1.38.2 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.38.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.38.0 (2026-04-16)
+
+* **Feature**: Updating regex for identification of AWS Regions.
+
+# v1.37.0 (2026-04-08)
+
+* **Feature**: This changes adds support for modifying the replication configuration to support data replication using IPv6.
+
+# v1.36.13 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.12 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

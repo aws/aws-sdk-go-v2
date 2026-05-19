@@ -802,6 +802,11 @@ type AwsJsonSubstitutionCommandPreprocessorConfig struct {
 // Configuration settings for batching.
 type BatchConfig struct {
 
+	// Whether to allow batching messages from different MQTT topics into a single
+	// HTTP request. By default, only messages from the same topic are batched
+	// together. The default value is false .
+	BatchAcrossTopics bool
+
 	// The maximum amount of time (in milliseconds) that an outgoing call waits for
 	// other calls with which it batches messages of the same type. The higher the
 	// setting, the longer the latency of the batched HTTP Action will be.

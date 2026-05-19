@@ -170,11 +170,107 @@ func TestCheckSnapshot_AssumeQueueRoleForWorker(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchGetJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_BatchGetJobEntity(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetJobEntity(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "BatchGetJobEntity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetSessionAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetSessionAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetSessionAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetStep")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchGetWorker(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetWorker(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchGetWorker")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchUpdateJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchUpdateJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_BatchUpdateTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchUpdateTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -631,6 +727,18 @@ func TestCheckSnapshot_GetMonitor(t *testing.T) {
 	_, err := svc.GetMonitor(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetMonitorSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMonitorSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMonitorSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1298,6 +1406,18 @@ func TestCheckSnapshot_UpdateMonitor(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateMonitorSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMonitorSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateMonitorSettings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateQueue(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateQueue(context.Background(), nil, func(o *Options) {
@@ -1525,11 +1645,107 @@ func TestUpdateSnapshot_AssumeQueueRoleForWorker(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_BatchGetJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_BatchGetJobEntity(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.BatchGetJobEntity(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchGetJobEntity")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetSessionAction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetSessionAction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetSessionAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetStep(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetStep(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetStep")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchGetWorker(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchGetWorker(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchGetWorker")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchUpdateJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchUpdateJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchUpdateTask(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchUpdateTask(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchUpdateTask")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1986,6 +2202,18 @@ func TestUpdateSnapshot_GetMonitor(t *testing.T) {
 	_, err := svc.GetMonitor(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetMonitorSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMonitorSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMonitorSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2646,6 +2874,18 @@ func TestUpdateSnapshot_UpdateMonitor(t *testing.T) {
 	_, err := svc.UpdateMonitor(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateMonitor")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateMonitorSettings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateMonitorSettings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateMonitorSettings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

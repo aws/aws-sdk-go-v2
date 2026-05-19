@@ -87,6 +87,9 @@ type GetProjectOutput struct {
 	// The timestamp of when the project was last updated.
 	LastUpdatedAt *time.Time
 
+	// The category of the project.
+	ProjectCategory *string
+
 	// The ID of the project profile of a project.
 	ProjectProfileId *string
 
@@ -139,7 +142,7 @@ func (c *Client) addOperationGetProjectMiddlewares(stack *middleware.Stack, opti
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -161,9 +164,6 @@ func (c *Client) addOperationGetProjectMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

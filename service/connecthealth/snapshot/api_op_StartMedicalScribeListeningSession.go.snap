@@ -13,7 +13,6 @@ StartMedicalScribeListeningSession
 		ClientRequestID
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ComputePayloadHash
@@ -38,6 +37,5 @@ StartMedicalScribeListeningSession
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

@@ -27,6 +27,7 @@ func (c *Client) ListSteps(ctx context.Context, params *ListStepsInput, optFns .
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListStepsInput struct {
 
 	// The farm ID to include on the list of steps.
@@ -54,6 +55,7 @@ type ListStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListStepsOutput struct {
 
 	// The steps on the list.
@@ -109,7 +111,7 @@ func (c *Client) addOperationListStepsMiddlewares(stack *middleware.Stack, optio
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -131,9 +133,6 @@ func (c *Client) addOperationListStepsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

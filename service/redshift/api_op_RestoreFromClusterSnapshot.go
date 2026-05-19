@@ -97,8 +97,8 @@ type RestoreFromClusterSnapshotInput struct {
 	// automated snapshots are disabled. Even if automated snapshots are disabled, you
 	// can still create manual snapshots when you want with CreateClusterSnapshot.
 	//
-	// You can't disable automated snapshots for RA3 node types. Set the automated
-	// retention period from 1-35 days.
+	// You can't disable automated snapshots for RG or RA3 node types. Set the
+	// automated retention period from 1-35 days.
 	//
 	// Default: The value selected for the cluster from which the snapshot was taken.
 	//
@@ -268,8 +268,8 @@ type RestoreFromClusterSnapshotInput struct {
 	// Default: The same port as the original cluster.
 	//
 	// Valid values: For clusters with DC2 nodes, must be within the range 1150 - 65535
-	// . For clusters with ra3 nodes, must be within the ranges 5431 - 5455 or 8191 -
-	// 8215 .
+	// . For clusters with RG or RA3 nodes, must be within the ranges 5431 - 5455 or
+	// 8191 - 8215 .
 	Port *int32
 
 	// The weekly time range (in UTC) during which automated cluster maintenance can
@@ -380,7 +380,7 @@ func (c *Client) addOperationRestoreFromClusterSnapshotMiddlewares(stack *middle
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -402,9 +402,6 @@ func (c *Client) addOperationRestoreFromClusterSnapshotMiddlewares(stack *middle
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

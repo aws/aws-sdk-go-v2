@@ -554,6 +554,18 @@ func TestCheckSnapshot_DescribeContainerGroupDefinition(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeContainerGroupPortMappings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeContainerGroupPortMappings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeContainerGroupPortMappings")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeEC2InstanceLimits(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeEC2InstanceLimits(context.Background(), nil, func(o *Options) {
@@ -1974,6 +1986,18 @@ func TestUpdateSnapshot_DescribeContainerGroupDefinition(t *testing.T) {
 	_, err := svc.DescribeContainerGroupDefinition(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeContainerGroupDefinition")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeContainerGroupPortMappings(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeContainerGroupPortMappings(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeContainerGroupPortMappings")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -37,6 +37,8 @@ import (
 // participating in improving Amazon Lex, utterances are not available.
 //
 // This operation requires permissions for the lex:GetUtterancesView action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetUtterancesView(ctx context.Context, params *GetUtterancesViewInput, optFns ...func(*Options)) (*GetUtterancesViewOutput, error) {
 	if params == nil {
 		params = &GetUtterancesViewInput{}
@@ -125,7 +127,7 @@ func (c *Client) addOperationGetUtterancesViewMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -147,9 +149,6 @@ func (c *Client) addOperationGetUtterancesViewMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

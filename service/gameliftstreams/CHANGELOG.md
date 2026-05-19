@@ -1,3 +1,22 @@
+# v1.11.4 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.3 (2026-04-27)
+
+* **Documentation**: Adds Proton 10.0-4 to the list of runtime environment options available when creating an Amazon GameLift Streams application
+
+# v1.11.2 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.1 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2026-03-13)
 
 * **Feature**: Feature launch that enables customers to connect streaming sessions to their own VPCs running in AWS.

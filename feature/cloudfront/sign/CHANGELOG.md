@@ -1,3 +1,25 @@
+# v1.11.0 (2026-05-18)
+
+* **Feature**: Support SHA-256 for CloudFront signer
+
+# v1.10.0 (2026-04-30)
+
+* **Feature**: Support ECDSA for CloudFront sign cookies
+
+# v1.9.23 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.22 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.21 (2026-03-26)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.9.20 (2026-03-13)
 
 * **Bug Fix**: Replace usages of the old ioutil/ package throughout the SDK.

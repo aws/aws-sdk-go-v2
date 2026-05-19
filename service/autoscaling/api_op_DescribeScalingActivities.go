@@ -74,6 +74,13 @@ type DescribeScalingActivitiesInput struct {
 	//   be used in combination with the AutoScalingGroupName parameter. For valid
 	//   StatusCode values, see [Activity]in the Amazon EC2 Auto Scaling API Reference.
 	//
+	// StartTimeLowerBound and StartTimeUpperBound accept ISO 8601 formatted
+	// timestamps. Timestamps without a timezone offset are assumed to be UTC.
+	//
+	//   - 2000-01-18T08:15:00Z
+	//
+	//   - 2000-01-18T16:15:00+08:00
+	//
 	// [Activity]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_Activity.html
 	Filters []types.Filter
 
@@ -145,7 +152,7 @@ func (c *Client) addOperationDescribeScalingActivitiesMiddlewares(stack *middlew
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -167,9 +174,6 @@ func (c *Client) addOperationDescribeScalingActivitiesMiddlewares(stack *middlew
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

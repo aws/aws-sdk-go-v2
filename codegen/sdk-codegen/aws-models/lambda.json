@@ -4059,7 +4059,7 @@
                 "FileSystemConfigs": {
                     "target": "com.amazonaws.lambda#FileSystemConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Connection settings for an Amazon EFS file system.</p>"
+                        "smithy.api#documentation": "<p>Connection settings for an Amazon EFS file system or an Amazon S3 Files file system.</p>"
                     }
                 },
                 "ImageConfig": {
@@ -6576,9 +6576,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 200
+                    "max": 256
                 },
-                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:elasticfilesystem:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:access-point/fsap-[a-f0-9]{17}$"
+                "smithy.api#pattern": "^arn:aws[a-zA-Z-]*:elasticfilesystem:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:access-point/fsap-[a-f0-9]{17}$|^arn:aws[-a-z]*:s3files:[0-9a-z-:]+:file-system/fs-[0-9a-f]{17,40}/access-point/fsap-[0-9a-f]{17,40}$"
             }
         },
         "com.amazonaws.lambda#FileSystemConfig": {
@@ -6587,7 +6587,7 @@
                 "Arn": {
                     "target": "com.amazonaws.lambda#FileSystemArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon EFS access point that provides access to the file system.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon EFS or Amazon S3 Files access point that provides access to the file system.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6600,7 +6600,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Details about the connection between a Lambda function and an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon EFS file system</a>.</p>"
+                "smithy.api#documentation": "<p>Details about the connection between a Lambda function and an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon EFS file system</a> or an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon S3 Files file system</a>.</p>"
             }
         },
         "com.amazonaws.lambda#FileSystemConfigList": {
@@ -7127,7 +7127,7 @@
                 "FileSystemConfigs": {
                     "target": "com.amazonaws.lambda#FileSystemConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Connection settings for an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon EFS file system</a>.</p>"
+                        "smithy.api#documentation": "<p>Connection settings for an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon EFS file system</a> or an <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html\">Amazon S3 Files file system</a>.</p>"
                     }
                 },
                 "PackageType": {
@@ -9697,8 +9697,8 @@
                 "smithy.api#documentation": "<p>Retrieves the provisioned concurrency configuration for a function's alias or version.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "To view a provisioned concurrency configuration",
-                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "title": "To get a provisioned concurrency configuration",
+                        "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
                         "input": {
                             "FunctionName": "my-function",
                             "Qualifier": "BLUE"
@@ -9712,8 +9712,8 @@
                         }
                     },
                     {
-                        "title": "To get a provisioned concurrency configuration",
-                        "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "title": "To view a provisioned concurrency configuration",
+                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
                         "input": {
                             "FunctionName": "my-function",
                             "Qualifier": "BLUE"
@@ -10447,6 +10447,15 @@
                     "target": "com.amazonaws.lambda#ResourceNotReadyException"
                 },
                 {
+                    "target": "com.amazonaws.lambda#S3FilesMountConnectivityException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#S3FilesMountFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#S3FilesMountTimeoutException"
+                },
+                {
                     "target": "com.amazonaws.lambda#SerializedRequestEntityTooLargeException"
                 },
                 {
@@ -10754,6 +10763,15 @@
                 },
                 {
                     "target": "com.amazonaws.lambda#ResourceNotReadyException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#S3FilesMountConnectivityException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#S3FilesMountFailureException"
+                },
+                {
+                    "target": "com.amazonaws.lambda#S3FilesMountTimeoutException"
                 },
                 {
                     "target": "com.amazonaws.lambda#SerializedRequestEntityTooLargeException"
@@ -12109,7 +12127,7 @@
                 "DurableExecutionName": {
                     "target": "com.amazonaws.lambda#DurableExecutionName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Filter executions by name. Only executions with names that contain this string are returned.</p>",
+                        "smithy.api#documentation": "<p>Filter executions by name. Only executions with names that matches this string are returned.</p>",
                         "smithy.api#httpQuery": "DurableExecutionName"
                     }
                 },
@@ -16249,6 +16267,12 @@
                     "traits": {
                         "smithy.api#enumValue": "dotnet10"
                     }
+                },
+                "ruby40": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ruby4.0"
+                    }
                 }
             }
         },
@@ -16310,6 +16334,72 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^[0-9A-Za-z\\.\\-_]*(?<!\\.)$"
+            }
+        },
+        "com.amazonaws.lambda#S3FilesMountConnectivityException": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception type.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Lambda function couldn't make a network connection to the configured S3 Files access point.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 408
+            }
+        },
+        "com.amazonaws.lambda#S3FilesMountFailureException": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception type.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Lambda function couldn't mount the configured S3 Files access point due to a permission or configuration issue.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.lambda#S3FilesMountTimeoutException": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception type.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.lambda#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The exception message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Lambda function made a network connection to the configured S3 Files access point, but the mount operation timed out.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 408
             }
         },
         "com.amazonaws.lambda#S3Key": {
@@ -18780,7 +18870,7 @@
                 "FileSystemConfigs": {
                     "target": "com.amazonaws.lambda#FileSystemConfigList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Connection settings for an Amazon EFS file system.</p>"
+                        "smithy.api#documentation": "<p>Connection settings for an Amazon EFS file system or an Amazon S3 Files file system.</p>"
                     }
                 },
                 "ImageConfig": {

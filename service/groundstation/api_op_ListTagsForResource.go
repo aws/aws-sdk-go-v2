@@ -26,6 +26,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 	return out, nil
 }
 
+// Input for the ListTagsForResource operation.
 type ListTagsForResourceInput struct {
 
 	// ARN of a resource.
@@ -36,6 +37,7 @@ type ListTagsForResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+// Output for the ListTagsForResource operation.
 type ListTagsForResourceOutput struct {
 
 	// Tags assigned to a resource.
@@ -81,7 +83,7 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -103,9 +105,6 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -1092,6 +1092,9 @@ type ImagePipeline struct {
 	// Contains settings for vulnerability scans.
 	ImageScanningConfiguration *ImageScanningConfiguration
 
+	// The tags to be applied to the images produced by this pipeline.
+	ImageTags map[string]string
+
 	// The image tests configuration of the image pipeline.
 	ImageTestsConfiguration *ImageTestsConfiguration
 
@@ -2290,6 +2293,30 @@ type ProductCodeListItem struct {
 	noSmithyDocumentSerde
 }
 
+// Controls Secure Boot and UEFI data settings for the resulting image during ISO
+// imports. For more information, see [UEFI Secure Boot for Amazon EC2 instances]in the Amazon EC2 User Guide .
+//
+// [UEFI Secure Boot for Amazon EC2 instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-secure-boot.html
+type RegisterImageOptions struct {
+
+	// Specifies whether Secure Boot is enabled for the output AMI. The default value
+	// is true . To disable Secure Boot for custom unsigned drivers, set this value to
+	// false .
+	SecureBootEnabled *bool
+
+	// A Base64-encoded representation of the non-volatile UEFI variable store. You
+	// can specify this parameter only when secureBootEnabled is true or unspecified.
+	// You can inspect and modify the UEFI data by using the [python-uefivars tool on GitHub].
+	//
+	// For more information, see [UEFI variables for Amazon EC2 instances].
+	//
+	// [UEFI variables for Amazon EC2 instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/uefi-variables.html
+	// [python-uefivars tool on GitHub]: https://github.com/awslabs/python-uefivars
+	UefiData *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about how to remediate a finding.
 type Remediation struct {
 
@@ -2560,6 +2587,20 @@ type VulnerablePackage struct {
 
 	// The version of the vulnerable package.
 	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Windows-specific configuration settings for an ISO import, including the
+// edition to install from a multi-edition Windows ISO file.
+type WindowsConfiguration struct {
+
+	// The 1-based index that specifies which Windows edition to install from a
+	// multi-edition Windows ISO file. A Windows ISO can contain a .wim file with
+	// multiple image indexes, each representing a different edition.
+	//
+	// This member is required.
+	ImageIndex *int64
 
 	noSmithyDocumentSerde
 }

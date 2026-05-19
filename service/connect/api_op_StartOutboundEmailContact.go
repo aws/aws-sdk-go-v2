@@ -30,7 +30,7 @@ func (c *Client) StartOutboundEmailContact(ctx context.Context, params *StartOut
 
 type StartOutboundEmailContactInput struct {
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	//
 	// This member is required.
 	ContactId *string
@@ -45,8 +45,8 @@ type StartOutboundEmailContactInput struct {
 	// This member is required.
 	EmailMessage *types.OutboundEmailContent
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -63,7 +63,7 @@ type StartOutboundEmailContactInput struct {
 	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
-	// The email address associated with the Amazon Connect instance.
+	// The email address associated with the Connect Customer instance.
 	FromEmailAddress *types.EmailAddressInfo
 
 	noSmithyDocumentSerde
@@ -71,7 +71,7 @@ type StartOutboundEmailContactInput struct {
 
 type StartOutboundEmailContactOutput struct {
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	ContactId *string
 
 	// Metadata pertaining to the operation's result.
@@ -114,7 +114,7 @@ func (c *Client) addOperationStartOutboundEmailContactMiddlewares(stack *middlew
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -136,9 +136,6 @@ func (c *Client) addOperationStartOutboundEmailContactMiddlewares(stack *middlew
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

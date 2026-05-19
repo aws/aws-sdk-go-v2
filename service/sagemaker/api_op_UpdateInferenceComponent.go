@@ -45,6 +45,12 @@ type UpdateInferenceComponentInput struct {
 	// the model, container, and compute resources.
 	Specification *types.InferenceComponentSpecification
 
+	// A list of specification objects for the inference component, one per instance
+	// type. Use this parameter when you want to specify different model or resource
+	// configurations for the inference component on each instance type. You can use
+	// either this parameter or the singular Specification parameter, but not both.
+	Specifications []types.InferenceComponentSpecification
+
 	noSmithyDocumentSerde
 }
 
@@ -95,7 +101,7 @@ func (c *Client) addOperationUpdateInferenceComponentMiddlewares(stack *middlewa
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -117,9 +123,6 @@ func (c *Client) addOperationUpdateInferenceComponentMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

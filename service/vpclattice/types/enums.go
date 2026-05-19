@@ -168,6 +168,28 @@ func (ProtocolType) Values() []ProtocolType {
 	}
 }
 
+type ResourceConfigDnsResolution string
+
+// Enum values for ResourceConfigDnsResolution
+const (
+	// Enable private DNS resolution within VPC for resources behind this resource
+	// gateway
+	ResourceConfigDnsResolutionInVpc ResourceConfigDnsResolution = "IN_VPC"
+	// Use public DNS resolution for resources behind this resource gateway
+	ResourceConfigDnsResolutionPublic ResourceConfigDnsResolution = "PUBLIC"
+)
+
+// Values returns all known values for ResourceConfigDnsResolution. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceConfigDnsResolution) Values() []ResourceConfigDnsResolution {
+	return []ResourceConfigDnsResolution{
+		"IN_VPC",
+		"PUBLIC",
+	}
+}
+
 type ResourceConfigurationIpAddressType string
 
 // Enum values for ResourceConfigurationIpAddressType

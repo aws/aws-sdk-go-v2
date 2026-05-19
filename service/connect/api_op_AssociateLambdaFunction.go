@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
+// This API is in preview release for Connect Customer and is subject to change.
 //
-// Allows the specified Amazon Connect instance to access the specified Lambda
+// Allows the specified Connect Customer instance to access the specified Lambda
 // function.
 func (c *Client) AssociateLambdaFunction(ctx context.Context, params *AssociateLambdaFunctionInput, optFns ...func(*Options)) (*AssociateLambdaFunctionOutput, error) {
 	if params == nil {
@@ -37,8 +37,8 @@ type AssociateLambdaFunctionInput struct {
 	// This member is required.
 	FunctionArn *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -96,7 +96,7 @@ func (c *Client) addOperationAssociateLambdaFunctionMiddlewares(stack *middlewar
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -118,9 +118,6 @@ func (c *Client) addOperationAssociateLambdaFunctionMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

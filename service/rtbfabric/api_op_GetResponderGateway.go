@@ -4,6 +4,7 @@ package rtbfabric
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
@@ -89,8 +90,23 @@ type GetResponderGatewayOutput struct {
 	// The domain name of the responder gateway.
 	DomainName *string
 
-	// The count of inbound links for the responder gateway.
+	// The external inbound endpoint for the responder gateway.
+	ExternalInboundEndpoint *string
+
+	// The type of gateway. Valid values are EXTERNAL or INTERNAL .
+	GatewayType types.GatewayType
+
+	// Deprecated. Use 'linksRequestedCount' instead.
+	//
+	// Deprecated: Use linksRequestedCount instead
 	InboundLinksCount *int32
+
+	// The count of requested links waiting for the responder gateway to accept or
+	// reject.
+	LinksRequestedCount *int32
+
+	// The listener configuration for the responder gateway.
+	ListenerConfig *types.ListenerConfig
 
 	// The configuration of the managed endpoint.
 	ManagedEndpointConfiguration types.ManagedEndpointConfiguration
@@ -148,7 +164,7 @@ func (c *Client) addOperationGetResponderGatewayMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -170,9 +186,6 @@ func (c *Client) addOperationGetResponderGatewayMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
@@ -578,6 +591,13 @@ func responderGatewayDeletedStateRetryable(ctx context.Context, input *GetRespon
 		var pathValue string
 		pathValue = string(v1)
 		if pathValue == expectedValue {
+			return false, nil
+		}
+	}
+
+	if err != nil {
+		var errorType *types.ResourceNotFoundException
+		if errors.As(err, &errorType) {
 			return false, nil
 		}
 	}

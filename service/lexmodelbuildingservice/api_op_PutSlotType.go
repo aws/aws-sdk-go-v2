@@ -26,6 +26,8 @@ import (
 // contains the slot type, the bot's status field is set to NOT_BUILT .
 //
 // This operation requires permissions for the lex:PutSlotType action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) PutSlotType(ctx context.Context, params *PutSlotTypeInput, optFns ...func(*Options)) (*PutSlotTypeOutput, error) {
 	if params == nil {
 		params = &PutSlotTypeInput{}
@@ -199,7 +201,7 @@ func (c *Client) addOperationPutSlotTypeMiddlewares(stack *middleware.Stack, opt
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -221,9 +223,6 @@ func (c *Client) addOperationPutSlotTypeMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

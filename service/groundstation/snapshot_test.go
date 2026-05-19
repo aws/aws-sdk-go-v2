@@ -194,6 +194,18 @@ func TestCheckSnapshot_DescribeContact(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeContactVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeContactVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeContactVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeEphemeris(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeEphemeris(context.Background(), nil, func(o *Options) {
@@ -290,6 +302,18 @@ func TestCheckSnapshot_GetSatellite(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListAntennas(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAntennas(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAntennas")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListConfigs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListConfigs(context.Background(), nil, func(o *Options) {
@@ -314,6 +338,18 @@ func TestCheckSnapshot_ListContacts(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListContactVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContactVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListContactVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDataflowEndpointGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDataflowEndpointGroups(context.Background(), nil, func(o *Options) {
@@ -331,6 +367,18 @@ func TestCheckSnapshot_ListEphemerides(t *testing.T) {
 	_, err := svc.ListEphemerides(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListEphemerides")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListGroundStationReservations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGroundStationReservations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListGroundStationReservations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -451,6 +499,18 @@ func TestCheckSnapshot_UpdateConfig(t *testing.T) {
 	_, err := svc.UpdateConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateContact(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateContact(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateContact")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -613,6 +673,18 @@ func TestUpdateSnapshot_DescribeContact(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeContactVersion(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeContactVersion(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeContactVersion")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeEphemeris(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeEphemeris(context.Background(), nil, func(o *Options) {
@@ -709,6 +781,18 @@ func TestUpdateSnapshot_GetSatellite(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListAntennas(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAntennas(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAntennas")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListConfigs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListConfigs(context.Background(), nil, func(o *Options) {
@@ -733,6 +817,18 @@ func TestUpdateSnapshot_ListContacts(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListContactVersions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListContactVersions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListContactVersions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDataflowEndpointGroups(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDataflowEndpointGroups(context.Background(), nil, func(o *Options) {
@@ -750,6 +846,18 @@ func TestUpdateSnapshot_ListEphemerides(t *testing.T) {
 	_, err := svc.ListEphemerides(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListEphemerides")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListGroundStationReservations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListGroundStationReservations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListGroundStationReservations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -870,6 +978,18 @@ func TestUpdateSnapshot_UpdateConfig(t *testing.T) {
 	_, err := svc.UpdateConfig(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateContact(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateContact(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateContact")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

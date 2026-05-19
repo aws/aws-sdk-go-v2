@@ -446,21 +446,6 @@ func validateExclusions(v *types.Exclusions) error {
 	}
 }
 
-func validateFastRestoreRule(v *types.FastRestoreRule) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "FastRestoreRule"}
-	if v.AvailabilityZones == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AvailabilityZones"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateParameters(v *types.Parameters) error {
 	if v == nil {
 		return nil
@@ -538,11 +523,6 @@ func validateSchedule(v *types.Schedule) error {
 	if v.CreateRule != nil {
 		if err := validateCreateRule(v.CreateRule); err != nil {
 			invalidParams.AddNested("CreateRule", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.FastRestoreRule != nil {
-		if err := validateFastRestoreRule(v.FastRestoreRule); err != nil {
-			invalidParams.AddNested("FastRestoreRule", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.CrossRegionCopyRules != nil {

@@ -7,6 +7,60 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
 )
 
+func ExampleCapabilityBaseRequestConfig_outputUsage() {
+	var union types.CapabilityBaseRequestConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CapabilityBaseRequestConfigMemberAiConfig:
+		_ = v.Value // Value is types.AIConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AIConfig
+
+func ExampleCapabilityBaseResponseConfig_outputUsage() {
+	var union types.CapabilityBaseResponseConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CapabilityBaseResponseConfigMemberAiConfig:
+		_ = v.Value // Value is types.AIConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AIConfig
+
+func ExampleCapabilityExtendedResponseConfig_outputUsage() {
+	var union types.CapabilityExtendedResponseConfig
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CapabilityExtendedResponseConfigMemberAiConfig:
+		_ = v.Value // Value is types.AIConfig
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AIConfig
+
 func ExampleDataSourceType_outputUsage() {
 	var union types.DataSourceType
 	// type switches can be used to check the union value

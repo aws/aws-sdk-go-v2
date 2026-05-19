@@ -98,6 +98,18 @@ func TestCheckSnapshot_AcceptReservedInstancesExchangeQuote(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AcceptTransitGatewayClientVpnAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptTransitGatewayClientVpnAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AcceptTransitGatewayClientVpnAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_AcceptTransitGatewayMulticastDomainAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.AcceptTransitGatewayMulticastDomainAssociations(context.Background(), nil, func(o *Options) {
@@ -2810,6 +2822,18 @@ func TestCheckSnapshot_DeleteTransitGateway(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteTransitGatewayClientVpnAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayClientVpnAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteTransitGatewayClientVpnAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteTransitGatewayConnect(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTransitGatewayConnect(context.Background(), nil, func(o *Options) {
@@ -4111,6 +4135,18 @@ func TestCheckSnapshot_DescribeIpamPolicies(t *testing.T) {
 	_, err := svc.DescribeIpamPolicies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeIpamPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeIpamPoolAllocations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamPoolAllocations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeIpamPoolAllocations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -6434,6 +6470,18 @@ func TestCheckSnapshot_GetCapacityManagerMetricDimensions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetCapacityManagerMonitoredTagKeys(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityManagerMonitoredTagKeys(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetCapacityManagerMonitoredTagKeys")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCapacityReservationUsage(context.Background(), nil, func(o *Options) {
@@ -6823,6 +6871,18 @@ func TestCheckSnapshot_GetManagedPrefixListEntries(t *testing.T) {
 	_, err := svc.GetManagedPrefixListEntries(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetManagedPrefixListEntries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetManagedResourceVisibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedResourceVisibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetManagedResourceVisibility")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7610,6 +7670,18 @@ func TestCheckSnapshot_ModifyIpamPool(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ModifyIpamPoolAllocation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIpamPoolAllocation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyIpamPoolAllocation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ModifyIpamPrefixListResolver(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyIpamPrefixListResolver(context.Background(), nil, func(o *Options) {
@@ -7699,6 +7771,18 @@ func TestCheckSnapshot_ModifyManagedPrefixList(t *testing.T) {
 	_, err := svc.ModifyManagedPrefixList(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ModifyManagedPrefixList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ModifyManagedResourceVisibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyManagedResourceVisibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ModifyManagedResourceVisibility")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8426,6 +8510,18 @@ func TestCheckSnapshot_RejectCapacityReservationBillingOwnership(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_RejectTransitGatewayClientVpnAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectTransitGatewayClientVpnAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "RejectTransitGatewayClientVpnAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_RejectTransitGatewayMulticastDomainAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RejectTransitGatewayMulticastDomainAssociations(context.Background(), nil, func(o *Options) {
@@ -9074,6 +9170,18 @@ func TestCheckSnapshot_UnmonitorInstances(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateCapacityManagerMonitoredTagKeys(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCapacityManagerMonitoredTagKeys(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateCapacityManagerMonitoredTagKeys")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateCapacityManagerOrganizationsAccess(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateCapacityManagerOrganizationsAccess(context.Background(), nil, func(o *Options) {
@@ -9162,6 +9270,18 @@ func TestUpdateSnapshot_AcceptReservedInstancesExchangeQuote(t *testing.T) {
 	_, err := svc.AcceptReservedInstancesExchangeQuote(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "AcceptReservedInstancesExchangeQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_AcceptTransitGatewayClientVpnAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AcceptTransitGatewayClientVpnAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AcceptTransitGatewayClientVpnAttachment")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -11881,6 +12001,18 @@ func TestUpdateSnapshot_DeleteTransitGateway(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteTransitGatewayClientVpnAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteTransitGatewayClientVpnAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteTransitGatewayClientVpnAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteTransitGatewayConnect(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteTransitGatewayConnect(context.Background(), nil, func(o *Options) {
@@ -13182,6 +13314,18 @@ func TestUpdateSnapshot_DescribeIpamPolicies(t *testing.T) {
 	_, err := svc.DescribeIpamPolicies(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeIpamPolicies")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeIpamPoolAllocations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeIpamPoolAllocations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeIpamPoolAllocations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -15505,6 +15649,18 @@ func TestUpdateSnapshot_GetCapacityManagerMetricDimensions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetCapacityManagerMonitoredTagKeys(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetCapacityManagerMonitoredTagKeys(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetCapacityManagerMonitoredTagKeys")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetCapacityReservationUsage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetCapacityReservationUsage(context.Background(), nil, func(o *Options) {
@@ -15894,6 +16050,18 @@ func TestUpdateSnapshot_GetManagedPrefixListEntries(t *testing.T) {
 	_, err := svc.GetManagedPrefixListEntries(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetManagedPrefixListEntries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetManagedResourceVisibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetManagedResourceVisibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetManagedResourceVisibility")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -16681,6 +16849,18 @@ func TestUpdateSnapshot_ModifyIpamPool(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ModifyIpamPoolAllocation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyIpamPoolAllocation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyIpamPoolAllocation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ModifyIpamPrefixListResolver(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ModifyIpamPrefixListResolver(context.Background(), nil, func(o *Options) {
@@ -16770,6 +16950,18 @@ func TestUpdateSnapshot_ModifyManagedPrefixList(t *testing.T) {
 	_, err := svc.ModifyManagedPrefixList(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ModifyManagedPrefixList")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ModifyManagedResourceVisibility(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ModifyManagedResourceVisibility(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ModifyManagedResourceVisibility")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -17497,6 +17689,18 @@ func TestUpdateSnapshot_RejectCapacityReservationBillingOwnership(t *testing.T) 
 	}
 }
 
+func TestUpdateSnapshot_RejectTransitGatewayClientVpnAttachment(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.RejectTransitGatewayClientVpnAttachment(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "RejectTransitGatewayClientVpnAttachment")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_RejectTransitGatewayMulticastDomainAssociations(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.RejectTransitGatewayMulticastDomainAssociations(context.Background(), nil, func(o *Options) {
@@ -18138,6 +18342,18 @@ func TestUpdateSnapshot_UnmonitorInstances(t *testing.T) {
 	_, err := svc.UnmonitorInstances(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UnmonitorInstances")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateCapacityManagerMonitoredTagKeys(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateCapacityManagerMonitoredTagKeys(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateCapacityManagerMonitoredTagKeys")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

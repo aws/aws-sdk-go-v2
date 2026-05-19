@@ -35,7 +35,8 @@ import (
 //   - Or the queryString must include a SOURCE command to select log groups for
 //     the query. The SOURCE command can select log groups based on log group name
 //     prefix, account ID, and log class, or select data sources using dataSource
-//     syntax in LogsQL, PPL, and SQL.
+//     syntax in LogsQL, PPL, and SQL. In LogsQL, the SOURCE command also supports
+//     filtering by log group tags.
 //
 // For more information about the SOURCE command, see [SOURCE].
 //
@@ -53,7 +54,7 @@ import (
 // For more information, see [CloudWatch cross-account observability]. For a cross-account StartQuery operation, the query
 // definition must be defined in the monitoring account.
 //
-// You can have up to 30 concurrent CloudWatch Logs insights queries, including
+// You can have up to 100 concurrent CloudWatch Logs insights queries, including
 // queries that have been added to dashboards.
 //
 // [CloudWatch Logs Insights Query Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
@@ -102,6 +103,8 @@ type StartQueryInput struct {
 	// The maximum number of log events to return in the query. If the query string
 	// uses the fields command, only the specified fields and their values are
 	// returned. The default is 10,000.
+	//
+	// The maximum value is 100,000.
 	Limit *int32
 
 	// The list of log groups to query. You can include up to 50 log groups.
@@ -192,7 +195,7 @@ func (c *Client) addOperationStartQueryMiddlewares(stack *middleware.Stack, opti
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -214,9 +217,6 @@ func (c *Client) addOperationStartQueryMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

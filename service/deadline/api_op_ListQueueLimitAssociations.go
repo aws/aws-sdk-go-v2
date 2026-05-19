@@ -27,6 +27,7 @@ func (c *Client) ListQueueLimitAssociations(ctx context.Context, params *ListQue
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListQueueLimitAssociationsInput struct {
 
 	// The unique identifier of the farm that contains the limits and associations.
@@ -53,6 +54,7 @@ type ListQueueLimitAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListQueueLimitAssociationsOutput struct {
 
 	// A list of associations between limits and queues in the farm specified in the
@@ -109,7 +111,7 @@ func (c *Client) addOperationListQueueLimitAssociationsMiddlewares(stack *middle
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -131,9 +133,6 @@ func (c *Client) addOperationListQueueLimitAssociationsMiddlewares(stack *middle
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

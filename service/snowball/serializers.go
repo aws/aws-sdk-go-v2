@@ -8,2974 +8,2885 @@ import (
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 	smithy "github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/encoding/httpbinding"
-	smithyjson "github.com/aws/smithy-go/encoding/json"
+	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/middleware"
-	smithytime "github.com/aws/smithy-go/time"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"math"
-	"path"
+	"net/http"
+	"time"
 )
 
-type awsAwsjson11_serializeOpCancelCluster struct {
+type smithyRpcv2cbor_serializeOpCancelCluster struct {
 }
 
-func (*awsAwsjson11_serializeOpCancelCluster) ID() string {
+func (*smithyRpcv2cbor_serializeOpCancelCluster) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpCancelCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpCancelCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*CancelClusterInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/CancelCluster"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_CancelClusterInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.CancelCluster")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentCancelClusterInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpCancelJob struct {
+type smithyRpcv2cbor_serializeOpCancelJob struct {
 }
 
-func (*awsAwsjson11_serializeOpCancelJob) ID() string {
+func (*smithyRpcv2cbor_serializeOpCancelJob) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpCancelJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpCancelJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*CancelJobInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/CancelJob"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_CancelJobInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.CancelJob")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentCancelJobInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpCreateAddress struct {
+type smithyRpcv2cbor_serializeOpCreateAddress struct {
 }
 
-func (*awsAwsjson11_serializeOpCreateAddress) ID() string {
+func (*smithyRpcv2cbor_serializeOpCreateAddress) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpCreateAddress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpCreateAddress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*CreateAddressInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/CreateAddress"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_CreateAddressInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.CreateAddress")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentCreateAddressInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpCreateCluster struct {
+type smithyRpcv2cbor_serializeOpCreateCluster struct {
 }
 
-func (*awsAwsjson11_serializeOpCreateCluster) ID() string {
+func (*smithyRpcv2cbor_serializeOpCreateCluster) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpCreateCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpCreateCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*CreateClusterInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/CreateCluster"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_CreateClusterInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.CreateCluster")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentCreateClusterInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpCreateJob struct {
+type smithyRpcv2cbor_serializeOpCreateJob struct {
 }
 
-func (*awsAwsjson11_serializeOpCreateJob) ID() string {
+func (*smithyRpcv2cbor_serializeOpCreateJob) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpCreateJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpCreateJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*CreateJobInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/CreateJob"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_CreateJobInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.CreateJob")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentCreateJobInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpCreateLongTermPricing struct {
+type smithyRpcv2cbor_serializeOpCreateLongTermPricing struct {
 }
 
-func (*awsAwsjson11_serializeOpCreateLongTermPricing) ID() string {
+func (*smithyRpcv2cbor_serializeOpCreateLongTermPricing) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpCreateLongTermPricing) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpCreateLongTermPricing) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*CreateLongTermPricingInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/CreateLongTermPricing"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_CreateLongTermPricingInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.CreateLongTermPricing")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentCreateLongTermPricingInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpCreateReturnShippingLabel struct {
+type smithyRpcv2cbor_serializeOpCreateReturnShippingLabel struct {
 }
 
-func (*awsAwsjson11_serializeOpCreateReturnShippingLabel) ID() string {
+func (*smithyRpcv2cbor_serializeOpCreateReturnShippingLabel) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpCreateReturnShippingLabel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpCreateReturnShippingLabel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*CreateReturnShippingLabelInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/CreateReturnShippingLabel"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_CreateReturnShippingLabelInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.CreateReturnShippingLabel")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentCreateReturnShippingLabelInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpDescribeAddress struct {
+type smithyRpcv2cbor_serializeOpDescribeAddress struct {
 }
 
-func (*awsAwsjson11_serializeOpDescribeAddress) ID() string {
+func (*smithyRpcv2cbor_serializeOpDescribeAddress) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpDescribeAddress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpDescribeAddress) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*DescribeAddressInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/DescribeAddress"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_DescribeAddressInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.DescribeAddress")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentDescribeAddressInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpDescribeAddresses struct {
+type smithyRpcv2cbor_serializeOpDescribeAddresses struct {
 }
 
-func (*awsAwsjson11_serializeOpDescribeAddresses) ID() string {
+func (*smithyRpcv2cbor_serializeOpDescribeAddresses) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpDescribeAddresses) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpDescribeAddresses) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*DescribeAddressesInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/DescribeAddresses"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_DescribeAddressesInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.DescribeAddresses")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentDescribeAddressesInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpDescribeCluster struct {
+type smithyRpcv2cbor_serializeOpDescribeCluster struct {
 }
 
-func (*awsAwsjson11_serializeOpDescribeCluster) ID() string {
+func (*smithyRpcv2cbor_serializeOpDescribeCluster) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpDescribeCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpDescribeCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*DescribeClusterInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/DescribeCluster"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_DescribeClusterInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.DescribeCluster")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentDescribeClusterInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpDescribeJob struct {
+type smithyRpcv2cbor_serializeOpDescribeJob struct {
 }
 
-func (*awsAwsjson11_serializeOpDescribeJob) ID() string {
+func (*smithyRpcv2cbor_serializeOpDescribeJob) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpDescribeJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpDescribeJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*DescribeJobInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/DescribeJob"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_DescribeJobInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.DescribeJob")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentDescribeJobInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpDescribeReturnShippingLabel struct {
+type smithyRpcv2cbor_serializeOpDescribeReturnShippingLabel struct {
 }
 
-func (*awsAwsjson11_serializeOpDescribeReturnShippingLabel) ID() string {
+func (*smithyRpcv2cbor_serializeOpDescribeReturnShippingLabel) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpDescribeReturnShippingLabel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpDescribeReturnShippingLabel) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*DescribeReturnShippingLabelInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/DescribeReturnShippingLabel"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_DescribeReturnShippingLabelInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.DescribeReturnShippingLabel")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentDescribeReturnShippingLabelInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpGetJobManifest struct {
+type smithyRpcv2cbor_serializeOpGetJobManifest struct {
 }
 
-func (*awsAwsjson11_serializeOpGetJobManifest) ID() string {
+func (*smithyRpcv2cbor_serializeOpGetJobManifest) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpGetJobManifest) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpGetJobManifest) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*GetJobManifestInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/GetJobManifest"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_GetJobManifestInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.GetJobManifest")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentGetJobManifestInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpGetJobUnlockCode struct {
+type smithyRpcv2cbor_serializeOpGetJobUnlockCode struct {
 }
 
-func (*awsAwsjson11_serializeOpGetJobUnlockCode) ID() string {
+func (*smithyRpcv2cbor_serializeOpGetJobUnlockCode) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpGetJobUnlockCode) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpGetJobUnlockCode) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*GetJobUnlockCodeInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/GetJobUnlockCode"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_GetJobUnlockCodeInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.GetJobUnlockCode")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentGetJobUnlockCodeInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpGetSnowballUsage struct {
+type smithyRpcv2cbor_serializeOpGetSnowballUsage struct {
 }
 
-func (*awsAwsjson11_serializeOpGetSnowballUsage) ID() string {
+func (*smithyRpcv2cbor_serializeOpGetSnowballUsage) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpGetSnowballUsage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpGetSnowballUsage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*GetSnowballUsageInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/GetSnowballUsage"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_GetSnowballUsageInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.GetSnowballUsage")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentGetSnowballUsageInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpGetSoftwareUpdates struct {
+type smithyRpcv2cbor_serializeOpGetSoftwareUpdates struct {
 }
 
-func (*awsAwsjson11_serializeOpGetSoftwareUpdates) ID() string {
+func (*smithyRpcv2cbor_serializeOpGetSoftwareUpdates) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpGetSoftwareUpdates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpGetSoftwareUpdates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*GetSoftwareUpdatesInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/GetSoftwareUpdates"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_GetSoftwareUpdatesInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.GetSoftwareUpdates")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentGetSoftwareUpdatesInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpListClusterJobs struct {
+type smithyRpcv2cbor_serializeOpListClusterJobs struct {
 }
 
-func (*awsAwsjson11_serializeOpListClusterJobs) ID() string {
+func (*smithyRpcv2cbor_serializeOpListClusterJobs) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpListClusterJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpListClusterJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*ListClusterJobsInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/ListClusterJobs"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_ListClusterJobsInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.ListClusterJobs")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentListClusterJobsInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpListClusters struct {
+type smithyRpcv2cbor_serializeOpListClusters struct {
 }
 
-func (*awsAwsjson11_serializeOpListClusters) ID() string {
+func (*smithyRpcv2cbor_serializeOpListClusters) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpListClusters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpListClusters) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*ListClustersInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/ListClusters"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_ListClustersInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.ListClusters")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentListClustersInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpListCompatibleImages struct {
+type smithyRpcv2cbor_serializeOpListCompatibleImages struct {
 }
 
-func (*awsAwsjson11_serializeOpListCompatibleImages) ID() string {
+func (*smithyRpcv2cbor_serializeOpListCompatibleImages) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpListCompatibleImages) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpListCompatibleImages) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*ListCompatibleImagesInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/ListCompatibleImages"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_ListCompatibleImagesInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.ListCompatibleImages")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentListCompatibleImagesInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpListJobs struct {
+type smithyRpcv2cbor_serializeOpListJobs struct {
 }
 
-func (*awsAwsjson11_serializeOpListJobs) ID() string {
+func (*smithyRpcv2cbor_serializeOpListJobs) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpListJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpListJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*ListJobsInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/ListJobs"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_ListJobsInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.ListJobs")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentListJobsInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpListLongTermPricing struct {
+type smithyRpcv2cbor_serializeOpListLongTermPricing struct {
 }
 
-func (*awsAwsjson11_serializeOpListLongTermPricing) ID() string {
+func (*smithyRpcv2cbor_serializeOpListLongTermPricing) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpListLongTermPricing) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpListLongTermPricing) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*ListLongTermPricingInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/ListLongTermPricing"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_ListLongTermPricingInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.ListLongTermPricing")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentListLongTermPricingInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpListPickupLocations struct {
+type smithyRpcv2cbor_serializeOpListPickupLocations struct {
 }
 
-func (*awsAwsjson11_serializeOpListPickupLocations) ID() string {
+func (*smithyRpcv2cbor_serializeOpListPickupLocations) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpListPickupLocations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpListPickupLocations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*ListPickupLocationsInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/ListPickupLocations"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_ListPickupLocationsInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.ListPickupLocations")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentListPickupLocationsInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpListServiceVersions struct {
+type smithyRpcv2cbor_serializeOpListServiceVersions struct {
 }
 
-func (*awsAwsjson11_serializeOpListServiceVersions) ID() string {
+func (*smithyRpcv2cbor_serializeOpListServiceVersions) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpListServiceVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpListServiceVersions) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*ListServiceVersionsInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/ListServiceVersions"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_ListServiceVersionsInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.ListServiceVersions")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentListServiceVersionsInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpUpdateCluster struct {
+type smithyRpcv2cbor_serializeOpUpdateCluster struct {
 }
 
-func (*awsAwsjson11_serializeOpUpdateCluster) ID() string {
+func (*smithyRpcv2cbor_serializeOpUpdateCluster) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpUpdateCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpUpdateCluster) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*UpdateClusterInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/UpdateCluster"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_UpdateClusterInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.UpdateCluster")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentUpdateClusterInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpUpdateJob struct {
+type smithyRpcv2cbor_serializeOpUpdateJob struct {
 }
 
-func (*awsAwsjson11_serializeOpUpdateJob) ID() string {
+func (*smithyRpcv2cbor_serializeOpUpdateJob) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpUpdateJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpUpdateJob) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*UpdateJobInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/UpdateJob"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_UpdateJobInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.UpdateJob")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentUpdateJobInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpUpdateJobShipmentState struct {
+type smithyRpcv2cbor_serializeOpUpdateJobShipmentState struct {
 }
 
-func (*awsAwsjson11_serializeOpUpdateJobShipmentState) ID() string {
+func (*smithyRpcv2cbor_serializeOpUpdateJobShipmentState) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpUpdateJobShipmentState) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpUpdateJobShipmentState) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*UpdateJobShipmentStateInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/UpdateJobShipmentState"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_UpdateJobShipmentStateInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.UpdateJobShipmentState")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentUpdateJobShipmentStateInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsjson11_serializeOpUpdateLongTermPricing struct {
+type smithyRpcv2cbor_serializeOpUpdateLongTermPricing struct {
 }
 
-func (*awsAwsjson11_serializeOpUpdateLongTermPricing) ID() string {
+func (*smithyRpcv2cbor_serializeOpUpdateLongTermPricing) ID() string {
 	return "OperationSerializer"
 }
 
-func (m *awsAwsjson11_serializeOpUpdateLongTermPricing) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+func (m *smithyRpcv2cbor_serializeOpUpdateLongTermPricing) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
 	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
 ) {
 	_, span := tracing.StartSpan(ctx, "OperationSerializer")
 	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
 	defer endTimer()
 	defer span.End()
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
 	input, ok := in.Parameters.(*UpdateLongTermPricingInput)
-	_ = input
 	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+		return out, metadata, fmt.Errorf("unexpected input type %T", in.Parameters)
+	}
+	_ = input
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", in.Request)
 	}
 
-	operationPath := "/"
-	if len(request.Request.URL.Path) == 0 {
-		request.Request.URL.Path = operationPath
-	} else {
-		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
-		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
-			request.Request.URL.Path += "/"
-		}
-	}
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	req.Method = http.MethodPost
+	req.URL.Path = "/service/AWSIESnowballJobManagementService/operation/UpdateLongTermPricing"
+	req.Header.Set("smithy-protocol", "rpc-v2-cbor")
+
+	req.Header.Set("Content-Type", "application/cbor")
+	req.Header.Set("Accept", "application/cbor")
+
+	cv, err := serializeCBOR_UpdateLongTermPricingInput(input)
 	if err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
-	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSIESnowballJobManagementService.UpdateLongTermPricing")
 
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsAwsjson11_serializeOpDocumentUpdateLongTermPricingInput(input, jsonEncoder.Value); err != nil {
+	payload := bytes.NewReader(smithycbor.Encode(cv))
+	if req, err = req.SetStream(payload); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
+	in.Request = req
 
 	endTimer()
 	span.End()
+
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentAddress(v *types.Address, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
+func serializeCBOR_Address(v *types.Address) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
 	if v.AddressId != nil {
-		ok := object.Key("AddressId")
-		ok.String(*v.AddressId)
+		ser, err := serializeCBOR_String(*v.AddressId)
+		if err != nil {
+			return nil, err
+		}
+		vm["AddressId"] = ser
 	}
-
-	if v.City != nil {
-		ok := object.Key("City")
-		ok.String(*v.City)
+	if v.Name != nil {
+		ser, err := serializeCBOR_String(*v.Name)
+		if err != nil {
+			return nil, err
+		}
+		vm["Name"] = ser
 	}
-
 	if v.Company != nil {
-		ok := object.Key("Company")
-		ok.String(*v.Company)
+		ser, err := serializeCBOR_String(*v.Company)
+		if err != nil {
+			return nil, err
+		}
+		vm["Company"] = ser
 	}
-
-	if v.Country != nil {
-		ok := object.Key("Country")
-		ok.String(*v.Country)
-	}
-
-	if v.IsRestricted {
-		ok := object.Key("IsRestricted")
-		ok.Boolean(v.IsRestricted)
-	}
-
-	if v.Landmark != nil {
-		ok := object.Key("Landmark")
-		ok.String(*v.Landmark)
-	}
-
-	if v.Name != nil {
-		ok := object.Key("Name")
-		ok.String(*v.Name)
-	}
-
-	if v.PhoneNumber != nil {
-		ok := object.Key("PhoneNumber")
-		ok.String(*v.PhoneNumber)
-	}
-
-	if v.PostalCode != nil {
-		ok := object.Key("PostalCode")
-		ok.String(*v.PostalCode)
-	}
-
-	if v.PrefectureOrDistrict != nil {
-		ok := object.Key("PrefectureOrDistrict")
-		ok.String(*v.PrefectureOrDistrict)
-	}
-
-	if v.StateOrProvince != nil {
-		ok := object.Key("StateOrProvince")
-		ok.String(*v.StateOrProvince)
-	}
-
 	if v.Street1 != nil {
-		ok := object.Key("Street1")
-		ok.String(*v.Street1)
+		ser, err := serializeCBOR_String(*v.Street1)
+		if err != nil {
+			return nil, err
+		}
+		vm["Street1"] = ser
 	}
-
 	if v.Street2 != nil {
-		ok := object.Key("Street2")
-		ok.String(*v.Street2)
+		ser, err := serializeCBOR_String(*v.Street2)
+		if err != nil {
+			return nil, err
+		}
+		vm["Street2"] = ser
 	}
-
 	if v.Street3 != nil {
-		ok := object.Key("Street3")
-		ok.String(*v.Street3)
-	}
-
-	if len(v.Type) > 0 {
-		ok := object.Key("Type")
-		ok.String(string(v.Type))
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentDependentService(v *types.DependentService, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if len(v.ServiceName) > 0 {
-		ok := object.Key("ServiceName")
-		ok.String(string(v.ServiceName))
-	}
-
-	if v.ServiceVersion != nil {
-		ok := object.Key("ServiceVersion")
-		if err := awsAwsjson11_serializeDocumentServiceVersion(v.ServiceVersion, ok); err != nil {
-			return err
+		ser, err := serializeCBOR_String(*v.Street3)
+		if err != nil {
+			return nil, err
 		}
+		vm["Street3"] = ser
 	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentDependentServiceList(v []types.DependentService, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		if err := awsAwsjson11_serializeDocumentDependentService(&v[i], av); err != nil {
-			return err
+	if v.City != nil {
+		ser, err := serializeCBOR_String(*v.City)
+		if err != nil {
+			return nil, err
 		}
+		vm["City"] = ser
 	}
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentDeviceConfiguration(v *types.DeviceConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.SnowconeDeviceConfiguration != nil {
-		ok := object.Key("SnowconeDeviceConfiguration")
-		if err := awsAwsjson11_serializeDocumentSnowconeDeviceConfiguration(v.SnowconeDeviceConfiguration, ok); err != nil {
-			return err
+	if v.StateOrProvince != nil {
+		ser, err := serializeCBOR_String(*v.StateOrProvince)
+		if err != nil {
+			return nil, err
 		}
+		vm["StateOrProvince"] = ser
 	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentEc2AmiResource(v *types.Ec2AmiResource, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.AmiId != nil {
-		ok := object.Key("AmiId")
-		ok.String(*v.AmiId)
-	}
-
-	if v.SnowballAmiId != nil {
-		ok := object.Key("SnowballAmiId")
-		ok.String(*v.SnowballAmiId)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentEc2AmiResourceList(v []types.Ec2AmiResource, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		if err := awsAwsjson11_serializeDocumentEc2AmiResource(&v[i], av); err != nil {
-			return err
+	if v.PrefectureOrDistrict != nil {
+		ser, err := serializeCBOR_String(*v.PrefectureOrDistrict)
+		if err != nil {
+			return nil, err
 		}
+		vm["PrefectureOrDistrict"] = ser
 	}
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentEKSOnDeviceServiceConfiguration(v *types.EKSOnDeviceServiceConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.EKSAnywhereVersion != nil {
-		ok := object.Key("EKSAnywhereVersion")
-		ok.String(*v.EKSAnywhereVersion)
-	}
-
-	if v.KubernetesVersion != nil {
-		ok := object.Key("KubernetesVersion")
-		ok.String(*v.KubernetesVersion)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentEventTriggerDefinition(v *types.EventTriggerDefinition, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.EventResourceARN != nil {
-		ok := object.Key("EventResourceARN")
-		ok.String(*v.EventResourceARN)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentEventTriggerDefinitionList(v []types.EventTriggerDefinition, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		if err := awsAwsjson11_serializeDocumentEventTriggerDefinition(&v[i], av); err != nil {
-			return err
+	if v.Landmark != nil {
+		ser, err := serializeCBOR_String(*v.Landmark)
+		if err != nil {
+			return nil, err
 		}
+		vm["Landmark"] = ser
 	}
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentINDTaxDocuments(v *types.INDTaxDocuments, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.GSTIN != nil {
-		ok := object.Key("GSTIN")
-		ok.String(*v.GSTIN)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentJobResource(v *types.JobResource, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Ec2AmiResources != nil {
-		ok := object.Key("Ec2AmiResources")
-		if err := awsAwsjson11_serializeDocumentEc2AmiResourceList(v.Ec2AmiResources, ok); err != nil {
-			return err
+	if v.Country != nil {
+		ser, err := serializeCBOR_String(*v.Country)
+		if err != nil {
+			return nil, err
 		}
+		vm["Country"] = ser
 	}
-
-	if v.LambdaResources != nil {
-		ok := object.Key("LambdaResources")
-		if err := awsAwsjson11_serializeDocumentLambdaResourceList(v.LambdaResources, ok); err != nil {
-			return err
+	if v.PostalCode != nil {
+		ser, err := serializeCBOR_String(*v.PostalCode)
+		if err != nil {
+			return nil, err
 		}
+		vm["PostalCode"] = ser
 	}
-
-	if v.S3Resources != nil {
-		ok := object.Key("S3Resources")
-		if err := awsAwsjson11_serializeDocumentS3ResourceList(v.S3Resources, ok); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentJobStateList(v []types.JobState, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		av.String(string(v[i]))
-	}
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentKeyRange(v *types.KeyRange, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.BeginMarker != nil {
-		ok := object.Key("BeginMarker")
-		ok.String(*v.BeginMarker)
-	}
-
-	if v.EndMarker != nil {
-		ok := object.Key("EndMarker")
-		ok.String(*v.EndMarker)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentLambdaResource(v *types.LambdaResource, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.EventTriggers != nil {
-		ok := object.Key("EventTriggers")
-		if err := awsAwsjson11_serializeDocumentEventTriggerDefinitionList(v.EventTriggers, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.LambdaArn != nil {
-		ok := object.Key("LambdaArn")
-		ok.String(*v.LambdaArn)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentLambdaResourceList(v []types.LambdaResource, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		if err := awsAwsjson11_serializeDocumentLambdaResource(&v[i], av); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentLongTermPricingIdList(v []string, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		av.String(v[i])
-	}
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentNFSOnDeviceServiceConfiguration(v *types.NFSOnDeviceServiceConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.StorageLimit != 0 {
-		ok := object.Key("StorageLimit")
-		ok.Integer(v.StorageLimit)
-	}
-
-	if len(v.StorageUnit) > 0 {
-		ok := object.Key("StorageUnit")
-		ok.String(string(v.StorageUnit))
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentNotification(v *types.Notification, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.DevicePickupSnsTopicARN != nil {
-		ok := object.Key("DevicePickupSnsTopicARN")
-		ok.String(*v.DevicePickupSnsTopicARN)
-	}
-
-	if v.JobStatesToNotify != nil {
-		ok := object.Key("JobStatesToNotify")
-		if err := awsAwsjson11_serializeDocumentJobStateList(v.JobStatesToNotify, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.NotifyAll {
-		ok := object.Key("NotifyAll")
-		ok.Boolean(v.NotifyAll)
-	}
-
-	if v.SnsTopicARN != nil {
-		ok := object.Key("SnsTopicARN")
-		ok.String(*v.SnsTopicARN)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v *types.OnDeviceServiceConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.EKSOnDeviceService != nil {
-		ok := object.Key("EKSOnDeviceService")
-		if err := awsAwsjson11_serializeDocumentEKSOnDeviceServiceConfiguration(v.EKSOnDeviceService, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.NFSOnDeviceService != nil {
-		ok := object.Key("NFSOnDeviceService")
-		if err := awsAwsjson11_serializeDocumentNFSOnDeviceServiceConfiguration(v.NFSOnDeviceService, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.S3OnDeviceService != nil {
-		ok := object.Key("S3OnDeviceService")
-		if err := awsAwsjson11_serializeDocumentS3OnDeviceServiceConfiguration(v.S3OnDeviceService, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.TGWOnDeviceService != nil {
-		ok := object.Key("TGWOnDeviceService")
-		if err := awsAwsjson11_serializeDocumentTGWOnDeviceServiceConfiguration(v.TGWOnDeviceService, ok); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeDocumentPickupDetails(v *types.PickupDetails, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.DevicePickupId != nil {
-		ok := object.Key("DevicePickupId")
-		ok.String(*v.DevicePickupId)
-	}
-
-	if v.Email != nil {
-		ok := object.Key("Email")
-		ok.String(*v.Email)
-	}
-
-	if v.IdentificationExpirationDate != nil {
-		ok := object.Key("IdentificationExpirationDate")
-		ok.Double(smithytime.FormatEpochSeconds(*v.IdentificationExpirationDate))
-	}
-
-	if v.IdentificationIssuingOrg != nil {
-		ok := object.Key("IdentificationIssuingOrg")
-		ok.String(*v.IdentificationIssuingOrg)
-	}
-
-	if v.IdentificationNumber != nil {
-		ok := object.Key("IdentificationNumber")
-		ok.String(*v.IdentificationNumber)
-	}
-
-	if v.Name != nil {
-		ok := object.Key("Name")
-		ok.String(*v.Name)
-	}
-
 	if v.PhoneNumber != nil {
-		ok := object.Key("PhoneNumber")
-		ok.String(*v.PhoneNumber)
+		ser, err := serializeCBOR_String(*v.PhoneNumber)
+		if err != nil {
+			return nil, err
+		}
+		vm["PhoneNumber"] = ser
 	}
-
-	return nil
+	serIsRestricted, err := serializeCBOR_Bool(v.IsRestricted)
+	if err != nil {
+		return nil, err
+	}
+	vm["IsRestricted"] = serIsRestricted
+	if len(v.Type) > 0 {
+		ser, err := serializeCBOR_AddressType(v.Type)
+		if err != nil {
+			return nil, err
+		}
+		vm["Type"] = ser
+	}
+	return vm, nil
 }
 
-func awsAwsjson11_serializeDocumentS3OnDeviceServiceConfiguration(v *types.S3OnDeviceServiceConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
+func serializeCBOR_AddressType(v types.AddressType) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
 
-	if v.FaultTolerance != nil {
-		ok := object.Key("FaultTolerance")
-		ok.Integer(*v.FaultTolerance)
+func serializeCBOR_DependentService(v *types.DependentService) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if len(v.ServiceName) > 0 {
+		ser, err := serializeCBOR_ServiceName(v.ServiceName)
+		if err != nil {
+			return nil, err
+		}
+		vm["ServiceName"] = ser
 	}
-
-	if v.ServiceSize != nil {
-		ok := object.Key("ServiceSize")
-		ok.Integer(*v.ServiceSize)
+	if v.ServiceVersion != nil {
+		ser, err := serializeCBOR_ServiceVersion(v.ServiceVersion)
+		if err != nil {
+			return nil, err
+		}
+		vm["ServiceVersion"] = ser
 	}
+	return vm, nil
+}
 
+func serializeCBOR_DependentServiceList(v []types.DependentService) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_DependentService(&v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
+}
+
+func serializeCBOR_DeviceConfiguration(v *types.DeviceConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.SnowconeDeviceConfiguration != nil {
+		ser, err := serializeCBOR_SnowconeDeviceConfiguration(v.SnowconeDeviceConfiguration)
+		if err != nil {
+			return nil, err
+		}
+		vm["SnowconeDeviceConfiguration"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DeviceServiceName(v types.DeviceServiceName) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_Ec2AmiResource(v *types.Ec2AmiResource) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.AmiId != nil {
+		ser, err := serializeCBOR_String(*v.AmiId)
+		if err != nil {
+			return nil, err
+		}
+		vm["AmiId"] = ser
+	}
+	if v.SnowballAmiId != nil {
+		ser, err := serializeCBOR_String(*v.SnowballAmiId)
+		if err != nil {
+			return nil, err
+		}
+		vm["SnowballAmiId"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_Ec2AmiResourceList(v []types.Ec2AmiResource) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_Ec2AmiResource(&v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
+}
+
+func serializeCBOR_EKSOnDeviceServiceConfiguration(v *types.EKSOnDeviceServiceConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.KubernetesVersion != nil {
+		ser, err := serializeCBOR_String(*v.KubernetesVersion)
+		if err != nil {
+			return nil, err
+		}
+		vm["KubernetesVersion"] = ser
+	}
+	if v.EKSAnywhereVersion != nil {
+		ser, err := serializeCBOR_String(*v.EKSAnywhereVersion)
+		if err != nil {
+			return nil, err
+		}
+		vm["EKSAnywhereVersion"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_EventTriggerDefinition(v *types.EventTriggerDefinition) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.EventResourceARN != nil {
+		ser, err := serializeCBOR_String(*v.EventResourceARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["EventResourceARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_EventTriggerDefinitionList(v []types.EventTriggerDefinition) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_EventTriggerDefinition(&v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
+}
+
+func serializeCBOR_ImpactLevel(v types.ImpactLevel) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_INDTaxDocuments(v *types.INDTaxDocuments) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.GSTIN != nil {
+		ser, err := serializeCBOR_String(*v.GSTIN)
+		if err != nil {
+			return nil, err
+		}
+		vm["GSTIN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_JobResource(v *types.JobResource) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.S3Resources != nil {
+		ser, err := serializeCBOR_S3ResourceList(v.S3Resources)
+		if err != nil {
+			return nil, err
+		}
+		vm["S3Resources"] = ser
+	}
+	if v.LambdaResources != nil {
+		ser, err := serializeCBOR_LambdaResourceList(v.LambdaResources)
+		if err != nil {
+			return nil, err
+		}
+		vm["LambdaResources"] = ser
+	}
+	if v.Ec2AmiResources != nil {
+		ser, err := serializeCBOR_Ec2AmiResourceList(v.Ec2AmiResources)
+		if err != nil {
+			return nil, err
+		}
+		vm["Ec2AmiResources"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_JobState(v types.JobState) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_JobStateList(v []types.JobState) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_JobState(v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
+}
+
+func serializeCBOR_JobType(v types.JobType) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_KeyRange(v *types.KeyRange) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.BeginMarker != nil {
+		ser, err := serializeCBOR_String(*v.BeginMarker)
+		if err != nil {
+			return nil, err
+		}
+		vm["BeginMarker"] = ser
+	}
+	if v.EndMarker != nil {
+		ser, err := serializeCBOR_String(*v.EndMarker)
+		if err != nil {
+			return nil, err
+		}
+		vm["EndMarker"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_LambdaResource(v *types.LambdaResource) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.LambdaArn != nil {
+		ser, err := serializeCBOR_String(*v.LambdaArn)
+		if err != nil {
+			return nil, err
+		}
+		vm["LambdaArn"] = ser
+	}
+	if v.EventTriggers != nil {
+		ser, err := serializeCBOR_EventTriggerDefinitionList(v.EventTriggers)
+		if err != nil {
+			return nil, err
+		}
+		vm["EventTriggers"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_LambdaResourceList(v []types.LambdaResource) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_LambdaResource(&v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
+}
+
+func serializeCBOR_LongTermPricingIdList(v []string) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
+	for i := range v {
+
+		ser, err := serializeCBOR_String(v[i])
+		if err != nil {
+			return nil, err
+		}
+		vl = append(vl, ser)
+	}
+	return vl, nil
+}
+
+func serializeCBOR_LongTermPricingType(v types.LongTermPricingType) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_NFSOnDeviceServiceConfiguration(v *types.NFSOnDeviceServiceConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	serStorageLimit, err := serializeCBOR_Int32(v.StorageLimit)
+	if err != nil {
+		return nil, err
+	}
+	vm["StorageLimit"] = serStorageLimit
+	if len(v.StorageUnit) > 0 {
+		ser, err := serializeCBOR_StorageUnit(v.StorageUnit)
+		if err != nil {
+			return nil, err
+		}
+		vm["StorageUnit"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_Notification(v *types.Notification) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.SnsTopicARN != nil {
+		ser, err := serializeCBOR_String(*v.SnsTopicARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["SnsTopicARN"] = ser
+	}
+	if v.JobStatesToNotify != nil {
+		ser, err := serializeCBOR_JobStateList(v.JobStatesToNotify)
+		if err != nil {
+			return nil, err
+		}
+		vm["JobStatesToNotify"] = ser
+	}
+	serNotifyAll, err := serializeCBOR_Bool(v.NotifyAll)
+	if err != nil {
+		return nil, err
+	}
+	vm["NotifyAll"] = serNotifyAll
+	if v.DevicePickupSnsTopicARN != nil {
+		ser, err := serializeCBOR_String(*v.DevicePickupSnsTopicARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["DevicePickupSnsTopicARN"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_OnDeviceServiceConfiguration(v *types.OnDeviceServiceConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.NFSOnDeviceService != nil {
+		ser, err := serializeCBOR_NFSOnDeviceServiceConfiguration(v.NFSOnDeviceService)
+		if err != nil {
+			return nil, err
+		}
+		vm["NFSOnDeviceService"] = ser
+	}
+	if v.TGWOnDeviceService != nil {
+		ser, err := serializeCBOR_TGWOnDeviceServiceConfiguration(v.TGWOnDeviceService)
+		if err != nil {
+			return nil, err
+		}
+		vm["TGWOnDeviceService"] = ser
+	}
+	if v.EKSOnDeviceService != nil {
+		ser, err := serializeCBOR_EKSOnDeviceServiceConfiguration(v.EKSOnDeviceService)
+		if err != nil {
+			return nil, err
+		}
+		vm["EKSOnDeviceService"] = ser
+	}
+	if v.S3OnDeviceService != nil {
+		ser, err := serializeCBOR_S3OnDeviceServiceConfiguration(v.S3OnDeviceService)
+		if err != nil {
+			return nil, err
+		}
+		vm["S3OnDeviceService"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_PickupDetails(v *types.PickupDetails) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.Name != nil {
+		ser, err := serializeCBOR_String(*v.Name)
+		if err != nil {
+			return nil, err
+		}
+		vm["Name"] = ser
+	}
+	if v.PhoneNumber != nil {
+		ser, err := serializeCBOR_String(*v.PhoneNumber)
+		if err != nil {
+			return nil, err
+		}
+		vm["PhoneNumber"] = ser
+	}
+	if v.Email != nil {
+		ser, err := serializeCBOR_String(*v.Email)
+		if err != nil {
+			return nil, err
+		}
+		vm["Email"] = ser
+	}
+	if v.IdentificationNumber != nil {
+		ser, err := serializeCBOR_String(*v.IdentificationNumber)
+		if err != nil {
+			return nil, err
+		}
+		vm["IdentificationNumber"] = ser
+	}
+	if v.IdentificationExpirationDate != nil {
+		ser, err := serializeCBOR_Time(*v.IdentificationExpirationDate)
+		if err != nil {
+			return nil, err
+		}
+		vm["IdentificationExpirationDate"] = ser
+	}
+	if v.IdentificationIssuingOrg != nil {
+		ser, err := serializeCBOR_String(*v.IdentificationIssuingOrg)
+		if err != nil {
+			return nil, err
+		}
+		vm["IdentificationIssuingOrg"] = ser
+	}
+	if v.DevicePickupId != nil {
+		ser, err := serializeCBOR_String(*v.DevicePickupId)
+		if err != nil {
+			return nil, err
+		}
+		vm["DevicePickupId"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_RemoteManagement(v types.RemoteManagement) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_S3OnDeviceServiceConfiguration(v *types.S3OnDeviceServiceConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
 	if v.StorageLimit != nil {
-		ok := object.Key("StorageLimit")
-		switch {
-		case math.IsNaN(*v.StorageLimit):
-			ok.String("NaN")
-
-		case math.IsInf(*v.StorageLimit, 1):
-			ok.String("Infinity")
-
-		case math.IsInf(*v.StorageLimit, -1):
-			ok.String("-Infinity")
-
-		default:
-			ok.Double(*v.StorageLimit)
-
+		ser, err := serializeCBOR_Float64(*v.StorageLimit)
+		if err != nil {
+			return nil, err
 		}
+		vm["StorageLimit"] = ser
 	}
-
 	if len(v.StorageUnit) > 0 {
-		ok := object.Key("StorageUnit")
-		ok.String(string(v.StorageUnit))
+		ser, err := serializeCBOR_StorageUnit(v.StorageUnit)
+		if err != nil {
+			return nil, err
+		}
+		vm["StorageUnit"] = ser
 	}
-
-	return nil
+	if v.ServiceSize != nil {
+		ser, err := serializeCBOR_Int32(*v.ServiceSize)
+		if err != nil {
+			return nil, err
+		}
+		vm["ServiceSize"] = ser
+	}
+	if v.FaultTolerance != nil {
+		ser, err := serializeCBOR_Int32(*v.FaultTolerance)
+		if err != nil {
+			return nil, err
+		}
+		vm["FaultTolerance"] = ser
+	}
+	return vm, nil
 }
 
-func awsAwsjson11_serializeDocumentS3Resource(v *types.S3Resource, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
+func serializeCBOR_S3Resource(v *types.S3Resource) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
 	if v.BucketArn != nil {
-		ok := object.Key("BucketArn")
-		ok.String(*v.BucketArn)
+		ser, err := serializeCBOR_String(*v.BucketArn)
+		if err != nil {
+			return nil, err
+		}
+		vm["BucketArn"] = ser
 	}
-
 	if v.KeyRange != nil {
-		ok := object.Key("KeyRange")
-		if err := awsAwsjson11_serializeDocumentKeyRange(v.KeyRange, ok); err != nil {
-			return err
+		ser, err := serializeCBOR_KeyRange(v.KeyRange)
+		if err != nil {
+			return nil, err
 		}
+		vm["KeyRange"] = ser
 	}
-
 	if v.TargetOnDeviceServices != nil {
-		ok := object.Key("TargetOnDeviceServices")
-		if err := awsAwsjson11_serializeDocumentTargetOnDeviceServiceList(v.TargetOnDeviceServices, ok); err != nil {
-			return err
+		ser, err := serializeCBOR_TargetOnDeviceServiceList(v.TargetOnDeviceServices)
+		if err != nil {
+			return nil, err
 		}
+		vm["TargetOnDeviceServices"] = ser
 	}
-
-	return nil
+	return vm, nil
 }
 
-func awsAwsjson11_serializeDocumentS3ResourceList(v []types.S3Resource, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
+func serializeCBOR_S3ResourceList(v []types.S3Resource) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
 	for i := range v {
-		av := array.Value()
-		if err := awsAwsjson11_serializeDocumentS3Resource(&v[i], av); err != nil {
-			return err
+
+		ser, err := serializeCBOR_S3Resource(&v[i])
+		if err != nil {
+			return nil, err
 		}
+		vl = append(vl, ser)
 	}
-	return nil
+	return vl, nil
 }
 
-func awsAwsjson11_serializeDocumentServiceVersion(v *types.ServiceVersion, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
+func serializeCBOR_ServiceName(v types.ServiceName) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
 
+func serializeCBOR_ServiceVersion(v *types.ServiceVersion) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
 	if v.Version != nil {
-		ok := object.Key("Version")
-		ok.String(*v.Version)
+		ser, err := serializeCBOR_String(*v.Version)
+		if err != nil {
+			return nil, err
+		}
+		vm["Version"] = ser
 	}
-
-	return nil
+	return vm, nil
 }
 
-func awsAwsjson11_serializeDocumentSnowconeDeviceConfiguration(v *types.SnowconeDeviceConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
+func serializeCBOR_ShipmentState(v types.ShipmentState) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
 
+func serializeCBOR_ShippingOption(v types.ShippingOption) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_SnowballCapacity(v types.SnowballCapacity) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_SnowballType(v types.SnowballType) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
+
+func serializeCBOR_SnowconeDeviceConfiguration(v *types.SnowconeDeviceConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
 	if v.WirelessConnection != nil {
-		ok := object.Key("WirelessConnection")
-		if err := awsAwsjson11_serializeDocumentWirelessConnection(v.WirelessConnection, ok); err != nil {
-			return err
+		ser, err := serializeCBOR_WirelessConnection(v.WirelessConnection)
+		if err != nil {
+			return nil, err
 		}
+		vm["WirelessConnection"] = ser
 	}
-
-	return nil
+	return vm, nil
 }
 
-func awsAwsjson11_serializeDocumentTargetOnDeviceService(v *types.TargetOnDeviceService, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
+func serializeCBOR_StorageUnit(v types.StorageUnit) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
+}
 
+func serializeCBOR_TargetOnDeviceService(v *types.TargetOnDeviceService) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
 	if len(v.ServiceName) > 0 {
-		ok := object.Key("ServiceName")
-		ok.String(string(v.ServiceName))
+		ser, err := serializeCBOR_DeviceServiceName(v.ServiceName)
+		if err != nil {
+			return nil, err
+		}
+		vm["ServiceName"] = ser
 	}
-
 	if len(v.TransferOption) > 0 {
-		ok := object.Key("TransferOption")
-		ok.String(string(v.TransferOption))
+		ser, err := serializeCBOR_TransferOption(v.TransferOption)
+		if err != nil {
+			return nil, err
+		}
+		vm["TransferOption"] = ser
 	}
-
-	return nil
+	return vm, nil
 }
 
-func awsAwsjson11_serializeDocumentTargetOnDeviceServiceList(v []types.TargetOnDeviceService, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
+func serializeCBOR_TargetOnDeviceServiceList(v []types.TargetOnDeviceService) (smithycbor.Value, error) {
+	vl := smithycbor.List{}
 	for i := range v {
-		av := array.Value()
-		if err := awsAwsjson11_serializeDocumentTargetOnDeviceService(&v[i], av); err != nil {
-			return err
+
+		ser, err := serializeCBOR_TargetOnDeviceService(&v[i])
+		if err != nil {
+			return nil, err
 		}
+		vl = append(vl, ser)
 	}
-	return nil
+	return vl, nil
 }
 
-func awsAwsjson11_serializeDocumentTaxDocuments(v *types.TaxDocuments, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
+func serializeCBOR_TaxDocuments(v *types.TaxDocuments) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
 	if v.IND != nil {
-		ok := object.Key("IND")
-		if err := awsAwsjson11_serializeDocumentINDTaxDocuments(v.IND, ok); err != nil {
-			return err
+		ser, err := serializeCBOR_INDTaxDocuments(v.IND)
+		if err != nil {
+			return nil, err
 		}
+		vm["IND"] = ser
 	}
-
-	return nil
+	return vm, nil
 }
 
-func awsAwsjson11_serializeDocumentTGWOnDeviceServiceConfiguration(v *types.TGWOnDeviceServiceConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.StorageLimit != 0 {
-		ok := object.Key("StorageLimit")
-		ok.Integer(v.StorageLimit)
+func serializeCBOR_TGWOnDeviceServiceConfiguration(v *types.TGWOnDeviceServiceConfiguration) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	serStorageLimit, err := serializeCBOR_Int32(v.StorageLimit)
+	if err != nil {
+		return nil, err
 	}
-
+	vm["StorageLimit"] = serStorageLimit
 	if len(v.StorageUnit) > 0 {
-		ok := object.Key("StorageUnit")
-		ok.String(string(v.StorageUnit))
+		ser, err := serializeCBOR_StorageUnit(v.StorageUnit)
+		if err != nil {
+			return nil, err
+		}
+		vm["StorageUnit"] = ser
 	}
-
-	return nil
+	return vm, nil
 }
 
-func awsAwsjson11_serializeDocumentWirelessConnection(v *types.WirelessConnection, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.IsWifiEnabled {
-		ok := object.Key("IsWifiEnabled")
-		ok.Boolean(v.IsWifiEnabled)
-	}
-
-	return nil
+func serializeCBOR_TransferOption(v types.TransferOption) (smithycbor.Value, error) {
+	return smithycbor.String(string(v)), nil
 }
 
-func awsAwsjson11_serializeOpDocumentCancelClusterInput(v *CancelClusterInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
+func serializeCBOR_WirelessConnection(v *types.WirelessConnection) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	serIsWifiEnabled, err := serializeCBOR_Bool(v.IsWifiEnabled)
+	if err != nil {
+		return nil, err
+	}
+	vm["IsWifiEnabled"] = serIsWifiEnabled
+	return vm, nil
+}
 
+func serializeCBOR_Bool(v bool) (smithycbor.Value, error) {
+	return smithycbor.Bool(v), nil
+}
+
+func serializeCBOR_Float64(v float64) (smithycbor.Value, error) {
+	return smithycbor.Float64(v), nil
+}
+
+func serializeCBOR_Int32(v int32) (smithycbor.Value, error) {
+	if v < 0 {
+		return smithycbor.NegInt(uint64(-v)), nil
+	}
+	return smithycbor.Uint(uint64(v)), nil
+}
+
+func serializeCBOR_String(v string) (smithycbor.Value, error) {
+	return smithycbor.String(v), nil
+}
+
+func serializeCBOR_Time(v time.Time) (smithycbor.Value, error) {
+	return &smithycbor.Tag{
+		ID:    1,
+		Value: smithycbor.Float64(float64(v.UnixMilli()) / 1000),
+	}, nil
+}
+
+func serializeCBOR_CancelClusterInput(v *CancelClusterInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
 	if v.ClusterId != nil {
-		ok := object.Key("ClusterId")
-		ok.String(*v.ClusterId)
+		ser, err := serializeCBOR_String(*v.ClusterId)
+		if err != nil {
+			return nil, err
+		}
+		vm["ClusterId"] = ser
 	}
-
-	return nil
+	return vm, nil
 }
 
-func awsAwsjson11_serializeOpDocumentCancelJobInput(v *CancelJobInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
+func serializeCBOR_CancelJobInput(v *CancelJobInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
 	if v.JobId != nil {
-		ok := object.Key("JobId")
-		ok.String(*v.JobId)
+		ser, err := serializeCBOR_String(*v.JobId)
+		if err != nil {
+			return nil, err
+		}
+		vm["JobId"] = ser
 	}
-
-	return nil
+	return vm, nil
 }
 
-func awsAwsjson11_serializeOpDocumentCreateAddressInput(v *CreateAddressInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
+func serializeCBOR_CreateAddressInput(v *CreateAddressInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
 	if v.Address != nil {
-		ok := object.Key("Address")
-		if err := awsAwsjson11_serializeDocumentAddress(v.Address, ok); err != nil {
-			return err
+		ser, err := serializeCBOR_Address(v.Address)
+		if err != nil {
+			return nil, err
 		}
+		vm["Address"] = ser
 	}
-
-	return nil
+	return vm, nil
 }
 
-func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.AddressId != nil {
-		ok := object.Key("AddressId")
-		ok.String(*v.AddressId)
+func serializeCBOR_CreateClusterInput(v *CreateClusterInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if len(v.JobType) > 0 {
+		ser, err := serializeCBOR_JobType(v.JobType)
+		if err != nil {
+			return nil, err
+		}
+		vm["JobType"] = ser
 	}
-
+	if v.Resources != nil {
+		ser, err := serializeCBOR_JobResource(v.Resources)
+		if err != nil {
+			return nil, err
+		}
+		vm["Resources"] = ser
+	}
+	if v.OnDeviceServiceConfiguration != nil {
+		ser, err := serializeCBOR_OnDeviceServiceConfiguration(v.OnDeviceServiceConfiguration)
+		if err != nil {
+			return nil, err
+		}
+		vm["OnDeviceServiceConfiguration"] = ser
+	}
 	if v.Description != nil {
-		ok := object.Key("Description")
-		ok.String(*v.Description)
+		ser, err := serializeCBOR_String(*v.Description)
+		if err != nil {
+			return nil, err
+		}
+		vm["Description"] = ser
 	}
-
-	if v.ForceCreateJobs {
-		ok := object.Key("ForceCreateJobs")
-		ok.Boolean(v.ForceCreateJobs)
+	if v.AddressId != nil {
+		ser, err := serializeCBOR_String(*v.AddressId)
+		if err != nil {
+			return nil, err
+		}
+		vm["AddressId"] = ser
 	}
-
+	if v.KmsKeyARN != nil {
+		ser, err := serializeCBOR_String(*v.KmsKeyARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["KmsKeyARN"] = ser
+	}
+	if v.RoleARN != nil {
+		ser, err := serializeCBOR_String(*v.RoleARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["RoleARN"] = ser
+	}
+	if len(v.SnowballType) > 0 {
+		ser, err := serializeCBOR_SnowballType(v.SnowballType)
+		if err != nil {
+			return nil, err
+		}
+		vm["SnowballType"] = ser
+	}
+	if len(v.ShippingOption) > 0 {
+		ser, err := serializeCBOR_ShippingOption(v.ShippingOption)
+		if err != nil {
+			return nil, err
+		}
+		vm["ShippingOption"] = ser
+	}
+	if v.Notification != nil {
+		ser, err := serializeCBOR_Notification(v.Notification)
+		if err != nil {
+			return nil, err
+		}
+		vm["Notification"] = ser
+	}
 	if v.ForwardingAddressId != nil {
-		ok := object.Key("ForwardingAddressId")
-		ok.String(*v.ForwardingAddressId)
+		ser, err := serializeCBOR_String(*v.ForwardingAddressId)
+		if err != nil {
+			return nil, err
+		}
+		vm["ForwardingAddressId"] = ser
 	}
-
+	if v.TaxDocuments != nil {
+		ser, err := serializeCBOR_TaxDocuments(v.TaxDocuments)
+		if err != nil {
+			return nil, err
+		}
+		vm["TaxDocuments"] = ser
+	}
+	if len(v.RemoteManagement) > 0 {
+		ser, err := serializeCBOR_RemoteManagement(v.RemoteManagement)
+		if err != nil {
+			return nil, err
+		}
+		vm["RemoteManagement"] = ser
+	}
 	if v.InitialClusterSize != nil {
-		ok := object.Key("InitialClusterSize")
-		ok.Integer(*v.InitialClusterSize)
+		ser, err := serializeCBOR_Int32(*v.InitialClusterSize)
+		if err != nil {
+			return nil, err
+		}
+		vm["InitialClusterSize"] = ser
 	}
-
-	if len(v.JobType) > 0 {
-		ok := object.Key("JobType")
-		ok.String(string(v.JobType))
+	serForceCreateJobs, err := serializeCBOR_Bool(v.ForceCreateJobs)
+	if err != nil {
+		return nil, err
 	}
-
-	if v.KmsKeyARN != nil {
-		ok := object.Key("KmsKeyARN")
-		ok.String(*v.KmsKeyARN)
-	}
-
+	vm["ForceCreateJobs"] = serForceCreateJobs
 	if v.LongTermPricingIds != nil {
-		ok := object.Key("LongTermPricingIds")
-		if err := awsAwsjson11_serializeDocumentLongTermPricingIdList(v.LongTermPricingIds, ok); err != nil {
-			return err
+		ser, err := serializeCBOR_LongTermPricingIdList(v.LongTermPricingIds)
+		if err != nil {
+			return nil, err
 		}
+		vm["LongTermPricingIds"] = ser
 	}
-
-	if v.Notification != nil {
-		ok := object.Key("Notification")
-		if err := awsAwsjson11_serializeDocumentNotification(v.Notification, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.OnDeviceServiceConfiguration != nil {
-		ok := object.Key("OnDeviceServiceConfiguration")
-		if err := awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v.OnDeviceServiceConfiguration, ok); err != nil {
-			return err
-		}
-	}
-
-	if len(v.RemoteManagement) > 0 {
-		ok := object.Key("RemoteManagement")
-		ok.String(string(v.RemoteManagement))
-	}
-
-	if v.Resources != nil {
-		ok := object.Key("Resources")
-		if err := awsAwsjson11_serializeDocumentJobResource(v.Resources, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.RoleARN != nil {
-		ok := object.Key("RoleARN")
-		ok.String(*v.RoleARN)
-	}
-
-	if len(v.ShippingOption) > 0 {
-		ok := object.Key("ShippingOption")
-		ok.String(string(v.ShippingOption))
-	}
-
 	if len(v.SnowballCapacityPreference) > 0 {
-		ok := object.Key("SnowballCapacityPreference")
-		ok.String(string(v.SnowballCapacityPreference))
-	}
-
-	if len(v.SnowballType) > 0 {
-		ok := object.Key("SnowballType")
-		ok.String(string(v.SnowballType))
-	}
-
-	if v.TaxDocuments != nil {
-		ok := object.Key("TaxDocuments")
-		if err := awsAwsjson11_serializeDocumentTaxDocuments(v.TaxDocuments, ok); err != nil {
-			return err
+		ser, err := serializeCBOR_SnowballCapacity(v.SnowballCapacityPreference)
+		if err != nil {
+			return nil, err
 		}
+		vm["SnowballCapacityPreference"] = ser
 	}
-
-	return nil
+	return vm, nil
 }
 
-func awsAwsjson11_serializeOpDocumentCreateJobInput(v *CreateJobInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.AddressId != nil {
-		ok := object.Key("AddressId")
-		ok.String(*v.AddressId)
-	}
-
-	if v.ClusterId != nil {
-		ok := object.Key("ClusterId")
-		ok.String(*v.ClusterId)
-	}
-
-	if v.Description != nil {
-		ok := object.Key("Description")
-		ok.String(*v.Description)
-	}
-
-	if v.DeviceConfiguration != nil {
-		ok := object.Key("DeviceConfiguration")
-		if err := awsAwsjson11_serializeDocumentDeviceConfiguration(v.DeviceConfiguration, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.ForwardingAddressId != nil {
-		ok := object.Key("ForwardingAddressId")
-		ok.String(*v.ForwardingAddressId)
-	}
-
-	if len(v.ImpactLevel) > 0 {
-		ok := object.Key("ImpactLevel")
-		ok.String(string(v.ImpactLevel))
-	}
-
+func serializeCBOR_CreateJobInput(v *CreateJobInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
 	if len(v.JobType) > 0 {
-		ok := object.Key("JobType")
-		ok.String(string(v.JobType))
+		ser, err := serializeCBOR_JobType(v.JobType)
+		if err != nil {
+			return nil, err
+		}
+		vm["JobType"] = ser
 	}
-
+	if v.Resources != nil {
+		ser, err := serializeCBOR_JobResource(v.Resources)
+		if err != nil {
+			return nil, err
+		}
+		vm["Resources"] = ser
+	}
+	if v.OnDeviceServiceConfiguration != nil {
+		ser, err := serializeCBOR_OnDeviceServiceConfiguration(v.OnDeviceServiceConfiguration)
+		if err != nil {
+			return nil, err
+		}
+		vm["OnDeviceServiceConfiguration"] = ser
+	}
+	if v.Description != nil {
+		ser, err := serializeCBOR_String(*v.Description)
+		if err != nil {
+			return nil, err
+		}
+		vm["Description"] = ser
+	}
+	if v.AddressId != nil {
+		ser, err := serializeCBOR_String(*v.AddressId)
+		if err != nil {
+			return nil, err
+		}
+		vm["AddressId"] = ser
+	}
 	if v.KmsKeyARN != nil {
-		ok := object.Key("KmsKeyARN")
-		ok.String(*v.KmsKeyARN)
-	}
-
-	if v.LongTermPricingId != nil {
-		ok := object.Key("LongTermPricingId")
-		ok.String(*v.LongTermPricingId)
-	}
-
-	if v.Notification != nil {
-		ok := object.Key("Notification")
-		if err := awsAwsjson11_serializeDocumentNotification(v.Notification, ok); err != nil {
-			return err
+		ser, err := serializeCBOR_String(*v.KmsKeyARN)
+		if err != nil {
+			return nil, err
 		}
+		vm["KmsKeyARN"] = ser
 	}
-
-	if v.OnDeviceServiceConfiguration != nil {
-		ok := object.Key("OnDeviceServiceConfiguration")
-		if err := awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v.OnDeviceServiceConfiguration, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.PickupDetails != nil {
-		ok := object.Key("PickupDetails")
-		if err := awsAwsjson11_serializeDocumentPickupDetails(v.PickupDetails, ok); err != nil {
-			return err
-		}
-	}
-
-	if len(v.RemoteManagement) > 0 {
-		ok := object.Key("RemoteManagement")
-		ok.String(string(v.RemoteManagement))
-	}
-
-	if v.Resources != nil {
-		ok := object.Key("Resources")
-		if err := awsAwsjson11_serializeDocumentJobResource(v.Resources, ok); err != nil {
-			return err
-		}
-	}
-
 	if v.RoleARN != nil {
-		ok := object.Key("RoleARN")
-		ok.String(*v.RoleARN)
+		ser, err := serializeCBOR_String(*v.RoleARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["RoleARN"] = ser
 	}
-
-	if len(v.ShippingOption) > 0 {
-		ok := object.Key("ShippingOption")
-		ok.String(string(v.ShippingOption))
-	}
-
 	if len(v.SnowballCapacityPreference) > 0 {
-		ok := object.Key("SnowballCapacityPreference")
-		ok.String(string(v.SnowballCapacityPreference))
+		ser, err := serializeCBOR_SnowballCapacity(v.SnowballCapacityPreference)
+		if err != nil {
+			return nil, err
+		}
+		vm["SnowballCapacityPreference"] = ser
 	}
-
+	if len(v.ShippingOption) > 0 {
+		ser, err := serializeCBOR_ShippingOption(v.ShippingOption)
+		if err != nil {
+			return nil, err
+		}
+		vm["ShippingOption"] = ser
+	}
+	if v.Notification != nil {
+		ser, err := serializeCBOR_Notification(v.Notification)
+		if err != nil {
+			return nil, err
+		}
+		vm["Notification"] = ser
+	}
+	if v.ClusterId != nil {
+		ser, err := serializeCBOR_String(*v.ClusterId)
+		if err != nil {
+			return nil, err
+		}
+		vm["ClusterId"] = ser
+	}
 	if len(v.SnowballType) > 0 {
-		ok := object.Key("SnowballType")
-		ok.String(string(v.SnowballType))
+		ser, err := serializeCBOR_SnowballType(v.SnowballType)
+		if err != nil {
+			return nil, err
+		}
+		vm["SnowballType"] = ser
 	}
-
+	if v.ForwardingAddressId != nil {
+		ser, err := serializeCBOR_String(*v.ForwardingAddressId)
+		if err != nil {
+			return nil, err
+		}
+		vm["ForwardingAddressId"] = ser
+	}
 	if v.TaxDocuments != nil {
-		ok := object.Key("TaxDocuments")
-		if err := awsAwsjson11_serializeDocumentTaxDocuments(v.TaxDocuments, ok); err != nil {
-			return err
+		ser, err := serializeCBOR_TaxDocuments(v.TaxDocuments)
+		if err != nil {
+			return nil, err
 		}
+		vm["TaxDocuments"] = ser
 	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentCreateLongTermPricingInput(v *CreateLongTermPricingInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.IsLongTermPricingAutoRenew != nil {
-		ok := object.Key("IsLongTermPricingAutoRenew")
-		ok.Boolean(*v.IsLongTermPricingAutoRenew)
-	}
-
-	if len(v.LongTermPricingType) > 0 {
-		ok := object.Key("LongTermPricingType")
-		ok.String(string(v.LongTermPricingType))
-	}
-
-	if len(v.SnowballType) > 0 {
-		ok := object.Key("SnowballType")
-		ok.String(string(v.SnowballType))
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentCreateReturnShippingLabelInput(v *CreateReturnShippingLabelInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.JobId != nil {
-		ok := object.Key("JobId")
-		ok.String(*v.JobId)
-	}
-
-	if len(v.ShippingOption) > 0 {
-		ok := object.Key("ShippingOption")
-		ok.String(string(v.ShippingOption))
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentDescribeAddressesInput(v *DescribeAddressesInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentDescribeAddressInput(v *DescribeAddressInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.AddressId != nil {
-		ok := object.Key("AddressId")
-		ok.String(*v.AddressId)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentDescribeClusterInput(v *DescribeClusterInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.ClusterId != nil {
-		ok := object.Key("ClusterId")
-		ok.String(*v.ClusterId)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentDescribeJobInput(v *DescribeJobInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.JobId != nil {
-		ok := object.Key("JobId")
-		ok.String(*v.JobId)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentDescribeReturnShippingLabelInput(v *DescribeReturnShippingLabelInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.JobId != nil {
-		ok := object.Key("JobId")
-		ok.String(*v.JobId)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentGetJobManifestInput(v *GetJobManifestInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.JobId != nil {
-		ok := object.Key("JobId")
-		ok.String(*v.JobId)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentGetJobUnlockCodeInput(v *GetJobUnlockCodeInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.JobId != nil {
-		ok := object.Key("JobId")
-		ok.String(*v.JobId)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentGetSnowballUsageInput(v *GetSnowballUsageInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentGetSoftwareUpdatesInput(v *GetSoftwareUpdatesInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.JobId != nil {
-		ok := object.Key("JobId")
-		ok.String(*v.JobId)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentListClusterJobsInput(v *ListClusterJobsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.ClusterId != nil {
-		ok := object.Key("ClusterId")
-		ok.String(*v.ClusterId)
-	}
-
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentListClustersInput(v *ListClustersInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentListCompatibleImagesInput(v *ListCompatibleImagesInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentListJobsInput(v *ListJobsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentListLongTermPricingInput(v *ListLongTermPricingInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentListPickupLocationsInput(v *ListPickupLocationsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentListServiceVersionsInput(v *ListServiceVersionsInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.DependentServices != nil {
-		ok := object.Key("DependentServices")
-		if err := awsAwsjson11_serializeDocumentDependentServiceList(v.DependentServices, ok); err != nil {
-			return err
+	if v.DeviceConfiguration != nil {
+		ser, err := serializeCBOR_DeviceConfiguration(v.DeviceConfiguration)
+		if err != nil {
+			return nil, err
 		}
+		vm["DeviceConfiguration"] = ser
 	}
-
-	if v.MaxResults != nil {
-		ok := object.Key("MaxResults")
-		ok.Integer(*v.MaxResults)
-	}
-
-	if v.NextToken != nil {
-		ok := object.Key("NextToken")
-		ok.String(*v.NextToken)
-	}
-
-	if len(v.ServiceName) > 0 {
-		ok := object.Key("ServiceName")
-		ok.String(string(v.ServiceName))
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.AddressId != nil {
-		ok := object.Key("AddressId")
-		ok.String(*v.AddressId)
-	}
-
-	if v.ClusterId != nil {
-		ok := object.Key("ClusterId")
-		ok.String(*v.ClusterId)
-	}
-
-	if v.Description != nil {
-		ok := object.Key("Description")
-		ok.String(*v.Description)
-	}
-
-	if v.ForwardingAddressId != nil {
-		ok := object.Key("ForwardingAddressId")
-		ok.String(*v.ForwardingAddressId)
-	}
-
-	if v.Notification != nil {
-		ok := object.Key("Notification")
-		if err := awsAwsjson11_serializeDocumentNotification(v.Notification, ok); err != nil {
-			return err
+	if len(v.RemoteManagement) > 0 {
+		ser, err := serializeCBOR_RemoteManagement(v.RemoteManagement)
+		if err != nil {
+			return nil, err
 		}
+		vm["RemoteManagement"] = ser
 	}
-
-	if v.OnDeviceServiceConfiguration != nil {
-		ok := object.Key("OnDeviceServiceConfiguration")
-		if err := awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v.OnDeviceServiceConfiguration, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Resources != nil {
-		ok := object.Key("Resources")
-		if err := awsAwsjson11_serializeDocumentJobResource(v.Resources, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.RoleARN != nil {
-		ok := object.Key("RoleARN")
-		ok.String(*v.RoleARN)
-	}
-
-	if len(v.ShippingOption) > 0 {
-		ok := object.Key("ShippingOption")
-		ok.String(string(v.ShippingOption))
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentUpdateJobInput(v *UpdateJobInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.AddressId != nil {
-		ok := object.Key("AddressId")
-		ok.String(*v.AddressId)
-	}
-
-	if v.Description != nil {
-		ok := object.Key("Description")
-		ok.String(*v.Description)
-	}
-
-	if v.ForwardingAddressId != nil {
-		ok := object.Key("ForwardingAddressId")
-		ok.String(*v.ForwardingAddressId)
-	}
-
-	if v.JobId != nil {
-		ok := object.Key("JobId")
-		ok.String(*v.JobId)
-	}
-
-	if v.Notification != nil {
-		ok := object.Key("Notification")
-		if err := awsAwsjson11_serializeDocumentNotification(v.Notification, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.OnDeviceServiceConfiguration != nil {
-		ok := object.Key("OnDeviceServiceConfiguration")
-		if err := awsAwsjson11_serializeDocumentOnDeviceServiceConfiguration(v.OnDeviceServiceConfiguration, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.PickupDetails != nil {
-		ok := object.Key("PickupDetails")
-		if err := awsAwsjson11_serializeDocumentPickupDetails(v.PickupDetails, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Resources != nil {
-		ok := object.Key("Resources")
-		if err := awsAwsjson11_serializeDocumentJobResource(v.Resources, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.RoleARN != nil {
-		ok := object.Key("RoleARN")
-		ok.String(*v.RoleARN)
-	}
-
-	if len(v.ShippingOption) > 0 {
-		ok := object.Key("ShippingOption")
-		ok.String(string(v.ShippingOption))
-	}
-
-	if len(v.SnowballCapacityPreference) > 0 {
-		ok := object.Key("SnowballCapacityPreference")
-		ok.String(string(v.SnowballCapacityPreference))
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentUpdateJobShipmentStateInput(v *UpdateJobShipmentStateInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.JobId != nil {
-		ok := object.Key("JobId")
-		ok.String(*v.JobId)
-	}
-
-	if len(v.ShipmentState) > 0 {
-		ok := object.Key("ShipmentState")
-		ok.String(string(v.ShipmentState))
-	}
-
-	return nil
-}
-
-func awsAwsjson11_serializeOpDocumentUpdateLongTermPricingInput(v *UpdateLongTermPricingInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.IsLongTermPricingAutoRenew != nil {
-		ok := object.Key("IsLongTermPricingAutoRenew")
-		ok.Boolean(*v.IsLongTermPricingAutoRenew)
-	}
-
 	if v.LongTermPricingId != nil {
-		ok := object.Key("LongTermPricingId")
-		ok.String(*v.LongTermPricingId)
+		ser, err := serializeCBOR_String(*v.LongTermPricingId)
+		if err != nil {
+			return nil, err
+		}
+		vm["LongTermPricingId"] = ser
 	}
+	if len(v.ImpactLevel) > 0 {
+		ser, err := serializeCBOR_ImpactLevel(v.ImpactLevel)
+		if err != nil {
+			return nil, err
+		}
+		vm["ImpactLevel"] = ser
+	}
+	if v.PickupDetails != nil {
+		ser, err := serializeCBOR_PickupDetails(v.PickupDetails)
+		if err != nil {
+			return nil, err
+		}
+		vm["PickupDetails"] = ser
+	}
+	return vm, nil
+}
 
+func serializeCBOR_CreateLongTermPricingInput(v *CreateLongTermPricingInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if len(v.LongTermPricingType) > 0 {
+		ser, err := serializeCBOR_LongTermPricingType(v.LongTermPricingType)
+		if err != nil {
+			return nil, err
+		}
+		vm["LongTermPricingType"] = ser
+	}
+	if v.IsLongTermPricingAutoRenew != nil {
+		ser, err := serializeCBOR_Bool(*v.IsLongTermPricingAutoRenew)
+		if err != nil {
+			return nil, err
+		}
+		vm["IsLongTermPricingAutoRenew"] = ser
+	}
+	if len(v.SnowballType) > 0 {
+		ser, err := serializeCBOR_SnowballType(v.SnowballType)
+		if err != nil {
+			return nil, err
+		}
+		vm["SnowballType"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_CreateReturnShippingLabelInput(v *CreateReturnShippingLabelInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.JobId != nil {
+		ser, err := serializeCBOR_String(*v.JobId)
+		if err != nil {
+			return nil, err
+		}
+		vm["JobId"] = ser
+	}
+	if len(v.ShippingOption) > 0 {
+		ser, err := serializeCBOR_ShippingOption(v.ShippingOption)
+		if err != nil {
+			return nil, err
+		}
+		vm["ShippingOption"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DescribeAddressesInput(v *DescribeAddressesInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.MaxResults != nil {
+		ser, err := serializeCBOR_Int32(*v.MaxResults)
+		if err != nil {
+			return nil, err
+		}
+		vm["MaxResults"] = ser
+	}
+	if v.NextToken != nil {
+		ser, err := serializeCBOR_String(*v.NextToken)
+		if err != nil {
+			return nil, err
+		}
+		vm["NextToken"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DescribeAddressInput(v *DescribeAddressInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.AddressId != nil {
+		ser, err := serializeCBOR_String(*v.AddressId)
+		if err != nil {
+			return nil, err
+		}
+		vm["AddressId"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DescribeClusterInput(v *DescribeClusterInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.ClusterId != nil {
+		ser, err := serializeCBOR_String(*v.ClusterId)
+		if err != nil {
+			return nil, err
+		}
+		vm["ClusterId"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DescribeJobInput(v *DescribeJobInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.JobId != nil {
+		ser, err := serializeCBOR_String(*v.JobId)
+		if err != nil {
+			return nil, err
+		}
+		vm["JobId"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_DescribeReturnShippingLabelInput(v *DescribeReturnShippingLabelInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.JobId != nil {
+		ser, err := serializeCBOR_String(*v.JobId)
+		if err != nil {
+			return nil, err
+		}
+		vm["JobId"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_GetJobManifestInput(v *GetJobManifestInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.JobId != nil {
+		ser, err := serializeCBOR_String(*v.JobId)
+		if err != nil {
+			return nil, err
+		}
+		vm["JobId"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_GetJobUnlockCodeInput(v *GetJobUnlockCodeInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.JobId != nil {
+		ser, err := serializeCBOR_String(*v.JobId)
+		if err != nil {
+			return nil, err
+		}
+		vm["JobId"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_GetSnowballUsageInput(v *GetSnowballUsageInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+
+	return vm, nil
+}
+
+func serializeCBOR_GetSoftwareUpdatesInput(v *GetSoftwareUpdatesInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.JobId != nil {
+		ser, err := serializeCBOR_String(*v.JobId)
+		if err != nil {
+			return nil, err
+		}
+		vm["JobId"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_ListClusterJobsInput(v *ListClusterJobsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.ClusterId != nil {
+		ser, err := serializeCBOR_String(*v.ClusterId)
+		if err != nil {
+			return nil, err
+		}
+		vm["ClusterId"] = ser
+	}
+	if v.MaxResults != nil {
+		ser, err := serializeCBOR_Int32(*v.MaxResults)
+		if err != nil {
+			return nil, err
+		}
+		vm["MaxResults"] = ser
+	}
+	if v.NextToken != nil {
+		ser, err := serializeCBOR_String(*v.NextToken)
+		if err != nil {
+			return nil, err
+		}
+		vm["NextToken"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_ListClustersInput(v *ListClustersInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.MaxResults != nil {
+		ser, err := serializeCBOR_Int32(*v.MaxResults)
+		if err != nil {
+			return nil, err
+		}
+		vm["MaxResults"] = ser
+	}
+	if v.NextToken != nil {
+		ser, err := serializeCBOR_String(*v.NextToken)
+		if err != nil {
+			return nil, err
+		}
+		vm["NextToken"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_ListCompatibleImagesInput(v *ListCompatibleImagesInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.MaxResults != nil {
+		ser, err := serializeCBOR_Int32(*v.MaxResults)
+		if err != nil {
+			return nil, err
+		}
+		vm["MaxResults"] = ser
+	}
+	if v.NextToken != nil {
+		ser, err := serializeCBOR_String(*v.NextToken)
+		if err != nil {
+			return nil, err
+		}
+		vm["NextToken"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_ListJobsInput(v *ListJobsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.MaxResults != nil {
+		ser, err := serializeCBOR_Int32(*v.MaxResults)
+		if err != nil {
+			return nil, err
+		}
+		vm["MaxResults"] = ser
+	}
+	if v.NextToken != nil {
+		ser, err := serializeCBOR_String(*v.NextToken)
+		if err != nil {
+			return nil, err
+		}
+		vm["NextToken"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_ListLongTermPricingInput(v *ListLongTermPricingInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.MaxResults != nil {
+		ser, err := serializeCBOR_Int32(*v.MaxResults)
+		if err != nil {
+			return nil, err
+		}
+		vm["MaxResults"] = ser
+	}
+	if v.NextToken != nil {
+		ser, err := serializeCBOR_String(*v.NextToken)
+		if err != nil {
+			return nil, err
+		}
+		vm["NextToken"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_ListPickupLocationsInput(v *ListPickupLocationsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.MaxResults != nil {
+		ser, err := serializeCBOR_Int32(*v.MaxResults)
+		if err != nil {
+			return nil, err
+		}
+		vm["MaxResults"] = ser
+	}
+	if v.NextToken != nil {
+		ser, err := serializeCBOR_String(*v.NextToken)
+		if err != nil {
+			return nil, err
+		}
+		vm["NextToken"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_ListServiceVersionsInput(v *ListServiceVersionsInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if len(v.ServiceName) > 0 {
+		ser, err := serializeCBOR_ServiceName(v.ServiceName)
+		if err != nil {
+			return nil, err
+		}
+		vm["ServiceName"] = ser
+	}
+	if v.DependentServices != nil {
+		ser, err := serializeCBOR_DependentServiceList(v.DependentServices)
+		if err != nil {
+			return nil, err
+		}
+		vm["DependentServices"] = ser
+	}
+	if v.MaxResults != nil {
+		ser, err := serializeCBOR_Int32(*v.MaxResults)
+		if err != nil {
+			return nil, err
+		}
+		vm["MaxResults"] = ser
+	}
+	if v.NextToken != nil {
+		ser, err := serializeCBOR_String(*v.NextToken)
+		if err != nil {
+			return nil, err
+		}
+		vm["NextToken"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_UpdateClusterInput(v *UpdateClusterInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.ClusterId != nil {
+		ser, err := serializeCBOR_String(*v.ClusterId)
+		if err != nil {
+			return nil, err
+		}
+		vm["ClusterId"] = ser
+	}
+	if v.RoleARN != nil {
+		ser, err := serializeCBOR_String(*v.RoleARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["RoleARN"] = ser
+	}
+	if v.Description != nil {
+		ser, err := serializeCBOR_String(*v.Description)
+		if err != nil {
+			return nil, err
+		}
+		vm["Description"] = ser
+	}
+	if v.Resources != nil {
+		ser, err := serializeCBOR_JobResource(v.Resources)
+		if err != nil {
+			return nil, err
+		}
+		vm["Resources"] = ser
+	}
+	if v.OnDeviceServiceConfiguration != nil {
+		ser, err := serializeCBOR_OnDeviceServiceConfiguration(v.OnDeviceServiceConfiguration)
+		if err != nil {
+			return nil, err
+		}
+		vm["OnDeviceServiceConfiguration"] = ser
+	}
+	if v.AddressId != nil {
+		ser, err := serializeCBOR_String(*v.AddressId)
+		if err != nil {
+			return nil, err
+		}
+		vm["AddressId"] = ser
+	}
+	if len(v.ShippingOption) > 0 {
+		ser, err := serializeCBOR_ShippingOption(v.ShippingOption)
+		if err != nil {
+			return nil, err
+		}
+		vm["ShippingOption"] = ser
+	}
+	if v.Notification != nil {
+		ser, err := serializeCBOR_Notification(v.Notification)
+		if err != nil {
+			return nil, err
+		}
+		vm["Notification"] = ser
+	}
+	if v.ForwardingAddressId != nil {
+		ser, err := serializeCBOR_String(*v.ForwardingAddressId)
+		if err != nil {
+			return nil, err
+		}
+		vm["ForwardingAddressId"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_UpdateJobInput(v *UpdateJobInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.JobId != nil {
+		ser, err := serializeCBOR_String(*v.JobId)
+		if err != nil {
+			return nil, err
+		}
+		vm["JobId"] = ser
+	}
+	if v.RoleARN != nil {
+		ser, err := serializeCBOR_String(*v.RoleARN)
+		if err != nil {
+			return nil, err
+		}
+		vm["RoleARN"] = ser
+	}
+	if v.Notification != nil {
+		ser, err := serializeCBOR_Notification(v.Notification)
+		if err != nil {
+			return nil, err
+		}
+		vm["Notification"] = ser
+	}
+	if v.Resources != nil {
+		ser, err := serializeCBOR_JobResource(v.Resources)
+		if err != nil {
+			return nil, err
+		}
+		vm["Resources"] = ser
+	}
+	if v.OnDeviceServiceConfiguration != nil {
+		ser, err := serializeCBOR_OnDeviceServiceConfiguration(v.OnDeviceServiceConfiguration)
+		if err != nil {
+			return nil, err
+		}
+		vm["OnDeviceServiceConfiguration"] = ser
+	}
+	if v.AddressId != nil {
+		ser, err := serializeCBOR_String(*v.AddressId)
+		if err != nil {
+			return nil, err
+		}
+		vm["AddressId"] = ser
+	}
+	if len(v.ShippingOption) > 0 {
+		ser, err := serializeCBOR_ShippingOption(v.ShippingOption)
+		if err != nil {
+			return nil, err
+		}
+		vm["ShippingOption"] = ser
+	}
+	if v.Description != nil {
+		ser, err := serializeCBOR_String(*v.Description)
+		if err != nil {
+			return nil, err
+		}
+		vm["Description"] = ser
+	}
+	if len(v.SnowballCapacityPreference) > 0 {
+		ser, err := serializeCBOR_SnowballCapacity(v.SnowballCapacityPreference)
+		if err != nil {
+			return nil, err
+		}
+		vm["SnowballCapacityPreference"] = ser
+	}
+	if v.ForwardingAddressId != nil {
+		ser, err := serializeCBOR_String(*v.ForwardingAddressId)
+		if err != nil {
+			return nil, err
+		}
+		vm["ForwardingAddressId"] = ser
+	}
+	if v.PickupDetails != nil {
+		ser, err := serializeCBOR_PickupDetails(v.PickupDetails)
+		if err != nil {
+			return nil, err
+		}
+		vm["PickupDetails"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_UpdateJobShipmentStateInput(v *UpdateJobShipmentStateInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.JobId != nil {
+		ser, err := serializeCBOR_String(*v.JobId)
+		if err != nil {
+			return nil, err
+		}
+		vm["JobId"] = ser
+	}
+	if len(v.ShipmentState) > 0 {
+		ser, err := serializeCBOR_ShipmentState(v.ShipmentState)
+		if err != nil {
+			return nil, err
+		}
+		vm["ShipmentState"] = ser
+	}
+	return vm, nil
+}
+
+func serializeCBOR_UpdateLongTermPricingInput(v *UpdateLongTermPricingInput) (smithycbor.Value, error) {
+	vm := smithycbor.Map{}
+	if v.LongTermPricingId != nil {
+		ser, err := serializeCBOR_String(*v.LongTermPricingId)
+		if err != nil {
+			return nil, err
+		}
+		vm["LongTermPricingId"] = ser
+	}
 	if v.ReplacementJob != nil {
-		ok := object.Key("ReplacementJob")
-		ok.String(*v.ReplacementJob)
+		ser, err := serializeCBOR_String(*v.ReplacementJob)
+		if err != nil {
+			return nil, err
+		}
+		vm["ReplacementJob"] = ser
 	}
-
-	return nil
+	if v.IsLongTermPricingAutoRenew != nil {
+		ser, err := serializeCBOR_Bool(*v.IsLongTermPricingAutoRenew)
+		if err != nil {
+			return nil, err
+		}
+		vm["IsLongTermPricingAutoRenew"] = ser
+	}
+	return vm, nil
 }

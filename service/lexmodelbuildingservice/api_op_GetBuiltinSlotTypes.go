@@ -17,6 +17,8 @@ import (
 //
 // This operation requires permission for the lex:GetBuiltInSlotTypes action.
 //
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+//
 // [Slot Type Reference]: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference
 func (c *Client) GetBuiltinSlotTypes(ctx context.Context, params *GetBuiltinSlotTypesInput, optFns ...func(*Options)) (*GetBuiltinSlotTypesOutput, error) {
 	if params == nil {
@@ -105,7 +107,7 @@ func (c *Client) addOperationGetBuiltinSlotTypesMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -127,9 +129,6 @@ func (c *Client) addOperationGetBuiltinSlotTypesMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

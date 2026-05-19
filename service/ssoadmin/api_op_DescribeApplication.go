@@ -61,6 +61,10 @@ type DescribeApplicationOutput struct {
 	// The description of the .
 	Description *string
 
+	// The ARN of the identity store that is connected to the instance of IAM Identity
+	// Center.
+	IdentityStoreArn *string
+
 	// The ARN of the IAM Identity Center application under which the operation will
 	// run. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services General
 	// Reference.
@@ -116,7 +120,7 @@ func (c *Client) addOperationDescribeApplicationMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -138,9 +142,6 @@ func (c *Client) addOperationDescribeApplicationMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

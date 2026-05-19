@@ -751,6 +751,13 @@ func awsAwsjson11_serializeOpDocumentBatchExecuteStatementInput(v *BatchExecuteS
 		ok.String(*v.DbUser)
 	}
 
+	if v.Parameters != nil {
+		ok := object.Key("Parameters")
+		if err := awsAwsjson11_serializeDocumentSqlParametersList(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ResultFormat) > 0 {
 		ok := object.Key("ResultFormat")
 		ok.String(string(v.ResultFormat))

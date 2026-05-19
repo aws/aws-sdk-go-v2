@@ -9067,6 +9067,13 @@ func awsRestjson1_serializeOpDocumentUpdateChannelInput(v *UpdateChannelInput, v
 		ok.String(*v.RoleArn)
 	}
 
+	if v.SpecialRouterSettings != nil {
+		ok := object.Key("specialRouterSettings")
+		if err := awsRestjson1_serializeDocumentSpecialRouterSettings(v.SpecialRouterSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -11405,6 +11412,19 @@ func awsRestjson1_serializeDocument__listOfMediaConnectFlowRequest(v []types.Med
 	return nil
 }
 
+func awsRestjson1_serializeDocument__listOfMediaConnectRouterOutputDestinationSettings(v []types.MediaConnectRouterOutputDestinationSettings, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMediaConnectRouterOutputDestinationSettings(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOfMediaPackageAdditionalDestinations(v []types.MediaPackageAdditionalDestinations, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -12420,6 +12440,13 @@ func awsRestjson1_serializeDocumentAv1ColorSpaceSettings(v *types.Av1ColorSpaceS
 	if v.Hdr10Settings != nil {
 		ok := object.Key("hdr10Settings")
 		if err := awsRestjson1_serializeDocumentHdr10Settings(v.Hdr10Settings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Hlg2020Settings != nil {
+		ok := object.Key("hlg2020Settings")
+		if err := awsRestjson1_serializeDocumentHlg2020Settings(v.Hlg2020Settings, ok); err != nil {
 			return err
 		}
 	}
@@ -16675,6 +16702,96 @@ func awsRestjson1_serializeDocumentMediaConnectFlowRequest(v *types.MediaConnect
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMediaConnectRouterContainerSettings(v *types.MediaConnectRouterContainerSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.M2tsSettings != nil {
+		ok := object.Key("m2tsSettings")
+		if err := awsRestjson1_serializeDocumentM2tsSettings(v.M2tsSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMediaConnectRouterGroupSettings(v *types.MediaConnectRouterGroupSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AvailabilityZones != nil {
+		ok := object.Key("availabilityZones")
+		if err := awsRestjson1_serializeDocument__listOf__string(v.AvailabilityZones, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMediaConnectRouterOutputConnectionMap(v *types.MediaConnectRouterOutputConnectionMap, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Pipeline0 != nil {
+		ok := object.Key("pipeline0")
+		ok.String(*v.Pipeline0)
+	}
+
+	if v.Pipeline1 != nil {
+		ok := object.Key("pipeline1")
+		ok.String(*v.Pipeline1)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMediaConnectRouterOutputDestinationSettings(v *types.MediaConnectRouterOutputDestinationSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.EncryptionType) > 0 {
+		ok := object.Key("encryptionType")
+		ok.String(string(v.EncryptionType))
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("secretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMediaConnectRouterOutputSettings(v *types.MediaConnectRouterOutputSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConnectedRouterInputs != nil {
+		ok := object.Key("connectedRouterInputs")
+		if err := awsRestjson1_serializeDocumentMediaConnectRouterOutputConnectionMap(v.ConnectedRouterInputs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ContainerSettings != nil {
+		ok := object.Key("containerSettings")
+		if err := awsRestjson1_serializeDocumentMediaConnectRouterContainerSettings(v.ContainerSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Destination != nil {
+		ok := object.Key("destination")
+		if err := awsRestjson1_serializeDocumentOutputLocationRef(v.Destination, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMediaPackageAdditionalDestinations(v *types.MediaPackageAdditionalDestinations, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17894,6 +18011,13 @@ func awsRestjson1_serializeDocumentOutputDestination(v *types.OutputDestination,
 		}
 	}
 
+	if v.MediaConnectRouterSettings != nil {
+		ok := object.Key("mediaConnectRouterSettings")
+		if err := awsRestjson1_serializeDocument__listOfMediaConnectRouterOutputDestinationSettings(v.MediaConnectRouterSettings, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MediaPackageSettings != nil {
 		ok := object.Key("mediaPackageSettings")
 		if err := awsRestjson1_serializeDocument__listOfMediaPackageOutputDestinationSettings(v.MediaPackageSettings, ok); err != nil {
@@ -18006,6 +18130,13 @@ func awsRestjson1_serializeDocumentOutputGroupSettings(v *types.OutputGroupSetti
 	if v.HlsGroupSettings != nil {
 		ok := object.Key("hlsGroupSettings")
 		if err := awsRestjson1_serializeDocumentHlsGroupSettings(v.HlsGroupSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MediaConnectRouterGroupSettings != nil {
+		ok := object.Key("mediaConnectRouterGroupSettings")
+		if err := awsRestjson1_serializeDocumentMediaConnectRouterGroupSettings(v.MediaConnectRouterGroupSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -18123,6 +18254,13 @@ func awsRestjson1_serializeDocumentOutputSettings(v *types.OutputSettings, value
 	if v.HlsOutputSettings != nil {
 		ok := object.Key("hlsOutputSettings")
 		if err := awsRestjson1_serializeDocumentHlsOutputSettings(v.HlsOutputSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MediaConnectRouterOutputSettings != nil {
+		ok := object.Key("mediaConnectRouterOutputSettings")
+		if err := awsRestjson1_serializeDocumentMediaConnectRouterOutputSettings(v.MediaConnectRouterOutputSettings, ok); err != nil {
 			return err
 		}
 	}

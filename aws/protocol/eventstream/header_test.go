@@ -1,6 +1,7 @@
 package eventstream
 
 import (
+	"bytes"
 	"reflect"
 	"testing"
 	"time"
@@ -62,5 +63,18 @@ func TestHeaders_Del(t *testing.T) {
 
 	if e, a := expectAfterDel, headers; !reflect.DeepEqual(e, a) {
 		t.Errorf("expect %v headers, got %v", e, a)
+	}
+}
+
+func TestHeaders_UnknownType(t *testing.T) {
+	buf := bytes.NewBuffer(nil)
+	buf.WriteByte(3)       // header name length
+	buf.WriteString("foo") // header name
+	buf.WriteByte(0xFF)    // unknown value type
+
+	_, err := decodeHeaders(buf)
+	// This shouldn't panic and should return an error
+	if err == nil {
+		t.Fatal("expect error for unknown header value type, got none")
 	}
 }

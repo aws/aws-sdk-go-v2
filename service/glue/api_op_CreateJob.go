@@ -116,7 +116,7 @@ type CreateJobInput struct {
 	// For more information about the available Glue versions and corresponding Spark
 	// and Python versions, see [Glue version]in the developer guide.
 	//
-	// Jobs that are created without specifying a Glue version default to Glue 0.9.
+	// Jobs that are created without specifying a Glue version default to Glue 5.1.
 	//
 	// [Glue version]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	GlueVersion *string
@@ -212,7 +212,8 @@ type CreateJobInput struct {
 	// Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the
 	// jobs will throw an exception.
 	//
-	// When the value is left blank, the timeout is defaulted to 2880 minutes.
+	// When the value is left blank, the timeout is defaulted to 2,880 minutes for
+	// Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.
 	//
 	// Any existing Glue jobs that had a timeout value greater than 7 days will be
 	// defaulted to 7 days. For instance if you have specified a timeout of 20 days for
@@ -312,7 +313,7 @@ func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, optio
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -334,9 +335,6 @@ func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

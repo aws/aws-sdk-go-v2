@@ -46,6 +46,10 @@ type UpdateDbClusterInput struct {
 	// The log delivery configuration to apply to the DB cluster.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
 
+	// Specifies the maintenance schedule for the DB cluster, including the preferred
+	// maintenance window and timezone.
+	MaintenanceSchedule *types.MaintenanceSchedule
+
 	// Update the DB cluster to use the specified port.
 	Port *int32
 
@@ -97,7 +101,7 @@ func (c *Client) addOperationUpdateDbClusterMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -119,9 +123,6 @@ func (c *Client) addOperationUpdateDbClusterMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

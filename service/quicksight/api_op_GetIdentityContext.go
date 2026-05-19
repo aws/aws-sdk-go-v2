@@ -104,6 +104,24 @@ type GetIdentityContextInput struct {
 	// This member is required.
 	UserIdentifier types.UserIdentifier
 
+	// The region in which the context is to be used. Use this parameter to obtain an
+	// identity context for cross-region use.
+	//
+	// The specified region must meet the following conditions:
+	//
+	//   - The region must be in the same Amazon Web Services partition as the region
+	//   you are calling from. Cross-partition requests are not supported. For example,
+	//   you cannot specify a region in the aws-cn partition when calling from a region
+	//   in the aws partition.
+	//
+	//   - It must be a valid Amazon QuickSight supported region.
+	//
+	//   - The calling customer account must be enabled in the specified context
+	//   region.
+	//
+	//   - This parameter is not supported when calling from an opt-in region.
+	ContextRegion *string
+
 	// The namespace of the user that you want to get identity context for. This
 	// parameter is required when the UserIdentifier is specified using Email or
 	// UserName.
@@ -174,7 +192,7 @@ func (c *Client) addOperationGetIdentityContextMiddlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -196,9 +214,6 @@ func (c *Client) addOperationGetIdentityContextMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

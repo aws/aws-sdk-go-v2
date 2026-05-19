@@ -54,7 +54,7 @@ type GetAgreementTermsInput struct {
 	// The maximum number of agreements to return in the response.
 	MaxResults *int32
 
-	// A token to specify where to start pagination
+	// A token to specify where to start pagination.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -66,7 +66,7 @@ type GetAgreementTermsOutput struct {
 	// acceptor as part of the agreement creation.
 	AcceptedTerms []types.AcceptedTerm
 
-	// A token to specify where to start pagination
+	// The token used for pagination. The field is null if there are no more results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -109,7 +109,7 @@ func (c *Client) addOperationGetAgreementTermsMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -131,9 +131,6 @@ func (c *Client) addOperationGetAgreementTermsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -1971,6 +1971,23 @@ func awsAwsjson10_serializeDocumentLogDeliveryConfiguration(v *types.LogDelivery
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentMaintenanceSchedule(v *types.MaintenanceSchedule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PreferredMaintenanceWindow != nil {
+		ok := object.Key("preferredMaintenanceWindow")
+		ok.String(*v.PreferredMaintenanceWindow)
+	}
+
+	if v.Timezone != nil {
+		ok := object.Key("timezone")
+		ok.String(*v.Timezone)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentParameters(v types.Parameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2128,6 +2145,13 @@ func awsAwsjson10_serializeOpDocumentCreateDbClusterInput(v *CreateDbClusterInpu
 		}
 	}
 
+	if v.MaintenanceSchedule != nil {
+		ok := object.Key("maintenanceSchedule")
+		if err := awsAwsjson10_serializeDocumentMaintenanceSchedule(v.MaintenanceSchedule, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -2224,6 +2248,13 @@ func awsAwsjson10_serializeOpDocumentCreateDbInstanceInput(v *CreateDbInstanceIn
 	if v.LogDeliveryConfiguration != nil {
 		ok := object.Key("logDeliveryConfiguration")
 		if err := awsAwsjson10_serializeDocumentLogDeliveryConfiguration(v.LogDeliveryConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaintenanceSchedule != nil {
+		ok := object.Key("maintenanceSchedule")
+		if err := awsAwsjson10_serializeDocumentMaintenanceSchedule(v.MaintenanceSchedule, ok); err != nil {
 			return err
 		}
 	}
@@ -2563,6 +2594,13 @@ func awsAwsjson10_serializeOpDocumentUpdateDbClusterInput(v *UpdateDbClusterInpu
 		}
 	}
 
+	if v.MaintenanceSchedule != nil {
+		ok := object.Key("maintenanceSchedule")
+		if err := awsAwsjson10_serializeDocumentMaintenanceSchedule(v.MaintenanceSchedule, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Port != nil {
 		ok := object.Key("port")
 		ok.Integer(*v.Port)
@@ -2608,6 +2646,13 @@ func awsAwsjson10_serializeOpDocumentUpdateDbInstanceInput(v *UpdateDbInstanceIn
 	if v.LogDeliveryConfiguration != nil {
 		ok := object.Key("logDeliveryConfiguration")
 		if err := awsAwsjson10_serializeDocumentLogDeliveryConfiguration(v.LogDeliveryConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaintenanceSchedule != nil {
+		ok := object.Key("maintenanceSchedule")
+		if err := awsAwsjson10_serializeDocumentMaintenanceSchedule(v.MaintenanceSchedule, ok); err != nil {
 			return err
 		}
 	}

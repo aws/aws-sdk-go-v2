@@ -54,10 +54,12 @@ type AccessKeyDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the account.
+// Contains information about the Amazon Web Services account within which the
+// activity took place.
 type Account struct {
 
-	// ID of the member's Amazon Web Services account
+	// The Amazon Web Services account ID within which the activity took place. This
+	// may differ from the account that owns the user identity.
 	//
 	// This member is required.
 	Uid *string
@@ -484,11 +486,15 @@ type Condition struct {
 	// Represents the equal condition to be applied to a single field when querying
 	// for findings.
 	//
+	// Max values: 50
+	//
 	// Deprecated: This member has been deprecated.
 	Eq []string
 
 	// Represents an equal condition to be applied to a single field when querying for
 	// findings.
+	//
+	// Max values: 50
 	Equals []string
 
 	// Represents a greater than condition to be applied to a single field when
@@ -541,11 +547,15 @@ type Condition struct {
 	// Represents the not equal condition to be applied to a single field when
 	// querying for findings.
 	//
+	// Max values: 50
+	//
 	// Deprecated: This member has been deprecated.
 	Neq []string
 
 	// Represents a not equal condition to be applied to a single field when querying
 	// for findings.
+	//
+	// Max values: 50
 	NotEquals []string
 
 	// Represents the not match condition to be applied to a single field when
@@ -2582,6 +2592,8 @@ type MemberDataSourceConfiguration struct {
 	AccountId *string
 
 	// Contains information on the status of data sources for the account.
+	//
+	// This member is required.
 	//
 	// Deprecated: This parameter is deprecated, use Features instead
 	DataSources *DataSourceConfigurationsResult
@@ -4869,7 +4881,9 @@ type User struct {
 	// This member is required.
 	Uid *string
 
-	// Contains information about the Amazon Web Services account.
+	// Contains information about the Amazon Web Services account within which the
+	// activity took place. This is not necessarily the account that owns the user
+	// identity.
 	Account *Account
 
 	// The credentials of the user ID.

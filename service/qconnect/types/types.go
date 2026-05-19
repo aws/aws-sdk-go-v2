@@ -3916,6 +3916,45 @@ type MessageTemplateVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The summary of a model available to an Amazon Q in Connect assistant.
+type ModelSummary struct {
+
+	// The display name of the model.
+	//
+	// This member is required.
+	DisplayName *string
+
+	// The identifier of the model.
+	//
+	// This member is required.
+	ModelId *string
+
+	// The cross-region availability status of the model. NONE indicates the model is
+	// only available in a single region, REGIONAL indicates the model is available
+	// through regional inference, and GLOBAL indicates the model is available through
+	// global cross-region inference.
+	CrossRegionStatus CrossRegionStatus
+
+	// The timestamp when the model will reach end of life and no longer be available
+	// for use.
+	EndOfLifeTimestamp *time.Time
+
+	// The timestamp when the model lifecycle will transition from ACTIVE to LEGACY .
+	LegacyTimestamp *time.Time
+
+	// The current lifecycle of the model. ACTIVE indicates the model is recommended
+	// for use and LEGACY indicates the model is still usable but is deprecated.
+	ModelLifecycle ModelLifecycle
+
+	// The list of AI Prompt types that the model supports.
+	SupportedAIPromptTypes []AIPromptType
+
+	// Whether the model supports prompt caching.
+	SupportsPromptCaching *bool
+
+	noSmithyDocumentSerde
+}
+
 // Details about notes chunk data.
 type NotesChunkDataDetails struct {
 
@@ -5520,8 +5559,14 @@ type Span struct {
 	// This member is required.
 	Status SpanStatus
 
+	// The origin request identifier for end-to-end tracing.
+	OriginRequestId *string
+
 	// Parent span identifier for hierarchy. Null for root spans.
 	ParentSpanId *string
+
+	// Human-readable error description when status is ERROR or TIMEOUT
+	StatusDescription *string
 
 	noSmithyDocumentSerde
 }
@@ -5620,6 +5665,10 @@ type SpanAttributes struct {
 	// Sampling temperature for generation
 	Temperature *float32
 
+	// Time to first token in milliseconds, measured from when Amazon Bedrock was
+	// invoked to when the first token was returned
+	TimeToFirstTokenMs *int32
+
 	// Top-p sampling parameter for generation
 	TopP *float32
 
@@ -5672,7 +5721,7 @@ type SpanMessage struct {
 	// This member is required.
 	Timestamp *time.Time
 
-	// Message content values (text, tool use, tool result)
+	// Message content values (text, tool use, tool result, reasoning)
 	//
 	// This member is required.
 	Values []SpanMessageValue
@@ -5680,16 +5729,26 @@ type SpanMessage struct {
 	noSmithyDocumentSerde
 }
 
-// Message content value - can be text, tool invocation, or tool result
+// Message content value - can be text, tool invocation, tool result, or reasoning
 //
 // The following types satisfy this interface:
 //
+//	SpanMessageValueMemberReasoning
 //	SpanMessageValueMemberText
 //	SpanMessageValueMemberToolResult
 //	SpanMessageValueMemberToolUse
 type SpanMessageValue interface {
 	isSpanMessageValue()
 }
+
+// Model reasoning and it's internal decision making process
+type SpanMessageValueMemberReasoning struct {
+	Value SpanReasoningValue
+
+	noSmithyDocumentSerde
+}
+
+func (*SpanMessageValueMemberReasoning) isSpanMessageValue() {}
 
 // Text message content
 type SpanMessageValueMemberText struct {
@@ -5717,6 +5776,17 @@ type SpanMessageValueMemberToolUse struct {
 }
 
 func (*SpanMessageValueMemberToolUse) isSpanMessageValue() {}
+
+// Model reasoning and it's internal decision making process
+type SpanReasoningValue struct {
+
+	// The reasoning text content
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
 
 // Text message content
 type SpanTextValue struct {

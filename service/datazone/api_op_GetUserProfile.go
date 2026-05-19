@@ -39,6 +39,9 @@ type GetUserProfileInput struct {
 	// This member is required.
 	UserIdentifier *string
 
+	// The session name for IAM role sessions.
+	SessionName *string
+
 	// The type of the user profile.
 	Type types.UserProfileType
 
@@ -103,7 +106,7 @@ func (c *Client) addOperationGetUserProfileMiddlewares(stack *middleware.Stack, 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -125,9 +128,6 @@ func (c *Client) addOperationGetUserProfileMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

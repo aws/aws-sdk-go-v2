@@ -91,6 +91,10 @@ type CreateDbClusterInput struct {
 	// Configuration for sending InfluxDB engine logs to a specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
 
+	// Specifies the maintenance schedule for the DB cluster, including the preferred
+	// maintenance window and timezone.
+	MaintenanceSchedule *types.MaintenanceSchedule
+
 	// Specifies whether the network type of the Timestream for InfluxDB cluster is
 	// IPv4, which can communicate over IPv4 protocol only, or DUAL, which can
 	// communicate over both IPv4 and IPv6 protocols.
@@ -181,7 +185,7 @@ func (c *Client) addOperationCreateDbClusterMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -203,9 +207,6 @@ func (c *Client) addOperationCreateDbClusterMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

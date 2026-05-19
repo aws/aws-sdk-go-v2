@@ -4042,6 +4042,13 @@ func awsRestjson1_serializeOpDocumentUpdateGlobalResolverInput(v *UpdateGlobalRe
 		ok.String(*v.ObservabilityRegion)
 	}
 
+	if v.Regions != nil {
+		ok := object.Key("regions")
+		if err := awsRestjson1_serializeDocumentRegions(v.Regions, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

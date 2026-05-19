@@ -224,6 +224,28 @@ func TestClient_SimpleInputParams_Serialize(t *testing.T) {
 				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&UsesXmlName=Hi`))
 			},
 		},
+		// ec2QueryName trait takes precedence when xmlName, default name, and
+		// ec2QueryName all have distinct values.
+		"Ec2QueryNameDistinctFromXmlNameAndMemberName": {
+			Params: &SimpleInputParamsInput{
+				DistinctQueryName:       ptr.String("value1"),
+				DistinctQueryAndXmlName: ptr.String("value2"),
+				DistinctXmlName:         ptr.String("value3"),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-www-form-urlencoded"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/x-www-form-urlencoded",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&QueryName=value1&queryAndXmlName=value2&XmlNameOnly=value3`))
+			},
+		},
 		// Supports handling NaN float values.
 		"Ec2QuerySupportsNaNFloatInputs": {
 			Params: &SimpleInputParamsInput{
@@ -544,6 +566,26 @@ func BenchmarkClient_SimpleInputParams_Serialize(b *testing.B) {
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&UsesXmlName=Hi`))
+			},
+		},
+		"Ec2QueryNameDistinctFromXmlNameAndMemberName": {
+			Params: &SimpleInputParamsInput{
+				DistinctQueryName:       ptr.String("value1"),
+				DistinctQueryAndXmlName: ptr.String("value2"),
+				DistinctXmlName:         ptr.String("value3"),
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-www-form-urlencoded"},
+			},
+			RequireHeader: []string{
+				"Content-Length",
+			},
+			BodyMediaType: "application/x-www-form-urlencoded",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=SimpleInputParams&Version=2020-01-08&QueryName=value1&queryAndXmlName=value2&XmlNameOnly=value3`))
 			},
 		},
 		"Ec2QuerySupportsNaNFloatInputs": {

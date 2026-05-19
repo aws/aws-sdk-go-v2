@@ -486,6 +486,9 @@ func awsAwsjson11_deserializeOpErrorCheckDomainAvailability(response *smithyhttp
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
 
+	case strings.EqualFold("TLDInMaintenance", errorCode):
+		return awsAwsjson11_deserializeErrorTLDInMaintenance(response, errorBody)
+
 	case strings.EqualFold("UnsupportedTLD", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedTLD(response, errorBody)
 
@@ -599,6 +602,9 @@ func awsAwsjson11_deserializeOpErrorCheckDomainTransferability(response *smithyh
 	switch {
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
+
+	case strings.EqualFold("TLDInMaintenance", errorCode):
+		return awsAwsjson11_deserializeErrorTLDInMaintenance(response, errorBody)
 
 	case strings.EqualFold("UnsupportedTLD", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedTLD(response, errorBody)
@@ -1782,6 +1788,9 @@ func awsAwsjson11_deserializeOpErrorGetDomainSuggestions(response *smithyhttp.Re
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
 
+	case strings.EqualFold("TLDInMaintenance", errorCode):
+		return awsAwsjson11_deserializeErrorTLDInMaintenance(response, errorBody)
+
 	case strings.EqualFold("UnsupportedTLD", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedTLD(response, errorBody)
 
@@ -2441,6 +2450,9 @@ func awsAwsjson11_deserializeOpErrorPushDomain(response *smithyhttp.Response, me
 	case strings.EqualFold("OperationLimitExceeded", errorCode):
 		return awsAwsjson11_deserializeErrorOperationLimitExceeded(response, errorBody)
 
+	case strings.EqualFold("TLDInMaintenance", errorCode):
+		return awsAwsjson11_deserializeErrorTLDInMaintenance(response, errorBody)
+
 	case strings.EqualFold("UnsupportedTLD", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedTLD(response, errorBody)
 
@@ -2924,6 +2936,9 @@ func awsAwsjson11_deserializeOpErrorResendContactReachabilityEmail(response *smi
 	case strings.EqualFold("OperationLimitExceeded", errorCode):
 		return awsAwsjson11_deserializeErrorOperationLimitExceeded(response, errorBody)
 
+	case strings.EqualFold("TLDInMaintenance", errorCode):
+		return awsAwsjson11_deserializeErrorTLDInMaintenance(response, errorBody)
+
 	case strings.EqualFold("UnsupportedTLD", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedTLD(response, errorBody)
 
@@ -3015,6 +3030,9 @@ func awsAwsjson11_deserializeOpErrorResendOperationAuthorization(response *smith
 	switch {
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
+
+	case strings.EqualFold("TLDInMaintenance", errorCode):
+		return awsAwsjson11_deserializeErrorTLDInMaintenance(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -3126,6 +3144,9 @@ func awsAwsjson11_deserializeOpErrorRetrieveDomainAuthCode(response *smithyhttp.
 	switch {
 	case strings.EqualFold("InvalidInput", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidInput(response, errorBody)
+
+	case strings.EqualFold("TLDInMaintenance", errorCode):
+		return awsAwsjson11_deserializeErrorTLDInMaintenance(response, errorBody)
 
 	case strings.EqualFold("UnsupportedTLD", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedTLD(response, errorBody)
@@ -4143,6 +4164,41 @@ func awsAwsjson11_deserializeErrorOperationLimitExceeded(response *smithyhttp.Re
 
 	output := &types.OperationLimitExceeded{}
 	err := awsAwsjson11_deserializeDocumentOperationLimitExceeded(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorTLDInMaintenance(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.TLDInMaintenance{}
+	err := awsAwsjson11_deserializeDocumentTLDInMaintenance(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -5745,6 +5801,55 @@ func awsAwsjson11_deserializeDocumentTagList(v *[]types.Tag, value interface{}) 
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentTLDInMaintenance(v **types.TLDInMaintenance, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TLDInMaintenance
+	if *v == nil {
+		sv = &types.TLDInMaintenance{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		case "tld":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TldName to be of type string, got %T instead", value)
+				}
+				sv.Tld = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

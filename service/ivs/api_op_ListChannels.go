@@ -33,6 +33,9 @@ func (c *Client) ListChannels(ctx context.Context, params *ListChannelsInput, op
 
 type ListChannelsInput struct {
 
+	// Filters the channel list to match the specified ad configuration ARN.
+	FilterByAdConfigurationArn *string
+
 	// Filters the channel list to match the specified name.
 	FilterByName *string
 
@@ -103,7 +106,7 @@ func (c *Client) addOperationListChannelsMiddlewares(stack *middleware.Stack, op
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -125,9 +128,6 @@ func (c *Client) addOperationListChannelsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

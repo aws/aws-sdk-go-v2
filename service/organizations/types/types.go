@@ -48,6 +48,9 @@ type Account struct {
 	// [regex pattern]: http://wikipedia.org/wiki/regex
 	Name *string
 
+	// The paths in the organization where the account exists.
+	Paths []string
+
 	// Each state represents a specific phase in the account lifecycle. Use this
 	// information to manage account access, automate workflows, or trigger actions
 	// based on account state changes.
@@ -542,6 +545,9 @@ type OrganizationalUnit struct {
 	//
 	// [regex pattern]: http://wikipedia.org/wiki/regex
 	Name *string
+
+	// The path in the organization where this OU exists.
+	Path *string
 
 	noSmithyDocumentSerde
 }

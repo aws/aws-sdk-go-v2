@@ -3716,6 +3716,12 @@
                         "smithy.api#documentation": "<p>User preferences for email message MFA. Activates or deactivates email MFA and sets it\n            as the preferred MFA method when multiple methods are available.\n            To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>"
                     }
                 },
+                "WebAuthnMfaSettings": {
+                    "target": "com.amazonaws.cognitoidentityprovider#WebAuthnMfaSettingsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User preferences for passkey MFA. Activates or deactivates passkey MFA for the user.\n            When activated, passkey authentication requires user verification, and passkey sign-in\n            is available when MFA is required. To activate this setting, the\n            <code>FactorConfiguration</code> of your user pool <code>WebAuthnConfiguration</code>\n            must be <code>MULTI_FACTOR_WITH_USER_VERIFICATION</code>.\n            To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>"
+                    }
+                },
                 "Username": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameType",
                     "traits": {
@@ -11190,7 +11196,7 @@
                 "WebAuthnConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#WebAuthnConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Shows user pool configuration for sign-in with passkey authenticators like biometric\n            devices and security keys. Passkeys are not eligible MFA factors. They are instead an\n            eligible primary sign-in factor for <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/authentication-flows-selection-sdk.html#authentication-flows-selection-choice\">choice-based authentication</a>, or the\n                <code>USER_AUTH</code> flow.</p>"
+                        "smithy.api#documentation": "<p>Shows user pool configuration for sign-in with passkey authenticators such as\n            biometric devices and security keys. Includes relying-party configuration,\n            user-verification requirements, and whether passkeys can satisfy MFA\n            requirements.</p>"
                     }
                 }
             },
@@ -12063,7 +12069,7 @@
         "com.amazonaws.cognitoidentityprovider#LanguageIdType": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^cognito:(default|english|french|spanish|german|bahasa-indonesia|italian|japanese|korean|portuguese-brazil|chinese-(simplified|traditional))$"
+                "smithy.api#pattern": "^cognito:(default|dutch|english|french|spanish|german|bahasa-indonesia|italian|japanese|korean|portuguese-brazil|chinese-(simplified|traditional))$"
             }
         },
         "com.amazonaws.cognitoidentityprovider#LimitExceededException": {
@@ -12103,7 +12109,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 12
+                    "max": 13
                 }
             }
         },
@@ -15345,6 +15351,12 @@
                         "smithy.api#documentation": "<p>User preferences for email message MFA. Activates or deactivates email MFA and sets it\n            as the preferred MFA method when multiple methods are available.\n            To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>"
                     }
                 },
+                "WebAuthnMfaSettings": {
+                    "target": "com.amazonaws.cognitoidentityprovider#WebAuthnMfaSettingsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>User preferences for passkey MFA. Activates or deactivates passkey MFA for the user.\n            When activated, passkey authentication requires user verification, and passkey sign-in\n            is available when MFA is required. To activate this setting, the\n            <code>FactorConfiguration</code> of your user pool <code>WebAuthnConfiguration</code>\n            must be <code>MULTI_FACTOR_WITH_USER_VERIFICATION</code>.\n            To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>"
+                    }
+                },
                 "AccessToken": {
                     "target": "com.amazonaws.cognitoidentityprovider#TokenModelType",
                     "traits": {
@@ -15442,7 +15454,7 @@
                 "WebAuthnConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#WebAuthnConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of your user pool for passkey, or WebAuthn, authentication and\n            registration. You can set this configuration independent of the MFA configuration\n            options in this operation.</p>"
+                        "smithy.api#documentation": "<p>The configuration of your user pool for passkey, or WebAuthn, authentication and\n            registration. Includes relying-party configuration, user-verification requirements,\n            and whether passkeys can satisfy MFA requirements.</p>"
                     }
                 }
             },
@@ -15480,7 +15492,7 @@
                 "WebAuthnConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#WebAuthnConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of your user pool for passkey, or WebAuthn, sign-in with\n            authenticators like biometric and security-key devices. Includes relying-party\n            configuration and settings for user-verification requirements.</p>"
+                        "smithy.api#documentation": "<p>The configuration of your user pool for passkey, or WebAuthn, sign-in with\n            authenticators such as biometric and security-key devices. Includes relying-party\n            configuration and settings for user-verification requirements.</p>"
                     }
                 }
             },
@@ -19354,6 +19366,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When <code>required</code>, users can only register and sign in users with passkeys\n            that are capable of <a href=\"https://www.w3.org/TR/webauthn-2/#enum-userVerificationRequirement\">user\n                verification</a>. When <code>preferred</code>, your user pool doesn't\n            require the use of authenticators with user verification but encourages it.</p>"
                     }
+                },
+                "FactorConfiguration": {
+                    "target": "com.amazonaws.cognitoidentityprovider#WebAuthnFactorConfigurationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Sets whether passkeys can be used as multi-factor authentication (MFA). When set to\n            <code>MULTI_FACTOR_WITH_USER_VERIFICATION</code>, passkey authentication with user\n            verification satisfies MFA requirements. When set to <code>SINGLE_FACTOR</code> or not\n            set, passkeys are a single authentication factor. To activate this setting, your user pool must be in the <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-essentials.html\">\n                     Essentials tier</a> or higher.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19435,6 +19453,41 @@
                     "min": 0,
                     "max": 20
                 }
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#WebAuthnFactorConfigurationType": {
+            "type": "enum",
+            "members": {
+                "SINGLE_FACTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SINGLE_FACTOR"
+                    }
+                },
+                "MULTI_FACTOR_WITH_USER_VERIFICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MULTI_FACTOR_WITH_USER_VERIFICATION"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration of passkey authentication as a single factor or a multi-factor\n            authentication (MFA) method. When set to\n            <code>MULTI_FACTOR_WITH_USER_VERIFICATION</code>, your user pool requires passkey\n            authenticators to perform <a href=\"https://www.w3.org/TR/webauthn-2/#user-verification\">user\n                verification</a>, for example a biometric or PIN. User verification combined\n            with the passkey constitutes multi-factor authentication. When set to\n            <code>SINGLE_FACTOR</code>, passkeys are a single authentication factor.</p>"
+            }
+        },
+        "com.amazonaws.cognitoidentityprovider#WebAuthnMfaSettingsType": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.cognitoidentityprovider#BooleanType",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether passkey MFA is activated for a user. When activated, the user's\n            passkey authentication requires user verification, and passkey sign-in is available\n            when MFA is required. The user must also have at least one other MFA method such as\n            SMS, TOTP, or email activated to prevent account lockout.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A user's preference for using passkey, or WebAuthn, multi-factor authentication\n            (MFA). Turns passkey MFA on and off for the user. Unlike other MFA settings types,\n            this type doesn't include a <code>PreferredMfa</code> option because passkey MFA\n            applies only when passkey is the first authentication factor.</p>"
             }
         },
         "com.amazonaws.cognitoidentityprovider#WebAuthnNotEnabledException": {

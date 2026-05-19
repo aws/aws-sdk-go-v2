@@ -13,6 +13,11 @@ import (
 
 // Retrieves statistical information about Amazon Web Services resources and their
 // associated security findings.
+//
+// You can use the Scopes parameter to define the data boundary for the query.
+// Currently, Scopes supports AwsOrganizations , which lets you aggregate resources
+// from your entire organization or from specific organizational units. Only the
+// delegated administrator account can use Scopes .
 func (c *Client) GetResourcesStatisticsV2(ctx context.Context, params *GetResourcesStatisticsV2Input, optFns ...func(*Options)) (*GetResourcesStatisticsV2Output, error) {
 	if params == nil {
 		params = &GetResourcesStatisticsV2Input{}
@@ -37,6 +42,18 @@ type GetResourcesStatisticsV2Input struct {
 
 	// The maximum number of results to be returned.
 	MaxStatisticResults *int32
+
+	// Limits the results to resources from specific organizational units or from the
+	// delegated administrator's organization. Only the delegated administrator account
+	// can use this parameter. Other accounts receive an AccessDeniedException .
+	//
+	// This parameter is optional. If you omit it, the delegated administrator sees
+	// statistics from all accounts across the entire organization. Other accounts see
+	// only statistics for their own resources.
+	//
+	// You can specify up to 10 entries in Scopes.AwsOrganizations . If multiple
+	// entries are specified, the entries are combined using OR logic.
+	Scopes *types.ResourceScopes
 
 	// Sorts aggregated statistics.
 	SortOrder types.SortOrder
@@ -91,7 +108,7 @@ func (c *Client) addOperationGetResourcesStatisticsV2Middlewares(stack *middlewa
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -113,9 +130,6 @@ func (c *Client) addOperationGetResourcesStatisticsV2Middlewares(stack *middlewa
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

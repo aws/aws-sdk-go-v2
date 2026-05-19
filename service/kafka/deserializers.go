@@ -3927,6 +3927,11 @@ func awsRestjson1_deserializeOpDocumentDescribeReplicatorOutput(v **DescribeRepl
 				return err
 			}
 
+		case "logDelivery":
+			if err := awsRestjson1_deserializeDocumentLogDelivery(&sv.LogDelivery, value); err != nil {
+				return err
+			}
+
 		case "replicationInfoList":
 			if err := awsRestjson1_deserializeDocument__listOfReplicationInfoDescription(&sv.ReplicationInfoList, value); err != nil {
 				return err
@@ -12344,6 +12349,55 @@ func awsRestjson1_deserializeDocumentAmazonMskCluster(v **types.AmazonMskCluster
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentApacheKafkaCluster(v **types.ApacheKafkaCluster, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ApacheKafkaCluster
+	if *v == nil {
+		sv = &types.ApacheKafkaCluster{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "apacheKafkaClusterId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ApacheKafkaClusterId = ptr.String(jtv)
+			}
+
+		case "bootstrapBrokerString":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.BootstrapBrokerString = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14213,6 +14267,15 @@ func awsRestjson1_deserializeDocumentConsumerGroupReplication(v **types.Consumer
 
 	for key, value := range shape {
 		switch key {
+		case "consumerGroupOffsetSyncMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConsumerGroupOffsetSyncMode to be of type string, got %T instead", value)
+				}
+				sv.ConsumerGroupOffsetSyncMode = types.ConsumerGroupOffsetSyncMode(jtv)
+			}
+
 		case "consumerGroupsToExclude":
 			if err := awsRestjson1_deserializeDocument__listOf__stringMax256(&sv.ConsumerGroupsToExclude, value); err != nil {
 				return err
@@ -14879,6 +14942,42 @@ func awsRestjson1_deserializeDocumentJmxExporterInfo(v **types.JmxExporterInfo, 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentKafkaClusterClientAuthentication(v **types.KafkaClusterClientAuthentication, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KafkaClusterClientAuthentication
+	if *v == nil {
+		sv = &types.KafkaClusterClientAuthentication{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "saslScram":
+			if err := awsRestjson1_deserializeDocumentKafkaClusterSaslScramAuthentication(&sv.SaslScram, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentKafkaClusterClientVpcConfig(v **types.KafkaClusterClientVpcConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14947,6 +15046,21 @@ func awsRestjson1_deserializeDocumentKafkaClusterDescription(v **types.KafkaClus
 				return err
 			}
 
+		case "apacheKafkaCluster":
+			if err := awsRestjson1_deserializeDocumentApacheKafkaCluster(&sv.ApacheKafkaCluster, value); err != nil {
+				return err
+			}
+
+		case "clientAuthentication":
+			if err := awsRestjson1_deserializeDocumentKafkaClusterClientAuthentication(&sv.ClientAuthentication, value); err != nil {
+				return err
+			}
+
+		case "encryptionInTransit":
+			if err := awsRestjson1_deserializeDocumentKafkaClusterEncryptionInTransit(&sv.EncryptionInTransit, value); err != nil {
+				return err
+			}
+
 		case "kafkaClusterAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -14959,6 +15073,104 @@ func awsRestjson1_deserializeDocumentKafkaClusterDescription(v **types.KafkaClus
 		case "vpcConfig":
 			if err := awsRestjson1_deserializeDocumentKafkaClusterClientVpcConfig(&sv.VpcConfig, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKafkaClusterEncryptionInTransit(v **types.KafkaClusterEncryptionInTransit, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KafkaClusterEncryptionInTransit
+	if *v == nil {
+		sv = &types.KafkaClusterEncryptionInTransit{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "encryptionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KafkaClusterEncryptionInTransitType to be of type string, got %T instead", value)
+				}
+				sv.EncryptionType = types.KafkaClusterEncryptionInTransitType(jtv)
+			}
+
+		case "rootCaCertificate":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.RootCaCertificate = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentKafkaClusterSaslScramAuthentication(v **types.KafkaClusterSaslScramAuthentication, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KafkaClusterSaslScramAuthentication
+	if *v == nil {
+		sv = &types.KafkaClusterSaslScramAuthentication{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "mechanism":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KafkaClusterSaslScramMechanism to be of type string, got %T instead", value)
+				}
+				sv.Mechanism = types.KafkaClusterSaslScramMechanism(jtv)
+			}
+
+		case "secretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.SecretArn = ptr.String(jtv)
 			}
 
 		default:
@@ -14994,6 +15206,11 @@ func awsRestjson1_deserializeDocumentKafkaClusterSummary(v **types.KafkaClusterS
 		switch key {
 		case "amazonMskCluster":
 			if err := awsRestjson1_deserializeDocumentAmazonMskCluster(&sv.AmazonMskCluster, value); err != nil {
+				return err
+			}
+
+		case "apacheKafkaCluster":
+			if err := awsRestjson1_deserializeDocumentApacheKafkaCluster(&sv.ApacheKafkaCluster, value); err != nil {
 				return err
 			}
 
@@ -15162,6 +15379,42 @@ func awsRestjson1_deserializeDocumentKafkaVersion(v **types.KafkaVersion, value 
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentLogDelivery(v **types.LogDelivery, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LogDelivery
+	if *v == nil {
+		sv = &types.LogDelivery{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "replicatorLogDelivery":
+			if err := awsRestjson1_deserializeDocumentReplicatorLogDelivery(&sv.ReplicatorLogDelivery, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentLoggingInfo(v **types.LoggingInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -15312,6 +15565,11 @@ func awsRestjson1_deserializeDocumentMutableClusterInfo(v **types.MutableCluster
 					return fmt.Errorf("expected StorageMode to be of type string, got %T instead", value)
 				}
 				sv.StorageMode = types.StorageMode(jtv)
+			}
+
+		case "zookeeperAccess":
+			if err := awsRestjson1_deserializeDocumentZookeeperAccess(&sv.ZookeeperAccess, value); err != nil {
+				return err
 			}
 
 		default:
@@ -16278,6 +16536,208 @@ func awsRestjson1_deserializeDocumentReplicationTopicNameConfiguration(v **types
 					return fmt.Errorf("expected ReplicationTopicNameConfigurationType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.ReplicationTopicNameConfigurationType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReplicatorCloudWatchLogs(v **types.ReplicatorCloudWatchLogs, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReplicatorCloudWatchLogs
+	if *v == nil {
+		sv = &types.ReplicatorCloudWatchLogs{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "logGroup":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.LogGroup = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReplicatorFirehose(v **types.ReplicatorFirehose, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReplicatorFirehose
+	if *v == nil {
+		sv = &types.ReplicatorFirehose{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "deliveryStream":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.DeliveryStream = ptr.String(jtv)
+			}
+
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReplicatorLogDelivery(v **types.ReplicatorLogDelivery, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReplicatorLogDelivery
+	if *v == nil {
+		sv = &types.ReplicatorLogDelivery{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "cloudWatchLogs":
+			if err := awsRestjson1_deserializeDocumentReplicatorCloudWatchLogs(&sv.CloudWatchLogs, value); err != nil {
+				return err
+			}
+
+		case "firehose":
+			if err := awsRestjson1_deserializeDocumentReplicatorFirehose(&sv.Firehose, value); err != nil {
+				return err
+			}
+
+		case "s3":
+			if err := awsRestjson1_deserializeDocumentReplicatorS3(&sv.S3, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReplicatorS3(v **types.ReplicatorS3, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReplicatorS3
+	if *v == nil {
+		sv = &types.ReplicatorS3{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Bucket = ptr.String(jtv)
+			}
+
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "prefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Prefix = ptr.String(jtv)
 			}
 
 		default:
@@ -17927,6 +18387,46 @@ func awsRestjson1_deserializeDocumentVpcConnectivityTls(v **types.VpcConnectivit
 	var sv *types.VpcConnectivityTls
 	if *v == nil {
 		sv = &types.VpcConnectivityTls{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentZookeeperAccess(v **types.ZookeeperAccess, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ZookeeperAccess
+	if *v == nil {
+		sv = &types.ZookeeperAccess{}
 	} else {
 		sv = *v
 	}

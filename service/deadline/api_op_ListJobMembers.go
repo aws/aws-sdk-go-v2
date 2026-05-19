@@ -27,6 +27,7 @@ func (c *Client) ListJobMembers(ctx context.Context, params *ListJobMembersInput
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListJobMembersInput struct {
 
 	// The farm ID of the job to list.
@@ -54,6 +55,7 @@ type ListJobMembersInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListJobMembersOutput struct {
 
 	// The members on the list.
@@ -109,7 +111,7 @@ func (c *Client) addOperationListJobMembersMiddlewares(stack *middleware.Stack, 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -131,9 +133,6 @@ func (c *Client) addOperationListJobMembersMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

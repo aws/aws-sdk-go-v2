@@ -250,6 +250,26 @@ func (m *validateOpCreateRecommender) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRecommenderSchema struct {
+}
+
+func (*validateOpCreateRecommenderSchema) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRecommenderSchema) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRecommenderSchemaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRecommenderSchemaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateSegmentDefinition struct {
 }
 
@@ -585,6 +605,26 @@ func (m *validateOpDeleteRecommender) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteRecommenderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRecommenderSchema struct {
+}
+
+func (*validateOpDeleteRecommenderSchema) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRecommenderSchema) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRecommenderSchemaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRecommenderSchemaInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1005,6 +1045,26 @@ func (m *validateOpGetRecommender) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetRecommenderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRecommenderSchema struct {
+}
+
+func (*validateOpGetRecommenderSchema) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRecommenderSchema) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRecommenderSchemaInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRecommenderSchemaInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1505,6 +1565,26 @@ func (m *validateOpListRecommenderFilters) HandleInitialize(ctx context.Context,
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListRecommenderFiltersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListRecommenderSchemas struct {
+}
+
+func (*validateOpListRecommenderSchemas) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRecommenderSchemas) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRecommenderSchemasInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRecommenderSchemasInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2038,6 +2118,10 @@ func addOpCreateRecommenderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRecommender{}, middleware.After)
 }
 
+func addOpCreateRecommenderSchemaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRecommenderSchema{}, middleware.After)
+}
+
 func addOpCreateSegmentDefinitionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSegmentDefinition{}, middleware.After)
 }
@@ -2104,6 +2188,10 @@ func addOpDeleteRecommenderFilterValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDeleteRecommenderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRecommender{}, middleware.After)
+}
+
+func addOpDeleteRecommenderSchemaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRecommenderSchema{}, middleware.After)
 }
 
 func addOpDeleteSegmentDefinitionValidationMiddleware(stack *middleware.Stack) error {
@@ -2188,6 +2276,10 @@ func addOpGetRecommenderFilterValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpGetRecommenderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRecommender{}, middleware.After)
+}
+
+func addOpGetRecommenderSchemaValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRecommenderSchema{}, middleware.After)
 }
 
 func addOpGetSegmentDefinitionValidationMiddleware(stack *middleware.Stack) error {
@@ -2288,6 +2380,10 @@ func addOpListProfileObjectTypesValidationMiddleware(stack *middleware.Stack) er
 
 func addOpListRecommenderFiltersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRecommenderFilters{}, middleware.After)
+}
+
+func addOpListRecommenderSchemasValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRecommenderSchemas{}, middleware.After)
 }
 
 func addOpListRecommendersValidationMiddleware(stack *middleware.Stack) error {
@@ -3634,6 +3730,55 @@ func validateRecommenderConfig(v *types.RecommenderConfig) error {
 	}
 }
 
+func validateRecommenderSchemaField(v *types.RecommenderSchemaField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommenderSchemaField"}
+	if v.TargetFieldName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetFieldName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecommenderSchemaFieldList(v []types.RecommenderSchemaField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommenderSchemaFieldList"}
+	for i := range v {
+		if err := validateRecommenderSchemaField(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRecommenderSchemaFields(v map[string][]types.RecommenderSchemaField) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RecommenderSchemaFields"}
+	for key := range v {
+		if err := validateRecommenderSchemaFieldList(v[key]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRuleBasedMatchingRequest(v *types.RuleBasedMatchingRequest) error {
 	if v == nil {
 		return nil
@@ -3780,6 +3925,25 @@ func validateSegmentGroupStructure(v *types.SegmentGroupStructure) error {
 	}
 }
 
+func validateSegmentSort(v *types.SegmentSort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SegmentSort"}
+	if v.Attributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Attributes"))
+	} else if v.Attributes != nil {
+		if err := validateSortAttributeList(v.Attributes); err != nil {
+			invalidParams.AddNested("Attributes", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateServiceNowSourceProperties(v *types.ServiceNowSourceProperties) error {
 	if v == nil {
 		return nil
@@ -3787,6 +3951,41 @@ func validateServiceNowSourceProperties(v *types.ServiceNowSourceProperties) err
 	invalidParams := smithy.InvalidParamsError{Context: "ServiceNowSourceProperties"}
 	if v.Object == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSortAttribute(v *types.SortAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SortAttribute"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Order) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Order"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSortAttributeList(v []types.SortAttribute) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SortAttributeList"}
+	for i := range v {
+		if err := validateSortAttribute(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4288,6 +4487,31 @@ func validateOpCreateRecommenderInput(v *CreateRecommenderInput) error {
 	}
 }
 
+func validateOpCreateRecommenderSchemaInput(v *CreateRecommenderSchemaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRecommenderSchemaInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.RecommenderSchemaName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommenderSchemaName"))
+	}
+	if v.Fields == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Fields"))
+	} else if v.Fields != nil {
+		if err := validateRecommenderSchemaFields(v.Fields); err != nil {
+			invalidParams.AddNested("Fields", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateSegmentDefinitionInput(v *CreateSegmentDefinitionInput) error {
 	if v == nil {
 		return nil
@@ -4305,6 +4529,11 @@ func validateOpCreateSegmentDefinitionInput(v *CreateSegmentDefinitionInput) err
 	if v.SegmentGroups != nil {
 		if err := validateSegmentGroup(v.SegmentGroups); err != nil {
 			invalidParams.AddNested("SegmentGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SegmentSort != nil {
+		if err := validateSegmentSort(v.SegmentSort); err != nil {
+			invalidParams.AddNested("SegmentSort", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4614,6 +4843,24 @@ func validateOpDeleteRecommenderInput(v *DeleteRecommenderInput) error {
 	}
 	if v.RecommenderName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecommenderName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRecommenderSchemaInput(v *DeleteRecommenderSchemaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRecommenderSchemaInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.RecommenderSchemaName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommenderSchemaName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5006,6 +5253,24 @@ func validateOpGetRecommenderInput(v *GetRecommenderInput) error {
 	}
 	if v.RecommenderName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecommenderName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRecommenderSchemaInput(v *GetRecommenderSchemaInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRecommenderSchemaInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if v.RecommenderSchemaName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecommenderSchemaName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5447,6 +5712,21 @@ func validateOpListRecommenderFiltersInput(v *ListRecommenderFiltersInput) error
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListRecommenderFiltersInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListRecommenderSchemasInput(v *ListRecommenderSchemasInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRecommenderSchemasInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}

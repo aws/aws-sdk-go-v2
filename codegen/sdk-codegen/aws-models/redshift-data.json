@@ -128,6 +128,12 @@
                         "smithy.api#documentation": "<p>The name of the SQL statements. You can name the SQL statements when you create them to identify the query. </p>"
                     }
                 },
+                "Parameters": {
+                    "target": "com.amazonaws.redshiftdata#SqlParametersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters for the SQL statements. The parameters are shared across all SQL statements in the batch.</p>"
+                    }
+                },
                 "WorkgroupName": {
                     "target": "com.amazonaws.redshiftdata#WorkgroupNameString",
                     "traits": {
@@ -368,7 +374,7 @@
                     "target": "com.amazonaws.redshiftdata#Integer",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>The precision value of a decimal number column. </p>"
+                        "smithy.api#documentation": "<p>The precision value of a decimal number column, or the column length for a non-numeric column. </p>"
                     }
                 },
                 "scale": {

@@ -27,6 +27,8 @@ func (c *Client) SearchJobs(ctx context.Context, params *SearchJobsInput, optFns
 	return out, nil
 }
 
+// Shared input fields for all Search operations (filterExpressions,
+// sortExpressions, itemOffset, pageSize).
 type SearchJobsInput struct {
 
 	// The farm ID of the job.
@@ -56,6 +58,7 @@ type SearchJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared output fields for all Search operations (nextItemOffset, totalResults).
 type SearchJobsOutput struct {
 
 	// The jobs in the search.
@@ -111,7 +114,7 @@ func (c *Client) addOperationSearchJobsMiddlewares(stack *middleware.Stack, opti
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -133,9 +136,6 @@ func (c *Client) addOperationSearchJobsMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

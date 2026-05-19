@@ -76,6 +76,13 @@ type CreatePrefetchScheduleInput struct {
 	// schedules for the playback configuration, regardless of StreamId .
 	StreamId *string
 
+	// The tags to assign to the prefetch schedule. Tags are key-value pairs that you
+	// can associate with Amazon resources to help with organization, access control,
+	// and cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -117,6 +124,13 @@ type CreatePrefetchScheduleOutput struct {
 	// schedules for the playback configuration, regardless of StreamId .
 	StreamId *string
 
+	// The tags assigned to the prefetch schedule. Tags are key-value pairs that you
+	// can associate with Amazon resources to help with organization, access control,
+	// and cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
+	Tags map[string]string
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -157,7 +171,7 @@ func (c *Client) addOperationCreatePrefetchScheduleMiddlewares(stack *middleware
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -179,9 +193,6 @@ func (c *Client) addOperationCreatePrefetchScheduleMiddlewares(stack *middleware
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

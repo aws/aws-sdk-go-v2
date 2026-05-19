@@ -12,7 +12,7 @@ import (
 )
 
 // Updates details about a specific evaluation form version in the specified
-// Amazon Connect instance. Question and section identifiers cannot be duplicated
+// Connect Customer instance. Question and section identifiers cannot be duplicated
 // within the same evaluation form.
 //
 // This operation does not support partial updates. Instead it does a full update
@@ -44,8 +44,8 @@ type UpdateEvaluationFormInput struct {
 	// This member is required.
 	EvaluationFormVersion int32
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -154,7 +154,7 @@ func (c *Client) addOperationUpdateEvaluationFormMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -176,9 +176,6 @@ func (c *Client) addOperationUpdateEvaluationFormMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

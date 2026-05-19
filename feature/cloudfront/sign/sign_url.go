@@ -42,6 +42,10 @@ import (
 type URLSigner struct {
 	keyID  string
 	signer crypto.Signer
+
+	// HashAlg specifies the hash algorithm for signing. Defaults to
+	// SHA-1 when empty. Set to HashSHA256 for SHA-256 signed URLs.
+	HashAlg HashAlgorithm
 }
 
 // NewURLSigner constructs and returns a new URLSigner to be used to for signing
@@ -79,7 +83,7 @@ func (s URLSigner) Sign(url string, expires time.Time) (string, error) {
 		return "", err
 	}
 
-	return signURL(scheme, cleanedURL, s.keyID, NewCannedPolicy(resource, expires), false, s.signer)
+	return signURL(scheme, cleanedURL, s.keyID, NewCannedPolicy(resource, expires), false, s.signer, s.HashAlg)
 }
 
 // SignWithPolicy will sign a URL with the Policy provided.  The URL will be
@@ -123,22 +127,22 @@ func (s URLSigner) SignWithPolicy(url string, p *Policy) (string, error) {
 		return "", err
 	}
 
-	return signURL(scheme, cleanedURL, s.keyID, p, true, s.signer)
+	return signURL(scheme, cleanedURL, s.keyID, p, true, s.signer, s.HashAlg)
 }
 
-func signURL(scheme, url, keyID string, p *Policy, customPolicy bool, signer crypto.Signer) (string, error) {
+func signURL(scheme, url, keyID string, p *Policy, customPolicy bool, signer crypto.Signer, hashAlg HashAlgorithm) (string, error) {
 	// Validation URL elements
 	if err := validateURL(url); err != nil {
 		return "", err
 	}
 
-	b64Signature, b64Policy, err := p.Sign(signer)
+	b64Signature, b64Policy, err := p.SignWithAlgorithm(signer, hashAlg)
 	if err != nil {
 		return "", err
 	}
 
 	// build and return signed URL
-	builtURL := buildSignedURL(url, keyID, p, customPolicy, b64Policy, b64Signature)
+	builtURL := buildSignedURL(url, keyID, p, customPolicy, b64Policy, b64Signature, hashAlg)
 	if scheme == "rtmp" {
 		return buildRTMPURL(builtURL)
 	}
@@ -146,7 +150,7 @@ func signURL(scheme, url, keyID string, p *Policy, customPolicy bool, signer cry
 	return builtURL, nil
 }
 
-func buildSignedURL(baseURL, keyID string, p *Policy, customPolicy bool, b64Policy, b64Signature []byte) string {
+func buildSignedURL(baseURL, keyID string, p *Policy, customPolicy bool, b64Policy, b64Signature []byte, hashAlg HashAlgorithm) string {
 	pred := "?"
 	if strings.Contains(baseURL, "?") {
 		pred = "&"
@@ -159,6 +163,13 @@ func buildSignedURL(baseURL, keyID string, p *Policy, customPolicy bool, b64Poli
 		signedURL += fmt.Sprintf("Expires=%d", p.Statements[0].Condition.DateLessThan.UTC().Unix())
 	}
 	signedURL += fmt.Sprintf("&Signature=%s&Key-Pair-Id=%s", string(b64Signature), keyID)
+
+	// Hash-Algorithm is always appended when explicitly set. When HashAlg
+	// is empty (zero value), it defaults to SHA-1 without the parameter
+	// for backward compatibility.
+	if hashAlg != "" {
+		signedURL += "&Hash-Algorithm=" + string(hashAlg)
+	}
 
 	return signedURL
 }

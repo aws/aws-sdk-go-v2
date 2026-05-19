@@ -486,6 +486,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the alarm is enabled.</p>"
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.lightsail#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values for the resource. For more information about tags in\n      Lightsail, see the <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2434,6 +2440,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The support code. Include this code in your email to support when you have questions about\n      your Lightsail contact method. This code enables our support team to look up your\n      Lightsail information more easily.</p>"
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.lightsail#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values for the resource. For more information about tags in\n      Lightsail, see the <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3809,7 +3821,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an email or SMS text message contact method.</p>\n         <p>A contact method is used to send you notifications about your Amazon Lightsail resources.\n      You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services\n      Regions, and SMS text messages cannot be sent to some countries/regions. For more information,\n      see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications\">Notifications in Amazon Lightsail</a>.</p>",
+                "smithy.api#documentation": "<p>Creates an email or SMS text message contact method.</p>\n         <p>A contact method is used to send you notifications about your Amazon Lightsail resources.\n      You can add one email address and one mobile phone number contact method in each Amazon Web Services Region. However, SMS text messaging is not supported in some Amazon Web Services\n      Regions, and SMS text messages cannot be sent to some countries/regions. For more information,\n      see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-notifications\">Notifications in Amazon Lightsail</a>.</p>\n         <p>The <code>create contact method</code> operation supports tag-based access control via request\n      tags. For more information, see the <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags\">Lightsail Developer Guide</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/CreateContactMethod",
@@ -3832,6 +3844,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The destination of the contact method, such as an email address or a mobile phone\n      number.</p>\n         <p>Use the E.164 format when specifying a mobile phone number. E.164 is a standard for the\n      phone number structure used for international telecommunication. Phone numbers that follow\n      this format can have a maximum of 15 digits, and they are prefixed with the plus character (+)\n      and the country code. For example, a U.S. phone number in E.164 format would be specified as\n      +1XXX5550100. For more information, see <a href=\"https://en.wikipedia.org/wiki/E.164\">E.164</a> on <i>Wikipedia</i>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.lightsail#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values to add to the contact method during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
                 }
             },
@@ -14472,6 +14490,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of time, in seconds, that the distribution waits for a response after\n      forwarding a request to the origin. The minimum timeout is 1 second, the maximum is 60\n      seconds, and the default (if you don't specify otherwise) is 30 seconds.</p>"
                     }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.lightsail#OriginIpAddressTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type that the distribution uses when connecting to the origin.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, <code>ipv6</code> for IPv6 only,\n      and <code>dualstack</code> for IPv4 and IPv6.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19240,10 +19264,39 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of time, in seconds, that the distribution waits for a response after\n      forwarding a request to the origin. The minimum timeout is 1 second, the maximum is 60\n      seconds, and the default (if you don't specify otherwise) is 30 seconds.</p>"
                     }
+                },
+                "ipAddressType": {
+                    "target": "com.amazonaws.lightsail#OriginIpAddressTypeEnum",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address type that the distribution uses when connecting to the origin.</p>\n         <p>The possible values are <code>ipv4</code> for IPv4 only, <code>ipv6</code> for IPv6 only,\n      and <code>dualstack</code> for IPv4 and IPv6.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the origin resource of an Amazon Lightsail content delivery network (CDN)\n      distribution.</p>\n         <p>An origin can be a Lightsail instance, bucket, or load balancer. A distribution pulls\n      content from an origin, caches it, and serves it to viewers via a worldwide network of edge\n      servers.</p>"
+            }
+        },
+        "com.amazonaws.lightsail#OriginIpAddressTypeEnum": {
+            "type": "enum",
+            "members": {
+                "IPV4": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv4"
+                    }
+                },
+                "IPV6": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ipv6"
+                    }
+                },
+                "DUALSTACK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "dualstack"
+                    }
+                }
             }
         },
         "com.amazonaws.lightsail#OriginProtocolPolicyEnum": {
@@ -19652,7 +19705,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates an alarm, and associates it with the specified metric.</p>\n         <p>An alarm is used to monitor a single metric for one of your resources. When a metric\n      condition is met, the alarm can notify you by email, SMS text message, and a banner displayed\n      on the Amazon Lightsail console. For more information, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-alarms\">Alarms\n        in Amazon Lightsail</a>.</p>\n         <p>When this action creates an alarm, the alarm state is immediately set to\n        <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set\n      appropriately. Any actions associated with the new state are then executed.</p>\n         <p>When you update an existing alarm, its state is left unchanged, but the update completely\n      overwrites the previous configuration of the alarm. The alarm is then evaluated with the\n      updated configuration.</p>",
+                "smithy.api#documentation": "<p>Creates or updates an alarm, and associates it with the specified metric.</p>\n         <p>An alarm is used to monitor a single metric for one of your resources. When a metric\n      condition is met, the alarm can notify you by email, SMS text message, and a banner displayed\n      on the Amazon Lightsail console. For more information, see <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-alarms\">Alarms\n        in Amazon Lightsail</a>.</p>\n         <p>When this action creates an alarm, the alarm state is immediately set to\n        <code>INSUFFICIENT_DATA</code>. The alarm is then evaluated and its state is set\n      appropriately. Any actions associated with the new state are then executed.</p>\n         <p>When you update an existing alarm, its state is left unchanged, but the update completely\n      overwrites the previous configuration of the alarm. The alarm is then evaluated with the\n      updated configuration.</p>\n         <p>The <code>put alarm</code> operation supports tag-based access control via request\n      tags. For more information, see the <a href=\"https://docs.aws.amazon.com/lightsail/latest/userguide/amazon-lightsail-controlling-access-using-tags\">Lightsail Developer Guide</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ls/api/2016-11-28/PutAlarm",
@@ -19733,6 +19786,12 @@
                     "target": "com.amazonaws.lightsail#boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether the alarm is enabled.</p>\n         <p>Notifications are enabled by default if you don't specify this parameter.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.lightsail#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag keys and optional values to add to the alarm during create.</p>\n         <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p>"
                     }
                 }
             },
@@ -20170,6 +20229,12 @@
                         "smithy.api#enumValue": "eu-central-1"
                     }
                 },
+                "EU_NORTH_1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "eu-north-1"
+                    }
+                },
                 "CA_CENTRAL_1": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -20206,16 +20271,16 @@
                         "smithy.api#enumValue": "ap-northeast-2"
                     }
                 },
-                "EU_NORTH_1": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "eu-north-1"
-                    }
-                },
                 "AP_SOUTHEAST_3": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ap-southeast-3"
+                    }
+                },
+                "AP_SOUTHEAST_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ap-southeast-5"
                     }
                 }
             }

@@ -12,10 +12,9 @@ import (
 	"time"
 )
 
-// Amazon Web Services HealthOmics variant stores and annotation stores will no
-// longer be open to new customers starting November 7, 2025. If you would like to
-// use variant stores or annotation stores, sign up prior to that date. Existing
-// customers can continue to use the service as normal. For more information, see [Amazon Web Services HealthOmics variant store and annotation store availability change].
+// Amazon Web Services HealthOmics variant stores and annotation stores are no
+// longer open to new customers. Existing customers can continue to use the service
+// as normal. For more information, see [Amazon Web Services HealthOmics variant store and annotation store availability change].
 //
 // Updates a variant store.
 //
@@ -125,7 +124,7 @@ func (c *Client) addOperationUpdateVariantStoreMiddlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -147,9 +146,6 @@ func (c *Client) addOperationUpdateVariantStoreMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

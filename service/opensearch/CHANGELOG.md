@@ -1,3 +1,50 @@
+# v1.69.0 (2026-05-13)
+
+* **Feature**: Adds support for AutomatedSnapshotPauseOptions.
+
+# v1.68.0 (2026-05-05)
+
+* **Feature**: Amazon OpenSearch Service now supports VPC egress, enabling outbound traffic from your OpenSearch domain to route privately through your VPC instead of the public internet.
+
+# v1.67.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.67.0 (2026-04-27)
+
+* **Feature**: Amazon OpenSearch Service now supports JWKS URL configuration for JWT authentication
+
+# v1.66.0 (2026-04-23)
+
+* **Feature**: Amazon OpenSearch UI applications now support cross-Region domain association, enabling you to connect OpenSearch Dashboards in one AWS Region to OpenSearch domains in other Regions within the same partition for centralized data visualization.
+
+# v1.65.0 (2026-04-22)
+
+* **Feature**: Adds support for RollbackServiceSoftwareUpdate API
+
+# v1.64.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.64.0 (2026-04-01)
+
+* **Feature**: Adding Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08 as TLS Policy in Supported Regions
+
+# v1.63.0 (2026-03-31)
+
+* **Feature**: Support RegisterCapability, GetCapability, DeregisterCapability API for AI Assistant feature management for OpenSearch UI Applications
+
+# v1.62.0 (2026-03-30)
+
+* **Feature**: Added Cluster Insights API's In OpenSearch Service SDK.
+
+# v1.61.1 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.0 (2026-03-20)
 
 * **Feature**: Added support for Amazon Managed Service for Prometheus (AMP) as a connected data source in OpenSearch UI. Now users can analyze Prometheus metrics in OpenSearch UI without data copy.

@@ -3690,6 +3690,21 @@ func validateCachePolicyQueryStringsConfig(v *types.CachePolicyQueryStringsConfi
 	}
 }
 
+func validateCacheTagConfig(v *types.CacheTagConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CacheTagConfig"}
+	if v.HeaderName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HeaderName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCertificate(v *types.Certificate) error {
 	if v == nil {
 		return nil
@@ -4162,6 +4177,11 @@ func validateDistributionConfig(v *types.DistributionConfig) error {
 	if v.ConnectionFunctionAssociation != nil {
 		if err := validateConnectionFunctionAssociation(v.ConnectionFunctionAssociation); err != nil {
 			invalidParams.AddNested("ConnectionFunctionAssociation", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CacheTagConfig != nil {
+		if err := validateCacheTagConfig(v.CacheTagConfig); err != nil {
+			invalidParams.AddNested("CacheTagConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -6725,6 +6745,11 @@ func validateOpCreateFunctionInput(v *CreateFunctionInput) error {
 	if v.FunctionCode == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("FunctionCode"))
 	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -6806,6 +6831,11 @@ func validateOpCreateKeyValueStoreInput(v *CreateKeyValueStoreInput) error {
 	if v.ImportSource != nil {
 		if err := validateImportSource(v.ImportSource); err != nil {
 			invalidParams.AddNested("ImportSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -8425,6 +8455,11 @@ func validateOpUpdateAnycastIpListInput(v *UpdateAnycastIpListInput) error {
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
+	if v.IpamCidrConfigs != nil {
+		if err := validateIpamCidrConfigList(v.IpamCidrConfigs); err != nil {
+			invalidParams.AddNested("IpamCidrConfigs", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.IfMatch == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IfMatch"))
 	}
@@ -8890,9 +8925,7 @@ func validateOpUpdateTrustStoreInput(v *UpdateTrustStoreInput) error {
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
-	if v.CaCertificatesBundleSource == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CaCertificatesBundleSource"))
-	} else if v.CaCertificatesBundleSource != nil {
+	if v.CaCertificatesBundleSource != nil {
 		if err := validateCaCertificatesBundleSource(v.CaCertificatesBundleSource); err != nil {
 			invalidParams.AddNested("CaCertificatesBundleSource", err.(smithy.InvalidParamsError))
 		}

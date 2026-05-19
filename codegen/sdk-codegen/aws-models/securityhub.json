@@ -14890,6 +14890,35 @@
                 "smithy.api#documentation": "<p>Contains information that OpenSearch Service derives based on the <code>VPCOptions</code> for the domain.</p>"
             }
         },
+        "com.amazonaws.securityhub#AwsOrganizationScope": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of the organization (for example, <code>o-abcd1234567890</code>). The organization must be the delegated administrator's own organization.\n         If you omit this value and provide <code>OrganizationalUnitId</code>, Security Hub uses the caller's organization ID.</p>"
+                    }
+                },
+                "OrganizationalUnitId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of the organizational unit (OU) (for example, <code>ou-ab12-cd345678</code>). The OU must exist within the delegated administrator's own organization. When specified, the results include only data from accounts in this OU.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an Organizations scope. Data from the specified organization or organizational unit is included in the response.</p>\n         <p>To scope to a specific organizational unit, provide <code>OrganizationalUnitId</code>. You can optionally include <code>OrganizationId</code>. If you omit <code>OrganizationId</code>, Security Hub uses the caller's organization ID.\n         To scope to the delegated administrator's entire organization, provide only <code>OrganizationId</code>.</p>\n         <p>The organization ID and organizational unit must belong to the delegated administrator's own organization.\n         Each request must use one scoping approach: either scope to the entire organization by providing an <code>AwsOrganizationScope</code> entry with only <code>OrganizationId</code>, or scope to specific organizational units by providing <code>AwsOrganizationScope</code> entries with <code>OrganizationalUnitId</code>. You can't combine both approaches in the same request.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsOrganizationScopeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsOrganizationScope"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of Organizations scopes. You can specify up to 10 entries.</p>"
+            }
+        },
         "com.amazonaws.securityhub#AwsRdsDbClusterAssociatedRole": {
             "type": "structure",
             "members": {
@@ -22190,7 +22219,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used by customers to update information about their investigation into a finding.\n         Requested by delegated administrator accounts or member accounts.\n         Delegated administrator accounts can update findings for their account and their member accounts.\n         Member accounts can update findings for their account. <code>BatchUpdateFindings</code> and <code>BatchUpdateFindingV2</code> both use <code>securityhub:BatchUpdateFindings</code> in the <code>Action</code> element of an IAM policy statement.\n         You must have permission to perform the <code>securityhub:BatchUpdateFindings</code> action.\n         Updates from <code>BatchUpdateFindingsV2</code> don't affect the value of f<code>inding_info.modified_time</code>, <code>finding_info.modified_time_dt</code>, <code>time</code>, <code>time_dt for a finding</code>.</p>",
+                "smithy.api#documentation": "<p>Updates information about a customer's investigation into a finding. Delegated administrator accounts can update findings for their account and their member accounts. Member accounts can update findings for their own account.</p>\n         <p>\n            <code>BatchUpdateFindings</code> and <code>BatchUpdateFindingsV2</code> both use <code>securityhub:BatchUpdateFindings</code> in the <code>Action</code> element of an IAM policy statement.\n         You must have permission to perform the <code>securityhub:BatchUpdateFindings</code> action.\n         You can configure IAM policies to restrict access to specific finding fields or field values by using the <code>securityhub:OCSFSyntaxPath/<fieldName></code> condition key, where <code><fieldName></code> is one of the following supported fields: <code>SeverityId</code>, <code>StatusId</code>, or <code>Comment</code>.</p>\n         <p>To prevent a user from updating a specific field, use a <code>Null</code> condition with <code>securityhub:OCSFSyntaxPath/<fieldName></code> set to <code>\"false\"</code>.\n         To prevent a user from setting a field to a specific value, use a <code>StringEquals</code> condition with <code>securityhub:OCSFSyntaxPath/<fieldName></code> set to the disallowed value or list of values.</p>\n         <p>Updates from <code>BatchUpdateFindingsV2</code> don't affect the value of <code>finding_info.modified_time</code>, <code>finding_info.modified_time_dt</code>, <code>time</code>, or <code>time_dt</code> for a finding.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/findingsv2/batchupdatev2",
@@ -22248,13 +22277,13 @@
                 "SeverityId": {
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated value for the normalized severity identifier.\n         The severity ID is an integer with the allowed enum values [0, 1, 2, 3, 4, 5, 99].\n         When customer provides the updated severity ID, the string sibling severity will automatically be updated in the finding.</p>"
+                        "smithy.api#documentation": "<p>The updated value for the normalized severity identifier.\n         The severity ID is an integer with the allowed enum values [0, 1, 2, 3, 4, 5, 6, 99].\n         When customer provides the updated severity ID, the string sibling severity will automatically be updated in the finding.</p>"
                     }
                 },
                 "StatusId": {
                     "target": "com.amazonaws.securityhub#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated value for the normalized status identifier.\n         The status ID is an integer with the allowed enum values [0, 1, 2, 3, 4, 5, 6, 99].\n         When customer provides the updated status ID, the string sibling status will automatically be updated in the finding.</p>"
+                        "smithy.api#documentation": "<p>The updated value for the normalized status identifier.\n         The status ID is an integer with the allowed enum values [0, 1, 2, 3, 4, 5, 99].\n         When customer provides the updated status ID, the string sibling status will automatically be updated in the finding.</p>"
                     }
                 }
             },
@@ -24766,10 +24795,33 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A date range unit for the date filter.</p>"
                     }
+                },
+                "Comparison": {
+                    "target": "com.amazonaws.securityhub#DateRangeComparison",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The condition to apply to a date range filter. If you specify <code>WITHIN</code>, Security Hub filters for dates within the specified date range. If you specify <code>OLDER_THAN</code>, Security Hub filters for dates before the specified date range. If you don't specify a value, the default is <code>WITHIN</code>.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A date range for the date filter.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#DateRangeComparison": {
+            "type": "enum",
+            "members": {
+                "WITHIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WITHIN"
+                    }
+                },
+                "OLDER_THAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OLDER_THAN"
+                    }
+                }
             }
         },
         "com.amazonaws.securityhub#DateRangeUnit": {
@@ -27336,6 +27388,20 @@
                 "smithy.api#documentation": "<p>The severity assigned to a finding by the finding provider. This object may include one or more of the following\nattributes:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Label</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Normalized</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Original</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Product</code>\n               </p>\n            </li>\n         </ul>\n         <p>If a <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchImportFindings.html\">\n               <code>BatchImportFindings</code>\n            </a> request for a\n           new finding only provides <code>Label</code> or only provides <code>Normalized</code>, Security Hub CSPM\n           automatically populates the value of the other field.</p>\n         <p>The <code>Normalized</code> and <code>Product</code> attributes are included in the <code>FindingProviderSeverity</code>\n           structure to preserve the historical information associated with the finding, even if the top-level\n           <code>Severity</code> object is later modified using the <a href=\"https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateFindings.html\">\n               <code>BatchUpdateFindings</code>\n            </a> operation.</p>\n         <p>If the top-level <code>Finding.Severity</code> object is present, but <code>Finding.FindingProviderFields</code> isn't present,\n           Security Hub CSPM creates the <code>FindingProviderFields.Severity</code> object and copies the entire <code>Finding.Severity</code> object into it.\n           This ensures that the original, provider-supplied details are retained within the <code>FindingProviderFields.Severity</code>\n           object, even if the top-level <code>Severity</code> object is overwritten.\n       </p>"
             }
         },
+        "com.amazonaws.securityhub#FindingScopes": {
+            "type": "structure",
+            "members": {
+                "AwsOrganizations": {
+                    "target": "com.amazonaws.securityhub#AwsOrganizationScopeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Organizations scopes to include in the query results. Each entry in the list specifies an organization or organizational unit to include for the delegated administrator's account. If the list specifies multiple entries, the entries are combined using OR logic.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the data boundary for a findings query. Scopes determine which organizational units or organizations to retrieve data from.</p>"
+            }
+        },
         "com.amazonaws.securityhub#FindingsTrendsCompositeFilter": {
             "type": "structure",
             "members": {
@@ -27584,6 +27650,66 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securityhub#FirewallPolicyStatelessRuleGroupReferencesDetails"
+            }
+        },
+        "com.amazonaws.securityhub#GenerateRecommendedPolicyV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#GenerateRecommendedPolicyV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#GenerateRecommendedPolicyV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Begins the recommended policy generation to remediate a Security Hub finding.\n         <code>GenerateRecommendedPolicyV2</code> only supports findings for unused permissions.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/recommendedPolicyV2/{MetadataUid}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GenerateRecommendedPolicyV2Request": {
+            "type": "structure",
+            "members": {
+                "MetadataUid": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of Security Hub OCSF findings found under the <code>metadata.uid</code> field of the finding.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#GenerateRecommendedPolicyV2Response": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.securityhub#GeneratorDetails": {
@@ -28609,6 +28735,12 @@
                     "target": "com.amazonaws.securityhub#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#OrganizationalUnitNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#OrganizationNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.securityhub#ThrottlingException"
                 },
                 {
@@ -28616,7 +28748,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns aggregated statistical data about findings.\n         <code>GetFindingStatisticsV2</code> use <code>securityhub:GetAdhocInsightResults</code> in the <code>Action</code> element of an IAM policy statement.\n         You must have permission to perform the <code>s</code> action.</p>",
+                "smithy.api#documentation": "<p>Returns aggregated statistical data about findings.</p>\n         <p>You can use the <code>Scopes</code> parameter to define the data boundary for the query. Currently, <code>Scopes</code> supports <code>AwsOrganizations</code>, which lets you aggregate findings from your entire organization or from specific organizational units. Only the delegated administrator account can use <code>Scopes</code>.</p>\n         <p>\n            <code>GetFindingStatisticsV2</code> uses <code>securityhub:GetAdhocInsightResults</code> in the <code>Action</code> element of an IAM policy statement.\n         You must have permission to perform the <code>securityhub:GetAdhocInsightResults</code> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/findingsv2/statistics",
@@ -28633,6 +28765,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Specifies how security findings should be aggregated and organized in the statistical analysis.\n      It can accept up to 5 <code>groupBy</code> fields in a single call.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Scopes": {
+                    "target": "com.amazonaws.securityhub#FindingScopes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the results to findings from specific organizational units or from the delegated administrator's organization.\n         Only the delegated administrator account can use this parameter. Other accounts receive an <code>AccessDeniedException</code>.</p>\n         <p>This parameter is optional. If you omit it, the delegated administrator sees statistics from all accounts across the entire organization. Other accounts see only statistics for their own findings.</p>\n         <p>You can specify up to 10 entries in <code>Scopes.AwsOrganizations</code>. If multiple entries are specified, the entries are combined using OR logic.</p>"
                     }
                 },
                 "SortOrder": {
@@ -28992,6 +29130,12 @@
                     "target": "com.amazonaws.securityhub#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#OrganizationalUnitNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#OrganizationNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.securityhub#ThrottlingException"
                 },
                 {
@@ -28999,7 +29143,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Return a list of findings that match the specified criteria.\n      <code>GetFindings</code> and <code>GetFindingsV2</code> both use <code>securityhub:GetFindings</code> in the <code>Action</code> element of an IAM policy statement.\n         You must have permission to perform the <code>securityhub:GetFindings</code> action.</p>",
+                "smithy.api#documentation": "<p>Returns a list of findings that match the specified criteria.</p>\n         <p>You can use the <code>Scopes</code> parameter to define the data boundary for the query. Currently, <code>Scopes</code> supports <code>AwsOrganizations</code>, which lets you retrieve findings from your entire organization or from specific organizational units. Only the delegated administrator account can use <code>Scopes</code>.</p>\n         <p>You can use the <code>Filters</code> parameter to refine results based on finding attributes. You can use <code>Scopes</code> and <code>Filters</code> independently or together. When both are provided, <code>Scopes</code> narrows the data set first, and then <code>Filters</code> refines results within that scoped data set.</p>\n         <p>\n            <code>GetFindings</code> and <code>GetFindingsV2</code> both use <code>securityhub:GetFindings</code> in the <code>Action</code> element of an IAM policy statement.\n         You must have permission to perform the <code>securityhub:GetFindings</code> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/findingsv2",
@@ -29020,6 +29164,12 @@
                     "target": "com.amazonaws.securityhub#OcsfFindingFilters",
                     "traits": {
                         "smithy.api#documentation": "<p>The finding attributes used to define a condition to filter the returned OCSF findings.\n         You can filter up to 10 composite filters.\n         For each filter type inside of a composite filter, you can provide up to 20 filters.</p>"
+                    }
+                },
+                "Scopes": {
+                    "target": "com.amazonaws.securityhub#FindingScopes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the results to findings from specific organizational units or from the delegated administrator's organization.\n         Only the delegated administrator account can use this parameter. Other accounts receive an <code>AccessDeniedException</code>.</p>\n         <p>This parameter is optional. If you omit it, the delegated administrator sees findings from all accounts across the entire organization. Other accounts see only their own findings.</p>\n         <p>You can specify up to 10 entries in <code>Scopes.AwsOrganizations</code>. If multiple entries are specified, the entries are combined using OR logic.</p>"
                     }
                 },
                 "SortCriteria": {
@@ -29467,6 +29617,123 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.securityhub#GetRecommendedPolicyV2": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.securityhub#GetRecommendedPolicyV2Request"
+            },
+            "output": {
+                "target": "com.amazonaws.securityhub#GetRecommendedPolicyV2Response"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.securityhub#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the recommended policy to remediate a Security Hub finding.\n         <code>GetRecommendedPolicyV2</code> only supports findings for unused permissions.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/recommendedPolicyV2/{MetadataUid}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RecommendationSteps",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.securityhub#GetRecommendedPolicyV2Request": {
+            "type": "structure",
+            "members": {
+                "MetadataUid": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier (ID) of Security Hub OCSF findings found under the <code>metadata.uid</code> field of the finding.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token used to paginate the <code>RecommendationSteps</code> list returned.\n           On your first call to <code>GetRecommendedPolicyV2</code>, omit this parameter or set it\n           to <code>NULL</code>. For subsequent calls, use the <code>NextToken</code> value returned in\n           the previous response to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.securityhub#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of recommendation steps to return.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.securityhub#GetRecommendedPolicyV2Response": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.securityhub#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use to request the next page of results.</p>"
+                    }
+                },
+                "RecommendationType": {
+                    "target": "com.amazonaws.securityhub#RecommendationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of recommendation for the finding.</p>"
+                    }
+                },
+                "RecommendationSteps": {
+                    "target": "com.amazonaws.securityhub#RecommendationSteps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended steps to take to resolve the finding.</p>"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.securityhub#RecommendationError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Detailed information for a <code>FAILED</code> retrieval status.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.securityhub#RecommendationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the recommended policy retrieval.</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the resource of the finding.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.securityhub#GetResourcesStatisticsV2": {
             "type": "operation",
             "input": {
@@ -29486,6 +29753,12 @@
                     "target": "com.amazonaws.securityhub#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#OrganizationalUnitNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#OrganizationNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.securityhub#ResourceNotFoundException"
                 },
                 {
@@ -29496,7 +29769,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves statistical information about Amazon Web Services resources and their associated security findings.</p>",
+                "smithy.api#documentation": "<p>Retrieves statistical information about Amazon Web Services resources and their associated security findings.</p>\n         <p>You can use the <code>Scopes</code> parameter to define the data boundary for the query. Currently, <code>Scopes</code> supports <code>AwsOrganizations</code>, which lets you aggregate resources from your entire organization or from specific organizational units. Only the delegated administrator account can use <code>Scopes</code>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/resourcesv2/statistics",
@@ -29513,6 +29786,12 @@
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>How resource statistics should be aggregated and organized in the response.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "Scopes": {
+                    "target": "com.amazonaws.securityhub#ResourceScopes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the results to resources from specific organizational units or from the delegated administrator's organization.\n         Only the delegated administrator account can use this parameter. Other accounts receive an <code>AccessDeniedException</code>.</p>\n         <p>This parameter is optional. If you omit it, the delegated administrator sees statistics from all accounts across the entire organization. Other accounts see only statistics for their own resources.</p>\n         <p>You can specify up to 10 entries in <code>Scopes.AwsOrganizations</code>. If multiple entries are specified, the entries are combined using OR logic.</p>"
                     }
                 },
                 "SortOrder": {
@@ -29676,6 +29955,12 @@
                     "target": "com.amazonaws.securityhub#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#OrganizationalUnitNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#OrganizationNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.securityhub#ResourceNotFoundException"
                 },
                 {
@@ -29686,7 +29971,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of resources.</p>",
+                "smithy.api#documentation": "<p>Returns a list of resources.</p>\n         <p>You can use the <code>Scopes</code> parameter to define the data boundary for the query. Currently, <code>Scopes</code> supports <code>AwsOrganizations</code>, which lets you retrieve resources from your entire organization or from specific organizational units. Only the delegated administrator account can use <code>Scopes</code>.</p>\n         <p>You can use the <code>Filters</code> parameter to refine results based on resource attributes. You can use <code>Scopes</code> and <code>Filters</code> independently or together. When both are provided, <code>Scopes</code> narrows the data set first, and then <code>Filters</code> refines results within that scoped data set.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/resourcesv2",
@@ -29709,10 +29994,16 @@
                         "smithy.api#documentation": "<p>Filters resources based on a set of criteria.</p>"
                     }
                 },
+                "Scopes": {
+                    "target": "com.amazonaws.securityhub#ResourceScopes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Limits the results to resources from specific organizational units or from the delegated administrator's organization.\n         Only the delegated administrator account can use this parameter. Other accounts receive an <code>AccessDeniedException</code>.</p>\n         <p>This parameter is optional. If you omit it, the delegated administrator sees resources from all accounts across the entire organization. Other accounts see only their own resources.</p>\n         <p>You can specify up to 10 entries in <code>Scopes.AwsOrganizations</code>. If multiple entries are specified, the entries are combined using OR logic.</p>"
+                    }
+                },
                 "SortCriteria": {
                     "target": "com.amazonaws.securityhub#SortCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The finding attributes used to sort the list of returned findings.</p>"
+                        "smithy.api#documentation": "<p>The resource attributes used to sort the list of returned resources.</p>"
                     }
                 },
                 "NextToken": {
@@ -29739,7 +30030,7 @@
                     "target": "com.amazonaws.securityhub#Resources",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>Filters resources based on a set of criteria.</p>",
+                        "smithy.api#documentation": "<p>An array of resources returned by the operation.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -33928,6 +34219,38 @@
                 }
             }
         },
+        "com.amazonaws.securityhub#OrganizationNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString"
+                },
+                "Code": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request failed because one or more organizations specified in the request don't exist or don't belong to the caller's organization.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.securityhub#OrganizationalUnitNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString"
+                },
+                "Code": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request failed because one or more organizational units specified in the request don't exist within the caller's organization.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.securityhub#Page": {
             "type": "structure",
             "members": {
@@ -34470,7 +34793,7 @@
                 "MarketplaceProductId": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the AWS Marketplace product associated with this integration.</p>"
+                        "smithy.api#documentation": "<p>The identifier for the Amazon Web Services Marketplace product associated with this integration.</p>"
                     }
                 }
             },
@@ -34649,6 +34972,80 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A recommendation on how to remediate the issue identified in a finding.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RecommendationError": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for a failed retrieval of a recommended policy for a finding.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message for a failed retrieval of a recommended policy for a finding.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the reason that the retrieval of a recommended policy for a finding failed.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RecommendationStatus": {
+            "type": "enum",
+            "members": {
+                "IN_PROGRESS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_PROGRESS"
+                    }
+                },
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.securityhub#RecommendationStep": {
+            "type": "union",
+            "members": {
+                "UnusedPermissions": {
+                    "target": "com.amazonaws.securityhub#UnusedPermissionsRecommendationStep",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A recommended step to remediate an unused permissions finding.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about a recommended step to remediate a Security Hub finding.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#RecommendationSteps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#RecommendationStep"
+            }
+        },
+        "com.amazonaws.securityhub#RecommendationType": {
+            "type": "enum",
+            "members": {
+                "UNUSED_PERMISSION_RECOMMENDATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNUSED_PERMISSION_RECOMMENDATION"
+                    }
+                }
             }
         },
         "com.amazonaws.securityhub#Record": {
@@ -35829,6 +36226,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides comprehensive details about an Amazon Web Services resource and its associated security findings.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#ResourceScopes": {
+            "type": "structure",
+            "members": {
+                "AwsOrganizations": {
+                    "target": "com.amazonaws.securityhub#AwsOrganizationScopeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Organizations scopes to include in the query results. Each entry in the list specifies an organization or organizational unit to include for the delegated administrator's account. If the list specifies multiple entries, the entries are combined using OR logic.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the data boundary for a resources query. Scopes determine which organizational units or organizations to retrieve data from.</p>"
             }
         },
         "com.amazonaws.securityhub#ResourceSeverityBreakdown": {
@@ -37500,6 +37911,9 @@
                     "target": "com.amazonaws.securityhub#EnableSecurityHubV2"
                 },
                 {
+                    "target": "com.amazonaws.securityhub#GenerateRecommendedPolicyV2"
+                },
+                {
                     "target": "com.amazonaws.securityhub#GetAdministratorAccount"
                 },
                 {
@@ -37552,6 +37966,9 @@
                 },
                 {
                     "target": "com.amazonaws.securityhub#GetMembers"
+                },
+                {
+                    "target": "com.amazonaws.securityhub#GetRecommendedPolicyV2"
                 },
                 {
                     "target": "com.amazonaws.securityhub#GetResourcesStatisticsV2"
@@ -40176,7 +40593,7 @@
                 "Comparison": {
                     "target": "com.amazonaws.securityhub#StringFilterComparison",
                     "traits": {
-                        "smithy.api#documentation": "<p>The condition to apply to a string value when filtering Security Hub CSPM findings.</p>\n         <p>To search for values that have the filter value, use one of the following comparison operators:</p>\n         <ul>\n            <li>\n               <p>To search for values that include the filter value, use <code>CONTAINS</code>. For example, the\n               filter <code>Title CONTAINS CloudFront</code> matches findings that have a <code>Title</code> that\n               includes the string CloudFront.</p>\n            </li>\n            <li>\n               <p>To search for values that exactly match the filter value, use <code>EQUALS</code>. For example,\n               the filter <code>AwsAccountId EQUALS 123456789012</code> only matches findings that have an account ID of\n               <code>123456789012</code>.</p>\n            </li>\n            <li>\n               <p>To search for values that start with the filter value, use <code>PREFIX</code>. For example, the\n               filter <code>ResourceRegion PREFIX us</code> matches findings that have a <code>ResourceRegion</code> that starts\n               with <code>us</code>. A <code>ResourceRegion</code> that starts with a different value, such as <code>af</code>,\n               <code>ap</code>, or <code>ca</code>, doesn't match.</p>\n            </li>\n         </ul>\n         <p>\n            <code>CONTAINS</code>, <code>EQUALS</code>, and <code>PREFIX</code> filters on the same field are joined by\n           <code>OR</code>. A finding matches if it matches any one of those filters. For example, the filters <code>Title CONTAINS CloudFront OR\n               Title CONTAINS CloudWatch</code> match a finding that includes either <code>CloudFront</code>,\n           <code>CloudWatch</code>, or both strings in the title.</p>\n         <p>To search for values that don’t have the filter value, use one of the following comparison operators:</p>\n         <ul>\n            <li>\n               <p>To search for values that exclude the filter value, use <code>NOT_CONTAINS</code>. For example, the\n               filter <code>Title NOT_CONTAINS CloudFront</code> matches findings that have a <code>Title</code> that\n               excludes the string CloudFront.</p>\n            </li>\n            <li>\n               <p>To search for values other than the filter value, use <code>NOT_EQUALS</code>. For\n               example, the filter <code>AwsAccountId NOT_EQUALS 123456789012</code> only matches findings that have an account\n               ID other than <code>123456789012</code>.</p>\n            </li>\n            <li>\n               <p>To search for values that don't start with the filter value, use <code>PREFIX_NOT_EQUALS</code>. For\n               example, the filter <code>ResourceRegion PREFIX_NOT_EQUALS us</code> matches findings with a\n               <code>ResourceRegion</code> that starts with a value other than <code>us</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <code>NOT_CONTAINS</code>, <code>NOT_EQUALS</code>, and <code>PREFIX_NOT_EQUALS</code> filters on the same field\n           are joined by <code>AND</code>. A finding matches only if it matches all of those filters. For example, the filters <code>Title NOT_CONTAINS CloudFront AND\n               Title NOT_CONTAINS CloudWatch</code> match a finding that excludes both <code>CloudFront</code> and\n           <code>CloudWatch</code> in the title.</p>\n         <p>You can’t have both a <code>CONTAINS</code> filter and a <code>NOT_CONTAINS</code> filter on the same field. Similarly,\n            you can't provide both an <code>EQUALS</code> filter and a <code>NOT_EQUALS</code> or\n           <code>PREFIX_NOT_EQUALS</code> filter on the same field. Combining filters in this way returns an error. <code>CONTAINS</code> filters\n           can only be used with other <code>CONTAINS</code> filters. <code>NOT_CONTAINS</code> filters can only be used with\n           other <code>NOT_CONTAINS</code> filters. </p>\n         <p>You can combine <code>PREFIX</code> filters with <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filters for the same field.\n           Security Hub CSPM first processes the <code>PREFIX</code> filters, and then the <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filters.</p>\n         <p>For example, for the following filters, Security Hub CSPM first identifies findings that have resource types\n           that start with either <code>AwsIam</code> or <code>AwsEc2</code>. It then excludes findings that have a resource\n           type of <code>AwsIamPolicy</code> and findings that have a resource type of <code>AwsEc2NetworkInterface</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ResourceType PREFIX AwsIam</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType PREFIX AwsEc2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType NOT_EQUALS AwsIamPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType NOT_EQUALS AwsEc2NetworkInterface</code>\n               </p>\n            </li>\n         </ul>\n         <p>\n            <code>CONTAINS</code> and <code>NOT_CONTAINS</code> operators can be used only with automation rules V1.\n          <code>CONTAINS_WORD</code> operator is only supported in <code>GetFindingsV2</code>, <code>GetFindingStatisticsV2</code>, <code>GetResourcesV2</code>, and <code>GetResourceStatisticsV2</code> APIs.\n          For more information, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html\">Automation rules</a> in the <i>Security Hub CSPM User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The condition to apply to a string value when filtering Security Hub CSPM findings.</p>\n         <p>To search for values that have the filter value, use one of the following comparison operators:</p>\n         <ul>\n            <li>\n               <p>To search for values that include the filter value, use <code>CONTAINS</code>. For example, the\n               filter <code>Title CONTAINS CloudFront</code> matches findings that have a <code>Title</code> that\n               includes the string CloudFront.</p>\n            </li>\n            <li>\n               <p>To search for values that exactly match the filter value, use <code>EQUALS</code>. For example,\n               the filter <code>AwsAccountId EQUALS 123456789012</code> only matches findings that have an account ID of\n               <code>123456789012</code>.</p>\n            </li>\n            <li>\n               <p>To search for values that start with the filter value, use <code>PREFIX</code>. For example, the\n               filter <code>ResourceRegion PREFIX us</code> matches findings that have a <code>ResourceRegion</code> that starts\n               with <code>us</code>. A <code>ResourceRegion</code> that starts with a different value, such as <code>af</code>,\n               <code>ap</code>, or <code>ca</code>, doesn't match.</p>\n            </li>\n         </ul>\n         <p>\n            <code>CONTAINS</code>, <code>EQUALS</code>, and <code>PREFIX</code> filters on the same field are joined by\n           <code>OR</code>. A finding matches if it matches any one of those filters. For example, the filters <code>Title CONTAINS CloudFront OR\n               Title CONTAINS CloudWatch</code> match a finding that includes either <code>CloudFront</code>,\n           <code>CloudWatch</code>, or both strings in the title.</p>\n         <p>To search for values that don’t have the filter value, use one of the following comparison operators:</p>\n         <ul>\n            <li>\n               <p>To search for values that exclude the filter value, use <code>NOT_CONTAINS</code>. For example, the\n               filter <code>Title NOT_CONTAINS CloudFront</code> matches findings that have a <code>Title</code> that\n               excludes the string CloudFront.</p>\n            </li>\n            <li>\n               <p>To search for values other than the filter value, use <code>NOT_EQUALS</code>. For\n               example, the filter <code>AwsAccountId NOT_EQUALS 123456789012</code> only matches findings that have an account\n               ID other than <code>123456789012</code>.</p>\n            </li>\n            <li>\n               <p>To search for values that don't start with the filter value, use <code>PREFIX_NOT_EQUALS</code>. For\n               example, the filter <code>ResourceRegion PREFIX_NOT_EQUALS us</code> matches findings with a\n               <code>ResourceRegion</code> that starts with a value other than <code>us</code>.</p>\n            </li>\n         </ul>\n         <p>\n            <code>NOT_CONTAINS</code>, <code>NOT_EQUALS</code>, and <code>PREFIX_NOT_EQUALS</code> filters on the same field\n           are joined by <code>AND</code>. A finding matches only if it matches all of those filters. For example, the filters <code>Title NOT_CONTAINS CloudFront AND\n               Title NOT_CONTAINS CloudWatch</code> match a finding that excludes both <code>CloudFront</code> and\n           <code>CloudWatch</code> in the title.</p>\n         <p>You can’t have both a <code>CONTAINS</code> filter and a <code>NOT_CONTAINS</code> filter on the same field. Similarly,\n            you can't provide both an <code>EQUALS</code> filter and a <code>NOT_EQUALS</code> or\n           <code>PREFIX_NOT_EQUALS</code> filter on the same field. Combining filters in this way returns an error. <code>CONTAINS</code> filters\n           can only be used with other <code>CONTAINS</code> filters. <code>NOT_CONTAINS</code> filters can only be used with\n           other <code>NOT_CONTAINS</code> filters. </p>\n         <p>You can combine <code>PREFIX</code> filters with <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filters for the same field.\n           Security Hub CSPM first processes the <code>PREFIX</code> filters, and then the <code>NOT_EQUALS</code> or <code>PREFIX_NOT_EQUALS</code> filters.</p>\n         <p>For example, for the following filters, Security Hub CSPM first identifies findings that have resource types\n           that start with either <code>AwsIam</code> or <code>AwsEc2</code>. It then excludes findings that have a resource\n           type of <code>AwsIamPolicy</code> and findings that have a resource type of <code>AwsEc2NetworkInterface</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ResourceType PREFIX AwsIam</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType PREFIX AwsEc2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType NOT_EQUALS AwsIamPolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ResourceType NOT_EQUALS AwsEc2NetworkInterface</code>\n               </p>\n            </li>\n         </ul>\n         <p>The <code>CONTAINS</code> operator works with automation rules V1 and V2.\n          The <code>NOT_CONTAINS</code> operator works only with automation rules V1.\n          The <code>CONTAINS_WORD</code> operator works only in the <code>GetFindingsV2</code>, <code>GetFindingStatisticsV2</code>, <code>GetResourcesV2</code>, and <code>GetResourcesStatisticsV2</code> APIs.\n          For more information, see <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/automation-rules.html\">Automation rules</a> in the <i>Security Hub CSPM User Guide</i>.</p>"
                     }
                 }
             },
@@ -41015,6 +41432,44 @@
             "members": {},
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.securityhub#UnusedPermissionsRecommendationStep": {
+            "type": "structure",
+            "members": {
+                "RecommendedAction": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A recommendation of whether to create or detach a policy for an unused permissions finding.</p>"
+                    }
+                },
+                "ExistingPolicy": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contents of the existing policy identified by <code>ExistingPolicyId</code> which needs to be replaced,\n          when the <code>RecommendedAction</code> is <code>CREATE_POLICY</code>.</p>"
+                    }
+                },
+                "ExistingPolicyId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of an existing policy to be replaced or detached.</p>"
+                    }
+                },
+                "PolicyUpdatedAt": {
+                    "target": "com.amazonaws.securityhub#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the existing policy for the unused permissions finding was last updated.</p>"
+                    }
+                },
+                "RecommendedPolicy": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The contents of the least-privileged recommended replacement for <code>ExistingPolicyId</code>,\n          when the <code>RecommendedAction</code> is <code>CREATE_POLICY</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the action to take for a policy in an unused permissions finding.</p>"
             }
         },
         "com.amazonaws.securityhub#UpdateActionTarget": {

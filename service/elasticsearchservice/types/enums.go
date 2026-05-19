@@ -584,6 +584,29 @@ func (PackageType) Values() []PackageType {
 	}
 }
 
+type PauseState string
+
+// Enum values for PauseState
+const (
+	PauseStateActive    PauseState = "Active"
+	PauseStateCompleted PauseState = "Completed"
+	PauseStateScheduled PauseState = "Scheduled"
+	PauseStateDisabled  PauseState = "Disabled"
+)
+
+// Values returns all known values for PauseState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PauseState) Values() []PauseState {
+	return []PauseState{
+		"Active",
+		"Completed",
+		"Scheduled",
+		"Disabled",
+	}
+}
+
 type PrincipalType string
 
 // Enum values for PrincipalType
@@ -725,9 +748,10 @@ type TLSSecurityPolicy string
 
 // Enum values for TLSSecurityPolicy
 const (
-	TLSSecurityPolicyPolicyMinTls10201907    TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"
-	TLSSecurityPolicyPolicyMinTls12201907    TLSSecurityPolicy = "Policy-Min-TLS-1-2-2019-07"
-	TLSSecurityPolicyPolicyMinTls12Pfs202310 TLSSecurityPolicy = "Policy-Min-TLS-1-2-PFS-2023-10"
+	TLSSecurityPolicyPolicyMinTls10201907            TLSSecurityPolicy = "Policy-Min-TLS-1-0-2019-07"
+	TLSSecurityPolicyPolicyMinTls12201907            TLSSecurityPolicy = "Policy-Min-TLS-1-2-2019-07"
+	TLSSecurityPolicyPolicyMinTls12Pfs202310         TLSSecurityPolicy = "Policy-Min-TLS-1-2-PFS-2023-10"
+	TLSSecurityPolicyPolicyMinTls12Rfc9151Fips202408 TLSSecurityPolicy = "Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08"
 )
 
 // Values returns all known values for TLSSecurityPolicy. Note that this can be
@@ -739,6 +763,7 @@ func (TLSSecurityPolicy) Values() []TLSSecurityPolicy {
 		"Policy-Min-TLS-1-0-2019-07",
 		"Policy-Min-TLS-1-2-2019-07",
 		"Policy-Min-TLS-1-2-PFS-2023-10",
+		"Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08",
 	}
 }
 

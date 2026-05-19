@@ -53,6 +53,7 @@ const (
 	BusinessValidationCodeInvalidAccountLinkingStatus             BusinessValidationCode = "INVALID_ACCOUNT_LINKING_STATUS"
 	BusinessValidationCodeInvalidAccountState                     BusinessValidationCode = "INVALID_ACCOUNT_STATE"
 	BusinessValidationCodeIncompatibleDomain                      BusinessValidationCode = "INCOMPATIBLE_DOMAIN"
+	BusinessValidationCodeIneligibleAccountTier                   BusinessValidationCode = "INELIGIBLE_ACCOUNT_TIER"
 )
 
 // Values returns all known values for BusinessValidationCode. Note that this can
@@ -68,6 +69,7 @@ func (BusinessValidationCode) Values() []BusinessValidationCode {
 		"INVALID_ACCOUNT_LINKING_STATUS",
 		"INVALID_ACCOUNT_STATE",
 		"INCOMPATIBLE_DOMAIN",
+		"INELIGIBLE_ACCOUNT_TIER",
 	}
 }
 
@@ -451,8 +453,13 @@ type ServiceQuotaExceededExceptionReason string
 
 // Enum values for ServiceQuotaExceededExceptionReason
 const (
-	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfEmail  ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_EMAIL"
-	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfDomain ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_DOMAIN"
+	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfEmail                         ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_EMAIL"
+	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfDomain                        ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_DOMAIN"
+	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfConnectionInvitationPerDay    ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_CONNECTION_INVITATION_PER_DAY"
+	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfActiveConnection              ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_ACTIVE_CONNECTION"
+	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfOpenConnectionInvitation      ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_OPEN_CONNECTION_INVITATION"
+	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfProfileUpdatePerDay           ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_PROFILE_UPDATE_PER_DAY"
+	ServiceQuotaExceededExceptionReasonLimitExceededNumberOfProfileVisibilityUpdatePerDay ServiceQuotaExceededExceptionReason = "LIMIT_EXCEEDED_NUMBER_OF_PROFILE_VISIBILITY_UPDATE_PER_DAY"
 )
 
 // Values returns all known values for ServiceQuotaExceededExceptionReason. Note
@@ -464,6 +471,11 @@ func (ServiceQuotaExceededExceptionReason) Values() []ServiceQuotaExceededExcept
 	return []ServiceQuotaExceededExceptionReason{
 		"LIMIT_EXCEEDED_NUMBER_OF_EMAIL",
 		"LIMIT_EXCEEDED_NUMBER_OF_DOMAIN",
+		"LIMIT_EXCEEDED_NUMBER_OF_CONNECTION_INVITATION_PER_DAY",
+		"LIMIT_EXCEEDED_NUMBER_OF_ACTIVE_CONNECTION",
+		"LIMIT_EXCEEDED_NUMBER_OF_OPEN_CONNECTION_INVITATION",
+		"LIMIT_EXCEEDED_NUMBER_OF_PROFILE_UPDATE_PER_DAY",
+		"LIMIT_EXCEEDED_NUMBER_OF_PROFILE_VISIBILITY_UPDATE_PER_DAY",
 	}
 }
 

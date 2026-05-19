@@ -173,6 +173,15 @@ func awsRestjson1_deserializeOpDocumentAssociateWhatsAppBusinessAccountOutput(v 
 
 	for key, value := range shape {
 		switch key {
+		case "linkedWhatsAppBusinessAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LinkedWhatsAppBusinessAccountId to be of type string, got %T instead", value)
+				}
+				sv.LinkedWhatsAppBusinessAccountId = ptr.String(jtv)
+			}
+
 		case "signupCallbackResult":
 			if err := awsRestjson1_deserializeDocumentWhatsAppSignupCallbackResult(&sv.SignupCallbackResult, value); err != nil {
 				return err
@@ -4219,6 +4228,15 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccount(v **types.Lin
 				}
 			}
 
+		case "marketingMessagesOnboardingStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppBusinessAccountMarketingMessagesOnboardingStatus to be of type string, got %T instead", value)
+				}
+				sv.MarketingMessagesOnboardingStatus = ptr.String(jtv)
+			}
+
 		case "phoneNumbers":
 			if err := awsRestjson1_deserializeDocumentWhatsAppPhoneNumberSummaryList(&sv.PhoneNumbers, value); err != nil {
 				return err
@@ -4382,6 +4400,15 @@ func awsRestjson1_deserializeDocumentLinkedWhatsAppBusinessAccountSummary(v **ty
 					return fmt.Errorf("expected WhatsAppBusinessAccountLinkDate to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "marketingMessagesOnboardingStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WhatsAppBusinessAccountMarketingMessagesOnboardingStatus to be of type string, got %T instead", value)
+				}
+				sv.MarketingMessagesOnboardingStatus = ptr.String(jtv)
 			}
 
 		case "registrationStatus":

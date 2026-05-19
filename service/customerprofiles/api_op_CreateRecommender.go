@@ -50,6 +50,10 @@ type CreateRecommenderInput struct {
 	// The recommender configuration.
 	RecommenderConfig *types.RecommenderConfig
 
+	// The name of the recommender schema to use for this recommender. If not
+	// specified, the default schema is used.
+	RecommenderSchemaName *string
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -106,7 +110,7 @@ func (c *Client) addOperationCreateRecommenderMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -128,9 +132,6 @@ func (c *Client) addOperationCreateRecommenderMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -39,13 +39,13 @@ import (
 //     cases.
 //
 //   - The service quota Queues per routing profile per instance applies to
-//     manually assigned queues, too. For more information about this quota, see [Amazon Connect quotas]in
-//     the Amazon Connect Administrator Guide.
+//     manually assigned queues, too. For more information about this quota, see [Connect Customer quotas]in
+//     the Connect Customer Administrator Guide.
 //
-// Endpoints: See [Amazon Connect endpoints and quotas].
+// Endpoints: See [Connect Customer endpoints and quotas].
 //
-// [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
-// [Amazon Connect quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas
+// [Connect Customer quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#connect-quotas
+// [Connect Customer endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 func (c *Client) AssociateContactWithUser(ctx context.Context, params *AssociateContactWithUserInput, optFns ...func(*Options)) (*AssociateContactWithUserOutput, error) {
 	if params == nil {
 		params = &AssociateContactWithUserInput{}
@@ -63,13 +63,13 @@ func (c *Client) AssociateContactWithUser(ctx context.Context, params *Associate
 
 type AssociateContactWithUserInput struct {
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	//
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -125,7 +125,7 @@ func (c *Client) addOperationAssociateContactWithUserMiddlewares(stack *middlewa
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -147,9 +147,6 @@ func (c *Client) addOperationAssociateContactWithUserMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

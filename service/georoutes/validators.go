@@ -1058,6 +1058,9 @@ func validateWaypointOptimizationDrivingDistanceOptions(v *types.WaypointOptimiz
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "WaypointOptimizationDrivingDistanceOptions"}
+	if v.DrivingDistance == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DrivingDistance"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1249,9 +1252,7 @@ func validateOpCalculateRouteMatrixInput(v *CalculateRouteMatrixInput) error {
 			invalidParams.AddNested("Origins", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.RoutingBoundary == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("RoutingBoundary"))
-	} else if v.RoutingBoundary != nil {
+	if v.RoutingBoundary != nil {
 		if err := validateRouteMatrixBoundary(v.RoutingBoundary); err != nil {
 			invalidParams.AddNested("RoutingBoundary", err.(smithy.InvalidParamsError))
 		}

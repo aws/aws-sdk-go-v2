@@ -14,7 +14,7 @@ import (
 // where the traffic distribution group is created.
 //
 // For more information about deleting traffic distribution groups, see [Delete traffic distribution groups] in the
-// Amazon Connect Administrator Guide.
+// Connect Customer Administrator Guide.
 //
 // [Delete traffic distribution groups]: https://docs.aws.amazon.com/connect/latest/adminguide/delete-traffic-distribution-groups.html
 func (c *Client) DeleteTrafficDistributionGroup(ctx context.Context, params *DeleteTrafficDistributionGroupInput, optFns ...func(*Options)) (*DeleteTrafficDistributionGroupOutput, error) {
@@ -84,7 +84,7 @@ func (c *Client) addOperationDeleteTrafficDistributionGroupMiddlewares(stack *mi
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -106,9 +106,6 @@ func (c *Client) addOperationDeleteTrafficDistributionGroupMiddlewares(stack *mi
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

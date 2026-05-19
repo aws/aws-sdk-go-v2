@@ -182,6 +182,18 @@ func TestCheckSnapshot_DeleteChannelPolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteFunction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteLiveSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteLiveSource(context.Background(), nil, func(o *Options) {
@@ -338,6 +350,18 @@ func TestCheckSnapshot_GetChannelSchedule(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetFunction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetPlaybackConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPlaybackConfiguration(context.Background(), nil, func(o *Options) {
@@ -379,6 +403,18 @@ func TestCheckSnapshot_ListChannels(t *testing.T) {
 	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListChannels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListFunctions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFunctions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListFunctions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -463,6 +499,18 @@ func TestCheckSnapshot_PutChannelPolicy(t *testing.T) {
 	_, err := svc.PutChannelPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "PutChannelPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutFunction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -709,6 +757,18 @@ func TestUpdateSnapshot_DeleteChannelPolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteFunction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteLiveSource(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteLiveSource(context.Background(), nil, func(o *Options) {
@@ -865,6 +925,18 @@ func TestUpdateSnapshot_GetChannelSchedule(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetFunction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetPlaybackConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetPlaybackConfiguration(context.Background(), nil, func(o *Options) {
@@ -906,6 +978,18 @@ func TestUpdateSnapshot_ListChannels(t *testing.T) {
 	_, err := svc.ListChannels(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListChannels")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListFunctions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListFunctions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListFunctions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -990,6 +1074,18 @@ func TestUpdateSnapshot_PutChannelPolicy(t *testing.T) {
 	_, err := svc.PutChannelPolicy(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutChannelPolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutFunction(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutFunction(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutFunction")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists contact evaluations in the specified Amazon Connect instance.
+// Lists contact evaluations in the specified Connect Customer instance.
 func (c *Client) ListContactEvaluations(ctx context.Context, params *ListContactEvaluationsInput, optFns ...func(*Options)) (*ListContactEvaluationsOutput, error) {
 	if params == nil {
 		params = &ListContactEvaluationsInput{}
@@ -29,13 +29,13 @@ func (c *Client) ListContactEvaluations(ctx context.Context, params *ListContact
 
 type ListContactEvaluationsInput struct {
 
-	// The identifier of the contact in this instance of Amazon Connect.
+	// The identifier of the contact in this instance of Connect Customer.
 	//
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -104,7 +104,7 @@ func (c *Client) addOperationListContactEvaluationsMiddlewares(stack *middleware
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -126,9 +126,6 @@ func (c *Client) addOperationListContactEvaluationsMiddlewares(stack *middleware
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

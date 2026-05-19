@@ -495,8 +495,9 @@ type RuleGroupType string
 
 // Enum values for RuleGroupType
 const (
-	RuleGroupTypeStateless RuleGroupType = "STATELESS"
-	RuleGroupTypeStateful  RuleGroupType = "STATEFUL"
+	RuleGroupTypeStateless      RuleGroupType = "STATELESS"
+	RuleGroupTypeStateful       RuleGroupType = "STATEFUL"
+	RuleGroupTypeStatefulDomain RuleGroupType = "STATEFUL_DOMAIN"
 )
 
 // Values returns all known values for RuleGroupType. Note that this can be
@@ -507,6 +508,7 @@ func (RuleGroupType) Values() []RuleGroupType {
 	return []RuleGroupType{
 		"STATELESS",
 		"STATEFUL",
+		"STATEFUL_DOMAIN",
 	}
 }
 

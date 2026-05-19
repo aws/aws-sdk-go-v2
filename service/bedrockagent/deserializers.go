@@ -27281,6 +27281,15 @@ func awsRestjson1_deserializeDocumentToolSpecification(v **types.ToolSpecificati
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "strict":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Strict = ptr.Bool(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

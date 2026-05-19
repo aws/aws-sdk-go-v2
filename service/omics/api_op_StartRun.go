@@ -119,12 +119,19 @@ type StartRunInput struct {
 	// ID, no task outputs are cached for this run.
 	CacheId *string
 
+	// Optional configuration name to use for the workflow run.
+	ConfigurationName *string
+
 	// A log level for the run.
 	LogLevel types.RunLogLevel
 
 	// A name for the run. This is recommended to view and organize runs in the Amazon
 	// Web Services HealthOmics console and CloudWatch logs.
 	Name *string
+
+	// Optional configuration for run networking behavior. If not specified, this will
+	// default to RESTRICTED.
+	NetworkingMode types.NetworkingMode
 
 	// Parameters for the run. The run needs all required parameters and can include
 	// optional parameters. The run cannot include any parameters that are not defined
@@ -217,8 +224,14 @@ type StartRunOutput struct {
 	// Unique resource identifier for the run.
 	Arn *string
 
+	// Configuration details for the workflow run.
+	Configuration *types.ConfigurationDetails
+
 	// The run's ID.
 	Id *string
+
+	// Networking mode for the workflow run.
+	NetworkingMode *string
 
 	// The destination for workflow outputs.
 	RunOutputUri *string
@@ -272,7 +285,7 @@ func (c *Client) addOperationStartRunMiddlewares(stack *middleware.Stack, option
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -294,9 +307,6 @@ func (c *Client) addOperationStartRunMiddlewares(stack *middleware.Stack, option
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

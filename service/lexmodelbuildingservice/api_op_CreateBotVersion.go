@@ -23,6 +23,8 @@ import (
 // Subsequent versions increment by 1. For more information, see versioning-intro.
 //
 // This operation requires permission for the lex:CreateBotVersion action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) CreateBotVersion(ctx context.Context, params *CreateBotVersionInput, optFns ...func(*Options)) (*CreateBotVersionOutput, error) {
 	if params == nil {
 		params = &CreateBotVersionInput{}
@@ -182,7 +184,7 @@ func (c *Client) addOperationCreateBotVersionMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -204,9 +206,6 @@ func (c *Client) addOperationCreateBotVersionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -3894,6 +3894,48 @@ func awsAwsjson10_serializeDocumentArchiveStringToEvaluate(v types.ArchiveString
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentBounceAction(v *types.BounceAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ActionFailurePolicy) > 0 {
+		ok := object.Key("ActionFailurePolicy")
+		ok.String(string(v.ActionFailurePolicy))
+	}
+
+	if v.DiagnosticMessage != nil {
+		ok := object.Key("DiagnosticMessage")
+		ok.String(*v.DiagnosticMessage)
+	}
+
+	if v.Message != nil {
+		ok := object.Key("Message")
+		ok.String(*v.Message)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.Sender != nil {
+		ok := object.Key("Sender")
+		ok.String(*v.Sender)
+	}
+
+	if v.SmtpReplyCode != nil {
+		ok := object.Key("SmtpReplyCode")
+		ok.String(*v.SmtpReplyCode)
+	}
+
+	if v.StatusCode != nil {
+		ok := object.Key("StatusCode")
+		ok.String(*v.StatusCode)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentDeliverToMailboxAction(v *types.DeliverToMailboxAction, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4167,6 +4209,12 @@ func awsAwsjson10_serializeDocumentIngressPointConfiguration(v types.IngressPoin
 		av := object.Key("SmtpPassword")
 		av.String(uv.Value)
 
+	case *types.IngressPointConfigurationMemberTlsAuthConfiguration:
+		av := object.Key("TlsAuthConfiguration")
+		if err := awsAwsjson10_serializeDocumentTlsAuthConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -4259,6 +4307,38 @@ func awsAwsjson10_serializeDocumentIngressTlsProtocolToEvaluate(v types.IngressT
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentInvokeLambdaAction(v *types.InvokeLambdaAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ActionFailurePolicy) > 0 {
+		ok := object.Key("ActionFailurePolicy")
+		ok.String(string(v.ActionFailurePolicy))
+	}
+
+	if v.FunctionArn != nil {
+		ok := object.Key("FunctionArn")
+		ok.String(*v.FunctionArn)
+	}
+
+	if len(v.InvocationType) > 0 {
+		ok := object.Key("InvocationType")
+		ok.String(string(v.InvocationType))
+	}
+
+	if v.RetryTimeMinutes != nil {
+		ok := object.Key("RetryTimeMinutes")
+		ok.Integer(*v.RetryTimeMinutes)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("RoleArn")
+		ok.String(*v.RoleArn)
+	}
+
 	return nil
 }
 
@@ -4548,6 +4628,12 @@ func awsAwsjson10_serializeDocumentRuleAction(v types.RuleAction, value smithyjs
 			return err
 		}
 
+	case *types.RuleActionMemberBounce:
+		av := object.Key("Bounce")
+		if err := awsAwsjson10_serializeDocumentBounceAction(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.RuleActionMemberDeliverToMailbox:
 		av := object.Key("DeliverToMailbox")
 		if err := awsAwsjson10_serializeDocumentDeliverToMailboxAction(&uv.Value, av); err != nil {
@@ -4563,6 +4649,12 @@ func awsAwsjson10_serializeDocumentRuleAction(v types.RuleAction, value smithyjs
 	case *types.RuleActionMemberDrop:
 		av := object.Key("Drop")
 		if err := awsAwsjson10_serializeDocumentDropAction(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RuleActionMemberInvokeLambda:
+		av := object.Key("InvokeLambda")
+		if err := awsAwsjson10_serializeDocumentInvokeLambdaAction(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -4961,6 +5053,10 @@ func awsAwsjson10_serializeDocumentRuleStringToEvaluate(v types.RuleStringToEval
 		av := object.Key("Attribute")
 		av.String(string(uv.Value))
 
+	case *types.RuleStringToEvaluateMemberClientCertificateAttribute:
+		av := object.Key("ClientCertificateAttribute")
+		av.String(string(uv.Value))
+
 	case *types.RuleStringToEvaluateMemberMimeHeaderAttribute:
 		av := object.Key("MimeHeaderAttribute")
 		av.String(uv.Value)
@@ -5187,6 +5283,42 @@ func awsAwsjson10_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentTlsAuthConfiguration(v *types.TlsAuthConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TrustStore != nil {
+		ok := object.Key("TrustStore")
+		if err := awsAwsjson10_serializeDocumentTrustStore(v.TrustStore, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentTrustStore(v *types.TrustStore, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CAContent != nil {
+		ok := object.Key("CAContent")
+		ok.String(*v.CAContent)
+	}
+
+	if v.CrlContent != nil {
+		ok := object.Key("CrlContent")
+		ok.String(*v.CrlContent)
+	}
+
+	if v.KmsKeyArn != nil {
+		ok := object.Key("KmsKeyArn")
+		ok.String(*v.KmsKeyArn)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeOpDocumentCreateAddonInstanceInput(v *CreateAddonInstanceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5362,6 +5494,11 @@ func awsAwsjson10_serializeOpDocumentCreateIngressPointInput(v *CreateIngressPoi
 		if err := awsAwsjson10_serializeDocumentTagList(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.TlsPolicy) > 0 {
+		ok := object.Key("TlsPolicy")
+		ok.String(string(v.TlsPolicy))
 	}
 
 	if v.TrafficPolicyId != nil {
@@ -5726,6 +5863,11 @@ func awsAwsjson10_serializeOpDocumentGetArchiveSearchResultsInput(v *GetArchiveS
 func awsAwsjson10_serializeOpDocumentGetIngressPointInput(v *GetIngressPointInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.IncludeTrustStoreContents) > 0 {
+		ok := object.Key("IncludeTrustStoreContents")
+		ok.String(string(v.IncludeTrustStoreContents))
+	}
 
 	if v.IngressPointId != nil {
 		ok := object.Key("IngressPointId")
@@ -6267,6 +6409,11 @@ func awsAwsjson10_serializeOpDocumentUpdateIngressPointInput(v *UpdateIngressPoi
 	if len(v.StatusToUpdate) > 0 {
 		ok := object.Key("StatusToUpdate")
 		ok.String(string(v.StatusToUpdate))
+	}
+
+	if len(v.TlsPolicy) > 0 {
+		ok := object.Key("TlsPolicy")
+		ok.String(string(v.TlsPolicy))
 	}
 
 	if v.TrafficPolicyId != nil {

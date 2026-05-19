@@ -70,6 +70,10 @@ type GetDataAccessInput struct {
 	// This member is required.
 	Target *string
 
+	// The context to identify the job or query associated with the credential
+	// request. This information will be displayed in CloudTrail log in your account.
+	AuditContext *string
+
 	// The session duration, in seconds, of the temporary access credential that S3
 	// Access Grants vends to the grantee or client application. The default value is 1
 	// hour, but the grantee can specify a range from 900 seconds (15 minutes) up to
@@ -159,7 +163,7 @@ func (c *Client) addOperationGetDataAccessMiddlewares(stack *middleware.Stack, o
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -184,9 +188,6 @@ func (c *Client) addOperationGetDataAccessMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

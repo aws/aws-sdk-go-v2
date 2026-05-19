@@ -80,6 +80,12 @@ type GetOauth2CredentialProviderOutput struct {
 	// after they complete the authorization flow.
 	CallbackUrl *string
 
+	// The reason for failure if the OAuth2 credential provider is in a failed state.
+	FailureReason *string
+
+	// The current status of the OAuth2 credential provider.
+	Status types.Status
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -120,7 +126,7 @@ func (c *Client) addOperationGetOauth2CredentialProviderMiddlewares(stack *middl
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -142,9 +148,6 @@ func (c *Client) addOperationGetOauth2CredentialProviderMiddlewares(stack *middl
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

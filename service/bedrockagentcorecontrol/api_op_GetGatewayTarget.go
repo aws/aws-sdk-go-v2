@@ -86,6 +86,11 @@ type GetGatewayTargetOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// OAuth2 authorization data for the gateway target. This data is returned when a
+	// target is configured with a credential provider with authorization code grant
+	// type and requires user federation.
+	AuthorizationData types.AuthorizationData
+
 	// The description of the gateway target.
 	Description *string
 
@@ -95,6 +100,15 @@ type GetGatewayTargetOutput struct {
 	// The metadata configuration for HTTP header and query parameter propagation for
 	// the retrieved gateway target.
 	MetadataConfiguration *types.MetadataConfiguration
+
+	// The private endpoint configuration for the gateway target.
+	PrivateEndpoint types.PrivateEndpoint
+
+	// The managed resources created by the gateway for private endpoint connectivity.
+	PrivateEndpointManagedResources []types.ManagedResourceDetails
+
+	// The protocol type of the gateway target.
+	ProtocolType types.TargetProtocolType
 
 	// The reasons for the current status of the gateway target.
 	StatusReasons []string
@@ -139,7 +153,7 @@ func (c *Client) addOperationGetGatewayTargetMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -161,9 +175,6 @@ func (c *Client) addOperationGetGatewayTargetMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

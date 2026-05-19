@@ -1,3 +1,26 @@
+# v1.58.0 (2026-05-05)
+
+* **Feature**: Added support for Monetization Functions. Monetization Functions let you enrich ad requests with external data and transform session parameters using JSONata expressions, without deploying custom infrastructure.
+
+# v1.57.2 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.0 (2026-04-06)
+
+* **Feature**: This change adds support for Tagging the resource types Programs and Prefetch Schedules
+
+# v1.56.3 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.2 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

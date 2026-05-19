@@ -1,3 +1,35 @@
+# v1.110.0 (2026-05-18)
+
+* **Feature**: Support for dataset enrichment and geo spatial in new data preparation experience
+
+# v1.109.0 (2026-05-13)
+
+* **Feature**: Adds five new custom permission option for Quick Apps so that these capabilities can be controlled by public SDK and CLI.
+
+# v1.108.0 (2026-05-01)
+
+* **Feature**: Add IdentityProviderCACertificatesBundleS3Uri for private CA certs with OAuth datasources. 256-char limit for FontFamily in themes. ControlTitleFormatText on all 13 filters. ControlTitleFontConfiguration. ContextRegion for cross-region identity context. Story,scenario in CreateCustomCapability API.
+
+# v1.107.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.107.0 (2026-04-17)
+
+* **Feature**: Public release of dashboard customization summary, S3 Tables data source type, Athena cross-account connector, custom sorting for controls, and AI-powered analysis generation.
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.106.0 (2026-03-31)
+
+* **Feature**: Adds StartAutomationJob and DescribeAutomationJob APIs for automation jobs. Adds three custom permission capabilities that allow admins to control whether users can manage Spaces and chat agents. Adds an OAuthClientCredentials structure to provide OAuth 2.0 client credentials inline to data sources.
+
+# v1.105.1 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.105.0 (2026-03-13)
 
 * **Feature**: The change adds a new capability named ManageSharedFolders in Custom Permissions

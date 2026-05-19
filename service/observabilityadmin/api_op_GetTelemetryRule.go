@@ -42,8 +42,25 @@ type GetTelemetryRuleOutput struct {
 	//  The timestamp when the telemetry rule was created.
 	CreatedTimeStamp *int64
 
+	//  The Amazon Web Services Region where the telemetry rule was originally
+	// created. For replicated rules in spoke regions, this indicates the region that
+	// manages the rule. For rules created without multi-region scope, this field is
+	// not present.
+	HomeRegion *string
+
+	//  Indicates whether this telemetry rule is a replica that was created in this
+	// region through multi-region fan-out from the home region. Replicated rules
+	// cannot be directly updated or deleted in the spoke region. To modify a
+	// replicated rule, make changes in the home region.
+	IsReplicated *bool
+
 	//  The timestamp when the telemetry rule was last updated.
 	LastUpdateTimeStamp *int64
+
+	//  A list of per-region replication statuses for the telemetry rule. Each entry
+	// indicates the replication status of the rule in a specific spoke region. This
+	// field is only present for rules created with multi-region scope.
+	RegionStatuses []types.RegionStatus
 
 	//  The Amazon Resource Name (ARN) of the telemetry rule.
 	RuleArn *string
@@ -94,7 +111,7 @@ func (c *Client) addOperationGetTelemetryRuleMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -116,9 +133,6 @@ func (c *Client) addOperationGetTelemetryRuleMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

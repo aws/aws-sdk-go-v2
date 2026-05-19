@@ -9940,6 +9940,11 @@ func awsAwsjson11_deserializeDocumentAccount(v **types.Account, value interface{
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "Paths":
+			if err := awsAwsjson11_deserializeDocumentPaths(&sv.Paths, value); err != nil {
+				return err
+			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12346,6 +12351,15 @@ func awsAwsjson11_deserializeDocumentOrganizationalUnit(v **types.Organizational
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "Path":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Path to be of type string, got %T instead", value)
+				}
+				sv.Path = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12625,6 +12639,42 @@ func awsAwsjson11_deserializeDocumentParents(v *[]types.Parent, value interface{
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPaths(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Path to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}

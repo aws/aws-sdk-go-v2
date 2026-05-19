@@ -490,6 +490,26 @@ func (m *validateOpDeleteVpcEndpoint) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeregisterCapability struct {
+}
+
+func (*validateOpDeregisterCapability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeregisterCapability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeregisterCapabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeregisterCapabilityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeDomainAutoTunes struct {
 }
 
@@ -650,6 +670,26 @@ func (m *validateOpDescribeDryRunProgress) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeInsightDetails struct {
+}
+
+func (*validateOpDescribeInsightDetails) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeInsightDetails) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeInsightDetailsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeInsightDetailsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeInstanceTypeLimits struct {
 }
 
@@ -745,6 +785,26 @@ func (m *validateOpGetApplication) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCapability struct {
+}
+
+func (*validateOpGetCapability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCapability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCapabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCapabilityInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -950,6 +1010,26 @@ func (m *validateOpListDomainsForPackage) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListInsights struct {
+}
+
+func (*validateOpListInsights) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListInsights) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListInsightsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListInsightsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListInstanceTypeDetails struct {
 }
 
@@ -1110,6 +1190,26 @@ func (m *validateOpPutDefaultApplicationSetting) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterCapability struct {
+}
+
+func (*validateOpRegisterCapability) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterCapability) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterCapabilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterCapabilityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRejectInboundConnection struct {
 }
 
@@ -1165,6 +1265,26 @@ func (m *validateOpRevokeVpcEndpointAccess) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRevokeVpcEndpointAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRollbackServiceSoftwareUpdate struct {
+}
+
+func (*validateOpRollbackServiceSoftwareUpdate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRollbackServiceSoftwareUpdate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RollbackServiceSoftwareUpdateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRollbackServiceSoftwareUpdateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1506,6 +1626,10 @@ func addOpDeleteVpcEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteVpcEndpoint{}, middleware.After)
 }
 
+func addOpDeregisterCapabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeregisterCapability{}, middleware.After)
+}
+
 func addOpDescribeDomainAutoTunesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeDomainAutoTunes{}, middleware.After)
 }
@@ -1538,6 +1662,10 @@ func addOpDescribeDryRunProgressValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpDescribeDryRunProgress{}, middleware.After)
 }
 
+func addOpDescribeInsightDetailsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeInsightDetails{}, middleware.After)
+}
+
 func addOpDescribeInstanceTypeLimitsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeInstanceTypeLimits{}, middleware.After)
 }
@@ -1556,6 +1684,10 @@ func addOpDissociatePackagesValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetApplication{}, middleware.After)
+}
+
+func addOpGetCapabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCapability{}, middleware.After)
 }
 
 func addOpGetDataSourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1598,6 +1730,10 @@ func addOpListDomainsForPackageValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpListDomainsForPackage{}, middleware.After)
 }
 
+func addOpListInsightsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListInsights{}, middleware.After)
+}
+
 func addOpListInstanceTypeDetailsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListInstanceTypeDetails{}, middleware.After)
 }
@@ -1630,6 +1766,10 @@ func addOpPutDefaultApplicationSettingValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpPutDefaultApplicationSetting{}, middleware.After)
 }
 
+func addOpRegisterCapabilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterCapability{}, middleware.After)
+}
+
 func addOpRejectInboundConnectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRejectInboundConnection{}, middleware.After)
 }
@@ -1640,6 +1780,10 @@ func addOpRemoveTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRevokeVpcEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRevokeVpcEndpointAccess{}, middleware.After)
+}
+
+func addOpRollbackServiceSoftwareUpdateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRollbackServiceSoftwareUpdate{}, middleware.After)
 }
 
 func addOpStartDomainMaintenanceValidationMiddleware(stack *middleware.Stack) error {
@@ -1699,6 +1843,21 @@ func validateAdvancedSecurityOptionsInput(v *types.AdvancedSecurityOptionsInput)
 		if err := validateSAMLOptionsInput(v.SAMLOptions); err != nil {
 			invalidParams.AddNested("SAMLOptions", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedSnapshotPauseRequestOptions(v *types.AutomatedSnapshotPauseRequestOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedSnapshotPauseRequestOptions"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1822,6 +1981,39 @@ func validateDomainInformationContainer(v *types.DomainInformationContainer) err
 		if err := validateAWSDomainInformation(v.AWSDomainInformation); err != nil {
 			invalidParams.AddNested("AWSDomainInformation", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInsightEntity(v *types.InsightEntity) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InsightEntity"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInsightTimeRange(v *types.InsightTimeRange) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InsightTimeRange"}
+	if v.From == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("From"))
+	}
+	if v.To == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("To"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2324,6 +2516,11 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 			invalidParams.AddNested("DeploymentStrategyOptions", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.AutomatedSnapshotPauseOptions != nil {
+		if err := validateAutomatedSnapshotPauseRequestOptions(v.AutomatedSnapshotPauseOptions); err != nil {
+			invalidParams.AddNested("AutomatedSnapshotPauseOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2576,6 +2773,24 @@ func validateOpDeleteVpcEndpointInput(v *DeleteVpcEndpointInput) error {
 	}
 }
 
+func validateOpDeregisterCapabilityInput(v *DeregisterCapabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeregisterCapabilityInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.CapabilityName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapabilityName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeDomainAutoTunesInput(v *DescribeDomainAutoTunesInput) error {
 	if v == nil {
 		return nil
@@ -2696,6 +2911,28 @@ func validateOpDescribeDryRunProgressInput(v *DescribeDryRunProgressInput) error
 	}
 }
 
+func validateOpDescribeInsightDetailsInput(v *DescribeInsightDetailsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeInsightDetailsInput"}
+	if v.Entity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entity"))
+	} else if v.Entity != nil {
+		if err := validateInsightEntity(v.Entity); err != nil {
+			invalidParams.AddNested("Entity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InsightId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InsightId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeInstanceTypeLimitsInput(v *DescribeInstanceTypeLimitsInput) error {
 	if v == nil {
 		return nil
@@ -2772,6 +3009,24 @@ func validateOpGetApplicationInput(v *GetApplicationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetApplicationInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCapabilityInput(v *GetCapabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCapabilityInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.CapabilityName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapabilityName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2939,6 +3194,30 @@ func validateOpListDomainsForPackageInput(v *ListDomainsForPackageInput) error {
 	}
 }
 
+func validateOpListInsightsInput(v *ListInsightsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListInsightsInput"}
+	if v.Entity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Entity"))
+	} else if v.Entity != nil {
+		if err := validateInsightEntity(v.Entity); err != nil {
+			invalidParams.AddNested("Entity", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TimeRange != nil {
+		if err := validateInsightTimeRange(v.TimeRange); err != nil {
+			invalidParams.AddNested("TimeRange", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListInstanceTypeDetailsInput(v *ListInstanceTypeDetailsInput) error {
 	if v == nil {
 		return nil
@@ -3065,6 +3344,27 @@ func validateOpPutDefaultApplicationSettingInput(v *PutDefaultApplicationSetting
 	}
 }
 
+func validateOpRegisterCapabilityInput(v *RegisterCapabilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterCapabilityInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.CapabilityName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapabilityName"))
+	}
+	if v.CapabilityConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CapabilityConfig"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpRejectInboundConnectionInput(v *RejectInboundConnectionInput) error {
 	if v == nil {
 		return nil
@@ -3103,6 +3403,21 @@ func validateOpRevokeVpcEndpointAccessInput(v *RevokeVpcEndpointAccessInput) err
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "RevokeVpcEndpointAccessInput"}
+	if v.DomainName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRollbackServiceSoftwareUpdateInput(v *RollbackServiceSoftwareUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RollbackServiceSoftwareUpdateInput"}
 	if v.DomainName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainName"))
 	}
@@ -3230,6 +3545,11 @@ func validateOpUpdateDomainConfigInput(v *UpdateDomainConfigInput) error {
 	if v.DeploymentStrategyOptions != nil {
 		if err := validateDeploymentStrategyOptions(v.DeploymentStrategyOptions); err != nil {
 			invalidParams.AddNested("DeploymentStrategyOptions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AutomatedSnapshotPauseOptions != nil {
+		if err := validateAutomatedSnapshotPauseRequestOptions(v.AutomatedSnapshotPauseOptions); err != nil {
+			invalidParams.AddNested("AutomatedSnapshotPauseOptions", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

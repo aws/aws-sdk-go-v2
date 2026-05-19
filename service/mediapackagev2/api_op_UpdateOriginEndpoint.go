@@ -97,6 +97,11 @@ type UpdateOriginEndpointInput struct {
 	// seconds (14 days).
 	StartoverWindowSeconds *int32
 
+	// The separator character to use in generated URIs for this origin endpoint. This
+	// setting applies to all manifest types on the endpoint. If you don't specify a
+	// value in the update request, the current value is preserved.
+	UriSeparator types.UriSeparator
+
 	noSmithyDocumentSerde
 }
 
@@ -179,6 +184,9 @@ type UpdateOriginEndpointOutput struct {
 	// The comma-separated list of tag key:value pairs assigned to the origin endpoint.
 	Tags map[string]string
 
+	// The separator character used in generated URIs for this origin endpoint.
+	UriSeparator types.UriSeparator
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -219,7 +227,7 @@ func (c *Client) addOperationUpdateOriginEndpointMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -241,9 +249,6 @@ func (c *Client) addOperationUpdateOriginEndpointMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

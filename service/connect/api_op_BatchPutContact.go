@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Only the Amazon Connect outbound campaigns service principal is allowed to
+// Only the Connect Customer outbound campaigns service principal is allowed to
 // assume a role in your account and call this API.
 //
-// Allows you to create a batch of contacts in Amazon Connect. The outbound
+// Allows you to create a batch of contacts in Connect Customer. The outbound
 // campaigns capability ingests dial requests via the [PutDialRequestBatch]API. It then uses
 // BatchPutContact to create contacts corresponding to those dial requests. If
 // agents are available, the dial requests are dialed out, which results in a voice
@@ -44,8 +44,8 @@ type BatchPutContactInput struct {
 	// This member is required.
 	ContactDataRequestList []types.ContactDataRequest
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -110,7 +110,7 @@ func (c *Client) addOperationBatchPutContactMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -132,9 +132,6 @@ func (c *Client) addOperationBatchPutContactMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

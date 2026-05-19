@@ -8005,6 +8005,20 @@ func awsRestjson1_deserializeDocumentIngestConfiguration(v **types.IngestConfigu
 				sv.ParticipantId = ptr.String(jtv)
 			}
 
+		case "redundantIngest":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected RedundantIngest to be of type *bool, got %T instead", value)
+				}
+				sv.RedundantIngest = jtv
+			}
+
+		case "redundantIngestCredentials":
+			if err := awsRestjson1_deserializeDocumentRedundantIngestCredentials(&sv.RedundantIngestCredentials, value); err != nil {
+				return err
+			}
+
 		case "stageArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8145,6 +8159,15 @@ func awsRestjson1_deserializeDocumentIngestConfigurationSummary(v **types.Ingest
 					return fmt.Errorf("expected ParticipantId to be of type string, got %T instead", value)
 				}
 				sv.ParticipantId = ptr.String(jtv)
+			}
+
+		case "redundantIngest":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected RedundantIngest to be of type *bool, got %T instead", value)
+				}
+				sv.RedundantIngest = jtv
 			}
 
 		case "stageArn":
@@ -8394,6 +8417,15 @@ func awsRestjson1_deserializeDocumentParticipant(v **types.Participant, value in
 				sv.FirstJoinTime = ptr.Time(t)
 			}
 
+		case "ingestConfigurationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IngestConfigurationArn to be of type string, got %T instead", value)
+				}
+				sv.IngestConfigurationArn = ptr.String(jtv)
+			}
+
 		case "ispName":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8473,6 +8505,15 @@ func awsRestjson1_deserializeDocumentParticipant(v **types.Participant, value in
 					return fmt.Errorf("expected ParticipantRecordingState to be of type string, got %T instead", value)
 				}
 				sv.RecordingState = types.ParticipantRecordingState(jtv)
+			}
+
+		case "redundantIngest":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected RedundantIngest to be of type *bool, got %T instead", value)
+				}
+				sv.RedundantIngest = jtv
 			}
 
 		case "replicationState":
@@ -8851,6 +8892,15 @@ func awsRestjson1_deserializeDocumentParticipantSummary(v **types.ParticipantSum
 				sv.FirstJoinTime = ptr.Time(t)
 			}
 
+		case "ingestConfigurationArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IngestConfigurationArn to be of type string, got %T instead", value)
+				}
+				sv.IngestConfigurationArn = ptr.String(jtv)
+			}
+
 		case "participantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8876,6 +8926,15 @@ func awsRestjson1_deserializeDocumentParticipantSummary(v **types.ParticipantSum
 					return fmt.Errorf("expected ParticipantRecordingState to be of type string, got %T instead", value)
 				}
 				sv.RecordingState = types.ParticipantRecordingState(jtv)
+			}
+
+		case "redundantIngest":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected RedundantIngest to be of type *bool, got %T instead", value)
+				}
+				sv.RedundantIngest = jtv
 			}
 
 		case "replicationState":
@@ -9659,6 +9718,89 @@ func awsRestjson1_deserializeDocumentRecordingConfiguration(v **types.RecordingC
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRedundantIngestCredential(v **types.RedundantIngestCredential, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RedundantIngestCredential
+	if *v == nil {
+		sv = &types.RedundantIngestCredential{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "participantId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParticipantId to be of type string, got %T instead", value)
+				}
+				sv.ParticipantId = ptr.String(jtv)
+			}
+
+		case "streamKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StreamKey to be of type string, got %T instead", value)
+				}
+				sv.StreamKey = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRedundantIngestCredentials(v *[]types.RedundantIngestCredential, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.RedundantIngestCredential
+	if *v == nil {
+		cv = []types.RedundantIngestCredential{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.RedundantIngestCredential
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentRedundantIngestCredential(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

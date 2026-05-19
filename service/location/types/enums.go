@@ -72,6 +72,110 @@ func (IntendedUse) Values() []IntendedUse {
 	}
 }
 
+type JobAction string
+
+// Enum values for JobAction
+const (
+	// The job will perform address validation over the job's input.
+	JobActionValidateAddress JobAction = "ValidateAddress"
+)
+
+// Values returns all known values for JobAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobAction) Values() []JobAction {
+	return []JobAction{
+		"ValidateAddress",
+	}
+}
+
+type JobErrorCode string
+
+// Enum values for JobErrorCode
+const (
+	JobErrorCodeValidationError     JobErrorCode = "ValidationError"
+	JobErrorCodeInternalServerError JobErrorCode = "InternalServerError"
+)
+
+// Values returns all known values for JobErrorCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobErrorCode) Values() []JobErrorCode {
+	return []JobErrorCode{
+		"ValidationError",
+		"InternalServerError",
+	}
+}
+
+type JobInputFormat string
+
+// Enum values for JobInputFormat
+const (
+	JobInputFormatParquet JobInputFormat = "Parquet"
+)
+
+// Values returns all known values for JobInputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobInputFormat) Values() []JobInputFormat {
+	return []JobInputFormat{
+		"Parquet",
+	}
+}
+
+type JobOutputFormat string
+
+// Enum values for JobOutputFormat
+const (
+	JobOutputFormatParquet JobOutputFormat = "Parquet"
+)
+
+// Values returns all known values for JobOutputFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobOutputFormat) Values() []JobOutputFormat {
+	return []JobOutputFormat{
+		"Parquet",
+	}
+}
+
+type JobStatus string
+
+// Enum values for JobStatus
+const (
+	// The job has not yet started.
+	JobStatusPending JobStatus = "Pending"
+	// The job is currently running.
+	JobStatusRunning JobStatus = "Running"
+	// The job has processed all records and is complete.
+	JobStatusCompleted JobStatus = "Completed"
+	// The job has failed to process all records.
+	JobStatusFailed JobStatus = "Failed"
+	// The job is being cancelled.
+	JobStatusCancelling JobStatus = "Cancelling"
+	// The job has been cancelled and cannot be resumed.
+	JobStatusCancelled JobStatus = "Cancelled"
+)
+
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"Pending",
+		"Running",
+		"Completed",
+		"Failed",
+		"Cancelling",
+		"Cancelled",
+	}
+}
+
 type OptimizationMode string
 
 // Values returns all known values for OptimizationMode. Note that this can be
@@ -169,6 +273,26 @@ func (TravelMode) Values() []TravelMode {
 		"Walking",
 		"Bicycle",
 		"Motorcycle",
+	}
+}
+
+type ValidateAddressAdditionalFeature string
+
+// Enum values for ValidateAddressAdditionalFeature
+const (
+	ValidateAddressAdditionalFeaturePosition                  ValidateAddressAdditionalFeature = "Position"
+	ValidateAddressAdditionalFeatureCountrySpecificAttributes ValidateAddressAdditionalFeature = "CountrySpecificAttributes"
+)
+
+// Values returns all known values for ValidateAddressAdditionalFeature. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ValidateAddressAdditionalFeature) Values() []ValidateAddressAdditionalFeature {
+	return []ValidateAddressAdditionalFeature{
+		"Position",
+		"CountrySpecificAttributes",
 	}
 }
 

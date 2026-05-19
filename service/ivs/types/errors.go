@@ -12,7 +12,15 @@ type AccessDeniedException struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -39,7 +47,15 @@ type ChannelNotBroadcasting struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -66,7 +82,15 @@ type ConflictException struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -93,7 +117,15 @@ type InternalServerException struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -120,7 +152,15 @@ type PendingVerification struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -147,7 +187,15 @@ type ResourceNotFoundException struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -174,7 +222,15 @@ type ServiceQuotaExceededException struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -196,12 +252,55 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+type ServiceUnavailable struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceUnavailable) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceUnavailable) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceUnavailable) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceUnavailable"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceUnavailable) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 type StreamUnavailable struct {
 	Message *string
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -228,7 +327,15 @@ type ThrottlingException struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }
@@ -255,7 +362,15 @@ type ValidationException struct {
 
 	ErrorCodeOverride *string
 
-	ExceptionMessage *string
+	AccessControlAllowOrigin   *string
+	AccessControlExposeHeaders *string
+	CacheControl               *string
+	ContentSecurityPolicy      *string
+	StrictTransportSecurity    *string
+	XContentTypeOptions        *string
+	XFrameOptions              *string
+	XAmznErrorType             *string
+	ExceptionMessage           *string
 
 	noSmithyDocumentSerde
 }

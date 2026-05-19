@@ -42,7 +42,7 @@ type CreateGlobalClusterInput struct {
 	// This member is required.
 	GlobalClusterIdentifier *string
 
-	// The name for the new global database (up to 64 alpha-numeric characters.
+	// The name for the new global database (up to 64 alpha-numeric characters).
 	DatabaseName *string
 
 	// The deletion protection setting for the new global database. The global
@@ -119,7 +119,7 @@ func (c *Client) addOperationCreateGlobalClusterMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -141,9 +141,6 @@ func (c *Client) addOperationCreateGlobalClusterMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

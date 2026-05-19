@@ -54,6 +54,15 @@ type Accuracy struct {
 	noSmithyDocumentSerde
 }
 
+// Optional configuration to customize location estimates.
+type AdvancedConfiguration struct {
+
+	// Configuration for WiFi and cellular-based payloads for location estimates.
+	WiFiCellular *WiFiCellular
+
+	noSmithyDocumentSerde
+}
+
 // LoRaWAN application configuration, which can be used to perform geolocation.
 type ApplicationConfig struct {
 
@@ -2274,6 +2283,16 @@ type WiFiAccessPoint struct {
 	//
 	// This member is required.
 	Rss *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for WiFi and cellular location payloads.
+type WiFiCellular struct {
+
+	// Confidence level for WiFi and cellular position estimates, expressed as a
+	// percentage. Valid range: 50–99 inclusive. Defaults to 68 if not specified.
+	ConfidencePercent *int32
 
 	noSmithyDocumentSerde
 }

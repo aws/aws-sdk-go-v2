@@ -1265,6 +1265,18 @@
                     "traits": {
                         "smithy.api#enumValue": "pcm"
                     }
+                },
+                "MULAW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mulaw"
+                    }
+                },
+                "ALAW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "alaw"
+                    }
                 }
             }
         },

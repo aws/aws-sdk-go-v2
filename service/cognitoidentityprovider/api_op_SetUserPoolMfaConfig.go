@@ -86,8 +86,8 @@ type SetUserPoolMfaConfigInput struct {
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
 
 	// The configuration of your user pool for passkey, or WebAuthn, authentication
-	// and registration. You can set this configuration independent of the MFA
-	// configuration options in this operation.
+	// and registration. Includes relying-party configuration, user-verification
+	// requirements, and whether passkeys can satisfy MFA requirements.
 	WebAuthnConfiguration *types.WebAuthnConfigurationType
 
 	noSmithyDocumentSerde
@@ -125,8 +125,8 @@ type SetUserPoolMfaConfigOutput struct {
 	SoftwareTokenMfaConfiguration *types.SoftwareTokenMfaConfigType
 
 	// The configuration of your user pool for passkey, or WebAuthn, sign-in with
-	// authenticators like biometric and security-key devices. Includes relying-party
-	// configuration and settings for user-verification requirements.
+	// authenticators such as biometric and security-key devices. Includes
+	// relying-party configuration and settings for user-verification requirements.
 	WebAuthnConfiguration *types.WebAuthnConfigurationType
 
 	// Metadata pertaining to the operation's result.
@@ -169,7 +169,7 @@ func (c *Client) addOperationSetUserPoolMfaConfigMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -191,9 +191,6 @@ func (c *Client) addOperationSetUserPoolMfaConfigMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -90,6 +90,26 @@ func (m *validateOpCreateOutpost) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateRenewal struct {
+}
+
+func (*validateOpCreateRenewal) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateRenewal) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateRenewalInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateRenewalInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateSite struct {
 }
 
@@ -305,6 +325,26 @@ func (m *validateOpGetOutpostSupportedInstanceTypes) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetOutpostSupportedInstanceTypesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetRenewalPricing struct {
+}
+
+func (*validateOpGetRenewalPricing) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetRenewalPricing) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetRenewalPricingInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetRenewalPricingInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -626,6 +666,10 @@ func addOpCreateOutpostValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateOutpost{}, middleware.After)
 }
 
+func addOpCreateRenewalValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateRenewal{}, middleware.After)
+}
+
 func addOpCreateSiteValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateSite{}, middleware.After)
 }
@@ -668,6 +712,10 @@ func addOpGetOutpostInstanceTypesValidationMiddleware(stack *middleware.Stack) e
 
 func addOpGetOutpostSupportedInstanceTypesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetOutpostSupportedInstanceTypes{}, middleware.After)
+}
+
+func addOpGetRenewalPricingValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetRenewalPricing{}, middleware.After)
 }
 
 func addOpGetSiteAddressValidationMiddleware(stack *middleware.Stack) error {
@@ -864,6 +912,27 @@ func validateOpCreateOutpostInput(v *CreateOutpostInput) error {
 	}
 }
 
+func validateOpCreateRenewalInput(v *CreateRenewalInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateRenewalInput"}
+	if len(v.PaymentOption) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentOption"))
+	}
+	if len(v.PaymentTerm) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentTerm"))
+	}
+	if v.OutpostIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateSiteInput(v *CreateSiteInput) error {
 	if v == nil {
 		return nil
@@ -1032,6 +1101,21 @@ func validateOpGetOutpostSupportedInstanceTypesInput(v *GetOutpostSupportedInsta
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetOutpostSupportedInstanceTypesInput"}
+	if v.OutpostIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetRenewalPricingInput(v *GetRenewalPricingInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetRenewalPricingInput"}
 	if v.OutpostIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
 	}

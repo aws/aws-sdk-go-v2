@@ -30,6 +30,46 @@ func (m *validateOpAssociateEipToVlan) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateEntitlement struct {
+}
+
+func (*validateOpCreateEntitlement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEntitlement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEntitlementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEntitlementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateEnvironmentConnector struct {
+}
+
+func (*validateOpCreateEnvironmentConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEnvironmentConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEnvironmentConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEnvironmentConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateEnvironmentHost struct {
 }
 
@@ -65,6 +105,46 @@ func (m *validateOpCreateEnvironment) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateEnvironmentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteEntitlement struct {
+}
+
+func (*validateOpDeleteEntitlement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEntitlement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEntitlementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEntitlementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteEnvironmentConnector struct {
+}
+
+func (*validateOpDeleteEnvironmentConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEnvironmentConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEnvironmentConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEnvironmentConnectorInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -150,6 +230,26 @@ func (m *validateOpGetEnvironment) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListEnvironmentConnectors struct {
+}
+
+func (*validateOpListEnvironmentConnectors) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEnvironmentConnectors) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEnvironmentConnectorsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEnvironmentConnectorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListEnvironmentHosts struct {
 }
 
@@ -210,6 +310,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListVmEntitlements struct {
+}
+
+func (*validateOpListVmEntitlements) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListVmEntitlements) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListVmEntitlementsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListVmEntitlementsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -250,8 +370,36 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateEnvironmentConnector struct {
+}
+
+func (*validateOpUpdateEnvironmentConnector) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEnvironmentConnector) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEnvironmentConnectorInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEnvironmentConnectorInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateEipToVlanValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateEipToVlan{}, middleware.After)
+}
+
+func addOpCreateEntitlementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEntitlement{}, middleware.After)
+}
+
+func addOpCreateEnvironmentConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEnvironmentConnector{}, middleware.After)
 }
 
 func addOpCreateEnvironmentHostValidationMiddleware(stack *middleware.Stack) error {
@@ -260,6 +408,14 @@ func addOpCreateEnvironmentHostValidationMiddleware(stack *middleware.Stack) err
 
 func addOpCreateEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateEnvironment{}, middleware.After)
+}
+
+func addOpDeleteEntitlementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEntitlement{}, middleware.After)
+}
+
+func addOpDeleteEnvironmentConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEnvironmentConnector{}, middleware.After)
 }
 
 func addOpDeleteEnvironmentHostValidationMiddleware(stack *middleware.Stack) error {
@@ -278,6 +434,10 @@ func addOpGetEnvironmentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEnvironment{}, middleware.After)
 }
 
+func addOpListEnvironmentConnectorsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEnvironmentConnectors{}, middleware.After)
+}
+
 func addOpListEnvironmentHostsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEnvironmentHosts{}, middleware.After)
 }
@@ -290,12 +450,20 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpListVmEntitlementsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListVmEntitlements{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateEnvironmentConnectorValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEnvironmentConnector{}, middleware.After)
 }
 
 func validateConnectivityInfo(v *types.ConnectivityInfo) error {
@@ -543,6 +711,54 @@ func validateOpAssociateEipToVlanInput(v *AssociateEipToVlanInput) error {
 	}
 }
 
+func validateOpCreateEntitlementInput(v *CreateEntitlementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEntitlementInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if len(v.EntitlementType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntitlementType"))
+	}
+	if v.VmIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VmIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateEnvironmentConnectorInput(v *CreateEnvironmentConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEnvironmentConnectorInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.ApplianceFqdn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplianceFqdn"))
+	}
+	if v.SecretIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateEnvironmentHostInput(v *CreateEnvironmentHostInput) error {
 	if v == nil {
 		return nil
@@ -627,6 +843,48 @@ func validateOpCreateEnvironmentInput(v *CreateEnvironmentInput) error {
 	}
 }
 
+func validateOpDeleteEntitlementInput(v *DeleteEntitlementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEntitlementInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if len(v.EntitlementType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntitlementType"))
+	}
+	if v.VmIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VmIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteEnvironmentConnectorInput(v *DeleteEnvironmentConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEnvironmentConnectorInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEnvironmentHostInput(v *DeleteEnvironmentHostInput) error {
 	if v == nil {
 		return nil
@@ -696,6 +954,21 @@ func validateOpGetEnvironmentInput(v *GetEnvironmentInput) error {
 	}
 }
 
+func validateOpListEnvironmentConnectorsInput(v *ListEnvironmentConnectorsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEnvironmentConnectorsInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListEnvironmentHostsInput(v *ListEnvironmentHostsInput) error {
 	if v == nil {
 		return nil
@@ -741,6 +1014,27 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpListVmEntitlementsInput(v *ListVmEntitlementsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListVmEntitlementsInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
+	}
+	if len(v.EntitlementType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntitlementType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -769,6 +1063,24 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEnvironmentConnectorInput(v *UpdateEnvironmentConnectorInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEnvironmentConnectorInput"}
+	if v.EnvironmentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentId"))
+	}
+	if v.ConnectorId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

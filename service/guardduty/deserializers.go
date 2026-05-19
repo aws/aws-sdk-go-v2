@@ -12814,7 +12814,7 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 				sv.Message = ptr.String(jtv)
 			}
 
-		case "__type":
+		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14307,7 +14307,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 				sv.Message = ptr.String(jtv)
 			}
 
-		case "__type":
+		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -14833,7 +14833,7 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 				sv.Message = ptr.String(jtv)
 			}
 
-		case "__type":
+		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -19784,7 +19784,7 @@ func awsRestjson1_deserializeDocumentInternalServerErrorException(v **types.Inte
 				sv.Message = ptr.String(jtv)
 			}
 
-		case "__type":
+		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
@@ -25600,7 +25600,7 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 				sv.Message = ptr.String(jtv)
 			}
 
-		case "__type":
+		case "type":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {

@@ -90,6 +90,26 @@ func (m *validateOpCancelAnnotationImportJob) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCancelRunBatch struct {
+}
+
+func (*validateOpCancelRunBatch) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelRunBatch) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelRunBatchInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelRunBatchInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelRun struct {
 }
 
@@ -185,6 +205,26 @@ func (m *validateOpCreateAnnotationStoreVersion) HandleInitialize(ctx context.Co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateAnnotationStoreVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateConfiguration struct {
+}
+
+func (*validateOpCreateConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -410,6 +450,46 @@ func (m *validateOpDeleteAnnotationStoreVersions) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteBatch struct {
+}
+
+func (*validateOpDeleteBatch) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBatch) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBatchInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBatchInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteConfiguration struct {
+}
+
+func (*validateOpDeleteConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteReference struct {
 }
 
@@ -445,6 +525,26 @@ func (m *validateOpDeleteReferenceStore) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteReferenceStoreInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteRunBatch struct {
+}
+
+func (*validateOpDeleteRunBatch) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteRunBatch) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteRunBatchInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteRunBatchInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -685,6 +785,46 @@ func (m *validateOpGetAnnotationStoreVersion) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetAnnotationStoreVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetBatch struct {
+}
+
+func (*validateOpGetBatch) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBatch) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBatchInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBatchInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetConfiguration struct {
+}
+
+func (*validateOpGetConfiguration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetConfiguration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetConfigurationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetConfigurationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1270,6 +1410,26 @@ func (m *validateOpListReferences) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListRunsInBatch struct {
+}
+
+func (*validateOpListRunsInBatch) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListRunsInBatch) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListRunsInBatchInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListRunsInBatchInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListRunTasks struct {
 }
 
@@ -1465,6 +1625,26 @@ func (m *validateOpStartReferenceImportJob) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartReferenceImportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStartRunBatch struct {
+}
+
+func (*validateOpStartRunBatch) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartRunBatch) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartRunBatchInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartRunBatchInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1746,6 +1926,10 @@ func addOpCancelAnnotationImportJobValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpCancelAnnotationImportJob{}, middleware.After)
 }
 
+func addOpCancelRunBatchValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelRunBatch{}, middleware.After)
+}
+
 func addOpCancelRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelRun{}, middleware.After)
 }
@@ -1764,6 +1948,10 @@ func addOpCreateAnnotationStoreValidationMiddleware(stack *middleware.Stack) err
 
 func addOpCreateAnnotationStoreVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAnnotationStoreVersion{}, middleware.After)
+}
+
+func addOpCreateConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateConfiguration{}, middleware.After)
 }
 
 func addOpCreateMultipartReadSetUploadValidationMiddleware(stack *middleware.Stack) error {
@@ -1810,12 +1998,24 @@ func addOpDeleteAnnotationStoreVersionsValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpDeleteAnnotationStoreVersions{}, middleware.After)
 }
 
+func addOpDeleteBatchValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBatch{}, middleware.After)
+}
+
+func addOpDeleteConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteConfiguration{}, middleware.After)
+}
+
 func addOpDeleteReferenceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteReference{}, middleware.After)
 }
 
 func addOpDeleteReferenceStoreValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteReferenceStore{}, middleware.After)
+}
+
+func addOpDeleteRunBatchValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteRunBatch{}, middleware.After)
 }
 
 func addOpDeleteRunCacheValidationMiddleware(stack *middleware.Stack) error {
@@ -1864,6 +2064,14 @@ func addOpGetAnnotationStoreValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetAnnotationStoreVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAnnotationStoreVersion{}, middleware.After)
+}
+
+func addOpGetBatchValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBatch{}, middleware.After)
+}
+
+func addOpGetConfigurationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetConfiguration{}, middleware.After)
 }
 
 func addOpGetReadSetActivationJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1982,6 +2190,10 @@ func addOpListReferencesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListReferences{}, middleware.After)
 }
 
+func addOpListRunsInBatchValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListRunsInBatch{}, middleware.After)
+}
+
 func addOpListRunTasksValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListRunTasks{}, middleware.After)
 }
@@ -2020,6 +2232,10 @@ func addOpStartReadSetImportJobValidationMiddleware(stack *middleware.Stack) err
 
 func addOpStartReferenceImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartReferenceImportJob{}, middleware.After)
+}
+
+func addOpStartRunBatchValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartRunBatch{}, middleware.After)
 }
 
 func addOpStartRunValidationMiddleware(stack *middleware.Stack) error {
@@ -2106,6 +2322,25 @@ func validateAnnotationImportItemSources(v []types.AnnotationImportItemSource) e
 	}
 }
 
+func validateBatchRunSettings(v types.BatchRunSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchRunSettings"}
+	switch uv := v.(type) {
+	case *types.BatchRunSettingsMemberInlineSettings:
+		if err := validateInlineSettings(uv.Value); err != nil {
+			invalidParams.AddNested("[inlineSettings]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCompleteReadSetUploadPartList(v []types.CompleteReadSetUploadPartListItem) error {
 	if v == nil {
 		return nil
@@ -2136,6 +2371,24 @@ func validateCompleteReadSetUploadPartListItem(v *types.CompleteReadSetUploadPar
 	}
 	if v.Checksum == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Checksum"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDefaultRunSetting(v *types.DefaultRunSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DefaultRunSetting"}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2189,6 +2442,38 @@ func validateExportReadSetList(v []types.ExportReadSet) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ExportReadSetList"}
 	for i := range v {
 		if err := validateExportReadSet(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInlineSetting(v *types.InlineSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InlineSetting"}
+	if v.RunSettingId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunSettingId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInlineSettings(v []types.InlineSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InlineSettings"}
+	for i := range v {
+		if err := validateInlineSetting(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -2457,6 +2742,21 @@ func validateOpCancelAnnotationImportJobInput(v *CancelAnnotationImportJobInput)
 	}
 }
 
+func validateOpCancelRunBatchInput(v *CancelRunBatchInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelRunBatchInput"}
+	if v.BatchId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BatchId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCancelRunInput(v *CancelRunInput) error {
 	if v == nil {
 		return nil
@@ -2542,6 +2842,27 @@ func validateOpCreateAnnotationStoreVersionInput(v *CreateAnnotationStoreVersion
 	}
 	if v.VersionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateConfigurationInput(v *CreateConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateConfigurationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.RunConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunConfigurations"))
+	}
+	if v.RequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2767,6 +3088,36 @@ func validateOpDeleteAnnotationStoreVersionsInput(v *DeleteAnnotationStoreVersio
 	}
 }
 
+func validateOpDeleteBatchInput(v *DeleteBatchInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBatchInput"}
+	if v.BatchId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BatchId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteConfigurationInput(v *DeleteConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteConfigurationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteReferenceInput(v *DeleteReferenceInput) error {
 	if v == nil {
 		return nil
@@ -2792,6 +3143,21 @@ func validateOpDeleteReferenceStoreInput(v *DeleteReferenceStoreInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteReferenceStoreInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteRunBatchInput(v *DeleteRunBatchInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteRunBatchInput"}
+	if v.BatchId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BatchId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2978,6 +3344,36 @@ func validateOpGetAnnotationStoreVersionInput(v *GetAnnotationStoreVersionInput)
 	}
 	if v.VersionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("VersionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBatchInput(v *GetBatchInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBatchInput"}
+	if v.BatchId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BatchId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetConfigurationInput(v *GetConfigurationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetConfigurationInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3463,6 +3859,21 @@ func validateOpListReferencesInput(v *ListReferencesInput) error {
 	}
 }
 
+func validateOpListRunsInBatchInput(v *ListRunsInBatchInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListRunsInBatchInput"}
+	if v.BatchId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BatchId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListRunTasksInput(v *ListRunTasksInput) error {
 	if v == nil {
 		return nil
@@ -3657,6 +4068,35 @@ func validateOpStartReferenceImportJobInput(v *StartReferenceImportJobInput) err
 	} else if v.Sources != nil {
 		if err := validateStartReferenceImportJobSourceList(v.Sources); err != nil {
 			invalidParams.AddNested("Sources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartRunBatchInput(v *StartRunBatchInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartRunBatchInput"}
+	if v.RequestId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestId"))
+	}
+	if v.DefaultRunSetting == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DefaultRunSetting"))
+	} else if v.DefaultRunSetting != nil {
+		if err := validateDefaultRunSetting(v.DefaultRunSetting); err != nil {
+			invalidParams.AddNested("DefaultRunSetting", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BatchRunSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BatchRunSettings"))
+	} else if v.BatchRunSettings != nil {
+		if err := validateBatchRunSettings(v.BatchRunSettings); err != nil {
+			invalidParams.AddNested("BatchRunSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

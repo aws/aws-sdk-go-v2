@@ -18,7 +18,7 @@ import (
 // credentials of other users by changing their email address. This poses a
 // security risk to your organization. They can change the email address of a user
 // to the attacker's email address, and then reset the password through email. For
-// more information, see [Best Practices for Security Profiles]in the Amazon Connect Administrator Guide.
+// more information, see [Best Practices for Security Profiles]in the Connect Customer Administrator Guide.
 //
 // [Best Practices for Security Profiles]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-best-practices.html
 func (c *Client) UpdateUserIdentityInfo(ctx context.Context, params *UpdateUserIdentityInfoInput, optFns ...func(*Options)) (*UpdateUserIdentityInfoOutput, error) {
@@ -43,8 +43,8 @@ type UpdateUserIdentityInfoInput struct {
 	// This member is required.
 	IdentityInfo *types.UserIdentityInfo
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -100,7 +100,7 @@ func (c *Client) addOperationUpdateUserIdentityInfoMiddlewares(stack *middleware
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -122,9 +122,6 @@ func (c *Client) addOperationUpdateUserIdentityInfoMiddlewares(stack *middleware
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

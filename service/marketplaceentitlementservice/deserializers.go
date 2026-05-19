@@ -3,663 +3,463 @@
 package marketplaceentitlementservice
 
 import (
-	"bytes"
 	"context"
-	"encoding/json"
 	"fmt"
-	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceentitlementservice/types"
 	smithy "github.com/aws/smithy-go"
-	smithyio "github.com/aws/smithy-go/io"
+	smithycbor "github.com/aws/smithy-go/encoding/cbor"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
-	smithytime "github.com/aws/smithy-go/time"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"math"
 	"strings"
+	"time"
 )
 
-type awsAwsjson11_deserializeOpGetEntitlements struct {
+type smithyRpcv2cbor_deserializeOpGetEntitlements struct {
 }
 
-func (*awsAwsjson11_deserializeOpGetEntitlements) ID() string {
+func (*smithyRpcv2cbor_deserializeOpGetEntitlements) ID() string {
 	return "OperationDeserializer"
 }
 
-func (m *awsAwsjson11_deserializeOpGetEntitlements) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+func (m *smithyRpcv2cbor_deserializeOpGetEntitlements) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
 	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
 ) {
 	out, metadata, err = next.HandleDeserialize(ctx, in)
-	if err != nil {
-		return out, metadata, err
-	}
 
 	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
 	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
 	defer endTimer()
 	defer span.End()
-	response, ok := out.RawResponse.(*smithyhttp.Response)
-	if !ok {
-		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+
+	if err != nil {
+		return out, metadata, err
 	}
 
-	if response.StatusCode < 200 || response.StatusCode >= 300 {
-		return out, metadata, awsAwsjson11_deserializeOpErrorGetEntitlements(response, &metadata)
+	resp, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, fmt.Errorf("unexpected transport type %T", out.RawResponse)
 	}
-	output := &GetEntitlementsOutput{}
+
+	if resp.Header.Get("smithy-protocol") != "rpc-v2-cbor" {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf(
+				"unexpected smithy-protocol response header '%s' (HTTP status: %s)",
+				resp.Header.Get("smithy-protocol"),
+				resp.Status,
+			),
+		}
+	}
+
+	if resp.StatusCode != 200 {
+		return out, metadata, rpc2_deserializeOpErrorGetEntitlements(resp)
+	}
+
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	if len(payload) == 0 {
+		out.Result = &GetEntitlementsOutput{}
+		return out, metadata, nil
+	}
+
+	cv, err := smithycbor.Decode(payload)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	output, err := deserializeCBOR_GetEntitlementsOutput(cv)
+	if err != nil {
+		return out, metadata, err
+	}
+
 	out.Result = output
 
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-
-	body := io.TeeReader(response.Body, ringBuffer)
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-	var shape interface{}
-	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return out, metadata, err
+	return out, metadata, nil
+}
+func deserializeCBOR_Entitlement(v smithycbor.Value) (*types.Entitlement, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
 	}
-
-	err = awsAwsjson11_deserializeOpDocumentGetEntitlementsOutput(&output, shape)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+	ds := &types.Entitlement{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "ProductCode" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ProductCode = ptr.String(dv)
 		}
-		return out, metadata, err
-	}
 
-	return out, metadata, err
+		if key == "Dimension" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Dimension = ptr.String(dv)
+		}
+
+		if key == "CustomerIdentifier" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.CustomerIdentifier = ptr.String(dv)
+		}
+
+		if key == "CustomerAWSAccountId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.CustomerAWSAccountId = ptr.String(dv)
+		}
+
+		if key == "Value" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_EntitlementValue(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Value = dv
+		}
+
+		if key == "ExpirationDate" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Time(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ExpirationDate = ptr.Time(dv)
+		}
+
+		if key == "LicenseArn" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.LicenseArn = ptr.String(dv)
+		}
+	}
+	return ds, nil
 }
 
-func awsAwsjson11_deserializeOpErrorGetEntitlements(response *smithyhttp.Response, metadata *middleware.Metadata) error {
-	var errorBuffer bytes.Buffer
-	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
-		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+func deserializeCBOR_EntitlementList(v smithycbor.Value) ([]types.Entitlement, error) {
+	av, ok := v.(smithycbor.List)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
 	}
-	errorBody := bytes.NewReader(errorBuffer.Bytes())
+	var dl []types.Entitlement
+	for _, si := range av {
 
-	errorCode := "UnknownError"
-	errorMessage := errorCode
-
-	headerCode := response.Header.Get("X-Amzn-ErrorType")
-
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-
-	body := io.TeeReader(errorBody, ringBuffer)
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-	bodyInfo, err := getProtocolErrorInfo(decoder)
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
+		di, err := deserializeCBOR_Entitlement(si)
+		if err != nil {
+			return nil, err
 		}
-		return err
+		dl = append(dl, *di)
+	}
+	return dl, nil
+}
+
+func deserializeCBOR_EntitlementValue(v smithycbor.Value) (*types.EntitlementValue, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.EntitlementValue{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "IntegerValue" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.IntegerValue = ptr.Int32(dv)
+		}
+
+		if key == "DoubleValue" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Float64(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.DoubleValue = ptr.Float64(dv)
+		}
+
+		if key == "BooleanValue" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Bool(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.BooleanValue = ptr.Bool(dv)
+		}
+
+		if key == "StringValue" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.StringValue = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_InternalServiceErrorException(v smithycbor.Value) (*types.InternalServiceErrorException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.InternalServiceErrorException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_InvalidParameterException(v smithycbor.Value) (*types.InvalidParameterException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.InvalidParameterException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_ThrottlingException(v smithycbor.Value) (*types.ThrottlingException, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.ThrottlingException{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "message" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Message = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_Bool(v smithycbor.Value) (bool, error) {
+	av, ok := v.(smithycbor.Bool)
+	if !ok {
+		return false, fmt.Errorf("unexpected value type %T", v)
+	}
+	return bool(av), nil
+}
+
+func deserializeCBOR_Float64(v smithycbor.Value) (float64, error) {
+	return smithycbor.AsFloat64(v)
+}
+
+func deserializeCBOR_Int32(v smithycbor.Value) (int32, error) {
+	return smithycbor.AsInt32(v)
+}
+
+func deserializeCBOR_String(v smithycbor.Value) (string, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return "", fmt.Errorf("unexpected value type %T", v)
+	}
+	return string(av), nil
+}
+
+func deserializeCBOR_Time(v smithycbor.Value) (time.Time, error) {
+	return smithycbor.AsTime(v)
+}
+
+func deserializeCBOR_GetEntitlementsOutput(v smithycbor.Value) (*GetEntitlementsOutput, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &GetEntitlementsOutput{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "Entitlements" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_EntitlementList(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Entitlements = dv
+		}
+
+		if key == "NextToken" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.NextToken = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+func rpc2_deserializeOpErrorGetEntitlements(resp *smithyhttp.Response) error {
+	payload, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("read response body: %w", err)}
 	}
 
-	errorBody.Seek(0, io.SeekStart)
-	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
-		errorCode = restjson.SanitizeErrorCode(typ)
+	typ, msg, v, err := getProtocolErrorInfo(payload)
+	if err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("get error info: %w", err)}
 	}
-	if len(bodyInfo.Message) != 0 {
-		errorMessage = bodyInfo.Message
+
+	if len(typ) == 0 {
+		typ = "UnknownError"
 	}
-	switch {
-	case strings.EqualFold("InternalServiceErrorException", errorCode):
-		return awsAwsjson11_deserializeErrorInternalServiceErrorException(response, errorBody)
+	if len(msg) == 0 {
+		msg = "UnknownError"
+	}
 
-	case strings.EqualFold("InvalidParameterException", errorCode):
-		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+	_ = v
+	// namespace can be mangled by service, so matching by error shape name
+	errorParts := strings.Split(typ, "#")
+	errorName := errorParts[len(errorParts)-1]
+	switch string(errorName) {
+	case "InternalServiceErrorException":
+		verr, err := deserializeCBOR_InternalServiceErrorException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.marketplaceentitlementservice#InternalServiceErrorException: %w", err),
+				Snapshot: payload,
+			}
+		}
 
-	case strings.EqualFold("ThrottlingException", errorCode):
-		return awsAwsjson11_deserializeErrorThrottlingException(response, errorBody)
+		return verr
+	case "InvalidParameterException":
+		verr, err := deserializeCBOR_InvalidParameterException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.marketplaceentitlementservice#InvalidParameterException: %w", err),
+				Snapshot: payload,
+			}
+		}
 
+		return verr
+	case "ThrottlingException":
+		verr, err := deserializeCBOR_ThrottlingException(v)
+		if err != nil {
+			return &smithy.DeserializationError{
+				Err:      fmt.Errorf("deserialize com.amazonaws.marketplaceentitlementservice#ThrottlingException: %w", err),
+				Snapshot: payload,
+			}
+		}
+
+		return verr
 	default:
-		genericError := &smithy.GenericAPIError{
-			Code:    errorCode,
-			Message: errorMessage,
-		}
-		return genericError
 
+		return &smithy.GenericAPIError{Code: typ, Message: msg}
 	}
 }
-
-func awsAwsjson11_deserializeErrorInternalServiceErrorException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-
-	body := io.TeeReader(errorBody, ringBuffer)
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-	var shape interface{}
-	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return err
-	}
-
-	output := &types.InternalServiceErrorException{}
-	err := awsAwsjson11_deserializeDocumentInternalServiceErrorException(&output, shape)
-
+func getProtocolErrorInfo(payload []byte) (typ, msg string, v smithycbor.Value, err error) {
+	v, err = smithycbor.Decode(payload)
 	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return err
+		return "", "", nil, fmt.Errorf("decode: %w", err)
 	}
 
-	errorBody.Seek(0, io.SeekStart)
-	return output
-}
-
-func awsAwsjson11_deserializeErrorInvalidParameterException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-
-	body := io.TeeReader(errorBody, ringBuffer)
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-	var shape interface{}
-	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return err
-	}
-
-	output := &types.InvalidParameterException{}
-	err := awsAwsjson11_deserializeDocumentInvalidParameterException(&output, shape)
-
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return err
-	}
-
-	errorBody.Seek(0, io.SeekStart)
-	return output
-}
-
-func awsAwsjson11_deserializeErrorThrottlingException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
-	var buff [1024]byte
-	ringBuffer := smithyio.NewRingBuffer(buff[:])
-
-	body := io.TeeReader(errorBody, ringBuffer)
-	decoder := json.NewDecoder(body)
-	decoder.UseNumber()
-	var shape interface{}
-	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return err
-	}
-
-	output := &types.ThrottlingException{}
-	err := awsAwsjson11_deserializeDocumentThrottlingException(&output, shape)
-
-	if err != nil {
-		var snapshot bytes.Buffer
-		io.Copy(&snapshot, ringBuffer)
-		err = &smithy.DeserializationError{
-			Err:      fmt.Errorf("failed to decode response body, %w", err),
-			Snapshot: snapshot.Bytes(),
-		}
-		return err
-	}
-
-	errorBody.Seek(0, io.SeekStart)
-	return output
-}
-
-func awsAwsjson11_deserializeDocumentEntitlement(v **types.Entitlement, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
+	mv, ok := v.(smithycbor.Map)
 	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
+		return "", "", nil, fmt.Errorf("unexpected payload type %T", v)
 	}
 
-	var sv *types.Entitlement
-	if *v == nil {
-		sv = &types.Entitlement{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "CustomerAWSAccountId":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
-				}
-				sv.CustomerAWSAccountId = ptr.String(jtv)
-			}
-
-		case "CustomerIdentifier":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
-				}
-				sv.CustomerIdentifier = ptr.String(jtv)
-			}
-
-		case "Dimension":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
-				}
-				sv.Dimension = ptr.String(jtv)
-			}
-
-		case "ExpirationDate":
-			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.ExpirationDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
-
-				}
-			}
-
-		case "LicenseArn":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
-				}
-				sv.LicenseArn = ptr.String(jtv)
-			}
-
-		case "ProductCode":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected ProductCode to be of type string, got %T instead", value)
-				}
-				sv.ProductCode = ptr.String(jtv)
-			}
-
-		case "Value":
-			if err := awsAwsjson11_deserializeDocumentEntitlementValue(&sv.Value, value); err != nil {
-				return err
-			}
-
-		default:
-			_, _ = key, value
-
+	if ctyp, ok := mv["__type"]; ok {
+		if ttyp, ok := ctyp.(smithycbor.String); ok {
+			typ = string(ttyp)
 		}
 	}
-	*v = sv
-	return nil
-}
 
-func awsAwsjson11_deserializeDocumentEntitlementList(v *[]types.Entitlement, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.([]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var cv []types.Entitlement
-	if *v == nil {
-		cv = []types.Entitlement{}
-	} else {
-		cv = *v
-	}
-
-	for _, value := range shape {
-		var col types.Entitlement
-		destAddr := &col
-		if err := awsAwsjson11_deserializeDocumentEntitlement(&destAddr, value); err != nil {
-			return err
-		}
-		col = *destAddr
-		cv = append(cv, col)
-
-	}
-	*v = cv
-	return nil
-}
-
-func awsAwsjson11_deserializeDocumentEntitlementValue(v **types.EntitlementValue, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.EntitlementValue
-	if *v == nil {
-		sv = &types.EntitlementValue{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "BooleanValue":
-			if value != nil {
-				jtv, ok := value.(bool)
-				if !ok {
-					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
-				}
-				sv.BooleanValue = ptr.Bool(jtv)
-			}
-
-		case "DoubleValue":
-			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.DoubleValue = ptr.Float64(f64)
-
-				case string:
-					var f64 float64
-					switch {
-					case strings.EqualFold(jtv, "NaN"):
-						f64 = math.NaN()
-
-					case strings.EqualFold(jtv, "Infinity"):
-						f64 = math.Inf(1)
-
-					case strings.EqualFold(jtv, "-Infinity"):
-						f64 = math.Inf(-1)
-
-					default:
-						return fmt.Errorf("unknown JSON number value: %s", jtv)
-
-					}
-					sv.DoubleValue = ptr.Float64(f64)
-
-				default:
-					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
-
-				}
-			}
-
-		case "IntegerValue":
-			if value != nil {
-				jtv, ok := value.(json.Number)
-				if !ok {
-					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
-				}
-				i64, err := jtv.Int64()
-				if err != nil {
-					return err
-				}
-				sv.IntegerValue = ptr.Int32(int32(i64))
-			}
-
-		case "StringValue":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected String to be of type string, got %T instead", value)
-				}
-				sv.StringValue = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
+	if cmsg, ok := mv["message"]; ok {
+		if tmsg, ok := cmsg.(smithycbor.String); ok {
+			msg = string(tmsg)
 		}
 	}
-	*v = sv
-	return nil
+
+	return typ, msg, mv, nil
 }
-
-func awsAwsjson11_deserializeDocumentInternalServiceErrorException(v **types.InternalServiceErrorException, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
+func getAwsQueryErrorCode(resp *smithyhttp.Response) string {
+	header := resp.Header.Get("x-amzn-query-error")
+	if header == "" {
+		return ""
 	}
 
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
+	parts := strings.Split(header, ";")
+	if len(parts) != 2 {
+		return ""
 	}
 
-	var sv *types.InternalServiceErrorException
-	if *v == nil {
-		sv = &types.InternalServiceErrorException{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "message", "Message":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
-				}
-				sv.Message = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsjson11_deserializeDocumentInvalidParameterException(v **types.InvalidParameterException, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.InvalidParameterException
-	if *v == nil {
-		sv = &types.InvalidParameterException{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "message", "Message":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
-				}
-				sv.Message = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsjson11_deserializeDocumentThrottlingException(v **types.ThrottlingException, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.ThrottlingException
-	if *v == nil {
-		sv = &types.ThrottlingException{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "message", "Message":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
-				}
-				sv.Message = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsAwsjson11_deserializeOpDocumentGetEntitlementsOutput(v **GetEntitlementsOutput, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *GetEntitlementsOutput
-	if *v == nil {
-		sv = &GetEntitlementsOutput{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "Entitlements":
-			if err := awsAwsjson11_deserializeDocumentEntitlementList(&sv.Entitlements, value); err != nil {
-				return err
-			}
-
-		case "NextToken":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
-				}
-				sv.NextToken = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-type protocolErrorInfo struct {
-	Type    string `json:"__type"`
-	Message string
-	Code    any // nonstandard for awsjson but some services do present the type here
-}
-
-func getProtocolErrorInfo(decoder *json.Decoder) (protocolErrorInfo, error) {
-	var errInfo protocolErrorInfo
-	if err := decoder.Decode(&errInfo); err != nil {
-		if err == io.EOF {
-			return errInfo, nil
-		}
-		return errInfo, err
-	}
-
-	return errInfo, nil
-}
-
-func resolveProtocolErrorType(headerType string, bodyInfo protocolErrorInfo) (string, bool) {
-	if len(headerType) != 0 {
-		return headerType, true
-	} else if len(bodyInfo.Type) != 0 {
-		return bodyInfo.Type, true
-	} else if code, ok := bodyInfo.Code.(string); ok && len(code) != 0 {
-		return code, true
-	}
-	return "", false
+	return parts[0]
 }

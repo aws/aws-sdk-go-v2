@@ -72,6 +72,9 @@
                     "target": "com.amazonaws.connectcampaignsv2#DeleteCampaignCommunicationTime"
                 },
                 {
+                    "target": "com.amazonaws.connectcampaignsv2#DeleteCampaignEntryLimits"
+                },
+                {
                     "target": "com.amazonaws.connectcampaignsv2#DeleteConnectInstanceConfig"
                 },
                 {
@@ -148,6 +151,9 @@
                 },
                 {
                     "target": "com.amazonaws.connectcampaignsv2#UpdateCampaignCommunicationTime"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#UpdateCampaignEntryLimits"
                 },
                 {
                     "target": "com.amazonaws.connectcampaignsv2#UpdateCampaignFlowAssociation"
@@ -941,6 +947,9 @@
                 "schedule": {
                     "target": "com.amazonaws.connectcampaignsv2#Schedule"
                 },
+                "entryLimitsConfig": {
+                    "target": "com.amazonaws.connectcampaignsv2#EntryLimitsConfig"
+                },
                 "communicationTimeConfig": {
                     "target": "com.amazonaws.connectcampaignsv2#CommunicationTimeConfig"
                 },
@@ -1098,6 +1107,9 @@
                 },
                 "schedule": {
                     "target": "com.amazonaws.connectcampaignsv2#Schedule"
+                },
+                "entryLimitsConfig": {
+                    "target": "com.amazonaws.connectcampaignsv2#EntryLimitsConfig"
                 },
                 "connectCampaignFlowArn": {
                     "target": "com.amazonaws.connectcampaignsv2#Arn"
@@ -1458,6 +1470,9 @@
                 "schedule": {
                     "target": "com.amazonaws.connectcampaignsv2#Schedule"
                 },
+                "entryLimitsConfig": {
+                    "target": "com.amazonaws.connectcampaignsv2#EntryLimitsConfig"
+                },
                 "communicationTimeConfig": {
                     "target": "com.amazonaws.connectcampaignsv2#CommunicationTimeConfig"
                 },
@@ -1798,6 +1813,59 @@
             },
             "traits": {
                 "smithy.api#documentation": "The request for DeleteCampaignCommunicationTime API.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#DeleteCampaignEntryLimits": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaignsv2#DeleteCampaignEntryLimitsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#InvalidCampaignStateException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes the entry limits config for a campaign. This API is idempotent.",
+                "smithy.api#http": {
+                    "uri": "/v2/campaigns/{id}/entry-limits",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#DeleteCampaignEntryLimitsRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaignsv2#CampaignId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request for DeleteCampaignEntryLimits API.",
                 "smithy.api#input": {}
             }
         },
@@ -2216,6 +2284,31 @@
                         "value": "KMS"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#EntryLimitsConfig": {
+            "type": "structure",
+            "members": {
+                "maxEntryCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum number of times a participant can enter the campaign. A value of 0 indicates unlimited entries. Values of 1 or greater specify the exact number of entries allowed.",
+                        "smithy.api#range": {
+                            "min": 0
+                        },
+                        "smithy.api#required": {}
+                    }
+                },
+                "minEntryInterval": {
+                    "target": "com.amazonaws.connectcampaignsv2#Iso8601Duration",
+                    "traits": {
+                        "smithy.api#documentation": "Minimum time interval that must pass before a participant can enter the campaign again.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Campaign entry limits config"
             }
         },
         "com.amazonaws.connectcampaignsv2#EventTrigger": {
@@ -3310,6 +3403,9 @@
                 },
                 "localTimeZoneDetection": {
                     "target": "com.amazonaws.connectcampaignsv2#LocalTimeZoneDetection"
+                },
+                "localTimeZoneDetectionScope": {
+                    "target": "com.amazonaws.connectcampaignsv2#LocalTimeZoneDetectionScope"
                 }
             },
             "traits": {
@@ -3324,6 +3420,22 @@
             "traits": {
                 "smithy.api#documentation": "Local TimeZone Detection method list",
                 "smithy.api#uniqueItems": {}
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#LocalTimeZoneDetectionScope": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Local TimeZone Detection scope.",
+                "smithy.api#enum": [
+                    {
+                        "value": "PRIMARY_ONLY",
+                        "name": "PRIMARY_ONLY"
+                    },
+                    {
+                        "value": "ALL_AVAILABLE",
+                        "name": "ALL_AVAILABLE"
+                    }
+                ]
             }
         },
         "com.amazonaws.connectcampaignsv2#LocalTimeZoneDetectionType": {
@@ -5044,6 +5156,65 @@
             },
             "traits": {
                 "smithy.api#documentation": "The request for UpdateCampaignCommunicationTime API.",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#UpdateCampaignEntryLimits": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcampaignsv2#UpdateCampaignEntryLimitsRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#InvalidCampaignStateException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcampaignsv2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Updates the entry limits config for a campaign. This API is idempotent.",
+                "smithy.api#http": {
+                    "uri": "/v2/campaigns/{id}/entry-limits",
+                    "method": "POST"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcampaignsv2#UpdateCampaignEntryLimitsRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.connectcampaignsv2#CampaignId",
+                    "traits": {
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "entryLimitsConfig": {
+                    "target": "com.amazonaws.connectcampaignsv2#EntryLimitsConfig",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The request for UpdateCampaignEntryLimits API.",
                 "smithy.api#input": {}
             }
         },

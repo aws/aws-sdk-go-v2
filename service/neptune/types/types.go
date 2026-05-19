@@ -878,7 +878,7 @@ type DBParameterGroup struct {
 // RebootDBInstance
 type DBParameterGroupStatus struct {
 
-	// The name of the DP parameter group.
+	// The name of the DB parameter group.
 	DBParameterGroupName *string
 
 	// The status of parameter updates.
@@ -1166,7 +1166,7 @@ type GlobalCluster struct {
 	// of the global database.
 	GlobalClusterMembers []GlobalClusterMember
 
-	// An immutable identifier for the global database that is unique within in all
+	// An immutable identifier for the global database that is unique within all
 	// regions. This identifier is found in CloudTrail log entries whenever the KMS key
 	// for the DB cluster is accessed.
 	GlobalClusterResourceId *string

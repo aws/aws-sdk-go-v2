@@ -427,6 +427,11 @@ func awsRestjson1_serializeOpDocumentCreateReplicationConfigurationTemplateInput
 		ok.String(*v.EbsEncryptionKeyArn)
 	}
 
+	if len(v.InternetProtocol) > 0 {
+		ok := object.Key("internetProtocol")
+		ok.String(string(v.InternetProtocol))
+	}
+
 	if v.PitPolicy != nil {
 		ok := object.Key("pitPolicy")
 		if err := awsRestjson1_serializeDocumentPITPolicy(v.PitPolicy, ok); err != nil {
@@ -4083,6 +4088,11 @@ func awsRestjson1_serializeOpDocumentUpdateFailbackReplicationConfigurationInput
 		ok.Long(v.BandwidthThrottling)
 	}
 
+	if len(v.InternetProtocol) > 0 {
+		ok := object.Key("internetProtocol")
+		ok.String(string(v.InternetProtocol))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -4462,6 +4472,11 @@ func awsRestjson1_serializeOpDocumentUpdateReplicationConfigurationInput(v *Upda
 		ok.String(*v.EbsEncryptionKeyArn)
 	}
 
+	if len(v.InternetProtocol) > 0 {
+		ok := object.Key("internetProtocol")
+		ok.String(string(v.InternetProtocol))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -4634,6 +4649,11 @@ func awsRestjson1_serializeOpDocumentUpdateReplicationConfigurationTemplateInput
 	if v.EbsEncryptionKeyArn != nil {
 		ok := object.Key("ebsEncryptionKeyArn")
 		ok.String(*v.EbsEncryptionKeyArn)
+	}
+
+	if len(v.InternetProtocol) > 0 {
+		ok := object.Key("internetProtocol")
+		ok.String(string(v.InternetProtocol))
 	}
 
 	if v.PitPolicy != nil {

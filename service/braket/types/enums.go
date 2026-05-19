@@ -139,17 +139,14 @@ type InstanceType string
 
 // Enum values for InstanceType
 const (
+	InstanceTypeMlT3Large      InstanceType = "ml.t3.large"
+	InstanceTypeMlT3Xlarge     InstanceType = "ml.t3.xlarge"
+	InstanceTypeMlT32xlarge    InstanceType = "ml.t3.2xlarge"
 	InstanceTypeMlM4Xlarge     InstanceType = "ml.m4.xlarge"
 	InstanceTypeMlM42xlarge    InstanceType = "ml.m4.2xlarge"
 	InstanceTypeMlM44xlarge    InstanceType = "ml.m4.4xlarge"
 	InstanceTypeMlM410xlarge   InstanceType = "ml.m4.10xlarge"
 	InstanceTypeMlM416xlarge   InstanceType = "ml.m4.16xlarge"
-	InstanceTypeMlG4dnXlarge   InstanceType = "ml.g4dn.xlarge"
-	InstanceTypeMlG4dn2xlarge  InstanceType = "ml.g4dn.2xlarge"
-	InstanceTypeMlG4dn4xlarge  InstanceType = "ml.g4dn.4xlarge"
-	InstanceTypeMlG4dn8xlarge  InstanceType = "ml.g4dn.8xlarge"
-	InstanceTypeMlG4dn12xlarge InstanceType = "ml.g4dn.12xlarge"
-	InstanceTypeMlG4dn16xlarge InstanceType = "ml.g4dn.16xlarge"
 	InstanceTypeMlM5Large      InstanceType = "ml.m5.large"
 	InstanceTypeMlM5Xlarge     InstanceType = "ml.m5.xlarge"
 	InstanceTypeMlM52xlarge    InstanceType = "ml.m5.2xlarge"
@@ -160,14 +157,6 @@ const (
 	InstanceTypeMlC42xlarge    InstanceType = "ml.c4.2xlarge"
 	InstanceTypeMlC44xlarge    InstanceType = "ml.c4.4xlarge"
 	InstanceTypeMlC48xlarge    InstanceType = "ml.c4.8xlarge"
-	InstanceTypeMlP2Xlarge     InstanceType = "ml.p2.xlarge"
-	InstanceTypeMlP28xlarge    InstanceType = "ml.p2.8xlarge"
-	InstanceTypeMlP216xlarge   InstanceType = "ml.p2.16xlarge"
-	InstanceTypeMlP32xlarge    InstanceType = "ml.p3.2xlarge"
-	InstanceTypeMlP38xlarge    InstanceType = "ml.p3.8xlarge"
-	InstanceTypeMlP316xlarge   InstanceType = "ml.p3.16xlarge"
-	InstanceTypeMlP3dn24xlarge InstanceType = "ml.p3dn.24xlarge"
-	InstanceTypeMlP4d24xlarge  InstanceType = "ml.p4d.24xlarge"
 	InstanceTypeMlC5Xlarge     InstanceType = "ml.c5.xlarge"
 	InstanceTypeMlC52xlarge    InstanceType = "ml.c5.2xlarge"
 	InstanceTypeMlC54xlarge    InstanceType = "ml.c5.4xlarge"
@@ -178,6 +167,36 @@ const (
 	InstanceTypeMlC5n4xlarge   InstanceType = "ml.c5n.4xlarge"
 	InstanceTypeMlC5n9xlarge   InstanceType = "ml.c5n.9xlarge"
 	InstanceTypeMlC5n18xlarge  InstanceType = "ml.c5n.18xlarge"
+	InstanceTypeMlP2Xlarge     InstanceType = "ml.p2.xlarge"
+	InstanceTypeMlP28xlarge    InstanceType = "ml.p2.8xlarge"
+	InstanceTypeMlP216xlarge   InstanceType = "ml.p2.16xlarge"
+	InstanceTypeMlP32xlarge    InstanceType = "ml.p3.2xlarge"
+	InstanceTypeMlP38xlarge    InstanceType = "ml.p3.8xlarge"
+	InstanceTypeMlP316xlarge   InstanceType = "ml.p3.16xlarge"
+	InstanceTypeMlP3dn24xlarge InstanceType = "ml.p3dn.24xlarge"
+	InstanceTypeMlP4d24xlarge  InstanceType = "ml.p4d.24xlarge"
+	InstanceTypeMlG4dnXlarge   InstanceType = "ml.g4dn.xlarge"
+	InstanceTypeMlG4dn2xlarge  InstanceType = "ml.g4dn.2xlarge"
+	InstanceTypeMlG4dn4xlarge  InstanceType = "ml.g4dn.4xlarge"
+	InstanceTypeMlG4dn8xlarge  InstanceType = "ml.g4dn.8xlarge"
+	InstanceTypeMlG4dn12xlarge InstanceType = "ml.g4dn.12xlarge"
+	InstanceTypeMlG4dn16xlarge InstanceType = "ml.g4dn.16xlarge"
+	InstanceTypeMlG6Xlarge     InstanceType = "ml.g6.xlarge"
+	InstanceTypeMlG62xlarge    InstanceType = "ml.g6.2xlarge"
+	InstanceTypeMlG64xlarge    InstanceType = "ml.g6.4xlarge"
+	InstanceTypeMlG68xlarge    InstanceType = "ml.g6.8xlarge"
+	InstanceTypeMlG612xlarge   InstanceType = "ml.g6.12xlarge"
+	InstanceTypeMlG616xlarge   InstanceType = "ml.g6.16xlarge"
+	InstanceTypeMlG624xlarge   InstanceType = "ml.g6.24xlarge"
+	InstanceTypeMlG648xlarge   InstanceType = "ml.g6.48xlarge"
+	InstanceTypeMlG6eXlarge    InstanceType = "ml.g6e.xlarge"
+	InstanceTypeMlG6e2xlarge   InstanceType = "ml.g6e.2xlarge"
+	InstanceTypeMlG6e4xlarge   InstanceType = "ml.g6e.4xlarge"
+	InstanceTypeMlG6e8xlarge   InstanceType = "ml.g6e.8xlarge"
+	InstanceTypeMlG6e12xlarge  InstanceType = "ml.g6e.12xlarge"
+	InstanceTypeMlG6e16xlarge  InstanceType = "ml.g6e.16xlarge"
+	InstanceTypeMlG6e24xlarge  InstanceType = "ml.g6e.24xlarge"
+	InstanceTypeMlG6e48xlarge  InstanceType = "ml.g6e.48xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
@@ -186,17 +205,14 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceType) Values() []InstanceType {
 	return []InstanceType{
+		"ml.t3.large",
+		"ml.t3.xlarge",
+		"ml.t3.2xlarge",
 		"ml.m4.xlarge",
 		"ml.m4.2xlarge",
 		"ml.m4.4xlarge",
 		"ml.m4.10xlarge",
 		"ml.m4.16xlarge",
-		"ml.g4dn.xlarge",
-		"ml.g4dn.2xlarge",
-		"ml.g4dn.4xlarge",
-		"ml.g4dn.8xlarge",
-		"ml.g4dn.12xlarge",
-		"ml.g4dn.16xlarge",
 		"ml.m5.large",
 		"ml.m5.xlarge",
 		"ml.m5.2xlarge",
@@ -207,14 +223,6 @@ func (InstanceType) Values() []InstanceType {
 		"ml.c4.2xlarge",
 		"ml.c4.4xlarge",
 		"ml.c4.8xlarge",
-		"ml.p2.xlarge",
-		"ml.p2.8xlarge",
-		"ml.p2.16xlarge",
-		"ml.p3.2xlarge",
-		"ml.p3.8xlarge",
-		"ml.p3.16xlarge",
-		"ml.p3dn.24xlarge",
-		"ml.p4d.24xlarge",
 		"ml.c5.xlarge",
 		"ml.c5.2xlarge",
 		"ml.c5.4xlarge",
@@ -225,6 +233,36 @@ func (InstanceType) Values() []InstanceType {
 		"ml.c5n.4xlarge",
 		"ml.c5n.9xlarge",
 		"ml.c5n.18xlarge",
+		"ml.p2.xlarge",
+		"ml.p2.8xlarge",
+		"ml.p2.16xlarge",
+		"ml.p3.2xlarge",
+		"ml.p3.8xlarge",
+		"ml.p3.16xlarge",
+		"ml.p3dn.24xlarge",
+		"ml.p4d.24xlarge",
+		"ml.g4dn.xlarge",
+		"ml.g4dn.2xlarge",
+		"ml.g4dn.4xlarge",
+		"ml.g4dn.8xlarge",
+		"ml.g4dn.12xlarge",
+		"ml.g4dn.16xlarge",
+		"ml.g6.xlarge",
+		"ml.g6.2xlarge",
+		"ml.g6.4xlarge",
+		"ml.g6.8xlarge",
+		"ml.g6.12xlarge",
+		"ml.g6.16xlarge",
+		"ml.g6.24xlarge",
+		"ml.g6.48xlarge",
+		"ml.g6e.xlarge",
+		"ml.g6e.2xlarge",
+		"ml.g6e.4xlarge",
+		"ml.g6e.8xlarge",
+		"ml.g6e.12xlarge",
+		"ml.g6e.16xlarge",
+		"ml.g6e.24xlarge",
+		"ml.g6e.48xlarge",
 	}
 }
 

@@ -35,12 +35,13 @@ type UpdateDashboardInput struct {
 	// This member is required.
 	Arn *string
 
-	// The new description for the dashboard. If not specified, the existing
-	// description is retained.
-	Description *string
-
-	// The new name for the dashboard. If not specified, the existing name is retained.
+	// The new name for the dashboard.
+	//
+	// This member is required.
 	Name *string
+
+	// The new description for the dashboard.
+	Description *string
 
 	// The updated array of widget configurations for the dashboard. Replaces all
 	// existing widgets.
@@ -96,7 +97,7 @@ func (c *Client) addOperationUpdateDashboardMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -118,9 +119,6 @@ func (c *Client) addOperationUpdateDashboardMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

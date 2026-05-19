@@ -27,6 +27,7 @@ func (c *Client) ListSessionsForWorker(ctx context.Context, params *ListSessions
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListSessionsForWorkerInput struct {
 
 	// The farm ID for the session.
@@ -54,6 +55,7 @@ type ListSessionsForWorkerInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListSessionsForWorkerOutput struct {
 
 	// The sessions in the response.
@@ -104,7 +106,7 @@ func (c *Client) addOperationListSessionsForWorkerMiddlewares(stack *middleware.
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -126,9 +128,6 @@ func (c *Client) addOperationListSessionsForWorkerMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

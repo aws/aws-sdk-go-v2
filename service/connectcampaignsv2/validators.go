@@ -90,6 +90,26 @@ func (m *validateOpDeleteCampaignCommunicationTime) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteCampaignEntryLimits struct {
+}
+
+func (*validateOpDeleteCampaignEntryLimits) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCampaignEntryLimits) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCampaignEntryLimitsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCampaignEntryLimitsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteCampaign struct {
 }
 
@@ -630,6 +650,26 @@ func (m *validateOpUpdateCampaignCommunicationTime) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateCampaignEntryLimits struct {
+}
+
+func (*validateOpUpdateCampaignEntryLimits) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCampaignEntryLimits) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCampaignEntryLimitsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCampaignEntryLimitsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCampaignFlowAssociation struct {
 }
 
@@ -724,6 +764,10 @@ func addOpDeleteCampaignCommunicationLimitsValidationMiddleware(stack *middlewar
 
 func addOpDeleteCampaignCommunicationTimeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteCampaignCommunicationTime{}, middleware.After)
+}
+
+func addOpDeleteCampaignEntryLimitsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCampaignEntryLimits{}, middleware.After)
 }
 
 func addOpDeleteCampaignValidationMiddleware(stack *middleware.Stack) error {
@@ -832,6 +876,10 @@ func addOpUpdateCampaignCommunicationLimitsValidationMiddleware(stack *middlewar
 
 func addOpUpdateCampaignCommunicationTimeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCampaignCommunicationTime{}, middleware.After)
+}
+
+func addOpUpdateCampaignEntryLimitsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCampaignEntryLimits{}, middleware.After)
 }
 
 func addOpUpdateCampaignFlowAssociationValidationMiddleware(stack *middleware.Stack) error {
@@ -1170,6 +1218,24 @@ func validateEncryptionConfig(v *types.EncryptionConfig) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "EncryptionConfig"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEntryLimitsConfig(v *types.EntryLimitsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EntryLimitsConfig"}
+	if v.MaxEntryCount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MaxEntryCount"))
+	}
+	if v.MinEntryInterval == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MinEntryInterval"))
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1859,6 +1925,11 @@ func validateOpCreateCampaignInput(v *CreateCampaignInput) error {
 			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.EntryLimitsConfig != nil {
+		if err := validateEntryLimitsConfig(v.EntryLimitsConfig); err != nil {
+			invalidParams.AddNested("EntryLimitsConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.CommunicationTimeConfig != nil {
 		if err := validateCommunicationTimeConfig(v.CommunicationTimeConfig); err != nil {
 			invalidParams.AddNested("CommunicationTimeConfig", err.(smithy.InvalidParamsError))
@@ -1922,6 +1993,21 @@ func validateOpDeleteCampaignCommunicationTimeInput(v *DeleteCampaignCommunicati
 	}
 	if len(v.Config) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Config"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCampaignEntryLimitsInput(v *DeleteCampaignEntryLimitsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCampaignEntryLimitsInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2397,6 +2483,28 @@ func validateOpUpdateCampaignCommunicationTimeInput(v *UpdateCampaignCommunicati
 	} else if v.CommunicationTimeConfig != nil {
 		if err := validateCommunicationTimeConfig(v.CommunicationTimeConfig); err != nil {
 			invalidParams.AddNested("CommunicationTimeConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCampaignEntryLimitsInput(v *UpdateCampaignEntryLimitsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCampaignEntryLimitsInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.EntryLimitsConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntryLimitsConfig"))
+	} else if v.EntryLimitsConfig != nil {
+		if err := validateEntryLimitsConfig(v.EntryLimitsConfig); err != nil {
+			invalidParams.AddNested("EntryLimitsConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

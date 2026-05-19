@@ -117,6 +117,9 @@ type DescribeModelPackageOutput struct {
 	// The last time that the model package was modified.
 	LastModifiedTime *time.Time
 
+	// The storage type of the model package.
+	ManagedStorageType types.ManagedStorageType
+
 	// Metadata properties of the tracking entity, trial, or trial component.
 	MetadataProperties *types.MetadataProperties
 
@@ -219,7 +222,7 @@ func (c *Client) addOperationDescribeModelPackageMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -241,9 +244,6 @@ func (c *Client) addOperationDescribeModelPackageMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

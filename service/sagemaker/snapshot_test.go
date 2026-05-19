@@ -182,6 +182,42 @@ func TestCheckSnapshot_CreateAction(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAIBenchmarkJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAIBenchmarkJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAIBenchmarkJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAIRecommendationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAIRecommendationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAIRecommendationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_CreateAIWorkloadConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAIWorkloadConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAIWorkloadConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAlgorithm(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAlgorithm(context.Background(), nil, func(o *Options) {
@@ -998,6 +1034,42 @@ func TestCheckSnapshot_DeleteAction(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteAIBenchmarkJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAIBenchmarkJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAIBenchmarkJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAIRecommendationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAIRecommendationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAIRecommendationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAIWorkloadConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAIWorkloadConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAIWorkloadConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteAlgorithm(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAlgorithm(context.Background(), nil, func(o *Options) {
@@ -1699,6 +1771,42 @@ func TestCheckSnapshot_DescribeAction(t *testing.T) {
 	_, err := svc.DescribeAction(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeAIBenchmarkJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAIBenchmarkJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAIBenchmarkJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeAIRecommendationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAIRecommendationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAIRecommendationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeAIWorkloadConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAIWorkloadConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAIWorkloadConfig")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2695,6 +2803,42 @@ func TestCheckSnapshot_ListActions(t *testing.T) {
 	_, err := svc.ListActions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListActions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAIBenchmarkJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAIBenchmarkJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAIBenchmarkJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAIRecommendationJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAIRecommendationJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAIRecommendationJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAIWorkloadConfigs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAIWorkloadConfigs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAIWorkloadConfigs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3818,6 +3962,18 @@ func TestCheckSnapshot_SendPipelineExecutionStepSuccess(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartClusterHealthCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartClusterHealthCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartClusterHealthCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StartEdgeDeploymentStage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartEdgeDeploymentStage(context.Background(), nil, func(o *Options) {
@@ -3895,6 +4051,30 @@ func TestCheckSnapshot_StartSession(t *testing.T) {
 	_, err := svc.StartSession(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopAIBenchmarkJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopAIBenchmarkJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopAIBenchmarkJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StopAIRecommendationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopAIRecommendationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StopAIRecommendationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4753,6 +4933,42 @@ func TestUpdateSnapshot_CreateAction(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateAIBenchmarkJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAIBenchmarkJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAIBenchmarkJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAIRecommendationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAIRecommendationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAIRecommendationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateAIWorkloadConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAIWorkloadConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAIWorkloadConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateAlgorithm(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAlgorithm(context.Background(), nil, func(o *Options) {
@@ -5569,6 +5785,42 @@ func TestUpdateSnapshot_DeleteAction(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteAIBenchmarkJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAIBenchmarkJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAIBenchmarkJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAIRecommendationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAIRecommendationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAIRecommendationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAIWorkloadConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAIWorkloadConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAIWorkloadConfig")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteAlgorithm(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteAlgorithm(context.Background(), nil, func(o *Options) {
@@ -6270,6 +6522,42 @@ func TestUpdateSnapshot_DescribeAction(t *testing.T) {
 	_, err := svc.DescribeAction(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeAction")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAIBenchmarkJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAIBenchmarkJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAIBenchmarkJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAIRecommendationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAIRecommendationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAIRecommendationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeAIWorkloadConfig(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAIWorkloadConfig(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAIWorkloadConfig")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -7266,6 +7554,42 @@ func TestUpdateSnapshot_ListActions(t *testing.T) {
 	_, err := svc.ListActions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListActions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAIBenchmarkJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAIBenchmarkJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAIBenchmarkJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAIRecommendationJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAIRecommendationJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAIRecommendationJobs")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAIWorkloadConfigs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAIWorkloadConfigs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAIWorkloadConfigs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -8389,6 +8713,18 @@ func TestUpdateSnapshot_SendPipelineExecutionStepSuccess(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartClusterHealthCheck(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartClusterHealthCheck(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartClusterHealthCheck")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StartEdgeDeploymentStage(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StartEdgeDeploymentStage(context.Background(), nil, func(o *Options) {
@@ -8466,6 +8802,30 @@ func TestUpdateSnapshot_StartSession(t *testing.T) {
 	_, err := svc.StartSession(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopAIBenchmarkJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopAIBenchmarkJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopAIBenchmarkJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StopAIRecommendationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StopAIRecommendationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StopAIRecommendationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

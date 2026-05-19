@@ -13,19 +13,19 @@ import (
 
 //	Initiates real-time message streaming for a new chat contact.
 //
-// For more information about message streaming, see [Enable real-time chat message streaming] in the Amazon Connect
+// For more information about message streaming, see [Enable real-time chat message streaming] in the Connect Customer
 // Administrator Guide.
 //
-// For more information about chat, see the following topics in the Amazon Connect
-// Administrator Guide:
+// For more information about chat, see the following topics in the Connect
+// Customer Administrator Guide:
 //
-// [Concepts: Web and mobile messaging capabilities in Amazon Connect]
+// [Concepts: Web and mobile messaging capabilities in Connect Customer]
 //
-// [Amazon Connect Chat security best practices]
+// [Connect Customer Chat security best practices]
 //
 // [Enable real-time chat message streaming]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-message-streaming.html
-// [Concepts: Web and mobile messaging capabilities in Amazon Connect]: https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html
-// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
+// [Concepts: Web and mobile messaging capabilities in Connect Customer]: https://docs.aws.amazon.com/connect/latest/adminguide/web-and-mobile-chat.html
+// [Connect Customer Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) StartContactStreaming(ctx context.Context, params *StartContactStreamingInput, optFns ...func(*Options)) (*StartContactStreamingOutput, error) {
 	if params == nil {
 		params = &StartContactStreamingInput{}
@@ -63,8 +63,8 @@ type StartContactStreamingInput struct {
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -121,7 +121,7 @@ func (c *Client) addOperationStartContactStreamingMiddlewares(stack *middleware.
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -143,9 +143,6 @@ func (c *Client) addOperationStartContactStreamingMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

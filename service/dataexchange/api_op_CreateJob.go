@@ -40,6 +40,10 @@ type CreateJobInput struct {
 	// This member is required.
 	Type types.Type
 
+	// The configuration for the asset, including tags to be applied to assets created
+	// by the job.
+	AssetConfiguration *types.AssetConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -47,6 +51,10 @@ type CreateJobOutput struct {
 
 	// The ARN for the job.
 	Arn *string
+
+	// The configuration for the asset, including tags applied to assets created by
+	// the job.
+	AssetConfiguration *types.AssetConfiguration
 
 	// The date and time that the job was created, in ISO 8601 format.
 	CreatedAt *time.Time
@@ -109,7 +117,7 @@ func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, optio
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -131,9 +139,6 @@ func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

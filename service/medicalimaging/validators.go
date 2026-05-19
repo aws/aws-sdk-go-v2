@@ -480,6 +480,60 @@ func validateCopySourceImageSetInformation(v *types.CopySourceImageSetInformatio
 	}
 }
 
+func validateDicomJsonMetadataImportConfiguration(v *types.DicomJsonMetadataImportConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DicomJsonMetadataImportConfiguration"}
+	if v.DicomMetadataMappings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DicomMetadataMappings"))
+	} else if v.DicomMetadataMappings != nil {
+		if err := validateDicomMetadataMappings(v.DicomMetadataMappings); err != nil {
+			invalidParams.AddNested("DicomMetadataMappings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDicomMetadataMapping(v *types.DicomMetadataMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DicomMetadataMapping"}
+	if v.StudyInstanceUID == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StudyInstanceUID"))
+	}
+	if v.MetadataFilePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataFilePath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDicomMetadataMappings(v []types.DicomMetadataMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DicomMetadataMappings"}
+	for i := range v {
+		if err := validateDicomMetadataMapping(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDICOMStudyDateAndTime(v *types.DICOMStudyDateAndTime) error {
 	if v == nil {
 		return nil
@@ -502,6 +556,25 @@ func validateImageFrameInformation(v *types.ImageFrameInformation) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ImageFrameInformation"}
 	if v.ImageFrameId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ImageFrameId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateImportConfiguration(v types.ImportConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportConfiguration"}
+	switch uv := v.(type) {
+	case *types.ImportConfigurationMemberDicomJsonMetadataImportConfiguration:
+		if err := validateDicomJsonMetadataImportConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[dicomJsonMetadataImportConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -894,6 +967,11 @@ func validateOpStartDICOMImportJobInput(v *StartDICOMImportJobInput) error {
 	}
 	if v.OutputS3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OutputS3Uri"))
+	}
+	if v.ImportConfiguration != nil {
+		if err := validateImportConfiguration(v.ImportConfiguration); err != nil {
+			invalidParams.AddNested("ImportConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

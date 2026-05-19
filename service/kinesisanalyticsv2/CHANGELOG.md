@@ -1,3 +1,22 @@
+# v1.37.2 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.37.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.37.0 (2026-03-31)
+
+* **Feature**: Support for Flink 2.2 in Managed Service for Apache Flink
+
+# v1.36.24 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.36.23 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

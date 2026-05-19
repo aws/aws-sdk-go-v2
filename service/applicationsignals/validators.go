@@ -651,6 +651,25 @@ func validateCanaryEntity(v *types.CanaryEntity) error {
 	}
 }
 
+func validateCompositeSliConfig(v *types.CompositeSliConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CompositeSliConfig"}
+	if v.SelectionConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SelectionConfig"))
+	} else if v.SelectionConfig != nil {
+		if err := validateSelectionConfig(v.SelectionConfig); err != nil {
+			invalidParams.AddNested("SelectionConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDependencyConfig(v *types.DependencyConfig) error {
 	if v == nil {
 		return nil
@@ -872,6 +891,21 @@ func validateMetricDataQuery(v *types.MetricDataQuery) error {
 	}
 }
 
+func validateMetricSource(v *types.MetricSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricSource"}
+	if v.MetricSourceKeyAttributes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricSourceKeyAttributes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetricStat(v *types.MetricStat) error {
 	if v == nil {
 		return nil
@@ -975,6 +1009,16 @@ func validateRequestBasedServiceLevelIndicatorMetricConfig(v *types.RequestBased
 			invalidParams.AddNested("DependencyConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MetricSource != nil {
+		if err := validateMetricSource(v.MetricSource); err != nil {
+			invalidParams.AddNested("MetricSource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CompositeSliConfig != nil {
+		if err := validateCompositeSliConfig(v.CompositeSliConfig); err != nil {
+			invalidParams.AddNested("CompositeSliConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1000,6 +1044,21 @@ func validateRollingInterval(v *types.RollingInterval) error {
 	}
 }
 
+func validateSelectionConfig(v *types.SelectionConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SelectionConfig"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateServiceLevelIndicatorConfig(v *types.ServiceLevelIndicatorConfig) error {
 	if v == nil {
 		return nil
@@ -1011,12 +1070,6 @@ func validateServiceLevelIndicatorConfig(v *types.ServiceLevelIndicatorConfig) e
 		if err := validateServiceLevelIndicatorMetricConfig(v.SliMetricConfig); err != nil {
 			invalidParams.AddNested("SliMetricConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if v.MetricThreshold == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MetricThreshold"))
-	}
-	if len(v.ComparisonOperator) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("ComparisonOperator"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1030,6 +1083,11 @@ func validateServiceLevelIndicatorMetricConfig(v *types.ServiceLevelIndicatorMet
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ServiceLevelIndicatorMetricConfig"}
+	if v.MetricSource != nil {
+		if err := validateMetricSource(v.MetricSource); err != nil {
+			invalidParams.AddNested("MetricSource", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.MetricDataQueries != nil {
 		if err := validateMetricDataQueries(v.MetricDataQueries); err != nil {
 			invalidParams.AddNested("MetricDataQueries", err.(smithy.InvalidParamsError))
@@ -1038,6 +1096,11 @@ func validateServiceLevelIndicatorMetricConfig(v *types.ServiceLevelIndicatorMet
 	if v.DependencyConfig != nil {
 		if err := validateDependencyConfig(v.DependencyConfig); err != nil {
 			invalidParams.AddNested("DependencyConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CompositeSliConfig != nil {
+		if err := validateCompositeSliConfig(v.CompositeSliConfig); err != nil {
+			invalidParams.AddNested("CompositeSliConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1345,6 +1408,11 @@ func validateOpListServiceLevelObjectivesInput(v *ListServiceLevelObjectivesInpu
 	if v.DependencyConfig != nil {
 		if err := validateDependencyConfig(v.DependencyConfig); err != nil {
 			invalidParams.AddNested("DependencyConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetricSource != nil {
+		if err := validateMetricSource(v.MetricSource); err != nil {
+			invalidParams.AddNested("MetricSource", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

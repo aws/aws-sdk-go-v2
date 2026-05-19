@@ -332,6 +332,25 @@ func (InitiatedBy) Values() []InitiatedBy {
 	}
 }
 
+type InternetProtocol string
+
+// Enum values for InternetProtocol
+const (
+	InternetProtocolIpv4 InternetProtocol = "IPV4"
+	InternetProtocolIpv6 InternetProtocol = "IPV6"
+)
+
+// Values returns all known values for InternetProtocol. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (InternetProtocol) Values() []InternetProtocol {
+	return []InternetProtocol{
+		"IPV4",
+		"IPV6",
+	}
+}
+
 type JobLogEvent string
 
 // Enum values for JobLogEvent

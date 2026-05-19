@@ -147,6 +147,25 @@ func (GroupDefinitionType) Values() []GroupDefinitionType {
 	}
 }
 
+type HealthStatusCode string
+
+// Enum values for HealthStatusCode
+const (
+	HealthStatusCodeHealthy   HealthStatusCode = "HEALTHY"
+	HealthStatusCodeUnhealthy HealthStatusCode = "UNHEALTHY"
+)
+
+// Values returns all known values for HealthStatusCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HealthStatusCode) Values() []HealthStatusCode {
+	return []HealthStatusCode{
+		"HEALTHY",
+		"UNHEALTHY",
+	}
+}
+
 type MatchOption string
 
 // Enum values for MatchOption
@@ -212,6 +231,54 @@ func (MetricName) Values() []MetricName {
 		"Hour",
 		"Unit",
 		"Cost",
+	}
+}
+
+type ScheduleState string
+
+// Enum values for ScheduleState
+const (
+	ScheduleStateEnabled  ScheduleState = "ENABLED"
+	ScheduleStateDisabled ScheduleState = "DISABLED"
+)
+
+// Values returns all known values for ScheduleState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduleState) Values() []ScheduleState {
+	return []ScheduleState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type StatusReason string
+
+// Enum values for StatusReason
+const (
+	StatusReasonDataSourceAccessDenied               StatusReason = "DATA_SOURCE_ACCESS_DENIED"
+	StatusReasonExecutionRoleAssumeFailed            StatusReason = "EXECUTION_ROLE_ASSUME_FAILED"
+	StatusReasonExecutionRoleInsufficientPermissions StatusReason = "EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS"
+	StatusReasonDashboardNotFound                    StatusReason = "DASHBOARD_NOT_FOUND"
+	StatusReasonDashboardAccessDenied                StatusReason = "DASHBOARD_ACCESS_DENIED"
+	StatusReasonInternalFailure                      StatusReason = "INTERNAL_FAILURE"
+	StatusReasonWidgetIdNotFound                     StatusReason = "WIDGET_ID_NOT_FOUND"
+)
+
+// Values returns all known values for StatusReason. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StatusReason) Values() []StatusReason {
+	return []StatusReason{
+		"DATA_SOURCE_ACCESS_DENIED",
+		"EXECUTION_ROLE_ASSUME_FAILED",
+		"EXECUTION_ROLE_INSUFFICIENT_PERMISSIONS",
+		"DASHBOARD_NOT_FOUND",
+		"DASHBOARD_ACCESS_DENIED",
+		"INTERNAL_FAILURE",
+		"WIDGET_ID_NOT_FOUND",
 	}
 }
 

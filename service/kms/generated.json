@@ -33,6 +33,7 @@
         "api_op_GenerateDataKeyWithoutPlaintext.go",
         "api_op_GenerateMac.go",
         "api_op_GenerateRandom.go",
+        "api_op_GetKeyLastUsage.go",
         "api_op_GetKeyPolicy.go",
         "api_op_GetKeyRotationStatus.go",
         "api_op_GetParametersForImport.go",

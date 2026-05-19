@@ -1330,6 +1330,18 @@
                 "smithy.api#documentation": "<p>Represents an item in the catalog with its complete set of attributes and metadata.</p>"
             }
         },
+        "com.amazonaws.customerprofiles#ColumnNamesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#text"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#ComparisonOperator": {
             "type": "enum",
             "members": {
@@ -2873,6 +2885,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "RecommenderSchemaName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender schema to use for this recommender filter. If not specified, the default schema is used.</p>"
+                    }
+                },
                 "Description": {
                     "target": "com.amazonaws.customerprofiles#sensitiveText",
                     "traits": {
@@ -2949,6 +2967,12 @@
                         "smithy.api#documentation": "<p>The description of the domain object type.</p>"
                     }
                 },
+                "RecommenderSchemaName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender schema to use for this recommender. If not specified, the default schema is used.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.customerprofiles#TagMap",
                     "traits": {
@@ -2967,6 +2991,126 @@
                     "target": "com.amazonaws.customerprofiles#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the recommender</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateRecommenderSchema": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#CreateRecommenderSchemaRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#CreateRecommenderSchemaResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a recommender schema. A recommender schema defines the set of data columns available for training recommenders and filters under a domain.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/domains/{DomainName}/recommender-schemas/{RecommenderSchemaName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateRecommenderSchemaRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecommenderSchemaName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender schema. The name must be unique within the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderSchemaFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of dataset type to column definitions that specifies which data columns to include in the schema. Currently only the <code>_webAnalytics</code> key is supported.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.customerprofiles#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#CreateRecommenderSchemaResponse": {
+            "type": "structure",
+            "members": {
+                "RecommenderSchemaArn": {
+                    "target": "com.amazonaws.customerprofiles#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recommender schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecommenderSchemaName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderSchemaFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of dataset type to column definitions included in the schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the recommender schema was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderSchemaStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the recommender schema.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3058,6 +3202,12 @@
                     "target": "com.amazonaws.customerprofiles#sensitiveString1To50000",
                     "traits": {
                         "smithy.api#documentation": "<p>The segment SQL query.</p>"
+                    }
+                },
+                "SegmentSort": {
+                    "target": "com.amazonaws.customerprofiles#SegmentSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The segment sort.</p>"
                     }
                 },
                 "Tags": {
@@ -3406,7 +3556,7 @@
         "com.amazonaws.customerprofiles#CustomAttributes": {
             "type": "map",
             "key": {
-                "target": "com.amazonaws.customerprofiles#typeName"
+                "target": "com.amazonaws.customerprofiles#string1To255"
             },
             "value": {
                 "target": "com.amazonaws.customerprofiles#AttributeDimension"
@@ -3451,6 +3601,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#CreateRecommenderFilter"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#CreateRecommenderSchema"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#CreateSegmentDefinition"
@@ -3502,6 +3655,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#DeleteRecommenderFilter"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#DeleteRecommenderSchema"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#DeleteSegmentDefinition"
@@ -3565,6 +3721,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#GetRecommenderFilter"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#GetRecommenderSchema"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#GetSegmentDefinition"
@@ -3652,6 +3811,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListRecommenders"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ListRecommenderSchemas"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#ListRuleBasedMatches"
@@ -5526,6 +5688,71 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#DeleteRecommenderSchema": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#DeleteRecommenderSchemaRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#DeleteRecommenderSchemaResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a recommender schema from a domain.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/domains/{DomainName}/recommender-schemas/{RecommenderSchemaName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteRecommenderSchemaRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecommenderSchemaName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender schema to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#DeleteRecommenderSchemaResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#DeleteSegmentDefinition": {
             "type": "operation",
             "input": {
@@ -6110,7 +6337,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 5
+                    "max": 10
                 }
             }
         },
@@ -9143,6 +9370,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "RecommenderSchemaName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender schema associated with this recommender filter.</p>"
+                    }
+                },
                 "CreatedAt": {
                     "target": "com.amazonaws.customerprofiles#timestamp",
                     "traits": {
@@ -9238,6 +9471,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "RecommenderSchemaName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender schema associated with this recommender.</p>"
+                    }
+                },
                 "RecommenderConfig": {
                     "target": "com.amazonaws.customerprofiles#RecommenderConfig",
                     "traits": {
@@ -9290,6 +9529,101 @@
                     "target": "com.amazonaws.customerprofiles#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetRecommenderSchema": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#GetRecommenderSchemaRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#GetRecommenderSchemaResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a specific recommender schema in a domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/recommender-schemas/{RecommenderSchemaName}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetRecommenderSchemaRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "RecommenderSchemaName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender schema to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#GetRecommenderSchemaResponse": {
+            "type": "structure",
+            "members": {
+                "RecommenderSchemaName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderSchemaFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of dataset type to column definitions included in the schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of when the recommender schema was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderSchemaStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the recommender schema.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -9385,6 +9719,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The segment criteria associated with this definition.</p>",
                         "smithy.api#jsonName": "SegmentGroups"
+                    }
+                },
+                "SegmentSort": {
+                    "target": "com.amazonaws.customerprofiles#SegmentSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The segment sort.</p>",
+                        "smithy.api#jsonName": "SegmentSort"
                     }
                 },
                 "SegmentDefinitionArn": {
@@ -10541,6 +10882,21 @@
                     "traits": {
                         "smithy.api#enumValue": "NONE"
                     }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#IncludedColumns": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#ColumnNamesList"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
                 }
             }
         },
@@ -12865,6 +13221,97 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#ListRecommenderSchemas": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#ListRecommenderSchemasRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#ListRecommenderSchemasResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of recommender schemas in the specified domain.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/domains/{DomainName}/recommender-schemas",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "RecommenderSchemas",
+                    "pageSize": "MaxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListRecommenderSchemasRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.customerprofiles#maxSize100",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of recommender schemas to return in the response. The default value is 100.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token received from a previous ListRecommenderSchemas call to retrieve the next page of results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#ListRecommenderSchemasResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.customerprofiles#token",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token to retrieve the next page of results. Null if there are no more results to retrieve.</p>"
+                    }
+                },
+                "RecommenderSchemas": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderSchemaSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of recommender schemas and their properties in the specified domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.customerprofiles#ListRecommenders": {
             "type": "operation",
             "input": {
@@ -14006,7 +14453,7 @@
                 "Target": {
                     "target": "com.amazonaws.customerprofiles#text",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the data in the standard ProfileObject model. For example:\n         _profile.Address.PostalCode.</p>"
+                        "smithy.api#documentation": "<p>The location of the data in the standard ProfileObject model. For example:\n         _profile.Address.PostalCode. Do not include sensitive or personally identifiable information (PII) in the target field name.</p>"
                     }
                 },
                 "ContentType": {
@@ -15819,6 +16266,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration settings for how the recommender handles inference requests.</p>"
                     }
+                },
+                "IncludedColumns": {
+                    "target": "com.amazonaws.customerprofiles#IncludedColumns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of dataset type to a list of column names to train on. The column names must be a subset of the columns defined in the recommender schema. If not specified, all columns in the schema are used for training. The following columns are always included and do not need to be specified: <code>Item.Id</code>, <code>ItemList[].Id</code>, <code>EventTimestamp</code>, <code>EventType</code>, and <code>EventValue</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15881,7 +16334,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 1000
+                    "max": 3000
                 },
                 "smithy.api#sensitive": {}
             }
@@ -15948,6 +16401,12 @@
                     "target": "com.amazonaws.customerprofiles#RecommenderFilterName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the recommender filter.</p>"
+                    }
+                },
+                "RecommenderSchemaName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender schema associated with this recommender filter.</p>"
                     }
                 },
                 "RecommenderFilterExpression": {
@@ -16135,6 +16594,119 @@
                 "target": "com.amazonaws.customerprofiles#RecommenderRecipe"
             }
         },
+        "com.amazonaws.customerprofiles#RecommenderSchemaField": {
+            "type": "structure",
+            "members": {
+                "TargetFieldName": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the target field in the dataset, such as <code>Location.City</code> or <code>Attributes.MealTime</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.customerprofiles#ContentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the column value. Valid values are <code>String</code> and <code>Number</code>. The default value is <code>String</code>.</p>"
+                    }
+                },
+                "FeatureType": {
+                    "target": "com.amazonaws.customerprofiles#FeatureType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How the column is treated for model training. Valid values are <code>CATEGORICAL</code> and <code>TEXTUAL</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines a column in a recommender schema, including the target field name and optional feature and content type settings for training.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderSchemaFieldList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#RecommenderSchemaField"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 9
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderSchemaFields": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.customerprofiles#RecommenderSchemaFieldList"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderSchemaStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderSchemaSummary": {
+            "type": "structure",
+            "members": {
+                "RecommenderSchemaName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Fields": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderSchemaFields",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of dataset type to column definitions included in the schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.customerprofiles#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the recommender schema was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.customerprofiles#RecommenderSchemaStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current operational status of the recommender schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of a recommender schema's configuration and current state.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#RecommenderSchemaSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#RecommenderSchemaSummary"
+            }
+        },
         "com.amazonaws.customerprofiles#RecommenderStatus": {
             "type": "enum",
             "members": {
@@ -16201,6 +16773,12 @@
                     "target": "com.amazonaws.customerprofiles#RecommenderRecipeName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the recipe used by this recommender.</p>"
+                    }
+                },
+                "RecommenderSchemaName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the recommender schema associated with this recommender.</p>"
                     }
                 },
                 "RecommenderConfig": {
@@ -17170,6 +17748,63 @@
                 }
             }
         },
+        "com.amazonaws.customerprofiles#SegmentSort": {
+            "type": "structure",
+            "members": {
+                "Attributes": {
+                    "target": "com.amazonaws.customerprofiles#SortAttributeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of attributes used to sort the segments and their ordering preferences.</p>",
+                        "smithy.api#jsonName": "Attributes",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines how segments should be sorted and ordered in the results.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#SegmentSortDataType": {
+            "type": "enum",
+            "members": {
+                "STRING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING"
+                    }
+                },
+                "NUMBER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER"
+                    }
+                },
+                "DATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#SegmentSortOrder": {
+            "type": "enum",
+            "members": {
+                "ASC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ASC"
+                    }
+                },
+                "DESC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DESC"
+                    }
+                }
+            }
+        },
         "com.amazonaws.customerprofiles#SegmentType": {
             "type": "enum",
             "members": {
@@ -17331,6 +17966,74 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The properties that are applied when ServiceNow is being used as a source.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#SortAttribute": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.customerprofiles#fieldName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attribute to sort by.</p>",
+                        "smithy.api#jsonName": "Name",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DataType": {
+                    "target": "com.amazonaws.customerprofiles#SegmentSortDataType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data type of the sort attribute (e.g., string, number, date).</p>",
+                        "smithy.api#jsonName": "DataType"
+                    }
+                },
+                "Order": {
+                    "target": "com.amazonaws.customerprofiles#SegmentSortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sort order for the attribute (ascending or descending).</p>",
+                        "smithy.api#jsonName": "Order",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.customerprofiles#SortAttributeType",
+                    "traits": {
+                        "smithy.api#default": "PROFILE",
+                        "smithy.api#documentation": "<p>The type of attribute (e.g., profile, calculated).</p>",
+                        "smithy.api#jsonName": "Type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the characteristics and rules for sorting by a specific attribute.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#SortAttributeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#SortAttribute"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#SortAttributeType": {
+            "type": "enum",
+            "members": {
+                "PROFILE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROFILE"
+                    }
+                },
+                "CALCULATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CALCULATED"
+                    }
+                }
             }
         },
         "com.amazonaws.customerprofiles#SourceConnectorProperties": {
@@ -18320,6 +19023,48 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "similarity"
+                    }
+                },
+                "MEAN_RECIPROCAL_RANK_AT_25": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "mean_reciprocal_rank_at_25"
+                    }
+                },
+                "NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN_AT_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "normalized_discounted_cumulative_gain_at_5"
+                    }
+                },
+                "NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN_AT_10": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "normalized_discounted_cumulative_gain_at_10"
+                    }
+                },
+                "NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN_AT_25": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "normalized_discounted_cumulative_gain_at_25"
+                    }
+                },
+                "PRECISION_AT_5": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "precision_at_5"
+                    }
+                },
+                "PRECISION_AT_10": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "precision_at_10"
+                    }
+                },
+                "PRECISION_AT_25": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "precision_at_25"
                     }
                 }
             }

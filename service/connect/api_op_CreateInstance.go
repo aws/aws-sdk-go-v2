@@ -11,22 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
+// This API is in preview release for Connect Customer and is subject to change.
 //
-// Initiates an Amazon Connect instance with all the supported channels enabled.
+// Initiates an Connect Customer instance with all the supported channels enabled.
 // It does not attach any storage, such as Amazon Simple Storage Service (Amazon
 // S3) or Amazon Kinesis. It also does not allow for any configurations on
-// features, such as Contact Lens for Amazon Connect.
+// features, such as Contact Lens for Connect Customer.
 //
-// For more information, see [Create an Amazon Connect instance] in the Amazon Connect Administrator Guide.
+// For more information, see [Create an Connect Customer instance] in the Connect Customer Administrator Guide.
 //
-// Amazon Connect enforces a limit on the total number of instances that you can
+// Connect Customer enforces a limit on the total number of instances that you can
 // create or delete in 30 days. If you exceed this limit, you will get an error
 // message indicating there has been an excessive number of attempts at creating or
 // deleting instances. You must wait 30 days before you can restart creating and
 // deleting instances in your account.
 //
-// [Create an Amazon Connect instance]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instances.html
+// [Create an Connect Customer instance]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-instances.html
 func (c *Client) CreateInstance(ctx context.Context, params *CreateInstanceInput, optFns ...func(*Options)) (*CreateInstanceOutput, error) {
 	if params == nil {
 		params = &CreateInstanceInput{}
@@ -44,7 +44,7 @@ func (c *Client) CreateInstance(ctx context.Context, params *CreateInstanceInput
 
 type CreateInstanceInput struct {
 
-	// The type of identity management for your Amazon Connect users.
+	// The type of identity management for your Connect Customer users.
 	//
 	// This member is required.
 	IdentityManagementType types.DirectoryType
@@ -123,7 +123,7 @@ func (c *Client) addOperationCreateInstanceMiddlewares(stack *middleware.Stack, 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -145,9 +145,6 @@ func (c *Client) addOperationCreateInstanceMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

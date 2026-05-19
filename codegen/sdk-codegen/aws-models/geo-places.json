@@ -150,7 +150,7 @@
                 "Block": {
                     "target": "com.amazonaws.geoplaces#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the block. </p> <p>Example: <code>Sunny Mansion 203 block: 2 Chome</code> </p>",
+                        "smithy.api#documentation": "<p> Name of the block. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p> <p>Example: <code>Sunny Mansion 203 block: 2 Chome</code> </p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 200
@@ -160,7 +160,7 @@
                 "SubBlock": {
                     "target": "com.amazonaws.geoplaces#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of sub-block. </p> <p>Example: <code>Sunny Mansion 203 sub-block: 4</code> </p>",
+                        "smithy.api#documentation": "<p> Name of sub-block. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p> <p>Example: <code>Sunny Mansion 203 sub-block: 4</code> </p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 200
@@ -170,7 +170,7 @@
                 "Intersection": {
                     "target": "com.amazonaws.geoplaces#IntersectionStreetList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Name of the streets in the intersection. </p> <p>Example: <code>[\"Friedrichstraße\",\"Unter den Linden\"]</code> </p>"
+                        "smithy.api#documentation": "<p> Name of the streets in the intersection. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p> <p>Example: <code>[\"Friedrichstraße\",\"Unter den Linden\"]</code> </p>"
                     }
                 },
                 "Street": {
@@ -186,7 +186,7 @@
                 "StreetComponents": {
                     "target": "com.amazonaws.geoplaces#StreetComponentsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Components of the street. </p> <p>Example: Younge from the \"Younge street\".</p>"
+                        "smithy.api#documentation": "<p> Components of the street. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p> <p>Example: Yonge from \"Yonge street\".</p>"
                     }
                 },
                 "AddressNumber": {
@@ -202,7 +202,7 @@
                 "Building": {
                     "target": "com.amazonaws.geoplaces#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the building at the address.</p>",
+                        "smithy.api#documentation": "<p> The name of the building at the address. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 200
@@ -212,7 +212,7 @@
                 "SecondaryAddressComponents": {
                     "target": "com.amazonaws.geoplaces#SecondaryAddressComponentList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Components that correspond to secondary identifiers on an Address. Secondary address components include information such as Suite or Unit Number, Building, or Floor.</p> <note> <p>Coverage for <code>Address.SecondaryAddressComponents</code> is available in the following countries:</p> <p>AUS, CAN, NZL, USA, PRI</p> </note>"
+                        "smithy.api#documentation": "<p> Components that correspond to secondary identifiers on an Address. Secondary address components include information such as Suite or Unit Number, Building, or Floor. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p> <note> <p>Coverage for <code>Address.SecondaryAddressComponents</code> is available in the following countries:</p> <p>AUS, CAN, NZL, USA, PRI</p> </note>"
                     }
                 }
             },
@@ -421,7 +421,7 @@
                 "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p> <code>Autocomplete</code> completes potential places and addresses as the user types, based on the partial input. The API enhances the efficiency and accuracy of address by completing query based on a few entered keystrokes. It helps you by completing partial queries with valid address completion. Also, the API supports the filtering of results based on geographic location, country, or specific place types, and can be tailored using optional parameters like language and political views.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/autocomplete.html\">Autocomplete</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
-                    "uri": "/autocomplete",
+                    "uri": "/v2/autocomplete",
                     "method": "POST"
                 },
                 "smithy.api#readonly": {},
@@ -711,7 +711,7 @@
                 "IntendedUse": {
                     "target": "com.amazonaws.geoplaces#AutocompleteIntendedUse",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p>"
+                        "smithy.api#documentation": "<p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Currently, <code>Autocomplete</code> does not support storage of results. </p>"
                     }
                 },
                 "Key": {
@@ -1209,7 +1209,7 @@
                     "target": "com.amazonaws.geoplaces#DistanceMeters",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The radius, in meters, of the <code>FilterCircle</code>.</p>",
+                        "smithy.api#documentation": "<p> The radius, in meters, of the <code>FilterCircle</code>. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers,<code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only up to a maximum value of 300,000. </p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 21000000
@@ -1314,7 +1314,7 @@
                 "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p> <code>Geocode</code> converts a textual address or place into geographic coordinates. You can obtain geographic coordinates, address component, and other related information. It supports flexible queries, including free-form text or structured queries with components like street names, postal codes, and regions. The Geocode API can also provide additional features such as time zone information and the inclusion of political views.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/geocode.html\">Geocode</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
-                    "uri": "/geocode",
+                    "uri": "/v2/geocode",
                     "method": "POST"
                 },
                 "smithy.api#readonly": {},
@@ -1715,7 +1715,7 @@
                 "IntendedUse": {
                     "target": "com.amazonaws.geoplaces#GeocodeIntendedUse",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an Geocode query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href=\"https://aws.amazon.com/location/sla/\">user agreement</a> and <a href=\"https://aws.amazon.com/location/pricing/\">service pricing structure</a> to determine the correct setting for your use case.</p> </note>"
+                        "smithy.api#documentation": "<p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p> <note> <p>When storing <code>Geocode</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href=\"https://aws.amazon.com/location/sla/\">user agreement</a> and <a href=\"https://aws.amazon.com/location/pricing/\">service pricing structure</a> to determine the correct setting for your use case.</p> </note>"
                     }
                 },
                 "Key": {
@@ -1924,7 +1924,7 @@
                 "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p> <code>GetPlace</code> finds a place by its unique ID. A <code>PlaceId</code> is returned by other place operations.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/get-place.html\">GetPlace</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
-                    "uri": "/place/{PlaceId}",
+                    "uri": "/v2/place/{PlaceId}",
                     "method": "GET"
                 },
                 "smithy.api#readonly": {}
@@ -2004,28 +2004,28 @@
                 "AdditionalFeatures": {
                     "target": "com.amazonaws.geoplaces#GetPlaceAdditionalFeatureList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of optional additional parameters such as time zone that can be requested for each result.</p>",
+                        "smithy.api#documentation": "<p> A list of optional additional parameters such as time zone that can be requested for each result. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the <code>TimeZone</code> value. </p>",
                         "smithy.api#httpQuery": "additional-features"
                     }
                 },
                 "Language": {
                     "target": "com.amazonaws.geoplaces#LanguageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>",
+                        "smithy.api#documentation": "<p> A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>",
                         "smithy.api#httpQuery": "language"
                     }
                 },
                 "PoliticalView": {
                     "target": "com.amazonaws.geoplaces#CountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>",
+                        "smithy.api#documentation": "<p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>",
                         "smithy.api#httpQuery": "political-view"
                     }
                 },
                 "IntendedUse": {
                     "target": "com.amazonaws.geoplaces#GetPlaceIntendedUse",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an GetPlace query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href=\"https://aws.amazon.com/location/sla/\">user agreement</a> and <a href=\"https://aws.amazon.com/location/pricing/\">service pricing structure</a> to determine the correct setting for your use case.</p> </note>",
+                        "smithy.api#documentation": "<p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p> <note> <p>When storing <code>GetPlace</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href=\"https://aws.amazon.com/location/sla/\">user agreement</a> and <a href=\"https://aws.amazon.com/location/pricing/\">service pricing structure</a> to determine the correct setting for your use case.</p> </note>",
                         "smithy.api#httpQuery": "intended-use"
                     }
                 },
@@ -2090,13 +2090,13 @@
                 "AddressNumberCorrected": {
                     "target": "com.amazonaws.geoplaces#SensitiveBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boolean indicating if the address provided has been corrected.</p>"
+                        "smithy.api#documentation": "<p> Boolean indicating if the address provided has been corrected. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "PostalCodeDetails": {
                     "target": "com.amazonaws.geoplaces#PostalCodeDetailsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details about the postal code of the place/result. </p>"
+                        "smithy.api#documentation": "<p> Contains details about the postal code of the place/result. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "Position": {
@@ -2120,7 +2120,7 @@
                 "FoodTypes": {
                     "target": "com.amazonaws.geoplaces#FoodTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of food types offered by this result.</p>"
+                        "smithy.api#documentation": "<p> List of food types offered by this result. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "BusinessChains": {
@@ -2132,25 +2132,25 @@
                 "Contacts": {
                     "target": "com.amazonaws.geoplaces#Contacts",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of potential contact methods for the result/place.</p>"
+                        "smithy.api#documentation": "<p> List of potential contact methods for the result/place. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "OpeningHours": {
                     "target": "com.amazonaws.geoplaces#OpeningHoursList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of opening hours objects.</p>"
+                        "smithy.api#documentation": "<p> List of opening hours objects. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "AccessPoints": {
                     "target": "com.amazonaws.geoplaces#AccessPointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
+                        "smithy.api#documentation": "<p> Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude]. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "AccessRestrictions": {
                     "target": "com.amazonaws.geoplaces#AccessRestrictionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates known access restrictions on a vehicle access point. The index correlates to an access point and indicates if access through this point has some form of restriction.</p>"
+                        "smithy.api#documentation": "<p> Indicates known access restrictions on a vehicle access point. The index correlates to an access point and indicates if access through this point has some form of restriction. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "TimeZone": {
@@ -2162,25 +2162,25 @@
                 "PoliticalView": {
                     "target": "com.amazonaws.geoplaces#CountryCode3",
                     "traits": {
-                        "smithy.api#documentation": "<p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>"
+                        "smithy.api#documentation": "<p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "Phonemes": {
                     "target": "com.amazonaws.geoplaces#PhonemeDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>How the various components of the result's address are pronounced in various languages.</p>"
+                        "smithy.api#documentation": "<p> How the various components of the result's address are pronounced in various languages. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "MainAddress": {
                     "target": "com.amazonaws.geoplaces#RelatedPlace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The main address corresponding to a place of type Secondary Address.</p>"
+                        "smithy.api#documentation": "<p> The main address corresponding to a place of type Secondary Address. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "SecondaryAddresses": {
                     "target": "com.amazonaws.geoplaces#RelatedPlaceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>All secondary addresses that are associated with a main address. A secondary address is one that includes secondary designators, such as a Suite or Unit Number, Building, or Floor information.</p> <note> <p>Coverage for this functionality is available in the following countries: AUS, CAN, NZL, USA, PRI.</p> </note>"
+                        "smithy.api#documentation": "<p> All secondary addresses that are associated with a main address. A secondary address is one that includes secondary designators, such as a Suite or Unit Number, Building, or Floor information. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p> <note> <p>Coverage for this functionality is available in the following countries: AUS, CAN, NZL, USA, PRI.</p> </note>"
                     }
                 }
             },
@@ -2822,40 +2822,40 @@
                     "partitionSpecialCases": {
                         "aws": [
                             {
-                                "endpoint": "https://places.geo.{region}.{dnsSuffix}/v2"
+                                "endpoint": "https://places.geo.{region}.{dnsSuffix}"
                             },
                             {
-                                "endpoint": "https://places.geo-fips.{region}.{dualStackDnsSuffix}/v2",
+                                "endpoint": "https://places.geo-fips.{region}.{dualStackDnsSuffix}",
                                 "fips": true,
                                 "dualStack": true
                             },
                             {
-                                "endpoint": "https://places.geo-fips.{region}.{dnsSuffix}/v2",
+                                "endpoint": "https://places.geo-fips.{region}.{dnsSuffix}",
                                 "fips": true,
                                 "dualStack": false
                             },
                             {
-                                "endpoint": "https://places.geo.{region}.{dualStackDnsSuffix}/v2",
+                                "endpoint": "https://places.geo.{region}.{dualStackDnsSuffix}",
                                 "fips": false,
                                 "dualStack": true
                             }
                         ],
                         "aws-us-gov": [
                             {
-                                "endpoint": "https://places.geo.{region}.{dnsSuffix}/v2"
+                                "endpoint": "https://places.geo.{region}.{dnsSuffix}"
                             },
                             {
-                                "endpoint": "https://places.geo-fips.{region}.{dualStackDnsSuffix}/v2",
+                                "endpoint": "https://places.geo-fips.{region}.{dualStackDnsSuffix}",
                                 "fips": true,
                                 "dualStack": true
                             },
                             {
-                                "endpoint": "https://places.geo-fips.{region}.{dnsSuffix}/v2",
+                                "endpoint": "https://places.geo-fips.{region}.{dnsSuffix}",
                                 "fips": true,
                                 "dualStack": false
                             },
                             {
-                                "endpoint": "https://places.geo.{region}.{dualStackDnsSuffix}/v2",
+                                "endpoint": "https://places.geo.{region}.{dualStackDnsSuffix}",
                                 "fips": false,
                                 "dualStack": true
                             }
@@ -3030,7 +3030,7 @@
                                                         }
                                                     ],
                                                     "endpoint": {
-                                                        "url": "https://places.geo.{Region}.{PartitionResult#dnsSuffix}/v2",
+                                                        "url": "https://places.geo.{Region}.{PartitionResult#dnsSuffix}",
                                                         "properties": {},
                                                         "headers": {}
                                                     },
@@ -3073,7 +3073,7 @@
                                                         }
                                                     ],
                                                     "endpoint": {
-                                                        "url": "https://places.geo-fips.{Region}.{PartitionResult#dualStackDnsSuffix}/v2",
+                                                        "url": "https://places.geo-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
                                                         "properties": {},
                                                         "headers": {}
                                                     },
@@ -3116,7 +3116,7 @@
                                                         }
                                                     ],
                                                     "endpoint": {
-                                                        "url": "https://places.geo-fips.{Region}.{PartitionResult#dnsSuffix}/v2",
+                                                        "url": "https://places.geo-fips.{Region}.{PartitionResult#dnsSuffix}",
                                                         "properties": {},
                                                         "headers": {}
                                                     },
@@ -3159,7 +3159,7 @@
                                                         }
                                                     ],
                                                     "endpoint": {
-                                                        "url": "https://places.geo.{Region}.{PartitionResult#dualStackDnsSuffix}/v2",
+                                                        "url": "https://places.geo.{Region}.{PartitionResult#dualStackDnsSuffix}",
                                                         "properties": {},
                                                         "headers": {}
                                                     },
@@ -3202,7 +3202,7 @@
                                                         }
                                                     ],
                                                     "endpoint": {
-                                                        "url": "https://places.geo.{Region}.{PartitionResult#dnsSuffix}/v2",
+                                                        "url": "https://places.geo.{Region}.{PartitionResult#dnsSuffix}",
                                                         "properties": {},
                                                         "headers": {}
                                                     },
@@ -3245,7 +3245,7 @@
                                                         }
                                                     ],
                                                     "endpoint": {
-                                                        "url": "https://places.geo-fips.{Region}.{PartitionResult#dualStackDnsSuffix}/v2",
+                                                        "url": "https://places.geo-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
                                                         "properties": {},
                                                         "headers": {}
                                                     },
@@ -3288,7 +3288,7 @@
                                                         }
                                                     ],
                                                     "endpoint": {
-                                                        "url": "https://places.geo-fips.{Region}.{PartitionResult#dnsSuffix}/v2",
+                                                        "url": "https://places.geo-fips.{Region}.{PartitionResult#dnsSuffix}",
                                                         "properties": {},
                                                         "headers": {}
                                                     },
@@ -3331,7 +3331,7 @@
                                                         }
                                                     ],
                                                     "endpoint": {
-                                                        "url": "https://places.geo.{Region}.{PartitionResult#dualStackDnsSuffix}/v2",
+                                                        "url": "https://places.geo.{Region}.{PartitionResult#dualStackDnsSuffix}",
                                                         "properties": {},
                                                         "headers": {}
                                                     },
@@ -3599,7 +3599,7 @@
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://places.geo-fips.us-east-1.api.aws/v2"
+                                    "url": "https://places.geo-fips.us-east-1.api.aws"
                                 }
                             },
                             "params": {
@@ -3612,7 +3612,7 @@
                             "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://places.geo-fips.us-east-1.amazonaws.com/v2"
+                                    "url": "https://places.geo-fips.us-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
@@ -3625,7 +3625,7 @@
                             "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://places.geo.us-east-1.api.aws/v2"
+                                    "url": "https://places.geo.us-east-1.api.aws"
                                 }
                             },
                             "params": {
@@ -3638,7 +3638,7 @@
                             "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://places.geo.us-east-1.amazonaws.com/v2"
+                                    "url": "https://places.geo.us-east-1.amazonaws.com"
                                 }
                             },
                             "params": {
@@ -3833,7 +3833,7 @@
                             "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://places.geo-fips.us-gov-west-1.api.aws/v2"
+                                    "url": "https://places.geo-fips.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
@@ -3846,7 +3846,7 @@
                             "documentation": "For region us-gov-west-1 with FIPS enabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://places.geo-fips.us-gov-west-1.amazonaws.com/v2"
+                                    "url": "https://places.geo-fips.us-gov-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
@@ -3859,7 +3859,7 @@
                             "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack enabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://places.geo.us-gov-west-1.api.aws/v2"
+                                    "url": "https://places.geo.us-gov-west-1.api.aws"
                                 }
                             },
                             "params": {
@@ -3872,7 +3872,7 @@
                             "documentation": "For region us-gov-west-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
-                                    "url": "https://places.geo.us-gov-west-1.amazonaws.com/v2"
+                                    "url": "https://places.geo.us-gov-west-1.amazonaws.com"
                                 }
                             },
                             "params": {
@@ -4146,7 +4146,7 @@
                 "Code": {
                     "target": "com.amazonaws.geoplaces#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Abbreviated code for a the state, province or region of the country. </p> <p>Example: <code>BC</code>.</p>",
+                        "smithy.api#documentation": "<p> Abbreviated code for a the state, province or region of the country. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p> <p>Example: <code>BC</code>.</p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 3
@@ -4277,7 +4277,7 @@
                 "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p> <code>ReverseGeocode</code> converts geographic coordinates into a human-readable address or place. You can obtain address component, and other related information such as place type, category, street information. The Reverse Geocode API supports filtering to on place type so that you can refine result based on your need. Also, The Reverse Geocode API can also provide additional features such as time zone information and the inclusion of political views.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/reverse-geocode.html\">Reverse Geocode</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
-                    "uri": "/reverse-geocode",
+                    "uri": "/v2/reverse-geocode",
                     "method": "POST"
                 },
                 "smithy.api#readonly": {},
@@ -4339,7 +4339,7 @@
                 "IncludePlaceTypes": {
                     "target": "com.amazonaws.geoplaces#ReverseGeocodeFilterPlaceTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The included place types.</p>"
+                        "smithy.api#documentation": "<p> The included place types. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only <code>Street</code> and <code>PointAddress</code> values. </p>"
                     }
                 }
             },
@@ -4418,7 +4418,7 @@
                     "target": "com.amazonaws.geoplaces#DistanceMeters",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>The maximum distance in meters from the QueryPosition from which a result will be returned.</p>",
+                        "smithy.api#documentation": "<p> The maximum distance in meters from the QueryPosition from which a result will be returned. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only up to a maximum value of 100,000. </p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 21000000
@@ -4429,7 +4429,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 1</p>",
+                        "smithy.api#documentation": "<p> An optional limit for the number of results returned in a single call.</p> <p>Default value: 1</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -4445,25 +4445,25 @@
                 "AdditionalFeatures": {
                     "target": "com.amazonaws.geoplaces#ReverseGeocodeAdditionalFeatureList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of optional additional parameters, such as time zone that can be requested for each result.</p>"
+                        "smithy.api#documentation": "<p> A list of optional additional parameters, such as time zone that can be requested for each result. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the <code>TimeZone</code> value. </p>"
                     }
                 },
                 "Language": {
                     "target": "com.amazonaws.geoplaces#LanguageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
+                        "smithy.api#documentation": "<p> A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>"
                     }
                 },
                 "PoliticalView": {
                     "target": "com.amazonaws.geoplaces#CountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>"
+                        "smithy.api#documentation": "<p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "IntendedUse": {
                     "target": "com.amazonaws.geoplaces#ReverseGeocodeIntendedUse",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an ReverseGeocode query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href=\"https://aws.amazon.com/location/sla/\">user agreement</a> and <a href=\"https://aws.amazon.com/location/pricing/\">service pricing structure</a> to determine the correct setting for your use case.</p> </note>"
+                        "smithy.api#documentation": "<p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). </p> <note> <p>When storing <code>ReverseGeocode</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href=\"https://aws.amazon.com/location/sla/\">user agreement</a> and <a href=\"https://aws.amazon.com/location/pricing/\">service pricing structure</a> to determine the correct setting for your use case.</p> </note>"
                     }
                 },
                 "Key": {
@@ -4548,13 +4548,13 @@
                 "AddressNumberCorrected": {
                     "target": "com.amazonaws.geoplaces#SensitiveBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Boolean indicating if the address provided has been corrected.</p>"
+                        "smithy.api#documentation": "<p> Boolean indicating if the address provided has been corrected. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "PostalCodeDetails": {
                     "target": "com.amazonaws.geoplaces#PostalCodeDetailsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains details about the postal code of the place/result. </p>"
+                        "smithy.api#documentation": "<p> Contains details about the postal code of the place/result. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "Position": {
@@ -4585,13 +4585,13 @@
                 "FoodTypes": {
                     "target": "com.amazonaws.geoplaces#FoodTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of food types offered by this result.</p>"
+                        "smithy.api#documentation": "<p> List of food types offered by this result. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "AccessPoints": {
                     "target": "com.amazonaws.geoplaces#AccessPointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
+                        "smithy.api#documentation": "<p> Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude]. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "TimeZone": {
@@ -4603,13 +4603,13 @@
                 "PoliticalView": {
                     "target": "com.amazonaws.geoplaces#CountryCode3",
                     "traits": {
-                        "smithy.api#documentation": "<p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>"
+                        "smithy.api#documentation": "<p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "Intersections": {
                     "target": "com.amazonaws.geoplaces#IntersectionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>All Intersections that are near the provided address.</p>"
+                        "smithy.api#documentation": "<p> All Intersections that are near the provided address. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 }
             },
@@ -4655,7 +4655,7 @@
                 "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p> <code>SearchNearby</code> queries for points of interest within a radius from a central coordinates, returning place results with optional filters such as categories, business chains, food types and more. The API returns details such as a place name, address, phone, category, food type, contact, opening hours. Also, the API can return phonemes, time zones and more based on requested parameters.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/search-nearby.html\">Search Nearby</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
-                    "uri": "/search-nearby",
+                    "uri": "/v2/search-nearby",
                     "method": "POST"
                 },
                 "smithy.api#readonly": {},
@@ -4847,7 +4847,7 @@
                 "IntendedUse": {
                     "target": "com.amazonaws.geoplaces#SearchNearbyIntendedUse",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an SearchNearby query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href=\"https://aws.amazon.com/location/sla/\">user agreement</a> and <a href=\"https://aws.amazon.com/location/pricing/\">service pricing structure</a> to determine the correct setting for your use case.</p> </note>"
+                        "smithy.api#documentation": "<p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p> <note> <p>When storing <code>SearchNearby</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href=\"https://aws.amazon.com/location/sla/\">user agreement</a> and <a href=\"https://aws.amazon.com/location/pricing/\">service pricing structure</a> to determine the correct setting for your use case.</p> </note>"
                     }
                 },
                 "NextToken": {
@@ -5062,7 +5062,7 @@
                 "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p> <code>SearchText</code> searches for geocode and place information. You can then complete a follow-up query suggested from the <code>Suggest</code> API via a query id.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/search-text.html\">Search Text</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
-                    "uri": "/search-text",
+                    "uri": "/v2/search-text",
                     "method": "POST"
                 },
                 "smithy.api#readonly": {},
@@ -5179,7 +5179,7 @@
                 "QueryId": {
                     "target": "com.amazonaws.geoplaces#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The query Id returned by the suggest API. If passed in the request, the SearchText API will preform a SearchText query with the improved query terms for the original query made to the suggest API.</p> <note> <p>Exactly one of the following fields must be set: <code>QueryText</code> or <code>QueryId</code>.</p> </note>",
+                        "smithy.api#documentation": "<p>The query Id returned by the suggest API. If passed in the request, the SearchText API will preform a SearchText query with the improved query terms for the original query made to the suggest API. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers.</p> <note> <p>Exactly one of the following fields must be set: <code>QueryText</code> or <code>QueryId</code>.</p> </note>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 500
@@ -5212,25 +5212,25 @@
                 "AdditionalFeatures": {
                     "target": "com.amazonaws.geoplaces#SearchTextAdditionalFeatureList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of optional additional parameters, such as time zone, that can be requested for each result.</p>"
+                        "smithy.api#documentation": "<p>A list of optional additional parameters, such as time zone, that can be requested for each result. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the <code>TimeZone</code> value.</p>"
                     }
                 },
                 "Language": {
                     "target": "com.amazonaws.geoplaces#LanguageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>"
                     }
                 },
                 "PoliticalView": {
                     "target": "com.amazonaws.geoplaces#CountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>"
+                        "smithy.api#documentation": "<p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers.</p>"
                     }
                 },
                 "IntendedUse": {
                     "target": "com.amazonaws.geoplaces#SearchTextIntendedUse",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p> <note> <p>Storing the response of an SearchText query is required to comply with service terms, but charged at a higher cost per request. Please review the <a href=\"https://aws.amazon.com/location/sla/\">user agreement</a> and <a href=\"https://aws.amazon.com/location/pricing/\">service pricing structure</a> to determine the correct setting for your use case.</p> </note>"
+                        "smithy.api#documentation": "<p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). </p> <note> <p>When storing <code>SearchText</code> responses, you <i>must</i> set this field to <code>Storage</code> to comply with the terms of service. These requests will be charged at a higher rate. Please review the <a href=\"https://aws.amazon.com/location/sla/\">user agreement</a> and <a href=\"https://aws.amazon.com/location/pricing/\">service pricing structure</a> to determine the correct setting for your use case.</p> </note>"
                     }
                 },
                 "NextToken": {
@@ -5587,7 +5587,7 @@
                 "Code": {
                     "target": "com.amazonaws.geoplaces#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Abbreviated code for the county or sub-region.</p>",
+                        "smithy.api#documentation": "<p> Abbreviated code for the county or sub-region. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 3
@@ -5655,7 +5655,7 @@
                 "aws.api#dataPlane": {},
                 "smithy.api#documentation": "<p> <code>Suggest</code> provides intelligent predictions or recommendations based on the user's input or context, such as relevant places, points of interest, query terms or search category. It is designed to help users find places or point of interests candidates or identify a follow on query based on incomplete or misspelled queries. It returns a list of possible matches or refinements that can be used to formulate a more accurate query. Users can select the most appropriate suggestion and use it for further searching. The API provides options for filtering results by location and other attributes, and allows for additional features like phonemes and timezones. The response includes refined query terms and detailed place information.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/suggest.html\">Suggest</a> in the <i>Amazon Location Service Developer Guide</i>.</p>",
                 "smithy.api#http": {
-                    "uri": "/suggest",
+                    "uri": "/v2/suggest",
                     "method": "POST"
                 },
                 "smithy.api#readonly": {},
@@ -5838,25 +5838,25 @@
                 "FoodTypes": {
                     "target": "com.amazonaws.geoplaces#FoodTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of food types offered by this result.</p>"
+                        "smithy.api#documentation": "<p> List of food types offered by this result. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "BusinessChains": {
                     "target": "com.amazonaws.geoplaces#BusinessChainList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Business Chains associated with the place.</p>"
+                        "smithy.api#documentation": "<p> The Business Chains associated with the place. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "AccessPoints": {
                     "target": "com.amazonaws.geoplaces#AccessPointList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude].</p>"
+                        "smithy.api#documentation": "<p> Position of the access point in World Geodetic System (WGS 84) format: [longitude, latitude]. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "AccessRestrictions": {
                     "target": "com.amazonaws.geoplaces#AccessRestrictionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates known access restrictions on a vehicle access point. The index correlates to an access point and indicates if access through this point has some form of restriction.</p>"
+                        "smithy.api#documentation": "<p> Indicates known access restrictions on a vehicle access point. The index correlates to an access point and indicates if access through this point has some form of restriction. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "TimeZone": {
@@ -5868,13 +5868,13 @@
                 "PoliticalView": {
                     "target": "com.amazonaws.geoplaces#CountryCode3",
                     "traits": {
-                        "smithy.api#documentation": "<p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>"
+                        "smithy.api#documentation": "<p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "Phonemes": {
                     "target": "com.amazonaws.geoplaces#PhonemeDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>How the various components of the result's address are pronounced in various languages.</p>"
+                        "smithy.api#documentation": "<p> How the various components of the result's address are pronounced in various languages. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 }
             },
@@ -5888,7 +5888,7 @@
                 "QueryId": {
                     "target": "com.amazonaws.geoplaces#SensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "<p>QueryId can be used to complete a follow up query through the SearchText API. The QueryId retains context from the original Suggest request such as filters, political view and language. See the SearchText API documentation for more details <a href=\"https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_SearchText.html\">SearchText API docs</a>.</p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>",
+                        "smithy.api#documentation": "<p>QueryId can be used to complete a follow up query through the SearchText API. The QueryId retains context from the original Suggest request such as filters, political view and language. See the SearchText API documentation for more details <a href=\"https://docs.aws.amazon.com/location/latest/APIReference/API_geoplaces_SearchText.html\">SearchText API docs</a>. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p> <note> <p>The fields <code>QueryText</code>, and <code>QueryID</code> are mutually exclusive.</p> </note>",
                         "smithy.api#length": {
                             "min": 0,
                             "max": 500
@@ -5898,7 +5898,7 @@
                 "QueryType": {
                     "target": "com.amazonaws.geoplaces#QueryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The query type. Category queries will search for places which have an entry matching the given category, for example \"doctor office\". BusinessChain queries will search for instances of a given business.</p>"
+                        "smithy.api#documentation": "<p> The query type. Category queries will search for places which have an entry matching the given category, for example \"doctor office\". BusinessChain queries will search for instances of a given business. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 }
             },
@@ -5924,7 +5924,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>An optional limit for the number of results returned in a single call.</p> <p>Default value: 20</p>",
+                        "smithy.api#documentation": "<p> An optional limit for the number of results returned in a single call. </p> <p>Default value: 20</p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 100
@@ -5935,7 +5935,7 @@
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#default": null,
-                        "smithy.api#documentation": "<p>Maximum number of query terms to be returned for use with a search text query.</p>",
+                        "smithy.api#documentation": "<p> Maximum number of query terms to be returned for use with a search text query. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 10
@@ -5957,25 +5957,25 @@
                 "AdditionalFeatures": {
                     "target": "com.amazonaws.geoplaces#SuggestAdditionalFeatureList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of optional additional parameters, such as time zone, that can be requested for each result.</p>"
+                        "smithy.api#documentation": "<p> A list of optional additional parameters, such as time zone, that can be requested for each result. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the <code>Core</code> and <code>TimeZone</code> values. </p>"
                     }
                 },
                 "Language": {
                     "target": "com.amazonaws.geoplaces#LanguageTag",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry.</p>"
+                        "smithy.api#documentation": "<p> A list of <a href=\"https://en.wikipedia.org/wiki/IETF_language_tag\">BCP 47</a> compliant language codes for the results to be rendered in. If there is no data for the result in the requested language, data will be returned in the default language for the entry. For <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers, <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions support only the following codes: <code>en, id, km, lo, ms, my, pt, th, tl, vi, zh</code> </p>"
                     }
                 },
                 "PoliticalView": {
                     "target": "com.amazonaws.geoplaces#CountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country.</p>"
+                        "smithy.api#documentation": "<p> The alpha-2 or alpha-3 character code for the political view of a country. The political view applies to the results of the request to represent unresolved territorial claims through the point of view of the specified country. Not supported in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 },
                 "IntendedUse": {
                     "target": "com.amazonaws.geoplaces#SuggestIntendedUse",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates if the results will be stored. Defaults to <code>SingleUse</code>, if left empty.</p>"
+                        "smithy.api#documentation": "<p> Indicates if the query results will be persisted in customer infrastructure. Defaults to <code>SingleUse</code> (not stored). Currently, <code>Suggest</code> does not support storage of results. </p>"
                     }
                 },
                 "Key": {
@@ -6010,7 +6010,7 @@
                 "QueryRefinements": {
                     "target": "com.amazonaws.geoplaces#QueryRefinementList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of query terms to be returned for use with a search text query.</p>"
+                        "smithy.api#documentation": "<p> Maximum number of query terms to be returned for use with a search text query. Not available in <code>ap-southeast-1</code> and <code>ap-southeast-5</code> regions for <a href=\"https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html\">GrabMaps</a> customers. </p>"
                     }
                 }
             },

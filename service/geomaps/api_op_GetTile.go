@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// GetTile returns a tile. Map tiles are used by clients to render a map. they're
+// GetTile returns a tile. Map tiles are used by clients to render a map. They're
 // addressed using a grid arrangement with an X coordinate, Y coordinate, and Z
 // (zoom) level.
 //
@@ -35,14 +35,17 @@ func (c *Client) GetTile(ctx context.Context, params *GetTileInput, optFns ...fu
 
 type GetTileInput struct {
 
-	// Specifies the desired tile set.
+	// Specifies the desired tile set. For [GrabMaps] customers, ap-southeast-1 and
+	// ap-southeast-5 regions support only the vector.basemap value.
 	//
 	// Valid Values: raster.satellite | vector.basemap | vector.traffic | raster.dem
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	Tileset *string
 
-	// The X axis value for the map tile. Must be between 0 and 19.
+	// The X axis value for the map tile.
 	//
 	// This member is required.
 	X *string
@@ -58,7 +61,10 @@ type GetTileInput struct {
 	Z *string
 
 	// A list of optional additional parameters such as map styles that can be
-	// requested for each result.
+	// requested for each result. Not supported in ap-southeast-1 and ap-southeast-5
+	// regions for [GrabMaps]customers.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	AdditionalFeatures []types.TileAdditionalFeature
 
 	// Optional: The API key to be used for authorization. Either an API key or valid
@@ -128,7 +134,7 @@ func (c *Client) addOperationGetTileMiddlewares(stack *middleware.Stack, options
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -150,9 +156,6 @@ func (c *Client) addOperationGetTileMiddlewares(stack *middleware.Stack, options
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

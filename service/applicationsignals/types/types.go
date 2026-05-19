@@ -316,6 +316,45 @@ type ChangeEvent struct {
 	noSmithyDocumentSerde
 }
 
+// Identifies a single operation to include in a composite SLI for a service-level
+// SLO. Used as an element of the Components list in CompositeSliConfig .
+//
+// The following types satisfy this interface:
+//
+//	CompositeSliComponentMemberOperationName
+type CompositeSliComponent interface {
+	isCompositeSliComponent()
+}
+
+// The name of the operation to include in the composite SLI.
+type CompositeSliComponentMemberOperationName struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*CompositeSliComponentMemberOperationName) isCompositeSliComponent() {}
+
+// This structure contains the configuration for a composite service level
+// indicator (SLI) that aggregates metrics across multiple operations of a service
+// for service-level SLOs.
+type CompositeSliConfig struct {
+
+	// Specifies how operations are selected for this service-level SLO. Operations
+	// can be selected explicitly by listing them, by specifying a prefix to match
+	// operation names, or by providing a regular expression pattern.
+	//
+	// This member is required.
+	SelectionConfig *SelectionConfig
+
+	// The list of operations included in this composite SLI. You must specify between
+	// 2 and 20 components. Each component is a CompositeSliComponent that identifies
+	// a single operation by its OperationName .
+	Components []CompositeSliComponent
+
+	noSmithyDocumentSerde
+}
+
 // Identifies the dependency using the DependencyKeyAttributes and
 // DependencyOperationName .
 //
@@ -715,6 +754,21 @@ type MetricReference struct {
 	noSmithyDocumentSerde
 }
 
+// Identifies the metric source for SLOs on resources other than Application
+// Signals services.
+type MetricSource struct {
+
+	// Key attributes that identify the metric source.
+	//
+	// This member is required.
+	MetricSourceKeyAttributes map[string]string
+
+	// Additional attributes for the metric source.
+	MetricSourceAttributes map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // This structure defines the metric to be used as the service level indicator,
 // along with the statistics, period, and unit.
 type MetricStat struct {
@@ -900,6 +954,10 @@ type RequestBasedServiceLevelIndicatorMetric struct {
 	// This member is required.
 	TotalRequestCountMetric []MetricDataQuery
 
+	// The composite SLI configuration for service-level SLOs that monitor multiple
+	// operations of a service.
+	CompositeSliConfig *CompositeSliConfig
+
 	// Identifies the dependency using the DependencyKeyAttributes and
 	// DependencyOperationName .
 	DependencyConfig *DependencyConfig
@@ -922,6 +980,10 @@ type RequestBasedServiceLevelIndicatorMetric struct {
 	//   belongs to.
 	KeyAttributes map[string]string
 
+	// Identifies the metric source for SLOs on resources other than Application
+	// Signals services.
+	MetricSource *MetricSource
+
 	// If the SLO monitors either the LATENCY or AVAILABILITY metric that Application
 	// Signals collects, this field displays which of those metrics is used.
 	MetricType ServiceLevelIndicatorMetricType
@@ -936,6 +998,10 @@ type RequestBasedServiceLevelIndicatorMetric struct {
 // Use this structure to specify the information for the metric that a
 // period-based SLO will monitor.
 type RequestBasedServiceLevelIndicatorMetricConfig struct {
+
+	// The composite SLI configuration for service-level SLOs that monitor multiple
+	// operations of a service.
+	CompositeSliConfig *CompositeSliConfig
 
 	// Identifies the dependency using the DependencyKeyAttributes and
 	// DependencyOperationName .
@@ -961,6 +1027,14 @@ type RequestBasedServiceLevelIndicatorMetricConfig struct {
 	//   - Environment specifies the location where this object is hosted, or what it
 	//   belongs to.
 	KeyAttributes map[string]string
+
+	// The name of the metric for SLOs on resources other than Application Signals
+	// services.
+	MetricName *string
+
+	// Identifies the metric source for SLOs on resources other than Application
+	// Signals services.
+	MetricSource *MetricSource
 
 	// If the SLO is to monitor either the LATENCY or AVAILABILITY metric that
 	// Application Signals collects, use this field to specify which of those metrics
@@ -1000,6 +1074,33 @@ type RollingInterval struct {
 	//
 	// This member is required.
 	DurationUnit DurationUnit
+
+	noSmithyDocumentSerde
+}
+
+// Defines how operations are selected for a service-level SLO.
+type SelectionConfig struct {
+
+	// The strategy for selecting operations to include in a service-level SLO.
+	//
+	//   - EXPLICIT — You provide a specific list of operations in the Components field
+	//   of CompositeSliConfig .
+	//
+	//   - PREFIX — You provide a prefix string in the Pattern field of SelectionConfig
+	//   , and all operations whose names start with the prefix are included.
+	//
+	//   - REGEX — You provide a regular expression in the Pattern field of
+	//   SelectionConfig , and all operations whose names match the pattern are
+	//   included.
+	//
+	// This member is required.
+	Type SelectionType
+
+	// A prefix string or regular expression that specifies which operations to
+	// include in a service-level SLO. When SelectionType is PREFIX , this value is a
+	// prefix string that matches the beginning of operation names. When SelectionType
+	// is REGEX , this value is a regular expression that matches operation names.
+	Pattern *string
 
 	noSmithyDocumentSerde
 }
@@ -1262,23 +1363,23 @@ type ServiceLevelIndicator struct {
 // metric that a period-based SLO is to monitor.
 type ServiceLevelIndicatorConfig struct {
 
+	// Use this structure to specify the metric to be used for the SLO.
+	//
+	// This member is required.
+	SliMetricConfig *ServiceLevelIndicatorMetricConfig
+
 	// The arithmetic operation to use when comparing the specified metric to the
 	// threshold.
 	//
-	// This member is required.
+	// This is not required if CreateRecommendedSlo is set to true .
 	ComparisonOperator ServiceLevelIndicatorComparisonOperator
 
 	// This parameter is used only when a request-based SLO tracks the Latency metric.
 	// Specify the threshold value that the observed Latency metric values are to be
 	// compared to.
 	//
-	// This member is required.
+	// This is not required if CreateRecommendedSlo is set to true .
 	MetricThreshold *float64
-
-	// Use this structure to specify the metric to be used for the SLO.
-	//
-	// This member is required.
-	SliMetricConfig *ServiceLevelIndicatorMetricConfig
 
 	noSmithyDocumentSerde
 }
@@ -1293,6 +1394,10 @@ type ServiceLevelIndicatorMetric struct {
 	//
 	// This member is required.
 	MetricDataQueries []MetricDataQuery
+
+	// The composite SLI configuration for service-level SLOs that monitor multiple
+	// operations of a service.
+	CompositeSliConfig *CompositeSliConfig
 
 	// Identifies the dependency using the DependencyKeyAttributes and
 	// DependencyOperationName .
@@ -1316,6 +1421,10 @@ type ServiceLevelIndicatorMetric struct {
 	//   belongs to.
 	KeyAttributes map[string]string
 
+	// Identifies the metric source for SLOs on resources other than Application
+	// Signals services.
+	MetricSource *MetricSource
+
 	// If the SLO monitors either the LATENCY or AVAILABILITY metric that Application
 	// Signals collects, this field displays which of those metrics is used.
 	MetricType ServiceLevelIndicatorMetricType
@@ -1330,6 +1439,10 @@ type ServiceLevelIndicatorMetric struct {
 // Use this structure to specify the information for the metric that a
 // period-based SLO will monitor.
 type ServiceLevelIndicatorMetricConfig struct {
+
+	// The composite SLI configuration for service-level SLOs that monitor multiple
+	// operations of a service.
+	CompositeSliConfig *CompositeSliConfig
 
 	// Identifies the dependency using the DependencyKeyAttributes and
 	// DependencyOperationName .
@@ -1363,6 +1476,10 @@ type ServiceLevelIndicatorMetricConfig struct {
 	// The name of the CloudWatch metric to use for the SLO, when using a custom
 	// metric rather than Application Signals standard metrics.
 	MetricName *string
+
+	// Identifies the metric source for SLOs on resources other than Application
+	// Signals services.
+	MetricSource *MetricSource
 
 	// If the SLO is to monitor either the LATENCY or AVAILABILITY metric that
 	// Application Signals collects, use this field to specify which of those metrics
@@ -1426,6 +1543,10 @@ type ServiceLevelObjective struct {
 	// This member is required.
 	Name *string
 
+	// Indicates whether DevOps Agent will automatically investigate this SLO when it
+	// is breached
+	AutoInvestigationEnabled *bool
+
 	// Each object in this array defines the length of the look-back window used to
 	// calculate one burn rate metric for this SLO. The burn rate measures how fast the
 	// service is consuming the error budget, relative to the attainment goal of the
@@ -1444,7 +1565,13 @@ type ServiceLevelObjective struct {
 	//
 	//   - Service dependency
 	//
+	//   - Service
+	//
 	//   - CloudWatch metric
+	//
+	//   - AppMonitor
+	//
+	//   - Canary
 	MetricSourceType MetricSourceType
 
 	// A structure containing information about the performance metric that this SLO
@@ -1607,6 +1734,10 @@ type ServiceLevelObjectiveSummary struct {
 	// This member is required.
 	Name *string
 
+	// The composite SLI configuration for service-level SLOs that monitor multiple
+	// operations of a service.
+	CompositeSliConfig *CompositeSliConfig
+
 	// The date and time that this service level objective was created. It is
 	// expressed as the number of milliseconds since Jan 1, 1970 00:00:00 UTC.
 	CreatedTime *time.Time
@@ -1635,13 +1766,23 @@ type ServiceLevelObjectiveSummary struct {
 	//   belongs to.
 	KeyAttributes map[string]string
 
+	// Identifies the metric source for SLOs on resources other than Application
+	// Signals services.
+	MetricSource *MetricSource
+
 	// Displays the SLI metric source type for this SLO. Supported types are:
 	//
 	//   - Service operation
 	//
 	//   - Service dependency
 	//
+	//   - Service
+	//
 	//   - CloudWatch metric
+	//
+	//   - AppMonitor
+	//
+	//   - Canary
 	MetricSourceType MetricSourceType
 
 	// If this service level objective is specific to a single operation, this field
@@ -1846,5 +1987,6 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isAuditTargetEntity()                      {}
+func (*UnknownUnionMember) isCompositeSliComponent()                  {}
 func (*UnknownUnionMember) isInterval()                               {}
 func (*UnknownUnionMember) isMonitoredRequestCountMetricDataQueries() {}

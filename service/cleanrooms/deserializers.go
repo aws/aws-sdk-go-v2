@@ -26593,6 +26593,11 @@ func awsRestjson1_deserializeDocumentProtectedJobWorkerComputeConfiguration(v **
 				sv.Number = ptr.Int32(int32(i64))
 			}
 
+		case "properties":
+			if err := awsRestjson1_deserializeDocumentWorkerComputeConfigurationProperties(&sv.Properties, value); err != nil {
+				return err
+			}
+
 		case "type":
 			if value != nil {
 				jtv, ok := value.(string)

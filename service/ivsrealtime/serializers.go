@@ -206,6 +206,11 @@ func awsRestjson1_serializeOpDocumentCreateIngestConfigurationInput(v *CreateIng
 		ok.String(*v.Name)
 	}
 
+	if v.RedundantIngest {
+		ok := object.Key("redundantIngest")
+		ok.Boolean(v.RedundantIngest)
+	}
+
 	if v.StageArn != nil {
 		ok := object.Key("stageArn")
 		ok.String(*v.StageArn)
@@ -3427,6 +3432,11 @@ func awsRestjson1_serializeOpDocumentUpdateIngestConfigurationInput(v *UpdateIng
 	if v.Arn != nil {
 		ok := object.Key("arn")
 		ok.String(*v.Arn)
+	}
+
+	if v.RedundantIngest {
+		ok := object.Key("redundantIngest")
+		ok.Boolean(v.RedundantIngest)
 	}
 
 	if v.StageArn != nil {

@@ -1,3 +1,26 @@
+# v1.73.0 (2026-05-01)
+
+* **Feature**: AWS IoT HTTP rule actions now support cross-topic batching, combining messages from different MQTT topics into single HTTP requests.
+
+# v1.72.8 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.72.7 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.72.6 (2026-04-13)
+
+* No change notes available for this release.
+
+# v1.72.5 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.72.4 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

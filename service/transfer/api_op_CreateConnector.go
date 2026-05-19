@@ -81,6 +81,12 @@ type CreateConnectorInput struct {
 	// connectivity.
 	EgressConfig types.ConnectorEgressConfig
 
+	// Specifies the IP address type for the connector's network connections. When set
+	// to IPV4 , the connector uses IPv4 addresses only. When set to DUALSTACK , the
+	// connector supports both IPv4 and IPv6 addresses, with IPv6 preferred when
+	// available.
+	IpAddressType types.ConnectorsIpAddressType
+
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that allows a connector to turn on CloudWatch logging for Amazon S3 events. When
 	// set, you can view connector activity in your CloudWatch logs.
@@ -153,7 +159,7 @@ func (c *Client) addOperationCreateConnectorMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -175,9 +181,6 @@ func (c *Client) addOperationCreateConnectorMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

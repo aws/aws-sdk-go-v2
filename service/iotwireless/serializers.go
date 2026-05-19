@@ -4308,6 +4308,13 @@ func awsRestjson1_serializeOpDocumentGetPositionEstimateInput(v *GetPositionEsti
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdvancedConfiguration != nil {
+		ok := object.Key("AdvancedConfiguration")
+		if err := awsRestjson1_serializeDocumentAdvancedConfiguration(v.AdvancedConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.CellTowers != nil {
 		ok := object.Key("CellTowers")
 		if err := awsRestjson1_serializeDocumentCellTowers(v.CellTowers, ok); err != nil {
@@ -9606,6 +9613,20 @@ func awsRestjson1_serializeDocumentAbpV1_1(v *types.AbpV1_1, value smithyjson.Va
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAdvancedConfiguration(v *types.AdvancedConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.WiFiCellular != nil {
+		ok := object.Key("WiFiCellular")
+		if err := awsRestjson1_serializeDocumentWiFiCellular(v.WiFiCellular, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentApplicationConfig(v *types.ApplicationConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12100,6 +12121,18 @@ func awsRestjson1_serializeDocumentWiFiAccessPoints(v []types.WiFiAccessPoint, v
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWiFiCellular(v *types.WiFiCellular, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConfidencePercent != nil {
+		ok := object.Key("ConfidencePercent")
+		ok.Integer(*v.ConfidencePercent)
+	}
+
 	return nil
 }
 

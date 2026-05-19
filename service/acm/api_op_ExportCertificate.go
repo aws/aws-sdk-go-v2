@@ -11,13 +11,15 @@ import (
 )
 
 // Exports a private certificate issued by a private certificate authority (CA) or
-// public certificate for use anywhere. The exported file contains the certificate,
-// the certificate chain, and the encrypted private key associated with the public
-// key that is embedded in the certificate. For security, you must assign a
-// passphrase for the private key when exporting it.
+// a public certificate for use anywhere. The exported file contains the
+// certificate, the certificate chain, and the encrypted private key associated
+// with the public key that is embedded in the certificate. For security, you must
+// assign a passphrase for the private key when exporting it.
 //
 // For information about exporting and formatting a certificate using the ACM
 // console or CLI, see [Export a private certificate]and [Export a public certificate].
+//
+// ACM public certificates created prior to June 17, 2025 cannot be exported.
 //
 // [Export a public certificate]: https://docs.aws.amazon.com/acm/latest/userguide/export-public-certificate
 // [Export a private certificate]: https://docs.aws.amazon.com/acm/latest/userguide/export-private.html
@@ -116,7 +118,7 @@ func (c *Client) addOperationExportCertificateMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -138,9 +140,6 @@ func (c *Client) addOperationExportCertificateMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

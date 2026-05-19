@@ -1,3 +1,23 @@
+# v1.57.2 (2026-04-29)
+
+* **Documentation**: Removes support for registry policy V1
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.0 (2026-04-08)
+
+* **Feature**: Add UnableToListUpstreamImageReferrersException in ListImageReferrers
+
+# v1.56.2 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.1 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

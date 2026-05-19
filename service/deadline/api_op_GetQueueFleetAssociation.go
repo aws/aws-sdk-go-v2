@@ -30,6 +30,8 @@ func (c *Client) GetQueueFleetAssociation(ctx context.Context, params *GetQueueF
 	return out, nil
 }
 
+// Identifier mixin for queue-fleet association operations. Composes
+// QueueIdentifierMixin (farmId + queueId) and adds fleetId.
 type GetQueueFleetAssociationInput struct {
 
 	// The farm ID of the farm that contains the queue-fleet association.
@@ -50,6 +52,8 @@ type GetQueueFleetAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+// Domain fields for QueueFleetAssociation summary/response shapes, ordered before
+// timestamps.
 type GetQueueFleetAssociationOutput struct {
 
 	// The date and time the resource was created.
@@ -123,7 +127,7 @@ func (c *Client) addOperationGetQueueFleetAssociationMiddlewares(stack *middlewa
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -145,9 +149,6 @@ func (c *Client) addOperationGetQueueFleetAssociationMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

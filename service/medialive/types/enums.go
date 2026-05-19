@@ -5350,6 +5350,26 @@ func (MaintenanceDay) Values() []MaintenanceDay {
 	}
 }
 
+type MediaConnectRouterOutputEncryptionType string
+
+// Enum values for MediaConnectRouterOutputEncryptionType
+const (
+	MediaConnectRouterOutputEncryptionTypeAutomatic      MediaConnectRouterOutputEncryptionType = "AUTOMATIC"
+	MediaConnectRouterOutputEncryptionTypeSecretsManager MediaConnectRouterOutputEncryptionType = "SECRETS_MANAGER"
+)
+
+// Values returns all known values for MediaConnectRouterOutputEncryptionType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MediaConnectRouterOutputEncryptionType) Values() []MediaConnectRouterOutputEncryptionType {
+	return []MediaConnectRouterOutputEncryptionType{
+		"AUTOMATIC",
+		"SECRETS_MANAGER",
+	}
+}
+
 type MotionGraphicsInsertion string
 
 // Enum values for MotionGraphicsInsertion

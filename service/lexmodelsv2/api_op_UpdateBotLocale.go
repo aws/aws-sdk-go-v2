@@ -56,6 +56,11 @@ type UpdateBotLocaleInput struct {
 	// This member is required.
 	NluIntentConfidenceThreshold *float64
 
+	// Updated audio filler settings to apply to the bot locale. When enabled,
+	// requires unifiedSpeechSettings (speech-to-speech) to be configured on the bot
+	// locale.
+	AudioFillerSettings *types.AudioFillerSettings
+
 	// The new description of the locale.
 	Description *string
 
@@ -83,6 +88,9 @@ type UpdateBotLocaleInput struct {
 }
 
 type UpdateBotLocaleOutput struct {
+
+	// The updated audio filler settings for the bot locale.
+	AudioFillerSettings *types.AudioFillerSettings
 
 	// The identifier of the bot that contains the updated locale.
 	BotId *string
@@ -178,7 +186,7 @@ func (c *Client) addOperationUpdateBotLocaleMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -200,9 +208,6 @@ func (c *Client) addOperationUpdateBotLocaleMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

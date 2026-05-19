@@ -247,6 +247,9 @@ type ComputeAttributes struct {
 	//   - RETIRING - The underlying hardware for the asset is degraded. Capacity for
 	//   new compute resources is reduced. Amazon Web Services sends notifications for
 	//   resources that must be stopped before the asset can be replaced.
+	//
+	//   - INSTALLING - The asset is being installed and can't yet provide capacity
+	//   for new compute resources.
 	State ComputeAssetState
 
 	noSmithyDocumentSerde
@@ -525,6 +528,18 @@ type Outpost struct {
 	noSmithyDocumentSerde
 }
 
+// A pricing option for the specified Outpost.
+type PricingOption struct {
+
+	// The type of pricing model.
+	PricingType QuotePricingType
+
+	// The subscription pricing details for this pricing option.
+	SubscriptionPricingDetails *SubscriptionPricingDetails
+
+	noSmithyDocumentSerde
+}
+
 //	Information about the physical and logistical details for racks at sites. For
 //
 // more information about hardware requirements for racks, see [Network readiness checklist]in the Amazon Web
@@ -647,6 +662,9 @@ type Subscription struct {
 	//   - ACTIVE - Subscription requests that are in progress and have an end date in
 	//   the future.
 	//
+	//   - PENDING - Subscription has been created but billing has not yet commenced
+	//   because the subscription begin date has not been reached.
+	//
 	//   - CANCELLED - Subscription requests that are cancelled.
 	SubscriptionStatus SubscriptionStatus
 
@@ -661,6 +679,24 @@ type Subscription struct {
 
 	// The amount billed when the subscription is created. This is a one-time charge.
 	UpfrontPrice *float64
+
+	noSmithyDocumentSerde
+}
+
+// The pricing details for a subscription.
+type SubscriptionPricingDetails struct {
+
+	// The monthly recurring price.
+	MonthlyRecurringPrice *float32
+
+	// The payment option.
+	PaymentOption PaymentOption
+
+	// The payment term.
+	PaymentTerm PaymentTerm
+
+	// The upfront price.
+	UpfrontPrice *float32
 
 	noSmithyDocumentSerde
 }

@@ -47,6 +47,9 @@ type UpdateEnvironmentInput struct {
 	// The description to be updated as part of the UpdateEnvironment action.
 	Description *string
 
+	// The configuration name of the environment.
+	EnvironmentConfigurationName *string
+
 	// The glossary terms to be updated as part of the UpdateEnvironment action.
 	GlossaryTerms []string
 
@@ -110,6 +113,9 @@ type UpdateEnvironmentOutput struct {
 
 	// The configuration ID of the environment.
 	EnvironmentConfigurationId *string
+
+	// The configuration name of the environment.
+	EnvironmentConfigurationName *string
 
 	// The profile identifier of the environment.
 	EnvironmentProfileId *string
@@ -179,7 +185,7 @@ func (c *Client) addOperationUpdateEnvironmentMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -201,9 +207,6 @@ func (c *Client) addOperationUpdateEnvironmentMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

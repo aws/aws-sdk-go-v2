@@ -183,6 +183,10 @@ type CreateContainerFleetInput struct {
 	//
 	// If you set values manually, Amazon GameLift Servers no longer calculates a port
 	// range for you, even if you later remove the manual settings.
+	//
+	// The port range must not overlap with the Amazon GameLift Servers reserved port
+	// range 4092-4191 . This range is reserved for internal Amazon GameLift Servers
+	// services.
 	InstanceConnectionPortRange *types.ConnectionPortRange
 
 	// The IP address ranges and port settings that allow inbound traffic to access
@@ -208,6 +212,10 @@ type CreateContainerFleetInput struct {
 	//
 	// If you set values manually, Amazon GameLift Servers no longer calculates a port
 	// range for you, even if you later remove the manual settings.
+	//
+	// The port range must not overlap with the Amazon GameLift Servers reserved port
+	// range 4092-4191 . This range is reserved for internal Amazon GameLift Servers
+	// services.
 	InstanceInboundPermissions []types.IpPermission
 
 	// The Amazon EC2 instance type to use for all instances in the fleet. For
@@ -344,11 +352,11 @@ func (c *Client) addOperationCreateContainerFleetMiddlewares(stack *middleware.S
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateContainerFleet{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateContainerFleet{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateContainerFleet{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateContainerFleet{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -374,7 +382,7 @@ func (c *Client) addOperationCreateContainerFleetMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -398,10 +406,10 @@ func (c *Client) addOperationCreateContainerFleetMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
+	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

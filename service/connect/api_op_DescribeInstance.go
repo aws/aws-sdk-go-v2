@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
+// This API is in preview release for Connect Customer and is subject to change.
 //
 // Returns the current state of the specified instance identifier. It tracks the
 // instance while it is being created and returns an error status, if applicable.
@@ -36,8 +36,8 @@ func (c *Client) DescribeInstance(ctx context.Context, params *DescribeInstanceI
 
 type DescribeInstanceInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -53,12 +53,12 @@ type DescribeInstanceOutput struct {
 	Instance *types.Instance
 
 	// Status information about the replication process. This field is included only
-	// when you are using the [ReplicateInstance]API to replicate an Amazon Connect instance across
-	// Amazon Web Services Regions. For information about replicating Amazon Connect
-	// instances, see [Create a replica of your existing Amazon Connect instance]in the Amazon Connect Administrator Guide.
+	// when you are using the [ReplicateInstance]API to replicate an Connect Customer instance across
+	// Amazon Web Services Regions. For information about replicating Connect Customer
+	// instances, see [Create a replica of your existing Connect Customer instance]in the Connect Customer Administrator Guide.
 	//
-	// [Create a replica of your existing Amazon Connect instance]: https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html
 	// [ReplicateInstance]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ReplicateInstance.html
+	// [Create a replica of your existing Connect Customer instance]: https://docs.aws.amazon.com/connect/latest/adminguide/create-replica-connect-instance.html
 	ReplicationConfiguration *types.ReplicationConfiguration
 
 	// Metadata pertaining to the operation's result.
@@ -101,7 +101,7 @@ func (c *Client) addOperationDescribeInstanceMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -123,9 +123,6 @@ func (c *Client) addOperationDescribeInstanceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

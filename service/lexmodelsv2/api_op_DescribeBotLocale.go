@@ -55,6 +55,9 @@ type DescribeBotLocaleInput struct {
 
 type DescribeBotLocaleOutput struct {
 
+	// The audio filler settings configured for the bot locale.
+	AudioFillerSettings *types.AudioFillerSettings
+
 	// The identifier of the bot associated with the locale.
 	BotId *string
 
@@ -162,7 +165,7 @@ func (c *Client) addOperationDescribeBotLocaleMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -184,9 +187,6 @@ func (c *Client) addOperationDescribeBotLocaleMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

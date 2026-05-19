@@ -124,6 +124,11 @@ type LinkedWhatsAppBusinessAccount struct {
 	// This member is required.
 	WabaName *string
 
+	// The onboarding status for the Marketing Messages API. This value is fetched
+	// from Meta and indicates whether the WhatsApp Business Account is onboarded for
+	// Meta's Marketing Messages API.
+	MarketingMessagesOnboardingStatus *string
+
 	noSmithyDocumentSerde
 }
 
@@ -184,6 +189,11 @@ type LinkedWhatsAppBusinessAccountSummary struct {
 	//
 	// This member is required.
 	WabaName *string
+
+	// The onboarding status for the Marketing Messages API. This value is fetched
+	// from Meta and indicates whether the WhatsApp Business Account is onboarded for
+	// Meta's Marketing Messages API.
+	MarketingMessagesOnboardingStatus *string
 
 	noSmithyDocumentSerde
 }

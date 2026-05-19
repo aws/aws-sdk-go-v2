@@ -1,3 +1,30 @@
+# v1.21.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.0 (2026-04-27)
+
+* **Feature**: Application Signals now supports creating composite Service Level Objectives on Service Operations. Users can now create service SLO on multiple operations.
+
+# v1.20.0 (2026-04-20)
+
+* **Feature**: Releasing Second phase of SLO Recommendations where you can create recommended SLOs out-of-the box using CreateSLO API
+
+# v1.19.2 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.1 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.0 (2026-03-25)
+
+* **Feature**: This release adds support for creating SLOs on RUM appMonitors, Synthetics canaries and services.
+
 # v1.18.7 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,3 +1,26 @@
+# v1.41.0 (2026-05-13)
+
+* **Feature**: Adds support for AutomatedSnapshotPauseOptions.
+
+# v1.40.2 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.40.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.40.0 (2026-04-01)
+
+* **Feature**: Adding Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08 as TLS Policy in Supported Regions
+
+# v1.39.2 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.1 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -946,6 +946,24 @@ type CachePolicySummary struct {
 	noSmithyDocumentSerde
 }
 
+// A complex type that specifies the HTTP header name from which CloudFront
+// extracts cache tags from origin responses. When you add CacheTagConfig to a
+// distribution, CloudFront reads the specified header from origin responses,
+// parses the comma-separated tag values, and stores them with the cached object.
+// You can then invalidate cached objects by tag using the CreateInvalidation API.
+type CacheTagConfig struct {
+
+	// The name of the HTTP header that your origin includes in responses. CloudFront
+	// uses this header to extract cache tags. The header value must contain
+	// comma-separated tag values (for example, product:electronics, category:tv,
+	// brand:example ).
+	//
+	// This member is required.
+	HeaderName *string
+
+	noSmithyDocumentSerde
+}
+
 // The Certificate Manager (ACM) certificate associated with your distribution.
 type Certificate struct {
 
@@ -2169,6 +2187,21 @@ type DistributionConfig struct {
 
 	// A complex type that contains zero or more CacheBehavior elements.
 	CacheBehaviors *CacheBehaviors
+
+	// Configuration for cache tag extraction from origin responses. When specified,
+	// CloudFront reads the header named in HeaderName from origin responses and
+	// stores the comma-separated values as cache tags on the object.
+	//
+	// Distributions without CacheTagConfig do not extract tags. When CacheTagConfig
+	// is removed from a distribution via UpdateDistribution , CloudFront stops
+	// extracting tags from origin responses.
+	//
+	// Changing the HeaderName on an existing distribution does not retroactively
+	// affect previously cached objects. Tag-based invalidations will not apply to
+	// objects already cached using a previous header. To ensure tag invalidations
+	// function after updating the header name, use path-based invalidations to recache
+	// all objects that use cache tags.
+	CacheTagConfig *CacheTagConfig
 
 	// The distribution's connection function association.
 	ConnectionFunctionAssociation *ConnectionFunctionAssociation
@@ -6620,6 +6653,10 @@ type TrustStore struct {
 	// The trust store's status.
 	Status TrustStoreStatus
 
+	// A Boolean that determines whether the trust store uses the CA certificate's
+	// OCSP endpoint to check certificate revocation status.
+	UseClientCertificateOCSPEndpoint *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -6849,14 +6886,14 @@ type ViewerCertificate struct {
 	//
 	//   - static-ip - Do not specify this value unless your distribution has been
 	//   enabled for this feature by the CloudFront team. If you have a use case that
-	//   requires static IP addresses for a distribution, contact CloudFront through the [Amazon Web ServicesSupport Center]
+	//   requires static IP addresses for a distribution, contact CloudFront through the [Amazon Web Services Support Center]
 	//   .
 	//
 	// If the distribution uses the CloudFront domain name such as
 	// d111111abcdef8.cloudfront.net , don't set a value for this field.
 	//
-	// [Amazon Web ServicesSupport Center]: https://console.aws.amazon.com/support/home
 	// [server name indication (SNI)]: https://en.wikipedia.org/wiki/Server_Name_Indication
+	// [Amazon Web Services Support Center]: https://console.aws.amazon.com/support/home
 	SSLSupportMethod SSLSupportMethod
 
 	noSmithyDocumentSerde

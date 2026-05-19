@@ -1068,6 +1068,29 @@
                 }
             }
         },
+        "com.amazonaws.account#AccountState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING_ACTIVATION",
+                        "name": "PENDING_ACTIVATION"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "SUSPENDED",
+                        "name": "SUSPENDED"
+                    },
+                    {
+                        "value": "CLOSED",
+                        "name": "CLOSED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.account#AddressLine": {
             "type": "string",
             "traits": {
@@ -1577,7 +1600,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the specified account including its account name, account ID, and account creation date and time. To use this API, an IAM user or role must have the <code>account:GetAccountInformation</code> IAM permission. </p>",
+                "smithy.api#documentation": "<p>Retrieves information about the specified account including its account name, account ID, account creation date and time, and account state. To use this API, an IAM user or role must have the <code>account:GetAccountInformation</code> IAM permission. </p>",
                 "smithy.api#http": {
                     "uri": "/getAccountInformation",
                     "method": "POST",
@@ -1622,6 +1645,12 @@
                     "target": "com.amazonaws.account#AccountCreatedDate",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the account was created.</p>"
+                    }
+                },
+                "AccountState": {
+                    "target": "com.amazonaws.account#AccountState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the account. Each account state represents a specific phase in the account lifecycle. Use this information to manage account access, automate workflows, or trigger actions based on account state changes.</p> <p>Valid values: <code>PENDING_ACTIVATION | ACTIVE | SUSPENDED | CLOSED</code> </p>"
                     }
                 }
             },

@@ -66,6 +66,9 @@ type ListServiceLevelObjectivesInput struct {
 	// parameter, the default of 50 is used.
 	MaxResults *int32
 
+	// Identifies the metric source to filter SLOs by.
+	MetricSource *types.MetricSource
+
 	// Use this optional field to only include SLOs with the specified metric source
 	// types in the output. Supported types are:
 	//
@@ -73,7 +76,13 @@ type ListServiceLevelObjectivesInput struct {
 	//
 	//   - Service dependency
 	//
+	//   - Service
+	//
 	//   - CloudWatch metric
+	//
+	//   - AppMonitor
+	//
+	//   - Canary
 	MetricSourceTypes []types.MetricSourceType
 
 	// Include this value, if it was returned by the previous operation, to get the
@@ -138,7 +147,7 @@ func (c *Client) addOperationListServiceLevelObjectivesMiddlewares(stack *middle
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -160,9 +169,6 @@ func (c *Client) addOperationListServiceLevelObjectivesMiddlewares(stack *middle
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

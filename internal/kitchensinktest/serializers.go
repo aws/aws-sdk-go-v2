@@ -87,6 +87,11 @@ func awsAwsjson10_serializeOpDocumentGetItemInput(v *GetItemInput, value smithyj
 	object := value.Object()
 	defer object.Close()
 
+	if v.Id != nil {
+		ok := object.Key("id")
+		ok.String(*v.Id)
+	}
+
 	if v.Item != nil {
 		ok := object.Key("item")
 		if err := awsAwsjson10_serializeDocumentItem(v.Item, ok); err != nil {

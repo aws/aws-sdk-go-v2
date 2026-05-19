@@ -20030,6 +20030,100 @@ func awsRestjson1_deserializeDocumentMediaConnectFlowRouterOutputStreamDetails(v
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMediaLiveChannelRouterInputConfiguration(v **types.MediaLiveChannelRouterInputConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaLiveChannelRouterInputConfiguration
+	if *v == nil {
+		sv = &types.MediaLiveChannelRouterInputConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "mediaLiveChannelArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MediaLiveChannelArn to be of type string, got %T instead", value)
+				}
+				sv.MediaLiveChannelArn = ptr.String(jtv)
+			}
+
+		case "mediaLiveChannelOutputName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.MediaLiveChannelOutputName = ptr.String(jtv)
+			}
+
+		case "mediaLivePipelineId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MediaLiveChannelPipelineId to be of type string, got %T instead", value)
+				}
+				sv.MediaLivePipelineId = types.MediaLiveChannelPipelineId(jtv)
+			}
+
+		case "sourceTransitDecryption":
+			if err := awsRestjson1_deserializeDocumentMediaLiveTransitEncryption(&sv.SourceTransitDecryption, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMediaLiveChannelRouterInputStreamDetails(v **types.MediaLiveChannelRouterInputStreamDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MediaLiveChannelRouterInputStreamDetails
+	if *v == nil {
+		sv = &types.MediaLiveChannelRouterInputStreamDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMediaLiveInputRouterOutputConfiguration(v **types.MediaLiveInputRouterOutputConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -22387,6 +22481,16 @@ loop:
 			uv = &types.RouterInputConfigurationMemberMediaConnectFlow{Value: mv}
 			break loop
 
+		case "mediaLiveChannel":
+			var mv types.MediaLiveChannelRouterInputConfiguration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentMediaLiveChannelRouterInputConfiguration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RouterInputConfigurationMemberMediaLiveChannel{Value: mv}
+			break loop
+
 		case "merge":
 			var mv types.MergeRouterInputConfiguration
 			destAddr := &mv
@@ -22776,6 +22880,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.RouterInputStreamDetailsMemberMediaConnectFlow{Value: mv}
+			break loop
+
+		case "mediaLiveChannel":
+			var mv types.MediaLiveChannelRouterInputStreamDetails
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentMediaLiveChannelRouterInputStreamDetails(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.RouterInputStreamDetailsMemberMediaLiveChannel{Value: mv}
 			break loop
 
 		case "merge":

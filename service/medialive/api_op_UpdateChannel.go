@@ -82,6 +82,12 @@ type UpdateChannelInput struct {
 	// previously set that role will be removed.
 	RoleArn *string
 
+	// When using MediaConnect Router as the source of a MediaLive input there's a
+	// special handoff that occurs when a router output is created. This group of
+	// settings is set on your behalf by the MediaConnect Router service using this set
+	// of settings. This setting object can only by used by that service.
+	SpecialRouterSettings *types.SpecialRouterSettings
+
 	noSmithyDocumentSerde
 }
 
@@ -131,7 +137,7 @@ func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, o
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -153,9 +159,6 @@ func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

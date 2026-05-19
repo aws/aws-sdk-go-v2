@@ -74,11 +74,47 @@ func TestCheckSnapshot_CreateDashboard(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateScheduledReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateScheduledReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateScheduledReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteDashboard(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDashboard(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteScheduledReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteScheduledReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteScheduledReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ExecuteScheduledReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExecuteScheduledReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ExecuteScheduledReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -110,11 +146,35 @@ func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetScheduledReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetScheduledReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetScheduledReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListDashboards(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDashboards(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListDashboards")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListScheduledReports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListScheduledReports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListScheduledReports")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -169,6 +229,18 @@ func TestCheckSnapshot_UpdateDashboard(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestCheckSnapshot_UpdateScheduledReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateScheduledReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateScheduledReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
 func TestUpdateSnapshot_CreateDashboard(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateDashboard(context.Background(), nil, func(o *Options) {
@@ -181,11 +253,47 @@ func TestUpdateSnapshot_CreateDashboard(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateScheduledReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateScheduledReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateScheduledReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteDashboard(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteDashboard(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteScheduledReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteScheduledReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteScheduledReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ExecuteScheduledReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExecuteScheduledReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ExecuteScheduledReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -217,11 +325,35 @@ func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetScheduledReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetScheduledReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetScheduledReport")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListDashboards(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListDashboards(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListDashboards")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListScheduledReports(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListScheduledReports(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListScheduledReports")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -270,6 +402,18 @@ func TestUpdateSnapshot_UpdateDashboard(t *testing.T) {
 	_, err := svc.UpdateDashboard(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateScheduledReport(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateScheduledReport(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateScheduledReport")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

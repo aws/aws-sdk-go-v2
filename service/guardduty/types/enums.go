@@ -74,13 +74,13 @@ type CoverageFilterCriterionKey string
 // Enum values for CoverageFilterCriterionKey
 const (
 	CoverageFilterCriterionKeyAccountId      CoverageFilterCriterionKey = "ACCOUNT_ID"
-	CoverageFilterCriterionKeyClusterName    CoverageFilterCriterionKey = "CLUSTER_NAME"
 	CoverageFilterCriterionKeyResourceType   CoverageFilterCriterionKey = "RESOURCE_TYPE"
 	CoverageFilterCriterionKeyCoverageStatus CoverageFilterCriterionKey = "COVERAGE_STATUS"
 	CoverageFilterCriterionKeyAddonVersion   CoverageFilterCriterionKey = "ADDON_VERSION"
+	CoverageFilterCriterionKeyClusterName    CoverageFilterCriterionKey = "CLUSTER_NAME"
+	CoverageFilterCriterionKeyEcsClusterName CoverageFilterCriterionKey = "ECS_CLUSTER_NAME"
 	CoverageFilterCriterionKeyManagementType CoverageFilterCriterionKey = "MANAGEMENT_TYPE"
 	CoverageFilterCriterionKeyEksClusterName CoverageFilterCriterionKey = "EKS_CLUSTER_NAME"
-	CoverageFilterCriterionKeyEcsClusterName CoverageFilterCriterionKey = "ECS_CLUSTER_NAME"
 	CoverageFilterCriterionKeyAgentVersion   CoverageFilterCriterionKey = "AGENT_VERSION"
 	CoverageFilterCriterionKeyInstanceId     CoverageFilterCriterionKey = "INSTANCE_ID"
 	CoverageFilterCriterionKeyClusterArn     CoverageFilterCriterionKey = "CLUSTER_ARN"
@@ -93,13 +93,13 @@ const (
 func (CoverageFilterCriterionKey) Values() []CoverageFilterCriterionKey {
 	return []CoverageFilterCriterionKey{
 		"ACCOUNT_ID",
-		"CLUSTER_NAME",
 		"RESOURCE_TYPE",
 		"COVERAGE_STATUS",
 		"ADDON_VERSION",
+		"CLUSTER_NAME",
+		"ECS_CLUSTER_NAME",
 		"MANAGEMENT_TYPE",
 		"EKS_CLUSTER_NAME",
-		"ECS_CLUSTER_NAME",
 		"AGENT_VERSION",
 		"INSTANCE_ID",
 		"CLUSTER_ARN",
@@ -111,11 +111,11 @@ type CoverageSortKey string
 // Enum values for CoverageSortKey
 const (
 	CoverageSortKeyAccountId      CoverageSortKey = "ACCOUNT_ID"
-	CoverageSortKeyClusterName    CoverageSortKey = "CLUSTER_NAME"
 	CoverageSortKeyCoverageStatus CoverageSortKey = "COVERAGE_STATUS"
 	CoverageSortKeyIssue          CoverageSortKey = "ISSUE"
 	CoverageSortKeyAddonVersion   CoverageSortKey = "ADDON_VERSION"
 	CoverageSortKeyUpdatedAt      CoverageSortKey = "UPDATED_AT"
+	CoverageSortKeyClusterName    CoverageSortKey = "CLUSTER_NAME"
 	CoverageSortKeyEksClusterName CoverageSortKey = "EKS_CLUSTER_NAME"
 	CoverageSortKeyEcsClusterName CoverageSortKey = "ECS_CLUSTER_NAME"
 	CoverageSortKeyInstanceId     CoverageSortKey = "INSTANCE_ID"
@@ -128,11 +128,11 @@ const (
 func (CoverageSortKey) Values() []CoverageSortKey {
 	return []CoverageSortKey{
 		"ACCOUNT_ID",
-		"CLUSTER_NAME",
 		"COVERAGE_STATUS",
 		"ISSUE",
 		"ADDON_VERSION",
 		"UPDATED_AT",
+		"CLUSTER_NAME",
 		"EKS_CLUSTER_NAME",
 		"ECS_CLUSTER_NAME",
 		"INSTANCE_ID",
@@ -296,8 +296,8 @@ const (
 	DetectorFeatureEksAuditLogs         DetectorFeature = "EKS_AUDIT_LOGS"
 	DetectorFeatureEbsMalwareProtection DetectorFeature = "EBS_MALWARE_PROTECTION"
 	DetectorFeatureRdsLoginEvents       DetectorFeature = "RDS_LOGIN_EVENTS"
-	DetectorFeatureEksRuntimeMonitoring DetectorFeature = "EKS_RUNTIME_MONITORING"
 	DetectorFeatureLambdaNetworkLogs    DetectorFeature = "LAMBDA_NETWORK_LOGS"
+	DetectorFeatureEksRuntimeMonitoring DetectorFeature = "EKS_RUNTIME_MONITORING"
 	DetectorFeatureRuntimeMonitoring    DetectorFeature = "RUNTIME_MONITORING"
 )
 
@@ -311,8 +311,8 @@ func (DetectorFeature) Values() []DetectorFeature {
 		"EKS_AUDIT_LOGS",
 		"EBS_MALWARE_PROTECTION",
 		"RDS_LOGIN_EVENTS",
-		"EKS_RUNTIME_MONITORING",
 		"LAMBDA_NETWORK_LOGS",
+		"EKS_RUNTIME_MONITORING",
 		"RUNTIME_MONITORING",
 	}
 }
@@ -328,8 +328,8 @@ const (
 	DetectorFeatureResultEksAuditLogs         DetectorFeatureResult = "EKS_AUDIT_LOGS"
 	DetectorFeatureResultEbsMalwareProtection DetectorFeatureResult = "EBS_MALWARE_PROTECTION"
 	DetectorFeatureResultRdsLoginEvents       DetectorFeatureResult = "RDS_LOGIN_EVENTS"
-	DetectorFeatureResultEksRuntimeMonitoring DetectorFeatureResult = "EKS_RUNTIME_MONITORING"
 	DetectorFeatureResultLambdaNetworkLogs    DetectorFeatureResult = "LAMBDA_NETWORK_LOGS"
+	DetectorFeatureResultEksRuntimeMonitoring DetectorFeatureResult = "EKS_RUNTIME_MONITORING"
 	DetectorFeatureResultRuntimeMonitoring    DetectorFeatureResult = "RUNTIME_MONITORING"
 )
 
@@ -346,8 +346,8 @@ func (DetectorFeatureResult) Values() []DetectorFeatureResult {
 		"EKS_AUDIT_LOGS",
 		"EBS_MALWARE_PROTECTION",
 		"RDS_LOGIN_EVENTS",
-		"EKS_RUNTIME_MONITORING",
 		"LAMBDA_NETWORK_LOGS",
+		"EKS_RUNTIME_MONITORING",
 		"RUNTIME_MONITORING",
 	}
 }
@@ -609,10 +609,10 @@ const (
 	FreeTrialFeatureResultEksAuditLogs             FreeTrialFeatureResult = "EKS_AUDIT_LOGS"
 	FreeTrialFeatureResultEbsMalwareProtection     FreeTrialFeatureResult = "EBS_MALWARE_PROTECTION"
 	FreeTrialFeatureResultRdsLoginEvents           FreeTrialFeatureResult = "RDS_LOGIN_EVENTS"
-	FreeTrialFeatureResultEksRuntimeMonitoring     FreeTrialFeatureResult = "EKS_RUNTIME_MONITORING"
 	FreeTrialFeatureResultLambdaNetworkLogs        FreeTrialFeatureResult = "LAMBDA_NETWORK_LOGS"
-	FreeTrialFeatureResultFargateRuntimeMonitoring FreeTrialFeatureResult = "FARGATE_RUNTIME_MONITORING"
+	FreeTrialFeatureResultEksRuntimeMonitoring     FreeTrialFeatureResult = "EKS_RUNTIME_MONITORING"
 	FreeTrialFeatureResultEc2RuntimeMonitoring     FreeTrialFeatureResult = "EC2_RUNTIME_MONITORING"
+	FreeTrialFeatureResultFargateRuntimeMonitoring FreeTrialFeatureResult = "FARGATE_RUNTIME_MONITORING"
 )
 
 // Values returns all known values for FreeTrialFeatureResult. Note that this can
@@ -628,10 +628,10 @@ func (FreeTrialFeatureResult) Values() []FreeTrialFeatureResult {
 		"EKS_AUDIT_LOGS",
 		"EBS_MALWARE_PROTECTION",
 		"RDS_LOGIN_EVENTS",
-		"EKS_RUNTIME_MONITORING",
 		"LAMBDA_NETWORK_LOGS",
-		"FARGATE_RUNTIME_MONITORING",
+		"EKS_RUNTIME_MONITORING",
 		"EC2_RUNTIME_MONITORING",
+		"FARGATE_RUNTIME_MONITORING",
 	}
 }
 
@@ -681,6 +681,11 @@ const (
 	IndicatorTypeCryptominingDomain   IndicatorType = "CRYPTOMINING_DOMAIN"
 	IndicatorTypeCryptominingProcess  IndicatorType = "CRYPTOMINING_PROCESS"
 	IndicatorTypeMaliciousFile        IndicatorType = "MALICIOUS_FILE"
+	IndicatorTypeVulnerability        IndicatorType = "VULNERABILITY"
+	IndicatorTypeMaliciousPackage     IndicatorType = "MALICIOUS_PACKAGE"
+	IndicatorTypeMisconfiguration     IndicatorType = "MISCONFIGURATION"
+	IndicatorTypeReachability         IndicatorType = "REACHABILITY"
+	IndicatorTypeSensitiveData        IndicatorType = "SENSITIVE_DATA"
 )
 
 // Values returns all known values for IndicatorType. Note that this can be
@@ -706,6 +711,11 @@ func (IndicatorType) Values() []IndicatorType {
 		"CRYPTOMINING_DOMAIN",
 		"CRYPTOMINING_PROCESS",
 		"MALICIOUS_FILE",
+		"VULNERABILITY",
+		"MALICIOUS_PACKAGE",
+		"MISCONFIGURATION",
+		"REACHABILITY",
+		"SENSITIVE_DATA",
 	}
 }
 
@@ -1033,8 +1043,8 @@ const (
 	OrgFeatureEksAuditLogs         OrgFeature = "EKS_AUDIT_LOGS"
 	OrgFeatureEbsMalwareProtection OrgFeature = "EBS_MALWARE_PROTECTION"
 	OrgFeatureRdsLoginEvents       OrgFeature = "RDS_LOGIN_EVENTS"
-	OrgFeatureEksRuntimeMonitoring OrgFeature = "EKS_RUNTIME_MONITORING"
 	OrgFeatureLambdaNetworkLogs    OrgFeature = "LAMBDA_NETWORK_LOGS"
+	OrgFeatureEksRuntimeMonitoring OrgFeature = "EKS_RUNTIME_MONITORING"
 	OrgFeatureRuntimeMonitoring    OrgFeature = "RUNTIME_MONITORING"
 )
 
@@ -1048,8 +1058,8 @@ func (OrgFeature) Values() []OrgFeature {
 		"EKS_AUDIT_LOGS",
 		"EBS_MALWARE_PROTECTION",
 		"RDS_LOGIN_EVENTS",
-		"EKS_RUNTIME_MONITORING",
 		"LAMBDA_NETWORK_LOGS",
+		"EKS_RUNTIME_MONITORING",
 		"RUNTIME_MONITORING",
 	}
 }
@@ -1633,8 +1643,8 @@ const (
 	UsageFeatureRdsLoginEvents              UsageFeature = "RDS_LOGIN_EVENTS"
 	UsageFeatureLambdaNetworkLogs           UsageFeature = "LAMBDA_NETWORK_LOGS"
 	UsageFeatureEksRuntimeMonitoring        UsageFeature = "EKS_RUNTIME_MONITORING"
-	UsageFeatureFargateRuntimeMonitoring    UsageFeature = "FARGATE_RUNTIME_MONITORING"
 	UsageFeatureEc2RuntimeMonitoring        UsageFeature = "EC2_RUNTIME_MONITORING"
+	UsageFeatureFargateRuntimeMonitoring    UsageFeature = "FARGATE_RUNTIME_MONITORING"
 	UsageFeatureRdsDbiProtectionProvisioned UsageFeature = "RDS_DBI_PROTECTION_PROVISIONED"
 	UsageFeatureRdsDbiProtectionServerless  UsageFeature = "RDS_DBI_PROTECTION_SERVERLESS"
 )
@@ -1654,8 +1664,8 @@ func (UsageFeature) Values() []UsageFeature {
 		"RDS_LOGIN_EVENTS",
 		"LAMBDA_NETWORK_LOGS",
 		"EKS_RUNTIME_MONITORING",
-		"FARGATE_RUNTIME_MONITORING",
 		"EC2_RUNTIME_MONITORING",
+		"FARGATE_RUNTIME_MONITORING",
 		"RDS_DBI_PROTECTION_PROVISIONED",
 		"RDS_DBI_PROTECTION_SERVERLESS",
 	}

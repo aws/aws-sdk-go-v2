@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists phone numbers claimed to your Amazon Connect instance or traffic
+// Lists phone numbers claimed to your Connect Customer instance or traffic
 // distribution group. If the provided TargetArn is a traffic distribution group,
 // you can call this API in both Amazon Web Services Regions associated with
 // traffic distribution group.
 //
-// For more information about phone numbers, see [Set Up Phone Numbers for Your Contact Center] in the Amazon Connect
+// For more information about phone numbers, see [Set Up Phone Numbers for Your Contact Center] in the Connect Customer
 // Administrator Guide.
 //
 //   - When given an instance ARN, ListPhoneNumbersV2 returns only the phone
@@ -43,10 +43,10 @@ func (c *Client) ListPhoneNumbersV2(ctx context.Context, params *ListPhoneNumber
 
 type ListPhoneNumbersV2Input struct {
 
-	// The identifier of the Amazon Connect instance that phone numbers are claimed
+	// The identifier of the Connect Customer instance that phone numbers are claimed
 	// to. You can [find the instance ID]in the Amazon Resource Name (ARN) of the instance. If both TargetArn
 	// and InstanceId are not provided, this API lists numbers claimed to all the
-	// Amazon Connect instances belonging to your account in the same Amazon Web
+	// Connect Customer instances belonging to your account in the same Amazon Web
 	// Services Region as the request.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
@@ -69,11 +69,11 @@ type ListPhoneNumbersV2Input struct {
 	// The type of phone number.
 	PhoneNumberTypes []types.PhoneNumberType
 
-	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
+	// The Amazon Resource Name (ARN) for Connect Customer instances or traffic
 	// distribution groups that phone number inbound traffic is routed through. If both
 	// TargetArn and InstanceId input are not provided, this API lists numbers claimed
-	// to all the Amazon Connect instances belonging to your account in the same Amazon
-	// Web Services Region as the request.
+	// to all the Connect Customer instances belonging to your account in the same
+	// Amazon Web Services Region as the request.
 	TargetArn *string
 
 	noSmithyDocumentSerde
@@ -81,7 +81,7 @@ type ListPhoneNumbersV2Input struct {
 
 type ListPhoneNumbersV2Output struct {
 
-	// Information about phone numbers that have been claimed to your Amazon Connect
+	// Information about phone numbers that have been claimed to your Connect Customer
 	// instances or traffic distribution groups.
 	ListPhoneNumbersSummaryList []types.ListPhoneNumbersSummary
 
@@ -128,7 +128,7 @@ func (c *Client) addOperationListPhoneNumbersV2Middlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -150,9 +150,6 @@ func (c *Client) addOperationListPhoneNumbersV2Middlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

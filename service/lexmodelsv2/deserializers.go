@@ -1500,6 +1500,11 @@ func awsRestjson1_deserializeOpDocumentCreateBotLocaleOutput(v **CreateBotLocale
 
 	for key, value := range shape {
 		switch key {
+		case "audioFillerSettings":
+			if err := awsRestjson1_deserializeDocumentAudioFillerSettings(&sv.AudioFillerSettings, value); err != nil {
+				return err
+			}
+
 		case "botId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7254,6 +7259,11 @@ func awsRestjson1_deserializeOpDocumentDescribeBotLocaleOutput(v **DescribeBotLo
 
 	for key, value := range shape {
 		switch key {
+		case "audioFillerSettings":
+			if err := awsRestjson1_deserializeDocumentAudioFillerSettings(&sv.AudioFillerSettings, value); err != nil {
+				return err
+			}
+
 		case "botId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20516,6 +20526,11 @@ func awsRestjson1_deserializeOpDocumentUpdateBotLocaleOutput(v **UpdateBotLocale
 
 	for key, value := range shape {
 		switch key {
+		case "audioFillerSettings":
+			if err := awsRestjson1_deserializeDocumentAudioFillerSettings(&sv.AudioFillerSettings, value); err != nil {
+				return err
+			}
+
 		case "botId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -24717,6 +24732,94 @@ func awsRestjson1_deserializeDocumentAudioAndDTMFInputSpecification(v **types.Au
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioFillerSettings(v **types.AudioFillerSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioFillerSettings
+	if *v == nil {
+		sv = &types.AudioFillerSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audioType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AudioFillerType to be of type string, got %T instead", value)
+				}
+				sv.AudioType = types.AudioFillerType(jtv)
+			}
+
+		case "enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = jtv
+			}
+
+		case "minimumPlayDurationInMilliseconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AudioFillerDurationInMilliseconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinimumPlayDurationInMilliseconds = ptr.Int32(int32(i64))
+			}
+
+		case "responseDeliveryDelayInMilliseconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AudioFillerDeliveryDelayInMilliseconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ResponseDeliveryDelayInMilliseconds = ptr.Int32(int32(i64))
+			}
+
+		case "startDelayInMilliseconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AudioFillerDelayInMilliseconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartDelayInMilliseconds = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAudioLogDestination(v **types.AudioLogDestination, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -26116,6 +26219,11 @@ func awsRestjson1_deserializeDocumentBotLocaleImportSpecification(v **types.BotL
 
 	for key, value := range shape {
 		switch key {
+		case "audioFillerSettings":
+			if err := awsRestjson1_deserializeDocumentAudioFillerSettings(&sv.AudioFillerSettings, value); err != nil {
+				return err
+			}
+
 		case "botId":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -34,11 +34,10 @@ type UntagResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// Array of tags to be removed. Array of maps, each of the form string:string
-	// (key:value) . See [Best practices and strategies] in Tagging Amazon Web Services Resources and Tag Editor for
-	// details, including restrictions that apply to tags and "Tag naming limits and
-	// requirements"; Amazon IVS has no service-specific constraints beyond what is
-	// documented there.
+	// Array of tag keys (strings) for the tags to be removed. See [Best practices and strategies] in Tagging Amazon
+	// Web Services Resources and Tag Editor for details, including restrictions that
+	// apply to tags and "Tag naming limits and requirements"; Amazon IVS has no
+	// service-specific constraints beyond what is documented there.
 	//
 	// [Best practices and strategies]: https://docs.aws.amazon.com/tag-editor/latest/userguide/best-practices-and-strats.html
 	//
@@ -89,7 +88,7 @@ func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, o
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -111,9 +110,6 @@ func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

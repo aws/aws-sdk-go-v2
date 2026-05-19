@@ -3354,10 +3354,12 @@ type MemberChangeSpecification struct {
 	// The abilities granted to the collaboration member. These determine what actions
 	// the member can perform within the collaboration.
 	//
-	// The following values are currently not supported: CAN_QUERY ,
-	// CAN_RECEIVE_RESULTS, and CAN_RUN_JOB .
+	// The following values are currently not supported: CAN_QUERY and CAN_RUN_JOB .
 	//
 	// Set the value of memberAbilities to [] to allow a member to contribute data.
+	//
+	// Set the value of memberAbilities to [CAN_RECEIVE_RESULTS] to allow a member to
+	// contribute data and receive results.
 	//
 	// This member is required.
 	MemberAbilities []MemberAbility
@@ -4700,6 +4702,11 @@ type ProtectedJobWorkerComputeConfiguration struct {
 	// This member is required.
 	Type ProtectedJobWorkerComputeType
 
+	// The configuration properties for the worker compute environment. These
+	// properties allow you to customize the compute settings for your Clean Rooms
+	// workloads.
+	Properties WorkerComputeConfigurationProperties
+
 	noSmithyDocumentSerde
 }
 
@@ -5610,12 +5617,12 @@ type WorkerComputeConfigurationProperties interface {
 	isWorkerComputeConfigurationProperties()
 }
 
-// The Spark configuration properties for SQL workloads. This map contains
-// key-value pairs that configure Apache Spark settings to optimize performance for
-// your data processing jobs. You can specify up to 50 Spark properties, with each
-// key being 1-200 characters and each value being 0-500 characters. These
-// properties allow you to adjust compute capacity for large datasets and complex
-// workloads.
+// The Spark configuration properties for SQL and PySpark workloads. This map
+// contains key-value pairs that configure Apache Spark settings to optimize
+// performance for your data processing jobs. You can specify up to 50 Spark
+// properties, with each key being 1-200 characters and each value being 0-500
+// characters. These properties allow you to adjust compute capacity for large
+// datasets and complex workloads.
 type WorkerComputeConfigurationPropertiesMemberSpark struct {
 	Value map[string]string
 

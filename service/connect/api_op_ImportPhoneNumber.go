@@ -11,8 +11,8 @@ import (
 )
 
 // Imports a claimed phone number from an external service, such as Amazon Web
-// Services End User Messaging, into an Amazon Connect instance. You can call this
-// API only in the same Amazon Web Services Region where the Amazon Connect
+// Services End User Messaging, into an Connect Customer instance. You can call
+// this API only in the same Amazon Web Services Region where the Connect Customer
 // instance was created.
 //
 // Call the [DescribePhoneNumber] API to verify the status of a previous ImportPhoneNumber operation.
@@ -53,8 +53,8 @@ func (c *Client) ImportPhoneNumber(ctx context.Context, params *ImportPhoneNumbe
 
 type ImportPhoneNumberInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -134,7 +134,7 @@ func (c *Client) addOperationImportPhoneNumberMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -156,9 +156,6 @@ func (c *Client) addOperationImportPhoneNumberMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

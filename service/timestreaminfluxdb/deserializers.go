@@ -13,6 +13,7 @@ import (
 	smithyio "github.com/aws/smithy-go/io"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
+	smithytime "github.com/aws/smithy-go/time"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -2602,6 +2603,72 @@ func awsAwsjson10_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentClusterConfiguration(v **types.ClusterConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterConfiguration
+	if *v == nil {
+		sv = &types.ClusterConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dedicatedCompactor":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DedicatedCompactor = ptr.Bool(jtv)
+			}
+
+		case "ingestQueryInstances":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.IngestQueryInstances = ptr.Int32(int32(i64))
+			}
+
+		case "queryOnlyInstances":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.QueryOnlyInstances = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentConflictException(v **types.ConflictException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4790,6 +4857,55 @@ func awsAwsjson10_deserializeDocumentLogDeliveryConfiguration(v **types.LogDeliv
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentMaintenanceSchedule(v **types.MaintenanceSchedule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MaintenanceSchedule
+	if *v == nil {
+		sv = &types.MaintenanceSchedule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "preferredMaintenanceWindow":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MaintenanceWindow to be of type string, got %T instead", value)
+				}
+				sv.PreferredMaintenanceWindow = ptr.String(jtv)
+			}
+
+		case "timezone":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IanaTimezone to be of type string, got %T instead", value)
+				}
+				sv.Timezone = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentParameters(v *types.Parameters, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5453,8 +5569,26 @@ func awsAwsjson10_deserializeOpDocumentCreateDbInstanceOutput(v **CreateDbInstan
 				return err
 			}
 
+		case "lastMaintenanceTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.LastMaintenanceTime = ptr.Time(t)
+			}
+
 		case "logDeliveryConfiguration":
 			if err := awsAwsjson10_deserializeDocumentLogDeliveryConfiguration(&sv.LogDeliveryConfiguration, value); err != nil {
+				return err
+			}
+
+		case "maintenanceSchedule":
+			if err := awsAwsjson10_deserializeDocumentMaintenanceSchedule(&sv.MaintenanceSchedule, value); err != nil {
 				return err
 			}
 
@@ -5474,6 +5608,19 @@ func awsAwsjson10_deserializeOpDocumentCreateDbInstanceOutput(v **CreateDbInstan
 					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
 				}
 				sv.NetworkType = types.NetworkType(jtv)
+			}
+
+		case "nextMaintenanceTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.NextMaintenanceTime = ptr.Time(t)
 			}
 
 		case "port":
@@ -5786,8 +5933,26 @@ func awsAwsjson10_deserializeOpDocumentDeleteDbInstanceOutput(v **DeleteDbInstan
 				return err
 			}
 
+		case "lastMaintenanceTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.LastMaintenanceTime = ptr.Time(t)
+			}
+
 		case "logDeliveryConfiguration":
 			if err := awsAwsjson10_deserializeDocumentLogDeliveryConfiguration(&sv.LogDeliveryConfiguration, value); err != nil {
+				return err
+			}
+
+		case "maintenanceSchedule":
+			if err := awsAwsjson10_deserializeDocumentMaintenanceSchedule(&sv.MaintenanceSchedule, value); err != nil {
 				return err
 			}
 
@@ -5807,6 +5972,19 @@ func awsAwsjson10_deserializeOpDocumentDeleteDbInstanceOutput(v **DeleteDbInstan
 					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
 				}
 				sv.NetworkType = types.NetworkType(jtv)
+			}
+
+		case "nextMaintenanceTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.NextMaintenanceTime = ptr.Time(t)
 			}
 
 		case "port":
@@ -5912,6 +6090,11 @@ func awsAwsjson10_deserializeOpDocumentGetDbClusterOutput(v **GetDbClusterOutput
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "clusterConfiguration":
+			if err := awsAwsjson10_deserializeDocumentClusterConfiguration(&sv.ClusterConfiguration, value); err != nil {
+				return err
+			}
+
 		case "dbInstanceType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5993,8 +6176,26 @@ func awsAwsjson10_deserializeOpDocumentGetDbClusterOutput(v **GetDbClusterOutput
 				sv.InfluxAuthParametersSecretArn = ptr.String(jtv)
 			}
 
+		case "lastMaintenanceTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.LastMaintenanceTime = ptr.Time(t)
+			}
+
 		case "logDeliveryConfiguration":
 			if err := awsAwsjson10_deserializeDocumentLogDeliveryConfiguration(&sv.LogDeliveryConfiguration, value); err != nil {
+				return err
+			}
+
+		case "maintenanceSchedule":
+			if err := awsAwsjson10_deserializeDocumentMaintenanceSchedule(&sv.MaintenanceSchedule, value); err != nil {
 				return err
 			}
 
@@ -6014,6 +6215,19 @@ func awsAwsjson10_deserializeOpDocumentGetDbClusterOutput(v **GetDbClusterOutput
 					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
 				}
 				sv.NetworkType = types.NetworkType(jtv)
+			}
+
+		case "nextMaintenanceTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.NextMaintenanceTime = ptr.Time(t)
 			}
 
 		case "port":
@@ -6214,8 +6428,26 @@ func awsAwsjson10_deserializeOpDocumentGetDbInstanceOutput(v **GetDbInstanceOutp
 				return err
 			}
 
+		case "lastMaintenanceTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.LastMaintenanceTime = ptr.Time(t)
+			}
+
 		case "logDeliveryConfiguration":
 			if err := awsAwsjson10_deserializeDocumentLogDeliveryConfiguration(&sv.LogDeliveryConfiguration, value); err != nil {
+				return err
+			}
+
+		case "maintenanceSchedule":
+			if err := awsAwsjson10_deserializeDocumentMaintenanceSchedule(&sv.MaintenanceSchedule, value); err != nil {
 				return err
 			}
 
@@ -6235,6 +6467,19 @@ func awsAwsjson10_deserializeOpDocumentGetDbInstanceOutput(v **GetDbInstanceOutp
 					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
 				}
 				sv.NetworkType = types.NetworkType(jtv)
+			}
+
+		case "nextMaintenanceTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.NextMaintenanceTime = ptr.Time(t)
 			}
 
 		case "port":
@@ -6763,8 +7008,26 @@ func awsAwsjson10_deserializeOpDocumentRebootDbInstanceOutput(v **RebootDbInstan
 				return err
 			}
 
+		case "lastMaintenanceTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.LastMaintenanceTime = ptr.Time(t)
+			}
+
 		case "logDeliveryConfiguration":
 			if err := awsAwsjson10_deserializeDocumentLogDeliveryConfiguration(&sv.LogDeliveryConfiguration, value); err != nil {
+				return err
+			}
+
+		case "maintenanceSchedule":
+			if err := awsAwsjson10_deserializeDocumentMaintenanceSchedule(&sv.MaintenanceSchedule, value); err != nil {
 				return err
 			}
 
@@ -6784,6 +7047,19 @@ func awsAwsjson10_deserializeOpDocumentRebootDbInstanceOutput(v **RebootDbInstan
 					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
 				}
 				sv.NetworkType = types.NetworkType(jtv)
+			}
+
+		case "nextMaintenanceTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.NextMaintenanceTime = ptr.Time(t)
 			}
 
 		case "port":
@@ -7024,8 +7300,26 @@ func awsAwsjson10_deserializeOpDocumentUpdateDbInstanceOutput(v **UpdateDbInstan
 				return err
 			}
 
+		case "lastMaintenanceTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.LastMaintenanceTime = ptr.Time(t)
+			}
+
 		case "logDeliveryConfiguration":
 			if err := awsAwsjson10_deserializeDocumentLogDeliveryConfiguration(&sv.LogDeliveryConfiguration, value); err != nil {
+				return err
+			}
+
+		case "maintenanceSchedule":
+			if err := awsAwsjson10_deserializeDocumentMaintenanceSchedule(&sv.MaintenanceSchedule, value); err != nil {
 				return err
 			}
 
@@ -7045,6 +7339,19 @@ func awsAwsjson10_deserializeOpDocumentUpdateDbInstanceOutput(v **UpdateDbInstan
 					return fmt.Errorf("expected NetworkType to be of type string, got %T instead", value)
 				}
 				sv.NetworkType = types.NetworkType(jtv)
+			}
+
+		case "nextMaintenanceTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.NextMaintenanceTime = ptr.Time(t)
 			}
 
 		case "port":

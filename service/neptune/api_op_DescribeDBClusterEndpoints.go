@@ -74,7 +74,7 @@ type DescribeDBClusterEndpointsOutput struct {
 	// any filter conditions.
 	DBClusterEndpoints []types.DBClusterEndpoint
 
-	//  n optional pagination token provided by a previous DescribeDBClusterEndpoints
+	// An optional pagination token provided by a previous DescribeDBClusterEndpoints
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords .
 	Marker *string
@@ -119,7 +119,7 @@ func (c *Client) addOperationDescribeDBClusterEndpointsMiddlewares(stack *middle
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -141,9 +141,6 @@ func (c *Client) addOperationDescribeDBClusterEndpointsMiddlewares(stack *middle
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

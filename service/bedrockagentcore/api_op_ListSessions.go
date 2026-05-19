@@ -15,6 +15,8 @@ import (
 // recommend using pagination to ensure that the operation returns quickly and
 // successfully.
 //
+// Empty sessions are automatically deleted after one day.
+//
 // To use this operation, you must have the bedrock-agentcore:ListSessions
 // permission.
 func (c *Client) ListSessions(ctx context.Context, params *ListSessionsInput, optFns ...func(*Options)) (*ListSessionsOutput, error) {
@@ -43,6 +45,9 @@ type ListSessionsInput struct {
 	//
 	// This member is required.
 	MemoryId *string
+
+	// Filter criteria to apply when listing sessions.
+	Filter *types.SessionFilter
 
 	// The maximum number of results to return in a single call. The default value is
 	// 20.
@@ -106,7 +111,7 @@ func (c *Client) addOperationListSessionsMiddlewares(stack *middleware.Stack, op
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -128,9 +133,6 @@ func (c *Client) addOperationListSessionsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

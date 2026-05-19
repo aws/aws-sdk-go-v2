@@ -14,6 +14,8 @@ import (
 // use the DeleteIntentoperation.
 //
 // This operation requires permissions for the lex:DeleteIntentVersion action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) DeleteIntentVersion(ctx context.Context, params *DeleteIntentVersionInput, optFns ...func(*Options)) (*DeleteIntentVersionOutput, error) {
 	if params == nil {
 		params = &DeleteIntentVersionInput{}
@@ -86,7 +88,7 @@ func (c *Client) addOperationDeleteIntentVersionMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -108,9 +110,6 @@ func (c *Client) addOperationDeleteIntentVersionMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

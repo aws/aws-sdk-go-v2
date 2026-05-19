@@ -170,6 +170,18 @@ func TestCheckSnapshot_CalculateRouteMatrix(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CancelJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CancelJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateGeofenceCollection(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateGeofenceCollection(context.Background(), nil, func(o *Options) {
@@ -446,6 +458,18 @@ func TestCheckSnapshot_GetGeofence(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetMapGlyphs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMapGlyphs(context.Background(), nil, func(o *Options) {
@@ -535,6 +559,18 @@ func TestCheckSnapshot_ListGeofences(t *testing.T) {
 	_, err := svc.ListGeofences(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListGeofences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -667,6 +703,18 @@ func TestCheckSnapshot_SearchPlaceIndexForText(t *testing.T) {
 	_, err := svc.SearchPlaceIndexForText(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "SearchPlaceIndexForText")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -882,6 +930,18 @@ func TestUpdateSnapshot_CalculateRouteMatrix(t *testing.T) {
 	_, err := svc.CalculateRouteMatrix(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CalculateRouteMatrix")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CancelJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CancelJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CancelJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1165,6 +1225,18 @@ func TestUpdateSnapshot_GetGeofence(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetMapGlyphs(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetMapGlyphs(context.Background(), nil, func(o *Options) {
@@ -1254,6 +1326,18 @@ func TestUpdateSnapshot_ListGeofences(t *testing.T) {
 	_, err := svc.ListGeofences(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListGeofences")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListJobs(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListJobs(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListJobs")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1386,6 +1470,18 @@ func TestUpdateSnapshot_SearchPlaceIndexForText(t *testing.T) {
 	_, err := svc.SearchPlaceIndexForText(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "SearchPlaceIndexForText")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

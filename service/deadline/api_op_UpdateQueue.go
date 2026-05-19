@@ -80,6 +80,16 @@ type UpdateQueueInput struct {
 	// The IAM role ARN that's used to run jobs from this queue.
 	RoleArn *string
 
+	// The scheduling configuration for the queue. This configuration determines how
+	// workers are assigned to jobs in the queue.
+	//
+	// When updating the scheduling configuration, the entire configuration is
+	// replaced.
+	//
+	// In-progress tasks run to completion before the new scheduling configuration
+	// takes effect.
+	SchedulingConfiguration types.SchedulingConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -124,7 +134,7 @@ func (c *Client) addOperationUpdateQueueMiddlewares(stack *middleware.Stack, opt
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -146,9 +156,6 @@ func (c *Client) addOperationUpdateQueueMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

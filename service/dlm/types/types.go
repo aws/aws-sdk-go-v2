@@ -374,9 +374,10 @@ type Exclusions struct {
 // restore based on either a count or a time interval.
 type FastRestoreRule struct {
 
+	// The Availability Zone Ids in which to enable fast snapshot restore.
+	AvailabilityZoneIds []string
+
 	// The Availability Zones in which to enable fast snapshot restore.
-	//
-	// This member is required.
 	AvailabilityZones []string
 
 	// The number of snapshots to be enabled with fast snapshot restore.

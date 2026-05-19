@@ -11,16 +11,26 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used by customers to update information about their investigation into a
-// finding. Requested by delegated administrator accounts or member accounts.
-// Delegated administrator accounts can update findings for their account and their
-// member accounts. Member accounts can update findings for their account.
-// BatchUpdateFindings and BatchUpdateFindingV2 both use
+// Updates information about a customer's investigation into a finding. Delegated
+// administrator accounts can update findings for their account and their member
+// accounts. Member accounts can update findings for their own account.
+//
+// BatchUpdateFindings and BatchUpdateFindingsV2 both use
 // securityhub:BatchUpdateFindings in the Action element of an IAM policy
 // statement. You must have permission to perform the
-// securityhub:BatchUpdateFindings action. Updates from BatchUpdateFindingsV2
-// don't affect the value of f inding_info.modified_time ,
-// finding_info.modified_time_dt , time , time_dt for a finding .
+// securityhub:BatchUpdateFindings action. You can configure IAM policies to
+// restrict access to specific finding fields or field values by using the
+// securityhub:OCSFSyntaxPath/ condition key, where  is one of the following
+// supported fields: SeverityId , StatusId , or Comment .
+//
+// To prevent a user from updating a specific field, use a Null condition with
+// securityhub:OCSFSyntaxPath/ set to "false" . To prevent a user from setting a
+// field to a specific value, use a StringEquals condition with
+// securityhub:OCSFSyntaxPath/ set to the disallowed value or list of values.
+//
+// Updates from BatchUpdateFindingsV2 don't affect the value of
+// finding_info.modified_time , finding_info.modified_time_dt , time , or time_dt
+// for a finding.
 func (c *Client) BatchUpdateFindingsV2(ctx context.Context, params *BatchUpdateFindingsV2Input, optFns ...func(*Options)) (*BatchUpdateFindingsV2Output, error) {
 	if params == nil {
 		params = &BatchUpdateFindingsV2Input{}
@@ -51,13 +61,13 @@ type BatchUpdateFindingsV2Input struct {
 	MetadataUids []string
 
 	// The updated value for the normalized severity identifier. The severity ID is an
-	// integer with the allowed enum values [0, 1, 2, 3, 4, 5, 99]. When customer
+	// integer with the allowed enum values [0, 1, 2, 3, 4, 5, 6, 99]. When customer
 	// provides the updated severity ID, the string sibling severity will automatically
 	// be updated in the finding.
 	SeverityId *int32
 
 	// The updated value for the normalized status identifier. The status ID is an
-	// integer with the allowed enum values [0, 1, 2, 3, 4, 5, 6, 99]. When customer
+	// integer with the allowed enum values [0, 1, 2, 3, 4, 5, 99]. When customer
 	// provides the updated status ID, the string sibling status will automatically be
 	// updated in the finding.
 	StatusId *int32
@@ -117,7 +127,7 @@ func (c *Client) addOperationBatchUpdateFindingsV2Middlewares(stack *middleware.
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -139,9 +149,6 @@ func (c *Client) addOperationBatchUpdateFindingsV2Middlewares(stack *middleware.
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -206,6 +206,66 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request failed because one or more organizational units specified in the
+// request don't exist within the caller's organization.
+type OrganizationalUnitNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *OrganizationalUnitNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OrganizationalUnitNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OrganizationalUnitNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "OrganizationalUnitNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *OrganizationalUnitNotFoundException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
+// The request failed because one or more organizations specified in the request
+// don't exist or don't belong to the caller's organization.
+type OrganizationNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Code *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *OrganizationNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *OrganizationNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *OrganizationNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "OrganizationNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *OrganizationNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The resource specified in the request conflicts with an existing resource.
 type ResourceConflictException struct {
 	Message *string

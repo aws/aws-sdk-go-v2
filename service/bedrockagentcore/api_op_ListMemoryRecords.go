@@ -40,12 +40,6 @@ type ListMemoryRecordsInput struct {
 	// This member is required.
 	MemoryId *string
 
-	// The namespace prefix to filter memory records by. Returns all memory records in
-	// namespaces that start with the provided prefix.
-	//
-	// This member is required.
-	Namespace *string
-
 	// The maximum number of results to return in a single call. The default value is
 	// 20.
 	MaxResults *int32
@@ -53,6 +47,19 @@ type ListMemoryRecordsInput struct {
 	// The memory strategy identifier to filter memory records by. If specified, only
 	// memory records with this strategy ID are returned.
 	MemoryStrategyId *string
+
+	// A list of metadata filter expressions to scope the returned memory records.
+	MetadataFilters []types.MemoryMetadataFilterExpression
+
+	// The namespace prefix to filter memory records by. Returns all memory records in
+	// namespaces that start with the provided prefix. Either namespace or
+	// namespacePath is required.
+	Namespace *string
+
+	// Use namespacePath for hierarchical retrievals. Return all memory records where
+	// namespace falls under the same parent hierarchy. Either namespace or
+	// namespacePath is required.
+	NamespacePath *string
 
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
@@ -112,7 +119,7 @@ func (c *Client) addOperationListMemoryRecordsMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -134,9 +141,6 @@ func (c *Client) addOperationListMemoryRecordsMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

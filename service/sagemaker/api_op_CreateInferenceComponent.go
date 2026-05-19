@@ -47,14 +47,18 @@ type CreateInferenceComponentInput struct {
 	// This member is required.
 	InferenceComponentName *string
 
-	// Details about the resources to deploy with this inference component, including
-	// the model, container, and compute resources.
-	//
-	// This member is required.
-	Specification *types.InferenceComponentSpecification
-
 	// Runtime settings for a model that is deployed with an inference component.
 	RuntimeConfig *types.InferenceComponentRuntimeConfig
+
+	// Details about the resources to deploy with this inference component, including
+	// the model, container, and compute resources.
+	Specification *types.InferenceComponentSpecification
+
+	// A list of specification objects for the inference component, one per instance
+	// type. Use this parameter when you want to deploy a different model or resource
+	// configuration for the inference component on each instance type. You can use
+	// either this parameter or the singular Specification parameter, but not both.
+	Specifications []types.InferenceComponentSpecification
 
 	// A list of key-value pairs associated with the model. For more information, see [Tagging Amazon Web Services resources]
 	// in the Amazon Web Services General Reference.
@@ -116,7 +120,7 @@ func (c *Client) addOperationCreateInferenceComponentMiddlewares(stack *middlewa
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -138,9 +142,6 @@ func (c *Client) addOperationCreateInferenceComponentMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

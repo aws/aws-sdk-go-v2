@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
+// This API is in preview release for Connect Customer and is subject to change.
 //
 // Describes the specified contact.
 //
@@ -35,15 +35,15 @@ import (
 //   - SystemEndpoint is not populated for contacts with initiation method of
 //     MONITOR, QUEUE_TRANSFER, or CALLBACK
 //
-//   - Contact information remains available in Amazon Connect for 24 months from
-//     the InitiationTimestamp , and then it is deleted. Only contact information
-//     that is available in Amazon Connect is returned by this API.
+//   - Contact information remains available in Connect Customer for 24 months
+//     from the InitiationTimestamp , and then it is deleted. Only contact
+//     information that is available in Connect Customer is returned by this API.
 //
-// Endpoints: See [Amazon Connect endpoints and quotas].
+// Endpoints: See [Connect Customer endpoints and quotas].
 //
 // [ContactTraceRecord]: https://docs.aws.amazon.com/connect/latest/adminguide/ctr-data-model.html#ctr-ContactTraceRecord
 // [contact event stream]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-events.html
-// [Amazon Connect endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
+// [Connect Customer endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/connect_region.html
 func (c *Client) DescribeContact(ctx context.Context, params *DescribeContactInput, optFns ...func(*Options)) (*DescribeContactOutput, error) {
 	if params == nil {
 		params = &DescribeContactInput{}
@@ -66,8 +66,8 @@ type DescribeContactInput struct {
 	// This member is required.
 	ContactId *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -122,7 +122,7 @@ func (c *Client) addOperationDescribeContactMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -144,9 +144,6 @@ func (c *Client) addOperationDescribeContactMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

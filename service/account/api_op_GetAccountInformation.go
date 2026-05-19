@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/account/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
 // Retrieves information about the specified account including its account name,
-// account ID, and account creation date and time. To use this API, an IAM user or
-// role must have the account:GetAccountInformation IAM permission.
+// account ID, account creation date and time, and account state. To use this API,
+// an IAM user or role must have the account:GetAccountInformation IAM permission.
 func (c *Client) GetAccountInformation(ctx context.Context, params *GetAccountInformationInput, optFns ...func(*Options)) (*GetAccountInformationOutput, error) {
 	if params == nil {
 		params = &GetAccountInformationInput{}
@@ -85,6 +86,13 @@ type GetAccountInformationOutput struct {
 	// The name of the account.
 	AccountName *string
 
+	// The state of the account. Each account state represents a specific phase in the
+	// account lifecycle. Use this information to manage account access, automate
+	// workflows, or trigger actions based on account state changes.
+	//
+	// Valid values: PENDING_ACTIVATION | ACTIVE | SUSPENDED | CLOSED
+	AccountState types.AccountState
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -125,7 +133,7 @@ func (c *Client) addOperationGetAccountInformationMiddlewares(stack *middleware.
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -147,9 +155,6 @@ func (c *Client) addOperationGetAccountInformationMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -12,7 +12,6 @@ InputStreamWithInitialRequest
 		ClientRequestID
 		SetCredentialSourceMiddleware
 		UserAgent
-		AddTimeOffsetMiddleware
 		RecursionDetection
 	Finalize stack step
 		ComputePayloadHash
@@ -35,6 +34,5 @@ InputStreamWithInitialRequest
 		ResponseErrorWrapper
 		RequestIDRetriever
 		OperationDeserializer
-		AddTimeOffsetMiddleware
 		RecordResponseTiming
 		RequestResponseLogger

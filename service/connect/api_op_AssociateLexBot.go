@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API is in preview release for Amazon Connect and is subject to change.
+// This API is in preview release for Connect Customer and is subject to change.
 //
-// Allows the specified Amazon Connect instance to access the specified Amazon Lex
-// V1 bot. This API only supports the association of Amazon Lex V1 bots.
+// Allows the specified Connect Customer instance to access the specified Amazon
+// Lex V1 bot. This API only supports the association of Amazon Lex V1 bots.
 func (c *Client) AssociateLexBot(ctx context.Context, params *AssociateLexBotInput, optFns ...func(*Options)) (*AssociateLexBotOutput, error) {
 	if params == nil {
 		params = &AssociateLexBotInput{}
@@ -32,8 +32,8 @@ func (c *Client) AssociateLexBot(ctx context.Context, params *AssociateLexBotInp
 
 type AssociateLexBotInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -96,7 +96,7 @@ func (c *Client) addOperationAssociateLexBotMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -118,9 +118,6 @@ func (c *Client) addOperationAssociateLexBotMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

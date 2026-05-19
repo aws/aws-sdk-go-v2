@@ -33,7 +33,10 @@ func (c *Client) GetStyleDescriptor(ctx context.Context, params *GetStyleDescrip
 
 type GetStyleDescriptorInput struct {
 
-	// Style specifies the desired map style.
+	// Style specifies the desired map style. For [GrabMaps] customers, ap-southeast-1 and
+	// ap-southeast-5 regions support only the Standard and Monochrome values.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	//
 	// This member is required.
 	Style types.MapStyle
@@ -47,8 +50,7 @@ type GetStyleDescriptorInput struct {
 	// Buildings3D is valid only for the Standard and Monochrome map styles.
 	Buildings types.Buildings
 
-	// Sets color tone for map such as dark and light for specific map styles. It
-	// applies to only vector map styles such as Standard and Monochrome.
+	// Sets the color tone for the map, such as dark and light.
 	//
 	// Example: Light
 	//
@@ -59,17 +61,21 @@ type GetStyleDescriptorInput struct {
 
 	// Displays the shape and steepness of terrain features using elevation lines. The
 	// density value controls how densely the available contour line information is
-	// rendered on the map.
+	// rendered on the map. Not supported in ap-southeast-1 and ap-southeast-5 regions
+	// for [GrabMaps]customers.
 	//
-	// This parameter is valid only for the Standard , Monochrome , and Hybrid map
-	// styles.
+	// This parameter is valid for all map styles except Satellite .
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	ContourDensity types.ContourDensity
 
 	// Optional: The API key to be used for authorization. Either an API key or valid
 	// SigV4 signature must be provided when making a request.
 	Key *string
 
-	// Specifies the political view using ISO 3166-2 or ISO 3166-3 country code format.
+	// Specifies the political view using ISO 3166-2 or ISO 3166-3 country code
+	// format. Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps]
+	// customers.
 	//
 	// The following political views are currently supported:
 	//
@@ -101,9 +107,12 @@ type GetStyleDescriptorInput struct {
 	//   - URY : Uruguay's view on Rincon de Artigas
 	//
 	//   - VNM : Vietnam's view on the Paracel Islands and Spratly Islands
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	PoliticalView *string
 
-	// Adjusts how physical terrain details are rendered on the map.
+	// Adjusts how physical terrain details are rendered on the map. Not supported in
+	// ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
 	//
 	// The following terrain styles are currently supported:
 	//
@@ -114,19 +123,27 @@ type GetStyleDescriptorInput struct {
 	//   three-dimensional model.
 	//
 	// Hillshade is valid only for the Standard and Monochrome map styles.
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Terrain types.Terrain
 
 	// Displays real-time traffic information overlay on map, such as incident events
-	// and flow events.
+	// and flow events. Not supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps]
+	// customers.
 	//
-	// This parameter is valid only for the Standard map style.
+	// This parameter is valid for all map styles except Satellite .
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	Traffic types.Traffic
 
 	// Renders additional map information relevant to selected travel modes.
 	// Information for multiple travel modes can be displayed simultaneously, although
-	// this increases the overall information density rendered on the map.
+	// this increases the overall information density rendered on the map. Not
+	// supported in ap-southeast-1 and ap-southeast-5 regions for [GrabMaps] customers.
 	//
-	// This parameter is valid only for the Standard map style.
+	// This parameter is valid for all map styles except Satellite .
+	//
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/GrabMaps.html
 	TravelModes []types.TravelMode
 
 	noSmithyDocumentSerde
@@ -188,7 +205,7 @@ func (c *Client) addOperationGetStyleDescriptorMiddlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -210,9 +227,6 @@ func (c *Client) addOperationGetStyleDescriptorMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

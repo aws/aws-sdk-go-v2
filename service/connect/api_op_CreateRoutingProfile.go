@@ -39,8 +39,8 @@ type CreateRoutingProfileInput struct {
 	// This member is required.
 	Description *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -67,7 +67,7 @@ type CreateRoutingProfileInput struct {
 	// routing profile. The limit of 10 array members applies to the maximum number of
 	// RoutingProfileManualAssignmentQueueConfig objects that can be passed during a
 	// CreateRoutingProfile API request. It is different from the quota of 50 queues
-	// per routing profile per instance that is listed in Amazon Connect service
+	// per routing profile per instance that is listed in Connect Customer service
 	// quotas.
 	//
 	// Note: Use this config for chat, email, and task contacts. It does not support
@@ -80,9 +80,9 @@ type CreateRoutingProfileInput struct {
 	// The limit of 10 array members applies to the maximum number of
 	// RoutingProfileQueueConfig objects that can be passed during a
 	// CreateRoutingProfile API request. It is different from the quota of 50 queues
-	// per routing profile per instance that is listed in [Amazon Connect service quotas].
+	// per routing profile per instance that is listed in [Connect Customer service quotas].
 	//
-	// [Amazon Connect service quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
+	// [Connect Customer service quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
 	QueueConfigs []types.RoutingProfileQueueConfig
 
 	// The tags used to organize, track, or control access for this resource. For
@@ -140,7 +140,7 @@ func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -162,9 +162,6 @@ func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.S
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -35,12 +35,6 @@ func (c *Client) AssociateOriginationIdentity(ctx context.Context, params *Assoc
 
 type AssociateOriginationIdentityInput struct {
 
-	// The new two-character code, in ISO 3166-1 alpha-2 format, for the country or
-	// region of the origination identity.
-	//
-	// This member is required.
-	IsoCountryCode *string
-
 	// The origination identity to use, such as PhoneNumberId, PhoneNumberArn,
 	// SenderId, or SenderIdArn. You can use DescribePhoneNumbersto find the values for PhoneNumberId and
 	// PhoneNumberArn, while DescribeSenderIdscan be used to get the values for SenderId and
@@ -67,6 +61,12 @@ type AssociateOriginationIdentityInput struct {
 	// the request. If you don't specify a client token, a randomly generated token is
 	// used for the request to ensure idempotency.
 	ClientToken *string
+
+	// The new two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region of the origination identity. This field is optional and is not required
+	// for origination identity types that are not country-specific, such as RCS
+	// agents.
+	IsoCountryCode *string
 
 	noSmithyDocumentSerde
 }
@@ -130,7 +130,7 @@ func (c *Client) addOperationAssociateOriginationIdentityMiddlewares(stack *midd
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -152,9 +152,6 @@ func (c *Client) addOperationAssociateOriginationIdentityMiddlewares(stack *midd
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

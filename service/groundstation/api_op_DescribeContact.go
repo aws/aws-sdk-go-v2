@@ -30,6 +30,7 @@ func (c *Client) DescribeContact(ctx context.Context, params *DescribeContactInp
 	return out, nil
 }
 
+// Input for the DescribeContact operation.
 type DescribeContactInput struct {
 
 	// UUID of a contact.
@@ -40,6 +41,7 @@ type DescribeContactInput struct {
 	noSmithyDocumentSerde
 }
 
+// Output for the DescribeContact operation.
 type DescribeContactOutput struct {
 
 	// UUID of a contact.
@@ -69,15 +71,15 @@ type DescribeContactOutput struct {
 	// ARN of a mission profile.
 	MissionProfileArn *string
 
-	// Amount of time after a contact ends that you’d like to receive a CloudWatch
+	// End time in UTC of the post-pass period, at which you receive a CloudWatch
 	// event indicating the pass has finished.
 	PostPassEndTime *time.Time
 
-	// Amount of time prior to contact start you’d like to receive a CloudWatch event
-	// indicating an upcoming pass.
+	// Start time in UTC of the pre-pass period, at which you receive a CloudWatch
+	// event indicating an upcoming pass.
 	PrePassStartTime *time.Time
 
-	// Region of a contact.
+	// Region where the ReserveContact API was called to schedule this contact.
 	Region *string
 
 	// ARN of a satellite.
@@ -91,6 +93,9 @@ type DescribeContactOutput struct {
 
 	// Tracking configuration overrides specified when the contact was reserved.
 	TrackingOverrides *types.TrackingOverrides
+
+	// Version information for a contact.
+	Version *types.ContactVersion
 
 	//  Projected time in UTC your satellite will set below the [receive mask]. This time is based
 	// on the satellite's current active ephemeris for future contacts and the
@@ -146,7 +151,7 @@ func (c *Client) addOperationDescribeContactMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -168,9 +173,6 @@ func (c *Client) addOperationDescribeContactMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

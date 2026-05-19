@@ -885,6 +885,11 @@ func awsAwsjson11_serializeDocumentS3Destination(v *types.S3Destination, value s
 		ok.String(*v.S3Bucket)
 	}
 
+	if v.S3BucketOwner != nil {
+		ok := object.Key("S3BucketOwner")
+		ok.String(*v.S3BucketOwner)
+	}
+
 	if v.S3OutputConfigurations != nil {
 		ok := object.Key("S3OutputConfigurations")
 		if err := awsAwsjson11_serializeDocumentS3OutputConfigurations(v.S3OutputConfigurations, ok); err != nil {

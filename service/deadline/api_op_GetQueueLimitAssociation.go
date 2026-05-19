@@ -50,6 +50,8 @@ type GetQueueLimitAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+// Domain fields for QueueLimitAssociation summary/response shapes, ordered before
+// timestamps.
 type GetQueueLimitAssociationOutput struct {
 
 	// The Unix timestamp of the date and time that the association was created.
@@ -123,7 +125,7 @@ func (c *Client) addOperationGetQueueLimitAssociationMiddlewares(stack *middlewa
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -145,9 +147,6 @@ func (c *Client) addOperationGetQueueLimitAssociationMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -112,8 +112,7 @@ type GetDomainDetailOutput struct {
 	// Reserved for future use.
 	RegistryDomainId *string
 
-	// Reseller of the domain. Domains registered or transferred using Route 53
-	// domains will have "Amazon" as the reseller.
+	// Reserved for future use.
 	Reseller *string
 
 	// An array of domain name status codes, also known as Extensible Provisioning
@@ -189,7 +188,7 @@ func (c *Client) addOperationGetDomainDetailMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -211,9 +210,6 @@ func (c *Client) addOperationGetDomainDetailMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

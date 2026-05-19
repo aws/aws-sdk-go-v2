@@ -1816,6 +1816,9 @@ type OdbNetwork struct {
 	// The user-friendly name of the ODB network.
 	DisplayName *string
 
+	// The list of EC2 Placement Group IDs associated with your ODB network.
+	Ec2PlacementGroupIds []string
+
 	// The managed services configuration for the ODB network.
 	ManagedServices *ManagedServices
 
@@ -1891,6 +1894,9 @@ type OdbNetworkSummary struct {
 
 	// The user-friendly name of the ODB network.
 	DisplayName *string
+
+	// The list of EC2 Placement Group IDs associated with your ODB network.
+	Ec2PlacementGroupIds []string
 
 	// The managed services configuration for the ODB network.
 	ManagedServices *ManagedServices

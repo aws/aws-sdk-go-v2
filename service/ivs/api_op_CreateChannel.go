@@ -29,6 +29,9 @@ func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, 
 
 type CreateChannelInput struct {
 
+	// ARN of the ad configuration associated with the channel.
+	AdConfigurationArn *string
+
 	// Whether the channel is private (enabled for playback authorization). Default:
 	// false .
 	Authorized bool
@@ -134,7 +137,7 @@ func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, o
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -156,9 +159,6 @@ func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

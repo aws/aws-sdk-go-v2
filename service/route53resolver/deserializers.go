@@ -2289,6 +2289,9 @@ func awsAwsjson11_deserializeOpErrorDeleteResolverRule(response *smithyhttp.Resp
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidRequestException(response, errorBody)
+
 	case strings.EqualFold("ResourceInUseException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceInUseException(response, errorBody)
 
@@ -2789,6 +2792,9 @@ func awsAwsjson11_deserializeOpErrorDisassociateResolverRule(response *smithyhtt
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("InvalidRequestException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidRequestException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -11132,6 +11138,15 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 				sv.Direction = types.ResolverEndpointDirection(jtv)
 			}
 
+		case "Dns64Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Dns64Enabled to be of type *bool, got %T instead", value)
+				}
+				sv.Dns64Enabled = ptr.Bool(jtv)
+			}
+
 		case "HostVPCId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11161,6 +11176,15 @@ func awsAwsjson11_deserializeDocumentResolverEndpoint(v **types.ResolverEndpoint
 					return err
 				}
 				sv.IpAddressCount = ptr.Int32(int32(i64))
+			}
+
+		case "Ipv6InternetAccessEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Ipv6InternetAccessEnabled to be of type *bool, got %T instead", value)
+				}
+				sv.Ipv6InternetAccessEnabled = ptr.Bool(jtv)
 			}
 
 		case "ModificationTime":

@@ -60,7 +60,7 @@ type CreateEventSubscriptionInput struct {
 	SubscriptionName *string
 
 	//  A Boolean value; set to true to activate the subscription, set to false to
-	// create the subscription but not active it.
+	// create the subscription but not activate it.
 	Enabled *bool
 
 	//  A list of event categories for a SourceType that you want to subscribe to. You
@@ -148,7 +148,7 @@ func (c *Client) addOperationCreateEventSubscriptionMiddlewares(stack *middlewar
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -170,9 +170,6 @@ func (c *Client) addOperationCreateEventSubscriptionMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -177,6 +177,25 @@ func (EvaluationStatus) Values() []EvaluationStatus {
 	}
 }
 
+type EventSourceMappingAction string
+
+// Enum values for EventSourceMappingAction
+const (
+	EventSourceMappingActionEnable  EventSourceMappingAction = "enable"
+	EventSourceMappingActionDisable EventSourceMappingAction = "disable"
+)
+
+// Values returns all known values for EventSourceMappingAction. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EventSourceMappingAction) Values() []EventSourceMappingAction {
+	return []EventSourceMappingAction{
+		"enable",
+		"disable",
+	}
+}
+
 type ExecutionAction string
 
 // Enum values for ExecutionAction
@@ -215,6 +234,7 @@ const (
 	ExecutionBlockTypeDocumentdb                  ExecutionBlockType = "DocumentDb"
 	ExecutionBlockTypeRdsPromoteReadReplica       ExecutionBlockType = "RdsPromoteReadReplica"
 	ExecutionBlockTypeRdsCreateCrossRegionReplica ExecutionBlockType = "RdsCreateCrossRegionReplica"
+	ExecutionBlockTypeLambdaEventSourceMapping    ExecutionBlockType = "LambdaEventSourceMapping"
 )
 
 // Values returns all known values for ExecutionBlockType. Note that this can be
@@ -236,6 +256,7 @@ func (ExecutionBlockType) Values() []ExecutionBlockType {
 		"DocumentDb",
 		"RdsPromoteReadReplica",
 		"RdsCreateCrossRegionReplica",
+		"LambdaEventSourceMapping",
 	}
 }
 
@@ -417,6 +438,24 @@ const (
 func (GlobalAuroraUngracefulBehavior) Values() []GlobalAuroraUngracefulBehavior {
 	return []GlobalAuroraUngracefulBehavior{
 		"failover",
+	}
+}
+
+type LambdaEventSourceMappingUngracefulBehavior string
+
+// Enum values for LambdaEventSourceMappingUngracefulBehavior
+const (
+	LambdaEventSourceMappingUngracefulBehaviorSkip LambdaEventSourceMappingUngracefulBehavior = "skip"
+)
+
+// Values returns all known values for LambdaEventSourceMappingUngracefulBehavior.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (LambdaEventSourceMappingUngracefulBehavior) Values() []LambdaEventSourceMappingUngracefulBehavior {
+	return []LambdaEventSourceMappingUngracefulBehavior{
+		"skip",
 	}
 }
 

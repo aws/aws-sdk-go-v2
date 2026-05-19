@@ -48,6 +48,9 @@ type CreateConnectionInput struct {
 	// of the request.
 	ClientToken *string
 
+	// The configurations of the connection.
+	Configurations []types.Configuration
+
 	// A connection description.
 	Description *string
 
@@ -97,6 +100,9 @@ type CreateConnectionOutput struct {
 	//
 	// This member is required.
 	Type types.ConnectionType
+
+	// The configurations of the connection.
+	Configurations []types.Configuration
 
 	// The connection description.
 	Description *string
@@ -153,7 +159,7 @@ func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -175,9 +181,6 @@ func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

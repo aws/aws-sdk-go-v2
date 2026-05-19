@@ -48,6 +48,11 @@ type UpdateIngressPointInput struct {
 	// The update status of an ingress endpoint.
 	StatusToUpdate types.IngressPointStatusToUpdate
 
+	// The Transport Layer Security (TLS) policy for the ingress point. Valid values
+	// are REQUIRED, OPTIONAL. Only ingress endpoints using REQUIRED or OPTIONAL as
+	// TlsPolicy can be updated.
+	TlsPolicy types.TlsPolicy
+
 	// The identifier of an existing traffic policy that you attach to an ingress
 	// endpoint resource.
 	TrafficPolicyId *string
@@ -96,7 +101,7 @@ func (c *Client) addOperationUpdateIngressPointMiddlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -118,9 +123,6 @@ func (c *Client) addOperationUpdateIngressPointMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

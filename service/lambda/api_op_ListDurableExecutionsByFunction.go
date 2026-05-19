@@ -40,7 +40,7 @@ type ListDurableExecutionsByFunctionInput struct {
 	// This member is required.
 	FunctionName *string
 
-	// Filter executions by name. Only executions with names that contain this string
+	// Filter executions by name. Only executions with names that matches this string
 	// are returned.
 	DurableExecutionName *string
 
@@ -122,7 +122,7 @@ func (c *Client) addOperationListDurableExecutionsByFunctionMiddlewares(stack *m
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -144,9 +144,6 @@ func (c *Client) addOperationListDurableExecutionsByFunctionMiddlewares(stack *m
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

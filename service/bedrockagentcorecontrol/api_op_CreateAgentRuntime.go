@@ -62,6 +62,11 @@ type CreateAgentRuntimeInput struct {
 	// Environment variables to set in the AgentCore Runtime environment.
 	EnvironmentVariables map[string]string
 
+	// The filesystem configurations to mount into the AgentCore Runtime. Use
+	// filesystem configurations to provide persistent storage to your AgentCore
+	// Runtime sessions.
+	FilesystemConfigurations []types.FilesystemConfiguration
+
 	// The life cycle configuration for the AgentCore Runtime.
 	LifecycleConfiguration *types.LifecycleConfiguration
 
@@ -151,7 +156,7 @@ func (c *Client) addOperationCreateAgentRuntimeMiddlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -173,9 +178,6 @@ func (c *Client) addOperationCreateAgentRuntimeMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

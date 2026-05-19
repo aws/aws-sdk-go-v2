@@ -914,9 +914,6 @@ func validateOpGetWhatsAppMessageTemplateInput(v *GetWhatsAppMessageTemplateInpu
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetWhatsAppMessageTemplateInput"}
-	if v.MetaTemplateId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MetaTemplateId"))
-	}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
@@ -1087,9 +1084,6 @@ func validateOpUpdateWhatsAppMessageTemplateInput(v *UpdateWhatsAppMessageTempla
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateWhatsAppMessageTemplateInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
-	}
-	if v.MetaTemplateId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MetaTemplateId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

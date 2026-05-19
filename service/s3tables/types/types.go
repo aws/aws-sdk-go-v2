@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/s3tables/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -45,11 +46,6 @@ type IcebergCompactionSettings struct {
 // Contains details about the metadata for an Iceberg table.
 type IcebergMetadata struct {
 
-	// The schema for an Iceberg table.
-	//
-	// This member is required.
-	Schema *IcebergSchema
-
 	// The partition specification for the Iceberg table. Partitioning organizes data
 	// into separate files based on the values of one or more fields, which can improve
 	// query performance by reducing the amount of data scanned. Each partition field
@@ -59,6 +55,17 @@ type IcebergMetadata struct {
 
 	// A map of custom configuration properties for the Iceberg table.
 	Properties map[string]string
+
+	// The schema for an Iceberg table. Use this property to define table schemas with
+	// primitive types only. For schemas that include nested or complex types such as
+	// struct , list , or map , use schemaV2 instead.
+	Schema *IcebergSchema
+
+	// The schema for an Iceberg table using the V2 format. Use this property to
+	// define table schemas that include nested or complex data types such as struct ,
+	// list , or map , in addition to primitive types. For schemas with only primitive
+	// types, you can use either schema or schemaV2 .
+	SchemaV2 *IcebergSchemaV2
 
 	// The sort order for the Iceberg table. Sort order defines how data is sorted
 	// within data files, which can improve query performance by enabling more
@@ -125,6 +132,36 @@ type IcebergSchema struct {
 	//
 	// This member is required.
 	Fields []SchemaField
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the schema for an Iceberg table using the V2 format.
+// This schema format supports nested and complex data types such as struct , list
+// , and map , in addition to primitive types.
+type IcebergSchemaV2 struct {
+
+	// The schema fields for the table. Each field defines a column in the table,
+	// including its name, type, and whether it is required.
+	//
+	// This member is required.
+	Fields []SchemaV2Field
+
+	// The type of the top-level schema, which is always a struct type as defined in
+	// the [Apache Iceberg specification]. This value must be struct .
+	//
+	// [Apache Iceberg specification]: https://iceberg.apache.org/spec/#schemas-and-data-types
+	//
+	// This member is required.
+	Type SchemaV2FieldType
+
+	// A list of field IDs that are used as the identifier fields for the table.
+	// Identifier fields uniquely identify a row in the table.
+	IdentifierFieldIds []int32
+
+	// An optional unique identifier for the schema. Schema IDs are used by Apache
+	// Iceberg to track schema evolution.
+	SchemaId *int32
 
 	noSmithyDocumentSerde
 }
@@ -347,6 +384,45 @@ type SchemaField struct {
 	// field. By default, this is false and null values are allowed in the field. If
 	// this is true the field does not allow null values.
 	Required bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a schema field in the V2 format. This field format
+// supports nested and complex data types such as struct , list , and map , in
+// addition to primitive types.
+type SchemaV2Field struct {
+
+	// The unique identifier for the schema field. Field IDs are used by Apache
+	// Iceberg to track schema evolution and maintain compatibility across schema
+	// changes.
+	//
+	// This member is required.
+	Id *int32
+
+	// The name of the field.
+	//
+	// This member is required.
+	Name *string
+
+	// A Boolean value that specifies whether values are required for each row in this
+	// field. If this is true , the field does not allow null values.
+	//
+	// This member is required.
+	Required *bool
+
+	// The data type of the field. This can be a primitive type string such as boolean
+	// , int , long , float , double , string , binary , date , timestamp , or
+	// timestamptz , or a complex type represented as a JSON object for nested types
+	// such as struct , list , or map . For more information, see the [Apache Iceberg schemas and data types documentation].
+	//
+	// [Apache Iceberg schemas and data types documentation]: https://iceberg.apache.org/spec/#schemas-and-data-types
+	//
+	// This member is required.
+	Type document.Interface
+
+	// An optional description of the field.
+	Doc *string
 
 	noSmithyDocumentSerde
 }

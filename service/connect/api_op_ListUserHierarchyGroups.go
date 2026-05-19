@@ -12,9 +12,9 @@ import (
 )
 
 // Provides summary information about the hierarchy groups for the specified
-// Amazon Connect instance.
+// Connect Customer instance.
 //
-// For more information about agent hierarchies, see [Set Up Agent Hierarchies] in the Amazon Connect
+// For more information about agent hierarchies, see [Set Up Agent Hierarchies] in the Connect Customer
 // Administrator Guide.
 //
 // [Set Up Agent Hierarchies]: https://docs.aws.amazon.com/connect/latest/adminguide/agent-hierarchy.html
@@ -35,8 +35,8 @@ func (c *Client) ListUserHierarchyGroups(ctx context.Context, params *ListUserHi
 
 type ListUserHierarchyGroupsInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -102,7 +102,7 @@ func (c *Client) addOperationListUserHierarchyGroupsMiddlewares(stack *middlewar
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -124,9 +124,6 @@ func (c *Client) addOperationListUserHierarchyGroupsMiddlewares(stack *middlewar
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

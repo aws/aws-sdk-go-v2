@@ -1742,10 +1742,10 @@ type CmafEncryptionSettings struct {
 	// segment and insert the first #EXT-X-KEY immediately before the first encrypted
 	// fragment. This feature is supported exclusively for CMAF HLS (fMP4) outputs and
 	// is compatible with all existing key provider integrations (SPEKE v1, SPEKE v2,
-	// and Static Key encryption). Supported codecs: H.264 and H.265 video codecs, and
-	// AAC audio codec. Choose Enabled to activate Clear Lead DRM optimization. Choose
-	// Disabled to use standard encryption where all segments are encrypted from the
-	// beginning.
+	// and Static Key encryption). Supported codecs: H.264, H.265, and AV1 video
+	// codecs, and AAC audio codec. Choose Enabled to activate Clear Lead DRM
+	// optimization. Choose Disabled to use standard encryption where all segments are
+	// encrypted from the beginning.
 	ClearLead HlsClearLead
 
 	// This is a 128-bit, 16-byte hex value represented by a 32-character text string.
@@ -2380,6 +2380,11 @@ type Container struct {
 	// media file has a format that the MediaConvert Probe operation does not
 	// recognize.
 	Format Format
+
+	// The start timecode of the media file, in HH:MM:SS:FF format (or HH:MM:SS;FF for
+	// drop frame timecode). Note that this field is null when the container does not
+	// include an embedded start timecode.
+	StartTimecode *string
 
 	// Details about each track (video, audio, or data) in the media file.
 	Tracks []Track
@@ -3388,6 +3393,30 @@ type Eac3Settings struct {
 	// When encoding 2/0 audio, sets whether Dolby Surround is matrix encoded into the
 	// two channels.
 	SurroundMode Eac3SurroundMode
+
+	noSmithyDocumentSerde
+}
+
+// The Elemental Inference configuration used in this job.
+type ElementalInferenceConfiguration struct {
+
+	// A list of Elemental Inference features used in this job.
+	Features []ElementalInferenceFeature
+
+	// A list of Elemental Inference feeds used by this job.
+	Feeds []ElementalInferenceFeed
+
+	noSmithyDocumentSerde
+}
+
+// Elemental Inference Feed.
+type ElementalInferenceFeed struct {
+
+	// Feed ARN.
+	Arn *string
+
+	// Elemental Inference Feed management state.
+	FeedManagementState ElementalInferenceFeedManagementState
 
 	noSmithyDocumentSerde
 }
@@ -5362,6 +5391,14 @@ type Input struct {
 	// horizontal interlacing artifacts.
 	InputScanType InputScanType
 
+	// Specify the enhancement layer input video file path for Multi View outputs. The
+	// base layer input is treated as the left eye and this Multi View input is treated
+	// as the right eye. Only one Multi View input is currently supported. MediaConvert
+	// encodes both views into a single MV-HEVC output codec. When you add
+	// MultiViewSettings to your job, you can only produce Multi View outputs. Adding
+	// any other codec output to the same job is not supported.
+	MultiViewSettings []MultiViewSettings
+
 	// Use Selection placement to define the video area in your output frame. The area
 	// outside of the rectangle that you specify here is black. If you specify a value
 	// here, it will override any value that you specify in the output setting
@@ -5657,6 +5694,14 @@ type InputTemplate struct {
 	// horizontal interlacing artifacts.
 	InputScanType InputScanType
 
+	// Specify the enhancement layer input video file path for Multi View outputs. The
+	// base layer input is treated as the left eye and this Multi View input is treated
+	// as the right eye. Only one Multi View input is currently supported. MediaConvert
+	// encodes both views into a single MV-HEVC output codec. When you add
+	// MultiViewSettings to your job, you can only produce Multi View outputs. Adding
+	// any other codec output to the same job is not supported.
+	MultiViewSettings []MultiViewSettings
+
 	// Use Selection placement to define the video area in your output frame. The area
 	// outside of the rectangle that you specify here is black. If you specify a value
 	// here, it will override any value that you specify in the output setting
@@ -5875,6 +5920,9 @@ type Job struct {
 
 	// A job's phase can be PROBING, TRANSCODING OR UPLOADING
 	CurrentPhase JobPhase
+
+	// The Elemental Inference configuration used in this job.
+	ElementalInferenceConfiguration *ElementalInferenceConfiguration
 
 	// Error code for the job
 	ErrorCode *int32
@@ -7494,6 +7542,31 @@ type MsSmoothGroupSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Input settings for MultiView Settings. You can include exactly one input as
+// enhancement layer.
+type MultiViewInput struct {
+
+	// Specify the input file S3, HTTP, or HTTPS URL for your right eye view video.
+	FileInput *string
+
+	noSmithyDocumentSerde
+}
+
+// Specify the enhancement layer input video file path for Multi View outputs. The
+// base layer input is treated as the left eye and this Multi View input is treated
+// as the right eye. Only one Multi View input is currently supported. MediaConvert
+// encodes both views into a single MV-HEVC output codec. When you add
+// MultiViewSettings to your job, you can only produce Multi View outputs. Adding
+// any other codec output to the same job is not supported.
+type MultiViewSettings struct {
+
+	// Input settings for MultiView Settings. You can include exactly one input as
+	// enhancement layer.
+	Input *MultiViewInput
+
+	noSmithyDocumentSerde
+}
+
 // These settings relate to your MXF output container.
 type MxfSettings struct {
 
@@ -8272,6 +8345,10 @@ type Queue struct {
 
 	// The timestamp in epoch seconds for when you most recently updated the queue.
 	LastUpdated *time.Time
+
+	// Specify the maximum number of Elemental Inference feeds MediaConvert can
+	// process concurrently.
+	MaximumConcurrentFeeds *int32
 
 	// Specifies whether the pricing plan for the queue is on-demand or reserved. For
 	// on-demand, you pay per minute, billed in increments of .01 minute. For reserved,
@@ -9219,7 +9296,10 @@ type VideoDescription struct {
 
 	// Specify the video Scaling behavior when your output has a different resolution
 	// than your input. For more information, see
-	// https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html
+	// https://docs.aws.amazon.com/mediaconvert/latest/ug/video-scaling.html Select
+	// Smart Cropping using Elemental Inference as your scaling behavior to have
+	// Elemental Inference automatically crop your video. Smart Crop requires a
+	// vertical output aspect ratio (1:1 is the widest aspect ratio supported).
 	ScalingBehavior ScalingBehavior
 
 	// Use Sharpness setting to specify the strength of anti-aliasing. This setting

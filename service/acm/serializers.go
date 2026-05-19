@@ -11,6 +11,7 @@ import (
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"path"
@@ -927,6 +928,67 @@ func (m *awsAwsjson11_serializeOpRevokeCertificate) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpSearchCertificates struct {
+}
+
+func (*awsAwsjson11_serializeOpSearchCertificates) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpSearchCertificates) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SearchCertificatesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("CertificateManager.SearchCertificates")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentSearchCertificatesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateCertificateOptions struct {
 }
 
@@ -987,6 +1049,130 @@ func (m *awsAwsjson11_serializeOpUpdateCertificateOptions) HandleSerialize(ctx c
 	span.End()
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentAcmCertificateMetadataFilter(v types.AcmCertificateMetadataFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.AcmCertificateMetadataFilterMemberExported:
+		av := object.Key("Exported")
+		av.Boolean(uv.Value)
+
+	case *types.AcmCertificateMetadataFilterMemberExportOption:
+		av := object.Key("ExportOption")
+		av.String(string(uv.Value))
+
+	case *types.AcmCertificateMetadataFilterMemberInUse:
+		av := object.Key("InUse")
+		av.Boolean(uv.Value)
+
+	case *types.AcmCertificateMetadataFilterMemberManagedBy:
+		av := object.Key("ManagedBy")
+		av.String(string(uv.Value))
+
+	case *types.AcmCertificateMetadataFilterMemberRenewalStatus:
+		av := object.Key("RenewalStatus")
+		av.String(string(uv.Value))
+
+	case *types.AcmCertificateMetadataFilterMemberStatus:
+		av := object.Key("Status")
+		av.String(string(uv.Value))
+
+	case *types.AcmCertificateMetadataFilterMemberType:
+		av := object.Key("Type")
+		av.String(string(uv.Value))
+
+	case *types.AcmCertificateMetadataFilterMemberValidationMethod:
+		av := object.Key("ValidationMethod")
+		av.String(string(uv.Value))
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCertificateFilter(v types.CertificateFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CertificateFilterMemberAcmCertificateMetadataFilter:
+		av := object.Key("AcmCertificateMetadataFilter")
+		if err := awsAwsjson11_serializeDocumentAcmCertificateMetadataFilter(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CertificateFilterMemberCertificateArn:
+		av := object.Key("CertificateArn")
+		av.String(uv.Value)
+
+	case *types.CertificateFilterMemberX509AttributeFilter:
+		av := object.Key("X509AttributeFilter")
+		if err := awsAwsjson11_serializeDocumentX509AttributeFilter(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCertificateFilterStatement(v types.CertificateFilterStatement, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CertificateFilterStatementMemberAnd:
+		av := object.Key("And")
+		if err := awsAwsjson11_serializeDocumentCertificateFilterStatementList(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CertificateFilterStatementMemberFilter:
+		av := object.Key("Filter")
+		if err := awsAwsjson11_serializeDocumentCertificateFilter(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CertificateFilterStatementMemberNot:
+		av := object.Key("Not")
+		if err := awsAwsjson11_serializeDocumentCertificateFilterStatement(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.CertificateFilterStatementMemberOr:
+		av := object.Key("Or")
+		if err := awsAwsjson11_serializeDocumentCertificateFilterStatementList(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCertificateFilterStatementList(v []types.CertificateFilterStatement, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsAwsjson11_serializeDocumentCertificateFilterStatement(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCertificateOptions(v *types.CertificateOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1012,6 +1198,40 @@ func awsAwsjson11_serializeDocumentCertificateStatuses(v []types.CertificateStat
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCommonNameFilter(v *types.CommonNameFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ComparisonOperator) > 0 {
+		ok := object.Key("ComparisonOperator")
+		ok.String(string(v.ComparisonOperator))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDnsNameFilter(v *types.DnsNameFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ComparisonOperator) > 0 {
+		ok := object.Key("ComparisonOperator")
+		ok.String(string(v.ComparisonOperator))
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
 	return nil
 }
 
@@ -1139,6 +1359,42 @@ func awsAwsjson11_serializeDocumentKeyUsageFilterList(v []types.KeyUsageName, va
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSubjectAlternativeNameFilter(v types.SubjectAlternativeNameFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.SubjectAlternativeNameFilterMemberDnsName:
+		av := object.Key("DnsName")
+		if err := awsAwsjson11_serializeDocumentDnsNameFilter(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSubjectFilter(v types.SubjectFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.SubjectFilterMemberCommonName:
+		av := object.Key("CommonName")
+		if err := awsAwsjson11_serializeDocumentCommonNameFilter(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1165,6 +1421,75 @@ func awsAwsjson11_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 		if err := awsAwsjson11_serializeDocumentTag(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentTimestampRange(v *types.TimestampRange, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.End != nil {
+		ok := object.Key("End")
+		ok.Double(smithytime.FormatEpochSeconds(*v.End))
+	}
+
+	if v.Start != nil {
+		ok := object.Key("Start")
+		ok.Double(smithytime.FormatEpochSeconds(*v.Start))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentX509AttributeFilter(v types.X509AttributeFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.X509AttributeFilterMemberExtendedKeyUsage:
+		av := object.Key("ExtendedKeyUsage")
+		av.String(string(uv.Value))
+
+	case *types.X509AttributeFilterMemberKeyAlgorithm:
+		av := object.Key("KeyAlgorithm")
+		av.String(string(uv.Value))
+
+	case *types.X509AttributeFilterMemberKeyUsage:
+		av := object.Key("KeyUsage")
+		av.String(string(uv.Value))
+
+	case *types.X509AttributeFilterMemberNotAfter:
+		av := object.Key("NotAfter")
+		if err := awsAwsjson11_serializeDocumentTimestampRange(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.X509AttributeFilterMemberNotBefore:
+		av := object.Key("NotBefore")
+		if err := awsAwsjson11_serializeDocumentTimestampRange(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.X509AttributeFilterMemberSerialNumber:
+		av := object.Key("SerialNumber")
+		av.String(uv.Value)
+
+	case *types.X509AttributeFilterMemberSubject:
+		av := object.Key("Subject")
+		if err := awsAwsjson11_serializeDocumentSubjectFilter(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.X509AttributeFilterMemberSubjectAlternativeName:
+		av := object.Key("SubjectAlternativeName")
+		if err := awsAwsjson11_serializeDocumentSubjectAlternativeNameFilter(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
 	}
 	return nil
 }
@@ -1477,6 +1802,40 @@ func awsAwsjson11_serializeOpDocumentRevokeCertificateInput(v *RevokeCertificate
 	if len(v.RevocationReason) > 0 {
 		ok := object.Key("RevocationReason")
 		ok.String(string(v.RevocationReason))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentSearchCertificatesInput(v *SearchCertificatesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FilterStatement != nil {
+		ok := object.Key("FilterStatement")
+		if err := awsAwsjson11_serializeDocumentCertificateFilterStatement(v.FilterStatement, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.SortBy) > 0 {
+		ok := object.Key("SortBy")
+		ok.String(string(v.SortBy))
+	}
+
+	if len(v.SortOrder) > 0 {
+		ok := object.Key("SortOrder")
+		ok.String(string(v.SortOrder))
 	}
 
 	return nil

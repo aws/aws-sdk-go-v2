@@ -779,6 +779,11 @@ type FirewallPolicyResponse struct {
 	// This member is required.
 	FirewallPolicyName *string
 
+	// The total number of domain name specifications across all domain list rule
+	// groups in the firewall policy that use the stateful-domain-rulegroup resource
+	// type.
+	ConsumedStatefulDomainCapacity *int32
+
 	// The number of capacity units currently consumed by the policy's stateful rules.
 	ConsumedStatefulRuleCapacity *int32
 

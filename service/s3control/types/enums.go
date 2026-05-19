@@ -112,6 +112,10 @@ const (
 	ComputeObjectChecksumAlgorithmMd5       ComputeObjectChecksumAlgorithm = "MD5"
 	ComputeObjectChecksumAlgorithmSha1      ComputeObjectChecksumAlgorithm = "SHA1"
 	ComputeObjectChecksumAlgorithmSha256    ComputeObjectChecksumAlgorithm = "SHA256"
+	ComputeObjectChecksumAlgorithmSha512    ComputeObjectChecksumAlgorithm = "SHA512"
+	ComputeObjectChecksumAlgorithmXxhash64  ComputeObjectChecksumAlgorithm = "XXHASH64"
+	ComputeObjectChecksumAlgorithmXxhash3   ComputeObjectChecksumAlgorithm = "XXHASH3"
+	ComputeObjectChecksumAlgorithmXxhash128 ComputeObjectChecksumAlgorithm = "XXHASH128"
 )
 
 // Values returns all known values for ComputeObjectChecksumAlgorithm. Note that
@@ -127,6 +131,10 @@ func (ComputeObjectChecksumAlgorithm) Values() []ComputeObjectChecksumAlgorithm 
 		"MD5",
 		"SHA1",
 		"SHA256",
+		"SHA512",
+		"XXHASH64",
+		"XXHASH3",
+		"XXHASH128",
 	}
 }
 
@@ -836,6 +844,11 @@ const (
 	S3ChecksumAlgorithmSha1      S3ChecksumAlgorithm = "SHA1"
 	S3ChecksumAlgorithmSha256    S3ChecksumAlgorithm = "SHA256"
 	S3ChecksumAlgorithmCrc64nvme S3ChecksumAlgorithm = "CRC64NVME"
+	S3ChecksumAlgorithmSha512    S3ChecksumAlgorithm = "SHA512"
+	S3ChecksumAlgorithmMd5       S3ChecksumAlgorithm = "MD5"
+	S3ChecksumAlgorithmXxhash64  S3ChecksumAlgorithm = "XXHASH64"
+	S3ChecksumAlgorithmXxhash3   S3ChecksumAlgorithm = "XXHASH3"
+	S3ChecksumAlgorithmXxhash128 S3ChecksumAlgorithm = "XXHASH128"
 )
 
 // Values returns all known values for S3ChecksumAlgorithm. Note that this can be
@@ -849,6 +862,11 @@ func (S3ChecksumAlgorithm) Values() []S3ChecksumAlgorithm {
 		"SHA1",
 		"SHA256",
 		"CRC64NVME",
+		"SHA512",
+		"MD5",
+		"XXHASH64",
+		"XXHASH3",
+		"XXHASH128",
 	}
 }
 

@@ -90,6 +90,9 @@ type UpdateOauth2CredentialProviderOutput struct {
 	// after they complete the authorization flow.
 	CallbackUrl *string
 
+	// The current status of the updated OAuth2 credential provider.
+	Status types.Status
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -130,7 +133,7 @@ func (c *Client) addOperationUpdateOauth2CredentialProviderMiddlewares(stack *mi
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -152,9 +155,6 @@ func (c *Client) addOperationUpdateOauth2CredentialProviderMiddlewares(stack *mi
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

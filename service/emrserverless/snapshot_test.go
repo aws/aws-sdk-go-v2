@@ -134,6 +134,42 @@ func TestCheckSnapshot_GetJobRun(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetResourceDashboard(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourceDashboard(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourceDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetSessionEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSessionEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetSessionEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListApplications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListApplications(context.Background(), nil, func(o *Options) {
@@ -163,6 +199,18 @@ func TestCheckSnapshot_ListJobRuns(t *testing.T) {
 	_, err := svc.ListJobRuns(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListJobRuns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListSessions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -206,6 +254,18 @@ func TestCheckSnapshot_StartJobRun(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_StartSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_StopApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopApplication(context.Background(), nil, func(o *Options) {
@@ -223,6 +283,18 @@ func TestCheckSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_TerminateSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TerminateSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "TerminateSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -325,6 +397,42 @@ func TestUpdateSnapshot_GetJobRun(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetResourceDashboard(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourceDashboard(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourceDashboard")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetSessionEndpoint(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetSessionEndpoint(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetSessionEndpoint")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListApplications(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListApplications(context.Background(), nil, func(o *Options) {
@@ -354,6 +462,18 @@ func TestUpdateSnapshot_ListJobRuns(t *testing.T) {
 	_, err := svc.ListJobRuns(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListJobRuns")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListSessions(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListSessions(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListSessions")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -397,6 +517,18 @@ func TestUpdateSnapshot_StartJobRun(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_StartSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartSession")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_StopApplication(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.StopApplication(context.Background(), nil, func(o *Options) {
@@ -414,6 +546,18 @@ func TestUpdateSnapshot_TagResource(t *testing.T) {
 	_, err := svc.TagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "TagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_TerminateSession(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.TerminateSession(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "TerminateSession")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

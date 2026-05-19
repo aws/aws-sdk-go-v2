@@ -12,9 +12,9 @@ import (
 
 // The name of the flow.
 //
-// You can also create and update flows using the [Amazon Connect Flow language].
+// You can also create and update flows using the [Connect Customer Flow language].
 //
-// [Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
+// [Connect Customer Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
 func (c *Client) UpdateContactFlowName(ctx context.Context, params *UpdateContactFlowNameInput, optFns ...func(*Options)) (*UpdateContactFlowNameOutput, error) {
 	if params == nil {
 		params = &UpdateContactFlowNameInput{}
@@ -37,7 +37,7 @@ type UpdateContactFlowNameInput struct {
 	// This member is required.
 	ContactFlowId *string
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Connect Customer instance.
 	//
 	// This member is required.
 	InstanceId *string
@@ -92,7 +92,7 @@ func (c *Client) addOperationUpdateContactFlowNameMiddlewares(stack *middleware.
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -114,9 +114,6 @@ func (c *Client) addOperationUpdateContactFlowNameMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

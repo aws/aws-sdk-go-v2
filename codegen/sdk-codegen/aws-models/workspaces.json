@@ -7434,6 +7434,12 @@
                     "traits": {
                         "smithy.api#enumValue": "COMPUTE_TYPE"
                     }
+                },
+                "PROTOCOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROTOCOL"
+                    }
                 }
             }
         },
@@ -7470,6 +7476,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UPDATE_IN_PROGRESS"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
                     }
                 }
             }

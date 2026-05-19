@@ -34,7 +34,7 @@ type Check struct {
 	//   - HOST_COUNT : Checks that your environment has a minimum of 4 hosts.
 	//
 	// If this check fails, you will need to add hosts so that your environment meets
-	//   this minimum requirement. Amazon EVS only supports environments with 4-16 hosts.
+	//   this minimum requirement. Amazon EVS only supports environments with 4-32 hosts.
 	Type CheckType
 
 	noSmithyDocumentSerde
@@ -50,6 +50,67 @@ type ConnectivityInfo struct {
 	//
 	// This member is required.
 	PrivateRouteServerPeerings []string
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents a connector for an Amazon EVS environment. A
+// connector establishes a vCenter connection using the credentials stored in
+// Amazon Web Services Secrets Manager.
+type Connector struct {
+
+	// The fully qualified domain name (FQDN) of the VCF appliance that the connector
+	// connects to.
+	ApplianceFqdn *string
+
+	// A list of checks that are run on the connector.
+	Checks []ConnectorCheck
+
+	// The unique ID of the connector.
+	ConnectorId *string
+
+	// The date and time that the connector was created.
+	CreatedAt *time.Time
+
+	// The unique ID of the environment that the connector belongs to.
+	EnvironmentId *string
+
+	// The date and time that the connector was modified.
+	ModifiedAt *time.Time
+
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Secrets Manager
+	// secret that stores the credentials for the VCF appliance.
+	SecretArn *string
+
+	// The state of the connector.
+	State ConnectorState
+
+	// A detailed description of the connector state.
+	StateDetails *string
+
+	// The status of the connector.
+	Status CheckResult
+
+	// The type of the connector.
+	Type ConnectorType
+
+	noSmithyDocumentSerde
+}
+
+// A check on a connector to identify connectivity health.
+type ConnectorCheck struct {
+
+	// The time when connector health began to be impaired.
+	ImpairedSince *time.Time
+
+	// The date and time of the last check attempt.
+	LastCheckAttempt *time.Time
+
+	// The check result.
+	Result CheckResult
+
+	// The check type.
+	Type CheckType
 
 	noSmithyDocumentSerde
 }
@@ -120,8 +181,13 @@ type Environment struct {
 
 	//  The license information that Amazon EVS requires to create an environment.
 	// Amazon EVS requires two license keys: a VCF solution key and a vSAN license key.
-	// The VCF solution key must cover a minimum of 256 cores. The vSAN license key
-	// must provide at least 110 TiB of vSAN capacity.
+	// The VCF solution key must meet minimum core requirements, and the vSAN license
+	// key must meet minimum capacity requirements for your selected instance type.
+	//
+	// For information about minimum license requirements, see [the VCF subscriptions section] in the Amazon EVS User
+	// Guide.
+	//
+	// [the VCF subscriptions section]: https://docs.aws.amazon.com/evs/latest/userguide/vcf-license-mgmt.html
 	LicenseInfo []LicenseInfo
 
 	//  The date and time that the environment was modified.
@@ -202,10 +268,26 @@ type EnvironmentSummary struct {
 	noSmithyDocumentSerde
 }
 
+// An object that contains error details for an entitlement.
+type ErrorDetail struct {
+
+	// The error code.
+	//
+	// This member is required.
+	ErrorCode *string
+
+	// The error message.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // An ESX host that runs on an Amazon EC2 bare metal instance. Four hosts are
 // created in an Amazon EVS environment during environment creation. You can add
 // hosts to an environment using the CreateEnvironmentHost operation. Amazon EVS
-// supports 4-16 hosts per environment.
+// supports 4-32 hosts per environment.
 type Host struct {
 
 	//  The date and time that the host was created.
@@ -225,8 +307,6 @@ type Host struct {
 	HostState HostState
 
 	// The EC2 instance type of the host.
-	//
-	// Currently, Amazon EVS supports only the i4i.metal instance type.
 	//
 	// EC2 instances created through Amazon EVS do not support associating an IAM
 	// instance profile.
@@ -266,8 +346,6 @@ type HostInfoForCreate struct {
 	HostName *string
 
 	// The EC2 instance type that represents the host.
-	//
-	// Currently, Amazon EVS supports only the i4i.metal instance type.
 	//
 	// This member is required.
 	InstanceType InstanceType
@@ -423,13 +501,13 @@ type LicenseInfo struct {
 
 	//  The VCF solution key. This license unlocks VMware VCF product features,
 	// including vSphere, NSX, SDDC Manager, and vCenter Server. The VCF solution key
-	// must cover a minimum of 256 cores.
+	// must meet the instance-type-specific minimum core requirements.
 	//
 	// This member is required.
 	SolutionKey *string
 
 	//  The VSAN license key. This license unlocks vSAN features. The vSAN license key
-	// must provide at least 110 TiB of vSAN capacity.
+	// must meet the instance-type-specific minimum capacity requirements.
 	//
 	// This member is required.
 	VsanKey *string
@@ -627,6 +705,43 @@ type Vlan struct {
 
 	//  The state of the VLAN.
 	VlanState VlanState
+
+	noSmithyDocumentSerde
+}
+
+// An object that represents a Windows Server License entitlement for a virtual
+// machine in an Amazon EVS environment.
+type VmEntitlement struct {
+
+	// The unique ID of the connector associated with the entitlement.
+	ConnectorId *string
+
+	// The unique ID of the environment.
+	EnvironmentId *string
+
+	// The error details associated with the entitlement, if applicable.
+	ErrorDetail *ErrorDetail
+
+	// The date and time that the entitlement was last synced.
+	LastSyncedAt *time.Time
+
+	// The date and time that the entitlement started.
+	StartedAt *time.Time
+
+	// The status of the entitlement.
+	Status EntitlementStatus
+
+	// The date and time that the entitlement stopped.
+	StoppedAt *time.Time
+
+	// The type of entitlement.
+	Type EntitlementType
+
+	// The unique ID of the virtual machine.
+	VmId *string
+
+	// The name of the virtual machine.
+	VmName *string
 
 	noSmithyDocumentSerde
 }

@@ -98,6 +98,18 @@ func TestCheckSnapshot_BatchStartViewerSessionRevocation(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateAdConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAdConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateAdConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateChannel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateChannel(context.Background(), nil, func(o *Options) {
@@ -139,6 +151,18 @@ func TestCheckSnapshot_CreateStreamKey(t *testing.T) {
 	_, err := svc.CreateStreamKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateStreamKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteAdConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAdConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteAdConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -199,6 +223,18 @@ func TestCheckSnapshot_DeleteStreamKey(t *testing.T) {
 	_, err := svc.DeleteStreamKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteStreamKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetAdConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAdConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetAdConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -295,6 +331,30 @@ func TestCheckSnapshot_ImportPlaybackKeyPair(t *testing.T) {
 	_, err := svc.ImportPlaybackKeyPair(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ImportPlaybackKeyPair")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_InsertAdBreak(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InsertAdBreak(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "InsertAdBreak")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListAdConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAdConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListAdConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -517,6 +577,18 @@ func TestUpdateSnapshot_BatchStartViewerSessionRevocation(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateAdConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateAdConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateAdConfiguration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateChannel(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateChannel(context.Background(), nil, func(o *Options) {
@@ -558,6 +630,18 @@ func TestUpdateSnapshot_CreateStreamKey(t *testing.T) {
 	_, err := svc.CreateStreamKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateStreamKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteAdConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteAdConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteAdConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -618,6 +702,18 @@ func TestUpdateSnapshot_DeleteStreamKey(t *testing.T) {
 	_, err := svc.DeleteStreamKey(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteStreamKey")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetAdConfiguration(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetAdConfiguration(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetAdConfiguration")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -714,6 +810,30 @@ func TestUpdateSnapshot_ImportPlaybackKeyPair(t *testing.T) {
 	_, err := svc.ImportPlaybackKeyPair(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ImportPlaybackKeyPair")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_InsertAdBreak(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.InsertAdBreak(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "InsertAdBreak")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListAdConfigurations(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListAdConfigurations(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListAdConfigurations")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

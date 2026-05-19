@@ -1032,6 +1032,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether target name server metrics are enabled for the outbound Resolver endpoints. \n\t\tWhen set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. \n\t\tWhen set to false, metrics are not published. Default is false. This is not supported for inbound Resolver endpoints.</p>\n         <note>\n            <p>Standard CloudWatch pricing and charges are applied for using the Route 53 Resolver \n\tendpoint target name server metrics. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html\">Detailed metrics</a>.</p>\n         </note>"
                     }
+                },
+                "Dns64Enabled": {
+                    "target": "com.amazonaws.route53resolver#Dns64Enabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether DNS64 is enabled for the inbound Resolver endpoint. When set to <code>true</code>, Route 53 Resolver\n\t\t\tsynthesizes AAAA (IPv6) records for IPv4-only services by prepending the <code>64:ff9b::/96</code> prefix to the IPv4 address.\n\t\t\tThis enables IPv6-only clients that send queries through the inbound endpoint to reach IPv4-only services.\n\t\t\tDNS64 works with NAT64 to provide complete IPv6-to-IPv4 translation. Default is false.</p>"
+                    }
+                },
+                "Ipv6InternetAccessEnabled": {
+                    "target": "com.amazonaws.route53resolver#Ipv6InternetAccessEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether IPv6 internet access is enabled for the outbound Resolver endpoint. When set to <code>true</code>,\n\t\t\tthe endpoint elastic network interfaces (ENIs) can forward DNS queries to public IPv6 targets through an internet gateway.\n\t\t\tDefault is false.</p>\n         <important>\n            <p>When you enable IPv6 internet access, use network controls like security groups, NACLs, or egress-only internet gateways\n\t\t\t\tto protect the endpoint ENIs from unsolicited ingress traffic. Be aware that some network controls can affect DNS query\n\t\t\t\tthroughput due to connection tracking. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/ec2/latest/userguide/security-group-connection-tracking.html\">Amazon EC2 security group connection tracking</a>\n\t\t\t\tand <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver-endpoint-scaling.html\">Resolver endpoint scaling</a>.</p>\n         </important>"
+                    }
                 }
             },
             "traits": {
@@ -1662,6 +1674,9 @@
                     "target": "com.amazonaws.route53resolver#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.route53resolver#InvalidRequestException"
+                },
+                {
                     "target": "com.amazonaws.route53resolver#ResourceInUseException"
                 },
                 {
@@ -1926,6 +1941,9 @@
                     "target": "com.amazonaws.route53resolver#InvalidParameterException"
                 },
                 {
+                    "target": "com.amazonaws.route53resolver#InvalidRequestException"
+                },
+                {
                     "target": "com.amazonaws.route53resolver#ResourceNotFoundException"
                 },
                 {
@@ -1971,6 +1989,9 @@
             "traits": {
                 "smithy.api#output": {}
             }
+        },
+        "com.amazonaws.route53resolver#Dns64Enabled": {
+            "type": "boolean"
         },
         "com.amazonaws.route53resolver#DnsThreatProtection": {
             "type": "enum",
@@ -4004,6 +4025,9 @@
                     "max": 39
                 }
             }
+        },
+        "com.amazonaws.route53resolver#Ipv6InternetAccessEnabled": {
+            "type": "boolean"
         },
         "com.amazonaws.route53resolver#LimitExceededException": {
             "type": "structure",
@@ -6180,6 +6204,18 @@
                     "target": "com.amazonaws.route53resolver#TargetNameServerMetricsEnabled",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether target name server metrics are enabled for the outbound Resolver endpoint. \n\t\tWhen enabled, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. \n\t\tWhen disabled, these metrics are not published. This feature is not supported for inbound Resolver endpoint.</p>"
+                    }
+                },
+                "Dns64Enabled": {
+                    "target": "com.amazonaws.route53resolver#Dns64Enabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether DNS64 is enabled for the inbound Resolver endpoint. When <code>true</code>, Route 53 Resolver\n\t\t\tsynthesizes AAAA (IPv6) records for IPv4-only services by prepending the <code>64:ff9b::/96</code> prefix to the IPv4 address.</p>"
+                    }
+                },
+                "Ipv6InternetAccessEnabled": {
+                    "target": "com.amazonaws.route53resolver#Ipv6InternetAccessEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether IPv6 internet access is enabled for the outbound Resolver endpoint. When <code>true</code>,\n\t\t\tthe endpoint elastic network interfaces (ENIs) can forward DNS queries to public IPv6 targets through an internet gateway.</p>"
                     }
                 }
             },
@@ -9147,6 +9183,18 @@
                     "target": "com.amazonaws.route53resolver#TargetNameServerMetricsEnabled",
                     "traits": {
                         "smithy.api#documentation": "<p>Updates whether target name server metrics are enabled for the outbound Resolver endpoints. \n\t\tWhen set to true, one-minute granular metrics are published in CloudWatch for each target name server associated with this endpoint. \n\t\tWhen set to false, metrics are not published. This setting is not supported for inbound Resolver endpoints.</p>\n         <note>\n            <p>Standard CloudWatch pricing and charges are applied for using the Route 53 Resolver \n\tendpoint target name server metrics. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/monitoring-resolver-with-cloudwatch.html\">Detailed metrics</a>.</p>\n         </note>"
+                    }
+                },
+                "Dns64Enabled": {
+                    "target": "com.amazonaws.route53resolver#Dns64Enabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether DNS64 is enabled for the inbound Resolver endpoint. When set to <code>true</code>, Route 53 Resolver\n\t\t\tsynthesizes AAAA (IPv6) records for IPv4-only services by prepending the <code>64:ff9b::/96</code> prefix to the IPv4 address.\n\t\t\tThis enables IPv6-only clients that send queries through the inbound endpoint to reach IPv4-only services.\n\t\t\tDNS64 works with NAT64 to provide complete IPv6-to-IPv4 translation.</p>"
+                    }
+                },
+                "Ipv6InternetAccessEnabled": {
+                    "target": "com.amazonaws.route53resolver#Ipv6InternetAccessEnabled",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether IPv6 internet access is enabled for the outbound Resolver endpoint. When set to <code>true</code>,\n\t\t\tthe endpoint elastic network interfaces (ENIs) can forward DNS queries to public IPv6 targets through an internet gateway.</p>\n         <important>\n            <p>When you enable IPv6 internet access, use network controls like security groups, NACLs, or egress-only internet gateways\n\t\t\t\tto protect the endpoint ENIs from unsolicited ingress traffic. Be aware that some network controls can affect DNS query\n\t\t\t\tthroughput due to connection tracking. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/ec2/latest/userguide/security-group-connection-tracking.html\">Amazon EC2 security group connection tracking</a>\n\t\t\t\tand <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/best-practices-resolver-endpoint-scaling.html\">Resolver endpoint scaling</a>.</p>\n         </important>"
                     }
                 }
             },

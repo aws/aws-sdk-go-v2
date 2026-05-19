@@ -450,6 +450,26 @@ func (m *validateOpGenerateMac) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetKeyLastUsage struct {
+}
+
+func (*validateOpGetKeyLastUsage) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetKeyLastUsage) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetKeyLastUsageInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetKeyLastUsageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetKeyPolicy struct {
 }
 
@@ -1038,6 +1058,10 @@ func addOpGenerateMacValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGenerateMac{}, middleware.After)
 }
 
+func addOpGetKeyLastUsageValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetKeyLastUsage{}, middleware.After)
+}
+
 func addOpGetKeyPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetKeyPolicy{}, middleware.After)
 }
@@ -1550,6 +1574,21 @@ func validateOpGenerateMacInput(v *GenerateMacInput) error {
 	}
 	if len(v.MacAlgorithm) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("MacAlgorithm"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetKeyLastUsageInput(v *GetKeyLastUsageInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetKeyLastUsageInput"}
+	if v.KeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -108,6 +108,9 @@ const (
 	MetricSourceTypeServiceOperation  MetricSourceType = "ServiceOperation"
 	MetricSourceTypeCloudwatchMetric  MetricSourceType = "CloudWatchMetric"
 	MetricSourceTypeServiceDependency MetricSourceType = "ServiceDependency"
+	MetricSourceTypeAppmonitor        MetricSourceType = "AppMonitor"
+	MetricSourceTypeCanary            MetricSourceType = "Canary"
+	MetricSourceTypeService           MetricSourceType = "Service"
 )
 
 // Values returns all known values for MetricSourceType. Note that this can be
@@ -119,6 +122,30 @@ func (MetricSourceType) Values() []MetricSourceType {
 		"ServiceOperation",
 		"CloudWatchMetric",
 		"ServiceDependency",
+		"AppMonitor",
+		"Canary",
+		"Service",
+	}
+}
+
+type SelectionType string
+
+// Enum values for SelectionType
+const (
+	SelectionTypeExplicit SelectionType = "EXPLICIT"
+	SelectionTypePrefix   SelectionType = "PREFIX"
+	SelectionTypeRegex    SelectionType = "REGEX"
+)
+
+// Values returns all known values for SelectionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SelectionType) Values() []SelectionType {
+	return []SelectionType{
+		"EXPLICIT",
+		"PREFIX",
+		"REGEX",
 	}
 }
 

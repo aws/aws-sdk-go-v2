@@ -250,9 +250,9 @@ type AutomatedDiscoveryAccountUpdateError struct {
 	AccountId *string
 
 	// The error code for the error that caused the request to fail for the account
-	// (accountId). Possible values are: ACCOUNT_NOT_FOUND, the account doesn’t exist
+	// (accountId). Possible values are: ACCOUNT_NOT_FOUND, the account doesn't exist
 	// or you're not the Amazon Macie administrator for the account; and,
-	// ACCOUNT_PAUSED, Macie isn’t enabled for the account in the current Amazon Web
+	// ACCOUNT_PAUSED, Macie isn't enabled for the account in the current Amazon Web
 	// Services Region.
 	ErrorCode AutomatedDiscoveryAccountUpdateErrorCode
 
@@ -2589,7 +2589,10 @@ type S3ClassificationScopeUpdate struct {
 }
 
 // Specifies an S3 bucket to store data classification results in, and the
-// encryption settings to use when storing results in that bucket.
+// encryption settings to use when storing results in that bucket. The bucket must
+// be an existing general purpose bucket. It can be a bucket in your own account or
+// a bucket that another account owns. If another account owns the bucket, you must
+// specify both the unique identifier for the account and the name of the bucket.
 type S3Destination struct {
 
 	// The name of the bucket. This must be the name of an existing general purpose
@@ -2605,6 +2608,10 @@ type S3Destination struct {
 	//
 	// This member is required.
 	KmsKeyArn *string
+
+	// The unique identifier (ID) for the Amazon Web Services account that owns the
+	// bucket. This must be the ID for the account that owns the specified bucket.
+	ExpectedBucketOwner *string
 
 	// The path prefix to use in the path to the location in the bucket. This prefix
 	// specifies where to store classification results in the bucket.

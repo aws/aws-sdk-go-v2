@@ -4986,6 +4986,20 @@
                 "target": "com.amazonaws.entityresolution#MatchedRecord"
             }
         },
+        "com.amazonaws.entityresolution#MatchingConfig": {
+            "type": "structure",
+            "members": {
+                "enableTransitiveMatching": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables transitive matching for the rule-based matching workflow. When enabled, records that match through different rules are grouped together into the same match group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains configuration settings for the matching process in a rule-based matching workflow.</p>"
+            }
+        },
         "com.amazonaws.entityresolution#MatchingKeys": {
             "type": "list",
             "member": {
@@ -5891,6 +5905,12 @@
                             "max": 25
                         },
                         "smithy.api#required": {}
+                    }
+                },
+                "matchingConfig": {
+                    "target": "com.amazonaws.entityresolution#MatchingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains configuration settings for the matching process.</p>"
                     }
                 }
             },

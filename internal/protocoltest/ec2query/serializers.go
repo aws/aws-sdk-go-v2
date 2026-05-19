@@ -1949,6 +1949,21 @@ func awsEc2query_serializeOpDocumentSimpleInputParamsInput(v *SimpleInputParamsI
 		}
 	}
 
+	if v.DistinctQueryAndXmlName != nil {
+		objectKey := object.Key("queryAndXmlName")
+		objectKey.String(*v.DistinctQueryAndXmlName)
+	}
+
+	if v.DistinctQueryName != nil {
+		objectKey := object.Key("QueryName")
+		objectKey.String(*v.DistinctQueryName)
+	}
+
+	if v.DistinctXmlName != nil {
+		objectKey := object.Key("XmlNameOnly")
+		objectKey.String(*v.DistinctXmlName)
+	}
+
 	if v.FloatValue != nil {
 		objectKey := object.Key("FloatValue")
 		switch {

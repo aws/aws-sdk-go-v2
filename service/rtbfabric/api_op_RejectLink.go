@@ -81,11 +81,17 @@ type RejectLinkOutput struct {
 	// Attributes of the link.
 	Attributes *types.LinkAttributes
 
+	// The connectivity type of the link.
+	ConnectivityType types.ConnectivityType
+
 	// The direction of the link.
 	Direction types.LinkDirection
 
 	// The configuration of flow modules.
 	FlowModules []types.ModuleConfiguration
+
+	// Describes the settings for a link log.
+	LogSettings *types.LinkLogSettings
 
 	// The configuration of pending flow modules.
 	PendingFlowModules []types.ModuleConfiguration
@@ -130,7 +136,7 @@ func (c *Client) addOperationRejectLinkMiddlewares(stack *middleware.Stack, opti
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -152,9 +158,6 @@ func (c *Client) addOperationRejectLinkMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

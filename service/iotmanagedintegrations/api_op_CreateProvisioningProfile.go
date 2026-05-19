@@ -11,10 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a provisioning profile for a device to execute the provisioning flows
-// using a provisioning template. The provisioning template is a document that
-// defines the set of resources and policies applied to a device during the
-// provisioning process.
+// Create a provisioning profile for executing device provisioning flows. The
+// provisioning profile is a document that defines the set of resources and
+// policies applied to a device during the provisioning process.
 func (c *Client) CreateProvisioningProfile(ctx context.Context, params *CreateProvisioningProfileInput, optFns ...func(*Options)) (*CreateProvisioningProfileOutput, error) {
 	if params == nil {
 		params = &CreateProvisioningProfileInput{}
@@ -38,10 +37,12 @@ type CreateProvisioningProfileInput struct {
 	// This member is required.
 	ProvisioningType types.ProvisioningType
 
-	// The id of the certificate authority (CA) certificate.
+	// The body of the PEM-encoded certificate authority (CA) certificate.
 	CaCertificate *string
 
-	// The claim certificate.
+	// The body of the PEM-encoded claim certificate. If a claim certificate is
+	// provided, it will be used for the provisioning profile. Otherwise, a claim
+	// certificate will be generated.
 	ClaimCertificate *string
 
 	// An idempotency token. If you retry a request that completed successfully
@@ -49,7 +50,7 @@ type CreateProvisioningProfileInput struct {
 	// will succeed without performing any further actions.
 	ClientToken *string
 
-	// The name of the provisioning template.
+	// The name of the provisioning profile.
 	Name *string
 
 	// A set of key/value pairs that are used to manage the provisioning profile.
@@ -60,27 +61,29 @@ type CreateProvisioningProfileInput struct {
 
 type CreateProvisioningProfileOutput struct {
 
-	// The Amazon Resource Name (ARN) of the provisioning template used in the
-	// provisioning profile.
+	// The Amazon Resource Name (ARN) of the provisioning profile.
 	Arn *string
 
-	// The id of the claim certificate.
+	// The body of the PEM-encoded claim certificate.
 	ClaimCertificate *string
 
-	// The private key of the claim certificate. This is stored securely on the device
-	// for validating the connection endpoint with IoT managed integrations using the
-	// public key.
+	// The private key of the claim certificate. This may be stored securely on the
+	// device for validating the connection endpoint with IoT managed integrations
+	// using the public key.
 	ClaimCertificatePrivateKey *string
 
 	// The identifier of the provisioning profile.
 	Id *string
 
-	// The name of the provisioning template.
+	// The name of the provisioning profile.
 	Name *string
 
 	// The type of provisioning workflow the device uses for onboarding to IoT managed
 	// integrations.
 	ProvisioningType types.ProvisioningType
+
+	// The status of a provisioning profile.
+	Status types.ProvisioningProfileStatus
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -122,7 +125,7 @@ func (c *Client) addOperationCreateProvisioningProfileMiddlewares(stack *middlew
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -144,9 +147,6 @@ func (c *Client) addOperationCreateProvisioningProfileMiddlewares(stack *middlew
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -1,3 +1,75 @@
+# v1.38.0 (2026-05-13)
+
+* **Feature**: Adds support for read-only summary APIs for Policy Engine, Policy, and Policy Generation resources, enabling metadata retrieval without KMS decryption for AWS Config integration.
+
+# v1.37.0 (2026-05-07)
+
+* **Feature**: Launching AgentCore payments - a capability that provides secure, instant microtransaction payments for AI agents to access paid APIs, MCP servers, and content. It handles payment processing for x402 protocol, payment limits, and 3P wallet integrations with Coinbase CDP and Stripe (Privy).
+
+# v1.36.0 (2026-05-06)
+
+* **Feature**: Adds support for bring-your-own file system in AgentCore Runtime. Developers can mount Amazon S3 Files and Amazon EFS access points directly into agent sessions using filesystemConfigurations.
+
+# v1.35.0 (2026-05-04)
+
+* **Feature**: Amazon Bedrock AgentCore gateways now support MCP Sessions and response streaming from MCP targets. Session timeouts can be set between 15 minutes and 8 hours, and response streaming enables forwarding stream events sent by MCP targets to gateway users.
+
+# v1.34.0 (2026-04-30)
+
+* **Feature**: AgentCore Identity now supports on-behalf-of token exchange OAuth2. AgentCore Memory now supports metadata for LongTerm Memory Records.
+
+# v1.33.0 (2026-04-29)
+
+* **Feature**: Adds configuration bundles for versioned, immutable agent configuration snapshots with branch-based lineage
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.0 (2026-04-24)
+
+* **Feature**: Added support for configuring identity providers and inbound authorizers within a private VPC for AWS Bedrock AgentCore, enabling secure network connection without public internet access
+
+# v1.31.0 (2026-04-22)
+
+* **Feature**: Adds support for Amazon Bedrock AgentCore Harness control plane APIs, enabling customers to create, manage, and configure managed agent loops with customizable models, tools, memory, and isolated execution environments.
+
+# v1.30.0 (2026-04-20)
+
+* **Feature**: Supporting listingMode for AgentCore Gateway MCP server targets
+
+# v1.29.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.29.0 (2026-04-09)
+
+* **Feature**: Initial release for CRUDL in AgentCore Registry Service
+
+# v1.28.1 (2026-04-03)
+
+* **Documentation**: Documentation Update for Adds support for three-legged (Authorization Code grant type) OAuth along with predefined MCP tool schema configuration for Amazon Bedrock AgentCore gateway MCP server targets.
+
+# v1.28.0 (2026-04-02)
+
+* **Feature**: Adds support for three-legged (Authorization Code grant type) OAuth along with predefined MCP tool schema configuration for Amazon Bedrock AgentCore gateway MCP server targets.
+
+# v1.27.0 (2026-04-01)
+
+* **Feature**: Adds support for VPC egress private endpoints for Amazon Bedrock AgentCore gateway targets, enabling private connectivity through managed VPC Lattice resources. Also adds IAM credential provider for gateway targets, enabling IAM-based authentication to target endpoints
+
+# v1.26.0 (2026-03-27)
+
+* **Feature**: Adds support for custom code-based evaluators using customer-managed Lambda functions.
+
+# v1.25.1 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.25.0 (2026-03-24)
+
+* **Feature**: Adds SDK support for 1) Persist session state in AgentCore Runtime via filesystemConfigurations in CreateAgentRuntime, UpdateAgentRuntime, and GetAgentRuntime APIs, 2) Optional name-based filtering on AgentCore ListBrowserProfiles API.
+
 # v1.24.0 (2026-03-19)
 
 * **Feature**: Adds support for the following new features. 1. Enterprise Policies support for AgentCore Browser Tool. 2. Root CA Configuration support for AgentCore Browser Tool and Code Interpreter.

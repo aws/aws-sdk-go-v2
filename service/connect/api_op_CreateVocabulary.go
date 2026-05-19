@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a custom vocabulary associated with your Amazon Connect instance. You
+// Creates a custom vocabulary associated with your Connect Customer instance. You
 // can set a custom vocabulary to be your default vocabulary for a given language.
-// Contact Lens for Amazon Connect uses the default vocabulary in post-call and
+// Contact Lens for Connect Customer uses the default vocabulary in post-call and
 // real-time contact analysis sessions for that language.
 func (c *Client) CreateVocabulary(ctx context.Context, params *CreateVocabularyInput, optFns ...func(*Options)) (*CreateVocabularyOutput, error) {
 	if params == nil {
@@ -42,8 +42,8 @@ type CreateVocabularyInput struct {
 	// This member is required.
 	Content *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -136,7 +136,7 @@ func (c *Client) addOperationCreateVocabularyMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -158,9 +158,6 @@ func (c *Client) addOperationCreateVocabularyMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

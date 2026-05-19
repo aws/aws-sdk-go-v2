@@ -1356,6 +1356,24 @@ func (EngagementSortName) Values() []EngagementSortName {
 	}
 }
 
+type ExpectedContractDurationTerm string
+
+// Enum values for ExpectedContractDurationTerm
+const (
+	ExpectedContractDurationTermMonths ExpectedContractDurationTerm = "Months"
+)
+
+// Values returns all known values for ExpectedContractDurationTerm. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ExpectedContractDurationTerm) Values() []ExpectedContractDurationTerm {
+	return []ExpectedContractDurationTerm{
+		"Months",
+	}
+}
+
 type Industry string
 
 // Enum values for Industry

@@ -172,6 +172,12 @@ type AdvancedSecurityOptionsStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for AI-powered capabilities of an OpenSearch UI
+// application.
+type AIConfig struct {
+	noSmithyDocumentSerde
+}
+
 // Container for parameters required to enable all machine learning features.
 type AIMLOptionsInput struct {
 
@@ -282,6 +288,72 @@ type AuthorizedPrincipal struct {
 
 	// The type of principal.
 	PrincipalType PrincipalType
+
+	// The options for the service, including the supported Regions for the endpoint
+	// access.
+	ServiceOptions *ServiceOptions
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the automated snapshot pause options for the domain. These options
+// allow you to temporarily pause automated snapshots for a specified time period.
+type AutomatedSnapshotPauseOptions struct {
+
+	// Whether automated snapshot pause is enabled for the domain.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The timestamp at which the automated snapshot pause ends.
+	EndTime *time.Time
+
+	// The timestamp at which the automated snapshot pause begins.
+	StartTime *time.Time
+
+	// The current state of the automated snapshot pause. Valid values are Active ,
+	// Completed , Scheduled , and Disabled .
+	State PauseState
+
+	noSmithyDocumentSerde
+}
+
+// The status of automated snapshot pause options for the domain.
+type AutomatedSnapshotPauseOptionsStatus struct {
+
+	// Automated snapshot pause options for the domain.
+	//
+	// This member is required.
+	Options *AutomatedSnapshotPauseOptions
+
+	// The current status of the automated snapshot pause options for the domain.
+	//
+	// This member is required.
+	Status *OptionStatus
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the automated snapshot pause request options for the domain.
+//
+// Suspending snapshots reduces data protection. You cannot restore your domain to
+// points in time when snapshots are suspended. Use this feature only for
+// short-term operational needs such as migrations or maintenance windows.
+//
+// Maximum suspension duration: 3 days.
+type AutomatedSnapshotPauseRequestOptions struct {
+
+	// Whether to enable or disable automated snapshot pause for the domain.
+	//
+	// This member is required.
+	Enabled *bool
+
+	// The timestamp at which the automated snapshot pause should end. The maximum
+	// allowed duration between StartTime and EndTime is 3 days.
+	EndTime *time.Time
+
+	// The timestamp at which the automated snapshot pause should begin.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -509,6 +581,75 @@ type CancelledChangeProperty struct {
 
 	// The name of the property whose change was cancelled.
 	PropertyName *string
+
+	noSmithyDocumentSerde
+}
+
+// The base configuration for registering a capability. Contains
+// capability-specific configuration such as AI settings.
+//
+// The following types satisfy this interface:
+//
+//	CapabilityBaseRequestConfigMemberAiConfig
+type CapabilityBaseRequestConfig interface {
+	isCapabilityBaseRequestConfig()
+}
+
+// Configuration settings for AI-powered capabilities.
+type CapabilityBaseRequestConfigMemberAiConfig struct {
+	Value AIConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*CapabilityBaseRequestConfigMemberAiConfig) isCapabilityBaseRequestConfig() {}
+
+// The base configuration returned for a registered capability.
+//
+// The following types satisfy this interface:
+//
+//	CapabilityBaseResponseConfigMemberAiConfig
+type CapabilityBaseResponseConfig interface {
+	isCapabilityBaseResponseConfig()
+}
+
+// Configuration settings for AI-powered capabilities.
+type CapabilityBaseResponseConfigMemberAiConfig struct {
+	Value AIConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*CapabilityBaseResponseConfigMemberAiConfig) isCapabilityBaseResponseConfig() {}
+
+// The extended configuration returned for a registered capability, including
+// additional details beyond the base configuration.
+//
+// The following types satisfy this interface:
+//
+//	CapabilityExtendedResponseConfigMemberAiConfig
+type CapabilityExtendedResponseConfig interface {
+	isCapabilityExtendedResponseConfig()
+}
+
+// Configuration settings for AI-powered capabilities.
+type CapabilityExtendedResponseConfigMemberAiConfig struct {
+	Value AIConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*CapabilityExtendedResponseConfigMemberAiConfig) isCapabilityExtendedResponseConfig() {}
+
+// Information about a capability failure.
+type CapabilityFailure struct {
+
+	// Additional details about the capability failure.
+	Details *string
+
+	// The reason for the capability failure. Possible values:
+	// KMS_KEY_INSUFFICIENT_PERMISSION .
+	Reason CapabilityFailureReason
 
 	noSmithyDocumentSerde
 }
@@ -962,6 +1103,9 @@ type DomainConfig struct {
 	// Container for Auto-Tune settings for the domain.
 	AutoTuneOptions *AutoTuneOptionsStatus
 
+	// Specifies AutomatedSnapshotPauseOptions for the domain.
+	AutomatedSnapshotPauseOptions *AutomatedSnapshotPauseOptionsStatus
+
 	// Container for information about the progress of an existing configuration
 	// change.
 	ChangeProgressDetails *ChangeProgressDetails
@@ -1051,6 +1195,9 @@ type DomainEndpointOptions struct {
 	//
 	//   - Policy-Min-TLS-1-2-PFS-2023-10: TLS security policy that supports TLS
 	//   version 1.2 to TLS version 1.3 with perfect forward secrecy cipher suites
+	//
+	//   - Policy-Min-TLS-1-2-RFC9151-FIPS-2024-08: TLS security policy that supports
+	//   TLS version 1.3 with FIPS
 	TLSSecurityPolicy TLSSecurityPolicy
 
 	noSmithyDocumentSerde
@@ -1242,6 +1389,9 @@ type DomainStatus struct {
 
 	// Auto-Tune settings for the domain.
 	AutoTuneOptions *AutoTuneOptionsOutput
+
+	// The current status of the domain's automated snapshot pause options.
+	AutomatedSnapshotPauseOptions *AutomatedSnapshotPauseOptions
 
 	// Information about a configuration change happening on the domain.
 	ChangeProgressDetails *ChangeProgressDetails
@@ -1611,6 +1761,9 @@ type IdentityCenterOptions struct {
 	// The Amazon Resource Name (ARN) of the IAM Identity Center instance.
 	IdentityCenterInstanceARN *string
 
+	// The Region of the IAM Identity Center instance.
+	IdentityCenterInstanceRegion *string
+
 	// The identifier of the IAM Identity Store.
 	IdentityStoreId *string
 
@@ -1635,6 +1788,9 @@ type IdentityCenterOptionsInput struct {
 	// The ARN of the IAM Identity Center instance used to create an OpenSearch UI
 	// application that uses IAM Identity Center for authentication.
 	IdentityCenterInstanceARN *string
+
+	// The Region of the IAM Identity Center instance.
+	IdentityCenterInstanceRegion *string
 
 	// Specifies the attribute that contains the backend role identifier (such as
 	// group name or group ID) in IAM Identity Center.
@@ -1717,6 +1873,94 @@ type InboundConnectionStatus struct {
 	noSmithyDocumentSerde
 }
 
+// Represents an insight returned by the ListInsights operation. An insight is a
+// notification about a domain event or recommendation that helps you optimize your
+// Amazon OpenSearch Service domain.
+type Insight struct {
+
+	// The timestamp when the insight was created, in epoch milliseconds.
+	CreationTime *time.Time
+
+	// The display name of the insight.
+	DisplayName *string
+
+	// The unique identifier of the insight.
+	InsightId *string
+
+	// Indicates whether the insight is experimental.
+	IsExperimental *bool
+
+	// The priority level of the insight. Possible values are CRITICAL , HIGH , MEDIUM
+	// , and LOW .
+	Priority InsightPriorityLevel
+
+	// The current status of the insight. Possible values are ACTIVE , RESOLVED , and
+	// DISMISSED .
+	Status InsightStatus
+
+	// The type of the insight. Possible values are EVENT and RECOMMENDATION .
+	Type InsightType
+
+	// The timestamp when the insight was last updated, in epoch milliseconds.
+	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the entity for which to retrieve insights. An entity can be an Amazon
+// OpenSearch Service domain or an Amazon Web Services account.
+type InsightEntity struct {
+
+	// The type of the entity. Possible values are Account and DomainName .
+	//
+	// This member is required.
+	Type InsightEntityType
+
+	// The value of the entity. For DomainName , this is the domain name. For Account ,
+	// this is the Amazon Web Services account ID.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a field in the detailed view of an insight, returned by the
+// DescribeInsightDetails operation.
+type InsightField struct {
+
+	// The name of the insight field.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of the insight field. Possible values are text and metric .
+	//
+	// This member is required.
+	Type InsightFieldType
+
+	// The value of the insight field.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the time range for filtering insights.
+type InsightTimeRange struct {
+
+	// The start of the time range, in epoch milliseconds.
+	//
+	// This member is required.
+	From *int64
+
+	// The end of the time range, in epoch milliseconds.
+	//
+	// This member is required.
+	To *int64
+
+	noSmithyDocumentSerde
+}
+
 // Limits on the number of instances that can be created in OpenSearch Service for
 // a given instance type.
 type InstanceCountLimits struct {
@@ -1795,6 +2039,10 @@ type JWTOptionsInput struct {
 	// True to enable JWT authentication and authorization for a domain.
 	Enabled *bool
 
+	// The URL endpoint that hosts the JSON Web Key Set (JWKS) containing public keys
+	// used to verify JWT signatures.
+	JwksUrl *string
+
 	// Element of the JWT assertion used by the cluster to verify JWT signatures.
 	PublicKey *string
 
@@ -1812,6 +2060,10 @@ type JWTOptionsOutput struct {
 
 	// True if JWT use is enabled.
 	Enabled *bool
+
+	// The configured JWKS URL endpoint from which the cluster retrieves public keys
+	// to verify JWT requests.
+	JwksUrl *string
 
 	// The key used to verify the signature of incoming JWT requests.
 	PublicKey *string
@@ -2465,6 +2717,24 @@ type ReservedInstanceOffering struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the rollback options for a service software update.
+type RollbackServiceSoftwareOptions struct {
+
+	// The current service software version on the domain.
+	CurrentVersion *string
+
+	// A description of the rollback status.
+	Description *string
+
+	// The service software version that the domain will roll back to.
+	NewVersion *string
+
+	// Whether a service software rollback is available for the domain.
+	RollbackAvailable *bool
+
+	noSmithyDocumentSerde
+}
+
 // Information about the Amazon S3 Glue Data Catalog.
 type S3GlueDataCatalog struct {
 
@@ -2642,6 +2912,15 @@ type ServerlessVectorAcceleration struct {
 	noSmithyDocumentSerde
 }
 
+// Options for the service, such as the supported Regions.
+type ServiceOptions struct {
+
+	// The list of supported Regions for the service.
+	SupportedRegions []string
+
+	noSmithyDocumentSerde
+}
+
 // The current status of the service software for an Amazon OpenSearch Service
 // domain. For more information, see [Service software updates in Amazon OpenSearch Service].
 //
@@ -2712,6 +2991,11 @@ type SoftwareUpdateOptions struct {
 
 	// Whether automatic service software updates are enabled for the domain.
 	AutoSoftwareUpdateEnabled *bool
+
+	// Whether the domain should use the latest service software version during a
+	// blue/green deployment. If enabled, the domain will automatically use the latest
+	// available service software when a blue/green deployment is triggered.
+	UseLatestServiceSoftwareForBlueGreen *bool
 
 	noSmithyDocumentSerde
 }
@@ -2900,6 +3184,11 @@ type VPCDerivedInfo struct {
 	// The list of Availability Zones associated with the VPC subnets.
 	AvailabilityZones []string
 
+	// Indicates whether egress traffic from the domain is routed through the customer
+	// VPC. When true , outbound traffic flows through the VPC. When false , outbound
+	// traffic goes through the public internet.
+	EgressEnabled *bool
+
 	// The list of security group IDs associated with the VPC endpoints for the domain.
 	SecurityGroupIds []string
 
@@ -2994,6 +3283,11 @@ type VpcEndpointSummary struct {
 // [Launching your Amazon OpenSearch Service domains using a VPC]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/vpc.html
 type VPCOptions struct {
 
+	// Controls whether egress traffic from the domain is routed through the customer
+	// VPC. When true , outbound traffic flows through the VPC. When false , outbound
+	// traffic goes through the public internet.
+	EgressEnabled *bool
+
 	// The list of security group IDs associated with the VPC endpoints for the
 	// domain. If you do not provide a security group ID, OpenSearch Service uses the
 	// default security group for the VPC.
@@ -3048,5 +3342,8 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isDataSourceType()            {}
-func (*UnknownUnionMember) isDirectQueryDataSourceType() {}
+func (*UnknownUnionMember) isCapabilityBaseRequestConfig()      {}
+func (*UnknownUnionMember) isCapabilityBaseResponseConfig()     {}
+func (*UnknownUnionMember) isCapabilityExtendedResponseConfig() {}
+func (*UnknownUnionMember) isDataSourceType()                   {}
+func (*UnknownUnionMember) isDirectQueryDataSourceType()        {}

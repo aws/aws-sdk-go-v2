@@ -78,7 +78,14 @@
                 "aws.auth#sigv4": {
                     "name": "sts"
                 },
+                "aws.auth#sigv4a": {
+                    "name": "sts"
+                },
                 "aws.protocols#awsQuery": {},
+                "smithy.api#auth": [
+                    "aws.auth#sigv4",
+                    "aws.auth#sigv4a"
+                ],
                 "smithy.api#documentation": "<fullname>Security Token Service</fullname>\n         <p>Security Token Service (STS) enables you to request temporary, limited-privilege \n      credentials for users. This guide provides descriptions of the STS API. For \n      more information about using this service, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp.html\">Temporary Security Credentials</a>.</p>",
                 "smithy.api#title": "AWS Security Token Service",
                 "smithy.api#xmlNamespace": {

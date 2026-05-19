@@ -48,6 +48,31 @@ type AutoScalingGroupsConfiguration struct {
 	// This member is required.
 	RoleArn *string
 
+	// The health check configuration for the Auto Scaling group managed endpoint.
+	HealthCheckConfig *HealthCheckConfig
+
+	noSmithyDocumentSerde
+}
+
+// Describes a summary of a certificate association.
+type CertificateAssociationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the ACM certificate.
+	//
+	// This member is required.
+	AcmCertificateArn *string
+
+	// The status of the certificate association.
+	//
+	// This member is required.
+	Status CertificateAssociationStatus
+
+	// The timestamp of when the certificate was associated.
+	AssociatedAt *time.Time
+
+	// The timestamp of when the certificate association was last updated.
+	UpdatedAt *time.Time
+
 	noSmithyDocumentSerde
 }
 
@@ -130,6 +155,46 @@ type HeaderTagAction struct {
 	noSmithyDocumentSerde
 }
 
+// The health check configuration for a managed endpoint. Defines how the service
+// probes instances in the Auto Scaling group to determine their health status.
+type HealthCheckConfig struct {
+
+	// The destination path for the health check request. Must start with / .
+	//
+	// This member is required.
+	Path *string
+
+	// The port to use for health check probes. Valid range is 80 to 65535.
+	//
+	// This member is required.
+	Port *int32
+
+	// The number of consecutive successful health checks required before an instance
+	// is considered healthy. Valid range is 2 to 10.
+	HealthyThresholdCount *int32
+
+	// The interval between health check probes, in seconds. Valid range is 5 to 60.
+	IntervalSeconds *int32
+
+	// The protocol to use for health check probes.
+	Protocol Protocol
+
+	// The expected HTTP status code or status code pattern from healthy instances.
+	// Supports a single code (for example, 200 ), a range (for example, 200-299 ), or
+	// a comma-separated list (for example, 200,204 ).
+	StatusCodeMatcher *string
+
+	// The timeout for each health check probe, in milliseconds. Valid range is 100 to
+	// 5000.
+	TimeoutMs *int32
+
+	// The number of consecutive failed health checks required before an instance is
+	// considered unhealthy. Valid range is 2 to 10.
+	UnhealthyThresholdCount *int32
+
+	noSmithyDocumentSerde
+}
+
 // Describes the configuration of a link application log.
 type LinkApplicationLogConfiguration struct {
 
@@ -180,6 +245,54 @@ type LinkLogSettings struct {
 	noSmithyDocumentSerde
 }
 
+// A summary of a link routing rule.
+type LinkRoutingRuleSummary struct {
+
+	// The conditions for the routing rule.
+	//
+	// This member is required.
+	Conditions *RuleCondition
+
+	// The timestamp of when the routing rule was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The priority of the routing rule.
+	//
+	// This member is required.
+	Priority *int32
+
+	// The unique identifier of the routing rule.
+	//
+	// This member is required.
+	RuleId *string
+
+	// The status of the routing rule.
+	//
+	// This member is required.
+	Status RuleStatus
+
+	// The timestamp of when the routing rule was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Listener configuration for the protocols (HTTP, HTTPS, or both) accepted by the
+// gateway.
+type ListenerConfig struct {
+
+	// The protocol for connections from clients to the gateway
+	//
+	// This member is required.
+	Protocols []Protocol
+
+	noSmithyDocumentSerde
+}
+
 // Describes a link.
 type ListLinksResponseStructure struct {
 
@@ -216,14 +329,23 @@ type ListLinksResponseStructure struct {
 	// Describes attributes of a link.
 	Attributes *LinkAttributes
 
+	// The connectivity type of the link.
+	ConnectivityType ConnectivityType
+
 	// The direction of the link.
 	Direction LinkDirection
 
 	// Describes the configuration of flow modules.
 	FlowModules []ModuleConfiguration
 
+	// Describes the settings for a link log.
+	LogSettings *LinkLogSettings
+
 	// Describes the configuration of pending flow modules.
 	PendingFlowModules []ModuleConfiguration
+
+	// The public endpoint of the outbound link.
+	PublicEndpoint *string
 
 	// A map of the key-value pairs of the tag or tags to assign to the resource.
 	Tags map[string]string
@@ -367,6 +489,24 @@ type OpenRtbAttributeModuleParameters struct {
 	noSmithyDocumentSerde
 }
 
+// A key-value pair for query string matching in a routing rule condition.
+type QueryStringKeyValuePair struct {
+
+	// The key of the query string parameter to match. Must contain only RFC 3986
+	// unreserved characters.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the query string parameter to match. Must contain only RFC 3986
+	// unreserved characters.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the parameters of a rate limit.
 type RateLimiterModuleParameters struct {
 
@@ -396,6 +536,32 @@ type ResponderErrorMaskingForHttpCode struct {
 
 	// The percentage of response logging.
 	ResponseLoggingPercentage *float32
+
+	noSmithyDocumentSerde
+}
+
+// The conditions for a routing rule. All specified fields must match for the rule
+// to apply (AND logic). At least one condition field must be set.
+type RuleCondition struct {
+
+	// The exact host header value to match.
+	HostHeader *string
+
+	// A wildcard pattern for host header matching (for example, *.example.com ).
+	HostHeaderWildcard *string
+
+	// The exact path to match. Must start with / .
+	PathExact *string
+
+	// The path prefix to match. The request path must start with this value. Must
+	// start with / .
+	PathPrefix *string
+
+	// A query string key-value pair that must be present and match exactly.
+	QueryStringEquals *QueryStringKeyValuePair
+
+	// A query string key that must be present in the request (any value is accepted).
+	QueryStringExists *string
 
 	noSmithyDocumentSerde
 }

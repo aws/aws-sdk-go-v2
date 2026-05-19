@@ -9996,6 +9996,15 @@ func awsAwsjson11_deserializeDocumentDescribedConnector(v **types.DescribedConne
 				sv.ErrorMessage = ptr.String(jtv)
 			}
 
+		case "IpAddressType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectorsIpAddressType to be of type string, got %T instead", value)
+				}
+				sv.IpAddressType = types.ConnectorsIpAddressType(jtv)
+			}
+
 		case "LoggingRole":
 			if value != nil {
 				jtv, ok := value.(string)

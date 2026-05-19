@@ -26,6 +26,7 @@ func (c *Client) GetMinuteUsage(ctx context.Context, params *GetMinuteUsageInput
 	return out, nil
 }
 
+// Input for the GetMinuteUsage operation.
 type GetMinuteUsageInput struct {
 
 	// The month being requested, with a value of 1-12.
@@ -41,6 +42,7 @@ type GetMinuteUsageInput struct {
 	noSmithyDocumentSerde
 }
 
+// Output for the GetMinuteUsage operation.
 type GetMinuteUsageOutput struct {
 
 	// Estimated number of minutes remaining for an account, specific to the month
@@ -102,7 +104,7 @@ func (c *Client) addOperationGetMinuteUsageMiddlewares(stack *middleware.Stack, 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -124,9 +126,6 @@ func (c *Client) addOperationGetMinuteUsageMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

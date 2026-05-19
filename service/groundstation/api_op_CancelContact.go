@@ -35,6 +35,7 @@ func (c *Client) CancelContact(ctx context.Context, params *CancelContactInput, 
 	return out, nil
 }
 
+// Input for the CancelContact operation.
 type CancelContactInput struct {
 
 	// UUID of a contact.
@@ -45,10 +46,14 @@ type CancelContactInput struct {
 	noSmithyDocumentSerde
 }
 
+// Response containing the ID of a contact.
 type CancelContactOutput struct {
 
 	// UUID of a contact.
 	ContactId *string
+
+	// Version ID of a contact.
+	VersionId *int32
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -90,7 +95,7 @@ func (c *Client) addOperationCancelContactMiddlewares(stack *middleware.Stack, o
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -112,9 +117,6 @@ func (c *Client) addOperationCancelContactMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

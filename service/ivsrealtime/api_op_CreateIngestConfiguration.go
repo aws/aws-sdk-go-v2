@@ -50,6 +50,10 @@ type CreateIngestConfigurationInput struct {
 	// Optional name that can be specified for the IngestConfiguration being created.
 	Name *string
 
+	// Indicates whether redundant ingest is enabled for the ingest configuration.
+	// Default: false .
+	RedundantIngest bool
+
 	// ARN of the stage with which the IngestConfiguration is associated.
 	StageArn *string
 
@@ -117,7 +121,7 @@ func (c *Client) addOperationCreateIngestConfigurationMiddlewares(stack *middlew
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -139,9 +143,6 @@ func (c *Client) addOperationCreateIngestConfigurationMiddlewares(stack *middlew
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -275,6 +275,29 @@ func (AttachedFileServiceQuotaExceededExceptionReason) Values() []AttachedFileSe
 	}
 }
 
+type AttachmentScope string
+
+// Enum values for AttachmentScope
+const (
+	AttachmentScopeEmail AttachmentScope = "EMAIL"
+	AttachmentScopeChat  AttachmentScope = "CHAT"
+	AttachmentScopeCase  AttachmentScope = "CASE"
+	AttachmentScopeTask  AttachmentScope = "TASK"
+)
+
+// Values returns all known values for AttachmentScope. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AttachmentScope) Values() []AttachmentScope {
+	return []AttachmentScope{
+		"EMAIL",
+		"CHAT",
+		"CASE",
+		"TASK",
+	}
+}
+
 type AutoEvaluationStatus string
 
 // Enum values for AutoEvaluationStatus
@@ -571,6 +594,7 @@ type ContactInteractionType string
 const (
 	ContactInteractionTypeAgent     ContactInteractionType = "AGENT"
 	ContactInteractionTypeAutomated ContactInteractionType = "AUTOMATED"
+	ContactInteractionTypeCustomer  ContactInteractionType = "CUSTOMER"
 )
 
 // Values returns all known values for ContactInteractionType. Note that this can
@@ -581,6 +605,7 @@ func (ContactInteractionType) Values() []ContactInteractionType {
 	return []ContactInteractionType{
 		"AGENT",
 		"AUTOMATED",
+		"CUSTOMER",
 	}
 }
 
@@ -630,6 +655,7 @@ const (
 	ContactParticipantRoleAgent     ContactParticipantRole = "AGENT"
 	ContactParticipantRoleSystem    ContactParticipantRole = "SYSTEM"
 	ContactParticipantRoleCustomBot ContactParticipantRole = "CUSTOM_BOT"
+	ContactParticipantRoleCustomer  ContactParticipantRole = "CUSTOMER"
 )
 
 // Values returns all known values for ContactParticipantRole. Note that this can
@@ -641,6 +667,7 @@ func (ContactParticipantRole) Values() []ContactParticipantRole {
 		"AGENT",
 		"SYSTEM",
 		"CUSTOM_BOT",
+		"CUSTOMER",
 	}
 }
 
@@ -1145,6 +1172,9 @@ const (
 	EvaluationFormLanguageCodeFrFr EvaluationFormLanguageCode = "fr-FR"
 	EvaluationFormLanguageCodeItIt EvaluationFormLanguageCode = "it-IT"
 	EvaluationFormLanguageCodePtBr EvaluationFormLanguageCode = "pt-BR"
+	EvaluationFormLanguageCodeJaJp EvaluationFormLanguageCode = "ja-JP"
+	EvaluationFormLanguageCodeKoKr EvaluationFormLanguageCode = "ko-KR"
+	EvaluationFormLanguageCodeZhCn EvaluationFormLanguageCode = "zh-CN"
 )
 
 // Values returns all known values for EvaluationFormLanguageCode. Note that this
@@ -1159,6 +1189,9 @@ func (EvaluationFormLanguageCode) Values() []EvaluationFormLanguageCode {
 		"fr-FR",
 		"it-IT",
 		"pt-BR",
+		"ja-JP",
+		"ko-KR",
+		"zh-CN",
 	}
 }
 
@@ -1429,18 +1462,23 @@ type EventSourceName string
 
 // Enum values for EventSourceName
 const (
-	EventSourceNameOnPostCallAnalysisAvailable     EventSourceName = "OnPostCallAnalysisAvailable"
-	EventSourceNameOnRealTimeCallAnalysisAvailable EventSourceName = "OnRealTimeCallAnalysisAvailable"
-	EventSourceNameOnRealTimeChatAnalysisAvailable EventSourceName = "OnRealTimeChatAnalysisAvailable"
-	EventSourceNameOnPostChatAnalysisAvailable     EventSourceName = "OnPostChatAnalysisAvailable"
-	EventSourceNameOnZendeskTicketCreate           EventSourceName = "OnZendeskTicketCreate"
-	EventSourceNameOnZendeskTicketStatusUpdate     EventSourceName = "OnZendeskTicketStatusUpdate"
-	EventSourceNameOnSalesforceCaseCreate          EventSourceName = "OnSalesforceCaseCreate"
-	EventSourceNameOnContactEvaluationSubmit       EventSourceName = "OnContactEvaluationSubmit"
-	EventSourceNameOnMetricDataUpdate              EventSourceName = "OnMetricDataUpdate"
-	EventSourceNameOnCaseCreate                    EventSourceName = "OnCaseCreate"
-	EventSourceNameOnCaseUpdate                    EventSourceName = "OnCaseUpdate"
-	EventSourceNameOnSlaBreach                     EventSourceName = "OnSlaBreach"
+	EventSourceNameOnPostCallAnalysisAvailable      EventSourceName = "OnPostCallAnalysisAvailable"
+	EventSourceNameOnRealTimeCallAnalysisAvailable  EventSourceName = "OnRealTimeCallAnalysisAvailable"
+	EventSourceNameOnRealTimeChatAnalysisAvailable  EventSourceName = "OnRealTimeChatAnalysisAvailable"
+	EventSourceNameOnPostChatAnalysisAvailable      EventSourceName = "OnPostChatAnalysisAvailable"
+	EventSourceNameOnEmailAnalysisAvailable         EventSourceName = "OnEmailAnalysisAvailable"
+	EventSourceNameOnZendeskTicketCreate            EventSourceName = "OnZendeskTicketCreate"
+	EventSourceNameOnZendeskTicketStatusUpdate      EventSourceName = "OnZendeskTicketStatusUpdate"
+	EventSourceNameOnSalesforceCaseCreate           EventSourceName = "OnSalesforceCaseCreate"
+	EventSourceNameOnContactEvaluationSubmit        EventSourceName = "OnContactEvaluationSubmit"
+	EventSourceNameOnMetricDataUpdate               EventSourceName = "OnMetricDataUpdate"
+	EventSourceNameOnCaseCreate                     EventSourceName = "OnCaseCreate"
+	EventSourceNameOnCaseUpdate                     EventSourceName = "OnCaseUpdate"
+	EventSourceNameOnSlaBreach                      EventSourceName = "OnSlaBreach"
+	EventSourceNameOnAlertUpdate                    EventSourceName = "OnAlertUpdate"
+	EventSourceNameOnSchedulePublish                EventSourceName = "OnSchedulePublish"
+	EventSourceNameOnScheduleUpdate                 EventSourceName = "OnScheduleUpdate"
+	EventSourceNameOnScheduleTimeOffRequestActivity EventSourceName = "OnScheduleTimeOffRequestActivity"
 )
 
 // Values returns all known values for EventSourceName. Note that this can be
@@ -1453,6 +1491,7 @@ func (EventSourceName) Values() []EventSourceName {
 		"OnRealTimeCallAnalysisAvailable",
 		"OnRealTimeChatAnalysisAvailable",
 		"OnPostChatAnalysisAvailable",
+		"OnEmailAnalysisAvailable",
 		"OnZendeskTicketCreate",
 		"OnZendeskTicketStatusUpdate",
 		"OnSalesforceCaseCreate",
@@ -1461,6 +1500,10 @@ func (EventSourceName) Values() []EventSourceName {
 		"OnCaseCreate",
 		"OnCaseUpdate",
 		"OnSlaBreach",
+		"OnAlertUpdate",
+		"OnSchedulePublish",
+		"OnScheduleUpdate",
+		"OnScheduleTimeOffRequestActivity",
 	}
 }
 
@@ -1551,8 +1594,12 @@ type FileUseCaseType string
 
 // Enum values for FileUseCaseType
 const (
-	FileUseCaseTypeEmailMessage FileUseCaseType = "EMAIL_MESSAGE"
-	FileUseCaseTypeAttachment   FileUseCaseType = "ATTACHMENT"
+	FileUseCaseTypeContactAnalysis               FileUseCaseType = "CONTACT_ANALYSIS"
+	FileUseCaseTypeEmailMessage                  FileUseCaseType = "EMAIL_MESSAGE"
+	FileUseCaseTypeEmailMessagePlainText         FileUseCaseType = "EMAIL_MESSAGE_PLAIN_TEXT"
+	FileUseCaseTypeEmailMessageRedacted          FileUseCaseType = "EMAIL_MESSAGE_REDACTED"
+	FileUseCaseTypeEmailMessagePlainTextRedacted FileUseCaseType = "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED"
+	FileUseCaseTypeAttachment                    FileUseCaseType = "ATTACHMENT"
 )
 
 // Values returns all known values for FileUseCaseType. Note that this can be
@@ -1561,7 +1608,11 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (FileUseCaseType) Values() []FileUseCaseType {
 	return []FileUseCaseType{
+		"CONTACT_ANALYSIS",
 		"EMAIL_MESSAGE",
+		"EMAIL_MESSAGE_PLAIN_TEXT",
+		"EMAIL_MESSAGE_REDACTED",
+		"EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
 		"ATTACHMENT",
 	}
 }
@@ -3500,15 +3551,17 @@ type ReferenceType string
 
 // Enum values for ReferenceType
 const (
-	ReferenceTypeUrl                   ReferenceType = "URL"
-	ReferenceTypeAttachment            ReferenceType = "ATTACHMENT"
-	ReferenceTypeContactAnalysis       ReferenceType = "CONTACT_ANALYSIS"
-	ReferenceTypeNumber                ReferenceType = "NUMBER"
-	ReferenceTypeString                ReferenceType = "STRING"
-	ReferenceTypeDate                  ReferenceType = "DATE"
-	ReferenceTypeEmail                 ReferenceType = "EMAIL"
-	ReferenceTypeEmailMessage          ReferenceType = "EMAIL_MESSAGE"
-	ReferenceTypeEmailMessagePlainText ReferenceType = "EMAIL_MESSAGE_PLAIN_TEXT"
+	ReferenceTypeUrl                           ReferenceType = "URL"
+	ReferenceTypeAttachment                    ReferenceType = "ATTACHMENT"
+	ReferenceTypeContactAnalysis               ReferenceType = "CONTACT_ANALYSIS"
+	ReferenceTypeNumber                        ReferenceType = "NUMBER"
+	ReferenceTypeString                        ReferenceType = "STRING"
+	ReferenceTypeDate                          ReferenceType = "DATE"
+	ReferenceTypeEmail                         ReferenceType = "EMAIL"
+	ReferenceTypeEmailMessage                  ReferenceType = "EMAIL_MESSAGE"
+	ReferenceTypeEmailMessagePlainText         ReferenceType = "EMAIL_MESSAGE_PLAIN_TEXT"
+	ReferenceTypeEmailMessagePlainTextRedacted ReferenceType = "EMAIL_MESSAGE_PLAIN_TEXT_REDACTED"
+	ReferenceTypeEmailMessageRedacted          ReferenceType = "EMAIL_MESSAGE_REDACTED"
 )
 
 // Values returns all known values for ReferenceType. Note that this can be
@@ -3526,6 +3579,8 @@ func (ReferenceType) Values() []ReferenceType {
 		"EMAIL",
 		"EMAIL_MESSAGE",
 		"EMAIL_MESSAGE_PLAIN_TEXT",
+		"EMAIL_MESSAGE_PLAIN_TEXT_REDACTED",
+		"EMAIL_MESSAGE_REDACTED",
 	}
 }
 

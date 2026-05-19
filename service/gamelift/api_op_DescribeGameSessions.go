@@ -79,7 +79,9 @@ type DescribeGameSessionsInput struct {
 	// either the fleet ID or ARN value.
 	FleetId *string
 
-	// A unique identifier for the game session to retrieve.
+	// An identifier for the game session that is unique across all regions to
+	// retrieve. The value is always a full ARN in the following format:
+	// arn:aws:gamelift:::gamesession// .
 	GameSessionId *string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -124,11 +126,11 @@ func (c *Client) addOperationDescribeGameSessionsMiddlewares(stack *middleware.S
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeGameSessions{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpDescribeGameSessions{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeGameSessions{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpDescribeGameSessions{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -154,7 +156,7 @@ func (c *Client) addOperationDescribeGameSessionsMiddlewares(stack *middleware.S
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -178,10 +180,10 @@ func (c *Client) addOperationDescribeGameSessionsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
+	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

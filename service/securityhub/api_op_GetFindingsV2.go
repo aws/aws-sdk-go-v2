@@ -12,9 +12,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Return a list of findings that match the specified criteria. GetFindings and
-// GetFindingsV2 both use securityhub:GetFindings in the Action element of an IAM
-// policy statement. You must have permission to perform the
+// Returns a list of findings that match the specified criteria.
+//
+// You can use the Scopes parameter to define the data boundary for the query.
+// Currently, Scopes supports AwsOrganizations , which lets you retrieve findings
+// from your entire organization or from specific organizational units. Only the
+// delegated administrator account can use Scopes .
+//
+// You can use the Filters parameter to refine results based on finding
+// attributes. You can use Scopes and Filters independently or together. When both
+// are provided, Scopes narrows the data set first, and then Filters refines
+// results within that scoped data set.
+//
+// GetFindings and GetFindingsV2 both use securityhub:GetFindings in the Action
+// element of an IAM policy statement. You must have permission to perform the
 // securityhub:GetFindings action.
 func (c *Client) GetFindingsV2(ctx context.Context, params *GetFindingsV2Input, optFns ...func(*Options)) (*GetFindingsV2Output, error) {
 	if params == nil {
@@ -45,6 +56,18 @@ type GetFindingsV2Input struct {
 	// parameter to NULL . For subsequent calls, to continue listing data, set the
 	// value of this parameter to the value returned in the previous response.
 	NextToken *string
+
+	// Limits the results to findings from specific organizational units or from the
+	// delegated administrator's organization. Only the delegated administrator account
+	// can use this parameter. Other accounts receive an AccessDeniedException .
+	//
+	// This parameter is optional. If you omit it, the delegated administrator sees
+	// findings from all accounts across the entire organization. Other accounts see
+	// only their own findings.
+	//
+	// You can specify up to 10 entries in Scopes.AwsOrganizations . If multiple
+	// entries are specified, the entries are combined using OR logic.
+	Scopes *types.FindingScopes
 
 	// The finding attributes used to sort the list of returned findings.
 	SortCriteria []types.SortCriterion
@@ -101,7 +124,7 @@ func (c *Client) addOperationGetFindingsV2Middlewares(stack *middleware.Stack, o
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -123,9 +146,6 @@ func (c *Client) addOperationGetFindingsV2Middlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

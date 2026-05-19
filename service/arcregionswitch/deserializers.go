@@ -2441,6 +2441,58 @@ func deserializeCBOR_EvaluationStatus(v smithycbor.Value) (types.EvaluationStatu
 	return types.EvaluationStatus(av), nil
 }
 
+func deserializeCBOR_EventSourceMapping(v smithycbor.Value) (*types.EventSourceMapping, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.EventSourceMapping{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "crossAccountRole" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.CrossAccountRole = ptr.String(dv)
+		}
+
+		if key == "externalId" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.ExternalId = ptr.String(dv)
+		}
+
+		if key == "arn" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_String(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Arn = ptr.String(dv)
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_EventSourceMappingAction(v smithycbor.Value) (types.EventSourceMappingAction, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.EventSourceMappingAction(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.EventSourceMappingAction(av), nil
+}
+
 func deserializeCBOR_ExecutionAction(v smithycbor.Value) (types.ExecutionAction, error) {
 	av, ok := v.(smithycbor.String)
 	if !ok {
@@ -2629,6 +2681,17 @@ func deserializeCBOR_ExecutionBlockConfiguration(v smithycbor.Value) (types.Exec
 				return nil, err
 			}
 			return &types.ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig{Value: *dv}, nil
+		}
+
+		if key == "lambdaEventSourceMappingConfig" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_LambdaEventSourceMappingConfiguration(sv)
+			if err != nil {
+				return nil, err
+			}
+			return &types.ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig{Value: *dv}, nil
 		}
 	}
 	return nil, fmt.Errorf("unrecognized variant")
@@ -3181,6 +3244,87 @@ func deserializeCBOR_KubernetesScalingResource(v smithycbor.Value) (*types.Kuber
 	return ds, nil
 }
 
+func deserializeCBOR_LambdaEventSourceMappingConfiguration(v smithycbor.Value) (*types.LambdaEventSourceMappingConfiguration, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.LambdaEventSourceMappingConfiguration{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "timeoutMinutes" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_Int32(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.TimeoutMinutes = ptr.Int32(dv)
+		}
+
+		if key == "action" {
+
+			dv, err := deserializeCBOR_EventSourceMappingAction(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Action = dv
+		}
+
+		if key == "regionEventSourceMappings" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_RegionEventSourceMappingMap(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.RegionEventSourceMappings = dv
+		}
+
+		if key == "ungraceful" {
+			if _, ok := sv.(*smithycbor.Nil); ok {
+				continue
+			}
+			dv, err := deserializeCBOR_LambdaEventSourceMappingUngraceful(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Ungraceful = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_LambdaEventSourceMappingUngraceful(v smithycbor.Value) (*types.LambdaEventSourceMappingUngraceful, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	ds := &types.LambdaEventSourceMappingUngraceful{}
+	for key, sv := range av {
+		_, _ = key, sv
+		if key == "behavior" {
+
+			dv, err := deserializeCBOR_LambdaEventSourceMappingUngracefulBehavior(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.Behavior = dv
+		}
+	}
+	return ds, nil
+}
+
+func deserializeCBOR_LambdaEventSourceMappingUngracefulBehavior(v smithycbor.Value) (types.LambdaEventSourceMappingUngracefulBehavior, error) {
+	av, ok := v.(smithycbor.String)
+	if !ok {
+		return types.LambdaEventSourceMappingUngracefulBehavior(""), fmt.Errorf("unexpected value type %T", v)
+	}
+	return types.LambdaEventSourceMappingUngracefulBehavior(av), nil
+}
+
 func deserializeCBOR_LambdaList(v smithycbor.Value) ([]types.Lambdas, error) {
 	av, ok := v.(smithycbor.List)
 	if !ok {
@@ -3699,6 +3843,23 @@ func deserializeCBOR_RegionAndRoutingControls(v smithycbor.Value) (map[string][]
 			return nil, err
 		}
 		dm[key] = dv
+	}
+	return dm, nil
+}
+
+func deserializeCBOR_RegionEventSourceMappingMap(v smithycbor.Value) (map[string]types.EventSourceMapping, error) {
+	av, ok := v.(smithycbor.Map)
+	if !ok {
+		return nil, fmt.Errorf("unexpected value type %T", v)
+	}
+	dm := map[string]types.EventSourceMapping{}
+	for key, sv := range av {
+
+		dv, err := deserializeCBOR_EventSourceMapping(sv)
+		if err != nil {
+			return nil, err
+		}
+		dm[key] = *dv
 	}
 	return dm, nil
 }

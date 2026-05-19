@@ -325,6 +325,9 @@ type JobLog struct {
 // Metadata associated with a Job log.
 type JobLogEventData struct {
 
+	// Retries for this operation.
+	AttemptCount int64
+
 	// Properties of a conversion job
 	ConversionProperties *ConversionProperties
 
@@ -333,6 +336,9 @@ type JobLogEventData struct {
 
 	// Properties of resource related to a job event.
 	EventResourceData EventResourceData
+
+	// The maximum number of retries that will be attempted if this operation failed.
+	MaxAttemptsCount int64
 
 	// A string representing a job error.
 	RawError *string
@@ -990,6 +996,10 @@ type ReplicationConfigurationTemplate struct {
 
 	// The ARN of the EBS encryption key to be used during replication.
 	EbsEncryptionKeyArn *string
+
+	// Which version of the Internet Protocol to use for replication of data. (IPv4 or
+	// IPv6)
+	InternetProtocol InternetProtocol
 
 	// The Point in time (PIT) policy to manage snapshots taken during replication.
 	PitPolicy []PITPolicyRule

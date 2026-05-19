@@ -13,6 +13,10 @@ import (
 )
 
 // Updates an existing gateway target.
+//
+// You cannot update a target that is in a pending authorization state (
+// CREATE_PENDING_AUTH , UPDATE_PENDING_AUTH , or SYNCHRONIZE_PENDING_AUTH ). Wait
+// for the authorization to complete or fail before updating the target.
 func (c *Client) UpdateGatewayTarget(ctx context.Context, params *UpdateGatewayTargetInput, optFns ...func(*Options)) (*UpdateGatewayTargetOutput, error) {
 	if params == nil {
 		params = &UpdateGatewayTargetInput{}
@@ -61,6 +65,10 @@ type UpdateGatewayTargetInput struct {
 	// target.
 	MetadataConfiguration *types.MetadataConfiguration
 
+	// The private endpoint configuration for the gateway target. Use this to connect
+	// the gateway to private resources in your VPC.
+	PrivateEndpoint types.PrivateEndpoint
+
 	noSmithyDocumentSerde
 }
 
@@ -107,6 +115,11 @@ type UpdateGatewayTargetOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// OAuth2 authorization data for the updated gateway target. This data is returned
+	// when a target is configured with a credential provider with authorization code
+	// grant type and requires user federation.
+	AuthorizationData types.AuthorizationData
+
 	// The updated description of the gateway target.
 	Description *string
 
@@ -115,6 +128,15 @@ type UpdateGatewayTargetOutput struct {
 
 	// The metadata configuration that was applied to the gateway target.
 	MetadataConfiguration *types.MetadataConfiguration
+
+	// The private endpoint configuration for the gateway target.
+	PrivateEndpoint types.PrivateEndpoint
+
+	// The managed resources created by the gateway for private endpoint connectivity.
+	PrivateEndpointManagedResources []types.ManagedResourceDetails
+
+	// The protocol type of the updated gateway target.
+	ProtocolType types.TargetProtocolType
 
 	// The reasons for the current status of the updated gateway target.
 	StatusReasons []string
@@ -159,7 +181,7 @@ func (c *Client) addOperationUpdateGatewayTargetMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -181,9 +203,6 @@ func (c *Client) addOperationUpdateGatewayTargetMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -2242,6 +2242,108 @@
                 "smithy.api#pattern": "^s3://([a-z0-9\\\\.-]+)/(.+)$"
             }
         },
+        "com.amazonaws.lexmodelsv2#AudioFillerDelayInMilliseconds": {
+            "type": "integer"
+        },
+        "com.amazonaws.lexmodelsv2#AudioFillerDeliveryDelayInMilliseconds": {
+            "type": "integer"
+        },
+        "com.amazonaws.lexmodelsv2#AudioFillerDurationInMilliseconds": {
+            "type": "integer"
+        },
+        "com.amazonaws.lexmodelsv2#AudioFillerSettings": {
+            "type": "structure",
+            "members": {
+                "enabled": {
+                    "target": "com.amazonaws.lexmodelsv2#Boolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Specifies whether audio filler playback is enabled for the bot locale.\n         Set to <code>true</code> to play filler audio while Amazon Lex processes a\n         user utterance. Set to <code>false</code> to disable filler audio.</p>"
+                    }
+                },
+                "audioType": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the audio filler to play while Amazon Lex processes the\n         user's input. This field is required when <code>enabled</code> is\n         <code>true</code>.</p>"
+                    }
+                },
+                "startDelayInMilliseconds": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerDelayInMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds, to wait after the end of the user's\n         utterance before starting audio filler playback. Valid range is\n         <code>500</code> to <code>5000</code> milliseconds. If not specified,\n         Amazon Lex uses a default of <code>2500</code> milliseconds.</p>"
+                    }
+                },
+                "minimumPlayDurationInMilliseconds": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerDurationInMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum time, in milliseconds, that audio filler plays once it\n         has started, even if the bot response becomes ready sooner. Valid range\n         is <code>1000</code> to <code>5000</code> milliseconds. If not\n         specified, Amazon Lex uses a default of <code>3000</code>\n         milliseconds.</p>"
+                    }
+                },
+                "responseDeliveryDelayInMilliseconds": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerDeliveryDelayInMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The silent delay, in milliseconds, inserted between the end of audio\n         filler playback and the start of the bot's response. Valid range is\n         <code>200</code> to <code>1000</code> milliseconds. If not specified,\n         Amazon Lex uses a default of <code>500</code> milliseconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration that plays background filler audio during speech-to-speech\n         interactions to mask processing delays and improve the perceived\n         responsiveness of the bot.</p>\n         <p>Audio filler requires <code>unifiedSpeechSettings</code> (speech-to-speech)\n         to be enabled on the bot locale when <code>enabled</code> is\n         <code>true</code>.</p>"
+            }
+        },
+        "com.amazonaws.lexmodelsv2#AudioFillerType": {
+            "type": "enum",
+            "members": {
+                "MELODY_CHIPPER_CHIME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MELODY_CHIPPER_CHIME"
+                    }
+                },
+                "MELODY_CURIOUS_CRAWL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MELODY_CURIOUS_CRAWL"
+                    }
+                },
+                "MELODY_RISING_RIPPLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MELODY_RISING_RIPPLE"
+                    }
+                },
+                "MELODY_PATIENT_PING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MELODY_PATIENT_PING"
+                    }
+                },
+                "MELODY_PONDERING_PONG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MELODY_PONDERING_PONG"
+                    }
+                },
+                "TYPING_KINETIC_KEYS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TYPING_KINETIC_KEYS"
+                    }
+                },
+                "TYPING_QUIET_QWERTY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TYPING_QUIET_QWERTY"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The audio filler identifier played during speech-to-speech\n         interactions. Supported values include melody and typing variants such\n         as <code>MELODY_CHIPPER_CHIME</code>, <code>MELODY_CURIOUS_CRAWL</code>,\n         <code>MELODY_RISING_RIPPLE</code>, <code>MELODY_PATIENT_PING</code>,\n         <code>MELODY_PONDERING_PONG</code>, <code>TYPING_KINETIC_KEYS</code>,\n         and <code>TYPING_QUIET_QWERTY</code>.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
         "com.amazonaws.lexmodelsv2#AudioLogDestination": {
             "type": "structure",
             "members": {
@@ -3561,6 +3663,12 @@
                     "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Unified speech settings to apply when importing the bot locale configuration.</p>"
+                    }
+                },
+                "audioFillerSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Audio filler settings to apply when importing the bot locale\n         configuration. Audio filler requires <code>unifiedSpeechSettings</code>\n         (speech-to-speech) to be enabled when <code>enabled</code> is\n         <code>true</code>.</p>"
                     }
                 }
             },
@@ -5523,6 +5631,12 @@
                         "smithy.api#documentation": "<p>Unified speech settings to configure for the new bot locale.</p>"
                     }
                 },
+                "audioFillerSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Audio filler settings to configure for the new bot locale. When\n         enabled, Amazon Lex plays a brief background audio filler during\n         speech-to-speech interactions to mask processing delays. Requires\n         <code>unifiedSpeechSettings</code> (speech-to-speech) to be configured\n         on the bot locale.</p>"
+                    }
+                },
                 "speechRecognitionSettings": {
                     "target": "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings",
                     "traits": {
@@ -5592,6 +5706,12 @@
                     "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The unified speech settings configured for the created bot locale.</p>"
+                    }
+                },
+                "audioFillerSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio filler settings configured for the created bot locale.</p>"
                     }
                 },
                 "speechRecognitionSettings": {
@@ -9434,6 +9554,12 @@
                     "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The unified speech settings configured for the bot locale.</p>"
+                    }
+                },
+                "audioFillerSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The audio filler settings configured for the bot locale.</p>"
                     }
                 },
                 "speechRecognitionSettings": {
@@ -24153,6 +24279,12 @@
                         "smithy.api#documentation": "<p>Updated unified speech settings to apply to the bot locale.</p>"
                     }
                 },
+                "audioFillerSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated audio filler settings to apply to the bot locale. When\n         enabled, requires <code>unifiedSpeechSettings</code> (speech-to-speech)\n         to be configured on the bot locale.</p>"
+                    }
+                },
                 "speechRecognitionSettings": {
                     "target": "com.amazonaws.lexmodelsv2#SpeechRecognitionSettings",
                     "traits": {
@@ -24225,6 +24357,12 @@
                     "target": "com.amazonaws.lexmodelsv2#UnifiedSpeechSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>The updated unified speech settings for the bot locale.</p>"
+                    }
+                },
+                "audioFillerSettings": {
+                    "target": "com.amazonaws.lexmodelsv2#AudioFillerSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated audio filler settings for the bot locale.</p>"
                     }
                 },
                 "speechRecognitionSettings": {

@@ -125,6 +125,110 @@ func awsRestjson1_serializeOpDocumentAcceptLinkInput(v *AcceptLinkInput, value s
 		}
 	}
 
+	if v.TimeoutInMillis != nil {
+		ok := object.Key("timeoutInMillis")
+		ok.Long(*v.TimeoutInMillis)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpAssociateCertificate struct {
+}
+
+func (*awsRestjson1_serializeOpAssociateCertificate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpAssociateCertificate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*AssociateCertificateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/responder-gateway/{gatewayId}/certificate")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsAssociateCertificateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentAssociateCertificateInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsAssociateCertificateInput(v *AssociateCertificateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayId == nil || len(*v.GatewayId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayId must not be empty")}
+	}
+	if v.GatewayId != nil {
+		if err := encoder.SetURI("gatewayId").String(*v.GatewayId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentAssociateCertificateInput(v *AssociateCertificateInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AcmCertificateArn != nil {
+		ok := object.Key("acmCertificateArn")
+		ok.String(*v.AcmCertificateArn)
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	return nil
 }
 
@@ -351,6 +455,133 @@ func awsRestjson1_serializeOpDocumentCreateLinkInput(v *CreateLinkInput, value s
 	if v.PeerGatewayId != nil {
 		ok := object.Key("peerGatewayId")
 		ok.String(*v.PeerGatewayId)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagsMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TimeoutInMillis != nil {
+		ok := object.Key("timeoutInMillis")
+		ok.Long(*v.TimeoutInMillis)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateLinkRoutingRule struct {
+}
+
+func (*awsRestjson1_serializeOpCreateLinkRoutingRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateLinkRoutingRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateLinkRoutingRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/responder-gateway/{gatewayId}/link/{linkId}/routing-rule")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateLinkRoutingRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateLinkRoutingRuleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateLinkRoutingRuleInput(v *CreateLinkRoutingRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayId == nil || len(*v.GatewayId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayId must not be empty")}
+	}
+	if v.GatewayId != nil {
+		if err := encoder.SetURI("gatewayId").String(*v.GatewayId); err != nil {
+			return err
+		}
+	}
+
+	if v.LinkId == nil || len(*v.LinkId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member linkId must not be empty")}
+	}
+	if v.LinkId != nil {
+		if err := encoder.SetURI("linkId").String(*v.LinkId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateLinkRoutingRuleInput(v *CreateLinkRoutingRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.Conditions != nil {
+		ok := object.Key("conditions")
+		if err := awsRestjson1_serializeDocumentRuleCondition(v.Conditions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Priority != nil {
+		ok := object.Key("priority")
+		ok.Integer(*v.Priority)
 	}
 
 	if v.Tags != nil {
@@ -683,6 +914,18 @@ func awsRestjson1_serializeOpDocumentCreateResponderGatewayInput(v *CreateRespon
 		ok.String(*v.DomainName)
 	}
 
+	if len(v.GatewayType) > 0 {
+		ok := object.Key("gatewayType")
+		ok.String(string(v.GatewayType))
+	}
+
+	if v.ListenerConfig != nil {
+		ok := object.Key("listenerConfig")
+		if err := awsRestjson1_serializeDocumentListenerConfig(v.ListenerConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ManagedEndpointConfiguration != nil {
 		ok := object.Key("managedEndpointConfiguration")
 		if err := awsRestjson1_serializeDocumentManagedEndpointConfiguration(v.ManagedEndpointConfiguration, ok); err != nil {
@@ -889,6 +1132,95 @@ func awsRestjson1_serializeOpHttpBindingsDeleteLinkInput(v *DeleteLinkInput, enc
 	}
 	if v.LinkId != nil {
 		if err := encoder.SetURI("linkId").String(*v.LinkId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteLinkRoutingRule struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteLinkRoutingRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteLinkRoutingRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteLinkRoutingRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/responder-gateway/{gatewayId}/link/{linkId}/routing-rule/{ruleId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteLinkRoutingRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteLinkRoutingRuleInput(v *DeleteLinkRoutingRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayId == nil || len(*v.GatewayId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayId must not be empty")}
+	}
+	if v.GatewayId != nil {
+		if err := encoder.SetURI("gatewayId").String(*v.GatewayId); err != nil {
+			return err
+		}
+	}
+
+	if v.LinkId == nil || len(*v.LinkId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member linkId must not be empty")}
+	}
+	if v.LinkId != nil {
+		if err := encoder.SetURI("linkId").String(*v.LinkId); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleId == nil || len(*v.RuleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ruleId must not be empty")}
+	}
+	if v.RuleId != nil {
+		if err := encoder.SetURI("ruleId").String(*v.RuleId); err != nil {
 			return err
 		}
 	}
@@ -1118,6 +1450,156 @@ func awsRestjson1_serializeOpHttpBindingsDeleteResponderGatewayInput(v *DeleteRe
 	return nil
 }
 
+type awsRestjson1_serializeOpDisassociateCertificate struct {
+}
+
+func (*awsRestjson1_serializeOpDisassociateCertificate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDisassociateCertificate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DisassociateCertificateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/responder-gateway/{gatewayId}/certificate")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDisassociateCertificateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDisassociateCertificateInput(v *DisassociateCertificateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AcmCertificateArn != nil {
+		encoder.SetQuery("acmCertificateArn").String(*v.AcmCertificateArn)
+	}
+
+	if v.GatewayId == nil || len(*v.GatewayId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayId must not be empty")}
+	}
+	if v.GatewayId != nil {
+		if err := encoder.SetURI("gatewayId").String(*v.GatewayId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetCertificateAssociation struct {
+}
+
+func (*awsRestjson1_serializeOpGetCertificateAssociation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetCertificateAssociation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetCertificateAssociationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/responder-gateway/{gatewayId}/certificate")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetCertificateAssociationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetCertificateAssociationInput(v *GetCertificateAssociationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AcmCertificateArn != nil {
+		encoder.SetQuery("acmCertificateArn").String(*v.AcmCertificateArn)
+	}
+
+	if v.GatewayId == nil || len(*v.GatewayId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayId must not be empty")}
+	}
+	if v.GatewayId != nil {
+		if err := encoder.SetURI("gatewayId").String(*v.GatewayId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetInboundExternalLink struct {
 }
 
@@ -1271,6 +1753,95 @@ func awsRestjson1_serializeOpHttpBindingsGetLinkInput(v *GetLinkInput, encoder *
 	}
 	if v.LinkId != nil {
 		if err := encoder.SetURI("linkId").String(*v.LinkId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetLinkRoutingRule struct {
+}
+
+func (*awsRestjson1_serializeOpGetLinkRoutingRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetLinkRoutingRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetLinkRoutingRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/responder-gateway/{gatewayId}/link/{linkId}/routing-rule/{ruleId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetLinkRoutingRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetLinkRoutingRuleInput(v *GetLinkRoutingRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayId == nil || len(*v.GatewayId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayId must not be empty")}
+	}
+	if v.GatewayId != nil {
+		if err := encoder.SetURI("gatewayId").String(*v.GatewayId); err != nil {
+			return err
+		}
+	}
+
+	if v.LinkId == nil || len(*v.LinkId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member linkId must not be empty")}
+	}
+	if v.LinkId != nil {
+		if err := encoder.SetURI("linkId").String(*v.LinkId); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleId == nil || len(*v.RuleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ruleId must not be empty")}
+	}
+	if v.RuleId != nil {
+		if err := encoder.SetURI("ruleId").String(*v.RuleId); err != nil {
 			return err
 		}
 	}
@@ -1495,6 +2066,173 @@ func awsRestjson1_serializeOpHttpBindingsGetResponderGatewayInput(v *GetResponde
 		if err := encoder.SetURI("gatewayId").String(*v.GatewayId); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListCertificateAssociations struct {
+}
+
+func (*awsRestjson1_serializeOpListCertificateAssociations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListCertificateAssociations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListCertificateAssociationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/responder-gateway/{gatewayId}/certificates")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListCertificateAssociationsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListCertificateAssociationsInput(v *ListCertificateAssociationsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayId == nil || len(*v.GatewayId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayId must not be empty")}
+	}
+	if v.GatewayId != nil {
+		if err := encoder.SetURI("gatewayId").String(*v.GatewayId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListLinkRoutingRules struct {
+}
+
+func (*awsRestjson1_serializeOpListLinkRoutingRules) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListLinkRoutingRules) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListLinkRoutingRulesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/responder-gateway/{gatewayId}/link/{linkId}/routing-rules")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListLinkRoutingRulesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListLinkRoutingRulesInput(v *ListLinkRoutingRulesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayId == nil || len(*v.GatewayId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayId must not be empty")}
+	}
+	if v.GatewayId != nil {
+		if err := encoder.SetURI("gatewayId").String(*v.GatewayId); err != nil {
+			return err
+		}
+	}
+
+	if v.LinkId == nil || len(*v.LinkId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member linkId must not be empty")}
+	}
+	if v.LinkId != nil {
+		if err := encoder.SetURI("linkId").String(*v.LinkId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
 	return nil
@@ -2145,6 +2883,11 @@ func awsRestjson1_serializeOpDocumentUpdateLinkInput(v *UpdateLinkInput, value s
 		}
 	}
 
+	if v.TimeoutInMillis != nil {
+		ok := object.Key("timeoutInMillis")
+		ok.Long(*v.TimeoutInMillis)
+	}
+
 	return nil
 }
 
@@ -2253,6 +2996,125 @@ func awsRestjson1_serializeOpDocumentUpdateLinkModuleFlowInput(v *UpdateLinkModu
 		if err := awsRestjson1_serializeDocumentModuleConfigurationList(v.Modules, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateLinkRoutingRule struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateLinkRoutingRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateLinkRoutingRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateLinkRoutingRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/responder-gateway/{gatewayId}/link/{linkId}/routing-rule/{ruleId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateLinkRoutingRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateLinkRoutingRuleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateLinkRoutingRuleInput(v *UpdateLinkRoutingRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.GatewayId == nil || len(*v.GatewayId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member gatewayId must not be empty")}
+	}
+	if v.GatewayId != nil {
+		if err := encoder.SetURI("gatewayId").String(*v.GatewayId); err != nil {
+			return err
+		}
+	}
+
+	if v.LinkId == nil || len(*v.LinkId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member linkId must not be empty")}
+	}
+	if v.LinkId != nil {
+		if err := encoder.SetURI("linkId").String(*v.LinkId); err != nil {
+			return err
+		}
+	}
+
+	if v.RuleId == nil || len(*v.RuleId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ruleId must not be empty")}
+	}
+	if v.RuleId != nil {
+		if err := encoder.SetURI("ruleId").String(*v.RuleId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateLinkRoutingRuleInput(v *UpdateLinkRoutingRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Conditions != nil {
+		ok := object.Key("conditions")
+		if err := awsRestjson1_serializeDocumentRuleCondition(v.Conditions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Priority != nil {
+		ok := object.Key("priority")
+		ok.Integer(*v.Priority)
 	}
 
 	return nil
@@ -2458,6 +3320,13 @@ func awsRestjson1_serializeOpDocumentUpdateResponderGatewayInput(v *UpdateRespon
 		ok.String(*v.DomainName)
 	}
 
+	if v.ListenerConfig != nil {
+		ok := object.Key("listenerConfig")
+		if err := awsRestjson1_serializeDocumentListenerConfig(v.ListenerConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ManagedEndpointConfiguration != nil {
 		ok := object.Key("managedEndpointConfiguration")
 		if err := awsRestjson1_serializeDocumentManagedEndpointConfiguration(v.ManagedEndpointConfiguration, ok); err != nil {
@@ -2527,6 +3396,13 @@ func awsRestjson1_serializeDocumentAutoScalingGroupsConfiguration(v *types.AutoS
 	if v.AutoScalingGroupNames != nil {
 		ok := object.Key("autoScalingGroupNames")
 		if err := awsRestjson1_serializeDocumentAutoScalingGroupNameList(v.AutoScalingGroupNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HealthCheckConfig != nil {
+		ok := object.Key("healthCheckConfig")
+		if err := awsRestjson1_serializeDocumentHealthCheckConfig(v.HealthCheckConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -2674,6 +3550,53 @@ func awsRestjson1_serializeDocumentHeaderTagAction(v *types.HeaderTagAction, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHealthCheckConfig(v *types.HealthCheckConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HealthyThresholdCount != nil {
+		ok := object.Key("healthyThresholdCount")
+		ok.Integer(*v.HealthyThresholdCount)
+	}
+
+	if v.IntervalSeconds != nil {
+		ok := object.Key("intervalSeconds")
+		ok.Integer(*v.IntervalSeconds)
+	}
+
+	if v.Path != nil {
+		ok := object.Key("path")
+		ok.String(*v.Path)
+	}
+
+	if v.Port != nil {
+		ok := object.Key("port")
+		ok.Integer(*v.Port)
+	}
+
+	if len(v.Protocol) > 0 {
+		ok := object.Key("protocol")
+		ok.String(string(v.Protocol))
+	}
+
+	if v.StatusCodeMatcher != nil {
+		ok := object.Key("statusCodeMatcher")
+		ok.String(*v.StatusCodeMatcher)
+	}
+
+	if v.TimeoutMs != nil {
+		ok := object.Key("timeoutMs")
+		ok.Integer(*v.TimeoutMs)
+	}
+
+	if v.UnhealthyThresholdCount != nil {
+		ok := object.Key("unhealthyThresholdCount")
+		ok.Integer(*v.UnhealthyThresholdCount)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLinkApplicationLogConfiguration(v *types.LinkApplicationLogConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2757,6 +3680,20 @@ func awsRestjson1_serializeDocumentLinkLogSettings(v *types.LinkLogSettings, val
 	if v.ApplicationLogs != nil {
 		ok := object.Key("applicationLogs")
 		if err := awsRestjson1_serializeDocumentLinkApplicationLogConfiguration(v.ApplicationLogs, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListenerConfig(v *types.ListenerConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Protocols != nil {
+		ok := object.Key("protocols")
+		if err := awsRestjson1_serializeDocumentProtocolList(v.Protocols, ok); err != nil {
 			return err
 		}
 	}
@@ -2953,6 +3890,34 @@ func awsRestjson1_serializeDocumentOpenRtbAttributeModuleParameters(v *types.Ope
 	return nil
 }
 
+func awsRestjson1_serializeDocumentProtocolList(v []types.Protocol, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentQueryStringKeyValuePair(v *types.QueryStringKeyValuePair, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRateLimiterModuleParameters(v *types.RateLimiterModuleParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3041,6 +4006,45 @@ func awsRestjson1_serializeDocumentResponderErrorMaskingLoggingTypes(v []types.R
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRuleCondition(v *types.RuleCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.HostHeader != nil {
+		ok := object.Key("hostHeader")
+		ok.String(*v.HostHeader)
+	}
+
+	if v.HostHeaderWildcard != nil {
+		ok := object.Key("hostHeaderWildcard")
+		ok.String(*v.HostHeaderWildcard)
+	}
+
+	if v.PathExact != nil {
+		ok := object.Key("pathExact")
+		ok.String(*v.PathExact)
+	}
+
+	if v.PathPrefix != nil {
+		ok := object.Key("pathPrefix")
+		ok.String(*v.PathPrefix)
+	}
+
+	if v.QueryStringEquals != nil {
+		ok := object.Key("queryStringEquals")
+		if err := awsRestjson1_serializeDocumentQueryStringKeyValuePair(v.QueryStringEquals, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QueryStringExists != nil {
+		ok := object.Key("queryStringExists")
+		ok.String(*v.QueryStringExists)
+	}
+
 	return nil
 }
 

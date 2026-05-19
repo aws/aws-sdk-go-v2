@@ -27,6 +27,7 @@ func (c *Client) ListFarms(ctx context.Context, params *ListFarmsInput, optFns .
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListFarmsInput struct {
 
 	// The maximum number of results to return. Use this parameter with NextToken to
@@ -42,6 +43,7 @@ type ListFarmsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListFarmsOutput struct {
 
 	// Farms on the list.
@@ -97,7 +99,7 @@ func (c *Client) addOperationListFarmsMiddlewares(stack *middleware.Stack, optio
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -119,9 +121,6 @@ func (c *Client) addOperationListFarmsMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -1,3 +1,23 @@
+# v1.15.0 (2026-05-07)
+
+* **Feature**: With this release, customers can configure their data exports to generate additional integration artifacts for Athena and Redshift.
+
+# v1.14.2 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.14.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.14.0 (2026-03-26)
+
+* **Feature**: With this release we are providing an option to accounts to have their export delivered to an S3 bucket that is not owned by the account.
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.13.1 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

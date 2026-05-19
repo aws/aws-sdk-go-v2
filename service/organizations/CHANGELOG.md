@@ -1,3 +1,26 @@
+# v1.51.3 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.2 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.1 (2026-04-03)
+
+* **Documentation**: Updates close Account quota for member accounts in an Organization.
+
+# v1.51.0 (2026-03-31)
+
+* **Feature**: Added Path field to Account and OrganizationalUnit objects in AWS Organizations API responses.
+
+# v1.50.6 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.5 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

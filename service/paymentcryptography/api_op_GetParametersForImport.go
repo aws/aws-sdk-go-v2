@@ -21,6 +21,9 @@ import (
 // import token expires in 30 days. You can use the same import token to import
 // multiple keys into your service account.
 //
+// To return a previously generated import token and wrapping key certificate
+// instead of generating new ones, set ReuseLastGeneratedToken to true .
+//
 // Cross-account use: This operation can't be used across different Amazon Web
 // Services accounts.
 //
@@ -68,6 +71,15 @@ type GetParametersForImportInput struct {
 	//
 	// This member is required.
 	WrappingKeyAlgorithm types.KeyAlgorithm
+
+	// Specifies whether to reuse the existing import token and wrapping key
+	// certificate. If set to true and a valid import token exists for the same key
+	// material type and wrapping key algorithm with at least 7 days of remaining
+	// validity, the existing token and wrapping key certificate are returned.
+	// Otherwise, a new import token and wrapping key certificate are generated. The
+	// default value is false , which generates a new import token and wrapping key
+	// certificate on every call.
+	ReuseLastGeneratedToken *bool
 
 	noSmithyDocumentSerde
 }
@@ -144,7 +156,7 @@ func (c *Client) addOperationGetParametersForImportMiddlewares(stack *middleware
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -166,9 +178,6 @@ func (c *Client) addOperationGetParametersForImportMiddlewares(stack *middleware
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

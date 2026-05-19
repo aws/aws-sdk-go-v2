@@ -39,6 +39,10 @@ type UpdateServiceLevelObjectiveInput struct {
 	// This member is required.
 	Id *string
 
+	// Indicates whether DevOps Agent will automatically investigate this SLO when it
+	// is breached
+	AutoInvestigationEnabled *bool
+
 	// Use this array to create burn rates for this SLO. Each burn rate is a metric
 	// that indicates how fast the service is consuming the error budget, relative to
 	// the attainment goal of the SLO.
@@ -112,7 +116,7 @@ func (c *Client) addOperationUpdateServiceLevelObjectiveMiddlewares(stack *middl
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -134,9 +138,6 @@ func (c *Client) addOperationUpdateServiceLevelObjectiveMiddlewares(stack *middl
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

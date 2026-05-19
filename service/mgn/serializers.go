@@ -9430,6 +9430,13 @@ func awsRestjson1_serializeDocumentConstructProperties(v map[string]string, valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDeleteOperation(v *types.DeleteOperation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDescribeJobsRequestFilters(v *types.DescribeJobsRequestFilters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10039,6 +10046,50 @@ func awsRestjson1_serializeDocumentListWavesRequestFilters(v *types.ListWavesReq
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMergeConstruct(v *types.MergeConstruct, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ConstructID != nil {
+		ok := object.Key("constructID")
+		ok.String(*v.ConstructID)
+	}
+
+	if v.SegmentID != nil {
+		ok := object.Key("segmentID")
+		ok.String(*v.SegmentID)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMergeConstructs(v []types.MergeConstruct, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMergeConstruct(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMergeOperation(v *types.MergeOperation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MergeConstructs != nil {
+		ok := object.Key("mergeConstructs")
+		if err := awsRestjson1_serializeDocumentMergeConstructs(v.MergeConstructs, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentNetworkMigrationDefintionsIDsFilter(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -10077,6 +10128,24 @@ func awsRestjson1_serializeDocumentOperationUnion(v types.OperationUnion, value 
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.OperationUnionMemberDelete:
+		av := object.Key("delete")
+		if err := awsRestjson1_serializeDocumentDeleteOperation(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.OperationUnionMemberMerge:
+		av := object.Key("merge")
+		if err := awsRestjson1_serializeDocumentMergeOperation(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.OperationUnionMemberSplit:
+		av := object.Key("split")
+		if err := awsRestjson1_serializeDocumentSplitOperation(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.OperationUnionMemberUpdate:
 		av := object.Key("update")
 		if err := awsRestjson1_serializeDocumentUpdateOperation(&uv.Value, av); err != nil {
@@ -10315,6 +10384,45 @@ func awsRestjson1_serializeDocumentSourceServerConnectorAction(v *types.SourceSe
 	if v.CredentialsSecretArn != nil {
 		ok := object.Key("credentialsSecretArn")
 		ok.String(*v.CredentialsSecretArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSplitConstruct(v *types.SplitConstruct, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CidrBlock != nil {
+		ok := object.Key("cidrBlock")
+		ok.String(*v.CidrBlock)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSplitConstructs(v []types.SplitConstruct, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSplitConstruct(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSplitOperation(v *types.SplitOperation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SplitConstructs != nil {
+		ok := object.Key("splitConstructs")
+		if err := awsRestjson1_serializeDocumentSplitConstructs(v.SplitConstructs, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -10680,6 +10788,16 @@ func awsRestjson1_serializeDocumentTerminateTargetInstancesRequestSourceServerID
 func awsRestjson1_serializeDocumentUpdateOperation(v *types.UpdateOperation, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Excluded != nil {
+		ok := object.Key("excluded")
+		ok.Boolean(*v.Excluded)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
 
 	if v.Properties != nil {
 		ok := object.Key("properties")

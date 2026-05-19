@@ -140,10 +140,11 @@ type CreateGameSessionInput struct {
 	// useful for ensuring that game session requests with the same idempotency token
 	// are processed only once. Subsequent requests with the same string return the
 	// original GameSession object, with an updated status. Maximum token length is 48
-	// characters. If provided, this string is included in the new game session's ID. A
-	// game session ARN has the following format: arn:aws:gamelift:::gamesession// .
-	// Idempotency tokens remain in use for 30 days after a game session has ended;
-	// game session objects are retained for this time period and then deleted.
+	// characters. If provided, this string is included in the new game session's ID.
+	// The value is always a full ARN in the following format:
+	// arn:aws:gamelift:::gamesession// . Idempotency tokens remain in use for 30 days
+	// after a game session has ended; game session objects are retained for this time
+	// period and then deleted.
 	IdempotencyToken *string
 
 	// A fleet's remote location to place the new game session in. If this parameter
@@ -175,11 +176,11 @@ func (c *Client) addOperationCreateGameSessionMiddlewares(stack *middleware.Stac
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateGameSession{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpCreateGameSession{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateGameSession{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpCreateGameSession{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -205,7 +206,7 @@ func (c *Client) addOperationCreateGameSessionMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -229,10 +230,10 @@ func (c *Client) addOperationCreateGameSessionMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
+	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

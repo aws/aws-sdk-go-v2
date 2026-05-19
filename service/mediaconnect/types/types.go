@@ -1918,6 +1918,36 @@ type MediaConnectFlowRouterOutputStreamDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration settings for connecting a router input to a MediaLive channel
+// output.
+type MediaLiveChannelRouterInputConfiguration struct {
+
+	// The encryption configuration that defines how content is encrypted during
+	// transit between MediaConnect Router and MediaLive. This configuration determines
+	// whether encryption keys are automatically managed by the service or manually
+	// managed through Secrets Manager.
+	//
+	// This member is required.
+	SourceTransitDecryption *MediaLiveTransitEncryption
+
+	// The ARN of the MediaLive channel to connect to this router input.
+	MediaLiveChannelArn *string
+
+	// The name of the MediaLive channel output to connect to this router input.
+	MediaLiveChannelOutputName *string
+
+	// The index of the MediaLive pipeline to connect to this router input.
+	MediaLivePipelineId MediaLiveChannelPipelineId
+
+	noSmithyDocumentSerde
+}
+
+// Configuration details for a MediaLive channel when used as a router input
+// source.
+type MediaLiveChannelRouterInputStreamDetails struct {
+	noSmithyDocumentSerde
+}
+
 // Configuration settings for connecting a router output to a MediaLive input.
 type MediaLiveInputRouterOutputConfiguration struct {
 
@@ -2906,6 +2936,7 @@ type RouterInput struct {
 //
 //	RouterInputConfigurationMemberFailover
 //	RouterInputConfigurationMemberMediaConnectFlow
+//	RouterInputConfigurationMemberMediaLiveChannel
 //	RouterInputConfigurationMemberMerge
 //	RouterInputConfigurationMemberStandard
 type RouterInputConfiguration interface {
@@ -2930,6 +2961,16 @@ type RouterInputConfigurationMemberMediaConnectFlow struct {
 }
 
 func (*RouterInputConfigurationMemberMediaConnectFlow) isRouterInputConfiguration() {}
+
+// Configuration settings for connecting a router input to a MediaLive channel
+// output.
+type RouterInputConfigurationMemberMediaLiveChannel struct {
+	Value MediaLiveChannelRouterInputConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*RouterInputConfigurationMemberMediaLiveChannel) isRouterInputConfiguration() {}
 
 // Configuration settings for a merge router input that combines two input sources.
 type RouterInputConfigurationMemberMerge struct {
@@ -3125,6 +3166,7 @@ type RouterInputSourceMetadataDetails struct {
 //
 //	RouterInputStreamDetailsMemberFailover
 //	RouterInputStreamDetailsMemberMediaConnectFlow
+//	RouterInputStreamDetailsMemberMediaLiveChannel
 //	RouterInputStreamDetailsMemberMerge
 //	RouterInputStreamDetailsMemberStandard
 type RouterInputStreamDetails interface {
@@ -3150,6 +3192,16 @@ type RouterInputStreamDetailsMemberMediaConnectFlow struct {
 }
 
 func (*RouterInputStreamDetailsMemberMediaConnectFlow) isRouterInputStreamDetails() {}
+
+// Configuration details for a MediaLive channel when used as a router input
+// source.
+type RouterInputStreamDetailsMemberMediaLiveChannel struct {
+	Value MediaLiveChannelRouterInputStreamDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*RouterInputStreamDetailsMemberMediaLiveChannel) isRouterInputStreamDetails() {}
 
 // Configuration details for a merge router input that combines two input sources.
 type RouterInputStreamDetailsMemberMerge struct {

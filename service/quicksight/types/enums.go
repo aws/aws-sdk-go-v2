@@ -677,6 +677,7 @@ type AuthenticationType string
 // Enum values for AuthenticationType
 const (
 	AuthenticationTypePassword AuthenticationType = "PASSWORD"
+	AuthenticationTypeKeypair  AuthenticationType = "KEYPAIR"
 	AuthenticationTypeToken    AuthenticationType = "TOKEN"
 	AuthenticationTypeX509     AuthenticationType = "X509"
 )
@@ -688,6 +689,7 @@ const (
 func (AuthenticationType) Values() []AuthenticationType {
 	return []AuthenticationType{
 		"PASSWORD",
+		"KEYPAIR",
 		"TOKEN",
 		"X509",
 	}
@@ -747,6 +749,31 @@ func (AuthorSpecifiedAggregation) Values() []AuthorSpecifiedAggregation {
 		"VAR",
 		"VARP",
 		"PERCENTILE",
+	}
+}
+
+type AutomationJobStatus string
+
+// Enum values for AutomationJobStatus
+const (
+	AutomationJobStatusFailed    AutomationJobStatus = "FAILED"
+	AutomationJobStatusRunning   AutomationJobStatus = "RUNNING"
+	AutomationJobStatusSucceeded AutomationJobStatus = "SUCCEEDED"
+	AutomationJobStatusQueued    AutomationJobStatus = "QUEUED"
+	AutomationJobStatusStopped   AutomationJobStatus = "STOPPED"
+)
+
+// Values returns all known values for AutomationJobStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomationJobStatus) Values() []AutomationJobStatus {
+	return []AutomationJobStatus{
+		"FAILED",
+		"RUNNING",
+		"SUCCEEDED",
+		"QUEUED",
+		"STOPPED",
 	}
 }
 
@@ -1400,6 +1427,27 @@ func (ContributionAnalysisSortType) Values() []ContributionAnalysisSortType {
 	}
 }
 
+type ControlSortDirection string
+
+// Enum values for ControlSortDirection
+const (
+	ControlSortDirectionAsc              ControlSortDirection = "ASC"
+	ControlSortDirectionDesc             ControlSortDirection = "DESC"
+	ControlSortDirectionUserDefinedOrder ControlSortDirection = "USER_DEFINED_ORDER"
+)
+
+// Values returns all known values for ControlSortDirection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ControlSortDirection) Values() []ControlSortDirection {
+	return []ControlSortDirection{
+		"ASC",
+		"DESC",
+		"USER_DEFINED_ORDER",
+	}
+}
+
 type CrossDatasetTypes string
 
 // Enum values for CrossDatasetTypes
@@ -1953,6 +2001,7 @@ const (
 	DataSourceTypePresto              DataSourceType = "PRESTO"
 	DataSourceTypeRedshift            DataSourceType = "REDSHIFT"
 	DataSourceTypeS3                  DataSourceType = "S3"
+	DataSourceTypeS3Tables            DataSourceType = "S3_TABLES"
 	DataSourceTypeSalesforce          DataSourceType = "SALESFORCE"
 	DataSourceTypeServicenow          DataSourceType = "SERVICENOW"
 	DataSourceTypeSnowflake           DataSourceType = "SNOWFLAKE"
@@ -1998,6 +2047,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"PRESTO",
 		"REDSHIFT",
 		"S3",
+		"S3_TABLES",
 		"SALESFORCE",
 		"SERVICENOW",
 		"SNOWFLAKE",
@@ -4870,6 +4920,7 @@ type SelectedTooltipType string
 const (
 	SelectedTooltipTypeBasic    SelectedTooltipType = "BASIC"
 	SelectedTooltipTypeDetailed SelectedTooltipType = "DETAILED"
+	SelectedTooltipTypeSheet    SelectedTooltipType = "SHEET"
 )
 
 // Values returns all known values for SelectedTooltipType. Note that this can be
@@ -4880,6 +4931,7 @@ func (SelectedTooltipType) Values() []SelectedTooltipType {
 	return []SelectedTooltipType{
 		"BASIC",
 		"DETAILED",
+		"SHEET",
 	}
 }
 
@@ -5326,6 +5378,44 @@ func (SortDirection) Values() []SortDirection {
 	return []SortDirection{
 		"ASC",
 		"DESC",
+	}
+}
+
+type SparklineAxisBehavior string
+
+// Enum values for SparklineAxisBehavior
+const (
+	SparklineAxisBehaviorShared      SparklineAxisBehavior = "SHARED"
+	SparklineAxisBehaviorIndependent SparklineAxisBehavior = "INDEPENDENT"
+)
+
+// Values returns all known values for SparklineAxisBehavior. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SparklineAxisBehavior) Values() []SparklineAxisBehavior {
+	return []SparklineAxisBehavior{
+		"SHARED",
+		"INDEPENDENT",
+	}
+}
+
+type SparklineVisualType string
+
+// Enum values for SparklineVisualType
+const (
+	SparklineVisualTypeLine     SparklineVisualType = "LINE"
+	SparklineVisualTypeAreaLine SparklineVisualType = "AREA_LINE"
+)
+
+// Values returns all known values for SparklineVisualType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SparklineVisualType) Values() []SparklineVisualType {
+	return []SparklineVisualType{
+		"LINE",
+		"AREA_LINE",
 	}
 }
 

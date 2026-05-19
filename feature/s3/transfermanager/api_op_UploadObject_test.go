@@ -59,6 +59,10 @@ func TestUploadOrderMulti(t *testing.T) {
 		t.Errorf("expect %q, got %q", "VERSION-ID", aws.ToString(resp.VersionID))
 	}
 
+	if e, a := "https://mock.amazonaws.com/key", aws.ToString(resp.Location); e != a {
+		t.Errorf("expect %q, got %q", e, a)
+	}
+
 	// Validate input values
 
 	// UploadPart
@@ -332,6 +336,10 @@ func TestUploadOrderSingle(t *testing.T) {
 
 	if e := "VERSION-ID"; e != aws.ToString(resp.VersionID) {
 		t.Errorf("expect %q, got %q", e, aws.ToString(resp.VersionID))
+	}
+
+	if e, a := "https://mock.amazonaws.com/key", aws.ToString(resp.Location); e != a {
+		t.Errorf("expect %q, got %q", e, a)
 	}
 
 	if len(aws.ToString(resp.UploadID)) > 0 {

@@ -11,23 +11,17 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-//	This API works with the following fleet types: Anywhere
+//	This API works with the following fleet types: EC2, Anywhere, Container
 //
 // Lists all custom and Amazon Web Services locations where Amazon GameLift
-// Servers can host game servers.
-//
-// Note that if you call this API using a location that doesn't have a service
-// endpoint, such as one that can only be a remote location in a multi-location
-// fleet, the API returns an error.
-//
-// Consult the table of supported locations in [Amazon GameLift Servers service locations] to identify home Regions that
-// support single and multi-location fleets.
+// Servers can host game servers. This operation also returns UDP ping beacon
+// information for locations, which you can use to measure network latency between
+// player devices and potential hosting locations.
 //
 // # Learn more
 //
 // [Service locations]
 //
-// [Amazon GameLift Servers service locations]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
 // [Service locations]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-regions.html
 func (c *Client) ListLocations(ctx context.Context, params *ListLocationsInput, optFns ...func(*Options)) (*ListLocationsOutput, error) {
 	if params == nil {
@@ -86,11 +80,11 @@ func (c *Client) addOperationListLocationsMiddlewares(stack *middleware.Stack, o
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListLocations{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListLocations{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListLocations{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListLocations{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -116,7 +110,7 @@ func (c *Client) addOperationListLocationsMiddlewares(stack *middleware.Stack, o
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -140,10 +134,10 @@ func (c *Client) addOperationListLocationsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
+	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

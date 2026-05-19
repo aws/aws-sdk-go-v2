@@ -1,3 +1,59 @@
+# v1.74.0 (2026-05-15)
+
+* **Feature**: Updating the max limit for start query api parameter.
+
+# v1.73.0 (2026-05-04)
+
+* **Feature**: Adding an additional optional deliverySourceConfiguration field to PutDeliverySource API. This enables customers to pass service-specific configurations through IngestionHub such as tracing enablement or sampling rates that will be propagated to the source resource.
+
+# v1.72.0 (2026-05-01)
+
+* **Feature**: Adds support for filtering log groups by tags in the ListLogGroups API via the new logGroupTags parameter.
+
+# v1.71.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.71.0 (2026-04-27)
+
+* **Feature**: Adds support for selecting all logs sources and types in a single association.
+
+# v1.70.0 (2026-04-24)
+
+* **Feature**: Adding nextToken and maxItems to the GetQueryResults API.
+
+# v1.69.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.69.0 (2026-04-16)
+
+* **Feature**: Endpoint update for CloudWatch Logs Streaming APIs.
+
+# v1.68.0 (2026-04-03)
+
+* **Feature**: Added queryDuration, bytesScanned, and userIdentity fields to the QueryInfo response object returned by DescribeQueries. Customers can now view detailed query cost information including who ran the query, how long it took, and the volume of data scanned.
+
+# v1.67.0 (2026-04-02)
+
+* **Feature**: We are pleased to announce that our logs transformation csv processor now has a destination field, allowing you to specify under which parent node parsed columns be placed under.
+
+# v1.66.0 (2026-03-30)
+
+* **Feature**: Adds Lookup Tables to CloudWatch Logs for log enrichment using CSV key-value data with KMS encryption support.
+
+# v1.65.0 (2026-03-26)
+
+* **Feature**: This release adds parameter support to saved queries in CloudWatch Logs Insights. Define reusable query templates with named placeholders, invoke them using start query. Available in Console, CLI and SDK
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.64.2 (2026-03-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.64.1 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

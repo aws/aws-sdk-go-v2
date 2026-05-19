@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Instructs Amazon Connect to resume the authentication process. The subsequent
+// Instructs Connect Customer to resume the authentication process. The subsequent
 // actions depend on the request body contents:
 //
 //   - If a code is provided: Connect retrieves the identity information from
@@ -39,8 +39,8 @@ func (c *Client) UpdateParticipantAuthentication(ctx context.Context, params *Up
 
 type UpdateParticipantAuthenticationInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -109,7 +109,7 @@ func (c *Client) addOperationUpdateParticipantAuthenticationMiddlewares(stack *m
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -131,9 +131,6 @@ func (c *Client) addOperationUpdateParticipantAuthenticationMiddlewares(stack *m
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

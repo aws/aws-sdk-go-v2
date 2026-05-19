@@ -1,3 +1,30 @@
+# v1.41.0 (2026-05-13)
+
+* **Feature**: Amazon Connect Cases now supports SLA durations of up to 2 years (1,051,200 minutes), increased from the previous maximum of 90 days (129,600 minutes). This enables you to track long-running service level agreements for cases that require extended resolution timelines.
+
+# v1.40.2 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.40.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.40.0 (2026-04-16)
+
+* **Feature**: Added error handling for service quota limits
+
+# v1.39.1 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.39.0 (2026-03-23)
+
+* **Feature**: You can now use the UpdateRelatedItem API to update the content of comments and custom related items associated with a case.
+
 # v1.38.1 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

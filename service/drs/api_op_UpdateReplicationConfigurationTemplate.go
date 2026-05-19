@@ -64,6 +64,10 @@ type UpdateReplicationConfigurationTemplateInput struct {
 	// The ARN of the EBS encryption key to be used during replication.
 	EbsEncryptionKeyArn *string
 
+	// Which version of the Internet Protocol to use for replication of data. (IPv4 or
+	// IPv6)
+	InternetProtocol types.InternetProtocol
+
 	// The Point in time (PIT) policy to manage snapshots taken during replication.
 	PitPolicy []types.PITPolicyRule
 
@@ -122,6 +126,10 @@ type UpdateReplicationConfigurationTemplateOutput struct {
 
 	// The ARN of the EBS encryption key to be used during replication.
 	EbsEncryptionKeyArn *string
+
+	// Which version of the Internet Protocol to use for replication of data. (IPv4 or
+	// IPv6)
+	InternetProtocol types.InternetProtocol
 
 	// The Point in time (PIT) policy to manage snapshots taken during replication.
 	PitPolicy []types.PITPolicyRule
@@ -186,7 +194,7 @@ func (c *Client) addOperationUpdateReplicationConfigurationTemplateMiddlewares(s
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -208,9 +216,6 @@ func (c *Client) addOperationUpdateReplicationConfigurationTemplateMiddlewares(s
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

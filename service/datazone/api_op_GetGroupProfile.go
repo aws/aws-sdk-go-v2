@@ -53,6 +53,14 @@ type GetGroupProfileOutput struct {
 	// The identifier of the group profile.
 	Id *string
 
+	// The ARN of the IAM role principal. This role is associated with the group
+	// profile.
+	RolePrincipalArn *string
+
+	// The unique identifier of the IAM role principal. This principal is associated
+	// with the group profile.
+	RolePrincipalId *string
+
 	// The identifier of the group profile.
 	Status types.GroupProfileStatus
 
@@ -96,7 +104,7 @@ func (c *Client) addOperationGetGroupProfileMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -118,9 +126,6 @@ func (c *Client) addOperationGetGroupProfileMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

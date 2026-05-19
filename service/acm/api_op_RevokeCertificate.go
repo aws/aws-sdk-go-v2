@@ -13,6 +13,9 @@ import (
 
 // Revokes a public ACM certificate. You can only revoke certificates that have
 // been previously exported.
+//
+// Once a certificate is revoked, you cannot reuse the certificate. Revoking a
+// certificate is permanent.
 func (c *Client) RevokeCertificate(ctx context.Context, params *RevokeCertificateInput, optFns ...func(*Options)) (*RevokeCertificateOutput, error) {
 	if params == nil {
 		params = &RevokeCertificateInput{}
@@ -92,7 +95,7 @@ func (c *Client) addOperationRevokeCertificateMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -114,9 +117,6 @@ func (c *Client) addOperationRevokeCertificateMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

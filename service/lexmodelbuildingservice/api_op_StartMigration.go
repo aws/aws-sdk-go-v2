@@ -17,6 +17,8 @@ import (
 //
 // For more information, see [Migrating a bot] in the Amazon Lex developer guide.
 //
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
+//
 // [Migrating a bot]: https://docs.aws.amazon.com/lex/latest/dg/migrate.html
 func (c *Client) StartMigration(ctx context.Context, params *StartMigrationInput, optFns ...func(*Options)) (*StartMigrationOutput, error) {
 	if params == nil {
@@ -145,7 +147,7 @@ func (c *Client) addOperationStartMigrationMiddlewares(stack *middleware.Stack, 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -167,9 +169,6 @@ func (c *Client) addOperationStartMigrationMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

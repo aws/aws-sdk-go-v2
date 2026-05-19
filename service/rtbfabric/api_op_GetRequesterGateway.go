@@ -4,6 +4,7 @@ package rtbfabric
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
@@ -131,7 +132,7 @@ func (c *Client) addOperationGetRequesterGatewayMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -153,9 +154,6 @@ func (c *Client) addOperationGetRequesterGatewayMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
@@ -561,6 +559,13 @@ func requesterGatewayDeletedStateRetryable(ctx context.Context, input *GetReques
 		var pathValue string
 		pathValue = string(v1)
 		if pathValue == expectedValue {
+			return false, nil
+		}
+	}
+
+	if err != nil {
+		var errorType *types.ResourceNotFoundException
+		if errors.As(err, &errorType) {
 			return false, nil
 		}
 	}

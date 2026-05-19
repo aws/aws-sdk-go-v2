@@ -66,6 +66,10 @@ type CreateGatewayTargetInput struct {
 	// from the gateway target.
 	MetadataConfiguration *types.MetadataConfiguration
 
+	// The private endpoint configuration for the gateway target. Use this to connect
+	// the gateway to private resources in your VPC.
+	PrivateEndpoint types.PrivateEndpoint
+
 	noSmithyDocumentSerde
 }
 
@@ -111,6 +115,11 @@ type CreateGatewayTargetOutput struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// OAuth2 authorization data for the created gateway target. This data is returned
+	// when a target is configured with a credential provider with authorization code
+	// grant type and requires user federation.
+	AuthorizationData types.AuthorizationData
+
 	// The description of the target.
 	Description *string
 
@@ -119,6 +128,15 @@ type CreateGatewayTargetOutput struct {
 
 	// The metadata configuration that was applied to the created gateway target.
 	MetadataConfiguration *types.MetadataConfiguration
+
+	// The private endpoint configuration for the gateway target.
+	PrivateEndpoint types.PrivateEndpoint
+
+	// The managed resources created by the gateway for private endpoint connectivity.
+	PrivateEndpointManagedResources []types.ManagedResourceDetails
+
+	// The protocol type of the created gateway target.
+	ProtocolType types.TargetProtocolType
 
 	// The reasons for the current status of the target.
 	StatusReasons []string
@@ -163,7 +181,7 @@ func (c *Client) addOperationCreateGatewayTargetMiddlewares(stack *middleware.St
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -185,9 +203,6 @@ func (c *Client) addOperationCreateGatewayTargetMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

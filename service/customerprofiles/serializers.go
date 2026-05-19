@@ -1439,6 +1439,11 @@ func awsRestjson1_serializeOpDocumentCreateRecommenderInput(v *CreateRecommender
 		ok.String(string(v.RecommenderRecipeName))
 	}
 
+	if v.RecommenderSchemaName != nil {
+		ok := object.Key("RecommenderSchemaName")
+		ok.String(*v.RecommenderSchemaName)
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
@@ -1552,6 +1557,123 @@ func awsRestjson1_serializeOpDocumentCreateRecommenderFilterInput(v *CreateRecom
 	if v.RecommenderFilterExpression != nil {
 		ok := object.Key("RecommenderFilterExpression")
 		ok.String(*v.RecommenderFilterExpression)
+	}
+
+	if v.RecommenderSchemaName != nil {
+		ok := object.Key("RecommenderSchemaName")
+		ok.String(*v.RecommenderSchemaName)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateRecommenderSchema struct {
+}
+
+func (*awsRestjson1_serializeOpCreateRecommenderSchema) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateRecommenderSchema) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateRecommenderSchemaInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domains/{DomainName}/recommender-schemas/{RecommenderSchemaName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateRecommenderSchemaInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateRecommenderSchemaInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateRecommenderSchemaInput(v *CreateRecommenderSchemaInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainName == nil || len(*v.DomainName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
+	if v.DomainName != nil {
+		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
+			return err
+		}
+	}
+
+	if v.RecommenderSchemaName == nil || len(*v.RecommenderSchemaName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RecommenderSchemaName must not be empty")}
+	}
+	if v.RecommenderSchemaName != nil {
+		if err := encoder.SetURI("RecommenderSchemaName").String(*v.RecommenderSchemaName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateRecommenderSchemaInput(v *CreateRecommenderSchemaInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Fields != nil {
+		ok := object.Key("Fields")
+		if err := awsRestjson1_serializeDocumentRecommenderSchemaFields(v.Fields, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Tags != nil {
@@ -1672,6 +1794,13 @@ func awsRestjson1_serializeOpDocumentCreateSegmentDefinitionInput(v *CreateSegme
 	if v.SegmentGroups != nil {
 		ok := object.Key("SegmentGroups")
 		if err := awsRestjson1_serializeDocumentSegmentGroup(v.SegmentGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SegmentSort != nil {
+		ok := object.Key("SegmentSort")
+		if err := awsRestjson1_serializeDocumentSegmentSort(v.SegmentSort, ok); err != nil {
 			return err
 		}
 	}
@@ -3123,6 +3252,86 @@ func awsRestjson1_serializeOpHttpBindingsDeleteRecommenderFilterInput(v *DeleteR
 	}
 	if v.RecommenderFilterName != nil {
 		if err := encoder.SetURI("RecommenderFilterName").String(*v.RecommenderFilterName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteRecommenderSchema struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteRecommenderSchema) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteRecommenderSchema) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteRecommenderSchemaInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domains/{DomainName}/recommender-schemas/{RecommenderSchemaName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteRecommenderSchemaInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteRecommenderSchemaInput(v *DeleteRecommenderSchemaInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainName == nil || len(*v.DomainName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
+	if v.DomainName != nil {
+		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
+			return err
+		}
+	}
+
+	if v.RecommenderSchemaName == nil || len(*v.RecommenderSchemaName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RecommenderSchemaName must not be empty")}
+	}
+	if v.RecommenderSchemaName != nil {
+		if err := encoder.SetURI("RecommenderSchemaName").String(*v.RecommenderSchemaName); err != nil {
 			return err
 		}
 	}
@@ -4949,6 +5158,86 @@ func awsRestjson1_serializeOpHttpBindingsGetRecommenderFilterInput(v *GetRecomme
 	}
 	if v.RecommenderFilterName != nil {
 		if err := encoder.SetURI("RecommenderFilterName").String(*v.RecommenderFilterName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetRecommenderSchema struct {
+}
+
+func (*awsRestjson1_serializeOpGetRecommenderSchema) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetRecommenderSchema) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetRecommenderSchemaInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domains/{DomainName}/recommender-schemas/{RecommenderSchemaName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetRecommenderSchemaInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetRecommenderSchemaInput(v *GetRecommenderSchemaInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainName == nil || len(*v.DomainName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
+	if v.DomainName != nil {
+		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
+			return err
+		}
+	}
+
+	if v.RecommenderSchemaName == nil || len(*v.RecommenderSchemaName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member RecommenderSchemaName must not be empty")}
+	}
+	if v.RecommenderSchemaName != nil {
+		if err := encoder.SetURI("RecommenderSchemaName").String(*v.RecommenderSchemaName); err != nil {
 			return err
 		}
 	}
@@ -7411,6 +7700,85 @@ func (m *awsRestjson1_serializeOpListRecommenders) HandleSerialize(ctx context.C
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListRecommendersInput(v *ListRecommendersInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainName == nil || len(*v.DomainName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member DomainName must not be empty")}
+	}
+	if v.DomainName != nil {
+		if err := encoder.SetURI("DomainName").String(*v.DomainName); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListRecommenderSchemas struct {
+}
+
+func (*awsRestjson1_serializeOpListRecommenderSchemas) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListRecommenderSchemas) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListRecommenderSchemasInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domains/{DomainName}/recommender-schemas")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListRecommenderSchemasInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListRecommenderSchemasInput(v *ListRecommenderSchemasInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -10386,6 +10754,17 @@ func awsRestjson1_serializeDocumentCandidateIdList(v []string, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentColumnNamesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentConditionOverrides(v *types.ConditionOverrides, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11237,6 +11616,22 @@ func awsRestjson1_serializeDocumentGroupList(v []types.FilterGroup, value smithy
 	return nil
 }
 
+func awsRestjson1_serializeDocumentIncludedColumns(v map[string][]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentColumnNamesList(v[key], om); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentIncrementalPullConfig(v *types.IncrementalPullConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11945,6 +12340,13 @@ func awsRestjson1_serializeDocumentRecommenderConfig(v *types.RecommenderConfig,
 		}
 	}
 
+	if v.IncludedColumns != nil {
+		ok := object.Key("IncludedColumns")
+		if err := awsRestjson1_serializeDocumentIncludedColumns(v.IncludedColumns, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.InferenceConfig != nil {
 		ok := object.Key("InferenceConfig")
 		if err := awsRestjson1_serializeDocumentInferenceConfig(v.InferenceConfig, ok); err != nil {
@@ -12050,6 +12452,57 @@ func awsRestjson1_serializeDocumentRecommenderPromotionalFilters(v []types.Recom
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentRecommenderPromotionalFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRecommenderSchemaField(v *types.RecommenderSchemaField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ContentType) > 0 {
+		ok := object.Key("ContentType")
+		ok.String(string(v.ContentType))
+	}
+
+	if len(v.FeatureType) > 0 {
+		ok := object.Key("FeatureType")
+		ok.String(string(v.FeatureType))
+	}
+
+	if v.TargetFieldName != nil {
+		ok := object.Key("TargetFieldName")
+		ok.String(*v.TargetFieldName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRecommenderSchemaFieldList(v []types.RecommenderSchemaField, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRecommenderSchemaField(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRecommenderSchemaFields(v map[string][]types.RecommenderSchemaField, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentRecommenderSchemaFieldList(v[key], om); err != nil {
 			return err
 		}
 	}
@@ -12266,6 +12719,20 @@ func awsRestjson1_serializeDocumentSegmentGroupStructure(v *types.SegmentGroupSt
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSegmentSort(v *types.SegmentSort, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Attributes != nil {
+		ok := object.Key("Attributes")
+		if err := awsRestjson1_serializeDocumentSortAttributeList(v.Attributes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentServiceNowSourceProperties(v *types.ServiceNowSourceProperties, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12275,6 +12742,46 @@ func awsRestjson1_serializeDocumentServiceNowSourceProperties(v *types.ServiceNo
 		ok.String(*v.Object)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSortAttribute(v *types.SortAttribute, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DataType) > 0 {
+		ok := object.Key("DataType")
+		ok.String(string(v.DataType))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Order) > 0 {
+		ok := object.Key("Order")
+		ok.String(string(v.Order))
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSortAttributeList(v []types.SortAttribute, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSortAttribute(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

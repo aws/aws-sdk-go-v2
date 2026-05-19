@@ -24,6 +24,8 @@ import (
 //   - l4 : Uses G6 and Gr6 instance families
 //
 //   - l40s : Uses G6e instance family
+//
+//   - rtx-pro-server-6000 : Uses G7e instance family
 type AcceleratorCapabilities struct {
 
 	// A list of accelerator capabilities requested for this fleet. Only Amazon
@@ -84,6 +86,8 @@ type AcceleratorSelection struct {
 	//
 	//   - l40s - NVIDIA L40S Tensor Core GPU (48 GiB memory)
 	//
+	//   - rtx-pro-server-6000 - NVIDIA RTX PRO Server 6000 GPU (96 GiB memory)
+	//
 	// This member is required.
 	Name AcceleratorName
 
@@ -96,6 +100,8 @@ type AcceleratorSelection struct {
 	//   latest and a new version of the runtime is released, the new version of the
 	//   runtime is used.
 	//
+	//   - grid:r580 - [NVIDIA vGPU software 19]
+	//
 	//   - grid:r570 - [NVIDIA vGPU software 18]
 	//
 	//   - grid:r535 - [NVIDIA vGPU software 16]
@@ -107,16 +113,19 @@ type AcceleratorSelection struct {
 	//
 	// Not all runtimes are compatible with all accelerator types:
 	//
-	//   - t4 and a10g : Support all runtimes ( grid:r570 , grid:r535 )
+	//   - t4 and a10g : Support all runtimes ( grid:r580 , grid:r570 , grid:r535 )
 	//
 	//   - l4 and l40s : Only support grid:r570 and newer
+	//
+	//   - rtx-pro-server-6000 : Only supports grid:r580
 	//
 	// All accelerators in a fleet must use the same runtime version. You cannot mix
 	// different runtime versions within a single fleet.
 	//
-	// When you specify latest , it resolves to grid:r570 for all currently supported
+	// When you specify latest , it resolves to grid:r580 for all currently supported
 	// accelerators.
 	//
+	// [NVIDIA vGPU software 19]: https://docs.nvidia.com/vgpu/19.0/index.html
 	// [NVIDIA vGPU software 16]: https://docs.nvidia.com/vgpu/16.0/index.html
 	// [NVIDIA vGPU software 18]: https://docs.nvidia.com/vgpu/18.0/index.html
 	Runtime *string
@@ -336,6 +345,975 @@ type AwsCredentials struct {
 	noSmithyDocumentSerde
 }
 
+// The error details for a job that could not be retrieved in a batch get
+// operation.
+type BatchGetJobError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchGetJobErrorCode
+
+	// The farm ID of the job that could not be retrieved.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the job that could not be retrieved.
+	//
+	// This member is required.
+	JobId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The queue ID of the job that could not be retrieved.
+	//
+	// This member is required.
+	QueueId *string
+
+	noSmithyDocumentSerde
+}
+
+// The identifiers for a job.
+type BatchGetJobIdentifier struct {
+
+	// The farm ID of the job.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the job.
+	//
+	// This member is required.
+	QueueId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a job returned in a batch get operation.
+type BatchGetJobItem struct {
+
+	// The date and time the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The user or system that created this resource.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The farm ID of the job.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID.
+	//
+	// This member is required.
+	JobId *string
+
+	// The life cycle status of the job.
+	//
+	// This member is required.
+	LifecycleStatus JobLifecycleStatus
+
+	// A message that communicates the status of the life cycle.
+	//
+	// This member is required.
+	LifecycleStatusMessage *string
+
+	// The name of the job.
+	//
+	// This member is required.
+	Name *string
+
+	// The job priority.
+	//
+	// This member is required.
+	Priority *int32
+
+	// The queue ID of the job.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The attachments for the job.
+	Attachments *Attachments
+
+	// The description of the job.
+	Description *string
+
+	// The date and time the resource ended running.
+	EndedAt *time.Time
+
+	// The number of task failures before the job stops running and is marked as FAILED
+	// .
+	MaxFailedTasksCount *int32
+
+	// The maximum number of retries per failed tasks.
+	MaxRetriesPerTask *int32
+
+	// The maximum number of worker hosts that can concurrently process a job.
+	MaxWorkerCount *int32
+
+	// The parameters for the job.
+	Parameters map[string]JobParameter
+
+	// The job ID for the source job.
+	SourceJobId *string
+
+	// The date and time the resource started running.
+	StartedAt *time.Time
+
+	// The storage profile ID associated with the job.
+	StorageProfileId *string
+
+	// The task status to start with on the job.
+	TargetTaskRunStatus JobTargetTaskRunStatus
+
+	// The number of times that tasks failed and were retried.
+	TaskFailureRetryCount *int32
+
+	// The task run status for the job.
+	TaskRunStatus TaskRunStatus
+
+	// The number of tasks for each run status for the job.
+	TaskRunStatusCounts map[string]int32
+
+	// The date and time the resource was updated.
+	UpdatedAt *time.Time
+
+	// The user or system that updated this resource.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details for a session action that could not be retrieved in a batch
+// get operation.
+type BatchGetSessionActionError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchGetSessionActionErrorCode
+
+	// The farm ID of the session action that could not be retrieved.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the session action that could not be retrieved.
+	//
+	// This member is required.
+	JobId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The queue ID of the session action that could not be retrieved.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The session action ID of the session action that could not be retrieved.
+	//
+	// This member is required.
+	SessionActionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The identifiers for a session action.
+type BatchGetSessionActionIdentifier struct {
+
+	// The farm ID of the session action.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the session action.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the session action.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The session action ID.
+	//
+	// This member is required.
+	SessionActionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a session action returned in a batch get operation.
+type BatchGetSessionActionItem struct {
+
+	// The session action definition.
+	//
+	// This member is required.
+	Definition SessionActionDefinition
+
+	// The farm ID of the session action.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the session action.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the session action.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The session action ID.
+	//
+	// This member is required.
+	SessionActionId *string
+
+	// The session ID for the session action.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The status of the session action.
+	//
+	// This member is required.
+	Status SessionActionStatus
+
+	// The limits that were acquired for the session action.
+	AcquiredLimits []AcquiredLimit
+
+	// The date and time the resource ended running.
+	EndedAt *time.Time
+
+	// The manifests for the session action.
+	Manifests []TaskRunManifestPropertiesResponse
+
+	// The exit code to apply to the session action.
+	ProcessExitCode *int32
+
+	// The message that communicates the progress of the session action.
+	ProgressMessage *string
+
+	// The completion percentage for the session action.
+	ProgressPercent *float32
+
+	// The date and time the resource started running.
+	StartedAt *time.Time
+
+	// The date and time the resource was updated by a worker.
+	WorkerUpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The error details for a session that could not be retrieved in a batch get
+// operation.
+type BatchGetSessionError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchGetSessionErrorCode
+
+	// The farm ID of the session that could not be retrieved.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the session that could not be retrieved.
+	//
+	// This member is required.
+	JobId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The queue ID of the session that could not be retrieved.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The session ID of the session that could not be retrieved.
+	//
+	// This member is required.
+	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The identifiers for a session.
+type BatchGetSessionIdentifier struct {
+
+	// The farm ID of the session.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the session.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the session.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The session ID.
+	//
+	// This member is required.
+	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a session returned in a batch get operation.
+type BatchGetSessionItem struct {
+
+	// The farm ID of the session.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The fleet ID of the session.
+	//
+	// This member is required.
+	FleetId *string
+
+	// The job ID of the session.
+	//
+	// This member is required.
+	JobId *string
+
+	// The life cycle status of the session.
+	//
+	// This member is required.
+	LifecycleStatus SessionLifecycleStatus
+
+	// The session log.
+	//
+	// This member is required.
+	Log *LogConfiguration
+
+	// The queue ID of the session.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The session ID.
+	//
+	// This member is required.
+	SessionId *string
+
+	// The date and time the resource started running.
+	//
+	// This member is required.
+	StartedAt *time.Time
+
+	// The worker ID of the session.
+	//
+	// This member is required.
+	WorkerId *string
+
+	// The date and time the resource ended running.
+	EndedAt *time.Time
+
+	// The host properties for the session.
+	HostProperties *HostPropertiesResponse
+
+	// The target life cycle status for the session.
+	TargetLifecycleStatus SessionLifecycleTargetStatus
+
+	// The date and time the resource was updated.
+	UpdatedAt *time.Time
+
+	// The user or system that updated this resource.
+	UpdatedBy *string
+
+	// The worker log for the session.
+	WorkerLog *LogConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The error details for a step that could not be retrieved in a batch get
+// operation.
+type BatchGetStepError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchGetStepErrorCode
+
+	// The farm ID of the step that could not be retrieved.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the step that could not be retrieved.
+	//
+	// This member is required.
+	JobId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The queue ID of the step that could not be retrieved.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The step ID of the step that could not be retrieved.
+	//
+	// This member is required.
+	StepId *string
+
+	noSmithyDocumentSerde
+}
+
+// The identifiers for a step.
+type BatchGetStepIdentifier struct {
+
+	// The farm ID of the step.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the step.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the step.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The step ID.
+	//
+	// This member is required.
+	StepId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a step returned in a batch get operation.
+type BatchGetStepItem struct {
+
+	// The date and time the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The user or system that created this resource.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The farm ID of the step.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the step.
+	//
+	// This member is required.
+	JobId *string
+
+	// The life cycle status of the step.
+	//
+	// This member is required.
+	LifecycleStatus StepLifecycleStatus
+
+	// The name of the step.
+	//
+	// This member is required.
+	Name *string
+
+	// The queue ID of the step.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The step ID.
+	//
+	// This member is required.
+	StepId *string
+
+	// The task run status for the step.
+	//
+	// This member is required.
+	TaskRunStatus TaskRunStatus
+
+	// The number of tasks for each run status for the step.
+	//
+	// This member is required.
+	TaskRunStatusCounts map[string]int32
+
+	// The number of dependencies for the step.
+	DependencyCounts *DependencyCounts
+
+	// The description of the step.
+	Description *string
+
+	// The date and time the resource ended running.
+	EndedAt *time.Time
+
+	// A message that communicates the status of the life cycle.
+	LifecycleStatusMessage *string
+
+	// The parameter space for the step.
+	ParameterSpace *ParameterSpace
+
+	// The required capabilities for the step.
+	RequiredCapabilities *StepRequiredCapabilities
+
+	// The date and time the resource started running.
+	StartedAt *time.Time
+
+	// The task status to start with on the step.
+	TargetTaskRunStatus StepTargetTaskRunStatus
+
+	// The number of times that tasks failed and were retried.
+	TaskFailureRetryCount *int32
+
+	// The date and time the resource was updated.
+	UpdatedAt *time.Time
+
+	// The user or system that updated this resource.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details for a task that could not be retrieved in a batch get
+// operation.
+type BatchGetTaskError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchGetTaskErrorCode
+
+	// The farm ID of the task that could not be retrieved.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the task that could not be retrieved.
+	//
+	// This member is required.
+	JobId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The queue ID of the task that could not be retrieved.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The step ID of the task that could not be retrieved.
+	//
+	// This member is required.
+	StepId *string
+
+	// The task ID of the task that could not be retrieved.
+	//
+	// This member is required.
+	TaskId *string
+
+	noSmithyDocumentSerde
+}
+
+// The identifiers for a task.
+type BatchGetTaskIdentifier struct {
+
+	// The farm ID of the task.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the task.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the task.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The step ID of the task.
+	//
+	// This member is required.
+	StepId *string
+
+	// The task ID.
+	//
+	// This member is required.
+	TaskId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a task returned in a batch get operation.
+type BatchGetTaskItem struct {
+
+	// The date and time the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The user or system that created this resource.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The farm ID of the task.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the task.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the task.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The run status of the task.
+	//
+	// This member is required.
+	RunStatus TaskRunStatus
+
+	// The step ID of the task.
+	//
+	// This member is required.
+	StepId *string
+
+	// The task ID.
+	//
+	// This member is required.
+	TaskId *string
+
+	// The date and time the resource ended running.
+	EndedAt *time.Time
+
+	// The number of times the task failed and was retried.
+	FailureRetryCount *int32
+
+	// The latest session action for the task.
+	LatestSessionActionId *string
+
+	// The parameters for the task.
+	Parameters map[string]TaskParameterValue
+
+	// The date and time the resource started running.
+	StartedAt *time.Time
+
+	// The run status with which to start the task.
+	TargetRunStatus TaskTargetRunStatus
+
+	// The date and time the resource was updated.
+	UpdatedAt *time.Time
+
+	// The user or system that updated this resource.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details for a worker that could not be retrieved in a batch get
+// operation.
+type BatchGetWorkerError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchGetWorkerErrorCode
+
+	// The farm ID of the worker that could not be retrieved.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The fleet ID of the worker that could not be retrieved.
+	//
+	// This member is required.
+	FleetId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The worker ID of the worker that could not be retrieved.
+	//
+	// This member is required.
+	WorkerId *string
+
+	noSmithyDocumentSerde
+}
+
+// The identifiers for a worker.
+type BatchGetWorkerIdentifier struct {
+
+	// The farm ID of the worker.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The fleet ID of the worker.
+	//
+	// This member is required.
+	FleetId *string
+
+	// The worker ID.
+	//
+	// This member is required.
+	WorkerId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a worker returned in a batch get operation.
+type BatchGetWorkerItem struct {
+
+	// The date and time the resource was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The user or system that created this resource.
+	//
+	// This member is required.
+	CreatedBy *string
+
+	// The farm ID of the worker.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The fleet ID of the worker.
+	//
+	// This member is required.
+	FleetId *string
+
+	// The status of the worker.
+	//
+	// This member is required.
+	Status WorkerStatus
+
+	// The worker ID.
+	//
+	// This member is required.
+	WorkerId *string
+
+	// The host properties for the worker.
+	HostProperties *HostPropertiesResponse
+
+	// The log configuration for the worker.
+	Log *LogConfiguration
+
+	// The date and time the resource was updated.
+	UpdatedAt *time.Time
+
+	// The user or system that updated this resource.
+	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The error details for a job that could not be updated in a batch update
+// operation.
+type BatchUpdateJobError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchUpdateJobErrorCode
+
+	// The farm ID of the job that could not be updated.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the job that could not be updated.
+	//
+	// This member is required.
+	JobId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The queue ID of the job that could not be updated.
+	//
+	// This member is required.
+	QueueId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a job to update in a batch update operation.
+type BatchUpdateJobItem struct {
+
+	// The farm ID of the job to update.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the job to update.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the job to update.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The description of the job to update.
+	Description *string
+
+	// The status of a job in its lifecycle. When you change the status of the job to
+	// ARCHIVED , the job can't be scheduled or archived.
+	//
+	// An archived job and its steps and tasks are deleted after 120 days. The job
+	// can't be recovered.
+	LifecycleStatus UpdateJobLifecycleStatus
+
+	// The number of task failures before the job stops running and is marked as FAILED
+	// .
+	MaxFailedTasksCount *int32
+
+	// The maximum number of retries per failed tasks.
+	MaxRetriesPerTask *int32
+
+	// The maximum number of worker hosts that can concurrently process a job.
+	MaxWorkerCount *int32
+
+	// The name of the job to update.
+	Name *string
+
+	// The job priority to update.
+	Priority *int32
+
+	// The task status to update the job's tasks to.
+	TargetTaskRunStatus JobTargetTaskRunStatus
+
+	noSmithyDocumentSerde
+}
+
+// The error details for a task that could not be updated in a batch update
+// operation.
+type BatchUpdateTaskError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code BatchUpdateTaskErrorCode
+
+	// The farm ID of the task that could not be updated.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the task that could not be updated.
+	//
+	// This member is required.
+	JobId *string
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	// The queue ID of the task that could not be updated.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The step ID of the task that could not be updated.
+	//
+	// This member is required.
+	StepId *string
+
+	// The task ID of the task that could not be updated.
+	//
+	// This member is required.
+	TaskId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a task to update in a batch update operation.
+type BatchUpdateTaskItem struct {
+
+	// The farm ID of the task to update.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The job ID of the task to update.
+	//
+	// This member is required.
+	JobId *string
+
+	// The queue ID of the task to update.
+	//
+	// This member is required.
+	QueueId *string
+
+	// The step ID of the task to update.
+	//
+	// This member is required.
+	StepId *string
+
+	// The run status with which to start the task.
+	//
+	// This member is required.
+	TargetRunStatus TaskTargetRunStatus
+
+	// The task ID of the task to update.
+	//
+	// This member is required.
+	TaskId *string
+
+	noSmithyDocumentSerde
+}
+
 // The budget action to add.
 type BudgetActionToAdd struct {
 
@@ -475,6 +1453,24 @@ type ConsumedUsages struct {
 	noSmithyDocumentSerde
 }
 
+// The auto scaling configuration settings for a customer managed fleet.
+type CustomerManagedAutoScalingConfiguration struct {
+
+	// The number of workers that can be added per minute to the fleet. The default is
+	// 10 workers per minute.
+	ScaleOutWorkersPerMinute *int32
+
+	// The number of idle workers maintained and ready to process incoming tasks. The
+	// default is 0.
+	StandbyWorkerCount *int32
+
+	// The number of seconds that a worker can remain idle before it is shut down. The
+	// default is 300 seconds (5 minutes).
+	WorkerIdleDurationSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration details for a customer managed fleet.
 type CustomerManagedFleetConfiguration struct {
 
@@ -487,6 +1483,9 @@ type CustomerManagedFleetConfiguration struct {
 	//
 	// This member is required.
 	WorkerCapabilities *CustomerManagedWorkerCapabilities
+
+	// The auto scaling configuration settings for the customer managed fleet.
+	AutoScalingConfiguration *CustomerManagedAutoScalingConfiguration
 
 	// The storage profile ID for the customer managed fleet.
 	StorageProfileId *string
@@ -1912,6 +2911,9 @@ type MonitorSummary struct {
 	// This member is required.
 	Url *string
 
+	// The AWS Region where IAM Identity Center is enabled.
+	IdentityCenterRegion *string
+
 	// The UNIX timestamp of the date and time that the monitor was last updated.
 	UpdatedAt *time.Time
 
@@ -2006,6 +3008,26 @@ type PosixUser struct {
 	// This member is required.
 	User *string
 
+	noSmithyDocumentSerde
+}
+
+// Configuration for priority balanced scheduling. Workers are distributed evenly
+// across all jobs at the highest priority level.
+type PriorityBalancedSchedulingConfiguration struct {
+
+	// The rendering task buffer controls worker stickiness. A worker only switches
+	// from its current job to another job at the same priority if the other job has
+	// fewer rendering tasks by more than this buffer value. Higher values make workers
+	// stickier to their current jobs. The default value is 1 .
+	RenderingTaskBuffer *int32
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for priority first-in, first-out (FIFO) scheduling. Workers are
+// assigned to the highest-priority job first. When multiple jobs share the same
+// priority, the job submitted earliest receives workers first.
+type PriorityFifoSchedulingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
@@ -2253,6 +3275,106 @@ type S3Location struct {
 	noSmithyDocumentSerde
 }
 
+// The scheduling configuration for a queue. Defines the strategy used to assign
+// workers to jobs.
+//
+// The following types satisfy this interface:
+//
+//	SchedulingConfigurationMemberPriorityBalanced
+//	SchedulingConfigurationMemberPriorityFifo
+//	SchedulingConfigurationMemberWeightedBalanced
+type SchedulingConfiguration interface {
+	isSchedulingConfiguration()
+}
+
+// Workers are distributed evenly across all jobs at the highest priority level.
+// When workers cannot be evenly divided, the extra workers are assigned to the
+// jobs submitted earliest. If a job has fewer remaining tasks than its share of
+// workers, the surplus workers are redistributed to other jobs at the same
+// priority level.
+type SchedulingConfigurationMemberPriorityBalanced struct {
+	Value PriorityBalancedSchedulingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SchedulingConfigurationMemberPriorityBalanced) isSchedulingConfiguration() {}
+
+// Workers are assigned to the highest-priority job first. When multiple jobs
+// share the same priority, the job submitted earliest receives workers first. This
+// is the default scheduling configuration for new queues.
+type SchedulingConfigurationMemberPriorityFifo struct {
+	Value PriorityFifoSchedulingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SchedulingConfigurationMemberPriorityFifo) isSchedulingConfiguration() {}
+
+// Workers are assigned to jobs based on a weighted formula that considers job
+// priority, error count, submission time, and the number of tasks currently
+// rendering. Each factor has a configurable weight that determines its influence
+// on scheduling decisions.
+type SchedulingConfigurationMemberWeightedBalanced struct {
+	Value WeightedBalancedSchedulingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*SchedulingConfigurationMemberWeightedBalanced) isSchedulingConfiguration() {}
+
+// Defines the override behavior for jobs at the maximum priority (100) in
+// weighted balanced scheduling.
+//
+// The following types satisfy this interface:
+//
+//	SchedulingMaxPriorityOverrideMemberAlwaysScheduleFirst
+type SchedulingMaxPriorityOverride interface {
+	isSchedulingMaxPriorityOverride()
+}
+
+// Jobs at the maximum priority (100) are always scheduled before other jobs,
+// regardless of the weighted scheduling formula. If multiple jobs have priority
+// 100, ties are broken using the standard weighted formula.
+type SchedulingMaxPriorityOverrideMemberAlwaysScheduleFirst struct {
+	Value SchedulingMaxPriorityOverrideAlwaysScheduleFirst
+
+	noSmithyDocumentSerde
+}
+
+func (*SchedulingMaxPriorityOverrideMemberAlwaysScheduleFirst) isSchedulingMaxPriorityOverride() {}
+
+// Specifies that jobs at the maximum priority (100) are always scheduled first.
+type SchedulingMaxPriorityOverrideAlwaysScheduleFirst struct {
+	noSmithyDocumentSerde
+}
+
+// Defines the override behavior for jobs at the minimum priority (0) in weighted
+// balanced scheduling.
+//
+// The following types satisfy this interface:
+//
+//	SchedulingMinPriorityOverrideMemberAlwaysScheduleLast
+type SchedulingMinPriorityOverride interface {
+	isSchedulingMinPriorityOverride()
+}
+
+// Jobs at the minimum priority (0) are always scheduled after all other jobs,
+// regardless of the weighted scheduling formula. If multiple jobs have priority 0,
+// ties are broken using the standard weighted formula.
+type SchedulingMinPriorityOverrideMemberAlwaysScheduleLast struct {
+	Value SchedulingMinPriorityOverrideAlwaysScheduleLast
+
+	noSmithyDocumentSerde
+}
+
+func (*SchedulingMinPriorityOverrideMemberAlwaysScheduleLast) isSchedulingMinPriorityOverride() {}
+
+// Specifies that jobs at the minimum priority (0) are always scheduled last.
+type SchedulingMinPriorityOverrideAlwaysScheduleLast struct {
+	noSmithyDocumentSerde
+}
+
 // The type of search filter to apply.
 //
 // The following types satisfy this interface:
@@ -2394,6 +3516,24 @@ type SearchTermFilterExpression struct {
 	noSmithyDocumentSerde
 }
 
+// The auto scaling configuration settings for a service managed EC2 fleet.
+type ServiceManagedEc2AutoScalingConfiguration struct {
+
+	// The number of workers that can be added per minute to the fleet. The default is
+	// 10 workers per minute.
+	ScaleOutWorkersPerMinute *int32
+
+	// The number of idle workers maintained and ready to process incoming tasks. The
+	// default is 0.
+	StandbyWorkerCount *int32
+
+	// The number of seconds that a worker can remain idle before it is shut down. The
+	// default is 300 seconds (5 minutes).
+	WorkerIdleDurationSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // The configuration details for a service managed EC2 fleet.
 type ServiceManagedEc2FleetConfiguration struct {
 
@@ -2406,6 +3546,9 @@ type ServiceManagedEc2FleetConfiguration struct {
 	//
 	// This member is required.
 	InstanceMarketOptions *ServiceManagedEc2InstanceMarketOptions
+
+	// The auto scaling configuration settings for the service managed EC2 fleet.
+	AutoScalingConfiguration *ServiceManagedEc2AutoScalingConfiguration
 
 	// The storage profile ID for the service managed EC2 fleet.
 	StorageProfileId *string
@@ -3512,6 +4655,59 @@ type VpcConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for weighted balanced scheduling. Workers are assigned to jobs
+// based on a weighted formula:
+//
+//	weight = (priority * priorityWeight) + (errors * errorWeight) + ((currentTime -
+//	submissionTime) * submissionTimeWeight) + ((renderingTasks -
+//	renderingTaskBuffer) * renderingTaskWeight)
+//
+// The job with the highest calculated weight is scheduled first. Workers are
+// distributed evenly amongst jobs with the same weight.
+type WeightedBalancedSchedulingConfiguration struct {
+
+	// The weight applied to the number of errors on a job. A negative value means
+	// jobs without errors are scheduled first. A value of 0 means errors are ignored.
+	// The default value is -10.0 .
+	ErrorWeight *float64
+
+	// Overrides the weighted scheduling formula for jobs at the maximum priority
+	// (100). When set, jobs with priority 100 are always scheduled first regardless of
+	// their calculated weight. When absent, maximum priority jobs use the standard
+	// weighted formula.
+	MaxPriorityOverride SchedulingMaxPriorityOverride
+
+	// Overrides the weighted scheduling formula for jobs at the minimum priority (0).
+	// When set, jobs with priority 0 are always scheduled last regardless of their
+	// calculated weight. When absent, minimum priority jobs use the standard weighted
+	// formula.
+	MinPriorityOverride SchedulingMinPriorityOverride
+
+	// The weight applied to job priority in the scheduling formula. Higher values
+	// give more influence to job priority. A value of 0 means priority is ignored.
+	// The default value is 100.0 .
+	PriorityWeight *float64
+
+	// The rendering task buffer is subtracted from the number of rendering tasks
+	// before applying the rendering task weight. This creates a stickiness effect
+	// where workers prefer to stay with their current job. Higher values make workers
+	// stickier. The default value is 1 . The buffer is only applied in the weight
+	// calculation for a job if the worker is currently assigned to that job.
+	RenderingTaskBuffer *int32
+
+	// The weight applied to the number of tasks currently rendering on a job. A
+	// negative value means jobs that are not already rendering are scheduled next. A
+	// value of 0 means the rendering state is ignored. The default value is -100.0 .
+	RenderingTaskWeight *float64
+
+	// The weight applied to job submission time. A positive value means earlier jobs
+	// are scheduled first. A value of 0 means submission time is ignored. The default
+	// value is 3.0 .
+	SubmissionTimeWeight *float64
+
+	noSmithyDocumentSerde
+}
+
 // The Windows user details.
 type WindowsUser struct {
 
@@ -3709,6 +4905,9 @@ func (*UnknownUnionMember) isGetJobEntityError()               {}
 func (*UnknownUnionMember) isJobEntity()                       {}
 func (*UnknownUnionMember) isJobEntityIdentifiersUnion()       {}
 func (*UnknownUnionMember) isJobParameter()                    {}
+func (*UnknownUnionMember) isSchedulingConfiguration()         {}
+func (*UnknownUnionMember) isSchedulingMaxPriorityOverride()   {}
+func (*UnknownUnionMember) isSchedulingMinPriorityOverride()   {}
 func (*UnknownUnionMember) isSearchFilterExpression()          {}
 func (*UnknownUnionMember) isSearchSortExpression()            {}
 func (*UnknownUnionMember) isSessionActionDefinition()         {}

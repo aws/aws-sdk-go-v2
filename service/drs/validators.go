@@ -1137,29 +1137,11 @@ func validateOpCreateReplicationConfigurationTemplateInput(v *CreateReplicationC
 	if v.StagingAreaSubnetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StagingAreaSubnetId"))
 	}
-	if v.AssociateDefaultSecurityGroup == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AssociateDefaultSecurityGroup"))
-	}
 	if v.ReplicationServersSecurityGroupsIDs == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ReplicationServersSecurityGroupsIDs"))
 	}
-	if v.ReplicationServerInstanceType == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ReplicationServerInstanceType"))
-	}
-	if v.UseDedicatedReplicationServer == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UseDedicatedReplicationServer"))
-	}
-	if len(v.DefaultLargeStagingDiskType) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("DefaultLargeStagingDiskType"))
-	}
 	if len(v.EbsEncryption) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("EbsEncryption"))
-	}
-	if len(v.DataPlaneRouting) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("DataPlaneRouting"))
-	}
-	if v.CreatePublicIP == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("CreatePublicIP"))
 	}
 	if v.StagingAreaTags == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StagingAreaTags"))

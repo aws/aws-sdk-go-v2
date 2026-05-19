@@ -14,13 +14,13 @@ import (
 //
 // Some of the supported resource types are agents, routing profiles, queues,
 // quick connects, flows, agent statuses, hours of operation, phone numbers,
-// security profiles, and task templates. For a complete list, see [Tagging resources in Amazon Connect].
+// security profiles, and task templates. For a complete list, see [Tagging resources in Connect Customer].
 //
-// For sample policies that use tags, see [Amazon Connect Identity-Based Policy Examples] in the Amazon Connect Administrator
+// For sample policies that use tags, see [Connect Customer Identity-Based Policy Examples] in the Connect Customer Administrator
 // Guide.
 //
-// [Amazon Connect Identity-Based Policy Examples]: https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html
-// [Tagging resources in Amazon Connect]: https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html
+// [Tagging resources in Connect Customer]: https://docs.aws.amazon.com/connect/latest/adminguide/tagging.html
+// [Connect Customer Identity-Based Policy Examples]: https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -93,7 +93,7 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -115,9 +115,6 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -74,6 +74,18 @@ func TestCheckSnapshot_AddKeyReplicationRegions(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_AssociateMpaTeam(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateMpaTeam(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "AssociateMpaTeam")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateAlias(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAlias(context.Background(), nil, func(o *Options) {
@@ -122,11 +134,35 @@ func TestCheckSnapshot_DeleteKey(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DisableDefaultKeyReplicationRegions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableDefaultKeyReplicationRegions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DisableDefaultKeyReplicationRegions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DisassociateMpaTeam(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateMpaTeam(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DisassociateMpaTeam")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -206,6 +242,18 @@ func TestCheckSnapshot_GetKey(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetMpaTeamAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMpaTeamAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetMpaTeamAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetParametersForExport(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetParametersForExport(context.Background(), nil, func(o *Options) {
@@ -235,6 +283,18 @@ func TestCheckSnapshot_GetPublicKeyCertificate(t *testing.T) {
 	_, err := svc.GetPublicKeyCertificate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetPublicKeyCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -283,6 +343,18 @@ func TestCheckSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_PutResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -385,6 +457,18 @@ func TestUpdateSnapshot_AddKeyReplicationRegions(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_AssociateMpaTeam(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.AssociateMpaTeam(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "AssociateMpaTeam")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateAlias(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateAlias(context.Background(), nil, func(o *Options) {
@@ -433,11 +517,35 @@ func TestUpdateSnapshot_DeleteKey(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteResourcePolicy")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DisableDefaultKeyReplicationRegions(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DisableDefaultKeyReplicationRegions(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisableDefaultKeyReplicationRegions")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DisassociateMpaTeam(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DisassociateMpaTeam(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DisassociateMpaTeam")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -517,6 +625,18 @@ func TestUpdateSnapshot_GetKey(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_GetMpaTeamAssociation(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetMpaTeamAssociation(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetMpaTeamAssociation")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetParametersForExport(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetParametersForExport(context.Background(), nil, func(o *Options) {
@@ -546,6 +666,18 @@ func TestUpdateSnapshot_GetPublicKeyCertificate(t *testing.T) {
 	_, err := svc.GetPublicKeyCertificate(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetPublicKeyCertificate")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -594,6 +726,18 @@ func TestUpdateSnapshot_ListTagsForResource(t *testing.T) {
 	_, err := svc.ListTagsForResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTagsForResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutResourcePolicy(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutResourcePolicy(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutResourcePolicy")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -1,3 +1,42 @@
+# v1.60.0 (2026-05-14)
+
+* **Feature**: Adds support for SageMaker Unified Studio notebook operations, including notebook import and export
+
+# v1.59.0 (2026-04-30)
+
+* **Feature**: Adds support for asynchronous notebook runs
+
+# v1.58.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.58.0 (2026-04-23)
+
+* **Feature**: Releasing For LakehouseProperties attributes in the Connections API's
+
+# v1.57.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.57.0 (2026-04-16)
+
+* **Feature**: Launching SMUS IAM domain SDK support
+
+# v1.56.0 (2026-04-07)
+
+* **Feature**: Update Configurations and registerS3AccessGrantLocation as public attributes for cfn
+
+# v1.55.0 (2026-03-31)
+
+* **Feature**: Adds environmentConfigurationName field to CreateEnvironmentInput and UpdateEnvironmentInput, so that Domain Owners can now recover orphaned environments by recreating deleted configurations with the same name, and will auto-recover orphaned environments
+
+# v1.54.2 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.1 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

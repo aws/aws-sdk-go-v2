@@ -534,6 +534,25 @@ func (MaintenanceType) Values() []MaintenanceType {
 	}
 }
 
+type MediaLiveChannelPipelineId string
+
+// Enum values for MediaLiveChannelPipelineId
+const (
+	MediaLiveChannelPipelineIdPipeline0 MediaLiveChannelPipelineId = "PIPELINE_0"
+	MediaLiveChannelPipelineIdPipeline1 MediaLiveChannelPipelineId = "PIPELINE_1"
+)
+
+// Values returns all known values for MediaLiveChannelPipelineId. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MediaLiveChannelPipelineId) Values() []MediaLiveChannelPipelineId {
+	return []MediaLiveChannelPipelineId{
+		"PIPELINE_0",
+		"PIPELINE_1",
+	}
+}
+
 type MediaLiveInputPipelineId string
 
 // Enum values for MediaLiveInputPipelineId
@@ -875,6 +894,7 @@ const (
 	RouterInputTypeFailover         RouterInputType = "FAILOVER"
 	RouterInputTypeMerge            RouterInputType = "MERGE"
 	RouterInputTypeMediaconnectFlow RouterInputType = "MEDIACONNECT_FLOW"
+	RouterInputTypeMedialiveChannel RouterInputType = "MEDIALIVE_CHANNEL"
 )
 
 // Values returns all known values for RouterInputType. Note that this can be
@@ -887,6 +907,7 @@ func (RouterInputType) Values() []RouterInputType {
 		"FAILOVER",
 		"MERGE",
 		"MEDIACONNECT_FLOW",
+		"MEDIALIVE_CHANNEL",
 	}
 }
 

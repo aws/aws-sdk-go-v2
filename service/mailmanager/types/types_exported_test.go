@@ -169,6 +169,9 @@ func ExampleIngressPointConfiguration_outputUsage() {
 	case *types.IngressPointConfigurationMemberSmtpPassword:
 		_ = v.Value // Value is string
 
+	case *types.IngressPointConfigurationMemberTlsAuthConfiguration:
+		_ = v.Value // Value is types.TlsAuthConfiguration
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -178,6 +181,7 @@ func ExampleIngressPointConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.TlsAuthConfiguration
 var _ *string
 var _ *string
 
@@ -309,6 +313,9 @@ func ExampleRuleAction_outputUsage() {
 	case *types.RuleActionMemberArchive:
 		_ = v.Value // Value is types.ArchiveAction
 
+	case *types.RuleActionMemberBounce:
+		_ = v.Value // Value is types.BounceAction
+
 	case *types.RuleActionMemberDeliverToMailbox:
 		_ = v.Value // Value is types.DeliverToMailboxAction
 
@@ -317,6 +324,9 @@ func ExampleRuleAction_outputUsage() {
 
 	case *types.RuleActionMemberDrop:
 		_ = v.Value // Value is types.DropAction
+
+	case *types.RuleActionMemberInvokeLambda:
+		_ = v.Value // Value is types.InvokeLambdaAction
 
 	case *types.RuleActionMemberPublishToSns:
 		_ = v.Value // Value is types.SnsAction
@@ -347,10 +357,12 @@ var _ *types.AddHeaderAction
 var _ *types.ArchiveAction
 var _ *types.DeliverToMailboxAction
 var _ *types.DropAction
+var _ *types.InvokeLambdaAction
 var _ *types.RelayAction
 var _ *types.DeliverToQBusinessAction
 var _ *types.ReplaceRecipientAction
 var _ *types.S3Action
+var _ *types.BounceAction
 var _ *types.SnsAction
 
 func ExampleRuleBooleanToEvaluate_outputUsage() {
@@ -463,6 +475,9 @@ func ExampleRuleStringToEvaluate_outputUsage() {
 	case *types.RuleStringToEvaluateMemberAttribute:
 		_ = v.Value // Value is types.RuleStringEmailAttribute
 
+	case *types.RuleStringToEvaluateMemberClientCertificateAttribute:
+		_ = v.Value // Value is types.RuleClientCertificateAttribute
+
 	case *types.RuleStringToEvaluateMemberMimeHeaderAttribute:
 		_ = v.Value // Value is string
 
@@ -478,6 +493,7 @@ func ExampleRuleStringToEvaluate_outputUsage() {
 var _ types.RuleStringEmailAttribute
 var _ *string
 var _ *types.Analysis
+var _ types.RuleClientCertificateAttribute
 
 func ExampleRuleVerdictToEvaluate_outputUsage() {
 	var union types.RuleVerdictToEvaluate

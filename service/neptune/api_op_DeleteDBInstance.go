@@ -57,7 +57,7 @@ type DeleteDBInstanceInput struct {
 	//  The DBSnapshotIdentifier of the new DBSnapshot created when SkipFinalSnapshot
 	// is set to false .
 	//
-	// Specifying this parameter and also setting the SkipFinalShapshot parameter to
+	// Specifying this parameter and also setting the SkipFinalSnapshot parameter to
 	// true results in an error.
 	//
 	// Constraints:
@@ -137,7 +137,7 @@ func (c *Client) addOperationDeleteDBInstanceMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -159,9 +159,6 @@ func (c *Client) addOperationDeleteDBInstanceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

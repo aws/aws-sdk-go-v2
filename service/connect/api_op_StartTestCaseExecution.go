@@ -100,7 +100,7 @@ func (c *Client) addOperationStartTestCaseExecutionMiddlewares(stack *middleware
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -124,13 +124,13 @@ func (c *Client) addOperationStartTestCaseExecutionMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
-		return err
-	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
+		return err
+	}
+	if err = addIdempotencyToken_opStartTestCaseExecutionMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addOpStartTestCaseExecutionValidationMiddleware(stack); err != nil {
@@ -164,6 +164,39 @@ func (c *Client) addOperationStartTestCaseExecutionMiddlewares(stack *middleware
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpStartTestCaseExecution struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpStartTestCaseExecution) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpStartTestCaseExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*StartTestCaseExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *StartTestCaseExecutionInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opStartTestCaseExecutionMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpStartTestCaseExecution{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opStartTestCaseExecution(region string) *awsmiddleware.RegisterServiceMetadata {

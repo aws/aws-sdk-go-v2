@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/drs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +38,10 @@ type UpdateFailbackReplicationConfigurationInput struct {
 	// Configure bandwidth throttling for the outbound data transfer rate of the
 	// Recovery Instance in Mbps.
 	BandwidthThrottling int64
+
+	// Which version of the Internet Protocol to use for replication of data. (IPv4 or
+	// IPv6)
+	InternetProtocol types.InternetProtocol
 
 	// The name of the Failback Replication Configuration.
 	Name *string
@@ -88,7 +93,7 @@ func (c *Client) addOperationUpdateFailbackReplicationConfigurationMiddlewares(s
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -110,9 +115,6 @@ func (c *Client) addOperationUpdateFailbackReplicationConfigurationMiddlewares(s
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

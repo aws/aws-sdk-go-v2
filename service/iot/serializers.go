@@ -24452,6 +24452,11 @@ func awsRestjson1_serializeDocumentBatchConfig(v *types.BatchConfig, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if v.BatchAcrossTopics {
+		ok := object.Key("batchAcrossTopics")
+		ok.Boolean(v.BatchAcrossTopics)
+	}
+
 	if v.MaxBatchOpenMs != nil {
 		ok := object.Key("maxBatchOpenMs")
 		ok.Integer(*v.MaxBatchOpenMs)

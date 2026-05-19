@@ -12,6 +12,16 @@ import (
 )
 
 // Returns a list of resources.
+//
+// You can use the Scopes parameter to define the data boundary for the query.
+// Currently, Scopes supports AwsOrganizations , which lets you retrieve resources
+// from your entire organization or from specific organizational units. Only the
+// delegated administrator account can use Scopes .
+//
+// You can use the Filters parameter to refine results based on resource
+// attributes. You can use Scopes and Filters independently or together. When both
+// are provided, Scopes narrows the data set first, and then Filters refines
+// results within that scoped data set.
 func (c *Client) GetResourcesV2(ctx context.Context, params *GetResourcesV2Input, optFns ...func(*Options)) (*GetResourcesV2Output, error) {
 	if params == nil {
 		params = &GetResourcesV2Input{}
@@ -40,7 +50,19 @@ type GetResourcesV2Input struct {
 	// value of this parameter to the value returned in the previous response.
 	NextToken *string
 
-	// The finding attributes used to sort the list of returned findings.
+	// Limits the results to resources from specific organizational units or from the
+	// delegated administrator's organization. Only the delegated administrator account
+	// can use this parameter. Other accounts receive an AccessDeniedException .
+	//
+	// This parameter is optional. If you omit it, the delegated administrator sees
+	// resources from all accounts across the entire organization. Other accounts see
+	// only their own resources.
+	//
+	// You can specify up to 10 entries in Scopes.AwsOrganizations . If multiple
+	// entries are specified, the entries are combined using OR logic.
+	Scopes *types.ResourceScopes
+
+	// The resource attributes used to sort the list of returned resources.
 	SortCriteria []types.SortCriterion
 
 	noSmithyDocumentSerde
@@ -48,7 +70,7 @@ type GetResourcesV2Input struct {
 
 type GetResourcesV2Output struct {
 
-	// Filters resources based on a set of criteria.
+	// An array of resources returned by the operation.
 	//
 	// This member is required.
 	Resources []types.ResourceResult
@@ -97,7 +119,7 @@ func (c *Client) addOperationGetResourcesV2Middlewares(stack *middleware.Stack, 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -119,9 +141,6 @@ func (c *Client) addOperationGetResourcesV2Middlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

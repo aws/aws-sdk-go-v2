@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an hours of operation override in an Amazon Connect hours of operation
-// resource.
+// Creates an hours of operation override in an Connect Customer hours of
+// operation resource.
 func (c *Client) CreateHoursOfOperationOverride(ctx context.Context, params *CreateHoursOfOperationOverrideInput, optFns ...func(*Options)) (*CreateHoursOfOperationOverrideOutput, error) {
 	if params == nil {
 		params = &CreateHoursOfOperationOverrideInput{}
@@ -51,7 +51,7 @@ type CreateHoursOfOperationOverrideInput struct {
 	// This member is required.
 	HoursOfOperationId *string
 
-	// The identifier of the Amazon Connect instance.
+	// The identifier of the Connect Customer instance.
 	//
 	// This member is required.
 	InstanceId *string
@@ -123,7 +123,7 @@ func (c *Client) addOperationCreateHoursOfOperationOverrideMiddlewares(stack *mi
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -145,9 +145,6 @@ func (c *Client) addOperationCreateHoursOfOperationOverrideMiddlewares(stack *mi
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -11,7 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This feature API is subject to changing at any time. For more information, see
+//
+// the [Amazon Web Services Service Terms](Betas and Previews).
+//
 // Retrieves the details of a specific procurement portal preference configuration.
+//
+// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
 func (c *Client) GetProcurementPortalPreference(ctx context.Context, params *GetProcurementPortalPreferenceInput, optFns ...func(*Options)) (*GetProcurementPortalPreferenceOutput, error) {
 	if params == nil {
 		params = &GetProcurementPortalPreferenceInput{}
@@ -84,7 +90,7 @@ func (c *Client) addOperationGetProcurementPortalPreferenceMiddlewares(stack *mi
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -106,9 +112,6 @@ func (c *Client) addOperationGetProcurementPortalPreferenceMiddlewares(stack *mi
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

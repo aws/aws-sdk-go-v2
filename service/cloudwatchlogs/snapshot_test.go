@@ -182,6 +182,18 @@ func TestCheckSnapshot_CreateLogStream(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateLookupTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLookupTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateLookupTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateScheduledQuery(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateScheduledQuery(context.Background(), nil, func(o *Options) {
@@ -331,6 +343,18 @@ func TestCheckSnapshot_DeleteLogStream(t *testing.T) {
 	_, err := svc.DeleteLogStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteLogStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteLookupTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLookupTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteLookupTable")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -578,6 +602,18 @@ func TestCheckSnapshot_DescribeLogStreams(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeLookupTables(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeLookupTables(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeLookupTables")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeMetricFilters(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeMetricFilters(context.Background(), nil, func(o *Options) {
@@ -811,6 +847,18 @@ func TestCheckSnapshot_GetLogRecord(t *testing.T) {
 	_, err := svc.GetLogRecord(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetLogRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetLookupTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLookupTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetLookupTable")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1346,6 +1394,18 @@ func TestCheckSnapshot_UpdateLogAnomalyDetector(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateLookupTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLookupTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateLookupTable")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateScheduledQuery(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateScheduledQuery(context.Background(), nil, func(o *Options) {
@@ -1470,6 +1530,18 @@ func TestUpdateSnapshot_CreateLogStream(t *testing.T) {
 	_, err := svc.CreateLogStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateLogStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_CreateLookupTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateLookupTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateLookupTable")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1626,6 +1698,18 @@ func TestUpdateSnapshot_DeleteLogStream(t *testing.T) {
 	_, err := svc.DeleteLogStream(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteLogStream")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteLookupTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteLookupTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteLookupTable")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1873,6 +1957,18 @@ func TestUpdateSnapshot_DescribeLogStreams(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeLookupTables(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeLookupTables(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeLookupTables")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeMetricFilters(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeMetricFilters(context.Background(), nil, func(o *Options) {
@@ -2106,6 +2202,18 @@ func TestUpdateSnapshot_GetLogRecord(t *testing.T) {
 	_, err := svc.GetLogRecord(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetLogRecord")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetLookupTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetLookupTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetLookupTable")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2634,6 +2742,18 @@ func TestUpdateSnapshot_UpdateLogAnomalyDetector(t *testing.T) {
 	_, err := svc.UpdateLogAnomalyDetector(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateLogAnomalyDetector")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateLookupTable(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateLookupTable(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateLookupTable")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

@@ -11,13 +11,28 @@ import (
 )
 
 // Deletes a certificate and its associated private key. If this action succeeds,
-// the certificate no longer appears in the list that can be displayed by calling
-// the ListCertificatesaction or be retrieved by calling the GetCertificate action. The certificate will not be
-// available for use by Amazon Web Services services integrated with ACM.
+// the certificate is not available for use by Amazon Web Services services
+// integrated with ACM. Deleting a certificate is eventually consistent. The may be
+// a short delay before the certificate no longer appears in the list that can be
+// displayed by calling the ListCertificatesaction or be retrieved by calling the GetCertificate action.
 //
 // You cannot delete an ACM certificate that is being used by another Amazon Web
-// Services service. To delete a certificate that is in use, the certificate
-// association must first be removed.
+// Services service. To delete a certificate that is in use, you must first remove
+// the certificate association using the console or the CLI for the associated
+// service.
+//
+// Deleting a certificate issued by a private certificate authority (CA) has no
+// effect on the CA. You will continue to be charged for the CA until it is
+// deleted. For more information, see [Deleting Your Private CA]in the Private Certificate Authority User
+// Guide.
+//
+// Deleting a certificate issued by a private certificate authority (CA) has no
+// effect on the CA. You will continue to be charged for the CA until it is
+// deleted. For more information, see [Deleting your private CA]in the Amazon Web Services Private
+// Certificate Authority User Guide.
+//
+// [Deleting your private CA]: https://docs.aws.amazon.com/privateca/latest/userguide/PCADeleteCA.html
+// [Deleting Your Private CA]: https://docs.aws.amazon.com/privateca/latest/userguide/PCADeleteCA.html
 func (c *Client) DeleteCertificate(ctx context.Context, params *DeleteCertificateInput, optFns ...func(*Options)) (*DeleteCertificateOutput, error) {
 	if params == nil {
 		params = &DeleteCertificateInput{}
@@ -91,7 +106,7 @@ func (c *Client) addOperationDeleteCertificateMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -113,9 +128,6 @@ func (c *Client) addOperationDeleteCertificateMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

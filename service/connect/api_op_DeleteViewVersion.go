@@ -28,7 +28,7 @@ func (c *Client) DeleteViewVersion(ctx context.Context, params *DeleteViewVersio
 
 type DeleteViewVersionInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instanceId in
+	// The identifier of the Connect Customer instance. You can find the instanceId in
 	// the ARN of the instance.
 	//
 	// This member is required.
@@ -88,7 +88,7 @@ func (c *Client) addOperationDeleteViewVersionMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -110,9 +110,6 @@ func (c *Client) addOperationDeleteViewVersionMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

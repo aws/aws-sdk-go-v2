@@ -1663,6 +1663,11 @@ func validateOpUpdateCollectionInput(v *UpdateCollectionInput) error {
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
+	if v.VectorOptions != nil {
+		if err := validateVectorOptions(v.VectorOptions); err != nil {
+			invalidParams.AddNested("VectorOptions", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

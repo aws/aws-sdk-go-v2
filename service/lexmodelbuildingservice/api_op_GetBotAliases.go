@@ -14,6 +14,8 @@ import (
 // Returns a list of aliases for a specified Amazon Lex bot.
 //
 // This operation requires permissions for the lex:GetBotAliases action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) GetBotAliases(ctx context.Context, params *GetBotAliasesInput, optFns ...func(*Options)) (*GetBotAliasesOutput, error) {
 	if params == nil {
 		params = &GetBotAliasesInput{}
@@ -104,7 +106,7 @@ func (c *Client) addOperationGetBotAliasesMiddlewares(stack *middleware.Stack, o
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -126,9 +128,6 @@ func (c *Client) addOperationGetBotAliasesMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

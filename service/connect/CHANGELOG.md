@@ -1,3 +1,47 @@
+# v1.174.0 (2026-05-18)
+
+* **Feature**: Amazon Connect Cases now supports SLA durations of up to 2 years (1,051,200 minutes), increased from the previous maximum of 90 days (129,600 minutes). This enables you to track long-running service level agreements for cases that require extended resolution timelines.
+
+# v1.173.0 (2026-05-13)
+
+* **Feature**: This change added three new EventSourceName for schedule notification feature
+
+# v1.172.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.172.0 (2026-04-24)
+
+* **Feature**: Amazon Connect is expanding attachment capabilities to give customers greater flexibility and control. Currently limited to predefined file types, the new feature will allow contact center administrators to customize which file extensions and sizes are supported across chat, email, tasks, and cases.
+
+# v1.171.0 (2026-04-17)
+
+* **Feature**: Fixes in SDK for customers using TestCase APIs
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.170.0 (2026-04-16)
+
+* **Feature**: This release updates the Amazon Connect Rules CRUD APIs to support a new EventSourceName - OnEmailAnalysisAvailable. Use this event source to trigger rules when conversational analytics results are available for email contacts.
+
+# v1.169.0 (2026-04-10)
+
+* **Feature**: Conversational Analytics for Email
+
+# v1.168.0 (2026-04-07)
+
+* **Feature**: The voice enhancement mode used by the agent can now be viewed on the contact record via the DescribeContact api.
+
+# v1.167.0 (2026-04-02)
+
+* **Feature**: Include CUSTOMER to evaluation target and participant role. Support Korean, Japanese and Simplified Chinese in evaluation forms.
+
+# v1.166.1 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.166.0 (2026-03-13)
 
 * **Feature**: Deprecating PredefinedNotificationID field

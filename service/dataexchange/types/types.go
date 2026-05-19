@@ -49,6 +49,15 @@ type ApiGatewayApiAsset struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for the asset, which can include tags.
+type AssetConfiguration struct {
+
+	// The tags to be applied to assets created by the job.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 // The destination for the asset.
 type AssetDestinationEntry struct {
 
@@ -1000,6 +1009,10 @@ type JobEntry struct {
 	// This member is required.
 	UpdatedAt *time.Time
 
+	// The configuration for the asset, including tags applied to assets created by
+	// the job.
+	AssetConfiguration *AssetConfiguration
+
 	// Errors for jobs.
 	Errors []JobError
 
@@ -1597,6 +1610,22 @@ type TableLFTagPolicyAndPermissions struct {
 	//
 	// This member is required.
 	Permissions []TableTagPolicyLFPermission
+
+	noSmithyDocumentSerde
+}
+
+// A tag consisting of a key-value pair that can be applied to a resource.
+type Tag struct {
+
+	// The key of the tag.
+	//
+	// This member is required.
+	Key *string
+
+	// The value of the tag.
+	//
+	// This member is required.
+	Value *string
 
 	noSmithyDocumentSerde
 }

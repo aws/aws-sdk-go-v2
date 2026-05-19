@@ -27,6 +27,7 @@ func (c *Client) ListSatellites(ctx context.Context, params *ListSatellitesInput
 	return out, nil
 }
 
+// Input for the ListSatellites operation.
 type ListSatellitesInput struct {
 
 	// Maximum number of satellites returned.
@@ -39,6 +40,7 @@ type ListSatellitesInput struct {
 	noSmithyDocumentSerde
 }
 
+// Output for the ListSatellites operation.
 type ListSatellitesOutput struct {
 
 	// Next token that can be supplied in the next call to get the next page of
@@ -88,7 +90,7 @@ func (c *Client) addOperationListSatellitesMiddlewares(stack *middleware.Stack, 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -110,9 +112,6 @@ func (c *Client) addOperationListSatellitesMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

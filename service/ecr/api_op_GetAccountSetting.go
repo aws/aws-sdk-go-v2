@@ -43,8 +43,8 @@ type GetAccountSettingOutput struct {
 	Name *string
 
 	// The setting value for the setting name. Valid value for basic scan type:
-	// AWS_NATIVE . Valid values for registry policy scope: V1 or V2 . Valid values for
-	// blob mounting: ENABLED or DISABLED .
+	// AWS_NATIVE . Valid values for registry policy scope: V2 . Valid values for blob
+	// mounting: ENABLED or DISABLED .
 	Value *string
 
 	// Metadata pertaining to the operation's result.
@@ -87,7 +87,7 @@ func (c *Client) addOperationGetAccountSettingMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -109,9 +109,6 @@ func (c *Client) addOperationGetAccountSettingMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

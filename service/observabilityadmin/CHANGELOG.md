@@ -1,3 +1,34 @@
+# v1.15.0 (2026-04-30)
+
+* **Feature**: Observability Admin enablement launch for AWS Kafka, Bedrock Agent Core Workload Identity and OTel metric enablement.
+
+# v1.14.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.14.0 (2026-04-20)
+
+* **Feature**: Enablement for Security Hub v2 via Observability Admin Telemetry Rule for account and organization level.
+
+# v1.13.1 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.0 (2026-04-10)
+
+* **Feature**: CloudWatch Observability Admin adds support for multi-region telemetry evaluation and telemetry enablement rules.
+
+# v1.12.0 (2026-03-31)
+
+* **Feature**: This release adds the Bedrock and Security Hub resource types for Omnia Enablement launch for March 31.
+
+# v1.11.1 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2026-03-19)
 
 * **Feature**: Adding a new field in the CreateCentralizationRuleForOrganization, UpdateCentralizationRuleForOrganization API and updating the GetCentralizationRuleForOrganization API response to include the new field

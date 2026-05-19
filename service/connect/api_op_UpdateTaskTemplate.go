@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Updates details about a specific task template in the specified Amazon Connect
-// instance. This operation does not support partial updates. Instead it does a
-// full update of template content.
+// Updates details about a specific task template in the specified Connect
+// Customer instance. This operation does not support partial updates. Instead it
+// does a full update of template content.
 func (c *Client) UpdateTaskTemplate(ctx context.Context, params *UpdateTaskTemplateInput, optFns ...func(*Options)) (*UpdateTaskTemplateOutput, error) {
 	if params == nil {
 		params = &UpdateTaskTemplateInput{}
@@ -32,8 +32,8 @@ func (c *Client) UpdateTaskTemplate(ctx context.Context, params *UpdateTaskTempl
 
 type UpdateTaskTemplateInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -105,8 +105,8 @@ type UpdateTaskTemplateOutput struct {
 	// The identifier of the task template resource.
 	Id *string
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	InstanceId *string
@@ -166,7 +166,7 @@ func (c *Client) addOperationUpdateTaskTemplateMiddlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -188,9 +188,6 @@ func (c *Client) addOperationUpdateTaskTemplateMiddlewares(stack *middleware.Sta
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

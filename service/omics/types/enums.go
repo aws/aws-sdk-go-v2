@@ -57,6 +57,41 @@ func (AnnotationType) Values() []AnnotationType {
 	}
 }
 
+type BatchStatus string
+
+// Enum values for BatchStatus
+const (
+	BatchStatusCreating     BatchStatus = "CREATING"
+	BatchStatusPending      BatchStatus = "PENDING"
+	BatchStatusSubmitting   BatchStatus = "SUBMITTING"
+	BatchStatusInprogress   BatchStatus = "INPROGRESS"
+	BatchStatusStopping     BatchStatus = "STOPPING"
+	BatchStatusCancelled    BatchStatus = "CANCELLED"
+	BatchStatusFailed       BatchStatus = "FAILED"
+	BatchStatusProcessed    BatchStatus = "PROCESSED"
+	BatchStatusRunsDeleting BatchStatus = "RUNS_DELETING"
+	BatchStatusRunsDeleted  BatchStatus = "RUNS_DELETED"
+)
+
+// Values returns all known values for BatchStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BatchStatus) Values() []BatchStatus {
+	return []BatchStatus{
+		"CREATING",
+		"PENDING",
+		"SUBMITTING",
+		"INPROGRESS",
+		"STOPPING",
+		"CANCELLED",
+		"FAILED",
+		"PROCESSED",
+		"RUNS_DELETING",
+		"RUNS_DELETED",
+	}
+}
+
 type CacheBehavior string
 
 // Enum values for CacheBehavior
@@ -73,6 +108,33 @@ func (CacheBehavior) Values() []CacheBehavior {
 	return []CacheBehavior{
 		"CACHE_ON_FAILURE",
 		"CACHE_ALWAYS",
+	}
+}
+
+type ConfigurationStatus string
+
+// Enum values for ConfigurationStatus
+const (
+	ConfigurationStatusCreating ConfigurationStatus = "CREATING"
+	ConfigurationStatusActive   ConfigurationStatus = "ACTIVE"
+	ConfigurationStatusUpdating ConfigurationStatus = "UPDATING"
+	ConfigurationStatusDeleting ConfigurationStatus = "DELETING"
+	ConfigurationStatusDeleted  ConfigurationStatus = "DELETED"
+	ConfigurationStatusFailed   ConfigurationStatus = "FAILED"
+)
+
+// Values returns all known values for ConfigurationStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ConfigurationStatus) Values() []ConfigurationStatus {
+	return []ConfigurationStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"DELETING",
+		"DELETED",
+		"FAILED",
 	}
 }
 
@@ -247,6 +309,25 @@ func (JobStatus) Values() []JobStatus {
 		"COMPLETED",
 		"FAILED",
 		"COMPLETED_WITH_FAILURES",
+	}
+}
+
+type NetworkingMode string
+
+// Enum values for NetworkingMode
+const (
+	NetworkingModeRestricted NetworkingMode = "RESTRICTED"
+	NetworkingModeVpc        NetworkingMode = "VPC"
+)
+
+// Values returns all known values for NetworkingMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NetworkingMode) Values() []NetworkingMode {
+	return []NetworkingMode{
+		"RESTRICTED",
+		"VPC",
 	}
 }
 
@@ -943,6 +1024,33 @@ func (StoreType) Values() []StoreType {
 	return []StoreType{
 		"SEQUENCE_STORE",
 		"REFERENCE_STORE",
+	}
+}
+
+type SubmissionStatus string
+
+// Enum values for SubmissionStatus
+const (
+	SubmissionStatusSuccess       SubmissionStatus = "SUCCESS"
+	SubmissionStatusFailed        SubmissionStatus = "FAILED"
+	SubmissionStatusCancelSuccess SubmissionStatus = "CANCEL_SUCCESS"
+	SubmissionStatusCancelFailed  SubmissionStatus = "CANCEL_FAILED"
+	SubmissionStatusDeleteSuccess SubmissionStatus = "DELETE_SUCCESS"
+	SubmissionStatusDeleteFailed  SubmissionStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for SubmissionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubmissionStatus) Values() []SubmissionStatus {
+	return []SubmissionStatus{
+		"SUCCESS",
+		"FAILED",
+		"CANCEL_SUCCESS",
+		"CANCEL_FAILED",
+		"DELETE_SUCCESS",
+		"DELETE_FAILED",
 	}
 }
 

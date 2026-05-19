@@ -33,7 +33,9 @@ type UpdateFarmInput struct {
 	// This member is required.
 	FarmId *string
 
-	// The cost scale factor of the farm to update.
+	// A multiplier applied to the farm's calculated costs for usage data and budget
+	// tracking. A value less than 1 represents a discount, a value greater than 1
+	// represents a premium, and a value of 1 represents no adjustment.
 	CostScaleFactor *float32
 
 	// The description of the farm to update.
@@ -94,7 +96,7 @@ func (c *Client) addOperationUpdateFarmMiddlewares(stack *middleware.Stack, opti
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -116,9 +118,6 @@ func (c *Client) addOperationUpdateFarmMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

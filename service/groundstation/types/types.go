@@ -99,6 +99,27 @@ type AntennaDownlinkDemodDecodeConfig struct {
 	noSmithyDocumentSerde
 }
 
+// An antenna at a ground station.
+type AntennaListItem struct {
+
+	// Name of the antenna.
+	//
+	// This member is required.
+	AntennaName *string
+
+	// Name of the ground station the antenna is associated with.
+	//
+	// This member is required.
+	GroundStationName *string
+
+	// Region of the antenna.
+	//
+	// This member is required.
+	Region *string
+
+	noSmithyDocumentSerde
+}
+
 // Information about the uplink Config of an antenna.
 type AntennaUplinkConfig struct {
 
@@ -550,12 +571,12 @@ type ContactData struct {
 	// ARN of a mission profile.
 	MissionProfileArn *string
 
-	// Amount of time after a contact ends that you’d like to receive a CloudWatch
+	// End time in UTC of the post-pass period, at which you receive a CloudWatch
 	// event indicating the pass has finished.
 	PostPassEndTime *time.Time
 
-	// Amount of time prior to contact start you’d like to receive a CloudWatch event
-	// indicating an upcoming pass.
+	// Start time in UTC of the pre-pass period, at which you receive a CloudWatch
+	// event indicating an upcoming pass.
 	PrePassStartTime *time.Time
 
 	// Region of a contact.
@@ -569,6 +590,9 @@ type ContactData struct {
 
 	// Tags assigned to a contact.
 	Tags map[string]string
+
+	// Version information for a contact.
+	Version *ContactVersion
 
 	//  Projected time in UTC your satellite will set below the [receive mask]. This time is based
 	// on the satellite's current active ephemeris for future contacts and the
@@ -585,6 +609,47 @@ type ContactData struct {
 	//
 	// [receive mask]: https://docs.aws.amazon.com/ground-station/latest/ug/site-masks.html
 	VisibilityStartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Details of a contact reservation.
+type ContactReservationDetails struct {
+
+	// UUID of a contact.
+	ContactId *string
+
+	noSmithyDocumentSerde
+}
+
+// Version information for a contact.
+type ContactVersion struct {
+
+	// Time the contact version was activated in UTC. A version is activated when it
+	// becomes the current active version of the contact.
+	Activated *time.Time
+
+	// Time the contact version was created in UTC.
+	Created *time.Time
+
+	// List of failure codes for the contact version.
+	FailureCodes []VersionFailureReasonCode
+
+	// Failure message for the contact version.
+	FailureMessage *string
+
+	// Time the contact version was last updated in UTC.
+	LastUpdated *time.Time
+
+	// Status of the contact version.
+	Status VersionStatus
+
+	// Time the contact version was superseded in UTC. A version is superseded when a
+	// newer version becomes active.
+	Superseded *time.Time
+
+	// Version ID of a contact.
+	VersionId *int32
 
 	noSmithyDocumentSerde
 }
@@ -1152,7 +1217,7 @@ type FrequencyBandwidth struct {
 // Information about the ground station data.
 type GroundStationData struct {
 
-	// UUID of a ground station.
+	// ID of a ground station.
 	GroundStationId *string
 
 	// Name of a ground station.
@@ -1160,6 +1225,42 @@ type GroundStationData struct {
 
 	// Ground station Region.
 	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// Item in a list of ground station reservations.
+type GroundStationReservationListItem struct {
+
+	// Name of an antenna.
+	//
+	// This member is required.
+	AntennaName *string
+
+	// End time of a ground station reservation in UTC.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// ID of a ground station.
+	//
+	// This member is required.
+	GroundStationId *string
+
+	// Details of a ground station reservation.
+	//
+	// This member is required.
+	ReservationDetails ReservationDetails
+
+	// Type of a ground station reservation.
+	//
+	// This member is required.
+	ReservationType ReservationType
+
+	// Start time of a ground station reservation in UTC.
+	//
+	// This member is required.
+	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -1254,6 +1355,17 @@ type KmsKeyMemberKmsKeyArn struct {
 
 func (*KmsKeyMemberKmsKeyArn) isKmsKey() {}
 
+// Details of a maintenance reservation.
+type MaintenanceReservationDetails struct {
+
+	// Type of maintenance.
+	//
+	// This member is required.
+	MaintenanceType MaintenanceType
+
+	noSmithyDocumentSerde
+}
+
 // Item in a list of mission profiles.
 type MissionProfileListItem struct {
 
@@ -1292,11 +1404,24 @@ type OEMEphemeris struct {
 	noSmithyDocumentSerde
 }
 
+// Program track settings for OEMEphemeris.
+type OemProgramTrackSettings struct {
+
+	// Unique identifier of the OEM ephemeris.
+	//
+	// This member is required.
+	EphemerisId *string
+
+	noSmithyDocumentSerde
+}
+
 // Program track settings for an antenna during a contact.
 //
 // The following types satisfy this interface:
 //
 //	ProgramTrackSettingsMemberAzEl
+//	ProgramTrackSettingsMemberOem
+//	ProgramTrackSettingsMemberTle
 type ProgramTrackSettings interface {
 	isProgramTrackSettings()
 }
@@ -1309,6 +1434,24 @@ type ProgramTrackSettingsMemberAzEl struct {
 }
 
 func (*ProgramTrackSettingsMemberAzEl) isProgramTrackSettings() {}
+
+// Program track settings for OEMEphemeris.
+type ProgramTrackSettingsMemberOem struct {
+	Value OemProgramTrackSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*ProgramTrackSettingsMemberOem) isProgramTrackSettings() {}
+
+// Program track settings for TLEEphemeris.
+type ProgramTrackSettingsMemberTle struct {
+	Value TleProgramTrackSettings
+
+	noSmithyDocumentSerde
+}
+
+func (*ProgramTrackSettingsMemberTle) isProgramTrackSettings() {}
 
 // Ingress address of AgentEndpoint with a port range and an optional mtu.
 type RangedConnectionDetails struct {
@@ -1339,6 +1482,34 @@ type RangedSocketAddress struct {
 
 	noSmithyDocumentSerde
 }
+
+// Details of a ground station reservation.
+//
+// The following types satisfy this interface:
+//
+//	ReservationDetailsMemberContact
+//	ReservationDetailsMemberMaintenance
+type ReservationDetails interface {
+	isReservationDetails()
+}
+
+// Details of a contact reservation.
+type ReservationDetailsMemberContact struct {
+	Value ContactReservationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*ReservationDetailsMemberContact) isReservationDetails() {}
+
+// Details of a maintenance reservation.
+type ReservationDetailsMemberMaintenance struct {
+	Value MaintenanceReservationDetails
+
+	noSmithyDocumentSerde
+}
+
+func (*ReservationDetailsMemberMaintenance) isReservationDetails() {}
 
 // Object stored in Amazon S3 containing ephemeris data.
 type S3Object struct {
@@ -1630,6 +1801,17 @@ type TLEEphemeris struct {
 	noSmithyDocumentSerde
 }
 
+// Program track settings for TLEEphemeris.
+type TleProgramTrackSettings struct {
+
+	// Unique identifier of the TLE ephemeris.
+	//
+	// This member is required.
+	EphemerisId *string
+
+	noSmithyDocumentSerde
+}
+
 // Object that determines whether tracking should be used during a contact
 // executed with this Config in the mission profile.
 type TrackingConfig struct {
@@ -1646,8 +1828,6 @@ type TrackingConfig struct {
 type TrackingOverrides struct {
 
 	// Program track settings to override for antenna tracking during the contact.
-	//
-	// This member is required.
 	ProgramTrackSettings ProgramTrackSettings
 
 	noSmithyDocumentSerde
@@ -1782,5 +1962,6 @@ func (*UnknownUnionMember) isEphemerisFilter()          {}
 func (*UnknownUnionMember) isEphemerisTypeDescription() {}
 func (*UnknownUnionMember) isKmsKey()                   {}
 func (*UnknownUnionMember) isProgramTrackSettings()     {}
+func (*UnknownUnionMember) isReservationDetails()       {}
 func (*UnknownUnionMember) isTelemetrySinkData()        {}
 func (*UnknownUnionMember) isUplinkDataflowDetails()    {}

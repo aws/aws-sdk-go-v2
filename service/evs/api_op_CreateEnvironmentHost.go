@@ -12,7 +12,7 @@ import (
 )
 
 // Creates an ESX host and adds it to an Amazon EVS environment. Amazon EVS
-// supports 4-16 hosts per environment.
+// supports 4-32 hosts per environment.
 //
 // This action can only be used after the Amazon EVS environment is deployed.
 //
@@ -119,7 +119,7 @@ func (c *Client) addOperationCreateEnvironmentHostMiddlewares(stack *middleware.
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -141,9 +141,6 @@ func (c *Client) addOperationCreateEnvironmentHostMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

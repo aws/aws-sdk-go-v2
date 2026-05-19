@@ -9,6 +9,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Deletes a Timestream for InfluxDB DB instance.
@@ -97,13 +98,22 @@ type DeleteDbInstanceOutput struct {
 	// Specifies the DbInstance's roles in the cluster.
 	InstanceModes []types.InstanceMode
 
+	// The timestamp of the last completed maintenance operation on the DB instance.
+	LastMaintenanceTime *time.Time
+
 	// Configuration for sending InfluxDB engine logs to send to specified S3 bucket.
 	LogDeliveryConfiguration *types.LogDeliveryConfiguration
+
+	// The maintenance schedule for the DB instance.
+	MaintenanceSchedule *types.MaintenanceSchedule
 
 	// Specifies whether the networkType of the Timestream for InfluxDB instance is
 	// IPV4, which can communicate over IPv4 protocol only, or DUAL, which can
 	// communicate over both IPv4 and IPv6 protocols.
 	NetworkType types.NetworkType
+
+	// The timestamp of the next scheduled maintenance operation on the DB instance.
+	NextMaintenanceTime *time.Time
 
 	// The port number on which InfluxDB accepts connections.
 	Port *int32
@@ -161,7 +171,7 @@ func (c *Client) addOperationDeleteDbInstanceMiddlewares(stack *middleware.Stack
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -183,9 +193,6 @@ func (c *Client) addOperationDeleteDbInstanceMiddlewares(stack *middleware.Stack
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

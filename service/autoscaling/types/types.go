@@ -174,6 +174,9 @@ type AutoScalingGroup struct {
 	// Scaling group.
 	AvailabilityZoneDistribution *AvailabilityZoneDistribution
 
+	//  The Availability Zone IDs where the Auto Scaling group can launch instances.
+	AvailabilityZoneIds []string
+
 	// The Availability Zone impairment policy for the Auto Scaling group.
 	AvailabilityZoneImpairmentPolicy *AvailabilityZoneImpairmentPolicy
 
@@ -313,11 +316,13 @@ type AutoScalingInstanceDetails struct {
 	//
 	// Valid values: Pending | Pending:Wait | Pending:Proceed | Quarantined | InService
 	// | Terminating | Terminating:Wait | Terminating:Proceed | Terminating:Retained |
-	// Terminated | Detaching | Detached | EnteringStandby | Standby | Warmed:Pending
-	// | Warmed:Pending:Wait | Warmed:Pending:Proceed | Warmed:Pending:Retained |
-	// Warmed:Terminating | Warmed:Terminating:Wait | Warmed:Terminating:Proceed |
+	// Terminated | Detaching | Detached | EnteringStandby | Standby |
+	// ReplacingRootVolume | ReplacingRootVolume:Wait | ReplacingRootVolume:Proceed |
+	// RootVolumeReplaced | Warmed:Pending | Warmed:Pending:Wait |
+	// Warmed:Pending:Proceed | Warmed:Pending:Retained | Warmed:Terminating |
+	// Warmed:Terminating:Wait | Warmed:Terminating:Proceed |
 	// Warmed:Terminating:Retained | Warmed:Terminated | Warmed:Stopped |
-	// Warmed:Running
+	// Warmed:Running | Warmed:Hibernated
 	//
 	// [Amazon EC2 Auto Scaling instance lifecycle]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-lifecycle.html
 	//
@@ -329,6 +334,9 @@ type AutoScalingInstanceDetails struct {
 	//
 	// This member is required.
 	ProtectedFromScaleIn *bool
+
+	//  The Availability Zone ID where the instance is located.
+	AvailabilityZoneId *string
 
 	//  The ID of the Amazon Machine Image (AMI) associated with the instance. This
 	// field shows the current AMI ID of the instance's root volume. It may differ from
@@ -863,6 +871,13 @@ type Filter struct {
 	//   be used in combination with the AutoScalingGroupName parameter. For valid
 	//   StatusCode values, see [Activity]in the Amazon EC2 Auto Scaling API Reference.
 	//
+	// StartTimeLowerBound and StartTimeUpperBound accept ISO 8601 formatted
+	// timestamps. Timestamps without a timezone offset are assumed to be UTC.
+	//
+	//   - 2000-01-18T08:15:00Z
+	//
+	//   - 2000-01-18T16:15:00+08:00
+	//
 	// [DescribeAutoScalingGroups]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeAutoScalingGroups.html
 	// [DescribeTags]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeTags.html
 	// [DescribeScalingActivities]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_DescribeScalingActivities.html
@@ -921,6 +936,9 @@ type Instance struct {
 	//
 	// This member is required.
 	ProtectedFromScaleIn *bool
+
+	//  The Availability Zone ID where the instance was launched.
+	AvailabilityZoneId *string
 
 	//  The ID of the Amazon Machine Image (AMI) used for the instance's current root
 	// volume. This value reflects the most recent AMI applied to the instance,

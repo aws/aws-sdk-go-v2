@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpBatchDeleteAdvancedPromptOptimizationJob struct {
+}
+
+func (*validateOpBatchDeleteAdvancedPromptOptimizationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchDeleteAdvancedPromptOptimizationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchDeleteAdvancedPromptOptimizationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchDeleteAdvancedPromptOptimizationJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchDeleteEvaluationJob struct {
 }
 
@@ -45,6 +65,26 @@ func (m *validateOpCancelAutomatedReasoningPolicyBuildWorkflow) HandleInitialize
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCancelAutomatedReasoningPolicyBuildWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAdvancedPromptOptimizationJob struct {
+}
+
+func (*validateOpCreateAdvancedPromptOptimizationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAdvancedPromptOptimizationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAdvancedPromptOptimizationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAdvancedPromptOptimizationJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -650,6 +690,26 @@ func (m *validateOpDeleteProvisionedModelThroughput) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteResourcePolicy struct {
+}
+
+func (*validateOpDeleteResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeregisterMarketplaceModelEndpoint struct {
 }
 
@@ -685,6 +745,26 @@ func (m *validateOpExportAutomatedReasoningPolicyVersion) HandleInitialize(ctx c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpExportAutomatedReasoningPolicyVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetAdvancedPromptOptimizationJob struct {
+}
+
+func (*validateOpGetAdvancedPromptOptimizationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAdvancedPromptOptimizationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAdvancedPromptOptimizationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAdvancedPromptOptimizationJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1130,6 +1210,26 @@ func (m *validateOpGetProvisionedModelThroughput) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetResourcePolicy struct {
+}
+
+func (*validateOpGetResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListAutomatedReasoningPolicyBuildWorkflows struct {
 }
 
@@ -1270,6 +1370,26 @@ func (m *validateOpPutModelInvocationLoggingConfiguration) HandleInitialize(ctx 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutResourcePolicy struct {
+}
+
+func (*validateOpPutResourcePolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutResourcePolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutResourcePolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutResourcePolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutUseCaseForModelAccess struct {
 }
 
@@ -1345,6 +1465,26 @@ func (m *validateOpStartAutomatedReasoningPolicyTestWorkflow) HandleInitialize(c
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartAutomatedReasoningPolicyTestWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopAdvancedPromptOptimizationJob struct {
+}
+
+func (*validateOpStopAdvancedPromptOptimizationJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopAdvancedPromptOptimizationJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopAdvancedPromptOptimizationJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopAdvancedPromptOptimizationJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1590,12 +1730,20 @@ func (m *validateOpUpdateProvisionedModelThroughput) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpBatchDeleteAdvancedPromptOptimizationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchDeleteAdvancedPromptOptimizationJob{}, middleware.After)
+}
+
 func addOpBatchDeleteEvaluationJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchDeleteEvaluationJob{}, middleware.After)
 }
 
 func addOpCancelAutomatedReasoningPolicyBuildWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelAutomatedReasoningPolicyBuildWorkflow{}, middleware.After)
+}
+
+func addOpCreateAdvancedPromptOptimizationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAdvancedPromptOptimizationJob{}, middleware.After)
 }
 
 func addOpCreateAutomatedReasoningPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1718,12 +1866,20 @@ func addOpDeleteProvisionedModelThroughputValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpDeleteProvisionedModelThroughput{}, middleware.After)
 }
 
+func addOpDeleteResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteResourcePolicy{}, middleware.After)
+}
+
 func addOpDeregisterMarketplaceModelEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeregisterMarketplaceModelEndpoint{}, middleware.After)
 }
 
 func addOpExportAutomatedReasoningPolicyVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExportAutomatedReasoningPolicyVersion{}, middleware.After)
+}
+
+func addOpGetAdvancedPromptOptimizationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAdvancedPromptOptimizationJob{}, middleware.After)
 }
 
 func addOpGetAutomatedReasoningPolicyAnnotationsValidationMiddleware(stack *middleware.Stack) error {
@@ -1814,6 +1970,10 @@ func addOpGetProvisionedModelThroughputValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpGetProvisionedModelThroughput{}, middleware.After)
 }
 
+func addOpGetResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetResourcePolicy{}, middleware.After)
+}
+
 func addOpListAutomatedReasoningPolicyBuildWorkflowsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAutomatedReasoningPolicyBuildWorkflows{}, middleware.After)
 }
@@ -1842,6 +2002,10 @@ func addOpPutModelInvocationLoggingConfigurationValidationMiddleware(stack *midd
 	return stack.Initialize.Add(&validateOpPutModelInvocationLoggingConfiguration{}, middleware.After)
 }
 
+func addOpPutResourcePolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutResourcePolicy{}, middleware.After)
+}
+
 func addOpPutUseCaseForModelAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutUseCaseForModelAccess{}, middleware.After)
 }
@@ -1856,6 +2020,10 @@ func addOpStartAutomatedReasoningPolicyBuildWorkflowValidationMiddleware(stack *
 
 func addOpStartAutomatedReasoningPolicyTestWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartAutomatedReasoningPolicyTestWorkflow{}, middleware.After)
+}
+
+func addOpStopAdvancedPromptOptimizationJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopAdvancedPromptOptimizationJob{}, middleware.After)
 }
 
 func addOpStopEvaluationJobValidationMiddleware(stack *middleware.Stack) error {
@@ -1917,13 +2085,40 @@ func validateAccountEnforcedGuardrailInferenceInputConfiguration(v *types.Accoun
 	if v.GuardrailVersion == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GuardrailVersion"))
 	}
-	if len(v.InputTags) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("InputTags"))
-	}
 	if v.ModelEnforcement != nil {
 		if err := validateModelEnforcement(v.ModelEnforcement); err != nil {
 			invalidParams.AddNested("ModelEnforcement", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAdvancedPromptOptimizationInputConfig(v *types.AdvancedPromptOptimizationInputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdvancedPromptOptimizationInputConfig"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAdvancedPromptOptimizationOutputConfig(v *types.AdvancedPromptOptimizationOutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AdvancedPromptOptimizationOutputConfig"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4145,6 +4340,38 @@ func validateMetadataConfigurationForReranking(v *types.MetadataConfigurationFor
 	}
 }
 
+func validateModelConfiguration(v *types.ModelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelConfiguration"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelConfigurations(v []types.ModelConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelConfigurations"}
+	for i := range v {
+		if err := validateModelConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateModelDataSource(v types.ModelDataSource) error {
 	if v == nil {
 		return nil
@@ -4872,6 +5099,21 @@ func validateVpcConfig(v *types.VpcConfig) error {
 	}
 }
 
+func validateOpBatchDeleteAdvancedPromptOptimizationJobInput(v *BatchDeleteAdvancedPromptOptimizationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchDeleteAdvancedPromptOptimizationJobInput"}
+	if v.JobIdentifiers == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobIdentifiers"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchDeleteEvaluationJobInput(v *BatchDeleteEvaluationJobInput) error {
 	if v == nil {
 		return nil
@@ -4897,6 +5139,47 @@ func validateOpCancelAutomatedReasoningPolicyBuildWorkflowInput(v *CancelAutomat
 	}
 	if v.BuildWorkflowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BuildWorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAdvancedPromptOptimizationJobInput(v *CreateAdvancedPromptOptimizationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAdvancedPromptOptimizationJobInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.InputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InputConfig"))
+	} else if v.InputConfig != nil {
+		if err := validateAdvancedPromptOptimizationInputConfig(v.InputConfig); err != nil {
+			invalidParams.AddNested("InputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateAdvancedPromptOptimizationOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ModelConfigurations == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelConfigurations"))
+	} else if v.ModelConfigurations != nil {
+		if err := validateModelConfigurations(v.ModelConfigurations); err != nil {
+			invalidParams.AddNested("ModelConfigurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5663,6 +5946,21 @@ func validateOpDeleteProvisionedModelThroughputInput(v *DeleteProvisionedModelTh
 	}
 }
 
+func validateOpDeleteResourcePolicyInput(v *DeleteResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeregisterMarketplaceModelEndpointInput(v *DeregisterMarketplaceModelEndpointInput) error {
 	if v == nil {
 		return nil
@@ -5685,6 +5983,21 @@ func validateOpExportAutomatedReasoningPolicyVersionInput(v *ExportAutomatedReas
 	invalidParams := smithy.InvalidParamsError{Context: "ExportAutomatedReasoningPolicyVersionInput"}
 	if v.PolicyArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PolicyArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAdvancedPromptOptimizationJobInput(v *GetAdvancedPromptOptimizationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAdvancedPromptOptimizationJobInput"}
+	if v.JobIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6047,6 +6360,21 @@ func validateOpGetProvisionedModelThroughputInput(v *GetProvisionedModelThroughp
 	}
 }
 
+func validateOpGetResourcePolicyInput(v *GetResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAutomatedReasoningPolicyBuildWorkflowsInput(v *ListAutomatedReasoningPolicyBuildWorkflowsInput) error {
 	if v == nil {
 		return nil
@@ -6163,6 +6491,24 @@ func validateOpPutModelInvocationLoggingConfigurationInput(v *PutModelInvocation
 	}
 }
 
+func validateOpPutResourcePolicyInput(v *PutResourcePolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutResourcePolicyInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.ResourcePolicy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourcePolicy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutUseCaseForModelAccessInput(v *PutUseCaseForModelAccessInput) error {
 	if v == nil {
 		return nil
@@ -6231,6 +6577,21 @@ func validateOpStartAutomatedReasoningPolicyTestWorkflowInput(v *StartAutomatedR
 	}
 	if v.BuildWorkflowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BuildWorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopAdvancedPromptOptimizationJobInput(v *StopAdvancedPromptOptimizationJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopAdvancedPromptOptimizationJobInput"}
+	if v.JobIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

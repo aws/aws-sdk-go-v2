@@ -34,6 +34,34 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The request could not be completed due to a conflict with the current state of
+// the resource. For example, attempting to create a resource that already exists
+// or is being created.
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // An internal error occurred while processing the request. Retry your request. If
 // the problem persists, contact Amazon Web Services Support.
 type InternalServerException struct {
@@ -88,9 +116,8 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request would exceed service quotas. For example, attempting to create more
-// than 20 widgets in a dashboard or exceeding the maximum number of dashboards per
-// account.
+// The request would exceed a service quota. Review the service quotas for Amazon
+// Web Services Billing and Cost Management Dashboards and retry your request.
 type ServiceQuotaExceededException struct {
 	Message *string
 

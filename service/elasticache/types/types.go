@@ -1495,8 +1495,8 @@ type ReplicationGroup struct {
 	// The user supplied description of the replication group.
 	Description *string
 
-	// The engine used in a replication group. The options are redis, memcached or
-	// valkey.
+	// The engine used in a replication group. The options are valkey, memcached or
+	// redis.
 	Engine *string
 
 	// The name of the Global datastore and role of this replication group in the
@@ -2001,6 +2001,12 @@ type ServerlessCache struct {
 	// The version number of the engine the serverless cache is compatible with.
 	MajorEngineVersion *string
 
+	// The type of IP address protocol used by the serverless cache. Must be either
+	// ipv4 | ipv6 | dual_stack . ipv6 is only supported with IPv6-only subnets. If
+	// not specified, defaults to ipv4 , unless all provided subnets are IPv6-only, in
+	// which case it defaults to ipv6 .
+	NetworkType NetworkType
+
 	// Represents the information required for client programs to connect to a cache
 	// node. This value is read-only.
 	ReaderEndpoint *Endpoint
@@ -2011,8 +2017,9 @@ type ServerlessCache struct {
 	// The unique identifier of the serverless cache.
 	ServerlessCacheName *string
 
-	// The current setting for the number of serverless cache snapshots the system
-	// will retain. Available for Valkey, Redis OSS and Serverless Memcached only.
+	// The number of days for which ElastiCache retains automatic snapshots before
+	// deleting them. Available for Valkey, Redis OSS and Serverless Memcached only.
+	// The maximum value allowed is 35 days.
 	SnapshotRetentionLimit *int32
 
 	// The current status of the serverless cache. The allowed values are CREATING,

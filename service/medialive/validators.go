@@ -4022,6 +4022,45 @@ func validateM2tsSettings(v *types.M2tsSettings) error {
 	}
 }
 
+func validateMediaConnectRouterContainerSettings(v *types.MediaConnectRouterContainerSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaConnectRouterContainerSettings"}
+	if v.M2tsSettings != nil {
+		if err := validateM2tsSettings(v.M2tsSettings); err != nil {
+			invalidParams.AddNested("M2tsSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMediaConnectRouterOutputSettings(v *types.MediaConnectRouterOutputSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MediaConnectRouterOutputSettings"}
+	if v.ContainerSettings == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ContainerSettings"))
+	} else if v.ContainerSettings != nil {
+		if err := validateMediaConnectRouterContainerSettings(v.ContainerSettings); err != nil {
+			invalidParams.AddNested("ContainerSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Destination == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Destination"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMediaPackageAdditionalDestinations(v *types.MediaPackageAdditionalDestinations) error {
 	if v == nil {
 		return nil
@@ -4448,6 +4487,11 @@ func validateOutputSettings(v *types.OutputSettings) error {
 	if v.SrtOutputSettings != nil {
 		if err := validateSrtOutputSettings(v.SrtOutputSettings); err != nil {
 			invalidParams.AddNested("SrtOutputSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MediaConnectRouterOutputSettings != nil {
+		if err := validateMediaConnectRouterOutputSettings(v.MediaConnectRouterOutputSettings); err != nil {
+			invalidParams.AddNested("MediaConnectRouterOutputSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the hierarchy structure of the specified Amazon Connect instance.
+// Describes the hierarchy structure of the specified Connect Customer instance.
 func (c *Client) DescribeUserHierarchyStructure(ctx context.Context, params *DescribeUserHierarchyStructureInput, optFns ...func(*Options)) (*DescribeUserHierarchyStructureOutput, error) {
 	if params == nil {
 		params = &DescribeUserHierarchyStructureInput{}
@@ -29,8 +29,8 @@ func (c *Client) DescribeUserHierarchyStructure(ctx context.Context, params *Des
 
 type DescribeUserHierarchyStructureInput struct {
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -85,7 +85,7 @@ func (c *Client) addOperationDescribeUserHierarchyStructureMiddlewares(stack *mi
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -107,9 +107,6 @@ func (c *Client) addOperationDescribeUserHierarchyStructureMiddlewares(stack *mi
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

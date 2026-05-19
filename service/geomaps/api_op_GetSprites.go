@@ -33,8 +33,7 @@ func (c *Client) GetSprites(ctx context.Context, params *GetSpritesInput, optFns
 
 type GetSpritesInput struct {
 
-	// Sets color tone for map such as dark and light for specific map styles. It
-	// applies to only vector map styles such as Standard and Monochrome.
+	// Sets the color tone for the map sprites, such as dark and light.
 	//
 	// Example: Light
 	//
@@ -127,7 +126,7 @@ func (c *Client) addOperationGetSpritesMiddlewares(stack *middleware.Stack, opti
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -149,9 +148,6 @@ func (c *Client) addOperationGetSpritesMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

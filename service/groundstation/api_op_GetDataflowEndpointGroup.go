@@ -27,6 +27,7 @@ func (c *Client) GetDataflowEndpointGroup(ctx context.Context, params *GetDatafl
 	return out, nil
 }
 
+// Input for the GetDataflowEndpointGroup operation.
 type GetDataflowEndpointGroupInput struct {
 
 	// UUID of a dataflow endpoint group.
@@ -37,6 +38,7 @@ type GetDataflowEndpointGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+// Output for the GetDataflowEndpointGroup operation.
 type GetDataflowEndpointGroupOutput struct {
 
 	// Amount of time, in seconds, after a contact ends that the Ground Station
@@ -103,7 +105,7 @@ func (c *Client) addOperationGetDataflowEndpointGroupMiddlewares(stack *middlewa
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -125,9 +127,6 @@ func (c *Client) addOperationGetDataflowEndpointGroupMiddlewares(stack *middlewa
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

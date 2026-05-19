@@ -1706,6 +1706,11 @@ type CapacityManagerDimension struct {
 	//  The Amazon Web Services account ID that owns the capacity resource.
 	AccountId *string
 
+	//  The name of the Amazon Web Services account that owns the capacity resource.
+	// This dimension is only available when Organizations access is enabled for
+	// Capacity Manager.
+	AccountName *string
+
 	//  The unique identifier of the Availability Zone where the capacity resource is
 	// located.
 	AvailabilityZoneId *string
@@ -1764,10 +1769,56 @@ type CapacityManagerDimension struct {
 	//  The Amazon Web Services Region where the capacity resource is located.
 	ResourceRegion *string
 
+	//  The tags associated with the capacity resource, represented as key-value
+	// pairs. Only tags that have been activated for monitoring via
+	// UpdateCapacityManagerMonitoredTagKeys are included.
+	Tags []CapacityManagerTagDimension
+
 	//  The tenancy of the EC2 instances associated with this capacity dimension.
 	// Valid values are 'default' for shared tenancy, 'dedicated' for dedicated
 	// instances, or 'host' for dedicated hosts.
 	Tenancy CapacityTenancy
+
+	noSmithyDocumentSerde
+}
+
+//	Describes a tag key that is being monitored by Capacity Manager, including its
+//
+// activation status and the earliest available data point.
+type CapacityManagerMonitoredTagKey struct {
+
+	//  Indicates whether this tag key is provided by Capacity Manager by default,
+	// rather than being user-activated.
+	CapacityManagerProvided *bool
+
+	//  The earliest timestamp from which tag data is available for queries, in UTC
+	// ISO 8601 format.
+	EarliestDatapointTimestamp *time.Time
+
+	//  The current status of the monitored tag key. Valid values are activating ,
+	// activated , deactivating , and suspended .
+	Status CapacityManagerMonitoredTagKeyStatus
+
+	//  A message providing additional details about the current status of the
+	// monitored tag key.
+	StatusMessage *string
+
+	//  The tag key being monitored.
+	TagKey *string
+
+	noSmithyDocumentSerde
+}
+
+//	A key-value pair representing a tag associated with a capacity resource in
+//
+// Capacity Manager.
+type CapacityManagerTagDimension struct {
+
+	//  The tag key.
+	Key *string
+
+	//  The tag value.
+	Value *string
 
 	noSmithyDocumentSerde
 }
@@ -2845,6 +2896,9 @@ type ClientVpnEndpoint struct {
 	// IPv4 and IPv6 addressing.
 	TrafficIpAddressType TrafficIpAddressType
 
+	// The Transit Gateway configuration for the Client VPN endpoint.
+	TransitGatewayConfiguration *TransitGatewayConfigurationDescribeEndpointStructure
+
 	// The transport protocol used by the Client VPN endpoint.
 	TransportProtocol TransportProtocol
 
@@ -2889,6 +2943,10 @@ type ClientVpnEndpointStatus struct {
 	//
 	//   - deleted - The Client VPN endpoint has been deleted. The Client VPN endpoint
 	//   cannot accept connections.
+	//
+	//   - pending - The Client VPN endpoint has been created with a Transit Gateway
+	//   configuration and is waiting for the Transit Gateway attachment to be accepted.
+	//   The Client VPN endpoint cannot accept connections.
 	Code ClientVpnEndpointStatusCode
 
 	// A message about the status of the Client VPN endpoint.
@@ -2920,6 +2978,10 @@ type ClientVpnRoute struct {
 
 	// The ID of the subnet through which traffic is routed.
 	TargetSubnet *string
+
+	// The ID of the Transit Gateway attachment, if the route targets a Transit
+	// Gateway.
+	TransitGatewayAttachmentId *string
 
 	// The route type.
 	Type *string
@@ -10712,6 +10774,9 @@ type InstanceTypeInfo struct {
 	// [Boot modes]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-boot.html
 	SupportedBootModes []BootModeType
 
+	// Indicates whether the instance type is supported in the current Region.
+	SupportedInRegion *bool
+
 	// The supported root device types.
 	SupportedRootDeviceTypes []RootDeviceType
 
@@ -11562,6 +11627,9 @@ type IpamPoolAllocation struct {
 
 	// The type of the resource.
 	ResourceType IpamPoolAllocationResourceType
+
+	// The tags for the IPAM pool allocation.
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }
@@ -14709,6 +14777,18 @@ type ManagedPrefixList struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the managed resource visibility settings for the account.
+type ManagedResourceVisibilitySettings struct {
+
+	// The default visibility setting for managed resources. A value of hidden
+	// indicates that managed resources are not included in Describe operation
+	// responses by default. A value of visible indicates that managed resources are
+	// included by default.
+	DefaultVisibility ManagedResourceDefaultVisibility
+
+	noSmithyDocumentSerde
+}
+
 // Describes the media accelerators for the instance type.
 type MediaAcceleratorInfo struct {
 
@@ -16474,6 +16554,10 @@ type OperatorRequest struct {
 // Describes whether the resource is managed by a service provider and, if so,
 // describes the service provider that manages it.
 type OperatorResponse struct {
+
+	// If true , the resource is hidden by default based on the managed resource
+	// visibility settings for the account.
+	HiddenByDefault *bool
 
 	// If true , the resource is managed by a service provider.
 	Managed *bool
@@ -22473,6 +22557,14 @@ type TargetNetwork struct {
 	// The ID of the association.
 	AssociationId *string
 
+	// The Availability Zone IDs for the target network association, if the Client VPN
+	// endpoint uses a Transit Gateway.
+	AvailabilityZoneIds []string
+
+	// The Availability Zone names for the target network association, if the Client
+	// VPN endpoint uses a Transit Gateway.
+	AvailabilityZones []string
+
 	// The ID of the Client VPN endpoint with which the target network is associated.
 	ClientVpnEndpointId *string
 
@@ -22866,6 +22958,67 @@ type TransitGatewayAttachmentPropagation struct {
 
 	// The ID of the propagation route table.
 	TransitGatewayRouteTableId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a Transit Gateway attachment for a Client VPN endpoint.
+type TransitGatewayClientVpnAttachment struct {
+
+	// The ID of the Client VPN endpoint.
+	ClientVpnEndpointId *string
+
+	// The ID of the Amazon Web Services account that owns the Client VPN endpoint.
+	ClientVpnOwnerId *string
+
+	// The date and time the Transit Gateway attachment was created.
+	CreationTime *string
+
+	// The state of the Transit Gateway attachment.
+	State TransitGatewayAttachmentStatusType
+
+	// The ID of the Transit Gateway attachment.
+	TransitGatewayAttachmentId *string
+
+	// The ID of the Transit Gateway.
+	TransitGatewayId *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the Transit Gateway configuration for a Client VPN endpoint.
+type TransitGatewayConfigurationDescribeEndpointStructure struct {
+
+	// The Availability Zone IDs for the Transit Gateway association.
+	AvailabilityZoneIds []string
+
+	// The Availability Zone names for the Transit Gateway association.
+	AvailabilityZones []string
+
+	// The ID of the Transit Gateway attachment.
+	TransitGatewayAttachmentId *string
+
+	// The ID of the Transit Gateway.
+	TransitGatewayId *string
+
+	noSmithyDocumentSerde
+}
+
+// The Transit Gateway configuration for a Client VPN endpoint.
+type TransitGatewayConfigurationInputStructure struct {
+
+	// The Availability Zone IDs for the Transit Gateway association. You can specify
+	// up to the maximum number of Availability Zones supported by the Transit Gateway.
+	// You cannot specify both AvailabilityZones and AvailabilityZoneIds .
+	AvailabilityZoneIds []string
+
+	// The Availability Zone names for the Transit Gateway association. You can
+	// specify up to the maximum number of Availability Zones supported by the Transit
+	// Gateway. You cannot specify both AvailabilityZones and AvailabilityZoneIds .
+	AvailabilityZones []string
+
+	// The ID of the Transit Gateway to associate with the Client VPN endpoint.
+	TransitGatewayId *string
 
 	noSmithyDocumentSerde
 }
@@ -24873,6 +25026,10 @@ type VolumeModification struct {
 	// The current modification state.
 	ModificationState VolumeModificationState
 
+	// Describes whether the resource is managed by a service provider and, if so,
+	// describes the service provider that manages it.
+	Operator *OperatorResponse
+
 	// The original IOPS rate of the volume.
 	OriginalIops *int32
 
@@ -25090,6 +25247,9 @@ type VolumeStatusItem struct {
 	//
 	// [Initialize Amazon EBS volumes]: https://docs.aws.amazon.com/ebs/latest/userguide/initalize-volume.html
 	InitializationStatusDetails *InitializationStatusDetails
+
+	// The service provider that manages the resource.
+	Operator *OperatorResponse
 
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string

@@ -31,6 +31,7 @@ func (c *Client) ListContacts(ctx context.Context, params *ListContactsInput, op
 	return out, nil
 }
 
+// Input for the ListContacts operation.
 type ListContactsInput struct {
 
 	// End time of a contact in UTC.
@@ -70,6 +71,7 @@ type ListContactsInput struct {
 	noSmithyDocumentSerde
 }
 
+// Output for the ListContacts operation.
 type ListContactsOutput struct {
 
 	// List of contacts.
@@ -119,7 +121,7 @@ func (c *Client) addOperationListContactsMiddlewares(stack *middleware.Stack, op
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -141,9 +143,6 @@ func (c *Client) addOperationListContactsMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -1,3 +1,26 @@
+# v1.51.0 (2026-04-30)
+
+* **Feature**: Adds support for ZookeeperAccess field to control the Client-Zookeeper connectivity.
+
+# v1.50.1 (2026-04-29)
+
+* **Dependency Update**: Update to smithy-go v1.25.1.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.50.0 (2026-04-20)
+
+* **Feature**: Amazon MSK Replicator now supports data migration from external Apache Kafka clusters to Amazon MSK Express brokers. This release adds SaslScram authentication with TLS encryption, enhanced consumer offset synchronization, and customer log forwarding for troubleshooting.
+
+# v1.49.3 (2026-04-17)
+
+* **Dependency Update**: Bump smithy-go to 1.25.0 to support endpointBdd trait
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.49.2 (2026-03-26)
+
+* **Bug Fix**: Fix a bug where a recorded clock skew could persist on the client even if the client and server clock ended up realigning.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.1 (2026-03-13)
 
 * **Dependency Update**: Updated to the latest SDK module versions

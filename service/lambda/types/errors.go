@@ -1073,6 +1073,93 @@ func (e *ResourceNotReadyException) ErrorCode() string {
 }
 func (e *ResourceNotReadyException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
+// The Lambda function couldn't make a network connection to the configured S3
+// Files access point.
+type S3FilesMountConnectivityException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *S3FilesMountConnectivityException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *S3FilesMountConnectivityException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *S3FilesMountConnectivityException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "S3FilesMountConnectivityException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *S3FilesMountConnectivityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The Lambda function couldn't mount the configured S3 Files access point due to
+// a permission or configuration issue.
+type S3FilesMountFailureException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *S3FilesMountFailureException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *S3FilesMountFailureException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *S3FilesMountFailureException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "S3FilesMountFailureException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *S3FilesMountFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The Lambda function made a network connection to the configured S3 Files access
+// point, but the mount operation timed out.
+type S3FilesMountTimeoutException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *S3FilesMountTimeoutException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *S3FilesMountTimeoutException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *S3FilesMountTimeoutException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "S3FilesMountTimeoutException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *S3FilesMountTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The request payload exceeded the maximum allowed size for serialized request
 // entities.
 type SerializedRequestEntityTooLargeException struct {

@@ -218,8 +218,7 @@
                 "IsoCountryCode": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new two-character code, in ISO 3166-1 alpha-2 format, for the country or region of the origination identity.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The new two-character code, in ISO 3166-1 alpha-2 format, for the country or region of the origination identity. This field is optional and is not required for origination identity types that are not country-specific, such as RCS agents.</p>"
                     }
                 },
                 "ClientToken": {
@@ -546,6 +545,54 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#CarrierStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The carrier-level launch status.</p> <ul> <li> <p> <code>PENDING</code>: The carrier launch is pending.</p> </li> <li> <p> <code>ACTIVE</code>: The carrier launch is active.</p> </li> <li> <p> <code>REJECTED</code>: The carrier launch was rejected.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "REJECTED",
+                        "name": "REJECTED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CarrierStatusInformation": {
+            "type": "structure",
+            "members": {
+                "CarrierName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the carrier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#CarrierStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch status for this carrier.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains carrier-level launch status details for an RCS agent within a country.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CarrierStatusInformationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#CarrierStatusInformation"
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#ClientToken": {
             "type": "string",
             "traits": {
@@ -854,8 +901,20 @@
                         "name": "REGISTRATION_NOT_COMPLETE"
                     },
                     {
+                        "value": "RESOURCE_ALREADY_ASSOCIATED",
+                        "name": "RESOURCE_ALREADY_ASSOCIATED"
+                    },
+                    {
                         "value": "SENDER_ID_ASSOCIATED_TO_POOL",
                         "name": "SENDER_ID_ASSOCIATED_TO_POOL"
+                    },
+                    {
+                        "value": "RCS_AGENT_ASSOCIATED_TO_POOL",
+                        "name": "RCS_AGENT_ASSOCIATED_TO_POOL"
+                    },
+                    {
+                        "value": "POOL_ASSOCIATED_TO_NOTIFY_CONFIGURATION",
+                        "name": "POOL_ASSOCIATED_TO_NOTIFY_CONFIGURATION"
                     },
                     {
                         "value": "RESOURCE_ALREADY_EXISTS",
@@ -916,6 +975,14 @@
                     {
                         "value": "DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE",
                         "name": "DESTINATION_PHONE_NUMBER_BLOCKED_BY_PROTECT_NUMBER_OVERRIDE"
+                    },
+                    {
+                        "value": "RCS_AGENT_ALREADY_ASSOCIATED_TO_REGISTRATION_TYPE",
+                        "name": "RCS_AGENT_ALREADY_ASSOCIATED_TO_REGISTRATION_TYPE"
+                    },
+                    {
+                        "value": "NOTIFY_CONFIGURATION_NOT_ACTIVE",
+                        "name": "NOTIFY_CONFIGURATION_NOT_ACTIVE"
                     }
                 ]
             }
@@ -952,6 +1019,127 @@
                     "max": 800
                 },
                 "smithy.api#pattern": "^(?!\\s)^[\\s\\S]+(?<!\\s)$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The per-country launch status of an RCS agent.</p> <ul> <li> <p> <code>CREATED</code>: The country launch has been created.</p> </li> <li> <p> <code>PENDING</code>: The country launch is pending.</p> </li> <li> <p> <code>PARTIAL</code>: The country launch is partially active.</p> </li> <li> <p> <code>ACTIVE</code>: The country launch is active.</p> </li> <li> <p> <code>REJECTED</code>: The country launch was rejected.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATED",
+                        "name": "CREATED"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "PARTIAL",
+                        "name": "PARTIAL"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "REJECTED",
+                        "name": "REJECTED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attribute to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#FilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array values to filter for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information for a country launch status that meets a specified criteria.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The filter name for filtering country launch statuses. The available filter names are:</p> <ul> <li> <p> <code>country-launch-status</code>: Filter by country launch status.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "country-launch-status",
+                        "name": "COUNTRY_LAUNCH_STATUS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusInformation": {
+            "type": "structure",
+            "members": {
+                "IsoCountryCode": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The launch status for this country.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RcsPlatformId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The RCS platform identifier for this country.</p>"
+                    }
+                },
+                "RegistrationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the registration associated with this country launch.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CarrierStatus": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#CarrierStatusInformationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of CarrierStatusInformation objects containing carrier-level launch status details.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains per-country launch status details for an RCS agent.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusInformationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusInformation"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#CreateConfigurationSet": {
@@ -1161,6 +1349,264 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#CreateNotifyConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#CreateNotifyConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#CreateNotifyConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new notify configuration for managed messaging. A notify configuration defines the settings for sending templated messages, including the display name, use case, enabled channels, and enabled countries.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "CreateNotifyConfiguration",
+                        "documentation": "Create a notify configuration for OTP code verification over SMS.",
+                        "input": {
+                            "DisplayName": "MyOTPConfig",
+                            "UseCase": "CODE_VERIFICATION",
+                            "EnabledChannels": [
+                                "SMS"
+                            ],
+                            "EnabledCountries": [
+                                "US",
+                                "CA"
+                            ],
+                            "DeletionProtectionEnabled": false,
+                            "Tags": [
+                                {
+                                    "Key": "Environment",
+                                    "Value": "Production"
+                                }
+                            ]
+                        },
+                        "output": {
+                            "NotifyConfigurationArn": "arn:aws:sms-voice:us-east-1:111122223333:notify-configuration/nc-1234567890abcdef0",
+                            "NotifyConfigurationId": "nc-1234567890abcdef0",
+                            "DisplayName": "MyOTPConfig",
+                            "UseCase": "CODE_VERIFICATION",
+                            "EnabledChannels": [
+                                "SMS"
+                            ],
+                            "EnabledCountries": [
+                                "US",
+                                "CA"
+                            ],
+                            "Tier": "BASIC",
+                            "TierUpgradeStatus": "BASIC",
+                            "Status": "ACTIVE",
+                            "DeletionProtectionEnabled": false,
+                            "Tags": [
+                                {
+                                    "Key": "Environment",
+                                    "Value": "Production"
+                                }
+                            ],
+                            "CreatedTimestamp": 1704067200
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CreateNotifyConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "DisplayName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name to associate with the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationUseCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case for the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultTemplateId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default template identifier to associate with the notify configuration. If specified, this template is used when sending messages without an explicit template identifier.</p>"
+                    }
+                },
+                "PoolId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#PoolIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the pool to associate with the notify configuration.</p>"
+                    }
+                },
+                "EnabledCountries": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of two-character ISO country codes, in ISO 3166-1 alpha-2 format, that are enabled for the notify configuration.</p>"
+                    }
+                },
+                "EnabledChannels": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyEnabledChannelsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of channels to enable for the notify configuration. Supported values include <code>SMS</code> and <code>VOICE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>By default this is set to false. When set to true the notify configuration can't be deleted. You can change this value using the <a>UpdateNotifyConfiguration</a> action.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of tags (key and value pairs) associated with the notify configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CreateNotifyConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "NotifyConfigurationArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotifyConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name associated with the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationUseCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case for the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultTemplateId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default template identifier associated with the notify configuration.</p>"
+                    }
+                },
+                "PoolId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the pool associated with the notify configuration.</p>"
+                    }
+                },
+                "EnabledCountries": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of two-character ISO country codes, in ISO 3166-1 alpha-2 format, that are enabled for the notify configuration.</p>"
+                    }
+                },
+                "EnabledChannels": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyEnabledChannelsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of channels enabled for the notify configuration. Supported values include <code>SMS</code> and <code>VOICE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tier": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier of the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TierUpgradeStatus": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TierUpgradeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier upgrade status of the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RejectionReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the notify configuration was rejected, if applicable.</p>"
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true deletion protection is enabled. By default this is set to false. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of tags (key and value pairs) associated with the notify configuration.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the notify configuration was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#CreateOptOutList": {
             "type": "operation",
             "input": {
@@ -1301,8 +1747,7 @@
                 "IsoCountryCode": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new two-character code, in ISO 3166-1 alpha-2 format, for the country or region of the new pool.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The new two-character code, in ISO 3166-1 alpha-2 format, for the country or region of the new pool. This field is optional and is not required for origination identity types that are not country-specific, such as RCS agents.</p>"
                     }
                 },
                 "MessageType": {
@@ -1529,6 +1974,158 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p>An array of key and value pair tags that are associated with the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CreateRcsAgent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#CreateRcsAgentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#CreateRcsAgentResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new RCS agent for sending rich messages through the RCS channel. The RCS agent serves as an origination identity for sending RCS messages to your recipients.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CreateRcsAgentRequest": {
+            "type": "structure",
+            "members": {
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>By default this is set to false. When set to true the RCS agent can't be deleted. You can change this value using the <a>UpdateRcsAgent</a> action.</p>"
+                    }
+                },
+                "OptOutListName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OptOutList to associate with the RCS agent. Valid values are either OptOutListName or OptOutListArn.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of tags (key and value pairs) associated with the RCS agent.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you don't specify a client token, a randomly generated token is used for the request to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CreateRcsAgentResult": {
+            "type": "structure",
+            "members": {
+                "RcsAgentArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the newly created RCS agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RcsAgentId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the RCS agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the RCS agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true deletion protection is enabled. By default this is set to false.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OptOutListName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the OptOutList associated with the RCS agent.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the RCS agent was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SelfManagedOptOutsEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>By default this is set to false. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TwoWayChannelArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TwoWayChannelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the two way channel.</p>"
+                    }
+                },
+                "TwoWayChannelRole": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional IAM Role Arn for a service to assume, to be able to post inbound SMS messages.</p>"
+                    }
+                },
+                "TwoWayEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>By default this is set to false. When set to true you can receive incoming text messages from your end recipients.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of tags (key and value pairs) associated with the RCS agent.</p>"
                     }
                 }
             },
@@ -1996,6 +2593,9 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#ServiceQuotaExceededException"
                 },
                 {
@@ -2017,6 +2617,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The verified destination phone number, in E.164 format.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "RcsAgentId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the RCS agent to associate with the verified destination number. You can use either the RcsAgentId or RcsAgentArn.</p>"
                     }
                 },
                 "Tags": {
@@ -2066,6 +2672,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the verified destination phone number.</p> <ul> <li> <p> <code>PENDING</code>: The phone number hasn't been verified yet.</p> </li> <li> <p> <code>VERIFIED</code>: The phone number is verified and can receive messages.</p> </li> </ul>",
                         "smithy.api#required": {}
+                    }
+                },
+                "RcsAgentId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the RCS agent associated with the verified destination number.</p>"
                     }
                 },
                 "Tags": {
@@ -2594,6 +3206,239 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing notify configuration.</p> <p>If deletion protection is enabled, an error is returned.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteNotifyConfiguration",
+                        "documentation": "Delete an existing notify configuration.",
+                        "input": {
+                            "NotifyConfigurationId": "nc-1234567890abcdef0"
+                        },
+                        "output": {
+                            "NotifyConfigurationArn": "arn:aws:sms-voice:us-east-1:111122223333:notify-configuration/nc-1234567890abcdef0",
+                            "NotifyConfigurationId": "nc-1234567890abcdef0",
+                            "DisplayName": "MyOTPConfig",
+                            "UseCase": "CODE_VERIFICATION",
+                            "EnabledChannels": [
+                                "SMS"
+                            ],
+                            "EnabledCountries": [
+                                "US",
+                                "CA"
+                            ],
+                            "Tier": "BASIC",
+                            "TierUpgradeStatus": "BASIC",
+                            "Status": "ACTIVE",
+                            "DeletionProtectionEnabled": false,
+                            "CreatedTimestamp": 1704067200
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "NotifyConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the notify configuration to delete. The NotifyConfigurationId can be found using the <a>DescribeNotifyConfigurations</a> operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "NotifyConfigurationArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotifyConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name associated with the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationUseCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case for the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultTemplateId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default template identifier associated with the notify configuration.</p>"
+                    }
+                },
+                "PoolId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the pool associated with the notify configuration.</p>"
+                    }
+                },
+                "EnabledCountries": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of two-character ISO country codes, in ISO 3166-1 alpha-2 format, that are enabled for the notify configuration.</p>"
+                    }
+                },
+                "EnabledChannels": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyEnabledChannelsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of channels enabled for the notify configuration. Supported values include <code>SMS</code> and <code>VOICE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tier": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier of the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TierUpgradeStatus": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TierUpgradeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier upgrade status of the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RejectionReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the notify configuration was rejected, if applicable.</p>"
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true deletion protection is enabled. By default this is set to false. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the notify configuration was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyMessageSpendLimitOverride": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyMessageSpendLimitOverrideRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyMessageSpendLimitOverrideResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an account-level monthly spending limit override for sending notify messages. Deleting a spend limit override will set the <code>EnforcedLimit</code> to equal the <code>MaxLimit</code>, which is controlled by Amazon Web Services. For more information on spend limits (quotas) see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html\">Quotas </a> in the <i>End User Messaging SMS User Guide</i>.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DeleteNotifyMessageSpendLimitOverride",
+                        "documentation": "Delete the monthly spend limit override for notify messages, reverting to the default limit.",
+                        "output": {
+                            "MonthlyLimit": 1000
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyMessageSpendLimitOverrideRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyMessageSpendLimitOverrideResult": {
+            "type": "structure",
+            "members": {
+                "MonthlyLimit": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MonthlyLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current monthly limit, in US dollars.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#DeleteOptOutList": {
             "type": "operation",
             "input": {
@@ -3075,6 +3920,131 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time when the resource-based policy was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteRcsAgent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DeleteRcsAgentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DeleteRcsAgentResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing RCS agent. If deletion protection is enabled, an error is returned.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteRcsAgentRequest": {
+            "type": "structure",
+            "members": {
+                "RcsAgentId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the RCS agent to delete. You can use either the RcsAgentId or RcsAgentArn.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteRcsAgentResult": {
+            "type": "structure",
+            "members": {
+                "RcsAgentArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the deleted RCS agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RcsAgentId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the deleted RCS agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the RCS agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the RCS agent was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true deletion protection is enabled. By default this is set to false.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OptOutListName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the OptOutList that was associated with the deleted RCS agent.</p>"
+                    }
+                },
+                "SelfManagedOptOutsEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>By default this is set to false. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TwoWayChannelArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TwoWayChannelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the two way channel.</p>"
+                    }
+                },
+                "TwoWayChannelRole": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional IAM Role Arn for a service to assume, to be able to post inbound SMS messages.</p>"
+                    }
+                },
+                "TwoWayEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>By default this is set to false. When set to true you can receive incoming text messages from your end recipients.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -3976,6 +4946,281 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyConfigurationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the specified notify configurations or all notify configurations in your account.</p> <p>If you specify notify configuration IDs, the output includes information for only the specified notify configurations. If you specify filters, the output includes information for only those notify configurations that meet the filter criteria. If you don't specify notify configuration IDs or filters, the output includes information for all notify configurations.</p> <p>If you specify a notify configuration ID that isn't valid, an error is returned.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DescribeNotifyConfigurations",
+                        "documentation": "Describe notify configurations filtered by status.",
+                        "input": {
+                            "Filters": [
+                                {
+                                    "Name": "status",
+                                    "Values": [
+                                        "ACTIVE"
+                                    ]
+                                }
+                            ],
+                            "MaxResults": 10
+                        },
+                        "output": {
+                            "NotifyConfigurations": [
+                                {
+                                    "NotifyConfigurationArn": "arn:aws:sms-voice:us-east-1:111122223333:notify-configuration/nc-1234567890abcdef0",
+                                    "NotifyConfigurationId": "nc-1234567890abcdef0",
+                                    "DisplayName": "MyOTPConfig",
+                                    "UseCase": "CODE_VERIFICATION",
+                                    "EnabledChannels": [
+                                        "SMS"
+                                    ],
+                                    "EnabledCountries": [
+                                        "US",
+                                        "CA"
+                                    ],
+                                    "Tier": "BASIC",
+                                    "TierUpgradeStatus": "BASIC",
+                                    "Status": "ACTIVE",
+                                    "DeletionProtectionEnabled": false,
+                                    "CreatedTimestamp": 1704067200
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "items": "NotifyConfigurations"
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "NotifyConfigurationIds": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of notify configuration IDs to describe.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of NotifyConfigurationFilter objects to filter the results on.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per each request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyConfigurationsResult": {
+            "type": "structure",
+            "members": {
+                "NotifyConfigurations": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationInformationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of NotifyConfigurationInformation objects that contain the results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyTemplates": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyTemplatesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the specified notify templates or all notify templates in your account.</p> <p>If you specify template IDs, the output includes information for only the specified notify templates. If you specify filters, the output includes information for only those notify templates that meet the filter criteria. If you don't specify template IDs or filters, the output includes information for all notify templates.</p> <p>If you specify a template ID that isn't valid, an error is returned.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "DescribeNotifyTemplates",
+                        "documentation": "Describe available notify templates for OTP verification over SMS.",
+                        "input": {
+                            "Filters": [
+                                {
+                                    "Name": "template-type",
+                                    "Values": [
+                                        "OTP_VERIFICATION"
+                                    ]
+                                },
+                                {
+                                    "Name": "channels",
+                                    "Values": [
+                                        "SMS"
+                                    ]
+                                }
+                            ],
+                            "MaxResults": 10
+                        },
+                        "output": {
+                            "NotifyTemplates": [
+                                {
+                                    "TemplateId": "nt-1234567890abcdef0",
+                                    "Version": 1,
+                                    "TemplateType": "OTP_VERIFICATION",
+                                    "Channels": [
+                                        "SMS"
+                                    ],
+                                    "TierAccess": [
+                                        "BASIC",
+                                        "ADVANCED"
+                                    ],
+                                    "Status": "ACTIVE",
+                                    "SupportedCountries": [
+                                        "US",
+                                        "CA",
+                                        "GB"
+                                    ],
+                                    "LanguageCode": "en",
+                                    "Content": "Your verification code is {{code}}. It expires in {{expiry}} minutes.",
+                                    "Variables": {
+                                        "code": {
+                                            "Type": "STRING",
+                                            "Required": true,
+                                            "Description": "The verification code",
+                                            "MaxLength": 10,
+                                            "Source": "CUSTOMER",
+                                            "Sample": "123456"
+                                        },
+                                        "expiry": {
+                                            "Type": "INTEGER",
+                                            "Required": false,
+                                            "Description": "Expiry time in minutes",
+                                            "MinValue": 1,
+                                            "MaxValue": 60,
+                                            "DefaultValue": "10",
+                                            "Source": "CUSTOMER",
+                                            "Sample": "10"
+                                        }
+                                    },
+                                    "CreatedTimestamp": 1704067200
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "items": "NotifyTemplates"
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyTemplatesRequest": {
+            "type": "structure",
+            "members": {
+                "TemplateIds": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of template IDs to describe.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of NotifyTemplateFilter objects to filter the results on.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per each request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyTemplatesResult": {
+            "type": "structure",
+            "members": {
+                "NotifyTemplates": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateInformationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of NotifyTemplateInformation objects that contain the results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#DescribeOptOutLists": {
             "type": "operation",
             "input": {
@@ -4420,6 +5665,201 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentCountryLaunchStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentCountryLaunchStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentCountryLaunchStatusResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the per-country launch status of an RCS agent, including carrier-level details for each country.</p>",
+                "smithy.api#paginated": {
+                    "items": "CountryLaunchStatus"
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentCountryLaunchStatusRequest": {
+            "type": "structure",
+            "members": {
+                "RcsAgentId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the RCS agent. You can use either the RcsAgentId or RcsAgentArn.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IsoCountryCodes": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of two-character ISO country codes, in ISO 3166-1 alpha-2 format, to filter the results.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of CountryLaunchStatusFilter objects to filter the results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per each request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentCountryLaunchStatusResult": {
+            "type": "structure",
+            "members": {
+                "RcsAgentId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the RCS agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RcsAgentArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the RCS agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CountryLaunchStatus": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#CountryLaunchStatusInformationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of CountryLaunchStatusInformation objects that contain the per-country launch status details.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the specified RCS agents or all RCS agents associated with your Amazon Web Services account.</p> <p>If you specify RCS agent IDs, the output includes information for only the specified RCS agents. If you specify filters, the output includes information for only those RCS agents that meet the filter criteria. If you don't specify RCS agent IDs or filters, the output includes information for all RCS agents.</p>",
+                "smithy.api#paginated": {
+                    "items": "RcsAgents"
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentsRequest": {
+            "type": "structure",
+            "members": {
+                "RcsAgentIds": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of unique identifiers for the RCS agents. This is an array of strings that can be either the RcsAgentId or RcsAgentArn.</p>"
+                    }
+                },
+                "Owner": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#Owner",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use <code>SELF</code> to filter the list of RCS agents to ones your account owns or use <code>SHARED</code> to filter on RCS agents shared with your account. The <code>Owner</code> and <code>RcsAgentIds</code> parameters can't be used at the same time.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of RcsAgentFilter objects to filter the results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per each request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentsResult": {
+            "type": "structure",
+            "members": {
+                "RcsAgents": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentInformationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of RcsAgentInformation objects that contain the details for the requested RCS agents.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>"
                     }
                 }
             },
@@ -5452,8 +6892,7 @@
                 "IsoCountryCode": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region. </p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region. This field is optional and is not required for origination identity types that are not country-specific, such as RCS agents.</p>"
                     }
                 },
                 "ClientToken": {
@@ -6227,6 +7666,18 @@
                 "smithy.api#pattern": "^[A-Z]{2}$"
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#IsoCountryCodeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCode"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 300
+                }
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#Keyword": {
             "type": "string",
             "traits": {
@@ -6435,6 +7886,139 @@
                         "name": "ZH_TW"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ListNotifyCountries": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#ListNotifyCountriesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#ListNotifyCountriesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists countries that support notify messaging. You can optionally filter by channel, use case, or tier.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "ListNotifyCountries",
+                        "documentation": "List countries that support notify messaging over SMS.",
+                        "input": {
+                            "Channels": [
+                                "SMS"
+                            ],
+                            "MaxResults": 10
+                        },
+                        "output": {
+                            "NotifyCountries": [
+                                {
+                                    "IsoCountryCode": "US",
+                                    "CountryName": "United States",
+                                    "SupportedChannels": [
+                                        "SMS",
+                                        "VOICE"
+                                    ],
+                                    "SupportedUseCases": [
+                                        "CODE_VERIFICATION"
+                                    ],
+                                    "SupportedTiers": [
+                                        "BASIC",
+                                        "ADVANCED"
+                                    ],
+                                    "CustomerOwnedIdentityRequired": false
+                                },
+                                {
+                                    "IsoCountryCode": "CA",
+                                    "CountryName": "Canada",
+                                    "SupportedChannels": [
+                                        "SMS"
+                                    ],
+                                    "SupportedUseCases": [
+                                        "CODE_VERIFICATION"
+                                    ],
+                                    "SupportedTiers": [
+                                        "BASIC"
+                                    ],
+                                    "CustomerOwnedIdentityRequired": false
+                                }
+                            ]
+                        }
+                    }
+                ],
+                "smithy.api#paginated": {
+                    "items": "NotifyCountries"
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ListNotifyCountriesRequest": {
+            "type": "structure",
+            "members": {
+                "Channels": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyEnabledChannelsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of channels to filter the results by.</p>"
+                    }
+                },
+                "UseCases": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyUseCaseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of use cases to filter the results by.</p>"
+                    }
+                },
+                "Tier": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier to filter the results by.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results. You don't need to supply a value for this field in the initial request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per each request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ListNotifyCountriesResult": {
+            "type": "structure",
+            "members": {
+                "NotifyCountries": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyCountryInformationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of NotifyCountryInformation objects that contain the results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results. If this field is empty then there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#ListPoolOriginationIdentities": {
@@ -6979,6 +8563,654 @@
                 }
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:\\S+$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationDisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 15
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_ -]+$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attribute to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#FilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array values to filter for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information for notify configurations that meet a specified criteria.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The filter name for filtering notify configurations. The available filter names are:</p> <ul> <li> <p> <code>default-pool</code>: Filter by the default pool.</p> </li> <li> <p> <code>default-template</code>: Filter by the default template.</p> </li> <li> <p> <code>deletion-protection-enabled</code>: Filter by deletion protection status.</p> </li> <li> <p> <code>display-name</code>: Filter by display name.</p> </li> <li> <p> <code>enabled-channels</code>: Filter by enabled channels.</p> </li> <li> <p> <code>enabled-countries</code>: Filter by enabled countries.</p> </li> <li> <p> <code>status</code>: Filter by status.</p> </li> <li> <p> <code>tier-upgrade-status</code>: Filter by tier upgrade status.</p> </li> <li> <p> <code>use-case</code>: Filter by use case.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "display-name",
+                        "name": "DISPLAY_NAME"
+                    },
+                    {
+                        "value": "enabled-countries",
+                        "name": "ENABLED_COUNTRIES"
+                    },
+                    {
+                        "value": "enabled-channels",
+                        "name": "ENABLED_CHANNELS"
+                    },
+                    {
+                        "value": "default-template",
+                        "name": "DEFAULT_TEMPLATE"
+                    },
+                    {
+                        "value": "default-pool",
+                        "name": "DEFAULT_POOL"
+                    },
+                    {
+                        "value": "use-case",
+                        "name": "USE_CASE"
+                    },
+                    {
+                        "value": "status",
+                        "name": "STATUS"
+                    },
+                    {
+                        "value": "deletion-protection-enabled",
+                        "name": "DELETION_PROTECTION_ENABLED"
+                    },
+                    {
+                        "value": "tier-upgrade-status",
+                        "name": "TIER_UPGRADE_STATUS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationIdOrArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationIdOrArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_:/-]+$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationInformation": {
+            "type": "structure",
+            "members": {
+                "NotifyConfigurationArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotifyConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name associated with the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationUseCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case for the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultTemplateId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default template identifier associated with the notify configuration.</p>"
+                    }
+                },
+                "PoolId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the pool associated with the notify configuration.</p>"
+                    }
+                },
+                "EnabledCountries": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of two-character ISO country codes, in ISO 3166-1 alpha-2 format, that are enabled for the notify configuration.</p>"
+                    }
+                },
+                "EnabledChannels": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyEnabledChannelsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of channels enabled for the notify configuration. Supported values include <code>SMS</code> and <code>VOICE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tier": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier of the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TierUpgradeStatus": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TierUpgradeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier upgrade status of the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RejectionReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the notify configuration was rejected, if applicable.</p>"
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true deletion protection is enabled. By default this is set to false. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the notify configuration was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information for a notify configuration in an Amazon Web Services account.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationInformationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationInformation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a notify configuration.</p> <ul> <li> <p> <code>PENDING</code> - The notify configuration is pending review.</p> </li> <li> <p> <code>ACTIVE</code> - The notify configuration is active and can be used.</p> </li> <li> <p> <code>REJECTED</code> - The notify configuration was rejected.</p> </li> <li> <p> <code>REQUIRES_VERIFICATION</code> - The notify configuration requires verification.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "REJECTED",
+                        "name": "REJECTED"
+                    },
+                    {
+                        "value": "REQUIRES_VERIFICATION",
+                        "name": "REQUIRES_VERIFICATION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationTier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The tier of a notify configuration.</p> <ul> <li> <p> <code>BASIC</code> - Basic tier.</p> </li> <li> <p> <code>ADVANCED</code> - Advanced tier.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "BASIC",
+                        "name": "BASIC"
+                    },
+                    {
+                        "value": "ADVANCED",
+                        "name": "ADVANCED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationTierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationTier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationUseCase": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The use case for a notify configuration.</p> <ul> <li> <p> <code>CODE_VERIFICATION</code> - Code verification use case.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "CODE_VERIFICATION",
+                        "name": "CODE_VERIFICATION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyCountryInformation": {
+            "type": "structure",
+            "members": {
+                "IsoCountryCode": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CountryName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the country.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupportedChannels": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyEnabledChannelsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of supported channels for the country. Supported values include <code>SMS</code> and <code>VOICE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupportedUseCases": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyUseCaseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of supported use cases for the country.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SupportedTiers": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of supported tiers for the country.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomerOwnedIdentityRequired": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether a customer-owned identity is required to send notify messages to this country.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information for a country that supports notify messaging.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyCountryInformationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#NotifyCountryInformation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 300
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyEnabledChannelsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#NumberCapability"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyLanguageCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 5
+                },
+                "smithy.api#pattern": "^[a-z]{2}(-[A-Z]{2})?$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyPoolIdOrUnset": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "A pool identifier (ID or ARN) or the special value UNSET_DEFAULT_POOL_FOR_NOTIFY.\nPass UNSET_DEFAULT_POOL_FOR_NOTIFY to clear the default pool from a NotifyConfiguration.\nThis shape is used exclusively in UpdateNotifyConfigurationRequest.",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9_:/-]+|UNSET_DEFAULT_POOL_FOR_NOTIFY)$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attribute to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#FilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array values to filter for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information for notify templates that meet a specified criteria.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The filter name for filtering notify templates. The available filter names are:</p> <ul> <li> <p> <code>channels</code>: Filter by channels.</p> </li> <li> <p> <code>language-code</code>: Filter by language code.</p> </li> <li> <p> <code>supported-countries</code>: Filter by supported countries.</p> </li> <li> <p> <code>supported-voice-ids</code>: Filter by supported voice IDs.</p> </li> <li> <p> <code>template-type</code>: Filter by template type.</p> </li> <li> <p> <code>tier-access</code>: Filter by tier access.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "template-type",
+                        "name": "TEMPLATE_TYPE"
+                    },
+                    {
+                        "value": "channels",
+                        "name": "CHANNELS"
+                    },
+                    {
+                        "value": "tier-access",
+                        "name": "TIER_ACCESS"
+                    },
+                    {
+                        "value": "supported-countries",
+                        "name": "SUPPORTED_COUNTRIES"
+                    },
+                    {
+                        "value": "language-code",
+                        "name": "LANGUAGE_CODE"
+                    },
+                    {
+                        "value": "supported-voice-ids",
+                        "name": "SUPPORTED_VOICE_IDS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Template identifier for notify templates.\nIn UpdateNotifyConfiguration, pass UNSET_DEFAULT_TEMPLATE to clear the default template.\nThe UNSET_DEFAULT_TEMPLATE value is only accepted by UpdateNotifyConfiguration.",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([A-Za-z0-9_-]*|UNSET_DEFAULT_TEMPLATE)$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateInformation": {
+            "type": "structure",
+            "members": {
+                "TemplateId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateVersion",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemplateType": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Channels": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NumberCapabilityList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The channels for the template. Supported values are <code>SMS</code> and <code>VOICE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TierAccess": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationTierList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier access level for the template.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the template.</p>"
+                    }
+                },
+                "SupportedCountries": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of supported country codes for the template.</p>"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyLanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language code for the template.</p>"
+                    }
+                },
+                "Content": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TemplateContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content of the template.</p>"
+                    }
+                },
+                "Variables": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TemplateVariablesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of template variable metadata for the template.</p>"
+                    }
+                },
+                "SupportedVoiceIds": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#VoiceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of supported voice IDs for voice templates.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the notify template was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information for a system-managed notify template in an Amazon Web Services account.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateInformationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateInformation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The status of a notify template.</p> <ul> <li> <p> <code>ACTIVE</code> - The template is active and available for use.</p> </li> <li> <p> <code>INACTIVE</code> - The template is inactive.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "INACTIVE",
+                        "name": "INACTIVE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The type of a notify template.</p> <ul> <li> <p> <code>OTP_VERIFICATION</code> - OTP verification template type.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "OTP_VERIFICATION",
+                        "name": "OTP_VERIFICATION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateVersion": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyTierList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationTier"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#NotifyUseCaseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationUseCase"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4
+                }
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#NumberCapability": {
             "type": "string",
             "traits": {
@@ -6994,6 +9226,10 @@
                     {
                         "value": "MMS",
                         "name": "MMS"
+                    },
+                    {
+                        "value": "RCS",
+                        "name": "RCS"
                     }
                 ]
             }
@@ -7006,7 +9242,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 3
+                    "max": 4
                 }
             }
         },
@@ -7241,7 +9477,7 @@
                 "IsoCountryCode": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region. </p>",
+                        "smithy.api#documentation": "<p>The two-character code, in ISO 3166-1 alpha-2 format, for the country or region. This field is optional and may not be present for origination identity types that are not country-specific, such as RCS agents.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -7603,6 +9839,9 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#CreateEventDestination"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#CreateNotifyConfiguration"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#CreateOptOutList"
                 },
                 {
@@ -7610,6 +9849,9 @@
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#CreateProtectConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#CreateRcsAgent"
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#CreateRegistration"
@@ -7648,6 +9890,12 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#DeleteMediaMessageSpendLimitOverride"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#DeleteNotifyMessageSpendLimitOverride"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#DeleteOptedOutNumber"
                 },
                 {
@@ -7661,6 +9909,9 @@
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#DeleteProtectConfigurationRuleSetNumberOverride"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#DeleteRcsAgent"
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#DeleteRegistration"
@@ -7696,6 +9947,12 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#DescribeKeywords"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyConfigurations"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#DescribeNotifyTemplates"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#DescribeOptedOutNumbers"
                 },
                 {
@@ -7709,6 +9966,12 @@
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#DescribeProtectConfigurations"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgentCountryLaunchStatus"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#DescribeRcsAgents"
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#DescribeRegistrationAttachments"
@@ -7754,6 +10017,9 @@
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#GetResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ListNotifyCountries"
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#ListPoolOriginationIdentities"
@@ -7804,6 +10070,12 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#SendMediaMessage"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#SendNotifyTextMessage"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#SendNotifyVoiceMessage"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#SendTextMessage"
                 },
                 {
@@ -7825,6 +10097,9 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#SetMediaMessageSpendLimitOverride"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#SetNotifyMessageSpendLimitOverride"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#SetTextMessageSpendLimitOverride"
                 },
                 {
@@ -7843,6 +10118,9 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#UpdateEventDestination"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#UpdateNotifyConfiguration"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#UpdatePhoneNumber"
                 },
                 {
@@ -7853,6 +10131,9 @@
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationCountryRuleSet"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#UpdateRcsAgent"
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#UpdateSenderId"
@@ -8681,10 +10962,10 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[A-Za-z0-9_:/-]+$"
+                "smithy.api#pattern": "^[A-Za-z0-9_:/-]*$"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#PoolInformation": {
@@ -9468,6 +11749,9 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#ServiceQuotaExceededException"
                 },
                 {
@@ -9781,6 +12065,220 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#RcsAgentFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attribute to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#FilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array values to filter for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information for an RCS agent that meets a specified criteria.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#RcsAgentFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#RcsAgentFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The filter name for filtering RCS agents. The available filter names are:</p> <ul> <li> <p> <code>deletion-protection-enabled</code>: Filter by deletion protection status.</p> </li> <li> <p> <code>opt-out-list-name</code>: Filter by the opt-out list name.</p> </li> <li> <p> <code>self-managed-opt-outs-enabled</code>: Filter by self-managed opt-outs status.</p> </li> <li> <p> <code>status</code>: Filter by RCS agent status.</p> </li> <li> <p> <code>two-way-channel-arn</code>: Filter by the two-way channel ARN.</p> </li> <li> <p> <code>two-way-enabled</code>: Filter by two-way enabled status.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "status",
+                        "name": "STATUS"
+                    },
+                    {
+                        "value": "two-way-enabled",
+                        "name": "TWO_WAY_ENABLED"
+                    },
+                    {
+                        "value": "self-managed-opt-outs-enabled",
+                        "name": "SELF_MANAGED_OPT_OUTS_ENABLED"
+                    },
+                    {
+                        "value": "opt-out-list-name",
+                        "name": "OPT_OUT_LIST_NAME"
+                    },
+                    {
+                        "value": "deletion-protection-enabled",
+                        "name": "DELETION_PROTECTION_ENABLED"
+                    },
+                    {
+                        "value": "two-way-channel-arn",
+                        "name": "TWO_WAY_CHANNEL_ARN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#RcsAgentIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentIdOrArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#RcsAgentIdOrArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_:/-]+$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#RcsAgentInformation": {
+            "type": "structure",
+            "members": {
+                "RcsAgentArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the RCS agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RcsAgentId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the RCS agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the RCS agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the RCS agent was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true the RCS agent can't be deleted.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OptOutListName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the OptOutList associated with the RCS agent.</p>"
+                    }
+                },
+                "SelfManagedOptOutsEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TwoWayChannelArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TwoWayChannelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the two way channel.</p>"
+                    }
+                },
+                "TwoWayChannelRole": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional IAM Role Arn for a service to assume, to be able to post inbound SMS messages.</p>"
+                    }
+                },
+                "TwoWayEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true you can receive incoming text messages from your end recipients using the TwoWayChannelArn.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PoolId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the pool associated with the RCS agent.</p>"
+                    }
+                },
+                "TestingAgent": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TestingAgentInformation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The testing agent information associated with the RCS agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information for an RCS agent in an Amazon Web Services account.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#RcsAgentInformationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentInformation"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#RcsAgentStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The current status of the RCS agent.</p> <ul> <li> <p> <code>CREATED</code>: The RCS agent has been created.</p> </li> <li> <p> <code>PENDING</code>: The RCS agent is pending review.</p> </li> <li> <p> <code>TESTING</code>: The RCS agent is in testing.</p> </li> <li> <p> <code>PARTIAL</code>: The RCS agent is partially active.</p> </li> <li> <p> <code>ACTIVE</code>: The RCS agent is active and available for use.</p> </li> <li> <p> <code>DELETED</code>: The RCS agent has been deleted.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATED",
+                        "name": "CREATED"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "TESTING",
+                        "name": "TESTING"
+                    },
+                    {
+                        "value": "PARTIAL",
+                        "name": "PARTIAL"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "DELETED",
+                        "name": "DELETED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#RegistrationAssociationBehavior": {
             "type": "string",
             "traits": {
@@ -9995,6 +12493,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time when the registration attachment was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AttachmentUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL to the document that's associated with the registration attachment.</p>"
                     }
                 }
             },
@@ -10229,7 +12733,7 @@
                 "Feedback": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Feedback provided for this specific field during the registration review process. This may include validation errors, suggestions for improvement, or additional requirements.</p>"
+                        "smithy.api#documentation": "<p>Generative AI feedback information provided for this specific field during the registration review process. This may include validation errors, suggestions for improvement, or additional requirements.</p>"
                     }
                 }
             },
@@ -10720,7 +13224,7 @@
                 "Feedback": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Feedback information provided during the registration review process. This includes comments, suggestions, or additional requirements.</p>"
+                        "smithy.api#documentation": "<p>Generative AI feedback information provided during the registration review process. This includes comments, suggestions, or additional requirements.</p>"
                     }
                 }
             },
@@ -10797,6 +13301,10 @@
                     {
                         "value": "ARCHIVED",
                         "name": "ARCHIVED"
+                    },
+                    {
+                        "value": "REQUIRES_OFFLINE_REVIEW",
+                        "name": "REQUIRES_OFFLINE_REVIEW"
                     }
                 ]
             }
@@ -11593,6 +14101,7 @@
         "com.amazonaws.pinpointsmsvoicev2#ResourceType": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "<p>The type of resource.</p> <ul> <li> <p> <code>phone-number</code>: A phone number resource.</p> </li> <li> <p> <code>sender-id</code>: A sender ID resource.</p> </li> <li> <p> <code>rcs-agent</code>: An RCS agent resource.</p> </li> </ul>",
                 "smithy.api#enum": [
                     {
                         "value": "account",
@@ -11647,6 +14156,14 @@
                         "name": "PROTECT_CONFIGURATION"
                     },
                     {
+                        "value": "notify-configuration",
+                        "name": "NOTIFY_CONFIGURATION"
+                    },
+                    {
+                        "value": "notify-template",
+                        "name": "NOTIFY_TEMPLATE"
+                    },
+                    {
                         "value": "message-template",
                         "name": "MESSAGE_TEMPLATE"
                     },
@@ -11657,6 +14174,10 @@
                     {
                         "value": "message",
                         "name": "MESSAGE"
+                    },
+                    {
+                        "value": "rcs-agent",
+                        "name": "RCS_AGENT"
                     }
                 ]
             }
@@ -11985,6 +14506,305 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for the message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SendNotifyTextMessage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#SendNotifyTextMessageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#SendNotifyTextMessageResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends a templated text message through a notify configuration to a recipient's phone number.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "SendNotifyTextMessage",
+                        "documentation": "Send an OTP verification code via SMS using a notify configuration.",
+                        "input": {
+                            "NotifyConfigurationId": "nc-1234567890abcdef0",
+                            "DestinationPhoneNumber": "+12065550100",
+                            "TemplateVariables": {
+                                "code": "123456",
+                                "expiry": "10"
+                            }
+                        },
+                        "output": {
+                            "MessageId": "msg-1234567890abcdef0",
+                            "TemplateId": "nt-1234567890abcdef0",
+                            "ResolvedMessageBody": "Your verification code is 123456. It expires in 10 minutes."
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SendNotifyTextMessageRequest": {
+            "type": "structure",
+            "members": {
+                "NotifyConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the notify configuration to use for sending the message. This can be either the NotifyConfigurationId or NotifyConfigurationArn.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationPhoneNumber": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination phone number in E.164 format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemplateId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the template to use for the message.</p>"
+                    }
+                },
+                "TemplateVariables": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TemplateVariableSubstitutionMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of template variable names and their values. All variable values are passed as strings regardless of the declared variable type. For example, pass <code>INTEGER</code> values as <code>\"42\"</code> and <code>BOOLEAN</code> values as <code>\"true\"</code> or <code>\"false\"</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TimeToLive": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TimeToLive",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How long the text message is valid for, in seconds. By default this is 72 hours.</p>"
+                    }
+                },
+                "Context": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can specify custom data in this field. If you do, that data is logged to the event destination.</p>"
+                    }
+                },
+                "ConfigurationSetName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConfigurationSetNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the configuration set to use. This can be either the ConfigurationSetName or ConfigurationSetArn.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true, the message is checked and validated, but isn't sent to the end recipient.</p>"
+                    }
+                },
+                "MessageFeedbackEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to true to enable message feedback for the message. When a user receives the message you need to update the message status using <a>PutMessageFeedback</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SendNotifyTextMessageResult": {
+            "type": "structure",
+            "members": {
+                "MessageId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the message.</p>"
+                    }
+                },
+                "TemplateId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the template used for the message.</p>"
+                    }
+                },
+                "ResolvedMessageBody": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message body after template variable substitution has been applied.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SendNotifyVoiceMessage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#SendNotifyVoiceMessageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#SendNotifyVoiceMessageResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends a templated voice message through a notify configuration to a recipient's phone number.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "SendNotifyVoiceMessage",
+                        "documentation": "Send an OTP verification code via voice call using a notify configuration.",
+                        "input": {
+                            "NotifyConfigurationId": "nc-1234567890abcdef0",
+                            "DestinationPhoneNumber": "+12065550100",
+                            "TemplateVariables": {
+                                "code": "123456",
+                                "expiry": "10"
+                            },
+                            "VoiceId": "JOANNA"
+                        },
+                        "output": {
+                            "MessageId": "msg-0987654321fedcba0",
+                            "TemplateId": "nt-1234567890abcdef0",
+                            "ResolvedMessageBody": "Your verification code is 123456. It expires in 10 minutes."
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SendNotifyVoiceMessageRequest": {
+            "type": "structure",
+            "members": {
+                "NotifyConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the notify configuration to use for sending the message. This can be either the NotifyConfigurationId or NotifyConfigurationArn.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DestinationPhoneNumber": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination phone number in E.164 format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TemplateId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the template to use for the message.</p>"
+                    }
+                },
+                "TemplateVariables": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TemplateVariableSubstitutionMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of template variable names and their values. All variable values are passed as strings regardless of the declared variable type. For example, pass <code>INTEGER</code> values as <code>\"42\"</code> and <code>BOOLEAN</code> values as <code>\"true\"</code> or <code>\"false\"</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "VoiceId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#VoiceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The voice ID to use for the voice message.</p>"
+                    }
+                },
+                "TimeToLive": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TimeToLive",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How long the voice message is valid for, in seconds. By default this is 72 hours.</p>"
+                    }
+                },
+                "Context": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can specify custom data in this field. If you do, that data is logged to the event destination.</p>"
+                    }
+                },
+                "ConfigurationSetName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConfigurationSetNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the configuration set to use. This can be either the ConfigurationSetName or ConfigurationSetArn.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true, the message is checked and validated, but isn't sent to the end recipient.</p>"
+                    }
+                },
+                "MessageFeedbackEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to true to enable message feedback for the message. When a user receives the message you need to update the message status using <a>PutMessageFeedback</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SendNotifyVoiceMessageResult": {
+            "type": "structure",
+            "members": {
+                "MessageId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the message.</p>"
+                    }
+                },
+                "TemplateId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the template used for the message.</p>"
+                    }
+                },
+                "ResolvedMessageBody": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The message body after template variable substitution has been applied.</p>"
                     }
                 }
             },
@@ -12480,6 +15300,10 @@
                         "name": "DAILY_DESTINATION_CALL_LIMIT"
                     },
                     {
+                        "value": "DAILY_NOTIFY_TIER_MESSAGE_LIMIT",
+                        "name": "DAILY_NOTIFY_TIER_MESSAGE_LIMIT"
+                    },
+                    {
                         "value": "EVENT_DESTINATIONS_PER_CONFIGURATION_SET",
                         "name": "EVENT_DESTINATIONS_PER_CONFIGURATION_SET"
                     },
@@ -12496,12 +15320,20 @@
                         "name": "MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA"
                     },
                     {
+                        "value": "MONTHLY_SPEND_LIMIT_REACHED_FOR_NOTIFY",
+                        "name": "MONTHLY_SPEND_LIMIT_REACHED_FOR_NOTIFY"
+                    },
+                    {
                         "value": "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT",
                         "name": "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT"
                     },
                     {
                         "value": "MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE",
                         "name": "MONTHLY_SPEND_LIMIT_REACHED_FOR_VOICE"
+                    },
+                    {
+                        "value": "NOTIFY_CONFIGURATIONS_PER_ACCOUNT",
+                        "name": "NOTIFY_CONFIGURATIONS_PER_ACCOUNT"
                     },
                     {
                         "value": "OPT_OUT_LISTS_PER_ACCOUNT",
@@ -12522,6 +15354,10 @@
                     {
                         "value": "POOLS_PER_ACCOUNT",
                         "name": "POOLS_PER_ACCOUNT"
+                    },
+                    {
+                        "value": "RCS_AGENTS_PER_ACCOUNT",
+                        "name": "RCS_AGENTS_PER_ACCOUNT"
                     },
                     {
                         "value": "REGISTRATION_ATTACHMENTS_CREATED_PER_DAY",
@@ -12914,6 +15750,73 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#SetNotifyMessageSpendLimitOverride": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#SetNotifyMessageSpendLimitOverrideRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#SetNotifyMessageSpendLimitOverrideResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets an account level monthly spend limit override for sending notify messages. The requested spend limit must be less than or equal to the <code>MaxLimit</code>, which is set by Amazon Web Services. </p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "SetNotifyMessageSpendLimitOverride",
+                        "documentation": "Set a monthly spend limit override for notify messages.",
+                        "input": {
+                            "MonthlyLimit": 1000
+                        },
+                        "output": {
+                            "MonthlyLimit": 1000
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SetNotifyMessageSpendLimitOverrideRequest": {
+            "type": "structure",
+            "members": {
+                "MonthlyLimit": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MonthlyLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new monthly limit to enforce on notify messages.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SetNotifyMessageSpendLimitOverrideResult": {
+            "type": "structure",
+            "members": {
+                "MonthlyLimit": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MonthlyLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current monthly limit, in US dollars.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#SetTextMessageSpendLimitOverride": {
             "type": "operation",
             "input": {
@@ -13109,6 +16012,10 @@
                     {
                         "value": "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT",
                         "name": "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT"
+                    },
+                    {
+                        "value": "NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT",
+                        "name": "NOTIFY_MESSAGE_MONTHLY_SPEND_LIMIT"
                     }
                 ]
             }
@@ -13399,6 +16306,212 @@
                 "smithy.api#pattern": "^.*$"
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#TemplateContent": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#TemplateVariableMetadata": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TemplateVariableType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the variable.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Required": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Whether the variable is required.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the variable.</p>"
+                    }
+                },
+                "MaxLength": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum length for string variables.</p>"
+                    }
+                },
+                "MinValue": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The minimum value for numeric variables.</p>"
+                    }
+                },
+                "MaxValue": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum value for numeric variables.</p>"
+                    }
+                },
+                "DefaultValue": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default value for the variable.</p>"
+                    }
+                },
+                "Pattern": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The regex pattern the variable value must match.</p>"
+                    }
+                },
+                "Sample": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A sample value for the variable.</p>"
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TemplateVariableSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the variable, either <code>CUSTOMER</code> or <code>SYSTEM</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata about a template variable.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#TemplateVariableName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_]+$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#TemplateVariableSource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The source of a template variable value.</p> <ul> <li> <p> <code>CUSTOMER</code> - The variable value is provided by the customer.</p> </li> <li> <p> <code>SYSTEM</code> - The variable value is provided by the system.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "CUSTOMER",
+                        "name": "CUSTOMER"
+                    },
+                    {
+                        "value": "SYSTEM",
+                        "name": "SYSTEM"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#TemplateVariableSubstitutionMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#TemplateVariableName"
+            },
+            "value": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#TemplateVariableValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#TemplateVariableType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The type of a template variable.</p> <ul> <li> <p> <code>STRING</code> - String variable type.</p> </li> <li> <p> <code>INTEGER</code> - Integer variable type.</p> </li> <li> <p> <code>BOOLEAN</code> - Boolean variable type.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "STRING",
+                        "name": "STRING"
+                    },
+                    {
+                        "value": "INTEGER",
+                        "name": "INTEGER"
+                    },
+                    {
+                        "value": "BOOLEAN",
+                        "name": "BOOLEAN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#TemplateVariableValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#TemplateVariablesMap": {
+            "type": "map",
+            "key": {
+                "target": "smithy.api#String"
+            },
+            "value": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#TemplateVariableMetadata"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#TestingAgentInformation": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TestingAgentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the testing agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TestingAgentId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the testing agent.</p>"
+                    }
+                },
+                "RegistrationId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the registration associated with the testing agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about the testing agent associated with an RCS agent.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#TestingAgentStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The current status of the testing agent.</p> <ul> <li> <p> <code>CREATED</code>: The testing agent has been created.</p> </li> <li> <p> <code>PENDING</code>: The testing agent is pending activation.</p> </li> <li> <p> <code>ACTIVE</code>: The testing agent is active and available for use.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATED",
+                        "name": "CREATED"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#TextMessageBody": {
             "type": "string",
             "traits": {
@@ -13470,6 +16583,30 @@
                 "smithy.api#retryable": {
                     "throttling": true
                 }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#TierUpgradeStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The tier upgrade status of a notify configuration.</p> <ul> <li> <p> <code>BASIC</code> - Currently at basic tier.</p> </li> <li> <p> <code>PENDING_UPGRADE</code> - Upgrade to advanced tier is pending.</p> </li> <li> <p> <code>ADVANCED</code> - Currently at advanced tier.</p> </li> <li> <p> <code>REJECTED</code> - Tier upgrade was rejected.</p> </li> </ul>",
+                "smithy.api#enum": [
+                    {
+                        "value": "BASIC",
+                        "name": "BASIC"
+                    },
+                    {
+                        "value": "PENDING_UPGRADE",
+                        "name": "PENDING_UPGRADE"
+                    },
+                    {
+                        "value": "ADVANCED",
+                        "name": "ADVANCED"
+                    },
+                    {
+                        "value": "REJECTED",
+                        "name": "REJECTED"
+                    }
+                ]
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#TimeToLive": {
@@ -13652,6 +16789,225 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#EventDestination",
                     "traits": {
                         "smithy.api#documentation": "<p>An EventDestination object containing the details of where events will be logged. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#UpdateNotifyConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#UpdateNotifyConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#UpdateNotifyConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing notify configuration. You can update the default template, pool association, enabled channels, enabled countries, and deletion protection settings.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "UpdateNotifyConfiguration",
+                        "documentation": "Update a notify configuration to add voice channel and additional countries.",
+                        "input": {
+                            "NotifyConfigurationId": "nc-1234567890abcdef0",
+                            "EnabledChannels": [
+                                "SMS",
+                                "VOICE"
+                            ],
+                            "EnabledCountries": [
+                                "US",
+                                "CA",
+                                "GB"
+                            ],
+                            "DeletionProtectionEnabled": true
+                        },
+                        "output": {
+                            "NotifyConfigurationArn": "arn:aws:sms-voice:us-east-1:111122223333:notify-configuration/nc-1234567890abcdef0",
+                            "NotifyConfigurationId": "nc-1234567890abcdef0",
+                            "DisplayName": "MyOTPConfig",
+                            "UseCase": "CODE_VERIFICATION",
+                            "EnabledChannels": [
+                                "SMS",
+                                "VOICE"
+                            ],
+                            "EnabledCountries": [
+                                "US",
+                                "CA",
+                                "GB"
+                            ],
+                            "Tier": "BASIC",
+                            "TierUpgradeStatus": "BASIC",
+                            "Status": "ACTIVE",
+                            "DeletionProtectionEnabled": true,
+                            "CreatedTimestamp": 1704067200
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#UpdateNotifyConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "NotifyConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the notify configuration to update. The NotifyConfigurationId can be found using the <a>DescribeNotifyConfigurations</a> operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultTemplateId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "The template ID to set as the default, or the special value\nUNSET_DEFAULT_TEMPLATE to clear the current default template."
+                    }
+                },
+                "PoolId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyPoolIdOrUnset",
+                    "traits": {
+                        "smithy.api#documentation": "The pool ID or ARN to associate, or the special value\nUNSET_DEFAULT_POOL_FOR_NOTIFY to clear the current default pool."
+                    }
+                },
+                "EnabledCountries": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of two-character ISO country codes, in ISO 3166-1 alpha-2 format, that are enabled for the notify configuration.</p>"
+                    }
+                },
+                "EnabledChannels": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyEnabledChannelsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of channels to enable for the notify configuration. Supported values include <code>SMS</code> and <code>VOICE</code>.</p>"
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When set to true the notify configuration can't be deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#UpdateNotifyConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "NotifyConfigurationArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotifyConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name associated with the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationUseCase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case for the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultTemplateId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyTemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The default template identifier associated with the notify configuration.</p>"
+                    }
+                },
+                "PoolId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the pool associated with the notify configuration.</p>"
+                    }
+                },
+                "EnabledCountries": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCodeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of two-character ISO country codes, in ISO 3166-1 alpha-2 format, that are enabled for the notify configuration.</p>"
+                    }
+                },
+                "EnabledChannels": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyEnabledChannelsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of channels enabled for the notify configuration. Supported values include <code>SMS</code> and <code>VOICE</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tier": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationTier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier of the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TierUpgradeStatus": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TierUpgradeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tier upgrade status of the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NotifyConfigurationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the notify configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RejectionReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason the notify configuration was rejected, if applicable.</p>"
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true deletion protection is enabled. By default this is set to false. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the notify configuration was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -14230,6 +17586,167 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#UpdateRcsAgent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#UpdateRcsAgentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#UpdateRcsAgentResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the configuration of an existing RCS agent. You can update the opt-out list, deletion protection, two-way messaging settings, and self-managed opt-outs configuration.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#UpdateRcsAgentRequest": {
+            "type": "structure",
+            "members": {
+                "RcsAgentId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the RCS agent to update. You can use either the RcsAgentId or RcsAgentArn.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>By default this is set to false. When set to true the RCS agent can't be deleted.</p>"
+                    }
+                },
+                "OptOutListName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OptOutList to associate with the RCS agent. Valid values are either OptOutListName or OptOutListArn.</p>"
+                    }
+                },
+                "SelfManagedOptOutsEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>By default this is set to false. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.</p>"
+                    }
+                },
+                "TwoWayChannelArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TwoWayChannelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the two way channel.</p>"
+                    }
+                },
+                "TwoWayChannelRole": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional IAM Role Arn for a service to assume, to be able to post inbound SMS messages.</p>"
+                    }
+                },
+                "TwoWayEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>By default this is set to false. When set to true you can receive incoming text messages from your end recipients.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#UpdateRcsAgentResult": {
+            "type": "structure",
+            "members": {
+                "RcsAgentArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the updated RCS agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RcsAgentId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the RCS agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#RcsAgentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the RCS agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the RCS agent was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true deletion protection is enabled. By default this is set to false.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OptOutListName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#OptOutListName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the OptOutList associated with the RCS agent.</p>"
+                    }
+                },
+                "SelfManagedOptOutsEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>By default this is set to false. When set to true you're responsible for responding to HELP and STOP requests. You're also responsible for tracking and honoring opt-out requests.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TwoWayChannelArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TwoWayChannelArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the two way channel.</p>"
+                    }
+                },
+                "TwoWayChannelRole": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#IamRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional IAM Role Arn for a service to assume, to be able to post inbound SMS messages.</p>"
+                    }
+                },
+                "TwoWayEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>By default this is set to false. When set to true you can receive incoming text messages from your end recipients.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#UpdateSenderId": {
             "type": "operation",
             "input": {
@@ -14417,8 +17934,16 @@
                         "name": "CANNOT_PARSE"
                     },
                     {
+                        "value": "CHANNEL_NOT_ENABLED",
+                        "name": "CHANNEL_NOT_ENABLED"
+                    },
+                    {
                         "value": "COUNTRY_CODE_MISMATCH",
                         "name": "COUNTRY_CODE_MISMATCH"
+                    },
+                    {
+                        "value": "COUNTRY_NOT_ENABLED",
+                        "name": "COUNTRY_NOT_ENABLED"
                     },
                     {
                         "value": "DESTINATION_COUNTRY_BLOCKED",
@@ -14621,6 +18146,10 @@
                     {
                         "value": "VERIFIED",
                         "name": "VERIFIED"
+                    },
+                    {
+                        "value": "UNSUPPORTED",
+                        "name": "UNSUPPORTED"
                     }
                 ]
             }
@@ -14661,10 +18190,15 @@
         "com.amazonaws.pinpointsmsvoicev2#VerifiedDestinationNumberFilterName": {
             "type": "string",
             "traits": {
+                "smithy.api#documentation": "<p>The filter name for filtering verified destination numbers. The available filter names are:</p> <ul> <li> <p> <code>status</code>: Filter by verification status.</p> </li> <li> <p> <code>rcs-agent-id</code>: Filter by the RCS agent identifier.</p> </li> </ul>",
                 "smithy.api#enum": [
                     {
                         "value": "status",
                         "name": "STATUS"
+                    },
+                    {
+                        "value": "rcs-agent-id",
+                        "name": "RCS_AGENT_ID"
                     }
                 ]
             }
@@ -14719,6 +18253,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the verified destination phone number.</p> <ul> <li> <p> <code>PENDING</code>: The phone number hasn't been verified yet.</p> </li> <li> <p> <code>VERIFIED</code>: The phone number is verified and can receive messages.</p> </li> </ul>",
                         "smithy.api#required": {}
+                    }
+                },
+                "RcsAgentId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the RCS agent associated with the verified destination number.</p>"
                     }
                 },
                 "CreatedTimestamp": {
@@ -15077,6 +18617,18 @@
                         "name": "ZHIYU"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#VoiceIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#VoiceId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 60
+                }
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#VoiceMessageBody": {

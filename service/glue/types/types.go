@@ -46,7 +46,8 @@ type Action struct {
 	// Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the
 	// jobs will throw an exception.
 	//
-	// When the value is left blank, the timeout is defaulted to 2880 minutes.
+	// When the value is left blank, the timeout is defaulted to 2,880 minutes for
+	// Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.
 	//
 	// Any existing Glue jobs that had a timeout value greater than 7 days will be
 	// defaulted to 7 days. For instance if you have specified a timeout of 20 days for
@@ -3514,6 +3515,11 @@ type DataQualityEvaluationRunAdditionalRunOptions struct {
 	// Set the evaluation method for composite rules in the ruleset to ROW/COLUMN
 	CompositeRuleEvaluationMethod DQCompositeRuleEvaluationMethod
 
+	// A custom prefix for the CloudWatch log group names. When specified, evaluation
+	// run logs are written to /error and /output instead of the default
+	// /aws-glue/data-quality/error and /aws-glue/data-quality/output log groups.
+	CustomLogGroupPrefix *string
+
 	// Prefix for Amazon S3 to store results.
 	ResultsS3Prefix *string
 
@@ -3783,6 +3789,9 @@ type DataQualityRulesetEvaluationRunFilter struct {
 	//
 	// This member is required.
 	DataSource *DataSource
+
+	// Filter results by the name of the ruleset.
+	RulesetName *string
 
 	// Filter results by runs that started after this time.
 	StartedAfter *time.Time
@@ -6408,7 +6417,7 @@ type Job struct {
 	// For more information about the available Glue versions and corresponding Spark
 	// and Python versions, see [Glue version]in the developer guide.
 	//
-	// Jobs that are created without specifying a Glue version default to Glue 0.9.
+	// Jobs that are created without specifying a Glue version default to Glue 5.1.
 	//
 	// [Glue version]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	GlueVersion *string
@@ -6510,7 +6519,8 @@ type Job struct {
 	// Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the
 	// jobs will throw an exception.
 	//
-	// When the value is left blank, the timeout is defaulted to 2880 minutes.
+	// When the value is left blank, the timeout is defaulted to 2,880 minutes for
+	// Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.
 	//
 	// Any existing Glue jobs that had a timeout value greater than 7 days will be
 	// defaulted to 7 days. For instance if you have specified a timeout of 20 days for
@@ -6717,7 +6727,7 @@ type JobRun struct {
 	// For more information about the available Glue versions and corresponding Spark
 	// and Python versions, see [Glue version]in the developer guide.
 	//
-	// Jobs that are created without specifying a Glue version default to Glue 0.9.
+	// Jobs that are created without specifying a Glue version default to Glue 5.1.
 	//
 	// [Glue version]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	GlueVersion *string
@@ -6834,7 +6844,8 @@ type JobRun struct {
 	// Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the
 	// jobs will throw an exception.
 	//
-	// When the value is left blank, the timeout is defaulted to 2880 minutes.
+	// When the value is left blank, the timeout is defaulted to 2,880 minutes for
+	// Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.
 	//
 	// Any existing Glue jobs that had a timeout value greater than 7 days will be
 	// defaulted to 7 days. For instance if you have specified a timeout of 20 days for
@@ -6969,7 +6980,8 @@ type JobUpdate struct {
 	// For more information about the available Glue versions and corresponding Spark
 	// and Python versions, see [Glue version]in the developer guide.
 	//
-	// Jobs that are created without specifying a Glue version default to Glue 0.9.
+	// If not provided in the update request, the Glue version retains the value from
+	// the existing job definition.
 	//
 	// [Glue version]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	GlueVersion *string
@@ -7063,7 +7075,8 @@ type JobUpdate struct {
 	// Jobs must have timeout values less than 7 days or 10080 minutes. Otherwise, the
 	// jobs will throw an exception.
 	//
-	// When the value is left blank, the timeout is defaulted to 2880 minutes.
+	// When the value is left blank, the timeout is defaulted to 2,880 minutes for
+	// Glue version 4.0 and earlier, or 480 minutes for Glue version 5.0 and later.
 	//
 	// Any existing Glue jobs that had a timeout value greater than 7 days will be
 	// defaulted to 7 days. For instance if you have specified a timeout of 20 days for

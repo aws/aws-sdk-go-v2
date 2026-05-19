@@ -68,7 +68,9 @@ import (
 // Cross-account use: Yes. The source KMS key and destination KMS key can be in
 // different Amazon Web Services accounts. Either or both KMS keys can be in a
 // different account than the caller. To specify a KMS key in a different account,
-// you must use its key ARN or alias ARN.
+// use the [key ARN]or [alias ARN]. A short [key ID] is also acceptable for the source key when decrypting
+// symmetric ciphertexts, though using a full key ARN is recommended to be more
+// explicit about the intended KMS key.
 //
 // Required permissions:
 //
@@ -97,16 +99,19 @@ import (
 // Eventual consistency: The KMS API follows an eventual consistency model. For
 // more information, see [KMS eventual consistency].
 //
-// [Amazon Web Services Encryption SDK]: https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/
-// [Key states of KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+// [key ID]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-id
 // [asymmetric KMS key]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
 // [key policy]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
 // [Amazon S3 client-side encryption]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html
-// [kms:ReEncryptTo]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+// [alias ARN]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-alias-ARN
 // [encryption context]: https://docs.aws.amazon.com/kms/latest/developerguide/encrypt_context.html
 // [manually rotate]: https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys-manually.html
 // [kms:ReEncryptFrom]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
 // [KMS eventual consistency]: https://docs.aws.amazon.com/kms/latest/developerguide/accessing-kms.html#programming-eventual-consistency
+// [Amazon Web Services Encryption SDK]: https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/
+// [key ARN]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN
+// [Key states of KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+// [kms:ReEncryptTo]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
 func (c *Client) ReEncrypt(ctx context.Context, params *ReEncryptInput, optFns ...func(*Options)) (*ReEncryptOutput, error) {
 	if params == nil {
 		params = &ReEncryptInput{}
@@ -260,7 +265,7 @@ type ReEncryptInput struct {
 	//
 	// To specify a KMS key, use its key ID, key ARN, alias name, or alias ARN. When
 	// using an alias name, prefix it with "alias/" . To specify a KMS key in a
-	// different Amazon Web Services account, you must use the key ARN or alias ARN.
+	// different Amazon Web Services account, you should use the key ARN or alias ARN.
 	//
 	// For example:
 	//
@@ -350,7 +355,7 @@ func (c *Client) addOperationReEncryptMiddlewares(stack *middleware.Stack, optio
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -372,9 +377,6 @@ func (c *Client) addOperationReEncryptMiddlewares(stack *middleware.Stack, optio
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -27,6 +27,7 @@ func (c *Client) ListQueues(ctx context.Context, params *ListQueuesInput, optFns
 	return out, nil
 }
 
+// Shared pagination fields for List operation inputs (nextToken + maxResults).
 type ListQueuesInput struct {
 
 	// The farm ID of the queue.
@@ -56,6 +57,7 @@ type ListQueuesInput struct {
 	noSmithyDocumentSerde
 }
 
+// Shared pagination field for List operation outputs (nextToken).
 type ListQueuesOutput struct {
 
 	// The queues on the list.
@@ -111,7 +113,7 @@ func (c *Client) addOperationListQueuesMiddlewares(stack *middleware.Stack, opti
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -133,9 +135,6 @@ func (c *Client) addOperationListQueuesMiddlewares(stack *middleware.Stack, opti
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

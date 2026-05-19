@@ -8462,6 +8462,35 @@ func awsRestjson1_serializeDocumentMediaConnectFlowRouterOutputConfiguration(v *
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMediaLiveChannelRouterInputConfiguration(v *types.MediaLiveChannelRouterInputConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MediaLiveChannelArn != nil {
+		ok := object.Key("mediaLiveChannelArn")
+		ok.String(*v.MediaLiveChannelArn)
+	}
+
+	if v.MediaLiveChannelOutputName != nil {
+		ok := object.Key("mediaLiveChannelOutputName")
+		ok.String(*v.MediaLiveChannelOutputName)
+	}
+
+	if len(v.MediaLivePipelineId) > 0 {
+		ok := object.Key("mediaLivePipelineId")
+		ok.String(string(v.MediaLivePipelineId))
+	}
+
+	if v.SourceTransitDecryption != nil {
+		ok := object.Key("sourceTransitDecryption")
+		if err := awsRestjson1_serializeDocumentMediaLiveTransitEncryption(v.SourceTransitDecryption, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMediaLiveInputRouterOutputConfiguration(v *types.MediaLiveInputRouterOutputConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8883,6 +8912,12 @@ func awsRestjson1_serializeDocumentRouterInputConfiguration(v types.RouterInputC
 	case *types.RouterInputConfigurationMemberMediaConnectFlow:
 		av := object.Key("mediaConnectFlow")
 		if err := awsRestjson1_serializeDocumentMediaConnectFlowRouterInputConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RouterInputConfigurationMemberMediaLiveChannel:
+		av := object.Key("mediaLiveChannel")
+		if err := awsRestjson1_serializeDocumentMediaLiveChannelRouterInputConfiguration(&uv.Value, av); err != nil {
 			return err
 		}
 

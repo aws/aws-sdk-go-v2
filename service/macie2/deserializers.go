@@ -20555,6 +20555,15 @@ func awsRestjson1_deserializeDocumentS3Destination(v **types.S3Destination, valu
 				sv.BucketName = ptr.String(jtv)
 			}
 
+		case "expectedBucketOwner":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.ExpectedBucketOwner = ptr.String(jtv)
+			}
+
 		case "keyPrefix":
 			if value != nil {
 				jtv, ok := value.(string)

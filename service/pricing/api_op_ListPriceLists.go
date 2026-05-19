@@ -55,12 +55,12 @@ type ListPriceListsInput struct {
 	// This member is required.
 	EffectiveDate *time.Time
 
-	// The service code or the Savings Plan service code for the attributes that you
+	// The service code or the Savings Plans service code for the attributes that you
 	// want to retrieve. For example, to get the list of applicable Amazon EC2 price
 	// lists, use AmazonEC2 . For a full list of service codes containing On-Demand and
 	// Reserved Instance (RI) pricing, use the [DescribeServices]API.
 	//
-	// To retrieve the Reserved Instance and Compute Savings Plan price lists, use
+	// To retrieve the Reserved Instance and Compute Savings Plans price lists, use
 	// ComputeSavingsPlans .
 	//
 	// To retrieve Machine Learning Savings Plans price lists, use
@@ -137,7 +137,7 @@ func (c *Client) addOperationListPriceListsMiddlewares(stack *middleware.Stack, 
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -159,9 +159,6 @@ func (c *Client) addOperationListPriceListsMiddlewares(stack *middleware.Stack, 
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

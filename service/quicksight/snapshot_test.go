@@ -926,6 +926,18 @@ func TestCheckSnapshot_DescribeAssetBundleImportJob(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeAutomationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAutomationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeAutomationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeBrand(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeBrand(context.Background(), nil, func(o *Options) {
@@ -2167,6 +2179,18 @@ func TestCheckSnapshot_StartAssetBundleImportJob(t *testing.T) {
 	_, err := svc.StartAssetBundleImportJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "StartAssetBundleImportJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_StartAutomationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAutomationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "StartAutomationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -3685,6 +3709,18 @@ func TestUpdateSnapshot_DescribeAssetBundleImportJob(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeAutomationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeAutomationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeAutomationJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeBrand(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeBrand(context.Background(), nil, func(o *Options) {
@@ -4926,6 +4962,18 @@ func TestUpdateSnapshot_StartAssetBundleImportJob(t *testing.T) {
 	_, err := svc.StartAssetBundleImportJob(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "StartAssetBundleImportJob")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_StartAutomationJob(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.StartAutomationJob(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "StartAutomationJob")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

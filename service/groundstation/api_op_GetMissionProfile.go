@@ -27,6 +27,7 @@ func (c *Client) GetMissionProfile(ctx context.Context, params *GetMissionProfil
 	return out, nil
 }
 
+// Input for the GetMissionProfile operation.
 type GetMissionProfileInput struct {
 
 	// UUID of a mission profile.
@@ -37,13 +38,14 @@ type GetMissionProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+// Output for the GetMissionProfile operation.
 type GetMissionProfileOutput struct {
 
-	// Amount of time after a contact ends that you’d like to receive a CloudWatch
+	// Amount of time after a contact ends that you'd like to receive a CloudWatch
 	// event indicating the pass has finished.
 	ContactPostPassDurationSeconds *int32
 
-	// Amount of time prior to contact start you’d like to receive a CloudWatch event
+	// Amount of time prior to contact start you'd like to receive a CloudWatch event
 	// indicating an upcoming pass.
 	ContactPrePassDurationSeconds *int32
 
@@ -51,7 +53,7 @@ type GetMissionProfileOutput struct {
 	// a to Config .
 	DataflowEdges [][]string
 
-	// Smallest amount of time in seconds that you’d like to see for an available
+	// Smallest amount of time in seconds that you'd like to see for an available
 	// contact. AWS Ground Station will not present you with contacts shorter than this
 	// duration.
 	MinimumViableContactDurationSeconds *int32
@@ -123,7 +125,7 @@ func (c *Client) addOperationGetMissionProfileMiddlewares(stack *middleware.Stac
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -145,9 +147,6 @@ func (c *Client) addOperationGetMissionProfileMiddlewares(stack *middleware.Stac
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

@@ -103,8 +103,10 @@ type StartMatchBackfillInput struct {
 	// This member is required.
 	Players []types.Player
 
-	// A unique identifier for the game session. Use the game session ID. When using
-	// FlexMatch as a standalone matchmaking solution, this parameter is not needed.
+	// An identifier for the game session that is unique across all regions. The value
+	// is always a full ARN in the following format: arn:aws:gamelift:::gamesession// .
+	// When using FlexMatch as a standalone matchmaking solution, this parameter is not
+	// needed.
 	GameSessionArn *string
 
 	// A unique identifier for a matchmaking ticket. If no ticket ID is specified
@@ -132,11 +134,11 @@ func (c *Client) addOperationStartMatchBackfillMiddlewares(stack *middleware.Sta
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpStartMatchBackfill{}, middleware.After)
+	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpStartMatchBackfill{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpStartMatchBackfill{}, middleware.After)
+	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpStartMatchBackfill{}, middleware.After)
 	if err != nil {
 		return err
 	}
@@ -162,7 +164,7 @@ func (c *Client) addOperationStartMatchBackfillMiddlewares(stack *middleware.Sta
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -186,10 +188,10 @@ func (c *Client) addOperationStartMatchBackfillMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
+	if err = addUserAgentRetryMode(stack, options); err != nil {
 		return err
 	}
-	if err = addUserAgentRetryMode(stack, options); err != nil {
+	if err = addUserAgentFeatureProtocolRPCV2CBOR(stack, options); err != nil {
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {

@@ -57,8 +57,8 @@ type ClinicalNoteGenerationSettingsResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Input configuration for creating a Pulse web application. Used only in
-// CreateDomain operation input.
+// Input configuration for creating a web application. Used only in CreateDomain
+// operation input.
 type CreateWebAppConfiguration struct {
 
 	// ARN of the IAM role used for EHR operations.

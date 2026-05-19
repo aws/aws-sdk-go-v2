@@ -12,9 +12,9 @@ import (
 	"time"
 )
 
-// Gets historical metric data from the specified Amazon Connect instance.
+// Gets historical metric data from the specified Connect Customer instance.
 //
-// For a description of each historical metric, see [Metrics definitions] in the Amazon Connect
+// For a description of each historical metric, see [Metrics definitions] in the Connect Customer
 // Administrator Guide.
 //
 // We recommend using the [GetMetricDataV2] API. It provides more flexibility, features, and the
@@ -69,7 +69,7 @@ type GetMetricDataInput struct {
 
 	// The metrics to retrieve. Specify the name, unit, and statistic for each metric.
 	// The following historical metrics are available. For a description of each
-	// metric, see [Metrics definition]in the Amazon Connect Administrator Guide.
+	// metric, see [Metrics definition]in the Connect Customer Administrator Guide.
 	//
 	// This API does not support a contacts incoming metric (there's no
 	// CONTACTS_INCOMING metric missing from the documented list).
@@ -257,8 +257,8 @@ type GetMetricDataInput struct {
 	// This member is required.
 	HistoricalMetrics []types.HistoricalMetric
 
-	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
-	// Name (ARN) of the instance.
+	// The identifier of the Connect Customer instance. You can [find the instance ID] in the Amazon
+	// Resource Name (ARN) of the instance.
 	//
 	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
@@ -349,7 +349,7 @@ func (c *Client) addOperationGetMetricDataMiddlewares(stack *middleware.Stack, o
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -371,9 +371,6 @@ func (c *Client) addOperationGetMetricDataMiddlewares(stack *middleware.Stack, o
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

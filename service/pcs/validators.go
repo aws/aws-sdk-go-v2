@@ -457,6 +457,41 @@ func validateAccountingRequest(v *types.AccountingRequest) error {
 	}
 }
 
+func validateCgroupCustomSetting(v *types.CgroupCustomSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CgroupCustomSetting"}
+	if v.ParameterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParameterName"))
+	}
+	if v.ParameterValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParameterValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCgroupCustomSettings(v []types.CgroupCustomSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CgroupCustomSettings"}
+	for i := range v {
+		if err := validateCgroupCustomSetting(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateClusterSlurmConfigurationRequest(v *types.ClusterSlurmConfigurationRequest) error {
 	if v == nil {
 		return nil
@@ -465,6 +500,16 @@ func validateClusterSlurmConfigurationRequest(v *types.ClusterSlurmConfiguration
 	if v.SlurmCustomSettings != nil {
 		if err := validateSlurmCustomSettings(v.SlurmCustomSettings); err != nil {
 			invalidParams.AddNested("SlurmCustomSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SlurmdbdCustomSettings != nil {
+		if err := validateSlurmdbdCustomSettings(v.SlurmdbdCustomSettings); err != nil {
+			invalidParams.AddNested("SlurmdbdCustomSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CgroupCustomSettings != nil {
+		if err := validateCgroupCustomSettings(v.CgroupCustomSettings); err != nil {
+			invalidParams.AddNested("CgroupCustomSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Accounting != nil {
@@ -601,6 +646,41 @@ func validateSlurmCustomSettings(v []types.SlurmCustomSetting) error {
 	}
 }
 
+func validateSlurmdbdCustomSetting(v *types.SlurmdbdCustomSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SlurmdbdCustomSetting"}
+	if v.ParameterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParameterName"))
+	}
+	if v.ParameterValue == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ParameterValue"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSlurmdbdCustomSettings(v []types.SlurmdbdCustomSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SlurmdbdCustomSettings"}
+	for i := range v {
+		if err := validateSlurmdbdCustomSetting(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSlurmRestRequest(v *types.SlurmRestRequest) error {
 	if v == nil {
 		return nil
@@ -624,6 +704,16 @@ func validateUpdateClusterSlurmConfigurationRequest(v *types.UpdateClusterSlurmC
 	if v.SlurmCustomSettings != nil {
 		if err := validateSlurmCustomSettings(v.SlurmCustomSettings); err != nil {
 			invalidParams.AddNested("SlurmCustomSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SlurmdbdCustomSettings != nil {
+		if err := validateSlurmdbdCustomSettings(v.SlurmdbdCustomSettings); err != nil {
+			invalidParams.AddNested("SlurmdbdCustomSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CgroupCustomSettings != nil {
+		if err := validateCgroupCustomSettings(v.CgroupCustomSettings); err != nil {
+			invalidParams.AddNested("CgroupCustomSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

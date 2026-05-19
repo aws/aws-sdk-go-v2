@@ -14,6 +14,8 @@ import (
 // type, use the DeleteSlotTypeoperation.
 //
 // This operation requires permissions for the lex:DeleteSlotTypeVersion action.
+//
+// Deprecated: Amazon Lex V1 is deprecated. Use Amazon Lex V2 instead.
 func (c *Client) DeleteSlotTypeVersion(ctx context.Context, params *DeleteSlotTypeVersionInput, optFns ...func(*Options)) (*DeleteSlotTypeVersionOutput, error) {
 	if params == nil {
 		params = &DeleteSlotTypeVersionInput{}
@@ -86,7 +88,7 @@ func (c *Client) addOperationDeleteSlotTypeVersionMiddlewares(stack *middleware.
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -108,9 +110,6 @@ func (c *Client) addOperationDeleteSlotTypeVersionMiddlewares(stack *middleware.
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

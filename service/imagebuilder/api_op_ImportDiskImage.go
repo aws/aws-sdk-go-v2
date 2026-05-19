@@ -85,8 +85,14 @@ type ImportDiskImageInput struct {
 	// Define logging configuration for the image build process.
 	LoggingConfiguration *types.ImageLoggingConfiguration
 
+	// Configures Secure Boot and UEFI settings for the imported image.
+	RegisterImageOptions *types.RegisterImageOptions
+
 	// Tags that are attached to image resources created from the import.
 	Tags map[string]string
+
+	// Specifies Windows settings for ISO imports.
+	WindowsConfiguration *types.WindowsConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -140,7 +146,7 @@ func (c *Client) addOperationImportDiskImageMiddlewares(stack *middleware.Stack,
 	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetry(stack, options); err != nil {
+	if err = addRetry(stack, options, c); err != nil {
 		return err
 	}
 	if err = addRawResponseToMetadata(stack); err != nil {
@@ -162,9 +168,6 @@ func (c *Client) addOperationImportDiskImageMiddlewares(stack *middleware.Stack,
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
-		return err
-	}
-	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = addUserAgentRetryMode(stack, options); err != nil {

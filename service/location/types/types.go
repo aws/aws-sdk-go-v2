@@ -14,10 +14,14 @@ type AndroidApp struct {
 	// 20 byte SHA-1 certificate fingerprint associated with the Android app signing
 	// certificate.
 	//
+	// Example: BB:0D:AC:74:D3:21:E1:43:67:71:9B:62:91:AF:A1:66:6E:44:5D:75
+	//
 	// This member is required.
 	CertificateFingerprint *string
 
-	// Unique package name for an Android app.
+	// Unique package name identifier for an Android app.
+	//
+	// Example: com.mydomain.appname
 	//
 	// This member is required.
 	Package *string
@@ -176,8 +180,10 @@ type ApiKeyRestrictions struct {
 // Consists of an Apple Bundle ID.
 type AppleApp struct {
 
-	// The unique identifier of the app across all Apple platforms (iOS, macOS, tvOS,
-	// watchOS, etc.)
+	// The unique identifier of the app across all Apple platforms (iOS, macOS, tvOS
+	// and watchOS).
+	//
+	// Example: com.mydomain.appname
 	//
 	// This member is required.
 	BundleId *string
@@ -882,6 +888,82 @@ type InferredState struct {
 	noSmithyDocumentSerde
 }
 
+// Additional options for configuring job action parameters.
+type JobActionOptions struct {
+
+	// Options specific to address validation jobs.
+	ValidateAddress *ValidateAddressActionOptions
+
+	noSmithyDocumentSerde
+}
+
+// Error information for failed jobs.
+type JobError struct {
+
+	// Error code indicating the type of error that occurred.
+	//
+	// This member is required.
+	Code JobErrorCode
+
+	// Error messages providing details about the failure.
+	Messages []string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for input data location and format.
+//
+// Input files have a limitation of 10gb per file, and 1gb per Parquet row-group
+// within the file.
+type JobInputOptions struct {
+
+	// Input data format. Currently only Parquet is supported.
+	//
+	// Input files have a limitation of 10gb per file, and 1gb per Parquet row-group
+	// within the file.
+	//
+	// This member is required.
+	Format JobInputFormat
+
+	// S3 ARN or URI where input files are stored.
+	//
+	// The Amazon S3 bucket must be created in the same Amazon Web Services region
+	// where you plan to run your job.
+	//
+	// This member is required.
+	Location *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration for output data location and format.
+type JobOutputOptions struct {
+
+	// Output data format. Currently only "Parquet" is supported.
+	//
+	// This member is required.
+	Format JobOutputFormat
+
+	// S3 ARN or URI where output files will be written.
+	//
+	// The Amazon S3 bucket must exist in the same Amazon Web Services region where
+	// you plan to run your job.
+	//
+	// This member is required.
+	Location *string
+
+	noSmithyDocumentSerde
+}
+
+// Criteria for filtering jobs.
+type JobsFilter struct {
+
+	// Filter by job status.
+	JobStatus JobStatus
+
+	noSmithyDocumentSerde
+}
+
 // Contains the calculated route's details for each path between a pair of
 // positions. The number of legs returned corresponds to one fewer than the total
 // number of positions in the request.
@@ -1097,6 +1179,76 @@ type ListGeofenceResponseEntry struct {
 	//
 	// Format: "key" : "value"
 	GeofenceProperties map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Job summary information returned in list operations.
+type ListJobsResponseEntry struct {
+
+	// Action performed by the job.
+	//
+	// This member is required.
+	Action JobAction
+
+	// Job creation time in [ISO 8601] format: YYYY-MM-DDThh:mm:ss.sss .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// IAM role used for job execution.
+	//
+	// This member is required.
+	ExecutionRoleArn *string
+
+	// Input configuration.
+	//
+	// This member is required.
+	InputOptions *JobInputOptions
+
+	// Amazon Resource Name (ARN) of the job.
+	//
+	// This member is required.
+	JobArn *string
+
+	// Unique job identifier.
+	//
+	// This member is required.
+	JobId *string
+
+	// Output configuration.
+	//
+	// This member is required.
+	OutputOptions *JobOutputOptions
+
+	// Current job status.
+	//
+	// This member is required.
+	Status JobStatus
+
+	// Last update time in [ISO 8601] format: YYYY-MM-DDThh:mm:ss.sss .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// Additional options for configuring job action parameters.
+	ActionOptions *JobActionOptions
+
+	// Job completion time in [ISO 8601] format: YYYY-MM-DDThh:mm:ss.sss . Only returned for jobs
+	// in a terminal status: Completed | Failed | Cancelled .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
+	EndedAt *time.Time
+
+	// Error information if the job failed.
+	Error *JobError
+
+	// Job name (if provided during creation).
+	Name *string
 
 	noSmithyDocumentSerde
 }
@@ -2125,6 +2277,22 @@ type TruckWeight struct {
 	//
 	// Default Value: Kilograms
 	Unit VehicleWeightUnit
+
+	noSmithyDocumentSerde
+}
+
+// Options specific to address validation jobs.
+type ValidateAddressActionOptions struct {
+
+	// A list of optional additional parameters that can be requested for each result.
+	//
+	// Values:
+	//
+	//   - Position - Return the position coordinates of the address if available.
+	//
+	//   - CountrySpecificAttributes - Return additional information about the address
+	//   specific to the country of origin.
+	AdditionalFeatures []ValidateAddressAdditionalFeature
 
 	noSmithyDocumentSerde
 }
