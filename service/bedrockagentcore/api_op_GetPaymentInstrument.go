@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a payment instrument by ID
+// Get a payment instrument by ID.
 func (c *Client) GetPaymentInstrument(ctx context.Context, params *GetPaymentInstrumentInput, optFns ...func(*Options)) (*GetPaymentInstrumentOutput, error) {
 	if params == nil {
 		params = &GetPaymentInstrumentInput{}
@@ -27,7 +27,7 @@ func (c *Client) GetPaymentInstrument(ctx context.Context, params *GetPaymentIns
 	return out, nil
 }
 
-// Request structure for getting a payment instrument
+// Request structure for getting a payment instrument.
 type GetPaymentInstrumentInput struct {
 
 	// The ID of the payment instrument to retrieve.
@@ -52,10 +52,10 @@ type GetPaymentInstrumentInput struct {
 	noSmithyDocumentSerde
 }
 
-// Response structure for getting a payment instrument
+// Response structure for getting a payment instrument.
 type GetPaymentInstrumentOutput struct {
 
-	// Represents a payment instrument
+	// The payment instrument details.
 	//
 	// This member is required.
 	PaymentInstrument *types.PaymentInstrument

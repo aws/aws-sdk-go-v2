@@ -681,6 +681,11 @@ const (
 	IndicatorTypeCryptominingDomain   IndicatorType = "CRYPTOMINING_DOMAIN"
 	IndicatorTypeCryptominingProcess  IndicatorType = "CRYPTOMINING_PROCESS"
 	IndicatorTypeMaliciousFile        IndicatorType = "MALICIOUS_FILE"
+	IndicatorTypeVulnerability        IndicatorType = "VULNERABILITY"
+	IndicatorTypeMaliciousPackage     IndicatorType = "MALICIOUS_PACKAGE"
+	IndicatorTypeMisconfiguration     IndicatorType = "MISCONFIGURATION"
+	IndicatorTypeReachability         IndicatorType = "REACHABILITY"
+	IndicatorTypeSensitiveData        IndicatorType = "SENSITIVE_DATA"
 )
 
 // Values returns all known values for IndicatorType. Note that this can be
@@ -706,6 +711,11 @@ func (IndicatorType) Values() []IndicatorType {
 		"CRYPTOMINING_DOMAIN",
 		"CRYPTOMINING_PROCESS",
 		"MALICIOUS_FILE",
+		"VULNERABILITY",
+		"MALICIOUS_PACKAGE",
+		"MISCONFIGURATION",
+		"REACHABILITY",
+		"SENSITIVE_DATA",
 	}
 }
 

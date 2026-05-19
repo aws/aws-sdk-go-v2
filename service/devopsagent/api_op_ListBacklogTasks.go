@@ -37,15 +37,11 @@ type ListBacklogTasksInput struct {
 	// This member is required.
 	AgentSpaceId *string
 
-	// Filter criteria to apply when listing tasks
-	//
-	// Filtering restrictions:
-	//
-	//   - Each filter field list is limited to a single value
-	//   - Filtering by Priority and Status at the same time when not filtering by
-	//   Type is not permitted
-	//   - Timestamp filters (createdAfter, createdBefore) can be combined with other
-	//   filters when not sorting by priority
+	// Filter criteria to apply when listing tasks Filtering restrictions: - Each
+	// filter field list is limited to a single value - Filtering by Priority and
+	// Status at the same time when not filtering by Type is not permitted - Timestamp
+	// filters (createdAfter, createdBefore) can be combined with other filters when
+	// not sorting by priority
 	Filter *types.TaskFilter
 
 	// Maximum number of tasks to return in a single response (1-1000, default: 100)
@@ -57,14 +53,9 @@ type ListBacklogTasksInput struct {
 	// Sort order for the tasks based on sortField (default: DESC)
 	Order types.TaskSortOrder
 
-	// Field to sort by
-	//
-	// Sorting restrictions:
-	//
-	//   - Only sorting on createdAt is supported when using priority or status
-	//   filters alone.
-	//   - Sorting by priority is not supported when using Timestamp filters
-	//   (createdAfter, createdBefore)
+	// Field to sort by Sorting restrictions: - Only sorting on createdAt is supported
+	// when using priority or status filters alone. - Sorting by priority is not
+	// supported when using Timestamp filters (createdAfter, createdBefore)
 	SortField types.TaskSortField
 
 	noSmithyDocumentSerde

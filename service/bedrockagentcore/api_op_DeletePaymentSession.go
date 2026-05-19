@@ -11,25 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a payment manager session
-//
-// Permanently removes a payment session record from the database. This is a hard
-// delete operation that removes the session completely.
-//
-// Deleting a non-existent or already-deleted session returns
-// ResourceNotFoundException (404).
-//
-// Authorization: The caller must own the session (accountId, userId, and
-// paymentManagerId must match). If authorization fails, a 403 Forbidden error is
-// returned.
-//
-// Errors:
-//
-//   - ResourceNotFoundException: The session does not exist or has already been
-//     deleted
-//   - AccessDeniedException: The caller is not authorized to delete this session
-//   - ValidationException: Required fields are missing or invalid
-//   - InternalServerException: An unexpected server error occurred
+// Deletes a payment session. This permanently removes the payment session record.
 func (c *Client) DeletePaymentSession(ctx context.Context, params *DeletePaymentSessionInput, optFns ...func(*Options)) (*DeletePaymentSessionOutput, error) {
 	if params == nil {
 		params = &DeletePaymentSessionInput{}
@@ -45,10 +27,7 @@ func (c *Client) DeletePaymentSession(ctx context.Context, params *DeletePayment
 	return out, nil
 }
 
-// Request structure for deleting a payment session
-//
-// All fields are required and must match the session owner's identifiers for
-// authorization to succeed.
+// Request structure for deleting a payment session.
 type DeletePaymentSessionInput struct {
 
 	// The payment manager ARN. Must match the session's paymentManagerArn.
@@ -67,9 +46,7 @@ type DeletePaymentSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Response structure for deleting a payment session
-//
-// Returns the deletion status with HTTP 200 status code on successful deletion.
+// Response structure for deleting a payment session.
 type DeletePaymentSessionOutput struct {
 
 	// The status of the deletion. Always DELETED for successful hard delete.

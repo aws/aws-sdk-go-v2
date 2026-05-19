@@ -510,6 +510,10 @@ type WorkspaceDescription struct {
 	// organizational units the workspace can access.
 	AccountAccessType AccountAccessType
 
+	// If the workspace is in the DEGRADED status, this field describes the reason the
+	// workspace is degraded.
+	DegradedWorkspaceReason *string
+
 	// The user-defined description of the workspace.
 	Description *string
 

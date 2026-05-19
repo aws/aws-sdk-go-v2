@@ -9491,6 +9491,16 @@ loop:
 			uv = &types.AdditionalServiceDetailsMemberMcpservernewrelic{Value: mv}
 			break loop
 
+		case "mcpserversigv4":
+			var mv types.RegisteredMCPServerSigV4Details
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentRegisteredMCPServerSigV4Details(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.AdditionalServiceDetailsMemberMcpserversigv4{Value: mv}
+			break loop
+
 		case "mcpserversplunk":
 			var mv types.RegisteredMCPServerDetails
 			destAddr := &mv
@@ -10279,6 +10289,42 @@ func awsRestjson1_deserializeDocumentContentSizeExceededException(v **types.Cont
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentCustomHeaders(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected CustomHeaderValue to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -11753,6 +11799,42 @@ func awsRestjson1_deserializeDocumentMCPServerNewRelicConfiguration(v **types.MC
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMCPServerSigV4Configuration(v **types.MCPServerSigV4Configuration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MCPServerSigV4Configuration
+	if *v == nil {
+		sv = &types.MCPServerSigV4Configuration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "tools":
+			if err := awsRestjson1_deserializeDocumentMCPToolsList(&sv.Tools, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMCPServerSplunkConfiguration(v **types.MCPServerSplunkConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12332,6 +12414,32 @@ func awsRestjson1_deserializeDocumentRecommendation(v **types.Recommendation, va
 				sv.Priority = types.RecommendationPriority(jtv)
 			}
 
+		case "rankedAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BackLogTimestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.RankedAt = ptr.Time(t)
+			}
+
+		case "rankPosition":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.RankPosition = ptr.Int32(int32(i64))
+			}
+
 		case "recommendationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12906,6 +13014,96 @@ func awsRestjson1_deserializeDocumentRegisteredMCPServerDetails(v **types.Regist
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRegisteredMCPServerSigV4Details(v **types.RegisteredMCPServerSigV4Details, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RegisteredMCPServerSigV4Details
+	if *v == nil {
+		sv = &types.RegisteredMCPServerSigV4Details{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "customHeaders":
+			if err := awsRestjson1_deserializeDocumentCustomHeaders(&sv.CustomHeaders, value); err != nil {
+				return err
+			}
+
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "endpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Endpoint = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SigV4Region to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		case "roleArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
+				}
+				sv.RoleArn = ptr.String(jtv)
+			}
+
+		case "service":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Service = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRegisteredNewRelicDetails(v **types.RegisteredNewRelicDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13377,6 +13575,16 @@ loop:
 			}
 			mv = *destAddr
 			uv = &types.ServiceConfigurationMemberMcpservernewrelic{Value: mv}
+			break loop
+
+		case "mcpserversigv4":
+			var mv types.MCPServerSigV4Configuration
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentMCPServerSigV4Configuration(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ServiceConfigurationMemberMcpserversigv4{Value: mv}
 			break loop
 
 		case "mcpserversplunk":

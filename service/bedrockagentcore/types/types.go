@@ -180,10 +180,10 @@ type AgentTracesConfigMemberSessionSpans struct {
 
 func (*AgentTracesConfigMemberSessionSpans) isAgentTracesConfig() {}
 
-// Money amount with currency
+// Represents a monetary amount with a currency.
 type Amount struct {
 
-	// The currency code for this amount.
+	// The currency code for the amount.
 	//
 	// This member is required.
 	Currency Currency
@@ -228,10 +228,10 @@ type AutomationStreamUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// Available session limits. Currently only budget is supported.
+// The available spending limits for a payment session.
 type AvailableLimits struct {
 
-	// The available spend amount for this session.
+	// The remaining available amount that can be spent.
 	AvailableSpendAmount *Amount
 
 	// The timestamp when the available limits were last updated.
@@ -261,7 +261,7 @@ type BasicAuth struct {
 	noSmithyDocumentSerde
 }
 
-// Summary representation for list responses
+// Summary representation for list responses.
 type BatchEvaluationSummary struct {
 
 	// The Amazon Resource Name (ARN) of the batch evaluation.
@@ -743,7 +743,7 @@ type CloudWatchLogsTraceConfig struct {
 	noSmithyDocumentSerde
 }
 
-// CloudWatch Logs destination for batch evaluation results
+// CloudWatch Logs destination for batch evaluation results.
 type CloudWatchOutputConfig struct {
 
 	// The name of the CloudWatch log group where evaluation results will be written.
@@ -850,7 +850,7 @@ type CodeInterpreterStreamOutputMemberResult struct {
 
 func (*CodeInterpreterStreamOutputMemberResult) isCodeInterpreterStreamOutput() {}
 
-// Coinbase CDP token request parameters
+// Coinbase CDP token request parameters.
 type CoinbaseCdpTokenRequestInput struct {
 
 	// The HTTP method for the payment API request.
@@ -863,27 +863,27 @@ type CoinbaseCdpTokenRequestInput struct {
 	// This member is required.
 	RequestPath *string
 
-	// Set to true for wallet write operations (requires walletSecret configured)
+	// Set to true for wallet write operations (requires walletSecret configured).
 	IncludeWalletAuthToken bool
 
-	// Request body JSON - used to generate wallet auth JWT
+	// Request body JSON — used to generate wallet auth JWT.
 	RequestBody *string
 
-	// Optional - defaults to "api.cdp.coinbase.com"
+	// The host for the payment API request. Defaults to "api.cdp.coinbase.com".
 	RequestHost *string
 
 	noSmithyDocumentSerde
 }
 
-// Coinbase CDP token response
+// Coinbase CDP token response.
 type CoinbaseCdpTokenResponseOutput struct {
 
-	// Bearer Token for Authorization header
+	// Bearer Token for Authorization header.
 	//
 	// This member is required.
 	BearerToken *string
 
-	// Wallet Auth Token for X-Wallet-Auth header
+	// Wallet Auth Token for X-Wallet-Auth header.
 	WalletAuthToken *string
 
 	noSmithyDocumentSerde
@@ -1092,15 +1092,15 @@ type Conversational struct {
 	noSmithyDocumentSerde
 }
 
-// X402 payment requirement input
+// The input for a crypto X402 payment.
 type CryptoX402PaymentInput struct {
 
-	// This can hold any JSON-like object
+	// The X402 payment payload.
 	//
 	// This member is required.
 	Payload document.Interface
 
-	// The X402 protocol version (e.g., "v1", "v2")
+	// The version of the X402 protocol.
 	//
 	// This member is required.
 	Version *string
@@ -1108,15 +1108,15 @@ type CryptoX402PaymentInput struct {
 	noSmithyDocumentSerde
 }
 
-// X402 payment requirement output
+// The output from a crypto X402 payment.
 type CryptoX402PaymentOutput struct {
 
-	// This can hold any JSON-like object
+	// The X402 payment response payload.
 	//
 	// This member is required.
 	Payload document.Interface
 
-	// The X402 protocol version (e.g., "1", "2")
+	// The version of the X402 protocol.
 	//
 	// This member is required.
 	Version *string
@@ -1133,7 +1133,7 @@ type CustomDescriptor struct {
 	noSmithyDocumentSerde
 }
 
-// Where to pull session spans from
+// Configuration for the data source used in evaluation.
 //
 // The following types satisfy this interface:
 //
@@ -1175,25 +1175,23 @@ type Descriptors struct {
 	noSmithyDocumentSerde
 }
 
-// Embedded Crypto wallet instrument details
+// Embedded crypto wallet instrument details.
 type EmbeddedCryptoWallet struct {
 
-	// List of linkedAccounts linked to this wallet. Each linkedAccount represents a
-	// way the end user can authenticate to this wallet. Can be empty when adding a new
-	// linkedAccount to an existing wallet.
+	// List of linked accounts linked to this wallet. Each represents a way the end
+	// user can authenticate to this wallet.
 	//
 	// This member is required.
 	LinkedAccounts []LinkedAccount
 
 	// The blockchain network for this embedded crypto wallet. Supported networks:
-	// ETHEREUM, SOLANA
+	// ETHEREUM, SOLANA.
 	//
 	// This member is required.
 	Network CryptoWalletNetwork
 
-	// URL for the end user to complete a provider-specific action (e.g., wallet
-	// linking, onboarding). Returned by the payment connector during instrument
-	// creation.
+	// URL for the end user to complete a provider-specific action such as wallet
+	// linking or onboarding.
 	RedirectUrl *string
 
 	// The wallet address on the specified blockchain network.
@@ -1443,7 +1441,7 @@ type EvaluationTargetMemberTraceIds struct {
 
 func (*EvaluationTargetMemberTraceIds) isEvaluationTarget() {}
 
-// An evaluator to run against sessions
+// An evaluator to run against sessions.
 type Evaluator struct {
 
 	// The unique identifier of the evaluator. Can reference built-in evaluators
@@ -1738,7 +1736,7 @@ type GatewayFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Where to pull ground truth from
+// Where to pull ground truth from.
 //
 // The following types satisfy this interface:
 //
@@ -2608,7 +2606,7 @@ type HarnessToolUseBlockStart struct {
 // per-turn expected responses.
 type InlineGroundTruth struct {
 
-	// assertions for evaluation, reuses common model EvaluationContentList
+	// Assertions for evaluation, reuses common model EvaluationContentList.
 	Assertions []EvaluationContent
 
 	// expectedTrajectory for evaluation, reuses common model
@@ -2842,9 +2840,8 @@ type LeftExpressionMemberMetadataKey struct {
 
 func (*LeftExpressionMemberMetadataKey) isLeftExpression() {}
 
-// Represents different linkedAccounts that can be linked to an embedded wallet.
-// This union supports multiple linkedAccount approaches: email, SMS, JWT, and
-// OAuth2.
+// Represents different linked accounts that can be linked to an embedded wallet.
+// Supports email, SMS, JWT, and OAuth2 approaches.
 //
 // The following types satisfy this interface:
 //
@@ -2856,7 +2853,7 @@ type LinkedAccount interface {
 	isLinkedAccount()
 }
 
-// Developer JWT linkedAccount with key ID and subject
+// Developer JWT linked account with key ID and subject.
 type LinkedAccountMemberDeveloperJwt struct {
 	Value LinkedAccountDeveloperJwt
 
@@ -2865,7 +2862,7 @@ type LinkedAccountMemberDeveloperJwt struct {
 
 func (*LinkedAccountMemberDeveloperJwt) isLinkedAccount() {}
 
-// Email-based linkedAccount
+// Email-based linked account.
 type LinkedAccountMemberEmail struct {
 	Value LinkedAccountEmail
 
@@ -2874,7 +2871,7 @@ type LinkedAccountMemberEmail struct {
 
 func (*LinkedAccountMemberEmail) isLinkedAccount() {}
 
-// OAuth2 provider linkedAccount (Google, Apple, X, Telegram, GitHub)
+// OAuth2 provider linked account (Google, Apple, X, Telegram, GitHub).
 type LinkedAccountMemberOAuth2 struct {
 	Value LinkedAccountOAuth2
 
@@ -2883,7 +2880,7 @@ type LinkedAccountMemberOAuth2 struct {
 
 func (*LinkedAccountMemberOAuth2) isLinkedAccount() {}
 
-// SMS-based linkedAccount using phone number
+// SMS-based linked account using phone number.
 type LinkedAccountMemberSms struct {
 	Value LinkedAccountSms
 
@@ -2910,10 +2907,10 @@ type LinkedAccountDeveloperJwt struct {
 	noSmithyDocumentSerde
 }
 
-// LinkedAccount using an email address.
+// Linked account using an email address.
 type LinkedAccountEmail struct {
 
-	// The email address used for linkedAccount. Must be a valid email format.
+	// The email address used for the linked account. Must be a valid email format.
 	//
 	// This member is required.
 	EmailAddress *string
@@ -2935,7 +2932,7 @@ type LinkedAccountOAuth2 interface {
 	isLinkedAccountOAuth2()
 }
 
-// Apple OAuth2 authentication
+// Apple OAuth2 authentication.
 type LinkedAccountOAuth2MemberApple struct {
 	Value OAuth2Authentication
 
@@ -2944,7 +2941,7 @@ type LinkedAccountOAuth2MemberApple struct {
 
 func (*LinkedAccountOAuth2MemberApple) isLinkedAccountOAuth2() {}
 
-// GitHub OAuth2 authentication
+// GitHub OAuth2 authentication.
 type LinkedAccountOAuth2MemberGithub struct {
 	Value OAuth2Authentication
 
@@ -2953,7 +2950,7 @@ type LinkedAccountOAuth2MemberGithub struct {
 
 func (*LinkedAccountOAuth2MemberGithub) isLinkedAccountOAuth2() {}
 
-// Google OAuth2 authentication
+// Google OAuth2 authentication.
 type LinkedAccountOAuth2MemberGoogle struct {
 	Value OAuth2Authentication
 
@@ -2962,7 +2959,7 @@ type LinkedAccountOAuth2MemberGoogle struct {
 
 func (*LinkedAccountOAuth2MemberGoogle) isLinkedAccountOAuth2() {}
 
-// Telegram OAuth2 authentication
+// Telegram OAuth2 authentication.
 type LinkedAccountOAuth2MemberTelegram struct {
 	Value OAuth2Authentication
 
@@ -2971,7 +2968,7 @@ type LinkedAccountOAuth2MemberTelegram struct {
 
 func (*LinkedAccountOAuth2MemberTelegram) isLinkedAccountOAuth2() {}
 
-// X (formerly Twitter) OAuth2 authentication
+// X (formerly Twitter) OAuth2 authentication.
 type LinkedAccountOAuth2MemberX struct {
 	Value OAuth2Authentication
 
@@ -2980,11 +2977,10 @@ type LinkedAccountOAuth2MemberX struct {
 
 func (*LinkedAccountOAuth2MemberX) isLinkedAccountOAuth2() {}
 
-// LinkedAccount using a phone number in E.164 format.
+// Linked account using a phone number in E.164 format.
 type LinkedAccountSms struct {
 
-	// The phone number in E.164 format (e.g., +1234567890). Must be a valid E.164
-	// formatted phone number starting with + and containing 1-15 digits.
+	// The phone number in E.164 format (e.g., +1234567890).
 	//
 	// This member is required.
 	PhoneNumber *string
@@ -3499,8 +3495,7 @@ type MouseScrollResult struct {
 	noSmithyDocumentSerde
 }
 
-// OAuth2 authentication information for third-party providers. Supports Google,
-// Apple, X, Telegram, and GitHub providers.
+// OAuth2 authentication information for third-party providers.
 type OAuth2Authentication struct {
 
 	// The subject (sub) claim from the OAuth2 provider. Uniquely identifies the user
@@ -3509,13 +3504,13 @@ type OAuth2Authentication struct {
 	// This member is required.
 	Sub *string
 
-	// The email address from the OAuth2 provider (optional).
+	// The email address from the OAuth2 provider.
 	EmailAddress *string
 
-	// The user's name from the OAuth2 provider (optional).
+	// The user's name from the OAuth2 provider.
 	Name *string
 
-	// The username from the OAuth2 provider (optional).
+	// The username from the OAuth2 provider.
 	Username *string
 
 	noSmithyDocumentSerde
@@ -3547,7 +3542,7 @@ type OAuthCredentialProvider struct {
 	noSmithyDocumentSerde
 }
 
-// Output destination configuration
+// Output destination configuration.
 //
 // The following types satisfy this interface:
 //
@@ -3593,7 +3588,7 @@ type PayloadTypeMemberConversational struct {
 
 func (*PayloadTypeMemberConversational) isPayloadType() {}
 
-// Payment request details union
+// The payment input details, which vary by payment type.
 //
 // The following types satisfy this interface:
 //
@@ -3602,7 +3597,7 @@ type PaymentInput interface {
 	isPaymentInput()
 }
 
-// X402 payment requirement input
+// Input for a crypto X402 payment.
 type PaymentInputMemberCryptoX402 struct {
 	Value CryptoX402PaymentInput
 
@@ -3611,7 +3606,7 @@ type PaymentInputMemberCryptoX402 struct {
 
 func (*PaymentInputMemberCryptoX402) isPaymentInput() {}
 
-// Represents a payment instrument
+// Represents a payment instrument.
 type PaymentInstrument struct {
 
 	// The timestamp when this payment instrument was created.
@@ -3662,7 +3657,7 @@ type PaymentInstrument struct {
 	noSmithyDocumentSerde
 }
 
-// Details specific to the instrument type
+// Details specific to the instrument type.
 //
 // The following types satisfy this interface:
 //
@@ -3671,7 +3666,7 @@ type PaymentInstrumentDetails interface {
 	isPaymentInstrumentDetails()
 }
 
-// Embedded crypto wallet managed directly by end user
+// Embedded crypto wallet managed directly by end user.
 type PaymentInstrumentDetailsMemberEmbeddedCryptoWallet struct {
 	Value EmbeddedCryptoWallet
 
@@ -3680,7 +3675,7 @@ type PaymentInstrumentDetailsMemberEmbeddedCryptoWallet struct {
 
 func (*PaymentInstrumentDetailsMemberEmbeddedCryptoWallet) isPaymentInstrumentDetails() {}
 
-// Summary of a payment instrument for list operations
+// Summary of a payment instrument for list operations.
 type PaymentInstrumentSummary struct {
 
 	// The timestamp when this payment instrument was created.
@@ -3726,8 +3721,7 @@ type PaymentInstrumentSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Payment response payload union. We will support versioning by introducing other
-// model in this union
+// The payment output details, which vary by payment type.
 //
 // The following types satisfy this interface:
 //
@@ -3736,7 +3730,7 @@ type PaymentOutput interface {
 	isPaymentOutput()
 }
 
-// X402 payment requirement output
+// Output from a crypto X402 payment.
 type PaymentOutputMemberCryptoX402 struct {
 	Value CryptoX402PaymentOutput
 
@@ -3745,10 +3739,10 @@ type PaymentOutputMemberCryptoX402 struct {
 
 func (*PaymentOutputMemberCryptoX402) isPaymentOutput() {}
 
-// Payment manager session
+// A payment session for managing payment transactions.
 type PaymentSession struct {
 
-	// The timestamp when this payment session was created.
+	// The timestamp when the session was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
@@ -3763,34 +3757,34 @@ type PaymentSession struct {
 	// This member is required.
 	PaymentManagerArn *string
 
-	// The unique identifier for this payment session.
+	// The unique identifier of the payment session.
 	//
 	// This member is required.
 	PaymentSessionId *string
 
-	// The timestamp when this payment session was last updated.
+	// The timestamp when the session was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The user ID associated with this payment session.
+	// The user ID associated with this session.
 	//
 	// This member is required.
 	UserId *string
 
-	// The available limits for this session after accounting for processed payments.
+	// The current available spending limits.
 	AvailableLimits *AvailableLimits
 
-	// The spending limits for this session.
+	// The spending limits for the payment session.
 	Limits *SessionLimits
 
 	noSmithyDocumentSerde
 }
 
-// Summary of a payment session for list operations
+// Summary information about a payment session.
 type PaymentSessionSummary struct {
 
-	// The timestamp when this payment session was created.
+	// The timestamp when the session was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
@@ -3805,17 +3799,17 @@ type PaymentSessionSummary struct {
 	// This member is required.
 	PaymentManagerArn *string
 
-	// The unique identifier for this payment session.
+	// The unique identifier of the payment session.
 	//
 	// This member is required.
 	PaymentSessionId *string
 
-	// The timestamp when this payment session was last updated.
+	// The timestamp when the session was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The user ID associated with this payment session.
+	// The user ID associated with this session.
 	//
 	// This member is required.
 	UserId *string
@@ -3823,7 +3817,7 @@ type PaymentSessionSummary struct {
 	noSmithyDocumentSerde
 }
 
-// VENDOR-SPECIFIC TOKEN REQUEST CONFIGURATION - Input
+// Vendor-specific token request configuration.
 //
 // The following types satisfy this interface:
 //
@@ -3833,7 +3827,7 @@ type PaymentTokenRequestInput interface {
 	isPaymentTokenRequestInput()
 }
 
-// Coinbase CDP token request parameters
+// The Coinbase CDP token request.
 type PaymentTokenRequestInputMemberCoinbaseCdpTokenRequest struct {
 	Value CoinbaseCdpTokenRequestInput
 
@@ -3842,7 +3836,7 @@ type PaymentTokenRequestInputMemberCoinbaseCdpTokenRequest struct {
 
 func (*PaymentTokenRequestInputMemberCoinbaseCdpTokenRequest) isPaymentTokenRequestInput() {}
 
-// StripePrivy token request parameters
+// The Stripe Privy token request.
 type PaymentTokenRequestInputMemberStripePrivyTokenRequest struct {
 	Value StripePrivyTokenRequestInput
 
@@ -3851,7 +3845,7 @@ type PaymentTokenRequestInputMemberStripePrivyTokenRequest struct {
 
 func (*PaymentTokenRequestInputMemberStripePrivyTokenRequest) isPaymentTokenRequestInput() {}
 
-// VENDOR-SPECIFIC TOKEN RESPONSE CONFIGURATION - Output
+// Vendor-specific token response configuration.
 //
 // The following types satisfy this interface:
 //
@@ -3861,7 +3855,7 @@ type PaymentTokenResponseOutput interface {
 	isPaymentTokenResponseOutput()
 }
 
-// Coinbase CDP token response
+// The Coinbase CDP token response.
 type PaymentTokenResponseOutputMemberCoinbaseCdpTokenResponse struct {
 	Value CoinbaseCdpTokenResponseOutput
 
@@ -3870,8 +3864,7 @@ type PaymentTokenResponseOutputMemberCoinbaseCdpTokenResponse struct {
 
 func (*PaymentTokenResponseOutputMemberCoinbaseCdpTokenResponse) isPaymentTokenResponseOutput() {}
 
-// StripePrivy token response containing appId, basicAuthToken, and optionally
-// authorizationSignature
+// The Stripe Privy token response.
 type PaymentTokenResponseOutputMemberStripePrivyTokenResponse struct {
 	Value StripePrivyTokenResponseOutput
 
@@ -4366,10 +4359,10 @@ type SessionFilterConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Session spending limits
+// The spending limits configuration for a payment session.
 type SessionLimits struct {
 
-	// The maximum amount that can be spent in this session.
+	// The maximum amount that can be spent in the session.
 	//
 	// This member is required.
 	MaxSpendAmount *Amount
@@ -4487,10 +4480,10 @@ type StreamUpdateMemberAutomationStreamUpdate struct {
 
 func (*StreamUpdateMemberAutomationStreamUpdate) isStreamUpdate() {}
 
-// StripePrivy token request parameters
+// Stripe Privy token request parameters.
 type StripePrivyTokenRequestInput struct {
 
-	// Request body JSON for the Privy API call
+	// Request body JSON for the Privy API call.
 	//
 	// This member is required.
 	RequestBody *string
@@ -4500,35 +4493,34 @@ type StripePrivyTokenRequestInput struct {
 	// This member is required.
 	RequestPath *string
 
-	// Set to true to generate privy-authorization-signature
+	// Set to true to generate privy-authorization-signature.
 	IncludeAuthorizationSignature bool
 
-	// Optional - defaults to "api.privy.io"
+	// The host for the Privy API request. Defaults to "api.privy.io".
 	RequestHost *string
 
 	noSmithyDocumentSerde
 }
 
-// StripePrivy token response containing appId, basicAuthToken, and optionally
-// authorizationSignature
+// Stripe Privy token response containing appId, basicAuthToken, and optionally
+// authorizationSignature.
 type StripePrivyTokenResponseOutput struct {
 
-	// The Privy app ID for the privy-app-id header
+	// The Privy app ID for the privy-app-id header.
 	//
 	// This member is required.
 	AppId *string
 
-	// Base64-encoded Basic Auth token (appId:appSecret) for the Authorization header
+	// Base64-encoded Basic Auth token (appId:appSecret) for the Authorization header.
 	//
 	// This member is required.
 	BasicAuthToken *string
 
 	// Base64-encoded ECDSA P-256 authorization signature (only present when
-	// includeAuthorizationSignature is true)
+	// includeAuthorizationSignature is true).
 	AuthorizationSignature *string
 
-	// Unix timestamp in milliseconds when the authorization signature expires. Set as
-	// privy-request-expiry header.
+	// Unix timestamp in milliseconds when the authorization signature expires.
 	RequestExpiry *int64
 
 	noSmithyDocumentSerde
@@ -4635,7 +4627,7 @@ type TargetRef struct {
 	noSmithyDocumentSerde
 }
 
-// A single token balance entry
+// A single token balance entry.
 type TokenBalance struct {
 
 	// Raw balance in the smallest denomination (e.g., USDC base units where 1 USDC =

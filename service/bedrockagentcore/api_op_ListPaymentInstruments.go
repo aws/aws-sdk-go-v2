@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List payment instruments for a manager
+// List payment instruments for a manager.
 func (c *Client) ListPaymentInstruments(ctx context.Context, params *ListPaymentInstrumentsInput, optFns ...func(*Options)) (*ListPaymentInstrumentsOutput, error) {
 	if params == nil {
 		params = &ListPaymentInstrumentsInput{}
@@ -27,7 +27,7 @@ func (c *Client) ListPaymentInstruments(ctx context.Context, params *ListPayment
 	return out, nil
 }
 
-// Request structure for listing payment instruments
+// Request structure for listing payment instruments.
 type ListPaymentInstrumentsInput struct {
 
 	// The ARN of the payment manager that owns the payment instruments.
@@ -53,7 +53,7 @@ type ListPaymentInstrumentsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Response structure for listing payment instruments
+// Response structure for listing payment instruments.
 type ListPaymentInstrumentsOutput struct {
 
 	// List of payment instrument summaries matching the request criteria.

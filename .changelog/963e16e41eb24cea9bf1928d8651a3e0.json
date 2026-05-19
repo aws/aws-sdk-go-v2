@@ -1,0 +1,8 @@
+{
+    "id": "963e16e4-1eb2-4cea-9bf1-928d8651a3e0",
+    "type": "feature",
+    "description": "This release is to deprecate 'inboundLinksCount' field in GetResponderGateway response and introduce the new field 'linksRequestedCount' to replace it.",
+    "modules": [
+        "service/rtbfabric"
+    ]
+}

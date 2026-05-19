@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get the balance of a payment instrument
+// Get the balance of a payment instrument.
 func (c *Client) GetPaymentInstrumentBalance(ctx context.Context, params *GetPaymentInstrumentBalanceInput, optFns ...func(*Options)) (*GetPaymentInstrumentBalanceOutput, error) {
 	if params == nil {
 		params = &GetPaymentInstrumentBalanceInput{}
@@ -27,12 +27,11 @@ func (c *Client) GetPaymentInstrumentBalance(ctx context.Context, params *GetPay
 	return out, nil
 }
 
-// Request structure for getting payment instrument balance
+// Request structure for getting payment instrument balance.
 type GetPaymentInstrumentBalanceInput struct {
 
 	// The specific blockchain chain to query balance on. Required because balances
-	// are chain-specific — the same wallet address may hold different token balances
-	// on different chains.
+	// are chain-specific.
 	//
 	// This member is required.
 	Chain types.BlockchainChainId
@@ -52,8 +51,8 @@ type GetPaymentInstrumentBalanceInput struct {
 	// This member is required.
 	PaymentManagerArn *string
 
-	// The token to query balance for. Required to specify which supported token's
-	// balance to return.
+	// The token to query balance for. Only tokens supported for X402 payments are
+	// returned.
 	//
 	// This member is required.
 	Token types.InstrumentBalanceToken
@@ -67,7 +66,7 @@ type GetPaymentInstrumentBalanceInput struct {
 	noSmithyDocumentSerde
 }
 
-// Response structure for getting payment instrument balance
+// Response structure for getting payment instrument balance.
 type GetPaymentInstrumentBalanceOutput struct {
 
 	// The ID of the payment instrument.

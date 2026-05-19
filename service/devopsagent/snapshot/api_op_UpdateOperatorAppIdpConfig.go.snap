@@ -24,6 +24,7 @@ UpdateOperatorAppIdpConfig
 		GetIdentity
 		ResolveEndpointV2
 		disableHTTPS
+		EndpointHostPrefix
 		ComputePayloadHash
 		setLegacyContextSigningOptions
 		Signing

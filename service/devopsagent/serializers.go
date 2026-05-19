@@ -4031,6 +4031,17 @@ func awsRestjson1_serializeDocumentAzureDevOpsConfiguration(v *types.AzureDevOps
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCustomHeaders(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDatadogAuthorizationConfig(v types.DatadogAuthorizationConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4634,6 +4645,78 @@ func awsRestjson1_serializeDocumentMCPServerOAuthClientCredentialsConfig(v *type
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMCPServerSigV4AuthorizationConfig(v *types.MCPServerSigV4AuthorizationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomHeaders != nil {
+		ok := object.Key("customHeaders")
+		if err := awsRestjson1_serializeDocumentCustomHeaders(v.CustomHeaders, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Region != nil {
+		ok := object.Key("region")
+		ok.String(*v.Region)
+	}
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.Service != nil {
+		ok := object.Key("service")
+		ok.String(*v.Service)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMCPServerSigV4Configuration(v *types.MCPServerSigV4Configuration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Tools != nil {
+		ok := object.Key("tools")
+		if err := awsRestjson1_serializeDocumentMCPToolsList(v.Tools, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMCPServerSigV4ServiceDetails(v *types.MCPServerSigV4ServiceDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthorizationConfig != nil {
+		ok := object.Key("authorizationConfig")
+		if err := awsRestjson1_serializeDocumentMCPServerSigV4AuthorizationConfig(v.AuthorizationConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Endpoint != nil {
+		ok := object.Key("endpoint")
+		ok.String(*v.Endpoint)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMCPServerSplunkConfiguration(v *types.MCPServerSplunkConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5097,6 +5180,12 @@ func awsRestjson1_serializeDocumentServiceConfiguration(v types.ServiceConfigura
 			return err
 		}
 
+	case *types.ServiceConfigurationMemberMcpserversigv4:
+		av := object.Key("mcpserversigv4")
+		if err := awsRestjson1_serializeDocumentMCPServerSigV4Configuration(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ServiceConfigurationMemberMcpserversplunk:
 		av := object.Key("mcpserversplunk")
 		if err := awsRestjson1_serializeDocumentMCPServerSplunkConfiguration(&uv.Value, av); err != nil {
@@ -5184,6 +5273,12 @@ func awsRestjson1_serializeDocumentServiceDetails(v types.ServiceDetails, value 
 	case *types.ServiceDetailsMemberMcpservernewrelic:
 		av := object.Key("mcpservernewrelic")
 		if err := awsRestjson1_serializeDocumentNewRelicServiceDetails(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ServiceDetailsMemberMcpserversigv4:
+		av := object.Key("mcpserversigv4")
+		if err := awsRestjson1_serializeDocumentMCPServerSigV4ServiceDetails(&uv.Value, av); err != nil {
 			return err
 		}
 

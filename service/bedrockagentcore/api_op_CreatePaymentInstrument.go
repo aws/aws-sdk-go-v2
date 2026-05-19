@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new payment instrument for a connector
+// Create a new payment instrument for a connector.
 func (c *Client) CreatePaymentInstrument(ctx context.Context, params *CreatePaymentInstrumentInput, optFns ...func(*Options)) (*CreatePaymentInstrumentOutput, error) {
 	if params == nil {
 		params = &CreatePaymentInstrumentInput{}
@@ -27,7 +27,7 @@ func (c *Client) CreatePaymentInstrument(ctx context.Context, params *CreatePaym
 	return out, nil
 }
 
-// Request structure for creating a payment instrument
+// Request structure for creating a payment instrument.
 type CreatePaymentInstrumentInput struct {
 
 	// The ID of the payment connector to use for this instrument.
@@ -53,7 +53,8 @@ type CreatePaymentInstrumentInput struct {
 	// The agent name associated with this request, used for observability.
 	AgentName *string
 
-	// Idempotency token to ensure request uniqueness.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientToken *string
 
 	// The user ID associated with this payment instrument.
@@ -62,10 +63,10 @@ type CreatePaymentInstrumentInput struct {
 	noSmithyDocumentSerde
 }
 
-// Response structure for creating a payment instrument
+// Response structure for creating a payment instrument.
 type CreatePaymentInstrumentOutput struct {
 
-	// Represents a payment instrument
+	// The created payment instrument.
 	//
 	// This member is required.
 	PaymentInstrument *types.PaymentInstrument

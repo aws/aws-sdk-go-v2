@@ -1457,6 +1457,67 @@ func validateMCPServerOAuthClientCredentialsConfig(v *types.MCPServerOAuthClient
 	}
 }
 
+func validateMCPServerSigV4AuthorizationConfig(v *types.MCPServerSigV4AuthorizationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MCPServerSigV4AuthorizationConfig"}
+	if v.Region == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if v.Service == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Service"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMCPServerSigV4Configuration(v *types.MCPServerSigV4Configuration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MCPServerSigV4Configuration"}
+	if v.Tools == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tools"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMCPServerSigV4ServiceDetails(v *types.MCPServerSigV4ServiceDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MCPServerSigV4ServiceDetails"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Endpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if v.AuthorizationConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationConfig"))
+	} else if v.AuthorizationConfig != nil {
+		if err := validateMCPServerSigV4AuthorizationConfig(v.AuthorizationConfig); err != nil {
+			invalidParams.AddNested("AuthorizationConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateNewRelicApiKeyConfig(v *types.NewRelicApiKeyConfig) error {
 	if v == nil {
 		return nil
@@ -1731,6 +1792,11 @@ func validateServiceConfiguration(v types.ServiceConfiguration) error {
 			invalidParams.AddNested("[mcpservernewrelic]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ServiceConfigurationMemberMcpserversigv4:
+		if err := validateMCPServerSigV4Configuration(&uv.Value); err != nil {
+			invalidParams.AddNested("[mcpserversigv4]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ServiceConfigurationMemberPagerduty:
 		if err := validatePagerDutyConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[pagerduty]", err.(smithy.InvalidParamsError))
@@ -1793,6 +1859,11 @@ func validateServiceDetails(v types.ServiceDetails) error {
 	case *types.ServiceDetailsMemberMcpservernewrelic:
 		if err := validateNewRelicServiceDetails(&uv.Value); err != nil {
 			invalidParams.AddNested("[mcpservernewrelic]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ServiceDetailsMemberMcpserversigv4:
+		if err := validateMCPServerSigV4ServiceDetails(&uv.Value); err != nil {
+			invalidParams.AddNested("[mcpserversigv4]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ServiceDetailsMemberMcpserversplunk:

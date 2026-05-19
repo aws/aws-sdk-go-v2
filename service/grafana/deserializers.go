@@ -6549,6 +6549,15 @@ func awsRestjson1_deserializeDocumentWorkspaceDescription(v **types.WorkspaceDes
 				return err
 			}
 
+		case "degradedWorkspaceReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DegradedWorkspaceReason to be of type string, got %T instead", value)
+				}
+				sv.DegradedWorkspaceReason = ptr.String(jtv)
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)

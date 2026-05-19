@@ -11,31 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a payment instrument
-//
-// Marks a payment instrument as deleted by updating its status to DELETED. This
-// is a soft delete operation that preserves the record in the database for audit
-// and compliance purposes. The record remains queryable for audit purposes but is
-// excluded from normal list and get operations.
-//
-// Deleting an already-deleted or non-existent instrument returns
-// ResourceNotFoundException (404).
-//
-// Authorization: The caller must own the instrument (accountId, userId, and
-// paymentManagerId must match). If authorization fails, a 403 Forbidden error is
-// returned.
-//
-// Timestamp Management: The updatedAt timestamp is set to the current time, while
-// createdAt is preserved. The version field is incremented for optimistic locking.
-//
-// Errors:
-//
-//   - ResourceNotFoundException: The instrument does not exist or is already
-//     deleted
-//   - AccessDeniedException: The caller is not authorized to delete this
-//     instrument
-//   - ValidationException: Required fields are missing or invalid
-//   - InternalServerException: An unexpected server error occurred
+// Deletes a payment instrument. This is a soft delete operation that preserves
+// the record for audit and compliance purposes.
 func (c *Client) DeletePaymentInstrument(ctx context.Context, params *DeletePaymentInstrumentInput, optFns ...func(*Options)) (*DeletePaymentInstrumentOutput, error) {
 	if params == nil {
 		params = &DeletePaymentInstrumentInput{}
@@ -51,10 +28,7 @@ func (c *Client) DeletePaymentInstrument(ctx context.Context, params *DeletePaym
 	return out, nil
 }
 
-// Request structure for deleting a payment instrument
-//
-// All fields are required and must match the instrument owner's identifiers for
-// authorization to succeed.
+// Request structure for deleting a payment instrument.
 type DeletePaymentInstrumentInput struct {
 
 	// The payment connector ID. Must match the instrument's paymentConnectorId.
@@ -78,10 +52,7 @@ type DeletePaymentInstrumentInput struct {
 	noSmithyDocumentSerde
 }
 
-// Response structure for deleting a payment instrument
-//
-// Returns the deletion status with HTTP 200 OK status code on successful soft
-// deletion.
+// Response structure for deleting a payment instrument.
 type DeletePaymentInstrumentOutput struct {
 
 	// The status of the instrument after deletion. Always DELETED for successful soft

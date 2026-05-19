@@ -52,11 +52,13 @@ type ListMemoryRecordsInput struct {
 	MetadataFilters []types.MemoryMetadataFilterExpression
 
 	// The namespace prefix to filter memory records by. Returns all memory records in
-	// namespaces that start with the provided prefix.
+	// namespaces that start with the provided prefix. Either namespace or
+	// namespacePath is required.
 	Namespace *string
 
 	// Use namespacePath for hierarchical retrievals. Return all memory records where
-	// namespace falls under the same parent hierarchy.
+	// namespace falls under the same parent hierarchy. Either namespace or
+	// namespacePath is required.
 	NamespacePath *string
 
 	// The token for the next set of results. Use the value returned in the previous

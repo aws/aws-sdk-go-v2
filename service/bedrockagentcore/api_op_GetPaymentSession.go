@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a payment session
+// Get a payment session.
 func (c *Client) GetPaymentSession(ctx context.Context, params *GetPaymentSessionInput, optFns ...func(*Options)) (*GetPaymentSessionOutput, error) {
 	if params == nil {
 		params = &GetPaymentSessionInput{}
@@ -27,7 +27,7 @@ func (c *Client) GetPaymentSession(ctx context.Context, params *GetPaymentSessio
 	return out, nil
 }
 
-// Request structure for getting a payment session
+// Request structure for getting a payment session.
 type GetPaymentSessionInput struct {
 
 	// The ARN of the payment manager that owns this session.
@@ -49,10 +49,10 @@ type GetPaymentSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Response structure for getting a payment session
+// Response structure for getting a payment session.
 type GetPaymentSessionOutput struct {
 
-	// Payment manager session
+	// The payment session details.
 	//
 	// This member is required.
 	PaymentSession *types.PaymentSession

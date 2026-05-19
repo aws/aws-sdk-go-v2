@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new payment manager session
+// Create a new payment session.
 func (c *Client) CreatePaymentSession(ctx context.Context, params *CreatePaymentSessionInput, optFns ...func(*Options)) (*CreatePaymentSessionOutput, error) {
 	if params == nil {
 		params = &CreatePaymentSessionInput{}
@@ -27,7 +27,7 @@ func (c *Client) CreatePaymentSession(ctx context.Context, params *CreatePayment
 	return out, nil
 }
 
-// Request structure for creating a payment session
+// Request structure for creating a payment session.
 type CreatePaymentSessionInput struct {
 
 	// The session expiry time in minutes. Must be between 15 and 480 minutes.
@@ -43,7 +43,8 @@ type CreatePaymentSessionInput struct {
 	// The agent name associated with this request, used for observability.
 	AgentName *string
 
-	// Idempotency token to ensure request uniqueness.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientToken *string
 
 	// The spending limits for this payment session.
@@ -55,10 +56,10 @@ type CreatePaymentSessionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Response structure for creating a payment session
+// Response structure for creating a payment session.
 type CreatePaymentSessionOutput struct {
 
-	// Payment manager session
+	// The created payment session.
 	//
 	// This member is required.
 	PaymentSession *types.PaymentSession

@@ -30,19 +30,18 @@ func (c *Client) GetResourcePaymentToken(ctx context.Context, params *GetResourc
 
 type GetResourcePaymentTokenInput struct {
 
-	// Vendor-specific token request input Contains all request parameters in a
-	// type-safe, vendor-specific structure
+	// Vendor-specific token request input. Contains all request parameters in a
+	// type-safe, vendor-specific structure.
 	//
 	// This member is required.
 	PaymentTokenRequest types.PaymentTokenRequestInput
 
-	// Name of the payment credential provider to use
+	// Name of the payment credential provider to use.
 	//
 	// This member is required.
 	ResourceCredentialProviderName *string
 
-	// Workload access token for authorization. Named workloadIdentityToken for
-	// consistency with APIKey and OAuth2CredentialProvider.
+	// Workload access token for authorization.
 	//
 	// This member is required.
 	WorkloadIdentityToken *string
@@ -52,8 +51,8 @@ type GetResourcePaymentTokenInput struct {
 
 type GetResourcePaymentTokenOutput struct {
 
-	// Vendor-specific token response output Contains all response data in a
-	// type-safe, vendor-specific structure
+	// Vendor-specific token response output. Contains all response data in a
+	// type-safe, vendor-specific structure.
 	//
 	// This member is required.
 	PaymentTokenResponse types.PaymentTokenResponseOutput

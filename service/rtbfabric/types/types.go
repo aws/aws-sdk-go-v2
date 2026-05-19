@@ -245,7 +245,7 @@ type LinkLogSettings struct {
 	noSmithyDocumentSerde
 }
 
-// Summary of a routing rule for list responses
+// A summary of a link routing rule.
 type LinkRoutingRuleSummary struct {
 
 	// The conditions for the routing rule.
@@ -489,15 +489,17 @@ type OpenRtbAttributeModuleParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Key-value pair for query string matching
+// A key-value pair for query string matching in a routing rule condition.
 type QueryStringKeyValuePair struct {
 
-	// RFC 3986 unreserved characters
+	// The key of the query string parameter to match. Must contain only RFC 3986
+	// unreserved characters.
 	//
 	// This member is required.
 	Key *string
 
-	// RFC 3986 unreserved characters
+	// The value of the query string parameter to match. Must contain only RFC 3986
+	// unreserved characters.
 	//
 	// This member is required.
 	Value *string
@@ -538,28 +540,27 @@ type ResponderErrorMaskingForHttpCode struct {
 	noSmithyDocumentSerde
 }
 
-// Conditions bag for a routing rule. All non-null fields must match (AND logic).
-// At least one field must be set (enforced by CP).
+// The conditions for a routing rule. All specified fields must match for the rule
+// to apply (AND logic). At least one condition field must be set.
 type RuleCondition struct {
 
-	// Exact host match — RFC 3986 unreserved characters
+	// The exact host header value to match.
 	HostHeader *string
 
-	// Wildcard host pattern (e.g., *.example.com) — RFC 3986 unreserved plus *
+	// A wildcard pattern for host header matching (for example, *.example.com ).
 	HostHeaderWildcard *string
 
-	// Exact path match — must start with /; RFC 3986 unreserved plus /
+	// The exact path to match. Must start with / .
 	PathExact *string
 
-	// Path prefix matching — strict starts-with, no wildcard (preferred for new
-	// rules). Must start with /; RFC 3986 unreserved plus /
+	// The path prefix to match. The request path must start with this value. Must
+	// start with / .
 	PathPrefix *string
 
-	// Query string key=value pair match (single pair)
+	// A query string key-value pair that must be present and match exactly.
 	QueryStringEquals *QueryStringKeyValuePair
 
-	// Query string key presence check (any value accepted) — RFC 3986 unreserved
-	// characters
+	// A query string key that must be present in the request (any value is accepted).
 	QueryStringExists *string
 
 	noSmithyDocumentSerde

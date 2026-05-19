@@ -310,6 +310,8 @@ const (
 	WorkspaceStatusVersionUpdating WorkspaceStatus = "VERSION_UPDATING"
 	// Workspace version update failed.
 	WorkspaceStatusVersionUpdateFailed WorkspaceStatus = "VERSION_UPDATE_FAILED"
+	// Workspace is degraded.
+	WorkspaceStatusDegraded WorkspaceStatus = "DEGRADED"
 )
 
 // Values returns all known values for WorkspaceStatus. Note that this can be
@@ -331,5 +333,6 @@ func (WorkspaceStatus) Values() []WorkspaceStatus {
 		"LICENSE_REMOVAL_FAILED",
 		"VERSION_UPDATING",
 		"VERSION_UPDATE_FAILED",
+		"DEGRADED",
 	}
 }

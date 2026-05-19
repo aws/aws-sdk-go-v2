@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Process a payment transaction
+// Processes a payment using a payment instrument within a payment session.
 func (c *Client) ProcessPayment(ctx context.Context, params *ProcessPaymentInput, optFns ...func(*Options)) (*ProcessPaymentOutput, error) {
 	if params == nil {
 		params = &ProcessPaymentInput{}
@@ -28,7 +28,7 @@ func (c *Client) ProcessPayment(ctx context.Context, params *ProcessPaymentInput
 	return out, nil
 }
 
-// Request structure for processing a payment
+// Request structure for processing a payment.
 type ProcessPaymentInput struct {
 
 	// The payment input details specific to the payment type.
@@ -36,22 +36,22 @@ type ProcessPaymentInput struct {
 	// This member is required.
 	PaymentInput types.PaymentInput
 
-	// The ID of the payment instrument to use for this transaction.
+	// The ID of the payment instrument to use.
 	//
 	// This member is required.
 	PaymentInstrumentId *string
 
-	// The ARN of the payment manager handling this payment.
+	// The ARN of the payment manager.
 	//
 	// This member is required.
 	PaymentManagerArn *string
 
-	// The ID of the payment session for this transaction.
+	// The ID of the payment session.
 	//
 	// This member is required.
 	PaymentSessionId *string
 
-	// The type of payment being processed.
+	// The type of payment to process.
 	//
 	// This member is required.
 	PaymentType types.PaymentType
@@ -59,7 +59,8 @@ type ProcessPaymentInput struct {
 	// The agent name associated with this request, used for observability.
 	AgentName *string
 
-	// Idempotency token to ensure request uniqueness.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientToken *string
 
 	// The user ID associated with this payment.
@@ -68,7 +69,7 @@ type ProcessPaymentInput struct {
 	noSmithyDocumentSerde
 }
 
-// Response structure for processing a payment
+// Response structure for processing a payment.
 type ProcessPaymentOutput struct {
 
 	// The timestamp when the payment was created.
@@ -76,12 +77,12 @@ type ProcessPaymentOutput struct {
 	// This member is required.
 	CreatedAt *time.Time
 
-	// The ID of the payment instrument used for this transaction.
+	// The ID of the payment instrument used.
 	//
 	// This member is required.
 	PaymentInstrumentId *string
 
-	// The ARN of the payment manager that processed this payment.
+	// The ARN of the payment manager.
 	//
 	// This member is required.
 	PaymentManagerArn *string
@@ -91,22 +92,22 @@ type ProcessPaymentOutput struct {
 	// This member is required.
 	PaymentOutput types.PaymentOutput
 
-	// The ID of the payment session for this transaction.
+	// The ID of the payment session used.
 	//
 	// This member is required.
 	PaymentSessionId *string
 
-	// The type of payment that was processed.
+	// The type of payment processed.
 	//
 	// This member is required.
 	PaymentType types.PaymentType
 
-	// The unique ID of the processed payment transaction.
+	// The unique identifier of the processed payment.
 	//
 	// This member is required.
 	ProcessPaymentId *string
 
-	// The status of the payment transaction.
+	// The status of the payment.
 	//
 	// This member is required.
 	Status types.PaymentStatus

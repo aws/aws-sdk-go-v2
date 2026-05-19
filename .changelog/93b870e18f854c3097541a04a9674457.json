@@ -1,0 +1,8 @@
+{
+    "id": "93b870e1-8f85-4c30-9754-1a04a9674457",
+    "type": "feature",
+    "description": "Add support for ml.p5.4xlarge and ml.p5en.48xlarge instances on SageMaker Notebook Instances Platform.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}
