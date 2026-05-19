@@ -16,27 +16,30 @@ jobs:
 
     steps:
       - name: Checkout target
-        uses: actions/checkout@v2
+        uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2
         with:
           path: sdkbase
           ref: ${{ github.base_ref }}
+          persist-credentials: false
       - name: Checkout this ref
-        uses: actions/checkout@v2
+        uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2
         with:
           path: new-ref
           fetch-depth: 0
+          persist-credentials: false
       - name: Get Diff
         run: git --git-dir ./new-ref/.git diff --name-only --diff-filter=ACMRT ${{ github.event.pull_request.base.sha }} ${{ github.sha }} > refDiffFiles.txt
       - name: Get Target Files
         run: git --git-dir ./sdkbase/.git ls-files | grep -xf refDiffFiles.txt - > targetFiles.txt
       - name: Checkout scancode
-        uses: actions/checkout@v2
+        uses: actions/checkout@ee0669bd1cc54295c223e0bb666b733df41de1c5 # v2
         with:
           repository: nexB/scancode-toolkit
           path: scancode-toolkit
           fetch-depth: 1
+          persist-credentials: false
       - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@e9aba2c848f5ebd159c070c61ea2c4e2b122355e # v2
         with:
           python-version: ${{ matrix.python-version }}
       # ScanCode
