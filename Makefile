@@ -105,7 +105,7 @@ smithy-generate:
 	cd codegen && ./gradlew clean build -Plog-tests && ./gradlew clean
 
 smithy-generate-protocol-tests:
-	cd codegen && ./gradlew :protocol-test-codegen:build -Plog-tests && ./gradlew :protocol-test-codegen:clean
+	cd codegen && SMITHY_GO_BUILD_API= ./gradlew :protocol-test-codegen:build -Plog-tests && ./gradlew :protocol-test-codegen:clean
 
 # suffix-to-path pattern
 # Targets with pattern suffix -% convert the suffix to a path by:
