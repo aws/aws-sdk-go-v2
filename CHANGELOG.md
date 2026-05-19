@@ -1,3 +1,19 @@
+# Release (2026-05-19)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcore`: [v1.26.0](service/bedrockagentcore/CHANGELOG.md#v1260-2026-05-19)
+  * **Feature**: Add RetryableConflictException (HTTP 409) to InvokeAgentRuntime and StopRuntimeSession to prevent orphaned VMs during concurrent session access. The SDK automatically retries this exception with backoff. Enforcement is not yet active and will be enabled in a future service update.
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.4.0](service/devopsagent/CHANGELOG.md#v140-2026-05-19)
+  * **Feature**: Added a new serviceType mcpserversigv4 service and association. This provides feature to register MCP sigv4 authorization based MCPs
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.35.0](service/grafana/CHANGELOG.md#v1350-2026-05-19)
+  * **Feature**: Introduce degraded workspace status as a possible Amazon Managed Grafana workspace status, and a new field named degraded workspace reason which informs customers why the workspace is degraded in the DescribeWorkspace API response.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.76.0](service/guardduty/CHANGELOG.md#v1760-2026-05-19)
+  * **Feature**: Adding support for exposure and vulnerability context from AWS Security Hub in GuardDuty Extended Threat Detection attack sequence findings.
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.6.0](service/rtbfabric/CHANGELOG.md#v160-2026-05-19)
+  * **Feature**: This release is to deprecate 'inboundLinksCount' field in GetResponderGateway response and introduce the new field 'linksRequestedCount' to replace it.
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.248.0](service/sagemaker/CHANGELOG.md#v12480-2026-05-19)
+  * **Feature**: Add support for ml.p5.4xlarge and ml.p5en.48xlarge instances on SageMaker Notebook Instances Platform.
+
 # Release (2026-05-18)
 
 ## Module Highlights

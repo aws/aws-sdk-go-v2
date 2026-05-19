@@ -1,3 +1,7 @@
+# v1.76.0 (2026-05-19)
+
+* **Feature**: Adding support for exposure and vulnerability context from AWS Security Hub in GuardDuty Extended Threat Detection attack sequence findings.
+
 # v1.75.4 (2026-05-07)
 
 * **Documentation**: This is a documentation update

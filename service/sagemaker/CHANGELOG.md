@@ -1,3 +1,7 @@
+# v1.248.0 (2026-05-19)
+
+* **Feature**: Add support for ml.p5.4xlarge and ml.p5en.48xlarge instances on SageMaker Notebook Instances Platform.
+
 # v1.247.0 (2026-05-13)
 
 * **Feature**: Adds execution role session name mode to reflect user identity in Studio. Adds Flexible Training Plans on Studio apps. Adds restricted model packages to control access to proprietary model artifacts via IAM. Fixed instance type parity between inference endpoints and managed shadow tests.

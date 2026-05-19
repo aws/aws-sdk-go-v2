@@ -1,8 +1,0 @@
-{
-    "id": "2d95c730-7981-4716-bbcd-b67db7dfa35d",
-    "type": "feature",
-    "description": "Adding support for exposure and vulnerability context from AWS Security Hub in GuardDuty Extended Threat Detection attack sequence findings.",
-    "modules": [
-        "service/guardduty"
-    ]
-}

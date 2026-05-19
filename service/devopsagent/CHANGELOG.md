@@ -1,3 +1,7 @@
+# v1.4.0 (2026-05-19)
+
+* **Feature**: Added a new serviceType mcpserversigv4 service and association. This provides feature to register MCP sigv4 authorization based MCPs
+
 # v1.3.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

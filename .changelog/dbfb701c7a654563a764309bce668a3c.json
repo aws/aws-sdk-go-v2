@@ -1,8 +1,0 @@
-{
-    "id": "dbfb701c-7a65-4563-a764-309bce668a3c",
-    "type": "feature",
-    "description": "Added a new serviceType mcpserversigv4 service and association. This provides feature to register MCP sigv4 authorization based MCPs",
-    "modules": [
-        "service/devopsagent"
-    ]
-}

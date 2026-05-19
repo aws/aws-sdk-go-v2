@@ -1,3 +1,7 @@
+# v1.6.0 (2026-05-19)
+
+* **Feature**: This release is to deprecate 'inboundLinksCount' field in GetResponderGateway response and introduce the new field 'linksRequestedCount' to replace it.
+
 # v1.5.0 (2026-05-13)
 
 * **Feature**: Customers can now configure custom domain names for their RTB Fabric gateways. This enables partners to use their own branded domain for RTB traffic instead of the default rtbfabric endpoint
