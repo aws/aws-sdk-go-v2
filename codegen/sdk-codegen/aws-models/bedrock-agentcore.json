@@ -1090,20 +1090,20 @@
                 "value": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "The numeric value of the amount.",
+                        "smithy.api#documentation": "<p>The numeric value of the amount.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "currency": {
                     "target": "com.amazonaws.bedrockagentcore#Currency",
                     "traits": {
-                        "smithy.api#documentation": "The currency code for this amount.",
+                        "smithy.api#documentation": "<p>The currency code for the amount.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Money amount with currency"
+                "smithy.api#documentation": "<p>Represents a monetary amount with a currency.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#ApiKeyArn": {
@@ -1205,18 +1205,18 @@
                 "availableSpendAmount": {
                     "target": "com.amazonaws.bedrockagentcore#Amount",
                     "traits": {
-                        "smithy.api#documentation": "The available spend amount for this session."
+                        "smithy.api#documentation": "<p>The remaining available amount that can be spent.</p>"
                     }
                 },
                 "updatedAt": {
                     "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "The timestamp when the available limits were last updated."
+                        "smithy.api#documentation": "<p>The timestamp when the available limits were last updated.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Available session limits. Currently only budget is supported."
+                "smithy.api#documentation": "<p>The available spending limits for a payment session.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#BasicAuth": {
@@ -1561,7 +1561,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Summary representation for list responses"
+                "smithy.api#documentation": "<p>Summary representation for list responses.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#BatchEvaluationSummaryList": {
@@ -1657,41 +1657,41 @@
                 "BASE": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "Base Mainnet (EVM L2)",
+                        "smithy.api#documentation": "<p>Base Mainnet (EVM L2)</p>",
                         "smithy.api#enumValue": "BASE"
                     }
                 },
                 "BASE_SEPOLIA": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "Base Sepolia testnet (EVM L2)",
+                        "smithy.api#documentation": "<p>Base Sepolia testnet (EVM L2)</p>",
                         "smithy.api#enumValue": "BASE_SEPOLIA"
                     }
                 },
                 "ETHEREUM": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "Ethereum Mainnet (EVM L1)",
+                        "smithy.api#documentation": "<p>Ethereum Mainnet (EVM L1)</p>",
                         "smithy.api#enumValue": "ETHEREUM"
                     }
                 },
                 "SOLANA": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "Solana Mainnet",
+                        "smithy.api#documentation": "<p>Solana Mainnet</p>",
                         "smithy.api#enumValue": "SOLANA"
                     }
                 },
                 "SOLANA_DEVNET": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "Solana Devnet testnet",
+                        "smithy.api#documentation": "<p>Solana Devnet testnet</p>",
                         "smithy.api#enumValue": "SOLANA_DEVNET"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Supported blockchain chain identifiers for balance queries.\nEach value maps to a specific chain supported by the underlying providers (Privy, Coinbase)."
+                "smithy.api#documentation": "<p>Supported blockchain chain identifiers for balance queries. Each value maps to a specific chain supported by the underlying providers (Privy, Coinbase).</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#Body": {
@@ -2439,7 +2439,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "CloudWatch Logs destination for batch evaluation results"
+                "smithy.api#documentation": "<p>CloudWatch Logs destination for batch evaluation results.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#CodeInterpreterArn": {
@@ -2645,20 +2645,20 @@
                 "requestMethod": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentHttpMethodType",
                     "traits": {
-                        "smithy.api#documentation": "The HTTP method for the payment API request.",
+                        "smithy.api#documentation": "<p>The HTTP method for the payment API request.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "requestHost": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentRequestHostType",
                     "traits": {
-                        "smithy.api#documentation": "Optional - defaults to \"api.cdp.coinbase.com\""
+                        "smithy.api#documentation": "<p>The host for the payment API request. Defaults to \"api.cdp.coinbase.com\".</p>"
                     }
                 },
                 "requestPath": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentRequestPathType",
                     "traits": {
-                        "smithy.api#documentation": "The path of the payment API request.",
+                        "smithy.api#documentation": "<p>The path of the payment API request.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2666,18 +2666,18 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "Set to true for wallet write operations (requires walletSecret configured)"
+                        "smithy.api#documentation": "<p>Set to true for wallet write operations (requires walletSecret configured).</p>"
                     }
                 },
                 "requestBody": {
                     "target": "com.amazonaws.bedrockagentcore#CoinbaseCdpPaymentRequestBodyType",
                     "traits": {
-                        "smithy.api#documentation": "Request body JSON - used to generate wallet auth JWT"
+                        "smithy.api#documentation": "<p>Request body JSON — used to generate wallet auth JWT.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Coinbase CDP token request parameters"
+                "smithy.api#documentation": "<p>Coinbase CDP token request parameters.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#CoinbaseCdpTokenResponseOutput": {
@@ -2686,19 +2686,19 @@
                 "bearerToken": {
                     "target": "com.amazonaws.bedrockagentcore#CoinbaseCdpPaymentJwtTokenType",
                     "traits": {
-                        "smithy.api#documentation": "Bearer Token for Authorization header",
+                        "smithy.api#documentation": "<p>Bearer Token for Authorization header.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "walletAuthToken": {
                     "target": "com.amazonaws.bedrockagentcore#CoinbaseCdpPaymentJwtTokenType",
                     "traits": {
-                        "smithy.api#documentation": "Wallet Auth Token for X-Wallet-Auth header"
+                        "smithy.api#documentation": "<p>Wallet Auth Token for X-Wallet-Auth header.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Coinbase CDP token response"
+                "smithy.api#documentation": "<p>Coinbase CDP token response.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#CommandExecutionStatus": {
@@ -3419,7 +3419,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Create a new payment instrument for a connector",
+                "smithy.api#documentation": "<p>Create a new payment instrument for a connector.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -3434,55 +3434,55 @@
                 "userId": {
                     "target": "com.amazonaws.bedrockagentcore#UserId",
                     "traits": {
-                        "smithy.api#documentation": "The user ID associated with this payment instrument.",
+                        "smithy.api#documentation": "<p>The user ID associated with this payment instrument.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-User-Id"
                     }
                 },
                 "agentName": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentAgentName",
                     "traits": {
-                        "smithy.api#documentation": "The agent name associated with this request, used for observability.",
+                        "smithy.api#documentation": "<p>The agent name associated with this request, used for observability.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-Agent-Name"
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the payment manager that owns this payment instrument.",
+                        "smithy.api#documentation": "<p>The ARN of the payment manager that owns this payment instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentConnectorId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentConnectorId",
                     "traits": {
-                        "smithy.api#documentation": "The ID of the payment connector to use for this instrument.",
+                        "smithy.api#documentation": "<p>The ID of the payment connector to use for this instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentInstrumentType": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentType",
                     "traits": {
-                        "smithy.api#documentation": "The type of payment instrument being created.",
+                        "smithy.api#documentation": "<p>The type of payment instrument being created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentInstrumentDetails": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentDetails",
                     "traits": {
-                        "smithy.api#documentation": "The details of the payment instrument.",
+                        "smithy.api#documentation": "<p>The details of the payment instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagentcore#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "Idempotency token to ensure request uniqueness.",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request structure for creating a payment instrument",
+                "smithy.api#documentation": "<p>Request structure for creating a payment instrument.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -3492,12 +3492,13 @@
                 "paymentInstrument": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrument",
                     "traits": {
+                        "smithy.api#documentation": "<p>The created payment instrument.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response structure for creating a payment instrument",
+                "smithy.api#documentation": "<p>Response structure for creating a payment instrument.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -3530,7 +3531,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Create a new payment manager session",
+                "smithy.api#documentation": "<p>Create a new payment session.</p>",
                 "smithy.api#http": {
                     "code": 201,
                     "method": "POST",
@@ -3545,34 +3546,34 @@
                 "userId": {
                     "target": "com.amazonaws.bedrockagentcore#UserId",
                     "traits": {
-                        "smithy.api#documentation": "The user ID associated with this payment session.",
+                        "smithy.api#documentation": "<p>The user ID associated with this payment session.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-User-Id"
                     }
                 },
                 "agentName": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentAgentName",
                     "traits": {
-                        "smithy.api#documentation": "The agent name associated with this request, used for observability.",
+                        "smithy.api#documentation": "<p>The agent name associated with this request, used for observability.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-Agent-Name"
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the payment manager that owns this session.",
+                        "smithy.api#documentation": "<p>The ARN of the payment manager that owns this session.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "limits": {
                     "target": "com.amazonaws.bedrockagentcore#SessionLimits",
                     "traits": {
-                        "smithy.api#documentation": "The spending limits for this payment session."
+                        "smithy.api#documentation": "<p>The spending limits for this payment session.</p>"
                     }
                 },
                 "expiryTimeInMinutes": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "The session expiry time in minutes. Must be between 15 and 480 minutes.",
+                        "smithy.api#documentation": "<p>The session expiry time in minutes. Must be between 15 and 480 minutes.</p>",
                         "smithy.api#range": {
                             "min": 15,
                             "max": 480
@@ -3583,13 +3584,13 @@
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagentcore#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "Idempotency token to ensure request uniqueness.",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request structure for creating a payment session",
+                "smithy.api#documentation": "<p>Request structure for creating a payment session.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -3599,12 +3600,13 @@
                 "paymentSession": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentSession",
                     "traits": {
+                        "smithy.api#documentation": "<p>The created payment session.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response structure for creating a payment session",
+                "smithy.api#documentation": "<p>Response structure for creating a payment session.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -3635,7 +3637,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Supported blockchain networks for crypto wallets"
+                "smithy.api#documentation": "<p>Supported blockchain networks for crypto wallets.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#CryptoX402PaymentInput": {
@@ -3644,20 +3646,20 @@
                 "version": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "The X402 protocol version (e.g., \"v1\", \"v2\")",
+                        "smithy.api#documentation": "<p>The version of the X402 protocol.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "payload": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentDocument",
                     "traits": {
-                        "smithy.api#documentation": "This can hold any JSON-like object",
+                        "smithy.api#documentation": "<p>The X402 payment payload.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "X402 payment requirement input"
+                "smithy.api#documentation": "<p>The input for a crypto X402 payment.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#CryptoX402PaymentOutput": {
@@ -3666,20 +3668,20 @@
                 "version": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "The X402 protocol version (e.g., \"1\", \"2\")",
+                        "smithy.api#documentation": "<p>The version of the X402 protocol.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "payload": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentDocument",
                     "traits": {
-                        "smithy.api#documentation": "This can hold any JSON-like object",
+                        "smithy.api#documentation": "<p>The X402 payment response payload.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "X402 payment requirement output"
+                "smithy.api#documentation": "<p>The output from a crypto X402 payment.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#Currency": {
@@ -3693,7 +3695,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Supported currency codes"
+                "smithy.api#documentation": "<p>Supported currency codes.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#CustomDescriptor": {
@@ -3750,7 +3752,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Where to pull session spans from"
+                "smithy.api#documentation": "<p>Configuration for the data source used in evaluation.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#DateTimestamp": {
@@ -4129,7 +4131,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Delete a payment instrument\n\nMarks a payment instrument as deleted by updating its status to DELETED. This is a soft delete\noperation that preserves the record in the database for audit and compliance purposes. The record\nremains queryable for audit purposes but is excluded from normal list and get operations.\n\nDeleting an already-deleted or non-existent instrument returns ResourceNotFoundException (404).\n\nAuthorization: The caller must own the instrument (accountId, userId, and paymentManagerId must match).\nIf authorization fails, a 403 Forbidden error is returned.\n\nTimestamp Management: The updatedAt timestamp is set to the current time, while createdAt is preserved.\nThe version field is incremented for optimistic locking.\n\nErrors:\n- ResourceNotFoundException: The instrument does not exist or is already deleted\n- AccessDeniedException: The caller is not authorized to delete this instrument\n- ValidationException: Required fields are missing or invalid\n- InternalServerException: An unexpected server error occurred",
+                "smithy.api#documentation": "<p>Deletes a payment instrument. This is a soft delete operation that preserves the record for audit and compliance purposes.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -4144,34 +4146,34 @@
                 "userId": {
                     "target": "com.amazonaws.bedrockagentcore#UserId",
                     "traits": {
-                        "smithy.api#documentation": "The user ID making the delete request. Must match the instrument's userId.",
+                        "smithy.api#documentation": "<p>The user ID making the delete request. Must match the instrument's userId.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-User-Id"
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The payment manager ARN. Must match the instrument's paymentManagerArn.",
+                        "smithy.api#documentation": "<p>The payment manager ARN. Must match the instrument's paymentManagerArn.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentConnectorId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentConnectorId",
                     "traits": {
-                        "smithy.api#documentation": "The payment connector ID. Must match the instrument's paymentConnectorId.",
+                        "smithy.api#documentation": "<p>The payment connector ID. Must match the instrument's paymentConnectorId.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentInstrumentId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentId",
                     "traits": {
-                        "smithy.api#documentation": "The payment instrument ID to delete.",
+                        "smithy.api#documentation": "<p>The payment instrument ID to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request structure for deleting a payment instrument\n\nAll fields are required and must match the instrument owner's identifiers for authorization to succeed.",
+                "smithy.api#documentation": "<p>Request structure for deleting a payment instrument.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -4181,13 +4183,13 @@
                 "status": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentStatus",
                     "traits": {
-                        "smithy.api#documentation": "The status of the instrument after deletion. Always DELETED for successful soft delete.",
+                        "smithy.api#documentation": "<p>The status of the instrument after deletion. Always DELETED for successful soft delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response structure for deleting a payment instrument\n\nReturns the deletion status with HTTP 200 OK status code on successful soft deletion.",
+                "smithy.api#documentation": "<p>Response structure for deleting a payment instrument.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -4217,7 +4219,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Delete a payment manager session\n\nPermanently removes a payment session record from the database. This is a hard delete operation\nthat removes the session completely.\n\nDeleting a non-existent or already-deleted session returns ResourceNotFoundException (404).\n\nAuthorization: The caller must own the session (accountId, userId, and paymentManagerId must match).\nIf authorization fails, a 403 Forbidden error is returned.\n\nErrors:\n- ResourceNotFoundException: The session does not exist or has already been deleted\n- AccessDeniedException: The caller is not authorized to delete this session\n- ValidationException: Required fields are missing or invalid\n- InternalServerException: An unexpected server error occurred",
+                "smithy.api#documentation": "<p>Deletes a payment session. This permanently removes the payment session record.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -4232,27 +4234,27 @@
                 "userId": {
                     "target": "com.amazonaws.bedrockagentcore#UserId",
                     "traits": {
-                        "smithy.api#documentation": "The user ID making the delete request. Must match the session's userId.",
+                        "smithy.api#documentation": "<p>The user ID making the delete request. Must match the session's userId.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-User-Id"
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The payment manager ARN. Must match the session's paymentManagerArn.",
+                        "smithy.api#documentation": "<p>The payment manager ARN. Must match the session's paymentManagerArn.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentSessionId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentSessionId",
                     "traits": {
-                        "smithy.api#documentation": "The payment session ID to delete.",
+                        "smithy.api#documentation": "<p>The payment session ID to delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request structure for deleting a payment session\n\nAll fields are required and must match the session owner's identifiers for authorization to succeed.",
+                "smithy.api#documentation": "<p>Request structure for deleting a payment session.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -4262,13 +4264,13 @@
                 "status": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentSessionStatus",
                     "traits": {
-                        "smithy.api#documentation": "The status of the deletion. Always DELETED for successful hard delete.",
+                        "smithy.api#documentation": "<p>The status of the deletion. Always DELETED for successful hard delete.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response structure for deleting a payment session\n\nReturns the deletion status with HTTP 200 status code on successful deletion.",
+                "smithy.api#documentation": "<p>Response structure for deleting a payment session.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -4466,7 +4468,7 @@
         "com.amazonaws.bedrockagentcore#Email": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Email address with validation for standard email format",
+                "smithy.api#documentation": "<p>Email address with validation for standard email format.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 254
@@ -4481,27 +4483,27 @@
                 "network": {
                     "target": "com.amazonaws.bedrockagentcore#CryptoWalletNetwork",
                     "traits": {
-                        "smithy.api#documentation": "The blockchain network for this embedded crypto wallet.\nSupported networks: ETHEREUM, SOLANA",
+                        "smithy.api#documentation": "<p>The blockchain network for this embedded crypto wallet. Supported networks: ETHEREUM, SOLANA.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "linkedAccounts": {
                     "target": "com.amazonaws.bedrockagentcore#LinkedAccountList",
                     "traits": {
-                        "smithy.api#documentation": "List of linkedAccounts linked to this wallet.\nEach linkedAccount represents a way the end user can authenticate to this wallet.\nCan be empty when adding a new linkedAccount to an existing wallet.",
+                        "smithy.api#documentation": "<p>List of linked accounts linked to this wallet. Each represents a way the end user can authenticate to this wallet.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "walletAddress": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "The wallet address on the specified blockchain network."
+                        "smithy.api#documentation": "<p>The wallet address on the specified blockchain network.</p>"
                     }
                 },
                 "redirectUrl": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "URL for the end user to complete a provider-specific action (e.g., wallet linking, onboarding).\nReturned by the payment connector during instrument creation.",
+                        "smithy.api#documentation": "<p>URL for the end user to complete a provider-specific action such as wallet linking or onboarding.</p>",
                         "smithy.api#length": {
                             "max": 2048
                         }
@@ -4509,7 +4511,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Embedded Crypto wallet instrument details"
+                "smithy.api#documentation": "<p>Embedded crypto wallet instrument details.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#ErrorDetailsList": {
@@ -5002,7 +5004,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "An evaluator to run against sessions"
+                "smithy.api#documentation": "<p>An evaluator to run against sessions.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#EvaluatorArn": {
@@ -6387,7 +6389,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Get a payment instrument by ID",
+                "smithy.api#documentation": "<p>Get a payment instrument by ID.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -6422,7 +6424,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Get the balance of a payment instrument",
+                "smithy.api#documentation": "<p>Get the balance of a payment instrument.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -6437,55 +6439,55 @@
                 "userId": {
                     "target": "com.amazonaws.bedrockagentcore#UserId",
                     "traits": {
-                        "smithy.api#documentation": "The user ID associated with this payment instrument.",
+                        "smithy.api#documentation": "<p>The user ID associated with this payment instrument.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-User-Id"
                     }
                 },
                 "agentName": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentAgentName",
                     "traits": {
-                        "smithy.api#documentation": "The agent name associated with this request, used for observability.",
+                        "smithy.api#documentation": "<p>The agent name associated with this request, used for observability.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-Agent-Name"
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the payment manager that owns this payment instrument.",
+                        "smithy.api#documentation": "<p>The ARN of the payment manager that owns this payment instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentConnectorId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentConnectorId",
                     "traits": {
-                        "smithy.api#documentation": "The ID of the payment connector associated with this instrument.",
+                        "smithy.api#documentation": "<p>The ID of the payment connector associated with this instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentInstrumentId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentId",
                     "traits": {
-                        "smithy.api#documentation": "The ID of the payment instrument to query balance for.",
+                        "smithy.api#documentation": "<p>The ID of the payment instrument to query balance for.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "chain": {
                     "target": "com.amazonaws.bedrockagentcore#BlockchainChainId",
                     "traits": {
-                        "smithy.api#documentation": "The specific blockchain chain to query balance on.\nRequired because balances are chain-specific — the same wallet address may hold\ndifferent token balances on different chains.",
+                        "smithy.api#documentation": "<p>The specific blockchain chain to query balance on. Required because balances are chain-specific.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "token": {
                     "target": "com.amazonaws.bedrockagentcore#InstrumentBalanceToken",
                     "traits": {
-                        "smithy.api#documentation": "The token to query balance for.\nRequired to specify which supported token's balance to return.",
+                        "smithy.api#documentation": "<p>The token to query balance for. Only tokens supported for X402 payments are returned.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request structure for getting payment instrument balance",
+                "smithy.api#documentation": "<p>Request structure for getting payment instrument balance.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -6495,20 +6497,20 @@
                 "paymentInstrumentId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentId",
                     "traits": {
-                        "smithy.api#documentation": "The ID of the payment instrument.",
+                        "smithy.api#documentation": "<p>The ID of the payment instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "tokenBalance": {
                     "target": "com.amazonaws.bedrockagentcore#TokenBalance",
                     "traits": {
-                        "smithy.api#documentation": "The balance of the supported token on the requested chain.",
+                        "smithy.api#documentation": "<p>The balance of the supported token on the requested chain.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response structure for getting payment instrument balance",
+                "smithy.api#documentation": "<p>Response structure for getting payment instrument balance.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -6518,40 +6520,40 @@
                 "userId": {
                     "target": "com.amazonaws.bedrockagentcore#UserId",
                     "traits": {
-                        "smithy.api#documentation": "The user ID associated with this payment instrument.",
+                        "smithy.api#documentation": "<p>The user ID associated with this payment instrument.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-User-Id"
                     }
                 },
                 "agentName": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentAgentName",
                     "traits": {
-                        "smithy.api#documentation": "The agent name associated with this request, used for observability.",
+                        "smithy.api#documentation": "<p>The agent name associated with this request, used for observability.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-Agent-Name"
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the payment manager that owns this payment instrument.",
+                        "smithy.api#documentation": "<p>The ARN of the payment manager that owns this payment instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentConnectorId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentConnectorId",
                     "traits": {
-                        "smithy.api#documentation": "The ID of the payment connector."
+                        "smithy.api#documentation": "<p>The ID of the payment connector.</p>"
                     }
                 },
                 "paymentInstrumentId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentId",
                     "traits": {
-                        "smithy.api#documentation": "The ID of the payment instrument to retrieve.",
+                        "smithy.api#documentation": "<p>The ID of the payment instrument to retrieve.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request structure for getting a payment instrument",
+                "smithy.api#documentation": "<p>Request structure for getting a payment instrument.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -6561,12 +6563,13 @@
                 "paymentInstrument": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrument",
                     "traits": {
+                        "smithy.api#documentation": "<p>The payment instrument details.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response structure for getting a payment instrument",
+                "smithy.api#documentation": "<p>Response structure for getting a payment instrument.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -6596,7 +6599,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Get a payment session",
+                "smithy.api#documentation": "<p>Get a payment session.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -6611,34 +6614,34 @@
                 "userId": {
                     "target": "com.amazonaws.bedrockagentcore#UserId",
                     "traits": {
-                        "smithy.api#documentation": "The user ID associated with this payment session.",
+                        "smithy.api#documentation": "<p>The user ID associated with this payment session.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-User-Id"
                     }
                 },
                 "agentName": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentAgentName",
                     "traits": {
-                        "smithy.api#documentation": "The agent name associated with this request, used for observability.",
+                        "smithy.api#documentation": "<p>The agent name associated with this request, used for observability.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-Agent-Name"
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the payment manager that owns this session.",
+                        "smithy.api#documentation": "<p>The ARN of the payment manager that owns this session.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentSessionId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentSessionId",
                     "traits": {
-                        "smithy.api#documentation": "The ID of the payment session to retrieve.",
+                        "smithy.api#documentation": "<p>The ID of the payment session to retrieve.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request structure for getting a payment session",
+                "smithy.api#documentation": "<p>Request structure for getting a payment session.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -6648,12 +6651,13 @@
                 "paymentSession": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentSession",
                     "traits": {
+                        "smithy.api#documentation": "<p>The payment session details.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response structure for getting a payment session",
+                "smithy.api#documentation": "<p>Response structure for getting a payment session.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -7038,7 +7042,7 @@
             ],
             "traits": {
                 "aws.api#dataPlane": {},
-                "smithy.api#documentation": "Generates authentication tokens for payment providers that use vendor-specific authentication mechanisms.",
+                "smithy.api#documentation": "<p>Generates authentication tokens for payment providers that use vendor-specific authentication mechanisms.</p>",
                 "smithy.api#http": {
                     "uri": "/identities/payment/token",
                     "method": "POST"
@@ -7052,21 +7056,21 @@
                 "workloadIdentityToken": {
                     "target": "com.amazonaws.bedrockagentcore#WorkloadIdentityTokenType",
                     "traits": {
-                        "smithy.api#documentation": "Workload access token for authorization. Named workloadIdentityToken for consistency with APIKey and OAuth2CredentialProvider.",
+                        "smithy.api#documentation": "<p>Workload access token for authorization.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "resourceCredentialProviderName": {
                     "target": "com.amazonaws.bedrockagentcore#CredentialProviderName",
                     "traits": {
-                        "smithy.api#documentation": "Name of the payment credential provider to use",
+                        "smithy.api#documentation": "<p>Name of the payment credential provider to use.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentTokenRequest": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentTokenRequestInput",
                     "traits": {
-                        "smithy.api#documentation": "Vendor-specific token request input\nContains all request parameters in a type-safe, vendor-specific structure",
+                        "smithy.api#documentation": "<p>Vendor-specific token request input. Contains all request parameters in a type-safe, vendor-specific structure.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7081,7 +7085,7 @@
                 "paymentTokenResponse": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentTokenResponseOutput",
                     "traits": {
-                        "smithy.api#documentation": "Vendor-specific token response output\nContains all response data in a type-safe, vendor-specific structure",
+                        "smithy.api#documentation": "<p>Vendor-specific token response output. Contains all response data in a type-safe, vendor-specific structure.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7316,7 +7320,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Where to pull ground truth from"
+                "smithy.api#documentation": "<p>Where to pull ground truth from.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#GroundTruthTurn": {
@@ -8635,7 +8639,7 @@
                 "assertions": {
                     "target": "com.amazonaws.bedrockagentcore#EvaluationContentList",
                     "traits": {
-                        "smithy.api#documentation": "assertions for evaluation, reuses common model EvaluationContentList"
+                        "smithy.api#documentation": "<p>Assertions for evaluation, reuses common model EvaluationContentList.</p>"
                     }
                 },
                 "expectedTrajectory": {
@@ -8702,7 +8706,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Supported tokens for instrument balance queries.\nOnly tokens supported for X402 payments are returned."
+                "smithy.api#documentation": "<p>Supported tokens for instrument balance queries. Only tokens supported for X402 payments are returned.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#InternalServerException": {
@@ -8751,6 +8755,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcore#RetryableConflictException"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcore#RuntimeClientError"
@@ -9663,7 +9670,7 @@
         "com.amazonaws.bedrockagentcore#JwtKeyId": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "JWT Key ID (kid) from the JWT header\nIdentifies which key was used to sign the JWT\nMust be alphanumeric with hyphens and underscores, 1-255 characters",
+                "smithy.api#documentation": "<p>JWT Key ID (kid) from the JWT header.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 255
@@ -9848,30 +9855,30 @@
                 "email": {
                     "target": "com.amazonaws.bedrockagentcore#LinkedAccountEmail",
                     "traits": {
-                        "smithy.api#documentation": "Email-based linkedAccount"
+                        "smithy.api#documentation": "<p>Email-based linked account.</p>"
                     }
                 },
                 "sms": {
                     "target": "com.amazonaws.bedrockagentcore#LinkedAccountSms",
                     "traits": {
-                        "smithy.api#documentation": "SMS-based linkedAccount using phone number"
+                        "smithy.api#documentation": "<p>SMS-based linked account using phone number.</p>"
                     }
                 },
                 "developerJwt": {
                     "target": "com.amazonaws.bedrockagentcore#LinkedAccountDeveloperJwt",
                     "traits": {
-                        "smithy.api#documentation": "Developer JWT linkedAccount with key ID and subject"
+                        "smithy.api#documentation": "<p>Developer JWT linked account with key ID and subject.</p>"
                     }
                 },
                 "oAuth2": {
                     "target": "com.amazonaws.bedrockagentcore#LinkedAccountOAuth2",
                     "traits": {
-                        "smithy.api#documentation": "OAuth2 provider linkedAccount (Google, Apple, X, Telegram, GitHub)"
+                        "smithy.api#documentation": "<p>OAuth2 provider linked account (Google, Apple, X, Telegram, GitHub).</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Represents different linkedAccounts that can be linked to an embedded wallet.\nThis union supports multiple linkedAccount approaches: email, SMS, JWT, and OAuth2.",
+                "smithy.api#documentation": "<p>Represents different linked accounts that can be linked to an embedded wallet. Supports email, SMS, JWT, and OAuth2 approaches.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -9881,14 +9888,14 @@
                 "kid": {
                     "target": "com.amazonaws.bedrockagentcore#JwtKeyId",
                     "traits": {
-                        "smithy.api#documentation": "The key ID (kid) from the JWT header.\nIdentifies which key was used to sign the JWT.",
+                        "smithy.api#documentation": "<p>The key ID (kid) from the JWT header. Identifies which key was used to sign the JWT.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "sub": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "The subject (sub) claim from the JWT payload.\nIdentifies the principal that is the subject of the JWT.",
+                        "smithy.api#documentation": "<p>The subject (sub) claim from the JWT payload. Identifies the principal that is the subject of the JWT.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 255
@@ -9898,7 +9905,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Authentication method using JWT with key ID and subject claims."
+                "smithy.api#documentation": "<p>Authentication method using JWT with key ID and subject claims.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#LinkedAccountEmail": {
@@ -9907,13 +9914,13 @@
                 "emailAddress": {
                     "target": "com.amazonaws.bedrockagentcore#Email",
                     "traits": {
-                        "smithy.api#documentation": "The email address used for linkedAccount.\nMust be a valid email format.",
+                        "smithy.api#documentation": "<p>The email address used for the linked account. Must be a valid email format.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "LinkedAccount using an email address.",
+                "smithy.api#documentation": "<p>Linked account using an email address.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -9923,7 +9930,7 @@
                 "target": "com.amazonaws.bedrockagentcore#LinkedAccount"
             },
             "traits": {
-                "smithy.api#documentation": "A list of linkedAccount methods linked to an embedded wallet.",
+                "smithy.api#documentation": "<p>A list of linkedAccount methods linked to an embedded wallet.</p>",
                 "smithy.api#length": {
                     "max": 1
                 }
@@ -9935,36 +9942,36 @@
                 "google": {
                     "target": "com.amazonaws.bedrockagentcore#OAuth2Authentication",
                     "traits": {
-                        "smithy.api#documentation": "Google OAuth2 authentication"
+                        "smithy.api#documentation": "<p>Google OAuth2 authentication.</p>"
                     }
                 },
                 "apple": {
                     "target": "com.amazonaws.bedrockagentcore#OAuth2Authentication",
                     "traits": {
-                        "smithy.api#documentation": "Apple OAuth2 authentication"
+                        "smithy.api#documentation": "<p>Apple OAuth2 authentication.</p>"
                     }
                 },
                 "x": {
                     "target": "com.amazonaws.bedrockagentcore#OAuth2Authentication",
                     "traits": {
-                        "smithy.api#documentation": "X (formerly Twitter) OAuth2 authentication"
+                        "smithy.api#documentation": "<p>X (formerly Twitter) OAuth2 authentication.</p>"
                     }
                 },
                 "telegram": {
                     "target": "com.amazonaws.bedrockagentcore#OAuth2Authentication",
                     "traits": {
-                        "smithy.api#documentation": "Telegram OAuth2 authentication"
+                        "smithy.api#documentation": "<p>Telegram OAuth2 authentication.</p>"
                     }
                 },
                 "github": {
                     "target": "com.amazonaws.bedrockagentcore#OAuth2Authentication",
                     "traits": {
-                        "smithy.api#documentation": "GitHub OAuth2 authentication"
+                        "smithy.api#documentation": "<p>GitHub OAuth2 authentication.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Authentication method using OAuth2 providers.\nSupports Google, Apple, X, Telegram, and GitHub providers."
+                "smithy.api#documentation": "<p>Authentication method using OAuth2 providers. Supports Google, Apple, X, Telegram, and GitHub providers.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#LinkedAccountSms": {
@@ -9973,13 +9980,13 @@
                 "phoneNumber": {
                     "target": "com.amazonaws.bedrockagentcore#PhoneNumber",
                     "traits": {
-                        "smithy.api#documentation": "The phone number in E.164 format (e.g., +1234567890).\nMust be a valid E.164 formatted phone number starting with + and containing 1-15 digits.",
+                        "smithy.api#documentation": "<p>The phone number in E.164 format (e.g., +1234567890).</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "LinkedAccount using a phone number in E.164 format.",
+                "smithy.api#documentation": "<p>Linked account using a phone number in E.164 format.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -10720,13 +10727,13 @@
                 "namespace": {
                     "target": "com.amazonaws.bedrockagentcore#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace prefix to filter memory records by. Returns all memory records in namespaces that start with the provided prefix.</p>"
+                        "smithy.api#documentation": "<p>The namespace prefix to filter memory records by. Returns all memory records in namespaces that start with the provided prefix. Either <code>namespace</code> or <code>namespacePath</code> is required.</p>"
                     }
                 },
                 "namespacePath": {
                     "target": "com.amazonaws.bedrockagentcore#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use namespacePath for hierarchical retrievals. Return all memory records where namespace falls under the same parent hierarchy.</p>"
+                        "smithy.api#documentation": "<p>Use namespacePath for hierarchical retrievals. Return all memory records where namespace falls under the same parent hierarchy. Either <code>namespace</code> or <code>namespacePath</code> is required.</p>"
                     }
                 },
                 "memoryStrategyId": {
@@ -10803,7 +10810,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "List payment instruments for a manager",
+                "smithy.api#documentation": "<p>List payment instruments for a manager.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -10824,45 +10831,45 @@
                 "userId": {
                     "target": "com.amazonaws.bedrockagentcore#UserId",
                     "traits": {
-                        "smithy.api#documentation": "The user ID associated with the payment instruments.",
+                        "smithy.api#documentation": "<p>The user ID associated with the payment instruments.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-User-Id"
                     }
                 },
                 "agentName": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentAgentName",
                     "traits": {
-                        "smithy.api#documentation": "The agent name associated with this request, used for observability.",
+                        "smithy.api#documentation": "<p>The agent name associated with this request, used for observability.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-Agent-Name"
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the payment manager that owns the payment instruments.",
+                        "smithy.api#documentation": "<p>The ARN of the payment manager that owns the payment instruments.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentConnectorId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentConnectorId",
                     "traits": {
-                        "smithy.api#documentation": "The ID of the payment connector to filter by."
+                        "smithy.api#documentation": "<p>The ID of the payment connector to filter by.</p>"
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.bedrockagentcore#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "Token for pagination to retrieve the next set of results."
+                        "smithy.api#documentation": "<p>Token for pagination to retrieve the next set of results.</p>"
                     }
                 },
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "Maximum number of results to return in a single response."
+                        "smithy.api#documentation": "<p>Maximum number of results to return in a single response.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request structure for listing payment instruments",
+                "smithy.api#documentation": "<p>Request structure for listing payment instruments.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -10872,19 +10879,19 @@
                 "paymentInstruments": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "List of payment instrument summaries matching the request criteria.",
+                        "smithy.api#documentation": "<p>List of payment instrument summaries matching the request criteria.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nextToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Token for pagination to retrieve the next set of results."
+                        "smithy.api#documentation": "<p>Token for pagination to retrieve the next set of results.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response structure for listing payment instruments",
+                "smithy.api#documentation": "<p>Response structure for listing payment instruments.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -10911,7 +10918,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "List payment manager sessions",
+                "smithy.api#documentation": "<p>List payment sessions.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -10932,39 +10939,39 @@
                 "userId": {
                     "target": "com.amazonaws.bedrockagentcore#UserId",
                     "traits": {
-                        "smithy.api#documentation": "The user ID associated with the payment sessions.",
+                        "smithy.api#documentation": "<p>The user ID associated with the payment sessions.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-User-Id"
                     }
                 },
                 "agentName": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentAgentName",
                     "traits": {
-                        "smithy.api#documentation": "The agent name associated with this request, used for observability.",
+                        "smithy.api#documentation": "<p>The agent name associated with this request, used for observability.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-Agent-Name"
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the payment manager that owns the sessions.",
+                        "smithy.api#documentation": "<p>The ARN of the payment manager that owns the sessions.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.bedrockagentcore#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "Token for pagination to retrieve the next set of results."
+                        "smithy.api#documentation": "<p>Token for pagination to retrieve the next set of results.</p>"
                     }
                 },
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "Maximum number of results to return in a single response."
+                        "smithy.api#documentation": "<p>Maximum number of results to return in a single response.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request structure for listing payment sessions",
+                "smithy.api#documentation": "<p>Request structure for listing payment sessions.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -10974,19 +10981,19 @@
                 "paymentSessions": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentSessionSummaryList",
                     "traits": {
-                        "smithy.api#documentation": "List of payment session summaries matching the request criteria.",
+                        "smithy.api#documentation": "<p>List of payment session summaries matching the request criteria.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "nextToken": {
                     "target": "com.amazonaws.bedrockagentcore#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "Token for pagination to retrieve the next set of results."
+                        "smithy.api#documentation": "<p>Token for pagination to retrieve the next set of results.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response structure for listing payment sessions",
+                "smithy.api#documentation": "<p>Response structure for listing payment sessions.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -12246,7 +12253,7 @@
                 "sub": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "The subject (sub) claim from the OAuth2 provider.\nUniquely identifies the user at the provider.",
+                        "smithy.api#documentation": "<p>The subject (sub) claim from the OAuth2 provider. Uniquely identifies the user at the provider.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 255
@@ -12257,13 +12264,13 @@
                 "emailAddress": {
                     "target": "com.amazonaws.bedrockagentcore#Email",
                     "traits": {
-                        "smithy.api#documentation": "The email address from the OAuth2 provider (optional)."
+                        "smithy.api#documentation": "<p>The email address from the OAuth2 provider.</p>"
                     }
                 },
                 "name": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "The user's name from the OAuth2 provider (optional).",
+                        "smithy.api#documentation": "<p>The user's name from the OAuth2 provider.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 255
@@ -12273,7 +12280,7 @@
                 "username": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "The username from the OAuth2 provider (optional).",
+                        "smithy.api#documentation": "<p>The username from the OAuth2 provider.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 255
@@ -12282,7 +12289,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "OAuth2 authentication information for third-party providers.\nSupports Google, Apple, X, Telegram, and GitHub providers.",
+                "smithy.api#documentation": "<p>OAuth2 authentication information for third-party providers.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -12486,7 +12493,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Output destination configuration"
+                "smithy.api#documentation": "<p>Output destination configuration.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PaginationToken": {
@@ -12535,7 +12542,7 @@
         "com.amazonaws.bedrockagentcore#PaymentAgentName": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "The agent name associated with the payment request.\nOptional human-readable name for the agent making the API call, used for observability.",
+                "smithy.api#documentation": "<p>The agent name associated with the payment request.</p>",
                 "smithy.api#length": {
                     "max": 256
                 }
@@ -12554,7 +12561,7 @@
         "com.amazonaws.bedrockagentcore#PaymentDocument": {
             "type": "document",
             "traits": {
-                "smithy.api#documentation": "Custom document type for payment payloads",
+                "smithy.api#documentation": "<p>Custom document type for payment payloads.</p>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -12597,11 +12604,14 @@
             "type": "union",
             "members": {
                 "cryptoX402": {
-                    "target": "com.amazonaws.bedrockagentcore#CryptoX402PaymentInput"
+                    "target": "com.amazonaws.bedrockagentcore#CryptoX402PaymentInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Input for a crypto X402 payment.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Payment request details union"
+                "smithy.api#documentation": "<p>The payment input details, which vary by payment type.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PaymentInstrument": {
@@ -12610,69 +12620,69 @@
                 "paymentInstrumentId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentId",
                     "traits": {
-                        "smithy.api#documentation": "The unique identifier for this payment instrument.",
+                        "smithy.api#documentation": "<p>The unique identifier for this payment instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the payment manager that owns this payment instrument.",
+                        "smithy.api#documentation": "<p>The ARN of the payment manager that owns this payment instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentConnectorId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentConnectorId",
                     "traits": {
-                        "smithy.api#documentation": "The ID of the payment connector associated with this instrument.",
+                        "smithy.api#documentation": "<p>The ID of the payment connector associated with this instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "userId": {
                     "target": "com.amazonaws.bedrockagentcore#UserId",
                     "traits": {
-                        "smithy.api#documentation": "The user ID associated with this payment instrument.",
+                        "smithy.api#documentation": "<p>The user ID associated with this payment instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentInstrumentType": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentType",
                     "traits": {
-                        "smithy.api#documentation": "The type of payment instrument (e.g., EMBEDDED_CRYPTO_WALLET).",
+                        "smithy.api#documentation": "<p>The type of payment instrument (e.g., EMBEDDED_CRYPTO_WALLET).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentInstrumentDetails": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentDetails",
                     "traits": {
-                        "smithy.api#documentation": "The details specific to the payment instrument type.",
+                        "smithy.api#documentation": "<p>The details specific to the payment instrument type.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "The timestamp when this payment instrument was created.",
+                        "smithy.api#documentation": "<p>The timestamp when this payment instrument was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentStatus",
                     "traits": {
-                        "smithy.api#documentation": "The current status of this payment instrument.",
+                        "smithy.api#documentation": "<p>The current status of this payment instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updatedAt": {
                     "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "The timestamp when this payment instrument was last updated.",
+                        "smithy.api#documentation": "<p>The timestamp when this payment instrument was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Represents a payment instrument"
+                "smithy.api#documentation": "<p>Represents a payment instrument.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PaymentInstrumentDetails": {
@@ -12681,12 +12691,12 @@
                 "embeddedCryptoWallet": {
                     "target": "com.amazonaws.bedrockagentcore#EmbeddedCryptoWallet",
                     "traits": {
-                        "smithy.api#documentation": "Embedded crypto wallet managed directly by end user"
+                        "smithy.api#documentation": "<p>Embedded crypto wallet managed directly by end user.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Details specific to the instrument type"
+                "smithy.api#documentation": "<p>Details specific to the instrument type.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PaymentInstrumentId": {
@@ -12756,7 +12766,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The status of a payment instrument"
+                "smithy.api#documentation": "<p>The status of a payment instrument.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PaymentInstrumentSummary": {
@@ -12765,62 +12775,62 @@
                 "paymentInstrumentId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentId",
                     "traits": {
-                        "smithy.api#documentation": "The unique identifier for this payment instrument.",
+                        "smithy.api#documentation": "<p>The unique identifier for this payment instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the payment manager that owns this payment instrument.",
+                        "smithy.api#documentation": "<p>The ARN of the payment manager that owns this payment instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentConnectorId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentConnectorId",
                     "traits": {
-                        "smithy.api#documentation": "The ID of the payment connector associated with this instrument.",
+                        "smithy.api#documentation": "<p>The ID of the payment connector associated with this instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "userId": {
                     "target": "com.amazonaws.bedrockagentcore#UserId",
                     "traits": {
-                        "smithy.api#documentation": "The user ID associated with this payment instrument.",
+                        "smithy.api#documentation": "<p>The user ID associated with this payment instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentInstrumentType": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentType",
                     "traits": {
-                        "smithy.api#documentation": "The type of payment instrument (e.g., EMBEDDED_CRYPTO_WALLET).",
+                        "smithy.api#documentation": "<p>The type of payment instrument (e.g., EMBEDDED_CRYPTO_WALLET).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentStatus",
                     "traits": {
-                        "smithy.api#documentation": "The current status of this payment instrument.",
+                        "smithy.api#documentation": "<p>The current status of this payment instrument.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "The timestamp when this payment instrument was created.",
+                        "smithy.api#documentation": "<p>The timestamp when this payment instrument was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updatedAt": {
                     "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "The timestamp when this payment instrument was last updated.",
+                        "smithy.api#documentation": "<p>The timestamp when this payment instrument was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Summary of a payment instrument for list operations"
+                "smithy.api#documentation": "<p>Summary of a payment instrument for list operations.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PaymentInstrumentSummaryList": {
@@ -12840,7 +12850,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The type of payment instrument"
+                "smithy.api#documentation": "<p>The type of payment instrument.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PaymentManagerArn": {
@@ -12860,11 +12870,14 @@
             "type": "union",
             "members": {
                 "cryptoX402": {
-                    "target": "com.amazonaws.bedrockagentcore#CryptoX402PaymentOutput"
+                    "target": "com.amazonaws.bedrockagentcore#CryptoX402PaymentOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Output from a crypto X402 payment.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Payment response payload union. We will support versioning by introducing other model in this union"
+                "smithy.api#documentation": "<p>The payment output details, which vary by payment type.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PaymentRequestHostType": {
@@ -12893,60 +12906,60 @@
                 "paymentSessionId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentSessionId",
                     "traits": {
-                        "smithy.api#documentation": "The unique identifier for this payment session.",
+                        "smithy.api#documentation": "<p>The unique identifier of the payment session.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the payment manager that owns this session.",
+                        "smithy.api#documentation": "<p>The ARN of the payment manager that owns this session.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "limits": {
                     "target": "com.amazonaws.bedrockagentcore#SessionLimits",
                     "traits": {
-                        "smithy.api#documentation": "The spending limits for this session."
+                        "smithy.api#documentation": "<p>The spending limits for the payment session.</p>"
                     }
                 },
                 "userId": {
                     "target": "com.amazonaws.bedrockagentcore#UserId",
                     "traits": {
-                        "smithy.api#documentation": "The user ID associated with this payment session.",
+                        "smithy.api#documentation": "<p>The user ID associated with this session.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "expiryTimeInMinutes": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "The session expiry time in minutes.",
+                        "smithy.api#documentation": "<p>The session expiry time in minutes.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "The timestamp when this payment session was created.",
+                        "smithy.api#documentation": "<p>The timestamp when the session was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "availableLimits": {
                     "target": "com.amazonaws.bedrockagentcore#AvailableLimits",
                     "traits": {
-                        "smithy.api#documentation": "The available limits for this session after accounting for processed payments."
+                        "smithy.api#documentation": "<p>The current available spending limits.</p>"
                     }
                 },
                 "updatedAt": {
                     "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "The timestamp when this payment session was last updated.",
+                        "smithy.api#documentation": "<p>The timestamp when the session was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Payment manager session"
+                "smithy.api#documentation": "<p>A payment session for managing payment transactions.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PaymentSessionId": {
@@ -13005,7 +13018,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "The status of a payment session"
+                "smithy.api#documentation": "<p>The status of a payment session.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PaymentSessionSummary": {
@@ -13014,48 +13027,48 @@
                 "paymentSessionId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentSessionId",
                     "traits": {
-                        "smithy.api#documentation": "The unique identifier for this payment session.",
+                        "smithy.api#documentation": "<p>The unique identifier of the payment session.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the payment manager that owns this session.",
+                        "smithy.api#documentation": "<p>The ARN of the payment manager that owns this session.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "userId": {
                     "target": "com.amazonaws.bedrockagentcore#UserId",
                     "traits": {
-                        "smithy.api#documentation": "The user ID associated with this payment session.",
+                        "smithy.api#documentation": "<p>The user ID associated with this session.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "expiryTimeInMinutes": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "The session expiry time in minutes.",
+                        "smithy.api#documentation": "<p>The session expiry time in minutes.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "The timestamp when this payment session was created.",
+                        "smithy.api#documentation": "<p>The timestamp when the session was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updatedAt": {
                     "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "The timestamp when this payment session was last updated.",
+                        "smithy.api#documentation": "<p>The timestamp when the session was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Summary of a payment session for list operations"
+                "smithy.api#documentation": "<p>Summary information about a payment session.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PaymentSessionSummaryList": {
@@ -13075,35 +13088,47 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Transaction status enum"
+                "smithy.api#documentation": "<p>Transaction status enum.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PaymentTokenRequestInput": {
             "type": "union",
             "members": {
                 "coinbaseCdpTokenRequest": {
-                    "target": "com.amazonaws.bedrockagentcore#CoinbaseCdpTokenRequestInput"
+                    "target": "com.amazonaws.bedrockagentcore#CoinbaseCdpTokenRequestInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Coinbase CDP token request.</p>"
+                    }
                 },
                 "stripePrivyTokenRequest": {
-                    "target": "com.amazonaws.bedrockagentcore#StripePrivyTokenRequestInput"
+                    "target": "com.amazonaws.bedrockagentcore#StripePrivyTokenRequestInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Stripe Privy token request.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "VENDOR-SPECIFIC TOKEN REQUEST CONFIGURATION - Input"
+                "smithy.api#documentation": "<p>Vendor-specific token request configuration.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PaymentTokenResponseOutput": {
             "type": "union",
             "members": {
                 "coinbaseCdpTokenResponse": {
-                    "target": "com.amazonaws.bedrockagentcore#CoinbaseCdpTokenResponseOutput"
+                    "target": "com.amazonaws.bedrockagentcore#CoinbaseCdpTokenResponseOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Coinbase CDP token response.</p>"
+                    }
                 },
                 "stripePrivyTokenResponse": {
-                    "target": "com.amazonaws.bedrockagentcore#StripePrivyTokenResponseOutput"
+                    "target": "com.amazonaws.bedrockagentcore#StripePrivyTokenResponseOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Stripe Privy token response.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "VENDOR-SPECIFIC TOKEN RESPONSE CONFIGURATION - Output"
+                "smithy.api#documentation": "<p>Vendor-specific token response configuration.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PaymentType": {
@@ -13117,7 +13142,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Payment type enum"
+                "smithy.api#documentation": "<p>Payment type enum.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#PerVariantOnlineEvaluationConfig": {
@@ -13157,7 +13182,7 @@
         "com.amazonaws.bedrockagentcore#PhoneNumber": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Phone number in E.164 format (e.g., +1234567890)",
+                "smithy.api#documentation": "<p>Phone number in E.164 format (e.g., +1234567890).</p>",
                 "smithy.api#length": {
                     "min": 3,
                     "max": 16
@@ -13195,7 +13220,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "Process a payment transaction",
+                "smithy.api#documentation": "<p>Processes a payment using a payment instrument within a payment session.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -13220,62 +13245,62 @@
                 "userId": {
                     "target": "com.amazonaws.bedrockagentcore#UserId",
                     "traits": {
-                        "smithy.api#documentation": "The user ID associated with this payment.",
+                        "smithy.api#documentation": "<p>The user ID associated with this payment.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-User-Id"
                     }
                 },
                 "agentName": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentAgentName",
                     "traits": {
-                        "smithy.api#documentation": "The agent name associated with this request, used for observability.",
+                        "smithy.api#documentation": "<p>The agent name associated with this request, used for observability.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-AgentCore-Payments-Agent-Name"
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the payment manager handling this payment.",
+                        "smithy.api#documentation": "<p>The ARN of the payment manager.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentSessionId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentSessionId",
                     "traits": {
-                        "smithy.api#documentation": "The ID of the payment session for this transaction.",
+                        "smithy.api#documentation": "<p>The ID of the payment session.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentInstrumentId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentId",
                     "traits": {
-                        "smithy.api#documentation": "The ID of the payment instrument to use for this transaction.",
+                        "smithy.api#documentation": "<p>The ID of the payment instrument to use.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentType": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentType",
                     "traits": {
-                        "smithy.api#documentation": "The type of payment being processed.",
+                        "smithy.api#documentation": "<p>The type of payment to process.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentInput": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInput",
                     "traits": {
-                        "smithy.api#documentation": "The payment input details specific to the payment type.",
+                        "smithy.api#documentation": "<p>The payment input details specific to the payment type.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "clientToken": {
                     "target": "com.amazonaws.bedrockagentcore#ClientToken",
                     "traits": {
-                        "smithy.api#documentation": "Idempotency token to ensure request uniqueness.",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Request structure for processing a payment",
+                "smithy.api#documentation": "<p>Request structure for processing a payment.</p>",
                 "smithy.api#input": {}
             }
         },
@@ -13299,69 +13324,69 @@
                 "processPaymentId": {
                     "target": "com.amazonaws.bedrockagentcore#ProcessPaymentId",
                     "traits": {
-                        "smithy.api#documentation": "The unique ID of the processed payment transaction.",
+                        "smithy.api#documentation": "<p>The unique identifier of the processed payment.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentManagerArn": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentManagerArn",
                     "traits": {
-                        "smithy.api#documentation": "The ARN of the payment manager that processed this payment.",
+                        "smithy.api#documentation": "<p>The ARN of the payment manager.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentSessionId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentSessionId",
                     "traits": {
-                        "smithy.api#documentation": "The ID of the payment session for this transaction.",
+                        "smithy.api#documentation": "<p>The ID of the payment session used.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentInstrumentId": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentInstrumentId",
                     "traits": {
-                        "smithy.api#documentation": "The ID of the payment instrument used for this transaction.",
+                        "smithy.api#documentation": "<p>The ID of the payment instrument used.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentType": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentType",
                     "traits": {
-                        "smithy.api#documentation": "The type of payment that was processed.",
+                        "smithy.api#documentation": "<p>The type of payment processed.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "status": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentStatus",
                     "traits": {
-                        "smithy.api#documentation": "The status of the payment transaction.",
+                        "smithy.api#documentation": "<p>The status of the payment.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "paymentOutput": {
                     "target": "com.amazonaws.bedrockagentcore#PaymentOutput",
                     "traits": {
-                        "smithy.api#documentation": "The payment output details specific to the payment type.",
+                        "smithy.api#documentation": "<p>The payment output details specific to the payment type.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "createdAt": {
                     "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "The timestamp when the payment was created.",
+                        "smithy.api#documentation": "<p>The timestamp when the payment was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "updatedAt": {
                     "target": "com.amazonaws.bedrockagentcore#DateTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "The timestamp when the payment was last updated.",
+                        "smithy.api#documentation": "<p>The timestamp when the payment was last updated.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Response structure for processing a payment",
+                "smithy.api#documentation": "<p>Response structure for processing a payment.</p>",
                 "smithy.api#output": {}
             }
         },
@@ -14166,13 +14191,13 @@
                 "namespace": {
                     "target": "com.amazonaws.bedrockagentcore#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace prefix to filter memory records by. Searches for memory records in namespaces that start with the provided prefix.</p>"
+                        "smithy.api#documentation": "<p>The namespace prefix to filter memory records by. Searches for memory records in namespaces that start with the provided prefix. Either <code>namespace</code> or <code>namespacePath</code> is required.</p>"
                     }
                 },
                 "namespacePath": {
                     "target": "com.amazonaws.bedrockagentcore#Namespace",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use namespacePath for hierarchical retrievals. Return all memory records where namespace falls under the same parent hierarchy.</p>"
+                        "smithy.api#documentation": "<p>Use namespacePath for hierarchical retrievals. Return all memory records where namespace falls under the same parent hierarchy. Either <code>namespace</code> or <code>namespacePath</code> is required.</p>"
                     }
                 },
                 "searchCriteria": {
@@ -14859,13 +14884,13 @@
                 "maxSpendAmount": {
                     "target": "com.amazonaws.bedrockagentcore#Amount",
                     "traits": {
-                        "smithy.api#documentation": "The maximum amount that can be spent in this session.",
+                        "smithy.api#documentation": "<p>The maximum amount that can be spent in the session.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Session spending limits"
+                "smithy.api#documentation": "<p>The spending limits configuration for a payment session.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#SessionMetadataList": {
@@ -16130,6 +16155,9 @@
                     "target": "com.amazonaws.bedrockagentcore#ResourceNotFoundException"
                 },
                 {
+                    "target": "com.amazonaws.bedrockagentcore#RetryableConflictException"
+                },
+                {
                     "target": "com.amazonaws.bedrockagentcore#RuntimeClientError"
                 },
                 {
@@ -16352,20 +16380,20 @@
                 "requestHost": {
                     "target": "com.amazonaws.bedrockagentcore#StripePrivyRequestHostType",
                     "traits": {
-                        "smithy.api#documentation": "Optional - defaults to \"api.privy.io\""
+                        "smithy.api#documentation": "<p>The host for the Privy API request. Defaults to \"api.privy.io\".</p>"
                     }
                 },
                 "requestPath": {
                     "target": "com.amazonaws.bedrockagentcore#StripePrivyRequestPathType",
                     "traits": {
-                        "smithy.api#documentation": "The path of the Stripe Privy API request.",
+                        "smithy.api#documentation": "<p>The path of the Stripe Privy API request.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "requestBody": {
                     "target": "com.amazonaws.bedrockagentcore#StripePrivyRequestBodyType",
                     "traits": {
-                        "smithy.api#documentation": "Request body JSON for the Privy API call",
+                        "smithy.api#documentation": "<p>Request body JSON for the Privy API call.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16373,12 +16401,12 @@
                     "target": "smithy.api#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "Set to true to generate privy-authorization-signature"
+                        "smithy.api#documentation": "<p>Set to true to generate privy-authorization-signature.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "StripePrivy token request parameters"
+                "smithy.api#documentation": "<p>Stripe Privy token request parameters.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#StripePrivyTokenResponseOutput": {
@@ -16387,32 +16415,32 @@
                 "authorizationSignature": {
                     "target": "com.amazonaws.bedrockagentcore#StripePrivyAuthorizationSignatureType",
                     "traits": {
-                        "smithy.api#documentation": "Base64-encoded ECDSA P-256 authorization signature (only present when includeAuthorizationSignature is true)"
+                        "smithy.api#documentation": "<p>Base64-encoded ECDSA P-256 authorization signature (only present when includeAuthorizationSignature is true).</p>"
                     }
                 },
                 "requestExpiry": {
                     "target": "smithy.api#Long",
                     "traits": {
-                        "smithy.api#documentation": "Unix timestamp in milliseconds when the authorization signature expires. Set as privy-request-expiry header."
+                        "smithy.api#documentation": "<p>Unix timestamp in milliseconds when the authorization signature expires.</p>"
                     }
                 },
                 "appId": {
                     "target": "com.amazonaws.bedrockagentcore#StripePrivyAppIdType",
                     "traits": {
-                        "smithy.api#documentation": "The Privy app ID for the privy-app-id header",
+                        "smithy.api#documentation": "<p>The Privy app ID for the privy-app-id header.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "basicAuthToken": {
                     "target": "com.amazonaws.bedrockagentcore#StripePrivyBasicAuthTokenType",
                     "traits": {
-                        "smithy.api#documentation": "Base64-encoded Basic Auth token (appId:appSecret) for the Authorization header",
+                        "smithy.api#documentation": "<p>Base64-encoded Basic Auth token (appId:appSecret) for the Authorization header.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "StripePrivy token response containing appId, basicAuthToken, and optionally authorizationSignature"
+                "smithy.api#documentation": "<p>Stripe Privy token response containing appId, basicAuthToken, and optionally authorizationSignature.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#SystemPromptConfig": {
@@ -16650,41 +16678,41 @@
                 "amount": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Raw balance in the smallest denomination (e.g., USDC base units where 1 USDC = 1000000).",
+                        "smithy.api#documentation": "<p>Raw balance in the smallest denomination (e.g., USDC base units where 1 USDC = 1000000).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "decimals": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "Number of decimal places for the token (e.g., 6 for USDC).",
+                        "smithy.api#documentation": "<p>Number of decimal places for the token (e.g., 6 for USDC).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "token": {
                     "target": "com.amazonaws.bedrockagentcore#InstrumentBalanceToken",
                     "traits": {
-                        "smithy.api#documentation": "The supported token for this balance.",
+                        "smithy.api#documentation": "<p>The supported token for this balance.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "network": {
                     "target": "com.amazonaws.bedrockagentcore#CryptoWalletNetwork",
                     "traits": {
-                        "smithy.api#documentation": "The blockchain network family (ETHEREUM or SOLANA).",
+                        "smithy.api#documentation": "<p>The blockchain network family (ETHEREUM or SOLANA).</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "chain": {
                     "target": "com.amazonaws.bedrockagentcore#BlockchainChainId",
                     "traits": {
-                        "smithy.api#documentation": "The specific blockchain chain.",
+                        "smithy.api#documentation": "<p>The specific blockchain chain.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "A single token balance entry"
+                "smithy.api#documentation": "<p>A single token balance entry.</p>"
             }
         },
         "com.amazonaws.bedrockagentcore#TokenUsage": {

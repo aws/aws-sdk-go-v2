@@ -4334,7 +4334,8 @@
                             "updatedAt": "2024-01-15T10:35:00Z",
                             "activeLinksCount": 2,
                             "totalLinksCount": 5,
-                            "inboundLinksCount": 3
+                            "inboundLinksCount": 3,
+                            "linksRequestedCount": 3
                         }
                     }
                 ],
@@ -4573,7 +4574,17 @@
                 "inboundLinksCount": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The count of inbound links for the responder gateway.</p>"
+                        "smithy.api#deprecated": {
+                            "message": "Use linksRequestedCount instead",
+                            "since": "2026-05-11"
+                        },
+                        "smithy.api#documentation": "<p>Deprecated. Use 'linksRequestedCount' instead.</p>"
+                    }
+                },
+                "linksRequestedCount": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The count of requested links waiting for the responder gateway to accept or reject.</p>"
                     }
                 },
                 "gatewayType": {
@@ -5019,7 +5030,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Summary of a routing rule for list responses"
+                "smithy.api#documentation": "<p>A summary of a link routing rule.</p>"
             }
         },
         "com.amazonaws.rtbfabric#LinkStatus": {
@@ -6182,7 +6193,7 @@
                 "key": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "RFC 3986 unreserved characters",
+                        "smithy.api#documentation": "<p>The key of the query string parameter to match. Must contain only RFC 3986 unreserved characters.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 128
@@ -6194,7 +6205,7 @@
                 "value": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "RFC 3986 unreserved characters",
+                        "smithy.api#documentation": "<p>The value of the query string parameter to match. Must contain only RFC 3986 unreserved characters.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 128
@@ -6205,7 +6216,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Key-value pair for query string matching"
+                "smithy.api#documentation": "<p>A key-value pair for query string matching in a routing rule condition.</p>"
             }
         },
         "com.amazonaws.rtbfabric#RTBFabric": {
@@ -7471,7 +7482,7 @@
                 "hostHeader": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Exact host match — RFC 3986 unreserved characters",
+                        "smithy.api#documentation": "<p>The exact host header value to match.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 255
@@ -7482,7 +7493,7 @@
                 "hostHeaderWildcard": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Wildcard host pattern (e.g., *.example.com) — RFC 3986 unreserved plus *",
+                        "smithy.api#documentation": "<p>A wildcard pattern for host header matching (for example, <code>*.example.com</code>).</p>",
                         "smithy.api#length": {
                             "min": 3,
                             "max": 255
@@ -7493,7 +7504,7 @@
                 "pathPrefix": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Path prefix matching — strict starts-with, no wildcard (preferred for new rules).\nMust start with /; RFC 3986 unreserved plus /",
+                        "smithy.api#documentation": "<p>The path prefix to match. The request path must start with this value. Must start with <code>/</code>.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 128
@@ -7504,7 +7515,7 @@
                 "pathExact": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Exact path match — must start with /; RFC 3986 unreserved plus /",
+                        "smithy.api#documentation": "<p>The exact path to match. Must start with <code>/</code>.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 128
@@ -7515,13 +7526,13 @@
                 "queryStringEquals": {
                     "target": "com.amazonaws.rtbfabric#QueryStringKeyValuePair",
                     "traits": {
-                        "smithy.api#documentation": "Query string key=value pair match (single pair)"
+                        "smithy.api#documentation": "<p>A query string key-value pair that must be present and match exactly.</p>"
                     }
                 },
                 "queryStringExists": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "Query string key presence check (any value accepted) — RFC 3986 unreserved characters",
+                        "smithy.api#documentation": "<p>A query string key that must be present in the request (any value is accepted).</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 128
@@ -7531,7 +7542,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Conditions bag for a routing rule.\nAll non-null fields must match (AND logic). At least one field must be set (enforced by CP)."
+                "smithy.api#documentation": "<p>The conditions for a routing rule. All specified fields must match for the rule to apply (AND logic). At least one condition field must be set.</p>"
             }
         },
         "com.amazonaws.rtbfabric#RuleId": {

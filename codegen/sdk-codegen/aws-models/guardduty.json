@@ -2781,7 +2781,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new threat entity set. In a threat entity set, you can provide known malicious IP addresses and domains for your Amazon Web Services environment. GuardDuty generates findings based on the entries in the threat entity sets. Only users of the administrator account can manage entity sets, which automatically apply to member accounts.</p>",
+                "smithy.api#documentation": "<p>Creates a new threat entity set. In a threat entity set, you can provide known malicious threat entities for your Amazon Web Services environment. GuardDuty generates findings based on the entries in the threat entity sets. Only users of the administrator account can manage entity sets, which automatically apply to member accounts.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/detector/{DetectorId}/threatentityset",
@@ -10207,6 +10207,36 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MALICIOUS_FILE"
+                    }
+                },
+                "VULNERABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VULNERABILITY"
+                    }
+                },
+                "MALICIOUS_PACKAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MALICIOUS_PACKAGE"
+                    }
+                },
+                "MISCONFIGURATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MISCONFIGURATION"
+                    }
+                },
+                "REACHABILITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REACHABILITY"
+                    }
+                },
+                "SENSITIVE_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SENSITIVE_DATA"
                     }
                 }
             }

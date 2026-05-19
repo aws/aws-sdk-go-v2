@@ -1706,6 +1706,15 @@
                 "target": "com.amazonaws.grafana#DataSourceType"
             }
         },
+        "com.amazonaws.grafana#DegradedWorkspaceReason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
         "com.amazonaws.grafana#DeleteWorkspace": {
             "type": "operation",
             "input": {
@@ -4675,6 +4684,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ID or ARN of the Key Management Service key used for encrypting workspace data.</p>"
                     }
+                },
+                "degradedWorkspaceReason": {
+                    "target": "com.amazonaws.grafana#DegradedWorkspaceReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the workspace is in the <code>DEGRADED</code> status, this field describes the reason the workspace is degraded.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4768,6 +4783,11 @@
                         "name": "VERSION_UPDATE_FAILED",
                         "value": "VERSION_UPDATE_FAILED",
                         "documentation": "Workspace version update failed."
+                    },
+                    {
+                        "name": "DEGRADED",
+                        "value": "DEGRADED",
+                        "documentation": "Workspace is degraded."
                     }
                 ]
             }
