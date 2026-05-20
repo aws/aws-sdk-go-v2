@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Establishes node-to-node initialization between payment processing nodes such
-// as an acquirer, issuer or payment network using Australian Standard 2805
-// (AS2805).
+// Generates a KekValidationRequest or a KekValidationResponse for node-to-node
+// initialization between payment processing nodes using [Australian Standard 2805 (AS2805)].
 //
 // During node-to-node initialization, both communicating nodes must validate that
 // they possess the correct Key Encrypting Keys (KEKs) before proceeding with
@@ -23,22 +22,32 @@ import (
 // created or imported into Amazon Web Services Payment Cryptography using either
 // the [CreateKey]or [ImportKey] operations.
 //
-// The node initiating communication can use GenerateAS2805KekValidation to
-// generate a combined KEK validation request and KEK validation response to send
-// to the partnering node for validation. When invoked, the API internally
-// generates a random sending key encrypted under KEKs and provides a receiving key
-// encrypted under KEKr as response. The initiating node sends the response
-// returned by this API to its partner for validation.
+// To use GenerateAs2805KekValidation to generate a KEK validation request, set
+// KekValidationType to KekValidationRequest . This operation returns both
+// RandomKeySend (KRs) and RandomKeyReceive (KRr) as response values. The
+// partnering node receives the KRs, uses its KEKr to decrypt it, and generates a
+// KRr which is an inverted value of KRs. The node receiving the KRr validates it
+// against its own KRr generated during KEK validation request outside of Amazon
+// Web Services Payment Cryptography.
+//
+// You can also use this operation to generate a KEK validation response, by
+// setting KekValidationType to KekValidationResponse and providing the incoming
+// KRs. This operation then calculates a KRr. To learn more about more about
+// node-to-node initialization, see [Validation of KEK]in the Amazon Web Services Payment
+// Cryptography User Guide.
 //
 // For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
 // Web Services Payment Cryptography User Guide.
 //
-// Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts.
+// Cross-account use: This operation supports cross-account use when the key has a
+// resource-based policy that grants access. For more information, see [Resource-based policies].
 //
+// [Validation of KEK]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/as2805.kekvalidation.html
 // [ImportKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
 // [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
 // [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+// [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
+// [Australian Standard 2805 (AS2805)]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/as2805.html
 // [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
 func (c *Client) GenerateAs2805KekValidation(ctx context.Context, params *GenerateAs2805KekValidationInput, optFns ...func(*Options)) (*GenerateAs2805KekValidationOutput, error) {
 	if params == nil {
@@ -57,8 +66,8 @@ func (c *Client) GenerateAs2805KekValidation(ctx context.Context, params *Genera
 
 type GenerateAs2805KekValidationInput struct {
 
-	// Parameter information for generating a random key for KEK validation to perform
-	// node-to-node initialization.
+	// Defines whether to generate a KEK validation request or KEK validation response
+	// for node-to-node initialization.
 	//
 	// This member is required.
 	KekValidationType types.As2805KekValidationType

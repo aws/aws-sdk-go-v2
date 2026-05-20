@@ -1,0 +1,8 @@
+{
+    "id": "2b5364c2-c9d0-464a-8599-bb8712622587",
+    "type": "feature",
+    "description": "Supporting Request Metadata for Invoke Model and Invoke Model with Response Stream",
+    "modules": [
+        "service/bedrockruntime"
+    ]
+}

@@ -2299,17 +2299,29 @@ type RecommenderConfig struct {
 	// Configuration settings for how the recommender processes and uses events.
 	EventsConfig *EventsConfig
 
-	// A map of dataset type to a list of column names to train on. The column names
-	// must be a subset of the columns defined in the recommender schema. If not
-	// specified, all columns in the schema are used for training. The following
-	// columns are always included and do not need to be specified: Item.Id ,
-	// ItemList[].Id , EventTimestamp , EventType , and EventValue .
+	// A map of dataset type to a list of column names to exclude from training. The
+	// _webAnalytics and _catalogItem keys are supported. The column names must be
+	// valid columns defined in the recommender schema. All columns in the schema
+	// except the listed columns will be used for training. The following columns are
+	// mandatory and cannot be excluded: Item.Id , EventTimestamp , and EventType for
+	// _webAnalytics ; Id for _catalogItem . Mutually exclusive with IncludedColumns —
+	// both cannot be specified in the same request.
+	ExcludedColumns map[string][]string
+
+	// A map of dataset type to a list of column names to train on. The _webAnalytics
+	// and _catalogItem keys are supported. The column names must be a subset of the
+	// columns defined in the recommender schema. If not specified, all columns in the
+	// schema are used for training. The following columns are always included in
+	// training and do not need to be specified: Item.Id , EventTimestamp , and
+	// EventType for _webAnalytics ; Id for _catalogItem . Mutually exclusive with
+	// ExcludedColumns — both cannot be specified in the same request.
 	IncludedColumns map[string][]string
 
 	// Configuration settings for how the recommender handles inference requests.
 	InferenceConfig *InferenceConfig
 
-	// How often the recommender should retrain its model with new data.
+	// How often the recommender should retrain its model with new data. If set to 0,
+	// automatic retraining will not be enabled.
 	TrainingFrequency *int32
 
 	noSmithyDocumentSerde

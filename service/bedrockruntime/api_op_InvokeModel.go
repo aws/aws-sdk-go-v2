@@ -118,6 +118,9 @@ type InvokeModelInput struct {
 	// Model performance settings for the request.
 	PerformanceConfigLatency types.PerformanceConfigLatency
 
+	// Key-value pairs that you can use to filter invocation logs.
+	RequestMetadata *string
+
 	// Specifies the processing tier type used for serving the request.
 	ServiceTier types.ServiceTierType
 

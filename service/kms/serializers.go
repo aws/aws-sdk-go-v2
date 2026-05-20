@@ -3350,6 +3350,11 @@ func awsAwsjson11_serializeDocumentGrantConstraints(v *types.GrantConstraints, v
 		}
 	}
 
+	if v.SourceArn != nil {
+		ok := object.Key("SourceArn")
+		ok.String(*v.SourceArn)
+	}
+
 	return nil
 }
 
@@ -3576,6 +3581,11 @@ func awsAwsjson11_serializeOpDocumentCreateGrantInput(v *CreateGrantInput, value
 		ok.String(*v.GranteePrincipal)
 	}
 
+	if v.GranteeServicePrincipal != nil {
+		ok := object.Key("GranteeServicePrincipal")
+		ok.String(*v.GranteeServicePrincipal)
+	}
+
 	if v.GrantTokens != nil {
 		ok := object.Key("GrantTokens")
 		if err := awsAwsjson11_serializeDocumentGrantTokenList(v.GrantTokens, ok); err != nil {
@@ -3603,6 +3613,11 @@ func awsAwsjson11_serializeOpDocumentCreateGrantInput(v *CreateGrantInput, value
 	if v.RetiringPrincipal != nil {
 		ok := object.Key("RetiringPrincipal")
 		ok.String(*v.RetiringPrincipal)
+	}
+
+	if v.RetiringServicePrincipal != nil {
+		ok := object.Key("RetiringServicePrincipal")
+		ok.String(*v.RetiringServicePrincipal)
 	}
 
 	return nil
@@ -4347,6 +4362,11 @@ func awsAwsjson11_serializeOpDocumentListGrantsInput(v *ListGrantsInput, value s
 		ok.String(*v.GranteePrincipal)
 	}
 
+	if v.GranteeServicePrincipal != nil {
+		ok := object.Key("GranteeServicePrincipal")
+		ok.String(*v.GranteeServicePrincipal)
+	}
+
 	if v.GrantId != nil {
 		ok := object.Key("GrantId")
 		ok.String(*v.GrantId)
@@ -4475,6 +4495,11 @@ func awsAwsjson11_serializeOpDocumentListRetirableGrantsInput(v *ListRetirableGr
 	if v.RetiringPrincipal != nil {
 		ok := object.Key("RetiringPrincipal")
 		ok.String(*v.RetiringPrincipal)
+	}
+
+	if v.RetiringServicePrincipal != nil {
+		ok := object.Key("RetiringServicePrincipal")
+		ok.String(*v.RetiringServicePrincipal)
 	}
 
 	return nil

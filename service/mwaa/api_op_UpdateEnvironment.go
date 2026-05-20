@@ -190,6 +190,11 @@ type UpdateEnvironmentInput struct {
 
 	// The Apache Airflow Web server access mode. For more information, refer to [Apache Airflow access modes].
 	//
+	// If set to PUBLIC_AND_PRIVATE , creates both a public network load balancer (NLB)
+	// for browser access and a private VPC endpoint (VPCE) for worker-to-webserver
+	// communication. This mode is only available for Apache Airflow version 3.2 and
+	// later.
+	//
 	// [Apache Airflow access modes]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html
 	WebserverAccessMode types.WebserverAccessMode
 

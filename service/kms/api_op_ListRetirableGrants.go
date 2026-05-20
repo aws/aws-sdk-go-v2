@@ -12,7 +12,7 @@ import (
 )
 
 // Returns information about all grants in the Amazon Web Services account and
-// Region that have the specified retiring principal.
+// Region that have the specified retiring principal or retiring service principal.
 //
 // You can specify any principal in your Amazon Web Services account. The grants
 // that are returned include grants for KMS keys in your Amazon Web Services
@@ -33,11 +33,15 @@ import (
 //
 // Required permissions: [kms:ListRetirableGrants] (IAM policy) in your Amazon Web Services account.
 //
-// KMS authorizes ListRetirableGrants requests by evaluating the caller account's
+// When listing retirable grants by RetiringPrincipal , KMS authorizes
+// ListRetirableGrants requests by evaluating the caller account's
 // kms:ListRetirableGrants permissions. The authorized resource in
 // ListRetirableGrants calls is the retiring principal specified in the request.
 // KMS does not evaluate the caller's permissions to verify their access to any KMS
 // keys or grants that might be returned by the ListRetirableGrants call.
+//
+// The RetiringServicePrincipal filter is only usable by callers in a service
+// principal.
 //
 // Related operations:
 //
@@ -73,20 +77,6 @@ func (c *Client) ListRetirableGrants(ctx context.Context, params *ListRetirableG
 
 type ListRetirableGrantsInput struct {
 
-	// The retiring principal for which to list grants. Enter a principal in your
-	// Amazon Web Services account.
-	//
-	// To specify the retiring principal, use the [Amazon Resource Name (ARN)] of an Amazon Web Services
-	// principal. Valid principals include Amazon Web Services accounts, IAM users, IAM
-	// roles, federated users, and assumed role users. For help with the ARN syntax for
-	// a principal, see [IAM ARNs]in the Identity and Access Management User Guide .
-	//
-	// [IAM ARNs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
-	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
-	//
-	// This member is required.
-	RetiringPrincipal *string
-
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, KMS does not return more than the specified number of items,
 	// but it might return fewer.
@@ -99,6 +89,28 @@ type ListRetirableGrantsInput struct {
 	// truncated results. Set it to the value of NextMarker from the truncated
 	// response you just received.
 	Marker *string
+
+	// The retiring principal for which to list grants. Enter a principal in your
+	// Amazon Web Services account.
+	//
+	// To specify the retiring principal, use the [Amazon Resource Name (ARN)] of an Amazon Web Services
+	// principal. Valid principals include Amazon Web Services accounts, IAM users, IAM
+	// roles, federated users, and assumed role users. For help with the ARN syntax for
+	// a principal, see [IAM ARNs]in the Identity and Access Management User Guide .
+	//
+	// You must specify either RetiringPrincipal or RetiringServicePrincipal , but not
+	// both.
+	//
+	// [IAM ARNs]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html#identifiers-arns
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	RetiringPrincipal *string
+
+	// The retiring service principal for which to list grants. This filter is only
+	// usable by callers in a service principal.
+	//
+	// You must specify either RetiringPrincipal or RetiringServicePrincipal , but not
+	// both.
+	RetiringServicePrincipal *string
 
 	noSmithyDocumentSerde
 }
@@ -186,9 +198,6 @@ func (c *Client) addOperationListRetirableGrantsMiddlewares(stack *middleware.St
 		return err
 	}
 	if err = addCredentialSource(stack, options); err != nil {
-		return err
-	}
-	if err = addOpListRetirableGrantsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRetirableGrants(options.Region), middleware.Before); err != nil {

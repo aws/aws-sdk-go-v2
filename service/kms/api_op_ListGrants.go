@@ -14,17 +14,22 @@ import (
 // Gets a list of all grants for the specified KMS key.
 //
 // You must specify the KMS key in all requests. You can filter the grant list by
-// grant ID or grantee principal.
+// grant ID, grantee principal, or grantee service principal.
 //
 // For detailed information about grants, including grant terminology, see [Grants in KMS] in the
 // Key Management Service Developer Guide . For examples of creating grants in
 // several programming languages, see [Use CreateGrant with an Amazon Web Services SDK or CLI].
 //
-// The GranteePrincipal field in the ListGrants response usually contains the user
-// or role designated as the grantee principal in the grant. However, when the
-// grantee principal in the grant is an Amazon Web Services service, the
-// GranteePrincipal field contains the [service principal], which might represent several different
-// grantee principals.
+// When a grant is created with the GranteePrincipal field, the ListGrants
+// response usually contains the user or role designated as the grantee principal
+// in the grant. However, if the grantee principal is an Amazon Web Services
+// service, the GranteePrincipal field contains an Amazon Web Services [service principal], which
+// might correspond to several different grantee principals, such as an IAM user,
+// IAM role, or Amazon Web Services account.
+//
+// When a grant is created with the GranteeServicePrincipal field, the ListGrants
+// response always includes a GranteeServicePrincipal that indicates the grantee
+// is actually an Amazon Web Services [service principal].
 //
 // Cross-account use: Yes. To perform this operation on a KMS key in a different
 // Amazon Web Services account, specify the key ARN in the value of the KeyId
@@ -90,7 +95,18 @@ type ListGrantsInput struct {
 
 	// Returns only grants where the specified principal is the grantee principal for
 	// the grant.
+	//
+	// You can specify either GranteePrincipal or GranteeServicePrincipal , but not
+	// both.
 	GranteePrincipal *string
+
+	// Returns only grants where the specified Amazon Web Services service principal
+	// is the grantee service principal for the grant. This filter is only usable by
+	// callers in a service principal.
+	//
+	// You can specify either GranteePrincipal or GranteeServicePrincipal , but not
+	// both.
+	GranteeServicePrincipal *string
 
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, KMS does not return more than the specified number of items,

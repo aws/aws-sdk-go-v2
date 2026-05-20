@@ -11,19 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Verifies card-related validation data using algorithms such as Card
-// Verification Values (CVV/CVV2), Dynamic Card Verification Values (dCVV/dCVV2)
-// and Card Security Codes (CSC). For more information, see [Verify card data]in the Amazon Web
-// Services Payment Cryptography User Guide.
+// Generates an Authorization Request Cryptogram (ARQC) for an EMV chip payment
+// card authorization. For more information, see [Generate auth request cryptogram]in the Amazon Web Services
+// Payment Cryptography User Guide.
 //
-// This operation validates the CVV or CSC codes that is printed on a payment
-// credit or debit card during card payment transaction. The input values are
-// typically provided as part of an inbound transaction to an issuer or supporting
-// platform partner. Amazon Web Services Payment Cryptography uses CVV or CSC, PAN
-// (Primary Account Number) and expiration date of the card to check its validity
-// during transaction processing. In this operation, the CVK (Card Verification
-// Key) encryption key for use with card data verification is same as the one in
-// used for GenerateCardValidationData.
+// ARQC generation uses an Issuer Master Key (IMK) for application cryptograms
+// (TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS) to derive a session key, which is then used
+// to generate the cryptogram from the provided transaction data (when applicable).
+// To use this operation, you must first create or import an IMK-AC key by calling [CreateKey]
+// or [ImportKey]. The KeyModesOfUse should be set to DeriveKey for the IMK-AC encryption key.
+//
+// This operation is intended for development and testing scenarios only. It is
+// not recommended to use this operation as a substitute for card-based cryptogram
+// generation in production payment flows.
 //
 // For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
 // Web Services Payment Cryptography User Guide.
@@ -33,64 +33,69 @@ import (
 //
 // Related operations:
 //
-// # GenerateCardValidationData
-//
 // # VerifyAuthRequestCryptogram
 //
-// # VerifyPinData
-//
-// [Verify card data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/verify-card-data.html
+// [ImportKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
 // [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
 // [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
 // [Resource-based policies]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/security_iam_resource-based-policies.html
-func (c *Client) VerifyCardValidationData(ctx context.Context, params *VerifyCardValidationDataInput, optFns ...func(*Options)) (*VerifyCardValidationDataOutput, error) {
+// [Generate auth request cryptogram]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/data-operations.generateauthrequestcryptogram.html
+// [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
+func (c *Client) GenerateAuthRequestCryptogram(ctx context.Context, params *GenerateAuthRequestCryptogramInput, optFns ...func(*Options)) (*GenerateAuthRequestCryptogramOutput, error) {
 	if params == nil {
-		params = &VerifyCardValidationDataInput{}
+		params = &GenerateAuthRequestCryptogramInput{}
 	}
 
-	result, metadata, err := c.invokeOperation(ctx, "VerifyCardValidationData", params, optFns, c.addOperationVerifyCardValidationDataMiddlewares)
+	result, metadata, err := c.invokeOperation(ctx, "GenerateAuthRequestCryptogram", params, optFns, c.addOperationGenerateAuthRequestCryptogramMiddlewares)
 	if err != nil {
 		return nil, err
 	}
 
-	out := result.(*VerifyCardValidationDataOutput)
+	out := result.(*GenerateAuthRequestCryptogramOutput)
 	out.ResultMetadata = metadata
 	return out, nil
 }
 
-type VerifyCardValidationDataInput struct {
+type GenerateAuthRequestCryptogramInput struct {
 
-	// The keyARN of the CVK encryption key that Amazon Web Services Payment
-	// Cryptography uses to verify card data.
+	// The keyARN of the IMK-AC (TR31_E0_EMV_MKEY_APP_CRYPTOGRAMS) that Amazon Web
+	// Services Payment Cryptography uses to generate the ARQC.
 	//
 	// This member is required.
 	KeyIdentifier *string
 
-	// The Primary Account Number (PAN), a unique identifier for a payment credit or
-	// debit card that associates the card with a specific account holder.
+	// The method to use when deriving the major encryption key for ARQC generation
+	// within Amazon Web Services Payment Cryptography.
 	//
 	// This member is required.
-	PrimaryAccountNumber *string
+	MajorKeyDerivationMode types.MajorKeyDerivationMode
 
-	// The CVV or CSC value for use for card data verification within Amazon Web
-	// Services Payment Cryptography.
+	// The attributes and values to use for deriving a session key for ARQC generation
+	// within Amazon Web Services Payment Cryptography.
 	//
 	// This member is required.
-	ValidationData *string
+	SessionKeyDerivationAttributes types.SessionKeyDerivation
 
-	// The algorithm to use for verification of card data within Amazon Web Services
-	// Payment Cryptography.
+	// The transaction data that Amazon Web Services Payment Cryptography uses for
+	// ARQC generation. The same transaction data is used for ARQC verification by the
+	// issuer using VerifyAuthRequestCryptogram.
 	//
 	// This member is required.
-	VerificationAttributes types.CardVerificationAttributes
+	TransactionData *string
 
 	noSmithyDocumentSerde
 }
 
-type VerifyCardValidationDataOutput struct {
+type GenerateAuthRequestCryptogramOutput struct {
 
-	// The keyARN of the CVK encryption key that Amazon Web Services Payment
-	// Cryptography uses to verify CVV or CSC.
+	// The Authorization Request Cryptogram (ARQC) generated by Amazon Web Services
+	// Payment Cryptography using the specified key and transaction data.
+	//
+	// This member is required.
+	AuthRequestCryptogram *string
+
+	// The keyARN of the IMK-AC that Amazon Web Services Payment Cryptography uses for
+	// ARQC generation.
 	//
 	// This member is required.
 	KeyArn *string
@@ -111,19 +116,19 @@ type VerifyCardValidationDataOutput struct {
 	noSmithyDocumentSerde
 }
 
-func (c *Client) addOperationVerifyCardValidationDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
+func (c *Client) addOperationGenerateAuthRequestCryptogramMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpVerifyCardValidationData{}, middleware.After)
+	err = stack.Serialize.Add(&awsRestjson1_serializeOpGenerateAuthRequestCryptogram{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpVerifyCardValidationData{}, middleware.After)
+	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGenerateAuthRequestCryptogram{}, middleware.After)
 	if err != nil {
 		return err
 	}
-	if err := addProtocolFinalizerMiddlewares(stack, options, "VerifyCardValidationData"); err != nil {
+	if err := addProtocolFinalizerMiddlewares(stack, options, "GenerateAuthRequestCryptogram"); err != nil {
 		return fmt.Errorf("add protocol finalizers: %v", err)
 	}
 
@@ -175,10 +180,10 @@ func (c *Client) addOperationVerifyCardValidationDataMiddlewares(stack *middlewa
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
-	if err = addOpVerifyCardValidationDataValidationMiddleware(stack); err != nil {
+	if err = addOpGenerateAuthRequestCryptogramValidationMiddleware(stack); err != nil {
 		return err
 	}
-	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opVerifyCardValidationData(options.Region), middleware.Before); err != nil {
+	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateAuthRequestCryptogram(options.Region), middleware.Before); err != nil {
 		return err
 	}
 	if err = addRecursionDetection(stack); err != nil {
@@ -208,10 +213,10 @@ func (c *Client) addOperationVerifyCardValidationDataMiddlewares(stack *middlewa
 	return nil
 }
 
-func newServiceMetadataMiddleware_opVerifyCardValidationData(region string) *awsmiddleware.RegisterServiceMetadata {
+func newServiceMetadataMiddleware_opGenerateAuthRequestCryptogram(region string) *awsmiddleware.RegisterServiceMetadata {
 	return &awsmiddleware.RegisterServiceMetadata{
 		Region:        region,
 		ServiceID:     ServiceID,
-		OperationName: "VerifyCardValidationData",
+		OperationName: "GenerateAuthRequestCryptogram",
 	}
 }

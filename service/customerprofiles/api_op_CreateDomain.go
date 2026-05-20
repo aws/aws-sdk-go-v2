@@ -17,8 +17,8 @@ import (
 // create multiple domains, and each domain can have multiple third-party
 // integrations.
 //
-// Each Amazon Connect instance can be associated with only one domain. Multiple
-// Amazon Connect instances can be associated with one domain.
+// Each Connect Customer instance can be associated with only one domain. Multiple
+// Connect Customer instances can be associated with one domain.
 //
 // Use this API or [UpdateDomain] to enable [identity resolution]: set Matching to true.
 //
@@ -92,7 +92,7 @@ type CreateDomainInput struct {
 	Matching *types.MatchingRequest
 
 	// The process of matching duplicate profiles using the Rule-Based matching. If
-	// RuleBasedMatching = true, Amazon Connect Customer Profiles will start to match
+	// RuleBasedMatching = true, Connect Customer Customer Profiles will start to match
 	// and merge your profiles according to your configuration in the
 	// RuleBasedMatchingRequest . You can use the ListRuleBasedMatches and
 	// GetSimilarProfiles API to return and review the results. Also, if you have
@@ -154,7 +154,7 @@ type CreateDomainOutput struct {
 	Matching *types.MatchingResponse
 
 	// The process of matching duplicate profiles using the Rule-Based matching. If
-	// RuleBasedMatching = true, Amazon Connect Customer Profiles will start to match
+	// RuleBasedMatching = true, Connect Customer Customer Profiles will start to match
 	// and merge your profiles according to your configuration in the
 	// RuleBasedMatchingRequest . You can use the ListRuleBasedMatches and
 	// GetSimilarProfiles API to return and review the results. Also, if you have

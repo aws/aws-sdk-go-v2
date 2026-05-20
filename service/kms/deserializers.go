@@ -9376,6 +9376,15 @@ func awsAwsjson11_deserializeDocumentGrantConstraints(v **types.GrantConstraints
 				return err
 			}
 
+		case "SourceArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GrantConstraintSourceArnType to be of type string, got %T instead", value)
+				}
+				sv.SourceArn = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9471,6 +9480,15 @@ func awsAwsjson11_deserializeDocumentGrantListEntry(v **types.GrantListEntry, va
 				sv.GranteePrincipal = ptr.String(jtv)
 			}
 
+		case "GranteeServicePrincipal":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServicePrincipalType to be of type string, got %T instead", value)
+				}
+				sv.GranteeServicePrincipal = ptr.String(jtv)
+			}
+
 		case "GrantId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9519,6 +9537,15 @@ func awsAwsjson11_deserializeDocumentGrantListEntry(v **types.GrantListEntry, va
 					return fmt.Errorf("expected PrincipalIdType to be of type string, got %T instead", value)
 				}
 				sv.RetiringPrincipal = ptr.String(jtv)
+			}
+
+		case "RetiringServicePrincipal":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ServicePrincipalType to be of type string, got %T instead", value)
+				}
+				sv.RetiringServicePrincipal = ptr.String(jtv)
 			}
 
 		default:

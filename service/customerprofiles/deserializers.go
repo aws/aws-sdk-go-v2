@@ -28451,6 +28451,11 @@ func awsRestjson1_deserializeDocumentRecommenderConfig(v **types.RecommenderConf
 				return err
 			}
 
+		case "ExcludedColumns":
+			if err := awsRestjson1_deserializeDocumentIncludedColumns(&sv.ExcludedColumns, value); err != nil {
+				return err
+			}
+
 		case "IncludedColumns":
 			if err := awsRestjson1_deserializeDocumentIncludedColumns(&sv.IncludedColumns, value); err != nil {
 				return err

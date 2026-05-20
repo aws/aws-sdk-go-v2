@@ -65,6 +65,10 @@ import (
 // The KMS key that you use for this operation must be in a compatible key state.
 // For details, see [Key states of KMS keys]in the Key Management Service Developer Guide.
 //
+// When using grants with SourceArn constraints for ReEncrypt operations, the
+// grants on both the source KMS key (for ReEncryptFrom ) and the destination KMS
+// key (for ReEncryptTo ) must specify the same SourceArn value.
+//
 // Cross-account use: Yes. The source KMS key and destination KMS key can be in
 // different Amazon Web Services accounts. Either or both KMS keys can be in a
 // different account than the caller. To specify a KMS key in a different account,

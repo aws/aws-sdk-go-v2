@@ -12340,6 +12340,13 @@ func awsRestjson1_serializeDocumentRecommenderConfig(v *types.RecommenderConfig,
 		}
 	}
 
+	if v.ExcludedColumns != nil {
+		ok := object.Key("ExcludedColumns")
+		if err := awsRestjson1_serializeDocumentIncludedColumns(v.ExcludedColumns, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IncludedColumns != nil {
 		ok := object.Key("IncludedColumns")
 		if err := awsRestjson1_serializeDocumentIncludedColumns(v.IncludedColumns, ok); err != nil {
