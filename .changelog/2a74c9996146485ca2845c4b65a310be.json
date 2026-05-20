@@ -1,8 +1,0 @@
-{
-    "id": "2a74c999-6146-485c-a284-5c4b65a310be",
-    "type": "feature",
-    "description": "AWS KMS now supports creating grants for AWS service principals using new GranteeServicePrincipal and RetiringServicePrincipal parameters. This release adds SourceArn grant constraint and three condition keys for controlling CreateGrant access. For more information, see Grants in AWS KMS.",
-    "modules": [
-        "service/kms"
-    ]
-}

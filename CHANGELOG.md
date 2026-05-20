@@ -1,3 +1,20 @@
+# Release (2026-05-20)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/bedrockruntime`: [v1.51.0](service/bedrockruntime/CHANGELOG.md#v1510-2026-05-20)
+  * **Feature**: Supporting Request Metadata for Invoke Model and Invoke Model with Response Stream
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.60.0](service/customerprofiles/CHANGELOG.md#v1600-2026-05-20)
+  * **Feature**: Amazon Connect Customer Profiles adds support for item catalog columns in RecommenderSchema, ExcludedColumns in Create and Update Recommender to specify columns to exclude from training, and the ability to disable automatic retraining by setting TrainingFrequency to 0.
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.52.0](service/kms/CHANGELOG.md#v1520-2026-05-20)
+  * **Feature**: AWS KMS now supports creating grants for AWS service principals using new GranteeServicePrincipal and RetiringServicePrincipal parameters. This release adds SourceArn grant constraint and three condition keys for controlling CreateGrant access. For more information, see Grants in AWS KMS.
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.40.1](service/mwaa/CHANGELOG.md#v1401-2026-05-20)
+  * **Documentation**: Updated API documentation to describe the PublicAndPrivate webserver access mode.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.26.0](service/paymentcryptographydata/CHANGELOG.md#v1260-2026-05-20)
+  * **Feature**: GenerateAuthRequestCryptogram API launch.
+
 # Release (2026-05-19)
 
 ## Module Highlights

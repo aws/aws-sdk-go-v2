@@ -1,3 +1,7 @@
+# v1.51.0 (2026-05-20)
+
+* **Feature**: Supporting Request Metadata for Invoke Model and Invoke Model with Response Stream
+
 # v1.50.6 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

@@ -1,3 +1,7 @@
+# v1.60.0 (2026-05-20)
+
+* **Feature**: Amazon Connect Customer Profiles adds support for item catalog columns in RecommenderSchema, ExcludedColumns in Create and Update Recommender to specify columns to exclude from training, and the ability to disable automatic retraining by setting TrainingFrequency to 0.
+
 # v1.59.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

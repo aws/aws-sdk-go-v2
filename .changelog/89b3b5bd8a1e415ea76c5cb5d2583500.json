@@ -1,8 +1,0 @@
-{
-    "id": "89b3b5bd-8a1e-415e-a76c-5cb5d2583500",
-    "type": "feature",
-    "description": "GenerateAuthRequestCryptogram API launch.",
-    "modules": [
-        "service/paymentcryptographydata"
-    ]
-}

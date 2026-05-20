@@ -1,3 +1,7 @@
+# v1.52.0 (2026-05-20)
+
+* **Feature**: AWS KMS now supports creating grants for AWS service principals using new GranteeServicePrincipal and RetiringServicePrincipal parameters. This release adds SourceArn grant constraint and three condition keys for controlling CreateGrant access. For more information, see Grants in AWS KMS.
+
 # v1.51.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

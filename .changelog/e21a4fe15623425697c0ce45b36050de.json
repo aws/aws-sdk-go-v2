@@ -1,8 +1,0 @@
-{
-    "id": "e21a4fe1-5623-4256-97c0-ce45b36050de",
-    "type": "documentation",
-    "description": "Updated API documentation to describe the PublicAndPrivate webserver access mode.",
-    "modules": [
-        "service/mwaa"
-    ]
-}

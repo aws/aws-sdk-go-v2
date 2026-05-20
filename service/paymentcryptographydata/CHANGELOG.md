@@ -1,3 +1,7 @@
+# v1.26.0 (2026-05-20)
+
+* **Feature**: GenerateAuthRequestCryptogram API launch.
+
 # v1.25.7 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.
