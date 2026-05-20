@@ -13,11 +13,6 @@ import software.amazon.smithy.model.shapes.ShapeId;
 public class RemoveOperations implements GoIntegration {
 
     private Map<String, List<ShapeId>> SHAPES_TO_REMOVE = Map.of(
-        "sagemaker runtime http2", List.of(
-            ShapeId.from("com.amazonaws.sagemakerruntimehttp2#InvokeEndpointWithBidirectionalStream"),
-            ShapeId.from("com.amazonaws.sagemakerruntimehttp2#InvokeEndpointWithBidirectionalStreamInput"),
-            ShapeId.from("com.amazonaws.sagemakerruntimehttp2#InvokeEndpointWithBidirectionalStreamOutput")
-        )
     );
 
     @Override
