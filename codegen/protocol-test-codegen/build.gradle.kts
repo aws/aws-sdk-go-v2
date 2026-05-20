@@ -62,6 +62,9 @@ val excludedServices = setOf(
     "com.amazonaws.machinelearning#AmazonML_20141212",
     "com.amazonaws.s3#AmazonS3",
     "aws.protocoltests.restjson.validation#RestJsonValidation",
+
+	// not yet supported
+	"smithy.protocoltests.rpcv2Json#RpcV2JsonProtocol"
 )
 
 // Override (projectionName, moduleSuffix) for services where auto-derivation

@@ -185,6 +185,17 @@ func TestClient_NoInputAndNoOutput_Deserialize(t *testing.T) {
 			StatusCode:   200,
 			ExpectResult: &NoInputAndNoOutputOutput{},
 		},
+		// Empty output, but the server returns ResponseMetadata.
+		"QueryNoInputAndNoOutputWithResponseMetadata": {
+			StatusCode: 200,
+			Body: []byte(`<NoInputAndNoOutputResponse>
+			    <ResponseMetadata>
+			        <RequestId>abc-123</RequestId>
+			    </ResponseMetadata>
+			</NoInputAndNoOutputResponse>
+			`),
+			ExpectResult: &NoInputAndNoOutputOutput{},
+		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -249,6 +260,16 @@ func BenchmarkClient_NoInputAndNoOutput_Deserialize(b *testing.B) {
 	}{
 		"QueryNoInputAndNoOutput": {
 			StatusCode:   200,
+			ExpectResult: &NoInputAndNoOutputOutput{},
+		},
+		"QueryNoInputAndNoOutputWithResponseMetadata": {
+			StatusCode: 200,
+			Body: []byte(`<NoInputAndNoOutputResponse>
+			    <ResponseMetadata>
+			        <RequestId>abc-123</RequestId>
+			    </ResponseMetadata>
+			</NoInputAndNoOutputResponse>
+			`),
 			ExpectResult: &NoInputAndNoOutputOutput{},
 		},
 	}

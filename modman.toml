@@ -35,6 +35,9 @@
   [modules."internal/protocoltest/awsrestjson"]
     no_tag = true
 
+  [modules."internal/protocoltest/eventstreamtest"]
+    no_tag = true
+
   [modules."internal/protocoltest/ec2query"]
     no_tag = true
 

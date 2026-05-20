@@ -2084,7 +2084,7 @@ public final class AwsEventStreamUtils {
         public Void booleanShape(BooleanShape shape) {
             var boolSymbol = SymbolUtils.createValueSymbolBuilder("bool")
                     .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true).build();
-            writeTypeDeserializer(getEventStreamSymbol("BoolValue"), boolSymbol);
+            writeTypeDeserializer(getEventStreamSymbol("BoolValue", false), boolSymbol);
             return null;
         }
 
@@ -2092,7 +2092,7 @@ public final class AwsEventStreamUtils {
         public Void byteShape(ByteShape shape) {
             var int8Symbol = SymbolUtils.createValueSymbolBuilder("int8")
                     .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true).build();
-            writeTypeDeserializer(getEventStreamSymbol("Int8Value"), int8Symbol);
+            writeTypeDeserializer(getEventStreamSymbol("Int8Value", false), int8Symbol);
             return null;
         }
 
@@ -2100,7 +2100,7 @@ public final class AwsEventStreamUtils {
         public Void shortShape(ShortShape shape) {
             var int16Symbol = SymbolUtils.createValueSymbolBuilder("int16")
                     .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true).build();
-            writeTypeDeserializer(getEventStreamSymbol("Int16Value"), int16Symbol);
+            writeTypeDeserializer(getEventStreamSymbol("Int16Value", false), int16Symbol);
             return null;
         }
 
@@ -2108,7 +2108,7 @@ public final class AwsEventStreamUtils {
         public Void integerShape(IntegerShape shape) {
             var int32Symbol = SymbolUtils.createValueSymbolBuilder("int32")
                     .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true).build();
-            writeTypeDeserializer(getEventStreamSymbol("Int32Value"), int32Symbol);
+            writeTypeDeserializer(getEventStreamSymbol("Int32Value", false), int32Symbol);
             return null;
         }
 
@@ -2116,7 +2116,7 @@ public final class AwsEventStreamUtils {
         public Void longShape(LongShape shape) {
             var int64Symbol = SymbolUtils.createValueSymbolBuilder("int64")
                     .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true).build();
-            writeTypeDeserializer(getEventStreamSymbol("Int64Value"), int64Symbol);
+            writeTypeDeserializer(getEventStreamSymbol("Int64Value", false), int64Symbol);
             return null;
         }
 
@@ -2124,20 +2124,20 @@ public final class AwsEventStreamUtils {
         public Void stringShape(StringShape shape) {
             var stringSymbol = SymbolUtils.createValueSymbolBuilder("string")
                     .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true).build();
-            writeTypeDeserializer(getEventStreamSymbol("StringValue"), stringSymbol);
+            writeTypeDeserializer(getEventStreamSymbol("StringValue", false), stringSymbol);
             return null;
         }
 
         @Override
         public Void enumShape(EnumShape shape) {
-            writeTypeDeserializer(getEventStreamSymbol("StringValue"),  headerSymbol);
+            writeTypeDeserializer(getEventStreamSymbol("StringValue", false),  headerSymbol);
             return null;
         }
 
         @Override
         public Void timestampShape(TimestampShape shape) {
             var timeSymbol = SymbolUtils.createValueSymbolBuilder("Time", SmithyGoDependency.TIME).build();
-            writeTypeDeserializer(getEventStreamSymbol("TimestampValue"), timeSymbol);
+            writeTypeDeserializer(getEventStreamSymbol("TimestampValue", false), timeSymbol);
             return null;
         }
 
