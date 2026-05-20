@@ -1906,7 +1906,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile\n         attributes, object types, profile keys, and encryption keys. You can create multiple\n         domains, and each domain can have multiple third-party integrations.</p>\n         <p>Each Amazon Connect instance can be associated with only one domain. Multiple\n            Amazon Connect instances can be associated with one domain.</p>\n         <p>Use this API or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">identity\n            resolution</a>: set <code>Matching</code> to true.</p>\n         <p>To prevent cross-service impersonation when you call this API, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html\">Cross-service confused deputy prevention</a> for sample policies that you should\n         apply. </p>\n         <note>\n            <p>It is not possible to associate a Customer Profiles domain with an Amazon Connect Instance directly from\n            the API. If you would like to create a domain and associate a Customer Profiles domain, use the Amazon Connect\n            admin website. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-customer-profiles.html#enable-customer-profiles-step1\">Enable Customer Profiles</a>.</p>\n            <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances\n            can be associated with one domain.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile\n         attributes, object types, profile keys, and encryption keys. You can create multiple\n         domains, and each domain can have multiple third-party integrations.</p>\n         <p>Each Connect Customer instance can be associated with only one domain. Multiple\n            Connect Customer instances can be associated with one domain.</p>\n         <p>Use this API or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">identity\n            resolution</a>: set <code>Matching</code> to true.</p>\n         <p>To prevent cross-service impersonation when you call this API, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html\">Cross-service confused deputy prevention</a> for sample policies that you should\n         apply. </p>\n         <note>\n            <p>It is not possible to associate a Customer Profiles domain with an Amazon Connect Instance directly from\n            the API. If you would like to create a domain and associate a Customer Profiles domain, use the Amazon Connect\n            admin website. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-customer-profiles.html#enable-customer-profiles-step1\">Enable Customer Profiles</a>.</p>\n            <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances\n            can be associated with one domain.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}",
@@ -2128,7 +2128,7 @@
                 "RuleBasedMatching": {
                     "target": "com.amazonaws.customerprofiles#RuleBasedMatchingRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
                     }
                 },
                 "DataStore": {
@@ -2186,7 +2186,7 @@
                 "RuleBasedMatching": {
                     "target": "com.amazonaws.customerprofiles#RuleBasedMatchingResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
                     }
                 },
                 "DataStore": {
@@ -2246,7 +2246,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an event stream, which is a subscription to real-time events, such as when\n         profiles are created and updated through Amazon Connect Customer Profiles.</p>\n         <p>Each event stream can be associated with only one Kinesis Data Stream destination in the\n         same region and Amazon Web Services account as the customer profiles domain</p>",
+                "smithy.api#documentation": "<p>Creates an event stream, which is a subscription to real-time events, such as when\n         profiles are created and updated through Connect Customer Customer Profiles.</p>\n         <p>Each event stream can be associated with only one Kinesis Data Stream destination in the\n         same region and Amazon Web Services account as the customer profiles domain</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}/event-streams/{EventStreamName}",
@@ -3061,7 +3061,7 @@
                 "Fields": {
                     "target": "com.amazonaws.customerprofiles#RecommenderSchemaFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of dataset type to column definitions that specifies which data columns to include in the schema. Currently only the <code>_webAnalytics</code> key is supported.</p>",
+                        "smithy.api#documentation": "<p>A map of dataset type to column definitions that specifies which data columns to include in the schema. The <code>_webAnalytics</code> and <code>_catalogItem</code> keys are supported.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3437,7 +3437,7 @@
                 "DestinationUri": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination to which the segment will be exported. This field must be provided if\n         the request is not submitted from the Amazon Connect Admin Website.</p>"
+                        "smithy.api#documentation": "<p>The destination to which the segment will be exported. This field must be provided if\n         the request is not submitted from the Connect Customer Admin Website.</p>"
                     }
                 }
             },
@@ -3897,7 +3897,7 @@
                     "name": "profile"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon Connect Customer Profiles</fullname>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Customer_Profiles.html\">Customer Profiles actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Customer_Profiles.html\">Customer Profiles data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>Amazon Connect Customer Profiles is a unified customer profile for your contact\n         center that has pre-built connectors powered by AppFlow that make it easy to combine\n         customer information from third party applications, such as Salesforce (CRM), ServiceNow\n         (ITSM), and your enterprise resource planning (ERP), with contact history from your Amazon Connect contact center. </p>\n         <p>For more information about the Amazon Connect Customer Profiles feature, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles.html\">Use Customer\n            Profiles</a> in the <i>Amazon Connect Administrator's Guide</i>. </p>",
+                "smithy.api#documentation": "<fullname>Connect Customer Customer Profiles</fullname>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Connect_Customer_Profiles.html\">Customer Profiles actions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Connect_Customer_Profiles.html\">Customer Profiles data types</a>\n               </p>\n            </li>\n         </ul>\n         <p>Connect Customer Customer Profiles is a unified customer profile for your contact\n         center that has pre-built connectors powered by AppFlow that make it easy to combine\n         customer information from third party applications, such as Salesforce (CRM), ServiceNow\n         (ITSM), and your enterprise resource planning (ERP), with contact history from your Connect Customer contact center. </p>\n         <p>For more information about the Connect Customer Customer Profiles feature, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/customer-profiles.html\">Use Customer\n            Profiles</a> in the <i>Connect Customer Administrator's Guide</i>. </p>",
                 "smithy.api#title": "Amazon Connect Customer Profiles",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -7948,7 +7948,7 @@
                 "RuleBasedMatching": {
                     "target": "com.amazonaws.customerprofiles#RuleBasedMatchingResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the Rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
                     }
                 },
                 "DataStore": {
@@ -10093,7 +10093,7 @@
                 "DestinationUri": {
                     "target": "com.amazonaws.customerprofiles#string1To255",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination to which the segment will be exported. This field must be provided if\n         the request is not submitted from the Amazon Connect Admin Website.</p>"
+                        "smithy.api#documentation": "<p>The destination to which the segment will be exported. This field must be provided if\n         the request is not submitted from the Connect Customer Admin Website.</p>"
                     }
                 }
             },
@@ -10933,7 +10933,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 500
+                    "max": 1000
                 }
             }
         },
@@ -16258,7 +16258,7 @@
                 "TrainingFrequency": {
                     "target": "com.amazonaws.customerprofiles#RecommenderConfigTrainingFrequencyInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>How often the recommender should retrain its model with new data.</p>"
+                        "smithy.api#documentation": "<p>How often the recommender should retrain its model with new data. If set to 0, automatic retraining will not be enabled.</p>"
                     }
                 },
                 "InferenceConfig": {
@@ -16270,7 +16270,13 @@
                 "IncludedColumns": {
                     "target": "com.amazonaws.customerprofiles#IncludedColumns",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map of dataset type to a list of column names to train on. The column names must be a subset of the columns defined in the recommender schema. If not specified, all columns in the schema are used for training. The following columns are always included and do not need to be specified: <code>Item.Id</code>, <code>ItemList[].Id</code>, <code>EventTimestamp</code>, <code>EventType</code>, and <code>EventValue</code>.</p>"
+                        "smithy.api#documentation": "<p>A map of dataset type to a list of column names to train on. The <code>_webAnalytics</code> and <code>_catalogItem</code> keys are supported. The column names must be a subset of the columns defined in the recommender schema. If not specified, all columns in the schema are used for training. The following columns are always included in training and do not need to be specified: <code>Item.Id</code>, <code>EventTimestamp</code>, and <code>EventType</code> for <code>_webAnalytics</code>; <code>Id</code> for <code>_catalogItem</code>. Mutually exclusive with ExcludedColumns — both cannot be specified in the same request.</p>"
+                    }
+                },
+                "ExcludedColumns": {
+                    "target": "com.amazonaws.customerprofiles#IncludedColumns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of dataset type to a list of column names to exclude from training. The <code>_webAnalytics</code> and <code>_catalogItem</code> keys are supported. The column names must be valid columns defined in the recommender schema. All columns in the schema except the listed columns will be used for training. The following columns are mandatory and cannot be excluded: <code>Item.Id</code>, <code>EventTimestamp</code>, and <code>EventType</code> for <code>_webAnalytics</code>; <code>Id</code> for <code>_catalogItem</code>. Mutually exclusive with IncludedColumns — both cannot be specified in the same request.</p>"
                     }
                 }
             },
@@ -16282,7 +16288,7 @@
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
-                    "min": 1,
+                    "min": 0,
                     "max": 30
                 }
             }
@@ -16644,7 +16650,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1
+                    "max": 2
                 }
             }
         },
@@ -19713,7 +19719,7 @@
                 "RuleBasedMatching": {
                     "target": "com.amazonaws.customerprofiles#RuleBasedMatchingRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
                     }
                 },
                 "DataStore": {
@@ -19770,7 +19776,7 @@
                 "RuleBasedMatching": {
                     "target": "com.amazonaws.customerprofiles#RuleBasedMatchingResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Amazon Connect Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles using the rule-Based matching. If\n            <code>RuleBasedMatching</code> = true, Connect Customer Customer Profiles will start\n         to match and merge your profiles according to your configuration in the\n            <code>RuleBasedMatchingRequest</code>. You can use the <code>ListRuleBasedMatches</code>\n         and <code>GetSimilarProfiles</code> API to return and review the results. Also, if you have\n         configured <code>ExportingConfig</code> in the <code>RuleBasedMatchingRequest</code>, you\n         can download the results from S3.</p>"
                     }
                 },
                 "DataStore": {

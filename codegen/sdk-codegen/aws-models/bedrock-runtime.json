@@ -5336,6 +5336,13 @@
                         "smithy.api#documentation": "<p>Specifies the processing tier type used for serving the request.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-Service-Tier"
                     }
+                },
+                "requestMetadata": {
+                    "target": "com.amazonaws.bedrockruntime#RequestMetadataJson",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs that you can use to filter invocation logs.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-Request-Metadata"
+                    }
                 }
             },
             "traits": {
@@ -5671,6 +5678,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the processing tier type used for serving the request.</p>",
                         "smithy.api#httpHeader": "X-Amzn-Bedrock-Service-Tier"
+                    }
+                },
+                "requestMetadata": {
+                    "target": "com.amazonaws.bedrockruntime#RequestMetadataJson",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs that you can use to filter invocation logs.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-Bedrock-Request-Metadata"
                     }
                 }
             },
@@ -6336,6 +6350,15 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 16
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockruntime#RequestMetadataJson": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 8500
                 },
                 "smithy.api#sensitive": {}
             }
