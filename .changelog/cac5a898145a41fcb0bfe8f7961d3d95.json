@@ -1,0 +1,8 @@
+{
+    "id": "cac5a898-145a-41fc-b0bf-e8f7961d3d95",
+    "type": "bugfix",
+    "description": "Reinstate missing bidirectional stream operation.",
+    "modules": [
+        "service/sagemakerruntimehttp2"
+    ]
+}
