@@ -144,6 +144,7 @@ const (
 	ChecksumAlgorithmCrc32c                   = "CRC32C"
 	ChecksumAlgorithmSha1                     = "SHA1"
 	ChecksumAlgorithmSha256                   = "SHA256"
+	ChecksumAlgorithmSha512                   = "SHA512"
 )
 
 // ObjectCannedACL defines the canned ACL to apply to the object, see [Canned ACL] in the
@@ -287,6 +288,17 @@ type CompletedPart struct {
 	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums
 	ChecksumSHA256 *string
 
+	// The base64-encoded, 512-bit SHA-512 digest of the object. This will only be
+	// present if it was uploaded with the object. When you use an API operation on an
+	// object that was uploaded using multipart uploads, this value may not be a direct
+	// checksum value of the full object. Instead, it's a calculation based on the
+	// checksum values of each individual part. For more information about how
+	// checksums are calculated with multipart uploads, see [Checking object integrity]in the Amazon S3 User
+	// Guide.
+	//
+	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html#large-object-checksums
+	ChecksumSHA512 *string
+
 	// Entity tag returned when the part was uploaded.
 	ETag *string
 
@@ -312,6 +324,7 @@ func (cp CompletedPart) MapCompletedPart() types.CompletedPart {
 		ChecksumCRC32C: cp.ChecksumCRC32C,
 		ChecksumSHA1:   cp.ChecksumSHA1,
 		ChecksumSHA256: cp.ChecksumSHA256,
+		ChecksumSHA512: cp.ChecksumSHA512,
 		ETag:           cp.ETag,
 		PartNumber:     cp.PartNumber,
 	}
@@ -323,6 +336,7 @@ func (cp *CompletedPart) MapFrom(resp *s3.UploadPartOutput, partNum *int32) {
 	cp.ChecksumCRC32C = resp.ChecksumCRC32C
 	cp.ChecksumSHA1 = resp.ChecksumSHA1
 	cp.ChecksumSHA256 = resp.ChecksumSHA256
+	cp.ChecksumSHA512 = resp.ChecksumSHA512
 	cp.ETag = resp.ETag
 	cp.PartNumber = partNum
 }
