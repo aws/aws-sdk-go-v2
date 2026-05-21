@@ -18,6 +18,7 @@
         "api_op_DeleteEnvironmentConnector.go",
         "api_op_DeleteEnvironmentHost.go",
         "api_op_DisassociateEipFromVlan.go",
+        "api_op_GetDepotUrl.go",
         "api_op_GetEnvironment.go",
         "api_op_GetVersions.go",
         "api_op_ListEnvironmentConnectors.go",

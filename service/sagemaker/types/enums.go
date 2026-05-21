@@ -3586,6 +3586,25 @@ func (Framework) Values() []Framework {
 	}
 }
 
+type HomeEfsFileSystemCreation string
+
+// Enum values for HomeEfsFileSystemCreation
+const (
+	HomeEfsFileSystemCreationEnabled  HomeEfsFileSystemCreation = "Enabled"
+	HomeEfsFileSystemCreationDisabled HomeEfsFileSystemCreation = "Disabled"
+)
+
+// Values returns all known values for HomeEfsFileSystemCreation. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HomeEfsFileSystemCreation) Values() []HomeEfsFileSystemCreation {
+	return []HomeEfsFileSystemCreation{
+		"Enabled",
+		"Disabled",
+	}
+}
+
 type HubContentSortBy string
 
 // Enum values for HubContentSortBy

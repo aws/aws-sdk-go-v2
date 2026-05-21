@@ -6,6 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,11 +16,19 @@ import (
 // This operation is idempotent. If you specify a policy store alias that does not
 // exist, the request response will still return a successful HTTP 200 status code.
 //
-// When a policy store alias is deleted, it enters the PendingDeletion state. When
-// a policy store alias is in the PendingDeletion state, new policy store aliases
-// cannot be created with the same name. If the policy store alias is used in an
-// API that has a policyStoreId field, the operation will fail with a
+// By default, when a policy store alias is deleted, it enters the PendingDeletion
+// state. When a policy store alias is in the PendingDeletion state, new policy
+// store aliases cannot be created with the same name. If the policy store alias is
+// used in an API that has a policyStoreId field, the operation will fail with a
 // ResourceNotFound exception.
+//
+// To immediately delete a policy store alias and bypass the PendingDeletion
+// state, set the deletionMode parameter to HardDelete .
+//
+// Verified Permissions is eventually consistent. If you hard delete a policy
+// store alias and then immediately recreate it to be associated with a different
+// policy store, requests that reference this alias may continue to be evaluated
+// against the previously associated policy store for a short period of time.
 func (c *Client) DeletePolicyStoreAlias(ctx context.Context, params *DeletePolicyStoreAliasInput, optFns ...func(*Options)) (*DeletePolicyStoreAliasOutput, error) {
 	if params == nil {
 		params = &DeletePolicyStoreAliasInput{}
@@ -43,6 +52,15 @@ type DeletePolicyStoreAliasInput struct {
 	//
 	// This member is required.
 	AliasName *string
+
+	// Specifies the deletion mode for the policy store alias. The valid values are:
+	//
+	//   - SoftDelete – The policy store alias enters the PendingDeletion state. This
+	//   is the default behavior when no deletionMode is specified.
+	//
+	//   - HardDelete – The policy store alias is immediately deleted, bypassing the
+	//   PendingDeletion state.
+	DeletionMode types.DeletionMode
 
 	noSmithyDocumentSerde
 }

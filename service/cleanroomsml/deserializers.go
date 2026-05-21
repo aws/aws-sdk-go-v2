@@ -3489,6 +3489,11 @@ func awsRestjson1_deserializeOpDocumentGetCollaborationMLInputChannelOutput(v **
 				sv.NumberOfRecords = ptr.Int64(i64)
 			}
 
+		case "payerConfiguration":
+			if err := awsRestjson1_deserializeDocumentPayerConfiguration(&sv.PayerConfiguration, value); err != nil {
+				return err
+			}
+
 		case "privacyBudgets":
 			if err := awsRestjson1_deserializeDocumentPrivacyBudgets(&sv.PrivacyBudgets, value); err != nil {
 				return err
@@ -3792,6 +3797,15 @@ func awsRestjson1_deserializeOpDocumentGetCollaborationTrainedModelOutput(v **Ge
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.MetricsStatusDetails = ptr.String(jtv)
+			}
+
+		case "mlModelTrainingPayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.MlModelTrainingPayerAccountId = ptr.String(jtv)
 			}
 
 		case "name":
@@ -5283,6 +5297,11 @@ func awsRestjson1_deserializeOpDocumentGetMLInputChannelOutput(v **GetMLInputCha
 				sv.NumberOfRecords = ptr.Int64(i64)
 			}
 
+		case "payerConfiguration":
+			if err := awsRestjson1_deserializeDocumentPayerConfiguration(&sv.PayerConfiguration, value); err != nil {
+				return err
+			}
+
 		case "privacyBudgets":
 			if err := awsRestjson1_deserializeDocumentPrivacyBudgets(&sv.PrivacyBudgets, value); err != nil {
 				return err
@@ -5651,6 +5670,15 @@ func awsRestjson1_deserializeOpDocumentGetTrainedModelOutput(v **GetTrainedModel
 				sv.MetricsStatusDetails = ptr.String(jtv)
 			}
 
+		case "mlModelTrainingPayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.MlModelTrainingPayerAccountId = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6001,6 +6029,15 @@ func awsRestjson1_deserializeOpDocumentGetTrainedModelInferenceJobOutput(v **Get
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.MetricsStatusDetails = ptr.String(jtv)
+			}
+
+		case "mlModelInferencePayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.MlModelInferencePayerAccountId = ptr.String(jtv)
 			}
 
 		case "name":
@@ -11889,6 +11926,11 @@ func awsRestjson1_deserializeDocumentCollaborationMLInputChannelSummary(v **type
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "payerConfiguration":
+			if err := awsRestjson1_deserializeDocumentPayerConfiguration(&sv.PayerConfiguration, value); err != nil {
+				return err
+			}
+
 		case "status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12243,6 +12285,15 @@ func awsRestjson1_deserializeDocumentCollaborationTrainedModelInferenceJobSummar
 				sv.MetricsStatusDetails = ptr.String(jtv)
 			}
 
+		case "mlModelInferencePayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.MlModelInferencePayerAccountId = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12432,6 +12483,15 @@ func awsRestjson1_deserializeDocumentCollaborationTrainedModelSummary(v **types.
 					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.MembershipIdentifier = ptr.String(jtv)
+			}
+
+		case "mlModelTrainingPayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.MlModelTrainingPayerAccountId = ptr.String(jtv)
 			}
 
 		case "name":
@@ -14864,6 +14924,11 @@ func awsRestjson1_deserializeDocumentMLInputChannelSummary(v **types.MLInputChan
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "payerConfiguration":
+			if err := awsRestjson1_deserializeDocumentPayerConfiguration(&sv.PayerConfiguration, value); err != nil {
+				return err
+			}
+
 		case "protectedQueryIdentifier":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15218,6 +15283,55 @@ func awsRestjson1_deserializeDocumentParameterMap(v *map[string]string, value in
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPayerConfiguration(v **types.PayerConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PayerConfiguration
+	if *v == nil {
+		sv = &types.PayerConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "computePayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.ComputePayerAccountId = ptr.String(jtv)
+			}
+
+		case "syntheticDataPayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.SyntheticDataPayerAccountId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -16635,6 +16749,15 @@ func awsRestjson1_deserializeDocumentTrainedModelInferenceJobSummary(v **types.T
 				sv.MetricsStatusDetails = ptr.String(jtv)
 			}
 
+		case "mlModelInferencePayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.MlModelInferencePayerAccountId = ptr.String(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16935,6 +17058,15 @@ func awsRestjson1_deserializeDocumentTrainedModelSummary(v **types.TrainedModelS
 					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
 				}
 				sv.MembershipIdentifier = ptr.String(jtv)
+			}
+
+		case "mlModelTrainingPayerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountId to be of type string, got %T instead", value)
+				}
+				sv.MlModelTrainingPayerAccountId = ptr.String(jtv)
 			}
 
 		case "name":

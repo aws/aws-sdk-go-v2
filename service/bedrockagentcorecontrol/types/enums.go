@@ -481,6 +481,78 @@ func (CredentialProviderVendorType) Values() []CredentialProviderVendorType {
 	}
 }
 
+type DatasetSchemaType string
+
+// Enum values for DatasetSchemaType
+const (
+	// AgentCore predefined evaluation schema, version 1. Dataset with pre-written
+	// inputs per conversation turn. Required: input. Optional: expectedResponse,
+	// assertions, expectedTrajectory.
+	DatasetSchemaTypeAgentcoreEvaluationPredefinedV1 DatasetSchemaType = "AGENTCORE_EVALUATION_PREDEFINED_V1"
+	// AgentCore simulated evaluation schema, version 1. Dataset for synthetic data
+	// generation. Each example is a Scenario that a simulator uses to generate full
+	// conversations. Required: input. Optional: name (→exampleId), actor_profile,
+	// max_turns, assertions.
+	DatasetSchemaTypeAgentcoreEvaluationSimulatedV1 DatasetSchemaType = "AGENTCORE_EVALUATION_SIMULATED_V1"
+)
+
+// Values returns all known values for DatasetSchemaType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetSchemaType) Values() []DatasetSchemaType {
+	return []DatasetSchemaType{
+		"AGENTCORE_EVALUATION_PREDEFINED_V1",
+		"AGENTCORE_EVALUATION_SIMULATED_V1",
+	}
+}
+
+type DatasetStatus string
+
+// Enum values for DatasetStatus
+const (
+	// CreateDataset async ingestion in progress. All writes are blocked. Poll
+	// GetDataset until status resolves to ACTIVE or CREATE_FAILED.
+	DatasetStatusCreating DatasetStatus = "CREATING"
+	// An async example mutation or CreateDatasetVersion is in progress. All writes
+	// are blocked. Poll GetDataset until status resolves.
+	DatasetStatusUpdating DatasetStatus = "UPDATING"
+	// Full or version-specific delete is in progress. Read operations (GetDataset,
+	// ListDatasetExamples) are still allowed.
+	DatasetStatusDeleting DatasetStatus = "DELETING"
+	// Dataset is stable. All operations are allowed per per-operation guards.
+	// failureReason is cleared.
+	DatasetStatusActive DatasetStatus = "ACTIVE"
+	// Initial ingestion failed. DRAFT record exists but contains no examples.
+	// failureReason is populated. AddDatasetExamples and DeleteDatasetExamples
+	// allowed. UpdateDatasetExamples and CreateDatasetVersion blocked (no examples
+	// exist).
+	DatasetStatusCreateFailed DatasetStatus = "CREATE_FAILED"
+	// Last example mutation or CreateDatasetVersion failed. DRAFT may be partially
+	// modified. failureReason is populated. All example mutations and
+	// CreateDatasetVersion allowed for retry.
+	DatasetStatusUpdateFailed DatasetStatus = "UPDATE_FAILED"
+	// Delete failed after retries. Dataset record/S3 may be in inconsistent state.
+	// failureReason is populated. Only DeleteDataset (retry) is allowed.
+	DatasetStatusDeleteFailed DatasetStatus = "DELETE_FAILED"
+)
+
+// Values returns all known values for DatasetStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DatasetStatus) Values() []DatasetStatus {
+	return []DatasetStatus{
+		"CREATING",
+		"UPDATING",
+		"DELETING",
+		"ACTIVE",
+		"CREATE_FAILED",
+		"UPDATE_FAILED",
+		"DELETE_FAILED",
+	}
+}
+
 type DescriptorType string
 
 // Enum values for DescriptorType
@@ -501,6 +573,29 @@ func (DescriptorType) Values() []DescriptorType {
 		"A2A",
 		"CUSTOM",
 		"AGENT_SKILLS",
+	}
+}
+
+type DraftStatus string
+
+// Enum values for DraftStatus
+const (
+	// DRAFT has changes not yet reflected in any published version, or no versions
+	// have been published yet.
+	DraftStatusModified DraftStatus = "MODIFIED"
+	// DRAFT content matches the latest published version exactly. Any example
+	// mutation transitions draftStatus back to MODIFIED.
+	DraftStatusUnmodified DraftStatus = "UNMODIFIED"
+)
+
+// Values returns all known values for DraftStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DraftStatus) Values() []DraftStatus {
+	return []DraftStatus{
+		"MODIFIED",
+		"UNMODIFIED",
 	}
 }
 

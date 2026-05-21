@@ -80,6 +80,25 @@ func (Decision) Values() []Decision {
 	}
 }
 
+type DeletionMode string
+
+// Enum values for DeletionMode
+const (
+	DeletionModeSoftDelete DeletionMode = "SoftDelete"
+	DeletionModeHardDelete DeletionMode = "HardDelete"
+)
+
+// Values returns all known values for DeletionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeletionMode) Values() []DeletionMode {
+	return []DeletionMode{
+		"SoftDelete",
+		"HardDelete",
+	}
+}
+
 type DeletionProtection string
 
 // Enum values for DeletionProtection

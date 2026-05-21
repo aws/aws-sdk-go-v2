@@ -182,6 +182,18 @@ func TestCheckSnapshot_DisassociateEipFromVlan(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_GetDepotUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDepotUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDepotUrl")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetEnvironment(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetEnvironment(context.Background(), nil, func(o *Options) {
@@ -426,6 +438,18 @@ func TestUpdateSnapshot_DisassociateEipFromVlan(t *testing.T) {
 	_, err := svc.DisassociateEipFromVlan(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DisassociateEipFromVlan")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDepotUrl(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDepotUrl(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDepotUrl")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

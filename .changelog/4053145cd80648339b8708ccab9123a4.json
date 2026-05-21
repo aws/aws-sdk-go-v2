@@ -1,0 +1,8 @@
+{
+    "id": "4053145c-d806-4833-9b87-08ccab9123a4",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/guardduty"
+    ]
+}

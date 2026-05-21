@@ -1,0 +1,8 @@
+{
+    "id": "790ad86f-320c-4b23-b680-0b9023266771",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/globalaccelerator"
+    ]
+}

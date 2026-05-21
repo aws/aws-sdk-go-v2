@@ -372,6 +372,10 @@ type ComputeResource struct {
 	// This parameter isn't applicable to jobs that are running on Fargate resources.
 	// Don't specify it.
 	//
+	// This parameter is required for Amazon EKS compute environments. For Amazon ECS
+	// compute environments, if this parameter isn't specified, the BEST_FIT
+	// allocation strategy is used by default.
+	//
 	// BEST_FIT (default) Batch selects an instance type that best fits the needs of
 	// the jobs with a preference for the lowest-cost instance type. If additional
 	// instances of the selected instance type aren't available, Batch waits for the

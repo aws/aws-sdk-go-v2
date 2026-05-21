@@ -1,0 +1,8 @@
+{
+    "id": "8162877c-f29c-431a-a16c-caaed3cfcd92",
+    "type": "feature",
+    "description": "Adds support for controlling the timecode source of NDI flow outputs.",
+    "modules": [
+        "service/mediaconnect"
+    ]
+}

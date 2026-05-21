@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAddDatasetExamples struct {
+}
+
+func (*validateOpAddDatasetExamples) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAddDatasetExamples) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AddDatasetExamplesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAddDatasetExamplesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAgentRuntimeEndpoint struct {
 }
 
@@ -145,6 +165,46 @@ func (m *validateOpCreateConfigurationBundle) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateConfigurationBundleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateDataset struct {
+}
+
+func (*validateOpCreateDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateDatasetVersion struct {
+}
+
+func (*validateOpCreateDatasetVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateDatasetVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateDatasetVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateDatasetVersionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -605,6 +665,46 @@ func (m *validateOpDeleteConfigurationBundle) HandleInitialize(ctx context.Conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteConfigurationBundleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDatasetExamples struct {
+}
+
+func (*validateOpDeleteDatasetExamples) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDatasetExamples) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDatasetExamplesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDatasetExamplesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteDataset struct {
+}
+
+func (*validateOpDeleteDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteDatasetInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1110,6 +1210,26 @@ func (m *validateOpGetConfigurationBundleVersion) HandleInitialize(ctx context.C
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetDataset struct {
+}
+
+func (*validateOpGetDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetEvaluator struct {
 }
 
@@ -1590,6 +1710,46 @@ func (m *validateOpListConfigurationBundleVersions) HandleInitialize(ctx context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListDatasetExamples struct {
+}
+
+func (*validateOpListDatasetExamples) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDatasetExamples) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDatasetExamplesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDatasetExamplesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListDatasetVersions struct {
+}
+
+func (*validateOpListDatasetVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListDatasetVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListDatasetVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListDatasetVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListGatewayRules struct {
 }
 
@@ -2010,6 +2170,46 @@ func (m *validateOpUpdateConfigurationBundle) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateDatasetExamples struct {
+}
+
+func (*validateOpUpdateDatasetExamples) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDatasetExamples) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDatasetExamplesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDatasetExamplesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateDataset struct {
+}
+
+func (*validateOpUpdateDataset) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateDataset) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateDatasetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateDatasetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEvaluator struct {
 }
 
@@ -2350,6 +2550,10 @@ func (m *validateOpUpdateWorkloadIdentity) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAddDatasetExamplesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAddDatasetExamples{}, middleware.After)
+}
+
 func addOpCreateAgentRuntimeEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAgentRuntimeEndpoint{}, middleware.After)
 }
@@ -2376,6 +2580,14 @@ func addOpCreateCodeInterpreterValidationMiddleware(stack *middleware.Stack) err
 
 func addOpCreateConfigurationBundleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateConfigurationBundle{}, middleware.After)
+}
+
+func addOpCreateDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDataset{}, middleware.After)
+}
+
+func addOpCreateDatasetVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateDatasetVersion{}, middleware.After)
 }
 
 func addOpCreateEvaluatorValidationMiddleware(stack *middleware.Stack) error {
@@ -2468,6 +2680,14 @@ func addOpDeleteCodeInterpreterValidationMiddleware(stack *middleware.Stack) err
 
 func addOpDeleteConfigurationBundleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteConfigurationBundle{}, middleware.After)
+}
+
+func addOpDeleteDatasetExamplesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDatasetExamples{}, middleware.After)
+}
+
+func addOpDeleteDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteDataset{}, middleware.After)
 }
 
 func addOpDeleteEvaluatorValidationMiddleware(stack *middleware.Stack) error {
@@ -2570,6 +2790,10 @@ func addOpGetConfigurationBundleVersionValidationMiddleware(stack *middleware.St
 	return stack.Initialize.Add(&validateOpGetConfigurationBundleVersion{}, middleware.After)
 }
 
+func addOpGetDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetDataset{}, middleware.After)
+}
+
 func addOpGetEvaluatorValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetEvaluator{}, middleware.After)
 }
@@ -2666,6 +2890,14 @@ func addOpListConfigurationBundleVersionsValidationMiddleware(stack *middleware.
 	return stack.Initialize.Add(&validateOpListConfigurationBundleVersions{}, middleware.After)
 }
 
+func addOpListDatasetExamplesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDatasetExamples{}, middleware.After)
+}
+
+func addOpListDatasetVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListDatasetVersions{}, middleware.After)
+}
+
 func addOpListGatewayRulesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListGatewayRules{}, middleware.After)
 }
@@ -2748,6 +2980,14 @@ func addOpUpdateApiKeyCredentialProviderValidationMiddleware(stack *middleware.S
 
 func addOpUpdateConfigurationBundleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateConfigurationBundle{}, middleware.After)
+}
+
+func addOpUpdateDatasetExamplesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDatasetExamples{}, middleware.After)
+}
+
+func addOpUpdateDatasetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateDataset{}, middleware.After)
 }
 
 func addOpUpdateEvaluatorValidationMiddleware(stack *middleware.Stack) error {
@@ -3911,6 +4151,30 @@ func validateDataSourceConfig(v types.DataSourceConfig) error {
 	}
 }
 
+func validateDataSourceType(v types.DataSourceType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DataSourceType"}
+	switch uv := v.(type) {
+	case *types.DataSourceTypeMemberInlineExamples:
+		if err := validateInlineExamplesSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[inlineExamples]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DataSourceTypeMemberS3Source:
+		if err := validateS3Source(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3Source]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDeleteMemoryStrategiesList(v []types.DeleteMemoryStrategyInput) error {
 	if v == nil {
 		return nil
@@ -4789,6 +5053,21 @@ func validateIndexedKeysList(v []types.IndexedKey) error {
 		if err := validateIndexedKey(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateInlineExamplesSource(v *types.InlineExamplesSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "InlineExamplesSource"}
+	if v.Examples == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Examples"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6027,6 +6306,21 @@ func validateS3Location(v *types.S3Location) error {
 	}
 }
 
+func validateS3Source(v *types.S3Source) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Source"}
+	if v.S3Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSalesforceOauth2ProviderConfigInput(v *types.SalesforceOauth2ProviderConfigInput) error {
 	if v == nil {
 		return nil
@@ -6883,6 +7177,28 @@ func validateWeightedRoute(v *types.WeightedRoute) error {
 	}
 }
 
+func validateOpAddDatasetExamplesInput(v *AddDatasetExamplesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddDatasetExamplesInput"}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateDataSourceType(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAgentRuntimeEndpointInput(v *CreateAgentRuntimeEndpointInput) error {
 	if v == nil {
 		return nil
@@ -7069,6 +7385,46 @@ func validateOpCreateConfigurationBundleInput(v *CreateConfigurationBundleInput)
 		if err := validateVersionCreatedBySource(v.CreatedBy); err != nil {
 			invalidParams.AddNested("CreatedBy", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDatasetInput(v *CreateDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDatasetInput"}
+	if v.DatasetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetName"))
+	}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	} else if v.Source != nil {
+		if err := validateDataSourceType(v.Source); err != nil {
+			invalidParams.AddNested("Source", err.(smithy.InvalidParamsError))
+		}
+	}
+	if len(v.SchemaType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateDatasetVersionInput(v *CreateDatasetVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateDatasetVersionInput"}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7640,6 +7996,39 @@ func validateOpDeleteConfigurationBundleInput(v *DeleteConfigurationBundleInput)
 	}
 }
 
+func validateOpDeleteDatasetExamplesInput(v *DeleteDatasetExamplesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDatasetExamplesInput"}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if v.ExampleIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExampleIds"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteDatasetInput(v *DeleteDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteDatasetInput"}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEvaluatorInput(v *DeleteEvaluatorInput) error {
 	if v == nil {
 		return nil
@@ -8036,6 +8425,21 @@ func validateOpGetConfigurationBundleVersionInput(v *GetConfigurationBundleVersi
 	}
 }
 
+func validateOpGetDatasetInput(v *GetDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetDatasetInput"}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetEvaluatorInput(v *GetEvaluatorInput) error {
 	if v == nil {
 		return nil
@@ -8412,6 +8816,36 @@ func validateOpListConfigurationBundleVersionsInput(v *ListConfigurationBundleVe
 	invalidParams := smithy.InvalidParamsError{Context: "ListConfigurationBundleVersionsInput"}
 	if v.BundleId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BundleId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDatasetExamplesInput(v *ListDatasetExamplesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDatasetExamplesInput"}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListDatasetVersionsInput(v *ListDatasetVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListDatasetVersionsInput"}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8811,6 +9245,39 @@ func validateOpUpdateConfigurationBundleInput(v *UpdateConfigurationBundleInput)
 		if err := validateVersionCreatedBySource(v.CreatedBy); err != nil {
 			invalidParams.AddNested("CreatedBy", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDatasetExamplesInput(v *UpdateDatasetExamplesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDatasetExamplesInput"}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
+	}
+	if v.Examples == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Examples"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateDatasetInput(v *UpdateDatasetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateDatasetInput"}
+	if v.DatasetId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatasetId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

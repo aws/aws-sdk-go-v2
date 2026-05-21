@@ -6239,6 +6239,11 @@ func awsRestjson1_serializeOpDocumentStartProtectedJobInput(v *StartProtectedJob
 		}
 	}
 
+	if v.JobComputePayerAccountId != nil {
+		ok := object.Key("jobComputePayerAccountId")
+		ok.String(*v.JobComputePayerAccountId)
+	}
+
 	if v.JobParameters != nil {
 		ok := object.Key("jobParameters")
 		if err := awsRestjson1_serializeDocumentProtectedJobParameters(v.JobParameters, ok); err != nil {
@@ -6352,6 +6357,11 @@ func awsRestjson1_serializeOpDocumentStartProtectedQueryInput(v *StartProtectedQ
 		if err := awsRestjson1_serializeDocumentComputeConfiguration(v.ComputeConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.QueryComputePayerAccountId != nil {
+		ok := object.Key("queryComputePayerAccountId")
+		ok.String(*v.QueryComputePayerAccountId)
 	}
 
 	if v.ResultConfiguration != nil {
@@ -7745,6 +7755,13 @@ func awsRestjson1_serializeOpDocumentUpdateMembershipInput(v *UpdateMembershipIn
 	if len(v.JobLogStatus) > 0 {
 		ok := object.Key("jobLogStatus")
 		ok.String(string(v.JobLogStatus))
+	}
+
+	if v.MembershipPaymentConfiguration != nil {
+		ok := object.Key("membershipPaymentConfiguration")
+		if err := awsRestjson1_serializeDocumentUpdateMembershipPaymentConfiguration(v.MembershipPaymentConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.QueryLogStatus) > 0 {
@@ -9157,6 +9174,20 @@ func awsRestjson1_serializeDocumentMemberChangeSpecification(v *types.MemberChan
 		}
 	}
 
+	if v.MlMemberAbilities != nil {
+		ok := object.Key("mlMemberAbilities")
+		if err := awsRestjson1_serializeDocumentMLMemberAbilities(v.MlMemberAbilities, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.PaymentConfiguration != nil {
+		ok := object.Key("paymentConfiguration")
+		if err := awsRestjson1_serializeDocumentPaymentConfiguration(v.PaymentConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -10196,6 +10227,34 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateMembershipPaymentConfiguration(v *types.UpdateMembershipPaymentConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JobCompute != nil {
+		ok := object.Key("jobCompute")
+		if err := awsRestjson1_serializeDocumentMembershipJobComputePaymentConfig(v.JobCompute, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MachineLearning != nil {
+		ok := object.Key("machineLearning")
+		if err := awsRestjson1_serializeDocumentMembershipMLPaymentConfig(v.MachineLearning, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.QueryCompute != nil {
+		ok := object.Key("queryCompute")
+		if err := awsRestjson1_serializeDocumentMembershipQueryComputePaymentConfig(v.QueryCompute, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

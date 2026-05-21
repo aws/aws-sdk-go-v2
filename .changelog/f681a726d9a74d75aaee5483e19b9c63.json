@@ -1,0 +1,8 @@
+{
+    "id": "f681a726-d9a7-4d75-aaee-5483e19b9c63",
+    "type": "feature",
+    "description": "Support hard deleting policy store aliases. Users can now delete an alias and immediately reassign it to a different policy store without waiting for the soft-delete retention period.",
+    "modules": [
+        "service/verifiedpermissions"
+    ]
+}

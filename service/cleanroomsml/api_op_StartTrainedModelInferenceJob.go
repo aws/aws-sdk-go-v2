@@ -79,6 +79,10 @@ type StartTrainedModelInferenceJobInput struct {
 	// decrypt customer-owned data in the ML inference job and associated data.
 	KmsKeyArn *string
 
+	// The account ID of the member that is responsible for paying for model inference
+	// costs.
+	MlModelInferencePayerAccountId *string
+
 	// The optional metadata that you apply to the resource to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
 	// you define.

@@ -1,0 +1,8 @@
+{
+    "id": "2de0f143-cc2f-4327-abfe-5e61b8e00d90",
+    "type": "documentation",
+    "description": "Clarified CreateComputeEnvironment parameter requirements - serviceRole is required for UNMANAGED compute environments, allocationStrategy is required for EKS compute environments, and compute environments must be created in the ENABLED state.",
+    "modules": [
+        "service/batch"
+    ]
+}

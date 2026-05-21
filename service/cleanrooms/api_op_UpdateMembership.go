@@ -49,6 +49,9 @@ type UpdateMembershipInput struct {
 	// DISABLED .
 	JobLogStatus types.MembershipJobLogStatus
 
+	// The payment configuration to update for the membership.
+	MembershipPaymentConfiguration *types.UpdateMembershipPaymentConfiguration
+
 	// An indicator as to whether query logging has been enabled or disabled for the
 	// membership.
 	//

@@ -1,0 +1,8 @@
+{
+    "id": "260e2837-7c9d-4186-a7c0-c9803f8e4ae4",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/networkmanager"
+    ]
+}

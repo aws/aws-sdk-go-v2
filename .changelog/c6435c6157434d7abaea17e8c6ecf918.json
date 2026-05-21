@@ -1,0 +1,8 @@
+{
+    "id": "c6435c61-5743-4d7a-baea-17e8c6ecf918",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/quicksight"
+    ]
+}

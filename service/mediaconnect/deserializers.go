@@ -25198,6 +25198,15 @@ func awsRestjson1_deserializeDocumentTransport(v **types.Transport, value interf
 				sv.MinLatency = ptr.Int32(int32(i64))
 			}
 
+		case "ndiOutputTimecodeSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NdiOutputTimecodeSource to be of type string, got %T instead", value)
+				}
+				sv.NdiOutputTimecodeSource = types.NdiOutputTimecodeSource(jtv)
+			}
+
 		case "ndiProgramName":
 			if value != nil {
 				jtv, ok := value.(string)

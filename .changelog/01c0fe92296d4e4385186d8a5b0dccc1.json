@@ -1,0 +1,8 @@
+{
+    "id": "01c0fe92-296d-4e43-8518-6d8a5b0dccc1",
+    "type": "feature",
+    "description": "Collaboration creators can update payment configurations without recreating the collaboration. When multiple payer candidates are configured for a cost type, analysis runners can specify the actual payer at submission time, providing granular control over billing.",
+    "modules": [
+        "service/cleanroomsml"
+    ]
+}

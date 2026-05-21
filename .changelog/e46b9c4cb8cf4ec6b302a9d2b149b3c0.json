@@ -1,0 +1,8 @@
+{
+    "id": "e46b9c4c-b8cf-4ec6-b302-a9d2b149b3c0",
+    "type": "feature",
+    "description": "Add support for disabling home EFS file system creation on SageMaker domains.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

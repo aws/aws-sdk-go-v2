@@ -512,6 +512,28 @@ func ExampleDataSourceConfig_outputUsage() {
 
 var _ *types.CloudWatchLogsInputConfig
 
+func ExampleDataSourceType_outputUsage() {
+	var union types.DataSourceType
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.DataSourceTypeMemberInlineExamples:
+		_ = v.Value // Value is types.InlineExamplesSource
+
+	case *types.DataSourceTypeMemberS3Source:
+		_ = v.Value // Value is types.S3Source
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.InlineExamplesSource
+var _ *types.S3Source
+
 func ExampleEvaluatorConfig_outputUsage() {
 	var union types.EvaluatorConfig
 	// type switches can be used to check the union value

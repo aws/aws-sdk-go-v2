@@ -1,0 +1,8 @@
+{
+    "id": "6e2ea400-653d-468e-a3e4-a7fe5c385e32",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/textract"
+    ]
+}

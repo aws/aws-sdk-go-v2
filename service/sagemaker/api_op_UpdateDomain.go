@@ -65,6 +65,11 @@ type UpdateDomainInput struct {
 	// A collection of DomainSettings configuration values to update.
 	DomainSettingsForUpdate *types.DomainSettingsForUpdate
 
+	// Indicates whether to create a home EFS file system for the domain. You can
+	// change from Disabled to Enabled to provision EFS on demand, but you cannot
+	// change from Enabled to Disabled .
+	HomeEfsFileSystemCreation types.HomeEfsFileSystemCreation
+
 	// The VPC subnets that Studio uses for communication.
 	//
 	// If removing subnets, ensure there are no apps in the InService , Pending , or

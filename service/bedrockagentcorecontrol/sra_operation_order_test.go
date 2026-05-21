@@ -19,6 +19,41 @@ func captureMiddlewareStack(stack *middleware.Stack) func(*middleware.Stack) err
 		return errTestReturnEarly
 	}
 }
+func TestOpAddDatasetExamplesSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.AddDatasetExamples(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
 func TestOpCreateAgentRuntimeSRAOperationOrder(t *testing.T) {
 	expect := []string{
 		"OperationSerializer",
@@ -247,6 +282,76 @@ func TestOpCreateConfigurationBundleSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.CreateConfigurationBundle(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpCreateDatasetSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.CreateDataset(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpCreateDatasetVersionSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.CreateDatasetVersion(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -1052,6 +1157,76 @@ func TestOpDeleteConfigurationBundleSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.DeleteConfigurationBundle(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpDeleteDatasetSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.DeleteDataset(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpDeleteDatasetExamplesSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.DeleteDatasetExamples(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -1927,6 +2102,41 @@ func TestOpGetConfigurationBundleVersionSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.GetConfigurationBundleVersion(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpGetDatasetSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.GetDataset(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -3012,6 +3222,111 @@ func TestOpListConfigurationBundleVersionsSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.ListConfigurationBundleVersions(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListDatasetExamplesSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListDatasetExamples(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListDatasetsSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListDatasets(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpListDatasetVersionsSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.ListDatasetVersions(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}
@@ -4167,6 +4482,76 @@ func TestOpUpdateConfigurationBundleSRAOperationOrder(t *testing.T) {
 		},
 	})
 	_, err := svc.UpdateConfigurationBundle(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpUpdateDatasetSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.UpdateDataset(context.Background(), nil)
+	if err != nil && !errors.Is(err, errTestReturnEarly) {
+		t.Fatalf("unexpected error: %v", err)
+	}
+
+	var actual, all []string
+	for _, step := range strings.Split(captured.String(), "\n") {
+		trimmed := strings.TrimSpace(step)
+		all = append(all, trimmed)
+		if slices.Contains(expect, trimmed) {
+			actual = append(actual, trimmed)
+		}
+	}
+
+	if !slices.Equal(expect, actual) {
+		t.Errorf("order mismatch:\nexpect: %v\nactual: %v\nall: %v", expect, actual, all)
+	}
+}
+func TestOpUpdateDatasetExamplesSRAOperationOrder(t *testing.T) {
+	expect := []string{
+		"OperationSerializer",
+		"Retry",
+		"ResolveAuthScheme",
+		"GetIdentity",
+		"ResolveEndpointV2",
+		"Signing",
+		"OperationDeserializer",
+	}
+
+	var captured middleware.Stack
+	svc := New(Options{
+		APIOptions: []func(*middleware.Stack) error{
+			captureMiddlewareStack(&captured),
+		},
+	})
+	_, err := svc.UpdateDatasetExamples(context.Background(), nil)
 	if err != nil && !errors.Is(err, errTestReturnEarly) {
 		t.Fatalf("unexpected error: %v", err)
 	}

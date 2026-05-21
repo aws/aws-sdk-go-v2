@@ -1,0 +1,8 @@
+{
+    "id": "86ef2cf3-3e6d-42d5-94ce-15f4ee898c10",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/qapps"
+    ]
+}

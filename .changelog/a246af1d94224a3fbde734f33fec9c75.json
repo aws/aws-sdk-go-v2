@@ -1,0 +1,8 @@
+{
+    "id": "a246af1d-9422-4a3f-bde7-34f33fec9c75",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/workmail"
+    ]
+}

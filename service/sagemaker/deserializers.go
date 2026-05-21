@@ -109860,6 +109860,15 @@ func awsAwsjson11_deserializeOpDocumentDescribeDomainOutput(v **DescribeDomainOu
 				sv.FailureReason = ptr.String(jtv)
 			}
 
+		case "HomeEfsFileSystemCreation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HomeEfsFileSystemCreation to be of type string, got %T instead", value)
+				}
+				sv.HomeEfsFileSystemCreation = types.HomeEfsFileSystemCreation(jtv)
+			}
+
 		case "HomeEfsFileSystemId":
 			if value != nil {
 				jtv, ok := value.(string)

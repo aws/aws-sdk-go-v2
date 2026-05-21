@@ -1,0 +1,8 @@
+{
+    "id": "640748b3-25c0-4d05-9a3f-93871d119d9d",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/comprehendmedical"
+    ]
+}

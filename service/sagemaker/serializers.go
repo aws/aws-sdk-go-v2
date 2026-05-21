@@ -39415,6 +39415,11 @@ func awsAwsjson11_serializeOpDocumentCreateDomainInput(v *CreateDomainInput, val
 		}
 	}
 
+	if len(v.HomeEfsFileSystemCreation) > 0 {
+		ok := object.Key("HomeEfsFileSystemCreation")
+		ok.String(string(v.HomeEfsFileSystemCreation))
+	}
+
 	if v.HomeEfsFileSystemKmsKeyId != nil {
 		ok := object.Key("HomeEfsFileSystemKmsKeyId")
 		ok.String(*v.HomeEfsFileSystemKmsKeyId)
@@ -49577,6 +49582,11 @@ func awsAwsjson11_serializeOpDocumentUpdateDomainInput(v *UpdateDomainInput, val
 		if err := awsAwsjson11_serializeDocumentDomainSettingsForUpdate(v.DomainSettingsForUpdate, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.HomeEfsFileSystemCreation) > 0 {
+		ok := object.Key("HomeEfsFileSystemCreation")
+		ok.String(string(v.HomeEfsFileSystemCreation))
 	}
 
 	if v.SubnetIds != nil {

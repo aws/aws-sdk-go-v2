@@ -1,0 +1,8 @@
+{
+    "id": "cc9d31cd-a666-46d4-9693-5e128374d861",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/fsx"
+    ]
+}

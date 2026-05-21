@@ -1,0 +1,8 @@
+{
+    "id": "e2d1babe-3692-41a1-957c-0dd543028bef",
+    "type": "feature",
+    "description": "Adds dataset management APIs for creating, versioning, and managing evaluation datasets.",
+    "modules": [
+        "service/bedrockagentcorecontrol"
+    ]
+}

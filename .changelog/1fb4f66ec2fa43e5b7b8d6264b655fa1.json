@@ -1,0 +1,8 @@
+{
+    "id": "1fb4f66e-c2fa-43e5-b7b8-d6264b655fa1",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/sagemakermetrics"
+    ]
+}

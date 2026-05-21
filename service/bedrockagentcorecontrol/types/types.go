@@ -1654,6 +1654,92 @@ type CustomReflectionConfigurationInputMemberEpisodicReflectionOverride struct {
 func (*CustomReflectionConfigurationInputMemberEpisodicReflectionOverride) isCustomReflectionConfigurationInput() {
 }
 
+// Summary information about a dataset.
+type DatasetSummary struct {
+
+	//  The timestamp when the dataset was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	//  The Amazon Resource Name (ARN) of the dataset.
+	//
+	// This member is required.
+	DatasetArn *string
+
+	//  The unique identifier of the dataset.
+	//
+	// This member is required.
+	DatasetId *string
+
+	//  The name of the dataset.
+	//
+	// This member is required.
+	DatasetName *string
+
+	//  The number of examples in the dataset.
+	//
+	// This member is required.
+	ExampleCount *int64
+
+	//  The schema type of the dataset.
+	//
+	// This member is required.
+	SchemaType DatasetSchemaType
+
+	//  The current status of the dataset.
+	//
+	// This member is required.
+	Status DatasetStatus
+
+	//  The timestamp when the dataset was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	//  The description of the dataset.
+	Description *string
+
+	// Publish synchronization state. Only authoritative when status == ACTIVE.
+	DraftStatus DraftStatus
+
+	noSmithyDocumentSerde
+}
+
+// Summary information about a published dataset version.
+type DatasetVersionSummary struct {
+
+	//  The timestamp when this version was published.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// Dataset version identifier. Accepts "DRAFT" or a non-negative integer string.
+	//
+	// "DRAFT" refers to the single mutable working copy of the dataset.
+	//
+	//   - Always present after CreateDataset ingestion completes.
+	//   - Content changes in-place when examples are added, updated, or deleted.
+	//   - NOT tracked as a DDB DatasetVersionItem — state lives in S3
+	//   (draft/manifest.json, draft/dataset.jsonl) and the DatasetItem.exampleCount
+	//   field.
+	//   - Default for read operations when ?datasetVersion is absent.
+	// An integer string (e.g. "1", "2", "3") refers to a published, immutable
+	// snapshot created by CreateDatasetVersion. Once created, a published version's
+	// content never changes. Stored as a DDB DatasetVersionItem
+	// (SK=VERSION#{zero-padded-N}).
+	//
+	// This member is required.
+	DatasetVersion *string
+
+	//  The number of examples in this version.
+	//
+	// This member is required.
+	ExampleCount *int64
+
+	noSmithyDocumentSerde
+}
+
 //	The configuration that specifies where to read agent traces for online
 //
 // evaluation.
@@ -1673,6 +1759,35 @@ type DataSourceConfigMemberCloudWatchLogs struct {
 }
 
 func (*DataSourceConfigMemberCloudWatchLogs) isDataSourceConfig() {}
+
+// Source of examples to add to the dataset.
+//
+// The following types satisfy this interface:
+//
+//	DataSourceTypeMemberInlineExamples
+//	DataSourceTypeMemberS3Source
+type DataSourceType interface {
+	isDataSourceType()
+}
+
+// Inline examples provided directly in the request body.
+type DataSourceTypeMemberInlineExamples struct {
+	Value InlineExamplesSource
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceTypeMemberInlineExamples) isDataSourceType() {}
+
+// S3 URI pointing to a JSONL file in the customer's bucket. The service reads
+// this file using the caller's FAS credentials.
+type DataSourceTypeMemberS3Source struct {
+	Value S3Source
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceTypeMemberS3Source) isDataSourceType() {}
 
 // Input for deleting a memory strategy.
 type DeleteMemoryStrategyInput struct {
@@ -3431,6 +3546,17 @@ type InferenceConfiguration struct {
 	//  The top-p sampling parameter that controls the diversity of the model's
 	// responses by limiting the cumulative probability of token choices.
 	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
+// Inline examples provided directly in the request body.
+type InlineExamplesSource struct {
+
+	// Examples to add. Each example is assigned an auto-generated UUID.
+	//
+	// This member is required.
+	Examples []document.Interface
 
 	noSmithyDocumentSerde
 }
@@ -6038,6 +6164,17 @@ type S3Location struct {
 	noSmithyDocumentSerde
 }
 
+// S3 location of a JSONL file containing dataset examples.
+type S3Source struct {
+
+	// S3 URI of the JSONL file (e.g. s3://my-bucket/path/to/examples.jsonl).
+	//
+	// This member is required.
+	S3Uri *string
+
+	noSmithyDocumentSerde
+}
+
 // Input configuration for a Salesforce OAuth2 provider.
 type SalesforceOauth2ProviderConfigInput struct {
 
@@ -7556,6 +7693,7 @@ func (*UnknownUnionMember) isCustomExtractionConfigurationInput()     {}
 func (*UnknownUnionMember) isCustomReflectionConfiguration()          {}
 func (*UnknownUnionMember) isCustomReflectionConfigurationInput()     {}
 func (*UnknownUnionMember) isDataSourceConfig()                       {}
+func (*UnknownUnionMember) isDataSourceType()                         {}
 func (*UnknownUnionMember) isEvaluatorConfig()                        {}
 func (*UnknownUnionMember) isEvaluatorModelConfig()                   {}
 func (*UnknownUnionMember) isEvaluatorReference()                     {}

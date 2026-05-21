@@ -1,0 +1,8 @@
+{
+    "id": "8c056298-95df-4985-848d-803870ebd584",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/dlm"
+    ]
+}
