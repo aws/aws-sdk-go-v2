@@ -1,0 +1,8 @@
+{
+    "id": "5a03c637-07e4-4718-aa1b-d8f6ad18ac2b",
+    "type": "feature",
+    "description": "Add SHA-512 support for s3 operations",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
