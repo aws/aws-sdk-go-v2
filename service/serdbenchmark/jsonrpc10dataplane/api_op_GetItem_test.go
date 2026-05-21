@@ -49,39 +49,27 @@ func TestSerdClient_GetItem_(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			serverURL := "http://localhost:8888/"
-			if c.Host != nil {
-				u, err := url.Parse(serverURL)
-				if err != nil {
-					panic(err)
-				}
-				u.Path = c.Host.Path
-				u.RawPath = c.Host.RawPath
-				u.RawQuery = c.Host.RawQuery
-				serverURL = u.String()
-			}
-			client := New(Options{
-				APIOptions: []func(*middleware.Stack) error{
-					func(s *middleware.Stack) error {
-						s.Finalize.Clear()
-						s.Initialize.Remove(`OperationInputValidation`)
-						return nil
-					},
-				},
-				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
-				HTTPClient:         &protocolTestHTTPClient{},
+			serializer := &awsAwsjson10_serializeOpGetItem{}
+			nopNext := middleware.SerializeHandlerFunc(func(ctx context.Context, in middleware.SerializeInput) (middleware.SerializeOutput, middleware.Metadata, error) {
+				return middleware.SerializeOutput{}, middleware.Metadata{}, nil
 			})
+
 			timings := make([]time.Duration, 0)
 			benchmarkStart := time.Now()
 
 			for i := 0; i < 10000; i++ {
+				in := middleware.SerializeInput{
+					Parameters: c.Params,
+					Request:    smithyhttp.NewStackRequest().(*smithyhttp.Request),
+				}
+
 				serializeStart := time.Now()
-				_, err := client.GetItem(context.Background(), c.Params)
+				_, _, err := serializer.HandleSerialize(context.Background(), in, nopNext)
+				serializeEnd := time.Now()
+
 				if err != nil {
 					t.Fatalf("error when running serd test for %s: %v", name, err)
 				}
-
-				serializeEnd := time.Now()
 				if i >= 1000 {
 					timings = append(timings, serializeEnd.Sub(serializeStart))
 				}
@@ -1798,63 +1786,36 @@ func TestDeserdClient_GetItem_(t *testing.T) {
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			var params GetItemInput
-			serverURL := "http://localhost:8888/"
-			client := New(Options{
-				HTTPClient: smithyhttp.ClientDoFunc(func(r *http.Request) (*http.Response, error) {
-					headers := http.Header{}
-					for k, vs := range c.Header {
-						for _, v := range vs {
-							headers.Add(k, v)
-						}
-					}
-					if len(c.BodyMediaType) != 0 && len(headers.Values("Content-Type")) == 0 {
-						headers.Set("Content-Type", c.BodyMediaType)
-					}
-					response := &http.Response{
-						StatusCode: c.StatusCode,
-						Header:     headers,
-						Request:    r,
-					}
-					if len(c.Body) != 0 {
-						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
-					} else {
-
-						response.Body = http.NoBody
-					}
-					return response, nil
-				}),
-				APIOptions: []func(*middleware.Stack) error{
-					func(s *middleware.Stack) error {
-						s.Finalize.Clear()
-						s.Initialize.Remove(`OperationInputValidation`)
-						return nil
+			deserializer := &awsAwsjson10_deserializeOpGetItem{}
+			nopNext := middleware.DeserializeHandlerFunc(func(ctx context.Context, in middleware.DeserializeInput) (middleware.DeserializeOutput, middleware.Metadata, error) {
+				response := &smithyhttp.Response{
+					Response: &http.Response{
+						StatusCode:    c.StatusCode,
+						Header:        c.Header.Clone(),
+						ContentLength: int64(len(c.Body)),
+						Body:          ioutil.NopCloser(bytes.NewReader(c.Body)),
 					},
-				},
-				EndpointResolverV2: &protocolTestEndpointResolver{serverURL},
+				}
+				return middleware.DeserializeOutput{RawResponse: response}, middleware.Metadata{}, nil
 			})
+
 			timings := make([]time.Duration, 0)
 			benchmarkStart := time.Now()
 
 			for i := 0; i < 10000; i++ {
-				_, err := client.GetItem(context.Background(), &params, func(o *Options) {
-					o.APIOptions = append(o.APIOptions, []func(*middleware.Stack) error{
-						func(s *middleware.Stack) error {
-							return s.Deserialize.Insert(middleware.DeserializeMiddlewareFunc("deserilaizerbenchmark", func(ctx context.Context, input middleware.DeserializeInput, next middleware.DeserializeHandler) (out middleware.DeserializeOutput, metadata middleware.Metadata, err error) {
-								deserializeStart := time.Now()
-								out, metadata, err = next.HandleDeserialize(ctx, input)
-								deserializeEnd := time.Now()
-								if i >= 1000 {
-									timings = append(timings, deserializeEnd.Sub(deserializeStart))
-								}
-								return
-							}), "OperationDeserializer", middleware.Before)
-						},
-					}...)
-				})
+				in := middleware.DeserializeInput{
+					Request: smithyhttp.NewStackRequest().(*smithyhttp.Request),
+				}
+
+				deserializeStart := time.Now()
+				_, _, err := deserializer.HandleDeserialize(context.Background(), in, nopNext)
+				deserializeEnd := time.Now()
+
 				if err != nil {
 					t.Fatalf("error when running deserd test for %s: %v", name, err)
+				}
+				if i >= 1000 {
+					timings = append(timings, deserializeEnd.Sub(deserializeStart))
 				}
 				if benchmarkStart.Add(30000000000).Before(time.Now()) {
 					break
