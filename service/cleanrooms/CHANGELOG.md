@@ -1,3 +1,7 @@
+# v1.44.0 (2026-05-21)
+
+* **Feature**: Collaboration creators can update payment configurations without recreating the collaboration. When multiple payer candidates are configured for a cost type, analysis runners can specify the actual payer at submission time, providing granular control over billing.
+
 # v1.43.1 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

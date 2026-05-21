@@ -1,3 +1,7 @@
+# v1.52.0 (2026-05-21)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.51.0 (2026-05-20)
 
 * **Feature**: Supporting Request Metadata for Invoke Model and Invoke Model with Response Stream

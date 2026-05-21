@@ -1,3 +1,7 @@
+# v1.49.0 (2026-05-21)
+
+* **Feature**: Adds support for controlling the timecode source of NDI flow outputs.
+
 # v1.48.2 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

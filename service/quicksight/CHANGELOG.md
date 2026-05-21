@@ -1,3 +1,7 @@
+# v1.111.0 (2026-05-21)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.110.0 (2026-05-18)
 
 * **Feature**: Support for dataset enrichment and geo spatial in new data preparation experience

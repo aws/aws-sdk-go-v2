@@ -1,3 +1,7 @@
+# v1.39.0 (2026-05-21)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.38.0 (2026-04-30)
 
 * **Feature**: Add InstanceArn and IdentityStoreArn in the response of CreateApplication API and IdentityStoreArn in the response of DescribeApplication API

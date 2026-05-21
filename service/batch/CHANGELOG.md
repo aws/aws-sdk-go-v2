@@ -1,3 +1,7 @@
+# v1.64.3 (2026-05-21)
+
+* **Documentation**: Clarified CreateComputeEnvironment parameter requirements - serviceRole is required for UNMANAGED compute environments, allocationStrategy is required for EKS compute environments, and compute environments must be created in the ENABLED state.
+
 # v1.64.2 (2026-05-13)
 
 * **Documentation**: Adds a billing callout to docs regarding using the CE Scale Down Delay feature

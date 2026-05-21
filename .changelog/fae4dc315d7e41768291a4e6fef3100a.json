@@ -1,8 +1,0 @@
-{
-    "id": "fae4dc31-5d7e-4176-8291-a4e6fef3100a",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/acmpca"
-    ]
-}

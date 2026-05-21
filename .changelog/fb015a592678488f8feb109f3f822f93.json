@@ -1,8 +1,0 @@
-{
-    "id": "fb015a59-2678-488f-8feb-109f3f822f93",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/securityhub"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "a7315b83-4f72-4adb-9ab6-386045654129",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/serverlessapplicationrepository"
-    ]
-}

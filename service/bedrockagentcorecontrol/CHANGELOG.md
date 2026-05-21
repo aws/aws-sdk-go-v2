@@ -1,3 +1,7 @@
+# v1.39.0 (2026-05-21)
+
+* **Feature**: Adds dataset management APIs for creating, versioning, and managing evaluation datasets.
+
 # v1.38.0 (2026-05-13)
 
 * **Feature**: Adds support for read-only summary APIs for Policy Engine, Policy, and Policy Generation resources, enabling metadata retrieval without KMS decryption for AWS Config integration.

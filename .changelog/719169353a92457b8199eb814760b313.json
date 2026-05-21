@@ -1,8 +1,0 @@
-{
-    "id": "71916935-3a92-457b-8199-eb814760b313",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/appstream"
-    ]
-}

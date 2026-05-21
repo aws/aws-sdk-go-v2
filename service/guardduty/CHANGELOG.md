@@ -1,3 +1,7 @@
+# v1.77.0 (2026-05-21)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.76.0 (2026-05-19)
 
 * **Feature**: Adding support for exposure and vulnerability context from AWS Security Hub in GuardDuty Extended Threat Detection attack sequence findings.

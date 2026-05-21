@@ -1,3 +1,7 @@
+# v1.249.0 (2026-05-21)
+
+* **Feature**: Add support for disabling home EFS file system creation on SageMaker domains.
+
 # v1.248.0 (2026-05-19)
 
 * **Feature**: Add support for ml.p5.4xlarge and ml.p5en.48xlarge instances on SageMaker Notebook Instances Platform.

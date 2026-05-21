@@ -1,3 +1,7 @@
+# v1.47.0 (2026-05-21)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.46.15 (2026-05-18)
 
 * No change notes available for this release.

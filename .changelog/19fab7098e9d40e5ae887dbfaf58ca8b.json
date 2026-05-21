@@ -1,8 +1,0 @@
-{
-    "id": "19fab709-8e9d-40e5-ae88-7dbfaf58ca8b",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/healthlake"
-    ]
-}

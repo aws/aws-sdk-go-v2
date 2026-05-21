@@ -1,8 +1,0 @@
-{
-    "id": "454ed9b1-b23c-4e7f-ae97-cf394f70f851",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/cloud9"
-    ]
-}

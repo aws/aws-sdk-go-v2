@@ -1,8 +1,0 @@
-{
-    "id": "f8ff4307-8d50-4b3c-aefb-09d7e0328577",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/apigateway"
-    ]
-}

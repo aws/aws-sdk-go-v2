@@ -1,8 +1,0 @@
-{
-    "id": "3da7b09b-c7cf-408e-a173-022a1dcc843b",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/mediatailor"
-    ]
-}

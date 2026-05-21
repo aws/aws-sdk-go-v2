@@ -1,3 +1,7 @@
+# v1.0.12 (2026-05-21)
+
+* **Bug Fix**: Reinstate missing bidirectional stream operation.
+
 # v1.0.11 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

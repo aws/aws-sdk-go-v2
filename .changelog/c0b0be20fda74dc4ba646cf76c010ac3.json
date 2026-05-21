@@ -1,8 +1,0 @@
-{
-    "id": "c0b0be20-fda7-4dc4-ba64-6cf76c010ac3",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/servicecatalogappregistry"
-    ]
-}

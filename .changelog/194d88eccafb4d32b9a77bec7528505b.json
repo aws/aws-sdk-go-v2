@@ -1,8 +1,0 @@
-{
-    "id": "194d88ec-cafb-4d32-b9a7-7bec7528505b",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/kendraranking"
-    ]
-}

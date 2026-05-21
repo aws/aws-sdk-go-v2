@@ -1,8 +1,0 @@
-{
-    "id": "3d3e2299-a706-43c7-bf86-e9ffd4924882",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/acm"
-    ]
-}

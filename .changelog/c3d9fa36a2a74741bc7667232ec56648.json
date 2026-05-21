@@ -1,8 +1,0 @@
-{
-    "id": "c3d9fa36-a2a7-4741-bc76-67232ec56648",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/iotjobsdataplane"
-    ]
-}

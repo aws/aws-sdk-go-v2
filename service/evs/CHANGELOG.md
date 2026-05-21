@@ -1,3 +1,7 @@
+# v1.9.0 (2026-05-21)
+
+* **Feature**: A new GetDepotUrl API has been added to retrieve a URL for accessing Amazon EVS custom addon packages. Customers can use this URL to configure vSphere Lifecycle Manager (vLCM) as an online depot source, enabling upgrades of addon components across ESXi hosts.
+
 # v1.8.2 (2026-05-18)
 
 * **Documentation**: Amazon EVS now supports up to 32 hosts per EVS environment, increasing the previous host limit to allow a larger scale of VMware workload deployments and reduce operational overhead.

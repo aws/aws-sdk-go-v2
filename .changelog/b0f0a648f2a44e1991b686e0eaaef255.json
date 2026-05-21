@@ -1,8 +1,0 @@
-{
-    "id": "b0f0a648-f2a4-4e19-91b6-86e0eaaef255",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/fms"
-    ]
-}

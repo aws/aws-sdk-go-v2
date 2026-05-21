@@ -1,3 +1,7 @@
+# v1.84.0 (2026-05-21)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.83.0 (2026-04-30)
 
 * **Feature**: Vended logs update param for capability vended logs feature

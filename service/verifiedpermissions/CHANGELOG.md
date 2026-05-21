@@ -1,3 +1,7 @@
+# v1.33.0 (2026-05-21)
+
+* **Feature**: Support hard deleting policy store aliases. Users can now delete an alias and immediately reassign it to a different policy store without waiting for the soft-delete retention period.
+
 # v1.32.3 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.
