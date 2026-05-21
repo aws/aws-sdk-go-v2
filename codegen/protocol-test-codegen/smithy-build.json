@@ -1,0 +1,295 @@
+{
+  "version": "1.0",
+  "sources": ["models"],
+  "projections": {
+    "aws-ec2": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.ec2#AwsEc2"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.ec2#AwsEc2",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query"
+        }
+      }
+    },
+    "aws-json": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.json#JsonProtocol"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.json#JsonProtocol",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc"
+        }
+      }
+    },
+    "aws-json-10": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.json10#JsonRpc10"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.json10#JsonRpc10",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10"
+        }
+      }
+    },
+    "aws-query": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.query#AwsQuery"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.query#AwsQuery",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/query"
+        }
+      }
+    },
+    "aws-restjson": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.restjson#RestJson"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.restjson#RestJson",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson"
+        }
+      }
+    },
+    "aws-restxml": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.restxml#RestXml"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.restxml#RestXml",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml"
+        }
+      }
+    },
+    "aws-restxml-with-namespace": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.restxml.xmlns#RestXmlWithNamespace"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.restxml.xmlns#RestXmlWithNamespace",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxmlwithnamespace"
+        }
+      }
+    },
+    "smithy-rpcv2-cbor": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["smithy.protocoltests.rpcv2Cbor#RpcV2Protocol"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "smithy.protocoltests.rpcv2Cbor#RpcV2Protocol",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor"
+        }
+      }
+    },
+    "aws-json-10-querycompatible": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.json#Json10QueryCompatible"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.json#Json10QueryCompatible",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10querycompatible"
+        }
+      }
+    },
+    "smithy-rpcv2-cbor-querycompatible": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["smithy.protocoltests.rpcv2Cbor#RpcV2CborQueryCompatible"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "smithy.protocoltests.rpcv2Cbor#RpcV2CborQueryCompatible",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cborquerycompatible"
+        }
+      }
+    },
+    "querycompatiblejsonrpc10": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.json10#QueryCompatibleJsonRpc10"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.json10#QueryCompatibleJsonRpc10",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/querycompatiblejsonrpc10"
+        }
+      }
+    },
+    "querycompatiblerpcv2protocol": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.rpcv2cbor#QueryCompatibleRpcV2Protocol"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.rpcv2cbor#QueryCompatibleRpcV2Protocol",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/querycompatiblerpcv2protocol"
+        }
+      }
+    },
+    "nonquerycompatiblerpcv2protocol": {
+      "transforms": [
+        {
+          "name": "includeServices",
+          "args": {
+            "services": ["aws.protocoltests.rpcv2cbor#NonQueryCompatibleRpcV2Protocol"]
+          }
+        },{
+          "name": "removeUnusedShapes"
+        }
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "aws.protocoltests.rpcv2cbor#NonQueryCompatibleRpcV2Protocol",
+          "module": "github.com/aws/aws-sdk-go-v2/internal/protocoltest/nonquerycompatiblerpcv2protocol"
+        }
+      }
+    },
+    "benchmark-aws-json-10": {
+      "transforms": [
+        {"name": "includeServices", "args": {"services": ["com.amazonaws.sdk.benchmark#AwsJsonRpc10DataPlane"]}}
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "com.amazonaws.sdk.benchmark#AwsJsonRpc10DataPlane",
+          "module": "github.com/aws/aws-sdk-go-v2/service/serdbenchmark/jsonrpc10dataplane"
+        }
+      }
+    },
+    "benchmark-aws-restjson": {
+      "transforms": [
+        {"name": "includeServices", "args": {"services": ["com.amazonaws.sdk.benchmark#AwsRestJsonDataPlane"]}}
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "com.amazonaws.sdk.benchmark#AwsRestJsonDataPlane",
+          "module": "github.com/aws/aws-sdk-go-v2/service/serdbenchmark/restjsondataplane"
+        }
+      }
+    },
+    "benchmark-aws-restxml": {
+      "transforms": [
+        {"name": "includeServices", "args": {"services": ["com.amazonaws.sdk.benchmark#AwsRestXmlDataPlane"]}}
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "com.amazonaws.sdk.benchmark#AwsRestXmlDataPlane",
+          "module": "github.com/aws/aws-sdk-go-v2/service/serdbenchmark/restxmldataplane"
+        }
+      }
+    },
+    "benchmark-aws-query": {
+      "transforms": [
+        {"name": "includeServices", "args": {"services": ["com.amazonaws.sdk.benchmark#AwsQueryDataPlane"]}}
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "com.amazonaws.sdk.benchmark#AwsQueryDataPlane",
+          "module": "github.com/aws/aws-sdk-go-v2/service/serdbenchmark/querydataplane"
+        }
+      }
+    },
+    "benchmark-smithy-rpcv2-cbor": {
+      "transforms": [
+        {"name": "includeServices", "args": {"services": ["com.amazonaws.sdk.benchmark#SmithyRpcV2CborDataPlane"]}}
+      ],
+      "plugins": {
+        "go-codegen": {
+          "service": "com.amazonaws.sdk.benchmark#SmithyRpcV2CborDataPlane",
+          "module": "github.com/aws/aws-sdk-go-v2/service/serdbenchmark/rpcv2cbordataplane"
+        }
+      }
+    }
+  }
+}

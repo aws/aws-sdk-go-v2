@@ -1,0 +1,103 @@
+{
+  "Item": {
+    "id": {
+      "B": "cmVjaXBlLTAwMg=="
+    },
+    "name": {
+      "B": "RmV0dHVjY2luZSBBbGZyZWRv"
+    },
+    "description": {
+      "B": "Q3JlYW15LCByaWNoIHBhc3RhIGRpc2ggd2l0aCBidXR0ZXIsIHBhcm1lc2FuIGNoZWVzZSwgYW5kIGZyZXNoIGZldHR1Y2NpbmUgbm9vZGxlcw=="
+    },
+    "cook_time": {
+      "N": "25"
+    },
+    "prep_time": {
+      "N": "15"
+    },
+    "difficulty": {
+      "B": "RWFzeQ=="
+    },
+    "cuisine": {
+      "B": "SXRhbGlhbg=="
+    },
+    "servings": {
+      "N": "4"
+    },
+    "rating": {
+      "N": "4.6"
+    },
+    "tags": {
+      "BS": [
+        "Y3JlYW15",
+        "Y29tZm9ydC1mb29k",
+        "dmVnZXRhcmlhbg=="
+      ]
+    },
+    "ingredients": {
+      "L": [
+        {
+          "M": {
+            "item": {
+              "B": "ZmV0dHVjY2luZSBwYXN0YQ=="
+            },
+            "amount": {
+              "B": "MSBsYg=="
+            }
+          }
+        },
+        {
+          "M": {
+            "item": {
+              "B": "YnV0dGVy"
+            },
+            "amount": {
+              "B": "MS8yIGN1cA=="
+            }
+          }
+        },
+        {
+          "M": {
+            "item": {
+              "B": "cGFybWVzYW4gY2hlZXNl"
+            },
+            "amount": {
+              "B": "MSBjdXAgZ3JhdGVk"
+            }
+          }
+        },
+        {
+          "M": {
+            "item": {
+              "B": "aGVhdnkgY3JlYW0="
+            },
+            "amount": {
+              "B": "MS8yIGN1cA=="
+            }
+          }
+        }
+      ]
+    },
+    "nutrition": {
+      "M": {
+        "calories": {
+          "N": "520"
+        },
+        "protein": {
+          "N": "18"
+        },
+        "carbs": {
+          "N": "45"
+        },
+        "fat": {
+          "N": "28"
+        }
+      }
+    }
+  },
+  "ConsumedCapacity": {
+    "TableName": "pasta-recipes",
+    "CapacityUnits": 2.5,
+    "ReadCapacityUnits": 2.5
+  }
+}
