@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/serdbenchmark/restjsondataplane/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -119,6 +121,274 @@ type CopyObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyObjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyObjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACL != nil {
+		s.WriteString(schemas.CopyObjectRequest_ACL, *v.ACL)
+	}
+	if v.Bucket != nil {
+		s.WriteString(schemas.CopyObjectRequest_Bucket, *v.Bucket)
+	}
+	if v.BucketKeyEnabled != nil {
+		s.WriteBool(schemas.CopyObjectRequest_BucketKeyEnabled, *v.BucketKeyEnabled)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.CopyObjectRequest_CacheControl, *v.CacheControl)
+	}
+	if v.ChecksumAlgorithm != nil {
+		s.WriteString(schemas.CopyObjectRequest_ChecksumAlgorithm, *v.ChecksumAlgorithm)
+	}
+	if v.ContentDisposition != nil {
+		s.WriteString(schemas.CopyObjectRequest_ContentDisposition, *v.ContentDisposition)
+	}
+	if v.ContentEncoding != nil {
+		s.WriteString(schemas.CopyObjectRequest_ContentEncoding, *v.ContentEncoding)
+	}
+	if v.ContentLanguage != nil {
+		s.WriteString(schemas.CopyObjectRequest_ContentLanguage, *v.ContentLanguage)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.CopyObjectRequest_ContentType, *v.ContentType)
+	}
+	if v.CopySource != nil {
+		s.WriteString(schemas.CopyObjectRequest_CopySource, *v.CopySource)
+	}
+	if v.CopySourceIfMatch != nil {
+		s.WriteString(schemas.CopyObjectRequest_CopySourceIfMatch, *v.CopySourceIfMatch)
+	}
+	if v.CopySourceIfModifiedSince != nil {
+		s.WriteTime(schemas.CopyObjectRequest_CopySourceIfModifiedSince, *v.CopySourceIfModifiedSince)
+	}
+	if v.CopySourceIfNoneMatch != nil {
+		s.WriteString(schemas.CopyObjectRequest_CopySourceIfNoneMatch, *v.CopySourceIfNoneMatch)
+	}
+	if v.CopySourceIfUnmodifiedSince != nil {
+		s.WriteTime(schemas.CopyObjectRequest_CopySourceIfUnmodifiedSince, *v.CopySourceIfUnmodifiedSince)
+	}
+	if v.CopySourceSSECustomerAlgorithm != nil {
+		s.WriteString(schemas.CopyObjectRequest_CopySourceSSECustomerAlgorithm, *v.CopySourceSSECustomerAlgorithm)
+	}
+	if v.CopySourceSSECustomerKey != nil {
+		s.WriteString(schemas.CopyObjectRequest_CopySourceSSECustomerKey, *v.CopySourceSSECustomerKey)
+	}
+	if v.CopySourceSSECustomerKeyMD5 != nil {
+		s.WriteString(schemas.CopyObjectRequest_CopySourceSSECustomerKeyMD5, *v.CopySourceSSECustomerKeyMD5)
+	}
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.CopyObjectRequest_ExpectedBucketOwner, *v.ExpectedBucketOwner)
+	}
+	if v.ExpectedSourceBucketOwner != nil {
+		s.WriteString(schemas.CopyObjectRequest_ExpectedSourceBucketOwner, *v.ExpectedSourceBucketOwner)
+	}
+	if v.Expires != nil {
+		s.WriteTime(schemas.CopyObjectRequest_Expires, *v.Expires)
+	}
+	if v.GrantFullControl != nil {
+		s.WriteString(schemas.CopyObjectRequest_GrantFullControl, *v.GrantFullControl)
+	}
+	if v.GrantRead != nil {
+		s.WriteString(schemas.CopyObjectRequest_GrantRead, *v.GrantRead)
+	}
+	if v.GrantReadACP != nil {
+		s.WriteString(schemas.CopyObjectRequest_GrantReadACP, *v.GrantReadACP)
+	}
+	if v.GrantWriteACP != nil {
+		s.WriteString(schemas.CopyObjectRequest_GrantWriteACP, *v.GrantWriteACP)
+	}
+	if v.IfMatch != nil {
+		s.WriteString(schemas.CopyObjectRequest_IfMatch, *v.IfMatch)
+	}
+	if v.IfNoneMatch != nil {
+		s.WriteString(schemas.CopyObjectRequest_IfNoneMatch, *v.IfNoneMatch)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.CopyObjectRequest_Key, *v.Key)
+	}
+	if v.MetadataDirective != nil {
+		s.WriteString(schemas.CopyObjectRequest_MetadataDirective, *v.MetadataDirective)
+	}
+	if v.ObjectLockLegalHoldStatus != nil {
+		s.WriteString(schemas.CopyObjectRequest_ObjectLockLegalHoldStatus, *v.ObjectLockLegalHoldStatus)
+	}
+	if v.ObjectLockMode != nil {
+		s.WriteString(schemas.CopyObjectRequest_ObjectLockMode, *v.ObjectLockMode)
+	}
+	if v.ObjectLockRetainUntilDate != nil {
+		s.WriteTime(schemas.CopyObjectRequest_ObjectLockRetainUntilDate, *v.ObjectLockRetainUntilDate)
+	}
+	if v.RequestPayer != nil {
+		s.WriteString(schemas.CopyObjectRequest_RequestPayer, *v.RequestPayer)
+	}
+	if v.SSECustomerAlgorithm != nil {
+		s.WriteString(schemas.CopyObjectRequest_SSECustomerAlgorithm, *v.SSECustomerAlgorithm)
+	}
+	if v.SSECustomerKey != nil {
+		s.WriteString(schemas.CopyObjectRequest_SSECustomerKey, *v.SSECustomerKey)
+	}
+	if v.SSECustomerKeyMD5 != nil {
+		s.WriteString(schemas.CopyObjectRequest_SSECustomerKeyMD5, *v.SSECustomerKeyMD5)
+	}
+	if v.SSEKMSEncryptionContext != nil {
+		s.WriteString(schemas.CopyObjectRequest_SSEKMSEncryptionContext, *v.SSEKMSEncryptionContext)
+	}
+	if v.SSEKMSKeyId != nil {
+		s.WriteString(schemas.CopyObjectRequest_SSEKMSKeyId, *v.SSEKMSKeyId)
+	}
+	if v.ServerSideEncryption != nil {
+		s.WriteString(schemas.CopyObjectRequest_ServerSideEncryption, *v.ServerSideEncryption)
+	}
+	if v.StorageClass != nil {
+		s.WriteString(schemas.CopyObjectRequest_StorageClass, *v.StorageClass)
+	}
+	if v.Tagging != nil {
+		s.WriteString(schemas.CopyObjectRequest_Tagging, *v.Tagging)
+	}
+	if v.TaggingDirective != nil {
+		s.WriteString(schemas.CopyObjectRequest_TaggingDirective, *v.TaggingDirective)
+	}
+	if v.WebsiteRedirectLocation != nil {
+		s.WriteString(schemas.CopyObjectRequest_WebsiteRedirectLocation, *v.WebsiteRedirectLocation)
+	}
+}
+func (v *CopyObjectInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyObjectRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyObjectRequest_ACL:
+			v.ACL = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_ACL, v.ACL)
+		case schemas.CopyObjectRequest_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_Bucket, v.Bucket)
+		case schemas.CopyObjectRequest_BucketKeyEnabled:
+			v.BucketKeyEnabled = new(bool)
+			return d.ReadBool(schemas.CopyObjectRequest_BucketKeyEnabled, v.BucketKeyEnabled)
+		case schemas.CopyObjectRequest_CacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_CacheControl, v.CacheControl)
+		case schemas.CopyObjectRequest_ChecksumAlgorithm:
+			v.ChecksumAlgorithm = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_ChecksumAlgorithm, v.ChecksumAlgorithm)
+		case schemas.CopyObjectRequest_ContentDisposition:
+			v.ContentDisposition = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_ContentDisposition, v.ContentDisposition)
+		case schemas.CopyObjectRequest_ContentEncoding:
+			v.ContentEncoding = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_ContentEncoding, v.ContentEncoding)
+		case schemas.CopyObjectRequest_ContentLanguage:
+			v.ContentLanguage = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_ContentLanguage, v.ContentLanguage)
+		case schemas.CopyObjectRequest_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_ContentType, v.ContentType)
+		case schemas.CopyObjectRequest_CopySource:
+			v.CopySource = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_CopySource, v.CopySource)
+		case schemas.CopyObjectRequest_CopySourceIfMatch:
+			v.CopySourceIfMatch = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_CopySourceIfMatch, v.CopySourceIfMatch)
+		case schemas.CopyObjectRequest_CopySourceIfModifiedSince:
+			v.CopySourceIfModifiedSince = new(time.Time)
+			return d.ReadTime(schemas.CopyObjectRequest_CopySourceIfModifiedSince, v.CopySourceIfModifiedSince)
+		case schemas.CopyObjectRequest_CopySourceIfNoneMatch:
+			v.CopySourceIfNoneMatch = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_CopySourceIfNoneMatch, v.CopySourceIfNoneMatch)
+		case schemas.CopyObjectRequest_CopySourceIfUnmodifiedSince:
+			v.CopySourceIfUnmodifiedSince = new(time.Time)
+			return d.ReadTime(schemas.CopyObjectRequest_CopySourceIfUnmodifiedSince, v.CopySourceIfUnmodifiedSince)
+		case schemas.CopyObjectRequest_CopySourceSSECustomerAlgorithm:
+			v.CopySourceSSECustomerAlgorithm = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_CopySourceSSECustomerAlgorithm, v.CopySourceSSECustomerAlgorithm)
+		case schemas.CopyObjectRequest_CopySourceSSECustomerKey:
+			v.CopySourceSSECustomerKey = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_CopySourceSSECustomerKey, v.CopySourceSSECustomerKey)
+		case schemas.CopyObjectRequest_CopySourceSSECustomerKeyMD5:
+			v.CopySourceSSECustomerKeyMD5 = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_CopySourceSSECustomerKeyMD5, v.CopySourceSSECustomerKeyMD5)
+		case schemas.CopyObjectRequest_ExpectedBucketOwner:
+			v.ExpectedBucketOwner = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_ExpectedBucketOwner, v.ExpectedBucketOwner)
+		case schemas.CopyObjectRequest_ExpectedSourceBucketOwner:
+			v.ExpectedSourceBucketOwner = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_ExpectedSourceBucketOwner, v.ExpectedSourceBucketOwner)
+		case schemas.CopyObjectRequest_Expires:
+			v.Expires = new(time.Time)
+			return d.ReadTime(schemas.CopyObjectRequest_Expires, v.Expires)
+		case schemas.CopyObjectRequest_GrantFullControl:
+			v.GrantFullControl = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_GrantFullControl, v.GrantFullControl)
+		case schemas.CopyObjectRequest_GrantRead:
+			v.GrantRead = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_GrantRead, v.GrantRead)
+		case schemas.CopyObjectRequest_GrantReadACP:
+			v.GrantReadACP = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_GrantReadACP, v.GrantReadACP)
+		case schemas.CopyObjectRequest_GrantWriteACP:
+			v.GrantWriteACP = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_GrantWriteACP, v.GrantWriteACP)
+		case schemas.CopyObjectRequest_IfMatch:
+			v.IfMatch = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_IfMatch, v.IfMatch)
+		case schemas.CopyObjectRequest_IfNoneMatch:
+			v.IfNoneMatch = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_IfNoneMatch, v.IfNoneMatch)
+		case schemas.CopyObjectRequest_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_Key, v.Key)
+		case schemas.CopyObjectRequest_MetadataDirective:
+			v.MetadataDirective = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_MetadataDirective, v.MetadataDirective)
+		case schemas.CopyObjectRequest_ObjectLockLegalHoldStatus:
+			v.ObjectLockLegalHoldStatus = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_ObjectLockLegalHoldStatus, v.ObjectLockLegalHoldStatus)
+		case schemas.CopyObjectRequest_ObjectLockMode:
+			v.ObjectLockMode = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_ObjectLockMode, v.ObjectLockMode)
+		case schemas.CopyObjectRequest_ObjectLockRetainUntilDate:
+			v.ObjectLockRetainUntilDate = new(time.Time)
+			return d.ReadTime(schemas.CopyObjectRequest_ObjectLockRetainUntilDate, v.ObjectLockRetainUntilDate)
+		case schemas.CopyObjectRequest_RequestPayer:
+			v.RequestPayer = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_RequestPayer, v.RequestPayer)
+		case schemas.CopyObjectRequest_SSECustomerAlgorithm:
+			v.SSECustomerAlgorithm = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_SSECustomerAlgorithm, v.SSECustomerAlgorithm)
+		case schemas.CopyObjectRequest_SSECustomerKey:
+			v.SSECustomerKey = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_SSECustomerKey, v.SSECustomerKey)
+		case schemas.CopyObjectRequest_SSECustomerKeyMD5:
+			v.SSECustomerKeyMD5 = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_SSECustomerKeyMD5, v.SSECustomerKeyMD5)
+		case schemas.CopyObjectRequest_SSEKMSEncryptionContext:
+			v.SSEKMSEncryptionContext = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_SSEKMSEncryptionContext, v.SSEKMSEncryptionContext)
+		case schemas.CopyObjectRequest_SSEKMSKeyId:
+			v.SSEKMSKeyId = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_SSEKMSKeyId, v.SSEKMSKeyId)
+		case schemas.CopyObjectRequest_ServerSideEncryption:
+			v.ServerSideEncryption = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_ServerSideEncryption, v.ServerSideEncryption)
+		case schemas.CopyObjectRequest_StorageClass:
+			v.StorageClass = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_StorageClass, v.StorageClass)
+		case schemas.CopyObjectRequest_Tagging:
+			v.Tagging = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_Tagging, v.Tagging)
+		case schemas.CopyObjectRequest_TaggingDirective:
+			v.TaggingDirective = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_TaggingDirective, v.TaggingDirective)
+		case schemas.CopyObjectRequest_WebsiteRedirectLocation:
+			v.WebsiteRedirectLocation = new(string)
+			return d.ReadString(schemas.CopyObjectRequest_WebsiteRedirectLocation, v.WebsiteRedirectLocation)
+		}
+		return nil
+	})
+}
+
 type CopyObjectOutput struct {
 	BucketKeyEnabled *bool
 
@@ -162,16 +432,137 @@ type CopyObjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyObjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyObjectOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyObjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketKeyEnabled != nil {
+		s.WriteBool(schemas.CopyObjectOutput_BucketKeyEnabled, *v.BucketKeyEnabled)
+	}
+	if v.ChecksumCRC32 != nil {
+		s.WriteString(schemas.CopyObjectOutput_ChecksumCRC32, *v.ChecksumCRC32)
+	}
+	if v.ChecksumCRC32C != nil {
+		s.WriteString(schemas.CopyObjectOutput_ChecksumCRC32C, *v.ChecksumCRC32C)
+	}
+	if v.ChecksumCRC64NVME != nil {
+		s.WriteString(schemas.CopyObjectOutput_ChecksumCRC64NVME, *v.ChecksumCRC64NVME)
+	}
+	if v.ChecksumSHA1 != nil {
+		s.WriteString(schemas.CopyObjectOutput_ChecksumSHA1, *v.ChecksumSHA1)
+	}
+	if v.ChecksumSHA256 != nil {
+		s.WriteString(schemas.CopyObjectOutput_ChecksumSHA256, *v.ChecksumSHA256)
+	}
+	if v.ChecksumType != nil {
+		s.WriteString(schemas.CopyObjectOutput_ChecksumType, *v.ChecksumType)
+	}
+	if v.CopySourceVersionId != nil {
+		s.WriteString(schemas.CopyObjectOutput_CopySourceVersionId, *v.CopySourceVersionId)
+	}
+	if v.ETag != nil {
+		s.WriteString(schemas.CopyObjectOutput_ETag, *v.ETag)
+	}
+	if v.Expiration != nil {
+		s.WriteString(schemas.CopyObjectOutput_Expiration, *v.Expiration)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.CopyObjectOutput_LastModified, *v.LastModified)
+	}
+	if v.RequestCharged != nil {
+		s.WriteString(schemas.CopyObjectOutput_RequestCharged, *v.RequestCharged)
+	}
+	if v.SSECustomerAlgorithm != nil {
+		s.WriteString(schemas.CopyObjectOutput_SSECustomerAlgorithm, *v.SSECustomerAlgorithm)
+	}
+	if v.SSECustomerKeyMD5 != nil {
+		s.WriteString(schemas.CopyObjectOutput_SSECustomerKeyMD5, *v.SSECustomerKeyMD5)
+	}
+	if v.SSEKMSEncryptionContext != nil {
+		s.WriteString(schemas.CopyObjectOutput_SSEKMSEncryptionContext, *v.SSEKMSEncryptionContext)
+	}
+	if v.SSEKMSKeyId != nil {
+		s.WriteString(schemas.CopyObjectOutput_SSEKMSKeyId, *v.SSEKMSKeyId)
+	}
+	if v.ServerSideEncryption != nil {
+		s.WriteString(schemas.CopyObjectOutput_ServerSideEncryption, *v.ServerSideEncryption)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.CopyObjectOutput_VersionId, *v.VersionId)
+	}
+}
+func (v *CopyObjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyObjectOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyObjectOutput_BucketKeyEnabled:
+			v.BucketKeyEnabled = new(bool)
+			return d.ReadBool(schemas.CopyObjectOutput_BucketKeyEnabled, v.BucketKeyEnabled)
+		case schemas.CopyObjectOutput_ChecksumCRC32:
+			v.ChecksumCRC32 = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_ChecksumCRC32, v.ChecksumCRC32)
+		case schemas.CopyObjectOutput_ChecksumCRC32C:
+			v.ChecksumCRC32C = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_ChecksumCRC32C, v.ChecksumCRC32C)
+		case schemas.CopyObjectOutput_ChecksumCRC64NVME:
+			v.ChecksumCRC64NVME = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_ChecksumCRC64NVME, v.ChecksumCRC64NVME)
+		case schemas.CopyObjectOutput_ChecksumSHA1:
+			v.ChecksumSHA1 = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_ChecksumSHA1, v.ChecksumSHA1)
+		case schemas.CopyObjectOutput_ChecksumSHA256:
+			v.ChecksumSHA256 = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_ChecksumSHA256, v.ChecksumSHA256)
+		case schemas.CopyObjectOutput_ChecksumType:
+			v.ChecksumType = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_ChecksumType, v.ChecksumType)
+		case schemas.CopyObjectOutput_CopySourceVersionId:
+			v.CopySourceVersionId = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_CopySourceVersionId, v.CopySourceVersionId)
+		case schemas.CopyObjectOutput_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_ETag, v.ETag)
+		case schemas.CopyObjectOutput_Expiration:
+			v.Expiration = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_Expiration, v.Expiration)
+		case schemas.CopyObjectOutput_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.CopyObjectOutput_LastModified, v.LastModified)
+		case schemas.CopyObjectOutput_RequestCharged:
+			v.RequestCharged = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_RequestCharged, v.RequestCharged)
+		case schemas.CopyObjectOutput_SSECustomerAlgorithm:
+			v.SSECustomerAlgorithm = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_SSECustomerAlgorithm, v.SSECustomerAlgorithm)
+		case schemas.CopyObjectOutput_SSECustomerKeyMD5:
+			v.SSECustomerKeyMD5 = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_SSECustomerKeyMD5, v.SSECustomerKeyMD5)
+		case schemas.CopyObjectOutput_SSEKMSEncryptionContext:
+			v.SSEKMSEncryptionContext = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_SSEKMSEncryptionContext, v.SSEKMSEncryptionContext)
+		case schemas.CopyObjectOutput_SSEKMSKeyId:
+			v.SSEKMSKeyId = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_SSEKMSKeyId, v.SSEKMSKeyId)
+		case schemas.CopyObjectOutput_ServerSideEncryption:
+			v.ServerSideEncryption = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_ServerSideEncryption, v.ServerSideEncryption)
+		case schemas.CopyObjectOutput_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.CopyObjectOutput_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCopyObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyObject, schemas.CopyObjectRequest, schemas.CopyObjectOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCopyObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyObject, schemas.CopyObjectRequest, schemas.CopyObjectOutput), output: &CopyObjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyObject"); err != nil {

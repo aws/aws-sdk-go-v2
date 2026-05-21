@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/serdbenchmark/rpcv2cbordataplane/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/serdbenchmark/rpcv2cbordataplane/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,76 @@ type PutItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConditionExpression != nil {
+		s.WriteString(schemas.PutItemInput_ConditionExpression, *v.ConditionExpression)
+	}
+	if v.ConditionalOperator != nil {
+		s.WriteString(schemas.PutItemInput_ConditionalOperator, *v.ConditionalOperator)
+	}
+	serializeExpectedAttributeMap(s, schemas.PutItemInput_Expected, v.Expected)
+	serializeExpressionAttributeNameMap(s, schemas.PutItemInput_ExpressionAttributeNames, v.ExpressionAttributeNames)
+	serializeExpressionAttributeValueMap(s, schemas.PutItemInput_ExpressionAttributeValues, v.ExpressionAttributeValues)
+	serializeAttributeValueMap(s, schemas.PutItemInput_Item, v.Item)
+	if v.ReturnConsumedCapacity != nil {
+		s.WriteString(schemas.PutItemInput_ReturnConsumedCapacity, *v.ReturnConsumedCapacity)
+	}
+	if v.ReturnItemCollectionMetrics != nil {
+		s.WriteString(schemas.PutItemInput_ReturnItemCollectionMetrics, *v.ReturnItemCollectionMetrics)
+	}
+	if v.ReturnValues != nil {
+		s.WriteString(schemas.PutItemInput_ReturnValues, *v.ReturnValues)
+	}
+	if v.ReturnValuesOnConditionCheckFailure != nil {
+		s.WriteString(schemas.PutItemInput_ReturnValuesOnConditionCheckFailure, *v.ReturnValuesOnConditionCheckFailure)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.PutItemInput_TableName, *v.TableName)
+	}
+}
+func (v *PutItemInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutItemInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutItemInput_ConditionExpression:
+			v.ConditionExpression = new(string)
+			return d.ReadString(schemas.PutItemInput_ConditionExpression, v.ConditionExpression)
+		case schemas.PutItemInput_ConditionalOperator:
+			v.ConditionalOperator = new(string)
+			return d.ReadString(schemas.PutItemInput_ConditionalOperator, v.ConditionalOperator)
+		case schemas.PutItemInput_Expected:
+			return deserializeExpectedAttributeMap(d, schemas.PutItemInput_Expected, &v.Expected)
+		case schemas.PutItemInput_ExpressionAttributeNames:
+			return deserializeExpressionAttributeNameMap(d, schemas.PutItemInput_ExpressionAttributeNames, &v.ExpressionAttributeNames)
+		case schemas.PutItemInput_ExpressionAttributeValues:
+			return deserializeExpressionAttributeValueMap(d, schemas.PutItemInput_ExpressionAttributeValues, &v.ExpressionAttributeValues)
+		case schemas.PutItemInput_Item:
+			return deserializeAttributeValueMap(d, schemas.PutItemInput_Item, &v.Item)
+		case schemas.PutItemInput_ReturnConsumedCapacity:
+			v.ReturnConsumedCapacity = new(string)
+			return d.ReadString(schemas.PutItemInput_ReturnConsumedCapacity, v.ReturnConsumedCapacity)
+		case schemas.PutItemInput_ReturnItemCollectionMetrics:
+			v.ReturnItemCollectionMetrics = new(string)
+			return d.ReadString(schemas.PutItemInput_ReturnItemCollectionMetrics, v.ReturnItemCollectionMetrics)
+		case schemas.PutItemInput_ReturnValues:
+			v.ReturnValues = new(string)
+			return d.ReadString(schemas.PutItemInput_ReturnValues, v.ReturnValues)
+		case schemas.PutItemInput_ReturnValuesOnConditionCheckFailure:
+			v.ReturnValuesOnConditionCheckFailure = new(string)
+			return d.ReadString(schemas.PutItemInput_ReturnValuesOnConditionCheckFailure, v.ReturnValuesOnConditionCheckFailure)
+		case schemas.PutItemInput_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.PutItemInput_TableName, v.TableName)
+		}
+		return nil
+	})
+}
+
 type PutItemOutput struct {
 	Attributes map[string]types.AttributeValue
 
@@ -69,16 +141,48 @@ type PutItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeValueMap(s, schemas.PutItemOutput_Attributes, v.Attributes)
+	if v.ConsumedCapacity != nil {
+		s.WriteStruct(schemas.PutItemOutput_ConsumedCapacity)
+		v.ConsumedCapacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ItemCollectionMetrics != nil {
+		s.WriteStruct(schemas.PutItemOutput_ItemCollectionMetrics)
+		v.ItemCollectionMetrics.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutItemOutput_Attributes:
+			return deserializeAttributeValueMap(d, schemas.PutItemOutput_Attributes, &v.Attributes)
+		case schemas.PutItemOutput_ConsumedCapacity:
+			v.ConsumedCapacity = &types.ConsumedCapacity{}
+			return v.ConsumedCapacity.Deserialize(d)
+		case schemas.PutItemOutput_ItemCollectionMetrics:
+			v.ItemCollectionMetrics = &types.ItemCollectionMetrics{}
+			return v.ItemCollectionMetrics.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpPutItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutItem, schemas.PutItemInput, schemas.PutItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpPutItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutItem, schemas.PutItemInput, schemas.PutItemOutput), output: &PutItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutItem"); err != nil {

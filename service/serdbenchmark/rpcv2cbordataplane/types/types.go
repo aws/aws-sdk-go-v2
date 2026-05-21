@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/serdbenchmark/rpcv2cbordataplane/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -32,6 +34,12 @@ type AttributeValueMemberB struct {
 }
 
 func (*AttributeValueMemberB) isAttributeValue() {}
+func (v *AttributeValueMemberB) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBlob(schemas.AttributeValue_B, v.Value)
+}
+func (v *AttributeValueMemberB) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBlob(schemas.AttributeValue_B, &v.Value)
+}
 
 type AttributeValueMemberBOOL struct {
 	Value bool
@@ -40,6 +48,12 @@ type AttributeValueMemberBOOL struct {
 }
 
 func (*AttributeValueMemberBOOL) isAttributeValue() {}
+func (v *AttributeValueMemberBOOL) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.AttributeValue_BOOL, v.Value)
+}
+func (v *AttributeValueMemberBOOL) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.AttributeValue_BOOL, &v.Value)
+}
 
 type AttributeValueMemberBS struct {
 	Value [][]byte
@@ -48,6 +62,12 @@ type AttributeValueMemberBS struct {
 }
 
 func (*AttributeValueMemberBS) isAttributeValue() {}
+func (v *AttributeValueMemberBS) Serialize(s smithy.ShapeSerializer) {
+	serializeBinarySet(s, schemas.AttributeValue_BS, v.Value)
+}
+func (v *AttributeValueMemberBS) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeBinarySet(d, schemas.AttributeValue_BS, &v.Value)
+}
 
 type AttributeValueMemberL struct {
 	Value []AttributeValue
@@ -56,6 +76,12 @@ type AttributeValueMemberL struct {
 }
 
 func (*AttributeValueMemberL) isAttributeValue() {}
+func (v *AttributeValueMemberL) Serialize(s smithy.ShapeSerializer) {
+	serializeAttributeValueList(s, schemas.AttributeValue_L, v.Value)
+}
+func (v *AttributeValueMemberL) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAttributeValueList(d, schemas.AttributeValue_L, &v.Value)
+}
 
 type AttributeValueMemberM struct {
 	Value map[string]AttributeValue
@@ -64,6 +90,12 @@ type AttributeValueMemberM struct {
 }
 
 func (*AttributeValueMemberM) isAttributeValue() {}
+func (v *AttributeValueMemberM) Serialize(s smithy.ShapeSerializer) {
+	serializeAttributeValueMap(s, schemas.AttributeValue_M, v.Value)
+}
+func (v *AttributeValueMemberM) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeAttributeValueMap(d, schemas.AttributeValue_M, &v.Value)
+}
 
 type AttributeValueMemberN struct {
 	Value string
@@ -72,6 +104,12 @@ type AttributeValueMemberN struct {
 }
 
 func (*AttributeValueMemberN) isAttributeValue() {}
+func (v *AttributeValueMemberN) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AttributeValue_N, v.Value)
+}
+func (v *AttributeValueMemberN) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AttributeValue_N, &v.Value)
+}
 
 type AttributeValueMemberNS struct {
 	Value []string
@@ -80,6 +118,12 @@ type AttributeValueMemberNS struct {
 }
 
 func (*AttributeValueMemberNS) isAttributeValue() {}
+func (v *AttributeValueMemberNS) Serialize(s smithy.ShapeSerializer) {
+	serializeNumberSet(s, schemas.AttributeValue_NS, v.Value)
+}
+func (v *AttributeValueMemberNS) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeNumberSet(d, schemas.AttributeValue_NS, &v.Value)
+}
 
 type AttributeValueMemberNULL struct {
 	Value bool
@@ -88,6 +132,12 @@ type AttributeValueMemberNULL struct {
 }
 
 func (*AttributeValueMemberNULL) isAttributeValue() {}
+func (v *AttributeValueMemberNULL) Serialize(s smithy.ShapeSerializer) {
+	s.WriteBool(schemas.AttributeValue_NULL, v.Value)
+}
+func (v *AttributeValueMemberNULL) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadBool(schemas.AttributeValue_NULL, &v.Value)
+}
 
 type AttributeValueMemberS struct {
 	Value string
@@ -96,6 +146,12 @@ type AttributeValueMemberS struct {
 }
 
 func (*AttributeValueMemberS) isAttributeValue() {}
+func (v *AttributeValueMemberS) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.AttributeValue_S, v.Value)
+}
+func (v *AttributeValueMemberS) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.AttributeValue_S, &v.Value)
+}
 
 type AttributeValueMemberSS struct {
 	Value []string
@@ -104,6 +160,12 @@ type AttributeValueMemberSS struct {
 }
 
 func (*AttributeValueMemberSS) isAttributeValue() {}
+func (v *AttributeValueMemberSS) Serialize(s smithy.ShapeSerializer) {
+	serializeStringSet(s, schemas.AttributeValue_SS, v.Value)
+}
+func (v *AttributeValueMemberSS) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeStringSet(d, schemas.AttributeValue_SS, &v.Value)
+}
 
 type ConsumedCapacity struct {
 	CapacityUnits *float64
@@ -117,6 +179,46 @@ type ConsumedCapacity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConsumedCapacity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConsumedCapacity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConsumedCapacity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityUnits != nil {
+		s.WriteFloat64(schemas.ConsumedCapacity_CapacityUnits, *v.CapacityUnits)
+	}
+	if v.ReadCapacityUnits != nil {
+		s.WriteFloat64(schemas.ConsumedCapacity_ReadCapacityUnits, *v.ReadCapacityUnits)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.ConsumedCapacity_TableName, *v.TableName)
+	}
+	if v.WriteCapacityUnits != nil {
+		s.WriteFloat64(schemas.ConsumedCapacity_WriteCapacityUnits, *v.WriteCapacityUnits)
+	}
+}
+func (v *ConsumedCapacity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConsumedCapacity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConsumedCapacity_CapacityUnits:
+			v.CapacityUnits = new(float64)
+			return d.ReadFloat64(schemas.ConsumedCapacity_CapacityUnits, v.CapacityUnits)
+		case schemas.ConsumedCapacity_ReadCapacityUnits:
+			v.ReadCapacityUnits = new(float64)
+			return d.ReadFloat64(schemas.ConsumedCapacity_ReadCapacityUnits, v.ReadCapacityUnits)
+		case schemas.ConsumedCapacity_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.ConsumedCapacity_TableName, v.TableName)
+		case schemas.ConsumedCapacity_WriteCapacityUnits:
+			v.WriteCapacityUnits = new(float64)
+			return d.ReadFloat64(schemas.ConsumedCapacity_WriteCapacityUnits, v.WriteCapacityUnits)
+		}
+		return nil
+	})
+}
+
 type Dimension struct {
 
 	// This member is required.
@@ -128,6 +230,34 @@ type Dimension struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Dimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Dimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Dimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Dimension_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Dimension_Value, *v.Value)
+	}
+}
+func (v *Dimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Dimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Dimension_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Dimension_Name, v.Name)
+		case schemas.Dimension_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Dimension_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 type Entity struct {
 	Attributes map[string]string
 
@@ -136,12 +266,61 @@ type Entity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Entity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Entity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Entity) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityAttributesMap(s, schemas.Entity_Attributes, v.Attributes)
+	serializeEntityKeyAttributesMap(s, schemas.Entity_KeyAttributes, v.KeyAttributes)
+}
+func (v *Entity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Entity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Entity_Attributes:
+			return deserializeEntityAttributesMap(d, schemas.Entity_Attributes, &v.Attributes)
+		case schemas.Entity_KeyAttributes:
+			return deserializeEntityKeyAttributesMap(d, schemas.Entity_KeyAttributes, &v.KeyAttributes)
+		}
+		return nil
+	})
+}
+
 type EntityMetricDatum struct {
 	Entity *Entity
 
 	MetricData []MetricDatum
 
 	noSmithyDocumentSerde
+}
+
+func (v *EntityMetricDatum) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EntityMetricDatum)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EntityMetricDatum) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entity != nil {
+		s.WriteStruct(schemas.EntityMetricDatum_Entity)
+		v.Entity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMetricData(s, schemas.EntityMetricDatum_MetricData, v.MetricData)
+}
+func (v *EntityMetricDatum) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EntityMetricDatum, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EntityMetricDatum_Entity:
+			v.Entity = &Entity{}
+			return v.Entity.Deserialize(d)
+		case schemas.EntityMetricDatum_MetricData:
+			return deserializeMetricData(d, schemas.EntityMetricDatum_MetricData, &v.MetricData)
+		}
+		return nil
+	})
 }
 
 type ExpectedAttributeValue struct {
@@ -157,6 +336,40 @@ type ExpectedAttributeValue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExpectedAttributeValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExpectedAttributeValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExpectedAttributeValue) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeValueList(s, schemas.ExpectedAttributeValue_AttributeValueList, v.AttributeValueList)
+	if v.ComparisonOperator != nil {
+		s.WriteString(schemas.ExpectedAttributeValue_ComparisonOperator, *v.ComparisonOperator)
+	}
+	if v.Exists != nil {
+		s.WriteBool(schemas.ExpectedAttributeValue_Exists, *v.Exists)
+	}
+	serializeAttributeValue(s, schemas.ExpectedAttributeValue_Value, v.Value)
+}
+func (v *ExpectedAttributeValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExpectedAttributeValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExpectedAttributeValue_AttributeValueList:
+			return deserializeAttributeValueList(d, schemas.ExpectedAttributeValue_AttributeValueList, &v.AttributeValueList)
+		case schemas.ExpectedAttributeValue_ComparisonOperator:
+			v.ComparisonOperator = new(string)
+			return d.ReadString(schemas.ExpectedAttributeValue_ComparisonOperator, v.ComparisonOperator)
+		case schemas.ExpectedAttributeValue_Exists:
+			v.Exists = new(bool)
+			return d.ReadBool(schemas.ExpectedAttributeValue_Exists, v.Exists)
+		case schemas.ExpectedAttributeValue_Value:
+			return deserializeAttributeValue(d, schemas.ExpectedAttributeValue_Value, &v.Value)
+		}
+		return nil
+	})
+}
+
 type ItemCollectionMetrics struct {
 	ItemCollectionKey map[string]AttributeValue
 
@@ -165,10 +378,54 @@ type ItemCollectionMetrics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ItemCollectionMetrics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ItemCollectionMetrics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ItemCollectionMetrics) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeValueMap(s, schemas.ItemCollectionMetrics_ItemCollectionKey, v.ItemCollectionKey)
+	serializeSizeEstimateRange(s, schemas.ItemCollectionMetrics_SizeEstimateRangeGB, v.SizeEstimateRangeGB)
+}
+func (v *ItemCollectionMetrics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ItemCollectionMetrics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ItemCollectionMetrics_ItemCollectionKey:
+			return deserializeAttributeValueMap(d, schemas.ItemCollectionMetrics_ItemCollectionKey, &v.ItemCollectionKey)
+		case schemas.ItemCollectionMetrics_SizeEstimateRangeGB:
+			return deserializeSizeEstimateRange(d, schemas.ItemCollectionMetrics_SizeEstimateRangeGB, &v.SizeEstimateRangeGB)
+		}
+		return nil
+	})
+}
+
 type LabelOptions struct {
 	Timezone *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LabelOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LabelOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LabelOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Timezone != nil {
+		s.WriteString(schemas.LabelOptions_Timezone, *v.Timezone)
+	}
+}
+func (v *LabelOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LabelOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LabelOptions_Timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.LabelOptions_Timezone, v.Timezone)
+		}
+		return nil
+	})
 }
 
 type MessageData struct {
@@ -179,6 +436,34 @@ type MessageData struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MessageData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != nil {
+		s.WriteString(schemas.MessageData_Code, *v.Code)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.MessageData_Value, *v.Value)
+	}
+}
+func (v *MessageData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageData_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.MessageData_Code, v.Code)
+		case schemas.MessageData_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.MessageData_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 type Metric struct {
 	Dimensions []Dimension
 
@@ -187,6 +472,37 @@ type Metric struct {
 	Namespace *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Metric) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Metric)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Metric) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensions(s, schemas.Metric_Dimensions, v.Dimensions)
+	if v.MetricName != nil {
+		s.WriteString(schemas.Metric_MetricName, *v.MetricName)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.Metric_Namespace, *v.Namespace)
+	}
+}
+func (v *Metric) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Metric, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Metric_Dimensions:
+			return deserializeDimensions(d, schemas.Metric_Dimensions, &v.Dimensions)
+		case schemas.Metric_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.Metric_MetricName, v.MetricName)
+		case schemas.Metric_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.Metric_Namespace, v.Namespace)
+		}
+		return nil
+	})
 }
 
 type MetricDataQuery struct {
@@ -209,6 +525,66 @@ type MetricDataQuery struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricDataQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricDataQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricDataQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.MetricDataQuery_AccountId, *v.AccountId)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.MetricDataQuery_Expression, *v.Expression)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.MetricDataQuery_Id, *v.Id)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.MetricDataQuery_Label, *v.Label)
+	}
+	if v.MetricStat != nil {
+		s.WriteStruct(schemas.MetricDataQuery_MetricStat)
+		v.MetricStat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.MetricDataQuery_Period, *v.Period)
+	}
+	if v.ReturnData != nil {
+		s.WriteBool(schemas.MetricDataQuery_ReturnData, *v.ReturnData)
+	}
+}
+func (v *MetricDataQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricDataQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricDataQuery_AccountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.MetricDataQuery_AccountId, v.AccountId)
+		case schemas.MetricDataQuery_Expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.MetricDataQuery_Expression, v.Expression)
+		case schemas.MetricDataQuery_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MetricDataQuery_Id, v.Id)
+		case schemas.MetricDataQuery_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.MetricDataQuery_Label, v.Label)
+		case schemas.MetricDataQuery_MetricStat:
+			v.MetricStat = &MetricStat{}
+			return v.MetricStat.Deserialize(d)
+		case schemas.MetricDataQuery_Period:
+			v.Period = new(int32)
+			return d.ReadInt32(schemas.MetricDataQuery_Period, v.Period)
+		case schemas.MetricDataQuery_ReturnData:
+			v.ReturnData = new(bool)
+			return d.ReadBool(schemas.MetricDataQuery_ReturnData, v.ReturnData)
+		}
+		return nil
+	})
+}
+
 type MetricDataResult struct {
 	Id *string
 
@@ -223,6 +599,53 @@ type MetricDataResult struct {
 	Values []float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricDataResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricDataResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricDataResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.MetricDataResult_Id, *v.Id)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.MetricDataResult_Label, *v.Label)
+	}
+	serializeMetricDataResultMessages(s, schemas.MetricDataResult_Messages, v.Messages)
+	if v.StatusCode != "" {
+		s.WriteString(schemas.MetricDataResult_StatusCode, string(v.StatusCode))
+	}
+	serializeTimestamps(s, schemas.MetricDataResult_Timestamps, v.Timestamps)
+	serializeValues(s, schemas.MetricDataResult_Values, v.Values)
+}
+func (v *MetricDataResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricDataResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricDataResult_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MetricDataResult_Id, v.Id)
+		case schemas.MetricDataResult_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.MetricDataResult_Label, v.Label)
+		case schemas.MetricDataResult_Messages:
+			return deserializeMetricDataResultMessages(d, schemas.MetricDataResult_Messages, &v.Messages)
+		case schemas.MetricDataResult_StatusCode:
+			var ev string
+			if err := d.ReadString(schemas.MetricDataResult_StatusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = StatusCode(ev)
+			return nil
+		case schemas.MetricDataResult_Timestamps:
+			return deserializeTimestamps(d, schemas.MetricDataResult_Timestamps, &v.Timestamps)
+		case schemas.MetricDataResult_Values:
+			return deserializeValues(d, schemas.MetricDataResult_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 type MetricDatum struct {
@@ -249,6 +672,73 @@ type MetricDatum struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricDatum) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricDatum)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricDatum) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCounts(s, schemas.MetricDatum_Counts, v.Counts)
+	serializeDimensions(s, schemas.MetricDatum_Dimensions, v.Dimensions)
+	if v.MetricName != nil {
+		s.WriteString(schemas.MetricDatum_MetricName, *v.MetricName)
+	}
+	if v.StatisticValues != nil {
+		s.WriteStruct(schemas.MetricDatum_StatisticValues)
+		v.StatisticValues.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageResolution != nil {
+		s.WriteInt32(schemas.MetricDatum_StorageResolution, *v.StorageResolution)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.MetricDatum_Timestamp, *v.Timestamp)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.MetricDatum_Unit, string(v.Unit))
+	}
+	if v.Value != nil {
+		s.WriteFloat64(schemas.MetricDatum_Value, *v.Value)
+	}
+	serializeValues(s, schemas.MetricDatum_Values, v.Values)
+}
+func (v *MetricDatum) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricDatum, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricDatum_Counts:
+			return deserializeCounts(d, schemas.MetricDatum_Counts, &v.Counts)
+		case schemas.MetricDatum_Dimensions:
+			return deserializeDimensions(d, schemas.MetricDatum_Dimensions, &v.Dimensions)
+		case schemas.MetricDatum_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.MetricDatum_MetricName, v.MetricName)
+		case schemas.MetricDatum_StatisticValues:
+			v.StatisticValues = &StatisticSet{}
+			return v.StatisticValues.Deserialize(d)
+		case schemas.MetricDatum_StorageResolution:
+			v.StorageResolution = new(int32)
+			return d.ReadInt32(schemas.MetricDatum_StorageResolution, v.StorageResolution)
+		case schemas.MetricDatum_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.MetricDatum_Timestamp, v.Timestamp)
+		case schemas.MetricDatum_Unit:
+			var ev string
+			if err := d.ReadString(schemas.MetricDatum_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = StandardUnit(ev)
+			return nil
+		case schemas.MetricDatum_Value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.MetricDatum_Value, v.Value)
+		case schemas.MetricDatum_Values:
+			return deserializeValues(d, schemas.MetricDatum_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 type MetricStat struct {
 
 	// This member is required.
@@ -263,6 +753,52 @@ type MetricStat struct {
 	Unit StandardUnit
 
 	noSmithyDocumentSerde
+}
+
+func (v *MetricStat) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricStat)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricStat) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metric != nil {
+		s.WriteStruct(schemas.MetricStat_Metric)
+		v.Metric.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Period != nil {
+		s.WriteInt32(schemas.MetricStat_Period, *v.Period)
+	}
+	if v.Stat != nil {
+		s.WriteString(schemas.MetricStat_Stat, *v.Stat)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.MetricStat_Unit, string(v.Unit))
+	}
+}
+func (v *MetricStat) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricStat, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricStat_Metric:
+			v.Metric = &Metric{}
+			return v.Metric.Deserialize(d)
+		case schemas.MetricStat_Period:
+			v.Period = new(int32)
+			return d.ReadInt32(schemas.MetricStat_Period, v.Period)
+		case schemas.MetricStat_Stat:
+			v.Stat = new(string)
+			return d.ReadString(schemas.MetricStat_Stat, v.Stat)
+		case schemas.MetricStat_Unit:
+			var ev string
+			if err := d.ReadString(schemas.MetricStat_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = StandardUnit(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type StatisticSet struct {
@@ -280,6 +816,46 @@ type StatisticSet struct {
 	Sum *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *StatisticSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StatisticSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StatisticSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Maximum != nil {
+		s.WriteFloat64(schemas.StatisticSet_Maximum, *v.Maximum)
+	}
+	if v.Minimum != nil {
+		s.WriteFloat64(schemas.StatisticSet_Minimum, *v.Minimum)
+	}
+	if v.SampleCount != nil {
+		s.WriteFloat64(schemas.StatisticSet_SampleCount, *v.SampleCount)
+	}
+	if v.Sum != nil {
+		s.WriteFloat64(schemas.StatisticSet_Sum, *v.Sum)
+	}
+}
+func (v *StatisticSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StatisticSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StatisticSet_Maximum:
+			v.Maximum = new(float64)
+			return d.ReadFloat64(schemas.StatisticSet_Maximum, v.Maximum)
+		case schemas.StatisticSet_Minimum:
+			v.Minimum = new(float64)
+			return d.ReadFloat64(schemas.StatisticSet_Minimum, v.Minimum)
+		case schemas.StatisticSet_SampleCount:
+			v.SampleCount = new(float64)
+			return d.ReadFloat64(schemas.StatisticSet_SampleCount, v.SampleCount)
+		case schemas.StatisticSet_Sum:
+			v.Sum = new(float64)
+			return d.ReadFloat64(schemas.StatisticSet_Sum, v.Sum)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

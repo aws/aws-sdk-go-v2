@@ -7,7 +7,9 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalChecksum "github.com/aws/aws-sdk-go-v2/service/internal/checksum"
+	"github.com/aws/aws-sdk-go-v2/service/serdbenchmark/restjsondataplane/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/serdbenchmark/restjsondataplane/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -120,6 +122,266 @@ type PutObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutObjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutObjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ACL != nil {
+		s.WriteString(schemas.PutObjectRequest_ACL, *v.ACL)
+	}
+	s.WriteBlob(schemas.PutObjectRequest_Body, v.Body)
+	if v.Bucket != nil {
+		s.WriteString(schemas.PutObjectRequest_Bucket, *v.Bucket)
+	}
+	if v.BucketKeyEnabled != nil {
+		s.WriteBool(schemas.PutObjectRequest_BucketKeyEnabled, *v.BucketKeyEnabled)
+	}
+	if v.CacheControl != nil {
+		s.WriteString(schemas.PutObjectRequest_CacheControl, *v.CacheControl)
+	}
+	if v.ChecksumAlgorithm != "" {
+		s.WriteString(schemas.PutObjectRequest_ChecksumAlgorithm, string(v.ChecksumAlgorithm))
+	}
+	if v.ChecksumCRC32 != nil {
+		s.WriteString(schemas.PutObjectRequest_ChecksumCRC32, *v.ChecksumCRC32)
+	}
+	if v.ChecksumCRC32C != nil {
+		s.WriteString(schemas.PutObjectRequest_ChecksumCRC32C, *v.ChecksumCRC32C)
+	}
+	if v.ChecksumCRC64NVME != nil {
+		s.WriteString(schemas.PutObjectRequest_ChecksumCRC64NVME, *v.ChecksumCRC64NVME)
+	}
+	if v.ChecksumSHA1 != nil {
+		s.WriteString(schemas.PutObjectRequest_ChecksumSHA1, *v.ChecksumSHA1)
+	}
+	if v.ChecksumSHA256 != nil {
+		s.WriteString(schemas.PutObjectRequest_ChecksumSHA256, *v.ChecksumSHA256)
+	}
+	if v.ContentDisposition != nil {
+		s.WriteString(schemas.PutObjectRequest_ContentDisposition, *v.ContentDisposition)
+	}
+	if v.ContentEncoding != nil {
+		s.WriteString(schemas.PutObjectRequest_ContentEncoding, *v.ContentEncoding)
+	}
+	if v.ContentLanguage != nil {
+		s.WriteString(schemas.PutObjectRequest_ContentLanguage, *v.ContentLanguage)
+	}
+	if v.ContentLength != nil {
+		s.WriteInt64(schemas.PutObjectRequest_ContentLength, *v.ContentLength)
+	}
+	if v.ContentMD5 != nil {
+		s.WriteString(schemas.PutObjectRequest_ContentMD5, *v.ContentMD5)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.PutObjectRequest_ContentType, *v.ContentType)
+	}
+	if v.ExpectedBucketOwner != nil {
+		s.WriteString(schemas.PutObjectRequest_ExpectedBucketOwner, *v.ExpectedBucketOwner)
+	}
+	if v.Expires != nil {
+		s.WriteTime(schemas.PutObjectRequest_Expires, *v.Expires)
+	}
+	if v.GrantFullControl != nil {
+		s.WriteString(schemas.PutObjectRequest_GrantFullControl, *v.GrantFullControl)
+	}
+	if v.GrantRead != nil {
+		s.WriteString(schemas.PutObjectRequest_GrantRead, *v.GrantRead)
+	}
+	if v.GrantReadACP != nil {
+		s.WriteString(schemas.PutObjectRequest_GrantReadACP, *v.GrantReadACP)
+	}
+	if v.GrantWriteACP != nil {
+		s.WriteString(schemas.PutObjectRequest_GrantWriteACP, *v.GrantWriteACP)
+	}
+	if v.IfMatch != nil {
+		s.WriteString(schemas.PutObjectRequest_IfMatch, *v.IfMatch)
+	}
+	if v.IfNoneMatch != nil {
+		s.WriteString(schemas.PutObjectRequest_IfNoneMatch, *v.IfNoneMatch)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.PutObjectRequest_Key, *v.Key)
+	}
+	serializeMetadata(s, schemas.PutObjectRequest_Metadata, v.Metadata)
+	if v.ObjectLockLegalHoldStatus != nil {
+		s.WriteString(schemas.PutObjectRequest_ObjectLockLegalHoldStatus, *v.ObjectLockLegalHoldStatus)
+	}
+	if v.ObjectLockMode != nil {
+		s.WriteString(schemas.PutObjectRequest_ObjectLockMode, *v.ObjectLockMode)
+	}
+	if v.ObjectLockRetainUntilDate != nil {
+		s.WriteTime(schemas.PutObjectRequest_ObjectLockRetainUntilDate, *v.ObjectLockRetainUntilDate)
+	}
+	if v.RequestPayer != nil {
+		s.WriteString(schemas.PutObjectRequest_RequestPayer, *v.RequestPayer)
+	}
+	if v.SSECustomerAlgorithm != nil {
+		s.WriteString(schemas.PutObjectRequest_SSECustomerAlgorithm, *v.SSECustomerAlgorithm)
+	}
+	if v.SSECustomerKey != nil {
+		s.WriteString(schemas.PutObjectRequest_SSECustomerKey, *v.SSECustomerKey)
+	}
+	if v.SSECustomerKeyMD5 != nil {
+		s.WriteString(schemas.PutObjectRequest_SSECustomerKeyMD5, *v.SSECustomerKeyMD5)
+	}
+	if v.SSEKMSEncryptionContext != nil {
+		s.WriteString(schemas.PutObjectRequest_SSEKMSEncryptionContext, *v.SSEKMSEncryptionContext)
+	}
+	if v.SSEKMSKeyId != nil {
+		s.WriteString(schemas.PutObjectRequest_SSEKMSKeyId, *v.SSEKMSKeyId)
+	}
+	if v.ServerSideEncryption != nil {
+		s.WriteString(schemas.PutObjectRequest_ServerSideEncryption, *v.ServerSideEncryption)
+	}
+	if v.StorageClass != nil {
+		s.WriteString(schemas.PutObjectRequest_StorageClass, *v.StorageClass)
+	}
+	if v.Tagging != nil {
+		s.WriteString(schemas.PutObjectRequest_Tagging, *v.Tagging)
+	}
+	if v.WebsiteRedirectLocation != nil {
+		s.WriteString(schemas.PutObjectRequest_WebsiteRedirectLocation, *v.WebsiteRedirectLocation)
+	}
+	if v.WriteOffsetBytes != nil {
+		s.WriteInt64(schemas.PutObjectRequest_WriteOffsetBytes, *v.WriteOffsetBytes)
+	}
+}
+func (v *PutObjectInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutObjectRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutObjectRequest_ACL:
+			v.ACL = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ACL, v.ACL)
+		case schemas.PutObjectRequest_Body:
+			return d.ReadBlob(schemas.PutObjectRequest_Body, &v.Body)
+		case schemas.PutObjectRequest_Bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.PutObjectRequest_Bucket, v.Bucket)
+		case schemas.PutObjectRequest_BucketKeyEnabled:
+			v.BucketKeyEnabled = new(bool)
+			return d.ReadBool(schemas.PutObjectRequest_BucketKeyEnabled, v.BucketKeyEnabled)
+		case schemas.PutObjectRequest_CacheControl:
+			v.CacheControl = new(string)
+			return d.ReadString(schemas.PutObjectRequest_CacheControl, v.CacheControl)
+		case schemas.PutObjectRequest_ChecksumAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.PutObjectRequest_ChecksumAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.ChecksumAlgorithm = types.ChecksumAlgorithm(ev)
+			return nil
+		case schemas.PutObjectRequest_ChecksumCRC32:
+			v.ChecksumCRC32 = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ChecksumCRC32, v.ChecksumCRC32)
+		case schemas.PutObjectRequest_ChecksumCRC32C:
+			v.ChecksumCRC32C = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ChecksumCRC32C, v.ChecksumCRC32C)
+		case schemas.PutObjectRequest_ChecksumCRC64NVME:
+			v.ChecksumCRC64NVME = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ChecksumCRC64NVME, v.ChecksumCRC64NVME)
+		case schemas.PutObjectRequest_ChecksumSHA1:
+			v.ChecksumSHA1 = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ChecksumSHA1, v.ChecksumSHA1)
+		case schemas.PutObjectRequest_ChecksumSHA256:
+			v.ChecksumSHA256 = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ChecksumSHA256, v.ChecksumSHA256)
+		case schemas.PutObjectRequest_ContentDisposition:
+			v.ContentDisposition = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ContentDisposition, v.ContentDisposition)
+		case schemas.PutObjectRequest_ContentEncoding:
+			v.ContentEncoding = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ContentEncoding, v.ContentEncoding)
+		case schemas.PutObjectRequest_ContentLanguage:
+			v.ContentLanguage = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ContentLanguage, v.ContentLanguage)
+		case schemas.PutObjectRequest_ContentLength:
+			v.ContentLength = new(int64)
+			return d.ReadInt64(schemas.PutObjectRequest_ContentLength, v.ContentLength)
+		case schemas.PutObjectRequest_ContentMD5:
+			v.ContentMD5 = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ContentMD5, v.ContentMD5)
+		case schemas.PutObjectRequest_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ContentType, v.ContentType)
+		case schemas.PutObjectRequest_ExpectedBucketOwner:
+			v.ExpectedBucketOwner = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ExpectedBucketOwner, v.ExpectedBucketOwner)
+		case schemas.PutObjectRequest_Expires:
+			v.Expires = new(time.Time)
+			return d.ReadTime(schemas.PutObjectRequest_Expires, v.Expires)
+		case schemas.PutObjectRequest_GrantFullControl:
+			v.GrantFullControl = new(string)
+			return d.ReadString(schemas.PutObjectRequest_GrantFullControl, v.GrantFullControl)
+		case schemas.PutObjectRequest_GrantRead:
+			v.GrantRead = new(string)
+			return d.ReadString(schemas.PutObjectRequest_GrantRead, v.GrantRead)
+		case schemas.PutObjectRequest_GrantReadACP:
+			v.GrantReadACP = new(string)
+			return d.ReadString(schemas.PutObjectRequest_GrantReadACP, v.GrantReadACP)
+		case schemas.PutObjectRequest_GrantWriteACP:
+			v.GrantWriteACP = new(string)
+			return d.ReadString(schemas.PutObjectRequest_GrantWriteACP, v.GrantWriteACP)
+		case schemas.PutObjectRequest_IfMatch:
+			v.IfMatch = new(string)
+			return d.ReadString(schemas.PutObjectRequest_IfMatch, v.IfMatch)
+		case schemas.PutObjectRequest_IfNoneMatch:
+			v.IfNoneMatch = new(string)
+			return d.ReadString(schemas.PutObjectRequest_IfNoneMatch, v.IfNoneMatch)
+		case schemas.PutObjectRequest_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.PutObjectRequest_Key, v.Key)
+		case schemas.PutObjectRequest_Metadata:
+			return deserializeMetadata(d, schemas.PutObjectRequest_Metadata, &v.Metadata)
+		case schemas.PutObjectRequest_ObjectLockLegalHoldStatus:
+			v.ObjectLockLegalHoldStatus = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ObjectLockLegalHoldStatus, v.ObjectLockLegalHoldStatus)
+		case schemas.PutObjectRequest_ObjectLockMode:
+			v.ObjectLockMode = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ObjectLockMode, v.ObjectLockMode)
+		case schemas.PutObjectRequest_ObjectLockRetainUntilDate:
+			v.ObjectLockRetainUntilDate = new(time.Time)
+			return d.ReadTime(schemas.PutObjectRequest_ObjectLockRetainUntilDate, v.ObjectLockRetainUntilDate)
+		case schemas.PutObjectRequest_RequestPayer:
+			v.RequestPayer = new(string)
+			return d.ReadString(schemas.PutObjectRequest_RequestPayer, v.RequestPayer)
+		case schemas.PutObjectRequest_SSECustomerAlgorithm:
+			v.SSECustomerAlgorithm = new(string)
+			return d.ReadString(schemas.PutObjectRequest_SSECustomerAlgorithm, v.SSECustomerAlgorithm)
+		case schemas.PutObjectRequest_SSECustomerKey:
+			v.SSECustomerKey = new(string)
+			return d.ReadString(schemas.PutObjectRequest_SSECustomerKey, v.SSECustomerKey)
+		case schemas.PutObjectRequest_SSECustomerKeyMD5:
+			v.SSECustomerKeyMD5 = new(string)
+			return d.ReadString(schemas.PutObjectRequest_SSECustomerKeyMD5, v.SSECustomerKeyMD5)
+		case schemas.PutObjectRequest_SSEKMSEncryptionContext:
+			v.SSEKMSEncryptionContext = new(string)
+			return d.ReadString(schemas.PutObjectRequest_SSEKMSEncryptionContext, v.SSEKMSEncryptionContext)
+		case schemas.PutObjectRequest_SSEKMSKeyId:
+			v.SSEKMSKeyId = new(string)
+			return d.ReadString(schemas.PutObjectRequest_SSEKMSKeyId, v.SSEKMSKeyId)
+		case schemas.PutObjectRequest_ServerSideEncryption:
+			v.ServerSideEncryption = new(string)
+			return d.ReadString(schemas.PutObjectRequest_ServerSideEncryption, v.ServerSideEncryption)
+		case schemas.PutObjectRequest_StorageClass:
+			v.StorageClass = new(string)
+			return d.ReadString(schemas.PutObjectRequest_StorageClass, v.StorageClass)
+		case schemas.PutObjectRequest_Tagging:
+			v.Tagging = new(string)
+			return d.ReadString(schemas.PutObjectRequest_Tagging, v.Tagging)
+		case schemas.PutObjectRequest_WebsiteRedirectLocation:
+			v.WebsiteRedirectLocation = new(string)
+			return d.ReadString(schemas.PutObjectRequest_WebsiteRedirectLocation, v.WebsiteRedirectLocation)
+		case schemas.PutObjectRequest_WriteOffsetBytes:
+			v.WriteOffsetBytes = new(int64)
+			return d.ReadInt64(schemas.PutObjectRequest_WriteOffsetBytes, v.WriteOffsetBytes)
+		}
+		return nil
+	})
+}
+
 type PutObjectOutput struct {
 	BucketKeyEnabled *bool
 
@@ -161,16 +423,131 @@ type PutObjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutObjectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutObjectOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutObjectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketKeyEnabled != nil {
+		s.WriteBool(schemas.PutObjectOutput_BucketKeyEnabled, *v.BucketKeyEnabled)
+	}
+	if v.ChecksumCRC32 != nil {
+		s.WriteString(schemas.PutObjectOutput_ChecksumCRC32, *v.ChecksumCRC32)
+	}
+	if v.ChecksumCRC32C != nil {
+		s.WriteString(schemas.PutObjectOutput_ChecksumCRC32C, *v.ChecksumCRC32C)
+	}
+	if v.ChecksumCRC64NVME != nil {
+		s.WriteString(schemas.PutObjectOutput_ChecksumCRC64NVME, *v.ChecksumCRC64NVME)
+	}
+	if v.ChecksumSHA1 != nil {
+		s.WriteString(schemas.PutObjectOutput_ChecksumSHA1, *v.ChecksumSHA1)
+	}
+	if v.ChecksumSHA256 != nil {
+		s.WriteString(schemas.PutObjectOutput_ChecksumSHA256, *v.ChecksumSHA256)
+	}
+	if v.ChecksumType != nil {
+		s.WriteString(schemas.PutObjectOutput_ChecksumType, *v.ChecksumType)
+	}
+	if v.ETag != nil {
+		s.WriteString(schemas.PutObjectOutput_ETag, *v.ETag)
+	}
+	if v.Expiration != nil {
+		s.WriteString(schemas.PutObjectOutput_Expiration, *v.Expiration)
+	}
+	if v.RequestCharged != nil {
+		s.WriteString(schemas.PutObjectOutput_RequestCharged, *v.RequestCharged)
+	}
+	if v.SSECustomerAlgorithm != nil {
+		s.WriteString(schemas.PutObjectOutput_SSECustomerAlgorithm, *v.SSECustomerAlgorithm)
+	}
+	if v.SSECustomerKeyMD5 != nil {
+		s.WriteString(schemas.PutObjectOutput_SSECustomerKeyMD5, *v.SSECustomerKeyMD5)
+	}
+	if v.SSEKMSEncryptionContext != nil {
+		s.WriteString(schemas.PutObjectOutput_SSEKMSEncryptionContext, *v.SSEKMSEncryptionContext)
+	}
+	if v.SSEKMSKeyId != nil {
+		s.WriteString(schemas.PutObjectOutput_SSEKMSKeyId, *v.SSEKMSKeyId)
+	}
+	if v.ServerSideEncryption != nil {
+		s.WriteString(schemas.PutObjectOutput_ServerSideEncryption, *v.ServerSideEncryption)
+	}
+	if v.Size != nil {
+		s.WriteInt64(schemas.PutObjectOutput_Size, *v.Size)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.PutObjectOutput_VersionId, *v.VersionId)
+	}
+}
+func (v *PutObjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutObjectOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutObjectOutput_BucketKeyEnabled:
+			v.BucketKeyEnabled = new(bool)
+			return d.ReadBool(schemas.PutObjectOutput_BucketKeyEnabled, v.BucketKeyEnabled)
+		case schemas.PutObjectOutput_ChecksumCRC32:
+			v.ChecksumCRC32 = new(string)
+			return d.ReadString(schemas.PutObjectOutput_ChecksumCRC32, v.ChecksumCRC32)
+		case schemas.PutObjectOutput_ChecksumCRC32C:
+			v.ChecksumCRC32C = new(string)
+			return d.ReadString(schemas.PutObjectOutput_ChecksumCRC32C, v.ChecksumCRC32C)
+		case schemas.PutObjectOutput_ChecksumCRC64NVME:
+			v.ChecksumCRC64NVME = new(string)
+			return d.ReadString(schemas.PutObjectOutput_ChecksumCRC64NVME, v.ChecksumCRC64NVME)
+		case schemas.PutObjectOutput_ChecksumSHA1:
+			v.ChecksumSHA1 = new(string)
+			return d.ReadString(schemas.PutObjectOutput_ChecksumSHA1, v.ChecksumSHA1)
+		case schemas.PutObjectOutput_ChecksumSHA256:
+			v.ChecksumSHA256 = new(string)
+			return d.ReadString(schemas.PutObjectOutput_ChecksumSHA256, v.ChecksumSHA256)
+		case schemas.PutObjectOutput_ChecksumType:
+			v.ChecksumType = new(string)
+			return d.ReadString(schemas.PutObjectOutput_ChecksumType, v.ChecksumType)
+		case schemas.PutObjectOutput_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.PutObjectOutput_ETag, v.ETag)
+		case schemas.PutObjectOutput_Expiration:
+			v.Expiration = new(string)
+			return d.ReadString(schemas.PutObjectOutput_Expiration, v.Expiration)
+		case schemas.PutObjectOutput_RequestCharged:
+			v.RequestCharged = new(string)
+			return d.ReadString(schemas.PutObjectOutput_RequestCharged, v.RequestCharged)
+		case schemas.PutObjectOutput_SSECustomerAlgorithm:
+			v.SSECustomerAlgorithm = new(string)
+			return d.ReadString(schemas.PutObjectOutput_SSECustomerAlgorithm, v.SSECustomerAlgorithm)
+		case schemas.PutObjectOutput_SSECustomerKeyMD5:
+			v.SSECustomerKeyMD5 = new(string)
+			return d.ReadString(schemas.PutObjectOutput_SSECustomerKeyMD5, v.SSECustomerKeyMD5)
+		case schemas.PutObjectOutput_SSEKMSEncryptionContext:
+			v.SSEKMSEncryptionContext = new(string)
+			return d.ReadString(schemas.PutObjectOutput_SSEKMSEncryptionContext, v.SSEKMSEncryptionContext)
+		case schemas.PutObjectOutput_SSEKMSKeyId:
+			v.SSEKMSKeyId = new(string)
+			return d.ReadString(schemas.PutObjectOutput_SSEKMSKeyId, v.SSEKMSKeyId)
+		case schemas.PutObjectOutput_ServerSideEncryption:
+			v.ServerSideEncryption = new(string)
+			return d.ReadString(schemas.PutObjectOutput_ServerSideEncryption, v.ServerSideEncryption)
+		case schemas.PutObjectOutput_Size:
+			v.Size = new(int64)
+			return d.ReadInt64(schemas.PutObjectOutput_Size, v.Size)
+		case schemas.PutObjectOutput_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.PutObjectOutput_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutObject, schemas.PutObjectRequest, schemas.PutObjectOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutObject, schemas.PutObjectRequest, schemas.PutObjectOutput), output: &PutObjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutObject"); err != nil {

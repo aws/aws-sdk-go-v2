@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/serdbenchmark/restjsondataplane/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/serdbenchmark/restjsondataplane/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,40 @@ type PutMetricDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMetricDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMetricDataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMetricDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEntityMetricDataList(s, schemas.PutMetricDataInput_EntityMetricData, v.EntityMetricData)
+	serializeMetricData(s, schemas.PutMetricDataInput_MetricData, v.MetricData)
+	if v.Namespace != nil {
+		s.WriteString(schemas.PutMetricDataInput_Namespace, *v.Namespace)
+	}
+	if v.StrictEntityValidation != nil {
+		s.WriteBool(schemas.PutMetricDataInput_StrictEntityValidation, *v.StrictEntityValidation)
+	}
+}
+func (v *PutMetricDataInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutMetricDataInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutMetricDataInput_EntityMetricData:
+			return deserializeEntityMetricDataList(d, schemas.PutMetricDataInput_EntityMetricData, &v.EntityMetricData)
+		case schemas.PutMetricDataInput_MetricData:
+			return deserializeMetricData(d, schemas.PutMetricDataInput_MetricData, &v.MetricData)
+		case schemas.PutMetricDataInput_Namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.PutMetricDataInput_Namespace, v.Namespace)
+		case schemas.PutMetricDataInput_StrictEntityValidation:
+			v.StrictEntityValidation = new(bool)
+			return d.ReadBool(schemas.PutMetricDataInput_StrictEntityValidation, v.StrictEntityValidation)
+		}
+		return nil
+	})
+}
+
 type PutMetricDataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -48,16 +84,29 @@ type PutMetricDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMetricDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMetricDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutMetricDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMetricData, schemas.PutMetricDataInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutMetricData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMetricData, schemas.PutMetricDataInput, nil), output: &PutMetricDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutMetricData"); err != nil {

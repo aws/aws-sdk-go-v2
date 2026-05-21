@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/serdbenchmark/rpcv2cbordataplane/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -30,6 +32,22 @@ type HealthcheckInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HealthcheckInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HealthcheckInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *HealthcheckInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type HealthcheckOutput struct {
 	Ok *string
 
@@ -39,16 +57,24 @@ type HealthcheckOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HealthcheckOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HealthcheckOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HealthcheckOutput_ok:
+			v.Ok = new(string)
+			return d.ReadString(schemas.HealthcheckOutput_ok, v.Ok)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHealthcheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpHealthcheck{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Healthcheck, nil, schemas.HealthcheckOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpHealthcheck{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Healthcheck, nil, schemas.HealthcheckOutput), output: &HealthcheckOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "Healthcheck"); err != nil {
