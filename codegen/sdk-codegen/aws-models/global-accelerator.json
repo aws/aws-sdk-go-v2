@@ -3254,6 +3254,194 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<fullname>Global Accelerator</fullname>\n         <p>This is the <i>Global Accelerator API Reference</i>. This guide is for developers who need detailed information about\n\t\t    Global Accelerator API actions, data types, and errors. For more information about Global Accelerator features, see the \n\t    \t<a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html\">Global Accelerator Developer Guide</a>.</p>\n         <p>Global Accelerator is a service in which you create <i>accelerators</i> to improve the performance \n\t\t\tof your applications for local and global users. Depending on the type of accelerator you choose, you can\n\t\t\tgain additional benefits. </p>\n         <ul>\n            <li>\n               <p>By using a standard accelerator, you can improve availability of your internet applications \n\t\t\t    that are used by a global audience. With a standard accelerator, Global Accelerator directs traffic to optimal endpoints over the Amazon Web Services \n\t\t\t\tglobal network. </p>\n            </li>\n            <li>\n               <p>For other scenarios, you might choose a custom routing accelerator. With a custom routing accelerator, you \n\t\t\t\tcan use application logic to directly map one or more users to a specific endpoint among many endpoints.</p>\n            </li>\n         </ul>\n         <important>\n            <p>Global Accelerator is a global service that supports endpoints in multiple Amazon Web Services Regions but you must specify the \n\t\t    \tUS West (Oregon) Region to create, update, or otherwise work with accelerators.  That is, for example, specify <code>--region us-west-2</code>\n\t\t    \ton Amazon Web Services CLI commands.</p>\n         </important>\n         <p>By default, Global Accelerator provides you with static IP addresses that you associate with your accelerator. The static IP addresses \n\t\t\tare anycast from the Amazon Web Services edge network. For IPv4, Global Accelerator provides two static IPv4 addresses. For dual-stack,\n\t\t\tGlobal Accelerator provides a total of four addresses: two static IPv4 addresses and two static IPv6 addresses. \n\t\t\tWith a standard accelerator for IPv4, instead of using the addresses that Global Accelerator provides, you can configure \n\t\t\tthese entry points to be IPv4 addresses from your own IP address ranges that you bring to Global Accelerator (BYOIP). </p>\n         <p>For a standard accelerator, \n\t        they distribute incoming application traffic across multiple endpoint resources in multiple Amazon Web Services Regions , which increases \n\t\t\tthe availability of your applications. Endpoints for standard accelerators can be Network Load Balancers, Application Load Balancers, \n\t    \tAmazon EC2 instances, or Elastic IP addresses that are located in one Amazon Web Services Region or multiple Amazon Web Services Regions. For custom routing\n\t        accelerators, you map traffic that arrives to the static IP addresses to specific Amazon EC2 servers in endpoints that\n\t\t\tare virtual private cloud (VPC) subnets.</p>\n         <important>\n            <p>The static IP addresses remain assigned to your accelerator for as long as it exists, even if you\n\t\t\t\tdisable the accelerator and it no longer accepts or routes traffic. However, when you\n\t\t\t\t\t<i>delete</i> an accelerator, you lose the static IP addresses that\n\t\t\t\tare assigned to it, so you can no longer route traffic by using them. You can use\n\t\t\t\tIAM policies like tag-based permissions with Global Accelerator to limit the users who have\n\t\t\t\tpermissions to delete an accelerator. For more information, see <a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/access-control-manage-access-tag-policies.html\">Tag-based policies</a>.</p>\n         </important>\n         <p>For standard accelerators, Global Accelerator uses the Amazon Web Services global network to route traffic to the optimal regional endpoint based\n\t\t\ton health, client location, and policies that you configure. The service reacts instantly to\n\t\t\tchanges in health or configuration to ensure that internet traffic from clients is always\n\t\t\tdirected to healthy endpoints.</p>\n         <p>For more information about understanding and using Global Accelerator, see the\n\t\t\t<a href=\"https://docs.aws.amazon.com/global-accelerator/latest/dg/what-is-global-accelerator.html\">Global Accelerator Developer Guide</a>.</p>",
                 "smithy.api#title": "AWS Global Accelerator",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://globalaccelerator-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://globalaccelerator-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://globalaccelerator.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://globalaccelerator.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {

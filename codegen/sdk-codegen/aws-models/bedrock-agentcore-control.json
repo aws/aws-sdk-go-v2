@@ -83,6 +83,126 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#AddDatasetExamples": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#AddDatasetExamplesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#AddDatasetExamplesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Adds examples to the dataset's DRAFT.\n\n**Validation:** All examples are validated against the dataset's schemaType before any\nwrites occur. If any example fails validation, the entire batch is rejected with\nValidationException — no examples are written (all-or-nothing semantics).\n\n**Asynchronous:** Operates in-place on DRAFT. No version bump occurs.\nUse CreateDatasetVersion to publish DRAFT as a new numbered version.\n\n**State guard:** Returns ConflictException (DATASET_NOT_READY) if the dataset\nstatus is not in {DRAFT, ACTIVE}.\n\n**Request size limit:** Max 5 MB total request body. Max 1000 examples per call.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/datasets/{datasetId}/examples/add",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#AddDatasetExamplesRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset to add examples to. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "Source of examples to add. Provide either inline examples or an S3 URI\npointing to a JSONL file.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#AddDatasetExamplesResponse": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "addedCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The number of examples added. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the examples were added. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "exampleIds": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ExampleIdList",
+                    "traits": {
+                        "smithy.api#documentation": "IDs of all added examples (auto-generated UUIDs).",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#AdditionalModelRequestFields": {
             "type": "document"
         },
@@ -704,6 +824,9 @@
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#ConfigurationBundle"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Dataset"
                 },
                 {
                     "target": "com.amazonaws.bedrockagentcorecontrol#Evaluator"
@@ -4256,6 +4379,242 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#CreateDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CreateDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CreateDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Creates a new Dataset resource asynchronously.\n\nReturns immediately with status CREATING. Poll GetDataset until\nstatus transitions to ACTIVE or CREATE_FAILED (with failureReason).",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/datasets",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CreateDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "Optional idempotency token.",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "datasetName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "Human-readable name for the dataset. Unique within the account (case-insensitive).\nImmutable after creation.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A description of the dataset. </p>",
+                        "smithy.api#length": {
+                            "max": 200
+                        }
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "Source of initial examples. Provide either inline examples or an S3 URI\npointing to a JSONL file.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "schemaType": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetSchemaType",
+                    "traits": {
+                        "smithy.api#documentation": "Versioned schema type governing the structure of examples. Immutable after creation.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "Optional AWS KMS key ARN for SSE-KMS on service S3 writes."
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A map of tag keys and values to assign to the dataset. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CreateDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the created dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the created dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Always CREATING immediately after this call.\nPoll GetDataset until status == ACTIVE (draftStatus=MODIFIED) or CREATE_FAILED.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the dataset was created. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CreateDatasetVersion": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CreateDatasetVersionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CreateDatasetVersionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Publishes the current DRAFT as a new numbered version.\n\nSnapshots the DRAFT examples as the next version (1, 2, 3, ...).\nThe DRAFT is preserved and remains editable after publishing.\nReturns immediately with status UPDATING. Poll GetDataset until\nstatus transitions to ACTIVE (draftStatus=UNMODIFIED) or UPDATE_FAILED.\n\n**State guard:** Returns ConflictException (DATASET_NOT_READY) if status is in\n{CREATING, UPDATING, DELETING}, or DATASET_IN_FAILED_STATE if status is in\n{CREATE_FAILED, DELETE_FAILED}.\n\n**Quota:** MAX_VERSIONS_PER_DATASET applies to published versions only (not DRAFT).",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/datasets/{datasetId}/versions",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CreateDatasetVersionRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset to publish a version for. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#CreateDatasetVersionResponse": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Always UPDATING immediately after this call.\nPoll GetDataset until status == ACTIVE (draftStatus=UNMODIFIED) or UPDATE_FAILED.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "The version being created.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the version creation was initiated. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#CreateEvaluator": {
             "type": "operation",
             "input": {
@@ -7478,6 +7837,298 @@
                 "smithy.api#documentation": "<p> The configuration that specifies where to read agent traces for online evaluation. </p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#DataSourceType": {
+            "type": "union",
+            "members": {
+                "inlineExamples": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InlineExamplesSource",
+                    "traits": {
+                        "smithy.api#documentation": "Inline examples provided directly in the request body."
+                    }
+                },
+                "s3Source": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#S3Source",
+                    "traits": {
+                        "smithy.api#documentation": "S3 URI pointing to a JSONL file in the customer's bucket.\nThe service reads this file using the caller's FAS credentials."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Source of examples to add to the dataset."
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#Dataset": {
+            "type": "resource",
+            "identifiers": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#CreateDataset"
+            },
+            "read": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetDataset"
+            },
+            "update": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#UpdateDataset"
+            },
+            "delete": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DeleteDataset"
+            },
+            "list": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListDatasets"
+            },
+            "operations": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AddDatasetExamples"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#CreateDatasetVersion"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DeleteDatasetExamples"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ListDatasetExamples"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ListDatasetVersions"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetExamples"
+                }
+            ]
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DatasetArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^arn:aws(-[a-z]+)*:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:dataset/[a-zA-Z0-9_-]{1,110}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DatasetExampleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#SensitiveJson"
+            },
+            "traits": {
+                "smithy.api#documentation": "Each element is a free-form JSON document whose structure is defined by the dataset's\n`schemaType`. Validated against the declared schema at write time. If an `exampleId`\nstring field is present it is used as the example identifier and removed from the\npersisted content; otherwise a UUID is generated automatically.\n`exampleId` must be a JSON string — numeric or other non-string types are rejected\nwith a ValidationException."
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DatasetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z0-9_-]{1,110}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DatasetName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,47}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DatasetSchemaType": {
+            "type": "enum",
+            "members": {
+                "AGENTCORE_EVALUATION_PREDEFINED_V1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "AgentCore predefined evaluation schema, version 1. Dataset with pre-written inputs per conversation turn.\nRequired: input. Optional: expectedResponse, assertions, expectedTrajectory.",
+                        "smithy.api#enumValue": "AGENTCORE_EVALUATION_PREDEFINED_V1"
+                    }
+                },
+                "AGENTCORE_EVALUATION_SIMULATED_V1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "AgentCore simulated evaluation schema, version 1. Dataset for synthetic data generation.\nEach example is a Scenario that a simulator uses to generate full conversations.\nRequired: input. Optional: name (→exampleId), actor_profile, max_turns, assertions.",
+                        "smithy.api#enumValue": "AGENTCORE_EVALUATION_SIMULATED_V1"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Format of a customer-provided source file.\n\n**JSONL** (JSON Lines, one object per line) is the service's native ingestion\nand storage format — it can be streamed line-by-line without loading the\nentire file into memory, which is important as the row-count cap is extended.\n\n**JSON array (`[{...},{...}]`) is intentionally not supported** at launch:\nit cannot be streamed (requires loading the full file into memory to parse),\nand all major eval frameworks (LangSmith, Ragas, DeepEval, Arize Phoenix)\nexport as JSONL or CSV — not JSON arrays. Customers with JSON array files can\nVersioned schema type for dataset examples.\n\nEach value identifies both the source format and the version of that format's schema.\nSchema definitions (required/optional fields) are stored as constants in SchemaRegistry.\nThe schemaType on a Dataset is immutable after creation.\n\nWhen a framework changes its format, a new version is added (e.g., RAGAS_V2) without\nbreaking existing datasets using the old version. Content is always stored as-is."
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DatasetStatus": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "CreateDataset async ingestion in progress.\nAll writes are blocked. Poll GetDataset until status resolves to ACTIVE or CREATE_FAILED.",
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "An async example mutation or CreateDatasetVersion is in progress.\nAll writes are blocked. Poll GetDataset until status resolves.",
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Full or version-specific delete is in progress.\nRead operations (GetDataset, ListDatasetExamples) are still allowed.",
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Dataset is stable. All operations are allowed per per-operation guards.\nfailureReason is cleared.",
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "CREATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Initial ingestion failed. DRAFT record exists but contains no examples.\nfailureReason is populated. AddDatasetExamples and DeleteDatasetExamples allowed.\nUpdateDatasetExamples and CreateDatasetVersion blocked (no examples exist).",
+                        "smithy.api#enumValue": "CREATE_FAILED"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Last example mutation or CreateDatasetVersion failed.\nDRAFT may be partially modified. failureReason is populated.\nAll example mutations and CreateDatasetVersion allowed for retry.",
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                },
+                "DELETE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "Delete failed after retries. Dataset record/S3 may be in inconsistent state.\nfailureReason is populated. Only DeleteDataset (retry) is allowed.",
+                        "smithy.api#enumValue": "DELETE_FAILED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Dataset lifecycle / operation status.\n\nTwo-column status model: `DatasetStatus` tracks lifecycle state independently\nfrom `DraftStatus` which tracks publish synchronization.\n\nIN-FLIGHT states (busy — all writes blocked):\n  CREATING   — CreateDataset async ingestion in progress.\n  UPDATING   — Example mutation (Add/Update/Delete) or CreateDatasetVersion in progress.\n  DELETING   — Full or version-specific delete in progress.\n\nTERMINAL states (stable — operations allowed per guards below):\n  ACTIVE         — Dataset is stable. failureReason cleared.\n  CREATE_FAILED  — Initial ingestion failed. DRAFT record exists but has no examples.\n                   failureReason populated.\n  UPDATE_FAILED  — Last example mutation or CreateDatasetVersion failed.\n                   DRAFT may be partially modified. failureReason populated.\n  DELETE_FAILED  — Delete failed after retries. Dataset/S3 may be in inconsistent state.\n                   Sev-2 ticket filed (full-delete only). failureReason populated.\n\nState transitions:\n  CreateDataset                    → CREATING → ACTIVE (draftStatus=MODIFIED) | CREATE_FAILED\n  Add/Update/DeleteDatasetExamples → UPDATING → ACTIVE (draftStatus=MODIFIED) | UPDATE_FAILED\n  CreateDatasetVersion             → UPDATING → ACTIVE (draftStatus=UNMODIFIED) | UPDATE_FAILED\n  DeleteDataset (version-specific) → DELETING → ACTIVE (draftStatus unchanged) | DELETE_FAILED\n  DeleteDataset (full)             → DELETING → (record deleted) | DELETE_FAILED [auto Sev-2]\n\nOperation guards (ConflictException codes):\n  GetDataset / ListDatasetExamples:\n    — Allowed for all statuses (no guard)\n  UpdateDataset, AddDatasetExamples, DeleteDatasetExamples:\n    — DATASET_NOT_READY if status in {CREATING, UPDATING, DELETING}\n    — DATASET_IN_FAILED_STATE if status == DELETE_FAILED\n  UpdateDatasetExamples:\n    — DATASET_NOT_READY if status in {CREATING, UPDATING, DELETING}\n    — DATASET_IN_FAILED_STATE if status in {CREATE_FAILED, DELETE_FAILED}\n  CreateDatasetVersion:\n    — DATASET_NOT_READY if status in {CREATING, UPDATING, DELETING}\n    — DATASET_IN_FAILED_STATE if status in {CREATE_FAILED, DELETE_FAILED}\n  DeleteDataset:\n    — DATASET_NOT_READY if status in {CREATING, UPDATING, DELETING}"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DatasetSummary": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The description of the dataset. </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "draftStatus": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DraftStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Publish synchronization state. Only authoritative when status == ACTIVE."
+                    }
+                },
+                "schemaType": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetSchemaType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The schema type of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "exampleCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The number of examples in the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the dataset was created. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the dataset was last updated. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Summary information about a dataset. </p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DatasetSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DatasetSummary"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DatasetVersion": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Dataset version identifier. Accepts \"DRAFT\" or a non-negative integer string.\n\n\"DRAFT\" refers to the single mutable working copy of the dataset.\n- Always present after CreateDataset ingestion completes.\n- Content changes in-place when examples are added, updated, or deleted.\n- NOT tracked as a DDB DatasetVersionItem — state lives in S3 (draft/manifest.json,\n  draft/dataset.jsonl) and the DatasetItem.exampleCount field.\n- Default for read operations when ?datasetVersion is absent.\n\nAn integer string (e.g. \"1\", \"2\", \"3\") refers to a published, immutable snapshot\ncreated by CreateDatasetVersion. Once created, a published version's content never\nchanges. Stored as a DDB DatasetVersionItem (SK=VERSION#{zero-padded-N}).",
+                "smithy.api#pattern": "^(DRAFT|[0-9]+)$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DatasetVersionSummary": {
+            "type": "structure",
+            "members": {
+                "datasetVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetVersion",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "exampleCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The number of examples in this version. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when this version was published. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> Summary information about a published dataset version. </p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DatasetVersionSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DatasetVersionSummary"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#DateTimestamp": {
             "type": "timestamp",
             "traits": {
@@ -8122,6 +8773,224 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#ConfigurationBundleStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the configuration bundle deletion operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DeleteDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DeleteDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes a dataset version or an entire dataset (all versions + name claim). Asynchronous 202.\n\n**State transitions:**\n- If `datasetVersion` is absent (full delete): status transitions to DELETING immediately.\n- If `datasetVersion` is provided (version-specific delete): status transitions to UPDATING.\n\n**State guard (full delete):** Returns ConflictException (DATASET_NOT_READY) if the\ndataset status is in {CREATING, UPDATING}. Deletion is allowed from ACTIVE, CREATE_FAILED,\nUPDATE_FAILED, and DELETE_FAILED states.\n\n**State guard (version-specific delete):** Returns ConflictException (DATASET_NOT_READY) if\nthe dataset status is not in {ACTIVE, CREATE_FAILED, UPDATE_FAILED}.\n\nFails with ConflictException (REFERENCED_BY_EVAL_JOB) if referenced by an active\nevaluation job (full delete only).\n\nIf the delete workflow fails after retries, status is set to DELETE_FAILED (full delete)\nor UPDATE_FAILED (version-specific delete).\nCalling DeleteDataset on a DELETE_FAILED dataset re-triggers the delete workflow\n(idempotent retry path).\n\n**Version parameter:**\n- If `datasetVersion` is absent: deletes ALL versions and the Dataset record itself.\n- If `datasetVersion` is provided: deletes only that specific DatasetVersion.\n  Returns ResourceNotFoundException if the specified version does not exist.",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/datasets/{datasetId}",
+                    "code": 202
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteDatasetExamples": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DeleteDatasetExamplesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#DeleteDatasetExamplesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes specific examples by ID from DRAFT.\n\n**Validation:** All example IDs are validated before any deletes occur. If any ID\ndoes not exist in DRAFT, the entire batch is rejected with ResourceNotFoundException —\nno examples are deleted (all-or-nothing semantics).\n\n**Asynchronous:** Operates in-place on DRAFT. No version bump occurs.\nUse CreateDatasetVersion to publish DRAFT as a new numbered version.\n\n**State guard:** Returns ConflictException (DATASET_NOT_READY) if the dataset\nstatus is not in {DRAFT, ACTIVE}.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/datasets/{datasetId}/examples/delete",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteDatasetExamplesRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "exampleIds": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ExampleIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The IDs of the examples to delete. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1000
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteDatasetExamplesResponse": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "deletedCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The number of examples deleted. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the examples were deleted. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset to delete. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "Optional version to delete. Use \"DRAFT\" or omit to delete the draft.\nReturns ResourceNotFoundException if the specified version does not exist.",
+                        "smithy.api#httpQuery": "datasetVersion"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DeleteDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of the dataset after the delete request. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "The version deleted.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the delete was initiated. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9649,6 +10518,34 @@
         "com.amazonaws.bedrockagentcorecontrol#DomainName": {
             "type": "string"
         },
+        "com.amazonaws.bedrockagentcorecontrol#DownloadUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#DraftStatus": {
+            "type": "enum",
+            "members": {
+                "MODIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "DRAFT has changes not yet reflected in any published version, or no versions\nhave been published yet.",
+                        "smithy.api#enumValue": "MODIFIED"
+                    }
+                },
+                "UNMODIFIED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "DRAFT content matches the latest published version exactly.\nAny example mutation transitions draftStatus back to MODIFIED.",
+                        "smithy.api#enumValue": "UNMODIFIED"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Publish synchronization state of the DRAFT working copy.\n\nTracks whether the current DRAFT content has been published as a version.\nOnly authoritative when DatasetStatus == ACTIVE. Not meaningful during\nin-flight or failed states.\n\nTransitions:\n  CreateDataset succeeds           → MODIFIED  (DRAFT has content with no published version yet)\n  Add/Update/DeleteExamples succeed → MODIFIED  (DRAFT differs from last published version)\n  CreateDatasetVersion succeeds    → UNMODIFIED (DRAFT matches the version just published)"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#EfsAccessPointArn": {
             "type": "string",
             "traits": {
@@ -10383,6 +11280,21 @@
                         "smithy.api#enumValue": "CustomCode"
                     }
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ExampleId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_.:-]+$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ExampleIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ExampleId"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#ExceptionLevel": {
@@ -12457,6 +13369,179 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when this specific version was created.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#GetDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Retrieves dataset metadata only.\n\nUse `?datasetVersion=DRAFT` or `?datasetVersion=N` to retrieve a specific version's metadata.\nIf absent, defaults to DRAFT (the mutable working copy).\nReturns ResourceNotFoundException if the specified version is not found.\n\n**Initial state after CreateDataset:** When CreateDataset completes successfully\n(status transitions to ACTIVE), only a DRAFT working copy exists. No published\nversions exist until CreateDatasetVersion is called. At this point draftStatus is\nMODIFIED because the DRAFT has content that has never been published.\n\n**Default version behavior:** When `datasetVersion` is omitted, the operation\nreturns the DRAFT working copy. To retrieve a specific published version, pass\nthe version number as a string (e.g. `?datasetVersion=1`).\n\n**State guard:** Allowed for all statuses including DELETING. Returns the dataset\nrecord with its current status so callers can observe the deletion in progress.\n\nFor paginated example IDs use ListDatasetExamples.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/datasets/{datasetId}"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset to retrieve. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "Version to retrieve: \"DRAFT\" or a version number. Defaults to DRAFT if absent.",
+                        "smithy.api#httpQuery": "datasetVersion"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#GetDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "The resolved version: \"DRAFT\" (default) or the requested version number.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetName": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The name of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The description of the dataset. </p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "draftStatus": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DraftStatus",
+                    "traits": {
+                        "smithy.api#documentation": "Publish synchronization state. Only authoritative when status == ACTIVE.\nMODIFIED — DRAFT has unpublished changes (or no published versions yet).\nUNMODIFIED — DRAFT matches the latest published version exactly."
+                    }
+                },
+                "failureReason": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "Populated when status is CREATE_FAILED, UPDATE_FAILED, or DELETE_FAILED."
+                    }
+                },
+                "schemaType": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetSchemaType",
+                    "traits": {
+                        "smithy.api#documentation": "The schema type declared at create time. Immutable after creation.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "kmsKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#KmsKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "AWS KMS key ARN used for SSE-KMS on service S3 writes, if configured."
+                    }
+                },
+                "exampleCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "Example count for DRAFT.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "downloadUrl": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DownloadUrl",
+                    "traits": {
+                        "smithy.api#documentation": "Presigned S3 URL to download the consolidated dataset.jsonl file for the resolved\nversion (DRAFT or published). TTL: 5 minutes. Omitted if the file does not yet exist\n(e.g. during CREATING) or on presign failure."
+                    }
+                },
+                "downloadUrlExpiresAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "Expiry timestamp for downloadUrl."
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the dataset was created. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the dataset was last updated. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The tags associated with the dataset. </p>"
                     }
                 }
             },
@@ -16935,6 +18020,25 @@
                 }
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#InlineExamplesSource": {
+            "type": "structure",
+            "members": {
+                "examples": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetExampleList",
+                    "traits": {
+                        "smithy.api#documentation": "Examples to add. Each example is assigned an auto-generated UUID.",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1000
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Inline examples provided directly in the request body."
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#InlinePayload": {
             "type": "string",
             "traits": {
@@ -18020,6 +19124,317 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>If the total number of results is greater than the <code>maxResults</code> value provided in the request, use this token when making another request in the <code>nextToken</code> field to return the next batch of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListDatasetExamples": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListDatasetExamplesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListDatasetExamplesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Returns paginated examples from the dataset.\n\n**Version-pinned pagination:** The server embeds the resolved version in the `nextToken`.\nOnce pagination begins, all subsequent pages are pinned to that version regardless of\nconcurrent mutations or whether `datasetVersion` is passed on subsequent requests. The `datasetVersion`\nquery parameter is only used for the first request (when `nextToken` is absent); if omitted,\ndefaults to DRAFT.\n\n**State guard:** Allowed for all statuses including DELETING.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/datasets/{datasetId}/examples"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "examples"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListDatasetExamplesRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "Version to paginate: \"DRAFT\" or a version number. Defaults to DRAFT if absent.\nOnly used on the first request (when nextToken is absent). For subsequent pages,\nthe version is extracted from the nextToken and this parameter is ignored.",
+                        "smithy.api#httpQuery": "datasetVersion"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "Maximum number of examples to return per page. Default: 1000. Min: 1, max: 1000.\nResponse size is validated against 5 MB limit after reading.\nFor bulk access to all examples, use the `downloadUrl` field from GetDataset.",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 1000
+                        }
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token for the next page of results. </p>",
+                        "smithy.api#httpQuery": "nextToken",
+                        "smithy.api#length": {
+                            "max": 2048
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListDatasetExamplesResponse": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetVersion": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetVersion",
+                    "traits": {
+                        "smithy.api#documentation": "The version returned.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "examples": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetExampleList",
+                    "traits": {
+                        "smithy.api#documentation": "Paginated example content. Each element is a JSON object containing at least\nan `exampleId` field plus the schema-specific content fields.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token for the next page of results, or null if there are no more results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListDatasetVersions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListDatasetVersionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListDatasetVersionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists all published versions of a dataset, sorted by version number descending\n(newest first). Does not include the DRAFT working copy.\n\n**State guard:** Allowed for all statuses including DELETING.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/datasets/{datasetId}/versions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "versions"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListDatasetVersionsRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token for the next page of results. </p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of versions to return per page. </p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListDatasetVersionsResponse": {
+            "type": "structure",
+            "members": {
+                "versions": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetVersionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The list of published dataset versions. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token for the next page of results, or null if there are no more results. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListDatasets": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListDatasetsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#ListDatasetsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists all datasets in the caller's account, paginated. No presigned URLs in list results.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/datasets"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "datasets"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListDatasetsRequest": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token for the next page of results. </p>",
+                        "smithy.api#httpQuery": "nextToken",
+                        "smithy.api#length": {
+                            "max": 2048
+                        }
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The maximum number of datasets to return per page. </p>",
+                        "smithy.api#httpQuery": "maxResults",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 100
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#ListDatasetsResponse": {
+            "type": "structure",
+            "members": {
+                "datasets": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The list of datasets. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The token for the next page of results, or null if there are no more results. </p>"
                     }
                 }
             },
@@ -24946,6 +26361,28 @@
                 "smithy.api#documentation": "<p>The Amazon S3 location for storing data. This structure defines where in Amazon S3 data is stored.</p>"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#S3Source": {
+            "type": "structure",
+            "members": {
+                "s3Uri": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#S3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "S3 URI of the JSONL file (e.g. s3://my-bucket/path/to/examples.jsonl).",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "S3 location of a JSONL file containing dataset examples."
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#S3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "S3 URI string (s3://bucket/key).",
+                "smithy.api#pattern": "^s3://[a-z0-9][a-z0-9.\\-]{1,61}[a-z0-9]/.{1,1024}$"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#SalesforceOauth2ProviderConfigInput": {
             "type": "structure",
             "members": {
@@ -28166,6 +29603,222 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the configuration bundle was updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateDataset": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Updates a dataset's metadata. Synchronous operation.\nOnly provided fields are updated; omitted fields remain unchanged.\n\nTo modify dataset content, use AddDatasetExamples, UpdateDatasetExamples,\nor DeleteDatasetExamples.\n\nCannot update: name, schemaType, kmsKeyArn (immutable after creation).",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/datasets/{datasetId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetExamples": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetExamplesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetExamplesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Updates multiple existing examples in-place on DRAFT.\n\n**Validation:** All examples are validated against the dataset's schemaType before any\nwrites occur. If any example fails validation, the entire batch is rejected with\nValidationException — no examples are updated (all-or-nothing semantics).\n\n**Asynchronous:** Operates in-place on DRAFT. No version bump occurs.\nUse CreateDatasetVersion to publish DRAFT as a new numbered version.\n\nFails with ResourceNotFoundException if any exampleId does not exist in DRAFT.\nTo add new examples, use AddDatasetExamples instead.\n\n**State guard:** Returns ConflictException (DATASET_NOT_READY) if the dataset\nstatus is not in {DRAFT, ACTIVE}.\n\n**Request size limit:** Max 5 MB total request body. Max 1000 examples per call.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/datasets/{datasetId}/examples/update",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetExamplesRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "examples": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetExampleList",
+                    "traits": {
+                        "smithy.api#documentation": "Examples to update. Each element is a JSON object containing a required `exampleId`\nstring field identifying the existing example, plus the replacement fields. The\n`exampleId` is extracted and removed before persistence; the remaining document is\nvalidated against the dataset's schemaType.\nMax 1000 examples per call. Total request body must not exceed 5 MB.",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1000
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetExamplesResponse": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The current status of the dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedCount": {
+                    "target": "smithy.api#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The number of examples updated. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the examples were updated. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetRequest": {
+            "type": "structure",
+            "members": {
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the dataset to update. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier to ensure that the API request completes no more than one time. If you don't specify this field, a value is randomly generated for you. If this token matches a previous request, the service ignores the request, but doesn't return an error. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">Ensuring idempotency</a>.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The updated description for the dataset. </p>",
+                        "smithy.api#length": {
+                            "max": 200
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#UpdateDatasetResponse": {
+            "type": "structure",
+            "members": {
+                "datasetArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) of the updated dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#DatasetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The unique identifier of the updated dataset. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The timestamp when the dataset was updated. </p>",
                         "smithy.api#required": {}
                     }
                 }

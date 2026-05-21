@@ -38093,6 +38093,194 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>Security Hub CSPM provides you with a comprehensive view of your security state in Amazon Web Services and helps\n           you assess your Amazon Web Services environment against security industry standards and best practices.</p>\n         <p>Security Hub CSPM collects security data across Amazon Web Services accounts, Amazon Web Services services, and\n            supported third-party products and helps you analyze your security trends and identify the highest priority security\n            issues.</p>\n         <p>To help you manage the security state of your organization, Security Hub CSPM supports multiple security standards.\n           These include the Amazon Web Services Foundational Security Best Practices (FSBP) standard developed by Amazon Web Services,\n            and external compliance frameworks such as the Center for Internet Security (CIS), the Payment Card Industry Data\n            Security Standard (PCI DSS), and the National Institute of Standards and Technology (NIST). Each standard includes\n            several security controls, each of which represents a security best practice. Security Hub CSPM runs checks against\n            security controls and generates control findings to help you assess your compliance against security best practices.</p>\n         <p>In addition to generating control findings, Security Hub CSPM also receives findings from other Amazon Web Services services,\n            such as Amazon GuardDuty and Amazon Inspector, and\n            supported third-party products. This gives you a single pane of glass into a variety of security-related issues. You\n            can also send Security Hub CSPM findings to other Amazon Web Services services and supported third-party products.</p>\n         <p>Security Hub CSPM offers automation features that help you triage and remediate security issues. For example,\n           you can use automation rules to automatically update critical findings when a security check fails. You can also leverage the integration with\n           Amazon EventBridge  to trigger automatic responses to specific findings.</p>\n         <p>This guide, the <i>Security Hub CSPM API Reference</i>, provides\n           information about the Security Hub CSPM API. This includes supported resources, HTTP methods, parameters,\n           and schemas. If you're new to Security Hub CSPM, you might find it helpful to also review the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/what-is-securityhub.html\">\n               <i>Security Hub CSPM User Guide</i>\n            </a>. The\n           user guide explains key concepts and provides procedures\n           that demonstrate how to use Security Hub CSPM features. It also provides information about topics such as\n           integrating Security Hub CSPM with other Amazon Web Services services.</p>\n         <p>In addition to interacting with Security Hub CSPM  by making calls to the Security Hub CSPM API, you can\n           use a current version of an Amazon Web Services command line tool or SDK. Amazon Web Services provides tools\n            and SDKs that consist of libraries and sample code for various languages and platforms, such as PowerShell,\n           Java, Go, Python, C++, and .NET. These tools and SDKs provide convenient, programmatic access to\n           Security Hub CSPM  and other Amazon Web Services services . They also handle tasks such as signing requests,\n           managing errors, and retrying requests automatically. For information about installing and using the Amazon Web Services  tools\n           and SDKs, see <a href=\"http://aws.amazon.com/developer/tools/\">Tools to Build on Amazon Web Services</a>.</p>\n         <p>With the exception of operations that are related to central configuration, Security Hub CSPM API requests are executed only in\n         the Amazon Web Services Region that is currently active or in the specific Amazon Web Services Region that you specify in your request. Any configuration or settings change\n         that results from the operation is applied only to that Region. To make the same change in\n         other Regions, call the same API operation in each Region in which you want to apply the change. When you use central configuration,\nAPI requests for enabling Security Hub CSPM, standards, and controls are executed in the home Region and all linked Regions. For a list of\ncentral configuration operations, see the <a href=\"https://docs.aws.amazon.com/securityhub/latest/userguide/central-configuration-intro.html#central-configuration-concepts\">Central configuration\nterms and concepts</a> section of the <i>Security Hub CSPM User Guide</i>.</p>\n         <p>The following throttling limits apply to Security Hub CSPM API operations.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BatchEnableStandards</code> - <code>RateLimit</code> of 1 request per\n               second. <code>BurstLimit</code> of 1 request per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetFindings</code> - <code>RateLimit</code> of 3 requests per second.\n                  <code>BurstLimit</code> of 6 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BatchImportFindings</code> - <code>RateLimit</code> of 10 requests per second.\n            <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BatchUpdateFindings</code> - <code>RateLimit</code> of 10 requests per second.\n            <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateStandardsControl</code> - <code>RateLimit</code> of 1 request per\n               second. <code>BurstLimit</code> of 5 requests per second.</p>\n            </li>\n            <li>\n               <p>All other operations - <code>RateLimit</code> of 10 requests per second.\n                  <code>BurstLimit</code> of 30 requests per second.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS SecurityHub",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://securityhub-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://securityhub-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://securityhub.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://securityhub.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {

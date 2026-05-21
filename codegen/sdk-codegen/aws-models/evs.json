@@ -2134,6 +2134,9 @@
                     "target": "com.amazonaws.evs#DisassociateEipFromVlan"
                 },
                 {
+                    "target": "com.amazonaws.evs#GetDepotUrl"
+                },
+                {
                     "target": "com.amazonaws.evs#ListEnvironmentConnectors"
                 },
                 {
@@ -2298,6 +2301,74 @@
             "type": "list",
             "member": {
                 "target": "smithy.api#String"
+            }
+        },
+        "com.amazonaws.evs#GetDepotUrl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.evs#GetDepotUrlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.evs#GetDepotUrlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.evs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.evs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a URL and authentication token for accessing the Amazon EVS Custom Addon depot. Configure the depot URL as a download source in vSphere Lifecycle Manager (vLCM) to sync and install the Amazon EVS Custom Addon.</p> <p>The depot URL remains active until you rotate the authentication token by calling this action with <code>rotate</code> set to <code>true</code>.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.evs#GetDepotUrlRequest": {
+            "type": "structure",
+            "members": {
+                "environmentId": {
+                    "target": "com.amazonaws.evs#EnvironmentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the Amazon EVS environment to get the depot URL for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "rotate": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Revokes the current authentication token and returns a new depot URL with a new token. Previously issued depot URLs will stop working within 5 minutes of rotation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.evs#GetDepotUrlResponse": {
+            "type": "structure",
+            "members": {
+                "depotUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL for accessing the Amazon EVS Custom Addon depot. This URL includes the authentication token as a path component.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "token": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication token for depot access. This token is included in the depot URL and is used to authenticate requests.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.evs#GetEnvironment": {
@@ -3545,7 +3616,8 @@
         "com.amazonaws.evs#SolutionKey": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}$"
+                "smithy.api#pattern": "^[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.evs#StateDetails": {
@@ -3868,7 +3940,8 @@
         "com.amazonaws.evs#VSanLicenseKey": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}$"
+                "smithy.api#pattern": "^[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}-[a-zA-Z0-9]{5}$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.evs#ValidationException": {

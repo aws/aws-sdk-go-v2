@@ -1827,6 +1827,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the ML input channel.</p>"
                     }
+                },
+                "payerConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#PayerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payer configuration for the ML input channel.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2032,6 +2038,12 @@
                         "smithy.api#documentation": "<p>Details about the logs status for the trained model inference job.</p>"
                     }
                 },
+                "mlModelInferencePayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model inference costs.</p>"
+                    }
+                },
                 "createTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -2150,6 +2162,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The account ID of the member that created the trained model.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "mlModelTrainingPayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model training costs.</p>"
                     }
                 }
             },
@@ -3273,6 +3291,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
+                },
+                "payerConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#PayerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payer configuration for the ML input channel. Determines which member account pays for compute and synthetic data costs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3421,6 +3445,12 @@
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
+                    }
+                },
+                "mlModelTrainingPayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model training costs.</p>"
                     }
                 }
             },
@@ -4835,6 +4865,12 @@
                         "smithy.api#documentation": "<p>The synthetic data configuration for this ML input channel, including parameters for generating privacy-preserving synthetic data and evaluation scores for measuring the privacy of the generated data.</p>"
                     }
                 },
+                "payerConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#PayerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payer configuration for the ML input channel.</p>"
+                    }
+                },
                 "createTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -5038,6 +5074,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the training container image.</p>"
+                    }
+                },
+                "mlModelTrainingPayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model training costs.</p>"
                     }
                 },
                 "createTime": {
@@ -5769,6 +5811,12 @@
                         "smithy.api#documentation": "<p>The synthetic data configuration for this ML input channel, including parameters for generating privacy-preserving synthetic data and evaluation scores for measuring the privacy of the generated data.</p>"
                     }
                 },
+                "payerConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#PayerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payer configuration for the ML input channel.</p>"
+                    }
+                },
                 "createTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -6072,6 +6120,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The optional metadata that you applied to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
+                },
+                "mlModelInferencePayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model inference costs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6221,6 +6275,12 @@
                     "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the training image container.</p>"
+                    }
+                },
+                "mlModelTrainingPayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model training costs.</p>"
                     }
                 },
                 "createTime": {
@@ -9927,6 +9987,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the ML input channel.</p>"
                     }
+                },
+                "payerConfiguration": {
+                    "target": "com.amazonaws.cleanroomsml#PayerConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payer configuration for the ML input channel.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10302,6 +10368,26 @@
                     "min": 0,
                     "max": 1000
                 }
+            }
+        },
+        "com.amazonaws.cleanroomsml#PayerConfiguration": {
+            "type": "structure",
+            "members": {
+                "computePayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying compute costs.</p>"
+                    }
+                },
+                "syntheticDataPayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying synthetic data generation costs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies which member accounts are responsible for paying for compute and synthetic data generation costs in a Clean Rooms ML collaboration.</p>"
             }
         },
         "com.amazonaws.cleanroomsml#PolicyExistenceCondition": {
@@ -11202,6 +11288,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p> <p>The following basic restrictions apply to tags:</p> <ul> <li> <p>Maximum number of tags per resource - 50.</p> </li> <li> <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p> </li> <li> <p>Maximum key length - 128 Unicode characters in UTF-8.</p> </li> <li> <p>Maximum value length - 256 Unicode characters in UTF-8.</p> </li> <li> <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p> </li> <li> <p>Tag keys and values are case sensitive.</p> </li> <li> <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p> </li> </ul>"
                     }
+                },
+                "mlModelInferencePayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model inference costs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -11985,6 +12077,12 @@
                         "smithy.api#documentation": "<p>Details about the log status for the trained model inference job.</p>"
                     }
                 },
+                "mlModelInferencePayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model inference costs.</p>"
+                    }
+                },
                 "createTime": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -12222,6 +12320,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configured model algorithm association that was used to create this trained model.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "mlModelTrainingPayerAccountId": {
+                    "target": "com.amazonaws.cleanroomsml#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that is responsible for paying for model training costs.</p>"
                     }
                 }
             },

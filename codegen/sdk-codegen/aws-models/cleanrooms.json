@@ -2940,6 +2940,42 @@
                     "traits": {
                         "smithy.api#enumValue": "EDIT_AUTO_APPROVED_CHANGE_TYPES"
                     }
+                },
+                "ADD_PAYER_CANDIDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ADD_PAYER_CANDIDATE"
+                    }
+                },
+                "REMOVE_PAYER_CANDIDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REMOVE_PAYER_CANDIDATE"
+                    }
+                },
+                "GRANT_CAN_RECEIVE_MODEL_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRANT_CAN_RECEIVE_MODEL_OUTPUT"
+                    }
+                },
+                "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GRANT_CAN_RECEIVE_INFERENCE_OUTPUT"
+                    }
+                },
+                "REVOKE_CAN_RECEIVE_MODEL_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVOKE_CAN_RECEIVE_MODEL_OUTPUT"
+                    }
+                },
+                "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REVOKE_CAN_RECEIVE_INFERENCE_OUTPUT"
+                    }
                 }
             }
         },
@@ -12818,6 +12854,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "mlMemberAbilities": {
+                    "target": "com.amazonaws.cleanrooms#MLMemberAbilities"
+                },
+                "paymentConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#PaymentConfiguration"
+                },
                 "displayName": {
                     "target": "com.amazonaws.cleanrooms#DisplayName",
                     "traits": {
@@ -14506,6 +14548,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The compute configuration for the protected job.</p>"
                     }
+                },
+                "jobComputePayerAccountId": {
+                    "target": "com.amazonaws.cleanrooms#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that pays for the job compute costs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14975,6 +15023,12 @@
                         "smithy.api#documentation": "<p> The receiver configurations for the protected job.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "jobComputePayerAccountId": {
+                    "target": "com.amazonaws.cleanrooms#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that pays for the job compute costs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15126,6 +15180,12 @@
                     "target": "com.amazonaws.cleanrooms#ComputeConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p> The compute configuration for the protected query.</p>"
+                    }
+                },
+                "queryComputePayerAccountId": {
+                    "target": "com.amazonaws.cleanrooms#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that pays for the query compute costs.</p>"
                     }
                 }
             },
@@ -15522,6 +15582,12 @@
                         "smithy.api#default": [],
                         "smithy.api#documentation": "<p> The receiver configuration.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "queryComputePayerAccountId": {
+                    "target": "com.amazonaws.cleanrooms#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that pays for the query compute costs.</p>"
                     }
                 }
             },
@@ -16681,6 +16747,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The compute configuration for the protected job.</p>"
                     }
+                },
+                "jobComputePayerAccountId": {
+                    "target": "com.amazonaws.cleanrooms#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that pays for the job compute costs.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16776,6 +16848,12 @@
                     "target": "com.amazonaws.cleanrooms#ComputeConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p> The compute configuration for the protected query.</p>"
+                    }
+                },
+                "queryComputePayerAccountId": {
+                    "target": "com.amazonaws.cleanrooms#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The account ID of the member that pays for the query compute costs.</p>"
                     }
                 }
             }
@@ -18280,6 +18358,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The default job result configuration.</p>"
                     }
+                },
+                "membershipPaymentConfiguration": {
+                    "target": "com.amazonaws.cleanrooms#UpdateMembershipPaymentConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment configuration to update for the membership.</p>"
+                    }
                 }
             }
         },
@@ -18292,6 +18376,23 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.cleanrooms#UpdateMembershipPaymentConfiguration": {
+            "type": "structure",
+            "members": {
+                "queryCompute": {
+                    "target": "com.amazonaws.cleanrooms#MembershipQueryComputePaymentConfig"
+                },
+                "machineLearning": {
+                    "target": "com.amazonaws.cleanrooms#MembershipMLPaymentConfig"
+                },
+                "jobCompute": {
+                    "target": "com.amazonaws.cleanrooms#MembershipJobComputePaymentConfig"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the payment responsibilities to update for the membership.</p>"
             }
         },
         "com.amazonaws.cleanrooms#UpdatePrivacyBudgetTemplate": {
