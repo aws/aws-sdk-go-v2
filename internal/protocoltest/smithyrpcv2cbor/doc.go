@@ -2,4 +2,7 @@
 
 // Package smithyrpcv2cbor provides the API client, operations, and parameter
 // types for RpcV2 Protocol Service.
+//
 package smithyrpcv2cbor
+
+

@@ -2,4 +2,7 @@
 
 // Package querycompatiblejsonrpc10 provides the API client, operations, and
 // parameter types for Query Compatible Json 1.0 Protocol Service.
+//
 package querycompatiblejsonrpc10
+
+

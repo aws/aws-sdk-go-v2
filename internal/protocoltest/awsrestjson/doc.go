@@ -2,4 +2,7 @@
 
 // Package awsrestjson provides the API client, operations, and parameter types
 // for Sample Rest Json Protocol Service.
+//
 package awsrestjson
+
+

@@ -5,7 +5,7 @@ go 1.24
 require (
 	github.com/aws/aws-sdk-go-v2 v1.41.7
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.10
-	github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.50.6
+	github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.51.0
 	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.6.43
 	github.com/aws/smithy-go v1.25.1
 )
