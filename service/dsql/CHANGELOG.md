@@ -1,3 +1,7 @@
+# v1.14.0 (2026-05-22)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.13.0 (2026-05-13)
 
 * **Feature**: Added support for Amazon Aurora DSQL change data capture (CDC) streams that deliver row-level database changes to Amazon Kinesis in JSON format. Includes CreateStream, GetStream, ListStreams, and DeleteStream operations.

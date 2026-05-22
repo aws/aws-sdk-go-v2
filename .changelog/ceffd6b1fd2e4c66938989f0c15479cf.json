@@ -1,8 +1,0 @@
-{
-    "id": "ceffd6b1-fd2e-4c66-9389-89f0c15479cf",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/s3vectors"
-    ]
-}

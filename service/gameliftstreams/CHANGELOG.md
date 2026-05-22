@@ -1,3 +1,7 @@
+# v1.11.5 (2026-05-22)
+
+* **Documentation**: Added new Gen6 stream classes based on the EC2 G6e instance family. These classes are designed for streaming high-fidelity, graphically demanding games and applications that benefit from additional GPU memory and performance.
+
 # v1.11.4 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

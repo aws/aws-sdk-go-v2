@@ -1,8 +1,0 @@
-{
-    "id": "19702773-f14b-4a8d-8a66-bbd7e8408b9f",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/emrcontainers"
-    ]
-}

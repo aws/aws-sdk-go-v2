@@ -1,8 +1,0 @@
-{
-    "id": "a031a338-71c2-4ea8-902a-898162cd092b",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/appconfig"
-    ]
-}

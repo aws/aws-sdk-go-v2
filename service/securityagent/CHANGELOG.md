@@ -1,3 +1,7 @@
+# v1.3.0 (2026-05-22)
+
+* **Feature**: Adds support for verification scripts on penetration test findings. Customers can now download executable scripts to independently reproduce confirmed vulnerabilities, with instructions and required environment variables provided for each finding.
+
 # v1.2.0 (2026-05-13)
 
 * **Feature**: Add support for code reviews, a new resource type that enables automated security-focused static analysis of source code repositories.

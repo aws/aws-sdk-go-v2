@@ -1,8 +1,0 @@
-{
-    "id": "dc95163d-564a-458a-87c8-a38264ef8355",
-    "type": "feature",
-    "description": "Added ListPerformanceAnalysisReportRecommendations API to retrieve recommendations for a performance analysis report. Added analysis configuration support to CreatePerformanceAnalysisReport for enhanced analysis types such as vacuum analysis.",
-    "modules": [
-        "service/pi"
-    ]
-}

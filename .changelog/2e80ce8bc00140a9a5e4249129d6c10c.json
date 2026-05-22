@@ -1,8 +1,0 @@
-{
-    "id": "2e80ce8b-c001-40a9-a5e4-249129d6c10c",
-    "type": "feature",
-    "description": "Add support for VPC connection",
-    "modules": [
-        "service/datazone"
-    ]
-}

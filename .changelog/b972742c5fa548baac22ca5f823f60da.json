@@ -1,8 +1,0 @@
-{
-    "id": "b972742c-5fa5-48ba-ac22-ca5f823f60da",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/networkfirewall"
-    ]
-}

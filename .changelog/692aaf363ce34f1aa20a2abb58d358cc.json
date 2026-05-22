@@ -1,8 +1,0 @@
-{
-    "id": "692aaf36-3ce3-4f1a-a20a-2abb58d358cc",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/licensemanagerlinuxsubscriptions"
-    ]
-}

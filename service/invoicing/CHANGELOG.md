@@ -1,3 +1,7 @@
+# v1.11.0 (2026-05-22)
+
+* **Feature**: Adds support for idempotency with a new ClientToken field for the CreateInvoiceUnit, DeleteInvoiceUnit, UpdateInvoiceUnit, DeleteProcurementPortalPreference, PutProcurementPortalPreference, and UpdateProcurementPortalPreferenceStatus APIs.
+
 # v1.10.0 (2026-05-07)
 
 * **Feature**: Updated ListInvoiceSummaries API to add new ReceiverRole filter in Request and Response

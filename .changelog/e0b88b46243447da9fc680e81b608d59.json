@@ -1,8 +1,0 @@
-{
-    "id": "e0b88b46-2434-47da-9fc6-80e81b608d59",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/geoplaces"
-    ]
-}

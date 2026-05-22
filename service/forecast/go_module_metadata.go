@@ -3,4 +3,4 @@
 package forecast
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.41.23"
+const goModuleVersion = "1.42.0"

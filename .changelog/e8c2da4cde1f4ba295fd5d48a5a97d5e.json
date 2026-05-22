@@ -1,8 +1,0 @@
-{
-    "id": "e8c2da4c-de1f-4ba2-95fd-5d48a5a97d5e",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/internetmonitor"
-    ]
-}

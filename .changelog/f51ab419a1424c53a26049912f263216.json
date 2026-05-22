@@ -1,8 +1,0 @@
-{
-    "id": "f51ab419-a142-4c53-a260-49912f263216",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/freetier"
-    ]
-}

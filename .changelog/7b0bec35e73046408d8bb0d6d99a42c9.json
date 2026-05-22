@@ -1,8 +1,0 @@
-{
-    "id": "7b0bec35-e730-4640-8d8b-b0d6d99a42c9",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/repostspace"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.32.0 (2026-05-22)
+
+* **Feature**: Added guardrail assessment results to inference spans in the ListSpans API. You can now see which AI Guardrail policies were evaluated, whether content was blocked or masked, and per-policy details for each Bedrock Converse call
+
 # v1.31.0 (2026-05-14)
 
 * **Feature**: ListModels is an API that returns the available AI models for a Connect Assistant based on its region and AI prompt type.

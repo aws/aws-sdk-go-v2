@@ -1,8 +1,0 @@
-{
-    "id": "f84aba9a-9a31-43c0-b035-333cd927f3ef",
-    "type": "feature",
-    "description": "The ModifyInstanceAttribute API now supports modification of EnclaveOptions for the instance as a typed parameter.",
-    "modules": [
-        "service/ec2"
-    ]
-}

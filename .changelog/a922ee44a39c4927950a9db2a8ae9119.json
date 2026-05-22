@@ -1,8 +1,0 @@
-{
-    "id": "a922ee44-a39c-4927-950a-9db2a8ae9119",
-    "type": "feature",
-    "description": "Added guardrail assessment results to inference spans in the ListSpans API. You can now see which AI Guardrail policies were evaluated, whether content was blocked or masked, and per-policy details for each Bedrock Converse call",
-    "modules": [
-        "service/qconnect"
-    ]
-}

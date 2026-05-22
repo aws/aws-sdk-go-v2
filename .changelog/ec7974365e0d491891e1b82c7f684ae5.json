@@ -1,8 +1,0 @@
-{
-    "id": "ec797436-5e0d-4918-91e1-b82c7f684ae5",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/neptunedata"
-    ]
-}

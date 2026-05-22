@@ -1,8 +1,0 @@
-{
-    "id": "fa1972b8-299d-400c-8a4f-5976f93c4a71",
-    "type": "feature",
-    "description": "Adds support for verification scripts on penetration test findings. Customers can now download executable scripts to independently reproduce confirmed vulnerabilities, with instructions and required environment variables provided for each finding.",
-    "modules": [
-        "service/securityagent"
-    ]
-}

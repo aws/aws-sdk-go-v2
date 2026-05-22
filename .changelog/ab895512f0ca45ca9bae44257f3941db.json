@@ -1,8 +1,0 @@
-{
-    "id": "ab895512-f0ca-45ca-9bae-44257f3941db",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/migrationhubrefactorspaces"
-    ]
-}

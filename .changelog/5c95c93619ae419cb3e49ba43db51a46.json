@@ -1,8 +1,0 @@
-{
-    "id": "5c95c936-19ae-419c-b3e4-9ba43db51a46",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/databrew"
-    ]
-}

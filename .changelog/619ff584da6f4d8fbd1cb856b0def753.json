@@ -1,8 +1,0 @@
-{
-    "id": "619ff584-da6f-4d8f-bd1c-b856b0def753",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/simspaceweaver"
-    ]
-}

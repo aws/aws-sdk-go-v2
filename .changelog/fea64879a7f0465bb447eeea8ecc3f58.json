@@ -1,8 +1,0 @@
-{
-    "id": "fea64879-a7f0-465b-b447-eeea8ecc3f58",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/controltower"
-    ]
-}

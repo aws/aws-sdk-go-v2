@@ -1,3 +1,7 @@
+# v1.36.0 (2026-05-22)
+
+* **Feature**: Added ListPerformanceAnalysisReportRecommendations API to retrieve recommendations for a performance analysis report. Added analysis configuration support to CreatePerformanceAnalysisReport for enhanced analysis types such as vacuum analysis.
+
 # v1.35.24 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

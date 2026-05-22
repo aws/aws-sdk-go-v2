@@ -1,3 +1,7 @@
+# v1.4.0 (2026-05-22)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.3.0 (2026-05-13)
 
 * **Feature**: Added ServiceQuotaExceededExceptions for Profile operations

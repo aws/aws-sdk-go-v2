@@ -1,3 +1,7 @@
+# v1.61.0 (2026-05-22)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.60.0 (2026-05-20)
 
 * **Feature**: Amazon Connect Customer Profiles adds support for item catalog columns in RecommenderSchema, ExcludedColumns in Create and Update Recommender to specify columns to exclude from training, and the ability to disable automatic retraining by setting TrainingFrequency to 0.

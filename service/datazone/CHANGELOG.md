@@ -1,3 +1,7 @@
+# v1.61.0 (2026-05-22)
+
+* **Feature**: Add support for VPC connection
+
 # v1.60.0 (2026-05-14)
 
 * **Feature**: Adds support for SageMaker Unified Studio notebook operations, including notebook import and export
