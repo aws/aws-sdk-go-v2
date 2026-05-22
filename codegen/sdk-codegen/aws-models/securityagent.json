@@ -3825,6 +3825,12 @@
                         "smithy.api#documentation": "<p>The file locations involved in the vulnerability, as reported by the code scanner.</p>"
                     }
                 },
+                "verificationScript": {
+                    "target": "com.amazonaws.securityagent#VerificationScript",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The verification script metadata for reproducing the finding, including download URL, instructions, and required environment variables.</p>"
+                    }
+                },
                 "createdAt": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
@@ -9542,6 +9548,67 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Contains the verification details for a target domain, including the verification method and provider-specific details.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#VerificationScript": {
+            "type": "structure",
+            "members": {
+                "scriptType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of script. Valid values are python and bash.</p>"
+                    }
+                },
+                "scriptUrl": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>URL to download the verification script.</p>"
+                    }
+                },
+                "instructions": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Instructions for running the verification script, including prerequisites and how to interpret results.</p>"
+                    }
+                },
+                "envVars": {
+                    "target": "com.amazonaws.securityagent#VerificationScriptEnvVarList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of environment variables required to run the verification script.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains metadata for a verification script that can be used to reproduce a security finding.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#VerificationScriptEnvVar": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the environment variable.</p>"
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the environment variable.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an environment variable required to run a verification script.</p>"
+            }
+        },
+        "com.amazonaws.securityagent#VerificationScriptEnvVarList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityagent#VerificationScriptEnvVar"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>List of environment variables required to run a verification script.</p>"
             }
         },
         "com.amazonaws.securityagent#VerifyTargetDomain": {

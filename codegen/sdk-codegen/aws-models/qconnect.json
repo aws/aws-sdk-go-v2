@@ -8464,6 +8464,26 @@
                 "smithy.api#uniqueItems": {}
             }
         },
+        "com.amazonaws.qconnect#GuardrailAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The outcome of a guardrail assessment.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "NONE",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "BLOCKED",
+                        "name": "BLOCKED"
+                    },
+                    {
+                        "value": "MASKED",
+                        "name": "MASKED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.qconnect#GuardrailContentFilterConfig": {
             "type": "structure",
             "members": {
@@ -8832,6 +8852,78 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.qconnect#GuardrailPolicyResult": {
+            "type": "structure",
+            "members": {
+                "policyType": {
+                    "target": "com.amazonaws.qconnect#GuardrailPolicyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of guardrail policy that was evaluated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.qconnect#GuardrailAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Outcome of this specific policy.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "details": {
+                    "target": "com.amazonaws.qconnect#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Policy-specific detail.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Per-policy guardrail assessment result. Captures which policy triggered, its outcome, and a policy-specific detail string.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailPolicyResultList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#GuardrailPolicyResult"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailPolicyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Classification of a guardrail policy.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "CONTENT_FILTER",
+                        "name": "CONTENT_FILTER"
+                    },
+                    {
+                        "value": "TOPIC",
+                        "name": "TOPIC"
+                    },
+                    {
+                        "value": "WORD",
+                        "name": "WORD"
+                    },
+                    {
+                        "value": "SENSITIVE_INFORMATION_PII",
+                        "name": "SENSITIVE_INFORMATION_PII"
+                    },
+                    {
+                        "value": "SENSITIVE_INFORMATION_REGEX",
+                        "name": "SENSITIVE_INFORMATION_REGEX"
+                    },
+                    {
+                        "value": "CONTEXTUAL_GROUNDING",
+                        "name": "CONTEXTUAL_GROUNDING"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.qconnect#GuardrailRegexConfig": {
             "type": "structure",
             "members": {
@@ -8926,6 +9018,22 @@
                     }
                 ],
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.qconnect#GuardrailSource": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Content source for a guardrail assessment.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "INPUT",
+                        "name": "INPUT"
+                    },
+                    {
+                        "value": "OUTPUT",
+                        "name": "OUTPUT"
+                    }
+                ]
             }
         },
         "com.amazonaws.qconnect#GuardrailTopicConfig": {
@@ -16819,7 +16927,7 @@
                 "statusDescription": {
                     "target": "com.amazonaws.qconnect#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "Human-readable error description when status is ERROR or TIMEOUT",
+                        "smithy.api#documentation": "<p>Human-readable error description when status is ERROR or TIMEOUT</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 1024
@@ -16836,7 +16944,7 @@
                 "originRequestId": {
                     "target": "com.amazonaws.qconnect#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "The origin request identifier for end-to-end tracing.",
+                        "smithy.api#documentation": "<p>The origin request identifier for end-to-end tracing.</p>",
                         "smithy.api#length": {
                             "min": 1,
                             "max": 256
@@ -17073,7 +17181,13 @@
                 "timeToFirstTokenMs": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "Time to first token in milliseconds, measured from when Amazon Bedrock was invoked to when the first token was returned"
+                        "smithy.api#documentation": "<p>Time to first token in milliseconds, measured from when Amazon Bedrock was invoked to when the first token was returned</p>"
+                    }
+                },
+                "guardrailAssessments": {
+                    "target": "com.amazonaws.qconnect#SpanGuardrailAssessmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Guardrail assessments for the inference span. Absent on other span types and when no AI Guardrail is attached to the AI Agent.</p>"
                     }
                 }
             },
@@ -17123,6 +17237,60 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.qconnect#NonEmptyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.qconnect#SpanGuardrailAssessment": {
+            "type": "structure",
+            "members": {
+                "guardrailId": {
+                    "target": "com.amazonaws.qconnect#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique AI Guardrail identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "guardrailName": {
+                    "target": "com.amazonaws.qconnect#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Customer-defined display name of the AI Guardrail resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "source": {
+                    "target": "com.amazonaws.qconnect#GuardrailSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Content source the guardrail was evaluated against.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "action": {
+                    "target": "com.amazonaws.qconnect#GuardrailAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Outcome of the guardrail assessment.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "policies": {
+                    "target": "com.amazonaws.qconnect#GuardrailPolicyResultList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Per-policy assessment results. Absent or empty when action is NONE.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Result of a single guardrail assessment, covering either the input (customer/user message) or the output (LLM response) of a Bedrock Converse call.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#SpanGuardrailAssessmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#SpanGuardrailAssessment"
             },
             "traits": {
                 "smithy.api#length": {
@@ -17238,13 +17406,13 @@
                 "value": {
                     "target": "com.amazonaws.qconnect#NonEmptySensitiveString",
                     "traits": {
-                        "smithy.api#documentation": "The reasoning text content",
+                        "smithy.api#documentation": "<p>The reasoning text content</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "Model reasoning and it's internal decision making process"
+                "smithy.api#documentation": "<p>Model reasoning and it's internal decision making process</p>"
             }
         },
         "com.amazonaws.qconnect#SpanStatus": {
@@ -19925,6 +20093,194 @@
                 "smithy.api#cors": {},
                 "smithy.api#documentation": "<ul> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Operations_Amazon_Q_Connect.html\">Amazon Q actions</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_Types_Amazon_Q_Connect.html\">Amazon Q data types</a> </p> </li> </ul> <note> <p> <b>Powered by Amazon Bedrock</b>: Amazon Web Services implements <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html\">automated abuse detection</a>. Because Amazon Q in Connect is built on Amazon Bedrock, users can take full advantage of the controls implemented in Amazon Bedrock to enforce safety, security, and the responsible use of artificial intelligence (AI).</p> </note> <p>Amazon Q in Connect is a generative AI customer service assistant. It is an LLM-enhanced evolution of Amazon Connect Wisdom that delivers real-time recommendations to help contact center agents resolve customer issues quickly and accurately.</p> <p>Amazon Q in Connect automatically detects customer intent during calls and chats using conversational analytics and natural language understanding (NLU). It then provides agents with immediate, real-time generative responses and suggested actions, and links to relevant documents and articles. Agents can also query Amazon Q in Connect directly using natural language or keywords to answer customer requests.</p> <p>Use the Amazon Q in Connect APIs to create an assistant and a knowledge base, for example, or manage content by uploading custom files.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-q-connect.html\">Use Amazon Q in Connect for generative AI powered agent assistance in real-time</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#title": "Amazon Q Connect",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://wisdom-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://wisdom-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://wisdom.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://wisdom.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {

@@ -3526,6 +3526,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The lakehouse properties of a connection.</p>"
                     }
+                },
+                "vpcProperties": {
+                    "target": "com.amazonaws.datazone#VpcPropertiesInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC properties of a connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3612,6 +3618,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The lakehouse properties of a connection.</p>"
                     }
+                },
+                "vpcProperties": {
+                    "target": "com.amazonaws.datazone#VpcPropertiesOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC properties of a connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3673,6 +3685,12 @@
                     "target": "com.amazonaws.datazone#LakehousePropertiesPatch",
                     "traits": {
                         "smithy.api#documentation": "<p>The lakehouse properties of a connection properties patch.</p>"
+                    }
+                },
+                "vpcProperties": {
+                    "target": "com.amazonaws.datazone#VpcPropertiesPatch",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC properties of a connection properties patch.</p>"
                     }
                 }
             },
@@ -3969,6 +3987,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MLFLOW"
+                    }
+                },
+                "VPC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VPC"
                     }
                 }
             }
@@ -35718,6 +35742,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.datazone#SecurityGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 32
+                },
+                "smithy.api#pattern": "^sg-[a-z0-9]+$"
+            }
+        },
         "com.amazonaws.datazone#SecurityGroupIdList": {
             "type": "list",
             "member": {
@@ -43939,6 +43972,122 @@
                 "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by the Amazon Web Services service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.datazone#VpcConnectionSubnetIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.datazone#SubnetId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16
+                }
+            }
+        },
+        "com.amazonaws.datazone#VpcId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 32
+                },
+                "smithy.api#pattern": "^vpc-[a-z0-9]+$"
+            }
+        },
+        "com.amazonaws.datazone#VpcPropertiesInput": {
+            "type": "structure",
+            "members": {
+                "vpcId": {
+                    "target": "com.amazonaws.datazone#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the VPC. Must match the pattern <code>^vpc-[a-z0-9]+$</code>. Maximum length of 32.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.datazone#VpcConnectionSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subnet IDs of the VPC connection. You can specify between 1 and 16 subnet IDs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "securityGroupId": {
+                    "target": "com.amazonaws.datazone#SecurityGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security group ID of the VPC connection. Must match the pattern <code>^sg-[a-z0-9]+$</code>. Maximum length of 32.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The VPC connection properties used when creating a connection.</p>"
+            }
+        },
+        "com.amazonaws.datazone#VpcPropertiesOutput": {
+            "type": "structure",
+            "members": {
+                "vpcId": {
+                    "target": "com.amazonaws.datazone#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the VPC.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.datazone#VpcConnectionSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subnet IDs of the VPC connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.datazone#ConnectionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the VPC connection.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "securityGroupId": {
+                    "target": "com.amazonaws.datazone#SecurityGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security group ID of the VPC connection.</p>"
+                    }
+                },
+                "glueConnectionNames": {
+                    "target": "com.amazonaws.datazone#GlueConnectionNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Glue connection names associated with the VPC connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The VPC connection properties returned in responses.</p>"
+            }
+        },
+        "com.amazonaws.datazone#VpcPropertiesPatch": {
+            "type": "structure",
+            "members": {
+                "vpcId": {
+                    "target": "com.amazonaws.datazone#VpcId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the VPC.</p>"
+                    }
+                },
+                "subnetIds": {
+                    "target": "com.amazonaws.datazone#VpcConnectionSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subnet IDs of the VPC connection.</p>"
+                    }
+                },
+                "securityGroupId": {
+                    "target": "com.amazonaws.datazone#SecurityGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security group ID of the VPC connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The VPC connection properties used when updating a connection.</p>"
             }
         },
         "com.amazonaws.datazone#WorkflowsMwaaPropertiesInput": {
