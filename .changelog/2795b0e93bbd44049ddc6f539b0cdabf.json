@@ -1,0 +1,8 @@
+{
+    "id": "2795b0e9-3bbd-4404-9ddc-6f539b0cdabf",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/kafkaconnect"
+    ]
+}

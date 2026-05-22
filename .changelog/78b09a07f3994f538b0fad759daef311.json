@@ -1,0 +1,8 @@
+{
+    "id": "78b09a07-f399-4f53-8b0f-ad759daef311",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/bcmrecommendedactions"
+    ]
+}

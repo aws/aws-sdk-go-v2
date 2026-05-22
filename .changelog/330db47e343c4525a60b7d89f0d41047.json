@@ -1,0 +1,8 @@
+{
+    "id": "330db47e-343c-4525-a60b-7d89f0d41047",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/b2bi"
+    ]
+}

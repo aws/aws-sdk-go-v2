@@ -1,0 +1,8 @@
+{
+    "id": "1b0f9674-4fe5-4dc5-89ce-0d86120c6586",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/bcmpricingcalculator"
+    ]
+}

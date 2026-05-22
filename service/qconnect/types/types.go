@@ -2783,6 +2783,26 @@ type GuardrailPiiEntityConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Per-policy guardrail assessment result. Captures which policy triggered, its
+// outcome, and a policy-specific detail string.
+type GuardrailPolicyResult struct {
+
+	// Outcome of this specific policy.
+	//
+	// This member is required.
+	Action GuardrailAction
+
+	// The type of guardrail policy that was evaluated.
+	//
+	// This member is required.
+	PolicyType GuardrailPolicyType
+
+	// Policy-specific detail.
+	Details *string
+
+	noSmithyDocumentSerde
+}
+
 // The regular expression to configure for the AI Guardrail.
 type GuardrailRegexConfig struct {
 
@@ -5611,6 +5631,10 @@ type SpanAttributes struct {
 	// Error classification if span failed (e.g., throttle, timeout)
 	ErrorType *string
 
+	// Guardrail assessments for the inference span. Absent on other span types and
+	// when no AI Guardrail is attached to the AI Agent.
+	GuardrailAssessments []SpanGuardrailAssessment
+
 	// Amazon Connect contact identifier
 	InitialContactId *string
 
@@ -5699,6 +5723,36 @@ type SpanCitation struct {
 
 	// The title of the content being cited in the span.
 	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// Result of a single guardrail assessment, covering either the input
+// (customer/user message) or the output (LLM response) of a Bedrock Converse call.
+type SpanGuardrailAssessment struct {
+
+	// Outcome of the guardrail assessment.
+	//
+	// This member is required.
+	Action GuardrailAction
+
+	// Unique AI Guardrail identifier.
+	//
+	// This member is required.
+	GuardrailId *string
+
+	// Customer-defined display name of the AI Guardrail resource.
+	//
+	// This member is required.
+	GuardrailName *string
+
+	// Content source the guardrail was evaluated against.
+	//
+	// This member is required.
+	Source GuardrailSource
+
+	// Per-policy assessment results. Absent or empty when action is NONE.
+	Policies []GuardrailPolicyResult
 
 	noSmithyDocumentSerde
 }

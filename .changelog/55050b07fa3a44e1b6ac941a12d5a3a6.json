@@ -1,0 +1,8 @@
+{
+    "id": "55050b07-fa3a-44e1-b6ac-941a12d5a3a6",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/frauddetector"
+    ]
+}

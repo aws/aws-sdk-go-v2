@@ -13210,6 +13210,11 @@ func awsRestjson1_deserializeDocumentFinding(v **types.Finding, value interface{
 				sv.UpdatedAt = ptr.Time(t)
 			}
 
+		case "verificationScript":
+			if err := awsRestjson1_deserializeDocumentVerificationScript(&sv.VerificationScript, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -16738,6 +16743,152 @@ func awsRestjson1_deserializeDocumentVerificationDetails(v **types.VerificationD
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVerificationScript(v **types.VerificationScript, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VerificationScript
+	if *v == nil {
+		sv = &types.VerificationScript{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "envVars":
+			if err := awsRestjson1_deserializeDocumentVerificationScriptEnvVarList(&sv.EnvVars, value); err != nil {
+				return err
+			}
+
+		case "instructions":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Instructions = ptr.String(jtv)
+			}
+
+		case "scriptType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ScriptType = ptr.String(jtv)
+			}
+
+		case "scriptUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ScriptUrl = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVerificationScriptEnvVar(v **types.VerificationScriptEnvVar, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VerificationScriptEnvVar
+	if *v == nil {
+		sv = &types.VerificationScriptEnvVar{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "value":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Value = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVerificationScriptEnvVarList(v *[]types.VerificationScriptEnvVar, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.VerificationScriptEnvVar
+	if *v == nil {
+		cv = []types.VerificationScriptEnvVar{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.VerificationScriptEnvVar
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentVerificationScriptEnvVar(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

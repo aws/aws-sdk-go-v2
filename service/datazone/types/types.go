@@ -1054,6 +1054,7 @@ type ConnectionCredentials struct {
 //	ConnectionPropertiesInputMemberS3Properties
 //	ConnectionPropertiesInputMemberSparkEmrProperties
 //	ConnectionPropertiesInputMemberSparkGlueProperties
+//	ConnectionPropertiesInputMemberVpcProperties
 //	ConnectionPropertiesInputMemberWorkflowsMwaaProperties
 //	ConnectionPropertiesInputMemberWorkflowsServerlessProperties
 type ConnectionPropertiesInput interface {
@@ -1159,6 +1160,15 @@ type ConnectionPropertiesInputMemberSparkGlueProperties struct {
 
 func (*ConnectionPropertiesInputMemberSparkGlueProperties) isConnectionPropertiesInput() {}
 
+// The VPC properties of a connection.
+type ConnectionPropertiesInputMemberVpcProperties struct {
+	Value VpcPropertiesInput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesInputMemberVpcProperties) isConnectionPropertiesInput() {}
+
 // The Amazon MWAA properties of a connection.
 type ConnectionPropertiesInputMemberWorkflowsMwaaProperties struct {
 	Value WorkflowsMwaaPropertiesInput
@@ -1192,6 +1202,7 @@ func (*ConnectionPropertiesInputMemberWorkflowsServerlessProperties) isConnectio
 //	ConnectionPropertiesOutputMemberS3Properties
 //	ConnectionPropertiesOutputMemberSparkEmrProperties
 //	ConnectionPropertiesOutputMemberSparkGlueProperties
+//	ConnectionPropertiesOutputMemberVpcProperties
 //	ConnectionPropertiesOutputMemberWorkflowsMwaaProperties
 //	ConnectionPropertiesOutputMemberWorkflowsServerlessProperties
 type ConnectionPropertiesOutput interface {
@@ -1297,6 +1308,15 @@ type ConnectionPropertiesOutputMemberSparkGlueProperties struct {
 
 func (*ConnectionPropertiesOutputMemberSparkGlueProperties) isConnectionPropertiesOutput() {}
 
+// The VPC properties of a connection.
+type ConnectionPropertiesOutputMemberVpcProperties struct {
+	Value VpcPropertiesOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesOutputMemberVpcProperties) isConnectionPropertiesOutput() {}
+
 // The Amazon MWAA properties of a connection.
 type ConnectionPropertiesOutputMemberWorkflowsMwaaProperties struct {
 	Value WorkflowsMwaaPropertiesOutput
@@ -1329,6 +1349,7 @@ func (*ConnectionPropertiesOutputMemberWorkflowsServerlessProperties) isConnecti
 //	ConnectionPropertiesPatchMemberRedshiftProperties
 //	ConnectionPropertiesPatchMemberS3Properties
 //	ConnectionPropertiesPatchMemberSparkEmrProperties
+//	ConnectionPropertiesPatchMemberVpcProperties
 type ConnectionPropertiesPatch interface {
 	isConnectionPropertiesPatch()
 }
@@ -1413,6 +1434,15 @@ type ConnectionPropertiesPatchMemberSparkEmrProperties struct {
 }
 
 func (*ConnectionPropertiesPatchMemberSparkEmrProperties) isConnectionPropertiesPatch() {}
+
+// The VPC properties of a connection properties patch.
+type ConnectionPropertiesPatchMemberVpcProperties struct {
+	Value VpcPropertiesPatch
+
+	noSmithyDocumentSerde
+}
+
+func (*ConnectionPropertiesPatchMemberVpcProperties) isConnectionPropertiesPatch() {}
 
 // The summary of a connection.
 type ConnectionSummary struct {
@@ -7612,6 +7642,71 @@ type UserProfileSummary struct {
 
 	// The type of the user profile.
 	Type UserProfileType
+
+	noSmithyDocumentSerde
+}
+
+// The VPC connection properties used when creating a connection.
+type VpcPropertiesInput struct {
+
+	// The subnet IDs of the VPC connection. You can specify between 1 and 16 subnet
+	// IDs.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The identifier of the VPC. Must match the pattern ^vpc-[a-z0-9]+$ . Maximum
+	// length of 32.
+	//
+	// This member is required.
+	VpcId *string
+
+	// The security group ID of the VPC connection. Must match the pattern
+	// ^sg-[a-z0-9]+$ . Maximum length of 32.
+	SecurityGroupId *string
+
+	noSmithyDocumentSerde
+}
+
+// The VPC connection properties returned in responses.
+type VpcPropertiesOutput struct {
+
+	// The status of the VPC connection.
+	//
+	// This member is required.
+	Status ConnectionStatus
+
+	// The subnet IDs of the VPC connection.
+	//
+	// This member is required.
+	SubnetIds []string
+
+	// The identifier of the VPC.
+	//
+	// This member is required.
+	VpcId *string
+
+	// The Amazon Web Services Glue connection names associated with the VPC
+	// connection.
+	GlueConnectionNames []string
+
+	// The security group ID of the VPC connection.
+	SecurityGroupId *string
+
+	noSmithyDocumentSerde
+}
+
+// The VPC connection properties used when updating a connection.
+type VpcPropertiesPatch struct {
+
+	// The security group ID of the VPC connection.
+	SecurityGroupId *string
+
+	// The subnet IDs of the VPC connection.
+	SubnetIds []string
+
+	// The identifier of the VPC.
+	VpcId *string
 
 	noSmithyDocumentSerde
 }

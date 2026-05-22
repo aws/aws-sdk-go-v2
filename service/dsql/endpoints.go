@@ -14,6 +14,7 @@ import (
 	internalendpoints "github.com/aws/aws-sdk-go-v2/service/dsql/internal/endpoints"
 	smithyauth "github.com/aws/smithy-go/auth"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
+	"github.com/aws/smithy-go/endpoints/private/bdd"
 	"github.com/aws/smithy-go/endpoints/private/rulesfn"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -277,21 +278,91 @@ func (p EndpointParameters) WithDefaults() EndpointParameters {
 	return p
 }
 
-type stringSlice []string
+const bddRoot int32 = 2
 
-func (s stringSlice) Get(i int) *string {
-	if i < 0 || i >= len(s) {
-		return nil
+var bddNodes = [18]int32{
+	-1, 1, -1, 0, 6, 3, 1, 4, 100000005, 2, 5, 100000005, 3, 100000003, 100000004, 3, 100000001, 100000002}
+
+type conditionContext struct {
+	PartitionResult *awsrulesfn.PartitionConfig
+}
+
+func evalCondition(idx int, params *EndpointParameters, c *conditionContext) bool {
+	switch idx {
+	case 0:
+		return params.Endpoint != nil
+	case 1:
+		return params.Region != nil
+	case 2:
+		if v := awsrulesfn.GetPartition(*params.Region); v != nil {
+			c.PartitionResult = v
+			return true
+		}
+		return false
+	case 3:
+		return *params.UseFIPS == true
 	}
+	return false
+}
 
-	v := s[i]
-	return &v
+func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (smithyendpoints.Endpoint, error) {
+	switch idx {
+	case 0:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint resolution failed: no matching rule")
+	case 1:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: FIPS and custom endpoint are not supported")
+	case 2:
+		uriString := *params.Endpoint
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 3:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://dsql-fips.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 4:
+		uriString := func() string {
+			var out strings.Builder
+			out.WriteString("https://dsql.")
+			out.WriteString(*params.Region)
+			out.WriteString(".")
+			out.WriteString(c.PartitionResult.DualStackDnsSuffix)
+			return out.String()
+		}()
+		uri, err := url.Parse(uriString)
+		if err != nil {
+			return smithyendpoints.Endpoint{}, fmt.Errorf("Failed to parse uri: %s", uriString)
+		}
+		return smithyendpoints.Endpoint{
+			URI:     *uri,
+			Headers: http.Header{},
+		}, nil
+	case 5:
+		return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Missing Region")
+	}
+	return smithyendpoints.Endpoint{}, fmt.Errorf("endpoint rule error, invalid result index: %d", idx)
 }
 
 // EndpointResolverV2 provides the interface for resolving service endpoints.
 type EndpointResolverV2 interface {
-	// ResolveEndpoint attempts to resolve the endpoint with the provided options,
-	// returning the endpoint if found. Otherwise an error is returned.
 	ResolveEndpoint(ctx context.Context, params EndpointParameters) (
 		smithyendpoints.Endpoint, error,
 	)
@@ -315,75 +386,12 @@ func (r *resolver) ResolveEndpoint(
 	if err = params.ValidateRequired(); err != nil {
 		return endpoint, fmt.Errorf("endpoint parameters are not valid, %w", err)
 	}
-	_UseFIPS := *params.UseFIPS
-	_ = _UseFIPS
 
-	if exprVal := params.Endpoint; exprVal != nil {
-		_Endpoint := *exprVal
-		_ = _Endpoint
-		if _UseFIPS == true {
-			return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: FIPS and custom endpoint are not supported")
-		}
-		uriString := _Endpoint
-
-		uri, err := url.Parse(uriString)
-		if err != nil {
-			return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-		}
-
-		return smithyendpoints.Endpoint{
-			URI:     *uri,
-			Headers: http.Header{},
-		}, nil
-	}
-	if exprVal := params.Region; exprVal != nil {
-		_Region := *exprVal
-		_ = _Region
-		if exprVal := awsrulesfn.GetPartition(_Region); exprVal != nil {
-			_PartitionResult := *exprVal
-			_ = _PartitionResult
-			if _UseFIPS == true {
-				uriString := func() string {
-					var out strings.Builder
-					out.WriteString("https://dsql-fips.")
-					out.WriteString(_Region)
-					out.WriteString(".")
-					out.WriteString(_PartitionResult.DualStackDnsSuffix)
-					return out.String()
-				}()
-
-				uri, err := url.Parse(uriString)
-				if err != nil {
-					return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-				}
-
-				return smithyendpoints.Endpoint{
-					URI:     *uri,
-					Headers: http.Header{},
-				}, nil
-			}
-			uriString := func() string {
-				var out strings.Builder
-				out.WriteString("https://dsql.")
-				out.WriteString(_Region)
-				out.WriteString(".")
-				out.WriteString(_PartitionResult.DualStackDnsSuffix)
-				return out.String()
-			}()
-
-			uri, err := url.Parse(uriString)
-			if err != nil {
-				return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
-			}
-
-			return smithyendpoints.Endpoint{
-				URI:     *uri,
-				Headers: http.Header{},
-			}, nil
-		}
-		return endpoint, fmt.Errorf("Endpoint resolution failed. Invalid operation or environment input.")
-	}
-	return endpoint, fmt.Errorf("endpoint rule error, %s", "Invalid Configuration: Missing Region")
+	c := &conditionContext{}
+	ref := bdd.Evaluate(bddNodes[:], bddRoot, func(idx int) bool {
+		return evalCondition(idx, &params, c)
+	})
+	return resolveResult(ref, &params, c)
 }
 
 type endpointParamsBinder interface {

@@ -566,6 +566,67 @@ func (m *awsAwsjson11_serializeOpListAvailableResourceMetrics) HandleSerialize(c
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpListPerformanceAnalysisReportRecommendations struct {
+}
+
+func (*awsAwsjson11_serializeOpListPerformanceAnalysisReportRecommendations) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpListPerformanceAnalysisReportRecommendations) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListPerformanceAnalysisReportRecommendationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("PerformanceInsightsv20180227.ListPerformanceAnalysisReportRecommendations")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentListPerformanceAnalysisReportRecommendationsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpListPerformanceAnalysisReports struct {
 }
 
@@ -917,6 +978,17 @@ func awsAwsjson11_serializeDocumentMetricQueryList(v []types.MetricQuery, value 
 }
 
 func awsAwsjson11_serializeDocumentMetricTypeList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRecommendationIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -1323,6 +1395,45 @@ func awsAwsjson11_serializeOpDocumentListAvailableResourceMetricsInput(v *ListAv
 	if v.NextToken != nil {
 		ok := object.Key("NextToken")
 		ok.String(*v.NextToken)
+	}
+
+	if len(v.ServiceType) > 0 {
+		ok := object.Key("ServiceType")
+		ok.String(string(v.ServiceType))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentListPerformanceAnalysisReportRecommendationsInput(v *ListPerformanceAnalysisReportRecommendationsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AnalysisReportId != nil {
+		ok := object.Key("AnalysisReportId")
+		ok.String(*v.AnalysisReportId)
+	}
+
+	if v.Identifier != nil {
+		ok := object.Key("Identifier")
+		ok.String(*v.Identifier)
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.RecommendationIds != nil {
+		ok := object.Key("RecommendationIds")
+		if err := awsAwsjson11_serializeDocumentRecommendationIdList(v.RecommendationIds, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ServiceType) > 0 {

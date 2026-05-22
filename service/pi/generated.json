@@ -17,6 +17,7 @@
         "api_op_GetResourceMetrics.go",
         "api_op_ListAvailableResourceDimensions.go",
         "api_op_ListAvailableResourceMetrics.go",
+        "api_op_ListPerformanceAnalysisReportRecommendations.go",
         "api_op_ListPerformanceAnalysisReports.go",
         "api_op_ListTagsForResource.go",
         "api_op_TagResource.go",

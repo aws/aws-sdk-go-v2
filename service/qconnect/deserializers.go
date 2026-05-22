@@ -22021,6 +22021,98 @@ func awsRestjson1_deserializeDocumentGuardrailPiiEntityConfig(v **types.Guardrai
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentGuardrailPolicyResult(v **types.GuardrailPolicyResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GuardrailPolicyResult
+	if *v == nil {
+		sv = &types.GuardrailPolicyResult{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailAction to be of type string, got %T instead", value)
+				}
+				sv.Action = types.GuardrailAction(jtv)
+			}
+
+		case "details":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.Details = ptr.String(jtv)
+			}
+
+		case "policyType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailPolicyType to be of type string, got %T instead", value)
+				}
+				sv.PolicyType = types.GuardrailPolicyType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGuardrailPolicyResultList(v *[]types.GuardrailPolicyResult, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GuardrailPolicyResult
+	if *v == nil {
+		cv = []types.GuardrailPolicyResult{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GuardrailPolicyResult
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentGuardrailPolicyResult(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentGuardrailRegexConfig(v **types.GuardrailRegexConfig, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -28706,6 +28798,11 @@ func awsRestjson1_deserializeDocumentSpanAttributes(v **types.SpanAttributes, va
 				sv.ErrorType = ptr.String(jtv)
 			}
 
+		case "guardrailAssessments":
+			if err := awsRestjson1_deserializeDocumentSpanGuardrailAssessmentList(&sv.GuardrailAssessments, value); err != nil {
+				return err
+			}
+
 		case "initialContactId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -29110,6 +29207,112 @@ func awsRestjson1_deserializeDocumentSpanFinishReasonList(v *[]string, value int
 			}
 			col = jtv
 		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSpanGuardrailAssessment(v **types.SpanGuardrailAssessment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SpanGuardrailAssessment
+	if *v == nil {
+		sv = &types.SpanGuardrailAssessment{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "action":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailAction to be of type string, got %T instead", value)
+				}
+				sv.Action = types.GuardrailAction(jtv)
+			}
+
+		case "guardrailId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.GuardrailId = ptr.String(jtv)
+			}
+
+		case "guardrailName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.GuardrailName = ptr.String(jtv)
+			}
+
+		case "policies":
+			if err := awsRestjson1_deserializeDocumentGuardrailPolicyResultList(&sv.Policies, value); err != nil {
+				return err
+			}
+
+		case "source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailSource to be of type string, got %T instead", value)
+				}
+				sv.Source = types.GuardrailSource(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSpanGuardrailAssessmentList(v *[]types.SpanGuardrailAssessment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SpanGuardrailAssessment
+	if *v == nil {
+		cv = []types.SpanGuardrailAssessment{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SpanGuardrailAssessment
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSpanGuardrailAssessment(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
 		cv = append(cv, col)
 
 	}

@@ -1,0 +1,8 @@
+{
+    "id": "fb2a0f2b-1c64-4f23-82e5-4b7dca05e953",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/tnb"
+    ]
+}

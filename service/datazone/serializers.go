@@ -20087,6 +20087,12 @@ func awsRestjson1_serializeDocumentConnectionPropertiesInput(v types.ConnectionP
 			return err
 		}
 
+	case *types.ConnectionPropertiesInputMemberVpcProperties:
+		av := object.Key("vpcProperties")
+		if err := awsRestjson1_serializeDocumentVpcPropertiesInput(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.ConnectionPropertiesInputMemberWorkflowsMwaaProperties:
 		av := object.Key("workflowsMwaaProperties")
 		if err := awsRestjson1_serializeDocumentWorkflowsMwaaPropertiesInput(&uv.Value, av); err != nil {
@@ -20162,6 +20168,12 @@ func awsRestjson1_serializeDocumentConnectionPropertiesPatch(v types.ConnectionP
 	case *types.ConnectionPropertiesPatchMemberSparkEmrProperties:
 		av := object.Key("sparkEmrProperties")
 		if err := awsRestjson1_serializeDocumentSparkEmrPropertiesPatch(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.ConnectionPropertiesPatchMemberVpcProperties:
+		av := object.Key("vpcProperties")
+		if err := awsRestjson1_serializeDocumentVpcPropertiesPatch(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -23920,6 +23932,65 @@ func awsRestjson1_serializeDocumentUserPolicyGrantPrincipal(v types.UserPolicyGr
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcConnectionSubnetIdList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcPropertiesInput(v *types.VpcPropertiesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecurityGroupId != nil {
+		ok := object.Key("securityGroupId")
+		ok.String(*v.SecurityGroupId)
+	}
+
+	if v.SubnetIds != nil {
+		ok := object.Key("subnetIds")
+		if err := awsRestjson1_serializeDocumentVpcConnectionSubnetIdList(v.SubnetIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcId != nil {
+		ok := object.Key("vpcId")
+		ok.String(*v.VpcId)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcPropertiesPatch(v *types.VpcPropertiesPatch, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SecurityGroupId != nil {
+		ok := object.Key("securityGroupId")
+		ok.String(*v.SecurityGroupId)
+	}
+
+	if v.SubnetIds != nil {
+		ok := object.Key("subnetIds")
+		if err := awsRestjson1_serializeDocumentVpcConnectionSubnetIdList(v.SubnetIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcId != nil {
+		ok := object.Key("vpcId")
+		ok.String(*v.VpcId)
+	}
+
 	return nil
 }
 

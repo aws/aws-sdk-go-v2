@@ -190,6 +190,26 @@ func (m *validateOpListAvailableResourceMetrics) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListPerformanceAnalysisReportRecommendations struct {
+}
+
+func (*validateOpListPerformanceAnalysisReportRecommendations) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListPerformanceAnalysisReportRecommendations) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListPerformanceAnalysisReportRecommendationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListPerformanceAnalysisReportRecommendationsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListPerformanceAnalysisReports struct {
 }
 
@@ -304,6 +324,10 @@ func addOpListAvailableResourceDimensionsValidationMiddleware(stack *middleware.
 
 func addOpListAvailableResourceMetricsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAvailableResourceMetrics{}, middleware.After)
+}
+
+func addOpListPerformanceAnalysisReportRecommendationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListPerformanceAnalysisReportRecommendations{}, middleware.After)
 }
 
 func addOpListPerformanceAnalysisReportsValidationMiddleware(stack *middleware.Stack) error {
@@ -422,9 +446,6 @@ func validateOpCreatePerformanceAnalysisReportInput(v *CreatePerformanceAnalysis
 	}
 	if v.StartTime == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
-	}
-	if v.EndTime == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
 	}
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
@@ -626,6 +647,27 @@ func validateOpListAvailableResourceMetricsInput(v *ListAvailableResourceMetrics
 	}
 	if v.MetricTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetricTypes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListPerformanceAnalysisReportRecommendationsInput(v *ListPerformanceAnalysisReportRecommendationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListPerformanceAnalysisReportRecommendationsInput"}
+	if len(v.ServiceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceType"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.AnalysisReportId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AnalysisReportId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

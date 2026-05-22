@@ -1,0 +1,8 @@
+{
+    "id": "3cae7cfe-302e-4dd9-a830-4be20b643386",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/ssooidc"
+    ]
+}

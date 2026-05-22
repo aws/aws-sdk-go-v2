@@ -789,6 +789,10 @@ type Finding struct {
 	// The date and time the finding was last updated, in UTC format.
 	UpdatedAt *time.Time
 
+	// The verification script metadata for reproducing the finding, including
+	// download URL, instructions, and required environment variables.
+	VerificationScript *VerificationScript
+
 	noSmithyDocumentSerde
 }
 
@@ -1660,6 +1664,38 @@ type VerificationDetails struct {
 
 	// The verification method used for the target domain.
 	Method DomainVerificationMethod
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata for a verification script that can be used to reproduce a
+// security finding.
+type VerificationScript struct {
+
+	// The list of environment variables required to run the verification script.
+	EnvVars []VerificationScriptEnvVar
+
+	// Instructions for running the verification script, including prerequisites and
+	// how to interpret results.
+	Instructions *string
+
+	// The type of script. Valid values are python and bash.
+	ScriptType *string
+
+	// URL to download the verification script.
+	ScriptUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents an environment variable required to run a verification script.
+type VerificationScriptEnvVar struct {
+
+	// The name of the environment variable.
+	Name *string
+
+	// The value of the environment variable.
+	Value *string
 
 	noSmithyDocumentSerde
 }

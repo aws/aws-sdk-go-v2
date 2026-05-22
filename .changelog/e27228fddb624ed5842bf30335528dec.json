@@ -1,0 +1,8 @@
+{
+    "id": "e27228fd-db62-4ed5-842b-f30335528dec",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/outposts"
+    ]
+}

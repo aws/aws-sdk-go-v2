@@ -34,6 +34,10 @@ type DeleteInvoiceUnitInput struct {
 	// This member is required.
 	InvoiceUnitArn *string
 
+	//  A unique, case-sensitive identifier that you provide to ensure idempotency of
+	// the request.
+	ClientToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -113,6 +117,9 @@ func (c *Client) addOperationDeleteInvoiceUnitMiddlewares(stack *middleware.Stac
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opDeleteInvoiceUnitMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteInvoiceUnitValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -144,6 +151,39 @@ func (c *Client) addOperationDeleteInvoiceUnitMiddlewares(stack *middleware.Stac
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpDeleteInvoiceUnit struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpDeleteInvoiceUnit) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpDeleteInvoiceUnit) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*DeleteInvoiceUnitInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *DeleteInvoiceUnitInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opDeleteInvoiceUnitMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteInvoiceUnit{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opDeleteInvoiceUnit(region string) *awsmiddleware.RegisterServiceMetadata {

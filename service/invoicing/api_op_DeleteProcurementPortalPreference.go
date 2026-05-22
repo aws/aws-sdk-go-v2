@@ -41,6 +41,10 @@ type DeleteProcurementPortalPreferenceInput struct {
 	// This member is required.
 	ProcurementPortalPreferenceArn *string
 
+	// A unique, case-sensitive identifier that you provide to ensure idempotency of
+	// the request.
+	ClientToken *string
+
 	noSmithyDocumentSerde
 }
 
@@ -121,6 +125,9 @@ func (c *Client) addOperationDeleteProcurementPortalPreferenceMiddlewares(stack 
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opDeleteProcurementPortalPreferenceMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpDeleteProcurementPortalPreferenceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,6 +159,39 @@ func (c *Client) addOperationDeleteProcurementPortalPreferenceMiddlewares(stack 
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpDeleteProcurementPortalPreference struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpDeleteProcurementPortalPreference) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpDeleteProcurementPortalPreference) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*DeleteProcurementPortalPreferenceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *DeleteProcurementPortalPreferenceInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opDeleteProcurementPortalPreferenceMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpDeleteProcurementPortalPreference{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opDeleteProcurementPortalPreference(region string) *awsmiddleware.RegisterServiceMetadata {

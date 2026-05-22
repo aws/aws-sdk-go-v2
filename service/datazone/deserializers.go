@@ -44103,6 +44103,16 @@ loop:
 			uv = &types.ConnectionPropertiesOutputMemberSparkGlueProperties{Value: mv}
 			break loop
 
+		case "vpcProperties":
+			var mv types.VpcPropertiesOutput
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentVpcPropertiesOutput(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConnectionPropertiesOutputMemberVpcProperties{Value: mv}
+			break loop
+
 		case "workflowsMwaaProperties":
 			var mv types.WorkflowsMwaaPropertiesOutput
 			destAddr := &mv
@@ -62950,6 +62960,110 @@ func awsRestjson1_deserializeDocumentValidationException(v **types.ValidationExc
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVpcConnectionSubnetIdList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SubnetId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVpcPropertiesOutput(v **types.VpcPropertiesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VpcPropertiesOutput
+	if *v == nil {
+		sv = &types.VpcPropertiesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "glueConnectionNames":
+			if err := awsRestjson1_deserializeDocumentGlueConnectionNames(&sv.GlueConnectionNames, value); err != nil {
+				return err
+			}
+
+		case "securityGroupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecurityGroupId to be of type string, got %T instead", value)
+				}
+				sv.SecurityGroupId = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ConnectionStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ConnectionStatus(jtv)
+			}
+
+		case "subnetIds":
+			if err := awsRestjson1_deserializeDocumentVpcConnectionSubnetIdList(&sv.SubnetIds, value); err != nil {
+				return err
+			}
+
+		case "vpcId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VpcId to be of type string, got %T instead", value)
+				}
+				sv.VpcId = ptr.String(jtv)
 			}
 
 		default:

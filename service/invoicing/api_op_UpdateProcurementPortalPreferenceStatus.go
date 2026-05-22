@@ -41,6 +41,10 @@ type UpdateProcurementPortalPreferenceStatusInput struct {
 	// This member is required.
 	ProcurementPortalPreferenceArn *string
 
+	// A unique, case-sensitive identifier that you provide to ensure idempotency of
+	// the request.
+	ClientToken *string
+
 	// The updated status of the e-invoice delivery preference.
 	EinvoiceDeliveryPreferenceStatus types.ProcurementPortalPreferenceStatus
 
@@ -136,6 +140,9 @@ func (c *Client) addOperationUpdateProcurementPortalPreferenceStatusMiddlewares(
 	if err = addCredentialSource(stack, options); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opUpdateProcurementPortalPreferenceStatusMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpUpdateProcurementPortalPreferenceStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -167,6 +174,39 @@ func (c *Client) addOperationUpdateProcurementPortalPreferenceStatusMiddlewares(
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpUpdateProcurementPortalPreferenceStatus struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpUpdateProcurementPortalPreferenceStatus) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpUpdateProcurementPortalPreferenceStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*UpdateProcurementPortalPreferenceStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *UpdateProcurementPortalPreferenceStatusInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opUpdateProcurementPortalPreferenceStatusMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpUpdateProcurementPortalPreferenceStatus{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opUpdateProcurementPortalPreferenceStatus(region string) *awsmiddleware.RegisterServiceMetadata {

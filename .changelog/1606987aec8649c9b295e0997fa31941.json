@@ -1,0 +1,8 @@
+{
+    "id": "1606987a-ec86-49c9-b295-e0997fa31941",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/iotwireless"
+    ]
+}

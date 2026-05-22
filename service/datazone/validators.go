@@ -4870,6 +4870,11 @@ func validateConnectionPropertiesInput(v types.ConnectionPropertiesInput) error 
 			invalidParams.AddNested("[s3Properties]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ConnectionPropertiesInputMemberVpcProperties:
+		if err := validateVpcPropertiesInput(&uv.Value); err != nil {
+			invalidParams.AddNested("[vpcProperties]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6730,6 +6735,24 @@ func validateUsernamePassword(v *types.UsernamePassword) error {
 	}
 	if v.Username == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateVpcPropertiesInput(v *types.VpcPropertiesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcPropertiesInput"}
+	if v.VpcId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VpcId"))
+	}
+	if v.SubnetIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

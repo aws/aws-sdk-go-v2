@@ -31,11 +31,6 @@ func (c *Client) CreatePerformanceAnalysisReport(ctx context.Context, params *Cr
 
 type CreatePerformanceAnalysisReportInput struct {
 
-	// The end time defined for the analysis report.
-	//
-	// This member is required.
-	EndTime *time.Time
-
 	// An immutable, Amazon Web Services Region-unique identifier for a data source.
 	// Performance Insights gathers metrics from this data source.
 	//
@@ -55,6 +50,9 @@ type CreatePerformanceAnalysisReportInput struct {
 	//
 	// This member is required.
 	StartTime *time.Time
+
+	// The end time defined for the analysis report.
+	EndTime *time.Time
 
 	// The metadata assigned to the analysis report consisting of a key-value pair.
 	Tags []types.Tag

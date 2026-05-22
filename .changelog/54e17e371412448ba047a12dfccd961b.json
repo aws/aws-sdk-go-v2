@@ -1,0 +1,8 @@
+{
+    "id": "54e17e37-1412-448b-a047-a12dfccd961b",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/ivsrealtime"
+    ]
+}

@@ -1488,6 +1488,11 @@ func awsAwsjson10_serializeOpDocumentCreateInvoiceUnitInput(v *CreateInvoiceUnit
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -1621,6 +1626,11 @@ func awsAwsjson10_serializeOpDocumentDeleteInvoiceUnitInput(v *DeleteInvoiceUnit
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.InvoiceUnitArn != nil {
 		ok := object.Key("InvoiceUnitArn")
 		ok.String(*v.InvoiceUnitArn)
@@ -1632,6 +1642,11 @@ func awsAwsjson10_serializeOpDocumentDeleteInvoiceUnitInput(v *DeleteInvoiceUnit
 func awsAwsjson10_serializeOpDocumentDeleteProcurementPortalPreferenceInput(v *DeleteProcurementPortalPreferenceInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
 
 	if v.ProcurementPortalPreferenceArn != nil {
 		ok := object.Key("ProcurementPortalPreferenceArn")
@@ -1775,6 +1790,11 @@ func awsAwsjson10_serializeOpDocumentPutProcurementPortalPreferenceInput(v *PutP
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.Contacts != nil {
 		ok := object.Key("Contacts")
 		if err := awsAwsjson10_serializeDocumentContacts(v.Contacts, ok); err != nil {
@@ -1873,6 +1893,11 @@ func awsAwsjson10_serializeOpDocumentUpdateInvoiceUnitInput(v *UpdateInvoiceUnit
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -1901,6 +1926,11 @@ func awsAwsjson10_serializeOpDocumentUpdateInvoiceUnitInput(v *UpdateInvoiceUnit
 func awsAwsjson10_serializeOpDocumentUpdateProcurementPortalPreferenceStatusInput(v *UpdateProcurementPortalPreferenceStatusInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("ClientToken")
+		ok.String(*v.ClientToken)
+	}
 
 	if len(v.EinvoiceDeliveryPreferenceStatus) > 0 {
 		ok := object.Key("EinvoiceDeliveryPreferenceStatus")

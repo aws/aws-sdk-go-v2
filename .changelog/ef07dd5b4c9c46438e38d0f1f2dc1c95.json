@@ -1,0 +1,8 @@
+{
+    "id": "ef07dd5b-4c9c-4643-8e38-d0f1f2dc1c95",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/marketplacediscovery"
+    ]
+}

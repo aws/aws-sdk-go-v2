@@ -235,6 +235,7 @@ const (
 	ConnectionTypeWorkflowsMwaa ConnectionType = "WORKFLOWS_MWAA"
 	ConnectionTypeAmazonQ       ConnectionType = "AMAZON_Q"
 	ConnectionTypeMlflow        ConnectionType = "MLFLOW"
+	ConnectionTypeVpc           ConnectionType = "VPC"
 )
 
 // Values returns all known values for ConnectionType. Note that this can be
@@ -265,6 +266,7 @@ func (ConnectionType) Values() []ConnectionType {
 		"WORKFLOWS_MWAA",
 		"AMAZON_Q",
 		"MLFLOW",
+		"VPC",
 	}
 }
 
