@@ -576,6 +576,17 @@ func TestNewEnvConfig(t *testing.T) {
 				AuthSchemePreference: []string{"sigv4a", "sigv4"},
 			},
 		},
+		55: {
+			Env: map[string]string{
+				"HOME":                        "/home/user",
+				"AWS_SHARED_CREDENTIALS_FILE": "~/.aws/credentials",
+				"AWS_CONFIG_FILE":             "~/.aws/config",
+			},
+			Config: EnvConfig{
+				SharedCredentialsFile: "/home/user/.aws/credentials",
+				SharedConfigFile:      "/home/user/.aws/config",
+			},
+		},
 	}
 
 	for i, c := range cases {
