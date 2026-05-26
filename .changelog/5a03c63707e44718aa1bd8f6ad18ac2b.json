@@ -3,6 +3,7 @@
     "type": "feature",
     "description": "Add SHA-512 support for s3 operations",
     "modules": [
-        "feature/s3/transfermanager"
+        "feature/s3/transfermanager",
+        "service/s3"
     ]
 }
