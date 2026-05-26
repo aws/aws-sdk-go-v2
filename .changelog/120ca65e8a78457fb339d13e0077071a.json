@@ -1,8 +1,0 @@
-{
-    "id": "120ca65e-8a78-457f-b339-d13e0077071a",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/partnercentralchannel"
-    ]
-}

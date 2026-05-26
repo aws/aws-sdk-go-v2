@@ -1,3 +1,7 @@
+# v1.43.7 (2026-05-26)
+
+* **Documentation**: AWS Budget Name Validation Documentation Updates.
+
 # v1.43.6 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

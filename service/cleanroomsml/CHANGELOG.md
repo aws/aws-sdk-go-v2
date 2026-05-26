@@ -1,3 +1,7 @@
+# v1.24.0 (2026-05-26)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.23.0 (2026-05-21)
 
 * **Feature**: Collaboration creators can update payment configurations without recreating the collaboration. When multiple payer candidates are configured for a cost type, analysis runners can specify the actual payer at submission time, providing granular control over billing.

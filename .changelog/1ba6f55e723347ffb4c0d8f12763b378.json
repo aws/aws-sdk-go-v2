@@ -1,8 +1,0 @@
-{
-    "id": "1ba6f55e-7233-47ff-b4c0-d8f12763b378",
-    "type": "feature",
-    "description": "Launching S3 PITR malware scanning support for AWS Backup",
-    "modules": [
-        "service/backup"
-    ]
-}

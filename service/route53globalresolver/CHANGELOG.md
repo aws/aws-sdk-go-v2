@@ -1,3 +1,7 @@
+# v1.3.0 (2026-05-26)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.2.0 (2026-04-30)
 
 * **Feature**: Adds support for regions in the UpdateGlobalResolver input.

@@ -1,3 +1,7 @@
+# v1.65.0 (2026-05-26)
+
+* **Feature**: Increase the maximum value of jobExecutionTimeoutMinutes to support longer job timeouts during compute environment infrastructure updates.
+
 # v1.64.3 (2026-05-21)
 
 * **Documentation**: Clarified CreateComputeEnvironment parameter requirements - serviceRole is required for UNMANAGED compute environments, allocationStrategy is required for EKS compute environments, and compute environments must be created in the ENABLED state.

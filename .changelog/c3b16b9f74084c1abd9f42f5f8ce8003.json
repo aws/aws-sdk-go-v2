@@ -1,8 +1,0 @@
-{
-    "id": "c3b16b9f-7408-4c1a-bd9f-42f5f8ce8003",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/rolesanywhere"
-    ]
-}

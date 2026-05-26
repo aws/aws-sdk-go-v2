@@ -1,8 +1,0 @@
-{
-    "id": "49671478-38d5-4bbb-8b46-c32eef31e9c7",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/resiliencehub"
-    ]
-}

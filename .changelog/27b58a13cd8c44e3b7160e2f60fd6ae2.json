@@ -1,8 +1,0 @@
-{
-    "id": "27b58a13-cd8c-44e3-b716-0e2f60fd6ae2",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/keyspacesstreams"
-    ]
-}

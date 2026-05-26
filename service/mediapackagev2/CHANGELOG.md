@@ -1,3 +1,7 @@
+# v1.39.0 (2026-05-26)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.38.0 (2026-05-15)
 
 * **Feature**: This release adds support for AvailabilityStartTimeConfiguration in MediaPackageV2 DASH manifests

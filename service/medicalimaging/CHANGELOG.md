@@ -1,3 +1,7 @@
+# v1.26.0 (2026-05-26)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.25.0 (2026-05-05)
 
 * **Feature**: Add support for DICOM Json Metadata Override features in startDICOMImportJob API

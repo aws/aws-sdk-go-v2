@@ -1,8 +1,0 @@
-{
-    "id": "53f1a622-15b5-4694-aaa3-c1e5fd3e11f7",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/kinesisvideowebrtcstorage"
-    ]
-}

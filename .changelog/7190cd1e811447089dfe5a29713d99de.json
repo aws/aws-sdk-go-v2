@@ -1,8 +1,0 @@
-{
-    "id": "7190cd1e-8114-4708-9dfe-5a29713d99de",
-    "type": "feature",
-    "description": "Added resourceConfigurations and allowUserProvidedConfigurations fields to environment blueprint configuration APIs, enabling customers who migrated from V1 to V2 domains to update resource configurations (such as lineage schedules) programmatically via the SDK.",
-    "modules": [
-        "service/datazone"
-    ]
-}

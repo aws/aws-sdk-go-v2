@@ -3,4 +3,4 @@
 package servicediscovery
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.39.28"
+const goModuleVersion = "1.40.0"

@@ -1,8 +1,0 @@
-{
-    "id": "7ecd51df-a44a-4ca7-8b7a-3222a8515b66",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/ssmquicksetup"
-    ]
-}

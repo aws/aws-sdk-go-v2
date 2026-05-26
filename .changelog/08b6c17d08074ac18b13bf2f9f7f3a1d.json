@@ -1,8 +1,0 @@
-{
-    "id": "08b6c17d-0807-4ac1-8b13-bf2f9f7f3a1d",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/route53globalresolver"
-    ]
-}

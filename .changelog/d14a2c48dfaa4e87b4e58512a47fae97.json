@@ -1,8 +1,0 @@
-{
-    "id": "d14a2c48-dfaa-4e87-b4e5-8512a47fae97",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/scheduler"
-    ]
-}

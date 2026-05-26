@@ -1,8 +1,0 @@
-{
-    "id": "e352c94f-63cb-4e23-a1d9-32d3d0f82130",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/devopsguru"
-    ]
-}

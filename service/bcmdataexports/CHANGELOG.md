@@ -1,3 +1,7 @@
+# v1.16.0 (2026-05-26)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.15.0 (2026-05-07)
 
 * **Feature**: With this release, customers can configure their data exports to generate additional integration artifacts for Athena and Redshift.

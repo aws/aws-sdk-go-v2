@@ -1,8 +1,0 @@
-{
-    "id": "fd12bbe2-aa8d-426e-8e0b-948963eb6c72",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/medicalimaging"
-    ]
-}

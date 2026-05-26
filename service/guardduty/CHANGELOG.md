@@ -1,3 +1,7 @@
+# v1.78.0 (2026-05-26)
+
+* **Feature**: Add malware scan support for Continuous Backups, also known as Point-In-Time Recovery Points (PITR).
+
 # v1.77.0 (2026-05-21)
 
 * **Feature**: Adding new BDD representation of endpoint ruleset

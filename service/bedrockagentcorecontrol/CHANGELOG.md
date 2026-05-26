@@ -1,3 +1,7 @@
+# v1.40.0 (2026-05-26)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.39.0 (2026-05-21)
 
 * **Feature**: Adds dataset management APIs for creating, versioning, and managing evaluation datasets.

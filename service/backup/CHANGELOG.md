@@ -1,3 +1,7 @@
+# v1.57.0 (2026-05-26)
+
+* **Feature**: Launching S3 PITR malware scanning support for AWS Backup
+
 # v1.56.0 (2026-05-21)
 
 * **Feature**: Adding new BDD representation of endpoint ruleset

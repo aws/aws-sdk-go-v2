@@ -1,8 +1,0 @@
-{
-    "id": "df343666-50fb-477a-97c8-ff1c24f7c156",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/bedrockagentcore"
-    ]
-}

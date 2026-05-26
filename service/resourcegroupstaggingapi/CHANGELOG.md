@@ -1,3 +1,7 @@
+# v1.32.0 (2026-05-26)
+
+* **Feature**: The GetResources API now returns MissingTagKeys in ComplianceDetails, listing tag keys defined as required in the ReportRequiredTagBlock block of the effective tag policy that are absent from the resource.
+
 # v1.31.12 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

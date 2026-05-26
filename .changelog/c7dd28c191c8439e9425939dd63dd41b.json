@@ -1,8 +1,0 @@
-{
-    "id": "c7dd28c1-91c8-439e-9425-939dd63dd41b",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/s3tables"
-    ]
-}

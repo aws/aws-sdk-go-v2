@@ -1,8 +1,0 @@
-{
-    "id": "204e10a6-5e70-408a-81d6-369a5ba7de6f",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/cleanrooms"
-    ]
-}

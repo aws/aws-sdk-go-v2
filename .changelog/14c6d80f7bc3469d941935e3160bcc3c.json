@@ -1,8 +1,0 @@
-{
-    "id": "14c6d80f-7bc3-469d-9419-35e3160bcc3c",
-    "type": "documentation",
-    "description": "AWS Budget Name Validation Documentation Updates.",
-    "modules": [
-        "service/budgets"
-    ]
-}
