@@ -1,0 +1,8 @@
+{
+    "id": "189eed4b-1c5b-4c38-b00b-1f7d3795c3ba",
+    "type": "bugfix",
+    "description": "Feature parity for transfer manager v2 to allow range download, support full object checksum type, fix error from failed multipart upload clean up due to ctx cancellation, honor mpu threshold and add back max upload parts option",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
