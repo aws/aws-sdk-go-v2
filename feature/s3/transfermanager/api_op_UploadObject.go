@@ -213,6 +213,12 @@ type UploadObjectInput struct {
 	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
 	ChecksumSHA512 *string
 
+	// Indicates the checksum type that you want Amazon S3 to use to calculate the
+	// object’s checksum value. For more information, see [Checking object integrity in the Amazon S3 User Guide].
+	//
+	// [Checking object integrity in the Amazon S3 User Guide]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+	ChecksumType types.ChecksumType
+
 	// Size of the body in bytes. This parameter is useful when the size of the body
 	// cannot be determined automatically. For more information, see [https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length].
 	//
@@ -314,6 +320,11 @@ type UploadObjectInput struct {
 
 	// A map of metadata to store with the object in S3.
 	Metadata map[string]string
+
+	//  The expected total object size of the multipart upload request. If there’s a
+	// mismatch between the specified object size value and the actual object size
+	// value, it results in an HTTP 400 InvalidRequest error.
+	MpuObjectSize *int64
 
 	// Specifies whether a legal hold will be applied to this object. For more
 	// information about S3 Object Lock, see [Object Lock]in the Amazon S3 User Guide.
@@ -527,6 +538,7 @@ func (i UploadObjectInput) mapCreateMultipartUploadInput(checksumAlgorithm types
 		ACL:                       s3types.ObjectCannedACL(i.ACL),
 		BucketKeyEnabled:          i.BucketKeyEnabled,
 		CacheControl:              i.CacheControl,
+		ChecksumType:              s3types.ChecksumType(i.ChecksumType),
 		ContentDisposition:        i.ContentDisposition,
 		ContentEncoding:           i.ContentEncoding,
 		ContentLanguage:           i.ContentLanguage,
@@ -571,9 +583,11 @@ func (i UploadObjectInput) mapCompleteMultipartUploadInput(uploadID *string, com
 		ChecksumSHA1:         i.ChecksumSHA1,
 		ChecksumSHA256:       i.ChecksumSHA256,
 		ChecksumSHA512:       i.ChecksumSHA512,
+		ChecksumType:         s3types.ChecksumType(i.ChecksumType),
 		ExpectedBucketOwner:  i.ExpectedBucketOwner,
 		IfMatch:              i.IfMatch,
 		IfNoneMatch:          i.IfNoneMatch,
+		MpuObjectSize:        i.MpuObjectSize,
 		RequestPayer:         s3types.RequestPayer(i.RequestPayer),
 		SSECustomerAlgorithm: i.SSECustomerAlgorithm,
 		SSECustomerKey:       i.SSECustomerKey,

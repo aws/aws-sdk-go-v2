@@ -100,6 +100,9 @@ type DownloadObjectInput struct {
 	// [RFC 7232]: https://tools.ietf.org/html/rfc7232
 	IfUnmodifiedSince *time.Time
 
+	// Downloads the specified byte range of an object. This field only applies when GetObjectType is GetObjectRanges
+	Range *string
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. If either the
 	// source or destination S3 bucket has Requester Pays enabled, the requester will
@@ -602,6 +605,16 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 			d.wg.Wait()
 		}
 	} else {
+		if rng := aws.ToString(d.in.Range); rng != "" {
+			rangeStart, rangeEnd, err := getReqRange(rng)
+			if err != nil {
+				d.emitter.Failed(ctx, d.err)
+				return nil, err
+			}
+			d.offset = rangeStart
+			d.totalBytes = rangeEnd + 1
+			d.pos = rangeStart
+		}
 		d.getChunk(ctx, 0, d.byteRange(), clientOptions...)
 		if d.err != nil {
 			// early check to see if error is caused by range download a zero object
@@ -780,7 +793,7 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 
 	d.totalBytesOnce.Do(func() {
 		d.setTotalBytes(out)
-		d.emitter.Start(ctx, d.in, d.totalBytes)
+		d.emitter.Start(ctx, d.in, d.totalBytes-d.offset)
 	}) // Set total in first GET
 
 	var n int64
@@ -843,14 +856,22 @@ func (d *downloader) byteRange() string {
 
 func getReqRange(rng string) (int64, int64, error) {
 	// rng fmt "bytes=start-end"
-	ranges := strings.Split(strings.Split(rng, "=")[1], "-")
-	start, err := strconv.ParseInt(ranges[0], 10, 64)
-	if err != nil {
-		return 0, 0, fmt.Errorf("error when parsing request start: %v", err)
+	sub1 := strings.Split(rng, "=")
+	if len(sub1) != 2 {
+		return -1, -1, fmt.Errorf("invalid range format %s, should be bytes=start-end format", rng)
 	}
-	end, err := strconv.ParseInt(ranges[1], 10, 64)
+	sub2 := strings.Split(sub1[1], "-")
+	if len(sub2) != 2 {
+		return -1, -1, fmt.Errorf("invalid range format %s, should be bytes=start-end format", rng)
+	}
+
+	start, err := strconv.ParseInt(sub2[0], 10, 64)
 	if err != nil {
-		return 0, 0, fmt.Errorf("error when parsing request end: %v", err)
+		return -1, -1, fmt.Errorf("invalid range start %v", err)
+	}
+	end, err := strconv.ParseInt(sub2[1], 10, 64)
+	if err != nil {
+		return -1, -1, fmt.Errorf("invalid range end %v", err)
 	}
 	return start, end, nil
 }

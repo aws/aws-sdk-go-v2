@@ -18,10 +18,11 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/testing"
+	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go-v2/service/s3/types"
+	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // getReaderLength discards the bytes from reader and returns the length
@@ -38,6 +39,9 @@ func TestUploadOrderMulti(t *testing.T) {
 		Bucket:               aws.String("Bucket"),
 		Key:                  aws.String("Key - value"),
 		Body:                 bytes.NewReader(buf20MB),
+		ChecksumType:         types.ChecksumTypeFullObject,
+		ChecksumAlgorithm:    types.ChecksumAlgorithmCrc32c,
+		ChecksumCRC32C:       aws.String("CRC32CValue"),
 		ServerSideEncryption: "aws:kms",
 		SSEKMSKeyID:          aws.String("KmsId"),
 		ContentType:          aws.String("content/type"),
@@ -74,9 +78,16 @@ func TestUploadOrderMulti(t *testing.T) {
 	}
 
 	// CompleteMultipartUpload
-	v := aws.ToString((*args)[4].(*s3.CompleteMultipartUploadInput).UploadId)
-	if "UPLOAD-ID" != v {
+	completemu := (*args)[4].(*s3.CompleteMultipartUploadInput)
+
+	if v := aws.ToString(completemu.UploadId); "UPLOAD-ID" != v {
 		t.Errorf("Expected %q, but received %q", "UPLOAD-ID", v)
+	}
+	if e, a := "CRC32CValue", aws.ToString(completemu.ChecksumCRC32C); e != a {
+		t.Errorf("Expected %v, but received %v", e, a)
+	}
+	if e, a := s3types.ChecksumTypeFullObject, completemu.ChecksumType; e != a {
+		t.Errorf("Expected %v, but received %v", e, a)
 	}
 
 	parts := (*args)[4].(*s3.CompleteMultipartUploadInput).MultipartUpload.Parts
@@ -95,18 +106,26 @@ func TestUploadOrderMulti(t *testing.T) {
 	}
 
 	// Custom headers
-	cmu := (*args)[0].(*s3.CreateMultipartUploadInput)
+	createmu := (*args)[0].(*s3.CreateMultipartUploadInput)
 
-	if e, a := types.ServerSideEncryption("aws:kms"), cmu.ServerSideEncryption; e != a {
+	if e, a := s3types.ServerSideEncryption("aws:kms"), createmu.ServerSideEncryption; e != a {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 
-	if e, a := "KmsId", aws.ToString(cmu.SSEKMSKeyId); e != a {
+	if e, a := "KmsId", aws.ToString(createmu.SSEKMSKeyId); e != a {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 
-	if e, a := "content/type", aws.ToString(cmu.ContentType); e != a {
+	if e, a := "content/type", aws.ToString(createmu.ContentType); e != a {
 		t.Errorf("expect %q, got %q", e, a)
+	}
+
+	if e, a := s3types.ChecksumAlgorithmCrc32c, createmu.ChecksumAlgorithm; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+
+	if e, a := s3types.ChecksumTypeFullObject, createmu.ChecksumType; e != a {
+		t.Errorf("expect %v, got %v", e, a)
 	}
 }
 
@@ -165,7 +184,7 @@ func TestUploadOrderMultiTriggerredBySinglePartSize(t *testing.T) {
 	// Custom headers
 	cmu := (*args)[0].(*s3.CreateMultipartUploadInput)
 
-	if e, a := types.ServerSideEncryption("aws:kms"), cmu.ServerSideEncryption; e != a {
+	if e, a := s3types.ServerSideEncryption("aws:kms"), cmu.ServerSideEncryption; e != a {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 
@@ -242,7 +261,7 @@ func TestUploadOrderMultiJustExceedSinglePart(t *testing.T) {
 	// Custom headers
 	cmu := (*args)[0].(*s3.CreateMultipartUploadInput)
 
-	if e, a := types.ServerSideEncryption("aws:kms"), cmu.ServerSideEncryption; e != a {
+	if e, a := s3types.ServerSideEncryption("aws:kms"), cmu.ServerSideEncryption; e != a {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 
@@ -348,7 +367,7 @@ func TestUploadOrderSingle(t *testing.T) {
 
 	putObjectInput := (*params)[0].(*s3.PutObjectInput)
 
-	if e, a := types.ServerSideEncryption("aws:kms"), putObjectInput.ServerSideEncryption; e != a {
+	if e, a := s3types.ServerSideEncryption("aws:kms"), putObjectInput.ServerSideEncryption; e != a {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 
