@@ -888,12 +888,15 @@ func (u *uploader) initSize() error {
 		}
 	}
 
+	if u.options.MaxUploadParts <= 0 || u.options.MaxUploadParts > defaultMaxUploadParts {
+		return fmt.Errorf("max upload parts must be greater than 0 and less than %d", defaultMaxUploadParts)
+	}
 	// Try to adjust partSize if it is too small and account for
 	// integer division truncation.
-	if u.objectSize/u.options.PartSizeBytes >= int64(defaultMaxUploadParts) {
+	if u.objectSize/u.options.PartSizeBytes >= u.options.MaxUploadParts {
 		// Add one to the part size to account for remainders
 		// during the size calculation. e.g odd number of bytes.
-		u.options.PartSizeBytes = (u.objectSize / int64(defaultMaxUploadParts)) + 1
+		u.options.PartSizeBytes = u.objectSize/u.options.MaxUploadParts + 1
 	}
 	return nil
 }
@@ -910,7 +913,9 @@ func (u *uploader) singleUpload(ctx context.Context, r io.Reader, sz int, cleanU
 	u.progressEmitter.Start(ctx, u.in, objectSize)
 	out, err := u.options.S3.PutObject(ctx, params, opts...)
 	if err != nil {
-		u.progressEmitter.Failed(ctx, err)
+		freshCtx, cancel := u.freshContext(ctx)
+		defer cancel()
+		u.progressEmitter.Failed(freshCtx, err)
 		return nil, err
 	}
 
@@ -928,16 +933,27 @@ func (u *uploader) nextReader(ctx context.Context) (io.Reader, int, func(), erro
 	if !u.multipleRead {
 		u.multipleRead = true
 		// read first part up to a maximum of PartSize to avoid allocating 8MB buffer out of the gate
-		r := io.LimitReader(u.in.Body, u.options.PartSizeBytes)
+		r := io.LimitReader(u.in.Body, u.options.MultipartUploadThreshold)
 		firstPart, err := io.ReadAll(r)
 		if err != nil {
 			return nil, 0, func() {}, err
 		}
 		n := len(firstPart)
-		if int64(n) < u.options.PartSizeBytes {
+		if int64(n) < u.options.MultipartUploadThreshold {
 			return bytes.NewReader(firstPart), n, func() {}, io.EOF
 		}
-		return bytes.NewReader(firstPart), n, func() {}, nil
+		if int64(n) > u.options.PartSizeBytes {
+			u.in.Body = io.MultiReader(bytes.NewReader(firstPart[u.options.PartSizeBytes:]), u.in.Body)
+			return bytes.NewReader(firstPart[:u.options.PartSizeBytes]), int(u.options.PartSizeBytes), func() {}, nil
+		}
+		remainedBytes := u.options.PartSizeBytes - int64(n)
+		r = io.LimitReader(u.in.Body, remainedBytes)
+		remainedPart, err := io.ReadAll(r)
+		if err != nil {
+			return nil, 0, func() {}, err
+		}
+		firstPart = append(firstPart, remainedPart...)
+		return bytes.NewReader(firstPart), len(firstPart), func() {}, nil
 	}
 	part, err := u.partPool.Get(ctx)
 	if err != nil {
@@ -950,6 +966,13 @@ func (u *uploader) nextReader(ctx context.Context) (io.Reader, int, func(), erro
 		u.partPool.Put(part)
 	}
 	return bytes.NewReader(part[0:n]), n, cleanup, err
+}
+
+func (u *uploader) freshContext(ctx context.Context) (context.Context, context.CancelFunc) {
+	if u.options.FailTimeout <= 0 {
+		return ctx, func() {}
+	}
+	return context.WithTimeout(context.Background(), u.options.FailTimeout)
 }
 
 func readFillBuf(r io.Reader, b []byte) (offset int, err error) {
@@ -1007,7 +1030,9 @@ func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, firstBuf
 		append(clientOptions, loc.WrapClient())...)
 	if err != nil {
 		cleanup()
-		u.progressEmitter.Failed(ctx, err)
+		freshCtx, cancel := u.freshContext(ctx)
+		defer cancel()
+		u.progressEmitter.Failed(freshCtx, err)
 		return nil, err
 	}
 	u.uploadID = resp.UploadId
@@ -1057,7 +1082,9 @@ func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, firstBuf
 	completeOut := u.complete(ctx, clientOptions...)
 
 	if err := u.geterr(); err != nil {
-		u.progressEmitter.Failed(ctx, err)
+		freshCtx, cancel := u.freshContext(ctx)
+		defer cancel()
+		u.progressEmitter.Failed(freshCtx, err)
 		return nil, &multipartUploadError{
 			err:      err,
 			uploadID: *u.uploadID,
@@ -1152,7 +1179,9 @@ func (u *multiUploader) seterr(e error) {
 
 func (u *multiUploader) fail(ctx context.Context, clientOptions ...func(*s3.Options)) {
 	params := u.in.mapAbortMultipartUploadInput(u.uploadID)
-	_, err := u.options.S3.AbortMultipartUpload(ctx, params, clientOptions...)
+	freshCtx, cancel := u.freshContext(ctx)
+	defer cancel()
+	_, err := u.options.S3.AbortMultipartUpload(freshCtx, params, clientOptions...)
 	if err != nil {
 		u.seterr(fmt.Errorf("failed to abort multipart upload (%v), triggered after multipart upload failed: %v", err, u.geterr()))
 	}
@@ -1169,6 +1198,9 @@ func (u *multiUploader) complete(ctx context.Context, clientOptions ...func(*s3.
 	sort.Sort(u.parts)
 
 	params := u.in.mapCompleteMultipartUploadInput(u.uploadID, u.parts)
+	if params.MpuObjectSize == nil && u.objectSize > 0 {
+		params.MpuObjectSize = aws.Int64(u.objectSize)
+	}
 
 	resp, err := u.options.S3.CompleteMultipartUpload(ctx, params, clientOptions...)
 	if err != nil {

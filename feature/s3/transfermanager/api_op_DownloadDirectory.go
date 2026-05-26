@@ -197,7 +197,9 @@ func (d *directoryDownloader) downloadDirectory(ctx context.Context) (*DownloadD
 	d.wg.Wait()
 
 	if d.err != nil {
-		d.emitter.Failed(ctx, d.in, d.err)
+		freshCtx, cancel := d.freshContext(ctx)
+		defer cancel()
+		d.emitter.Failed(freshCtx, d.in, d.err)
 		return nil, d.err
 	}
 
@@ -308,6 +310,13 @@ func (d *directoryDownloader) downloadObject(ctx context.Context, ch chan object
 		d.objectsDownloaded.Add(1)
 		d.emitter.ObjectsTransferred(ctx, n)
 	}
+}
+
+func (d *directoryDownloader) freshContext(ctx context.Context) (context.Context, context.CancelFunc) {
+	if d.options.FailTimeout <= 0 {
+		return ctx, func() {}
+	}
+	return context.WithTimeout(context.Background(), d.options.FailTimeout)
 }
 
 func (d *directoryDownloader) setErr(err error) {

@@ -580,7 +580,9 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 	if d.options.GetObjectType == types.GetObjectParts {
 		output = d.getChunk(ctx, 1, "", clientOptions...)
 		if d.err != nil {
-			d.emitter.Failed(ctx, d.err)
+			freshCtx, cancel := d.freshContext(ctx)
+			defer cancel()
+			d.emitter.Failed(freshCtx, d.err)
 			return output, d.err
 		}
 
@@ -608,7 +610,9 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 		if rng := aws.ToString(d.in.Range); rng != "" {
 			rangeStart, rangeEnd, err := getReqRange(rng)
 			if err != nil {
-				d.emitter.Failed(ctx, d.err)
+				freshCtx, cancel := d.freshContext(ctx)
+				defer cancel()
+				d.emitter.Failed(freshCtx, d.err)
 				return nil, err
 			}
 			d.offset = rangeStart
@@ -631,7 +635,9 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 					return out, nil
 				}
 			}
-			d.emitter.Failed(ctx, d.err)
+			freshCtx, cancel := d.freshContext(ctx)
+			defer cancel()
+			d.emitter.Failed(freshCtx, d.err)
 			return nil, d.err
 		}
 		total := d.totalBytes
@@ -659,7 +665,9 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 	}
 
 	if d.err != nil {
-		d.emitter.Failed(ctx, d.err)
+		freshCtx, cancel := d.freshContext(ctx)
+		defer cancel()
+		d.emitter.Failed(freshCtx, d.err)
 		return nil, d.err
 	}
 
@@ -833,6 +841,13 @@ func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
 
 		d.totalBytes = total
 	}
+}
+
+func (d *downloader) freshContext(ctx context.Context) (context.Context, context.CancelFunc) {
+	if d.options.FailTimeout <= 0 {
+		return ctx, func() {}
+	}
+	return context.WithTimeout(context.Background(), d.options.FailTimeout)
 }
 
 func (d *downloader) setOutput(resp *DownloadObjectOutput) {

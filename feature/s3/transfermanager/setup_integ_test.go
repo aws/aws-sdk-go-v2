@@ -214,13 +214,16 @@ func setupBuckets(ctx context.Context) (func(), error) {
 }
 
 type putObjectTestData struct {
-	Body        io.Reader
-	ExpectBody  []byte
-	ExpectError string
+	Body              io.Reader
+	ChecksumAlgorithm types.ChecksumAlgorithm
+	ChecksumType      types.ChecksumType
+	ExpectBody        []byte
+	ExpectError       string
 }
 
 type downloadObjectTestData struct {
 	Body        io.Reader
+	Range       string
 	ExpectBody  []byte
 	ExpectError string
 	OptFns      []func(*Options)
@@ -228,6 +231,7 @@ type downloadObjectTestData struct {
 
 type getObjectTestData struct {
 	Body            io.Reader
+	Range           string
 	ExpectBody      []byte
 	ExpectGetError  string
 	ExpectReadError string
@@ -249,9 +253,11 @@ func testPutObject(t *testing.T, bucket string, testData putObjectTestData, opts
 
 	_, err := s3TransferManagerClient.UploadObject(context.Background(),
 		&UploadObjectInput{
-			Bucket: aws.String(bucket),
-			Key:    aws.String(key),
-			Body:   testData.Body,
+			Bucket:            aws.String(bucket),
+			Key:               aws.String(key),
+			Body:              testData.Body,
+			ChecksumAlgorithm: testData.ChecksumAlgorithm,
+			ChecksumType:      testData.ChecksumType,
 		}, opts...)
 	if err != nil {
 		if len(testData.ExpectError) == 0 {
@@ -283,6 +289,10 @@ func testPutObject(t *testing.T, bucket string, testData putObjectTestData, opts
 	if e, a := testData.ExpectBody, b; !bytes.EqualFold(e, a) {
 		t.Errorf("expect %s, got %s", e, a)
 	}
+
+	if e, a := string(testData.ChecksumType), string(resp.ChecksumType); e != "" && e != a {
+		t.Errorf("expect %s, got %s", e, a)
+	}
 }
 
 func testGetObject(t *testing.T, bucket string, testData getObjectTestData) {
@@ -302,6 +312,7 @@ func testGetObject(t *testing.T, bucket string, testData getObjectTestData) {
 		&GetObjectInput{
 			Bucket: aws.String(bucket),
 			Key:    aws.String(key),
+			Range:  aws.String(testData.Range),
 		}, testData.OptFns...)
 
 	if err != nil {
@@ -360,6 +371,7 @@ func testDownloadObject(t *testing.T, bucket string, testData downloadObjectTest
 			Bucket:   aws.String(bucket),
 			Key:      aws.String(key),
 			WriterAt: w,
+			Range:    aws.String(testData.Range),
 		}, testData.OptFns...)
 	if err != nil {
 		if len(testData.ExpectError) == 0 {

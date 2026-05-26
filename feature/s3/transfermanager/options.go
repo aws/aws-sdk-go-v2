@@ -1,6 +1,8 @@
 package transfermanager
 
 import (
+	"time"
+
 	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 )
 
@@ -16,6 +18,15 @@ type Options struct {
 
 	// The threshold bytes to decide when the file should be multi-uploaded
 	MultipartUploadThreshold int64
+
+	// FailTimeout is the timeout for transfer failure handling when a transfer fails.
+	// A fresh context with this timeout is used so failure followup (AbortMPU for upload or possible progress listener work)
+	// succeed even when the original context is canceled.
+	// Defaults to 0 (uses the original context) for fail case not caused by ctx cancellation.
+	FailTimeout time.Duration
+
+	// The max parts count for a multi part upload, which could not exceed defaultMaxUploadParts defined by s3 side
+	MaxUploadParts int64
 
 	// Option to disable checksum validation for download
 	DisableChecksumValidation bool
@@ -95,6 +106,12 @@ func resolvePartBodyMaxRetries(o *Options) {
 func resolveGetBufferSize(o *Options) {
 	if o.GetObjectBufferSize == 0 {
 		o.GetObjectBufferSize = defaultGetBufferSize
+	}
+}
+
+func resolveMaxUploadParts(o *Options) {
+	if o.MaxUploadParts == 0 {
+		o.MaxUploadParts = defaultMaxUploadParts
 	}
 }
 

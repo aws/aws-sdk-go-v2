@@ -4,9 +4,10 @@ package transfermanager
 
 import (
 	"bytes"
-	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 	"strings"
 	"testing"
+
+	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 )
 
 func TestInteg_DownloadObject(t *testing.T) {
@@ -35,6 +36,16 @@ func TestInteg_DownloadObject(t *testing.T) {
 		"range get multipart body": {
 			Body:       bytes.NewReader(largeObjectBuf),
 			ExpectBody: largeObjectBuf,
+			OptFns: []func(*Options){
+				func(opt *Options) {
+					opt.GetObjectType = types.GetObjectRanges
+				},
+			},
+		},
+		"range get large object body with range input": {
+			Body:       bytes.NewReader(largeObjectBuf),
+			ExpectBody: largeObjectBuf[1:10485761],
+			Range:      "bytes=1-10485760",
 			OptFns: []func(*Options){
 				func(opt *Options) {
 					opt.GetObjectType = types.GetObjectRanges

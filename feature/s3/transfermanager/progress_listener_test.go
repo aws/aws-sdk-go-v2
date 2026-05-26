@@ -75,6 +75,11 @@ func (m *mockListener) OnObjectTransferFailed(ctx context.Context, event *Object
 	m.mu.Lock()
 	defer m.mu.Unlock()
 
+	if ctx.Err() != nil {
+		return
+	}
+
+	// only listen failure when the input ctx still works
 	m.failed = append(m.failed, event)
 }
 
@@ -211,6 +216,11 @@ func (m *mockDirectoryListener) OnObjectsTransferFailed(ctx context.Context, eve
 	m.mu.Lock()
 	defer m.mu.Unlock()
 
+	if ctx.Err() != nil {
+		return
+	}
+
+	// only listen failure when the input ctx still works
 	m.failed = append(m.failed, event)
 }
 
