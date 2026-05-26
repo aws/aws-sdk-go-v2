@@ -205,6 +205,14 @@ type UploadObjectInput struct {
 	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
 	ChecksumSHA256 *string
 
+	// This header can be used as a data integrity check to verify that the data
+	// received is the same data that was originally sent. This header specifies the
+	// Base64 encoded, 512-bit SHA512 digest of the object. For more information, see [Checking object integrity]
+	// in the Amazon S3 User Guide.
+	//
+	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+	ChecksumSHA512 *string
+
 	// Size of the body in bytes. This parameter is useful when the size of the body
 	// cannot be determined automatically. For more information, see [https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length].
 	//
@@ -475,6 +483,7 @@ func (i UploadObjectInput) mapSingleUploadInput(body io.Reader, checksumAlgorith
 		ChecksumCRC64NVME:         i.ChecksumCRC64NVME,
 		ChecksumSHA1:              i.ChecksumSHA1,
 		ChecksumSHA256:            i.ChecksumSHA256,
+		ChecksumSHA512:            i.ChecksumSHA512,
 		ContentDisposition:        i.ContentDisposition,
 		ContentEncoding:           i.ContentEncoding,
 		ContentLanguage:           i.ContentLanguage,
@@ -561,6 +570,7 @@ func (i UploadObjectInput) mapCompleteMultipartUploadInput(uploadID *string, com
 		ChecksumCRC64NVME:    i.ChecksumCRC64NVME,
 		ChecksumSHA1:         i.ChecksumSHA1,
 		ChecksumSHA256:       i.ChecksumSHA256,
+		ChecksumSHA512:       i.ChecksumSHA512,
 		ExpectedBucketOwner:  i.ExpectedBucketOwner,
 		IfMatch:              i.IfMatch,
 		IfNoneMatch:          i.IfNoneMatch,
@@ -639,6 +649,9 @@ type UploadObjectOutput struct {
 
 	// The base64-encoded, 256-bit SHA-256 digest of the object.
 	ChecksumSHA256 *string
+
+	// The base64-encoded, 512-bit SHA-512 digest of the object.
+	ChecksumSHA512 *string
 
 	// This header specifies the checksum type of the object, which determines how
 	// part-level checksums are combined to create an object-level checksum for
@@ -735,6 +748,7 @@ func (o *UploadObjectOutput) mapFromPutObjectOutput(out *s3.PutObjectOutput, buc
 	o.ChecksumCRC64NVME = out.ChecksumCRC64NVME
 	o.ChecksumSHA1 = out.ChecksumSHA1
 	o.ChecksumSHA256 = out.ChecksumSHA256
+	o.ChecksumSHA512 = out.ChecksumSHA512
 	o.ChecksumType = types.ChecksumType(out.ChecksumType)
 	o.ContentLength = aws.Int64(contentLength)
 	o.ETag = out.ETag
@@ -761,6 +775,7 @@ func (o *UploadObjectOutput) mapFromCompleteMultipartUploadOutput(out *s3.Comple
 	o.ChecksumCRC64NVME = out.ChecksumCRC64NVME
 	o.ChecksumSHA1 = out.ChecksumSHA1
 	o.ChecksumSHA256 = out.ChecksumSHA256
+	o.ChecksumSHA512 = out.ChecksumSHA512
 	o.ChecksumType = types.ChecksumType(out.ChecksumType)
 	o.ContentLength = aws.Int64(contentLength)
 	o.ETag = out.ETag
