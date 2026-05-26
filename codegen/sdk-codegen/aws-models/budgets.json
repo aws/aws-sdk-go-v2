@@ -1729,7 +1729,7 @@
                 "BudgetName": {
                     "target": "com.amazonaws.budgets#BudgetName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a budget. The name must be unique within an account. The <code>:</code>\n\t\t\tand <code>\\</code> characters, and the \"/action/\" substring, aren't allowed in\n\t\t\t\t<code>BudgetName</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of a budget. The name must be unique within an account. The <code>:</code>\n\t\t\tand <code>\\</code> characters, and the \"/action/\" substring, aren't allowed in\n\t\t\t\t<code>BudgetName</code>.</p>\n         <p>Budget names are validated for content. Names that contain phone numbers, URLs, or\n\t\t\temail addresses combined with certain terms may be rejected.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1835,7 +1835,7 @@
         "com.amazonaws.budgets#BudgetName": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p> A string that represents the budget name. The \":\" and \"\\\" characters, and the\n\t\t\t\"/action/\" substring, aren't allowed.</p>",
+                "smithy.api#documentation": "<p> A string that represents the budget name. The \":\" and \"\\\" characters, and the\n\t\t\t\"/action/\" substring, aren't allowed.</p>\n         <p>Budget names are validated for content. Names that contain phone numbers, URLs, or\n\t\t\temail addresses combined with certain terms may be rejected.</p>",
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100

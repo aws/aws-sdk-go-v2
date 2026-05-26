@@ -1538,6 +1538,29 @@
                 "target": "com.amazonaws.guardduty#Container"
             }
         },
+        "com.amazonaws.guardduty#ContinuousScanDetails": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp representing the start of the time range to scan. Reserved for internal use.</p>",
+                        "smithy.api#jsonName": "startTime"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp representing the end of the time range to scan.</p>",
+                        "smithy.api#jsonName": "endTime",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the time range within the continuous backup in Amazon Web Services Backup to scan for a point-in-time recovery resource.</p>"
+            }
+        },
         "com.amazonaws.guardduty#CountByCoverageStatus": {
             "type": "map",
             "key": {
@@ -13314,6 +13337,12 @@
                     "traits": {
                         "smithy.api#enumValue": "S3_BUCKET"
                     }
+                },
+                "S3_POINT_IN_TIME_RECOVERY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "S3_POINT_IN_TIME_RECOVERY"
+                    }
                 }
             }
         },
@@ -15581,6 +15610,13 @@
                         "smithy.api#jsonName": "backupVaultName",
                         "smithy.api#required": {}
                     }
+                },
+                "ContinuousScanDetails": {
+                    "target": "com.amazonaws.guardduty#ContinuousScanDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about the time range within the continuous backup in Amazon Web Services Backup to scan.</p>",
+                        "smithy.api#jsonName": "continuousScanDetails"
+                    }
                 }
             },
             "traits": {
@@ -16872,6 +16908,29 @@
                 "smithy.api#documentation": "<p>Contains information about the configuration used for the malware scan.</p>"
             }
         },
+        "com.amazonaws.guardduty#ScanConfigurationContinuousScanDetails": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp representing the start of the time range that was scanned.</p>",
+                        "smithy.api#jsonName": "startTime"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.guardduty#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp representing the end of the time range that was scanned.</p>",
+                        "smithy.api#jsonName": "endTime",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about the time range within the continuous backup in Amazon Web Services Backup that was scanned for a point-in-time recovery resource.</p>"
+            }
+        },
         "com.amazonaws.guardduty#ScanConfigurationRecoveryPoint": {
             "type": "structure",
             "members": {
@@ -16880,6 +16939,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the Amazon Web Services Backup vault that contains the recovery point for the scanned.</p>",
                         "smithy.api#jsonName": "backupVaultName"
+                    }
+                },
+                "ContinuousScanDetails": {
+                    "target": "com.amazonaws.guardduty#ScanConfigurationContinuousScanDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time range within the continuous backup in Amazon Web Services Backup that was scanned for a point-in-time recovery resource.</p>",
+                        "smithy.api#jsonName": "continuousScanDetails"
                     }
                 }
             },
