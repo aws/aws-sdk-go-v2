@@ -1,0 +1,8 @@
+{
+    "id": "488bf4d3-4c2a-41a6-b40a-fa3d82f12826",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/ivschat"
+    ]
+}

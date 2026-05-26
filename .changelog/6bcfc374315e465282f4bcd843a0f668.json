@@ -1,0 +1,8 @@
+{
+    "id": "6bcfc374-315e-4652-82f4-bcd843a0f668",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/workspacesthinclient"
+    ]
+}

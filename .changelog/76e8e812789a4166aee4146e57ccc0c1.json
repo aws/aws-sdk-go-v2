@@ -1,0 +1,8 @@
+{
+    "id": "76e8e812-789a-4166-aee4-146e57ccc0c1",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/marketplaceagreement"
+    ]
+}

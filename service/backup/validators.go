@@ -930,6 +930,26 @@ func (m *validateOpGetLegalHold) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPITRMalwareScanResults struct {
+}
+
+func (*validateOpGetPITRMalwareScanResults) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPITRMalwareScanResults) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPITRMalwareScanResultsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPITRMalwareScanResultsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetRecoveryPointIndexDetails struct {
 }
 
@@ -1872,6 +1892,10 @@ func addOpGetBackupVaultNotificationsValidationMiddleware(stack *middleware.Stac
 
 func addOpGetLegalHoldValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetLegalHold{}, middleware.After)
+}
+
+func addOpGetPITRMalwareScanResultsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPITRMalwareScanResults{}, middleware.After)
 }
 
 func addOpGetRecoveryPointIndexDetailsValidationMiddleware(stack *middleware.Stack) error {
@@ -3254,6 +3278,30 @@ func validateOpGetLegalHoldInput(v *GetLegalHoldInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetLegalHoldInput"}
 	if v.LegalHoldId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LegalHoldId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetPITRMalwareScanResultsInput(v *GetPITRMalwareScanResultsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPITRMalwareScanResultsInput"}
+	if v.RecoveryPointArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
+	}
+	if v.BackupVaultName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.ScanEndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ScanEndTime"))
+	}
+	if len(v.MalwareScanner) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("MalwareScanner"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

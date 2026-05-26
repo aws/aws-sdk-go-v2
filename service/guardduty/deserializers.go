@@ -26976,6 +26976,69 @@ func awsRestjson1_deserializeDocumentScanConfiguration(v **types.ScanConfigurati
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentScanConfigurationContinuousScanDetails(v **types.ScanConfigurationContinuousScanDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScanConfigurationContinuousScanDetails
+	if *v == nil {
+		sv = &types.ScanConfigurationContinuousScanDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "endTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "startTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentScanConfigurationRecoveryPoint(v **types.ScanConfigurationRecoveryPoint, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -27005,6 +27068,11 @@ func awsRestjson1_deserializeDocumentScanConfigurationRecoveryPoint(v **types.Sc
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.BackupVaultName = ptr.String(jtv)
+			}
+
+		case "continuousScanDetails":
+			if err := awsRestjson1_deserializeDocumentScanConfigurationContinuousScanDetails(&sv.ContinuousScanDetails, value); err != nil {
+				return err
 			}
 
 		default:

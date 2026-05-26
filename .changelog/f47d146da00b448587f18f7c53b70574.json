@@ -1,0 +1,8 @@
+{
+    "id": "f47d146d-a00b-4485-87f1-8f7c53b70574",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/identitystore"
+    ]
+}

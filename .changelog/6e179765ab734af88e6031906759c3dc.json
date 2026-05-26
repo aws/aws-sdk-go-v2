@@ -1,0 +1,8 @@
+{
+    "id": "6e179765-ab73-4af8-8e60-31906759c3dc",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/pcaconnectorscep"
+    ]
+}

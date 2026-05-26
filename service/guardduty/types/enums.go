@@ -883,14 +883,15 @@ type MalwareProtectionResourceType string
 
 // Enum values for MalwareProtectionResourceType
 const (
-	MalwareProtectionResourceTypeEbsRecoveryPoint MalwareProtectionResourceType = "EBS_RECOVERY_POINT"
-	MalwareProtectionResourceTypeEbsSnapshot      MalwareProtectionResourceType = "EBS_SNAPSHOT"
-	MalwareProtectionResourceTypeEbsVolume        MalwareProtectionResourceType = "EBS_VOLUME"
-	MalwareProtectionResourceTypeEc2Ami           MalwareProtectionResourceType = "EC2_AMI"
-	MalwareProtectionResourceTypeEc2Instance      MalwareProtectionResourceType = "EC2_INSTANCE"
-	MalwareProtectionResourceTypeEc2RecoveryPoint MalwareProtectionResourceType = "EC2_RECOVERY_POINT"
-	MalwareProtectionResourceTypeS3RecoveryPoint  MalwareProtectionResourceType = "S3_RECOVERY_POINT"
-	MalwareProtectionResourceTypeS3Bucket         MalwareProtectionResourceType = "S3_BUCKET"
+	MalwareProtectionResourceTypeEbsRecoveryPoint      MalwareProtectionResourceType = "EBS_RECOVERY_POINT"
+	MalwareProtectionResourceTypeEbsSnapshot           MalwareProtectionResourceType = "EBS_SNAPSHOT"
+	MalwareProtectionResourceTypeEbsVolume             MalwareProtectionResourceType = "EBS_VOLUME"
+	MalwareProtectionResourceTypeEc2Ami                MalwareProtectionResourceType = "EC2_AMI"
+	MalwareProtectionResourceTypeEc2Instance           MalwareProtectionResourceType = "EC2_INSTANCE"
+	MalwareProtectionResourceTypeEc2RecoveryPoint      MalwareProtectionResourceType = "EC2_RECOVERY_POINT"
+	MalwareProtectionResourceTypeS3RecoveryPoint       MalwareProtectionResourceType = "S3_RECOVERY_POINT"
+	MalwareProtectionResourceTypeS3Bucket              MalwareProtectionResourceType = "S3_BUCKET"
+	MalwareProtectionResourceTypeS3PointInTimeRecovery MalwareProtectionResourceType = "S3_POINT_IN_TIME_RECOVERY"
 )
 
 // Values returns all known values for MalwareProtectionResourceType. Note that
@@ -908,6 +909,7 @@ func (MalwareProtectionResourceType) Values() []MalwareProtectionResourceType {
 		"EC2_RECOVERY_POINT",
 		"S3_RECOVERY_POINT",
 		"S3_BUCKET",
+		"S3_POINT_IN_TIME_RECOVERY",
 	}
 }
 

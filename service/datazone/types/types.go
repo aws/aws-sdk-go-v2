@@ -2385,6 +2385,10 @@ type EnvironmentBlueprintConfigurationItem struct {
 	// This member is required.
 	EnvironmentBlueprintId *string
 
+	// Specifies whether user-provided resource configurations are allowed for the
+	// environment blueprint.
+	AllowUserProvidedConfigurations *bool
+
 	// The timestamp of when an environment blueprint was created.
 	CreatedAt *time.Time
 
@@ -2407,6 +2411,9 @@ type EnvironmentBlueprintConfigurationItem struct {
 
 	// The regional parameters of the environment blueprint.
 	RegionalParameters map[string]map[string]string
+
+	// The resource configurations of the environment blueprint.
+	ResourceConfigurations []ResourceConfiguration
 
 	// The timestamp of when the environment blueprint was updated.
 	UpdatedAt *time.Time
@@ -5406,6 +5413,30 @@ type ProvisioningPropertiesMemberCloudFormation struct {
 
 func (*ProvisioningPropertiesMemberCloudFormation) isProvisioningProperties() {}
 
+// The resource configuration that is used to configure the environment blueprint.
+type PutResourceConfiguration struct {
+
+	// The name of the resource configuration.
+	//
+	// This member is required.
+	Name *string
+
+	// The parameters of the resource configuration.
+	//
+	// This member is required.
+	Parameters map[string]string
+
+	// The Amazon Web Services Region of the resource configuration.
+	//
+	// This member is required.
+	Region *string
+
+	// The description of the resource configuration.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // The recommendation to be updated as part of the UpdateDataSource action.
 type RecommendationConfiguration struct {
 
@@ -5823,6 +5854,35 @@ type Resource struct {
 
 	// The provider of a provisioned resource of this Amazon DataZone environment.
 	Provider *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the resource configuration.
+type ResourceConfiguration struct {
+
+	// The identifier of the resource configuration.
+	//
+	// This member is required.
+	Identifier *string
+
+	// The name of the resource configuration.
+	//
+	// This member is required.
+	Name *string
+
+	// The parameters of the resource configuration.
+	//
+	// This member is required.
+	Parameters map[string]string
+
+	// The Amazon Web Services Region of the resource configuration.
+	//
+	// This member is required.
+	Region *string
+
+	// The description of the resource configuration.
+	Description *string
 
 	noSmithyDocumentSerde
 }

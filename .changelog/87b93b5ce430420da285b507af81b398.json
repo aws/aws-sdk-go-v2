@@ -1,0 +1,8 @@
+{
+    "id": "87b93b5c-e430-420d-a285-b507af81b398",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/redshiftserverless"
+    ]
+}

@@ -42,6 +42,9 @@ type UpdateBudgetActionInput struct {
 	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	//
+	// Budget names are validated for content. Names that contain phone numbers, URLs,
+	// or email addresses combined with certain terms may be rejected.
+	//
 	// This member is required.
 	BudgetName *string
 
@@ -76,6 +79,9 @@ type UpdateBudgetActionOutput struct {
 
 	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
+	//
+	// Budget names are validated for content. Names that contain phone numbers, URLs,
+	// or email addresses combined with certain terms may be rejected.
 	//
 	// This member is required.
 	BudgetName *string

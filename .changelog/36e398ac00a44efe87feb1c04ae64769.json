@@ -1,0 +1,8 @@
+{
+    "id": "36e398ac-00a4-4efe-87fe-b1c04ae64769",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/emrserverless"
+    ]
+}

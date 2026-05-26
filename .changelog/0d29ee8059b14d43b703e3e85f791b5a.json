@@ -1,0 +1,8 @@
+{
+    "id": "0d29ee80-59b1-4d43-b703-e3e85f791b5a",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/connecthealth"
+    ]
+}

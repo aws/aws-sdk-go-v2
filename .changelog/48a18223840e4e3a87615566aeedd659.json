@@ -1,0 +1,8 @@
+{
+    "id": "48a18223-840e-4e3a-8761-5566aeedd659",
+    "type": "feature",
+    "description": "Add malware scan support for Continuous Backups, also known as Point-In-Time Recovery Points (PITR).",
+    "modules": [
+        "service/guardduty"
+    ]
+}

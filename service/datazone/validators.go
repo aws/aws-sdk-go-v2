@@ -6053,6 +6053,44 @@ func validateProvisioningProperties(v types.ProvisioningProperties) error {
 	}
 }
 
+func validatePutResourceConfiguration(v *types.PutResourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutResourceConfiguration"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Region == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Region"))
+	}
+	if v.Parameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePutResourceConfigurations(v []types.PutResourceConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutResourceConfigurations"}
+	for i := range v {
+		if err := validatePutResourceConfiguration(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRedshiftClusterStorage(v *types.RedshiftClusterStorage) error {
 	if v == nil {
 		return nil
@@ -9719,6 +9757,11 @@ func validateOpPutEnvironmentBlueprintConfigurationInput(v *PutEnvironmentBluepr
 	}
 	if v.EnabledRegions == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("EnabledRegions"))
+	}
+	if v.ResourceConfigurations != nil {
+		if err := validatePutResourceConfigurations(v.ResourceConfigurations); err != nil {
+			invalidParams.AddNested("ResourceConfigurations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

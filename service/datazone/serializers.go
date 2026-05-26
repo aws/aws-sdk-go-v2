@@ -14238,6 +14238,11 @@ func awsRestjson1_serializeOpDocumentPutEnvironmentBlueprintConfigurationInput(v
 	object := value.Object()
 	defer object.Close()
 
+	if v.AllowUserProvidedConfigurations != nil {
+		ok := object.Key("allowUserProvidedConfigurations")
+		ok.Boolean(*v.AllowUserProvidedConfigurations)
+	}
+
 	if v.EnabledRegions != nil {
 		ok := object.Key("enabledRegions")
 		if err := awsRestjson1_serializeDocumentEnabledRegionList(v.EnabledRegions, ok); err != nil {
@@ -14277,6 +14282,13 @@ func awsRestjson1_serializeOpDocumentPutEnvironmentBlueprintConfigurationInput(v
 	if v.RegionalParameters != nil {
 		ok := object.Key("regionalParameters")
 		if err := awsRestjson1_serializeDocumentRegionalParameterMap(v.RegionalParameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ResourceConfigurations != nil {
+		ok := object.Key("resourceConfigurations")
+		if err := awsRestjson1_serializeDocumentPutResourceConfigurations(v.ResourceConfigurations, ok); err != nil {
 			return err
 		}
 	}
@@ -22479,6 +22491,48 @@ func awsRestjson1_serializeDocumentProvisioningProperties(v types.ProvisioningPr
 	return nil
 }
 
+func awsRestjson1_serializeDocumentPutResourceConfiguration(v *types.PutResourceConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("parameters")
+		if err := awsRestjson1_serializeDocumentResourceConfigurationParameterMap(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Region != nil {
+		ok := object.Key("region")
+		ok.String(*v.Region)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentPutResourceConfigurations(v []types.PutResourceConfiguration, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentPutResourceConfiguration(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRecommendationConfiguration(v *types.RecommendationConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -22908,6 +22962,17 @@ func awsRestjson1_serializeDocumentRequiredMetadataFormList(v []types.MetadataFo
 		if err := awsRestjson1_serializeDocumentMetadataFormReference(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentResourceConfigurationParameterMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

@@ -1,0 +1,8 @@
+{
+    "id": "19866974-313b-4f48-9131-f4b7fea0c666",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/apprunner"
+    ]
+}

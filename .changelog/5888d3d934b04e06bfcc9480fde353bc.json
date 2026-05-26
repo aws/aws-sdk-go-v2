@@ -1,0 +1,8 @@
+{
+    "id": "5888d3d9-34b0-4e06-bfcc-9480fde353bc",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/osis"
+    ]
+}

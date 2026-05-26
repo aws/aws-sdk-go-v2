@@ -1,0 +1,8 @@
+{
+    "id": "7fede378-dfba-4e93-b039-689b4b260623",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/notifications"
+    ]
+}

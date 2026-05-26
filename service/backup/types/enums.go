@@ -700,6 +700,7 @@ type ScanResultStatus string
 const (
 	ScanResultStatusNoThreatsFound ScanResultStatus = "NO_THREATS_FOUND"
 	ScanResultStatusThreatsFound   ScanResultStatus = "THREATS_FOUND"
+	ScanResultStatusUnknown        ScanResultStatus = "UNKNOWN"
 )
 
 // Values returns all known values for ScanResultStatus. Note that this can be
@@ -710,6 +711,7 @@ func (ScanResultStatus) Values() []ScanResultStatus {
 	return []ScanResultStatus{
 		"NO_THREATS_FOUND",
 		"THREATS_FOUND",
+		"UNKNOWN",
 	}
 }
 

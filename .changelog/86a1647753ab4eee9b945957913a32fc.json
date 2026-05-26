@@ -1,0 +1,8 @@
+{
+    "id": "86a16477-53ab-4eee-9b94-5957913a32fc",
+    "type": "feature",
+    "description": "Increase the maximum value of jobExecutionTimeoutMinutes to support longer job timeouts during compute environment infrastructure updates.",
+    "modules": [
+        "service/batch"
+    ]
+}

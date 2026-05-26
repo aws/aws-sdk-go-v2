@@ -1,0 +1,8 @@
+{
+    "id": "26fd171c-d6dc-41d3-903a-2d93968d3542",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/pipes"
+    ]
+}

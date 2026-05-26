@@ -1941,6 +1941,21 @@ func validateAccountDetails(v []types.AccountDetail) error {
 	}
 }
 
+func validateContinuousScanDetails(v *types.ContinuousScanDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ContinuousScanDetails"}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDataSourceConfigurations(v *types.DataSourceConfigurations) error {
 	if v == nil {
 		return nil
@@ -2107,6 +2122,11 @@ func validateRecoveryPoint(v *types.RecoveryPoint) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RecoveryPoint"}
 	if v.BackupVaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if v.ContinuousScanDetails != nil {
+		if err := validateContinuousScanDetails(v.ContinuousScanDetails); err != nil {
+			invalidParams.AddNested("ContinuousScanDetails", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -629,6 +629,22 @@ type ContainerInstanceDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the time range within the continuous backup in
+// Amazon Web Services Backup to scan for a point-in-time recovery resource.
+type ContinuousScanDetails struct {
+
+	// The timestamp representing the end of the time range to scan.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The timestamp representing the start of the time range to scan. Reserved for
+	// internal use.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the country where the remote IP address is located.
 type Country struct {
 
@@ -3441,6 +3457,10 @@ type RecoveryPoint struct {
 	// This member is required.
 	BackupVaultName *string
 
+	// Contains information about the time range within the continuous backup in
+	// Amazon Web Services Backup to scan.
+	ContinuousScanDetails *ContinuousScanDetails
+
 	noSmithyDocumentSerde
 }
 
@@ -4102,12 +4122,32 @@ type ScanConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about the time range within the continuous backup in
+// Amazon Web Services Backup that was scanned for a point-in-time recovery
+// resource.
+type ScanConfigurationContinuousScanDetails struct {
+
+	// The timestamp representing the end of the time range that was scanned.
+	//
+	// This member is required.
+	EndTime *time.Time
+
+	// The timestamp representing the start of the time range that was scanned.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the recovery point configuration used in the scan.
 type ScanConfigurationRecoveryPoint struct {
 
 	// The name of the Amazon Web Services Backup vault that contains the recovery
 	// point for the scanned.
 	BackupVaultName *string
+
+	// The time range within the continuous backup in Amazon Web Services Backup that
+	// was scanned for a point-in-time recovery resource.
+	ContinuousScanDetails *ScanConfigurationContinuousScanDetails
 
 	noSmithyDocumentSerde
 }

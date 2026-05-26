@@ -1,0 +1,8 @@
+{
+    "id": "eaa0f129-1ce9-46d8-a356-8ba34bc6bff1",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/sagemakergeospatial"
+    ]
+}

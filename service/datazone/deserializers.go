@@ -17371,6 +17371,15 @@ func awsRestjson1_deserializeOpDocumentGetEnvironmentBlueprintConfigurationOutpu
 
 	for key, value := range shape {
 		switch key {
+		case "allowUserProvidedConfigurations":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowUserProvidedConfigurations = ptr.Bool(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -17441,6 +17450,11 @@ func awsRestjson1_deserializeOpDocumentGetEnvironmentBlueprintConfigurationOutpu
 
 		case "regionalParameters":
 			if err := awsRestjson1_deserializeDocumentRegionalParameterMap(&sv.RegionalParameters, value); err != nil {
+				return err
+			}
+
+		case "resourceConfigurations":
+			if err := awsRestjson1_deserializeDocumentResourceConfigurations(&sv.ResourceConfigurations, value); err != nil {
 				return err
 			}
 
@@ -30606,6 +30620,15 @@ func awsRestjson1_deserializeOpDocumentPutEnvironmentBlueprintConfigurationOutpu
 
 	for key, value := range shape {
 		switch key {
+		case "allowUserProvidedConfigurations":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowUserProvidedConfigurations = ptr.Bool(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -30676,6 +30699,11 @@ func awsRestjson1_deserializeOpDocumentPutEnvironmentBlueprintConfigurationOutpu
 
 		case "regionalParameters":
 			if err := awsRestjson1_deserializeDocumentRegionalParameterMap(&sv.RegionalParameters, value); err != nil {
+				return err
+			}
+
+		case "resourceConfigurations":
+			if err := awsRestjson1_deserializeDocumentResourceConfigurations(&sv.ResourceConfigurations, value); err != nil {
 				return err
 			}
 
@@ -47280,6 +47308,15 @@ func awsRestjson1_deserializeDocumentEnvironmentBlueprintConfigurationItem(v **t
 
 	for key, value := range shape {
 		switch key {
+		case "allowUserProvidedConfigurations":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AllowUserProvidedConfigurations = ptr.Bool(jtv)
+			}
+
 		case "createdAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -47350,6 +47387,11 @@ func awsRestjson1_deserializeDocumentEnvironmentBlueprintConfigurationItem(v **t
 
 		case "regionalParameters":
 			if err := awsRestjson1_deserializeDocumentRegionalParameterMap(&sv.RegionalParameters, value); err != nil {
+				return err
+			}
+
+		case "resourceConfigurations":
+			if err := awsRestjson1_deserializeDocumentResourceConfigurations(&sv.ResourceConfigurations, value); err != nil {
 				return err
 			}
 
@@ -57719,6 +57761,148 @@ func awsRestjson1_deserializeDocumentResource(v **types.Resource, value interfac
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourceConfiguration(v **types.ResourceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ResourceConfiguration
+	if *v == nil {
+		sv = &types.ResourceConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "identifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Identifier = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "parameters":
+			if err := awsRestjson1_deserializeDocumentResourceConfigurationParameterMap(&sv.Parameters, value); err != nil {
+				return err
+			}
+
+		case "region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegionName to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourceConfigurationParameterMap(v *map[string]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]string
+	if *v == nil {
+		mv = map[string]string{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			parsedVal = jtv
+		}
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentResourceConfigurations(v *[]types.ResourceConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ResourceConfiguration
+	if *v == nil {
+		cv = []types.ResourceConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ResourceConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentResourceConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

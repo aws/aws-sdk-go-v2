@@ -17,6 +17,10 @@ type ComplianceDetails struct {
 	// either incorrect case treatment or noncompliant values.
 	KeysWithNoncompliantValues []string
 
+	// These tag keys are defined as required in the report_required_tag_for block of
+	// the effective tag policy, but are missing from the resource.
+	MissingTagKeys []string
+
 	// These tag keys on the resource are noncompliant with the effective tag policy.
 	NoncompliantKeys []string
 

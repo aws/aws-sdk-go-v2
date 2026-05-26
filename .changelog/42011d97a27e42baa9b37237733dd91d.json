@@ -1,0 +1,8 @@
+{
+    "id": "42011d97-a27e-42ba-a9b3-7237733dd91d",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/observabilityadmin"
+    ]
+}

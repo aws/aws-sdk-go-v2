@@ -489,9 +489,6 @@ type ComputeResource struct {
 	//
 	// Batch can select the instance type for you if you choose one of the following:
 	//
-	//   - optimal to select instance types (from the c4 , m4 , r4 , c5 , m5 , and r5
-	//   instance families) that match the demand of your job queues.
-	//
 	//   - default_x86_64 to choose x86 based instance types (from the m6i , c6i , r6i
 	//   , and c7i instance families) that matches the resource demands of the job
 	//   queue.
@@ -499,10 +496,7 @@ type ComputeResource struct {
 	//   - default_arm64 to choose ARM based instance types (from the m6g , c6g , r6g ,
 	//   and c7g instance families) that matches the resource demands of the job queue.
 	//
-	// Starting on 11/01/2025 the behavior of optimal is going to be changed to match
-	// default_x86_64 . During the change your instance families could be updated to a
-	// newer generation. You do not need to perform any actions for the upgrade to
-	// happen. For more information about change, see [Optimal instance type configuration to receive automatic instance family updates].
+	//   - optimal Semantically equivalent to default_x86_64 , see [Optimal instance type configuration to receive automatic instance family updates]for details.
 	//
 	// Instance family availability varies by Amazon Web Services Region. For example,
 	// some Amazon Web Services Regions may not have any fourth generation instance
@@ -5587,7 +5581,12 @@ type Ulimit struct {
 type UpdatePolicy struct {
 
 	// Specifies the job timeout (in minutes) when the compute environment
-	// infrastructure is updated. The default value is 30.
+	// infrastructure is updated. The default value is 30. The maximum value is 7200.
+	//
+	// Increasing jobExecutionTimeoutMinutes during infrastructure updates delays the
+	// replacement of instances with new instances that include updates such as
+	// security patches, but provides more time for jobs to execute. Consider the
+	// security implications of this tradeoff when setting timeout values.
 	JobExecutionTimeoutMinutes *int64
 
 	// Specifies whether jobs are automatically terminated when the compute

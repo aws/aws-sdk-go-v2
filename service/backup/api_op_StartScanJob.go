@@ -76,6 +76,9 @@ type StartScanJobInput struct {
 	// This member is required.
 	ScannerRoleArn *string
 
+	// The point in time the scan job will scan up to for a continuous backup.
+	ContinuousScanEndTime *time.Time
+
 	// A customer-chosen string that you can use to distinguish between otherwise
 	// identical calls to StartScanJob . Retrying a successful request with the same
 	// idempotency token results in a success message with no action taken.

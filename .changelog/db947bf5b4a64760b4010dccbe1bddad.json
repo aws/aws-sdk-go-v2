@@ -1,0 +1,8 @@
+{
+    "id": "db947bf5-b4a6-4760-b401-0dccbe1bddad",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/chimesdkmediapipelines"
+    ]
+}
