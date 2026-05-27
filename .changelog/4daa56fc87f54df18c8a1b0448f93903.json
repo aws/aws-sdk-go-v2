@@ -1,8 +1,0 @@
-{
-    "id": "4daa56fc-87f5-4df1-8c8a-1b0448f93903",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/eventbridge"
-    ]
-}

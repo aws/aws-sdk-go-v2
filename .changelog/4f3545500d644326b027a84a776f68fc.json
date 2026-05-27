@@ -1,8 +1,0 @@
-{
-    "id": "4f354550-0d64-4326-b027-a84a776f68fc",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/simpledbv2"
-    ]
-}

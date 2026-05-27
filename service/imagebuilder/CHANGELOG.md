@@ -1,3 +1,7 @@
+# v1.55.0 (2026-05-27)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.54.0 (2026-05-06)
 
 * **Feature**: The ImportDiskImage API now enforces a maximum character limit of 128 characters on the image name field.

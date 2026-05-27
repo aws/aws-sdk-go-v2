@@ -1,8 +1,0 @@
-{
-    "id": "146db766-41c7-44f6-b2f4-7390b4ffff01",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/resourceexplorer2"
-    ]
-}

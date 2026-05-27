@@ -1,8 +1,0 @@
-{
-    "id": "96da1bd3-e45e-4c4f-aca8-684889bdadbf",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/sagemakerfeaturestoreruntime"
-    ]
-}

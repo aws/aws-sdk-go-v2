@@ -1,8 +1,0 @@
-{
-    "id": "b3c3a10f-933d-49e4-8205-7eca8d5bf665",
-    "type": "feature",
-    "description": "Added support for smart subtitles in Elemental Inference, enabling automatic generation of subtitles for media content. Available in English, Spanish, French, German, Italian, and Portuguese.",
-    "modules": [
-        "service/elementalinference"
-    ]
-}

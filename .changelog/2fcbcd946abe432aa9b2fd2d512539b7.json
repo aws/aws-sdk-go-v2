@@ -1,8 +1,0 @@
-{
-    "id": "2fcbcd94-6abe-432a-a9b2-fd2d512539b7",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/ssmsap"
-    ]
-}

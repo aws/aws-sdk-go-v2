@@ -1,8 +1,0 @@
-{
-    "id": "dbcaafb3-0747-4bb5-ae27-1e8a01057fc6",
-    "type": "documentation",
-    "description": "AWS Organizations now emits CloudTrail events (AccountJoinedOrganization, AccountDepartedOrganization) to the management account for membership changes, including join and departure method and timestamp.",
-    "modules": [
-        "service/organizations"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.51.4 (2026-05-27)
+
+* **Documentation**: AWS Organizations now emits CloudTrail events (AccountJoinedOrganization, AccountDepartedOrganization) to the management account for membership changes, including join and departure method and timestamp.
+
 # v1.51.3 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

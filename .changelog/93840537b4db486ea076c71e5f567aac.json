@@ -1,8 +1,0 @@
-{
-    "id": "93840537-b4db-486e-a076-c71e5f567aac",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/ecrpublic"
-    ]
-}

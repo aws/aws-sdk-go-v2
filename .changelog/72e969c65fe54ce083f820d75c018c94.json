@@ -1,8 +1,0 @@
-{
-    "id": "72e969c6-5fe5-4ce0-83f8-20d75c018c94",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/voiceid"
-    ]
-}

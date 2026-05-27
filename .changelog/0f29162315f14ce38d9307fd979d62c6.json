@@ -1,8 +1,0 @@
-{
-    "id": "0f291623-15f1-4ce3-8d93-07fd979d62c6",
-    "type": "feature",
-    "description": "OpenSearch will now support multi-segment paths in JWKS URLs.",
-    "modules": [
-        "service/opensearch"
-    ]
-}

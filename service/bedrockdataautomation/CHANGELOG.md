@@ -1,3 +1,7 @@
+# v1.16.0 (2026-05-27)
+
+* **Feature**: Matcher Fallback extends the CustomOutputConfiguration for the Document modality in DataAutomationProjects, enabling a fallback blueprint when no match is found. A FALLBACK match status is returned, improving the matching experience and guaranteeing customers always receive CustomOutputResults.
+
 # v1.15.0 (2026-05-26)
 
 * **Feature**: Adding new BDD representation of endpoint ruleset

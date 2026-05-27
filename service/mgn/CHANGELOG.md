@@ -1,3 +1,7 @@
+# v1.44.0 (2026-05-27)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.43.0 (2026-05-14)
 
 * **Feature**: Introducing new option for security groups mapping - with MAP-DHCP the service translates security rules from your source environment with DHCP compatibility.

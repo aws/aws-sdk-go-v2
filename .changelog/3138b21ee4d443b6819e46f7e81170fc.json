@@ -1,8 +1,0 @@
-{
-    "id": "3138b21e-e4d4-43b6-819e-46f7e81170fc",
-    "type": "feature",
-    "description": "Add support for Neuron device resource requirements for Amazon ECS",
-    "modules": [
-        "service/ecs"
-    ]
-}

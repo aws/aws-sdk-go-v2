@@ -1,8 +1,0 @@
-{
-    "id": "e4dc3e3e-ab89-4461-9427-15b60b884d4c",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/memorydb"
-    ]
-}

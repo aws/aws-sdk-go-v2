@@ -1,8 +1,0 @@
-{
-    "id": "9338069a-341d-4e2f-87d1-e3d9dc283ea3",
-    "type": "feature",
-    "description": "Adds shared environment support for Restricted Instance Groups (RIGs) on SageMaker HyperPod, enabling cross-RIG workload scheduling and FSx sharing. This unlocks shared CPU-GPU environments needed for cost-efficient RL training (e.g., Nova Forge). Adds p6 instance support for recommendation jobs",
-    "modules": [
-        "service/sagemaker"
-    ]
-}

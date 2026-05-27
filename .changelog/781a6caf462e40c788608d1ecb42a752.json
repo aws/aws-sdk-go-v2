@@ -1,8 +1,0 @@
-{
-    "id": "781a6caf-462e-40c7-8860-8d1ecb42a752",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/novaact"
-    ]
-}

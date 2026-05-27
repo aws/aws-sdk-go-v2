@@ -1,8 +1,0 @@
-{
-    "id": "ee29036f-1de1-4ae8-b33d-acd592484071",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/workmailmessageflow"
-    ]
-}

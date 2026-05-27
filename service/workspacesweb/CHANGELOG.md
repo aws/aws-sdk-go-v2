@@ -1,3 +1,7 @@
+# v1.40.0 (2026-05-27)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.39.0 (2026-04-29)
 
 * **Feature**: Allow admins to configure IPv6 ranges on IP Access Settings.

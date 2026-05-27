@@ -1,8 +1,0 @@
-{
-    "id": "704c5d15-aae3-4554-b869-640ba25ef9df",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/imagebuilder"
-    ]
-}

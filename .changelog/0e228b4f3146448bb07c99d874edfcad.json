@@ -1,8 +1,0 @@
-{
-    "id": "0e228b4f-3146-448b-b07c-99d874edfcad",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/bcmdashboards"
-    ]
-}

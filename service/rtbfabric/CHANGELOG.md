@@ -1,3 +1,7 @@
+# v1.7.0 (2026-05-27)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.6.0 (2026-05-19)
 
 * **Feature**: This release is to deprecate 'inboundLinksCount' field in GetResponderGateway response and introduce the new field 'linksRequestedCount' to replace it.

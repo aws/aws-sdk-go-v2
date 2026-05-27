@@ -1,3 +1,7 @@
+# v1.70.0 (2026-05-27)
+
+* **Feature**: OpenSearch will now support multi-segment paths in JWKS URLs.
+
 # v1.69.0 (2026-05-13)
 
 * **Feature**: Adds support for AutomatedSnapshotPauseOptions.

@@ -1,8 +1,0 @@
-{
-    "id": "3fccbaec-1a6b-462e-9fd9-5927a5613385",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/iotfleetwise"
-    ]
-}

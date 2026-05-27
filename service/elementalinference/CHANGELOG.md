@@ -1,3 +1,7 @@
+# v1.1.0 (2026-05-27)
+
+* **Feature**: Added support for smart subtitles in Elemental Inference, enabling automatic generation of subtitles for media content. Available in English, Spanish, French, German, Italian, and Portuguese.
+
 # v1.0.5 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

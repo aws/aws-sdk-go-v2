@@ -1,3 +1,7 @@
+# v1.97.0 (2026-05-27)
+
+* **Feature**: AWS Elemental MediaLive now supports Smart Subtitles, a new caption source that uses AWS Elemental Inference to automatically generate WebVTT and TTML captions from source audio. Available in English, Spanish, French, German, Italian, and Portuguese.
+
 # v1.96.0 (2026-05-04)
 
 * **Feature**: Updates the type of the MediaLiveRouterOutputConnectionMap.

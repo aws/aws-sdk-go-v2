@@ -1,3 +1,7 @@
+# v1.19.0 (2026-05-27)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.18.23 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

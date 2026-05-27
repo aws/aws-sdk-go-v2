@@ -1,3 +1,8 @@
+# v0.2.0 (2026-05-27)
+
+* **Feature**: Add SHA-512 support for s3 operations
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v0.1.22 (2026-05-22)
 
 * **Dependency Update**: Updated to the latest SDK module versions

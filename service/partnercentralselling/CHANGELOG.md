@@ -1,3 +1,7 @@
+# v1.18.0 (2026-05-27)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+
 # v1.17.0 (2026-05-15)
 
 * **Feature**: Enable TCV intake on Opportunity to improve Opportunities Hygiene and downstream revenue attribution.

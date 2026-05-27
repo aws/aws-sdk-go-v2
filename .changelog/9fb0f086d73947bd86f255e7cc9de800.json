@@ -1,8 +1,0 @@
-{
-    "id": "9fb0f086-d739-47bd-86f2-55e7cc9de800",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/iotdeviceadvisor"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.81.0 (2026-05-27)
+
+* **Feature**: Add support for Neuron device resource requirements for Amazon ECS
+
 # v1.80.0 (2026-05-18)
 
 * **Feature**: Amazon ECS now supports Pause lifecycle hooks for service deployments, allowing customers to automatically pause deployments at specified stages and use the new ContinueServiceDeployment API to continue or roll back with confidence.

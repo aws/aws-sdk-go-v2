@@ -1,3 +1,118 @@
+# Release (2026-05-27)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.2.0](feature/s3/transfermanager/CHANGELOG.md#v020-2026-05-27)
+  * **Feature**: Add SHA-512 support for s3 operations
+* `github.com/aws/aws-sdk-go-v2/service/bcmdashboards`: [v1.3.0](service/bcmdashboards/CHANGELOG.md#v130-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation`: [v1.16.0](service/bedrockdataautomation/CHANGELOG.md#v1160-2026-05-27)
+  * **Feature**: Matcher Fallback extends the CustomOutputConfiguration for the Document modality in DataAutomationProjects, enabling a fallback blueprint when no match is found. A FALLBACK match status is returned, improving the matching experience and guaranteeing customers always receive CustomOutputResults.
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.51.0](service/computeoptimizer/CHANGELOG.md#v1510-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation`: [v1.2.0](service/computeoptimizerautomation/CHANGELOG.md#v120-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/connectcases`: [v1.42.0](service/connectcases/CHANGELOG.md#v1420-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/dataexchange`: [v1.42.0](service/dataexchange/CHANGELOG.md#v1420-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/devopsagent`: [v1.5.0](service/devopsagent/CHANGELOG.md#v150-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/docdbelastic`: [v1.21.0](service/docdbelastic/CHANGELOG.md#v1210-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ebs`: [v1.34.0](service/ebs/CHANGELOG.md#v1340-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ecrpublic`: [v1.39.0](service/ecrpublic/CHANGELOG.md#v1390-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.81.0](service/ecs/CHANGELOG.md#v1810-2026-05-27)
+  * **Feature**: Add support for Neuron device resource requirements for Amazon ECS
+* `github.com/aws/aws-sdk-go-v2/service/eksauth`: [v1.13.0](service/eksauth/CHANGELOG.md#v1130-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/elementalinference`: [v1.1.0](service/elementalinference/CHANGELOG.md#v110-2026-05-27)
+  * **Feature**: Added support for smart subtitles in Elemental Inference, enabling automatic generation of subtitles for media content. Available in English, Spanish, French, German, Italian, and Portuguese.
+* `github.com/aws/aws-sdk-go-v2/service/eventbridge`: [v1.46.0](service/eventbridge/CHANGELOG.md#v1460-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/finspace`: [v1.34.0](service/finspace/CHANGELOG.md#v1340-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/fis`: [v1.38.0](service/fis/CHANGELOG.md#v1380-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/imagebuilder`: [v1.55.0](service/imagebuilder/CHANGELOG.md#v1550-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.48.0](service/inspector2/CHANGELOG.md#v1480-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor`: [v1.37.0](service/iotdeviceadvisor/CHANGELOG.md#v1370-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/iotfleetwise`: [v1.32.0](service/iotfleetwise/CHANGELOG.md#v1320-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/iotthingsgraph`: [v1.31.0](service/iotthingsgraph/CHANGELOG.md#v1310-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/launchwizard`: [v1.15.0](service/launchwizard/CHANGELOG.md#v1150-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/location`: [v1.52.0](service/location/CHANGELOG.md#v1520-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/m2`: [v1.27.0](service/m2/CHANGELOG.md#v1270-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/marketplacedeployment`: [v1.12.0](service/marketplacedeployment/CHANGELOG.md#v1120-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.97.0](service/medialive/CHANGELOG.md#v1970-2026-05-27)
+  * **Feature**: AWS Elemental MediaLive now supports Smart Subtitles, a new caption source that uses AWS Elemental Inference to automatically generate WebVTT and TTML captions from source audio. Available in English, Spanish, French, German, Italian, and Portuguese.
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.34.0](service/memorydb/CHANGELOG.md#v1340-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/mgn`: [v1.44.0](service/mgn/CHANGELOG.md#v1440-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/mpa`: [v1.8.0](service/mpa/CHANGELOG.md#v180-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/novaact`: [v1.1.0](service/novaact/CHANGELOG.md#v110-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.42.0](service/omics/CHANGELOG.md#v1420-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.70.0](service/opensearch/CHANGELOG.md#v1700-2026-05-27)
+  * **Feature**: OpenSearch will now support multi-segment paths in JWKS URLs.
+* `github.com/aws/aws-sdk-go-v2/service/organizations`: [v1.51.4](service/organizations/CHANGELOG.md#v1514-2026-05-27)
+  * **Documentation**: AWS Organizations now emits CloudTrail events (AccountJoinedOrganization, AccountDepartedOrganization) to the management account for membership changes, including join and departure method and timestamp.
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits`: [v1.1.0](service/partnercentralbenefits/CHANGELOG.md#v110-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/partnercentralselling`: [v1.18.0](service/partnercentralselling/CHANGELOG.md#v1180-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptography`: [v1.30.0](service/paymentcryptography/CHANGELOG.md#v1300-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/pcaconnectorad`: [v1.16.0](service/pcaconnectorad/CHANGELOG.md#v1160-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/resourceexplorer2`: [v1.24.0](service/resourceexplorer2/CHANGELOG.md#v1240-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/rtbfabric`: [v1.7.0](service/rtbfabric/CHANGELOG.md#v170-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/rum`: [v1.31.0](service/rum/CHANGELOG.md#v1310-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.102.0](service/s3/CHANGELOG.md#v11020-2026-05-27)
+  * **Feature**: Add SHA-512 support for s3 operations
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.250.0](service/sagemaker/CHANGELOG.md#v12500-2026-05-27)
+  * **Feature**: Adds shared environment support for Restricted Instance Groups (RIGs) on SageMaker HyperPod, enabling cross-RIG workload scheduling and FSx sharing. This unlocks shared CPU-GPU environments needed for cost-efficient RL training (e.g., Nova Forge). Adds p6 instance support for recommendation jobs
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime`: [v1.35.0](service/sagemakerfeaturestoreruntime/CHANGELOG.md#v1350-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/savingsplans`: [v1.33.0](service/savingsplans/CHANGELOG.md#v1330-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/securityir`: [v1.11.0](service/securityir/CHANGELOG.md#v1110-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/simpledbv2`: [v1.1.0](service/simpledbv2/CHANGELOG.md#v110-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.32.0](service/ssmcontacts/CHANGELOG.md#v1320-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ssmsap`: [v1.27.0](service/ssmsap/CHANGELOG.md#v1270-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/supportapp`: [v1.19.0](service/supportapp/CHANGELOG.md#v1190-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/voiceid`: [v1.31.0](service/voiceid/CHANGELOG.md#v1310-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/wellarchitected`: [v1.40.0](service/wellarchitected/CHANGELOG.md#v1400-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/workmailmessageflow`: [v1.29.0](service/workmailmessageflow/CHANGELOG.md#v1290-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/workspacesweb`: [v1.40.0](service/workspacesweb/CHANGELOG.md#v1400-2026-05-27)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+
 # Release (2026-05-26)
 
 ## Module Highlights

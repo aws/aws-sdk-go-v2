@@ -1,8 +1,0 @@
-{
-    "id": "980ddc17-e425-4241-b89e-b64099be14cf",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/ssmcontacts"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "03e487f2-bac3-4915-9dd9-0cbde089606b",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/mgn"
-    ]
-}
