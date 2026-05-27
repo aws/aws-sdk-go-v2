@@ -54,8 +54,8 @@ type RegisterContainerInstanceInput struct {
 	// http://169.254.169.254/latest/dynamic/instance-identity/signature/
 	InstanceIdentityDocumentSignature *string
 
-	// The devices that are available on the container instance. The only supported
-	// device type is a GPU.
+	// The devices that are available on the container instance. The supported device
+	// types are GPUs and Neuron devices.
 	PlatformDevices []types.PlatformDevice
 
 	// The metadata that you apply to the container instance to help you categorize

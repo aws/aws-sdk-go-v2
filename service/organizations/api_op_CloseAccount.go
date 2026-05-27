@@ -49,6 +49,11 @@ import (
 //	both accounts. To learn important pre-closure details, see [Closing an Amazon Web Services GovCloud (US) account]in the Amazon Web
 //	Services GovCloud User Guide.
 //
+// After the permanent termination of the account after the 90-day waiting period,
+// Organizations logs a membership event in CloudTrail. The event is an
+// AccountDepartedOrganization event with departedMethod:Cleaned and departedTime .
+// This event is available only in the management account's event history.
+//
 // [all features are enabled]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
 //
 // [Quotas for Organizations]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_reference_limits.html

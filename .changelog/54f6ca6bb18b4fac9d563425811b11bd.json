@@ -1,0 +1,8 @@
+{
+    "id": "54f6ca6b-b18b-4fac-9d56-3425811b11bd",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/rtbfabric"
+    ]
+}

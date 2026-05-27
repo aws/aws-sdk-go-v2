@@ -1,0 +1,8 @@
+{
+    "id": "2f77e19b-3eb4-400f-b09d-a6982e264d70",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/iotthingsgraph"
+    ]
+}

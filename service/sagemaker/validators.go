@@ -9558,6 +9558,25 @@ func validateClusterOrchestratorEksConfig(v *types.ClusterOrchestratorEksConfig)
 	}
 }
 
+func validateClusterRestrictedInstanceGroupsConfig(v *types.ClusterRestrictedInstanceGroupsConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterRestrictedInstanceGroupsConfig"}
+	if v.SharedEnvironmentConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SharedEnvironmentConfig"))
+	} else if v.SharedEnvironmentConfig != nil {
+		if err := validateClusterSharedEnvironmentConfig(v.SharedEnvironmentConfig); err != nil {
+			invalidParams.AddNested("SharedEnvironmentConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateClusterRestrictedInstanceGroupSpecification(v *types.ClusterRestrictedInstanceGroupSpecification) error {
 	if v == nil {
 		return nil
@@ -9610,6 +9629,28 @@ func validateClusterRestrictedInstanceGroupSpecifications(v []types.ClusterRestr
 	for i := range v {
 		if err := validateClusterRestrictedInstanceGroupSpecification(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateClusterSharedEnvironmentConfig(v *types.ClusterSharedEnvironmentConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ClusterSharedEnvironmentConfig"}
+	if len(v.FSxLustreDeletionPolicy) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("FSxLustreDeletionPolicy"))
+	}
+	if v.FSxLustreConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FSxLustreConfig"))
+	} else if v.FSxLustreConfig != nil {
+		if err := validateFSxLustreConfig(v.FSxLustreConfig); err != nil {
+			invalidParams.AddNested("FSxLustreConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -16385,6 +16426,11 @@ func validateOpCreateClusterInput(v *CreateClusterInput) error {
 			invalidParams.AddNested("RestrictedInstanceGroups", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.RestrictedInstanceGroupsConfig != nil {
+		if err := validateClusterRestrictedInstanceGroupsConfig(v.RestrictedInstanceGroupsConfig); err != nil {
+			invalidParams.AddNested("RestrictedInstanceGroupsConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.VpcConfig != nil {
 		if err := validateVpcConfig(v.VpcConfig); err != nil {
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
@@ -21759,6 +21805,11 @@ func validateOpUpdateClusterInput(v *UpdateClusterInput) error {
 	if v.RestrictedInstanceGroups != nil {
 		if err := validateClusterRestrictedInstanceGroupSpecifications(v.RestrictedInstanceGroups); err != nil {
 			invalidParams.AddNested("RestrictedInstanceGroups", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RestrictedInstanceGroupsConfig != nil {
+		if err := validateClusterRestrictedInstanceGroupsConfig(v.RestrictedInstanceGroupsConfig); err != nil {
+			invalidParams.AddNested("RestrictedInstanceGroupsConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.TieredStorageConfig != nil {

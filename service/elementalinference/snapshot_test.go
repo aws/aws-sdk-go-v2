@@ -74,11 +74,35 @@ func TestCheckSnapshot_AssociateFeed(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateDictionary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDictionary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateDictionary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateFeed(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateFeed(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "CreateFeed")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteDictionary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDictionary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteDictionary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -110,11 +134,47 @@ func TestCheckSnapshot_DisassociateFeed(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ExportDictionaryEntries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExportDictionaryEntries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ExportDictionaryEntries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetDictionary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDictionary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetDictionary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_GetFeed(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFeed(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetFeed")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListDictionaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDictionaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListDictionaries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -170,6 +230,18 @@ func TestCheckSnapshot_UntagResource(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateDictionary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDictionary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateDictionary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdateFeed(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdateFeed(context.Background(), nil, func(o *Options) {
@@ -193,11 +265,35 @@ func TestUpdateSnapshot_AssociateFeed(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateDictionary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateDictionary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateDictionary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateFeed(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateFeed(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "CreateFeed")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteDictionary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteDictionary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteDictionary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -229,11 +325,47 @@ func TestUpdateSnapshot_DisassociateFeed(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ExportDictionaryEntries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ExportDictionaryEntries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ExportDictionaryEntries")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetDictionary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetDictionary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetDictionary")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_GetFeed(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.GetFeed(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetFeed")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListDictionaries(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListDictionaries(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListDictionaries")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -282,6 +414,18 @@ func TestUpdateSnapshot_UntagResource(t *testing.T) {
 	_, err := svc.UntagResource(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UntagResource")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateDictionary(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateDictionary(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateDictionary")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

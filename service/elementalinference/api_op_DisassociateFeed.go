@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Releases the resource (for example, an MediaLive channel) that is associated
-// with this feed. The outputs in the feed become disabled.
+// Releases the resource (the source media) that is associated with this feed. The
+// outputs in the feed become DISABLED.
 func (c *Client) DisassociateFeed(ctx context.Context, params *DisassociateFeedInput, optFns ...func(*Options)) (*DisassociateFeedOutput, error) {
 	if params == nil {
 		params = &DisassociateFeedInput{}
@@ -29,7 +29,7 @@ func (c *Client) DisassociateFeed(ctx context.Context, params *DisassociateFeedI
 
 type DisassociateFeedInput struct {
 
-	// The name of the resource currently associated with the feed'.
+	// The name of the resource currently associated with the feed.
 	//
 	// This member is required.
 	AssociatedResourceName *string
@@ -40,6 +40,10 @@ type DisassociateFeedInput struct {
 	Id *string
 
 	// Set to true if you want to do a dry run of the disassociate action.
+	//
+	// Elemental Inference will validate that the real request would succeed without
+	// actually making any changes. A dry run catches errors such as missing IAM
+	// permissions. If the dry run fails, the action returns a 4xx error code.
 	DryRun bool
 
 	noSmithyDocumentSerde
@@ -47,12 +51,12 @@ type DisassociateFeedInput struct {
 
 type DisassociateFeedOutput struct {
 
-	// The ID of the feed where you deleted the associated resource.
+	// The ARN of the feed.
 	//
 	// This member is required.
 	Arn *string
 
-	// The ARN of the resource that you deleted.
+	// The ID of the feed.
 	//
 	// This member is required.
 	Id *string

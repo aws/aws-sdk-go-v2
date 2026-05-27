@@ -834,6 +834,9 @@ type Container struct {
 	// The network interfaces associated with the container.
 	NetworkInterfaces []NetworkInterface
 
+	// The IDs of each Neuron device assigned to the container.
+	NeuronDeviceIds []string
+
 	// A short (1024 max characters) human-readable string to provide additional
 	// details about a running or stopped container.
 	Reason *string
@@ -1310,8 +1313,8 @@ type ContainerDefinition struct {
 	// The private repository authentication credentials to use.
 	RepositoryCredentials *RepositoryCredentials
 
-	// The type and amount of a resource to assign to a container. The only supported
-	// resource is a GPU.
+	// The type and amount of a resource to assign to a container. The supported
+	// resources are GPUs and Neuron devices.
 	ResourceRequirements []ResourceRequirement
 
 	// The restart policy for a container. When you set up a restart policy, Amazon
@@ -1753,7 +1756,8 @@ type ContainerOverride struct {
 	Name *string
 
 	// The type and amount of a resource to assign to a container, instead of the
-	// default value from the task definition. The only supported resource is a GPU.
+	// default value from the task definition. The supported resources are GPUs and
+	// Neuron devices.
 	ResourceRequirements []ResourceRequirement
 
 	noSmithyDocumentSerde
@@ -5623,19 +5627,20 @@ type PlacementStrategy struct {
 	noSmithyDocumentSerde
 }
 
-// The devices that are available on the container instance. The only supported
-// device type is a GPU.
+// The devices that are available on the container instance. The supported device
+// types are GPUs and Neuron devices.
 type PlatformDevice struct {
 
-	// The ID for the GPUs on the container instance. The available GPU IDs can also
-	// be obtained on the container instance in the
-	// /var/lib/ecs/gpu/nvidia_gpu_info.json file.
+	// The ID for the GPU or Neuron device on the container instance. For GPUs, the
+	// available GPU IDs can also be obtained on the container instance in the
+	// /var/lib/ecs/gpu/nvidia_gpu_info.json file. For Neuron devices, the ID
+	// corresponds to the device index (for example, 0 for /dev/neuron0 ).
 	//
 	// This member is required.
 	Id *string
 
-	// The type of device that's available on the container instance. The only
-	// supported value is GPU .
+	// The type of device that's available on the container instance. The supported
+	// values are GPU and NEURON_DEVICE .
 	//
 	// This member is required.
 	Type PlatformDeviceType
@@ -5943,8 +5948,9 @@ type Resource struct {
 }
 
 // The type and amount of a resource to assign to a container. The supported
-// resource types are GPUs and Elastic Inference accelerators. For more
-// information, see [Working with GPUs on Amazon ECS]or [Working with Amazon Elastic Inference on Amazon ECS] in the Amazon Elastic Container Service Developer Guide
+// resource types are GPUs, Neuron devices, and Elastic Inference accelerators. For
+// more information, see [Working with GPUs on Amazon ECS]or [Working with Amazon Elastic Inference on Amazon ECS] in the Amazon Elastic Container Service Developer
+// Guide
 //
 // [Working with Amazon Elastic Inference on Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html
 // [Working with GPUs on Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html
@@ -5960,7 +5966,13 @@ type ResourceRequirement struct {
 	// When the type is GPU , the value is the number of physical GPUs the Amazon ECS
 	// container agent reserves for the container. The number of GPUs that's reserved
 	// for all containers in a task can't exceed the number of available GPUs on the
-	// container instance that the task is launched on.
+	// container instance that the task is launched on. You can also specify ALL to
+	// allocate all available GPUs on the instance to the container.
+	//
+	// When the type is NeuronDevice , the value must be ALL . This allocates all
+	// available Neuron devices on the instance to the container. Only one container in
+	// a task can specify NeuronDevice resources. This resource type is only supported
+	// on Managed Instances.
 	//
 	// When the type is InferenceAccelerator , the value matches the deviceName for an [InferenceAccelerator]
 	// specified in a task definition.

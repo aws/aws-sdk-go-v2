@@ -1016,8 +1016,11 @@ func (e *InvalidHandshakeTransitionException) ErrorFault() smithy.ErrorFault {
 //   - END_DATE_NOT_END_OF_MONTH: You provided an invalid end date. The end date
 //     must be the end of the last day of the month (23.59.59.999).
 //
-//   - END_DATE_TOO_EARLY: You provided an invalid end date. It is too early for
-//     the transfer to end.
+//   - END_DATE_TOO_EARLY: You provided an invalid end date. The end date is too
+//     early.
+//
+//   - END_DATE_TOO_LATE: You provided an invalid end date. The end date is too
+//     late.
 //
 //   - IMMUTABLE_POLICY: You specified a policy that is managed by Amazon Web
 //     Services and can't be modified.

@@ -66,6 +66,10 @@ type UpdateClusterInput struct {
 	// created in the SageMaker HyperPod cluster.
 	RestrictedInstanceGroups []types.ClusterRestrictedInstanceGroupSpecification
 
+	// The configuration for the restricted instance groups (RIG) in the SageMaker
+	// HyperPod cluster.
+	RestrictedInstanceGroupsConfig *types.ClusterRestrictedInstanceGroupsConfig
+
 	// Updates the configuration for managed tier checkpointing on the HyperPod
 	// cluster. For example, you can enable or disable the feature and modify the
 	// percentage of cluster memory allocated for checkpoint storage.

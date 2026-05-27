@@ -48,35 +48,36 @@ type GetFeedOutput struct {
 	// This member is required.
 	Arn *string
 
-	// The dataEndpoints of the feed being queried.
+	// The dataEndpoints of the feed.
 	//
 	// This member is required.
 	DataEndpoints []string
 
-	// The ID of the feed being queried.
+	// The ID of the feed.
 	//
 	// This member is required.
 	Id *string
 
-	// The name of the feed being queried.
+	// The name of the feed.
 	//
 	// This member is required.
 	Name *string
 
-	// An array of the outputs in the feed being queried.
+	// An array of the outputs in the feed.
 	//
 	// This member is required.
 	Outputs []types.GetOutput
 
-	// The status of the feed being queried.
+	// The status of the feed.
 	//
 	// This member is required.
 	Status types.FeedStatus
 
-	// Information about the resource, if any, associated with the feed being queried.
+	// Information about the resource that is associated with the feed. It's possible
+	// that there is no associated resource. This is not an error.
 	Association *types.FeedAssociation
 
-	// A list of the tags, if any, for the feed being queried.
+	// A list of the tags, if any, for the feed.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

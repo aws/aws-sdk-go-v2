@@ -17,6 +17,9 @@ func ExampleOutputConfig_outputUsage() {
 	case *types.OutputConfigMemberCropping:
 		_ = v.Value // Value is types.CroppingConfig
 
+	case *types.OutputConfigMemberSubtitling:
+		_ = v.Value // Value is types.SubtitlingConfig
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -26,5 +29,6 @@ func ExampleOutputConfig_outputUsage() {
 	}
 }
 
+var _ *types.SubtitlingConfig
 var _ *types.ClippingConfig
 var _ *types.CroppingConfig

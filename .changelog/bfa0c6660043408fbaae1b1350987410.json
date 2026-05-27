@@ -1,0 +1,8 @@
+{
+    "id": "bfa0c666-0043-408f-baae-1b1350987410",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/rum"
+    ]
+}

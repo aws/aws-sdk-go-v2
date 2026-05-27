@@ -25482,6 +25482,40 @@ func awsRestjson1_deserializeDocument__listOfAudioDescription(v *[]types.AudioDe
 	return nil
 }
 
+func awsRestjson1_deserializeDocument__listOfAudioFeedInput(v *[]types.AudioFeedInput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AudioFeedInput
+	if *v == nil {
+		cv = []types.AudioFeedInput{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AudioFeedInput
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAudioFeedInput(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOfAudioSelector(v *[]types.AudioSelector, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -29058,6 +29092,55 @@ func awsRestjson1_deserializeDocumentAudioDolbyEDecode(v **types.AudioDolbyEDeco
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAudioFeedInput(v **types.AudioFeedInput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AudioFeedInput
+	if *v == nil {
+		sv = &types.AudioFeedInput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audioSelectorName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.AudioSelectorName = ptr.String(jtv)
+			}
+
+		case "feedInput":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.FeedInput = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAudioHlsRenditionSelection(v **types.AudioHlsRenditionSelection, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -31324,6 +31407,11 @@ func awsRestjson1_deserializeDocumentCaptionSelectorSettings(v **types.CaptionSe
 				return err
 			}
 
+		case "smartSubtitleSourceSettings":
+			if err := awsRestjson1_deserializeDocumentSmartSubtitleSourceSettings(&sv.SmartSubtitleSourceSettings, value); err != nil {
+				return err
+			}
+
 		case "teletextSourceSettings":
 			if err := awsRestjson1_deserializeDocumentTeletextSourceSettings(&sv.TeletextSourceSettings, value); err != nil {
 				return err
@@ -33167,6 +33255,11 @@ func awsRestjson1_deserializeDocumentDescribeInferenceSettings(v **types.Describ
 
 	for key, value := range shape {
 		switch key {
+		case "audioFeedInputs":
+			if err := awsRestjson1_deserializeDocument__listOfAudioFeedInput(&sv.AudioFeedInputs, value); err != nil {
+				return err
+			}
+
 		case "feedArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -48602,6 +48695,55 @@ func awsRestjson1_deserializeDocumentSignalMapSummary(v **types.SignalMapSummary
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSmartSubtitleSourceSettings(v **types.SmartSubtitleSourceSettings, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SmartSubtitleSourceSettings
+	if *v == nil {
+		sv = &types.SmartSubtitleSourceSettings{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "captionSynchronizationMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CaptionSynchronizationMode to be of type string, got %T instead", value)
+				}
+				sv.CaptionSynchronizationMode = types.CaptionSynchronizationMode(jtv)
+			}
+
+		case "inferenceFeedOutput":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.InferenceFeedOutput = ptr.String(jtv)
 			}
 
 		default:

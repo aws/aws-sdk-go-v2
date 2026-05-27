@@ -2,6 +2,58 @@
 
 package types
 
+type DictionaryLanguage string
+
+// Enum values for DictionaryLanguage
+const (
+	DictionaryLanguageEng DictionaryLanguage = "eng"
+	DictionaryLanguageFra DictionaryLanguage = "fra"
+	DictionaryLanguageIta DictionaryLanguage = "ita"
+	DictionaryLanguageDeu DictionaryLanguage = "deu"
+	DictionaryLanguageSpa DictionaryLanguage = "spa"
+	DictionaryLanguagePor DictionaryLanguage = "por"
+)
+
+// Values returns all known values for DictionaryLanguage. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DictionaryLanguage) Values() []DictionaryLanguage {
+	return []DictionaryLanguage{
+		"eng",
+		"fra",
+		"ita",
+		"deu",
+		"spa",
+		"por",
+	}
+}
+
+type DictionaryStatus string
+
+// Enum values for DictionaryStatus
+const (
+	DictionaryStatusCreating   DictionaryStatus = "CREATING"
+	DictionaryStatusAvailable  DictionaryStatus = "AVAILABLE"
+	DictionaryStatusReferenced DictionaryStatus = "REFERENCED"
+	DictionaryStatusDeleting   DictionaryStatus = "DELETING"
+	DictionaryStatusDeleted    DictionaryStatus = "DELETED"
+)
+
+// Values returns all known values for DictionaryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DictionaryStatus) Values() []DictionaryStatus {
+	return []DictionaryStatus{
+		"CREATING",
+		"AVAILABLE",
+		"REFERENCED",
+		"DELETING",
+		"DELETED",
+	}
+}
+
 type FeedStatus string
 
 // Enum values for FeedStatus
@@ -47,5 +99,59 @@ func (OutputStatus) Values() []OutputStatus {
 	return []OutputStatus{
 		"ENABLED",
 		"DISABLED",
+	}
+}
+
+type ProfanityFilterMode string
+
+// Enum values for ProfanityFilterMode
+const (
+	ProfanityFilterModeDisabled ProfanityFilterMode = "DISABLED"
+	ProfanityFilterModeCensor   ProfanityFilterMode = "CENSOR"
+	ProfanityFilterModeDrop     ProfanityFilterMode = "DROP"
+)
+
+// Values returns all known values for ProfanityFilterMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProfanityFilterMode) Values() []ProfanityFilterMode {
+	return []ProfanityFilterMode{
+		"DISABLED",
+		"CENSOR",
+		"DROP",
+	}
+}
+
+type TranscriptionLanguage string
+
+// Enum values for TranscriptionLanguage
+const (
+	TranscriptionLanguageEng   TranscriptionLanguage = "eng"
+	TranscriptionLanguageEngAu TranscriptionLanguage = "eng-au"
+	TranscriptionLanguageEngGb TranscriptionLanguage = "eng-gb"
+	TranscriptionLanguageEngUs TranscriptionLanguage = "eng-us"
+	TranscriptionLanguageFra   TranscriptionLanguage = "fra"
+	TranscriptionLanguageIta   TranscriptionLanguage = "ita"
+	TranscriptionLanguageDeu   TranscriptionLanguage = "deu"
+	TranscriptionLanguageSpa   TranscriptionLanguage = "spa"
+	TranscriptionLanguagePor   TranscriptionLanguage = "por"
+)
+
+// Values returns all known values for TranscriptionLanguage. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (TranscriptionLanguage) Values() []TranscriptionLanguage {
+	return []TranscriptionLanguage{
+		"eng",
+		"eng-au",
+		"eng-gb",
+		"eng-us",
+		"fra",
+		"ita",
+		"deu",
+		"spa",
+		"por",
 	}
 }

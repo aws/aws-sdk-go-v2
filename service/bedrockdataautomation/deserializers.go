@@ -5692,6 +5692,11 @@ func awsRestjson1_deserializeDocumentCustomOutputConfiguration(v **types.CustomO
 				return err
 			}
 
+		case "document":
+			if err := awsRestjson1_deserializeDocumentDocumentCustomOutputConfiguration(&sv.Document, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6620,6 +6625,42 @@ func awsRestjson1_deserializeDocumentDocumentBoundingBox(v **types.DocumentBound
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDocumentCustomOutputConfiguration(v **types.DocumentCustomOutputConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DocumentCustomOutputConfiguration
+	if *v == nil {
+		sv = &types.DocumentCustomOutputConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "fallbackBlueprints":
+			if err := awsRestjson1_deserializeDocumentFallbackBlueprintItems(&sv.FallbackBlueprints, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDocumentExtractionGranularity(v **types.DocumentExtractionGranularity, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7131,6 +7172,40 @@ func awsRestjson1_deserializeDocumentEntityTypeInfoList(v *[]types.EntityTypeInf
 		var col types.EntityTypeInfo
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentEntityTypeInfo(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFallbackBlueprintItems(v *[]types.BlueprintItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BlueprintItem
+	if *v == nil {
+		cv = []types.BlueprintItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BlueprintItem
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentBlueprintItem(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr

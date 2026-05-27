@@ -1002,6 +1002,25 @@ func (BurnInTeletextGridControl) Values() []BurnInTeletextGridControl {
 	}
 }
 
+type CaptionSynchronizationMode string
+
+// Enum values for CaptionSynchronizationMode
+const (
+	CaptionSynchronizationModeNoVideoDelay         CaptionSynchronizationMode = "NO_VIDEO_DELAY"
+	CaptionSynchronizationModeVideoAlignedCaptions CaptionSynchronizationMode = "VIDEO_ALIGNED_CAPTIONS"
+)
+
+// Values returns all known values for CaptionSynchronizationMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CaptionSynchronizationMode) Values() []CaptionSynchronizationMode {
+	return []CaptionSynchronizationMode{
+		"NO_VIDEO_DELAY",
+		"VIDEO_ALIGNED_CAPTIONS",
+	}
+}
+
 type CdiInputResolution string
 
 // Enum values for CdiInputResolution

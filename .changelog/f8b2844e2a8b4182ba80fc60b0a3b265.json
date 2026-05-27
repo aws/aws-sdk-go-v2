@@ -1,0 +1,8 @@
+{
+    "id": "f8b2844e-2a8b-4182-ba80-fc60b0a3b265",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/computeoptimizer"
+    ]
+}

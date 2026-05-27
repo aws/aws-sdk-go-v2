@@ -341,6 +341,21 @@ type AudioDolbyEDecode struct {
 	noSmithyDocumentSerde
 }
 
+// Maps an audio selector in the channel to a feed input on the associated
+// Elemental Inference feed.
+type AudioFeedInput struct {
+
+	// The name of the audio selector in the channel that will be sent to the
+	// Elemental Inference feed input.
+	AudioSelectorName *string
+
+	// The name of the feed input on the Elemental Inference feed that will receive
+	// the audio from the specified audio selector.
+	FeedInput *string
+
+	noSmithyDocumentSerde
+}
+
 // Audio Hls Rendition Selection
 type AudioHlsRenditionSelection struct {
 
@@ -1214,6 +1229,9 @@ type CaptionSelectorSettings struct {
 	// Scte27 Source Settings
 	Scte27SourceSettings *Scte27SourceSettings
 
+	// Smart Subtitle Source Settings
+	SmartSubtitleSourceSettings *SmartSubtitleSourceSettings
+
 	// Teletext Source Settings
 	TeletextSourceSettings *TeletextSourceSettings
 
@@ -1931,6 +1949,10 @@ type DescribeFollowerChannelSettings struct {
 
 // Configures Elemental Inference features in a channel.
 type DescribeInferenceSettings struct {
+
+	// A list of audio feed inputs that map audio selectors in the channel to feed
+	// inputs on the associated Elemental Inference feed.
+	AudioFeedInputs []AudioFeedInput
 
 	// The ARN of the feed resource that is associated with this channel. The feed is
 	// a resource in the Elemental Inference service.
@@ -3988,6 +4010,10 @@ type ImmediateModeScheduleActionStartSettings struct {
 
 // Configures Elemental Inference features in a channel.
 type InferenceSettings struct {
+
+	// A list of audio feed inputs that map audio selectors in the channel to feed
+	// inputs on the associated Elemental Inference feed.
+	AudioFeedInputs []AudioFeedInput
 
 	// The ARN of the feed resource that is associated with this channel. The feed is
 	// a resource in the Elemental Inference service.
@@ -7658,6 +7684,20 @@ type SignalMapSummary struct {
 
 	// Represents the tags associated with a resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Smart Subtitle Source Settings
+type SmartSubtitleSourceSettings struct {
+
+	// Controls whether MediaLive delays video to synchronize captions with audio and
+	// video output.
+	CaptionSynchronizationMode CaptionSynchronizationMode
+
+	// The name of the Elemental Inference feed output that supplies subtitle input
+	// into this caption selector.
+	InferenceFeedOutput *string
 
 	noSmithyDocumentSerde
 }

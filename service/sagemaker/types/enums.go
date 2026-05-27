@@ -197,45 +197,46 @@ type AIRecommendationInstanceType string
 
 // Enum values for AIRecommendationInstanceType
 const (
-	AIRecommendationInstanceTypeMlG5Xlarge     AIRecommendationInstanceType = "ml.g5.xlarge"
-	AIRecommendationInstanceTypeMlG52xlarge    AIRecommendationInstanceType = "ml.g5.2xlarge"
-	AIRecommendationInstanceTypeMlG54xlarge    AIRecommendationInstanceType = "ml.g5.4xlarge"
-	AIRecommendationInstanceTypeMlG58xlarge    AIRecommendationInstanceType = "ml.g5.8xlarge"
-	AIRecommendationInstanceTypeMlG512xlarge   AIRecommendationInstanceType = "ml.g5.12xlarge"
-	AIRecommendationInstanceTypeMlG516xlarge   AIRecommendationInstanceType = "ml.g5.16xlarge"
-	AIRecommendationInstanceTypeMlG524xlarge   AIRecommendationInstanceType = "ml.g5.24xlarge"
-	AIRecommendationInstanceTypeMlG548xlarge   AIRecommendationInstanceType = "ml.g5.48xlarge"
-	AIRecommendationInstanceTypeMlG6Xlarge     AIRecommendationInstanceType = "ml.g6.xlarge"
-	AIRecommendationInstanceTypeMlG62xlarge    AIRecommendationInstanceType = "ml.g6.2xlarge"
-	AIRecommendationInstanceTypeMlG64xlarge    AIRecommendationInstanceType = "ml.g6.4xlarge"
-	AIRecommendationInstanceTypeMlG68xlarge    AIRecommendationInstanceType = "ml.g6.8xlarge"
-	AIRecommendationInstanceTypeMlG612xlarge   AIRecommendationInstanceType = "ml.g6.12xlarge"
-	AIRecommendationInstanceTypeMlG616xlarge   AIRecommendationInstanceType = "ml.g6.16xlarge"
-	AIRecommendationInstanceTypeMlG624xlarge   AIRecommendationInstanceType = "ml.g6.24xlarge"
-	AIRecommendationInstanceTypeMlG648xlarge   AIRecommendationInstanceType = "ml.g6.48xlarge"
-	AIRecommendationInstanceTypeMlG6eXlarge    AIRecommendationInstanceType = "ml.g6e.xlarge"
-	AIRecommendationInstanceTypeMlG6e2xlarge   AIRecommendationInstanceType = "ml.g6e.2xlarge"
-	AIRecommendationInstanceTypeMlG6e4xlarge   AIRecommendationInstanceType = "ml.g6e.4xlarge"
-	AIRecommendationInstanceTypeMlG6e8xlarge   AIRecommendationInstanceType = "ml.g6e.8xlarge"
-	AIRecommendationInstanceTypeMlG6e12xlarge  AIRecommendationInstanceType = "ml.g6e.12xlarge"
-	AIRecommendationInstanceTypeMlG6e16xlarge  AIRecommendationInstanceType = "ml.g6e.16xlarge"
-	AIRecommendationInstanceTypeMlG6e24xlarge  AIRecommendationInstanceType = "ml.g6e.24xlarge"
-	AIRecommendationInstanceTypeMlG6e48xlarge  AIRecommendationInstanceType = "ml.g6e.48xlarge"
-	AIRecommendationInstanceTypeMlG7e2xlarge   AIRecommendationInstanceType = "ml.g7e.2xlarge"
-	AIRecommendationInstanceTypeMlG7e4xlarge   AIRecommendationInstanceType = "ml.g7e.4xlarge"
-	AIRecommendationInstanceTypeMlG7e8xlarge   AIRecommendationInstanceType = "ml.g7e.8xlarge"
-	AIRecommendationInstanceTypeMlG7e12xlarge  AIRecommendationInstanceType = "ml.g7e.12xlarge"
-	AIRecommendationInstanceTypeMlG7e24xlarge  AIRecommendationInstanceType = "ml.g7e.24xlarge"
-	AIRecommendationInstanceTypeMlG7e48xlarge  AIRecommendationInstanceType = "ml.g7e.48xlarge"
-	AIRecommendationInstanceTypeMlP32xlarge    AIRecommendationInstanceType = "ml.p3.2xlarge"
-	AIRecommendationInstanceTypeMlP38xlarge    AIRecommendationInstanceType = "ml.p3.8xlarge"
-	AIRecommendationInstanceTypeMlP316xlarge   AIRecommendationInstanceType = "ml.p3.16xlarge"
-	AIRecommendationInstanceTypeMlP4d24xlarge  AIRecommendationInstanceType = "ml.p4d.24xlarge"
-	AIRecommendationInstanceTypeMlP4de24xlarge AIRecommendationInstanceType = "ml.p4de.24xlarge"
-	AIRecommendationInstanceTypeMlP54xlarge    AIRecommendationInstanceType = "ml.p5.4xlarge"
-	AIRecommendationInstanceTypeMlP548xlarge   AIRecommendationInstanceType = "ml.p5.48xlarge"
-	AIRecommendationInstanceTypeMlP5e48xlarge  AIRecommendationInstanceType = "ml.p5e.48xlarge"
-	AIRecommendationInstanceTypeMlP5en48xlarge AIRecommendationInstanceType = "ml.p5en.48xlarge"
+	AIRecommendationInstanceTypeMlG5Xlarge       AIRecommendationInstanceType = "ml.g5.xlarge"
+	AIRecommendationInstanceTypeMlG52xlarge      AIRecommendationInstanceType = "ml.g5.2xlarge"
+	AIRecommendationInstanceTypeMlG54xlarge      AIRecommendationInstanceType = "ml.g5.4xlarge"
+	AIRecommendationInstanceTypeMlG58xlarge      AIRecommendationInstanceType = "ml.g5.8xlarge"
+	AIRecommendationInstanceTypeMlG512xlarge     AIRecommendationInstanceType = "ml.g5.12xlarge"
+	AIRecommendationInstanceTypeMlG516xlarge     AIRecommendationInstanceType = "ml.g5.16xlarge"
+	AIRecommendationInstanceTypeMlG524xlarge     AIRecommendationInstanceType = "ml.g5.24xlarge"
+	AIRecommendationInstanceTypeMlG548xlarge     AIRecommendationInstanceType = "ml.g5.48xlarge"
+	AIRecommendationInstanceTypeMlG6Xlarge       AIRecommendationInstanceType = "ml.g6.xlarge"
+	AIRecommendationInstanceTypeMlG62xlarge      AIRecommendationInstanceType = "ml.g6.2xlarge"
+	AIRecommendationInstanceTypeMlG64xlarge      AIRecommendationInstanceType = "ml.g6.4xlarge"
+	AIRecommendationInstanceTypeMlG68xlarge      AIRecommendationInstanceType = "ml.g6.8xlarge"
+	AIRecommendationInstanceTypeMlG612xlarge     AIRecommendationInstanceType = "ml.g6.12xlarge"
+	AIRecommendationInstanceTypeMlG616xlarge     AIRecommendationInstanceType = "ml.g6.16xlarge"
+	AIRecommendationInstanceTypeMlG624xlarge     AIRecommendationInstanceType = "ml.g6.24xlarge"
+	AIRecommendationInstanceTypeMlG648xlarge     AIRecommendationInstanceType = "ml.g6.48xlarge"
+	AIRecommendationInstanceTypeMlG6eXlarge      AIRecommendationInstanceType = "ml.g6e.xlarge"
+	AIRecommendationInstanceTypeMlG6e2xlarge     AIRecommendationInstanceType = "ml.g6e.2xlarge"
+	AIRecommendationInstanceTypeMlG6e4xlarge     AIRecommendationInstanceType = "ml.g6e.4xlarge"
+	AIRecommendationInstanceTypeMlG6e8xlarge     AIRecommendationInstanceType = "ml.g6e.8xlarge"
+	AIRecommendationInstanceTypeMlG6e12xlarge    AIRecommendationInstanceType = "ml.g6e.12xlarge"
+	AIRecommendationInstanceTypeMlG6e16xlarge    AIRecommendationInstanceType = "ml.g6e.16xlarge"
+	AIRecommendationInstanceTypeMlG6e24xlarge    AIRecommendationInstanceType = "ml.g6e.24xlarge"
+	AIRecommendationInstanceTypeMlG6e48xlarge    AIRecommendationInstanceType = "ml.g6e.48xlarge"
+	AIRecommendationInstanceTypeMlG7e2xlarge     AIRecommendationInstanceType = "ml.g7e.2xlarge"
+	AIRecommendationInstanceTypeMlG7e4xlarge     AIRecommendationInstanceType = "ml.g7e.4xlarge"
+	AIRecommendationInstanceTypeMlG7e8xlarge     AIRecommendationInstanceType = "ml.g7e.8xlarge"
+	AIRecommendationInstanceTypeMlG7e12xlarge    AIRecommendationInstanceType = "ml.g7e.12xlarge"
+	AIRecommendationInstanceTypeMlG7e24xlarge    AIRecommendationInstanceType = "ml.g7e.24xlarge"
+	AIRecommendationInstanceTypeMlG7e48xlarge    AIRecommendationInstanceType = "ml.g7e.48xlarge"
+	AIRecommendationInstanceTypeMlP32xlarge      AIRecommendationInstanceType = "ml.p3.2xlarge"
+	AIRecommendationInstanceTypeMlP38xlarge      AIRecommendationInstanceType = "ml.p3.8xlarge"
+	AIRecommendationInstanceTypeMlP316xlarge     AIRecommendationInstanceType = "ml.p3.16xlarge"
+	AIRecommendationInstanceTypeMlP4d24xlarge    AIRecommendationInstanceType = "ml.p4d.24xlarge"
+	AIRecommendationInstanceTypeMlP4de24xlarge   AIRecommendationInstanceType = "ml.p4de.24xlarge"
+	AIRecommendationInstanceTypeMlP54xlarge      AIRecommendationInstanceType = "ml.p5.4xlarge"
+	AIRecommendationInstanceTypeMlP548xlarge     AIRecommendationInstanceType = "ml.p5.48xlarge"
+	AIRecommendationInstanceTypeMlP5e48xlarge    AIRecommendationInstanceType = "ml.p5e.48xlarge"
+	AIRecommendationInstanceTypeMlP5en48xlarge   AIRecommendationInstanceType = "ml.p5en.48xlarge"
+	AIRecommendationInstanceTypeMlP6B20048xlarge AIRecommendationInstanceType = "ml.p6-b200.48xlarge"
 )
 
 // Values returns all known values for AIRecommendationInstanceType. Note that
@@ -284,6 +285,7 @@ func (AIRecommendationInstanceType) Values() []AIRecommendationInstanceType {
 		"ml.p5.48xlarge",
 		"ml.p5e.48xlarge",
 		"ml.p5en.48xlarge",
+		"ml.p6-b200.48xlarge",
 	}
 }
 
@@ -2112,6 +2114,26 @@ func (ClusterEventResourceType) Values() []ClusterEventResourceType {
 		"Cluster",
 		"InstanceGroup",
 		"Instance",
+	}
+}
+
+type ClusterFSxLustreDeletionPolicy string
+
+// Enum values for ClusterFSxLustreDeletionPolicy
+const (
+	ClusterFSxLustreDeletionPolicyDeleteIfNotUsed ClusterFSxLustreDeletionPolicy = "DeleteIfNotUsed"
+	ClusterFSxLustreDeletionPolicyKeep            ClusterFSxLustreDeletionPolicy = "Keep"
+)
+
+// Values returns all known values for ClusterFSxLustreDeletionPolicy. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClusterFSxLustreDeletionPolicy) Values() []ClusterFSxLustreDeletionPolicy {
+	return []ClusterFSxLustreDeletionPolicy{
+		"DeleteIfNotUsed",
+		"Keep",
 	}
 }
 

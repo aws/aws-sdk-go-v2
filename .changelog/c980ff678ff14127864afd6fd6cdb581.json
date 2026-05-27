@@ -1,0 +1,8 @@
+{
+    "id": "c980ff67-8ff1-4127-864a-fd6fd6cdb581",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/eksauth"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "37d92a73-4ed4-4a57-8d01-4ac4a208e583",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/omics"
+    ]
+}

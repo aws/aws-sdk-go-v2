@@ -66,6 +66,11 @@ import (
 //   - Check the CloudTrail log for the CreateAccountResult event. For information
 //     on using CloudTrail with Organizations, see [Logging and monitoring in Organizations]in the Organizations User Guide.
 //
+// Additionally, the AccountJoinedOrganization event is logged in CloudTrail and
+// is available only in the management account's event history only for the linked
+// commercial account. This event includes joinedMethod:Created and joinedTime
+// fields to provide context on how and when the account joined the organization.
+//
 // When you call the CreateGovCloudAccount action, you create two accounts: a
 // standalone account in the Amazon Web Services GovCloud (US) Region and an
 // associated account in the commercial Region for billing and support purposes.

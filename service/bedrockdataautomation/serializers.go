@@ -2983,6 +2983,13 @@ func awsRestjson1_serializeDocumentCustomOutputConfiguration(v *types.CustomOutp
 		}
 	}
 
+	if v.Document != nil {
+		ok := object.Key("document")
+		if err := awsRestjson1_serializeDocumentDocumentCustomOutputConfiguration(v.Document, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3075,6 +3082,20 @@ func awsRestjson1_serializeDocumentDocumentBoundingBox(v *types.DocumentBounding
 	if len(v.State) > 0 {
 		ok := object.Key("state")
 		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDocumentCustomOutputConfiguration(v *types.DocumentCustomOutputConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FallbackBlueprints != nil {
+		ok := object.Key("fallbackBlueprints")
+		if err := awsRestjson1_serializeDocumentFallbackBlueprintItems(v.FallbackBlueprints, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3291,6 +3312,19 @@ func awsRestjson1_serializeDocumentEventBridgeConfiguration(v *types.EventBridge
 		ok.Boolean(*v.EventBridgeEnabled)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFallbackBlueprintItems(v []types.BlueprintItem, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBlueprintItem(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

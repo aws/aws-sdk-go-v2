@@ -1557,7 +1557,8 @@ type PlatformDeviceType string
 
 // Enum values for PlatformDeviceType
 const (
-	PlatformDeviceTypeGpu PlatformDeviceType = "GPU"
+	PlatformDeviceTypeGpu          PlatformDeviceType = "GPU"
+	PlatformDeviceTypeNeuronDevice PlatformDeviceType = "NEURON_DEVICE"
 )
 
 // Values returns all known values for PlatformDeviceType. Note that this can be
@@ -1567,6 +1568,7 @@ const (
 func (PlatformDeviceType) Values() []PlatformDeviceType {
 	return []PlatformDeviceType{
 		"GPU",
+		"NEURON_DEVICE",
 	}
 }
 
@@ -1652,6 +1654,7 @@ type ResourceType string
 const (
 	ResourceTypeGpu                  ResourceType = "GPU"
 	ResourceTypeInferenceAccelerator ResourceType = "InferenceAccelerator"
+	ResourceTypeNeuronDevice         ResourceType = "NeuronDevice"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -1662,6 +1665,7 @@ func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"GPU",
 		"InferenceAccelerator",
+		"NeuronDevice",
 	}
 }
 

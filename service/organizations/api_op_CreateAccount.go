@@ -25,6 +25,11 @@ import (
 //   - Check the CloudTrail log for the CreateAccountResult event. For information
 //     on using CloudTrail with Organizations, see [Logging and monitoring in Organizations]in the Organizations User Guide.
 //
+// Additionally, the AccountJoinedOrganization event is logged in CloudTrail and
+// is available only in the management account's event history. This event includes
+// joinedMethod:Created and joinedTime fields to provide context on how and when
+// the account joined the organization.
+//
 // The user who calls the API to create an account must have the
 // organizations:CreateAccount permission. If you enabled all features in the
 // organization, Organizations creates the required service-linked role named

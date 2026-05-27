@@ -55342,6 +55342,42 @@ func awsAwsjson11_deserializeDocumentClusterRestrictedInstanceGroupDetailsList(v
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentClusterRestrictedInstanceGroupsConfigOutput(v **types.ClusterRestrictedInstanceGroupsConfigOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterRestrictedInstanceGroupsConfigOutput
+	if *v == nil {
+		sv = &types.ClusterRestrictedInstanceGroupsConfigOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SharedEnvironmentConfig":
+			if err := awsAwsjson11_deserializeDocumentClusterSharedEnvironmentConfigDetails(&sv.SharedEnvironmentConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentClusterSchedulerConfigSummary(v **types.ClusterSchedulerConfigSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -55494,6 +55530,65 @@ func awsAwsjson11_deserializeDocumentClusterSchedulerConfigSummaryList(v *[]type
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentClusterSharedEnvironmentConfigDetails(v **types.ClusterSharedEnvironmentConfigDetails, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ClusterSharedEnvironmentConfigDetails
+	if *v == nil {
+		sv = &types.ClusterSharedEnvironmentConfigDetails{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CurrentFSxLustreConfig":
+			if err := awsAwsjson11_deserializeDocumentFSxLustreConfig(&sv.CurrentFSxLustreConfig, value); err != nil {
+				return err
+			}
+
+		case "CurrentFSxLustreDeletionPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterFSxLustreDeletionPolicy to be of type string, got %T instead", value)
+				}
+				sv.CurrentFSxLustreDeletionPolicy = types.ClusterFSxLustreDeletionPolicy(jtv)
+			}
+
+		case "DesiredFSxLustreConfig":
+			if err := awsAwsjson11_deserializeDocumentFSxLustreConfig(&sv.DesiredFSxLustreConfig, value); err != nil {
+				return err
+			}
+
+		case "DesiredFSxLustreDeletionPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClusterFSxLustreDeletionPolicy to be of type string, got %T instead", value)
+				}
+				sv.DesiredFSxLustreDeletionPolicy = types.ClusterFSxLustreDeletionPolicy(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -91125,6 +91220,15 @@ func awsAwsjson11_deserializeDocumentReservedCapacitySummary(v **types.ReservedC
 				sv.AvailabilityZone = ptr.String(jtv)
 			}
 
+		case "AvailabilityZoneId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AvailabilityZoneId to be of type string, got %T instead", value)
+				}
+				sv.AvailabilityZoneId = ptr.String(jtv)
+			}
+
 		case "DurationHours":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -108622,6 +108726,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeClusterOutput(v **DescribeCluster
 
 		case "RestrictedInstanceGroups":
 			if err := awsAwsjson11_deserializeDocumentClusterRestrictedInstanceGroupDetailsList(&sv.RestrictedInstanceGroups, value); err != nil {
+				return err
+			}
+
+		case "RestrictedInstanceGroupsConfig":
+			if err := awsAwsjson11_deserializeDocumentClusterRestrictedInstanceGroupsConfigOutput(&sv.RestrictedInstanceGroupsConfig, value); err != nil {
 				return err
 			}
 

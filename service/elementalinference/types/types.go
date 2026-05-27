@@ -6,10 +6,29 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
+// The width and height of the output video. Used in SubtitlingConfig to determine
+// subtitle layout.
+type AspectRatio struct {
+
+	// The height component of the aspect ratio (for example, 9 in a 16:9 ratio).
+	//
+	// This member is required.
+	Height *int32
+
+	// The width component of the aspect ratio (for example, 16 in a 16:9 ratio).
+	//
+	// This member is required.
+	Width *int32
+
+	noSmithyDocumentSerde
+}
+
 // A type of OutputConfig, used when the output in a feed is for the clip feature.
 type ClippingConfig struct {
 
-	// The metadata that is the result of the clip request to Elemental Inference.
+	// A string that you want Elemental Inference to always include in the event
+	// clipping metadata for this output. The string might identify the sports event in
+	// the source media, for example.
 	CallbackMetadata *string
 
 	noSmithyDocumentSerde
@@ -24,10 +43,10 @@ type CreateOutput struct {
 	// This member is required.
 	Name *string
 
-	// A typed property for an output in a feed. It is used in the CreateFeed and
-	// AssociateFeed actions. It identifies the action for Elemental Inference to
-	// perform. It also provides a repository for the results of that action. For
-	// example, CroppingConfig output will contain the metadata for the crop feature.
+	// A typed property for an output in a feed. It identifies the action for
+	// Elemental Inference to perform. It also provides a repository for the results of
+	// that action. For example, CroppingConfig output will contain the metadata for
+	// the crop feature.
 	//
 	// This member is required.
 	OutputConfig OutputConfig
@@ -48,6 +67,38 @@ type CroppingConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Contains summary information about a dictionary. Used in the ListDictionaries
+// response.
+type DictionarySummary struct {
+
+	// The ARN of the dictionary.
+	//
+	// This member is required.
+	Arn *string
+
+	// The ID of the dictionary.
+	//
+	// This member is required.
+	Id *string
+
+	// The language of the dictionary.
+	//
+	// This member is required.
+	Language DictionaryLanguage
+
+	// The name of the dictionary.
+	//
+	// This member is required.
+	Name *string
+
+	// The status of the dictionary.
+	//
+	// This member is required.
+	Status DictionaryStatus
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the resource that is associated with a feed. It is
 // used in the FeedSummary that is used in the response of a ListFeeds action.
 type FeedAssociation struct {
@@ -61,7 +112,7 @@ type FeedAssociation struct {
 }
 
 // Contains configuration information about a feed. It is used in the ListFeeds
-// action.
+// response.
 type FeedSummary struct {
 
 	// The ARN of the feed.
@@ -91,18 +142,18 @@ type FeedSummary struct {
 }
 
 // Contains configuration information about one output in a feed. It is used in
-// the GetFeed action.
+// the GetFeed response.
 type GetOutput struct {
 
-	// The ARN of the output.
+	// The name of the output.
 	//
 	// This member is required.
 	Name *string
 
-	// A typed property for an output in a feed. It is used in the GetFeed action. It
-	// identifies the action for Elemental Inference to perform. It also provides a
-	// repository for the results of that action. For example, CroppingConfig output
-	// will contain the metadata for the crop feature.
+	// A typed property for an output in a feed. It identifies the action for
+	// Elemental Inference to perform. It also provides a repository for the results of
+	// that action. For example, CroppingConfig output will contain the metadata for
+	// the crop feature.
 	//
 	// This member is required.
 	OutputConfig OutputConfig
@@ -115,10 +166,11 @@ type GetOutput struct {
 	// The description of the output.
 	Description *string
 
-	// True means that the output was originally created in the feed by the
-	// AssociateFeed operation. False means it was created using CreateFeed or
-	// UpdateFeed. You will need this value if you use the UpdateFeed operation to
-	// modify the list of outputs in the feed.
+	// True means that the output was originally created in the feed using
+	// AssociateFeed. False means it was created using CreateFeed or UpdateFeed.
+	//
+	// You will need this value if you use UpdateFeed to modify the list of outputs in
+	// the feed.
 	FromAssociation *bool
 
 	noSmithyDocumentSerde
@@ -131,6 +183,7 @@ type GetOutput struct {
 //
 //	OutputConfigMemberClipping
 //	OutputConfigMemberCropping
+//	OutputConfigMemberSubtitling
 type OutputConfig interface {
 	isOutputConfig()
 }
@@ -153,19 +206,59 @@ type OutputConfigMemberCropping struct {
 
 func (*OutputConfigMemberCropping) isOutputConfig() {}
 
+// The output config type that applies to the smart subtitling feature.
+type OutputConfigMemberSubtitling struct {
+	Value SubtitlingConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*OutputConfigMemberSubtitling) isOutputConfig() {}
+
+// A type of OutputConfig, used when the output in a feed is for the smart
+// subtitling feature. smart subtitling uses automatic speech recognition (ASR) to
+// generate live TTML subtitles from the audio in your source media.
+type SubtitlingConfig struct {
+
+	// The language of the audio in the source media. Elemental Inference uses this
+	// setting to optimize transcription accuracy. Specify the language using an ISO
+	// 639-2/T three-letter code, optionally with a region subtag. Supported values:
+	// eng, eng-au, eng-gb, eng-us, fra, ita, deu, spa, por.
+	//
+	// This member is required.
+	Language TranscriptionLanguage
+
+	// The aspect ratio of the output video, specified as width and height integer
+	// values. Elemental Inference uses the aspect ratio to determine subtitle layout
+	// and line lengths.
+	AspectRatio *AspectRatio
+
+	// The ID of a custom dictionary to improve transcription accuracy for
+	// domain-specific terminology. Use the CreateDictionary operation to create a
+	// dictionary.
+	Dictionary *string
+
+	// Controls how profanity is handled in the generated subtitles. Valid values:
+	// DISABLED (no filtering, default), CENSOR (replace profanity with asterisks),
+	// DROP (remove profanity from the transcript).
+	ProfanityFilter ProfanityFilterMode
+
+	noSmithyDocumentSerde
+}
+
 // Contains configuration information about one output in a feed. It is used in
 // the UpdateFeed action.
 type UpdateOutput struct {
 
-	// The name start here
+	// The name of the output.
 	//
 	// This member is required.
 	Name *string
 
-	// A typed property for an output in a feed. It is used in the UpdateFeed action.
-	// It identifies the action for Elemental Inference to perform. It also provides a
-	// repository for the results of that action. For example, CroppingConfig output
-	// will contain the metadata for the crop feature.
+	// A typed property for an output in a feed. It identifies the action for
+	// Elemental Inference to perform. It also provides a repository for the results of
+	// that action. For example, CroppingConfig output will contain the metadata for
+	// the crop feature.
 	//
 	// This member is required.
 	OutputConfig OutputConfig
@@ -178,11 +271,13 @@ type UpdateOutput struct {
 	// A description of the output.
 	Description *string
 
-	// This property is set by the service when you add the output to the feed, and
-	// indicates how you added the output. True means that you used the AssociateFeed
-	// operation. False means that you used the CreateFeed or UpdateFeed operation. Use
-	// GetFeed to obtain the value. If the value is True, include this field here with
-	// a value of True. If the value is False, omit the field here.
+	// Elemental Inference originally sets this parameter to True if this output was
+	// created by AssociateFeed or to False if this output was created by CreateFeed or
+	// UpdateFeed.
+	//
+	// You must not change this value. Therefore, use GetFeed to determine the current
+	// value. Then in the UpdateFeed request, if the current value is True, include
+	// this parameter with a value of True. If it's False, omit the parameter.
 	FromAssociation *bool
 
 	noSmithyDocumentSerde

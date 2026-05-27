@@ -5343,6 +5343,31 @@ type ClusterRestrictedInstanceGroupDetails struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration for the restricted instance groups (RIG) in the SageMaker
+// HyperPod cluster.
+type ClusterRestrictedInstanceGroupsConfig struct {
+
+	// The shared environment configuration for the restricted instance groups (RIG).
+	//
+	// This member is required.
+	SharedEnvironmentConfig *ClusterSharedEnvironmentConfig
+
+	noSmithyDocumentSerde
+}
+
+// The output configuration for the restricted instance groups (RIG) in the
+// SageMaker HyperPod cluster.
+type ClusterRestrictedInstanceGroupsConfigOutput struct {
+
+	// The shared environment configuration details for the restricted instance groups
+	// (RIG).
+	//
+	// This member is required.
+	SharedEnvironmentConfig *ClusterSharedEnvironmentConfigDetails
+
+	noSmithyDocumentSerde
+}
+
 // The specifications of a restricted instance group that you need to define.
 type ClusterRestrictedInstanceGroupSpecification struct {
 
@@ -5444,6 +5469,47 @@ type ClusterSchedulerConfigSummary struct {
 
 	// Last modified time of the cluster policy.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The shared environment configuration for the restricted instance groups (RIG).
+type ClusterSharedEnvironmentConfig struct {
+
+	// Configuration settings for an Amazon FSx for Lustre file system in the shared
+	// environment.
+	//
+	// This member is required.
+	FSxLustreConfig *FSxLustreConfig
+
+	// The deletion policy for the Amazon FSx for Lustre file system in the shared
+	// environment.
+	//
+	// This member is required.
+	FSxLustreDeletionPolicy ClusterFSxLustreDeletionPolicy
+
+	noSmithyDocumentSerde
+}
+
+// The shared environment configuration details for the restricted instance groups
+// (RIG).
+type ClusterSharedEnvironmentConfigDetails struct {
+
+	// The current Amazon FSx for Lustre file system configuration in the shared
+	// environment.
+	CurrentFSxLustreConfig *FSxLustreConfig
+
+	// The current deletion policy for the Amazon FSx for Lustre file system in the
+	// shared environment.
+	CurrentFSxLustreDeletionPolicy ClusterFSxLustreDeletionPolicy
+
+	// The desired Amazon FSx for Lustre file system configuration in the shared
+	// environment.
+	DesiredFSxLustreConfig *FSxLustreConfig
+
+	// The desired deletion policy for the Amazon FSx for Lustre file system in the
+	// shared environment.
+	DesiredFSxLustreDeletionPolicy ClusterFSxLustreDeletionPolicy
 
 	noSmithyDocumentSerde
 }
@@ -19121,6 +19187,9 @@ type ReservedCapacitySummary struct {
 
 	// The availability zone for the reserved capacity.
 	AvailabilityZone *string
+
+	// The Availability Zone ID of the reserved capacity.
+	AvailabilityZoneId *string
 
 	// The number of whole hours in the total duration for this reserved capacity.
 	DurationHours *int64

@@ -1,0 +1,8 @@
+{
+    "id": "b47d7bfe-ba4e-4348-894b-8e61cd85e985",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/launchwizard"
+    ]
+}

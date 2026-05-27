@@ -1,0 +1,8 @@
+{
+    "id": "41f0f5b5-df2e-4201-9c02-1481808c6641",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/partnercentralbenefits"
+    ]
+}

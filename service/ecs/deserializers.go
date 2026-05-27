@@ -12894,6 +12894,11 @@ func awsAwsjson11_deserializeDocumentContainer(v **types.Container, value interf
 				return err
 			}
 
+		case "neuronDeviceIds":
+			if err := awsAwsjson11_deserializeDocumentNeuronDeviceIds(&sv.NeuronDeviceIds, value); err != nil {
+				return err
+			}
+
 		case "reason":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22887,6 +22892,42 @@ func awsAwsjson11_deserializeDocumentNetworkInterfaces(v *[]types.NetworkInterfa
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentNeuronDeviceIds(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}

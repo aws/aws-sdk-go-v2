@@ -27061,6 +27061,20 @@ func awsAwsjson11_serializeDocumentClusterPartitionNames(v []string, value smith
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentClusterRestrictedInstanceGroupsConfig(v *types.ClusterRestrictedInstanceGroupsConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SharedEnvironmentConfig != nil {
+		ok := object.Key("SharedEnvironmentConfig")
+		if err := awsAwsjson11_serializeDocumentClusterSharedEnvironmentConfig(v.SharedEnvironmentConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentClusterRestrictedInstanceGroupSpecification(v *types.ClusterRestrictedInstanceGroupSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -27143,6 +27157,25 @@ func awsAwsjson11_serializeDocumentClusterRestrictedInstanceGroupSpecifications(
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentClusterSharedEnvironmentConfig(v *types.ClusterSharedEnvironmentConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FSxLustreConfig != nil {
+		ok := object.Key("FSxLustreConfig")
+		if err := awsAwsjson11_serializeDocumentFSxLustreConfig(v.FSxLustreConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.FSxLustreDeletionPolicy) > 0 {
+		ok := object.Key("FSxLustreDeletionPolicy")
+		ok.String(string(v.FSxLustreDeletionPolicy))
+	}
+
 	return nil
 }
 
@@ -39022,6 +39055,13 @@ func awsAwsjson11_serializeOpDocumentCreateClusterInput(v *CreateClusterInput, v
 		}
 	}
 
+	if v.RestrictedInstanceGroupsConfig != nil {
+		ok := object.Key("RestrictedInstanceGroupsConfig")
+		if err := awsAwsjson11_serializeDocumentClusterRestrictedInstanceGroupsConfig(v.RestrictedInstanceGroupsConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -49326,6 +49366,13 @@ func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 	if v.RestrictedInstanceGroups != nil {
 		ok := object.Key("RestrictedInstanceGroups")
 		if err := awsAwsjson11_serializeDocumentClusterRestrictedInstanceGroupSpecifications(v.RestrictedInstanceGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RestrictedInstanceGroupsConfig != nil {
+		ok := object.Key("RestrictedInstanceGroupsConfig")
+		if err := awsAwsjson11_serializeDocumentClusterRestrictedInstanceGroupsConfig(v.RestrictedInstanceGroupsConfig, ok); err != nil {
 			return err
 		}
 	}

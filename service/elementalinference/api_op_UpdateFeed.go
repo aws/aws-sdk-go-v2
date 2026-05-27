@@ -12,6 +12,16 @@ import (
 )
 
 // Updates the name and/or outputs in a feed.
+//
+// UpdateFeed is a PUT operation, which means that the payload that you specify
+// completely overwrites the existing payload.
+//
+// This means that if you want to touch the array of outputs, you must pass in the
+// full new list. So you must omit outputs you want to delete, and include outputs
+// you want to add or modify.
+//
+// If you want to patch the array of outputs to make selective additions, use
+// AssociateFeed.
 func (c *Client) UpdateFeed(ctx context.Context, params *UpdateFeedInput, optFns ...func(*Options)) (*UpdateFeedOutput, error) {
 	if params == nil {
 		params = &UpdateFeedInput{}
@@ -77,18 +87,15 @@ type UpdateFeedOutput struct {
 	// This member is required.
 	Outputs []types.GetOutput
 
-	// The status of the output.
+	// The status of the feed.
 	//
 	// This member is required.
 	Status types.FeedStatus
 
-	// True means that the output was originally created in the feed by the
-	// AssociateFeed operation. False means it was created using CreateFeed or
-	// UpdateFeed. You will need this value if you use the UpdateFeed operation to
-	// modify the list of outputs in the feed.
+	// Information about the resource that is associated with the feed, if any.
 	Association *types.FeedAssociation
 
-	// The name of the resource currently associated with the feed, if any.
+	// The tags associated with the feed.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

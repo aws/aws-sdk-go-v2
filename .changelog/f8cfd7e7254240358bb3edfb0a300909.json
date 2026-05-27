@@ -1,0 +1,8 @@
+{
+    "id": "f8cfd7e7-2542-4035-8bb3-edfb0a300909",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/mpa"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "6f74a5a2-67fb-4e08-b30b-51eae355be85",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/wellarchitected"
+    ]
+}

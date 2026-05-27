@@ -26,6 +26,11 @@ import (
 // FeatureSet parameter to CONSOLIDATED_BILLING , no policy types are enabled by
 // default and you can't use organization policies.
 //
+// The AccountJoinedOrganization event is logged in CloudTrail and is available
+// only in the management account's event history. This event includes
+// joinedMethod:Invited and joinedTime fields to provide context on how and when
+// the account joined the organization.
+//
 // [management account]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
 func (c *Client) CreateOrganization(ctx context.Context, params *CreateOrganizationInput, optFns ...func(*Options)) (*CreateOrganizationOutput, error) {
 	if params == nil {
