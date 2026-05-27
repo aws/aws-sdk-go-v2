@@ -871,20 +871,20 @@ func (d *downloader) byteRange() string {
 
 func getReqRange(rng string) (int64, int64, error) {
 	// rng fmt "bytes=start-end"
-	sub1 := strings.Split(rng, "=")
-	if len(sub1) != 2 {
+	rangeFmt := strings.Split(rng, "=")
+	if len(rangeFmt) != 2 {
 		return -1, -1, fmt.Errorf("invalid range format %s, should be bytes=start-end format", rng)
 	}
-	sub2 := strings.Split(sub1[1], "-")
-	if len(sub2) != 2 {
+	startEnd := strings.Split(rangeFmt[1], "-")
+	if len(startEnd) != 2 {
 		return -1, -1, fmt.Errorf("invalid range format %s, should be bytes=start-end format", rng)
 	}
 
-	start, err := strconv.ParseInt(sub2[0], 10, 64)
+	start, err := strconv.ParseInt(startEnd[0], 10, 64)
 	if err != nil {
 		return -1, -1, fmt.Errorf("invalid range start %v", err)
 	}
-	end, err := strconv.ParseInt(sub2[1], 10, 64)
+	end, err := strconv.ParseInt(startEnd[1], 10, 64)
 	if err != nil {
 		return -1, -1, fmt.Errorf("invalid range end %v", err)
 	}

@@ -25,7 +25,7 @@ type Options struct {
 	// Defaults to 0 (uses the original context) for fail case not caused by ctx cancellation.
 	FailTimeout time.Duration
 
-	// The max parts count for a multi part upload, which could not exceed defaultMaxUploadParts defined by s3 side
+	// The max parts count for a multi part upload, which must not exceed "Maximum number of parts per upload" defined by S3
 	// https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html
 	MaxUploadParts int64
 
