@@ -1095,6 +1095,28 @@
                 "smithy.api#documentation": "Audio Dolby EDecode"
             }
         },
+        "com.amazonaws.medialive#AudioFeedInput": {
+            "type": "structure",
+            "members": {
+                "AudioSelectorName": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the audio selector in the channel that will be sent to the Elemental Inference feed input.",
+                        "smithy.api#jsonName": "audioSelectorName"
+                    }
+                },
+                "FeedInput": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the feed input on the Elemental Inference feed that will receive the audio from the specified audio selector.",
+                        "smithy.api#jsonName": "feedInput"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Maps an audio selector in the channel to a feed input on the associated Elemental Inference feed."
+            }
+        },
         "com.amazonaws.medialive#AudioHlsRenditionSelection": {
             "type": "structure",
             "members": {
@@ -3574,10 +3596,36 @@
                     "traits": {
                         "smithy.api#jsonName": "teletextSourceSettings"
                     }
+                },
+                "SmartSubtitleSourceSettings": {
+                    "target": "com.amazonaws.medialive#SmartSubtitleSourceSettings",
+                    "traits": {
+                        "smithy.api#jsonName": "smartSubtitleSourceSettings"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "Caption Selector Settings"
+            }
+        },
+        "com.amazonaws.medialive#CaptionSynchronizationMode": {
+            "type": "enum",
+            "members": {
+                "NO_VIDEO_DELAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NO_VIDEO_DELAY"
+                    }
+                },
+                "VIDEO_ALIGNED_CAPTIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VIDEO_ALIGNED_CAPTIONS"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Controls how MediaLive synchronizes Elemental Inference generated subtitles with video output.\n\nvideo_aligned_captions - MediaLive delays video to ensure captions are synchronized with\n     audio and video.\nno_video_delay - MediaLive does not delay video for caption alignment. Captions output\n     timing is adjusted to align with video as captions become available."
             }
         },
         "com.amazonaws.medialive#CdiInputResolution": {
@@ -10886,6 +10934,13 @@
                     "traits": {
                         "smithy.api#documentation": "The ARN of the feed resource that is associated with this channel. The feed is a resource in the Elemental Inference service.",
                         "smithy.api#jsonName": "feedArn"
+                    }
+                },
+                "AudioFeedInputs": {
+                    "target": "com.amazonaws.medialive#__listOfAudioFeedInput",
+                    "traits": {
+                        "smithy.api#documentation": "A list of audio feed inputs that map audio selectors in the channel to feed inputs on the associated Elemental Inference feed.",
+                        "smithy.api#jsonName": "audioFeedInputs"
                     }
                 }
             },
@@ -20009,6 +20064,13 @@
                     "traits": {
                         "smithy.api#documentation": "The ARN of the feed resource that is associated with this channel. The feed is a resource in the Elemental Inference service.",
                         "smithy.api#jsonName": "feedArn"
+                    }
+                },
+                "AudioFeedInputs": {
+                    "target": "com.amazonaws.medialive#__listOfAudioFeedInput",
+                    "traits": {
+                        "smithy.api#documentation": "A list of audio feed inputs that map audio selectors in the channel to feed inputs on the associated Elemental Inference feed.",
+                        "smithy.api#jsonName": "audioFeedInputs"
                     }
                 }
             },
@@ -33382,6 +33444,28 @@
                 "smithy.api#documentation": "Placeholder documentation for SignalMapSummary"
             }
         },
+        "com.amazonaws.medialive#SmartSubtitleSourceSettings": {
+            "type": "structure",
+            "members": {
+                "CaptionSynchronizationMode": {
+                    "target": "com.amazonaws.medialive#CaptionSynchronizationMode",
+                    "traits": {
+                        "smithy.api#documentation": "Controls whether MediaLive delays video to synchronize captions with audio and video output.",
+                        "smithy.api#jsonName": "captionSynchronizationMode"
+                    }
+                },
+                "InferenceFeedOutput": {
+                    "target": "com.amazonaws.medialive#__string",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Elemental Inference feed output that supplies subtitle input into this caption selector.",
+                        "smithy.api#jsonName": "inferenceFeedOutput"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Smart Subtitle Source Settings"
+            }
+        },
         "com.amazonaws.medialive#SmoothGroupAudioOnlyTimecodeControl": {
             "type": "enum",
             "members": {
@@ -40313,6 +40397,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "Placeholder documentation for __listOfAudioDescription"
+            }
+        },
+        "com.amazonaws.medialive#__listOfAudioFeedInput": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.medialive#AudioFeedInput"
+            },
+            "traits": {
+                "smithy.api#documentation": "Placeholder documentation for __listOfAudioFeedInput"
             }
         },
         "com.amazonaws.medialive#__listOfAudioSelector": {

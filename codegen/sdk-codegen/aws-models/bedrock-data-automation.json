@@ -1974,6 +1974,9 @@
             "members": {
                 "blueprints": {
                     "target": "com.amazonaws.bedrockdataautomation#BlueprintItems"
+                },
+                "document": {
+                    "target": "com.amazonaws.bedrockdataautomation#DocumentCustomOutputConfiguration"
                 }
             },
             "traits": {
@@ -2903,6 +2906,17 @@
                 "smithy.api#documentation": "Bounding Box Configuration of Document Extraction"
             }
         },
+        "com.amazonaws.bedrockdataautomation#DocumentCustomOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "fallbackBlueprints": {
+                    "target": "com.amazonaws.bedrockdataautomation#FallbackBlueprintItems"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Custom Configuration of Document"
+            }
+        },
         "com.amazonaws.bedrockdataautomation#DocumentExtractionGranularity": {
             "type": "structure",
             "members": {
@@ -3254,6 +3268,19 @@
             },
             "traits": {
                 "smithy.api#documentation": "Event bridge configuration."
+            }
+        },
+        "com.amazonaws.bedrockdataautomation#FallbackBlueprintItems": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrockdataautomation#BlueprintItem"
+            },
+            "traits": {
+                "smithy.api#documentation": "List of Fallback Blueprint Items",
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
             }
         },
         "com.amazonaws.bedrockdataautomation#GetBlueprint": {
