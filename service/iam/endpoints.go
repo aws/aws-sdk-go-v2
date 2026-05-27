@@ -230,6 +230,8 @@ func bindRegion(region string) (*string, error) {
 	return aws.String(endpoints.MapFIPSRegion(region)), nil
 }
 
+var _ = rulesfn.StringSlice(nil)
+
 // EndpointParameters provides the parameters that influence how endpoints are
 // resolved.
 type EndpointParameters struct {
@@ -293,17 +295,6 @@ func (p EndpointParameters) WithDefaults() EndpointParameters {
 		p.UseFIPS = ptr.Bool(false)
 	}
 	return p
-}
-
-type stringSlice []string
-
-func (s stringSlice) Get(i int) *string {
-	if i < 0 || i >= len(s) {
-		return nil
-	}
-
-	v := s[i]
-	return &v
 }
 
 // EndpointResolverV2 provides the interface for resolving service endpoints.
@@ -382,7 +373,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
@@ -413,7 +404,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "us-east-1")
@@ -444,7 +435,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
@@ -475,7 +466,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "cn-north-1")
@@ -506,7 +497,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-west-1")
@@ -537,7 +528,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-west-1")
@@ -568,7 +559,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-west-1")
@@ -599,7 +590,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-west-1")
@@ -630,7 +621,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "us-iso-east-1")
@@ -661,7 +652,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "us-iso-east-1")
@@ -692,7 +683,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "us-isob-east-1")
@@ -723,7 +714,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "us-isob-east-1")
@@ -754,7 +745,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "eu-isoe-west-1")
@@ -785,7 +776,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "us-isof-south-1")
@@ -816,7 +807,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, "eusc-de-east-1")
@@ -853,7 +844,7 @@ func (r *resolver) ResolveEndpoint(
 									var out smithy.Properties
 									smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 										{
-											SchemeID: "aws.auth#sigv4",
+											SchemeID: "sigv4",
 											SignerProperties: func() smithy.Properties {
 												var sp smithy.Properties
 												smithyhttp.SetSigV4SigningRegion(&sp, _PartitionResult.ImplicitGlobalRegion)
@@ -891,7 +882,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, _PartitionResult.ImplicitGlobalRegion)
@@ -928,7 +919,7 @@ func (r *resolver) ResolveEndpoint(
 								var out smithy.Properties
 								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 									{
-										SchemeID: "aws.auth#sigv4",
+										SchemeID: "sigv4",
 										SignerProperties: func() smithy.Properties {
 											var sp smithy.Properties
 											smithyhttp.SetSigV4SigningRegion(&sp, _PartitionResult.ImplicitGlobalRegion)
@@ -962,7 +953,7 @@ func (r *resolver) ResolveEndpoint(
 					var out smithy.Properties
 					smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 						{
-							SchemeID: "aws.auth#sigv4",
+							SchemeID: "sigv4",
 							SignerProperties: func() smithy.Properties {
 								var sp smithy.Properties
 								smithyhttp.SetSigV4SigningRegion(&sp, _PartitionResult.ImplicitGlobalRegion)

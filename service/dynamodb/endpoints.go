@@ -230,6 +230,8 @@ func bindRegion(region string) (*string, error) {
 	return aws.String(endpoints.MapFIPSRegion(region)), nil
 }
 
+var _ = rulesfn.StringSlice(nil)
+
 // EndpointParameters provides the parameters that influence how endpoints are
 // resolved.
 type EndpointParameters struct {
@@ -319,17 +321,6 @@ func (p EndpointParameters) WithDefaults() EndpointParameters {
 		p.UseFIPS = ptr.Bool(false)
 	}
 	return p
-}
-
-type stringSlice []string
-
-func (s stringSlice) Get(i int) *string {
-	if i < 0 || i >= len(s) {
-		return nil
-	}
-
-	v := s[i]
-	return &v
 }
 
 // EndpointResolverV2 provides the interface for resolving service endpoints.
@@ -451,7 +442,7 @@ func (r *resolver) ResolveEndpoint(
 						var out smithy.Properties
 						smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 							{
-								SchemeID: "aws.auth#sigv4",
+								SchemeID: "sigv4",
 								SignerProperties: func() smithy.Properties {
 									var sp smithy.Properties
 									smithyhttp.SetSigV4SigningName(&sp, "dynamodb")
@@ -619,7 +610,7 @@ func (r *resolver) ResolveEndpoint(
 							if _PartitionResult.Name == "aws" {
 								if !(_UseFIPS == true) {
 									if exprVal := params.ResourceArnList; exprVal != nil {
-										_ResourceArnList := stringSlice(exprVal)
+										_ResourceArnList := rulesfn.StringSlice(exprVal)
 										_ = _ResourceArnList
 										if exprVal := _ResourceArnList.Get(0); exprVal != nil {
 											_FirstArn := *exprVal
@@ -807,7 +798,7 @@ func (r *resolver) ResolveEndpoint(
 					if _PartitionResult.Name == "aws" {
 						if !(_UseFIPS == true) {
 							if exprVal := params.ResourceArnList; exprVal != nil {
-								_ResourceArnList := stringSlice(exprVal)
+								_ResourceArnList := rulesfn.StringSlice(exprVal)
 								_ = _ResourceArnList
 								if exprVal := _ResourceArnList.Get(0); exprVal != nil {
 									_FirstArn := *exprVal
