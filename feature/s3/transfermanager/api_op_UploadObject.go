@@ -1112,8 +1112,8 @@ func (u *multiUploader) shouldContinue(part int32, nextChunkLen int, err error) 
 	}
 
 	// This upload exceeded maximum number of supported parts, error now.
-	if part > defaultMaxUploadParts {
-		return false, fmt.Errorf("exceeded total allowed S3 limit MaxUploadParts (%d). Adjust PartSize to fit in this limit", defaultMaxUploadParts)
+	if int64(part) > u.options.MaxUploadParts {
+		return false, fmt.Errorf("exceeded total allowed MaxUploadParts (%d). Adjust PartSize to fit in this limit", u.options.MaxUploadParts)
 	}
 
 	return true, err

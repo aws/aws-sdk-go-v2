@@ -26,6 +26,7 @@ type Options struct {
 	FailTimeout time.Duration
 
 	// The max parts count for a multi part upload, which could not exceed defaultMaxUploadParts defined by s3 side
+	// https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html
 	MaxUploadParts int64
 
 	// Option to disable checksum validation for download

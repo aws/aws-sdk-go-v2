@@ -18,7 +18,7 @@ func TestInteg_PutObject(t *testing.T) {
 		"multipart upload body with full object checksum type": {
 			Body:              bytes.NewReader(largeObjectBuf),
 			ExpectBody:        largeObjectBuf,
-			ChecksumAlgorithm: types.ChecksumAlgorithmCrc32c, // only CRC algorithms support full object checksum
+			ChecksumAlgorithm: types.ChecksumAlgorithmCrc32c,
 			ChecksumType:      types.ChecksumTypeFullObject,
 		},
 	}

@@ -57,7 +57,7 @@ type TransferManagerLoggingClient struct {
 	m sync.Mutex
 
 	PutObjectFn               func(*TransferManagerLoggingClient, *s3.PutObjectInput) (*s3.PutObjectOutput, error)
-	UploadPartFn              func(*TransferManagerLoggingClient, *s3.UploadPartInput) (*s3.UploadPartOutput, error)
+	UploadPartFn              func(context.Context, *TransferManagerLoggingClient, *s3.UploadPartInput) (*s3.UploadPartOutput, error)
 	CreateMultipartUploadFn   func(*TransferManagerLoggingClient, *s3.CreateMultipartUploadInput) (*s3.CreateMultipartUploadOutput, error)
 	CompleteMultipartUploadFn func(context.Context, *TransferManagerLoggingClient, *s3.CompleteMultipartUploadInput) (*s3.CompleteMultipartUploadOutput, error)
 	AbortMultipartUploadFn    func(*TransferManagerLoggingClient, *s3.AbortMultipartUploadInput) (*s3.AbortMultipartUploadOutput, error)
@@ -148,7 +148,7 @@ func (c *TransferManagerLoggingClient) UploadPart(ctx context.Context, params *s
 	}
 
 	if c.UploadPartFn != nil {
-		return c.UploadPartFn(c, params)
+		return c.UploadPartFn(ctx, c, params)
 	}
 
 	return &s3.UploadPartOutput{

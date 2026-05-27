@@ -345,6 +345,37 @@ func TestUploadOrderMultiWithMaxParts(t *testing.T) {
 	}
 }
 
+func TestUploadOrderMultiExceedMaxParts(t *testing.T) {
+	c, ops, args := s3testing.NewUploadLoggingClient(nil)
+	mgr := New(c, func(options *Options) {
+		options.MaxUploadParts = 2
+		options.Concurrency = 1
+	})
+
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewBuffer(buf20MB), // When size is unknown (streaming), error once the part count exceeds MaxUploadParts
+	})
+
+	if err == nil {
+		t.Errorf("expect error, got none")
+	} else if e, a := "exceeded total allowed MaxUploadParts", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %q to be contained in %q", e, a)
+	}
+
+	vals := []string{"CreateMultipartUpload", "UploadPart", "UploadPart", "AbortMultipartUpload"}
+	if !reflect.DeepEqual(vals, *ops) {
+		t.Errorf("expect %v, got %v", vals, *ops)
+	}
+
+	for i := 1; i <= 2; i++ {
+		if e, a := 1024*1024*8, getReaderLength((*args)[i].(*s3.UploadPartInput).Body); int64(e) != a {
+			t.Errorf("expect %d, got %d", e, a)
+		}
+	}
+}
+
 func TestUploadWithPartSizeIncreased(t *testing.T) {
 	c, ops, args := s3testing.NewUploadLoggingClient([]string{"CreateMultipartUpload", "CompleteMultipartUpload"})
 	mgr := New(c, func(o *Options) {
@@ -476,7 +507,7 @@ func TestUploadOrderZero(t *testing.T) {
 func TestUploadOrderMultiFailure(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 
-	c.UploadPartFn = func(u *s3testing.TransferManagerLoggingClient, params *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
+	c.UploadPartFn = func(ctx context.Context, u *s3testing.TransferManagerLoggingClient, params *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
 		if *params.PartNumber == 2 {
 			return nil, fmt.Errorf("an unexpected error")
 		}
@@ -998,7 +1029,7 @@ func TestUploadUnexpectedEOF(t *testing.T) {
 
 func TestSSE(t *testing.T) {
 	c, _, _ := s3testing.NewUploadLoggingClient(nil)
-	c.UploadPartFn = func(u *s3testing.TransferManagerLoggingClient, params *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
+	c.UploadPartFn = func(ctx context.Context, u *s3testing.TransferManagerLoggingClient, params *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
 		if params.SSECustomerAlgorithm == nil {
 			t.Fatal("SSECustomerAlgoritm should not be nil")
 		}
@@ -1047,6 +1078,42 @@ func TestUploadWithContextCanceled(t *testing.T) {
 
 	if e, a := "canceled", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expected error message to contain %q, but did not %q", e, a)
+	}
+}
+
+func TestUploadWithContextCanceledWhenUploadPart(t *testing.T) {
+	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
+	ctx.Error = fmt.Errorf("context canceled error which shouldn't be returned finally")
+	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
+	index := 0
+	c.UploadPartFn = func(context.Context, *s3testing.TransferManagerLoggingClient, *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
+		if index > 0 {
+			close(ctx.DoneCh)
+			return &s3.UploadPartOutput{}, fmt.Errorf("upload part error due to context canceled")
+		}
+		index++
+		return &s3.UploadPartOutput{}, nil
+	}
+	u := New(c, func(o *Options) {
+		o.FailTimeout = 5 * time.Second
+	})
+
+	_, err := u.UploadObject(ctx, &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(make([]byte, 24*1024*1024)),
+	})
+	if err == nil {
+		t.Fatalf("expect error, got nil")
+	}
+	if e, a := "upload part error due to context canceled", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expected error message to contain %q, but did not %q", e, a)
+	} else if noe := "context canceled error which shouldn't be returned finally"; strings.Contains(a, noe) {
+		t.Errorf("expect %q to not be within %q", noe, a)
+	}
+
+	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "UploadPart", "AbortMultipartUpload"}, *invocations); len(diff) > 0 {
+		t.Error(diff)
 	}
 }
 
