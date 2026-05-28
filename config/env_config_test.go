@@ -576,6 +576,29 @@ func TestNewEnvConfig(t *testing.T) {
 				AuthSchemePreference: []string{"sigv4a", "sigv4"},
 			},
 		},
+		55: {
+			Env: map[string]string{
+				"AWS_RESTRICT_FILE_PERMISSIONS": "user_read_write",
+			},
+			Config: EnvConfig{
+				RestrictFilePermissions: aws.RestrictFilePermissionsUserReadWrite,
+			},
+		},
+		56: {
+			Env: map[string]string{
+				"AWS_RESTRICT_FILE_PERMISSIONS": "UNRESTRICTED",
+			},
+			Config: EnvConfig{
+				RestrictFilePermissions: aws.RestrictFilePermissionsUnrestricted,
+			},
+		},
+		57: {
+			Env: map[string]string{
+				"AWS_RESTRICT_FILE_PERMISSIONS": "blabla",
+			},
+			Config:  EnvConfig{},
+			WantErr: true,
+		},
 	}
 
 	for i, c := range cases {
