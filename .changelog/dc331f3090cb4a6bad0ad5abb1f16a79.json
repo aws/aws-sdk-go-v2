@@ -1,8 +1,0 @@
-{
-    "id": "dc331f30-90cb-4a6b-ad0a-d5abb1f16a79",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/pinpointsmsvoicev2"
-    ]
-}

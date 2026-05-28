@@ -1,3 +1,7 @@
+# v1.61.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.0 (2026-05-06)
 
 * **Feature**: Amazon Lex V2 introduces audio filler support for speech-to-speech bots. Configure melody or typing sounds that play during backend processing to reduce perceived latency and maintain a natural conversational experience for callers.

@@ -1,3 +1,7 @@
+# v1.54.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2026-05-13)
 
 * **Feature**: Added OriginIpAddressTypeEnum (ipv4, ipv6, dualstack) and ipAddressType field to Origin and InputOrigin structures for Lightsail CDN distributions. Allows customers to specify how the distribution connects to origins, using IPv4, IPv6, or dualstack networking

@@ -1,3 +1,8 @@
+# v1.53.0 (2026-05-28)
+
+* **Feature**: Support system role in message
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.52.0 (2026-05-21)
 
 * **Feature**: Adding new BDD representation of endpoint ruleset

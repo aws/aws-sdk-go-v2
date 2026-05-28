@@ -1,3 +1,8 @@
+# v1.33.0 (2026-05-28)
+
+* **Feature**: Adding GetConnection, ListSubscriptions, and SendDirectMessage APIs to IoT Data Plane
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.24 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

@@ -1,3 +1,8 @@
+# v1.74.0 (2026-05-28)
+
+* **Feature**: Adds new connectivity-related fields to Fleet Indexing API requests and responses.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.73.0 (2026-05-01)
 
 * **Feature**: AWS IoT HTTP rule actions now support cross-topic batching, combining messages from different MQTT topics into single HTTP requests.

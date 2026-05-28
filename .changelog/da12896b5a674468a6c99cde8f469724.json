@@ -1,8 +1,0 @@
-{
-    "id": "da12896b-5a67-4468-a6c9-9cde8f469724",
-    "type": "feature",
-    "description": "Adding GetConnection, ListSubscriptions, and SendDirectMessage APIs to IoT Data Plane",
-    "modules": [
-        "service/iotdataplane"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "2830462c-6d15-4736-8ab2-7b217e85e2ac",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/socialmessaging"
-    ]
-}

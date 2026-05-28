@@ -1,3 +1,7 @@
+# v1.65.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.65.0 (2026-05-26)
 
 * **Feature**: Increase the maximum value of jobExecutionTimeoutMinutes to support longer job timeouts during compute environment infrastructure updates.

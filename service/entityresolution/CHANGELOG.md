@@ -1,3 +1,7 @@
+# v1.27.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.27.0 (2026-05-01)
 
 * **Feature**: Add support for transitive matching in AWS Entity Resolution rule-based matching workflows. When enabled, records that match through different rules are grouped together into the same match group, allowing related records to be connected across rule levels.

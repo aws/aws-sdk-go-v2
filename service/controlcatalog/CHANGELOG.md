@@ -1,3 +1,8 @@
+# v1.16.0 (2026-05-28)
+
+* **Feature**: AWS Control Catalog - Added GovernedProviders response field and inclusion filter to GetControl and ListControls APIs to identify and filter by cloud provider. Added ParameterRequirementSummary response field indicating parameter requirements.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.0 (2026-05-26)
 
 * **Feature**: Adding new BDD representation of endpoint ruleset

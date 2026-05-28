@@ -1,3 +1,7 @@
+# v1.11.6 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.5 (2026-05-22)
 
 * **Documentation**: Added new Gen6 stream classes based on the EC2 G6e instance family. These classes are designed for streaming high-fidelity, graphically demanding games and applications that benefit from additional GPU memory and performance.

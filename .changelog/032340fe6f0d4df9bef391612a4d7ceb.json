@@ -1,8 +1,0 @@
-{
-    "id": "032340fe-6f0d-4df9-bef3-91612a4d7ceb",
-    "type": "feature",
-    "description": "Amazon WorkSpaces Applications now supports BYOL (Bring Your Own License). This enables customers to import their own WorkSpaces images and use them in WorkSpaces Applications.",
-    "modules": [
-        "service/appstream"
-    ]
-}

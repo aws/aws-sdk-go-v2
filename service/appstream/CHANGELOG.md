@@ -1,3 +1,8 @@
+# v1.60.0 (2026-05-28)
+
+* **Feature**: Amazon WorkSpaces Applications now supports BYOL (Bring Your Own License). This enables customers to import their own WorkSpaces images and use them in WorkSpaces Applications.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.59.0 (2026-05-21)
 
 * **Feature**: Adding new BDD representation of endpoint ruleset

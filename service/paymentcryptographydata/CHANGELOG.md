@@ -1,3 +1,7 @@
+# v1.26.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.26.0 (2026-05-20)
 
 * **Feature**: GenerateAuthRequestCryptogram API launch.

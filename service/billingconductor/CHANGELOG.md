@@ -1,3 +1,8 @@
+# v1.30.0 (2026-05-28)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.29.0 (2026-05-13)
 
 * **Feature**: Add ConflictException to UpdateCustomLineItem operation.

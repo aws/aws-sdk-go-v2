@@ -1,8 +1,0 @@
-{
-    "id": "144393ee-57ec-4250-85d0-4b4d63e363ec",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/kinesisanalyticsv2"
-    ]
-}

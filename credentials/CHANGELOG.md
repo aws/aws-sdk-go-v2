@@ -1,3 +1,8 @@
+# v1.19.18 (2026-05-28)
+
+* **Bug Fix**: Create new login cache files with 0600 on Unix platforms.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.19.17 (2026-05-22)
 
 * **Dependency Update**: Updated to the latest SDK module versions

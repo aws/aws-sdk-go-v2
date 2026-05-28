@@ -1,8 +1,0 @@
-{
-    "id": "74388c6f-0b77-420d-93b9-c9e30cbc71d8",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/lookoutequipment"
-    ]
-}

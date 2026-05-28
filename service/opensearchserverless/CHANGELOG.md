@@ -1,3 +1,8 @@
+# v1.31.0 (2026-05-28)
+
+* **Feature**: Adds support for deletion protection on collections, ability to create NEXTGEN collection groups and autoscaling visibility for NEXTGEN collection groups
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.3 (2026-04-29)
 
 * **Dependency Update**: Update to smithy-go v1.25.1.

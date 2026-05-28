@@ -1,3 +1,8 @@
+# v1.19.0 (2026-05-28)
+
+* **Feature**: This release adds support for configuring scaleDownIdleTimeInSeconds at the compute node group level, allowing customers to set different idle timeouts per node group. Previously this setting was only available at the cluster level.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.18.0 (2026-05-13)
 
 * **Feature**: Add support for Amazon EC2 Interruptible-ODCR

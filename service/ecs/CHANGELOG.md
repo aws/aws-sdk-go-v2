@@ -1,3 +1,7 @@
+# v1.81.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.81.0 (2026-05-27)
 
 * **Feature**: Add support for Neuron device resource requirements for Amazon ECS

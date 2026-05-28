@@ -1,8 +1,0 @@
-{
-    "id": "5db47ea3-6118-4a64-8c13-16087bf73514",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/accessanalyzer"
-    ]
-}

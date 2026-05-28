@@ -1,8 +1,0 @@
-{
-    "id": "2db81e81-1430-419d-bafa-7abde29fbd4e",
-    "type": "feature",
-    "description": "Update the minimum value of MinStorageBytesPercentage in StorageLensPrefixLevel.SelectionCriteria from 0.1 to 1, aligning the model with the documented contract.",
-    "modules": [
-        "service/s3control"
-    ]
-}

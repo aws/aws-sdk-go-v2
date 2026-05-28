@@ -1,8 +1,0 @@
-{
-    "id": "9475e3f0-2c12-4260-b868-6bc4253190c2",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/redshiftdata"
-    ]
-}

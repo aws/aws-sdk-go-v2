@@ -1,8 +1,0 @@
-{
-    "id": "f29e52c4-a833-4f73-b1a8-92484086cca4",
-    "type": "feature",
-    "description": "Adds support for deletion protection on collections, ability to create NEXTGEN collection groups and autoscaling visibility for NEXTGEN collection groups",
-    "modules": [
-        "service/opensearchserverless"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "ed57a571-1f5d-49c6-9eb3-817f17a55646",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/ssmincidents"
-    ]
-}

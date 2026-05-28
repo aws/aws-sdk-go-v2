@@ -1,3 +1,7 @@
+# v1.40.2 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.1 (2026-05-20)
 
 * **Documentation**: Updated API documentation to describe the PublicAndPrivate webserver access mode.

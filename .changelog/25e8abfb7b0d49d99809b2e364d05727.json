@@ -1,8 +1,0 @@
-{
-    "id": "25e8abfb-7b0d-49d9-9809-b2e364d05727",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/wickr"
-    ]
-}

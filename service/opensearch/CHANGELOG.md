@@ -1,3 +1,7 @@
+# v1.70.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.70.0 (2026-05-27)
 
 * **Feature**: OpenSearch will now support multi-segment paths in JWKS URLs.

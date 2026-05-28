@@ -1,3 +1,7 @@
+# v1.64.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.64.0 (2026-05-14)
 
 * **Feature**: Adding a new boolean for OCSP Revocations in Viewer mTLS Create and Update APIs, and adding a new 'Passthrough' option for TrustStore modes

@@ -1,3 +1,8 @@
+# v1.41.0 (2026-05-28)
+
+* **Feature**: Added Harness support for LiteLLM model configuration for third-party model providers. Added S3 and Git skill source types. Added Responses API format for OpenAI and Bedrock models. Added runtimeUserId parameter to InvokeHarness for end-user identification.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2026-05-26)
 
 * **Feature**: Adding new BDD representation of endpoint ruleset

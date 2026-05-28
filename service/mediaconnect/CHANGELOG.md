@@ -1,3 +1,7 @@
+# v1.49.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.49.0 (2026-05-21)
 
 * **Feature**: Adds support for controlling the timecode source of NDI flow outputs.

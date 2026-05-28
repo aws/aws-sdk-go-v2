@@ -1,8 +1,0 @@
-{
-    "id": "be491ee5-132f-4167-80af-592144b38423",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/trustedadvisor"
-    ]
-}

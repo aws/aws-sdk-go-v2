@@ -1,3 +1,8 @@
+# v1.8.0 (2026-05-28)
+
+* **Feature**: Adding new BDD representation of endpoint ruleset
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2026-05-13)
 
 * **Feature**: Adds support for enabling and disabling Lambda event source mappings in Region switch plans.

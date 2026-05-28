@@ -1,3 +1,7 @@
+# v1.43.8 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.43.7 (2026-05-26)
 
 * **Documentation**: AWS Budget Name Validation Documentation Updates.

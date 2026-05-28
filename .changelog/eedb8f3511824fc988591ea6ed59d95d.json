@@ -1,8 +1,0 @@
-{
-    "id": "eedb8f35-1182-4fc9-8859-1ea6ed59d95d",
-    "type": "feature",
-    "description": "AWS Control Catalog - Added GovernedProviders response field and inclusion filter to GetControl and ListControls APIs to identify and filter by cloud provider. Added ParameterRequirementSummary response field indicating parameter requirements.",
-    "modules": [
-        "service/controlcatalog"
-    ]
-}

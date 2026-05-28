@@ -1,3 +1,8 @@
+# v0.2.1 (2026-05-28)
+
+* **Bug Fix**: Feature parity for transfer manager v2 to allow range download, support checksum type config, fix error from failed transfer's follow-up due to ctx cancellation, honor mpu threshold and add back max upload parts option
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v0.2.0 (2026-05-27)
 
 * **Feature**: Add SHA-512 support for s3 operations

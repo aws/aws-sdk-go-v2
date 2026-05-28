@@ -1,3 +1,8 @@
+# v1.32.0 (2026-05-28)
+
+* **Feature**: Added support for persistent storage on Service-Managed Fleets, allowing customers to configure persistent storage that preserves data across worker sessions which reduces job startup times for workloads with large software installations or asset caches.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2026-04-29)
 
 * **Feature**: Adds support for rtx-pro-server-6000 GPU accelerator for service-managed fleets.

@@ -1,8 +1,0 @@
-{
-    "id": "2d14a671-71b7-4242-a09c-a15f072f775c",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/verifiedpermissions"
-    ]
-}

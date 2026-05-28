@@ -1,3 +1,7 @@
+# v1.12.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2026-05-22)
 
 * **Feature**: Validate discovered endpoint before overwriting request host in case cached tampered endpoints pollute request

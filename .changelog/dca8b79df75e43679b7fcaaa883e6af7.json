@@ -1,8 +1,0 @@
-{
-    "id": "dca8b79d-f75e-4367-9b7f-caaa883e6af7",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/chimesdkmessaging"
-    ]
-}

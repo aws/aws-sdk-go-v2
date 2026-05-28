@@ -1,8 +1,0 @@
-{
-    "id": "bf82a369-3707-4b40-94ef-1dc3fbe613a7",
-    "type": "bugfix",
-    "description": "Create new login cache files with 0600 on Unix platforms.",
-    "modules": [
-        "credentials"
-    ]
-}

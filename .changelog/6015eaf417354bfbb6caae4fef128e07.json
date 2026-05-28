@@ -1,8 +1,0 @@
-{
-    "id": "6015eaf4-1735-4bfb-b6ca-ae4fef128e07",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/georoutes"
-    ]
-}

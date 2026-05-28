@@ -1,8 +1,0 @@
-{
-    "id": "6f7d1815-55e4-4a3b-a676-d4b84cad223e",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/securityagent"
-    ]
-}

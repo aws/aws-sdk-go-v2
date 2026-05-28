@@ -1,8 +1,0 @@
-{
-    "id": "162dd3bc-4257-4b17-ba07-79ec77501296",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/cloudfrontkeyvaluestore"
-    ]
-}

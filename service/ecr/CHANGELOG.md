@@ -1,3 +1,7 @@
+# v1.57.3 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.2 (2026-04-29)
 
 * **Documentation**: Removes support for registry policy V1

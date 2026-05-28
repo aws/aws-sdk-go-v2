@@ -1,8 +1,0 @@
-{
-    "id": "ee1005b6-720c-443d-86f6-cdda090392d8",
-    "type": "feature",
-    "description": "Support system role in message",
-    "modules": [
-        "service/bedrockruntime"
-    ]
-}

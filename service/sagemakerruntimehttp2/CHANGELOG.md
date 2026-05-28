@@ -1,3 +1,7 @@
+# v1.0.13 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.12 (2026-05-21)
 
 * **Bug Fix**: Reinstate missing bidirectional stream operation.

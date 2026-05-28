@@ -1,3 +1,7 @@
+# v1.304.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.304.0 (2026-05-22)
 
 * **Feature**: The ModifyInstanceAttribute API now supports modification of EnclaveOptions for the instance as a typed parameter.

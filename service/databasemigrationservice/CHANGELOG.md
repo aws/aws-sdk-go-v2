@@ -1,3 +1,7 @@
+# v1.63.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.63.0 (2026-05-14)
 
 * **Feature**: Add 9 SDK waiters for DMS Schema Conversion async operations. Eliminates manual polling for import, assessment, conversion, export, and creation jobs.

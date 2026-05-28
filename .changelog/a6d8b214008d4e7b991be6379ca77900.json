@@ -1,9 +1,0 @@
-{
-    "id": "a6d8b214-008d-4e7b-991b-e6379ca77900",
-    "type": "bugfix",
-    "description": "Adds support for AWS_RESTRICT_FILE_PERMISSIONS for env and in-code config.",
-    "modules": [
-        ".",
-        "config"
-    ]
-}

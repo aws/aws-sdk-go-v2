@@ -1,8 +1,0 @@
-{
-    "id": "6a8ec63f-771b-4044-8fc5-59a87a043030",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/codestarconnections"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.78.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.78.0 (2026-05-26)
 
 * **Feature**: Add malware scan support for Continuous Backups, also known as Point-In-Time Recovery Points (PITR).

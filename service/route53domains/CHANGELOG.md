@@ -1,3 +1,7 @@
+# v1.35.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.35.0 (2026-05-05)
 
 * **Feature**: This release adds the TLDInMaintenance exception.

@@ -1,3 +1,7 @@
+# v1.84.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.84.0 (2026-05-21)
 
 * **Feature**: Adding new BDD representation of endpoint ruleset

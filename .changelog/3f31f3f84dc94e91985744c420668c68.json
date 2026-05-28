@@ -1,8 +1,0 @@
-{
-    "id": "3f31f3f8-4dc9-4e91-9857-44c420668c68",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/iottwinmaker"
-    ]
-}

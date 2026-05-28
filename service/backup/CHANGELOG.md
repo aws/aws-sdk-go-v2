@@ -1,3 +1,7 @@
+# v1.57.1 (2026-05-28)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.57.0 (2026-05-26)
 
 * **Feature**: Launching S3 PITR malware scanning support for AWS Backup
