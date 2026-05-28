@@ -178,6 +178,26 @@
                 }
             }
         },
+        "com.amazonaws.opensearchserverless#AutoscalingStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The autoscaling status of an OpenSearch Serverless collection group: <code>ACTION_SCALING_UP</code>, <code>ACTION_SCALING_DOWN</code>, or <code>NO_ACTION</code>.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTION_SCALING_UP",
+                        "name": "ACTION_SCALING_UP"
+                    },
+                    {
+                        "value": "ACTION_SCALING_DOWN",
+                        "name": "ACTION_SCALING_DOWN"
+                    },
+                    {
+                        "value": "NO_ACTION",
+                        "name": "NO_ACTION"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.opensearchserverless#BatchGetCollection": {
             "type": "operation",
             "input": {
@@ -456,6 +476,26 @@
                 }
             }
         },
+        "com.amazonaws.opensearchserverless#CapacityDetails": {
+            "type": "structure",
+            "members": {
+                "capacityInOcu": {
+                    "target": "smithy.api#Float",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current capacity in OpenSearch Compute Units (OCUs).</p>"
+                    }
+                },
+                "autoscalingStatus": {
+                    "target": "com.amazonaws.opensearchserverless#AutoscalingStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current autoscaling status for the collection group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Capacity details for an OpenSearch Serverless collection group, including the current capacity and autoscaling status.</p>"
+            }
+        },
         "com.amazonaws.opensearchserverless#CapacityLimits": {
             "type": "structure",
             "members": {
@@ -562,6 +602,12 @@
                     "target": "com.amazonaws.opensearchserverless#StandbyReplicas",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about an OpenSearch Serverless collection.</p>"
+                    }
+                },
+                "deletionProtection": {
+                    "target": "com.amazonaws.opensearchserverless#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether deletion protection is <code>ENABLED</code> or <code>DISABLED</code> for the collection.</p>"
                     }
                 },
                 "vectorOptions": {
@@ -725,25 +771,25 @@
             "type": "structure",
             "members": {
                 "maxIndexingCapacityInOCU": {
-                    "target": "com.amazonaws.opensearchserverless#CollectionGroupIndexingCapacityValue",
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupMaxIndexingCapacityValue",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum indexing capacity for collections in the group.</p>"
                     }
                 },
                 "maxSearchCapacityInOCU": {
-                    "target": "com.amazonaws.opensearchserverless#CollectionGroupSearchCapacityValue",
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupMaxSearchCapacityValue",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum search capacity for collections in the group.</p>"
                     }
                 },
                 "minIndexingCapacityInOCU": {
-                    "target": "com.amazonaws.opensearchserverless#CollectionGroupIndexingCapacityValue",
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupMinIndexingCapacityValue",
                     "traits": {
                         "smithy.api#documentation": "<p>The minimum indexing capacity for collections in the group.</p>"
                     }
                 },
                 "minSearchCapacityInOCU": {
-                    "target": "com.amazonaws.opensearchserverless#CollectionGroupSearchCapacityValue",
+                    "target": "com.amazonaws.opensearchserverless#CollectionGroupMinSearchCapacityValue",
                     "traits": {
                         "smithy.api#documentation": "<p>The minimum search capacity for collections in the group.</p>"
                     }
@@ -804,10 +850,22 @@
                         "smithy.api#documentation": "<p>The capacity limits for the collection group, in OpenSearch Compute Units (OCUs).</p>"
                     }
                 },
+                "currentCapacity": {
+                    "target": "com.amazonaws.opensearchserverless#CurrentCapacity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Current search and indexing capacity for the collection group.</p>"
+                    }
+                },
                 "numberOfCollections": {
                     "target": "smithy.api#Integer",
                     "traits": {
                         "smithy.api#documentation": "<p>The number of collections associated with the collection group.</p>"
+                    }
+                },
+                "generation": {
+                    "target": "com.amazonaws.opensearchserverless#ServerlessGeneration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generation of Amazon OpenSearch Serverless for the collection group.</p>"
                     }
                 }
             },
@@ -881,11 +939,35 @@
                 }
             }
         },
-        "com.amazonaws.opensearchserverless#CollectionGroupIndexingCapacityValue": {
+        "com.amazonaws.opensearchserverless#CollectionGroupMaxIndexingCapacityValue": {
             "type": "float",
             "traits": {
                 "smithy.api#range": {
                     "min": 1
+                }
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupMaxSearchCapacityValue": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupMinIndexingCapacityValue": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.opensearchserverless#CollectionGroupMinSearchCapacityValue": {
+            "type": "float",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0
                 }
             }
         },
@@ -908,14 +990,6 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 100
-                }
-            }
-        },
-        "com.amazonaws.opensearchserverless#CollectionGroupSearchCapacityValue": {
-            "type": "float",
-            "traits": {
-                "smithy.api#range": {
-                    "min": 1
                 }
             }
         },
@@ -960,6 +1034,12 @@
                 },
                 "capacityLimits": {
                     "target": "com.amazonaws.opensearchserverless#CollectionGroupCapacityLimits"
+                },
+                "generation": {
+                    "target": "com.amazonaws.opensearchserverless#ServerlessGeneration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generation of Amazon OpenSearch Serverless for the collection group.</p>"
+                    }
                 }
             },
             "traits": {
@@ -993,7 +1073,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 3,
-                    "max": 32
+                    "max": 64
                 },
                 "smithy.api#pattern": "^[a-z][a-z0-9-]+$"
             }
@@ -1310,6 +1390,12 @@
                         "smithy.api#documentation": "<p>Creates details about an OpenSearch Serverless collection.</p>"
                     }
                 },
+                "deletionProtection": {
+                    "target": "com.amazonaws.opensearchserverless#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether deletion protection is <code>ENABLED</code> or <code>DISABLED</code> for the collection.</p>"
+                    }
+                },
                 "vectorOptions": {
                     "target": "com.amazonaws.opensearchserverless#VectorOptions",
                     "traits": {
@@ -1416,6 +1502,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The capacity limits for the collection group, in OpenSearch Compute Units (OCUs).</p>"
                     }
+                },
+                "generation": {
+                    "target": "com.amazonaws.opensearchserverless#ServerlessGeneration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generation of Amazon OpenSearch Serverless for the collection group.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1458,6 +1550,12 @@
                     "target": "com.amazonaws.opensearchserverless#CollectionGroupCapacityLimits",
                     "traits": {
                         "smithy.api#documentation": "<p>The capacity limits for the collection group, in OpenSearch Compute Units (OCUs). These limits control the maximum and minimum capacity for collections within the group.</p>"
+                    }
+                },
+                "generation": {
+                    "target": "com.amazonaws.opensearchserverless#ServerlessGeneration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generation of Amazon OpenSearch Serverless for the collection group. Valid values are <code>CLASSIC</code> and <code>NEXTGEN</code>.</p>"
                     }
                 },
                 "clientToken": {
@@ -1540,6 +1638,12 @@
                     "target": "com.amazonaws.opensearchserverless#EncryptionConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>Encryption settings for the collection.</p>"
+                    }
+                },
+                "deletionProtection": {
+                    "target": "com.amazonaws.opensearchserverless#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to enable deletion protection for the collection. When set to <code>ENABLED</code>, the collection cannot be deleted.</p>"
                     }
                 },
                 "clientToken": {
@@ -2007,6 +2111,26 @@
                 }
             }
         },
+        "com.amazonaws.opensearchserverless#CurrentCapacity": {
+            "type": "structure",
+            "members": {
+                "search": {
+                    "target": "com.amazonaws.opensearchserverless#CapacityDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The search capacity for the collection group.</p>"
+                    }
+                },
+                "indexing": {
+                    "target": "com.amazonaws.opensearchserverless#CapacityDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The indexing capacity for the collection group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Current search and indexing capacity for an OpenSearch Serverless collection group. Measured in OpenSearch Compute Units (OCUs).</p>"
+            }
+        },
         "com.amazonaws.opensearchserverless#DeleteAccessPolicy": {
             "type": "operation",
             "input": {
@@ -2111,6 +2235,12 @@
                     "target": "com.amazonaws.opensearchserverless#CollectionStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the collection.</p>"
+                    }
+                },
+                "deletionProtection": {
+                    "target": "com.amazonaws.opensearchserverless#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether deletion protection is <code>ENABLED</code> or <code>DISABLED</code> for the collection.</p>"
                     }
                 }
             },
@@ -2513,6 +2643,24 @@
                         "smithy.api#documentation": "<p>Details about the deleted endpoint.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.opensearchserverless#DeletionProtection": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates whether deletion protection is <code>ENABLED</code> or <code>DISABLED</code> for the collection. When deletion protection is <code>ENABLED</code>, the collection cannot be deleted.</p>",
+                "smithy.api#enum": [
+                    {
+                        "name": "ENABLED",
+                        "value": "ENABLED",
+                        "documentation": "Deletion protection enabled"
+                    },
+                    {
+                        "name": "DISABLED",
+                        "value": "DISABLED",
+                        "documentation": "Deletion protection disabled"
+                    }
+                ]
             }
         },
         "com.amazonaws.opensearchserverless#EffectiveLifecyclePolicyDetail": {
@@ -4757,7 +4905,7 @@
         "com.amazonaws.opensearchserverless#ResourceName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^index/[a-z][a-z0-9-]{3,32}/([a-z;0-9&$%][+.~=\\-_a-z;0-9&$%]*)$"
+                "smithy.api#pattern": "^index/[a-z][a-z0-9-]{3,63}/([a-z;0-9&$%][+.~=\\-_a-z;0-9&$%]*)$"
             }
         },
         "com.amazonaws.opensearchserverless#ResourceNotFoundException": {
@@ -5204,6 +5352,21 @@
                         "name": "network",
                         "value": "network",
                         "documentation": "network policy type"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.opensearchserverless#ServerlessGeneration": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "CLASSIC",
+                        "value": "CLASSIC"
+                    },
+                    {
+                        "name": "NEXTGEN",
+                        "value": "NEXTGEN"
                     }
                 ]
             }
@@ -5682,6 +5845,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the collection was last modified.</p>"
                     }
+                },
+                "deletionProtection": {
+                    "target": "com.amazonaws.opensearchserverless#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether deletion protection is <code>ENABLED</code> or <code>DISABLED</code> for the collection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5758,6 +5927,12 @@
                     "target": "smithy.api#Long",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the collection group was last modified.</p>"
+                    }
+                },
+                "generation": {
+                    "target": "com.amazonaws.opensearchserverless#ServerlessGeneration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The generation of Amazon OpenSearch Serverless for the collection group.</p>"
                     }
                 }
             },
@@ -5840,6 +6015,12 @@
                     "target": "com.amazonaws.opensearchserverless#VectorOptions",
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration options for vector search capabilities in the collection.</p>"
+                    }
+                },
+                "deletionProtection": {
+                    "target": "com.amazonaws.opensearchserverless#DeletionProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether to enable or disable deletion protection for the collection. When set to <code>ENABLED</code>, the collection cannot be deleted.</p>"
                     }
                 },
                 "clientToken": {

@@ -2959,6 +2959,9 @@
                     "target": "com.amazonaws.appstream#InvalidAccountStatusException"
                 },
                 {
+                    "target": "com.amazonaws.appstream#InvalidParameterCombinationException"
+                },
+                {
                     "target": "com.amazonaws.appstream#InvalidRoleException"
                 },
                 {
@@ -2992,17 +2995,19 @@
                 "SourceAmiId": {
                     "target": "com.amazonaws.appstream#PhotonAmiId",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ID of the EC2 AMI to import. The AMI must meet specific requirements including Windows Server 2022 Full Base, UEFI boot mode, TPM 2.0 support, and proper drivers.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ID of the EC2 AMI to import.</p>"
+                    }
+                },
+                "WorkspaceImageId": {
+                    "target": "com.amazonaws.appstream#WorkspaceImageId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Workspaces Image to import.</p>"
                     }
                 },
                 "IamRoleArn": {
                     "target": "com.amazonaws.appstream#Arn",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that allows WorkSpaces Applications to access your AMI. The role must have permissions to modify image attributes and describe images, with a trust relationship allowing appstream.amazonaws.com to assume the role.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that allows WorkSpaces Applications to access your AMI. The role must have permissions to modify image attributes and describe images, with a trust relationship allowing appstream.amazonaws.com to assume the role.</p>"
                     }
                 },
                 "Description": {
@@ -6584,6 +6589,12 @@
                     "traits": {
                         "smithy.api#enumValue": "FAILED"
                     }
+                },
+                "TIMED_OUT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TIMED_OUT"
+                    }
                 }
             }
         },
@@ -7828,6 +7839,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "NATIVE"
+                    }
+                },
+                "BYOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BYOL"
                     }
                 }
             },
@@ -12873,6 +12890,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes VPC configuration information for fleets and image builders.</p>"
+            }
+        },
+        "com.amazonaws.appstream#WorkspaceImageId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 67
+                },
+                "smithy.api#pattern": "^wsi-[0-9a-z]{8,63}$"
             }
         }
     }

@@ -157,7 +157,6 @@
                 "GPU": {
                     "target": "smithy.api#Unit",
                     "traits": {
-                        "smithy.api#documentation": "GPU accelerator type.",
                         "smithy.api#enumValue": "gpu"
                     }
                 }
@@ -5084,7 +5083,6 @@
         "com.amazonaws.deadline#CostScaleFactor": {
             "type": "float",
             "traits": {
-                "smithy.api#documentation": "A multiplier applied to calculated costs. Valid range is 0 to 100. Values less than 1.0 represent discounts, values greater than 1.0 represent markups, and a value of 1.0 represents no adjustment.",
                 "smithy.api#range": {
                     "min": 0,
                     "max": 100
@@ -6062,7 +6060,7 @@
                 "identityCenterRegion": {
                     "target": "com.amazonaws.deadline#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region where IAM Identity Center is enabled. Required when IAM Identity Center is in a different Region than the monitor.</p>"
+                        "smithy.api#documentation": "<p>The Region where IAM Identity Center is enabled. Required when IAM Identity Center is in a different Region than the monitor.</p>"
                     }
                 },
                 "subdomain": {
@@ -7212,6 +7210,194 @@
                 },
                 "smithy.api#documentation": "<p>The Amazon Web Services Deadline Cloud API provides infrastructure and centralized management for your projects. Use the Deadline Cloud API to onboard users, assign projects, and attach permissions specific to their job function.</p> <p>With Deadline Cloud, content production teams can deploy resources for their workforce securely in the cloud, reducing the costs of added physical infrastructure. Keep your content production operations secure, while allowing your contributors to access the tools they need, such as scalable high-speed storage, licenses, and cost management services.</p>",
                 "smithy.api#title": "AWSDeadlineCloud",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://deadline-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://deadline-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://deadline.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://deadline.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -8843,6 +9029,113 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.deadline#DeleteVolume": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.deadline#DeleteVolumeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.deadline#DeleteVolumeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.deadline#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "name": "DeleteVolume",
+                    "documentation": "Grants permission to delete a volume",
+                    "requiredActions": [
+                        "identitystore:ListGroupMembershipsForMember"
+                    ],
+                    "resources": {
+                        "required": {
+                            "volume": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Deletes a persistent volume.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "management."
+                },
+                "smithy.api#examples": [
+                    {
+                        "title": "Delete a volume",
+                        "input": {
+                            "farmId": "farm-1234567890abcdef1234567890abcdef",
+                            "fleetId": "fleet-1234567890abcdef1234567890abcdef",
+                            "volumeId": "volume-1234567890abcdef1234567890abcdef"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/2023-10-12/farms/{farmId}/fleets/{fleetId}/volumes/{volumeId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.deadline#DeleteVolumeRequest": {
+            "type": "structure",
+            "members": {
+                "farmId": {
+                    "target": "com.amazonaws.deadline#FarmId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The farm ID of the farm that contains the fleet.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "fleetId": {
+                    "target": "com.amazonaws.deadline#FleetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fleet ID of the fleet that contains the volume.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "volumeId": {
+                    "target": "com.amazonaws.deadline#VolumeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The volume ID of the volume to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.deadline#VolumeResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.deadline#DeleteVolumeResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.deadline#DeleteWorker": {
             "type": "operation",
             "input": {
@@ -9413,6 +9706,20 @@
                     "min": 125,
                     "max": 1000
                 }
+            }
+        },
+        "com.amazonaws.deadline#EbsVolumeType": {
+            "type": "enum",
+            "members": {
+                "GP3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gp3"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The EBS volume type.</p>"
             }
         },
         "com.amazonaws.deadline#Ec2EbsVolume": {
@@ -10227,6 +10534,9 @@
                 }
             ],
             "resources": [
+                {
+                    "target": "com.amazonaws.deadline#VolumeResource"
+                },
                 {
                     "target": "com.amazonaws.deadline#WorkerResource"
                 }
@@ -11875,7 +12185,7 @@
                 "identityCenterRegion": {
                     "target": "com.amazonaws.deadline#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region where IAM Identity Center is enabled.</p>"
+                        "smithy.api#documentation": "<p>The Region where IAM Identity Center is enabled.</p>"
                     }
                 },
                 "identityCenterApplicationArn": {
@@ -13826,6 +14136,209 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.deadline#GetVolume": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.deadline#GetVolumeRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.deadline#GetVolumeResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.deadline#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "name": "GetVolume",
+                    "documentation": "Grants permission to get a volume",
+                    "requiredActions": [
+                        "identitystore:ListGroupMembershipsForMember"
+                    ],
+                    "resources": {
+                        "required": {
+                            "volume": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Gets a persistent volume.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "management."
+                },
+                "smithy.api#examples": [
+                    {
+                        "title": "Get a volume",
+                        "input": {
+                            "farmId": "farm-1234567890abcdef1234567890abcdef",
+                            "fleetId": "fleet-1234567890abcdef1234567890abcdef",
+                            "volumeId": "volume-1234567890abcdef1234567890abcdef"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2023-10-12/farms/{farmId}/fleets/{fleetId}/volumes/{volumeId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.deadline#GetVolumeRequest": {
+            "type": "structure",
+            "members": {
+                "farmId": {
+                    "target": "com.amazonaws.deadline#FarmId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The farm ID of the farm that contains the fleet.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "fleetId": {
+                    "target": "com.amazonaws.deadline#FleetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fleet ID of the fleet that contains the volume.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "volumeId": {
+                    "target": "com.amazonaws.deadline#VolumeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The volume ID of the volume to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.deadline#VolumeResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.deadline#GetVolumeResponse": {
+            "type": "structure",
+            "members": {
+                "volumeId": {
+                    "target": "com.amazonaws.deadline#VolumeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The volume ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "farmId": {
+                    "target": "com.amazonaws.deadline#FarmId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The farm ID of the farm that contains the fleet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fleetId": {
+                    "target": "com.amazonaws.deadline#FleetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fleet ID of the fleet that contains the volume.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.deadline#VolumeState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the volume.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sizeGiB": {
+                    "target": "com.amazonaws.deadline#PersistentVolumeSizeGiB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The volume size in GiB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "com.amazonaws.deadline#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone ID of the volume.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "attachedWorkerId": {
+                    "target": "com.amazonaws.deadline#WorkerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The worker ID of the worker the volume is attached to.</p>"
+                    }
+                },
+                "volumeType": {
+                    "target": "com.amazonaws.deadline#EbsVolumeType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The EBS volume type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "iops": {
+                    "target": "com.amazonaws.deadline#PersistentVolumeIops",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IOPS of the volume.</p>"
+                    }
+                },
+                "throughputMiB": {
+                    "target": "com.amazonaws.deadline#PersistentVolumeThroughputMiB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The throughput of the volume in MiB.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.deadline#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the resource was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastAssignedAt": {
+                    "target": "com.amazonaws.deadline#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the volume was last assigned to a worker.</p>"
+                    }
+                },
+                "lastReleasedAt": {
+                    "target": "com.amazonaws.deadline#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the volume was last released from a worker.</p>"
+                    }
+                },
+                "expiresAt": {
+                    "target": "com.amazonaws.deadline#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the volume expires and will be deleted.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Mixin that adds an optional ARN field to response structures.\nApply to SummaryMixins (flows into Get, Summary, and BatchGet) and Create outputs.",
+                "smithy.api#output": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.deadline#VolumeResource"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.deadline#GetWorker": {
             "type": "operation",
             "input": {
@@ -14338,7 +14851,6 @@
         "com.amazonaws.deadline#JobDescriptionOverride": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "The input description for the job. Passing in an empty string removes any existing description.",
                 "smithy.api#length": {
                     "min": 0,
                     "max": 2048
@@ -18601,7 +19113,8 @@
                             "job": {},
                             "worker": {},
                             "monitor": {},
-                            "budget": {}
+                            "budget": {},
+                            "volume": {}
                         }
                     }
                 },
@@ -18766,6 +19279,133 @@
                     "target": "com.amazonaws.deadline#TaskSummaries",
                     "traits": {
                         "smithy.api#documentation": "<p>Tasks for the job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.deadline#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If Deadline Cloud returns <code>nextToken</code>, then there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. To retrieve the next page, call the operation again using the returned token. Keep all other arguments unchanged. If no results remain, then <code>nextToken</code> is set to <code>null</code>. Each pagination token expires after 24 hours. If you provide a token that isn't valid, then you receive an HTTP 400 <code>ValidationException</code> error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Shared pagination field for List operation outputs (nextToken).",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.deadline#ListVolumes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.deadline#ListVolumesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.deadline#ListVolumesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.deadline#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.deadline#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#iamAction": {
+                    "name": "ListVolumes",
+                    "documentation": "Grants permission to list volumes",
+                    "requiredActions": [
+                        "identitystore:ListGroupMembershipsForMember"
+                    ],
+                    "resources": {
+                        "required": {
+                            "volume": {}
+                        }
+                    }
+                },
+                "smithy.api#documentation": "<p>Lists the persistent volumes in a fleet.</p>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "management."
+                },
+                "smithy.api#examples": [
+                    {
+                        "title": "List volumes for a fleet",
+                        "input": {
+                            "farmId": "farm-1234567890abcdef1234567890abcdef",
+                            "fleetId": "fleet-1234567890abcdef1234567890abcdef"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/2023-10-12/farms/{farmId}/fleets/{fleetId}/volumes",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "volumes"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.deadline#ListVolumesRequest": {
+            "type": "structure",
+            "members": {
+                "farmId": {
+                    "target": "com.amazonaws.deadline#FarmId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The farm ID of the farm that contains the fleet.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "fleetId": {
+                    "target": "com.amazonaws.deadline#FleetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fleet ID of the fleet that contains the volumes.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.deadline#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or <code>null</code> to start from the beginning.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.deadline#MaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The maximum number of results to return. Use this parameter with <code>NextToken</code> to get results as a set of sequential pages.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Shared pagination fields for List operation inputs (nextToken + maxResults).",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.deadline#ListVolumesResponse": {
+            "type": "structure",
+            "members": {
+                "volumes": {
+                    "target": "com.amazonaws.deadline#VolumeSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The volumes on the list.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -19344,7 +19984,7 @@
                 "identityCenterRegion": {
                     "target": "com.amazonaws.deadline#Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region where IAM Identity Center is enabled.</p>"
+                        "smithy.api#documentation": "<p>The Region where IAM Identity Center is enabled.</p>"
                     }
                 },
                 "identityCenterApplicationArn": {
@@ -19383,6 +20023,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides information about a monitor in Deadline Cloud.</p>"
+            }
+        },
+        "com.amazonaws.deadline#MountPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
             }
         },
         "com.amazonaws.deadline#NextItemOffset": {
@@ -19599,6 +20248,85 @@
                     "traits": {
                         "smithy.api#enumValue": "MONTHLY"
                     }
+                }
+            }
+        },
+        "com.amazonaws.deadline#PersistentVolumeConfiguration": {
+            "type": "structure",
+            "members": {
+                "sizeGiB": {
+                    "target": "com.amazonaws.deadline#PersistentVolumeSizeGiB",
+                    "traits": {
+                        "smithy.api#default": 250,
+                        "smithy.api#documentation": "<p>The persistent volume size in GiB. The default is 250.</p>"
+                    }
+                },
+                "iops": {
+                    "target": "com.amazonaws.deadline#PersistentVolumeIops",
+                    "traits": {
+                        "smithy.api#default": 3000,
+                        "smithy.api#documentation": "<p>The IOPS per persistent volume. The default is 3000.</p>"
+                    }
+                },
+                "throughputMiB": {
+                    "target": "com.amazonaws.deadline#PersistentVolumeThroughputMiB",
+                    "traits": {
+                        "smithy.api#default": 125,
+                        "smithy.api#documentation": "<p>The throughput per persistent volume in MiB. The default is 125.</p>"
+                    }
+                },
+                "mountPath": {
+                    "target": "com.amazonaws.deadline#MountPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file system path where the persistent volume is mounted on the worker instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "lastUsedTtlHours": {
+                    "target": "com.amazonaws.deadline#PersistentVolumeTtlHours",
+                    "traits": {
+                        "smithy.api#default": 168,
+                        "smithy.api#documentation": "<p>The number of hours a persistent volume can remain unused before it is deleted. The default is 168 (7 days).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the persistent EBS volume configuration for workers in a service managed fleet.</p>"
+            }
+        },
+        "com.amazonaws.deadline#PersistentVolumeIops": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 100,
+                    "max": 80000
+                }
+            }
+        },
+        "com.amazonaws.deadline#PersistentVolumeSizeGiB": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 65536
+                }
+            }
+        },
+        "com.amazonaws.deadline#PersistentVolumeThroughputMiB": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 125,
+                    "max": 2000
+                }
+            }
+        },
+        "com.amazonaws.deadline#PersistentVolumeTtlHours": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 8760
                 }
             }
         },
@@ -21397,6 +22125,12 @@
                     "target": "com.amazonaws.deadline#StorageProfileId",
                     "traits": {
                         "smithy.api#documentation": "<p>The storage profile ID for the service managed EC2 fleet.</p>"
+                    }
+                },
+                "persistentVolumeConfiguration": {
+                    "target": "com.amazonaws.deadline#PersistentVolumeConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The persistent volume configuration for the service managed EC2 fleet.</p>"
                     }
                 },
                 "autoScalingConfiguration": {
@@ -23321,7 +24055,8 @@
                             "job": {},
                             "worker": {},
                             "monitor": {},
-                            "budget": {}
+                            "budget": {},
+                            "volume": {}
                         }
                     }
                 },
@@ -24011,7 +24746,8 @@
                             "job": {},
                             "worker": {},
                             "monitor": {},
-                            "budget": {}
+                            "budget": {},
+                            "volume": {}
                         }
                     }
                 },
@@ -26438,6 +27174,156 @@
                         "smithy.api#enumValue": "OTHER"
                     }
                 }
+            }
+        },
+        "com.amazonaws.deadline#VolumeId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^volume-[0-9a-f]{32}$"
+            }
+        },
+        "com.amazonaws.deadline#VolumeResource": {
+            "type": "resource",
+            "identifiers": {
+                "farmId": {
+                    "target": "com.amazonaws.deadline#FarmId"
+                },
+                "fleetId": {
+                    "target": "com.amazonaws.deadline#FleetId"
+                },
+                "volumeId": {
+                    "target": "com.amazonaws.deadline#VolumeId"
+                }
+            },
+            "read": {
+                "target": "com.amazonaws.deadline#GetVolume"
+            },
+            "delete": {
+                "target": "com.amazonaws.deadline#DeleteVolume"
+            },
+            "list": {
+                "target": "com.amazonaws.deadline#ListVolumes"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "farm/{farmId}/fleet/{fleetId}/volume/{volumeId}"
+                },
+                "aws.iam#conditionKeys": [
+                    "deadline:FarmMembershipLevels",
+                    "deadline:FleetMembershipLevels",
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#iamResource": {
+                    "name": "volume",
+                    "relativeDocumentation": "volumes.html"
+                },
+                "smithy.api#documentation": "Represents a persistent volume that provides reusable storage for workers in a fleet"
+            }
+        },
+        "com.amazonaws.deadline#VolumeState": {
+            "type": "enum",
+            "members": {
+                "PENDING_CREATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_CREATION"
+                    }
+                },
+                "PENDING_ATTACHMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_ATTACHMENT"
+                    }
+                },
+                "IN_USE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IN_USE"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "PENDING_DELETION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_DELETION"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of a persistent volume.</p>"
+            }
+        },
+        "com.amazonaws.deadline#VolumeSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.deadline#VolumeSummary"
+            }
+        },
+        "com.amazonaws.deadline#VolumeSummary": {
+            "type": "structure",
+            "members": {
+                "volumeId": {
+                    "target": "com.amazonaws.deadline#VolumeId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The volume ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "farmId": {
+                    "target": "com.amazonaws.deadline#FarmId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The farm ID of the farm that contains the fleet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "fleetId": {
+                    "target": "com.amazonaws.deadline#FleetId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fleet ID of the fleet that contains the volume.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "state": {
+                    "target": "com.amazonaws.deadline#VolumeState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the volume.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "sizeGiB": {
+                    "target": "com.amazonaws.deadline#PersistentVolumeSizeGiB",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The volume size in GiB.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "availabilityZoneId": {
+                    "target": "com.amazonaws.deadline#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone ID of the volume.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "attachedWorkerId": {
+                    "target": "com.amazonaws.deadline#WorkerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The worker ID of the worker the volume is attached to.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The summary of a persistent volume.</p>",
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.deadline#VolumeResource"
+                    }
+                ]
             }
         },
         "com.amazonaws.deadline#VpcConfiguration": {

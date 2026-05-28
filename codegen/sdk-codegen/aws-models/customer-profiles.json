@@ -1101,6 +1101,186 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.customerprofiles#BatchPutProfileObject": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.customerprofiles#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds multiple profile objects to a domain of a given ObjectType in a single API call.</p>\n         <p>When adding a specific profile object, like a Contact Record, an inferred profile can\n         get created if it is not mapped to an existing profile. The resulting profile will only\n         have a phone number populated in the standard ProfileObject. Any additional Contact Records\n         with the same phone number will be mapped to the same inferred profile.</p>\n         <p>When a ProfileObject is created and if a ProfileObjectType already exists for the\n         ProfileObject, it will provide data to a standard profile depending on the\n         ProfileObjectType definition.</p>\n         <p>BatchPutProfileObject needs an ObjectType, which can be created using\n         PutProfileObjectType.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/domains/{DomainName}/profiles/objects/batch-put-profile-object",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectErrorItem": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the item in the batch request that failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.customerprofiles#responseCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP status code for the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.customerprofiles#text",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message describing the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An item that failed to be added to the domain.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectErrorItem"
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectRequest": {
+            "type": "structure",
+            "members": {
+                "DomainName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ObjectTypeName": {
+                    "target": "com.amazonaws.customerprofiles#typeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the profile object type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Items": {
+                    "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectRequestItemList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of items to add to the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectRequestItem": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for this item in the batch request. Used to correlate items in the response.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Object": {
+                    "target": "com.amazonaws.customerprofiles#stringifiedJson",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that is serialized from a JSON object.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An item to add to the domain as part of a batch request.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectRequestItemList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectRequestItem"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectResponse": {
+            "type": "structure",
+            "members": {
+                "Successful": {
+                    "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectResponseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of items that were successfully added to the domain.</p>"
+                    }
+                },
+                "Failed": {
+                    "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of items that failed to be added to the domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectResponseItem": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the item in the batch request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProfileObjectUniqueKey": {
+                    "target": "com.amazonaws.customerprofiles#string1To255",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the profile object generated by the service.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An item that was successfully added to the domain.</p>"
+            }
+        },
+        "com.amazonaws.customerprofiles#BatchPutProfileObjectResponseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.customerprofiles#BatchPutProfileObjectResponseItem"
+            }
+        },
         "com.amazonaws.customerprofiles#Batches": {
             "type": "list",
             "member": {
@@ -3574,6 +3754,9 @@
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#BatchGetProfile"
+                },
+                {
+                    "target": "com.amazonaws.customerprofiles#BatchPutProfileObject"
                 },
                 {
                     "target": "com.amazonaws.customerprofiles#CreateCalculatedAttributeDefinition"
@@ -14868,7 +15051,7 @@
                     }
                 },
                 "Value": {
-                    "target": "com.amazonaws.customerprofiles#maxSize24",
+                    "target": "com.amazonaws.customerprofiles#maxSize60",
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of time of the specified unit.</p>",
                         "smithy.api#required": {}
@@ -14895,6 +15078,12 @@
         "com.amazonaws.customerprofiles#PeriodUnit": {
             "type": "enum",
             "members": {
+                "MINUTES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MINUTES"
+                    }
+                },
                 "HOURS": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -20916,12 +21105,12 @@
                 }
             }
         },
-        "com.amazonaws.customerprofiles#maxSize24": {
+        "com.amazonaws.customerprofiles#maxSize60": {
             "type": "integer",
             "traits": {
                 "smithy.api#range": {
                     "min": 1,
-                    "max": 24
+                    "max": 60
                 }
             }
         },
@@ -20973,6 +21162,15 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.customerprofiles#string1To255"
+            }
+        },
+        "com.amazonaws.customerprofiles#responseCode": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 200,
+                    "max": 599
+                }
             }
         },
         "com.amazonaws.customerprofiles#s3BucketName": {

@@ -4614,7 +4614,7 @@
                     "target": "com.amazonaws.iot#BatchAcrossTopics",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Whether to allow batching messages from different MQTT topics into a single HTTP request.\n         By default, only messages from the same topic are batched together. The default value is <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Whether to allow batching messages from different MQTT topics into a single HTTP request.\n         By default, only messages from the same topic are batched together. The default value is <code>false</code>.</p>\n         <note>\n            <p>When <code>batchAcrossTopics</code> is enabled, the error payload format changes: the <code>topic</code> field moves from the top level to inside each entry in the <code>payloadsWithMetadata</code> array, since each message in the batch may originate from a different topic.</p>\n         </note>\n         <note>\n            <p>Messages are always batched within the scope of the same account, rule name, target HTTP endpoint URL, and billing group. Messages that differ in any of these attributes are never combined into the same batch, regardless of the <code>batchAcrossTopics</code> setting.</p>\n         </note>"
                     }
                 }
             },
@@ -7254,6 +7254,20 @@
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.iot#ConnectivityFilter": {
+            "type": "structure",
+            "members": {
+                "includeSocketInformation": {
+                    "target": "com.amazonaws.iot#FleetIndexingApiList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of fleet indexing APIs for which to enable socket information retrieval. Currently, the only supported value is <code>GET_THING_CONNECTIVITY_DATA</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides connectivity filter selections for the fleet indexing configuration.</p>"
             }
         },
         "com.amazonaws.iot#ConnectivityTimestamp": {
@@ -17322,6 +17336,12 @@
                         "smithy.api#enumValue": "SERVER_INITIATED_DISCONNECT"
                     }
                 },
+                "API_INITIATED_DISCONNECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API_INITIATED_DISCONNECT"
+                    }
+                },
                 "THROTTLED": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -18244,6 +18264,23 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.iot#FleetIndexingApi": {
+            "type": "enum",
+            "members": {
+                "GET_THING_CONNECTIVITY_DATA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GET_THING_CONNECTIVITY_DATA"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.iot#FleetIndexingApiList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.iot#FleetIndexingApi"
             }
         },
         "com.amazonaws.iot#FleetMetricArn": {
@@ -20239,6 +20276,12 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "includeSocketInformation": {
+                    "target": "com.amazonaws.iot#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if socket information (sourcePort, targetPort, sourceIp, targetIp, vpcEndpointId) should be included in the GetThingConnectivityData response. Set to <code>true</code> to include socket information. Set to <code>false</code> to omit socket information. By default, this is set to <code>false</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -20263,13 +20306,67 @@
                 "timestamp": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of when the event occurred.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the event occurred. When you enable or update the indexing configuration, this value might be the Unix epoch time (0) for devices that have never connected or have been disconnected for more than an hour.</p>"
                     }
                 },
                 "disconnectReason": {
                     "target": "com.amazonaws.iot#DisconnectReasonValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason why the client is disconnecting.</p>"
+                        "smithy.api#documentation": "<p>The reason why the client is disconnecting. When you enable or update the indexing configuration, this value might be <code>UNKNOWN</code> for devices that have never connected or have been disconnected for more than an hour.</p>"
+                    }
+                },
+                "sourceIp": {
+                    "target": "com.amazonaws.iot#SourceIp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the client that initiated the connection.</p>"
+                    }
+                },
+                "sourcePort": {
+                    "target": "com.amazonaws.iot#SourcePort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client's source port.</p>"
+                    }
+                },
+                "targetIp": {
+                    "target": "com.amazonaws.iot#TargetIp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IP address of the Amazon Web Services IoT Core endpoint that the client connected to.</p>"
+                    }
+                },
+                "targetPort": {
+                    "target": "com.amazonaws.iot#TargetPort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The port number of the Amazon Web Services IoT Core endpoint that the client connected to.</p>"
+                    }
+                },
+                "vpcEndpointId": {
+                    "target": "com.amazonaws.iot#VpcEndpointId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the VPC endpoint. Present for clients connected to Amazon Web Services IoT Core via a VPC endpoint.</p>"
+                    }
+                },
+                "keepAliveDuration": {
+                    "target": "com.amazonaws.iot#KeepAliveDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The keep-alive interval in seconds that the client specified when establishing the connection.</p>"
+                    }
+                },
+                "cleanSession": {
+                    "target": "com.amazonaws.iot#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the client is using a clean session. Returns <code>true</code> for clean sessions.</p>"
+                    }
+                },
+                "sessionExpiry": {
+                    "target": "com.amazonaws.iot#SessionExpiry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session expiry interval in seconds for the MQTT client connection. This value indicates how long the session will remain active after the client disconnects.</p>"
+                    }
+                },
+                "clientId": {
+                    "target": "com.amazonaws.iot#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the MQTT client.</p>"
                     }
                 }
             },
@@ -20823,6 +20920,12 @@
                     "target": "com.amazonaws.iot#GeoLocationsFilter",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of geolocation targets that you select to index. The default maximum number of\n      geolocation targets for indexing is <code>1</code>. To increase the limit, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/iot_device_management.html#fleet-indexing-limits\">Amazon Web Services IoT Device\n        Management Quotas</a> in the <i>Amazon Web Services General Reference</i>.</p>"
+                    }
+                },
+                "connectivity": {
+                    "target": "com.amazonaws.iot#ConnectivityFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides additional connectivity filter selections for the fleet indexing configuration.</p>"
                     }
                 }
             },
@@ -21985,6 +22088,9 @@
                     "max": 100
                 }
             }
+        },
+        "com.amazonaws.iot#KeepAliveDuration": {
+            "type": "integer"
         },
         "com.amazonaws.iot#Key": {
             "type": "string"
@@ -32876,6 +32982,9 @@
                 "smithy.api#httpError": 503
             }
         },
+        "com.amazonaws.iot#SessionExpiry": {
+            "type": "long"
+        },
         "com.amazonaws.iot#SetAsActive": {
             "type": "boolean",
             "traits": {
@@ -33334,6 +33443,18 @@
                         "smithy.api#enumValue": "DESCENDING"
                     }
                 }
+            }
+        },
+        "com.amazonaws.iot#SourceIp": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.iot#SourcePort": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.iot#SqlParseException": {
@@ -34428,6 +34549,18 @@
                 }
             }
         },
+        "com.amazonaws.iot#TargetIp": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.iot#TargetPort": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.iot#TargetSelection": {
             "type": "enum",
             "members": {
@@ -34935,13 +35068,37 @@
                 "timestamp": {
                     "target": "com.amazonaws.iot#ConnectivityTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The epoch time (in milliseconds) when the thing last connected or disconnected. If the\n      thing has been disconnected for approximately an hour, the time value might be missing.</p>"
+                        "smithy.api#documentation": "<p>The epoch time (in milliseconds) when the thing last connected or disconnected. If the\n      thing has been disconnected for approximately an hour, the time value might be missing. When you enable or update the indexing configuration, this value might be <code>0</code> (the Unix epoch time) for devices that have never connected or have been disconnected for more than an hour.</p>"
                     }
                 },
                 "disconnectReason": {
                     "target": "com.amazonaws.iot#DisconnectReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason why the client is disconnected. If the thing has been disconnected for approximately an hour, the <code>disconnectReason</code> value might be missing.</p>"
+                        "smithy.api#documentation": "<p>The reason why the client is disconnected. When you enable or update the indexing configuration, this value might be missing for devices that have never connected or have been disconnected for more than an hour.</p>"
+                    }
+                },
+                "keepAliveDuration": {
+                    "target": "com.amazonaws.iot#KeepAliveDuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The keep-alive interval in seconds that the client specified when establishing the connection.</p>"
+                    }
+                },
+                "cleanSession": {
+                    "target": "com.amazonaws.iot#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the client is using a clean session. Returns <code>true</code> for clean sessions.</p>"
+                    }
+                },
+                "sessionExpiry": {
+                    "target": "com.amazonaws.iot#SessionExpiry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session expiry interval in seconds for the MQTT client connection. This value indicates how long the session will remain active after the client disconnects.</p>"
+                    }
+                },
+                "clientId": {
+                    "target": "com.amazonaws.iot#ClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the MQTT client.</p>"
                     }
                 }
             },
@@ -39643,6 +39800,12 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The summary of a virtual private cloud (VPC) destination.</p>"
+            }
+        },
+        "com.amazonaws.iot#VpcEndpointId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.iot#VpcId": {

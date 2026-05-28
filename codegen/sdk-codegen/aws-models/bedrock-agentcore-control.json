@@ -3435,6 +3435,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the configuration bundle.</p>"
                     }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when the configuration bundle was created.</p>"
+                    }
                 }
             },
             "traits": {
@@ -16960,7 +16966,7 @@
             "type": "structure",
             "members": {
                 "browserArn": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#BrowserArn",
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessBrowserArn",
                     "traits": {
                         "smithy.api#documentation": "<p>If not populated, the built-in Browser ARN is used.</p>"
                     }
@@ -16974,7 +16980,7 @@
             "type": "structure",
             "members": {
                 "codeInterpreterArn": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#CodeInterpreterArn",
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessCodeInterpreterArn",
                     "traits": {
                         "smithy.api#documentation": "<p>If not populated, the built-in Code Interpreter ARN is used.</p>"
                     }
@@ -17162,6 +17168,32 @@
                 "smithy.api#pattern": "^arn:([^:]+)?:bedrock-agentcore:[a-z0-9-]+:[0-9]{12}:harness/[a-zA-Z][a-zA-Z0-9_]{0,39}-[a-zA-Z0-9]{10}$"
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessBedrockApiFormat": {
+            "type": "enum",
+            "members": {
+                "CONVERSE_STREAM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the Bedrock Converse Stream API format.</p>",
+                        "smithy.api#enumValue": "converse_stream"
+                    }
+                },
+                "RESPONSES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the Responses API format.</p>",
+                        "smithy.api#enumValue": "responses"
+                    }
+                },
+                "CHAT_COMPLETIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the Chat Completions API format.</p>",
+                        "smithy.api#enumValue": "chat_completions"
+                    }
+                }
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#HarnessBedrockModelConfig": {
             "type": "structure",
             "members": {
@@ -17189,10 +17221,36 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The topP set when calling the model.</p>"
                     }
+                },
+                "apiFormat": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessBedrockApiFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API format to use when calling the Bedrock provider.</p>"
+                    }
+                },
+                "additionalParams": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provider-specific parameters passed through to the model provider unchanged.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Configuration for an Amazon Bedrock model provider.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessBrowserArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Browser ARN for Harness tool configuration. Accepts both managed (aws.browser.v1) and custom browser ARNs.",
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):browser(-custom)?/(aws\\.browser\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessCodeInterpreterArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Code Interpreter ARN for Harness tool configuration. Accepts both managed (aws.codeinterpreter.v1) and custom code interpreter ARNs.",
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:bedrock-agentcore:[a-z0-9-]+:(aws|[0-9]{12}):code-interpreter(-custom)?/(aws\\.codeinterpreter\\.v1|[a-zA-Z][a-zA-Z0-9_]{0,47}-[a-zA-Z0-9]{10})$"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#HarnessEnvironmentArtifact": {
@@ -17250,7 +17308,10 @@
                     }
                 },
                 "oauth": {
-                    "target": "com.amazonaws.bedrockagentcorecontrol#OAuthCredentialProvider"
+                    "target": "com.amazonaws.bedrockagentcorecontrol#OAuthCredentialProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use OAuth credentials for outbound authentication to the gateway.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17341,6 +17402,67 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessLiteLlmApiBase": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16383
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessLiteLlmModelConfig": {
+            "type": "structure",
+            "members": {
+                "modelId": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ModelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The LiteLLM model identifier (e.g., \"anthropic/claude-3-sonnet\").</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "apiKeyArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ApiKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the API key in AgentCore Identity for authenticating with the model provider.</p>"
+                    }
+                },
+                "apiBase": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessLiteLlmApiBase",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The base URL for the model provider's API endpoint.</p>"
+                    }
+                },
+                "maxTokens": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#MaxTokens",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of tokens to allow in the generated response per iteration.</p>"
+                    }
+                },
+                "temperature": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#Temperature",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The temperature to set when calling the model.</p>"
+                    }
+                },
+                "topP": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#TopP",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The topP set when calling the model.</p>"
+                    }
+                },
+                "additionalParams": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provider-specific parameters passed through to the model provider unchanged.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for a LiteLLM model provider, enabling connection to third-party model providers.</p>"
+            }
+        },
         "com.amazonaws.bedrockagentcorecontrol#HarnessMemoryConfiguration": {
             "type": "union",
             "members": {
@@ -17375,6 +17497,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Configuration for a Google Gemini model.</p>"
                     }
+                },
+                "liteLlmModelConfig": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessLiteLlmModelConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The LiteLLM model configuration for connecting to third-party model providers.</p>"
+                    }
                 }
             },
             "traits": {
@@ -17385,6 +17513,25 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,39}$"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessOpenAiApiFormat": {
+            "type": "enum",
+            "members": {
+                "CHAT_COMPLETIONS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the Chat Completions API format.</p>",
+                        "smithy.api#enumValue": "chat_completions"
+                    }
+                },
+                "RESPONSES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Use the Responses API format.</p>",
+                        "smithy.api#enumValue": "responses"
+                    }
+                }
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#HarnessOpenAiModelConfig": {
@@ -17420,6 +17567,18 @@
                     "target": "com.amazonaws.bedrockagentcorecontrol#TopP",
                     "traits": {
                         "smithy.api#documentation": "<p>The topP set when calling the model.</p>"
+                    }
+                },
+                "apiFormat": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessOpenAiApiFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The API format to use when calling the OpenAI provider.</p>"
+                    }
+                },
+                "additionalParams": {
+                    "target": "smithy.api#Document",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provider-specific parameters passed through to the model provider unchanged.</p>"
                     }
                 }
             },
@@ -17486,10 +17645,79 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The filesystem path to the skill definition.</p>"
                     }
+                },
+                "s3": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessSkillS3Source",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An S3 source containing the skill.</p>"
+                    }
+                },
+                "git": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessSkillGitSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A git repository containing the skill.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A skill available to the agent.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessSkillGitAuth": {
+            "type": "structure",
+            "members": {
+                "credentialArn": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#ApiKeyArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the credential in AgentCore Identity containing the password or personal access token.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "username": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Username for authentication. Defaults to 'oauth2' if not specified.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Authentication configuration for accessing a private git repository.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessSkillGitSource": {
+            "type": "structure",
+            "members": {
+                "url": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessSkillGitUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTPS URL of the git repository.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "path": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Subdirectory within the repository containing the skill.</p>"
+                    }
+                },
+                "auth": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessSkillGitAuth",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Authentication configuration for private repositories.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A git repository source for a skill.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessSkillGitUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 8
+                },
+                "smithy.api#pattern": "^https://"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#HarnessSkillPath": {
@@ -17498,6 +17726,30 @@
                 "smithy.api#length": {
                     "min": 1
                 }
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessSkillS3Source": {
+            "type": "structure",
+            "members": {
+                "uri": {
+                    "target": "com.amazonaws.bedrockagentcorecontrol#HarnessSkillS3Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 URI pointing to the skill directory (e.g., s3://bucket/skills/my-skill/).</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An S3 source for a skill.</p>"
+            }
+        },
+        "com.amazonaws.bedrockagentcorecontrol#HarnessSkillS3Uri": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5
+                },
+                "smithy.api#pattern": "^s3://"
             }
         },
         "com.amazonaws.bedrockagentcorecontrol#HarnessSkills": {

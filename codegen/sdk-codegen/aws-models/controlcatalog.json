@@ -1125,6 +1125,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A filter that narrows the results to controls with specific implementation types or identifiers. This field allows you to find controls that are implemented by specific Amazon Web Services services or with specific service identifiers.</p>"
                     }
+                },
+                "GovernedProviders": {
+                    "target": "com.amazonaws.controlcatalog#GovernedProviderFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that narrows the results to controls that govern a specific provider's resources.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1201,10 +1207,33 @@
                         "smithy.api#documentation": "<p>The parameter name. This name is the parameter <code>key</code> when you call <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_EnableControl.html\"> <code>EnableControl</code> </a> or <a href=\"https://docs.aws.amazon.com/controltower/latest/APIReference/API_UpdateEnabledControl.html\"> <code>UpdateEnabledControl</code> </a>.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Requirement": {
+                    "target": "com.amazonaws.controlcatalog#ControlParameterRequirement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the parameter is required or optional when you enable the control.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Five types of control parameters are supported.</p> <ul> <li> <p> <b>AllowedRegions</b>: List of Amazon Web Services Regions exempted from the control. Each string is expected to be an Amazon Web Services Region code. This parameter is mandatory for the <b>OU Region deny</b> control, <b>CT.MULTISERVICE.PV.1</b>.</p> <p>Example: <code>[\"us-east-1\",\"us-west-2\"]</code> </p> </li> <li> <p> <b>ExemptedActions</b>: List of Amazon Web Services IAM actions exempted from the control. Each string is expected to be an IAM action.</p> <p>Example: <code>[\"logs:DescribeLogGroups\",\"logs:StartQuery\",\"logs:GetQueryResults\"]</code> </p> </li> <li> <p> <b>ExemptedPrincipalArns</b>: List of Amazon Web Services IAM principal ARNs exempted from the control. Each string is expected to be an IAM principal that follows the format <code>arn:partition:service::account:resource</code> </p> <p>Example: <code>[\"arn:aws:iam::*:role/ReadOnly\",\"arn:aws:sts::*:assumed-role/ReadOnly/*\"]</code> </p> </li> <li> <p> <b>ExemptedResourceArns</b>: List of resource ARNs exempted from the control. Each string is expected to be a resource ARN.</p> <p>Example: <code>[\"arn:aws:s3:::my-bucket-name\"]</code> </p> </li> <li> <p> <b>ExemptAssumeRoot</b>: A parameter that lets you choose whether to exempt requests made with <code>AssumeRoot</code> from this control, for this OU. For member accounts, the <code>AssumeRoot</code> property is included in requests initiated by IAM centralized root access. This parameter applies only to the <code>AWS-GR_RESTRICT_ROOT_USER</code> control. If you add the parameter when enabling the control, the <code>AssumeRoot</code> exemption is allowed. If you omit the parameter, the <code>AssumeRoot</code> exception is not permitted. The parameter does not accept <code>False</code> as a value.</p> <p> <i>Example: Enabling the control and allowing <code>AssumeRoot</code> </i> </p> <p> <code>{ \"controlIdentifier\": \"arn:aws:controlcatalog:::control/5kvme4m5d2b4d7if2fs5yg2ui\", \"parameters\": [ { \"key\": \"ExemptAssumeRoot\", \"value\": true } ], \"targetIdentifier\": \"arn:aws:organizations::8633900XXXXX:ou/o-6jmn81636m/ou-qsah-jtiihcla\" }</code> </p> </li> </ul>"
+            }
+        },
+        "com.amazonaws.controlcatalog#ControlParameterRequirement": {
+            "type": "enum",
+            "members": {
+                "REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUIRED"
+                    }
+                },
+                "OPTIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPTIONAL"
+                    }
+                }
             }
         },
         "com.amazonaws.controlcatalog#ControlParameters": {
@@ -1348,6 +1377,12 @@
                         "smithy.api#documentation": "<p>An enumerated type, with the following possible values:</p>"
                     }
                 },
+                "ParameterRequirementSummary": {
+                    "target": "com.amazonaws.controlcatalog#ParameterRequirementSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary that indicates whether the control requires parameters, accepts optional parameters, or does not support parameters. Use this field to determine whether you need to supply parameter values when you enable the control.</p>"
+                    }
+                },
                 "Implementation": {
                     "target": "com.amazonaws.controlcatalog#ImplementationSummary",
                     "traits": {
@@ -1363,7 +1398,13 @@
                 "GovernedResources": {
                     "target": "com.amazonaws.controlcatalog#GovernedResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Amazon Web Services resource types that are governed by this control. This information helps you understand which controls can govern certain types of resources, and conversely, which resources are affected when the control is implemented. The resources are represented as Amazon Web Services CloudFormation resource types. If <code>GovernedResources</code> cannot be represented by available CloudFormation resource types, it’s returned as an empty list.</p>"
+                        "smithy.api#documentation": "<p>A list of resource types that are governed by this control. This information helps you understand which controls can govern certain types of resources, and conversely, which resources are affected when the control is implemented. For Amazon Web Services controls, the resources are represented as CloudFormation resource types. For non-Amazon Web Services controls, the resources are represented in a provider-specific format. If <code>GovernedResources</code> cannot be represented by available resource types, it’s returned as an empty list.</p>"
+                    }
+                },
+                "GovernedProviders": {
+                    "target": "com.amazonaws.controlcatalog#GovernedProviders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of providers whose resources are governed by this control. For example, a value of <code>AWS</code> indicates that the control governs Amazon Web Services resources.</p>"
                     }
                 }
             },
@@ -1629,6 +1670,12 @@
                         "smithy.api#documentation": "<p>Returns information about the control, as an <code>ImplementationDetails</code> object that shows the underlying implementation type for a control.</p>"
                     }
                 },
+                "ParameterRequirementSummary": {
+                    "target": "com.amazonaws.controlcatalog#ParameterRequirementSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary that indicates whether the control requires parameters, accepts optional parameters, or does not support parameters. Use this field to determine whether you need to supply parameter values when you enable the control.</p>"
+                    }
+                },
                 "Parameters": {
                     "target": "com.amazonaws.controlcatalog#ControlParameters",
                     "traits": {
@@ -1644,7 +1691,13 @@
                 "GovernedResources": {
                     "target": "com.amazonaws.controlcatalog#GovernedResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Amazon Web Services resource types that are governed by this control. This information helps you understand which controls can govern certain types of resources, and conversely, which resources are affected when the control is implemented. The resources are represented as Amazon Web Services CloudFormation resource types. If <code>GovernedResources</code> cannot be represented by available CloudFormation resource types, it’s returned as an empty list.</p>"
+                        "smithy.api#documentation": "<p>A list of resource types that are governed by this control. This information helps you understand which controls can govern certain types of resources, and conversely, which resources are affected when the control is implemented. For Amazon Web Services controls, the resources are represented as CloudFormation resource types. For non-Amazon Web Services controls, the resources are represented in a provider-specific format. If <code>GovernedResources</code> cannot be represented by available resource types, it’s returned as an empty list.</p>"
+                    }
+                },
+                "GovernedProviders": {
+                    "target": "com.amazonaws.controlcatalog#GovernedProviders",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of providers whose resources are governed by this control. For example, a value of <code>AWS</code> indicates that the control governs Amazon Web Services resources.</p>"
                     }
                 }
             },
@@ -1652,10 +1705,38 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.controlcatalog#GovernedProvider": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Z]{2,64}$"
+            }
+        },
+        "com.amazonaws.controlcatalog#GovernedProviderFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#GovernedProvider"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#GovernedProviders": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#GovernedProvider"
+            }
+        },
         "com.amazonaws.controlcatalog#GovernedResource": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}$"
+                "smithy.api#pattern": "^[A-Za-z0-9][A-Za-z0-9.:/_-]{1,254}$"
             }
         },
         "com.amazonaws.controlcatalog#GovernedResources": {
@@ -2446,6 +2527,29 @@
             "traits": {
                 "smithy.api#length": {
                     "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#ParameterRequirementSummary": {
+            "type": "enum",
+            "members": {
+                "REQUIRED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUIRED"
+                    }
+                },
+                "OPTIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OPTIONAL"
+                    }
+                },
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NONE"
+                    }
                 }
             }
         },

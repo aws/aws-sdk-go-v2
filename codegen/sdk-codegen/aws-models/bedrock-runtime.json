@@ -1989,6 +1989,12 @@
                     "traits": {
                         "smithy.api#enumValue": "assistant"
                     }
+                },
+                "SYSTEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "system"
+                    }
                 }
             }
         },
