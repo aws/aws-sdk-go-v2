@@ -95,3 +95,4 @@ software.amazon.smithy.aws.go.codegen.customization.RemoveOperations
 software.amazon.smithy.aws.go.codegen.customization.RetryInterceptors
 software.amazon.smithy.aws.go.codegen.customization.service.BearerTokenEnvProvider
 software.amazon.smithy.aws.go.codegen.customization.service.s3.S3AddErrorMessage
+software.amazon.smithy.aws.go.codegen.customization.service.sts.STSRetryableErrors
