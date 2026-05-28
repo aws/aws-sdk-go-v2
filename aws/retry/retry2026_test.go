@@ -6,11 +6,15 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"sync/atomic"
 	"testing"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/ratelimit"
+	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
+	"github.com/aws/aws-sdk-go-v2/internal/sdk"
+	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
@@ -594,5 +598,80 @@ func TestRetry2026StandardMode(t *testing.T) {
 				}
 			}
 		})
+	}
+}
+
+func TestLongPollingContextBackoff(t *testing.T) {
+	// This test simulates an SQS ReceiveMessage-like long-polling operation
+	// that fails when the retry quota is already exhausted.
+	//
+	// long-polling operations MUST back off (sleep) before
+	// returning even when the retry quota is exhausted and no retry will be
+	// made. This prevents request amplification — without the backoff, a tight
+	// loop calling ReceiveMessage would hammer the service immediately after
+	// every failure instead of waiting.
+	//
+	// The setup:
+	//   - Retryer with 0 tokens: simulates a client whose retry quota is
+	//     already exhausted from previous failures.
+	//   - Long-polling context flag: simulates what the codegen-generated
+	//     setLongPollingContextMiddleware does for ReceiveMessage. The retryer
+	//     itself is NOT wrapped with AddWithLongPolling (matching the real
+	//     codegen path where Options are passed by value).
+	//   - 500 error response: a retryable error that would normally trigger a
+	//     retry, but can't because quota is 0.
+	//
+	// We intercept sdk.SleepWithContext to detect whether the middleware slept.
+	// For a normal operation with exhausted quota, the SDK returns immediately.
+	// For a long-polling operation, it MUST sleep first (the SEP pseudocode):
+	//
+	//   if not HasRetryQuota(response)
+	//     if IsLongPollingOperation():
+	//       sleep(ExponentialBackoff(attempts - 1))
+	//     return response
+	//
+	t.Setenv("AWS_NEW_RETRIES_2026", "true")
+
+	var slept atomic.Bool
+	origSleep := sdk.SleepWithContext
+	sdk.SleepWithContext = func(ctx context.Context, d time.Duration) error {
+		slept.Store(true)
+		return nil
+	}
+	defer func() { sdk.SleepWithContext = origSleep }()
+
+	retryer := NewStandard(func(o *StandardOptions) {
+		o.MaxAttempts = 3
+		o.RateLimiter = ratelimit.NewTokenRateLimit(0)
+		o.Backoff = BackoffDelayerFunc(func(attempt int, err error) (time.Duration, error) {
+			return 50 * time.Millisecond, nil
+		})
+	})
+
+	m := NewAttemptMiddleware(retryer, func(i interface{}) interface{} { return i })
+
+	ctx := internalcontext.SetIsLongPolling(context.Background(), true)
+
+	next := middleware.FinalizeHandlerFunc(
+		func(ctx context.Context, in middleware.FinalizeInput) (
+			out middleware.FinalizeOutput, metadata middleware.Metadata, err error,
+		) {
+			return out, metadata, &smithyhttp.ResponseError{
+				Response: &smithyhttp.Response{Response: &http.Response{
+					StatusCode: 500,
+					Header:     http.Header{},
+				}},
+			}
+		})
+
+	_, _, err := m.HandleFinalize(ctx, middleware.FinalizeInput{
+		Request: &smithyhttp.Request{Request: &http.Request{Header: http.Header{}}},
+	}, next)
+
+	if err == nil {
+		t.Fatal("expected error, got nil")
+	}
+	if !slept.Load() {
+		t.Fatal("expected backoff sleep for long-polling operation when quota exhausted, but no sleep occurred")
 	}
 }
