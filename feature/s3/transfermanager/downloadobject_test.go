@@ -25,6 +25,7 @@ func TestDownloadObject(t *testing.T) {
 		data                 []byte
 		errReaders           []s3testing.TestErrReader
 		getObjectFn          func(*s3testing.TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
+		rng                  string
 		optFn                func(*Options)
 		expectInvocations    int
 		expectRanges         []string
@@ -87,6 +88,50 @@ func TestDownloadObject(t *testing.T) {
 				l.expectByteTransfers(t,
 					10*megabyte, 20*megabyte)
 			},
+		},
+		"single range download with specified range input": {
+			data:        buf20MB,
+			getObjectFn: s3testing.RangeGetObjectFn,
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+			},
+			rng:               "bytes=2-8388609",
+			expectInvocations: 1,
+			expectRanges:      []string{"bytes=2-8388609"},
+			expectETags:       []string{""},
+			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
+				l.expectComplete(t, in, out)
+				l.expectStartTotalBytes(t, 8388608)
+				l.expectByteTransfers(t,
+					8*megabyte)
+			},
+		},
+		"multiple range download with specified range input": {
+			data:        buf20MB,
+			getObjectFn: s3testing.RangeGetObjectFn,
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+				o.Concurrency = 1
+			},
+			rng:               "bytes=2-16777218",
+			expectInvocations: 3,
+			expectRanges:      []string{"bytes=2-8388609", "bytes=8388610-16777217", "bytes=16777218-16777218"},
+			expectETags:       []string{"", etag, etag},
+			listenerValidationFn: func(t *testing.T, l *mockListener, in, out any, err error) {
+				l.expectComplete(t, in, out)
+				l.expectStartTotalBytes(t, 16777217)
+				l.expectByteTransfers(t,
+					8*megabyte, 16*megabyte, 16*megabyte+1)
+			},
+		},
+		"range download with invalid range input": {
+			data:        buf20MB,
+			getObjectFn: s3testing.RangeGetObjectFn,
+			optFn: func(o *Options) {
+				o.GetObjectType = types.GetObjectRanges
+			},
+			rng:       "bytes=-2-8388609",
+			expectErr: "invalid range format",
 		},
 		"range download with s3 error": {
 			data:        buf20MB,
@@ -412,6 +457,7 @@ func TestDownloadObject(t *testing.T) {
 				Key:       aws.String("key"),
 				WriterAt:  w,
 				VersionID: nzstring(c.versionID),
+				Range:     aws.String(c.rng),
 			}
 
 			listener := &mockListener{}

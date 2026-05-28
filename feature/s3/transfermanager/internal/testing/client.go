@@ -57,9 +57,9 @@ type TransferManagerLoggingClient struct {
 	m sync.Mutex
 
 	PutObjectFn               func(*TransferManagerLoggingClient, *s3.PutObjectInput) (*s3.PutObjectOutput, error)
-	UploadPartFn              func(*TransferManagerLoggingClient, *s3.UploadPartInput) (*s3.UploadPartOutput, error)
+	UploadPartFn              func(context.Context, *TransferManagerLoggingClient, *s3.UploadPartInput) (*s3.UploadPartOutput, error)
 	CreateMultipartUploadFn   func(*TransferManagerLoggingClient, *s3.CreateMultipartUploadInput) (*s3.CreateMultipartUploadOutput, error)
-	CompleteMultipartUploadFn func(*TransferManagerLoggingClient, *s3.CompleteMultipartUploadInput) (*s3.CompleteMultipartUploadOutput, error)
+	CompleteMultipartUploadFn func(context.Context, *TransferManagerLoggingClient, *s3.CompleteMultipartUploadInput) (*s3.CompleteMultipartUploadOutput, error)
 	AbortMultipartUploadFn    func(*TransferManagerLoggingClient, *s3.AbortMultipartUploadInput) (*s3.AbortMultipartUploadOutput, error)
 	GetObjectFn               func(*TransferManagerLoggingClient, *s3.GetObjectInput) (*s3.GetObjectOutput, error)
 }
@@ -148,7 +148,7 @@ func (c *TransferManagerLoggingClient) UploadPart(ctx context.Context, params *s
 	}
 
 	if c.UploadPartFn != nil {
-		return c.UploadPartFn(c, params)
+		return c.UploadPartFn(ctx, c, params)
 	}
 
 	return &s3.UploadPartOutput{
@@ -188,7 +188,7 @@ func (c *TransferManagerLoggingClient) CompleteMultipartUpload(ctx context.Conte
 	}
 
 	if c.CompleteMultipartUploadFn != nil {
-		return c.CompleteMultipartUploadFn(c, params)
+		return c.CompleteMultipartUploadFn(ctx, c, params)
 	}
 
 	return &s3.CompleteMultipartUploadOutput{
@@ -201,6 +201,10 @@ func (c *TransferManagerLoggingClient) CompleteMultipartUpload(ctx context.Conte
 func (c *TransferManagerLoggingClient) AbortMultipartUpload(ctx context.Context, params *s3.AbortMultipartUploadInput, optFns ...func(*s3.Options)) (*s3.AbortMultipartUploadOutput, error) {
 	c.m.Lock()
 	defer c.m.Unlock()
+
+	if ctx.Err() != nil {
+		return nil, ctx.Err()
+	}
 
 	c.traceOperation("AbortMultipartUpload", params)
 	if err := c.simulateHTTPClientOption(optFns...); err != nil {

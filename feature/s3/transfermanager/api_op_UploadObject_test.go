@@ -14,14 +14,16 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/retry"
 	s3testing "github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/internal/testing"
+	"github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager/types"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/sdk"
 	"github.com/aws/aws-sdk-go-v2/service/s3"
-	"github.com/aws/aws-sdk-go-v2/service/s3/types"
+	s3types "github.com/aws/aws-sdk-go-v2/service/s3/types"
 )
 
 // getReaderLength discards the bytes from reader and returns the length
@@ -38,6 +40,9 @@ func TestUploadOrderMulti(t *testing.T) {
 		Bucket:               aws.String("Bucket"),
 		Key:                  aws.String("Key - value"),
 		Body:                 bytes.NewReader(buf20MB),
+		ChecksumType:         types.ChecksumTypeFullObject,
+		ChecksumAlgorithm:    types.ChecksumAlgorithmCrc32c,
+		ChecksumCRC32C:       aws.String("CRC32CValue"),
 		ServerSideEncryption: "aws:kms",
 		SSEKMSKeyID:          aws.String("KmsId"),
 		ContentType:          aws.String("content/type"),
@@ -74,9 +79,16 @@ func TestUploadOrderMulti(t *testing.T) {
 	}
 
 	// CompleteMultipartUpload
-	v := aws.ToString((*args)[4].(*s3.CompleteMultipartUploadInput).UploadId)
-	if "UPLOAD-ID" != v {
+	completemu := (*args)[4].(*s3.CompleteMultipartUploadInput)
+
+	if v := aws.ToString(completemu.UploadId); "UPLOAD-ID" != v {
 		t.Errorf("Expected %q, but received %q", "UPLOAD-ID", v)
+	}
+	if e, a := "CRC32CValue", aws.ToString(completemu.ChecksumCRC32C); e != a {
+		t.Errorf("Expected %v, but received %v", e, a)
+	}
+	if e, a := s3types.ChecksumTypeFullObject, completemu.ChecksumType; e != a {
+		t.Errorf("Expected %v, but received %v", e, a)
 	}
 
 	parts := (*args)[4].(*s3.CompleteMultipartUploadInput).MultipartUpload.Parts
@@ -95,29 +107,37 @@ func TestUploadOrderMulti(t *testing.T) {
 	}
 
 	// Custom headers
-	cmu := (*args)[0].(*s3.CreateMultipartUploadInput)
+	createmu := (*args)[0].(*s3.CreateMultipartUploadInput)
 
-	if e, a := types.ServerSideEncryption("aws:kms"), cmu.ServerSideEncryption; e != a {
+	if e, a := s3types.ServerSideEncryption("aws:kms"), createmu.ServerSideEncryption; e != a {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 
-	if e, a := "KmsId", aws.ToString(cmu.SSEKMSKeyId); e != a {
+	if e, a := "KmsId", aws.ToString(createmu.SSEKMSKeyId); e != a {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 
-	if e, a := "content/type", aws.ToString(cmu.ContentType); e != a {
+	if e, a := "content/type", aws.ToString(createmu.ContentType); e != a {
 		t.Errorf("expect %q, got %q", e, a)
+	}
+
+	if e, a := s3types.ChecksumAlgorithmCrc32c, createmu.ChecksumAlgorithm; e != a {
+		t.Errorf("expect %v, got %v", e, a)
+	}
+
+	if e, a := s3types.ChecksumTypeFullObject, createmu.ChecksumType; e != a {
+		t.Errorf("expect %v, got %v", e, a)
 	}
 }
 
-func TestUploadOrderMultiTriggerredBySinglePartSize(t *testing.T) {
+func TestSingleUploadLimitedByMPUThreshold(t *testing.T) {
 	c, invocations, args := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c)
 
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket:               aws.String("Bucket"),
 		Key:                  aws.String("Key - value"),
-		Body:                 bytes.NewReader(make([]byte, 8*1024*1024)),
+		Body:                 bytes.NewReader(make([]byte, 16*1024*1024-1)),
 		ServerSideEncryption: "aws:kms",
 		SSEKMSKeyID:          aws.String("KmsId"),
 		ContentType:          aws.String("content/type"),
@@ -127,65 +147,41 @@ func TestUploadOrderMultiTriggerredBySinglePartSize(t *testing.T) {
 		t.Errorf("Expected no error but received %v", err)
 	}
 
-	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "CompleteMultipartUpload"}, *invocations); len(diff) > 0 {
+	if diff := cmpDiff([]string{"PutObject"}, *invocations); len(diff) > 0 {
 		t.Error(diff)
-	}
-
-	if "UPLOAD-ID" != aws.ToString(resp.UploadID) {
-		t.Errorf("expect %q, got %q", "UPLOAD-ID", aws.ToString(resp.UploadID))
 	}
 
 	if "VERSION-ID" != aws.ToString(resp.VersionID) {
 		t.Errorf("expect %q, got %q", "VERSION-ID", aws.ToString(resp.VersionID))
 	}
 
-	// Validate input values
-	v := aws.ToString((*args)[1].(*s3.UploadPartInput).UploadId)
-	if "UPLOAD-ID" != v {
-		t.Errorf("Expected %q, but received %q", "UPLOAD-ID", v)
-	}
-	v = aws.ToString((*args)[2].(*s3.CompleteMultipartUploadInput).UploadId)
-	if "UPLOAD-ID" != v {
-		t.Errorf("Expected %q, but received %q", "UPLOAD-ID", v)
+	if len(aws.ToString(resp.UploadID)) > 0 {
+		t.Errorf("expect empty string, got %q", aws.ToString(resp.UploadID))
 	}
 
-	parts := (*args)[2].(*s3.CompleteMultipartUploadInput).MultipartUpload.Parts
+	putObjectInput := (*args)[0].(*s3.PutObjectInput)
 
-	num := parts[0].PartNumber
-	etag := aws.ToString(parts[0].ETag)
-
-	if aws.ToInt32(num) != 1 {
-		t.Errorf("expect part number to be 1, got %d", num)
-	}
-
-	if matched, err := regexp.MatchString(`^ETAG\d+$`, etag); !matched || err != nil {
-		t.Errorf("Failed regexp expression `^ETAG\\d+$`, got %s", etag)
-	}
-
-	// Custom headers
-	cmu := (*args)[0].(*s3.CreateMultipartUploadInput)
-
-	if e, a := types.ServerSideEncryption("aws:kms"), cmu.ServerSideEncryption; e != a {
+	if e, a := s3types.ServerSideEncryption("aws:kms"), putObjectInput.ServerSideEncryption; e != a {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 
-	if e, a := "KmsId", aws.ToString(cmu.SSEKMSKeyId); e != a {
+	if e, a := "KmsId", aws.ToString(putObjectInput.SSEKMSKeyId); e != a {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 
-	if e, a := "content/type", aws.ToString(cmu.ContentType); e != a {
-		t.Errorf("expect %q, got %q", e, a)
+	if e, a := "content/type", aws.ToString(putObjectInput.ContentType); e != a {
+		t.Errorf("Expected %q, but received %q", e, a)
 	}
 }
 
-func TestUploadOrderMultiJustExceedSinglePart(t *testing.T) {
+func TestUploadOrderMultiJustMeetThreshold(t *testing.T) {
 	c, invocations, args := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c)
 
 	resp, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket:               aws.String("Bucket"),
 		Key:                  aws.String("Key - value"),
-		Body:                 bytes.NewReader(make([]byte, 8*1024*1024+1)),
+		Body:                 bytes.NewReader(make([]byte, 16*1024*1024)),
 		ServerSideEncryption: "aws:kms",
 		SSEKMSKeyID:          aws.String("KmsId"),
 		ContentType:          aws.String("content/type"),
@@ -242,7 +238,7 @@ func TestUploadOrderMultiJustExceedSinglePart(t *testing.T) {
 	// Custom headers
 	cmu := (*args)[0].(*s3.CreateMultipartUploadInput)
 
-	if e, a := types.ServerSideEncryption("aws:kms"), cmu.ServerSideEncryption; e != a {
+	if e, a := s3types.ServerSideEncryption("aws:kms"), cmu.ServerSideEncryption; e != a {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 
@@ -279,10 +275,104 @@ func TestUploadOrderMultiDifferentPartSize(t *testing.T) {
 
 	// Part lengths
 	if len := getReaderLength((*args)[1].(*s3.UploadPartInput).Body); 1024*1024*11 != len {
-		t.Errorf("expect %d, got %d", 1024*1024*7, len)
+		t.Errorf("expect %d, got %d", 1024*1024*11, len)
 	}
 	if len := getReaderLength((*args)[2].(*s3.UploadPartInput).Body); 1024*1024*9 != len {
-		t.Errorf("expect %d, got %d", 1024*1024*5, len)
+		t.Errorf("expect %d, got %d", 1024*1024*9, len)
+	}
+}
+
+func TestUploadOrderMultiWithPartSizeEqualToThreshold(t *testing.T) {
+	c, ops, args := s3testing.NewUploadLoggingClient(nil)
+	mgr := New(c, func(options *Options) {
+		options.PartSizeBytes = 1024 * 1024 * 16
+		options.Concurrency = 1
+	})
+
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(buf20MB),
+	})
+
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+
+	vals := []string{"CreateMultipartUpload", "UploadPart", "UploadPart", "CompleteMultipartUpload"}
+	if !reflect.DeepEqual(vals, *ops) {
+		t.Errorf("expect %v, got %v", vals, *ops)
+	}
+
+	// Part lengths
+	if e, a := 1024*1024*16, getReaderLength((*args)[1].(*s3.UploadPartInput).Body); int64(e) != a {
+		t.Errorf("expect %d, got %d", e, a)
+	}
+	if e, a := 1024*1024*4, getReaderLength((*args)[2].(*s3.UploadPartInput).Body); int64(e) != a {
+		t.Errorf("expect %d, got %d", e, a)
+	}
+}
+
+func TestUploadOrderMultiWithMaxParts(t *testing.T) {
+	c, ops, args := s3testing.NewUploadLoggingClient(nil)
+	mgr := New(c, func(options *Options) {
+		options.MaxUploadParts = 2
+		options.Concurrency = 1
+	})
+
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(buf40MB),
+	})
+
+	if err != nil {
+		t.Errorf("expect no error, got %v", err)
+	}
+
+	vals := []string{"CreateMultipartUpload", "UploadPart", "UploadPart", "CompleteMultipartUpload"}
+	if !reflect.DeepEqual(vals, *ops) {
+		t.Errorf("expect %v, got %v", vals, *ops)
+	}
+
+	// max 2 parts means the part size will be recalculated to 40MB/2+1=20MB + 1
+	// Part lengths
+	if e, a := 1024*1024*20+1, getReaderLength((*args)[1].(*s3.UploadPartInput).Body); int64(e) != a {
+		t.Errorf("expect %d, got %d", e, a)
+	}
+	if e, a := 1024*1024*20-1, getReaderLength((*args)[2].(*s3.UploadPartInput).Body); int64(e) != a {
+		t.Errorf("expect %d, got %d", e, a)
+	}
+}
+
+func TestUploadOrderMultiExceedMaxParts(t *testing.T) {
+	c, ops, args := s3testing.NewUploadLoggingClient(nil)
+	mgr := New(c, func(options *Options) {
+		options.MaxUploadParts = 2
+		options.Concurrency = 1
+	})
+
+	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewBuffer(buf20MB), // When size is unknown (streaming), error once the part count exceeds MaxUploadParts
+	})
+
+	if err == nil {
+		t.Errorf("expect error, got none")
+	} else if e, a := "exceeded total allowed MaxUploadParts", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expect %q to be contained in %q", e, a)
+	}
+
+	vals := []string{"CreateMultipartUpload", "UploadPart", "UploadPart", "AbortMultipartUpload"}
+	if !reflect.DeepEqual(vals, *ops) {
+		t.Errorf("expect %v, got %v", vals, *ops)
+	}
+
+	for i := 1; i <= 2; i++ {
+		if e, a := 1024*1024*8, getReaderLength((*args)[i].(*s3.UploadPartInput).Body); int64(e) != a {
+			t.Errorf("expect %d, got %d", e, a)
+		}
 	}
 }
 
@@ -348,7 +438,7 @@ func TestUploadOrderSingle(t *testing.T) {
 
 	putObjectInput := (*params)[0].(*s3.PutObjectInput)
 
-	if e, a := types.ServerSideEncryption("aws:kms"), putObjectInput.ServerSideEncryption; e != a {
+	if e, a := s3types.ServerSideEncryption("aws:kms"), putObjectInput.ServerSideEncryption; e != a {
 		t.Errorf("expect %q, got %q", e, a)
 	}
 
@@ -417,7 +507,7 @@ func TestUploadOrderZero(t *testing.T) {
 func TestUploadOrderMultiFailure(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 
-	c.UploadPartFn = func(u *s3testing.TransferManagerLoggingClient, params *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
+	c.UploadPartFn = func(ctx context.Context, u *s3testing.TransferManagerLoggingClient, params *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
 		if *params.PartNumber == 2 {
 			return nil, fmt.Errorf("an unexpected error")
 		}
@@ -445,7 +535,7 @@ func TestUploadOrderMultiFailure(t *testing.T) {
 func TestUploadOrderMultiFailureOnComplete(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 
-	c.CompleteMultipartUploadFn = func(*s3testing.TransferManagerLoggingClient, *s3.CompleteMultipartUploadInput) (*s3.CompleteMultipartUploadOutput, error) {
+	c.CompleteMultipartUploadFn = func(context.Context, *s3testing.TransferManagerLoggingClient, *s3.CompleteMultipartUploadInput) (*s3.CompleteMultipartUploadOutput, error) {
 		return nil, fmt.Errorf("complete multipart error")
 	}
 
@@ -460,6 +550,8 @@ func TestUploadOrderMultiFailureOnComplete(t *testing.T) {
 
 	if err == nil {
 		t.Error("expect error, got nil")
+	} else if e, a := "complete multipart error", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("Expected %v to be contained in %q", e, a)
 	}
 
 	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "UploadPart", "UploadPart",
@@ -479,7 +571,7 @@ func TestUploadOrderMultiFailureOnCreate(t *testing.T) {
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
-		Body:   bytes.NewReader(make([]byte, 1024*1024*12)),
+		Body:   bytes.NewReader(make([]byte, 1024*1024*16)),
 	})
 
 	if err == nil {
@@ -533,7 +625,7 @@ func TestUploadOrderReadFail2(t *testing.T) {
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
-		Body:   &failreader{failBytes: 8 * 1024 * 1024},
+		Body:   &failreader{failBytes: 16*1024*1024 + 1},
 	})
 	if err == nil {
 		t.Fatalf("expect error to not be nil")
@@ -600,13 +692,15 @@ func TestUploadOrderMultiBufferedReader(t *testing.T) {
 	}
 }
 
-func TestUploadOrderMultiBufferedReaderWithSinglePartSize(t *testing.T) {
+func TestUploadOrderMultiBufferedReaderWithSinglePartSizeThreshold(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
-	mgr := New(c)
+	mgr := New(c, func(o *Options) {
+		o.MultipartUploadThreshold = defaultPartSizeBytes
+	})
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
-		Body:   &sizedReader{size: 1024 * 1024 * 8},
+		Body:   &sizedReader{size: defaultPartSizeBytes},
 	})
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
@@ -625,31 +719,31 @@ func TestUploadOrderMultiBufferedReaderWithSinglePartSize(t *testing.T) {
 	}
 }
 
-func TestUploadOrderMultiBufferedReaderJustExceedSinglePart(t *testing.T) {
+func TestUploadOrderMultiBufferedReaderJustExceedMPUThreshold(t *testing.T) {
 	c, invocations, params := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c)
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
-		Body:   &sizedReader{size: defaultPartSizeBytes + 1},
+		Body:   &sizedReader{size: defaultMultipartUploadThreshold + 1},
 	})
 	if err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
 
-	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "UploadPart",
+	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "UploadPart", "UploadPart",
 		"CompleteMultipartUpload"}, *invocations); len(diff) > 0 {
 		t.Error(diff)
 	}
 
 	// Part lengths
 	var parts []int64
-	for i := 1; i < 3; i++ {
+	for i := 1; i < 4; i++ {
 		parts = append(parts, getReaderLength((*params)[i].(*s3.UploadPartInput).Body))
 	}
 	slices.Sort(parts)
 
-	if diff := cmpDiff([]int64{1, 1024 * 1024 * 8}, parts); len(diff) > 0 {
+	if diff := cmpDiff([]int64{1, 1024 * 1024 * 8, 1024 * 1024 * 8}, parts); len(diff) > 0 {
 		t.Error(diff)
 	}
 }
@@ -849,6 +943,49 @@ func TestProgressListener_MultiUpload(t *testing.T) {
 		eightMB*5)
 }
 
+func TestProgressListener_MultiUploadFailAtComplete(t *testing.T) {
+	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
+	ctx.Error = fmt.Errorf("context canceled error which shouldn't be returned finally")
+	c, _, _ := s3testing.NewUploadLoggingClient(nil)
+	c.CompleteMultipartUploadFn = func(context.Context, *s3testing.TransferManagerLoggingClient, *s3.CompleteMultipartUploadInput) (*s3.CompleteMultipartUploadOutput, error) {
+		close(ctx.DoneCh)
+		return &s3.CompleteMultipartUploadOutput{}, fmt.Errorf("complete mpu error due to context canceled")
+	}
+
+	listener := &mockListener{}
+
+	mgr := New(c, func(options *Options) {
+		options.ObjectProgressListeners.Register(listener)
+		options.Concurrency = 1
+		options.FailTimeout = 5 * time.Second
+	})
+
+	in := &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(buf40MB),
+	}
+	_, err := mgr.UploadObject(context.Background(), in)
+	if err == nil {
+		t.Fatal("expect error but received none")
+	}
+
+	objectSize := int64(len(buf40MB))
+	listener.expectStartTotalBytes(t, objectSize)
+	listener.expectFailed(t, in, err.(*multipartUploadError).err)
+
+	// 40MB / 8 (default part size) = 5 expected events
+	// we keep the input size a multiple of the part size so the intermediate
+	// byte counts are predictable
+	const eightMB = 1024 * 1024 * 8
+	listener.expectByteTransfers(t,
+		eightMB,
+		eightMB*2,
+		eightMB*3,
+		eightMB*4,
+		eightMB*5)
+}
+
 type testIncompleteReader struct {
 	Size int64
 	read int64
@@ -866,13 +1003,12 @@ func TestUploadUnexpectedEOF(t *testing.T) {
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 	mgr := New(c, func(o *Options) {
 		o.Concurrency = 1
-		o.PartSizeBytes = defaultPartSizeBytes
 	})
 	_, err := mgr.UploadObject(context.Background(), &UploadObjectInput{
 		Bucket: aws.String("Bucket"),
 		Key:    aws.String("Key"),
 		Body: &testIncompleteReader{
-			Size: defaultPartSizeBytes + 1,
+			Size: defaultMultipartUploadThreshold + 1,
 		},
 	})
 	if err == nil {
@@ -893,7 +1029,7 @@ func TestUploadUnexpectedEOF(t *testing.T) {
 
 func TestSSE(t *testing.T) {
 	c, _, _ := s3testing.NewUploadLoggingClient(nil)
-	c.UploadPartFn = func(u *s3testing.TransferManagerLoggingClient, params *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
+	c.UploadPartFn = func(ctx context.Context, u *s3testing.TransferManagerLoggingClient, params *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
 		if params.SSECustomerAlgorithm == nil {
 			t.Fatal("SSECustomerAlgoritm should not be nil")
 		}
@@ -942,6 +1078,73 @@ func TestUploadWithContextCanceled(t *testing.T) {
 
 	if e, a := "canceled", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expected error message to contain %q, but did not %q", e, a)
+	}
+}
+
+func TestUploadWithContextCanceledWhenUploadPart(t *testing.T) {
+	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
+	ctx.Error = fmt.Errorf("context canceled error which shouldn't be returned finally")
+	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
+	index := 0
+	c.UploadPartFn = func(context.Context, *s3testing.TransferManagerLoggingClient, *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
+		if index > 0 {
+			close(ctx.DoneCh)
+			return &s3.UploadPartOutput{}, fmt.Errorf("upload part error due to context canceled")
+		}
+		index++
+		return &s3.UploadPartOutput{}, nil
+	}
+	u := New(c, func(o *Options) {
+		o.FailTimeout = 5 * time.Second
+	})
+
+	_, err := u.UploadObject(ctx, &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(make([]byte, 24*1024*1024)),
+	})
+	if err == nil {
+		t.Fatalf("expect error, got nil")
+	}
+	if e, a := "upload part error due to context canceled", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expected error message to contain %q, but did not %q", e, a)
+	} else if noe := "context canceled error which shouldn't be returned finally"; strings.Contains(a, noe) {
+		t.Errorf("expect %q to not be within %q", noe, a)
+	}
+
+	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "UploadPart", "AbortMultipartUpload"}, *invocations); len(diff) > 0 {
+		t.Error(diff)
+	}
+}
+
+func TestUploadWithContextCanceledWhenComplete(t *testing.T) {
+	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
+	ctx.Error = fmt.Errorf("context canceled error which shouldn't be returned finally")
+	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
+	c.CompleteMultipartUploadFn = func(context.Context, *s3testing.TransferManagerLoggingClient, *s3.CompleteMultipartUploadInput) (*s3.CompleteMultipartUploadOutput, error) {
+		close(ctx.DoneCh)
+		return &s3.CompleteMultipartUploadOutput{}, fmt.Errorf("complete mpu error due to context canceled")
+	}
+	u := New(c, func(o *Options) {
+		o.FailTimeout = 5 * time.Second
+	})
+
+	_, err := u.UploadObject(ctx, &UploadObjectInput{
+		Bucket: aws.String("Bucket"),
+		Key:    aws.String("Key"),
+		Body:   bytes.NewReader(make([]byte, 16*1024*1024)),
+	})
+	if err == nil {
+		t.Fatalf("expect error, got nil")
+	}
+	if e, a := "complete mpu error due to context canceled", err.Error(); !strings.Contains(a, e) {
+		t.Errorf("expected error message to contain %q, but did not %q", e, a)
+	} else if noe := "context canceled error which shouldn't be returned finally"; strings.Contains(a, noe) {
+		t.Errorf("expect %q to not be within %q", noe, a)
+	}
+
+	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "UploadPart", "CompleteMultipartUpload", "AbortMultipartUpload"}, *invocations); len(diff) > 0 {
+		t.Error(diff)
 	}
 }
 

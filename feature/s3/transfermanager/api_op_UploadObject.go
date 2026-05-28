@@ -213,6 +213,12 @@ type UploadObjectInput struct {
 	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
 	ChecksumSHA512 *string
 
+	// Indicates the checksum type that you want Amazon S3 to use to calculate the
+	// object’s checksum value. For more information, see [Checking object integrity in the Amazon S3 User Guide].
+	//
+	// [Checking object integrity in the Amazon S3 User Guide]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
+	ChecksumType types.ChecksumType
+
 	// Size of the body in bytes. This parameter is useful when the size of the body
 	// cannot be determined automatically. For more information, see [https://www.rfc-editor.org/rfc/rfc9110.html#name-content-length].
 	//
@@ -314,6 +320,11 @@ type UploadObjectInput struct {
 
 	// A map of metadata to store with the object in S3.
 	Metadata map[string]string
+
+	//  The expected total object size of the multipart upload request. If there’s a
+	// mismatch between the specified object size value and the actual object size
+	// value, it results in an HTTP 400 InvalidRequest error.
+	MpuObjectSize *int64
 
 	// Specifies whether a legal hold will be applied to this object. For more
 	// information about S3 Object Lock, see [Object Lock]in the Amazon S3 User Guide.
@@ -527,6 +538,7 @@ func (i UploadObjectInput) mapCreateMultipartUploadInput(checksumAlgorithm types
 		ACL:                       s3types.ObjectCannedACL(i.ACL),
 		BucketKeyEnabled:          i.BucketKeyEnabled,
 		CacheControl:              i.CacheControl,
+		ChecksumType:              s3types.ChecksumType(i.ChecksumType),
 		ContentDisposition:        i.ContentDisposition,
 		ContentEncoding:           i.ContentEncoding,
 		ContentLanguage:           i.ContentLanguage,
@@ -571,9 +583,11 @@ func (i UploadObjectInput) mapCompleteMultipartUploadInput(uploadID *string, com
 		ChecksumSHA1:         i.ChecksumSHA1,
 		ChecksumSHA256:       i.ChecksumSHA256,
 		ChecksumSHA512:       i.ChecksumSHA512,
+		ChecksumType:         s3types.ChecksumType(i.ChecksumType),
 		ExpectedBucketOwner:  i.ExpectedBucketOwner,
 		IfMatch:              i.IfMatch,
 		IfNoneMatch:          i.IfNoneMatch,
+		MpuObjectSize:        i.MpuObjectSize,
 		RequestPayer:         s3types.RequestPayer(i.RequestPayer),
 		SSECustomerAlgorithm: i.SSECustomerAlgorithm,
 		SSECustomerKey:       i.SSECustomerKey,
@@ -874,12 +888,15 @@ func (u *uploader) initSize() error {
 		}
 	}
 
+	if u.options.MaxUploadParts <= 0 || u.options.MaxUploadParts > defaultMaxUploadParts {
+		return fmt.Errorf("max upload parts must be greater than 0 and less than %d", defaultMaxUploadParts)
+	}
 	// Try to adjust partSize if it is too small and account for
 	// integer division truncation.
-	if u.objectSize/u.options.PartSizeBytes >= int64(defaultMaxUploadParts) {
+	if u.objectSize/u.options.PartSizeBytes >= u.options.MaxUploadParts {
 		// Add one to the part size to account for remainders
 		// during the size calculation. e.g odd number of bytes.
-		u.options.PartSizeBytes = (u.objectSize / int64(defaultMaxUploadParts)) + 1
+		u.options.PartSizeBytes = u.objectSize/u.options.MaxUploadParts + 1
 	}
 	return nil
 }
@@ -896,7 +913,9 @@ func (u *uploader) singleUpload(ctx context.Context, r io.Reader, sz int, cleanU
 	u.progressEmitter.Start(ctx, u.in, objectSize)
 	out, err := u.options.S3.PutObject(ctx, params, opts...)
 	if err != nil {
-		u.progressEmitter.Failed(ctx, err)
+		freshCtx, cancel := u.freshContext(ctx)
+		defer cancel()
+		u.progressEmitter.Failed(freshCtx, err)
 		return nil, err
 	}
 
@@ -914,16 +933,27 @@ func (u *uploader) nextReader(ctx context.Context) (io.Reader, int, func(), erro
 	if !u.multipleRead {
 		u.multipleRead = true
 		// read first part up to a maximum of PartSize to avoid allocating 8MB buffer out of the gate
-		r := io.LimitReader(u.in.Body, u.options.PartSizeBytes)
+		r := io.LimitReader(u.in.Body, u.options.MultipartUploadThreshold)
 		firstPart, err := io.ReadAll(r)
 		if err != nil {
 			return nil, 0, func() {}, err
 		}
 		n := len(firstPart)
-		if int64(n) < u.options.PartSizeBytes {
+		if int64(n) < u.options.MultipartUploadThreshold {
 			return bytes.NewReader(firstPart), n, func() {}, io.EOF
 		}
-		return bytes.NewReader(firstPart), n, func() {}, nil
+		if int64(n) > u.options.PartSizeBytes {
+			u.in.Body = io.MultiReader(bytes.NewReader(firstPart[u.options.PartSizeBytes:]), u.in.Body)
+			return bytes.NewReader(firstPart[:u.options.PartSizeBytes]), int(u.options.PartSizeBytes), func() {}, nil
+		}
+		remainedBytes := u.options.PartSizeBytes - int64(n)
+		r = io.LimitReader(u.in.Body, remainedBytes)
+		remainedPart, err := io.ReadAll(r)
+		if err != nil {
+			return nil, 0, func() {}, err
+		}
+		firstPart = append(firstPart, remainedPart...)
+		return bytes.NewReader(firstPart), len(firstPart), func() {}, nil
 	}
 	part, err := u.partPool.Get(ctx)
 	if err != nil {
@@ -936,6 +966,13 @@ func (u *uploader) nextReader(ctx context.Context) (io.Reader, int, func(), erro
 		u.partPool.Put(part)
 	}
 	return bytes.NewReader(part[0:n]), n, cleanup, err
+}
+
+func (u *uploader) freshContext(ctx context.Context) (context.Context, context.CancelFunc) {
+	if u.options.FailTimeout <= 0 {
+		return ctx, func() {}
+	}
+	return context.WithTimeout(context.Background(), u.options.FailTimeout)
 }
 
 func readFillBuf(r io.Reader, b []byte) (offset int, err error) {
@@ -993,7 +1030,9 @@ func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, firstBuf
 		append(clientOptions, loc.WrapClient())...)
 	if err != nil {
 		cleanup()
-		u.progressEmitter.Failed(ctx, err)
+		freshCtx, cancel := u.freshContext(ctx)
+		defer cancel()
+		u.progressEmitter.Failed(freshCtx, err)
 		return nil, err
 	}
 	u.uploadID = resp.UploadId
@@ -1043,7 +1082,9 @@ func (u *multiUploader) upload(ctx context.Context, firstBuf io.Reader, firstBuf
 	completeOut := u.complete(ctx, clientOptions...)
 
 	if err := u.geterr(); err != nil {
-		u.progressEmitter.Failed(ctx, err)
+		freshCtx, cancel := u.freshContext(ctx)
+		defer cancel()
+		u.progressEmitter.Failed(freshCtx, err)
 		return nil, &multipartUploadError{
 			err:      err,
 			uploadID: *u.uploadID,
@@ -1071,8 +1112,8 @@ func (u *multiUploader) shouldContinue(part int32, nextChunkLen int, err error) 
 	}
 
 	// This upload exceeded maximum number of supported parts, error now.
-	if part > defaultMaxUploadParts {
-		return false, fmt.Errorf("exceeded total allowed S3 limit MaxUploadParts (%d). Adjust PartSize to fit in this limit", defaultMaxUploadParts)
+	if int64(part) > u.options.MaxUploadParts {
+		return false, fmt.Errorf("exceeded total allowed MaxUploadParts (%d). Adjust PartSize to fit in this limit", u.options.MaxUploadParts)
 	}
 
 	return true, err
@@ -1138,7 +1179,9 @@ func (u *multiUploader) seterr(e error) {
 
 func (u *multiUploader) fail(ctx context.Context, clientOptions ...func(*s3.Options)) {
 	params := u.in.mapAbortMultipartUploadInput(u.uploadID)
-	_, err := u.options.S3.AbortMultipartUpload(ctx, params, clientOptions...)
+	freshCtx, cancel := u.freshContext(ctx)
+	defer cancel()
+	_, err := u.options.S3.AbortMultipartUpload(freshCtx, params, clientOptions...)
 	if err != nil {
 		u.seterr(fmt.Errorf("failed to abort multipart upload (%v), triggered after multipart upload failed: %v", err, u.geterr()))
 	}
@@ -1155,6 +1198,9 @@ func (u *multiUploader) complete(ctx context.Context, clientOptions ...func(*s3.
 	sort.Sort(u.parts)
 
 	params := u.in.mapCompleteMultipartUploadInput(u.uploadID, u.parts)
+	if params.MpuObjectSize == nil && u.objectSize > 0 {
+		params.MpuObjectSize = aws.Int64(u.objectSize)
+	}
 
 	resp, err := u.options.S3.CompleteMultipartUpload(ctx, params, clientOptions...)
 	if err != nil {

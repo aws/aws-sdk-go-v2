@@ -109,6 +109,9 @@ type GetObjectInput struct {
 	// [RFC 7232]: https://tools.ietf.org/html/rfc7232
 	IfUnmodifiedSince *time.Time
 
+	// Downloads the specified byte range of an object. This field only applies when GetObjectType is GetObjectRanges
+	Range *string
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. If either the
 	// source or destination S3 bucket has Requester Pays enabled, the requester will
@@ -658,12 +661,21 @@ func (g *getter) get(ctx context.Context) (out *GetObjectOutput, err error) {
 		if aws.ToInt64(out.ContentLength) == 0 {
 			return g.singleDownload(ctx, clientOptions...)
 		}
+
 		total := aws.ToInt64(out.ContentLength)
-		contentLength := total
+		if rng := aws.ToString(g.in.Range); rng != "" {
+			r.pos, total, err = getReqRange(rng)
+			total++
+			if err != nil {
+				return nil, err
+			}
+		}
+
+		contentLength := total - r.pos
 
 		output.mapFromHeadObjectOutput(out, g.in.ChecksumMode, !g.options.DisableChecksumValidation, r)
 		output.ContentLength = aws.Int64(contentLength)
-		output.ContentRange = aws.String(fmt.Sprintf("bytes=0-%d/%d", total-1, aws.ToInt64(out.ContentLength)))
+		output.ContentRange = aws.String(fmt.Sprintf("bytes=%d-%d/%d", r.pos, total-1, aws.ToInt64(out.ContentLength)))
 
 		partsCount := int32((contentLength-1)/g.options.PartSizeBytes + 1)
 		sectionParts := int32(max(1, g.options.GetObjectBufferSize/g.options.PartSizeBytes))

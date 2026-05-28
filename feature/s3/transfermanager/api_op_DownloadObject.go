@@ -100,6 +100,9 @@ type DownloadObjectInput struct {
 	// [RFC 7232]: https://tools.ietf.org/html/rfc7232
 	IfUnmodifiedSince *time.Time
 
+	// Downloads the specified byte range of an object. This field only applies when GetObjectType is GetObjectRanges
+	Range *string
+
 	// Confirms that the requester knows that they will be charged for the request.
 	// Bucket owners need not specify this parameter in their requests. If either the
 	// source or destination S3 bucket has Requester Pays enabled, the requester will
@@ -577,7 +580,9 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 	if d.options.GetObjectType == types.GetObjectParts {
 		output = d.getChunk(ctx, 1, "", clientOptions...)
 		if d.err != nil {
-			d.emitter.Failed(ctx, d.err)
+			freshCtx, cancel := d.freshContext(ctx)
+			defer cancel()
+			d.emitter.Failed(freshCtx, d.err)
 			return output, d.err
 		}
 
@@ -602,6 +607,18 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 			d.wg.Wait()
 		}
 	} else {
+		if rng := aws.ToString(d.in.Range); rng != "" {
+			rangeStart, rangeEnd, err := getReqRange(rng)
+			if err != nil {
+				freshCtx, cancel := d.freshContext(ctx)
+				defer cancel()
+				d.emitter.Failed(freshCtx, d.err)
+				return nil, err
+			}
+			d.offset = rangeStart
+			d.totalBytes = rangeEnd + 1
+			d.pos = rangeStart
+		}
 		d.getChunk(ctx, 0, d.byteRange(), clientOptions...)
 		if d.err != nil {
 			// early check to see if error is caused by range download a zero object
@@ -618,7 +635,9 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 					return out, nil
 				}
 			}
-			d.emitter.Failed(ctx, d.err)
+			freshCtx, cancel := d.freshContext(ctx)
+			defer cancel()
+			d.emitter.Failed(freshCtx, d.err)
 			return nil, d.err
 		}
 		total := d.totalBytes
@@ -646,7 +665,9 @@ func (d *downloader) download(ctx context.Context) (*DownloadObjectOutput, error
 	}
 
 	if d.err != nil {
-		d.emitter.Failed(ctx, d.err)
+		freshCtx, cancel := d.freshContext(ctx)
+		defer cancel()
+		d.emitter.Failed(freshCtx, d.err)
 		return nil, d.err
 	}
 
@@ -780,7 +801,7 @@ func (d *downloader) tryDownloadChunk(ctx context.Context, params *s3.GetObjectI
 
 	d.totalBytesOnce.Do(func() {
 		d.setTotalBytes(out)
-		d.emitter.Start(ctx, d.in, d.totalBytes)
+		d.emitter.Start(ctx, d.in, d.totalBytes-d.offset)
 	}) // Set total in first GET
 
 	var n int64
@@ -822,6 +843,13 @@ func (d *downloader) setTotalBytes(resp *s3.GetObjectOutput) {
 	}
 }
 
+func (d *downloader) freshContext(ctx context.Context) (context.Context, context.CancelFunc) {
+	if d.options.FailTimeout <= 0 {
+		return ctx, func() {}
+	}
+	return context.WithTimeout(context.Background(), d.options.FailTimeout)
+}
+
 func (d *downloader) setOutput(resp *DownloadObjectOutput) {
 	d.m.Lock()
 	defer d.m.Unlock()
@@ -843,14 +871,22 @@ func (d *downloader) byteRange() string {
 
 func getReqRange(rng string) (int64, int64, error) {
 	// rng fmt "bytes=start-end"
-	ranges := strings.Split(strings.Split(rng, "=")[1], "-")
-	start, err := strconv.ParseInt(ranges[0], 10, 64)
-	if err != nil {
-		return 0, 0, fmt.Errorf("error when parsing request start: %v", err)
+	rangeFmt := strings.Split(rng, "=")
+	if len(rangeFmt) != 2 {
+		return -1, -1, fmt.Errorf("invalid range format %s, should be bytes=start-end format", rng)
 	}
-	end, err := strconv.ParseInt(ranges[1], 10, 64)
+	startEnd := strings.Split(rangeFmt[1], "-")
+	if len(startEnd) != 2 {
+		return -1, -1, fmt.Errorf("invalid range format %s, should be bytes=start-end format", rng)
+	}
+
+	start, err := strconv.ParseInt(startEnd[0], 10, 64)
 	if err != nil {
-		return 0, 0, fmt.Errorf("error when parsing request end: %v", err)
+		return -1, -1, fmt.Errorf("invalid range start %v", err)
+	}
+	end, err := strconv.ParseInt(startEnd[1], 10, 64)
+	if err != nil {
+		return -1, -1, fmt.Errorf("invalid range end %v", err)
 	}
 	return start, end, nil
 }
