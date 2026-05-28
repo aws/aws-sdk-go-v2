@@ -1142,7 +1142,7 @@ type DataSourceConfig interface {
 	isDataSourceConfig()
 }
 
-// Pull session spans from CloudWatch
+// Configuration for pulling agent session traces from CloudWatch Logs.
 type DataSourceConfigMemberCloudWatchLogs struct {
 	Value CloudWatchLogsSource
 
@@ -1304,9 +1304,8 @@ func (*EvaluationMetadataMemberSessionMetadata) isEvaluationMetadata() {}
 // specific context level (session or trace) through its span context.
 type EvaluationReferenceInput struct {
 
-	//  The contextual information associated with an evaluation, including span
-	// context details that identify the specific traces and sessions being evaluated
-	// within the agent's execution flow.
+	//  The span context that identifies which session or trace this reference input
+	// applies to, used for correlating ground truth with agent output.
 	//
 	// This member is required.
 	Context Context
@@ -1745,7 +1744,7 @@ type GroundTruthSource interface {
 	isGroundTruthSource()
 }
 
-// Provide ground truth inline
+// Inline ground truth data provided directly in the request.
 type GroundTruthSourceMemberInline struct {
 	Value InlineGroundTruth
 
@@ -1824,6 +1823,12 @@ type HarnessBedrockModelConfig struct {
 	//
 	// This member is required.
 	ModelId *string
+
+	// Provider-specific parameters passed through to the model provider unchanged.
+	AdditionalParams document.Interface
+
+	// The API format to use when calling the Bedrock provider.
+	ApiFormat HarnessBedrockApiFormat
 
 	// The maximum number of tokens to allow in the generated response per iteration.
 	MaxTokens *int32
@@ -2088,6 +2093,37 @@ type HarnessInlineFunctionConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for a LiteLLM model provider, enabling connection to third-party
+// model providers.
+type HarnessLiteLlmModelConfig struct {
+
+	// The LiteLLM model identifier (e.g., "anthropic/claude-3-sonnet").
+	//
+	// This member is required.
+	ModelId *string
+
+	// Provider-specific parameters passed through to the model provider unchanged.
+	AdditionalParams document.Interface
+
+	// The base URL for the model provider's API endpoint.
+	ApiBase *string
+
+	// The ARN of the API key in AgentCore Identity for authenticating with the model
+	// provider.
+	ApiKeyArn *string
+
+	// The maximum number of tokens to allow in the generated response per iteration.
+	MaxTokens *int32
+
+	// The temperature to set when calling the model.
+	Temperature *float32
+
+	// The topP set when calling the model.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
 // A message in the conversation.
 type HarnessMessage struct {
 
@@ -2148,6 +2184,7 @@ type HarnessMetadataEvent struct {
 //
 //	HarnessModelConfigurationMemberBedrockModelConfig
 //	HarnessModelConfigurationMemberGeminiModelConfig
+//	HarnessModelConfigurationMemberLiteLlmModelConfig
 //	HarnessModelConfigurationMemberOpenAiModelConfig
 type HarnessModelConfiguration interface {
 	isHarnessModelConfiguration()
@@ -2171,6 +2208,15 @@ type HarnessModelConfigurationMemberGeminiModelConfig struct {
 
 func (*HarnessModelConfigurationMemberGeminiModelConfig) isHarnessModelConfiguration() {}
 
+// The LiteLLM model configuration for connecting to third-party model providers.
+type HarnessModelConfigurationMemberLiteLlmModelConfig struct {
+	Value HarnessLiteLlmModelConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessModelConfigurationMemberLiteLlmModelConfig) isHarnessModelConfiguration() {}
+
 // Configuration for an OpenAI model.
 type HarnessModelConfigurationMemberOpenAiModelConfig struct {
 	Value HarnessOpenAiModelConfig
@@ -2193,6 +2239,12 @@ type HarnessOpenAiModelConfig struct {
 	//
 	// This member is required.
 	ModelId *string
+
+	// Provider-specific parameters passed through to the model provider unchanged.
+	AdditionalParams document.Interface
+
+	// The API format to use when calling the OpenAI provider.
+	ApiFormat HarnessOpenAiApiFormat
 
 	// The maximum number of tokens to allow in the generated response per iteration.
 	MaxTokens *int32
@@ -2305,10 +2357,21 @@ type HarnessRemoteMcpConfig struct {
 //
 // The following types satisfy this interface:
 //
+//	HarnessSkillMemberGit
 //	HarnessSkillMemberPath
+//	HarnessSkillMemberS3
 type HarnessSkill interface {
 	isHarnessSkill()
 }
+
+// A git repository containing the skill.
+type HarnessSkillMemberGit struct {
+	Value HarnessSkillGitSource
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSkillMemberGit) isHarnessSkill() {}
 
 // The filesystem path to the skill definition.
 type HarnessSkillMemberPath struct {
@@ -2318,6 +2381,58 @@ type HarnessSkillMemberPath struct {
 }
 
 func (*HarnessSkillMemberPath) isHarnessSkill() {}
+
+// An S3 source containing the skill.
+type HarnessSkillMemberS3 struct {
+	Value HarnessSkillS3Source
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSkillMemberS3) isHarnessSkill() {}
+
+// Authentication configuration for accessing a private git repository.
+type HarnessSkillGitAuth struct {
+
+	// The ARN of the credential in AgentCore Identity containing the password or
+	// personal access token.
+	//
+	// This member is required.
+	CredentialArn *string
+
+	// Username for authentication. Defaults to 'oauth2' if not specified.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// A git repository source for a skill.
+type HarnessSkillGitSource struct {
+
+	// The HTTPS URL of the git repository.
+	//
+	// This member is required.
+	Url *string
+
+	// Authentication configuration for private repositories.
+	Auth *HarnessSkillGitAuth
+
+	// Subdirectory within the repository containing the skill.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
+// An S3 source for a skill.
+type HarnessSkillS3Source struct {
+
+	// The S3 URI pointing to the skill directory (e.g., s3://bucket/skills/my-skill/).
+	//
+	// This member is required.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
 
 // Latency metrics for the invocation.
 type HarnessStreamMetrics struct {
@@ -2609,8 +2724,7 @@ type InlineGroundTruth struct {
 	// Assertions for evaluation, reuses common model EvaluationContentList.
 	Assertions []EvaluationContent
 
-	// expectedTrajectory for evaluation, reuses common model
-	// EvaluationExpectedTrajectory
+	// The expected tool call sequence for trajectory evaluation.
 	ExpectedTrajectory *EvaluationExpectedTrajectory
 
 	// A list of per-turn ground truth data, each containing an input prompt and

@@ -1,0 +1,8 @@
+{
+    "id": "ae216443-40d5-4580-823b-7f3aef384978",
+    "type": "feature",
+    "description": "Added support for persistent storage on Service-Managed Fleets, allowing customers to configure persistent storage that preserves data across worker sessions which reduces job startup times for workloads with large software installations or asset caches.",
+    "modules": [
+        "service/deadline"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "37438aa9-1cc7-42c3-9537-d7f705d3ebf0",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/chatbot"
+    ]
+}

@@ -31,7 +31,6 @@ type AcceleratorType string
 
 // Enum values for AcceleratorType
 const (
-	// GPU accelerator type.
 	AcceleratorTypeGpu AcceleratorType = "gpu"
 )
 
@@ -532,6 +531,23 @@ const (
 func (DesiredWorkerStatus) Values() []DesiredWorkerStatus {
 	return []DesiredWorkerStatus{
 		"STOPPED",
+	}
+}
+
+type EbsVolumeType string
+
+// Enum values for EbsVolumeType
+const (
+	EbsVolumeTypeGp3 EbsVolumeType = "gp3"
+)
+
+// Values returns all known values for EbsVolumeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EbsVolumeType) Values() []EbsVolumeType {
+	return []EbsVolumeType{
+		"gp3",
 	}
 }
 
@@ -1516,6 +1532,31 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"CANNOT_PARSE",
 		"FIELD_VALIDATION_FAILED",
 		"OTHER",
+	}
+}
+
+type VolumeState string
+
+// Enum values for VolumeState
+const (
+	VolumeStatePendingCreation   VolumeState = "PENDING_CREATION"
+	VolumeStatePendingAttachment VolumeState = "PENDING_ATTACHMENT"
+	VolumeStateInUse             VolumeState = "IN_USE"
+	VolumeStateAvailable         VolumeState = "AVAILABLE"
+	VolumeStatePendingDeletion   VolumeState = "PENDING_DELETION"
+)
+
+// Values returns all known values for VolumeState. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VolumeState) Values() []VolumeState {
+	return []VolumeState{
+		"PENDING_CREATION",
+		"PENDING_ATTACHMENT",
+		"IN_USE",
+		"AVAILABLE",
+		"PENDING_DELETION",
 	}
 }
 

@@ -56,6 +56,10 @@ type CreateCollectionGroupInput struct {
 	// A description of the collection group.
 	Description *string
 
+	// The generation of Amazon OpenSearch Serverless for the collection group. Valid
+	// values are CLASSIC and NEXTGEN .
+	Generation types.ServerlessGeneration
+
 	// An arbitrary set of tags (key–value pairs) to associate with the OpenSearch
 	// Serverless collection group.
 	Tags []types.Tag

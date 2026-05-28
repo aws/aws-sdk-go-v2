@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all advanced prompt optimization jobs for the account.
+// Lists the advanced prompt optimization jobs in your account.
 func (c *Client) ListAdvancedPromptOptimizationJobs(ctx context.Context, params *ListAdvancedPromptOptimizationJobsInput, optFns ...func(*Options)) (*ListAdvancedPromptOptimizationJobsOutput, error) {
 	if params == nil {
 		params = &ListAdvancedPromptOptimizationJobsInput{}
@@ -30,16 +30,18 @@ func (c *Client) ListAdvancedPromptOptimizationJobs(ctx context.Context, params 
 // List Advanced Prompt Optimization Jobs Request
 type ListAdvancedPromptOptimizationJobsInput struct {
 
-	// Maximum number of results to return.
+	// The maximum number of results to return in the response.
 	MaxResults *int32
 
-	// Pagination token for the next page of results.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, use this token in a subsequent request to get the next set of
+	// results.
 	NextToken *string
 
-	// Field to sort by in the returned list of jobs.
+	// The field to sort the results by.
 	SortBy types.SortJobsBy
 
-	// Sort order for the results.
+	// The sort order for the results.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -48,10 +50,12 @@ type ListAdvancedPromptOptimizationJobsInput struct {
 // List Advanced Prompt Optimization Jobs Response
 type ListAdvancedPromptOptimizationJobsOutput struct {
 
-	// List of advanced prompt optimization job summaries.
+	// A list of advanced prompt optimization job summaries.
 	JobSummaries []types.AdvancedPromptOptimizationJobSummary
 
-	// Pagination token for the next page of results.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, use this token in a subsequent request to get the next set of
+	// results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -157,7 +161,7 @@ func (c *Client) addOperationListAdvancedPromptOptimizationJobsMiddlewares(stack
 // ListAdvancedPromptOptimizationJobsPaginatorOptions is the paginator options for
 // ListAdvancedPromptOptimizationJobs
 type ListAdvancedPromptOptimizationJobsPaginatorOptions struct {
-	// Maximum number of results to return.
+	// The maximum number of results to return in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

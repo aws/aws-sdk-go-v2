@@ -1,0 +1,8 @@
+{
+    "id": "b2308230-05b2-4ac0-ad08-edc06de4e9a4",
+    "type": "feature",
+    "description": "Added Harness support for LiteLLM model configuration for third-party model providers. Added S3 and Git skill source types. Added Responses API format for OpenAI and Bedrock models. Added runtimeUserId and runtimeClientError to InvokeHarness.",
+    "modules": [
+        "service/bedrockagentcore"
+    ]
+}

@@ -3115,6 +3115,25 @@ func validateCustomMetricEvaluatorModelConfig(v *types.CustomMetricEvaluatorMode
 	}
 }
 
+func validateCustomModelDataSource(v types.CustomModelDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomModelDataSource"}
+	switch uv := v.(type) {
+	case *types.CustomModelDataSourceMemberModelPackageArnDataSource:
+		if err := validateModelPackageArnDataSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[modelPackageArnDataSource]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDistillationConfig(v *types.DistillationConfig) error {
 	if v == nil {
 		return nil
@@ -4477,6 +4496,21 @@ func validateModelInvocationJobS3OutputDataConfig(v *types.ModelInvocationJobS3O
 	}
 }
 
+func validateModelPackageArnDataSource(v *types.ModelPackageArnDataSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelPackageArnDataSource"}
+	if v.ModelPackageArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelPackageArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOrchestrationConfiguration(v *types.OrchestrationConfiguration) error {
 	if v == nil {
 		return nil
@@ -5288,11 +5322,14 @@ func validateOpCreateCustomModelInput(v *CreateCustomModelInput) error {
 	if v.ModelName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ModelName"))
 	}
-	if v.ModelSourceConfig == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ModelSourceConfig"))
-	} else if v.ModelSourceConfig != nil {
+	if v.ModelSourceConfig != nil {
 		if err := validateModelDataSource(v.ModelSourceConfig); err != nil {
 			invalidParams.AddNested("ModelSourceConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomModelDataSource != nil {
+		if err := validateCustomModelDataSource(v.CustomModelDataSource); err != nil {
+			invalidParams.AddNested("CustomModelDataSource", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.ModelTags != nil {

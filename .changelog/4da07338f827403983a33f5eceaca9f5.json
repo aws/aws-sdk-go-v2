@@ -1,0 +1,8 @@
+{
+    "id": "4da07338-f827-4039-83a3-3f5eceaca9f5",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/bedrockdataautomationruntime"
+    ]
+}

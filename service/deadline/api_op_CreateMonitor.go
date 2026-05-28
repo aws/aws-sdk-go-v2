@@ -63,7 +63,7 @@ type CreateMonitorInput struct {
 	// The unique token which the server uses to recognize retries of the same request.
 	ClientToken *string
 
-	// The AWS Region where IAM Identity Center is enabled. Required when IAM Identity
+	// The Region where IAM Identity Center is enabled. Required when IAM Identity
 	// Center is in a different Region than the monitor.
 	IdentityCenterRegion *string
 

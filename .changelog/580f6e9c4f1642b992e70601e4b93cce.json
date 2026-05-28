@@ -1,0 +1,8 @@
+{
+    "id": "580f6e9c-4f16-42b9-92e7-0601e4b93cce",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/sagemakera2iruntime"
+    ]
+}

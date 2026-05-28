@@ -98,6 +98,18 @@ func TestCheckSnapshot_BatchGetProfile(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_BatchPutProfileObject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchPutProfileObject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "BatchPutProfileObject")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCalculatedAttributeDefinition(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCalculatedAttributeDefinition(context.Background(), nil, func(o *Options) {
@@ -1362,6 +1374,18 @@ func TestUpdateSnapshot_BatchGetProfile(t *testing.T) {
 	_, err := svc.BatchGetProfile(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "BatchGetProfile")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_BatchPutProfileObject(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.BatchPutProfileObject(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "BatchPutProfileObject")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

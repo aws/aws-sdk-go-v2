@@ -35,22 +35,66 @@ type GetThingConnectivityDataInput struct {
 	// This member is required.
 	ThingName *string
 
+	// Specifies if socket information (sourcePort, targetPort, sourceIp, targetIp,
+	// vpcEndpointId) should be included in the GetThingConnectivityData response. Set
+	// to true to include socket information. Set to false to omit socket information.
+	// By default, this is set to false .
+	IncludeSocketInformation *bool
+
 	noSmithyDocumentSerde
 }
 
 type GetThingConnectivityDataOutput struct {
 
+	// Indicates whether the client is using a clean session. Returns true for clean
+	// sessions.
+	CleanSession *bool
+
+	// The unique identifier of the MQTT client.
+	ClientId *string
+
 	// A Boolean that indicates the connectivity status.
 	Connected *bool
 
-	// The reason why the client is disconnecting.
+	// The reason why the client is disconnecting. When you enable or update the
+	// indexing configuration, this value might be UNKNOWN for devices that have never
+	// connected or have been disconnected for more than an hour.
 	DisconnectReason types.DisconnectReasonValue
+
+	// The keep-alive interval in seconds that the client specified when establishing
+	// the connection.
+	KeepAliveDuration *int32
+
+	// The session expiry interval in seconds for the MQTT client connection. This
+	// value indicates how long the session will remain active after the client
+	// disconnects.
+	SessionExpiry *int64
+
+	// The IP address of the client that initiated the connection.
+	SourceIp *string
+
+	// The client's source port.
+	SourcePort *int32
+
+	// The IP address of the Amazon Web Services IoT Core endpoint that the client
+	// connected to.
+	TargetIp *string
+
+	// The port number of the Amazon Web Services IoT Core endpoint that the client
+	// connected to.
+	TargetPort *int32
 
 	// The name of your IoT thing.
 	ThingName *string
 
-	// The timestamp of when the event occurred.
+	// The timestamp of when the event occurred. When you enable or update the
+	// indexing configuration, this value might be the Unix epoch time (0) for devices
+	// that have never connected or have been disconnected for more than an hour.
 	Timestamp *time.Time
+
+	// The ID of the VPC endpoint. Present for clients connected to Amazon Web
+	// Services IoT Core via a VPC endpoint.
+	VpcEndpointId *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

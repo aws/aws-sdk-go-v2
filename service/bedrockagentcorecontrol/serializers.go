@@ -15842,6 +15842,18 @@ func awsRestjson1_serializeDocumentHarnessBedrockModelConfig(v *types.HarnessBed
 	object := value.Object()
 	defer object.Close()
 
+	if v.AdditionalParams != nil {
+		ok := object.Key("additionalParams")
+		if err := awsRestjson1_serializeDocumentDocument(v.AdditionalParams, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ApiFormat) > 0 {
+		ok := object.Key("apiFormat")
+		ok.String(string(v.ApiFormat))
+	}
+
 	if v.MaxTokens != nil {
 		ok := object.Key("maxTokens")
 		ok.Integer(*v.MaxTokens)
@@ -16039,6 +16051,76 @@ func awsRestjson1_serializeDocumentHarnessInlineFunctionConfig(v *types.HarnessI
 	return nil
 }
 
+func awsRestjson1_serializeDocumentHarnessLiteLlmModelConfig(v *types.HarnessLiteLlmModelConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AdditionalParams != nil {
+		ok := object.Key("additionalParams")
+		if err := awsRestjson1_serializeDocumentDocument(v.AdditionalParams, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ApiBase != nil {
+		ok := object.Key("apiBase")
+		ok.String(*v.ApiBase)
+	}
+
+	if v.ApiKeyArn != nil {
+		ok := object.Key("apiKeyArn")
+		ok.String(*v.ApiKeyArn)
+	}
+
+	if v.MaxTokens != nil {
+		ok := object.Key("maxTokens")
+		ok.Integer(*v.MaxTokens)
+	}
+
+	if v.ModelId != nil {
+		ok := object.Key("modelId")
+		ok.String(*v.ModelId)
+	}
+
+	if v.Temperature != nil {
+		ok := object.Key("temperature")
+		switch {
+		case math.IsNaN(float64(*v.Temperature)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Temperature), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Temperature), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Temperature)
+
+		}
+	}
+
+	if v.TopP != nil {
+		ok := object.Key("topP")
+		switch {
+		case math.IsNaN(float64(*v.TopP)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.TopP), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.TopP), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.TopP)
+
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentHarnessMemoryConfiguration(v types.HarnessMemoryConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -16074,6 +16156,12 @@ func awsRestjson1_serializeDocumentHarnessModelConfiguration(v types.HarnessMode
 			return err
 		}
 
+	case *types.HarnessModelConfigurationMemberLiteLlmModelConfig:
+		av := object.Key("liteLlmModelConfig")
+		if err := awsRestjson1_serializeDocumentHarnessLiteLlmModelConfig(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.HarnessModelConfigurationMemberOpenAiModelConfig:
 		av := object.Key("openAiModelConfig")
 		if err := awsRestjson1_serializeDocumentHarnessOpenAiModelConfig(&uv.Value, av); err != nil {
@@ -16090,6 +16178,18 @@ func awsRestjson1_serializeDocumentHarnessModelConfiguration(v types.HarnessMode
 func awsRestjson1_serializeDocumentHarnessOpenAiModelConfig(v *types.HarnessOpenAiModelConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AdditionalParams != nil {
+		ok := object.Key("additionalParams")
+		if err := awsRestjson1_serializeDocumentDocument(v.AdditionalParams, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ApiFormat) > 0 {
+		ok := object.Key("apiFormat")
+		ok.String(string(v.ApiFormat))
+	}
 
 	if v.ApiKeyArn != nil {
 		ok := object.Key("apiKeyArn")
@@ -16169,14 +16269,67 @@ func awsRestjson1_serializeDocumentHarnessSkill(v types.HarnessSkill, value smit
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.HarnessSkillMemberGit:
+		av := object.Key("git")
+		if err := awsRestjson1_serializeDocumentHarnessSkillGitSource(&uv.Value, av); err != nil {
+			return err
+		}
+
 	case *types.HarnessSkillMemberPath:
 		av := object.Key("path")
 		av.String(uv.Value)
+
+	case *types.HarnessSkillMemberS3:
+		av := object.Key("s3")
+		if err := awsRestjson1_serializeDocumentHarnessSkillS3Source(&uv.Value, av); err != nil {
+			return err
+		}
 
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarnessSkillGitAuth(v *types.HarnessSkillGitAuth, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CredentialArn != nil {
+		ok := object.Key("credentialArn")
+		ok.String(*v.CredentialArn)
+	}
+
+	if v.Username != nil {
+		ok := object.Key("username")
+		ok.String(*v.Username)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarnessSkillGitSource(v *types.HarnessSkillGitSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Auth != nil {
+		ok := object.Key("auth")
+		if err := awsRestjson1_serializeDocumentHarnessSkillGitAuth(v.Auth, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Path != nil {
+		ok := object.Key("path")
+		ok.String(*v.Path)
+	}
+
+	if v.Url != nil {
+		ok := object.Key("url")
+		ok.String(*v.Url)
+	}
+
 	return nil
 }
 
@@ -16193,6 +16346,18 @@ func awsRestjson1_serializeDocumentHarnessSkills(v []types.HarnessSkill, value s
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentHarnessSkillS3Source(v *types.HarnessSkillS3Source, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Uri != nil {
+		ok := object.Key("uri")
+		ok.String(*v.Uri)
+	}
+
 	return nil
 }
 

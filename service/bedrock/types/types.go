@@ -76,10 +76,11 @@ type AccountEnforcedGuardrailOutputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Input data configuration for the advanced prompt optimization job.
+// Contains the input data configuration for an advanced prompt optimization job.
 type AdvancedPromptOptimizationInputConfig struct {
 
-	// S3 URI of the input JSONL file.
+	// The S3 URI of the JSONL input file containing prompt templates and evaluation
+	// samples.
 	//
 	// This member is required.
 	S3Uri *string
@@ -87,39 +88,39 @@ type AdvancedPromptOptimizationInputConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Summary of an advanced prompt optimization job.
+// Contains a summary of an advanced prompt optimization job.
 type AdvancedPromptOptimizationJobSummary struct {
 
-	// Creation time of the advanced prompt optimization job.
+	// The time at which the job was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// ARN of the advanced prompt optimization job.
+	// The Amazon Resource Name (ARN) of the job.
 	//
 	// This member is required.
 	JobArn *string
 
-	// Name of the advanced prompt optimization job.
+	// The name of the job.
 	//
 	// This member is required.
 	JobName *string
 
-	// Status of the advanced prompt optimization job.
+	// The status of the job.
 	//
 	// This member is required.
 	JobStatus AdvancedPromptOptimizationJobStatus
 
-	// Last modified time of the advanced prompt optimization job.
+	// The time at which the job was last modified.
 	LastModifiedTime *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Output data configuration for the advanced prompt optimization job.
+// Contains the output data configuration for an advanced prompt optimization job.
 type AdvancedPromptOptimizationOutputConfig struct {
 
-	// S3 URI prefix for the output location.
+	// The S3 URI prefix where the optimization results will be written.
 	//
 	// This member is required.
 	S3Uri *string
@@ -2342,34 +2343,36 @@ type AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets struct 
 func (*AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets) isAutomatedReasoningPolicyWorkflowTypeContent() {
 }
 
-// Batch deletion error for an advanced prompt optimization job.
+// Contains information about an error that occurred when deleting an advanced
+// prompt optimization job.
 type BatchDeleteAdvancedPromptOptimizationJobError struct {
 
-	// Error code for the deletion failure.
+	// The error code for the deletion failure.
 	//
 	// This member is required.
 	Code *string
 
-	// Identifier of the job that failed to delete.
+	// The identifier of the job that could not be deleted.
 	//
 	// This member is required.
 	JobIdentifier *string
 
-	// Error message describing the deletion failure.
+	// A message describing the error.
 	Message *string
 
 	noSmithyDocumentSerde
 }
 
-// Successfully deleted advanced prompt optimization job.
+// Contains information about a successfully deleted advanced prompt optimization
+// job.
 type BatchDeleteAdvancedPromptOptimizationJobItem struct {
 
-	// Identifier of the deleted job.
+	// The identifier of the deleted job.
 	//
 	// This member is required.
 	JobIdentifier *string
 
-	// Status of the deleted job.
+	// The status of the deleted job.
 	//
 	// This member is required.
 	JobStatus AdvancedPromptOptimizationJobStatus
@@ -2562,6 +2565,30 @@ type CustomMetricEvaluatorModelConfig struct {
 
 	noSmithyDocumentSerde
 }
+
+// The data source for a custom model. This is a union type that supports the
+// following member:
+//
+//   - modelPackageArnDataSource — Specifies a SageMaker AI model package as the
+//     data source.
+//
+// The following types satisfy this interface:
+//
+//	CustomModelDataSourceMemberModelPackageArnDataSource
+type CustomModelDataSource interface {
+	isCustomModelDataSource()
+}
+
+// A SageMaker AI model package ARN as the data source for the custom model. When
+// you specify a model package ARN, Amazon Bedrock resolves the model package to
+// retrieve the model artifacts.
+type CustomModelDataSourceMemberModelPackageArnDataSource struct {
+	Value ModelPackageArnDataSource
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomModelDataSourceMemberModelPackageArnDataSource) isCustomModelDataSource() {}
 
 // Contains summary information about a custom model deployment, including its
 // ARN, name, status, and associated custom model.
@@ -4814,19 +4841,29 @@ type ImportedModelSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Inference configuration for a model.
+// Base inference parameters to pass to a model. For more information, see [Inference parameters for foundation models].
+//
+// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
 type InferenceConfiguration struct {
 
-	// The maximum number of tokens to generate.
+	// The maximum number of tokens to allow in the generated response. The default
+	// value is the maximum allowed value for the model that you are using.
 	MaxTokens *int32
 
-	// Stop sequences that end generation.
+	// A list of stop sequences. A stop sequence is a sequence of characters that
+	// causes the model to stop generating the response.
 	StopSequences []string
 
-	// The temperature for sampling.
+	// The likelihood of the model selecting higher-probability options while
+	// generating a response. A lower value makes the model more likely to choose
+	// higher-probability options, while a higher value makes the model more likely to
+	// choose lower-probability options.
 	Temperature *float32
 
-	// The top-p value for nucleus sampling.
+	// The percentage of most-likely candidates that the model considers for the next
+	// token. For example, if you choose a value of 0.8 for topP , the model selects
+	// from the top 80% of the probability distribution of tokens that could be next in
+	// the sequence.
 	TopP *float32
 
 	noSmithyDocumentSerde
@@ -5243,18 +5280,21 @@ type MetadataConfigurationForReranking struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration for a model used in advanced prompt optimization.
+// Contains the configuration for a model used in an advanced prompt optimization
+// job, including the model ID and inference parameters.
 type ModelConfiguration struct {
 
-	// The model ID.
+	// The ID of the model to use for optimization.
 	//
 	// This member is required.
 	ModelId *string
 
-	// Additional model request fields.
+	// Additional model request fields. Use this to pass model-specific parameters
+	// that are not included in the standard inference configuration.
 	AdditionalModelRequestFields map[string]document.Interface
 
-	// Inference configuration for the model.
+	// The inference configuration for the model, including parameters such as maximum
+	// tokens, temperature, and top-p.
 	InferenceConfig *InferenceConfiguration
 
 	noSmithyDocumentSerde
@@ -5651,6 +5691,22 @@ type ModelInvocationJobSummary struct {
 	//
 	// [Protect batch inference jobs using a VPC]: https://docs.aws.amazon.com/bedrock/latest/userguide/batch-vpc
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Amazon Resource Name (ARN) of a SageMaker AI model package to use
+// as the data source for a custom model.
+type ModelPackageArnDataSource struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker AI model package. The ARN must
+	// be for a model package of restricted type.
+	//
+	// To use a model package ARN, you must have the sagemaker:DescribeModelPackage
+	// and sagemaker:AccessModelPackageData permissions on the model package resource.
+	//
+	// This member is required.
+	ModelPackageArn *string
 
 	noSmithyDocumentSerde
 }
@@ -6769,6 +6825,7 @@ func (*UnknownUnionMember) isAutomatedReasoningPolicyMutation()                 
 func (*UnknownUnionMember) isAutomatedReasoningPolicyTypeValueAnnotation()           {}
 func (*UnknownUnionMember) isAutomatedReasoningPolicyWorkflowTypeContent()           {}
 func (*UnknownUnionMember) isCustomizationConfig()                                   {}
+func (*UnknownUnionMember) isCustomModelDataSource()                                 {}
 func (*UnknownUnionMember) isEndpointConfig()                                        {}
 func (*UnknownUnionMember) isEvaluationConfig()                                      {}
 func (*UnknownUnionMember) isEvaluationDatasetLocation()                             {}

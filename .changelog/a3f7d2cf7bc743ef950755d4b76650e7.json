@@ -1,0 +1,8 @@
+{
+    "id": "a3f7d2cf-7bc7-43ef-9507-55d4b76650e7",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/keyspaces"
+    ]
+}

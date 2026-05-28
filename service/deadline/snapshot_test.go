@@ -590,6 +590,18 @@ func TestCheckSnapshot_DeleteStorageProfile(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DeleteVolume(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVolume(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteVolume")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteWorker(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteWorker(context.Background(), nil, func(o *Options) {
@@ -871,6 +883,18 @@ func TestCheckSnapshot_GetTask(t *testing.T) {
 	_, err := svc.GetTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "GetTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_GetVolume(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVolume(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "GetVolume")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1219,6 +1243,18 @@ func TestCheckSnapshot_ListTasks(t *testing.T) {
 	_, err := svc.ListTasks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListVolumes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListVolumes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListVolumes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2065,6 +2101,18 @@ func TestUpdateSnapshot_DeleteStorageProfile(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DeleteVolume(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteVolume(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteVolume")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteWorker(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteWorker(context.Background(), nil, func(o *Options) {
@@ -2346,6 +2394,18 @@ func TestUpdateSnapshot_GetTask(t *testing.T) {
 	_, err := svc.GetTask(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "GetTask")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_GetVolume(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.GetVolume(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "GetVolume")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2694,6 +2754,18 @@ func TestUpdateSnapshot_ListTasks(t *testing.T) {
 	_, err := svc.ListTasks(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListTasks")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListVolumes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListVolumes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListVolumes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

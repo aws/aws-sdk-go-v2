@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Retrieves the details and status of an advanced prompt optimization job.
+// Gets information about an advanced prompt optimization job.
 func (c *Client) GetAdvancedPromptOptimizationJob(ctx context.Context, params *GetAdvancedPromptOptimizationJobInput, optFns ...func(*Options)) (*GetAdvancedPromptOptimizationJobOutput, error) {
 	if params == nil {
 		params = &GetAdvancedPromptOptimizationJobInput{}
@@ -31,7 +31,7 @@ func (c *Client) GetAdvancedPromptOptimizationJob(ctx context.Context, params *G
 // Get Advanced Prompt Optimization Job Request
 type GetAdvancedPromptOptimizationJobInput struct {
 
-	// ARN or ID of the advanced prompt optimization job.
+	// The ARN or ID of the advanced prompt optimization job.
 	//
 	// This member is required.
 	JobIdentifier *string
@@ -42,51 +42,51 @@ type GetAdvancedPromptOptimizationJobInput struct {
 // Get Advanced Prompt Optimization Job Response
 type GetAdvancedPromptOptimizationJobOutput struct {
 
-	// Creation time of the advanced prompt optimization job.
+	// The time at which the advanced prompt optimization job was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// Input data configuration for the advanced prompt optimization job.
+	// The input data configuration for the optimization job.
 	//
 	// This member is required.
 	InputConfig *types.AdvancedPromptOptimizationInputConfig
 
-	// ARN of the advanced prompt optimization job.
+	// The Amazon Resource Name (ARN) of the advanced prompt optimization job.
 	//
 	// This member is required.
 	JobArn *string
 
-	// Name of the advanced prompt optimization job.
+	// The name of the advanced prompt optimization job.
 	//
 	// This member is required.
 	JobName *string
 
-	// Status of the advanced prompt optimization job.
+	// The status of the advanced prompt optimization job.
 	//
 	// This member is required.
 	JobStatus types.AdvancedPromptOptimizationJobStatus
 
-	// Model configurations for advanced prompt optimization.
+	// The model configurations used in the optimization job.
 	//
 	// This member is required.
 	ModelConfigurations []types.ModelConfiguration
 
-	// Output data configuration for the advanced prompt optimization job.
+	// The output data configuration for the optimization job.
 	//
 	// This member is required.
 	OutputConfig *types.AdvancedPromptOptimizationOutputConfig
 
-	// KMS key ARN used for encrypting output data.
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the output data.
 	EncryptionKeyArn *string
 
-	// Failure message if the advanced prompt optimization job failed.
+	// If the job failed, a message describing the reason for the failure.
 	FailureMessage *string
 
-	// Description of the advanced prompt optimization job.
+	// The description of the advanced prompt optimization job.
 	JobDescription *string
 
-	// Last modified time of the advanced prompt optimization job.
+	// The time at which the advanced prompt optimization job was last modified.
 	LastModifiedTime *time.Time
 
 	// Metadata pertaining to the operation's result.

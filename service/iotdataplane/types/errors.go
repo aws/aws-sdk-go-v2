@@ -59,6 +59,33 @@ func (e *ForbiddenException) ErrorCode() string {
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The delivery confirmation was not received from the client within the specified
+// timeout period.
+type GatewayTimeoutException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *GatewayTimeoutException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *GatewayTimeoutException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *GatewayTimeoutException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "GatewayTimeoutException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *GatewayTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
 // An unexpected error has occurred.
 type InternalFailureException struct {
 	Message *string

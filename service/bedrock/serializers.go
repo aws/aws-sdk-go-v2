@@ -810,6 +810,13 @@ func awsRestjson1_serializeOpDocumentCreateCustomModelInput(v *CreateCustomModel
 		ok.String(*v.ClientRequestToken)
 	}
 
+	if v.CustomModelDataSource != nil {
+		ok := object.Key("customModelDataSource")
+		if err := awsRestjson1_serializeDocumentCustomModelDataSource(v.CustomModelDataSource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ModelKmsKeyArn != nil {
 		ok := object.Key("modelKmsKeyArn")
 		ok.String(*v.ModelKmsKeyArn)
@@ -10436,6 +10443,24 @@ func awsRestjson1_serializeDocumentCustomMetricEvaluatorModelConfig(v *types.Cus
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCustomModelDataSource(v types.CustomModelDataSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.CustomModelDataSourceMemberModelPackageArnDataSource:
+		av := object.Key("modelPackageArnDataSource")
+		if err := awsRestjson1_serializeDocumentModelPackageArnDataSource(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDistillationConfig(v *types.DistillationConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -12205,6 +12230,18 @@ func awsRestjson1_serializeDocumentModelInvocationJobS3OutputDataConfig(v *types
 	if v.S3Uri != nil {
 		ok := object.Key("s3Uri")
 		ok.String(*v.S3Uri)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentModelPackageArnDataSource(v *types.ModelPackageArnDataSource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelPackageArn != nil {
+		ok := object.Key("modelPackageArn")
+		ok.String(*v.ModelPackageArn)
 	}
 
 	return nil

@@ -11,6 +11,7 @@
         "api_op_AddProfileKey.go",
         "api_op_BatchGetCalculatedAttributeForProfile.go",
         "api_op_BatchGetProfile.go",
+        "api_op_BatchPutProfileObject.go",
         "api_op_CreateCalculatedAttributeDefinition.go",
         "api_op_CreateDomain.go",
         "api_op_CreateDomainLayout.go",

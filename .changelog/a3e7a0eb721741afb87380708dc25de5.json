@@ -1,0 +1,8 @@
+{
+    "id": "a3e7a0eb-7217-41af-b873-80708dc25de5",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/groundstation"
+    ]
+}

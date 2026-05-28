@@ -1016,6 +1016,9 @@ type ConfigurationBundleSummary struct {
 	// This member is required.
 	BundleName *string
 
+	// The timestamp when the configuration bundle was created.
+	CreatedAt *time.Time
+
 	// The description of the configuration bundle.
 	Description *string
 
@@ -2941,6 +2944,12 @@ type HarnessBedrockModelConfig struct {
 	// This member is required.
 	ModelId *string
 
+	// Provider-specific parameters passed through to the model provider unchanged.
+	AdditionalParams document.Interface
+
+	// The API format to use when calling the Bedrock provider.
+	ApiFormat HarnessBedrockApiFormat
+
 	// The maximum number of tokens to allow in the generated response per model call.
 	MaxTokens *int32
 
@@ -3038,9 +3047,7 @@ type HarnessGatewayOutboundAuthMemberNone struct {
 
 func (*HarnessGatewayOutboundAuthMemberNone) isHarnessGatewayOutboundAuth() {}
 
-// An OAuth credential provider for gateway authentication. This structure
-// contains the configuration for authenticating with the target endpoint using
-// OAuth.
+// Use OAuth credentials for outbound authentication to the gateway.
 type HarnessGatewayOutboundAuthMemberOauth struct {
 	Value OAuthCredentialProvider
 
@@ -3095,6 +3102,37 @@ type HarnessInlineFunctionConfig struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for a LiteLLM model provider, enabling connection to third-party
+// model providers.
+type HarnessLiteLlmModelConfig struct {
+
+	// The LiteLLM model identifier (e.g., "anthropic/claude-3-sonnet").
+	//
+	// This member is required.
+	ModelId *string
+
+	// Provider-specific parameters passed through to the model provider unchanged.
+	AdditionalParams document.Interface
+
+	// The base URL for the model provider's API endpoint.
+	ApiBase *string
+
+	// The ARN of the API key in AgentCore Identity for authenticating with the model
+	// provider.
+	ApiKeyArn *string
+
+	// The maximum number of tokens to allow in the generated response per iteration.
+	MaxTokens *int32
+
+	// The temperature to set when calling the model.
+	Temperature *float32
+
+	// The topP set when calling the model.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
 // The memory configuration for a harness.
 //
 // The following types satisfy this interface:
@@ -3119,6 +3157,7 @@ func (*HarnessMemoryConfigurationMemberAgentCoreMemoryConfiguration) isHarnessMe
 //
 //	HarnessModelConfigurationMemberBedrockModelConfig
 //	HarnessModelConfigurationMemberGeminiModelConfig
+//	HarnessModelConfigurationMemberLiteLlmModelConfig
 //	HarnessModelConfigurationMemberOpenAiModelConfig
 type HarnessModelConfiguration interface {
 	isHarnessModelConfiguration()
@@ -3142,6 +3181,15 @@ type HarnessModelConfigurationMemberGeminiModelConfig struct {
 
 func (*HarnessModelConfigurationMemberGeminiModelConfig) isHarnessModelConfiguration() {}
 
+// The LiteLLM model configuration for connecting to third-party model providers.
+type HarnessModelConfigurationMemberLiteLlmModelConfig struct {
+	Value HarnessLiteLlmModelConfig
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessModelConfigurationMemberLiteLlmModelConfig) isHarnessModelConfiguration() {}
+
 // Configuration for an OpenAI model.
 type HarnessModelConfigurationMemberOpenAiModelConfig struct {
 	Value HarnessOpenAiModelConfig
@@ -3164,6 +3212,12 @@ type HarnessOpenAiModelConfig struct {
 	//
 	// This member is required.
 	ModelId *string
+
+	// Provider-specific parameters passed through to the model provider unchanged.
+	AdditionalParams document.Interface
+
+	// The API format to use when calling the OpenAI provider.
+	ApiFormat HarnessOpenAiApiFormat
 
 	// The maximum number of tokens to allow in the generated response per model call.
 	MaxTokens *int32
@@ -3195,10 +3249,21 @@ type HarnessRemoteMcpConfig struct {
 //
 // The following types satisfy this interface:
 //
+//	HarnessSkillMemberGit
 //	HarnessSkillMemberPath
+//	HarnessSkillMemberS3
 type HarnessSkill interface {
 	isHarnessSkill()
 }
+
+// A git repository containing the skill.
+type HarnessSkillMemberGit struct {
+	Value HarnessSkillGitSource
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSkillMemberGit) isHarnessSkill() {}
 
 // The filesystem path to the skill definition.
 type HarnessSkillMemberPath struct {
@@ -3208,6 +3273,58 @@ type HarnessSkillMemberPath struct {
 }
 
 func (*HarnessSkillMemberPath) isHarnessSkill() {}
+
+// An S3 source containing the skill.
+type HarnessSkillMemberS3 struct {
+	Value HarnessSkillS3Source
+
+	noSmithyDocumentSerde
+}
+
+func (*HarnessSkillMemberS3) isHarnessSkill() {}
+
+// Authentication configuration for accessing a private git repository.
+type HarnessSkillGitAuth struct {
+
+	// The ARN of the credential in AgentCore Identity containing the password or
+	// personal access token.
+	//
+	// This member is required.
+	CredentialArn *string
+
+	// Username for authentication. Defaults to 'oauth2' if not specified.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// A git repository source for a skill.
+type HarnessSkillGitSource struct {
+
+	// The HTTPS URL of the git repository.
+	//
+	// This member is required.
+	Url *string
+
+	// Authentication configuration for private repositories.
+	Auth *HarnessSkillGitAuth
+
+	// Subdirectory within the repository containing the skill.
+	Path *string
+
+	noSmithyDocumentSerde
+}
+
+// An S3 source for a skill.
+type HarnessSkillS3Source struct {
+
+	// The S3 URI pointing to the skill directory (e.g., s3://bucket/skills/my-skill/).
+	//
+	// This member is required.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
 
 // Configuration for sliding window truncation strategy.
 type HarnessSlidingWindowConfiguration struct {

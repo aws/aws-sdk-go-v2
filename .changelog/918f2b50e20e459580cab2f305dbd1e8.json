@@ -1,0 +1,8 @@
+{
+    "id": "918f2b50-e20e-4595-80ca-b2f305dbd1e8",
+    "type": "feature",
+    "description": "Adds new connectivity-related fields to Fleet Indexing API requests and responses.",
+    "modules": [
+        "service/iot"
+    ]
+}

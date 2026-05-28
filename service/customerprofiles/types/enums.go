@@ -760,10 +760,11 @@ type PeriodUnit string
 
 // Enum values for PeriodUnit
 const (
-	PeriodUnitHours  PeriodUnit = "HOURS"
-	PeriodUnitDays   PeriodUnit = "DAYS"
-	PeriodUnitWeeks  PeriodUnit = "WEEKS"
-	PeriodUnitMonths PeriodUnit = "MONTHS"
+	PeriodUnitMinutes PeriodUnit = "MINUTES"
+	PeriodUnitHours   PeriodUnit = "HOURS"
+	PeriodUnitDays    PeriodUnit = "DAYS"
+	PeriodUnitWeeks   PeriodUnit = "WEEKS"
+	PeriodUnitMonths  PeriodUnit = "MONTHS"
 )
 
 // Values returns all known values for PeriodUnit. Note that this can be expanded
@@ -772,6 +773,7 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (PeriodUnit) Values() []PeriodUnit {
 	return []PeriodUnit{
+		"MINUTES",
 		"HOURS",
 		"DAYS",
 		"WEEKS",

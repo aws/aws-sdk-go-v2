@@ -7085,6 +7085,11 @@ func awsAwsjson11_serializeOpDocumentCreateImportedImageInput(v *CreateImportedI
 		}
 	}
 
+	if v.WorkspaceImageId != nil {
+		ok := object.Key("WorkspaceImageId")
+		ok.String(*v.WorkspaceImageId)
+	}
+
 	return nil
 }
 

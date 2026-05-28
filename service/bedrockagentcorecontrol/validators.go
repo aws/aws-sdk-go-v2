@@ -4797,6 +4797,21 @@ func validateHarnessInlineFunctionConfig(v *types.HarnessInlineFunctionConfig) e
 	}
 }
 
+func validateHarnessLiteLlmModelConfig(v *types.HarnessLiteLlmModelConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessLiteLlmModelConfig"}
+	if v.ModelId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateHarnessMemoryConfiguration(v types.HarnessMemoryConfiguration) error {
 	if v == nil {
 		return nil
@@ -4830,6 +4845,11 @@ func validateHarnessModelConfiguration(v types.HarnessModelConfiguration) error 
 	case *types.HarnessModelConfigurationMemberGeminiModelConfig:
 		if err := validateHarnessGeminiModelConfig(&uv.Value); err != nil {
 			invalidParams.AddNested("[geminiModelConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.HarnessModelConfigurationMemberLiteLlmModelConfig:
+		if err := validateHarnessLiteLlmModelConfig(&uv.Value); err != nil {
+			invalidParams.AddNested("[liteLlmModelConfig]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.HarnessModelConfigurationMemberOpenAiModelConfig:
@@ -4870,6 +4890,97 @@ func validateHarnessRemoteMcpConfig(v *types.HarnessRemoteMcpConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "HarnessRemoteMcpConfig"}
 	if v.Url == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessSkill(v types.HarnessSkill) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessSkill"}
+	switch uv := v.(type) {
+	case *types.HarnessSkillMemberGit:
+		if err := validateHarnessSkillGitSource(&uv.Value); err != nil {
+			invalidParams.AddNested("[git]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.HarnessSkillMemberS3:
+		if err := validateHarnessSkillS3Source(&uv.Value); err != nil {
+			invalidParams.AddNested("[s3]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessSkillGitAuth(v *types.HarnessSkillGitAuth) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessSkillGitAuth"}
+	if v.CredentialArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessSkillGitSource(v *types.HarnessSkillGitSource) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessSkillGitSource"}
+	if v.Url == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Url"))
+	}
+	if v.Auth != nil {
+		if err := validateHarnessSkillGitAuth(v.Auth); err != nil {
+			invalidParams.AddNested("Auth", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessSkills(v []types.HarnessSkill) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessSkills"}
+	for i := range v {
+		if err := validateHarnessSkill(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHarnessSkillS3Source(v *types.HarnessSkillS3Source) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HarnessSkillS3Source"}
+	if v.Uri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Uri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7595,6 +7706,11 @@ func validateOpCreateHarnessInput(v *CreateHarnessInput) error {
 			invalidParams.AddNested("Tools", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Skills != nil {
+		if err := validateHarnessSkills(v.Skills); err != nil {
+			invalidParams.AddNested("Skills", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Memory != nil {
 		if err := validateHarnessMemoryConfiguration(v.Memory); err != nil {
 			invalidParams.AddNested("Memory", err.(smithy.InvalidParamsError))
@@ -9442,6 +9558,11 @@ func validateOpUpdateHarnessInput(v *UpdateHarnessInput) error {
 	if v.Tools != nil {
 		if err := validateHarnessTools(v.Tools); err != nil {
 			invalidParams.AddNested("Tools", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Skills != nil {
+		if err := validateHarnessSkills(v.Skills); err != nil {
+			invalidParams.AddNested("Skills", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Memory != nil {

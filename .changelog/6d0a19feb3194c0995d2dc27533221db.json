@@ -1,0 +1,8 @@
+{
+    "id": "6d0a19fe-b319-4c09-95d2-dc27533221db",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/neptunegraph"
+    ]
+}

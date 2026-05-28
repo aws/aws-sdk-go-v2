@@ -805,6 +805,9 @@ func ExampleHarnessModelConfiguration_outputUsage() {
 	case *types.HarnessModelConfigurationMemberGeminiModelConfig:
 		_ = v.Value // Value is types.HarnessGeminiModelConfig
 
+	case *types.HarnessModelConfigurationMemberLiteLlmModelConfig:
+		_ = v.Value // Value is types.HarnessLiteLlmModelConfig
+
 	case *types.HarnessModelConfigurationMemberOpenAiModelConfig:
 		_ = v.Value // Value is types.HarnessOpenAiModelConfig
 
@@ -817,6 +820,7 @@ func ExampleHarnessModelConfiguration_outputUsage() {
 	}
 }
 
+var _ *types.HarnessLiteLlmModelConfig
 var _ *types.HarnessGeminiModelConfig
 var _ *types.HarnessOpenAiModelConfig
 var _ *types.HarnessBedrockModelConfig
@@ -825,8 +829,14 @@ func ExampleHarnessSkill_outputUsage() {
 	var union types.HarnessSkill
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.HarnessSkillMemberGit:
+		_ = v.Value // Value is types.HarnessSkillGitSource
+
 	case *types.HarnessSkillMemberPath:
 		_ = v.Value // Value is string
+
+	case *types.HarnessSkillMemberS3:
+		_ = v.Value // Value is types.HarnessSkillS3Source
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -837,6 +847,8 @@ func ExampleHarnessSkill_outputUsage() {
 	}
 }
 
+var _ *types.HarnessSkillS3Source
+var _ *types.HarnessSkillGitSource
 var _ *string
 
 func ExampleHarnessSystemContentBlock_outputUsage() {

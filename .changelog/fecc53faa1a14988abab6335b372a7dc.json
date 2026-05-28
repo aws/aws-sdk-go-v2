@@ -1,0 +1,8 @@
+{
+    "id": "fecc53fa-a1a1-4988-abab-6335b372a7dc",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/kinesisvideosignaling"
+    ]
+}

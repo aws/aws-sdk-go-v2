@@ -294,6 +294,7 @@ const (
 	ExportImageTaskStateExporting ExportImageTaskState = "EXPORTING"
 	ExportImageTaskStateCompleted ExportImageTaskState = "COMPLETED"
 	ExportImageTaskStateFailed    ExportImageTaskState = "FAILED"
+	ExportImageTaskStateTimedOut  ExportImageTaskState = "TIMED_OUT"
 )
 
 // Values returns all known values for ExportImageTaskState. Note that this can be
@@ -305,6 +306,7 @@ func (ExportImageTaskState) Values() []ExportImageTaskState {
 		"EXPORTING",
 		"COMPLETED",
 		"FAILED",
+		"TIMED_OUT",
 	}
 }
 
@@ -604,6 +606,7 @@ type ImageType string
 const (
 	ImageTypeCustom ImageType = "CUSTOM"
 	ImageTypeNative ImageType = "NATIVE"
+	ImageTypeByol   ImageType = "BYOL"
 )
 
 // Values returns all known values for ImageType. Note that this can be expanded
@@ -614,6 +617,7 @@ func (ImageType) Values() []ImageType {
 	return []ImageType{
 		"CUSTOM",
 		"NATIVE",
+		"BYOL",
 	}
 }
 

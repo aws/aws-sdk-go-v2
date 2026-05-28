@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Batch delete the specified advanced prompt optimization jobs.
+// Deletes one or more advanced prompt optimization jobs.
 func (c *Client) BatchDeleteAdvancedPromptOptimizationJob(ctx context.Context, params *BatchDeleteAdvancedPromptOptimizationJobInput, optFns ...func(*Options)) (*BatchDeleteAdvancedPromptOptimizationJobOutput, error) {
 	if params == nil {
 		params = &BatchDeleteAdvancedPromptOptimizationJobInput{}
@@ -30,7 +30,7 @@ func (c *Client) BatchDeleteAdvancedPromptOptimizationJob(ctx context.Context, p
 // Batch Delete Advanced Prompt Optimization Jobs Request
 type BatchDeleteAdvancedPromptOptimizationJobInput struct {
 
-	// List of advanced prompt optimization job identifiers to delete.
+	// A list of advanced prompt optimization job identifiers (ARNs or IDs) to delete.
 	//
 	// This member is required.
 	JobIdentifiers []string
@@ -41,12 +41,12 @@ type BatchDeleteAdvancedPromptOptimizationJobInput struct {
 // Batch Delete Advanced Prompt Optimization Jobs Response
 type BatchDeleteAdvancedPromptOptimizationJobOutput struct {
 
-	// List of successfully deleted advanced prompt optimization jobs.
+	// A list of successfully deleted advanced prompt optimization jobs.
 	//
 	// This member is required.
 	AdvancedPromptOptimizationJobs []types.BatchDeleteAdvancedPromptOptimizationJobItem
 
-	// List of errors encountered during batch deletion.
+	// A list of errors encountered during batch deletion.
 	//
 	// This member is required.
 	Errors []types.BatchDeleteAdvancedPromptOptimizationJobError

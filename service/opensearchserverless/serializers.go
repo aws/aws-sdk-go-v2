@@ -3423,6 +3423,11 @@ func awsAwsjson10_serializeOpDocumentCreateCollectionGroupInput(v *CreateCollect
 		ok.String(*v.Description)
 	}
 
+	if len(v.Generation) > 0 {
+		ok := object.Key("generation")
+		ok.String(string(v.Generation))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -3455,6 +3460,11 @@ func awsAwsjson10_serializeOpDocumentCreateCollectionInput(v *CreateCollectionIn
 	if v.CollectionGroupName != nil {
 		ok := object.Key("collectionGroupName")
 		ok.String(*v.CollectionGroupName)
+	}
+
+	if len(v.DeletionProtection) > 0 {
+		ok := object.Key("deletionProtection")
+		ok.String(string(v.DeletionProtection))
 	}
 
 	if v.Description != nil {
@@ -4212,6 +4222,11 @@ func awsAwsjson10_serializeOpDocumentUpdateCollectionInput(v *UpdateCollectionIn
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if len(v.DeletionProtection) > 0 {
+		ok := object.Key("deletionProtection")
+		ok.String(string(v.DeletionProtection))
 	}
 
 	if v.Description != nil {

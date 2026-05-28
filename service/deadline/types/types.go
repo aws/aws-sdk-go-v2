@@ -2911,7 +2911,7 @@ type MonitorSummary struct {
 	// This member is required.
 	Url *string
 
-	// The AWS Region where IAM Identity Center is enabled.
+	// The Region where IAM Identity Center is enabled.
 	IdentityCenterRegion *string
 
 	// The UNIX timestamp of the date and time that the monitor was last updated.
@@ -2991,6 +2991,32 @@ type PathMappingRule struct {
 	//
 	// This member is required.
 	SourcePathFormat PathFormat
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the persistent EBS volume configuration for workers in a service
+// managed fleet.
+type PersistentVolumeConfiguration struct {
+
+	// The file system path where the persistent volume is mounted on the worker
+	// instance.
+	//
+	// This member is required.
+	MountPath *string
+
+	// The IOPS per persistent volume. The default is 3000.
+	Iops *int32
+
+	// The number of hours a persistent volume can remain unused before it is deleted.
+	// The default is 168 (7 days).
+	LastUsedTtlHours *int32
+
+	// The persistent volume size in GiB. The default is 250.
+	SizeGiB *int32
+
+	// The throughput per persistent volume in MiB. The default is 125.
+	ThroughputMiB *int32
 
 	noSmithyDocumentSerde
 }
@@ -3549,6 +3575,9 @@ type ServiceManagedEc2FleetConfiguration struct {
 
 	// The auto scaling configuration settings for the service managed EC2 fleet.
 	AutoScalingConfiguration *ServiceManagedEc2AutoScalingConfiguration
+
+	// The persistent volume configuration for the service managed EC2 fleet.
+	PersistentVolumeConfiguration *PersistentVolumeConfiguration
 
 	// The storage profile ID for the service managed EC2 fleet.
 	StorageProfileId *string
@@ -4642,6 +4671,45 @@ type VCpuCountRange struct {
 
 	// The maximum amount of vCPU.
 	Max *int32
+
+	noSmithyDocumentSerde
+}
+
+// The summary of a persistent volume.
+type VolumeSummary struct {
+
+	// The Availability Zone ID of the volume.
+	//
+	// This member is required.
+	AvailabilityZoneId *string
+
+	// The farm ID of the farm that contains the fleet.
+	//
+	// This member is required.
+	FarmId *string
+
+	// The fleet ID of the fleet that contains the volume.
+	//
+	// This member is required.
+	FleetId *string
+
+	// The volume size in GiB.
+	//
+	// This member is required.
+	SizeGiB *int32
+
+	// The state of the volume.
+	//
+	// This member is required.
+	State VolumeState
+
+	// The volume ID.
+	//
+	// This member is required.
+	VolumeId *string
+
+	// The worker ID of the worker the volume is attached to.
+	AttachedWorkerId *string
 
 	noSmithyDocumentSerde
 }

@@ -1,0 +1,8 @@
+{
+    "id": "40cb4fd7-0dd8-4e72-8a0a-d8710aac26b7",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/arcregionswitch"
+    ]
+}

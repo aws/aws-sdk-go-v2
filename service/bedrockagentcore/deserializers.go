@@ -6961,6 +6961,9 @@ func awsRestjson1_deserializeOpErrorInvokeHarness(response *smithyhttp.Response,
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("RuntimeClientError", errorCode):
+		return awsRestjson1_deserializeErrorRuntimeClientError(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -17884,14 +17887,6 @@ func awsRestjson1_deserializeDocumentDescriptors(v **types.Descriptors, value in
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentDocument(v *document.Interface, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	*v = internaldocument.NewDocumentUnmarshaler(value)
-	return nil
-}
-
 func awsRestjson1_deserializeDocumentDomainPatterns(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -19884,6 +19879,14 @@ loop:
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMemoryDocument(v *document.Interface, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	*v = internaldocument.NewDocumentUnmarshaler(value)
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentMemoryRecord(v **types.MemoryRecord, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -20890,7 +20893,7 @@ loop:
 		switch key {
 		case "blob":
 			var mv document.Interface
-			if err := awsRestjson1_deserializeDocumentDocument(&mv, value); err != nil {
+			if err := awsRestjson1_deserializeDocumentMemoryDocument(&mv, value); err != nil {
 				return err
 			}
 			uv = &types.PayloadTypeMemberBlob{Value: mv}

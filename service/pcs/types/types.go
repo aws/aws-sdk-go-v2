@@ -397,6 +397,13 @@ type ComputeNodeGroupConfiguration struct {
 // Additional options related to the Slurm scheduler.
 type ComputeNodeGroupSlurmConfiguration struct {
 
+	// The time (in seconds) before an idle node is scaled down. If not specified, the
+	// cluster-level setting applies. This overrides the cluster-level
+	// scaleDownIdleTimeInSeconds setting. A value of -1 removes the override and
+	// applies the cluster-level setting to this compute node group. Requires Slurm
+	// version 25.11 or later.
+	ScaleDownIdleTimeInSeconds *int32
+
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.
 	SlurmCustomSettings []SlurmCustomSetting
 
@@ -405,6 +412,13 @@ type ComputeNodeGroupSlurmConfiguration struct {
 
 // Additional options related to the Slurm scheduler.
 type ComputeNodeGroupSlurmConfigurationRequest struct {
+
+	// The time (in seconds) before an idle node is scaled down. If not specified, the
+	// cluster-level setting applies. This overrides the cluster-level
+	// scaleDownIdleTimeInSeconds setting. A value of -1 removes the override and
+	// applies the cluster-level setting to this compute node group. Requires Slurm
+	// version 25.11 or later.
+	ScaleDownIdleTimeInSeconds *int32
 
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.
 	SlurmCustomSettings []SlurmCustomSetting
@@ -1009,6 +1023,13 @@ type UpdateClusterSlurmConfigurationRequest struct {
 
 // Additional options related to the Slurm scheduler.
 type UpdateComputeNodeGroupSlurmConfigurationRequest struct {
+
+	// The time (in seconds) before an idle node is scaled down. If not specified, the
+	// cluster-level setting applies. This overrides the cluster-level
+	// scaleDownIdleTimeInSeconds setting. A value of -1 removes the override and
+	// applies the cluster-level setting to this compute node group. Requires Slurm
+	// version 25.11 or later.
+	ScaleDownIdleTimeInSeconds *int32
 
 	// Additional Slurm-specific configuration that directly maps to Slurm settings.
 	SlurmCustomSettings []SlurmCustomSetting

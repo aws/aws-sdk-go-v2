@@ -96,7 +96,7 @@ type GetMonitorOutput struct {
 	// This member is required.
 	Url *string
 
-	// The AWS Region where IAM Identity Center is enabled.
+	// The Region where IAM Identity Center is enabled.
 	IdentityCenterRegion *string
 
 	// The UNIX timestamp of the last date and time that the monitor was updated.

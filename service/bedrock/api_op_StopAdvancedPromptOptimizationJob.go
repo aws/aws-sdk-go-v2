@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops an in-progress advanced prompt optimization job.
+// Stops an advanced prompt optimization job that is in progress.
 func (c *Client) StopAdvancedPromptOptimizationJob(ctx context.Context, params *StopAdvancedPromptOptimizationJobInput, optFns ...func(*Options)) (*StopAdvancedPromptOptimizationJobOutput, error) {
 	if params == nil {
 		params = &StopAdvancedPromptOptimizationJobInput{}
@@ -29,7 +29,7 @@ func (c *Client) StopAdvancedPromptOptimizationJob(ctx context.Context, params *
 // Stop Advanced Prompt Optimization Job Request
 type StopAdvancedPromptOptimizationJobInput struct {
 
-	// ARN or ID of the advanced prompt optimization job to stop.
+	// The ARN or ID of the advanced prompt optimization job to stop.
 	//
 	// This member is required.
 	JobIdentifier *string

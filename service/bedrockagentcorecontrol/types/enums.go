@@ -869,6 +869,51 @@ func (GatewayStatus) Values() []GatewayStatus {
 	}
 }
 
+type HarnessBedrockApiFormat string
+
+// Enum values for HarnessBedrockApiFormat
+const (
+	// Use the Bedrock Converse Stream API format.
+	HarnessBedrockApiFormatConverseStream HarnessBedrockApiFormat = "converse_stream"
+	// Use the Responses API format.
+	HarnessBedrockApiFormatResponses HarnessBedrockApiFormat = "responses"
+	// Use the Chat Completions API format.
+	HarnessBedrockApiFormatChatCompletions HarnessBedrockApiFormat = "chat_completions"
+)
+
+// Values returns all known values for HarnessBedrockApiFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessBedrockApiFormat) Values() []HarnessBedrockApiFormat {
+	return []HarnessBedrockApiFormat{
+		"converse_stream",
+		"responses",
+		"chat_completions",
+	}
+}
+
+type HarnessOpenAiApiFormat string
+
+// Enum values for HarnessOpenAiApiFormat
+const (
+	// Use the Chat Completions API format.
+	HarnessOpenAiApiFormatChatCompletions HarnessOpenAiApiFormat = "chat_completions"
+	// Use the Responses API format.
+	HarnessOpenAiApiFormatResponses HarnessOpenAiApiFormat = "responses"
+)
+
+// Values returns all known values for HarnessOpenAiApiFormat. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (HarnessOpenAiApiFormat) Values() []HarnessOpenAiApiFormat {
+	return []HarnessOpenAiApiFormat{
+		"chat_completions",
+		"responses",
+	}
+}
+
 type HarnessStatus string
 
 // Enum values for HarnessStatus

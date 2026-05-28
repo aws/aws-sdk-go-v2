@@ -1,0 +1,8 @@
+{
+    "id": "c304b5fa-e99e-4a53-8512-802f34c1d42c",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/timestreaminfluxdb"
+    ]
+}

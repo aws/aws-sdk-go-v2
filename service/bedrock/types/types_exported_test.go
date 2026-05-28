@@ -387,6 +387,24 @@ func ExampleCustomizationConfig_outputUsage() {
 var _ *types.DistillationConfig
 var _ *types.RFTConfig
 
+func ExampleCustomModelDataSource_outputUsage() {
+	var union types.CustomModelDataSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CustomModelDataSourceMemberModelPackageArnDataSource:
+		_ = v.Value // Value is types.ModelPackageArnDataSource
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ModelPackageArnDataSource
+
 func ExampleEndpointConfig_outputUsage() {
 	var union types.EndpointConfig
 	// type switches can be used to check the union value

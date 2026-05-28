@@ -2362,6 +2362,9 @@ func awsAwsjson11_deserializeOpErrorCreateImportedImage(response *smithyhttp.Res
 	case strings.EqualFold("InvalidAccountStatusException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidAccountStatusException(response, errorBody)
 
+	case strings.EqualFold("InvalidParameterCombinationException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterCombinationException(response, errorBody)
+
 	case strings.EqualFold("InvalidRoleException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidRoleException(response, errorBody)
 

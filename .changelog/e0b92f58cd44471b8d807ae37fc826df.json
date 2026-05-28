@@ -1,0 +1,8 @@
+{
+    "id": "e0b92f58-cd44-471b-8d80-7ae37fc826df",
+    "type": "feature",
+    "description": "Add support for ModelPackageArn in Bedrock's CreateCustomModel API",
+    "modules": [
+        "service/bedrock"
+    ]
+}

@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an asynchronous batch job for advanced prompt optimization.
+// Creates an advanced prompt optimization job. The job optimizes your prompt
+// templates for specific models using your evaluation dataset and criteria.
 func (c *Client) CreateAdvancedPromptOptimizationJob(ctx context.Context, params *CreateAdvancedPromptOptimizationJobInput, optFns ...func(*Options)) (*CreateAdvancedPromptOptimizationJobOutput, error) {
 	if params == nil {
 		params = &CreateAdvancedPromptOptimizationJobInput{}
@@ -30,36 +31,41 @@ func (c *Client) CreateAdvancedPromptOptimizationJob(ctx context.Context, params
 // Create Advanced Prompt Optimization Job Request
 type CreateAdvancedPromptOptimizationJobInput struct {
 
-	// Input data configuration for the advanced prompt optimization job.
+	// Specifies the S3 location of your JSONL input file containing prompt templates
+	// and evaluation samples.
 	//
 	// This member is required.
 	InputConfig *types.AdvancedPromptOptimizationInputConfig
 
-	// Name of the advanced prompt optimization job.
+	// A name for the advanced prompt optimization job.
 	//
 	// This member is required.
 	JobName *string
 
-	// Model configurations for advanced prompt optimization.
+	// A list of model configurations specifying the target models for prompt
+	// optimization. You can specify up to 5 models.
 	//
 	// This member is required.
 	ModelConfigurations []types.ModelConfiguration
 
-	// Output data configuration for the advanced prompt optimization job.
+	// Specifies the S3 location where optimization results will be stored.
 	//
 	// This member is required.
 	OutputConfig *types.AdvancedPromptOptimizationOutputConfig
 
-	// Idempotency token for the request.
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request but does not return an error.
 	ClientToken *string
 
-	// KMS key ARN for encrypting output data.
+	// The Amazon Resource Name (ARN) of the KMS key used for encrypting the output
+	// data. If not specified, the output is encrypted with an Amazon-owned KMS key.
 	EncryptionKeyArn *string
 
-	// Description of the advanced prompt optimization job.
+	// A description of the advanced prompt optimization job.
 	JobDescription *string
 
-	// Tags to associate with the job.
+	// Tags to associate with the advanced prompt optimization job.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -68,7 +74,7 @@ type CreateAdvancedPromptOptimizationJobInput struct {
 // Create Advanced Prompt Optimization Job Response
 type CreateAdvancedPromptOptimizationJobOutput struct {
 
-	// ARN of the created advanced prompt optimization job.
+	// The Amazon Resource Name (ARN) of the created advanced prompt optimization job.
 	//
 	// This member is required.
 	JobArn *string

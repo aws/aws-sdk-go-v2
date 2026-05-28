@@ -1,0 +1,8 @@
+{
+    "id": "e547afd9-d14e-426f-b358-c18cc1c74f14",
+    "type": "feature",
+    "description": "BatchPutProfileObject API adds multiple profile objects to a domain of a given ObjectType in a single API call.",
+    "modules": [
+        "service/customerprofiles"
+    ]
+}

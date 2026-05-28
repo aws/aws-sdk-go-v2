@@ -1,0 +1,8 @@
+{
+    "id": "c3bb14cf-e7d8-4a60-a6a7-7ab8ee85b5a8",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/migrationhubstrategy"
+    ]
+}

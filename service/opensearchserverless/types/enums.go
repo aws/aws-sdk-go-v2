@@ -20,6 +20,27 @@ func (AccessPolicyType) Values() []AccessPolicyType {
 	}
 }
 
+type AutoscalingStatus string
+
+// Enum values for AutoscalingStatus
+const (
+	AutoscalingStatusActionScalingUp   AutoscalingStatus = "ACTION_SCALING_UP"
+	AutoscalingStatusActionScalingDown AutoscalingStatus = "ACTION_SCALING_DOWN"
+	AutoscalingStatusNoAction          AutoscalingStatus = "NO_ACTION"
+)
+
+// Values returns all known values for AutoscalingStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutoscalingStatus) Values() []AutoscalingStatus {
+	return []AutoscalingStatus{
+		"ACTION_SCALING_UP",
+		"ACTION_SCALING_DOWN",
+		"NO_ACTION",
+	}
+}
+
 type CollectionStatus string
 
 // Enum values for CollectionStatus
@@ -74,6 +95,27 @@ func (CollectionType) Values() []CollectionType {
 		"SEARCH",
 		"TIMESERIES",
 		"VECTORSEARCH",
+	}
+}
+
+type DeletionProtection string
+
+// Enum values for DeletionProtection
+const (
+	// Deletion protection enabled
+	DeletionProtectionEnabled DeletionProtection = "ENABLED"
+	// Deletion protection disabled
+	DeletionProtectionDisabled DeletionProtection = "DISABLED"
+)
+
+// Values returns all known values for DeletionProtection. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeletionProtection) Values() []DeletionProtection {
+	return []DeletionProtection{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -202,6 +244,25 @@ func (SecurityPolicyType) Values() []SecurityPolicyType {
 	return []SecurityPolicyType{
 		"encryption",
 		"network",
+	}
+}
+
+type ServerlessGeneration string
+
+// Enum values for ServerlessGeneration
+const (
+	ServerlessGenerationClassic ServerlessGeneration = "CLASSIC"
+	ServerlessGenerationNextgen ServerlessGeneration = "NEXTGEN"
+)
+
+// Values returns all known values for ServerlessGeneration. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ServerlessGeneration) Values() []ServerlessGeneration {
+	return []ServerlessGeneration{
+		"CLASSIC",
+		"NEXTGEN",
 	}
 }
 

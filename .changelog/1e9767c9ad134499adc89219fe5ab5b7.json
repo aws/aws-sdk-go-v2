@@ -1,0 +1,8 @@
+{
+    "id": "1e9767c9-ad13-4499-adc8-9219fe5ab5b7",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/costoptimizationhub"
+    ]
+}

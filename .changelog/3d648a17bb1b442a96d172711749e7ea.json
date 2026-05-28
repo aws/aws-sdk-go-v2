@@ -1,0 +1,8 @@
+{
+    "id": "3d648a17-bb1b-442a-96d1-72711749e7ea",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/networkmonitor"
+    ]
+}

@@ -80,6 +80,19 @@ type AccountSettingsDetail struct {
 	noSmithyDocumentSerde
 }
 
+// Capacity details for an OpenSearch Serverless collection group, including the
+// current capacity and autoscaling status.
+type CapacityDetails struct {
+
+	// The current autoscaling status for the collection group.
+	AutoscalingStatus AutoscalingStatus
+
+	// The current capacity in OpenSearch Compute Units (OCUs).
+	CapacityInOcu *float32
+
+	noSmithyDocumentSerde
+}
+
 // The maximum capacity limits for all OpenSearch Serverless collections, in
 // OpenSearch Compute Units (OCUs). These limits are used to scale your collections
 // based on the current workload. For more information, see [Managing capacity limits for Amazon OpenSearch Serverless].
@@ -116,6 +129,9 @@ type CollectionDetail struct {
 
 	// Collection-specific endpoint used to access OpenSearch Dashboards.
 	DashboardEndpoint *string
+
+	// Indicates whether deletion protection is ENABLED or DISABLED for the collection.
+	DeletionProtection DeletionProtection
 
 	// A description of the collection.
 	Description *string
@@ -227,8 +243,14 @@ type CollectionGroupDetail struct {
 	// The Epoch time when the collection group was created.
 	CreatedDate *int64
 
+	// Current search and indexing capacity for the collection group.
+	CurrentCapacity *CurrentCapacity
+
 	// The description of the collection group.
 	Description *string
+
+	// The generation of Amazon OpenSearch Serverless for the collection group.
+	Generation ServerlessGeneration
 
 	// The unique identifier of the collection group.
 	Id *string
@@ -283,6 +305,9 @@ type CollectionGroupSummary struct {
 	// The Epoch time when the collection group was created.
 	CreatedDate *int64
 
+	// The generation of Amazon OpenSearch Serverless for the collection group.
+	Generation ServerlessGeneration
+
 	// The unique identifier of the collection group.
 	Id *string
 
@@ -332,6 +357,9 @@ type CreateCollectionDetail struct {
 	// The Epoch time when the collection was created.
 	CreatedDate *int64
 
+	// Indicates whether deletion protection is ENABLED or DISABLED for the collection.
+	DeletionProtection DeletionProtection
+
 	// A description of the collection.
 	Description *string
 
@@ -378,6 +406,9 @@ type CreateCollectionGroupDetail struct {
 
 	// The description of the collection group.
 	Description *string
+
+	// The generation of Amazon OpenSearch Serverless for the collection group.
+	Generation ServerlessGeneration
 
 	// The unique identifier of the collection group.
 	Id *string
@@ -432,8 +463,24 @@ type CreateVpcEndpointDetail struct {
 	noSmithyDocumentSerde
 }
 
+// Current search and indexing capacity for an OpenSearch Serverless collection
+// group. Measured in OpenSearch Compute Units (OCUs).
+type CurrentCapacity struct {
+
+	// The indexing capacity for the collection group.
+	Indexing *CapacityDetails
+
+	// The search capacity for the collection group.
+	Search *CapacityDetails
+
+	noSmithyDocumentSerde
+}
+
 // Details about a deleted OpenSearch Serverless collection.
 type DeleteCollectionDetail struct {
+
+	// Indicates whether deletion protection is ENABLED or DISABLED for the collection.
+	DeletionProtection DeletionProtection
 
 	// The unique identifier of the collection.
 	Id *string
@@ -879,6 +926,9 @@ type UpdateCollectionDetail struct {
 	// The date and time when the collection was created.
 	CreatedDate *int64
 
+	// Indicates whether deletion protection is ENABLED or DISABLED for the collection.
+	DeletionProtection DeletionProtection
+
 	// The description of the collection.
 	Description *string
 
@@ -918,6 +968,9 @@ type UpdateCollectionGroupDetail struct {
 
 	// The description of the collection group.
 	Description *string
+
+	// The generation of Amazon OpenSearch Serverless for the collection group.
+	Generation ServerlessGeneration
 
 	// The unique identifier of the collection group.
 	Id *string

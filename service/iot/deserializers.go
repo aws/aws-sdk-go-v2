@@ -23507,6 +23507,24 @@ func awsRestjson1_deserializeOpDocumentGetThingConnectivityDataOutput(v **GetThi
 
 	for key, value := range shape {
 		switch key {
+		case "cleanSession":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CleanSession = ptr.Bool(jtv)
+			}
+
+		case "clientId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientId to be of type string, got %T instead", value)
+				}
+				sv.ClientId = ptr.String(jtv)
+			}
+
 		case "connected":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -23523,6 +23541,76 @@ func awsRestjson1_deserializeOpDocumentGetThingConnectivityDataOutput(v **GetThi
 					return fmt.Errorf("expected DisconnectReasonValue to be of type string, got %T instead", value)
 				}
 				sv.DisconnectReason = types.DisconnectReasonValue(jtv)
+			}
+
+		case "keepAliveDuration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected KeepAliveDuration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.KeepAliveDuration = ptr.Int32(int32(i64))
+			}
+
+		case "sessionExpiry":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SessionExpiry to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SessionExpiry = ptr.Int64(i64)
+			}
+
+		case "sourceIp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SourceIp to be of type string, got %T instead", value)
+				}
+				sv.SourceIp = ptr.String(jtv)
+			}
+
+		case "sourcePort":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SourcePort to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SourcePort = ptr.Int32(int32(i64))
+			}
+
+		case "targetIp":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TargetIp to be of type string, got %T instead", value)
+				}
+				sv.TargetIp = ptr.String(jtv)
+			}
+
+		case "targetPort":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TargetPort to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TargetPort = ptr.Int32(int32(i64))
 			}
 
 		case "thingName":
@@ -23548,6 +23636,15 @@ func awsRestjson1_deserializeOpDocumentGetThingConnectivityDataOutput(v **GetThi
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "vpcEndpointId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VpcEndpointId to be of type string, got %T instead", value)
+				}
+				sv.VpcEndpointId = ptr.String(jtv)
 			}
 
 		default:
@@ -50659,6 +50756,42 @@ func awsRestjson1_deserializeDocumentConflictingResourceUpdateException(v **type
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentConnectivityFilter(v **types.ConnectivityFilter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ConnectivityFilter
+	if *v == nil {
+		sv = &types.ConnectivityFilter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "includeSocketInformation":
+			if err := awsRestjson1_deserializeDocumentFleetIndexingApiList(&sv.IncludeSocketInformation, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCustomCodeSigning(v **types.CustomCodeSigning, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -52467,6 +52600,42 @@ func awsRestjson1_deserializeDocumentFirehoseAction(v **types.FirehoseAction, va
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentFleetIndexingApiList(v *[]types.FleetIndexingApi, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.FleetIndexingApi
+	if *v == nil {
+		cv = []types.FleetIndexingApi{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.FleetIndexingApi
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected FleetIndexingApi to be of type string, got %T instead", value)
+			}
+			col = types.FleetIndexingApi(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFleetMetricNameAndArn(v **types.FleetMetricNameAndArn, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -53012,6 +53181,11 @@ func awsRestjson1_deserializeDocumentIndexingFilter(v **types.IndexingFilter, va
 
 	for key, value := range shape {
 		switch key {
+		case "connectivity":
+			if err := awsRestjson1_deserializeDocumentConnectivityFilter(&sv.Connectivity, value); err != nil {
+				return err
+			}
+
 		case "geoLocations":
 			if err := awsRestjson1_deserializeDocumentGeoLocationsFilter(&sv.GeoLocations, value); err != nil {
 				return err
@@ -63081,6 +63255,24 @@ func awsRestjson1_deserializeDocumentThingConnectivity(v **types.ThingConnectivi
 
 	for key, value := range shape {
 		switch key {
+		case "cleanSession":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CleanSession = ptr.Bool(jtv)
+			}
+
+		case "clientId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientId to be of type string, got %T instead", value)
+				}
+				sv.ClientId = ptr.String(jtv)
+			}
+
 		case "connected":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -63097,6 +63289,32 @@ func awsRestjson1_deserializeDocumentThingConnectivity(v **types.ThingConnectivi
 					return fmt.Errorf("expected DisconnectReason to be of type string, got %T instead", value)
 				}
 				sv.DisconnectReason = ptr.String(jtv)
+			}
+
+		case "keepAliveDuration":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected KeepAliveDuration to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.KeepAliveDuration = ptr.Int32(int32(i64))
+			}
+
+		case "sessionExpiry":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected SessionExpiry to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SessionExpiry = ptr.Int64(i64)
 			}
 
 		case "timestamp":

@@ -1,0 +1,8 @@
+{
+    "id": "d02e52c1-87f7-4283-8a3b-6b372467f9b0",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/finspacedata"
+    ]
+}

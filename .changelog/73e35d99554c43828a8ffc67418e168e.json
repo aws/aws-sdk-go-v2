@@ -1,0 +1,8 @@
+{
+    "id": "73e35d99-554c-4382-8a8f-fc67418e168e",
+    "type": "feature",
+    "description": "This is the initial SDK release for the next generation of Resilience Hub.",
+    "modules": [
+        "service/resiliencehubv2"
+    ]
+}
