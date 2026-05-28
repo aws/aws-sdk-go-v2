@@ -26,8 +26,8 @@ import software.amazon.smithy.go.codegen.GoSettings;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
-import software.amazon.smithy.go.codegen.integration.ConfigFieldResolver;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
+import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.model.shapes.OperationShape;
@@ -38,12 +38,12 @@ import software.amazon.smithy.utils.ListUtils;
 import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 
 /**
- * Configures the retryer for long-polling operations to back off even when the
- * retry quota is exhausted.
+ * Marks long-polling operations on the request context so the retry middleware
+ * can apply backoff even when the retry quota is exhausted.
  */
 public class LongPollingRetryIntegration implements GoIntegration {
 
-    private static final String FINALIZE_LONG_POLLING_RETRYER = "finalizeLongPollingRetryer";
+    private static final String SET_LONG_POLLING_FUNC = "addSetLongPollingContext";
 
     // Hardcoded long-polling operations until the aws.api#longPoll trait is
     // applied to service models.
@@ -65,6 +65,14 @@ public class LongPollingRetryIntegration implements GoIntegration {
                 .orElse(false);
     }
 
+    private static boolean serviceHasLongPollingOps(Model model, ServiceShape service) {
+        return service.getAllOperations().stream()
+                .flatMap(id -> model.getShape(id).stream())
+                .filter(shape -> shape.isOperationShape())
+                .map(shape -> shape.asOperationShape().get())
+                .anyMatch(op -> isLongPollingOperation(model, service, op));
+    }
+
     @Override
     public void writeAdditionalFiles(
             GoSettings settings,
@@ -73,30 +81,37 @@ public class LongPollingRetryIntegration implements GoIntegration {
             GoDelegator delegator
     ) {
         ServiceShape service = settings.getService(model);
-        boolean hasLongPollingOps = service.getAllOperations().stream()
-                .flatMap(id -> model.getShape(id).stream())
-                .filter(shape -> shape.isOperationShape())
-                .map(shape -> shape.asOperationShape().get())
-                .anyMatch(op -> isLongPollingOperation(model, service, op));
-
-        if (!hasLongPollingOps) {
+        if (!serviceHasLongPollingOps(model, service)) {
             return;
         }
 
-        delegator.useShapeWriter(service, this::writeLongPollingResolver);
+        delegator.useShapeWriter(service, this::writeSetLongPollingContext);
     }
 
-    private void writeLongPollingResolver(GoWriter writer) {
+    private void writeSetLongPollingContext(GoWriter writer) {
         writer.write(goTemplate("""
-                $os:D $retry:D
-                func finalizeLongPollingRetryer(o *Options) {
-                    if os.Getenv("AWS_NEW_RETRIES_2026") == "true" {
-                        o.Retryer = retry.AddWithLongPolling(o.Retryer)
+                $os:D $internalcontext:D $middleware:D
+                func addSetLongPollingContext(stack *middleware.Stack, options Options) error {
+                    if os.Getenv("AWS_NEW_RETRIES_2026") != "true" {
+                        return nil
                     }
+                    return stack.Initialize.Add(&setLongPollingContextMiddleware{}, middleware.Before)
+                }
+
+                type setLongPollingContextMiddleware struct{}
+
+                func (*setLongPollingContextMiddleware) ID() string { return "SetLongPollingContext" }
+
+                func (*setLongPollingContextMiddleware) HandleInitialize(
+                    ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
+                ) (middleware.InitializeOutput, middleware.Metadata, error) {
+                    ctx = internalcontext.SetIsLongPolling(ctx, true)
+                    return next.HandleInitialize(ctx, in)
                 }
                 """, Map.of(
-                "os", SmithyGoDependency.OS,
-                "retry", AwsGoDependency.AWS_RETRY
+                "internalcontext", AwsGoDependency.INTERNAL_CONTEXT,
+                "middleware", SmithyGoDependency.SMITHY_MIDDLEWARE,
+                "os", SmithyGoDependency.OS
         )));
     }
 
@@ -105,11 +120,10 @@ public class LongPollingRetryIntegration implements GoIntegration {
         return ListUtils.of(
                 RuntimeClientPlugin.builder()
                         .operationPredicate(LongPollingRetryIntegration::isLongPollingOperation)
-                        .addConfigFieldResolver(ConfigFieldResolver.builder()
-                                .location(ConfigFieldResolver.Location.OPERATION)
-                                .target(ConfigFieldResolver.Target.FINALIZATION)
-                                .resolver(SymbolUtils.createValueSymbolBuilder(
-                                        FINALIZE_LONG_POLLING_RETRYER).build())
+                        .registerMiddleware(MiddlewareRegistrar.builder()
+                                .resolvedFunction(SymbolUtils.createValueSymbolBuilder(
+                                        SET_LONG_POLLING_FUNC).build())
+                                .useClientOptions()
                                 .build())
                         .build()
         );

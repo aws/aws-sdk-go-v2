@@ -279,15 +279,10 @@ func (r *Attempt) handleAttempt(
 	releaseRetryToken, retryTokenErr := r.retryer.GetRetryToken(ctx, err)
 	if retryTokenErr != nil {
 		// Long-polling operations must still back off when quota is exceeded.
-		if newRetries2026() {
-			if _, ok := r.retryer.(*withLongPolling); ok {
-				// Pass nil error to RetryDelay so backoff uses non-throttle
-				// base delay, but pass the real error to adjustForRetryAfterHeader
-				// so the response header is still honored.
-				if retryDelay, delayErr := r.retryer.RetryDelay(attemptNum-1, nil); delayErr == nil {
-					retryDelay = adjustForRetryAfterHeader(retryDelay, err, logger, r.LogAttempts)
-					_ = sdk.SleepWithContext(ctx, retryDelay)
-				}
+		if newRetries2026() && internalcontext.GetIsLongPolling(ctx) {
+			if retryDelay, delayErr := r.retryer.RetryDelay(attemptNum-1, err); delayErr == nil {
+				retryDelay = adjustForRetryAfterHeader(retryDelay, err, logger, r.LogAttempts)
+				_ = sdk.SleepWithContext(ctx, retryDelay)
 			}
 		}
 		return out, attemptResult, nopRelease, errors.Join(err, retryTokenErr)

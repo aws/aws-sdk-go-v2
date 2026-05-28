@@ -16,6 +16,7 @@ import (
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
+	internalcontext "github.com/aws/aws-sdk-go-v2/internal/context"
 	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
@@ -736,10 +737,22 @@ func addRetry(stack *middleware.Stack, o Options, c *Client) error {
 	return nil
 }
 
-func finalizeLongPollingRetryer(o *Options) {
-	if os.Getenv("AWS_NEW_RETRIES_2026") == "true" {
-		o.Retryer = retry.AddWithLongPolling(o.Retryer)
+func addSetLongPollingContext(stack *middleware.Stack, options Options) error {
+	if os.Getenv("AWS_NEW_RETRIES_2026") != "true" {
+		return nil
 	}
+	return stack.Initialize.Add(&setLongPollingContextMiddleware{}, middleware.Before)
+}
+
+type setLongPollingContextMiddleware struct{}
+
+func (*setLongPollingContextMiddleware) ID() string { return "SetLongPollingContext" }
+
+func (*setLongPollingContextMiddleware) HandleInitialize(
+	ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler,
+) (middleware.InitializeOutput, middleware.Metadata, error) {
+	ctx = internalcontext.SetIsLongPolling(ctx, true)
+	return next.HandleInitialize(ctx, in)
 }
 
 // resolves dual-stack endpoint configuration
