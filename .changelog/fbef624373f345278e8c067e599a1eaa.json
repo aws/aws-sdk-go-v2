@@ -1,0 +1,8 @@
+{
+    "id": "fbef6243-73f3-4527-8e8c-067e599a1eaa",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/arczonalshift"
+    ]
+}

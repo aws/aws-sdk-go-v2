@@ -1,0 +1,8 @@
+{
+    "id": "29df5f86-840c-4dd7-829d-900c890573d0",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/athena"
+    ]
+}

@@ -81,6 +81,9 @@ type GetRunOutput struct {
 	// The run's digest.
 	Digest *string
 
+	// The engine-specific settings for the workflow run.
+	EngineSettings document.Interface
+
 	// The actual Nextflow engine version that Amazon Web Services HealthOmics used
 	// for the run. The other workflow definition languages don't provide a value for
 	// this field.

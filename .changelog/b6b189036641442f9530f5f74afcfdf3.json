@@ -1,0 +1,8 @@
+{
+    "id": "b6b18903-6641-442f-9530-f5f74afcfdf3",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/codegurusecurity"
+    ]
+}

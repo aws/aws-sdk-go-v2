@@ -3253,8 +3253,10 @@ func validateAtlassianOauth2ProviderConfigInput(v *types.AtlassianOauth2Provider
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
-	if v.ClientSecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	if v.ClientSecretConfig != nil {
+		if err := validateSecretReference(v.ClientSecretConfig); err != nil {
+			invalidParams.AddNested("ClientSecretConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3597,11 +3599,15 @@ func validateCoinbaseCdpConfigurationInput(v *types.CoinbaseCdpConfigurationInpu
 	if v.ApiKeyId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApiKeyId"))
 	}
-	if v.ApiKeySecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiKeySecret"))
+	if v.ApiKeySecretConfig != nil {
+		if err := validateSecretReference(v.ApiKeySecretConfig); err != nil {
+			invalidParams.AddNested("ApiKeySecretConfig", err.(smithy.InvalidParamsError))
+		}
 	}
-	if v.WalletSecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("WalletSecret"))
+	if v.WalletSecretConfig != nil {
+		if err := validateSecretReference(v.WalletSecretConfig); err != nil {
+			invalidParams.AddNested("WalletSecretConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4091,6 +4097,16 @@ func validateCustomOauth2ProviderConfigInput(v *types.CustomOauth2ProviderConfig
 			invalidParams.AddNested("OauthDiscovery", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ClientSecretConfig != nil {
+		if err := validateSecretReference(v.ClientSecretConfig); err != nil {
+			invalidParams.AddNested("ClientSecretConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OnBehalfOfTokenExchangeConfig != nil {
+		if err := validateOnBehalfOfTokenExchangeConfigType(v.OnBehalfOfTokenExchangeConfig); err != nil {
+			invalidParams.AddNested("OnBehalfOfTokenExchangeConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.PrivateEndpoint != nil {
 		if err := validatePrivateEndpoint(v.PrivateEndpoint); err != nil {
 			invalidParams.AddNested("PrivateEndpoint", err.(smithy.InvalidParamsError))
@@ -4099,11 +4115,6 @@ func validateCustomOauth2ProviderConfigInput(v *types.CustomOauth2ProviderConfig
 	if v.PrivateEndpointOverrides != nil {
 		if err := validatePrivateEndpointOverrides(v.PrivateEndpointOverrides); err != nil {
 			invalidParams.AddNested("PrivateEndpointOverrides", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.OnBehalfOfTokenExchangeConfig != nil {
-		if err := validateOnBehalfOfTokenExchangeConfigType(v.OnBehalfOfTokenExchangeConfig); err != nil {
-			invalidParams.AddNested("OnBehalfOfTokenExchangeConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -4604,8 +4615,10 @@ func validateGithubOauth2ProviderConfigInput(v *types.GithubOauth2ProviderConfig
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
-	if v.ClientSecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	if v.ClientSecretConfig != nil {
+		if err := validateSecretReference(v.ClientSecretConfig); err != nil {
+			invalidParams.AddNested("ClientSecretConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4622,8 +4635,10 @@ func validateGoogleOauth2ProviderConfigInput(v *types.GoogleOauth2ProviderConfig
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
-	if v.ClientSecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	if v.ClientSecretConfig != nil {
+		if err := validateSecretReference(v.ClientSecretConfig); err != nil {
+			invalidParams.AddNested("ClientSecretConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5127,8 +5142,10 @@ func validateIncludedOauth2ProviderConfigInput(v *types.IncludedOauth2ProviderCo
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
-	if v.ClientSecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	if v.ClientSecretConfig != nil {
+		if err := validateSecretReference(v.ClientSecretConfig); err != nil {
+			invalidParams.AddNested("ClientSecretConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5314,8 +5331,10 @@ func validateLinkedinOauth2ProviderConfigInput(v *types.LinkedinOauth2ProviderCo
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
-	if v.ClientSecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	if v.ClientSecretConfig != nil {
+		if err := validateSecretReference(v.ClientSecretConfig); err != nil {
+			invalidParams.AddNested("ClientSecretConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -5648,8 +5667,10 @@ func validateMicrosoftOauth2ProviderConfigInput(v *types.MicrosoftOauth2Provider
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
-	if v.ClientSecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	if v.ClientSecretConfig != nil {
+		if err := validateSecretReference(v.ClientSecretConfig); err != nil {
+			invalidParams.AddNested("ClientSecretConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6440,8 +6461,10 @@ func validateSalesforceOauth2ProviderConfigInput(v *types.SalesforceOauth2Provid
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
-	if v.ClientSecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	if v.ClientSecretConfig != nil {
+		if err := validateSecretReference(v.ClientSecretConfig); err != nil {
+			invalidParams.AddNested("ClientSecretConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6500,6 +6523,24 @@ func validateSchemaProperties(v map[string]types.SchemaDefinition) error {
 		if err := validateSchemaDefinition(&value); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSecretReference(v *types.SecretReference) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SecretReference"}
+	if v.SecretId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecretId"))
+	}
+	if v.JsonKey == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JsonKey"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6658,8 +6699,10 @@ func validateSlackOauth2ProviderConfigInput(v *types.SlackOauth2ProviderConfigIn
 	if v.ClientId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
 	}
-	if v.ClientSecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	if v.ClientSecretConfig != nil {
+		if err := validateSecretReference(v.ClientSecretConfig); err != nil {
+			invalidParams.AddNested("ClientSecretConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6779,11 +6822,15 @@ func validateStripePrivyConfigurationInput(v *types.StripePrivyConfigurationInpu
 	if v.AppId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AppId"))
 	}
-	if v.AppSecret == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AppSecret"))
+	if v.AppSecretConfig != nil {
+		if err := validateSecretReference(v.AppSecretConfig); err != nil {
+			invalidParams.AddNested("AppSecretConfig", err.(smithy.InvalidParamsError))
+		}
 	}
-	if v.AuthorizationPrivateKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationPrivateKey"))
+	if v.AuthorizationPrivateKeyConfig != nil {
+		if err := validateSecretReference(v.AuthorizationPrivateKeyConfig); err != nil {
+			invalidParams.AddNested("AuthorizationPrivateKeyConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if v.AuthorizationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AuthorizationId"))
@@ -7383,8 +7430,10 @@ func validateOpCreateApiKeyCredentialProviderInput(v *CreateApiKeyCredentialProv
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.ApiKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiKey"))
+	if v.ApiKeySecretConfig != nil {
+		if err := validateSecretReference(v.ApiKeySecretConfig); err != nil {
+			invalidParams.AddNested("ApiKeySecretConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -9334,8 +9383,10 @@ func validateOpUpdateApiKeyCredentialProviderInput(v *UpdateApiKeyCredentialProv
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
-	if v.ApiKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApiKey"))
+	if v.ApiKeySecretConfig != nil {
+		if err := validateSecretReference(v.ApiKeySecretConfig); err != nil {
+			invalidParams.AddNested("ApiKeySecretConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

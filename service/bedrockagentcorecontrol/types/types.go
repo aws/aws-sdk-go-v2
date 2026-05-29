@@ -366,9 +366,17 @@ type AtlassianOauth2ProviderConfigInput struct {
 
 	// The client secret for the Atlassian OAuth2 provider. This secret is assigned by
 	// Atlassian and used along with the client ID to authenticate your application.
-	//
-	// This member is required.
 	ClientSecret *string
+
+	// A reference to the AWS Secrets Manager secret that stores the client secret.
+	// This includes the secret ID and the JSON key used to extract the client secret
+	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	ClientSecretConfig *SecretReference
+
+	// The source type of the client secret for the Atlassian OAuth2 provider. Use
+	// MANAGED if the secret is managed by the service, or EXTERNAL if you manage the
+	// secret yourself in AWS Secrets Manager.
+	ClientSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
 }
@@ -877,14 +885,30 @@ type CoinbaseCdpConfigurationInput struct {
 	ApiKeyId *string
 
 	// The API key secret provided by Coinbase Developer Platform.
-	//
-	// This member is required.
 	ApiKeySecret *string
 
+	// A reference to the AWS Secrets Manager secret that stores the API key secret.
+	// This includes the secret ID and the JSON key used to extract the API key secret
+	// value from the secret. Required when apiKeySecretSource is set to EXTERNAL .
+	ApiKeySecretConfig *SecretReference
+
+	// The source type of the API key secret for the Coinbase Developer Platform. Use
+	// MANAGED if the secret is managed by the service, or EXTERNAL if you manage the
+	// secret yourself in AWS Secrets Manager.
+	ApiKeySecretSource SecretSourceType
+
 	// The wallet secret provided by Coinbase Developer Platform.
-	//
-	// This member is required.
 	WalletSecret *string
+
+	// A reference to the AWS Secrets Manager secret that stores the wallet secret.
+	// This includes the secret ID and the JSON key used to extract the wallet secret
+	// value from the secret. Required when walletSecretSource is set to EXTERNAL .
+	WalletSecretConfig *SecretReference
+
+	// The source type of the wallet secret for the Coinbase Developer Platform. Use
+	// MANAGED if the secret is managed by the service, or EXTERNAL if you manage the
+	// secret yourself in AWS Secrets Manager.
+	WalletSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
 }
@@ -906,6 +930,22 @@ type CoinbaseCdpConfigurationOutput struct {
 	//
 	// This member is required.
 	WalletSecretArn *Secret
+
+	// The JSON key used to extract the API key secret value from the AWS Secrets
+	// Manager secret.
+	ApiKeySecretJsonKey *string
+
+	// The source type of the API key secret. Either MANAGED if the secret is managed
+	// by the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	ApiKeySecretSource SecretSourceType
+
+	// The JSON key used to extract the wallet secret value from the AWS Secrets
+	// Manager secret.
+	WalletSecretJsonKey *string
+
+	// The source type of the wallet secret. Either MANAGED if the secret is managed
+	// by the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	WalletSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
 }
@@ -1576,6 +1616,16 @@ type CustomOauth2ProviderConfigInput struct {
 
 	// The client secret for the custom OAuth2 provider.
 	ClientSecret *string
+
+	// A reference to the AWS Secrets Manager secret that stores the client secret.
+	// This includes the secret ID and the JSON key used to extract the client secret
+	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	ClientSecretConfig *SecretReference
+
+	// The source type of the client secret. Use MANAGED if the secret is managed by
+	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
+	// Manager.
+	ClientSecretSource SecretSourceType
 
 	// The configuration for on-behalf-of token exchange. This enables authentication
 	// flows that use RFC 8693 token exchange or RFC 7523 JWT authorization grants.
@@ -2658,9 +2708,17 @@ type GithubOauth2ProviderConfigInput struct {
 	ClientId *string
 
 	// The client secret for the GitHub OAuth2 provider.
-	//
-	// This member is required.
 	ClientSecret *string
+
+	// A reference to the AWS Secrets Manager secret that stores the client secret.
+	// This includes the secret ID and the JSON key used to extract the client secret
+	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	ClientSecretConfig *SecretReference
+
+	// The source type of the client secret. Use MANAGED if the secret is managed by
+	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
+	// Manager.
+	ClientSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
 }
@@ -2688,9 +2746,17 @@ type GoogleOauth2ProviderConfigInput struct {
 	ClientId *string
 
 	// The client secret for the Google OAuth2 provider.
-	//
-	// This member is required.
 	ClientSecret *string
+
+	// A reference to the AWS Secrets Manager secret that stores the client secret.
+	// This includes the secret ID and the JSON key used to extract the client secret
+	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	ClientSecretConfig *SecretReference
+
+	// The source type of the client secret. Use MANAGED if the secret is managed by
+	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
+	// Manager.
+	ClientSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
 }
@@ -3589,17 +3655,25 @@ type IncludedOauth2ProviderConfigInput struct {
 	// This member is required.
 	ClientId *string
 
-	// The client secret for the supported OAuth2 provider. This secret is assigned by
-	// the OAuth2 provider and used along with the client ID to authenticate your
-	// application.
-	//
-	// This member is required.
-	ClientSecret *string
-
 	// OAuth2 authorization endpoint for your isolated OAuth2 application tenant. This
 	// is where users are redirected to authenticate and authorize access to their
 	// resources.
 	AuthorizationEndpoint *string
+
+	// The client secret for the supported OAuth2 provider. This secret is assigned by
+	// the OAuth2 provider and used along with the client ID to authenticate your
+	// application.
+	ClientSecret *string
+
+	// A reference to the AWS Secrets Manager secret that stores the client secret.
+	// This includes the secret ID and the JSON key used to extract the client secret
+	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	ClientSecretConfig *SecretReference
+
+	// The source type of the client secret. Use MANAGED if the secret is managed by
+	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
+	// Manager.
+	ClientSecretSource SecretSourceType
 
 	// Token issuer of your isolated OAuth2 application tenant. This URL identifies
 	// the authorization server that issues tokens for this provider.
@@ -3828,9 +3902,17 @@ type LinkedinOauth2ProviderConfigInput struct {
 
 	// The client secret for the LinkedIn OAuth2 provider. This secret is assigned by
 	// LinkedIn and used along with the client ID to authenticate your application.
-	//
-	// This member is required.
 	ClientSecret *string
+
+	// A reference to the AWS Secrets Manager secret that stores the client secret.
+	// This includes the secret ID and the JSON key used to extract the client secret
+	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	ClientSecretConfig *SecretReference
+
+	// The source type of the client secret. Use MANAGED if the secret is managed by
+	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
+	// Manager.
+	ClientSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
 }
@@ -4441,9 +4523,17 @@ type MicrosoftOauth2ProviderConfigInput struct {
 	ClientId *string
 
 	// The client secret for the Microsoft OAuth2 provider.
-	//
-	// This member is required.
 	ClientSecret *string
+
+	// A reference to the AWS Secrets Manager secret that stores the client secret.
+	// This includes the secret ID and the JSON key used to extract the client secret
+	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	ClientSecretConfig *SecretReference
+
+	// The source type of the client secret. Use MANAGED if the secret is managed by
+	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
+	// Manager.
+	ClientSecretSource SecretSourceType
 
 	// The Microsoft Entra ID (formerly Azure AD) tenant ID for your organization.
 	// This identifies the specific tenant within Microsoft's identity platform where
@@ -6301,9 +6391,17 @@ type SalesforceOauth2ProviderConfigInput struct {
 	ClientId *string
 
 	// The client secret for the Salesforce OAuth2 provider.
-	//
-	// This member is required.
 	ClientSecret *string
+
+	// A reference to the AWS Secrets Manager secret that stores the client secret.
+	// This includes the secret ID and the JSON key used to extract the client secret
+	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	ClientSecretConfig *SecretReference
+
+	// The source type of the client secret. Use MANAGED if the secret is managed by
+	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
+	// Manager.
+	ClientSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
 }
@@ -6372,6 +6470,23 @@ type Secret struct {
 	//
 	// This member is required.
 	SecretArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains a reference to a secret stored in AWS Secrets Manager.
+type SecretReference struct {
+
+	// The JSON key used to extract the secret value from the AWS Secrets Manager
+	// secret.
+	//
+	// This member is required.
+	JsonKey *string
+
+	// The ID of the AWS Secrets Manager secret that stores the secret value.
+	//
+	// This member is required.
+	SecretId *string
 
 	noSmithyDocumentSerde
 }
@@ -6636,9 +6751,17 @@ type SlackOauth2ProviderConfigInput struct {
 	ClientId *string
 
 	// The client secret for the Slack OAuth2 provider.
-	//
-	// This member is required.
 	ClientSecret *string
+
+	// A reference to the AWS Secrets Manager secret that stores the client secret.
+	// This includes the secret ID and the JSON key used to extract the client secret
+	// value from the secret. Required when clientSecretSource is set to EXTERNAL .
+	ClientSecretConfig *SecretReference
+
+	// The source type of the client secret. Use MANAGED if the secret is managed by
+	// the service, or EXTERNAL if you manage the secret yourself in AWS Secrets
+	// Manager.
+	ClientSecretSource SecretSourceType
 
 	noSmithyDocumentSerde
 }
@@ -6776,20 +6899,36 @@ type StripePrivyConfigurationInput struct {
 	// This member is required.
 	AppId *string
 
-	// The app secret provided by Privy.
-	//
-	// This member is required.
-	AppSecret *string
-
 	// The authorization ID for the Stripe Privy integration.
 	//
 	// This member is required.
 	AuthorizationId *string
 
+	// The app secret provided by Privy.
+	AppSecret *string
+
+	// A reference to the AWS Secrets Manager secret that stores the app secret. This
+	// includes the secret ID and the JSON key used to extract the app secret value
+	// from the secret. Required when appSecretSource is set to EXTERNAL .
+	AppSecretConfig *SecretReference
+
+	// The source type of the app secret. Use MANAGED if the secret is managed by the
+	// service, or EXTERNAL if you manage the secret yourself in AWS Secrets Manager.
+	AppSecretSource SecretSourceType
+
 	// The authorization private key for the Stripe Privy integration.
-	//
-	// This member is required.
 	AuthorizationPrivateKey *string
+
+	// A reference to the AWS Secrets Manager secret that stores the authorization
+	// private key. This includes the secret ID and the JSON key used to extract the
+	// authorization private key value from the secret. Required when
+	// authorizationPrivateKeySource is set to EXTERNAL .
+	AuthorizationPrivateKeyConfig *SecretReference
+
+	// The source type of the authorization private key. Use MANAGED if the secret is
+	// managed by the service, or EXTERNAL if you manage the secret yourself in AWS
+	// Secrets Manager.
+	AuthorizationPrivateKeySource SecretSourceType
 
 	noSmithyDocumentSerde
 }
@@ -6816,6 +6955,23 @@ type StripePrivyConfigurationOutput struct {
 	//
 	// This member is required.
 	AuthorizationPrivateKeyArn *Secret
+
+	// The JSON key used to extract the app secret value from the AWS Secrets Manager
+	// secret.
+	AppSecretJsonKey *string
+
+	// The source type of the app secret. Either MANAGED if the secret is managed by
+	// the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	AppSecretSource SecretSourceType
+
+	// The JSON key used to extract the authorization private key value from the AWS
+	// Secrets Manager secret.
+	AuthorizationPrivateKeyJsonKey *string
+
+	// The source type of the authorization private key. Either MANAGED if the secret
+	// is managed by the service, or EXTERNAL if managed by the user in AWS Secrets
+	// Manager.
+	AuthorizationPrivateKeySource SecretSourceType
 
 	noSmithyDocumentSerde
 }

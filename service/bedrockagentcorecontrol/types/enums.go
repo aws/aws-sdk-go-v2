@@ -1762,6 +1762,25 @@ func (SearchType) Values() []SearchType {
 	}
 }
 
+type SecretSourceType string
+
+// Enum values for SecretSourceType
+const (
+	SecretSourceTypeManaged  SecretSourceType = "MANAGED"
+	SecretSourceTypeExternal SecretSourceType = "EXTERNAL"
+)
+
+// Values returns all known values for SecretSourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SecretSourceType) Values() []SecretSourceType {
+	return []SecretSourceType{
+		"MANAGED",
+		"EXTERNAL",
+	}
+}
+
 type ServerProtocol string
 
 // Enum values for ServerProtocol

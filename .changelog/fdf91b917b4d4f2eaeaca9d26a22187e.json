@@ -1,0 +1,8 @@
+{
+    "id": "fdf91b91-7b4d-4f2e-aeac-a9d26a22187e",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/synthetics"
+    ]
+}

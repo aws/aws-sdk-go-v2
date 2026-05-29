@@ -1,0 +1,8 @@
+{
+    "id": "df870a13-4a43-4e06-9f2e-0246cd7cc5a3",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/connectcontactlens"
+    ]
+}

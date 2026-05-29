@@ -390,6 +390,26 @@ func (m *validateOpCreateNamespace) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateOAuthClientApplication struct {
+}
+
+func (*validateOpCreateOAuthClientApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateOAuthClientApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateOAuthClientApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateOAuthClientApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateRefreshSchedule struct {
 }
 
@@ -965,6 +985,26 @@ func (m *validateOpDeleteNamespace) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteNamespaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteOAuthClientApplication struct {
+}
+
+func (*validateOpDeleteOAuthClientApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteOAuthClientApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteOAuthClientApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteOAuthClientApplicationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1990,6 +2030,26 @@ func (m *validateOpDescribeNamespace) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeOAuthClientApplication struct {
+}
+
+func (*validateOpDescribeOAuthClientApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeOAuthClientApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeOAuthClientApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeOAuthClientApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeQPersonalizationConfiguration struct {
 }
 
@@ -2925,6 +2985,26 @@ func (m *validateOpListNamespaces) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListNamespacesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListOAuthClientApplications struct {
+}
+
+func (*validateOpListOAuthClientApplications) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListOAuthClientApplications) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListOAuthClientApplicationsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListOAuthClientApplicationsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4250,6 +4330,26 @@ func (m *validateOpUpdateKeyRegistration) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateOAuthClientApplication struct {
+}
+
+func (*validateOpUpdateOAuthClientApplication) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateOAuthClientApplication) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateOAuthClientApplicationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateOAuthClientApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdatePublicSharingSettings struct {
 }
 
@@ -4726,6 +4826,10 @@ func addOpCreateNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateNamespace{}, middleware.After)
 }
 
+func addOpCreateOAuthClientApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateOAuthClientApplication{}, middleware.After)
+}
+
 func addOpCreateRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRefreshSchedule{}, middleware.After)
 }
@@ -4840,6 +4944,10 @@ func addOpDeleteIdentityPropagationConfigValidationMiddleware(stack *middleware.
 
 func addOpDeleteNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNamespace{}, middleware.After)
+}
+
+func addOpDeleteOAuthClientApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteOAuthClientApplication{}, middleware.After)
 }
 
 func addOpDeleteRefreshScheduleValidationMiddleware(stack *middleware.Stack) error {
@@ -5046,6 +5154,10 @@ func addOpDescribeNamespaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeNamespace{}, middleware.After)
 }
 
+func addOpDescribeOAuthClientApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeOAuthClientApplication{}, middleware.After)
+}
+
 func addOpDescribeQPersonalizationConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeQPersonalizationConfiguration{}, middleware.After)
 }
@@ -5232,6 +5344,10 @@ func addOpListIngestionsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListNamespacesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListNamespaces{}, middleware.After)
+}
+
+func addOpListOAuthClientApplicationsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListOAuthClientApplications{}, middleware.After)
 }
 
 func addOpListRefreshSchedulesValidationMiddleware(stack *middleware.Stack) error {
@@ -5496,6 +5612,10 @@ func addOpUpdateIpRestrictionValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdateKeyRegistrationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateKeyRegistration{}, middleware.After)
+}
+
+func addOpUpdateOAuthClientApplicationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateOAuthClientApplication{}, middleware.After)
 }
 
 func addOpUpdatePublicSharingSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -24733,6 +24853,49 @@ func validateOpCreateNamespaceInput(v *CreateNamespaceInput) error {
 	}
 }
 
+func validateOpCreateOAuthClientApplicationInput(v *CreateOAuthClientApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateOAuthClientApplicationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.OAuthClientApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OAuthClientApplicationId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.OAuthClientAuthenticationType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("OAuthClientAuthenticationType"))
+	}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.ClientSecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	}
+	if v.OAuthTokenEndpointUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OAuthTokenEndpointUrl"))
+	}
+	if v.IdentityProviderVpcConnectionProperties != nil {
+		if err := validateVpcConnectionProperties(v.IdentityProviderVpcConnectionProperties); err != nil {
+			invalidParams.AddNested("IdentityProviderVpcConnectionProperties", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateRefreshScheduleInput(v *CreateRefreshScheduleInput) error {
 	if v == nil {
 		return nil
@@ -25363,6 +25526,24 @@ func validateOpDeleteNamespaceInput(v *DeleteNamespaceInput) error {
 	}
 	if v.Namespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteOAuthClientApplicationInput(v *DeleteOAuthClientApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteOAuthClientApplicationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.OAuthClientApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OAuthClientApplicationId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -26319,6 +26500,24 @@ func validateOpDescribeNamespaceInput(v *DescribeNamespaceInput) error {
 	}
 }
 
+func validateOpDescribeOAuthClientApplicationInput(v *DescribeOAuthClientApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeOAuthClientApplicationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.OAuthClientApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OAuthClientApplicationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeQPersonalizationConfigurationInput(v *DescribeQPersonalizationConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -27163,6 +27362,21 @@ func validateOpListNamespacesInput(v *ListNamespacesInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListNamespacesInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListOAuthClientApplicationsInput(v *ListOAuthClientApplicationsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListOAuthClientApplicationsInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
@@ -28677,6 +28891,32 @@ func validateOpUpdateKeyRegistrationInput(v *UpdateKeyRegistrationInput) error {
 	}
 	if v.KeyRegistration == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("KeyRegistration"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateOAuthClientApplicationInput(v *UpdateOAuthClientApplicationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOAuthClientApplicationInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.OAuthClientApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OAuthClientApplicationId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.IdentityProviderVpcConnectionProperties != nil {
+		if err := validateVpcConnectionProperties(v.IdentityProviderVpcConnectionProperties); err != nil {
+			invalidParams.AddNested("IdentityProviderVpcConnectionProperties", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

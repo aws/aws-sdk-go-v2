@@ -69,7 +69,7 @@ type GetConfigurationSetOutput struct {
 	SendingOptions *types.SendingOptions
 
 	// An object that contains information about the suppression list preferences for
-	// your account.
+	// your account or for a specific tenant.
 	SuppressionOptions *types.SuppressionOptions
 
 	// An array of objects that define the tags (keys and values) that are associated

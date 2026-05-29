@@ -10065,6 +10065,38 @@ func awsRestjson1_serializeDocumentAutomatedReasoningPolicyIngestContentAnnotati
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAutomatedReasoningPolicyIterativeRefinementContent(v *types.AutomatedReasoningPolicyIterativeRefinementContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Documents != nil {
+		ok := object.Key("documents")
+		if err := awsRestjson1_serializeDocumentAutomatedReasoningPolicyIterativeRefinementDocumentList(v.Documents, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Feedback != nil {
+		ok := object.Key("feedback")
+		ok.String(*v.Feedback)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAutomatedReasoningPolicyIterativeRefinementDocumentList(v []types.AutomatedReasoningPolicyBuildWorkflowDocument, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAutomatedReasoningPolicyBuildWorkflowDocument(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAutomatedReasoningPolicyTestCaseIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -10269,6 +10301,12 @@ func awsRestjson1_serializeDocumentAutomatedReasoningPolicyWorkflowTypeContent(v
 	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent:
 		av := object.Key("generateFidelityReportContent")
 		if err := awsRestjson1_serializeDocumentAutomatedReasoningPolicyGenerateFidelityReportContent(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberIterativeRefinementContent:
+		av := object.Key("iterativeRefinementContent")
+		if err := awsRestjson1_serializeDocumentAutomatedReasoningPolicyIterativeRefinementContent(&uv.Value, av); err != nil {
 			return err
 		}
 

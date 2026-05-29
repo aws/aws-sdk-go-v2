@@ -57,7 +57,9 @@ type CreateConfigurationSetInput struct {
 	SendingOptions *types.SendingOptions
 
 	// An object that contains information about the suppression list preferences for
-	// your account.
+	// the configuration set. You can optionally include a SuppressionScope to
+	// override the tenant or account suppression scope for emails sent using this
+	// configuration set.
 	SuppressionOptions *types.SuppressionOptions
 
 	// An array of objects that define the tags (keys and values) to associate with

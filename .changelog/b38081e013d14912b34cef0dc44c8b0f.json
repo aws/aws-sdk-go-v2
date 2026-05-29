@@ -1,0 +1,8 @@
+{
+    "id": "b38081e0-13d1-4912-b34c-ef0dc44c8b0f",
+    "type": "feature",
+    "description": "RDS Data API arrays (longValues, doubleValues, stringValues, booleanValues) in ExecuteStatement responses now correctly support null elements. Runtime change for JS v3 and .NET. Compile-time change for C plus plus, .NET, Kotlin, Rust. No impact for Java, Python, Ruby, PHP, Go.",
+    "modules": [
+        "service/rdsdata"
+    ]
+}

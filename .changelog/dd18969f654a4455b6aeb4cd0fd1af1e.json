@@ -1,0 +1,8 @@
+{
+    "id": "dd18969f-654a-4455-b6ae-b4cd0fd1af1e",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/networkflowmonitor"
+    ]
+}

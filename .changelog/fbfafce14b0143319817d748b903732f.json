@@ -1,0 +1,8 @@
+{
+    "id": "fbfafce1-4b01-4331-9817-d748b903732f",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/wafv2"
+    ]
+}

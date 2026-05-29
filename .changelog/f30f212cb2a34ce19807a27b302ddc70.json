@@ -1,0 +1,8 @@
+{
+    "id": "f30f212c-b2a3-4ce1-9807-a27b302ddc70",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/pcs"
+    ]
+}

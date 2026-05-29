@@ -1,0 +1,8 @@
+{
+    "id": "d25f6fe0-ebd4-4974-996b-cca8b458a70e",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/personalizeevents"
+    ]
+}

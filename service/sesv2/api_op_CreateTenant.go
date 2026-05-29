@@ -19,6 +19,11 @@ import (
 // sets, and templates, along with reputation metrics and sending status. This
 // helps isolate and manage email sending for different customers or business units
 // within your Amazon SES API v2 account.
+//
+// You can optionally specify SuppressionAttributes to configure tenant-level
+// suppression at creation time. When tenant-level suppression is enabled, Amazon
+// SES maintains a separate suppression list for the tenant instead of using the
+// account-level suppression list.
 func (c *Client) CreateTenant(ctx context.Context, params *CreateTenantInput, optFns ...func(*Options)) (*CreateTenantOutput, error) {
 	if params == nil {
 		params = &CreateTenantInput{}
@@ -49,6 +54,10 @@ type CreateTenantInput struct {
 	// This member is required.
 	TenantName *string
 
+	// An object that contains information about the suppression list preferences for
+	// the tenant. Use this to configure tenant-level suppression at creation time.
+	SuppressionAttributes *types.TenantSuppressionAttributes
+
 	// An array of objects that define the tags (keys and values) to associate with
 	// the tenant
 	Tags []types.Tag
@@ -64,6 +73,9 @@ type CreateTenantOutput struct {
 
 	// The status of email sending capability for the tenant.
 	SendingStatus types.SendingStatus
+
+	// An object that contains the suppression list preferences for a tenant.
+	SuppressionAttributes *types.TenantSuppressionAttributes
 
 	// An array of objects that define the tags (keys and values) associated with the
 	// tenant.

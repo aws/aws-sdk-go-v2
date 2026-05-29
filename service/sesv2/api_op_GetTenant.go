@@ -12,7 +12,7 @@ import (
 )
 
 // Get information about a specific tenant, including the tenant's name, ID, ARN,
-// creation timestamp, tags, and sending status.
+// creation timestamp, tags, sending status, and suppression attributes.
 func (c *Client) GetTenant(ctx context.Context, params *GetTenantInput, optFns ...func(*Options)) (*GetTenantOutput, error) {
 	if params == nil {
 		params = &GetTenantInput{}

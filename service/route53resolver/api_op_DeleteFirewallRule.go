@@ -71,7 +71,7 @@ type DeleteFirewallRuleInput struct {
 	//   - TXT: Verifies email senders and application-specific values.
 	//
 	//   - A query type you define by using the DNS type ID, for example 28 for AAAA.
-	//   The values must be defined as TYPENUMBER, where the NUMBER can be 1-65334, for
+	//   The values must be defined as TYPENUMBER, where the NUMBER can be 1-65534, for
 	//   example, TYPE28. For more information, see [List of DNS record types].
 	//
 	// [List of DNS record types]: https://en.wikipedia.org/wiki/List_of_DNS_record_types

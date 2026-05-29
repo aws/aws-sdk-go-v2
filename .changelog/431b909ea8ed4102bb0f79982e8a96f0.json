@@ -1,0 +1,8 @@
+{
+    "id": "431b909e-a8ed-4102-bb0f-79982e8a96f0",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/codecommit"
+    ]
+}

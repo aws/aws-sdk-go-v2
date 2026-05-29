@@ -472,6 +472,18 @@ func awsRestjson1_serializeOpDocumentCreateApiKeyCredentialProviderInput(v *Crea
 		ok.String(*v.ApiKey)
 	}
 
+	if v.ApiKeySecretConfig != nil {
+		ok := object.Key("apiKeySecretConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.ApiKeySecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ApiKeySecretSource) > 0 {
+		ok := object.Key("apiKeySecretSource")
+		ok.String(string(v.ApiKeySecretSource))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -11185,6 +11197,18 @@ func awsRestjson1_serializeOpDocumentUpdateApiKeyCredentialProviderInput(v *Upda
 		ok.String(*v.ApiKey)
 	}
 
+	if v.ApiKeySecretConfig != nil {
+		ok := object.Key("apiKeySecretConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.ApiKeySecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ApiKeySecretSource) > 0 {
+		ok := object.Key("apiKeySecretSource")
+		ok.String(string(v.ApiKeySecretSource))
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
@@ -13981,6 +14005,18 @@ func awsRestjson1_serializeDocumentAtlassianOauth2ProviderConfigInput(v *types.A
 		ok.String(*v.ClientSecret)
 	}
 
+	if v.ClientSecretConfig != nil {
+		ok := object.Key("clientSecretConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.ClientSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ClientSecretSource) > 0 {
+		ok := object.Key("clientSecretSource")
+		ok.String(string(v.ClientSecretSource))
+	}
+
 	return nil
 }
 
@@ -14335,9 +14371,33 @@ func awsRestjson1_serializeDocumentCoinbaseCdpConfigurationInput(v *types.Coinba
 		ok.String(*v.ApiKeySecret)
 	}
 
+	if v.ApiKeySecretConfig != nil {
+		ok := object.Key("apiKeySecretConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.ApiKeySecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ApiKeySecretSource) > 0 {
+		ok := object.Key("apiKeySecretSource")
+		ok.String(string(v.ApiKeySecretSource))
+	}
+
 	if v.WalletSecret != nil {
 		ok := object.Key("walletSecret")
 		ok.String(*v.WalletSecret)
+	}
+
+	if v.WalletSecretConfig != nil {
+		ok := object.Key("walletSecretConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.WalletSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.WalletSecretSource) > 0 {
+		ok := object.Key("walletSecretSource")
+		ok.String(string(v.WalletSecretSource))
 	}
 
 	return nil
@@ -14896,6 +14956,18 @@ func awsRestjson1_serializeDocumentCustomOauth2ProviderConfigInput(v *types.Cust
 	if v.ClientSecret != nil {
 		ok := object.Key("clientSecret")
 		ok.String(*v.ClientSecret)
+	}
+
+	if v.ClientSecretConfig != nil {
+		ok := object.Key("clientSecretConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.ClientSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ClientSecretSource) > 0 {
+		ok := object.Key("clientSecretSource")
+		ok.String(string(v.ClientSecretSource))
 	}
 
 	if v.OauthDiscovery != nil {
@@ -15658,6 +15730,18 @@ func awsRestjson1_serializeDocumentGithubOauth2ProviderConfigInput(v *types.Gith
 		ok.String(*v.ClientSecret)
 	}
 
+	if v.ClientSecretConfig != nil {
+		ok := object.Key("clientSecretConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.ClientSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ClientSecretSource) > 0 {
+		ok := object.Key("clientSecretSource")
+		ok.String(string(v.ClientSecretSource))
+	}
+
 	return nil
 }
 
@@ -15673,6 +15757,18 @@ func awsRestjson1_serializeDocumentGoogleOauth2ProviderConfigInput(v *types.Goog
 	if v.ClientSecret != nil {
 		ok := object.Key("clientSecret")
 		ok.String(*v.ClientSecret)
+	}
+
+	if v.ClientSecretConfig != nil {
+		ok := object.Key("clientSecretConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.ClientSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ClientSecretSource) > 0 {
+		ok := object.Key("clientSecretSource")
+		ok.String(string(v.ClientSecretSource))
 	}
 
 	return nil
@@ -16644,6 +16740,18 @@ func awsRestjson1_serializeDocumentIncludedOauth2ProviderConfigInput(v *types.In
 		ok.String(*v.ClientSecret)
 	}
 
+	if v.ClientSecretConfig != nil {
+		ok := object.Key("clientSecretConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.ClientSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ClientSecretSource) > 0 {
+		ok := object.Key("clientSecretSource")
+		ok.String(string(v.ClientSecretSource))
+	}
+
 	if v.Issuer != nil {
 		ok := object.Key("issuer")
 		ok.String(*v.Issuer)
@@ -16897,6 +17005,18 @@ func awsRestjson1_serializeDocumentLinkedinOauth2ProviderConfigInput(v *types.Li
 	if v.ClientSecret != nil {
 		ok := object.Key("clientSecret")
 		ok.String(*v.ClientSecret)
+	}
+
+	if v.ClientSecretConfig != nil {
+		ok := object.Key("clientSecretConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.ClientSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ClientSecretSource) > 0 {
+		ok := object.Key("clientSecretSource")
+		ok.String(string(v.ClientSecretSource))
 	}
 
 	return nil
@@ -17433,6 +17553,18 @@ func awsRestjson1_serializeDocumentMicrosoftOauth2ProviderConfigInput(v *types.M
 	if v.ClientSecret != nil {
 		ok := object.Key("clientSecret")
 		ok.String(*v.ClientSecret)
+	}
+
+	if v.ClientSecretConfig != nil {
+		ok := object.Key("clientSecretConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.ClientSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ClientSecretSource) > 0 {
+		ok := object.Key("clientSecretSource")
+		ok.String(string(v.ClientSecretSource))
 	}
 
 	if v.TenantId != nil {
@@ -18567,6 +18699,18 @@ func awsRestjson1_serializeDocumentSalesforceOauth2ProviderConfigInput(v *types.
 		ok.String(*v.ClientSecret)
 	}
 
+	if v.ClientSecretConfig != nil {
+		ok := object.Key("clientSecretConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.ClientSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ClientSecretSource) > 0 {
+		ok := object.Key("clientSecretSource")
+		ok.String(string(v.ClientSecretSource))
+	}
+
 	return nil
 }
 
@@ -18666,6 +18810,23 @@ func awsRestjson1_serializeDocumentScopesListType(v []string, value smithyjson.V
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSecretReference(v *types.SecretReference, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JsonKey != nil {
+		ok := object.Key("jsonKey")
+		ok.String(*v.JsonKey)
+	}
+
+	if v.SecretId != nil {
+		ok := object.Key("secretId")
+		ok.String(*v.SecretId)
+	}
+
 	return nil
 }
 
@@ -18960,6 +19121,18 @@ func awsRestjson1_serializeDocumentSlackOauth2ProviderConfigInput(v *types.Slack
 		ok.String(*v.ClientSecret)
 	}
 
+	if v.ClientSecretConfig != nil {
+		ok := object.Key("clientSecretConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.ClientSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ClientSecretSource) > 0 {
+		ok := object.Key("clientSecretSource")
+		ok.String(string(v.ClientSecretSource))
+	}
+
 	return nil
 }
 
@@ -19099,6 +19272,18 @@ func awsRestjson1_serializeDocumentStripePrivyConfigurationInput(v *types.Stripe
 		ok.String(*v.AppSecret)
 	}
 
+	if v.AppSecretConfig != nil {
+		ok := object.Key("appSecretConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.AppSecretConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.AppSecretSource) > 0 {
+		ok := object.Key("appSecretSource")
+		ok.String(string(v.AppSecretSource))
+	}
+
 	if v.AuthorizationId != nil {
 		ok := object.Key("authorizationId")
 		ok.String(*v.AuthorizationId)
@@ -19107,6 +19292,18 @@ func awsRestjson1_serializeDocumentStripePrivyConfigurationInput(v *types.Stripe
 	if v.AuthorizationPrivateKey != nil {
 		ok := object.Key("authorizationPrivateKey")
 		ok.String(*v.AuthorizationPrivateKey)
+	}
+
+	if v.AuthorizationPrivateKeyConfig != nil {
+		ok := object.Key("authorizationPrivateKeyConfig")
+		if err := awsRestjson1_serializeDocumentSecretReference(v.AuthorizationPrivateKeyConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.AuthorizationPrivateKeySource) > 0 {
+		ok := object.Key("authorizationPrivateKeySource")
+		ok.String(string(v.AuthorizationPrivateKeySource))
 	}
 
 	return nil

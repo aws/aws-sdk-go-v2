@@ -13472,6 +13472,85 @@ type NumericSeparatorConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// An OAuth client application that is used to authenticate connections to a data
+// source through an OAuth identity provider.
+type OAuthClientApplication struct {
+
+	// The Amazon Resource Name (ARN) of the OAuthClientApplication.
+	Arn *string
+
+	// The time that the OAuthClientApplication was created.
+	CreatedTime *time.Time
+
+	// The type of data source that the OAuthClientApplication is used with. Valid
+	// values are SNOWFLAKE .
+	DataSourceType DataSourceType
+
+	// VPC connection properties.
+	IdentityProviderVpcConnectionProperties *VpcConnectionProperties
+
+	// The time that the OAuthClientApplication was last updated.
+	LastUpdatedTime *time.Time
+
+	// The display name of the OAuthClientApplication.
+	Name *string
+
+	// The authorization endpoint URL of the identity provider that is used to obtain
+	// authorization codes.
+	OAuthAuthorizationEndpointUrl *string
+
+	// The ID of the OAuthClientApplication. This ID is unique per Amazon Web Services
+	// Region for each Amazon Web Services account.
+	OAuthClientApplicationId *string
+
+	// The OAuth client authentication type used by the OAuthClientApplication. Valid
+	// values are TOKEN .
+	OAuthClientAuthenticationType OAuthClientAuthenticationType
+
+	// The OAuth scopes that are requested when the OAuthClientApplication obtains an
+	// access token from the identity provider.
+	OAuthScopes *string
+
+	// The token endpoint URL of the identity provider that is used to obtain access
+	// tokens.
+	OAuthTokenEndpointUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an OAuthClientApplication.
+type OAuthClientApplicationSummary struct {
+
+	// The Amazon Resource Name (ARN) of the OAuthClientApplication.
+	Arn *string
+
+	// The time that the OAuthClientApplication was created.
+	CreatedTime *time.Time
+
+	// The type of data source that the OAuthClientApplication is used with. Valid
+	// values are SNOWFLAKE .
+	DataSourceType DataSourceType
+
+	// VPC connection properties.
+	IdentityProviderVpcConnectionProperties *VpcConnectionProperties
+
+	// The time that the OAuthClientApplication was last updated.
+	LastUpdatedTime *time.Time
+
+	// The display name of the OAuthClientApplication.
+	Name *string
+
+	// The ID of the OAuthClientApplication. This ID is unique per Amazon Web Services
+	// Region for each Amazon Web Services account.
+	OAuthClientApplicationId *string
+
+	// The OAuth client authentication type used by the OAuthClientApplication. Valid
+	// values are TOKEN .
+	OAuthClientAuthenticationType OAuthClientAuthenticationType
+
+	noSmithyDocumentSerde
+}
+
 // The OAuth 2.0 client credentials used for authenticating a data source
 // connection. Use this structure to provide a client ID, client secret, and
 // username directly instead of referencing a secret stored in Amazon Secrets

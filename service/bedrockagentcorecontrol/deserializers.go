@@ -870,6 +870,24 @@ func awsRestjson1_deserializeOpDocumentCreateApiKeyCredentialProviderOutput(v **
 				return err
 			}
 
+		case "apiKeySecretJsonKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretJsonKeyType to be of type string, got %T instead", value)
+				}
+				sv.ApiKeySecretJsonKey = ptr.String(jtv)
+			}
+
+		case "apiKeySecretSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretSourceType to be of type string, got %T instead", value)
+				}
+				sv.ApiKeySecretSource = types.SecretSourceType(jtv)
+			}
+
 		case "credentialProviderArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3704,6 +3722,24 @@ func awsRestjson1_deserializeOpDocumentCreateOauth2CredentialProviderOutput(v **
 		case "clientSecretArn":
 			if err := awsRestjson1_deserializeDocumentSecret(&sv.ClientSecretArn, value); err != nil {
 				return err
+			}
+
+		case "clientSecretJsonKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretJsonKeyType to be of type string, got %T instead", value)
+				}
+				sv.ClientSecretJsonKey = ptr.String(jtv)
+			}
+
+		case "clientSecretSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretSourceType to be of type string, got %T instead", value)
+				}
+				sv.ClientSecretSource = types.SecretSourceType(jtv)
 			}
 
 		case "credentialProviderArn":
@@ -10939,6 +10975,24 @@ func awsRestjson1_deserializeOpDocumentGetApiKeyCredentialProviderOutput(v **Get
 				return err
 			}
 
+		case "apiKeySecretJsonKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretJsonKeyType to be of type string, got %T instead", value)
+				}
+				sv.ApiKeySecretJsonKey = ptr.String(jtv)
+			}
+
+		case "apiKeySecretSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretSourceType to be of type string, got %T instead", value)
+				}
+				sv.ApiKeySecretSource = types.SecretSourceType(jtv)
+			}
+
 		case "createdTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -14223,6 +14277,24 @@ func awsRestjson1_deserializeOpDocumentGetOauth2CredentialProviderOutput(v **Get
 		case "clientSecretArn":
 			if err := awsRestjson1_deserializeDocumentSecret(&sv.ClientSecretArn, value); err != nil {
 				return err
+			}
+
+		case "clientSecretJsonKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretJsonKeyType to be of type string, got %T instead", value)
+				}
+				sv.ClientSecretJsonKey = ptr.String(jtv)
+			}
+
+		case "clientSecretSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretSourceType to be of type string, got %T instead", value)
+				}
+				sv.ClientSecretSource = types.SecretSourceType(jtv)
 			}
 
 		case "createdTime":
@@ -25607,6 +25679,24 @@ func awsRestjson1_deserializeOpDocumentUpdateApiKeyCredentialProviderOutput(v **
 				return err
 			}
 
+		case "apiKeySecretJsonKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretJsonKeyType to be of type string, got %T instead", value)
+				}
+				sv.ApiKeySecretJsonKey = ptr.String(jtv)
+			}
+
+		case "apiKeySecretSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretSourceType to be of type string, got %T instead", value)
+				}
+				sv.ApiKeySecretSource = types.SecretSourceType(jtv)
+			}
+
 		case "createdTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -27875,6 +27965,24 @@ func awsRestjson1_deserializeOpDocumentUpdateOauth2CredentialProviderOutput(v **
 		case "clientSecretArn":
 			if err := awsRestjson1_deserializeDocumentSecret(&sv.ClientSecretArn, value); err != nil {
 				return err
+			}
+
+		case "clientSecretJsonKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretJsonKeyType to be of type string, got %T instead", value)
+				}
+				sv.ClientSecretJsonKey = ptr.String(jtv)
+			}
+
+		case "clientSecretSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretSourceType to be of type string, got %T instead", value)
+				}
+				sv.ClientSecretSource = types.SecretSourceType(jtv)
 			}
 
 		case "createdTime":
@@ -33645,9 +33753,45 @@ func awsRestjson1_deserializeDocumentCoinbaseCdpConfigurationOutput(v **types.Co
 				return err
 			}
 
+		case "apiKeySecretJsonKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretJsonKeyType to be of type string, got %T instead", value)
+				}
+				sv.ApiKeySecretJsonKey = ptr.String(jtv)
+			}
+
+		case "apiKeySecretSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretSourceType to be of type string, got %T instead", value)
+				}
+				sv.ApiKeySecretSource = types.SecretSourceType(jtv)
+			}
+
 		case "walletSecretArn":
 			if err := awsRestjson1_deserializeDocumentSecret(&sv.WalletSecretArn, value); err != nil {
 				return err
+			}
+
+		case "walletSecretJsonKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretJsonKeyType to be of type string, got %T instead", value)
+				}
+				sv.WalletSecretJsonKey = ptr.String(jtv)
+			}
+
+		case "walletSecretSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretSourceType to be of type string, got %T instead", value)
+				}
+				sv.WalletSecretSource = types.SecretSourceType(jtv)
 			}
 
 		default:
@@ -48306,6 +48450,24 @@ func awsRestjson1_deserializeDocumentStripePrivyConfigurationOutput(v **types.St
 				return err
 			}
 
+		case "appSecretJsonKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretJsonKeyType to be of type string, got %T instead", value)
+				}
+				sv.AppSecretJsonKey = ptr.String(jtv)
+			}
+
+		case "appSecretSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretSourceType to be of type string, got %T instead", value)
+				}
+				sv.AppSecretSource = types.SecretSourceType(jtv)
+			}
+
 		case "authorizationId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -48318,6 +48480,24 @@ func awsRestjson1_deserializeDocumentStripePrivyConfigurationOutput(v **types.St
 		case "authorizationPrivateKeyArn":
 			if err := awsRestjson1_deserializeDocumentSecret(&sv.AuthorizationPrivateKeyArn, value); err != nil {
 				return err
+			}
+
+		case "authorizationPrivateKeyJsonKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretJsonKeyType to be of type string, got %T instead", value)
+				}
+				sv.AuthorizationPrivateKeyJsonKey = ptr.String(jtv)
+			}
+
+		case "authorizationPrivateKeySource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretSourceType to be of type string, got %T instead", value)
+				}
+				sv.AuthorizationPrivateKeySource = types.SecretSourceType(jtv)
 			}
 
 		default:

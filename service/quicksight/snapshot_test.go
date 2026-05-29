@@ -290,6 +290,18 @@ func TestCheckSnapshot_CreateNamespace(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateOAuthClientApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateOAuthClientApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateOAuthClientApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateRefreshSchedule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRefreshSchedule(context.Background(), nil, func(o *Options) {
@@ -631,6 +643,18 @@ func TestCheckSnapshot_DeleteNamespace(t *testing.T) {
 	_, err := svc.DeleteNamespace(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteNamespace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteOAuthClientApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteOAuthClientApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteOAuthClientApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1250,6 +1274,18 @@ func TestCheckSnapshot_DescribeNamespace(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_DescribeOAuthClientApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeOAuthClientApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeOAuthClientApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DescribeQPersonalizationConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeQPersonalizationConfiguration(context.Background(), nil, func(o *Options) {
@@ -1807,6 +1843,18 @@ func TestCheckSnapshot_ListNamespaces(t *testing.T) {
 	_, err := svc.ListNamespaces(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "ListNamespaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_ListOAuthClientApplications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOAuthClientApplications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListOAuthClientApplications")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2606,6 +2654,18 @@ func TestCheckSnapshot_UpdateKeyRegistration(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_UpdateOAuthClientApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateOAuthClientApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateOAuthClientApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_UpdatePublicSharingSettings(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.UpdatePublicSharingSettings(context.Background(), nil, func(o *Options) {
@@ -3073,6 +3133,18 @@ func TestUpdateSnapshot_CreateNamespace(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateOAuthClientApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateOAuthClientApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateOAuthClientApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateRefreshSchedule(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateRefreshSchedule(context.Background(), nil, func(o *Options) {
@@ -3414,6 +3486,18 @@ func TestUpdateSnapshot_DeleteNamespace(t *testing.T) {
 	_, err := svc.DeleteNamespace(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteNamespace")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteOAuthClientApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteOAuthClientApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteOAuthClientApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -4033,6 +4117,18 @@ func TestUpdateSnapshot_DescribeNamespace(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_DescribeOAuthClientApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeOAuthClientApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeOAuthClientApplication")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DescribeQPersonalizationConfiguration(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DescribeQPersonalizationConfiguration(context.Background(), nil, func(o *Options) {
@@ -4590,6 +4686,18 @@ func TestUpdateSnapshot_ListNamespaces(t *testing.T) {
 	_, err := svc.ListNamespaces(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "ListNamespaces")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_ListOAuthClientApplications(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListOAuthClientApplications(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListOAuthClientApplications")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -5382,6 +5490,18 @@ func TestUpdateSnapshot_UpdateKeyRegistration(t *testing.T) {
 	_, err := svc.UpdateKeyRegistration(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateKeyRegistration")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateOAuthClientApplication(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateOAuthClientApplication(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateOAuthClientApplication")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

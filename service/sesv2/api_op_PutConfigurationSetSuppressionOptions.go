@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specify the account suppression list preferences for a configuration set.
+// Specify the suppression list preferences for a configuration set. You can also
+// use this operation to specify a SuppressionScope to override the suppression
+// scope of the tenant or account for emails sent using this configuration set.
 func (c *Client) PutConfigurationSetSuppressionOptions(ctx context.Context, params *PutConfigurationSetSuppressionOptionsInput, optFns ...func(*Options)) (*PutConfigurationSetSuppressionOptionsOutput, error) {
 	if params == nil {
 		params = &PutConfigurationSetSuppressionOptionsInput{}
@@ -27,7 +29,7 @@ func (c *Client) PutConfigurationSetSuppressionOptions(ctx context.Context, para
 	return out, nil
 }
 
-// A request to change the account suppression list preferences for a specific
+// A request to change the suppression list preferences for a specific
 // configuration set.
 type PutConfigurationSetSuppressionOptionsInput struct {
 
@@ -38,15 +40,26 @@ type PutConfigurationSetSuppressionOptionsInput struct {
 	ConfigurationSetName *string
 
 	// A list that contains the reasons that email addresses are automatically added
-	// to the suppression list for your account. This list can contain any or all of
-	// the following:
+	// to the suppression list for your account or for a specific tenant. This list can
+	// contain any or all of the following:
 	//
 	//   - COMPLAINT – Amazon SES adds an email address to the suppression list for
-	//   your account when a message sent to that address results in a complaint.
+	//   your account or for a specific tenant when a message sent to that address
+	//   results in a complaint.
 	//
 	//   - BOUNCE – Amazon SES adds an email address to the suppression list for your
-	//   account when a message sent to that address results in a hard bounce.
+	//   account or for a specific tenant when a message sent to that address results in
+	//   a hard bounce.
 	SuppressedReasons []types.SuppressionListReason
+
+	// The suppression scope for the configuration set. This overrides the tenant or
+	// account suppression scope for emails sent using this configuration set. Can be
+	// one of the following:
+	//
+	//   - TENANT – Use the tenant's suppression list.
+	//
+	//   - ACCOUNT – Use the account-level suppression list.
+	SuppressionScope types.SuppressionListScope
 
 	// An object that contains information about the email address suppression
 	// preferences for the configuration set in the current Amazon Web Services Region.

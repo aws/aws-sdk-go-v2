@@ -4007,6 +4007,24 @@ func (NumericSeparatorSymbol) Values() []NumericSeparatorSymbol {
 	}
 }
 
+type OAuthClientAuthenticationType string
+
+// Enum values for OAuthClientAuthenticationType
+const (
+	OAuthClientAuthenticationTypeToken OAuthClientAuthenticationType = "TOKEN"
+)
+
+// Values returns all known values for OAuthClientAuthenticationType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (OAuthClientAuthenticationType) Values() []OAuthClientAuthenticationType {
+	return []OAuthClientAuthenticationType{
+		"TOKEN",
+	}
+}
+
 type OtherCategories string
 
 // Enum values for OtherCategories

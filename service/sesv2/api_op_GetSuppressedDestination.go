@@ -12,7 +12,9 @@ import (
 )
 
 // Retrieves information about a specific email address that's on the suppression
-// list for your account.
+// list for your account or for a specific tenant. To target a tenant's suppression
+// list, specify the TenantName parameter. If you omit TenantName , the operation
+// targets the account-level suppression list.
 func (c *Client) GetSuppressedDestination(ctx context.Context, params *GetSuppressedDestinationInput, optFns ...func(*Options)) (*GetSuppressedDestinationOutput, error) {
 	if params == nil {
 		params = &GetSuppressedDestinationInput{}
@@ -29,13 +31,18 @@ func (c *Client) GetSuppressedDestination(ctx context.Context, params *GetSuppre
 }
 
 // A request to retrieve information about an email address that's on the
-// suppression list for your account.
+// suppression list for your account or for a specific tenant.
 type GetSuppressedDestinationInput struct {
 
-	// The email address that's on the account suppression list.
+	// The email address that's on the suppression list for your account or for the
+	// specified tenant.
 	//
 	// This member is required.
 	EmailAddress *string
+
+	// The name of the tenant whose suppression list you want to query. If you omit
+	// this parameter, the operation targets the account-level suppression list.
+	TenantName *string
 
 	noSmithyDocumentSerde
 }

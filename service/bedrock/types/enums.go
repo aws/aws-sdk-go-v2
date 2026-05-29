@@ -296,11 +296,13 @@ type AutomatedReasoningPolicyBuildWorkflowType string
 
 // Enum values for AutomatedReasoningPolicyBuildWorkflowType
 const (
-	AutomatedReasoningPolicyBuildWorkflowTypeIngestContent           AutomatedReasoningPolicyBuildWorkflowType = "INGEST_CONTENT"
-	AutomatedReasoningPolicyBuildWorkflowTypeRefinePolicy            AutomatedReasoningPolicyBuildWorkflowType = "REFINE_POLICY"
-	AutomatedReasoningPolicyBuildWorkflowTypeImportPolicy            AutomatedReasoningPolicyBuildWorkflowType = "IMPORT_POLICY"
-	AutomatedReasoningPolicyBuildWorkflowTypeGenerateFidelityReport  AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_FIDELITY_REPORT"
-	AutomatedReasoningPolicyBuildWorkflowTypeGeneratePolicyScenarios AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_POLICY_SCENARIOS"
+	AutomatedReasoningPolicyBuildWorkflowTypeIngestContent            AutomatedReasoningPolicyBuildWorkflowType = "INGEST_CONTENT"
+	AutomatedReasoningPolicyBuildWorkflowTypeRefinePolicy             AutomatedReasoningPolicyBuildWorkflowType = "REFINE_POLICY"
+	AutomatedReasoningPolicyBuildWorkflowTypeImportPolicy             AutomatedReasoningPolicyBuildWorkflowType = "IMPORT_POLICY"
+	AutomatedReasoningPolicyBuildWorkflowTypeGenerateFidelityReport   AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_FIDELITY_REPORT"
+	AutomatedReasoningPolicyBuildWorkflowTypeGeneratePolicyScenarios  AutomatedReasoningPolicyBuildWorkflowType = "GENERATE_POLICY_SCENARIOS"
+	AutomatedReasoningPolicyBuildWorkflowTypeResolvePolicyAmbiguities AutomatedReasoningPolicyBuildWorkflowType = "RESOLVE_POLICY_AMBIGUITIES"
+	AutomatedReasoningPolicyBuildWorkflowTypeIterativelyRefinePolicy  AutomatedReasoningPolicyBuildWorkflowType = "ITERATIVELY_REFINE_POLICY"
 )
 
 // Values returns all known values for AutomatedReasoningPolicyBuildWorkflowType.
@@ -315,6 +317,8 @@ func (AutomatedReasoningPolicyBuildWorkflowType) Values() []AutomatedReasoningPo
 		"IMPORT_POLICY",
 		"GENERATE_FIDELITY_REPORT",
 		"GENERATE_POLICY_SCENARIOS",
+		"RESOLVE_POLICY_AMBIGUITIES",
+		"ITERATIVELY_REFINE_POLICY",
 	}
 }
 

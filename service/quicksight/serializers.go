@@ -2451,6 +2451,154 @@ func awsRestjson1_serializeOpDocumentCreateNamespaceInput(v *CreateNamespaceInpu
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateOAuthClientApplication struct {
+}
+
+func (*awsRestjson1_serializeOpCreateOAuthClientApplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateOAuthClientApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateOAuthClientApplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/oauth-client-applications")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateOAuthClientApplicationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateOAuthClientApplicationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateOAuthClientApplicationInput(v *CreateOAuthClientApplicationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateOAuthClientApplicationInput(v *CreateOAuthClientApplicationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientId != nil {
+		ok := object.Key("ClientId")
+		ok.String(*v.ClientId)
+	}
+
+	if v.ClientSecret != nil {
+		ok := object.Key("ClientSecret")
+		ok.String(*v.ClientSecret)
+	}
+
+	if len(v.DataSourceType) > 0 {
+		ok := object.Key("DataSourceType")
+		ok.String(string(v.DataSourceType))
+	}
+
+	if v.IdentityProviderVpcConnectionProperties != nil {
+		ok := object.Key("IdentityProviderVpcConnectionProperties")
+		if err := awsRestjson1_serializeDocumentVpcConnectionProperties(v.IdentityProviderVpcConnectionProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.OAuthAuthorizationEndpointUrl != nil {
+		ok := object.Key("OAuthAuthorizationEndpointUrl")
+		ok.String(*v.OAuthAuthorizationEndpointUrl)
+	}
+
+	if v.OAuthClientApplicationId != nil {
+		ok := object.Key("OAuthClientApplicationId")
+		ok.String(*v.OAuthClientApplicationId)
+	}
+
+	if len(v.OAuthClientAuthenticationType) > 0 {
+		ok := object.Key("OAuthClientAuthenticationType")
+		ok.String(string(v.OAuthClientAuthenticationType))
+	}
+
+	if v.OAuthScopes != nil {
+		ok := object.Key("OAuthScopes")
+		ok.String(*v.OAuthScopes)
+	}
+
+	if v.OAuthTokenEndpointUrl != nil {
+		ok := object.Key("OAuthTokenEndpointUrl")
+		ok.String(*v.OAuthTokenEndpointUrl)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateRefreshSchedule struct {
 }
 
@@ -5146,6 +5294,86 @@ func awsRestjson1_serializeOpHttpBindingsDeleteNamespaceInput(v *DeleteNamespace
 	}
 	if v.Namespace != nil {
 		if err := encoder.SetURI("Namespace").String(*v.Namespace); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteOAuthClientApplication struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteOAuthClientApplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteOAuthClientApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteOAuthClientApplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/oauth-client-applications/{OAuthClientApplicationId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteOAuthClientApplicationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteOAuthClientApplicationInput(v *DeleteOAuthClientApplicationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.OAuthClientApplicationId == nil || len(*v.OAuthClientApplicationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member OAuthClientApplicationId must not be empty")}
+	}
+	if v.OAuthClientApplicationId != nil {
+		if err := encoder.SetURI("OAuthClientApplicationId").String(*v.OAuthClientApplicationId); err != nil {
 			return err
 		}
 	}
@@ -9399,6 +9627,86 @@ func awsRestjson1_serializeOpHttpBindingsDescribeNamespaceInput(v *DescribeNames
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeOAuthClientApplication struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeOAuthClientApplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeOAuthClientApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeOAuthClientApplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/oauth-client-applications/{OAuthClientApplicationId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeOAuthClientApplicationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeOAuthClientApplicationInput(v *DescribeOAuthClientApplicationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.OAuthClientApplicationId == nil || len(*v.OAuthClientApplicationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member OAuthClientApplicationId must not be empty")}
+	}
+	if v.OAuthClientApplicationId != nil {
+		if err := encoder.SetURI("OAuthClientApplicationId").String(*v.OAuthClientApplicationId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeQPersonalizationConfiguration struct {
 }
 
@@ -13453,6 +13761,85 @@ func (m *awsRestjson1_serializeOpListNamespaces) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 func awsRestjson1_serializeOpHttpBindingsListNamespacesInput(v *ListNamespacesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("max-results").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("next-token").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListOAuthClientApplications struct {
+}
+
+func (*awsRestjson1_serializeOpListOAuthClientApplications) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListOAuthClientApplications) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListOAuthClientApplicationsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/oauth-client-applications")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListOAuthClientApplicationsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListOAuthClientApplicationsInput(v *ListOAuthClientApplicationsInput, encoder *httpbinding.Encoder) error {
 	if v == nil {
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
@@ -20353,6 +20740,146 @@ func awsRestjson1_serializeOpDocumentUpdateKeyRegistrationInput(v *UpdateKeyRegi
 		if err := awsRestjson1_serializeDocumentKeyRegistration(v.KeyRegistration, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateOAuthClientApplication struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateOAuthClientApplication) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateOAuthClientApplication) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	_, span := tracing.StartSpan(ctx, "OperationSerializer")
+	endTimer := startMetricTimer(ctx, "client.call.serialization_duration")
+	defer endTimer()
+	defer span.End()
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateOAuthClientApplicationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/oauth-client-applications/{OAuthClientApplicationId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateOAuthClientApplicationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateOAuthClientApplicationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	endTimer()
+	span.End()
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateOAuthClientApplicationInput(v *UpdateOAuthClientApplicationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.OAuthClientApplicationId == nil || len(*v.OAuthClientApplicationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member OAuthClientApplicationId must not be empty")}
+	}
+	if v.OAuthClientApplicationId != nil {
+		if err := encoder.SetURI("OAuthClientApplicationId").String(*v.OAuthClientApplicationId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateOAuthClientApplicationInput(v *UpdateOAuthClientApplicationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientId != nil {
+		ok := object.Key("ClientId")
+		ok.String(*v.ClientId)
+	}
+
+	if v.ClientSecret != nil {
+		ok := object.Key("ClientSecret")
+		ok.String(*v.ClientSecret)
+	}
+
+	if len(v.DataSourceType) > 0 {
+		ok := object.Key("DataSourceType")
+		ok.String(string(v.DataSourceType))
+	}
+
+	if v.IdentityProviderVpcConnectionProperties != nil {
+		ok := object.Key("IdentityProviderVpcConnectionProperties")
+		if err := awsRestjson1_serializeDocumentVpcConnectionProperties(v.IdentityProviderVpcConnectionProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.OAuthAuthorizationEndpointUrl != nil {
+		ok := object.Key("OAuthAuthorizationEndpointUrl")
+		ok.String(*v.OAuthAuthorizationEndpointUrl)
+	}
+
+	if v.OAuthScopes != nil {
+		ok := object.Key("OAuthScopes")
+		ok.String(*v.OAuthScopes)
+	}
+
+	if v.OAuthTokenEndpointUrl != nil {
+		ok := object.Key("OAuthTokenEndpointUrl")
+		ok.String(*v.OAuthTokenEndpointUrl)
 	}
 
 	return nil

@@ -1,0 +1,8 @@
+{
+    "id": "edd9463e-dbeb-4754-9207-1160577cd091",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/entityresolution"
+    ]
+}

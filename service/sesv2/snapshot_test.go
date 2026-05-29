@@ -1214,6 +1214,18 @@ func TestCheckSnapshot_PutSuppressedDestination(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_PutTenantSuppressionAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTenantSuppressionAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "PutTenantSuppressionAttributes")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_SendBulkEmail(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.SendBulkEmail(context.Background(), nil, func(o *Options) {
@@ -2526,6 +2538,18 @@ func TestUpdateSnapshot_PutSuppressedDestination(t *testing.T) {
 	_, err := svc.PutSuppressedDestination(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "PutSuppressedDestination")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_PutTenantSuppressionAttributes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.PutTenantSuppressionAttributes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "PutTenantSuppressionAttributes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

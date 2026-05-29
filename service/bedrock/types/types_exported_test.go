@@ -349,6 +349,9 @@ func ExampleAutomatedReasoningPolicyWorkflowTypeContent_outputUsage() {
 	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent:
 		_ = v.Value // Value is types.AutomatedReasoningPolicyGenerateFidelityReportContent
 
+	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberIterativeRefinementContent:
+		_ = v.Value // Value is types.AutomatedReasoningPolicyIterativeRefinementContent
+
 	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets:
 		_ = v.Value // Value is types.AutomatedReasoningPolicyBuildWorkflowRepairContent
 
@@ -361,6 +364,7 @@ func ExampleAutomatedReasoningPolicyWorkflowTypeContent_outputUsage() {
 	}
 }
 
+var _ *types.AutomatedReasoningPolicyIterativeRefinementContent
 var _ *types.AutomatedReasoningPolicyBuildWorkflowRepairContent
 var _ types.AutomatedReasoningPolicyGenerateFidelityReportContent
 var _ []types.AutomatedReasoningPolicyBuildWorkflowDocument

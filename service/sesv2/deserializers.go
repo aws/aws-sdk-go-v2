@@ -2123,6 +2123,11 @@ func awsRestjson1_deserializeOpDocumentCreateTenantOutput(v **CreateTenantOutput
 				sv.SendingStatus = types.SendingStatus(jtv)
 			}
 
+		case "SuppressionAttributes":
+			if err := awsRestjson1_deserializeDocumentTenantSuppressionAttributes(&sv.SuppressionAttributes, value); err != nil {
+				return err
+			}
+
 		case "Tags":
 			if err := awsRestjson1_deserializeDocumentTagList(&sv.Tags, value); err != nil {
 				return err
@@ -10778,6 +10783,9 @@ func awsRestjson1_deserializeOpErrorListSuppressedDestinations(response *smithyh
 	case strings.EqualFold("InvalidNextTokenException", errorCode):
 		return awsRestjson1_deserializeErrorInvalidNextTokenException(response, errorBody)
 
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
 
@@ -13455,6 +13463,103 @@ func awsRestjson1_deserializeOpErrorPutSuppressedDestination(response *smithyhtt
 	switch {
 	case strings.EqualFold("BadRequestException", errorCode):
 		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestjson1_deserializeOpPutTenantSuppressionAttributes struct {
+}
+
+func (*awsRestjson1_deserializeOpPutTenantSuppressionAttributes) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpPutTenantSuppressionAttributes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorPutTenantSuppressionAttributes(response, &metadata)
+	}
+	output := &PutTenantSuppressionAttributesOutput{}
+	out.Result = output
+
+	span.End()
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorPutTenantSuppressionAttributes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequestException", errorCode):
+		return awsRestjson1_deserializeErrorBadRequestException(response, errorBody)
+
+	case strings.EqualFold("NotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorNotFoundException(response, errorBody)
 
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsRestjson1_deserializeErrorTooManyRequestsException(response, errorBody)
@@ -22391,6 +22496,15 @@ func awsRestjson1_deserializeDocumentSuppressedDestination(v **types.SuppressedD
 				sv.Reason = types.SuppressionListReason(jtv)
 			}
 
+		case "TenantName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TenantName to be of type string, got %T instead", value)
+				}
+				sv.TenantName = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -22777,6 +22891,15 @@ func awsRestjson1_deserializeDocumentSuppressionOptions(v **types.SuppressionOpt
 				return err
 			}
 
+		case "SuppressionScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SuppressionListScope to be of type string, got %T instead", value)
+				}
+				sv.SuppressionScope = types.SuppressionListScope(jtv)
+			}
+
 		case "ValidationOptions":
 			if err := awsRestjson1_deserializeDocumentSuppressionValidationOptions(&sv.ValidationOptions, value); err != nil {
 				return err
@@ -22991,6 +23114,11 @@ func awsRestjson1_deserializeDocumentTenant(v **types.Tenant, value interface{})
 					return fmt.Errorf("expected SendingStatus to be of type string, got %T instead", value)
 				}
 				sv.SendingStatus = types.SendingStatus(jtv)
+			}
+
+		case "SuppressionAttributes":
+			if err := awsRestjson1_deserializeDocumentTenantSuppressionAttributes(&sv.SuppressionAttributes, value); err != nil {
+				return err
 			}
 
 		case "Tags":
@@ -23222,6 +23350,51 @@ func awsRestjson1_deserializeDocumentTenantResourceList(v *[]types.TenantResourc
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTenantSuppressionAttributes(v **types.TenantSuppressionAttributes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TenantSuppressionAttributes
+	if *v == nil {
+		sv = &types.TenantSuppressionAttributes{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SuppressedReasons":
+			if err := awsRestjson1_deserializeDocumentSuppressionListReasons(&sv.SuppressedReasons, value); err != nil {
+				return err
+			}
+
+		case "SuppressionScope":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SuppressionListScope to be of type string, got %T instead", value)
+				}
+				sv.SuppressionScope = types.SuppressionListScope(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

@@ -1682,6 +1682,23 @@ type AutomatedReasoningPolicyIngestContentAnnotation struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for an iterative policy refinement workflow, including source
+// documents to process and optional feedback to guide the refinement.
+type AutomatedReasoningPolicyIterativeRefinementContent struct {
+
+	// Source documents used for iterative policy refinement. These documents provide
+	// context for refining the policy definition.
+	//
+	// This member is required.
+	Documents []AutomatedReasoningPolicyBuildWorkflowDocument
+
+	// Optional feedback to guide the iterative refinement workflow. Provide specific
+	// instructions or constraints for policy refinement.
+	Feedback *string
+
+	noSmithyDocumentSerde
+}
+
 // A container for various mutation operations that can be applied to an Automated
 // Reasoning policy, including adding, updating, and deleting policy elements.
 //
@@ -2305,6 +2322,7 @@ type AutomatedReasoningPolicyVariableReport struct {
 //
 //	AutomatedReasoningPolicyWorkflowTypeContentMemberDocuments
 //	AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent
+//	AutomatedReasoningPolicyWorkflowTypeContentMemberIterativeRefinementContent
 //	AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets
 type AutomatedReasoningPolicyWorkflowTypeContent interface {
 	isAutomatedReasoningPolicyWorkflowTypeContent()
@@ -2330,6 +2348,18 @@ type AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportCont
 }
 
 func (*AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent) isAutomatedReasoningPolicyWorkflowTypeContent() {
+}
+
+// Content configuration to start an iterative policy refinement workflow that
+// uses generative AI to automatically make changes to the policy based on test
+// results and the optional feedback provided.
+type AutomatedReasoningPolicyWorkflowTypeContentMemberIterativeRefinementContent struct {
+	Value AutomatedReasoningPolicyIterativeRefinementContent
+
+	noSmithyDocumentSerde
+}
+
+func (*AutomatedReasoningPolicyWorkflowTypeContentMemberIterativeRefinementContent) isAutomatedReasoningPolicyWorkflowTypeContent() {
 }
 
 // The assets and instructions needed for a policy repair workflow, including

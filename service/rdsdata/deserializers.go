@@ -1822,7 +1822,7 @@ loop:
 			break loop
 
 		case "booleanValues":
-			var mv []bool
+			var mv []*bool
 			if err := awsRestjson1_deserializeDocumentBooleanArray(&mv, value); err != nil {
 				return err
 			}
@@ -1830,7 +1830,7 @@ loop:
 			break loop
 
 		case "doubleValues":
-			var mv []float64
+			var mv []*float64
 			if err := awsRestjson1_deserializeDocumentDoubleArray(&mv, value); err != nil {
 				return err
 			}
@@ -1838,7 +1838,7 @@ loop:
 			break loop
 
 		case "longValues":
-			var mv []int64
+			var mv []*int64
 			if err := awsRestjson1_deserializeDocumentLongArray(&mv, value); err != nil {
 				return err
 			}
@@ -1846,7 +1846,7 @@ loop:
 			break loop
 
 		case "stringValues":
-			var mv []string
+			var mv []*string
 			if err := awsRestjson1_deserializeDocumentStringArray(&mv, value); err != nil {
 				return err
 			}
@@ -1935,7 +1935,7 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentBooleanArray(v *[]bool, value interface{}) error {
+func awsRestjson1_deserializeDocumentBooleanArray(v *[]*bool, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -1948,21 +1948,21 @@ func awsRestjson1_deserializeDocumentBooleanArray(v *[]bool, value interface{}) 
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []bool
+	var cv []*bool
 	if *v == nil {
-		cv = []bool{}
+		cv = []*bool{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col bool
+		var col *bool
 		if value != nil {
 			jtv, ok := value.(bool)
 			if !ok {
 				return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
 			}
-			col = jtv
+			col = ptr.Bool(jtv)
 		}
 		cv = append(cv, col)
 
@@ -2299,7 +2299,7 @@ func awsRestjson1_deserializeDocumentDatabaseUnavailableException(v **types.Data
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentDoubleArray(v *[]float64, value interface{}) error {
+func awsRestjson1_deserializeDocumentDoubleArray(v *[]*float64, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2312,15 +2312,15 @@ func awsRestjson1_deserializeDocumentDoubleArray(v *[]float64, value interface{}
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []float64
+	var cv []*float64
 	if *v == nil {
-		cv = []float64{}
+		cv = []*float64{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col float64
+		var col *float64
 		if value != nil {
 			switch jtv := value.(type) {
 			case json.Number:
@@ -2328,7 +2328,7 @@ func awsRestjson1_deserializeDocumentDoubleArray(v *[]float64, value interface{}
 				if err != nil {
 					return err
 				}
-				col = f64
+				col = ptr.Float64(f64)
 
 			case string:
 				var f64 float64
@@ -2346,7 +2346,7 @@ func awsRestjson1_deserializeDocumentDoubleArray(v *[]float64, value interface{}
 					return fmt.Errorf("unknown JSON number value: %s", jtv)
 
 				}
-				col = f64
+				col = ptr.Float64(f64)
 
 			default:
 				return fmt.Errorf("expected BoxedDouble to be a JSON Number, got %T instead", value)
@@ -2726,7 +2726,7 @@ func awsRestjson1_deserializeDocumentInvalidSecretException(v **types.InvalidSec
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentLongArray(v *[]int64, value interface{}) error {
+func awsRestjson1_deserializeDocumentLongArray(v *[]*int64, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -2739,15 +2739,15 @@ func awsRestjson1_deserializeDocumentLongArray(v *[]int64, value interface{}) er
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []int64
+	var cv []*int64
 	if *v == nil {
-		cv = []int64{}
+		cv = []*int64{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col int64
+		var col *int64
 		if value != nil {
 			jtv, ok := value.(json.Number)
 			if !ok {
@@ -2757,7 +2757,7 @@ func awsRestjson1_deserializeDocumentLongArray(v *[]int64, value interface{}) er
 			if err != nil {
 				return err
 			}
-			col = i64
+			col = ptr.Int64(i64)
 		}
 		cv = append(cv, col)
 
@@ -3271,7 +3271,7 @@ func awsRestjson1_deserializeDocumentStatementTimeoutException(v **types.Stateme
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentStringArray(v *[]string, value interface{}) error {
+func awsRestjson1_deserializeDocumentStringArray(v *[]*string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
@@ -3284,21 +3284,21 @@ func awsRestjson1_deserializeDocumentStringArray(v *[]string, value interface{})
 		return fmt.Errorf("unexpected JSON type %v", value)
 	}
 
-	var cv []string
+	var cv []*string
 	if *v == nil {
-		cv = []string{}
+		cv = []*string{}
 	} else {
 		cv = *v
 	}
 
 	for _, value := range shape {
-		var col string
+		var col *string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
 				return fmt.Errorf("expected String to be of type string, got %T instead", value)
 			}
-			col = jtv
+			col = ptr.String(jtv)
 		}
 		cv = append(cv, col)
 

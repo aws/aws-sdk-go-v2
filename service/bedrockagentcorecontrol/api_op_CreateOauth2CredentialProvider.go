@@ -77,6 +77,14 @@ type CreateOauth2CredentialProviderOutput struct {
 	// after they complete the authorization flow.
 	CallbackUrl *string
 
+	// The JSON key used to extract the client secret value from the AWS Secrets
+	// Manager secret.
+	ClientSecretJsonKey *string
+
+	// The source type of the client secret. Either MANAGED if the secret is managed
+	// by the service, or EXTERNAL if managed by the user in AWS Secrets Manager.
+	ClientSecretSource types.SecretSourceType
+
 	// Contains the output configuration for an OAuth2 provider.
 	Oauth2ProviderConfigOutput types.Oauth2ProviderConfigOutput
 

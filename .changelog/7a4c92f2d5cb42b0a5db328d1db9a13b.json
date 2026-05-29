@@ -1,0 +1,8 @@
+{
+    "id": "7a4c92f2-d5cb-42b0-a5db-328d1db9a13b",
+    "type": "feature",
+    "description": "This release introduces support for Tenant Suppression Lists",
+    "modules": [
+        "service/sesv2"
+    ]
+}

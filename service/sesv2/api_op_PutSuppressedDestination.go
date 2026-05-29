@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds an email address to the suppression list for your account.
+// Adds an email address to the suppression list for your account or for a
+// specific tenant. To target a tenant's suppression list, specify the TenantName
+// parameter. If you omit TenantName , the address is added to the account-level
+// suppression list.
 func (c *Client) PutSuppressedDestination(ctx context.Context, params *PutSuppressedDestinationInput, optFns ...func(*Options)) (*PutSuppressedDestinationOutput, error) {
 	if params == nil {
 		params = &PutSuppressedDestinationInput{}
@@ -27,19 +30,26 @@ func (c *Client) PutSuppressedDestination(ctx context.Context, params *PutSuppre
 	return out, nil
 }
 
-// A request to add an email destination to the suppression list for your account.
+// A request to add an email destination to the suppression list for your account
+// or for a specific tenant.
 type PutSuppressedDestinationInput struct {
 
-	// The email address that should be added to the suppression list for your account.
+	// The email address that should be added to the suppression list for your account
+	// or for the specified tenant.
 	//
 	// This member is required.
 	EmailAddress *string
 
 	// The factors that should cause the email address to be added to the suppression
-	// list for your account.
+	// list for your account or for the specified tenant.
 	//
 	// This member is required.
 	Reason types.SuppressionListReason
+
+	// The name of the tenant whose suppression list you want to add the address to.
+	// If you omit this parameter, the address is added to the account-level
+	// suppression list.
+	TenantName *string
 
 	noSmithyDocumentSerde
 }

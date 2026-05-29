@@ -370,7 +370,7 @@ type CloudWatchDimensionConfiguration struct {
 	//   - Can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores (_),
 	//   or dashes (-), at signs (@), and periods (.).
 	//
-	//   - It can contain no more than 256 characters.
+	//   - It can contain no more than 255 characters.
 	//
 	// This member is required.
 	DefaultDimensionValue *string
@@ -381,7 +381,7 @@ type CloudWatchDimensionConfiguration struct {
 	//   - It can only contain ASCII letters (a–z, A–Z), numbers (0–9), underscores
 	//   (_), or dashes (-).
 	//
-	//   - It can contain no more than 256 characters.
+	//   - It can contain no more than 255 characters.
 	//
 	// This member is required.
 	DimensionName *string
@@ -2521,10 +2521,11 @@ type StatusRecord struct {
 }
 
 // An object that contains information about an email address that is on the
-// suppression list for your account.
+// suppression list for your account or for a specific tenant.
 type SuppressedDestination struct {
 
-	// The email address that is on the suppression list for your account.
+	// The email address that is on the suppression list for your account or for a
+	// specific tenant.
 	//
 	// This member is required.
 	EmailAddress *string
@@ -2535,28 +2536,35 @@ type SuppressedDestination struct {
 	// This member is required.
 	LastUpdateTime *time.Time
 
-	// The reason that the address was added to the suppression list for your account.
+	// The reason that the address was added to the suppression list for your account
+	// or for a specific tenant.
 	//
 	// This member is required.
 	Reason SuppressionListReason
 
 	// An optional value that can contain additional information about the reasons
-	// that the address was added to the suppression list for your account.
+	// that the address was added to the suppression list for your account or for a
+	// specific tenant.
 	Attributes *SuppressedDestinationAttributes
+
+	// The name of the tenant that the suppressed destination belongs to. This field
+	// is present only when the suppressed destination is on a tenant's suppression
+	// list.
+	TenantName *string
 
 	noSmithyDocumentSerde
 }
 
 // An object that contains additional attributes that are related an email address
-// that is on the suppression list for your account.
+// that is on the suppression list for your account or for a specific tenant.
 type SuppressedDestinationAttributes struct {
 
 	// A unique identifier that's generated when an email address is added to the
-	// suppression list for your account.
+	// suppression list for your account or for a specific tenant.
 	FeedbackId *string
 
 	// The unique identifier of the email message that caused the email address to be
-	// added to the suppression list for your account.
+	// added to the suppression list for your account or for a specific tenant.
 	MessageId *string
 
 	noSmithyDocumentSerde
@@ -2565,7 +2573,8 @@ type SuppressedDestinationAttributes struct {
 // A summary that describes the suppressed email address.
 type SuppressedDestinationSummary struct {
 
-	// The email address that's on the suppression list for your account.
+	// The email address that's on the suppression list for your account or for a
+	// specific tenant.
 	//
 	// This member is required.
 	EmailAddress *string
@@ -2576,7 +2585,8 @@ type SuppressedDestinationSummary struct {
 	// This member is required.
 	LastUpdateTime *time.Time
 
-	// The reason that the address was added to the suppression list for your account.
+	// The reason that the address was added to the suppression list for your account
+	// or for a specific tenant.
 	//
 	// This member is required.
 	Reason SuppressionListReason
@@ -2653,19 +2663,30 @@ type SuppressionListDestination struct {
 }
 
 // An object that contains information about the suppression list preferences for
-// your account.
+// your account or for a specific tenant.
 type SuppressionOptions struct {
 
 	// A list that contains the reasons that email addresses are automatically added
-	// to the suppression list for your account. This list can contain any or all of
-	// the following:
+	// to the suppression list for your account or for a specific tenant. This list can
+	// contain any or all of the following:
 	//
 	//   - COMPLAINT – Amazon SES adds an email address to the suppression list for
-	//   your account when a message sent to that address results in a complaint.
+	//   your account or for a specific tenant when a message sent to that address
+	//   results in a complaint.
 	//
 	//   - BOUNCE – Amazon SES adds an email address to the suppression list for your
-	//   account when a message sent to that address results in a hard bounce.
+	//   account or for a specific tenant when a message sent to that address results in
+	//   a hard bounce.
 	SuppressedReasons []SuppressionListReason
+
+	// The suppression scope for the configuration set. This overrides the tenant or
+	// account suppression scope for emails sent using this configuration set. Can be
+	// one of the following:
+	//
+	//   - TENANT – Use the tenant's suppression list.
+	//
+	//   - ACCOUNT – Use the account-level suppression list.
+	SuppressionScope SuppressionListScope
 
 	// Contains validation options for email address suppression.
 	ValidationOptions *SuppressionValidationOptions
@@ -2791,6 +2812,10 @@ type Tenant struct {
 	// The status of sending capability for the tenant.
 	SendingStatus SendingStatus
 
+	// An object that contains information about the suppression list preferences for
+	// the tenant.
+	SuppressionAttributes *TenantSuppressionAttributes
+
 	// An array of objects that define the tags (keys and values) associated with the
 	// tenant.
 	Tags []Tag
@@ -2834,6 +2859,33 @@ type TenantResource struct {
 	// The type of resource associated with the tenant. Valid values are EMAIL_IDENTITY
 	// , CONFIGURATION_SET , or EMAIL_TEMPLATE .
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains the suppression list preferences for a tenant.
+type TenantSuppressionAttributes struct {
+
+	// A list that contains the reasons that email addresses are automatically added
+	// to the suppression list for the tenant. This list can contain any or all of the
+	// following:
+	//
+	//   - COMPLAINT – Amazon SES adds an email address to the suppression list when a
+	//   message sent to that address results in a complaint.
+	//
+	//   - BOUNCE – Amazon SES adds an email address to the suppression list when a
+	//   message sent to that address results in a hard bounce.
+	SuppressedReasons []SuppressionListReason
+
+	// The suppression scope for the tenant. Can be one of the following:
+	//
+	//   - TENANT – The tenant uses its own suppression list.
+	//
+	//   - ACCOUNT – The tenant uses the account-level suppression list.
+	//
+	// If you don't specify a suppression scope, the tenant defaults to ACCOUNT scope
+	// and uses the account-level suppression list.
+	SuppressionScope SuppressionListScope
 
 	noSmithyDocumentSerde
 }

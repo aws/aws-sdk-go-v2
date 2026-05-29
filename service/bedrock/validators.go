@@ -2766,6 +2766,42 @@ func validateAutomatedReasoningPolicyIngestContentAnnotation(v *types.AutomatedR
 	}
 }
 
+func validateAutomatedReasoningPolicyIterativeRefinementContent(v *types.AutomatedReasoningPolicyIterativeRefinementContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyIterativeRefinementContent"}
+	if v.Documents == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Documents"))
+	} else if v.Documents != nil {
+		if err := validateAutomatedReasoningPolicyIterativeRefinementDocumentList(v.Documents); err != nil {
+			invalidParams.AddNested("Documents", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAutomatedReasoningPolicyIterativeRefinementDocumentList(v []types.AutomatedReasoningPolicyBuildWorkflowDocument) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AutomatedReasoningPolicyIterativeRefinementDocumentList"}
+	for i := range v {
+		if err := validateAutomatedReasoningPolicyBuildWorkflowDocument(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAutomatedReasoningPolicyTypeValueAnnotation(v types.AutomatedReasoningPolicyTypeValueAnnotation) error {
 	if v == nil {
 		return nil
@@ -2926,6 +2962,11 @@ func validateAutomatedReasoningPolicyWorkflowTypeContent(v types.AutomatedReason
 	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberGenerateFidelityReportContent:
 		if err := validateAutomatedReasoningPolicyGenerateFidelityReportContent(uv.Value); err != nil {
 			invalidParams.AddNested("[generateFidelityReportContent]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberIterativeRefinementContent:
+		if err := validateAutomatedReasoningPolicyIterativeRefinementContent(&uv.Value); err != nil {
+			invalidParams.AddNested("[iterativeRefinementContent]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.AutomatedReasoningPolicyWorkflowTypeContentMemberPolicyRepairAssets:
