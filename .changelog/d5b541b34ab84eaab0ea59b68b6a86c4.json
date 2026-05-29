@@ -1,8 +1,0 @@
-{
-    "id": "d5b541b3-4ab8-4eaa-b0ea-59b68b6a86c4",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/codedeploy"
-    ]
-}

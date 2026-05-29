@@ -1,8 +1,0 @@
-{
-    "id": "60bf4be7-4e88-4bf3-804c-c516c40201f6",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/cloudhsm"
-    ]
-}

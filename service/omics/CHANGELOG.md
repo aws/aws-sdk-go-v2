@@ -1,3 +1,9 @@
+# v1.43.0 (2026-05-29)
+
+* **Feature**: Add engineSettings to StartRun and GetRun. Add profiles and profileParameterTemplates to GetWorkflow and GetWorkflowVersion.
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.1 (2026-05-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

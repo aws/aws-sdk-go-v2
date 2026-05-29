@@ -1,8 +1,0 @@
-{
-    "id": "110dd82e-f895-4749-84ea-9c91dddcc5a9",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/chime"
-    ]
-}

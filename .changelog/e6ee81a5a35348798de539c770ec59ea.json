@@ -1,8 +1,0 @@
-{
-    "id": "e6ee81a5-a353-4879-8de5-39c770ec59ea",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/paymentcryptographydata"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "4599a978-7616-42e2-8a1a-cbcc0a93d2df",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/inspectorscan"
-    ]
-}

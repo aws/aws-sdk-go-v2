@@ -1,3 +1,9 @@
+# v1.112.0 (2026-05-29)
+
+* **Feature**: Adds support for creating, updating, describing, listing, and deleting an OAuthClientApplication resource, a new quicksight resource that allows customers to store OAuth configurations to connect to their databases via 3 Legged OAuth.
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.111.1 (2026-05-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions

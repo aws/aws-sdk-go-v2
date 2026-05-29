@@ -1,8 +1,0 @@
-{
-    "id": "2a778aa8-edc0-4291-8430-caf82f2bcb3c",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/route53recoverycluster"
-    ]
-}

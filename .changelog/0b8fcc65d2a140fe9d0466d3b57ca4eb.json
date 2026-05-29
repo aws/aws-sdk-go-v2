@@ -1,8 +1,0 @@
-{
-    "id": "0b8fcc65-d2a1-40fe-9d04-66d3b57ca4eb",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/mwaa"
-    ]
-}

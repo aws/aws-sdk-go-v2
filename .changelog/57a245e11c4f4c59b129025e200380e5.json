@@ -1,8 +1,0 @@
-{
-    "id": "57a245e1-1c4f-4c59-b129-025e200380e5",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/codebuild"
-    ]
-}

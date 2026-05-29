@@ -1,8 +1,0 @@
-{
-    "id": "474db361-4d56-443c-a12f-43b5b488b3b5",
-    "type": "feature",
-    "description": "Adds support for Alpha-5 satellite number encoding in the Two-Line Element ephemeris format.",
-    "modules": [
-        "service/groundstation"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "8491e513-caef-4260-86d9-e3ae8e7a24b8",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/backupgateway"
-    ]
-}

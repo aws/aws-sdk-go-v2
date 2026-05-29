@@ -1,3 +1,8 @@
+# v1.53.1 (2026-05-29)
+
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.53.0 (2026-05-28)
 
 * **Feature**: Support system role in message

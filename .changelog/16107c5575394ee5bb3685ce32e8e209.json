@@ -1,8 +1,0 @@
-{
-    "id": "16107c55-7539-4ee5-bb36-85ce32e8e209",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/ssmguiconnect"
-    ]
-}

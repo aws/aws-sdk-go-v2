@@ -1,8 +1,0 @@
-{
-    "id": "fff8aa2e-5bd0-4aa5-b085-ace68aed0f95",
-    "type": "feature",
-    "description": "Added BatchCreateFirewallRule, BatchUpdateFirewallRule, BatchDeleteFirewallRule, and ListFirewallRuleTypes APIs. Added FirewallRuleType support to Firewall Rule APIs.",
-    "modules": [
-        "service/route53resolver"
-    ]
-}

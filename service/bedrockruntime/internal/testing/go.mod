@@ -3,17 +3,17 @@ module github.com/aws/aws-sdk-go-v2/service/bedrockruntime/internal/testing
 go 1.24
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.41.8
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.10
-	github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.53.0
-	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.6.45
+	github.com/aws/aws-sdk-go-v2 v1.41.9
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.11
+	github.com/aws/aws-sdk-go-v2/service/bedrockruntime v1.53.1
+	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.6.46
 	github.com/aws/smithy-go v1.26.0
 )
 
 require (
-	github.com/aws/aws-sdk-go-v2/credentials v1.19.18 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.24 // indirect
-	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.24 // indirect
+	github.com/aws/aws-sdk-go-v2/credentials v1.19.19 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/configsources v1.4.25 // indirect
+	github.com/aws/aws-sdk-go-v2/internal/endpoints/v2 v2.7.25 // indirect
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../../

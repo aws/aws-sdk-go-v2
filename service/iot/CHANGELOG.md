@@ -1,3 +1,8 @@
+# v1.74.1 (2026-05-29)
+
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.74.0 (2026-05-28)
 
 * **Feature**: Adds new connectivity-related fields to Fleet Indexing API requests and responses.

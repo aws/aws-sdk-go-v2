@@ -1,3 +1,9 @@
+# v1.63.0 (2026-05-29)
+
+* **Feature**: Automated Reasoning checks - Added two build workflows for policies. Iterative Refine Policy uses AI to update policy definitions based on test results and feedback. Resolve Policy Ambiguities consolidates ambiguous variables in Automated Reasoning policies, a common source of ambiguous validation.
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.62.0 (2026-05-28)
 
 * **Feature**: Add support for ModelPackageArn in Bedrock's CreateCustomModel API

@@ -1,8 +1,0 @@
-{
-    "id": "efd5819c-223e-4a12-975f-124fbad6010a",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/mailmanager"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "0ebb4497-691a-43bc-b45a-b7eb82c91459",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/cloudsearchdomain"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "9c477215-e193-41ad-a61f-19ed198afb8f",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/clouddirectory"
-    ]
-}

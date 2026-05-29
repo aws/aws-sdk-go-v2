@@ -1,8 +1,0 @@
-{
-    "id": "2f5626b7-4502-4a48-b7c4-0929906370c9",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/autoscalingplans"
-    ]
-}

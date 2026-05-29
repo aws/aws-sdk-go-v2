@@ -1,8 +1,0 @@
-{
-    "id": "4947b5a8-8132-4800-9fbd-a5d88db1e60f",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/qbusiness"
-    ]
-}

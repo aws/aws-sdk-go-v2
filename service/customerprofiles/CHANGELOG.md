@@ -1,3 +1,8 @@
+# v1.62.1 (2026-05-29)
+
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.62.0 (2026-05-28)
 
 * **Feature**: BatchPutProfileObject API adds multiple profile objects to a domain of a given ObjectType in a single API call.

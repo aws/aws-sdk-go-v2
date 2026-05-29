@@ -1,3 +1,111 @@
+# Release (2026-05-29)
+
+## General Highlights
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/account`: [v1.32.0](service/account/CHANGELOG.md#v1320-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/applicationinsights`: [v1.35.0](service/applicationinsights/CHANGELOG.md#v1350-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/arczonalshift`: [v1.23.0](service/arczonalshift/CHANGELOG.md#v1230-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/athena`: [v1.58.0](service/athena/CHANGELOG.md#v1580-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/autoscaling`: [v1.67.0](service/autoscaling/CHANGELOG.md#v1670-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/autoscalingplans`: [v1.31.0](service/autoscalingplans/CHANGELOG.md#v1310-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/backupgateway`: [v1.27.0](service/backupgateway/CHANGELOG.md#v1270-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/bedrock`: [v1.63.0](service/bedrock/CHANGELOG.md#v1630-2026-05-29)
+  * **Feature**: Automated Reasoning checks - Added two build workflows for policies. Iterative Refine Policy uses AI to update policy definitions based on test results and feedback. Resolve Policy Ambiguities consolidates ambiguous variables in Automated Reasoning policies, a common source of ambiguous validation.
+* `github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol`: [v1.42.0](service/bedrockagentcorecontrol/CHANGELOG.md#v1420-2026-05-29)
+  * **Feature**: Reference your own AWS Secrets Manager secrets when configuring credential providers, giving you control over encryption, rotation, and access policies instead of using service-managed secrets.
+* `github.com/aws/aws-sdk-go-v2/service/budgets`: [v1.44.0](service/budgets/CHANGELOG.md#v1440-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/chime`: [v1.42.0](service/chime/CHANGELOG.md#v1420-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/clouddirectory`: [v1.31.0](service/clouddirectory/CHANGELOG.md#v1310-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsm`: [v1.30.0](service/cloudhsm/CHANGELOG.md#v1300-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/cloudhsmv2`: [v1.35.0](service/cloudhsmv2/CHANGELOG.md#v1350-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearch`: [v1.33.0](service/cloudsearch/CHANGELOG.md#v1330-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain`: [v1.29.0](service/cloudsearchdomain/CHANGELOG.md#v1290-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/cloudtrail`: [v1.56.0](service/cloudtrail/CHANGELOG.md#v1560-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.69.0](service/codebuild/CHANGELOG.md#v1690-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/codecatalyst`: [v1.22.0](service/codecatalyst/CHANGELOG.md#v1220-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/codecommit`: [v1.34.0](service/codecommit/CHANGELOG.md#v1340-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/codedeploy`: [v1.36.0](service/codedeploy/CHANGELOG.md#v1360-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/codegurusecurity`: [v1.17.0](service/codegurusecurity/CHANGELOG.md#v1170-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2`: [v1.14.0](service/connectcampaignsv2/CHANGELOG.md#v1140-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/connectcontactlens`: [v1.34.0](service/connectcontactlens/CHANGELOG.md#v1340-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/directoryservicedata`: [v1.8.0](service/directoryservicedata/CHANGELOG.md#v180-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/drs`: [v1.39.0](service/drs/CHANGELOG.md#v1390-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/entityresolution`: [v1.28.0](service/entityresolution/CHANGELOG.md#v1280-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/grafana`: [v1.36.0](service/grafana/CHANGELOG.md#v1360-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/groundstation`: [v1.43.0](service/groundstation/CHANGELOG.md#v1430-2026-05-29)
+  * **Feature**: Adds support for Alpha-5 satellite number encoding in the Two-Line Element ephemeris format.
+* `github.com/aws/aws-sdk-go-v2/service/inspectorscan`: [v1.14.0](service/inspectorscan/CHANGELOG.md#v1140-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelsv2`: [v1.62.0](service/lexmodelsv2/CHANGELOG.md#v1620-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimev2`: [v1.36.0](service/lexruntimev2/CHANGELOG.md#v1360-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/mailmanager`: [v1.19.0](service/mailmanager/CHANGELOG.md#v1190-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/mwaa`: [v1.41.0](service/mwaa/CHANGELOG.md#v1410-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/networkflowmonitor`: [v1.12.0](service/networkflowmonitor/CHANGELOG.md#v1120-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/omics`: [v1.43.0](service/omics/CHANGELOG.md#v1430-2026-05-29)
+  * **Feature**: Add engineSettings to StartRun and GetRun. Add profiles and profileParameterTemplates to GetWorkflow and GetWorkflowVersion.
+* `github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata`: [v1.27.0](service/paymentcryptographydata/CHANGELOG.md#v1270-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/pcs`: [v1.20.0](service/pcs/CHANGELOG.md#v1200-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/personalizeevents`: [v1.32.0](service/personalizeevents/CHANGELOG.md#v1320-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/proton`: [v1.40.0](service/proton/CHANGELOG.md#v1400-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/qbusiness`: [v1.35.0](service/qbusiness/CHANGELOG.md#v1350-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.112.0](service/quicksight/CHANGELOG.md#v11120-2026-05-29)
+  * **Feature**: Adds support for creating, updating, describing, listing, and deleting an OAuthClientApplication resource, a new quicksight resource that allows customers to store OAuth configurations to connect to their databases via 3 Legged OAuth.
+* `github.com/aws/aws-sdk-go-v2/service/rdsdata`: [v1.33.0](service/rdsdata/CHANGELOG.md#v1330-2026-05-29)
+  * **Feature**: RDS Data API arrays (longValues, doubleValues, stringValues, booleanValues) in ExecuteStatement responses now correctly support null elements. Runtime change for JS v3 and .NET. Compile-time change for C plus plus, .NET, Kotlin, Rust. No impact for Java, Python, Ruby, PHP, Go.
+* `github.com/aws/aws-sdk-go-v2/service/route53recoverycluster`: [v1.29.0](service/route53recoverycluster/CHANGELOG.md#v1290-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.45.0](service/route53resolver/CHANGELOG.md#v1450-2026-05-29)
+  * **Feature**: Added BatchCreateFirewallRule, BatchUpdateFirewallRule, BatchDeleteFirewallRule, and ListFirewallRuleTypes APIs. Added FirewallRuleType support to Firewall Rule APIs.
+* `github.com/aws/aws-sdk-go-v2/service/sesv2`: [v1.62.0](service/sesv2/CHANGELOG.md#v1620-2026-05-29)
+  * **Feature**: This release introduces support for Tenant Suppression Lists
+* `github.com/aws/aws-sdk-go-v2/service/ssmguiconnect`: [v1.6.0](service/ssmguiconnect/CHANGELOG.md#v160-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/synthetics`: [v1.43.0](service/synthetics/CHANGELOG.md#v1430-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/wafv2`: [v1.72.0](service/wafv2/CHANGELOG.md#v1720-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/workspacesinstances`: [v1.6.0](service/workspacesinstances/CHANGELOG.md#v160-2026-05-29)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+
 # Release (2026-05-28)
 
 ## General Highlights

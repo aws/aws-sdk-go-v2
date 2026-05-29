@@ -1,8 +1,0 @@
-{
-    "id": "eb3b8bbe-a101-48eb-9005-bf2e15ecdb52",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/grafana"
-    ]
-}

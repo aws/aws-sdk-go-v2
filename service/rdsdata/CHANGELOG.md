@@ -1,3 +1,9 @@
+# v1.33.0 (2026-05-29)
+
+* **Feature**: RDS Data API arrays (longValues, doubleValues, stringValues, booleanValues) in ExecuteStatement responses now correctly support null elements. Runtime change for JS v3 and .NET. Compile-time change for C plus plus, .NET, Kotlin, Rust. No impact for Java, Python, Ruby, PHP, Go.
+* **Dependency Update**: Update to smithy-go v1.26.0.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.32.24 (2026-05-28)
 
 * **Dependency Update**: Updated to the latest SDK module versions
