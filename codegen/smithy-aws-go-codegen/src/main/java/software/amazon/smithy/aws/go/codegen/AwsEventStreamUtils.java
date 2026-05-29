@@ -536,7 +536,7 @@ public final class AwsEventStreamUtils {
         var deserializeOutput = getSymbol("DeserializeOutput", SmithyGoDependency.SMITHY_MIDDLEWARE);
         var httpResponse = getSymbol("Response", SmithyGoDependency.SMITHY_HTTP_TRANSPORT);
         var copy = getSymbol("Copy", SmithyGoDependency.IO);
-        var discard = getSymbol("Discard", SmithyGoDependency.IOUTIL);
+        var discard = getSymbol("Discard", SmithyGoDependency.IO);
         writer.write("""
 
                      func ($P) closeResponseBody(out $T) {

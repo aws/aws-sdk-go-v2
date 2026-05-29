@@ -3,7 +3,7 @@ package schemas
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"testing"
 
@@ -51,6 +51,6 @@ func newGetCodeBindingSourceHTTPResponse(payload []byte) *http.Response {
 			"Content-Type": {"application/octet-stream"},
 		},
 		ContentLength: int64(len(payload)),
-		Body:          ioutil.NopCloser(bytes.NewReader(payload)),
+		Body:          io.NopCloser(bytes.NewReader(payload)),
 	}
 }

@@ -3,7 +3,7 @@ package benchmark
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"testing"
 
@@ -172,6 +172,6 @@ func newPutSessionHTTPResponse() *http.Response {
 			"x-amz-lex-slot-to-elicit":     {"fooSlot"},
 			"x-amz-lex-slots":              {"eyJmb29LZXkiOiAiZm9vVmFsdWUifQ=="},
 		},
-		Body: ioutil.NopCloser(bytes.NewReader(putSessionBody)),
+		Body: io.NopCloser(bytes.NewReader(putSessionBody)),
 	}
 }

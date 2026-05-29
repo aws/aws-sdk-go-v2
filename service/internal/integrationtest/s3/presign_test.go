@@ -8,7 +8,6 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"reflect"
 	"strconv"
@@ -286,7 +285,7 @@ func sendHTTPRequest(presignRequest *v4.PresignedHTTPRequest, body io.Reader) (*
 
 	// assign the request body if not nil
 	if body != nil {
-		req.Body = ioutil.NopCloser(body)
+		req.Body = io.NopCloser(body)
 		if req.ContentLength == 0 {
 			req.Body = nil
 		}

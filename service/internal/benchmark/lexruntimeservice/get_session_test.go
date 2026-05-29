@@ -3,7 +3,7 @@ package benchmark
 import (
 	"bytes"
 	"context"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"path/filepath"
 	"testing"
@@ -110,6 +110,6 @@ func newGetSessionHTTPResponse(body []byte) *http.Response {
 			"Content-Type": {"application/json"},
 		},
 		ContentLength: int64(len(body)),
-		Body:          ioutil.NopCloser(bytes.NewReader(body)),
+		Body:          io.NopCloser(bytes.NewReader(body)),
 	}
 }

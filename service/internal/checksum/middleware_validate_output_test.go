@@ -6,7 +6,7 @@ import (
 	"bytes"
 	"context"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 	"testing"
@@ -41,7 +41,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 						h.Set(AlgorithmHTTPHeader(AlgorithmCRC32), "DUoRhQ==")
 						return h
 					}(),
-					Body: ioutil.NopCloser(strings.NewReader("hello world")),
+					Body: io.NopCloser(strings.NewReader("hello world")),
 				},
 			},
 			expectHaveAlgorithmsUsed: true,
@@ -57,7 +57,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 						h.Set(AlgorithmHTTPHeader(AlgorithmCRC32C), "crUfeA==")
 						return h
 					}(),
-					Body: ioutil.NopCloser(strings.NewReader("Hello world")),
+					Body: io.NopCloser(strings.NewReader("Hello world")),
 				},
 			},
 			expectPayload: []byte("Hello world"),
@@ -74,7 +74,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 						h.Set(AlgorithmHTTPHeader(AlgorithmCRC32), "AAAAAA==")
 						return h
 					}(),
-					Body: ioutil.NopCloser(strings.NewReader("hello world")),
+					Body: io.NopCloser(strings.NewReader("hello world")),
 				},
 			},
 			expectReadErr: "checksum did not match",
@@ -91,7 +91,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 						h.Set(AlgorithmHTTPHeader(AlgorithmCRC32), "AAAAAA==")
 						return h
 					}(),
-					Body: ioutil.NopCloser(iotest.ErrReader(fmt.Errorf("some read error"))),
+					Body: io.NopCloser(iotest.ErrReader(fmt.Errorf("some read error"))),
 				},
 			},
 			expectReadErr: "some read error",
@@ -108,7 +108,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 						h.Set(AlgorithmHTTPHeader("unsupported"), "AAAAAA==")
 						return h
 					}(),
-					Body: ioutil.NopCloser(strings.NewReader("hello world")),
+					Body: io.NopCloser(strings.NewReader("hello world")),
 				},
 			},
 			expectLogged:  "no supported checksum",
@@ -125,7 +125,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 						h := http.Header{}
 						return h
 					}(),
-					Body: ioutil.NopCloser(strings.NewReader("hello world")),
+					Body: io.NopCloser(strings.NewReader("hello world")),
 				},
 			},
 			expectPayload: []byte("hello world"),
@@ -142,7 +142,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 						h.Set(AlgorithmHTTPHeader(AlgorithmCRC32), "DUoRhQ==")
 						return h
 					}(),
-					Body: ioutil.NopCloser(strings.NewReader("hello world")),
+					Body: io.NopCloser(strings.NewReader("hello world")),
 				},
 			},
 			validateOptions: func(o *validateOutputPayloadChecksum) {
@@ -159,7 +159,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 			response: &smithyhttp.Response{
 				Response: &http.Response{
 					StatusCode: 400,
-					Body:       ioutil.NopCloser(strings.NewReader("error")),
+					Body:       io.NopCloser(strings.NewReader("error")),
 				},
 			},
 			// does not log
@@ -178,7 +178,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 						h.Set(AlgorithmHTTPHeader(AlgorithmCRC32), "DUoRhQ==-12")
 						return h
 					}(),
-					Body: ioutil.NopCloser(strings.NewReader("hello world")),
+					Body: io.NopCloser(strings.NewReader("hello world")),
 				},
 			},
 			validateOptions: func(o *validateOutputPayloadChecksum) {
@@ -238,7 +238,7 @@ func TestValidateOutputPayloadChecksum(t *testing.T) {
 
 			response := out.RawResponse.(*smithyhttp.Response)
 
-			actualPayload, err := ioutil.ReadAll(response.Body)
+			actualPayload, err := io.ReadAll(response.Body)
 			if err == nil && len(c.expectReadErr) != 0 {
 				t.Fatalf("expected read error: %v, got none", c.expectReadErr)
 			}

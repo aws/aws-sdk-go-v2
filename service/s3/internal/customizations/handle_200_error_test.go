@@ -3,7 +3,6 @@ package customizations_test
 import (
 	"context"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"strings"
 	"testing"
@@ -31,7 +30,7 @@ func (m *mockHTTPClient) Do(*http.Request) (*http.Response, error) {
 var _ s3.HTTPClient = &mockHTTPClient{}
 
 func asReadCloser(s string) io.ReadCloser {
-	return ioutil.NopCloser(strings.NewReader(s))
+	return io.NopCloser(strings.NewReader(s))
 }
 
 func TestErrorResponseWith200StatusCode(t *testing.T) {
