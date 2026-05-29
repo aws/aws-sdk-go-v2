@@ -364,12 +364,15 @@ func TestUploadOrderMultiExceedMaxParts(t *testing.T) {
 		t.Errorf("expect %q to be contained in %q", e, a)
 	}
 
-	vals := []string{"CreateMultipartUpload", "UploadPart", "UploadPart", "AbortMultipartUpload"}
-	if !reflect.DeepEqual(vals, *ops) {
-		t.Errorf("expect %v, got %v", vals, *ops)
+	// The worker may or may not send part 2 before observing the error set
+	// by the main goroutine, so both sequences are valid.
+	withTwo := []string{"CreateMultipartUpload", "UploadPart", "UploadPart", "AbortMultipartUpload"}
+	withOne := []string{"CreateMultipartUpload", "UploadPart", "AbortMultipartUpload"}
+	if !reflect.DeepEqual(withTwo, *ops) && !reflect.DeepEqual(withOne, *ops) {
+		t.Errorf("expect %v or %v, got %v", withTwo, withOne, *ops)
 	}
 
-	for i := 1; i <= 2; i++ {
+	for i := 1; i < len(*ops)-1; i++ {
 		if e, a := 1024*1024*8, getReaderLength((*args)[i].(*s3.UploadPartInput).Body); int64(e) != a {
 			t.Errorf("expect %d, got %d", e, a)
 		}
