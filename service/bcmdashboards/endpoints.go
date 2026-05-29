@@ -231,6 +231,8 @@ func bindRegion(region string) (*string, error) {
 	return aws.String(endpoints.MapFIPSRegion(region)), nil
 }
 
+var _ = rulesfn.StringSlice(nil)
+
 // EndpointParameters provides the parameters that influence how endpoints are
 // resolved.
 type EndpointParameters struct {
@@ -342,7 +344,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 				var out smithy.Properties
 				smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 					{
-						SchemeID: "aws.auth#sigv4",
+						SchemeID: "sigv4",
 						SignerProperties: func() smithy.Properties {
 							var sp smithy.Properties
 							smithyhttp.SetSigV4SigningRegion(&sp, c.PartitionResult.ImplicitGlobalRegion)
@@ -373,7 +375,7 @@ func resolveResult(idx int32, params *EndpointParameters, c *conditionContext) (
 				var out smithy.Properties
 				smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
 					{
-						SchemeID: "aws.auth#sigv4",
+						SchemeID: "sigv4",
 						SignerProperties: func() smithy.Properties {
 							var sp smithy.Properties
 							smithyhttp.SetSigV4SigningRegion(&sp, c.PartitionResult.ImplicitGlobalRegion)
