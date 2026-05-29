@@ -2476,6 +2476,15 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildFeedback": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 4000
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildLog": {
             "type": "structure",
             "members": {
@@ -3048,6 +3057,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "GENERATE_POLICY_SCENARIOS"
+                    }
+                },
+                "RESOLVE_POLICY_AMBIGUITIES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOLVE_POLICY_AMBIGUITIES"
+                    }
+                },
+                "ITERATIVELY_REFINE_POLICY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ITERATIVELY_REFINE_POLICY"
                     }
                 }
             }
@@ -3840,6 +3861,39 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An annotation for processing and incorporating new content into an Automated Reasoning policy.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyIterativeRefinementContent": {
+            "type": "structure",
+            "members": {
+                "documents": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyIterativeRefinementDocumentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source documents used for iterative policy refinement. These documents provide context for refining the policy definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "feedback": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildFeedback",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional feedback to guide the iterative refinement workflow. Provide specific instructions or constraints for policy refinement.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for an iterative policy refinement workflow, including source documents to process and optional feedback to guide the refinement.</p>"
+            }
+        },
+        "com.amazonaws.bedrock#AutomatedReasoningPolicyIterativeRefinementDocumentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyBuildWorkflowDocument"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
             }
         },
         "com.amazonaws.bedrock#AutomatedReasoningPolicyJustificationList": {
@@ -4917,6 +4971,12 @@
                     "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyGenerateFidelityReportContent",
                     "traits": {
                         "smithy.api#documentation": "<p>The content configuration for generating a fidelity report workflow. This can include source documents to analyze or an existing fidelity report to update with a new policy definition.</p>"
+                    }
+                },
+                "iterativeRefinementContent": {
+                    "target": "com.amazonaws.bedrock#AutomatedReasoningPolicyIterativeRefinementContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Content configuration to start an iterative policy refinement workflow that uses generative AI to automatically make changes to the policy based on test results and the optional feedback provided.</p>"
                     }
                 }
             },

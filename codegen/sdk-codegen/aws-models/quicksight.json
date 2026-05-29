@@ -13493,6 +13493,174 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#CreateOAuthClientApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#CreateOAuthClientApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#CreateOAuthClientApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an OAuthClientApplication.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/oauth-client-applications",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateOAuthClientApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "OAuthClientApplicationId": {
+                    "target": "com.amazonaws.quicksight#OAuthClientApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An ID for the OAuthClientApplication that you want to create. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name for the OAuthClientApplication.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OAuthClientAuthenticationType": {
+                    "target": "com.amazonaws.quicksight#OAuthClientAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authentication type to use for the OAuthClientApplication. This determines the OAuth 2.0 grant flow that is used when the data source connects to the identity provider. Valid values are <code>TOKEN</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.quicksight#OAuthClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client ID of the OAuth application that is registered with the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientSecret": {
+                    "target": "com.amazonaws.quicksight#OAuthClientSecret",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client secret of the OAuth application that is registered with the identity provider.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OAuthTokenEndpointUrl": {
+                    "target": "com.amazonaws.quicksight#OAuthTokenEndpointUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token endpoint URL of the identity provider that is used to obtain access tokens.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OAuthAuthorizationEndpointUrl": {
+                    "target": "com.amazonaws.quicksight#OAuthAuthorizationEndpointUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization endpoint URL of the identity provider that is used to obtain authorization codes.</p>"
+                    }
+                },
+                "OAuthScopes": {
+                    "target": "com.amazonaws.quicksight#OAuthScopesString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth scopes that are requested when the OAuthClientApplication obtains an access token from the identity provider.</p>"
+                    }
+                },
+                "DataSourceType": {
+                    "target": "com.amazonaws.quicksight#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of data source that the OAuthClientApplication is used with. Valid values are <code>SNOWFLAKE</code>.</p>"
+                    }
+                },
+                "IdentityProviderVpcConnectionProperties": {
+                    "target": "com.amazonaws.quicksight#VpcConnectionProperties"
+                },
+                "Tags": {
+                    "target": "com.amazonaws.quicksight#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the OAuthClientApplication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#CreateOAuthClientApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the OAuthClientApplication.</p>"
+                    }
+                },
+                "OAuthClientApplicationId": {
+                    "target": "com.amazonaws.quicksight#OAuthClientApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the OAuthClientApplication. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
+                    }
+                },
+                "CreationStatus": {
+                    "target": "com.amazonaws.quicksight#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of creating the OAuthClientApplication.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#CreateRefreshSchedule": {
             "type": "operation",
             "input": {
@@ -22291,6 +22459,101 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DeleteOAuthClientApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteOAuthClientApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteOAuthClientApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an OAuthClientApplication.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/oauth-client-applications/{OAuthClientApplicationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DeleteOAuthClientApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "OAuthClientApplicationId": {
+                    "target": "com.amazonaws.quicksight#OAuthClientApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the OAuthClientApplication that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteOAuthClientApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the OAuthClientApplication that you deleted.</p>"
+                    }
+                },
+                "OAuthClientApplicationId": {
+                    "target": "com.amazonaws.quicksight#OAuthClientApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the OAuthClientApplication. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DeleteRefreshSchedule": {
             "type": "operation",
             "input": {
@@ -27590,6 +27853,92 @@
                     "target": "com.amazonaws.quicksight#NamespaceInfoV2",
                     "traits": {
                         "smithy.api#documentation": "<p>The information about the namespace that you're describing. The response includes \n        the namespace ARN, name, Amazon Web Services Region, creation status, and identity store. <code>DescribeNamespace</code> also\n        works for namespaces that are in the process of being created. For incomplete namespaces,\n        this API operation lists the namespace error types and messages associated with the creation process.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeOAuthClientApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeOAuthClientApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeOAuthClientApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an OAuthClientApplication.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/oauth-client-applications/{OAuthClientApplicationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#DescribeOAuthClientApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "OAuthClientApplicationId": {
+                    "target": "com.amazonaws.quicksight#OAuthClientApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the OAuthClientApplication that you want to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeOAuthClientApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "OAuthClientApplication": {
+                    "target": "com.amazonaws.quicksight#OAuthClientApplication",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information about the OAuthClientApplication.</p>"
                     }
                 },
                 "RequestId": {
@@ -42705,6 +43054,113 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#ListOAuthClientApplications": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListOAuthClientApplicationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListOAuthClientApplicationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all OAuthClientApplications in the current Amazon Web Services Region that belong to this Amazon Web Services account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/oauth-client-applications",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "OAuthClientApplications",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListOAuthClientApplicationsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that can be used in a subsequent request.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListOAuthClientApplicationsResponse": {
+            "type": "structure",
+            "members": {
+                "OAuthClientApplications": {
+                    "target": "com.amazonaws.quicksight#OAuthClientApplicationSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of OAuthClientApplication summaries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that can be used in a subsequent request.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#ListRefreshSchedules": {
             "type": "operation",
             "input": {
@@ -46534,6 +46990,168 @@
                 "smithy.api#documentation": "<p>The measure type field with numerical type columns.</p>"
             }
         },
+        "com.amazonaws.quicksight#OAuthAuthorizationEndpointUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^https://[^\\p{Cc}]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.quicksight#OAuthClientApplication": {
+            "type": "structure",
+            "members": {
+                "OAuthClientApplicationId": {
+                    "target": "com.amazonaws.quicksight#OAuthClientApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the OAuthClientApplication. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the OAuthClientApplication.</p>"
+                    }
+                },
+                "OAuthClientAuthenticationType": {
+                    "target": "com.amazonaws.quicksight#OAuthClientAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth client authentication type used by the OAuthClientApplication. Valid values are <code>TOKEN</code>.</p>"
+                    }
+                },
+                "OAuthTokenEndpointUrl": {
+                    "target": "com.amazonaws.quicksight#OAuthTokenEndpointUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token endpoint URL of the identity provider that is used to obtain access tokens.</p>"
+                    }
+                },
+                "OAuthAuthorizationEndpointUrl": {
+                    "target": "com.amazonaws.quicksight#OAuthAuthorizationEndpointUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization endpoint URL of the identity provider that is used to obtain authorization codes.</p>"
+                    }
+                },
+                "OAuthScopes": {
+                    "target": "com.amazonaws.quicksight#OAuthScopesString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth scopes that are requested when the OAuthClientApplication obtains an access token from the identity provider.</p>"
+                    }
+                },
+                "DataSourceType": {
+                    "target": "com.amazonaws.quicksight#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of data source that the OAuthClientApplication is used with. Valid values are <code>SNOWFLAKE</code>.</p>"
+                    }
+                },
+                "IdentityProviderVpcConnectionProperties": {
+                    "target": "com.amazonaws.quicksight#VpcConnectionProperties"
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the OAuthClientApplication was created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the OAuthClientApplication was last updated.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the OAuthClientApplication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An OAuth client application that is used to authenticate connections to a data source through an OAuth identity provider.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#OAuthClientApplicationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[^/][^\\p{Cc}]*$"
+            }
+        },
+        "com.amazonaws.quicksight#OAuthClientApplicationSummary": {
+            "type": "structure",
+            "members": {
+                "OAuthClientApplicationId": {
+                    "target": "com.amazonaws.quicksight#OAuthClientApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the OAuthClientApplication. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the OAuthClientApplication.</p>"
+                    }
+                },
+                "OAuthClientAuthenticationType": {
+                    "target": "com.amazonaws.quicksight#OAuthClientAuthenticationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth client authentication type used by the OAuthClientApplication. Valid values are <code>TOKEN</code>.</p>"
+                    }
+                },
+                "DataSourceType": {
+                    "target": "com.amazonaws.quicksight#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of data source that the OAuthClientApplication is used with. Valid values are <code>SNOWFLAKE</code>.</p>"
+                    }
+                },
+                "IdentityProviderVpcConnectionProperties": {
+                    "target": "com.amazonaws.quicksight#VpcConnectionProperties"
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the OAuthClientApplication was created.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the OAuthClientApplication was last updated.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the OAuthClientApplication.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of an OAuthClientApplication.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#OAuthClientApplicationSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#OAuthClientApplicationSummary"
+            }
+        },
+        "com.amazonaws.quicksight#OAuthClientAuthenticationType": {
+            "type": "enum",
+            "members": {
+                "TOKEN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOKEN"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#OAuthClientCredentials": {
             "type": "structure",
             "members": {
@@ -46567,6 +47185,7 @@
                     "min": 1,
                     "max": 256
                 },
+                "smithy.api#pattern": "^[^\\p{Cc}]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -46577,6 +47196,7 @@
                     "min": 1,
                     "max": 2048
                 },
+                "smithy.api#pattern": "^[^\\p{Cc}]+$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -46623,6 +47243,27 @@
                     "min": 1,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.quicksight#OAuthScopesString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 4096
+                },
+                "smithy.api#pattern": "^[^\\p{Cc}]+$"
+            }
+        },
+        "com.amazonaws.quicksight#OAuthTokenEndpointUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^https://[^\\p{Cc}]+$",
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.quicksight#OAuthUsername": {
@@ -50240,6 +50881,9 @@
                     "target": "com.amazonaws.quicksight#CreateNamespace"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#CreateOAuthClientApplication"
+                },
+                {
                     "target": "com.amazonaws.quicksight#CreateRefreshSchedule"
                 },
                 {
@@ -50325,6 +50969,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteNamespace"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DeleteOAuthClientApplication"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteRefreshSchedule"
@@ -50480,6 +51127,9 @@
                     "target": "com.amazonaws.quicksight#DescribeNamespace"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeOAuthClientApplication"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeQPersonalizationConfiguration"
                 },
                 {
@@ -50619,6 +51269,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListNamespaces"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ListOAuthClientApplications"
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListRefreshSchedules"
@@ -50817,6 +51470,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateKeyRegistration"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateOAuthClientApplication"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdatePublicSharingSettings"
@@ -69850,6 +70506,156 @@
                     "min": 0,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateOAuthClientApplication": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateOAuthClientApplicationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateOAuthClientApplicationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an OAuthClientApplication.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/oauth-client-applications/{OAuthClientApplicationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateOAuthClientApplicationRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "OAuthClientApplicationId": {
+                    "target": "com.amazonaws.quicksight#OAuthClientApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the OAuthClientApplication that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name for the OAuthClientApplication.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientId": {
+                    "target": "com.amazonaws.quicksight#OAuthClientId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client ID of the OAuth application that is registered with the identity provider.</p>"
+                    }
+                },
+                "ClientSecret": {
+                    "target": "com.amazonaws.quicksight#OAuthClientSecret",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client secret of the OAuth application that is registered with the identity provider.</p>"
+                    }
+                },
+                "OAuthTokenEndpointUrl": {
+                    "target": "com.amazonaws.quicksight#OAuthTokenEndpointUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token endpoint URL of the identity provider that is used to obtain access tokens.</p>"
+                    }
+                },
+                "OAuthAuthorizationEndpointUrl": {
+                    "target": "com.amazonaws.quicksight#OAuthAuthorizationEndpointUrl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The authorization endpoint URL of the identity provider that is used to obtain authorization codes.</p>"
+                    }
+                },
+                "OAuthScopes": {
+                    "target": "com.amazonaws.quicksight#OAuthScopesString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The OAuth scopes that are requested when the OAuthClientApplication obtains an access token from the identity provider.</p>"
+                    }
+                },
+                "DataSourceType": {
+                    "target": "com.amazonaws.quicksight#DataSourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of data source that the OAuthClientApplication is used with. Valid values are <code>SNOWFLAKE</code>.</p>"
+                    }
+                },
+                "IdentityProviderVpcConnectionProperties": {
+                    "target": "com.amazonaws.quicksight#VpcConnectionProperties"
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateOAuthClientApplicationResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the OAuthClientApplication.</p>"
+                    }
+                },
+                "OAuthClientApplicationId": {
+                    "target": "com.amazonaws.quicksight#OAuthClientApplicationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the OAuthClientApplication. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>"
+                    }
+                },
+                "UpdateStatus": {
+                    "target": "com.amazonaws.quicksight#ResourceStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of updating the OAuthClientApplication.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.quicksight#UpdatePublicSharingSettings": {

@@ -5170,6 +5170,9 @@
                 "smithy.api#pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$"
             }
         },
+        "com.amazonaws.omics#EngineSettings": {
+            "type": "document"
+        },
         "com.amazonaws.omics#EngineVersion": {
             "type": "string",
             "traits": {
@@ -8714,6 +8717,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>VPC configuration for the workflow run.</p>"
                     }
+                },
+                "engineSettings": {
+                    "target": "com.amazonaws.omics#EngineSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The engine-specific settings for the workflow run.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10067,6 +10076,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The path to the workflow README markdown file within the repository. This file provides documentation and usage information for the workflow. If not specified, the <code>README.md</code> file from the root directory of the repository will be used.</p>"
                     }
+                },
+                "profiles": {
+                    "target": "com.amazonaws.omics#WorkflowProfileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Nextflow profiles that are available for this workflow. Profiles allow you to select predefined configuration settings at runtime.</p>"
+                    }
+                },
+                "profileParameterTemplates": {
+                    "target": "com.amazonaws.omics#WorkflowProfileParameterTemplates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping of profile names to their parameter templates. Each profile defines its own set of parameters that you can use when starting a run with that profile.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10368,6 +10389,18 @@
                     "target": "com.amazonaws.omics#ReadmePath",
                     "traits": {
                         "smithy.api#documentation": "<p>The path to the workflow version README markdown file within the repository. This file provides documentation and usage information for the workflow. If not specified, the <code>README.md</code> file from the root directory of the repository will be used.</p>"
+                    }
+                },
+                "profiles": {
+                    "target": "com.amazonaws.omics#WorkflowProfileList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Nextflow profiles that are available for this workflow version. Profiles allow you to select predefined configuration settings at runtime.</p>"
+                    }
+                },
+                "profileParameterTemplates": {
+                    "target": "com.amazonaws.omics#WorkflowProfileParameterTemplates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A mapping of profile names to their parameter templates. Each profile defines its own set of parameters that you can use when starting a run with that profile.</p>"
                     }
                 }
             },
@@ -19264,6 +19297,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Optional configuration name to use for the workflow run.</p>"
                     }
+                },
+                "engineSettings": {
+                    "target": "com.amazonaws.omics#EngineSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Engine-specific settings for the workflow run. Use this field to specify configuration options that are specific to the workflow engine (for example, Nextflow profiles).</p>"
+                    }
                 }
             },
             "traits": {
@@ -22138,6 +22177,24 @@
                     "min": 1,
                     "max": 2000
                 }
+            }
+        },
+        "com.amazonaws.omics#WorkflowProfileList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.omics#WorkflowProfileName"
+            }
+        },
+        "com.amazonaws.omics#WorkflowProfileName": {
+            "type": "string"
+        },
+        "com.amazonaws.omics#WorkflowProfileParameterTemplates": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.omics#WorkflowProfileName"
+            },
+            "value": {
+                "target": "com.amazonaws.omics#WorkflowParameterTemplate"
             }
         },
         "com.amazonaws.omics#WorkflowRequestId": {

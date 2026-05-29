@@ -435,6 +435,294 @@
                 }
             }
         },
+        "com.amazonaws.route53resolver#BatchCreateFirewallRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#BatchCreateFirewallRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#BatchCreateFirewallRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates multiple DNS Firewall rules in the specified rule group.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#BatchCreateFirewallRuleError": {
+            "type": "structure",
+            "members": {
+                "FirewallRule": {
+                    "target": "com.amazonaws.route53resolver#CreateFirewallRuleEntry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The firewall rule entry that caused the error.</p>"
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.route53resolver#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the failure.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.route53resolver#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that provides details about the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error that occurred while creating a firewall rule in a batch operation.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#BatchCreateFirewallRuleErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53resolver#BatchCreateFirewallRuleError"
+            }
+        },
+        "com.amazonaws.route53resolver#BatchCreateFirewallRuleRequest": {
+            "type": "structure",
+            "members": {
+                "CreateFirewallRuleEntries": {
+                    "target": "com.amazonaws.route53resolver#CreateFirewallRuleEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of firewall rules to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53resolver#BatchCreateFirewallRuleResponse": {
+            "type": "structure",
+            "members": {
+                "CreatedFirewallRules": {
+                    "target": "com.amazonaws.route53resolver#FirewallRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The firewall rules that were successfully created by the request.</p>"
+                    }
+                },
+                "CreateErrors": {
+                    "target": "com.amazonaws.route53resolver#BatchCreateFirewallRuleErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of errors that occurred while creating the firewall rules.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53resolver#BatchDeleteFirewallRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#BatchDeleteFirewallRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#BatchDeleteFirewallRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes multiple DNS Firewall rules from the specified rule group.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#BatchDeleteFirewallRuleError": {
+            "type": "structure",
+            "members": {
+                "FirewallRule": {
+                    "target": "com.amazonaws.route53resolver#DeleteFirewallRuleEntry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The firewall rule entry that caused the error.</p>"
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.route53resolver#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the failure.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.route53resolver#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that provides details about the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error that occurred while deleting a firewall rule in a batch operation.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#BatchDeleteFirewallRuleErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53resolver#BatchDeleteFirewallRuleError"
+            }
+        },
+        "com.amazonaws.route53resolver#BatchDeleteFirewallRuleRequest": {
+            "type": "structure",
+            "members": {
+                "DeleteFirewallRuleEntries": {
+                    "target": "com.amazonaws.route53resolver#DeleteFirewallRuleEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of firewall rules to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53resolver#BatchDeleteFirewallRuleResponse": {
+            "type": "structure",
+            "members": {
+                "DeletedFirewallRules": {
+                    "target": "com.amazonaws.route53resolver#FirewallRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The firewall rules that were successfully deleted by the request.</p>"
+                    }
+                },
+                "DeleteErrors": {
+                    "target": "com.amazonaws.route53resolver#BatchDeleteFirewallRuleErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of errors that occurred while deleting the firewall rules.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53resolver#BatchUpdateFirewallRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#BatchUpdateFirewallRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#BatchUpdateFirewallRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates multiple DNS Firewall rules in the specified rule group.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#BatchUpdateFirewallRuleError": {
+            "type": "structure",
+            "members": {
+                "FirewallRule": {
+                    "target": "com.amazonaws.route53resolver#UpdateFirewallRuleEntry",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The firewall rule entry that caused the error.</p>"
+                    }
+                },
+                "Code": {
+                    "target": "com.amazonaws.route53resolver#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the failure.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.route53resolver#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message that provides details about the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error that occurred while updating a firewall rule in a batch operation.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#BatchUpdateFirewallRuleErrors": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53resolver#BatchUpdateFirewallRuleError"
+            }
+        },
+        "com.amazonaws.route53resolver#BatchUpdateFirewallRuleRequest": {
+            "type": "structure",
+            "members": {
+                "UpdateFirewallRuleEntries": {
+                    "target": "com.amazonaws.route53resolver#UpdateFirewallRuleEntries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of firewall rules to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53resolver#BatchUpdateFirewallRuleResponse": {
+            "type": "structure",
+            "members": {
+                "UpdatedFirewallRules": {
+                    "target": "com.amazonaws.route53resolver#FirewallRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The firewall rules that were successfully updated by the request.</p>"
+                    }
+                },
+                "UpdateErrors": {
+                    "target": "com.amazonaws.route53resolver#BatchUpdateFirewallRuleErrors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of errors that occurred while updating the firewall rules.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.route53resolver#BlockOverrideDnsType": {
             "type": "enum",
             "members": {
@@ -491,6 +779,15 @@
             "type": "boolean",
             "traits": {
                 "smithy.api#default": false
+            }
+        },
+        "com.amazonaws.route53resolver#Category": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
             }
         },
         "com.amazonaws.route53resolver#ConfidenceThreshold": {
@@ -636,6 +933,115 @@
             ],
             "traits": {
                 "smithy.api#documentation": "<p>Creates a single DNS Firewall rule in the specified rule group, using the specified domain list.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#CreateFirewallRuleEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53resolver#CreateFirewallRuleEntry"
+            }
+        },
+        "com.amazonaws.route53resolver#CreateFirewallRuleEntry": {
+            "type": "structure",
+            "members": {
+                "CreatorRequestId": {
+                    "target": "com.amazonaws.route53resolver#CreatorRequestId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string that identifies the request and that allows you to retry failed requests without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirewallRuleGroupId": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the firewall rule group where you want to create the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirewallDomainListId": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain list that you want to use in the rule. This setting is mutually exclusive with <code>DnsThreatProtection</code> and <code>FirewallRuleType</code>.</p>"
+                    }
+                },
+                "Priority": {
+                    "target": "com.amazonaws.route53resolver#Priority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The setting that determines the processing order of the rule in the rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.route53resolver#Action",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list, or a threat in a DNS Firewall Advanced rule:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW</code> - Permit the request to go through. Not available for DNS Firewall Advanced rules.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALERT</code> - Permit the request and send metrics and logs to CloudWatch.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BLOCK</code> - Disallow the request. This option requires additional details in the rule's <code>BlockResponse</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "BlockResponse": {
+                    "target": "com.amazonaws.route53resolver#BlockResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The way that you want DNS Firewall to block the request, used with the rule action setting <code>BLOCK</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NODATA</code> - Respond indicating that the query was successful, but no response is available for it.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NXDOMAIN</code> - Respond indicating that the domain name that's in the query doesn't exist.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OVERRIDE</code> - Provide a custom override in the response. This option requires custom handling details in the rule's <code>BlockOverride*</code> settings.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "BlockOverrideDomain": {
+                    "target": "com.amazonaws.route53resolver#BlockOverrideDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom DNS record to send back in response to the query. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p>"
+                    }
+                },
+                "BlockOverrideDnsType": {
+                    "target": "com.amazonaws.route53resolver#BlockOverrideDnsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS record's type. This determines the format of the record value that you provided in <code>BlockOverrideDomain</code>. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p>"
+                    }
+                },
+                "BlockOverrideTtl": {
+                    "target": "com.amazonaws.route53resolver#BlockOverrideTtl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p>\n         <p>This setting is required if the <code>BlockResponse</code> setting is <code>OVERRIDE</code>.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53resolver#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name that lets you identify the rule in the rule group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirewallDomainRedirectionAction": {
+                    "target": "com.amazonaws.route53resolver#FirewallDomainRedirectionAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How you want the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME.</p>\n         <p>\n            <code>INSPECT_REDIRECTION_DOMAIN</code>: (Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be added to the domain list.</p>\n         <p>\n            <code>TRUST_REDIRECTION_DOMAIN</code>: Inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the redirection list to the domain list.</p>"
+                    }
+                },
+                "Qtype": {
+                    "target": "com.amazonaws.route53resolver#Qtype",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS query type you want the rule to evaluate. Allowed values are:</p>\n         <ul>\n            <li>\n               <p>A: Returns an IPv4 address.</p>\n            </li>\n            <li>\n               <p>AAAA: Returns an IPv6 address.</p>\n            </li>\n            <li>\n               <p>CAA: Restricts CAs that can create SSL/TLS certifications for the domain.</p>\n            </li>\n            <li>\n               <p>CNAME: Returns another domain name.</p>\n            </li>\n            <li>\n               <p>DS: Record that identifies the DNSSEC signing key of a delegated zone.</p>\n            </li>\n            <li>\n               <p>MX: Specifies mail servers.</p>\n            </li>\n            <li>\n               <p>NAPTR: Regular-expression-based rewriting of domain names.</p>\n            </li>\n            <li>\n               <p>NS: Authoritative name servers.</p>\n            </li>\n            <li>\n               <p>PTR: Maps an IP address to a domain name.</p>\n            </li>\n            <li>\n               <p>SOA: Start of authority record for the zone.</p>\n            </li>\n            <li>\n               <p>SPF: Lists the servers authorized to send emails from a domain.</p>\n            </li>\n            <li>\n               <p>SRV: Application specific values that identify servers.</p>\n            </li>\n            <li>\n               <p>TXT: Verifies email senders and application-specific values.</p>\n            </li>\n            <li>\n               <p>A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be defined as TYPENUMBER, where the NUMBER can be 1-65534, for example, TYPE28. For more information, see <a href=\"https://en.wikipedia.org/wiki/List_of_DNS_record_types\">List of DNS record types</a>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DnsThreatProtection": {
+                    "target": "com.amazonaws.route53resolver#DnsThreatProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the DNS Firewall Advanced rule. This setting is mutually exclusive with <code>FirewallDomainListId</code> and <code>FirewallRuleType</code>. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DGA</code>: Domain generation algorithms detection. DGAs are used by attackers to generate a large number of domains to launch malware attacks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DNS_TUNNELING</code>: DNS tunneling detection. DNS tunneling is used by attackers to exfiltrate data from the client by using the DNS tunnel without making a network connection to the client.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DICT_DGA</code>: Dictionary-based domain generation algorithms detection. Dictionary DGAs use wordlists to generate domains that appear more legitimate, making them harder to detect than traditional DGAs.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ConfidenceThreshold": {
+                    "target": "com.amazonaws.route53resolver#ConfidenceThreshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence threshold for DNS Firewall Advanced. You must provide this value when you create or update a DNS Firewall Advanced rule. The confidence level values mean:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LOW</code>: Provides the highest detection rate for threats, but also increases false positives.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MEDIUM</code>: Provides a balance between detecting threats and false positives.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HIGH</code>: Detects only the most well corroborated threats with a low rate of false positives.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "FirewallRuleType": {
+                    "target": "com.amazonaws.route53resolver#FirewallRuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule type configuration for the firewall rule. This setting is mutually exclusive with the top-level <code>FirewallDomainListId</code> and <code>DnsThreatProtection</code> fields.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for creating a single firewall rule in a batch operation.</p>"
             }
         },
         "com.amazonaws.route53resolver#CreateFirewallRuleGroup": {
@@ -788,7 +1194,7 @@
                 "Qtype": {
                     "target": "com.amazonaws.route53resolver#Qtype",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tThe DNS query type you want the rule to evaluate. Allowed values are;\n\t\t</p>\n         <ul>\n            <li>\n               <p>\n\t\t\t\tA: Returns an IPv4 address.</p>\n            </li>\n            <li>\n               <p>AAAA: Returns an Ipv6 address.</p>\n            </li>\n            <li>\n               <p>CAA: Restricts CAs that can create SSL/TLS certifications for the domain.</p>\n            </li>\n            <li>\n               <p>CNAME: Returns another domain name.</p>\n            </li>\n            <li>\n               <p>DS: Record that identifies the DNSSEC signing key of a delegated zone.</p>\n            </li>\n            <li>\n               <p>MX: Specifies mail servers.</p>\n            </li>\n            <li>\n               <p>NAPTR: Regular-expression-based rewriting of domain names.</p>\n            </li>\n            <li>\n               <p>NS: Authoritative name servers.</p>\n            </li>\n            <li>\n               <p>PTR: Maps an IP address to a domain name.</p>\n            </li>\n            <li>\n               <p>SOA: Start of authority record for the zone.</p>\n            </li>\n            <li>\n               <p>SPF: Lists the servers authorized to send emails from a domain.</p>\n            </li>\n            <li>\n               <p>SRV: Application specific values that identify servers.</p>\n            </li>\n            <li>\n               <p>TXT: Verifies email senders and application-specific values.</p>\n            </li>\n            <li>\n               <p>A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be\n\t\t\t\tdefined as TYPENUMBER, where the\n\t\t\t\tNUMBER can be 1-65334, for\n\t\t\t\texample, TYPE28. For more information, see \n\t\t\t\t<a href=\"https://en.wikipedia.org/wiki/List_of_DNS_record_types\">List of DNS record types</a>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n\t\t\tThe DNS query type you want the rule to evaluate. Allowed values are;\n\t\t</p>\n         <ul>\n            <li>\n               <p>\n\t\t\t\tA: Returns an IPv4 address.</p>\n            </li>\n            <li>\n               <p>AAAA: Returns an Ipv6 address.</p>\n            </li>\n            <li>\n               <p>CAA: Restricts CAs that can create SSL/TLS certifications for the domain.</p>\n            </li>\n            <li>\n               <p>CNAME: Returns another domain name.</p>\n            </li>\n            <li>\n               <p>DS: Record that identifies the DNSSEC signing key of a delegated zone.</p>\n            </li>\n            <li>\n               <p>MX: Specifies mail servers.</p>\n            </li>\n            <li>\n               <p>NAPTR: Regular-expression-based rewriting of domain names.</p>\n            </li>\n            <li>\n               <p>NS: Authoritative name servers.</p>\n            </li>\n            <li>\n               <p>PTR: Maps an IP address to a domain name.</p>\n            </li>\n            <li>\n               <p>SOA: Start of authority record for the zone.</p>\n            </li>\n            <li>\n               <p>SPF: Lists the servers authorized to send emails from a domain.</p>\n            </li>\n            <li>\n               <p>SRV: Application specific values that identify servers.</p>\n            </li>\n            <li>\n               <p>TXT: Verifies email senders and application-specific values.</p>\n            </li>\n            <li>\n               <p>A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be\n\t\t\t\tdefined as TYPENUMBER, where the\n\t\t\t\tNUMBER can be 1-65534, for\n\t\t\t\texample, TYPE28. For more information, see \n\t\t\t\t<a href=\"https://en.wikipedia.org/wiki/List_of_DNS_record_types\">List of DNS record types</a>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DnsThreatProtection": {
@@ -801,6 +1207,12 @@
                     "target": "com.amazonaws.route53resolver#ConfidenceThreshold",
                     "traits": {
                         "smithy.api#documentation": "<p>\n\t\t\tThe confidence threshold for DNS Firewall Advanced. You must provide this value when you create a DNS Firewall Advanced rule. The confidence\n\t\t\tlevel values mean:\n\t\t</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LOW</code>: Provides the highest detection rate for threats, but also increases false positives.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MEDIUM</code>: Provides a balance between detecting threats and false positives.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HIGH</code>: Detects only the most well corroborated threats with a low rate of false positives. </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "FirewallRuleType": {
+                    "target": "com.amazonaws.route53resolver#FirewallRuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule type configuration for the firewall rule. This setting is mutually exclusive with the top-level <code>FirewallDomainListId</code> and <code>DnsThreatProtection</code> fields.</p>"
                     }
                 }
             },
@@ -1370,6 +1782,45 @@
                 "smithy.api#documentation": "<p>Deletes the specified firewall rule.</p>"
             }
         },
+        "com.amazonaws.route53resolver#DeleteFirewallRuleEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53resolver#DeleteFirewallRuleEntry"
+            }
+        },
+        "com.amazonaws.route53resolver#DeleteFirewallRuleEntry": {
+            "type": "structure",
+            "members": {
+                "FirewallRuleGroupId": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the firewall rule group for the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirewallDomainListId": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain list that's used in the rule.</p>"
+                    }
+                },
+                "FirewallThreatProtectionId": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the DNS Firewall Advanced rule.</p>"
+                    }
+                },
+                "Qtype": {
+                    "target": "com.amazonaws.route53resolver#Qtype",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS query type that the rule evaluates.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for deleting a single firewall rule in a batch operation.</p>"
+            }
+        },
         "com.amazonaws.route53resolver#DeleteFirewallRuleGroup": {
             "type": "operation",
             "input": {
@@ -1456,7 +1907,7 @@
                 "Qtype": {
                     "target": "com.amazonaws.route53resolver#Qtype",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tThe DNS query type that the rule you are deleting evaluates. Allowed values are;\n\t\t</p>\n         <ul>\n            <li>\n               <p>\n\t\t\t\tA: Returns an IPv4 address.</p>\n            </li>\n            <li>\n               <p>AAAA: Returns an Ipv6 address.</p>\n            </li>\n            <li>\n               <p>CAA: Restricts CAs that can create SSL/TLS certifications for the domain.</p>\n            </li>\n            <li>\n               <p>CNAME: Returns another domain name.</p>\n            </li>\n            <li>\n               <p>DS: Record that identifies the DNSSEC signing key of a delegated zone.</p>\n            </li>\n            <li>\n               <p>MX: Specifies mail servers.</p>\n            </li>\n            <li>\n               <p>NAPTR: Regular-expression-based rewriting of domain names.</p>\n            </li>\n            <li>\n               <p>NS: Authoritative name servers.</p>\n            </li>\n            <li>\n               <p>PTR: Maps an IP address to a domain name.</p>\n            </li>\n            <li>\n               <p>SOA: Start of authority record for the zone.</p>\n            </li>\n            <li>\n               <p>SPF: Lists the servers authorized to send emails from a domain.</p>\n            </li>\n            <li>\n               <p>SRV: Application specific values that identify servers.</p>\n            </li>\n            <li>\n               <p>TXT: Verifies email senders and application-specific values.</p>\n            </li>\n            <li>\n               <p>A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be\n\t\t\t\tdefined as TYPENUMBER, where the\n\t\t\t\tNUMBER can be 1-65334, for\n\t\t\t\texample, TYPE28. For more information, see \n\t\t\t\t<a href=\"https://en.wikipedia.org/wiki/List_of_DNS_record_types\">List of DNS record types</a>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n\t\t\tThe DNS query type that the rule you are deleting evaluates. Allowed values are;\n\t\t</p>\n         <ul>\n            <li>\n               <p>\n\t\t\t\tA: Returns an IPv4 address.</p>\n            </li>\n            <li>\n               <p>AAAA: Returns an Ipv6 address.</p>\n            </li>\n            <li>\n               <p>CAA: Restricts CAs that can create SSL/TLS certifications for the domain.</p>\n            </li>\n            <li>\n               <p>CNAME: Returns another domain name.</p>\n            </li>\n            <li>\n               <p>DS: Record that identifies the DNSSEC signing key of a delegated zone.</p>\n            </li>\n            <li>\n               <p>MX: Specifies mail servers.</p>\n            </li>\n            <li>\n               <p>NAPTR: Regular-expression-based rewriting of domain names.</p>\n            </li>\n            <li>\n               <p>NS: Authoritative name servers.</p>\n            </li>\n            <li>\n               <p>PTR: Maps an IP address to a domain name.</p>\n            </li>\n            <li>\n               <p>SOA: Start of authority record for the zone.</p>\n            </li>\n            <li>\n               <p>SPF: Lists the servers authorized to send emails from a domain.</p>\n            </li>\n            <li>\n               <p>SRV: Application specific values that identify servers.</p>\n            </li>\n            <li>\n               <p>TXT: Verifies email senders and application-specific values.</p>\n            </li>\n            <li>\n               <p>A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be\n\t\t\t\tdefined as TYPENUMBER, where the\n\t\t\t\tNUMBER can be 1-65534, for\n\t\t\t\texample, TYPE28. For more information, see \n\t\t\t\t<a href=\"https://en.wikipedia.org/wiki/List_of_DNS_record_types\">List of DNS record types</a>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -1990,6 +2441,15 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.route53resolver#DisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
         "com.amazonaws.route53resolver#Dns64Enabled": {
             "type": "boolean"
         },
@@ -2016,12 +2476,60 @@
                 }
             }
         },
+        "com.amazonaws.route53resolver#DnsThreatProtectionRuleTypeConfig": {
+            "type": "structure",
+            "members": {
+                "Value": {
+                    "target": "com.amazonaws.route53resolver#DnsThreatProtectionRuleTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of DNS threat protection. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DGA</code>: Domain generation algorithms detection. DGAs are used by attackers to generate a large number of domains to launch malware attacks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DNS_TUNNELING</code>: DNS tunneling detection. DNS tunneling is used by attackers to exfiltrate data from the client by using the DNS tunnel without making a network connection to the client.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DICT_DGA</code>: Dictionary-based domain generation algorithms detection. Dictionary DGAs use wordlists to generate domains that appear more legitimate, making them harder to detect than traditional DGAs.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfidenceThreshold": {
+                    "target": "com.amazonaws.route53resolver#ConfidenceThreshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence threshold for DNS Firewall Advanced. You must provide this value when you create or update a DNS Firewall Advanced rule. The confidence level values mean:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LOW</code>: Provides the highest detection rate for threats, but also increases false positives.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MEDIUM</code>: Provides a balance between detecting threats and false positives.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HIGH</code>: Detects only the most well corroborated threats with a low rate of false positives.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a DNS threat protection rule type within the rule type framework.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#DnsThreatProtectionRuleTypeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.route53resolver#DomainListFileUrl": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#DomainListType": {
+            "type": "enum",
+            "members": {
+                "THREAT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "THREAT"
+                    }
+                },
+                "CONTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTENT"
+                    }
                 }
             }
         },
@@ -2085,6 +2593,54 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.route53resolver#Filter"
+            }
+        },
+        "com.amazonaws.route53resolver#FirewallAdvancedContentCategoryConfig": {
+            "type": "structure",
+            "members": {
+                "Category": {
+                    "target": "com.amazonaws.route53resolver#FirewallAdvancedContentCategoryValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The content category identifier. To retrieve the list of available content categories, call <a>ListFirewallRuleTypes</a> with <code>RuleType</code> set to <code>FirewallAdvancedContentCategory</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a content category-based filtering rule. This specifies which content category to use for DNS query evaluation.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#FirewallAdvancedContentCategoryValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#FirewallAdvancedThreatCategoryConfig": {
+            "type": "structure",
+            "members": {
+                "Category": {
+                    "target": "com.amazonaws.route53resolver#FirewallAdvancedThreatCategoryValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The threat category identifier. To retrieve the list of available threat categories, call <a>ListFirewallRuleTypes</a> with <code>RuleType</code> set to <code>FirewallAdvancedThreatCategory</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a threat category-based filtering rule. This specifies which threat category to use for DNS query evaluation.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#FirewallAdvancedThreatCategoryValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
             }
         },
         "com.amazonaws.route53resolver#FirewallConfig": {
@@ -2198,6 +2754,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that the domain list was last modified, in Unix time format and Coordinated Universal Time (UTC). </p>"
                     }
+                },
+                "Category": {
+                    "target": "com.amazonaws.route53resolver#Category",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the domain list.</p>"
+                    }
+                },
+                "ManagedListType": {
+                    "target": "com.amazonaws.route53resolver#DomainListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the managed domain list, for example <code>THREAT</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2235,6 +2803,18 @@
                     "target": "com.amazonaws.route53resolver#ServicePrinciple",
                     "traits": {
                         "smithy.api#documentation": "<p>The owner of the list, used only for lists that are not managed by you. For example, the managed domain list <code>AWSManagedDomainsMalwareDomainList</code> has the managed owner name <code>Route 53 Resolver DNS Firewall</code>.</p>"
+                    }
+                },
+                "ManagedListType": {
+                    "target": "com.amazonaws.route53resolver#DomainListType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the managed domain list, for example <code>THREAT</code>.</p>"
+                    }
+                },
+                "Category": {
+                    "target": "com.amazonaws.route53resolver#Category",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the domain list.</p>"
                     }
                 }
             },
@@ -2451,7 +3031,7 @@
                 "Qtype": {
                     "target": "com.amazonaws.route53resolver#Qtype",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tThe DNS query type you want the rule to evaluate. Allowed values are;\n\t\t</p>\n         <ul>\n            <li>\n               <p>\n\t\t\t\tA: Returns an IPv4 address.</p>\n            </li>\n            <li>\n               <p>AAAA: Returns an Ipv6 address.</p>\n            </li>\n            <li>\n               <p>CAA: Restricts CAs that can create SSL/TLS certifications for the domain.</p>\n            </li>\n            <li>\n               <p>CNAME: Returns another domain name.</p>\n            </li>\n            <li>\n               <p>DS: Record that identifies the DNSSEC signing key of a delegated zone.</p>\n            </li>\n            <li>\n               <p>MX: Specifies mail servers.</p>\n            </li>\n            <li>\n               <p>NAPTR: Regular-expression-based rewriting of domain names.</p>\n            </li>\n            <li>\n               <p>NS: Authoritative name servers.</p>\n            </li>\n            <li>\n               <p>PTR: Maps an IP address to a domain name.</p>\n            </li>\n            <li>\n               <p>SOA: Start of authority record for the zone.</p>\n            </li>\n            <li>\n               <p>SPF: Lists the servers authorized to send emails from a domain.</p>\n            </li>\n            <li>\n               <p>SRV: Application specific values that identify servers.</p>\n            </li>\n            <li>\n               <p>TXT: Verifies email senders and application-specific values.</p>\n            </li>\n            <li>\n               <p>A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be\n\t\t\t\tdefined as TYPENUMBER, where the\n\t\t\t\tNUMBER can be 1-65334, for\n\t\t\t\texample, TYPE28. For more information, see \n\t\t\t\t<a href=\"https://en.wikipedia.org/wiki/List_of_DNS_record_types\">List of DNS record types</a>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n\t\t\tThe DNS query type you want the rule to evaluate. Allowed values are;\n\t\t</p>\n         <ul>\n            <li>\n               <p>\n\t\t\t\tA: Returns an IPv4 address.</p>\n            </li>\n            <li>\n               <p>AAAA: Returns an Ipv6 address.</p>\n            </li>\n            <li>\n               <p>CAA: Restricts CAs that can create SSL/TLS certifications for the domain.</p>\n            </li>\n            <li>\n               <p>CNAME: Returns another domain name.</p>\n            </li>\n            <li>\n               <p>DS: Record that identifies the DNSSEC signing key of a delegated zone.</p>\n            </li>\n            <li>\n               <p>MX: Specifies mail servers.</p>\n            </li>\n            <li>\n               <p>NAPTR: Regular-expression-based rewriting of domain names.</p>\n            </li>\n            <li>\n               <p>NS: Authoritative name servers.</p>\n            </li>\n            <li>\n               <p>PTR: Maps an IP address to a domain name.</p>\n            </li>\n            <li>\n               <p>SOA: Start of authority record for the zone.</p>\n            </li>\n            <li>\n               <p>SPF: Lists the servers authorized to send emails from a domain.</p>\n            </li>\n            <li>\n               <p>SRV: Application specific values that identify servers.</p>\n            </li>\n            <li>\n               <p>TXT: Verifies email senders and application-specific values.</p>\n            </li>\n            <li>\n               <p>A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be\n\t\t\t\tdefined as TYPENUMBER, where the\n\t\t\t\tNUMBER can be 1-65534, for\n\t\t\t\texample, TYPE28. For more information, see \n\t\t\t\t<a href=\"https://en.wikipedia.org/wiki/List_of_DNS_record_types\">List of DNS record types</a>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DnsThreatProtection": {
@@ -2464,6 +3044,12 @@
                     "target": "com.amazonaws.route53resolver#ConfidenceThreshold",
                     "traits": {
                         "smithy.api#documentation": "<p>\n\t\t\tThe confidence threshold for DNS Firewall Advanced. You must provide this value when you create a DNS Firewall Advanced rule. The confidence\n\t\t\tlevel values mean:\n\t\t</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LOW</code>: Provides the highest detection rate for threats, but also increases false positives.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MEDIUM</code>: Provides a balance between detecting threats and false positives.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HIGH</code>: Detects only the most well corroborated threats with a low rate of false positives. </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "FirewallRuleType": {
+                    "target": "com.amazonaws.route53resolver#FirewallRuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule type configuration for the firewall rule. Exactly one member of this union should be set.</p>"
                     }
                 }
             },
@@ -2740,6 +3326,70 @@
                         "smithy.api#enumValue": "UPDATING"
                     }
                 }
+            }
+        },
+        "com.amazonaws.route53resolver#FirewallRuleType": {
+            "type": "structure",
+            "members": {
+                "FirewallAdvancedContentCategory": {
+                    "target": "com.amazonaws.route53resolver#FirewallAdvancedContentCategoryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a content category-based filtering rule.</p>"
+                    }
+                },
+                "FirewallAdvancedThreatCategory": {
+                    "target": "com.amazonaws.route53resolver#FirewallAdvancedThreatCategoryConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a threat category-based filtering rule.</p>"
+                    }
+                },
+                "DnsThreatProtection": {
+                    "target": "com.amazonaws.route53resolver#DnsThreatProtectionRuleTypeConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for a DNS threat protection rule type, such as DGA or DNS tunneling detection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration for a rule type in a DNS Firewall rule. This is a union type — exactly one member should be set.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#FirewallRuleTypeDefinition": {
+            "type": "structure",
+            "members": {
+                "RuleType": {
+                    "target": "com.amazonaws.route53resolver#RuleTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category or class of the rule type, such as <code>FirewallAdvancedContentCategory</code> or <code>FirewallAdvancedThreatCategory</code>.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.route53resolver#RuleTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific identifier within the rule type category, such as <code>VIOLENCE_AND_HATE_SPEECH</code> or <code>PHISHING</code>.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.route53resolver#DisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the rule type.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.route53resolver#RuleTypeDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the rule type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The definition of an available rule type that can be used in DNS Firewall rules. This is returned by <a>ListFirewallRuleTypes</a>.</p>"
+            }
+        },
+        "com.amazonaws.route53resolver#FirewallRuleTypeDefinitions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53resolver#FirewallRuleTypeDefinition"
             }
         },
         "com.amazonaws.route53resolver#FirewallRules": {
@@ -4452,6 +5102,84 @@
                     "target": "com.amazonaws.route53resolver#FirewallRuleGroupMetadataList",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of your firewall rule groups.</p>\n         <p>This might be a partial list of the rule groups that you have defined. For information, see <code>MaxResults</code>. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.route53resolver#ListFirewallRuleTypes": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53resolver#ListFirewallRuleTypesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53resolver#ListFirewallRuleTypesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53resolver#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#InternalServiceErrorException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the available rule types that can be used in DNS Firewall rules.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "FirewallRuleTypes",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#ListFirewallRuleTypesRequest": {
+            "type": "structure",
+            "members": {
+                "RuleType": {
+                    "target": "com.amazonaws.route53resolver#RuleTypeName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule type to filter by. If specified, only rule types matching this value are returned.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.route53resolver#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53resolver#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For the first call to this list request, omit this value. When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver provides a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.route53resolver#ListFirewallRuleTypesResponse": {
+            "type": "structure",
+            "members": {
+                "FirewallRuleTypes": {
+                    "target": "com.amazonaws.route53resolver#FirewallRuleTypeDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the available rule type definitions.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53resolver#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.</p>"
                     }
                 }
             },
@@ -6925,6 +7653,15 @@
                     "target": "com.amazonaws.route53resolver#AssociateResolverRule"
                 },
                 {
+                    "target": "com.amazonaws.route53resolver#BatchCreateFirewallRule"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#BatchDeleteFirewallRule"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#BatchUpdateFirewallRule"
+                },
+                {
                     "target": "com.amazonaws.route53resolver#CreateFirewallDomainList"
                 },
                 {
@@ -7043,6 +7780,9 @@
                 },
                 {
                     "target": "com.amazonaws.route53resolver#ListFirewallRules"
+                },
+                {
+                    "target": "com.amazonaws.route53resolver#ListFirewallRuleTypes"
                 },
                 {
                     "target": "com.amazonaws.route53resolver#ListOutpostResolvers"
@@ -8291,6 +9031,24 @@
                 }
             }
         },
+        "com.amazonaws.route53resolver#RuleTypeDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#RuleTypeName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                }
+            }
+        },
         "com.amazonaws.route53resolver#RuleTypeOption": {
             "type": "enum",
             "members": {
@@ -8317,6 +9075,15 @@
                     "traits": {
                         "smithy.api#enumValue": "DELEGATE"
                     }
+                }
+            }
+        },
+        "com.amazonaws.route53resolver#RuleTypeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
                 }
             }
         },
@@ -8884,6 +9651,111 @@
                 "smithy.api#documentation": "<p>Updates the specified firewall rule. </p>"
             }
         },
+        "com.amazonaws.route53resolver#UpdateFirewallRuleEntries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53resolver#UpdateFirewallRuleEntry"
+            }
+        },
+        "com.amazonaws.route53resolver#UpdateFirewallRuleEntry": {
+            "type": "structure",
+            "members": {
+                "FirewallRuleGroupId": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the firewall rule group for the rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FirewallDomainListId": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the domain list to use in the rule. This setting is mutually exclusive with <code>DnsThreatProtection</code> and <code>FirewallRuleType</code>.</p>"
+                    }
+                },
+                "FirewallThreatProtectionId": {
+                    "target": "com.amazonaws.route53resolver#ResourceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the DNS Firewall Advanced rule.</p>"
+                    }
+                },
+                "Priority": {
+                    "target": "com.amazonaws.route53resolver#Priority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The setting that determines the processing order of the rule in the rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting.</p>"
+                    }
+                },
+                "Action": {
+                    "target": "com.amazonaws.route53resolver#Action",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list, or a threat in a DNS Firewall Advanced rule:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ALLOW</code> - Permit the request to go through. Not available for DNS Firewall Advanced rules.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ALERT</code> - Permit the request and send metrics and logs to CloudWatch.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BLOCK</code> - Disallow the request. This option requires additional details in the rule's <code>BlockResponse</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "BlockResponse": {
+                    "target": "com.amazonaws.route53resolver#BlockResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The way that you want DNS Firewall to block the request, used with the rule action setting <code>BLOCK</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NODATA</code> - Respond indicating that the query was successful, but no response is available for it.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NXDOMAIN</code> - Respond indicating that the domain name that's in the query doesn't exist.</p>\n            </li>\n            <li>\n               <p>\n                  <code>OVERRIDE</code> - Provide a custom override in the response. This option requires custom handling details in the rule's <code>BlockOverride*</code> settings.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "BlockOverrideDomain": {
+                    "target": "com.amazonaws.route53resolver#BlockOverrideDomain",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom DNS record to send back in response to the query. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p>"
+                    }
+                },
+                "BlockOverrideDnsType": {
+                    "target": "com.amazonaws.route53resolver#BlockOverrideDnsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS record's type. This determines the format of the record value that you provided in <code>BlockOverrideDomain</code>. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p>"
+                    }
+                },
+                "BlockOverrideTtl": {
+                    "target": "com.amazonaws.route53resolver#BlockOverrideTtl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p>\n         <p>This setting is required if the <code>BlockResponse</code> setting is <code>OVERRIDE</code>.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53resolver#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rule.</p>"
+                    }
+                },
+                "FirewallDomainRedirectionAction": {
+                    "target": "com.amazonaws.route53resolver#FirewallDomainRedirectionAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How you want the rule to evaluate DNS redirection in the DNS redirection chain, such as CNAME or DNAME.</p>\n         <p>\n            <code>INSPECT_REDIRECTION_DOMAIN</code>: (Default) inspects all domains in the redirection chain. The individual domains in the redirection chain must be added to the domain list.</p>\n         <p>\n            <code>TRUST_REDIRECTION_DOMAIN</code>: Inspects only the first domain in the redirection chain. You don't need to add the subsequent domains in the redirection list to the domain list.</p>"
+                    }
+                },
+                "Qtype": {
+                    "target": "com.amazonaws.route53resolver#Qtype",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS query type you want the rule to evaluate. Allowed values are:</p>\n         <ul>\n            <li>\n               <p>A: Returns an IPv4 address.</p>\n            </li>\n            <li>\n               <p>AAAA: Returns an IPv6 address.</p>\n            </li>\n            <li>\n               <p>CAA: Restricts CAs that can create SSL/TLS certifications for the domain.</p>\n            </li>\n            <li>\n               <p>CNAME: Returns another domain name.</p>\n            </li>\n            <li>\n               <p>DS: Record that identifies the DNSSEC signing key of a delegated zone.</p>\n            </li>\n            <li>\n               <p>MX: Specifies mail servers.</p>\n            </li>\n            <li>\n               <p>NAPTR: Regular-expression-based rewriting of domain names.</p>\n            </li>\n            <li>\n               <p>NS: Authoritative name servers.</p>\n            </li>\n            <li>\n               <p>PTR: Maps an IP address to a domain name.</p>\n            </li>\n            <li>\n               <p>SOA: Start of authority record for the zone.</p>\n            </li>\n            <li>\n               <p>SPF: Lists the servers authorized to send emails from a domain.</p>\n            </li>\n            <li>\n               <p>SRV: Application specific values that identify servers.</p>\n            </li>\n            <li>\n               <p>TXT: Verifies email senders and application-specific values.</p>\n            </li>\n            <li>\n               <p>A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be defined as TYPENUMBER, where the NUMBER can be 1-65534, for example, TYPE28. For more information, see <a href=\"https://en.wikipedia.org/wiki/List_of_DNS_record_types\">List of DNS record types</a>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DnsThreatProtection": {
+                    "target": "com.amazonaws.route53resolver#DnsThreatProtection",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the DNS Firewall Advanced rule. This setting is mutually exclusive with <code>FirewallDomainListId</code> and <code>FirewallRuleType</code>. Valid values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DGA</code>: Domain generation algorithms detection. DGAs are used by attackers to generate a large number of domains to launch malware attacks.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DNS_TUNNELING</code>: DNS tunneling detection. DNS tunneling is used by attackers to exfiltrate data from the client by using the DNS tunnel without making a network connection to the client.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DICT_DGA</code>: Dictionary-based domain generation algorithms detection. Dictionary DGAs use wordlists to generate domains that appear more legitimate, making them harder to detect than traditional DGAs.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ConfidenceThreshold": {
+                    "target": "com.amazonaws.route53resolver#ConfidenceThreshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The confidence threshold for DNS Firewall Advanced. You must provide this value when you create or update a DNS Firewall Advanced rule. The confidence level values mean:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LOW</code>: Provides the highest detection rate for threats, but also increases false positives.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MEDIUM</code>: Provides a balance between detecting threats and false positives.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HIGH</code>: Detects only the most well corroborated threats with a low rate of false positives.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "FirewallRuleType": {
+                    "target": "com.amazonaws.route53resolver#FirewallRuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule type configuration for the firewall rule. This setting is mutually exclusive with the top-level <code>FirewallDomainListId</code> and <code>DnsThreatProtection</code> fields.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for updating a single firewall rule in a batch operation.</p>"
+            }
+        },
         "com.amazonaws.route53resolver#UpdateFirewallRuleGroupAssociation": {
             "type": "operation",
             "input": {
@@ -9036,7 +9908,7 @@
                 "Qtype": {
                     "target": "com.amazonaws.route53resolver#Qtype",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n\t\t\tThe DNS query type you want the rule to evaluate. Allowed values are;\n\t\t</p>\n         <ul>\n            <li>\n               <p>\n\t\t\t\tA: Returns an IPv4 address.</p>\n            </li>\n            <li>\n               <p>AAAA: Returns an Ipv6 address.</p>\n            </li>\n            <li>\n               <p>CAA: Restricts CAs that can create SSL/TLS certifications for the domain.</p>\n            </li>\n            <li>\n               <p>CNAME: Returns another domain name.</p>\n            </li>\n            <li>\n               <p>DS: Record that identifies the DNSSEC signing key of a delegated zone.</p>\n            </li>\n            <li>\n               <p>MX: Specifies mail servers.</p>\n            </li>\n            <li>\n               <p>NAPTR: Regular-expression-based rewriting of domain names.</p>\n            </li>\n            <li>\n               <p>NS: Authoritative name servers.</p>\n            </li>\n            <li>\n               <p>PTR: Maps an IP address to a domain name.</p>\n            </li>\n            <li>\n               <p>SOA: Start of authority record for the zone.</p>\n            </li>\n            <li>\n               <p>SPF: Lists the servers authorized to send emails from a domain.</p>\n            </li>\n            <li>\n               <p>SRV: Application specific values that identify servers.</p>\n            </li>\n            <li>\n               <p>TXT: Verifies email senders and application-specific values.</p>\n            </li>\n            <li>\n               <p>A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be\n\t\t\t\tdefined as TYPENUMBER, where the\n\t\t\t\tNUMBER can be 1-65334, for\n\t\t\t\texample, TYPE28. For more information, see \n\t\t\t\t<a href=\"https://en.wikipedia.org/wiki/List_of_DNS_record_types\">List of DNS record types</a>.</p>\n               <note>\n                  <p>If you set up a firewall BLOCK rule with action NXDOMAIN on query type equals AAAA, \n\t\t\t\t\tthis action will not be applied to synthetic IPv6 addresses generated when DNS64 is enabled. </p>\n               </note>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>\n\t\t\tThe DNS query type you want the rule to evaluate. Allowed values are;\n\t\t</p>\n         <ul>\n            <li>\n               <p>\n\t\t\t\tA: Returns an IPv4 address.</p>\n            </li>\n            <li>\n               <p>AAAA: Returns an Ipv6 address.</p>\n            </li>\n            <li>\n               <p>CAA: Restricts CAs that can create SSL/TLS certifications for the domain.</p>\n            </li>\n            <li>\n               <p>CNAME: Returns another domain name.</p>\n            </li>\n            <li>\n               <p>DS: Record that identifies the DNSSEC signing key of a delegated zone.</p>\n            </li>\n            <li>\n               <p>MX: Specifies mail servers.</p>\n            </li>\n            <li>\n               <p>NAPTR: Regular-expression-based rewriting of domain names.</p>\n            </li>\n            <li>\n               <p>NS: Authoritative name servers.</p>\n            </li>\n            <li>\n               <p>PTR: Maps an IP address to a domain name.</p>\n            </li>\n            <li>\n               <p>SOA: Start of authority record for the zone.</p>\n            </li>\n            <li>\n               <p>SPF: Lists the servers authorized to send emails from a domain.</p>\n            </li>\n            <li>\n               <p>SRV: Application specific values that identify servers.</p>\n            </li>\n            <li>\n               <p>TXT: Verifies email senders and application-specific values.</p>\n            </li>\n            <li>\n               <p>A query type you define by using the DNS type ID, for example 28 for AAAA. The values must be\n\t\t\t\tdefined as TYPENUMBER, where the\n\t\t\t\tNUMBER can be 1-65534, for\n\t\t\t\texample, TYPE28. For more information, see \n\t\t\t\t<a href=\"https://en.wikipedia.org/wiki/List_of_DNS_record_types\">List of DNS record types</a>.</p>\n               <note>\n                  <p>If you set up a firewall BLOCK rule with action NXDOMAIN on query type equals AAAA, \n\t\t\t\t\tthis action will not be applied to synthetic IPv6 addresses generated when DNS64 is enabled. </p>\n               </note>\n            </li>\n         </ul>"
                     }
                 },
                 "DnsThreatProtection": {
@@ -9049,6 +9921,12 @@
                     "target": "com.amazonaws.route53resolver#ConfidenceThreshold",
                     "traits": {
                         "smithy.api#documentation": "<p>\n\t\t\tThe confidence threshold for DNS Firewall Advanced. You must provide this value when you create a DNS Firewall Advanced rule. The confidence\n\t\t\tlevel values mean:\n\t\t</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LOW</code>: Provides the highest detection rate for threats, but also increases false positives.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MEDIUM</code>: Provides a balance between detecting threats and false positives.</p>\n            </li>\n            <li>\n               <p>\n                  <code>HIGH</code>: Detects only the most well corroborated threats with a low rate of false positives. </p>\n            </li>\n         </ul>"
+                    }
+                },
+                "FirewallRuleType": {
+                    "target": "com.amazonaws.route53resolver#FirewallRuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rule type configuration for the firewall rule. This setting is mutually exclusive with the top-level <code>FirewallDomainListId</code> and <code>DnsThreatProtection</code> fields.</p>"
                     }
                 }
             },
