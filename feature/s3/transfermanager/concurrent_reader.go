@@ -42,7 +42,6 @@ type concurrentReader struct {
 	ctx context.Context
 	m   sync.Mutex
 	wg  sync.WaitGroup
-	co  sync.Once
 
 	err error
 }
@@ -106,9 +105,7 @@ func (r *concurrentReader) Read(p []byte) (int, error) {
 	r.wg.Wait()
 
 	if e := r.getErr(); e != nil && e != io.EOF {
-		r.co.Do(func() {
-			close(r.ch)
-		})
+		close(r.ch)
 	}
 	wg.Wait()
 
