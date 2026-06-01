@@ -9,7 +9,9 @@ import (
 	"os"
 	"os/exec"
 	"runtime"
+	"strings"
 	"time"
+	"unicode"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/sdkio"
@@ -85,24 +87,70 @@ type DefaultNewCommandBuilder struct {
 	Args []string
 }
 
-// NewCommand returns an initialized exec.Cmd with the builder's initialized
-// Args. The command is also initialized current process environment variables,
-// stderr, and stdin pipes.
-func (b DefaultNewCommandBuilder) NewCommand(ctx context.Context) (*exec.Cmd, error) {
-	var cmdArgs []string
-	if runtime.GOOS == "windows" {
-		cmdArgs = []string{"cmd.exe", "/C"}
-	} else {
-		cmdArgs = []string{"sh", "-c"}
+// parseCommand splits a command string into executable and arguments,
+// respecting quoted strings (both single and double quotes).
+// This provides safe command parsing without shell interpolation.
+func parseCommand(command string) ([]string, error) {
+	var args []string
+	var current strings.Builder
+	var inQuote rune
+	var escaped bool
+
+	for _, r := range command {
+		switch {
+		case escaped:
+			current.WriteRune(r)
+			escaped = false
+		case r == '\\' && inQuote != '\'':
+			escaped = true
+		case r == inQuote:
+			inQuote = 0
+		case inQuote != 0:
+			current.WriteRune(r)
+		case r == '"' || r == '\'':
+			inQuote = r
+		case unicode.IsSpace(r):
+			if current.Len() > 0 {
+				args = append(args, current.String())
+				current.Reset()
+			}
+		default:
+			current.WriteRune(r)
+		}
 	}
 
+	if current.Len() > 0 {
+		args = append(args, current.String())
+	}
+
+	if len(args) == 0 {
+		return nil, fmt.Errorf("empty command")
+	}
+
+	return args, nil
+}
+
+// NewCommand returns an initialized exec.Cmd with the builder's initialized
+// Args. The command is executed directly without shell interpolation to
+// prevent command injection via shell metacharacters (;, &&, ||, |, $(), etc.).
+// The command is also initialized with current process environment variables,
+// stderr, and stdin pipes.
+func (b DefaultNewCommandBuilder) NewCommand(ctx context.Context) (*exec.Cmd, error) {
 	if len(b.Args) == 0 {
 		return nil, &ProviderError{
 			Err: fmt.Errorf("failed to prepare command: command must not be empty"),
 		}
 	}
 
-	cmdArgs = append(cmdArgs, b.Args...)
+	// Parse the command string into executable and arguments without shell
+	// interpolation to prevent command injection.
+	cmdArgs, err := parseCommand(b.Args[0])
+	if err != nil {
+		return nil, &ProviderError{
+			Err: fmt.Errorf("failed to parse command: %w", err),
+		}
+	}
+
 	cmd := exec.CommandContext(ctx, cmdArgs[0], cmdArgs[1:]...)
 	cmd.Env = os.Environ()
 

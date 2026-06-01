@@ -353,3 +353,90 @@ func getOSCat() string {
 	}
 	return "cat"
 }
+
+func TestParseCommand(t *testing.T) {
+	tests := []struct {
+		name    string
+		input   string
+		want    []string
+		wantErr bool
+	}{
+		{
+			name:  "simple command",
+			input: "/usr/bin/credential-helper",
+			want:  []string{"/usr/bin/credential-helper"},
+		},
+		{
+			name:  "command with arguments",
+			input: "/usr/bin/helper --profile prod",
+			want:  []string{"/usr/bin/helper", "--profile", "prod"},
+		},
+		{
+			name:  "double quoted argument",
+			input: `/usr/bin/helper --name "my profile"`,
+			want:  []string{"/usr/bin/helper", "--name", "my profile"},
+		},
+		{
+			name:  "shell metacharacters treated as literal",
+			input: "/bin/echo test; rm -rf /",
+			want:  []string{"/bin/echo", "test;", "rm", "-rf", "/"},
+		},
+		{
+			name:    "empty command",
+			input:   "",
+			wantErr: true,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := parseCommand(tt.input)
+			if tt.wantErr {
+				if err == nil {
+					t.Errorf("expected error, got nil")
+				}
+				return
+			}
+			if err != nil {
+				t.Errorf("unexpected error: %v", err)
+				return
+			}
+			if len(got) != len(tt.want) {
+				t.Errorf("length mismatch: got %v, want %v", got, tt.want)
+				return
+			}
+			for i := range got {
+				if got[i] != tt.want[i] {
+					t.Errorf("args[%d] = %q, want %q", i, got[i], tt.want[i])
+				}
+			}
+		})
+	}
+}
+
+func TestShellMetacharactersNotExecuted(t *testing.T) {
+	if runtime.GOOS == "windows" {
+		t.Skip("test not applicable on windows")
+	}
+
+	tmpFile := filepath.Join(os.TempDir(), "aws-sdk-shell-injection-test")
+	os.Remove(tmpFile)
+
+	maliciousCommand := fmt.Sprintf("/bin/echo test; touch %s", tmpFile)
+
+	builder := DefaultNewCommandBuilder{
+		Args: []string{maliciousCommand},
+	}
+
+	cmd, err := builder.NewCommand(context.Background())
+	if err != nil {
+		t.Fatalf("NewCommand failed: %v", err)
+	}
+
+	_ = cmd.Run()
+
+	if _, err := os.Stat(tmpFile); err == nil {
+		os.Remove(tmpFile)
+		t.Fatal("shell injection succeeded - temp file was created")
+	}
+}
