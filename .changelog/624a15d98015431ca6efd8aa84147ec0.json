@@ -1,0 +1,8 @@
+{
+    "id": "624a15d9-8015-431c-a6ef-d8aa84147ec0",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/appmesh"
+    ]
+}

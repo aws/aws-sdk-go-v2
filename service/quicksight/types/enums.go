@@ -118,6 +118,72 @@ func (ActionConnectorType) Values() []ActionConnectorType {
 	}
 }
 
+type AgentLifecycle string
+
+// Enum values for AgentLifecycle
+const (
+	AgentLifecyclePreview   AgentLifecycle = "PREVIEW"
+	AgentLifecyclePublished AgentLifecycle = "PUBLISHED"
+)
+
+// Values returns all known values for AgentLifecycle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentLifecycle) Values() []AgentLifecycle {
+	return []AgentLifecycle{
+		"PREVIEW",
+		"PUBLISHED",
+	}
+}
+
+type AgentOwnershipFilterAttribute string
+
+// Enum values for AgentOwnershipFilterAttribute
+const (
+	AgentOwnershipFilterAttributeDirectQuicksightOwner         AgentOwnershipFilterAttribute = "DIRECT_QUICKSIGHT_OWNER"
+	AgentOwnershipFilterAttributeDirectQuicksightViewerOrOwner AgentOwnershipFilterAttribute = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+	AgentOwnershipFilterAttributeDirectQuicksightSoleOwner     AgentOwnershipFilterAttribute = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+	AgentOwnershipFilterAttributeAgentName                     AgentOwnershipFilterAttribute = "AGENT_NAME"
+)
+
+// Values returns all known values for AgentOwnershipFilterAttribute. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentOwnershipFilterAttribute) Values() []AgentOwnershipFilterAttribute {
+	return []AgentOwnershipFilterAttribute{
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+		"AGENT_NAME",
+	}
+}
+
+type AgentStatus string
+
+// Enum values for AgentStatus
+const (
+	AgentStatusActive   AgentStatus = "ACTIVE"
+	AgentStatusUpdating AgentStatus = "UPDATING"
+	AgentStatusFailed   AgentStatus = "FAILED"
+	AgentStatusCreating AgentStatus = "CREATING"
+)
+
+// Values returns all known values for AgentStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AgentStatus) Values() []AgentStatus {
+	return []AgentStatus{
+		"ACTIVE",
+		"UPDATING",
+		"FAILED",
+		"CREATING",
+	}
+}
+
 type AggType string
 
 // Enum values for AggType
@@ -1274,6 +1340,25 @@ func (ComparisonMethodType) Values() []ComparisonMethodType {
 		"PERCENT_OF_TOTAL",
 		"RUNNING_SUM",
 		"MOVING_AVERAGE",
+	}
+}
+
+type ComparisonOperator string
+
+// Enum values for ComparisonOperator
+const (
+	ComparisonOperatorStringEquals ComparisonOperator = "StringEquals"
+	ComparisonOperatorStringLike   ComparisonOperator = "StringLike"
+)
+
+// Values returns all known values for ComparisonOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ComparisonOperator) Values() []ComparisonOperator {
+	return []ComparisonOperator{
+		"StringEquals",
+		"StringLike",
 	}
 }
 
@@ -5396,6 +5481,88 @@ func (SortDirection) Values() []SortDirection {
 	return []SortDirection{
 		"ASC",
 		"DESC",
+	}
+}
+
+type SpaceQuickSightResourceType string
+
+// Enum values for SpaceQuickSightResourceType
+const (
+	SpaceQuickSightResourceTypeTopic           SpaceQuickSightResourceType = "TOPIC"
+	SpaceQuickSightResourceTypeDashboard       SpaceQuickSightResourceType = "DASHBOARD"
+	SpaceQuickSightResourceTypeKnowledgeBase   SpaceQuickSightResourceType = "KNOWLEDGE_BASE"
+	SpaceQuickSightResourceTypeSpace           SpaceQuickSightResourceType = "SPACE"
+	SpaceQuickSightResourceTypeActionConnector SpaceQuickSightResourceType = "ACTION_CONNECTOR"
+	SpaceQuickSightResourceTypeDataSet         SpaceQuickSightResourceType = "DATA_SET"
+	SpaceQuickSightResourceTypeArtifact        SpaceQuickSightResourceType = "ARTIFACT"
+)
+
+// Values returns all known values for SpaceQuickSightResourceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpaceQuickSightResourceType) Values() []SpaceQuickSightResourceType {
+	return []SpaceQuickSightResourceType{
+		"TOPIC",
+		"DASHBOARD",
+		"KNOWLEDGE_BASE",
+		"SPACE",
+		"ACTION_CONNECTOR",
+		"DATA_SET",
+		"ARTIFACT",
+	}
+}
+
+type SpaceQuickSightSearchFilterName string
+
+// Enum values for SpaceQuickSightSearchFilterName
+const (
+	SpaceQuickSightSearchFilterNameSpaceId                       SpaceQuickSightSearchFilterName = "SPACE_ID"
+	SpaceQuickSightSearchFilterNameSpaceName                     SpaceQuickSightSearchFilterName = "SPACE_NAME"
+	SpaceQuickSightSearchFilterNameDirectQuicksightOwner         SpaceQuickSightSearchFilterName = "DIRECT_QUICKSIGHT_OWNER"
+	SpaceQuickSightSearchFilterNameDirectQuicksightViewerOrOwner SpaceQuickSightSearchFilterName = "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+	SpaceQuickSightSearchFilterNameDirectQuicksightSoleOwner     SpaceQuickSightSearchFilterName = "DIRECT_QUICKSIGHT_SOLE_OWNER"
+	SpaceQuickSightSearchFilterNameContributedBy                 SpaceQuickSightSearchFilterName = "CONTRIBUTED_BY"
+	SpaceQuickSightSearchFilterNameConsumedSourceSize            SpaceQuickSightSearchFilterName = "CONSUMED_SOURCE_SIZE"
+	SpaceQuickSightSearchFilterNameCreatedBy                     SpaceQuickSightSearchFilterName = "CREATED_BY"
+)
+
+// Values returns all known values for SpaceQuickSightSearchFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpaceQuickSightSearchFilterName) Values() []SpaceQuickSightSearchFilterName {
+	return []SpaceQuickSightSearchFilterName{
+		"SPACE_ID",
+		"SPACE_NAME",
+		"DIRECT_QUICKSIGHT_OWNER",
+		"DIRECT_QUICKSIGHT_VIEWER_OR_OWNER",
+		"DIRECT_QUICKSIGHT_SOLE_OWNER",
+		"CONTRIBUTED_BY",
+		"CONSUMED_SOURCE_SIZE",
+		"CREATED_BY",
+	}
+}
+
+type SpaceSearchOperator string
+
+// Enum values for SpaceSearchOperator
+const (
+	SpaceSearchOperatorStringEquals SpaceSearchOperator = "STRING_EQUALS"
+	SpaceSearchOperatorStringLike   SpaceSearchOperator = "STRING_LIKE"
+	SpaceSearchOperatorNumberRange  SpaceSearchOperator = "NUMBER_RANGE"
+)
+
+// Values returns all known values for SpaceSearchOperator. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SpaceSearchOperator) Values() []SpaceSearchOperator {
+	return []SpaceSearchOperator{
+		"STRING_EQUALS",
+		"STRING_LIKE",
+		"NUMBER_RANGE",
 	}
 }
 

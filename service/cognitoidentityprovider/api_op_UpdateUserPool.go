@@ -15,8 +15,13 @@ import (
 // Cognito defaults, construct this API request to pass the existing configuration
 // of your user pool, modified to include the changes that you want to make.
 //
-// With the exception of UserPoolTier , if you don't provide a value for an
-// attribute, Amazon Cognito sets it to its default value.
+// If you don't provide a value for an attribute, Amazon Cognito sets it to its
+// default value.
+//
+// In secondary regions for user pools with multi-region replication, regional
+// configurations for email, SMS, Lambda functions, and tags can be updated. Both
+// global and regional settings must be provided as inputs, with global settings
+// required to match existing values to maintain consistency across replicas.
 //
 // This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you
@@ -126,6 +131,14 @@ type UpdateUserPoolInput struct {
 
 	// This parameter is no longer used.
 	EmailVerificationSubject *string
+
+	// The issuer configuration for the user pool. In secondary regions, this
+	// parameter must match the existing configuration and cannot be modified.
+	IssuerConfiguration *types.IssuerConfigurationType
+
+	// The key configuration for the user pool. In secondary regions, this parameter
+	// must match the existing configuration and cannot be modified.
+	KeyConfiguration *types.KeyConfigurationType
 
 	// A collection of user pool Lambda triggers. Amazon Cognito invokes triggers at
 	// several possible stages of authentication operations. Triggers can modify the

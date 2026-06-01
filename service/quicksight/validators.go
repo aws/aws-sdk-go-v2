@@ -130,6 +130,26 @@ func (m *validateOpCreateActionConnector) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAgent struct {
+}
+
+func (*validateOpCreateAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateAnalysis struct {
 }
 
@@ -245,6 +265,26 @@ func (m *validateOpCreateDataSource) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateDataSourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateFlow struct {
+}
+
+func (*validateOpCreateFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFlowInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -445,6 +485,26 @@ func (m *validateOpCreateRoleMembership) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateRoleMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateSpace struct {
+}
+
+func (*validateOpCreateSpace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateSpace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateSpaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateSpaceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -670,6 +730,26 @@ func (m *validateOpDeleteActionConnector) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteAgent struct {
+}
+
+func (*validateOpDeleteAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAnalysis struct {
 }
 
@@ -845,6 +925,26 @@ func (m *validateOpDeleteDefaultQBusinessApplication) HandleInitialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDefaultQBusinessApplicationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFlow struct {
+}
+
+func (*validateOpDeleteFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFlowInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1065,6 +1165,26 @@ func (m *validateOpDeleteRoleMembership) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteRoleMembershipInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteSpace struct {
+}
+
+func (*validateOpDeleteSpace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteSpace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteSpaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteSpaceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1385,6 +1505,46 @@ func (m *validateOpDescribeActionConnectorPermissions) HandleInitialize(ctx cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeActionConnectorPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAgent struct {
+}
+
+func (*validateOpDescribeAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAgentPermissions struct {
+}
+
+func (*validateOpDescribeAgentPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAgentPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAgentPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAgentPermissionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1830,6 +1990,26 @@ func (m *validateOpDescribeDefaultQBusinessApplication) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeFlow struct {
+}
+
+func (*validateOpDescribeFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeFolder struct {
 }
 
@@ -2145,6 +2325,46 @@ func (m *validateOpDescribeSelfUpgradeConfiguration) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeSelfUpgradeConfigurationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeSpace struct {
+}
+
+func (*validateOpDescribeSpace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSpace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSpaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSpaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeSpacePermissions struct {
+}
+
+func (*validateOpDescribeSpacePermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeSpacePermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeSpacePermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeSpacePermissionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2585,6 +2805,26 @@ func (m *validateOpListActionConnectors) HandleInitialize(ctx context.Context, i
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListActionConnectorsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAgents struct {
+}
+
+func (*validateOpListAgents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAgents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAgentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAgentsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3070,6 +3310,46 @@ func (m *validateOpListSelfUpgrades) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListSpaceResources struct {
+}
+
+func (*validateOpListSpaceResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSpaceResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSpaceResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSpaceResourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListSpaces struct {
+}
+
+func (*validateOpListSpaces) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListSpaces) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListSpacesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListSpacesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -3430,6 +3710,26 @@ func (m *validateOpSearchActionConnectors) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSearchAgents struct {
+}
+
+func (*validateOpSearchAgents) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchAgents) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchAgentsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchAgentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSearchAnalyses struct {
 }
 
@@ -3565,6 +3865,26 @@ func (m *validateOpSearchGroups) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpSearchGroupsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSearchSpaces struct {
+}
+
+func (*validateOpSearchSpaces) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSearchSpaces) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SearchSpacesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSearchSpacesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3825,6 +4145,46 @@ func (m *validateOpUpdateActionConnectorPermissions) HandleInitialize(ctx contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateActionConnectorPermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAgent struct {
+}
+
+func (*validateOpUpdateAgent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAgent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAgentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAgentInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateAgentPermissions struct {
+}
+
+func (*validateOpUpdateAgentPermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAgentPermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAgentPermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAgentPermissionsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -4170,6 +4530,26 @@ func (m *validateOpUpdateDefaultQBusinessApplication) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFlow struct {
+}
+
+func (*validateOpUpdateFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateFlowPermissions struct {
 }
 
@@ -4490,6 +4870,66 @@ func (m *validateOpUpdateSelfUpgrade) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSpace struct {
+}
+
+func (*validateOpUpdateSpace) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSpace) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSpaceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSpaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateSpacePermissions struct {
+}
+
+func (*validateOpUpdateSpacePermissions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSpacePermissions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSpacePermissionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSpacePermissionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateSpaceResources struct {
+}
+
+func (*validateOpUpdateSpaceResources) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSpaceResources) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSpaceResourcesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSpaceResourcesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateSPICECapacityConfiguration struct {
 }
 
@@ -4774,6 +5214,10 @@ func addOpCreateActionConnectorValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpCreateActionConnector{}, middleware.After)
 }
 
+func addOpCreateAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAgent{}, middleware.After)
+}
+
 func addOpCreateAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateAnalysis{}, middleware.After)
 }
@@ -4796,6 +5240,10 @@ func addOpCreateDataSetValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDataSource{}, middleware.After)
+}
+
+func addOpCreateFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFlow{}, middleware.After)
 }
 
 func addOpCreateFolderValidationMiddleware(stack *middleware.Stack) error {
@@ -4836,6 +5284,10 @@ func addOpCreateRefreshScheduleValidationMiddleware(stack *middleware.Stack) err
 
 func addOpCreateRoleMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateRoleMembership{}, middleware.After)
+}
+
+func addOpCreateSpaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateSpace{}, middleware.After)
 }
 
 func addOpCreateTemplateAliasValidationMiddleware(stack *middleware.Stack) error {
@@ -4882,6 +5334,10 @@ func addOpDeleteActionConnectorValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDeleteActionConnector{}, middleware.After)
 }
 
+func addOpDeleteAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAgent{}, middleware.After)
+}
+
 func addOpDeleteAnalysisValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAnalysis{}, middleware.After)
 }
@@ -4916,6 +5372,10 @@ func addOpDeleteDataSourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteDefaultQBusinessApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDefaultQBusinessApplication{}, middleware.After)
+}
+
+func addOpDeleteFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFlow{}, middleware.After)
 }
 
 func addOpDeleteFolderValidationMiddleware(stack *middleware.Stack) error {
@@ -4960,6 +5420,10 @@ func addOpDeleteRoleCustomPermissionValidationMiddleware(stack *middleware.Stack
 
 func addOpDeleteRoleMembershipValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRoleMembership{}, middleware.After)
+}
+
+func addOpDeleteSpaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteSpace{}, middleware.After)
 }
 
 func addOpDeleteTemplateAliasValidationMiddleware(stack *middleware.Stack) error {
@@ -5024,6 +5488,14 @@ func addOpDescribeActionConnectorValidationMiddleware(stack *middleware.Stack) e
 
 func addOpDescribeActionConnectorPermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeActionConnectorPermissions{}, middleware.After)
+}
+
+func addOpDescribeAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAgent{}, middleware.After)
+}
+
+func addOpDescribeAgentPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAgentPermissions{}, middleware.After)
 }
 
 func addOpDescribeAnalysisDefinitionValidationMiddleware(stack *middleware.Stack) error {
@@ -5114,6 +5586,10 @@ func addOpDescribeDefaultQBusinessApplicationValidationMiddleware(stack *middlew
 	return stack.Initialize.Add(&validateOpDescribeDefaultQBusinessApplication{}, middleware.After)
 }
 
+func addOpDescribeFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFlow{}, middleware.After)
+}
+
 func addOpDescribeFolderValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeFolder{}, middleware.After)
 }
@@ -5176,6 +5652,14 @@ func addOpDescribeRoleCustomPermissionValidationMiddleware(stack *middleware.Sta
 
 func addOpDescribeSelfUpgradeConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeSelfUpgradeConfiguration{}, middleware.After)
+}
+
+func addOpDescribeSpaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSpace{}, middleware.After)
+}
+
+func addOpDescribeSpacePermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeSpacePermissions{}, middleware.After)
 }
 
 func addOpDescribeTemplateAliasValidationMiddleware(stack *middleware.Stack) error {
@@ -5264,6 +5748,10 @@ func addOpGetSessionEmbedUrlValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListActionConnectorsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListActionConnectors{}, middleware.After)
+}
+
+func addOpListAgentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAgents{}, middleware.After)
 }
 
 func addOpListAnalysesValidationMiddleware(stack *middleware.Stack) error {
@@ -5362,6 +5850,14 @@ func addOpListSelfUpgradesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListSelfUpgrades{}, middleware.After)
 }
 
+func addOpListSpaceResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSpaceResources{}, middleware.After)
+}
+
+func addOpListSpacesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListSpaces{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
@@ -5434,6 +5930,10 @@ func addOpSearchActionConnectorsValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpSearchActionConnectors{}, middleware.After)
 }
 
+func addOpSearchAgentsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchAgents{}, middleware.After)
+}
+
 func addOpSearchAnalysesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchAnalyses{}, middleware.After)
 }
@@ -5460,6 +5960,10 @@ func addOpSearchFoldersValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpSearchGroupsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSearchGroups{}, middleware.After)
+}
+
+func addOpSearchSpacesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSearchSpaces{}, middleware.After)
 }
 
 func addOpSearchTopicsValidationMiddleware(stack *middleware.Stack) error {
@@ -5512,6 +6016,14 @@ func addOpUpdateActionConnectorValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateActionConnectorPermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateActionConnectorPermissions{}, middleware.After)
+}
+
+func addOpUpdateAgentValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAgent{}, middleware.After)
+}
+
+func addOpUpdateAgentPermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAgentPermissions{}, middleware.After)
 }
 
 func addOpUpdateAnalysisValidationMiddleware(stack *middleware.Stack) error {
@@ -5582,6 +6094,10 @@ func addOpUpdateDefaultQBusinessApplicationValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpUpdateDefaultQBusinessApplication{}, middleware.After)
 }
 
+func addOpUpdateFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFlow{}, middleware.After)
+}
+
 func addOpUpdateFlowPermissionsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFlowPermissions{}, middleware.After)
 }
@@ -5644,6 +6160,18 @@ func addOpUpdateSelfUpgradeConfigurationValidationMiddleware(stack *middleware.S
 
 func addOpUpdateSelfUpgradeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSelfUpgrade{}, middleware.After)
+}
+
+func addOpUpdateSpaceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSpace{}, middleware.After)
+}
+
+func addOpUpdateSpacePermissionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSpacePermissions{}, middleware.After)
+}
+
+func addOpUpdateSpaceResourcesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSpaceResources{}, middleware.After)
 }
 
 func addOpUpdateSPICECapacityConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -10111,6 +10639,46 @@ func validateCustomNarrativeOptions(v *types.CustomNarrativeOptions) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CustomNarrativeOptions"}
 	if v.Narrative == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Narrative"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomPromptInput(v types.CustomPromptInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomPromptInput"}
+	switch uv := v.(type) {
+	case *types.CustomPromptInputMemberExistingPrompt:
+		if err := validateCustomPromptProfile(&uv.Value); err != nil {
+			invalidParams.AddNested("[ExistingPrompt]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCustomPromptProfile(v *types.CustomPromptProfile) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CustomPromptProfile"}
+	if v.ModelProfileId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ModelProfileId"))
+	}
+	if v.SubscriptionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionId"))
+	}
+	if v.QbsAwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QbsAwsAccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -17462,6 +18030,23 @@ func validatePermission(v *types.Permission) error {
 	}
 }
 
+func validatePermissionsList(v []types.Permission) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PermissionsList"}
+	for i := range v {
+		if err := validatePermission(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePhysicalTable(v types.PhysicalTable) error {
 	if v == nil {
 		return nil
@@ -20891,6 +21476,79 @@ func validateSourceTableMap(v map[string]types.SourceTable) error {
 	}
 }
 
+func validateSpaceQuicksightSearchFilter(v *types.SpaceQuicksightSearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpaceQuicksightSearchFilter"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Operator) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Operator"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSpaceQuicksightSearchFilters(v []types.SpaceQuicksightSearchFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpaceQuicksightSearchFilters"}
+	for i := range v {
+		if err := validateSpaceQuicksightSearchFilter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSpaceResourceOperation(v *types.SpaceResourceOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpaceResourceOperation"}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.ResourceDetails == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceDetails"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSpaceResourceOperations(v []types.SpaceResourceOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SpaceResourceOperations"}
+	for i := range v {
+		if err := validateSpaceResourceOperation(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateSparklinesOptions(v *types.SparklinesOptions) error {
 	if v == nil {
 		return nil
@@ -23443,6 +24101,40 @@ func validateUntagColumnOperation(v *types.UntagColumnOperation) error {
 	}
 }
 
+func validateUpdateAgentPermissionsRequestGrantPermissionsList(v []types.ResourcePermission) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentPermissionsRequestGrantPermissionsList"}
+	for i := range v {
+		if err := validateResourcePermission(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateAgentPermissionsRequestRevokePermissionsList(v []types.ResourcePermission) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentPermissionsRequestRevokePermissionsList"}
+	for i := range v {
+		if err := validateResourcePermission(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateFlowPermissionsInputGrantPermissionsList(v []types.Permission) error {
 	if v == nil {
 		return nil
@@ -24397,6 +25089,32 @@ func validateOpCreateActionConnectorInput(v *CreateActionConnectorInput) error {
 	}
 }
 
+func validateOpCreateAgentInput(v *CreateAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAgentInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.CustomPromptInput != nil {
+		if err := validateCustomPromptInput(v.CustomPromptInput); err != nil {
+			invalidParams.AddNested("CustomPromptInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateAnalysisInput(v *CreateAnalysisInput) error {
 	if v == nil {
 		return nil
@@ -24685,6 +25403,32 @@ func validateOpCreateDataSourceInput(v *CreateDataSourceInput) error {
 	}
 }
 
+func validateOpCreateFlowInput(v *CreateFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFlowInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.FlowDefinition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowDefinition"))
+	}
+	if v.Permissions != nil {
+		if err := validatePermissionsList(v.Permissions); err != nil {
+			invalidParams.AddNested("Permissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateFolderInput(v *CreateFolderInput) error {
 	if v == nil {
 		return nil
@@ -24937,6 +25681,27 @@ func validateOpCreateRoleMembershipInput(v *CreateRoleMembershipInput) error {
 	}
 	if len(v.Role) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateSpaceInput(v *CreateSpaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSpaceInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -25234,6 +25999,24 @@ func validateOpDeleteActionConnectorInput(v *DeleteActionConnectorInput) error {
 	}
 }
 
+func validateOpDeleteAgentInput(v *DeleteAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAgentInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAnalysisInput(v *DeleteAnalysisInput) error {
 	if v == nil {
 		return nil
@@ -25382,6 +26165,24 @@ func validateOpDeleteDefaultQBusinessApplicationInput(v *DeleteDefaultQBusinessA
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDefaultQBusinessApplicationInput"}
 	if v.AwsAccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFlowInput(v *DeleteFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFlowInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -25610,6 +26411,24 @@ func validateOpDeleteRoleMembershipInput(v *DeleteRoleMembershipInput) error {
 	}
 	if v.Namespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteSpaceInput(v *DeleteSpaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteSpaceInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -25904,6 +26723,42 @@ func validateOpDescribeActionConnectorPermissionsInput(v *DescribeActionConnecto
 	}
 	if v.ActionConnectorId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionConnectorId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAgentInput(v *DescribeAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAgentInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAgentPermissionsInput(v *DescribeAgentPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAgentPermissionsInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -26311,6 +27166,27 @@ func validateOpDescribeDefaultQBusinessApplicationInput(v *DescribeDefaultQBusin
 	}
 }
 
+func validateOpDescribeFlowInput(v *DescribeFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFlowInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowId"))
+	}
+	if len(v.PublishState) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PublishState"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeFolderInput(v *DescribeFolderInput) error {
 	if v == nil {
 		return nil
@@ -26600,6 +27476,42 @@ func validateOpDescribeSelfUpgradeConfigurationInput(v *DescribeSelfUpgradeConfi
 	}
 	if v.Namespace == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeSpaceInput(v *DescribeSpaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSpaceInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeSpacePermissionsInput(v *DescribeSpacePermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeSpacePermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -27042,6 +27954,21 @@ func validateOpListActionConnectorsInput(v *ListActionConnectorsInput) error {
 	}
 }
 
+func validateOpListAgentsInput(v *ListAgentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAgentsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListAnalysesInput(v *ListAnalysesInput) error {
 	if v == nil {
 		return nil
@@ -27444,6 +28371,39 @@ func validateOpListSelfUpgradesInput(v *ListSelfUpgradesInput) error {
 	}
 }
 
+func validateOpListSpaceResourcesInput(v *ListSpaceResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSpaceResourcesInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListSpacesInput(v *ListSpacesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListSpacesInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -27781,6 +28741,24 @@ func validateOpSearchActionConnectorsInput(v *SearchActionConnectorsInput) error
 	}
 }
 
+func validateOpSearchAgentsInput(v *SearchAgentsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchAgentsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpSearchAnalysesInput(v *SearchAnalysesInput) error {
 	if v == nil {
 		return nil
@@ -27920,6 +28898,28 @@ func validateOpSearchGroupsInput(v *SearchGroupsInput) error {
 		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
 	} else if v.Filters != nil {
 		if err := validateGroupSearchFilterList(v.Filters); err != nil {
+			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSearchSpacesInput(v *SearchSpacesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SearchSpacesInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Filters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filters"))
+	} else if v.Filters != nil {
+		if err := validateSpaceQuicksightSearchFilters(v.Filters); err != nil {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -28232,6 +29232,60 @@ func validateOpUpdateActionConnectorPermissionsInput(v *UpdateActionConnectorPer
 	}
 	if v.RevokePermissions != nil {
 		if err := validateResourcePermissionList(v.RevokePermissions); err != nil {
+			invalidParams.AddNested("RevokePermissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAgentInput(v *UpdateAgentInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.CustomPromptInput != nil {
+		if err := validateCustomPromptInput(v.CustomPromptInput); err != nil {
+			invalidParams.AddNested("CustomPromptInput", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateAgentPermissionsInput(v *UpdateAgentPermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentPermissionsInput"}
+	if v.AgentId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentId"))
+	}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.GrantPermissions != nil {
+		if err := validateUpdateAgentPermissionsRequestGrantPermissionsList(v.GrantPermissions); err != nil {
+			invalidParams.AddNested("GrantPermissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RevokePermissions != nil {
+		if err := validateUpdateAgentPermissionsRequestRevokePermissionsList(v.RevokePermissions); err != nil {
 			invalidParams.AddNested("RevokePermissions", err.(smithy.InvalidParamsError))
 		}
 	}
@@ -28729,6 +29783,24 @@ func validateOpUpdateDefaultQBusinessApplicationInput(v *UpdateDefaultQBusinessA
 	}
 }
 
+func validateOpUpdateFlowInput(v *UpdateFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFlowInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.FlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateFlowPermissionsInput(v *UpdateFlowPermissionsInput) error {
 	if v == nil {
 		return nil
@@ -29062,6 +30134,80 @@ func validateOpUpdateSelfUpgradeInput(v *UpdateSelfUpgradeInput) error {
 	}
 	if len(v.Action) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Action"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSpaceInput(v *UpdateSpaceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSpaceInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSpacePermissionsInput(v *UpdateSpacePermissionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSpacePermissionsInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if v.GrantPermissions != nil {
+		if err := validateResourcePermissionList(v.GrantPermissions); err != nil {
+			invalidParams.AddNested("GrantPermissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RevokePermissions != nil {
+		if err := validateResourcePermissionList(v.RevokePermissions); err != nil {
+			invalidParams.AddNested("RevokePermissions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSpaceResourcesInput(v *UpdateSpaceResourcesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSpaceResourcesInput"}
+	if v.AwsAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
+	}
+	if v.SpaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SpaceId"))
+	}
+	if v.AddResources != nil {
+		if err := validateSpaceResourceOperations(v.AddResources); err != nil {
+			invalidParams.AddNested("AddResources", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RemoveResources != nil {
+		if err := validateSpaceResourceOperations(v.RemoveResources); err != nil {
+			invalidParams.AddNested("RemoveResources", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

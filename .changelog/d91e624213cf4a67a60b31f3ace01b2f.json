@@ -1,0 +1,8 @@
+{
+    "id": "d91e6242-13cf-4a67-a60b-31f3ace01b2f",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/kms"
+    ]
+}

@@ -1,0 +1,8 @@
+{
+    "id": "a2bf2030-65c1-4f6e-b704-23a48af44179",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/mediastoredata"
+    ]
+}

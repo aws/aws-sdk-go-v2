@@ -1,0 +1,8 @@
+{
+    "id": "e90914b4-34cb-460b-b277-eb88d7efb6a7",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/codepipeline"
+    ]
+}

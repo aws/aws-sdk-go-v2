@@ -578,6 +578,18 @@ func TestCheckSnapshot_CreateUserPoolDomain(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateUserPoolReplica(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateUserPoolReplica(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateUserPoolReplica")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_DeleteGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteGroup(context.Background(), nil, func(o *Options) {
@@ -703,6 +715,18 @@ func TestCheckSnapshot_DeleteUserPoolDomain(t *testing.T) {
 	_, err := svc.DeleteUserPoolDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DeleteUserPoolDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DeleteUserPoolReplica(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteUserPoolReplica(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DeleteUserPoolReplica")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -1142,6 +1166,18 @@ func TestCheckSnapshot_ListUserPoolClientSecrets(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_ListUserPoolReplicas(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUserPoolReplicas(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "ListUserPoolReplicas")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_ListUserPools(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListUserPools(context.Background(), nil, func(o *Options) {
@@ -1495,6 +1531,18 @@ func TestCheckSnapshot_UpdateUserPoolDomain(t *testing.T) {
 	_, err := svc.UpdateUserPoolDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "UpdateUserPoolDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_UpdateUserPoolReplica(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateUserPoolReplica(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "UpdateUserPoolReplica")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2041,6 +2089,18 @@ func TestUpdateSnapshot_CreateUserPoolDomain(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateUserPoolReplica(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateUserPoolReplica(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateUserPoolReplica")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_DeleteGroup(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.DeleteGroup(context.Background(), nil, func(o *Options) {
@@ -2166,6 +2226,18 @@ func TestUpdateSnapshot_DeleteUserPoolDomain(t *testing.T) {
 	_, err := svc.DeleteUserPoolDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DeleteUserPoolDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DeleteUserPoolReplica(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DeleteUserPoolReplica(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DeleteUserPoolReplica")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -2605,6 +2677,18 @@ func TestUpdateSnapshot_ListUserPoolClientSecrets(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_ListUserPoolReplicas(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.ListUserPoolReplicas(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "ListUserPoolReplicas")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_ListUserPools(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.ListUserPools(context.Background(), nil, func(o *Options) {
@@ -2958,6 +3042,18 @@ func TestUpdateSnapshot_UpdateUserPoolDomain(t *testing.T) {
 	_, err := svc.UpdateUserPoolDomain(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "UpdateUserPoolDomain")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_UpdateUserPoolReplica(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.UpdateUserPoolReplica(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "UpdateUserPoolReplica")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

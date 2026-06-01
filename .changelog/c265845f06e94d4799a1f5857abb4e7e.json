@@ -1,0 +1,8 @@
+{
+    "id": "c265845f-06e9-4d47-99a1-f5857abb4e7e",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/elasticbeanstalk"
+    ]
+}

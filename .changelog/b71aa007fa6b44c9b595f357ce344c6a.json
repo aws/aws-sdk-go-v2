@@ -1,0 +1,8 @@
+{
+    "id": "b71aa007-fa6b-44c9-b595-f357ce344c6a",
+    "type": "feature",
+    "description": "This release adds public APIs for Amazon QuickSight Spaces, Agents, and Flows. Spaces APIs enable management of curated resource collections. Agents APIs provide lifecycle control over AI-powered agents that leverage Spaces. Flows APIs add CRUDL APIs for automated workflows.",
+    "modules": [
+        "service/quicksight"
+    ]
+}

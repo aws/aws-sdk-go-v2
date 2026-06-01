@@ -29,6 +29,11 @@ import (
 // value of UserPoolAddOns in an UpdateUserPool request. To activate this setting,
 // your user pool must be on the [Plus tier].
 //
+// In secondary regions for user pools with multi-region replication, only the
+// SourceARN and From attributes of NotifyConfiguration can be modified to
+// configure region-specific SES integration. All other risk configuration settings
+// must match the existing values to maintain consistency across replicas.
+//
 // [Plus tier]: https://docs.aws.amazon.com/cognito/latest/developerguide/feature-plans-features-plus.html
 func (c *Client) SetRiskConfiguration(ctx context.Context, params *SetRiskConfigurationInput, optFns ...func(*Options)) (*SetRiskConfigurationOutput, error) {
 	if params == nil {

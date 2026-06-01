@@ -98,6 +98,10 @@ type UpdateUserPoolDomainInput struct {
 	// [Managed login]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html
 	ManagedLoginVersion *int32
 
+	// The routing configuration for the user pool domain. Specifies failover settings
+	// for multi-region deployments.
+	Routing *types.RoutingType
+
 	noSmithyDocumentSerde
 }
 
@@ -118,6 +122,9 @@ type UpdateUserPoolDomainOutput struct {
 	//
 	// [Managed login]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-managed-login.html
 	ManagedLoginVersion *int32
+
+	// The updated routing configuration for the user pool domain.
+	Routing *types.RoutingType
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

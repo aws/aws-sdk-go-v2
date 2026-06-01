@@ -1,0 +1,8 @@
+{
+    "id": "c60bc363-0488-4e5c-9893-2bbc453489a9",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/devicefarm"
+    ]
+}

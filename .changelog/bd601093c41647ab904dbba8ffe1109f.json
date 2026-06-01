@@ -1,0 +1,8 @@
+{
+    "id": "bd601093-c416-47ab-904d-bba8ffe1109f",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/lexmodelbuildingservice"
+    ]
+}

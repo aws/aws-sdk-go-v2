@@ -1,0 +1,8 @@
+{
+    "id": "b9d8d07a-bd45-45dc-bbde-66e14fb2e4a2",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/greengrass"
+    ]
+}

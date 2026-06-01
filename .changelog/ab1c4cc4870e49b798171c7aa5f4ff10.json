@@ -1,0 +1,8 @@
+{
+    "id": "ab1c4cc4-870e-49b7-9817-1c7aa5f4ff10",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/machinelearning"
+    ]
+}

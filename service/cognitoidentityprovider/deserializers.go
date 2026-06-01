@@ -131,6 +131,9 @@ func awsAwsjson11_deserializeOpErrorAddCustomAttributes(response *smithyhttp.Res
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -361,6 +364,9 @@ func awsAwsjson11_deserializeOpErrorAdminAddUserToGroup(response *smithyhttp.Res
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -492,6 +498,9 @@ func awsAwsjson11_deserializeOpErrorAdminConfirmSignUp(response *smithyhttp.Resp
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -643,6 +652,9 @@ func awsAwsjson11_deserializeOpErrorAdminCreateUser(response *smithyhttp.Respons
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("PreconditionNotMetException", errorCode):
 		return awsAwsjson11_deserializeErrorPreconditionNotMetException(response, errorBody)
 
@@ -761,6 +773,9 @@ func awsAwsjson11_deserializeOpErrorAdminDeleteUser(response *smithyhttp.Respons
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -887,6 +902,9 @@ func awsAwsjson11_deserializeOpErrorAdminDeleteUserAttributes(response *smithyht
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -1017,6 +1035,9 @@ func awsAwsjson11_deserializeOpErrorAdminDisableProviderForUser(response *smithy
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -1142,6 +1163,9 @@ func awsAwsjson11_deserializeOpErrorAdminDisableUser(response *smithyhttp.Respon
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -1269,6 +1293,9 @@ func awsAwsjson11_deserializeOpErrorAdminEnableUser(response *smithyhttp.Respons
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -1375,6 +1402,9 @@ func awsAwsjson11_deserializeOpErrorAdminForgetDevice(response *smithyhttp.Respo
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -1505,6 +1535,9 @@ func awsAwsjson11_deserializeOpErrorAdminGetDevice(response *smithyhttp.Response
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -1627,6 +1660,9 @@ func awsAwsjson11_deserializeOpErrorAdminGetUser(response *smithyhttp.Response, 
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -1771,6 +1807,9 @@ func awsAwsjson11_deserializeOpErrorAdminInitiateAuth(response *smithyhttp.Respo
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
@@ -1919,6 +1958,9 @@ func awsAwsjson11_deserializeOpErrorAdminLinkProviderForUser(response *smithyhtt
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -2048,6 +2090,9 @@ func awsAwsjson11_deserializeOpErrorAdminListDevices(response *smithyhttp.Respon
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -2170,6 +2215,9 @@ func awsAwsjson11_deserializeOpErrorAdminListGroupsForUser(response *smithyhttp.
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -2297,6 +2345,9 @@ func awsAwsjson11_deserializeOpErrorAdminListUserAuthEvents(response *smithyhttp
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -2403,6 +2454,9 @@ func awsAwsjson11_deserializeOpErrorAdminRemoveUserFromGroup(response *smithyhtt
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -2544,6 +2598,9 @@ func awsAwsjson11_deserializeOpErrorAdminResetUserPassword(response *smithyhttp.
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -2707,6 +2764,9 @@ func awsAwsjson11_deserializeOpErrorAdminRespondToAuthChallenge(response *smithy
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("PasswordHistoryPolicyViolationException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordHistoryPolicyViolationException(response, errorBody)
 
@@ -2851,6 +2911,9 @@ func awsAwsjson11_deserializeOpErrorAdminSetUserMFAPreference(response *smithyht
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
 
@@ -2983,6 +3046,9 @@ func awsAwsjson11_deserializeOpErrorAdminSetUserPassword(response *smithyhttp.Re
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("PasswordHistoryPolicyViolationException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordHistoryPolicyViolationException(response, errorBody)
 
@@ -3112,6 +3178,9 @@ func awsAwsjson11_deserializeOpErrorAdminSetUserSettings(response *smithyhttp.Re
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -3234,6 +3303,9 @@ func awsAwsjson11_deserializeOpErrorAdminUpdateAuthEventFeedback(response *smith
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -3366,6 +3438,9 @@ func awsAwsjson11_deserializeOpErrorAdminUpdateDeviceStatus(response *smithyhttp
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -3508,6 +3583,9 @@ func awsAwsjson11_deserializeOpErrorAdminUpdateUserAttributes(response *smithyht
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -3639,6 +3717,9 @@ func awsAwsjson11_deserializeOpErrorAdminUserGlobalSignOut(response *smithyhttp.
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -3772,6 +3853,9 @@ func awsAwsjson11_deserializeOpErrorAssociateSoftwareToken(response *smithyhttp.
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -3903,6 +3987,9 @@ func awsAwsjson11_deserializeOpErrorChangePassword(response *smithyhttp.Response
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordHistoryPolicyViolationException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordHistoryPolicyViolationException(response, errorBody)
@@ -4044,6 +4131,9 @@ func awsAwsjson11_deserializeOpErrorCompleteWebAuthnRegistration(response *smith
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
@@ -4201,6 +4291,9 @@ func awsAwsjson11_deserializeOpErrorConfirmDevice(response *smithyhttp.Response,
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
 
@@ -4353,6 +4446,9 @@ func awsAwsjson11_deserializeOpErrorConfirmForgotPassword(response *smithyhttp.R
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordHistoryPolicyViolationException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordHistoryPolicyViolationException(response, errorBody)
@@ -4513,6 +4609,9 @@ func awsAwsjson11_deserializeOpErrorConfirmSignUp(response *smithyhttp.Response,
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -4653,6 +4752,9 @@ func awsAwsjson11_deserializeOpErrorCreateGroup(response *smithyhttp.Response, m
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -4915,6 +5017,9 @@ func awsAwsjson11_deserializeOpErrorCreateManagedLoginBranding(response *smithyh
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -5040,6 +5145,9 @@ func awsAwsjson11_deserializeOpErrorCreateResourceServer(response *smithyhttp.Re
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -5170,6 +5278,9 @@ func awsAwsjson11_deserializeOpErrorCreateTerms(response *smithyhttp.Response, m
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -5298,6 +5409,9 @@ func awsAwsjson11_deserializeOpErrorCreateUserImportJob(response *smithyhttp.Res
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PreconditionNotMetException", errorCode):
 		return awsAwsjson11_deserializeErrorPreconditionNotMetException(response, errorBody)
@@ -5575,6 +5689,9 @@ func awsAwsjson11_deserializeOpErrorCreateUserPoolClient(response *smithyhttp.Re
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -5710,8 +5827,146 @@ func awsAwsjson11_deserializeOpErrorCreateUserPoolDomain(response *smithyhttp.Re
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpCreateUserPoolReplica struct {
+}
+
+func (*awsAwsjson11_deserializeOpCreateUserPoolReplica) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpCreateUserPoolReplica) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorCreateUserPoolReplica(response, &metadata)
+	}
+	output := &CreateUserPoolReplicaOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentCreateUserPoolReplicaOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorCreateUserPoolReplica(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("FeatureUnavailableInTierException", errorCode):
+		return awsAwsjson11_deserializeErrorFeatureUnavailableInTierException(response, errorBody)
+
+	case strings.EqualFold("InternalErrorException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("LimitExceededException", errorCode):
+		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("NotAuthorizedException", errorCode):
+		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	case strings.EqualFold("UserPoolTaggingException", errorCode):
+		return awsAwsjson11_deserializeErrorUserPoolTaggingException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -5807,6 +6062,9 @@ func awsAwsjson11_deserializeOpErrorDeleteGroup(response *smithyhttp.Response, m
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -6019,6 +6277,9 @@ func awsAwsjson11_deserializeOpErrorDeleteManagedLoginBranding(response *smithyh
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -6119,6 +6380,9 @@ func awsAwsjson11_deserializeOpErrorDeleteResourceServer(response *smithyhttp.Re
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -6224,6 +6488,9 @@ func awsAwsjson11_deserializeOpErrorDeleteTerms(response *smithyhttp.Response, m
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -6327,6 +6594,9 @@ func awsAwsjson11_deserializeOpErrorDeleteUser(response *smithyhttp.Response, me
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
@@ -6463,6 +6733,9 @@ func awsAwsjson11_deserializeOpErrorDeleteUserAttributes(response *smithyhttp.Re
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
 
@@ -6573,6 +6846,9 @@ func awsAwsjson11_deserializeOpErrorDeleteUserPool(response *smithyhttp.Response
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -6679,6 +6955,9 @@ func awsAwsjson11_deserializeOpErrorDeleteUserPoolClient(response *smithyhttp.Re
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -6929,8 +7208,137 @@ func awsAwsjson11_deserializeOpErrorDeleteUserPoolDomain(response *smithyhttp.Re
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpDeleteUserPoolReplica struct {
+}
+
+func (*awsAwsjson11_deserializeOpDeleteUserPoolReplica) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDeleteUserPoolReplica) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteUserPoolReplica(response, &metadata)
+	}
+	output := &DeleteUserPoolReplicaOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDeleteUserPoolReplicaOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDeleteUserPoolReplica(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("InternalErrorException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("NotAuthorizedException", errorCode):
+		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -7054,6 +7462,9 @@ func awsAwsjson11_deserializeOpErrorDeleteWebAuthnCredential(response *smithyhtt
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
@@ -7304,6 +7715,9 @@ func awsAwsjson11_deserializeOpErrorDescribeManagedLoginBranding(response *smith
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -7426,6 +7840,9 @@ func awsAwsjson11_deserializeOpErrorDescribeManagedLoginBrandingByClient(respons
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -7550,6 +7967,9 @@ func awsAwsjson11_deserializeOpErrorDescribeResourceServer(response *smithyhttp.
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -7672,6 +8092,9 @@ func awsAwsjson11_deserializeOpErrorDescribeRiskConfiguration(response *smithyht
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -7799,6 +8222,9 @@ func awsAwsjson11_deserializeOpErrorDescribeTerms(response *smithyhttp.Response,
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -7922,6 +8348,9 @@ func awsAwsjson11_deserializeOpErrorDescribeUserImportJob(response *smithyhttp.R
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -8044,6 +8473,9 @@ func awsAwsjson11_deserializeOpErrorDescribeUserPool(response *smithyhttp.Respon
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -8171,6 +8603,9 @@ func awsAwsjson11_deserializeOpErrorDescribeUserPoolClient(response *smithyhttp.
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -8294,6 +8729,9 @@ func awsAwsjson11_deserializeOpErrorDescribeUserPoolDomain(response *smithyhttp.
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -8397,6 +8835,9 @@ func awsAwsjson11_deserializeOpErrorForgetDevice(response *smithyhttp.Response, 
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
@@ -8551,6 +8992,9 @@ func awsAwsjson11_deserializeOpErrorForgotPassword(response *smithyhttp.Response
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -8683,6 +9127,9 @@ func awsAwsjson11_deserializeOpErrorGetCSVHeader(response *smithyhttp.Response, 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -8811,6 +9258,9 @@ func awsAwsjson11_deserializeOpErrorGetDevice(response *smithyhttp.Response, met
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
@@ -8943,6 +9393,9 @@ func awsAwsjson11_deserializeOpErrorGetGroup(response *smithyhttp.Response, meta
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -9310,6 +9763,9 @@ func awsAwsjson11_deserializeOpErrorGetSigningCertificate(response *smithyhttp.R
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -9435,6 +9891,9 @@ func awsAwsjson11_deserializeOpErrorGetTokensFromRefreshToken(response *smithyht
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("RefreshTokenReuseException", errorCode):
 		return awsAwsjson11_deserializeErrorRefreshTokenReuseException(response, errorBody)
@@ -9571,6 +10030,9 @@ func awsAwsjson11_deserializeOpErrorGetUICustomization(response *smithyhttp.Resp
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -9696,6 +10158,9 @@ func awsAwsjson11_deserializeOpErrorGetUser(response *smithyhttp.Response, metad
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
@@ -9850,6 +10315,9 @@ func awsAwsjson11_deserializeOpErrorGetUserAttributeVerificationCode(response *s
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
 
@@ -9990,6 +10458,9 @@ func awsAwsjson11_deserializeOpErrorGetUserAuthFactors(response *smithyhttp.Resp
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
@@ -10249,6 +10720,9 @@ func awsAwsjson11_deserializeOpErrorGlobalSignOut(response *smithyhttp.Response,
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
 
@@ -10395,6 +10869,9 @@ func awsAwsjson11_deserializeOpErrorInitiateAuth(response *smithyhttp.Response, 
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
@@ -10543,6 +11020,9 @@ func awsAwsjson11_deserializeOpErrorListDevices(response *smithyhttp.Response, m
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
 
@@ -10674,6 +11154,9 @@ func awsAwsjson11_deserializeOpErrorListGroups(response *smithyhttp.Response, me
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -10921,6 +11404,9 @@ func awsAwsjson11_deserializeOpErrorListResourceServers(response *smithyhttp.Res
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -11043,6 +11529,9 @@ func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -11167,6 +11656,9 @@ func awsAwsjson11_deserializeOpErrorListTerms(response *smithyhttp.Response, met
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -11289,6 +11781,9 @@ func awsAwsjson11_deserializeOpErrorListUserImportJobs(response *smithyhttp.Resp
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -11413,6 +11908,9 @@ func awsAwsjson11_deserializeOpErrorListUserPoolClients(response *smithyhttp.Res
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -11535,6 +12033,132 @@ func awsAwsjson11_deserializeOpErrorListUserPoolClientSecrets(response *smithyht
 
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpListUserPoolReplicas struct {
+}
+
+func (*awsAwsjson11_deserializeOpListUserPoolReplicas) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpListUserPoolReplicas) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorListUserPoolReplicas(response, &metadata)
+	}
+	output := &ListUserPoolReplicasOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentListUserPoolReplicasOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorListUserPoolReplicas(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("InternalErrorException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("NotAuthorizedException", errorCode):
+		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -11779,6 +12403,9 @@ func awsAwsjson11_deserializeOpErrorListUsers(response *smithyhttp.Response, met
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -11901,6 +12528,9 @@ func awsAwsjson11_deserializeOpErrorListUsersInGroup(response *smithyhttp.Respon
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -12030,6 +12660,9 @@ func awsAwsjson11_deserializeOpErrorListWebAuthnCredentials(response *smithyhttp
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
@@ -12174,6 +12807,9 @@ func awsAwsjson11_deserializeOpErrorResendConfirmationCode(response *smithyhttp.
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -12340,6 +12976,9 @@ func awsAwsjson11_deserializeOpErrorRespondToAuthChallenge(response *smithyhttp.
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("PasswordHistoryPolicyViolationException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordHistoryPolicyViolationException(response, errorBody)
 
@@ -12483,6 +13122,9 @@ func awsAwsjson11_deserializeOpErrorRevokeToken(response *smithyhttp.Response, m
 
 	case strings.EqualFold("InvalidParameterException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
@@ -12745,6 +13387,9 @@ func awsAwsjson11_deserializeOpErrorSetRiskConfiguration(response *smithyhttp.Re
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -12871,6 +13516,9 @@ func awsAwsjson11_deserializeOpErrorSetUICustomization(response *smithyhttp.Resp
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -12996,6 +13644,9 @@ func awsAwsjson11_deserializeOpErrorSetUserMFAPreference(response *smithyhttp.Re
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
@@ -13138,6 +13789,9 @@ func awsAwsjson11_deserializeOpErrorSetUserPoolMfaConfig(response *smithyhttp.Re
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -13263,6 +13917,9 @@ func awsAwsjson11_deserializeOpErrorSetUserSettings(response *smithyhttp.Respons
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
@@ -13417,6 +14074,9 @@ func awsAwsjson11_deserializeOpErrorSignUp(response *smithyhttp.Response, metada
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -13548,6 +14208,9 @@ func awsAwsjson11_deserializeOpErrorStartUserImportJob(response *smithyhttp.Resp
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PreconditionNotMetException", errorCode):
 		return awsAwsjson11_deserializeErrorPreconditionNotMetException(response, errorBody)
@@ -13681,6 +14344,9 @@ func awsAwsjson11_deserializeOpErrorStartWebAuthnRegistration(response *smithyht
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
 
@@ -13810,6 +14476,9 @@ func awsAwsjson11_deserializeOpErrorStopUserImportJob(response *smithyhttp.Respo
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("PreconditionNotMetException", errorCode):
 		return awsAwsjson11_deserializeErrorPreconditionNotMetException(response, errorBody)
 
@@ -13936,6 +14605,9 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -14059,6 +14731,9 @@ func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -14181,6 +14856,9 @@ func awsAwsjson11_deserializeOpErrorUpdateAuthEventFeedback(response *smithyhttp
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -14317,6 +14995,9 @@ func awsAwsjson11_deserializeOpErrorUpdateDeviceStatus(response *smithyhttp.Resp
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
 
@@ -14448,6 +15129,9 @@ func awsAwsjson11_deserializeOpErrorUpdateGroup(response *smithyhttp.Response, m
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -14704,6 +15388,9 @@ func awsAwsjson11_deserializeOpErrorUpdateManagedLoginBranding(response *smithyh
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -14826,6 +15513,9 @@ func awsAwsjson11_deserializeOpErrorUpdateResourceServer(response *smithyhttp.Re
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -14952,6 +15642,9 @@ func awsAwsjson11_deserializeOpErrorUpdateTerms(response *smithyhttp.Response, m
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -15106,6 +15799,9 @@ func awsAwsjson11_deserializeOpErrorUpdateUserAttributes(response *smithyhttp.Re
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
 
@@ -15259,6 +15955,9 @@ func awsAwsjson11_deserializeOpErrorUpdateUserPool(response *smithyhttp.Response
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -15400,6 +16099,9 @@ func awsAwsjson11_deserializeOpErrorUpdateUserPoolClient(response *smithyhttp.Re
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
 
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
 
@@ -15531,6 +16233,135 @@ func awsAwsjson11_deserializeOpErrorUpdateUserPoolDomain(response *smithyhttp.Re
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("TooManyRequestsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpUpdateUserPoolReplica struct {
+}
+
+func (*awsAwsjson11_deserializeOpUpdateUserPoolReplica) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpUpdateUserPoolReplica) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	_, span := tracing.StartSpan(ctx, "OperationDeserializer")
+	endTimer := startMetricTimer(ctx, "client.call.deserialization_duration")
+	defer endTimer()
+	defer span.End()
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateUserPoolReplica(response, &metadata)
+	}
+	output := &UpdateUserPoolReplicaOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUpdateUserPoolReplicaOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorUpdateUserPoolReplica(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("InternalErrorException", errorCode):
+		return awsAwsjson11_deserializeErrorInternalErrorException(response, errorBody)
+
+	case strings.EqualFold("InvalidParameterException", errorCode):
+		return awsAwsjson11_deserializeErrorInvalidParameterException(response, errorBody)
+
+	case strings.EqualFold("NotAuthorizedException", errorCode):
+		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -15666,6 +16497,9 @@ func awsAwsjson11_deserializeOpErrorVerifySoftwareToken(response *smithyhttp.Res
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
@@ -15816,6 +16650,9 @@ func awsAwsjson11_deserializeOpErrorVerifyUserAttribute(response *smithyhttp.Res
 
 	case strings.EqualFold("NotAuthorizedException", errorCode):
 		return awsAwsjson11_deserializeErrorNotAuthorizedException(response, errorBody)
+
+	case strings.EqualFold("OperationNotEnabledException", errorCode):
+		return awsAwsjson11_deserializeErrorOperationNotEnabledException(response, errorBody)
 
 	case strings.EqualFold("PasswordResetRequiredException", errorCode):
 		return awsAwsjson11_deserializeErrorPasswordResetRequiredException(response, errorBody)
@@ -16737,6 +17574,41 @@ func awsAwsjson11_deserializeErrorNotAuthorizedException(response *smithyhttp.Re
 
 	output := &types.NotAuthorizedException{}
 	err := awsAwsjson11_deserializeDocumentNotAuthorizedException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorOperationNotEnabledException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.OperationNotEnabledException{}
+	err := awsAwsjson11_deserializeDocumentOperationNotEnabledException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -19977,6 +20849,11 @@ func awsAwsjson11_deserializeDocumentDomainDescriptionType(v **types.DomainDescr
 				sv.ManagedLoginVersion = ptr.Int32(int32(i64))
 			}
 
+		case "Routing":
+			if err := awsAwsjson11_deserializeDocumentRoutingType(&sv.Routing, value); err != nil {
+				return err
+			}
+
 		case "S3Bucket":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -20535,6 +21412,55 @@ func awsAwsjson11_deserializeDocumentExplicitAuthFlowsListType(v *[]types.Explic
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFailoverType(v **types.FailoverType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FailoverType
+	if *v == nil {
+		sv = &types.FailoverType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PrimaryRoute53HealthCheckId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HealthCheckIdType to be of type string, got %T instead", value)
+				}
+				sv.PrimaryRoute53HealthCheckId = ptr.String(jtv)
+			}
+
+		case "SecondaryRegion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegionNameType to be of type string, got %T instead", value)
+				}
+				sv.SecondaryRegion = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -21432,6 +22358,95 @@ func awsAwsjson11_deserializeDocumentInvalidUserPoolConfigurationException(v **t
 					return fmt.Errorf("expected MessageType to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentIssuerConfigurationType(v **types.IssuerConfigurationType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IssuerConfigurationType
+	if *v == nil {
+		sv = &types.IssuerConfigurationType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IssuerType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.IssuerType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentKeyConfigurationType(v **types.KeyConfigurationType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KeyConfigurationType
+	if *v == nil {
+		sv = &types.KeyConfigurationType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "KeyType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionKeyType to be of type string, got %T instead", value)
+				}
+				sv.KeyType = types.EncryptionKeyType(jtv)
+			}
+
+		case "KmsKeyArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EncryptionKeyArnType to be of type string, got %T instead", value)
+				}
+				sv.KmsKeyArn = ptr.String(jtv)
 			}
 
 		default:
@@ -22510,6 +23525,46 @@ func awsAwsjson11_deserializeDocumentOAuthFlowsType(v *[]types.OAuthFlowType, va
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentOperationNotEnabledException(v **types.OperationNotEnabledException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OperationNotEnabledException
+	if *v == nil {
+		sv = &types.OperationNotEnabledException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message", "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MessageType to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentPasswordHistoryPolicyViolationException(v **types.PasswordHistoryPolicyViolationException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23116,6 +24171,42 @@ func awsAwsjson11_deserializeDocumentRefreshTokenRotationType(v **types.RefreshT
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentReplicaRegionsType(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected StringType to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.ResourceNotFoundException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -23445,6 +24536,42 @@ func awsAwsjson11_deserializeDocumentRiskExceptionConfigurationType(v **types.Ri
 
 		case "SkippedIPRangeList":
 			if err := awsAwsjson11_deserializeDocumentSkippedIPRangeListType(&sv.SkippedIPRangeList, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRoutingType(v **types.RoutingType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RoutingType
+	if *v == nil {
+		sv = &types.RoutingType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Failover":
+			if err := awsAwsjson11_deserializeDocumentFailoverType(&sv.Failover, value); err != nil {
 				return err
 			}
 
@@ -25913,6 +27040,11 @@ func awsAwsjson11_deserializeDocumentUserPoolDescriptionType(v **types.UserPoolD
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "ReplicaRegions":
+			if err := awsAwsjson11_deserializeDocumentReplicaRegionsType(&sv.ReplicaRegions, value); err != nil {
+				return err
+			}
+
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -25995,6 +27127,107 @@ func awsAwsjson11_deserializeDocumentUserPoolPolicyType(v **types.UserPoolPolicy
 		case "SignInPolicy":
 			if err := awsAwsjson11_deserializeDocumentSignInPolicyType(&sv.SignInPolicy, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUserPoolReplicaListType(v *[]types.UserPoolReplicaType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.UserPoolReplicaType
+	if *v == nil {
+		cv = []types.UserPoolReplicaType{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.UserPoolReplicaType
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentUserPoolReplicaType(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUserPoolReplicaType(v **types.UserPoolReplicaType, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UserPoolReplicaType
+	if *v == nil {
+		sv = &types.UserPoolReplicaType{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "RegionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RegionNameType to be of type string, got %T instead", value)
+				}
+				sv.RegionName = ptr.String(jtv)
+			}
+
+		case "Role":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReplicaRoleType to be of type string, got %T instead", value)
+				}
+				sv.Role = types.ReplicaRoleType(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReplicaStatusType to be of type string, got %T instead", value)
+				}
+				sv.Status = types.ReplicaStatusType(jtv)
+			}
+
+		case "UserPoolArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ArnType to be of type string, got %T instead", value)
+				}
+				sv.UserPoolArn = ptr.String(jtv)
 			}
 
 		default:
@@ -26233,6 +27466,16 @@ func awsAwsjson11_deserializeDocumentUserPoolType(v **types.UserPoolType, value 
 					return fmt.Errorf("expected UserPoolIdType to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "IssuerConfiguration":
+			if err := awsAwsjson11_deserializeDocumentIssuerConfigurationType(&sv.IssuerConfiguration, value); err != nil {
+				return err
+			}
+
+		case "KeyConfiguration":
+			if err := awsAwsjson11_deserializeDocumentKeyConfigurationType(&sv.KeyConfiguration, value); err != nil {
+				return err
 			}
 
 		case "LambdaConfig":
@@ -28587,6 +29830,11 @@ func awsAwsjson11_deserializeOpDocumentCreateUserPoolDomainOutput(v **CreateUser
 				sv.ManagedLoginVersion = ptr.Int32(int32(i64))
 			}
 
+		case "Routing":
+			if err := awsAwsjson11_deserializeDocumentRoutingType(&sv.Routing, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -28620,6 +29868,42 @@ func awsAwsjson11_deserializeOpDocumentCreateUserPoolOutput(v **CreateUserPoolOu
 		switch key {
 		case "UserPool":
 			if err := awsAwsjson11_deserializeDocumentUserPoolType(&sv.UserPool, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentCreateUserPoolReplicaOutput(v **CreateUserPoolReplicaOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateUserPoolReplicaOutput
+	if *v == nil {
+		sv = &CreateUserPoolReplicaOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "UserPoolReplica":
+			if err := awsAwsjson11_deserializeDocumentUserPoolReplicaType(&sv.UserPoolReplica, value); err != nil {
 				return err
 			}
 
@@ -28716,6 +30000,42 @@ func awsAwsjson11_deserializeOpDocumentDeleteUserPoolDomainOutput(v **DeleteUser
 
 	for key, value := range shape {
 		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentDeleteUserPoolReplicaOutput(v **DeleteUserPoolReplicaOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DeleteUserPoolReplicaOutput
+	if *v == nil {
+		sv = &DeleteUserPoolReplicaOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "UserPoolReplica":
+			if err := awsAwsjson11_deserializeDocumentUserPoolReplicaType(&sv.UserPoolReplica, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -30163,6 +31483,51 @@ func awsAwsjson11_deserializeOpDocumentListUserPoolClientsOutput(v **ListUserPoo
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentListUserPoolReplicasOutput(v **ListUserPoolReplicasOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListUserPoolReplicasOutput
+	if *v == nil {
+		sv = &ListUserPoolReplicasOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PaginationKeyType to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "UserPoolReplicas":
+			if err := awsAwsjson11_deserializeDocumentUserPoolReplicaListType(&sv.UserPoolReplicas, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentListUserPoolsOutput(v **ListUserPoolsOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -31290,6 +32655,11 @@ func awsAwsjson11_deserializeOpDocumentUpdateUserPoolDomainOutput(v **UpdateUser
 				sv.ManagedLoginVersion = ptr.Int32(int32(i64))
 			}
 
+		case "Routing":
+			if err := awsAwsjson11_deserializeDocumentRoutingType(&sv.Routing, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -31321,6 +32691,42 @@ func awsAwsjson11_deserializeOpDocumentUpdateUserPoolOutput(v **UpdateUserPoolOu
 
 	for key, value := range shape {
 		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentUpdateUserPoolReplicaOutput(v **UpdateUserPoolReplicaOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateUserPoolReplicaOutput
+	if *v == nil {
+		sv = &UpdateUserPoolReplicaOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "UserPoolReplica":
+			if err := awsAwsjson11_deserializeDocumentUserPoolReplicaType(&sv.UserPoolReplica, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 

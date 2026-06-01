@@ -81,6 +81,28 @@ func ExampleClientCredentialsDetails_outputUsage() {
 
 var _ *types.ClientCredentialsGrantDetails
 
+func ExampleCustomPromptInput_outputUsage() {
+	var union types.CustomPromptInput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.CustomPromptInputMemberExistingPrompt:
+		_ = v.Value // Value is types.CustomPromptProfile
+
+	case *types.CustomPromptInputMemberNewPrompt:
+		_ = v.Value // Value is types.CustomPromptInputParameters
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.CustomPromptProfile
+var _ *types.CustomPromptInputParameters
+
 func ExampleDataSourceParameters_outputUsage() {
 	var union types.DataSourceParameters
 	// type switches can be used to check the union value
@@ -373,6 +395,24 @@ func ExampleReadClientCredentialsDetails_outputUsage() {
 }
 
 var _ *types.ReadClientCredentialsGrantDetails
+
+func ExampleSpaceQuickSightResourceDetails_outputUsage() {
+	var union types.SpaceQuickSightResourceDetails
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SpaceQuickSightResourceDetailsMemberResourceArn:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
 
 func ExampleTransformOperation_outputUsage() {
 	var union types.TransformOperation

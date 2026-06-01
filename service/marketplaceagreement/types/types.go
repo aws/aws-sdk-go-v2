@@ -274,6 +274,9 @@ type AgreementViewSummary struct {
 	// agreements, which don’t have end dates.
 	EndTime *time.Time
 
+	// A list of entitlements associated with the agreement.
+	Entitlements []Entitlement
+
 	// A summary of the proposal
 	ProposalSummary *ProposalSummary
 
@@ -641,6 +644,16 @@ type DocumentItem struct {
 	// Version of standard contracts provided by AWS Marketplace. Required when Type
 	// is StandardEula or StandardDsa .
 	Version *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents an entitlement associated with an agreement.
+type Entitlement struct {
+
+	// The Amazon Resource Name (ARN) of the AWS License Manager license associated
+	// with the entitlement.
+	LicenseArn *string
 
 	noSmithyDocumentSerde
 }

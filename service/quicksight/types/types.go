@@ -3,6 +3,7 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/quicksight/document"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -247,6 +248,131 @@ type AdHocFilteringOption struct {
 
 	// Availability status.
 	AvailabilityStatus DashboardBehavior
+
+	noSmithyDocumentSerde
+}
+
+// An agent resource in Amazon QuickSight that provides AI-powered conversational
+// experiences.
+type Agent struct {
+
+	// The unique identifier for the agent.
+	//
+	// This member is required.
+	AgentId *string
+
+	// The lifecycle state of the agent. Valid values are PREVIEW and PUBLISHED .
+	//
+	// This member is required.
+	AgentLifecycle AgentLifecycle
+
+	// The status of the agent.
+	//
+	// This member is required.
+	AgentStatus AgentStatus
+
+	// The Amazon Resource Name (ARN) of the agent.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time that the agent was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The identity of the user who created the agent.
+	//
+	// This member is required.
+	Creator *string
+
+	// The name of the agent.
+	//
+	// This member is required.
+	Name *string
+
+	// The date and time that the agent was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// The Amazon Resource Names (ARNs) of the action connectors attached to the agent.
+	ActionConnectors []string
+
+	// The custom prompt interface configuration for the agent.
+	CustomPromptInterface *CustomPromptInterface
+
+	// A description of the agent.
+	Description *string
+
+	// An error message associated with the agent, if applicable.
+	ErrorMessage *string
+
+	// The icon identifier for the agent.
+	IconId *string
+
+	// The Amazon Resource Names (ARNs) of the spaces attached to the agent.
+	Spaces []string
+
+	// A list of starter prompts that are displayed to users when they begin
+	// interacting with the agent.
+	StarterPrompts []string
+
+	// The welcome message that is displayed when a user starts a conversation with
+	// the agent.
+	WelcomeMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter to apply when searching agents.
+type AgentSearchFilter struct {
+
+	// The name of the field to filter on.
+	Name AgentOwnershipFilterAttribute
+
+	// The comparison operator to use for the filter.
+	Operator ComparisonOperator
+
+	// The value to filter on.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an agent, including its identifier, name, and metadata.
+type AgentSummary struct {
+
+	// The unique identifier for the agent.
+	//
+	// This member is required.
+	AgentId *string
+
+	// The Amazon Resource Name (ARN) of the agent.
+	//
+	// This member is required.
+	Arn *string
+
+	// The date and time that the agent was created.
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The name of the agent.
+	//
+	// This member is required.
+	Name *string
+
+	// The date and time that the agent was last updated.
+	//
+	// This member is required.
+	UpdatedAt *time.Time
+
+	// A description of the agent.
+	Description *string
+
+	// The icon identifier for the agent.
+	IconId *string
 
 	noSmithyDocumentSerde
 }
@@ -5344,6 +5470,117 @@ type CustomPermissions struct {
 	noSmithyDocumentSerde
 }
 
+// The custom prompt input for an agent. This is a union type that can be either
+// an existing prompt profile or new prompt parameters.
+//
+// The following types satisfy this interface:
+//
+//	CustomPromptInputMemberExistingPrompt
+//	CustomPromptInputMemberNewPrompt
+type CustomPromptInput interface {
+	isCustomPromptInput()
+}
+
+// An existing custom prompt profile to use for the agent.
+type CustomPromptInputMemberExistingPrompt struct {
+	Value CustomPromptProfile
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomPromptInputMemberExistingPrompt) isCustomPromptInput() {}
+
+// New custom prompt parameters to configure for the agent.
+type CustomPromptInputMemberNewPrompt struct {
+	Value CustomPromptInputParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*CustomPromptInputMemberNewPrompt) isCustomPromptInput() {}
+
+// The parameters for configuring a custom prompt for an agent.
+type CustomPromptInputParameters struct {
+
+	// Custom instructions for the agent's behavior.
+	CustomInstructions *string
+
+	// Instructions that define the agent's identity and persona.
+	Identity *string
+
+	// Instructions for the desired output style.
+	OutputStyle *string
+
+	// Instructions for the desired response length.
+	ResponseLength *string
+
+	// Instructions for the desired tone of responses.
+	Tone *string
+
+	noSmithyDocumentSerde
+}
+
+// The custom prompt interface configuration that defines how an agent's prompt is
+// configured.
+type CustomPromptInterface struct {
+
+	// The identifier of the model profile.
+	//
+	// This member is required.
+	ModelProfileId *string
+
+	// The Amazon Web Services account ID for the Q Business service.
+	//
+	// This member is required.
+	QbsAwsAccountId *string
+
+	// The subscription identifier.
+	//
+	// This member is required.
+	SubscriptionId *string
+
+	// Custom instructions for the agent's behavior.
+	CustomInstructions *string
+
+	// Instructions that define the agent's identity and persona.
+	Identity *string
+
+	// Instructions for the desired output style.
+	OutputStyle *string
+
+	// A summary of the custom prompt configuration.
+	PromptSummary *string
+
+	// Instructions for the desired response length.
+	ResponseLength *string
+
+	// Instructions for the desired tone of responses.
+	Tone *string
+
+	noSmithyDocumentSerde
+}
+
+// A reference to an existing custom prompt profile.
+type CustomPromptProfile struct {
+
+	// The identifier of the model profile.
+	//
+	// This member is required.
+	ModelProfileId *string
+
+	// The Amazon Web Services account ID for the Q Business service.
+	//
+	// This member is required.
+	QbsAwsAccountId *string
+
+	// The subscription identifier.
+	//
+	// This member is required.
+	SubscriptionId *string
+
+	noSmithyDocumentSerde
+}
+
 // A physical table type built from the results of the custom SQL query.
 type CustomSql struct {
 
@@ -8402,6 +8639,40 @@ type FailedKeyRegistrationEntry struct {
 	noSmithyDocumentSerde
 }
 
+// A resource operation that failed.
+type FailedSpaceResourceOperation struct {
+
+	// The error message that describes why the operation failed.
+	//
+	// This member is required.
+	ErrorMessage *string
+
+	// The type of the resource.
+	//
+	// This member is required.
+	ResourceType SpaceQuickSightResourceType
+
+	// The details of the resource.
+	ResourceDetails SpaceQuickSightResourceDetails
+
+	noSmithyDocumentSerde
+}
+
+// Information about a per-ARN failure when updating agent associations.
+type FailedToUpdateAssociation struct {
+
+	// The ARN that could not be added or removed.
+	Arn *string
+
+	// The error code for the failure.
+	ErrorCode *string
+
+	// A description of the failure.
+	ErrorMessage *string
+
+	noSmithyDocumentSerde
+}
+
 // The field series item configuration of a BarChartVisual .
 type FieldBarSeriesItem struct {
 
@@ -9226,6 +9497,60 @@ type FilterTextFieldControl struct {
 
 	// The title of the FilterTextFieldControl .
 	Title *string
+
+	noSmithyDocumentSerde
+}
+
+// The full details of a flow, including its definition specifying the steps.
+type FlowDetail struct {
+
+	// The Amazon Resource Name (ARN) of the flow.
+	//
+	// This member is required.
+	Arn *string
+
+	// The time this flow was created.
+	//
+	// This member is required.
+	CreatedTime *time.Time
+
+	// The definition of the flow, specifying the steps and configurations. This is
+	// the flow definition in Quick Flow's internal format. The format is subject to
+	// change.
+	//
+	// This member is required.
+	FlowDefinition document.Interface
+
+	// The unique identifier of the flow.
+	//
+	// This member is required.
+	FlowId *string
+
+	// The display name of the flow.
+	//
+	// This member is required.
+	Name *string
+
+	// The publish state of the flow. Valid values are DRAFT , PUBLISHED , or
+	// PENDING_APPROVAL .
+	//
+	// This member is required.
+	PublishState FlowPublishState
+
+	// The identifier of the principal who created the flow.
+	CreatedBy *string
+
+	// The description of the flow.
+	Description *string
+
+	// The identifier of the last principal who updated the flow.
+	LastUpdatedBy *string
+
+	// The last time this flow was modified.
+	LastUpdatedTime *time.Time
+
+	// A list of step alias mappings for the flow.
+	StepAliases []StepAliasMapping
 
 	noSmithyDocumentSerde
 }
@@ -18193,6 +18518,190 @@ type SourceTable struct {
 	noSmithyDocumentSerde
 }
 
+// A contributor to an Amazon QuickSight space.
+type SpaceContributor struct {
+
+	// The raw file size in bytes contributed by the user.
+	//
+	// This member is required.
+	RawFileSizeBytes *int64
+
+	// The percentage of total contributions made by the user.
+	Percentage *float64
+
+	// The user name of the contributor.
+	UserName *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of an Amazon QuickSight space.
+type SpaceDetails struct {
+
+	// The number of consumed source documents.
+	ConsumedSourceDocCount *int32
+
+	// The total consumed source size in bytes.
+	ConsumedSourceSize *int64
+
+	// The date and time that the space was created.
+	CreatedAt *time.Time
+
+	// The user who created the space.
+	CreatedBy *string
+
+	// The ARN of the user who created the space.
+	CreatedByArn *string
+
+	// The description of the space.
+	Description *string
+
+	// The display name of the space.
+	Name *string
+
+	// The resources in the space.
+	Resources []SpaceQuickSightResource
+
+	// The date and time that the space was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A QuickSight resource that is associated with a space.
+type SpaceQuickSightResource struct {
+
+	// The details of the QuickSight resource.
+	//
+	// This member is required.
+	ResourceDetails SpaceQuickSightResourceDetails
+
+	// The type of the QuickSight resource.
+	//
+	// This member is required.
+	ResourceType SpaceQuickSightResourceType
+
+	noSmithyDocumentSerde
+}
+
+// The details of a QuickSight resource in a space.
+//
+// The following types satisfy this interface:
+//
+//	SpaceQuickSightResourceDetailsMemberResourceArn
+type SpaceQuickSightResourceDetails interface {
+	isSpaceQuickSightResourceDetails()
+}
+
+// The ARN of the QuickSight resource.
+type SpaceQuickSightResourceDetailsMemberResourceArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SpaceQuickSightResourceDetailsMemberResourceArn) isSpaceQuickSightResourceDetails() {}
+
+// A filter to use when searching for spaces.
+type SpaceQuicksightSearchFilter struct {
+
+	// The name of the filter field to use.
+	//
+	// This member is required.
+	Name SpaceQuickSightSearchFilterName
+
+	// The comparison operator to use for the filter.
+	//
+	// This member is required.
+	Operator SpaceSearchOperator
+
+	// The value to use for the filter.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// An operation to perform on a resource in a space.
+type SpaceResourceOperation struct {
+
+	// The details of the resource.
+	//
+	// This member is required.
+	ResourceDetails SpaceQuickSightResourceDetails
+
+	// The type of the resource.
+	//
+	// This member is required.
+	ResourceType SpaceQuickSightResourceType
+
+	noSmithyDocumentSerde
+}
+
+// A summary of a resource in a space.
+type SpaceResourceSummary struct {
+
+	// The details of the resource.
+	//
+	// This member is required.
+	ResourceDetails SpaceQuickSightResourceDetails
+
+	// The type of the resource.
+	//
+	// This member is required.
+	ResourceType SpaceQuickSightResourceType
+
+	// The name of the resource.
+	ResourceName *string
+
+	// The date and time that the resource was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// A summary of an Amazon QuickSight space.
+type SpaceSummary struct {
+
+	// The ID of the space.
+	//
+	// This member is required.
+	SpaceId *string
+
+	// The number of consumed source documents.
+	ConsumedSourceDocCount *int32
+
+	// The total consumed source size in bytes.
+	ConsumedSourceSize *int64
+
+	// The date and time that the space was created.
+	CreatedAt *time.Time
+
+	// The user who created the space.
+	CreatedBy *string
+
+	// The ARN of the user who created the space.
+	CreatedByArn *string
+
+	// The description of the space.
+	Description *string
+
+	// The display name of the space.
+	Name *string
+
+	// The number of resources in the space.
+	ResourcesCount *int32
+
+	// The ARN of the space.
+	SpaceArn *string
+
+	// The date and time that the space was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of spacing (often a margin or padding).
 type Spacing struct {
 
@@ -18411,6 +18920,22 @@ type StaticFileUrlSourceOptions struct {
 	//
 	// This member is required.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// A mapping between a step identifier and its alias in a flow.
+type StepAliasMapping struct {
+
+	// The alias for the step.
+	//
+	// This member is required.
+	StepAlias *string
+
+	// The unique identifier of the step.
+	//
+	// This member is required.
+	StepId *string
 
 	noSmithyDocumentSerde
 }
@@ -22409,6 +22934,7 @@ type UnknownUnionMember struct {
 func (*UnknownUnionMember) isAuthenticationMetadata()                       {}
 func (*UnknownUnionMember) isAuthorizationCodeGrantCredentialsDetails()     {}
 func (*UnknownUnionMember) isClientCredentialsDetails()                     {}
+func (*UnknownUnionMember) isCustomPromptInput()                            {}
 func (*UnknownUnionMember) isDataSourceParameters()                         {}
 func (*UnknownUnionMember) isGeocodePreferenceValue()                       {}
 func (*UnknownUnionMember) isImageSource()                                  {}
@@ -22416,5 +22942,6 @@ func (*UnknownUnionMember) isPhysicalTable()                                {}
 func (*UnknownUnionMember) isReadAuthenticationMetadata()                   {}
 func (*UnknownUnionMember) isReadAuthorizationCodeGrantCredentialsDetails() {}
 func (*UnknownUnionMember) isReadClientCredentialsDetails()                 {}
+func (*UnknownUnionMember) isSpaceQuickSightResourceDetails()               {}
 func (*UnknownUnionMember) isTransformOperation()                           {}
 func (*UnknownUnionMember) isUserIdentifier()                               {}

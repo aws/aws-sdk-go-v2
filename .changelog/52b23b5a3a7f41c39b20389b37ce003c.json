@@ -1,0 +1,8 @@
+{
+    "id": "52b23b5a-3a7f-41c3-9b20-389b37ce003c",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/appsync"
+    ]
+}

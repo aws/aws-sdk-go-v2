@@ -4110,6 +4110,11 @@ func awsAwsjson10_deserializeDocumentAgreementViewSummary(v **types.AgreementVie
 				}
 			}
 
+		case "entitlements":
+			if err := awsAwsjson10_deserializeDocumentEntitlementList(&sv.Entitlements, value); err != nil {
+				return err
+			}
+
 		case "proposalSummary":
 			if err := awsAwsjson10_deserializeDocumentProposalSummary(&sv.ProposalSummary, value); err != nil {
 				return err
@@ -5285,6 +5290,80 @@ func awsAwsjson10_deserializeDocumentDocumentList(v *[]types.DocumentItem, value
 		var col types.DocumentItem
 		destAddr := &col
 		if err := awsAwsjson10_deserializeDocumentDocumentItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentEntitlement(v **types.Entitlement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Entitlement
+	if *v == nil {
+		sv = &types.Entitlement{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "licenseArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.LicenseArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentEntitlementList(v *[]types.Entitlement, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Entitlement
+	if *v == nil {
+		cv = []types.Entitlement{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Entitlement
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentEntitlement(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
