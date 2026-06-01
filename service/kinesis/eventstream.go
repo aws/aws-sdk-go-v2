@@ -14,7 +14,6 @@ import (
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"sync"
 )
 
@@ -285,7 +284,7 @@ func (m *awsAwsjson11_deserializeOpEventStreamSubscribeToShard) HandleDeserializ
 
 func (*awsAwsjson11_deserializeOpEventStreamSubscribeToShard) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }

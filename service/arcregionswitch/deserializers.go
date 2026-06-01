@@ -13,7 +13,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 	"time"
 )
@@ -58,7 +57,7 @@ func (m *smithyRpcv2cbor_deserializeOpApprovePlanExecutionStep) HandleDeserializ
 		return out, metadata, rpc2_deserializeOpErrorApprovePlanExecutionStep(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -107,7 +106,7 @@ func (m *smithyRpcv2cbor_deserializeOpCancelPlanExecution) HandleDeserialize(ctx
 		return out, metadata, rpc2_deserializeOpErrorCancelPlanExecution(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -221,7 +220,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeletePlan) HandleDeserialize(ctx context.
 		return out, metadata, rpc2_deserializeOpErrorDeletePlan(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1050,7 +1049,7 @@ func (m *smithyRpcv2cbor_deserializeOpTagResource) HandleDeserialize(ctx context
 		return out, metadata, rpc2_deserializeOpErrorTagResource(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1099,7 +1098,7 @@ func (m *smithyRpcv2cbor_deserializeOpUntagResource) HandleDeserialize(ctx conte
 		return out, metadata, rpc2_deserializeOpErrorUntagResource(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1213,7 +1212,7 @@ func (m *smithyRpcv2cbor_deserializeOpUpdatePlanExecution) HandleDeserialize(ctx
 		return out, metadata, rpc2_deserializeOpErrorUpdatePlanExecution(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1262,7 +1261,7 @@ func (m *smithyRpcv2cbor_deserializeOpUpdatePlanExecutionStep) HandleDeserialize
 		return out, metadata, rpc2_deserializeOpErrorUpdatePlanExecutionStep(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 

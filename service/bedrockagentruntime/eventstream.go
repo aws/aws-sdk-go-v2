@@ -14,7 +14,6 @@ import (
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"sync"
 )
 
@@ -779,7 +778,7 @@ func (m *awsRestjson1_deserializeOpEventStreamInvokeAgent) HandleDeserialize(ctx
 
 func (*awsRestjson1_deserializeOpEventStreamInvokeAgent) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }
@@ -867,7 +866,7 @@ func (m *awsRestjson1_deserializeOpEventStreamInvokeFlow) HandleDeserialize(ctx 
 
 func (*awsRestjson1_deserializeOpEventStreamInvokeFlow) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }
@@ -955,7 +954,7 @@ func (m *awsRestjson1_deserializeOpEventStreamInvokeInlineAgent) HandleDeseriali
 
 func (*awsRestjson1_deserializeOpEventStreamInvokeInlineAgent) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }
@@ -1043,7 +1042,7 @@ func (m *awsRestjson1_deserializeOpEventStreamOptimizePrompt) HandleDeserialize(
 
 func (*awsRestjson1_deserializeOpEventStreamOptimizePrompt) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }
@@ -1131,7 +1130,7 @@ func (m *awsRestjson1_deserializeOpEventStreamRetrieveAndGenerateStream) HandleD
 
 func (*awsRestjson1_deserializeOpEventStreamRetrieveAndGenerateStream) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }

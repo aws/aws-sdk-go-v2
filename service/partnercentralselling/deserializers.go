@@ -17,7 +17,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 )
 
@@ -51,7 +50,7 @@ func (m *awsAwsjson10_deserializeOpAcceptEngagementInvitation) HandleDeserialize
 	output := &AcceptEngagementInvitationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -155,7 +154,7 @@ func (m *awsAwsjson10_deserializeOpAssignOpportunity) HandleDeserialize(ctx cont
 	output := &AssignOpportunityOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -256,7 +255,7 @@ func (m *awsAwsjson10_deserializeOpAssociateOpportunity) HandleDeserialize(ctx c
 	output := &AssociateOpportunityOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1128,7 +1127,7 @@ func (m *awsAwsjson10_deserializeOpDeleteResourceSnapshotJob) HandleDeserialize(
 	output := &DeleteResourceSnapshotJobOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1232,7 +1231,7 @@ func (m *awsAwsjson10_deserializeOpDisassociateOpportunity) HandleDeserialize(ct
 	output := &DisassociateOpportunityOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3793,7 +3792,7 @@ func (m *awsAwsjson10_deserializeOpRejectEngagementInvitation) HandleDeserialize
 	output := &RejectEngagementInvitationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4284,7 +4283,7 @@ func (m *awsAwsjson10_deserializeOpStartResourceSnapshotJob) HandleDeserialize(c
 	output := &StartResourceSnapshotJobOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4385,7 +4384,7 @@ func (m *awsAwsjson10_deserializeOpStopResourceSnapshotJob) HandleDeserialize(ct
 	output := &StopResourceSnapshotJobOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4486,7 +4485,7 @@ func (m *awsAwsjson10_deserializeOpSubmitOpportunity) HandleDeserialize(ctx cont
 	output := &SubmitOpportunityOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}

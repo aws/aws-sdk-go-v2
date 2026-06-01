@@ -19,7 +19,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 )
 
@@ -1583,7 +1582,7 @@ func (m *awsAwsjson11_deserializeOpDeleteApplicationAccessScope) HandleDeseriali
 	output := &DeleteApplicationAccessScopeOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1813,7 +1812,7 @@ func (m *awsAwsjson11_deserializeOpDeleteApplicationAuthenticationMethod) Handle
 	output := &DeleteApplicationAuthenticationMethodOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1917,7 +1916,7 @@ func (m *awsAwsjson11_deserializeOpDeleteApplicationGrant) HandleDeserialize(ctx
 	output := &DeleteApplicationGrantOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7931,7 +7930,7 @@ func (m *awsAwsjson11_deserializeOpPutApplicationAccessScope) HandleDeserialize(
 	output := &PutApplicationAccessScopeOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -8161,7 +8160,7 @@ func (m *awsAwsjson11_deserializeOpPutApplicationAuthenticationMethod) HandleDes
 	output := &PutApplicationAuthenticationMethodOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -8265,7 +8264,7 @@ func (m *awsAwsjson11_deserializeOpPutApplicationGrant) HandleDeserialize(ctx co
 	output := &PutApplicationGrantOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}

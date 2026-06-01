@@ -17,7 +17,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 )
 
@@ -51,7 +50,7 @@ func (m *awsRestjson1_deserializeOpAssociateBackupVaultMpaApprovalTeam) HandleDe
 	output := &AssociateBackupVaultMpaApprovalTeamOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -2654,7 +2653,7 @@ func (m *awsRestjson1_deserializeOpDeleteBackupSelection) HandleDeserialize(ctx 
 	output := &DeleteBackupSelectionOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -2757,7 +2756,7 @@ func (m *awsRestjson1_deserializeOpDeleteBackupVault) HandleDeserialize(ctx cont
 	output := &DeleteBackupVaultOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -2863,7 +2862,7 @@ func (m *awsRestjson1_deserializeOpDeleteBackupVaultAccessPolicy) HandleDeserial
 	output := &DeleteBackupVaultAccessPolicyOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -2966,7 +2965,7 @@ func (m *awsRestjson1_deserializeOpDeleteBackupVaultLockConfiguration) HandleDes
 	output := &DeleteBackupVaultLockConfigurationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3072,7 +3071,7 @@ func (m *awsRestjson1_deserializeOpDeleteBackupVaultNotifications) HandleDeseria
 	output := &DeleteBackupVaultNotificationsOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3175,7 +3174,7 @@ func (m *awsRestjson1_deserializeOpDeleteFramework) HandleDeserialize(ctx contex
 	output := &DeleteFrameworkOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3281,7 +3280,7 @@ func (m *awsRestjson1_deserializeOpDeleteRecoveryPoint) HandleDeserialize(ctx co
 	output := &DeleteRecoveryPointOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3390,7 +3389,7 @@ func (m *awsRestjson1_deserializeOpDeleteReportPlan) HandleDeserialize(ctx conte
 	output := &DeleteReportPlanOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3496,7 +3495,7 @@ func (m *awsRestjson1_deserializeOpDeleteRestoreTestingPlan) HandleDeserialize(c
 	output := &DeleteRestoreTestingPlanOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3593,7 +3592,7 @@ func (m *awsRestjson1_deserializeOpDeleteRestoreTestingSelection) HandleDeserial
 	output := &DeleteRestoreTestingSelectionOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7095,7 +7094,7 @@ func (m *awsRestjson1_deserializeOpDisassociateBackupVaultMpaApprovalTeam) Handl
 	output := &DisassociateBackupVaultMpaApprovalTeamOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7201,7 +7200,7 @@ func (m *awsRestjson1_deserializeOpDisassociateRecoveryPoint) HandleDeserialize(
 	output := &DisassociateRecoveryPointOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7310,7 +7309,7 @@ func (m *awsRestjson1_deserializeOpDisassociateRecoveryPointFromParent) HandleDe
 	output := &DisassociateRecoveryPointFromParentOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -15487,7 +15486,7 @@ func (m *awsRestjson1_deserializeOpPutBackupVaultAccessPolicy) HandleDeserialize
 	output := &PutBackupVaultAccessPolicyOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -15590,7 +15589,7 @@ func (m *awsRestjson1_deserializeOpPutBackupVaultLockConfiguration) HandleDeseri
 	output := &PutBackupVaultLockConfigurationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -15696,7 +15695,7 @@ func (m *awsRestjson1_deserializeOpPutBackupVaultNotifications) HandleDeserializ
 	output := &PutBackupVaultNotificationsOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -15799,7 +15798,7 @@ func (m *awsRestjson1_deserializeOpPutRestoreValidationResult) HandleDeserialize
 	output := &PutRestoreValidationResultOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -15905,7 +15904,7 @@ func (m *awsRestjson1_deserializeOpRevokeRestoreAccessBackupVault) HandleDeseria
 	output := &RevokeRestoreAccessBackupVaultOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -16932,7 +16931,7 @@ func (m *awsRestjson1_deserializeOpStopBackupJob) HandleDeserialize(ctx context.
 	output := &StopBackupJobOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -17038,7 +17037,7 @@ func (m *awsRestjson1_deserializeOpTagResource) HandleDeserialize(ctx context.Co
 	output := &TagResourceOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -17144,7 +17143,7 @@ func (m *awsRestjson1_deserializeOpUntagResource) HandleDeserialize(ctx context.
 	output := &UntagResourceOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -17655,7 +17654,7 @@ func (m *awsRestjson1_deserializeOpUpdateGlobalSettings) HandleDeserialize(ctx c
 	output := &UpdateGlobalSettingsOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -18140,7 +18139,7 @@ func (m *awsRestjson1_deserializeOpUpdateRegionSettings) HandleDeserialize(ctx c
 	output := &UpdateRegionSettingsOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}

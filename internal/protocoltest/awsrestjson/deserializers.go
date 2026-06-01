@@ -22,7 +22,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"math"
 	"strconv"
 	"strings"
@@ -59,7 +58,7 @@ func (m *awsRestjson1_deserializeOpAllQueryStringTypes) HandleDeserialize(ctx co
 	output := &AllQueryStringTypesOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -150,7 +149,7 @@ func (m *awsRestjson1_deserializeOpConstantAndVariableQueryString) HandleDeseria
 	output := &ConstantAndVariableQueryStringOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -241,7 +240,7 @@ func (m *awsRestjson1_deserializeOpConstantQueryString) HandleDeserialize(ctx co
 	output := &ConstantQueryStringOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1455,7 +1454,7 @@ func (m *awsRestjson1_deserializeOpEndpointOperation) HandleDeserialize(ctx cont
 	output := &EndpointOperationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1546,7 +1545,7 @@ func (m *awsRestjson1_deserializeOpEndpointWithHostLabelOperation) HandleDeseria
 	output := &EndpointWithHostLabelOperationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1906,7 +1905,7 @@ func (m *awsRestjson1_deserializeOpHostWithPathOperation) HandleDeserialize(ctx 
 	output := &HostWithPathOperationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3152,7 +3151,7 @@ func (m *awsRestjson1_deserializeOpHttpQueryParamsOnlyOperation) HandleDeseriali
 	output := &HttpQueryParamsOnlyOperationOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3243,7 +3242,7 @@ func (m *awsRestjson1_deserializeOpHttpRequestWithFloatLabels) HandleDeserialize
 	output := &HttpRequestWithFloatLabelsOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3334,7 +3333,7 @@ func (m *awsRestjson1_deserializeOpHttpRequestWithGreedyLabelInPath) HandleDeser
 	output := &HttpRequestWithGreedyLabelInPathOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3425,7 +3424,7 @@ func (m *awsRestjson1_deserializeOpHttpRequestWithLabels) HandleDeserialize(ctx 
 	output := &HttpRequestWithLabelsOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3516,7 +3515,7 @@ func (m *awsRestjson1_deserializeOpHttpRequestWithLabelsAndTimestampFormat) Hand
 	output := &HttpRequestWithLabelsAndTimestampFormatOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -3607,7 +3606,7 @@ func (m *awsRestjson1_deserializeOpHttpRequestWithRegexLiteral) HandleDeserializ
 	output := &HttpRequestWithRegexLiteralOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4380,7 +4379,7 @@ func (m *awsRestjson1_deserializeOpInputStream) HandleDeserialize(ctx context.Co
 	output := &InputStreamOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4471,7 +4470,7 @@ func (m *awsRestjson1_deserializeOpInputStreamWithInitialRequest) HandleDeserial
 	output := &InputStreamWithInitialRequestOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -6231,7 +6230,7 @@ func (m *awsRestjson1_deserializeOpMalformedBlob) HandleDeserialize(ctx context.
 	output := &MalformedBlobOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -6322,7 +6321,7 @@ func (m *awsRestjson1_deserializeOpMalformedBoolean) HandleDeserialize(ctx conte
 	output := &MalformedBooleanOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -6413,7 +6412,7 @@ func (m *awsRestjson1_deserializeOpMalformedByte) HandleDeserialize(ctx context.
 	output := &MalformedByteOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -6504,7 +6503,7 @@ func (m *awsRestjson1_deserializeOpMalformedContentTypeWithBody) HandleDeseriali
 	output := &MalformedContentTypeWithBodyOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -6595,7 +6594,7 @@ func (m *awsRestjson1_deserializeOpMalformedContentTypeWithGenericString) Handle
 	output := &MalformedContentTypeWithGenericStringOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -6686,7 +6685,7 @@ func (m *awsRestjson1_deserializeOpMalformedContentTypeWithoutBody) HandleDeseri
 	output := &MalformedContentTypeWithoutBodyOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -6777,7 +6776,7 @@ func (m *awsRestjson1_deserializeOpMalformedContentTypeWithoutBodyEmptyInput) Ha
 	output := &MalformedContentTypeWithoutBodyEmptyInputOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -6868,7 +6867,7 @@ func (m *awsRestjson1_deserializeOpMalformedContentTypeWithPayload) HandleDeseri
 	output := &MalformedContentTypeWithPayloadOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -6959,7 +6958,7 @@ func (m *awsRestjson1_deserializeOpMalformedDouble) HandleDeserialize(ctx contex
 	output := &MalformedDoubleOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7050,7 +7049,7 @@ func (m *awsRestjson1_deserializeOpMalformedFloat) HandleDeserialize(ctx context
 	output := &MalformedFloatOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7141,7 +7140,7 @@ func (m *awsRestjson1_deserializeOpMalformedInteger) HandleDeserialize(ctx conte
 	output := &MalformedIntegerOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7232,7 +7231,7 @@ func (m *awsRestjson1_deserializeOpMalformedList) HandleDeserialize(ctx context.
 	output := &MalformedListOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7323,7 +7322,7 @@ func (m *awsRestjson1_deserializeOpMalformedLong) HandleDeserialize(ctx context.
 	output := &MalformedLongOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7414,7 +7413,7 @@ func (m *awsRestjson1_deserializeOpMalformedMap) HandleDeserialize(ctx context.C
 	output := &MalformedMapOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7505,7 +7504,7 @@ func (m *awsRestjson1_deserializeOpMalformedRequestBody) HandleDeserialize(ctx c
 	output := &MalformedRequestBodyOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7596,7 +7595,7 @@ func (m *awsRestjson1_deserializeOpMalformedShort) HandleDeserialize(ctx context
 	output := &MalformedShortOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7687,7 +7686,7 @@ func (m *awsRestjson1_deserializeOpMalformedString) HandleDeserialize(ctx contex
 	output := &MalformedStringOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7778,7 +7777,7 @@ func (m *awsRestjson1_deserializeOpMalformedTimestampBodyDateTime) HandleDeseria
 	output := &MalformedTimestampBodyDateTimeOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7869,7 +7868,7 @@ func (m *awsRestjson1_deserializeOpMalformedTimestampBodyDefault) HandleDeserial
 	output := &MalformedTimestampBodyDefaultOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -7960,7 +7959,7 @@ func (m *awsRestjson1_deserializeOpMalformedTimestampBodyHttpDate) HandleDeseria
 	output := &MalformedTimestampBodyHttpDateOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -8051,7 +8050,7 @@ func (m *awsRestjson1_deserializeOpMalformedTimestampHeaderDateTime) HandleDeser
 	output := &MalformedTimestampHeaderDateTimeOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -8142,7 +8141,7 @@ func (m *awsRestjson1_deserializeOpMalformedTimestampHeaderDefault) HandleDeseri
 	output := &MalformedTimestampHeaderDefaultOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -8233,7 +8232,7 @@ func (m *awsRestjson1_deserializeOpMalformedTimestampHeaderEpoch) HandleDeserial
 	output := &MalformedTimestampHeaderEpochOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -8324,7 +8323,7 @@ func (m *awsRestjson1_deserializeOpMalformedTimestampPathDefault) HandleDeserial
 	output := &MalformedTimestampPathDefaultOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -8415,7 +8414,7 @@ func (m *awsRestjson1_deserializeOpMalformedTimestampPathEpoch) HandleDeserializ
 	output := &MalformedTimestampPathEpochOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -8506,7 +8505,7 @@ func (m *awsRestjson1_deserializeOpMalformedTimestampPathHttpDate) HandleDeseria
 	output := &MalformedTimestampPathHttpDateOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -8597,7 +8596,7 @@ func (m *awsRestjson1_deserializeOpMalformedTimestampQueryDefault) HandleDeseria
 	output := &MalformedTimestampQueryDefaultOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -8688,7 +8687,7 @@ func (m *awsRestjson1_deserializeOpMalformedTimestampQueryEpoch) HandleDeseriali
 	output := &MalformedTimestampQueryEpochOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -8779,7 +8778,7 @@ func (m *awsRestjson1_deserializeOpMalformedTimestampQueryHttpDate) HandleDeseri
 	output := &MalformedTimestampQueryHttpDateOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -8870,7 +8869,7 @@ func (m *awsRestjson1_deserializeOpMalformedUnion) HandleDeserialize(ctx context
 	output := &MalformedUnionOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -9068,7 +9067,7 @@ func (m *awsRestjson1_deserializeOpNoInputAndNoOutput) HandleDeserialize(ctx con
 	output := &NoInputAndNoOutputOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -9492,7 +9491,7 @@ func (m *awsRestjson1_deserializeOpOmitsNullSerializesEmptyString) HandleDeseria
 	output := &OmitsNullSerializesEmptyStringOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -9583,7 +9582,7 @@ func (m *awsRestjson1_deserializeOpOmitsSerializingEmptyLists) HandleDeserialize
 	output := &OmitsSerializingEmptyListsOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -10841,7 +10840,7 @@ func (m *awsRestjson1_deserializeOpPutWithContentEncoding) HandleDeserialize(ctx
 	output := &PutWithContentEncodingOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -10932,7 +10931,7 @@ func (m *awsRestjson1_deserializeOpQueryIdempotencyTokenAutoFill) HandleDeserial
 	output := &QueryIdempotencyTokenAutoFillOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -11023,7 +11022,7 @@ func (m *awsRestjson1_deserializeOpQueryParamsAsStringListMap) HandleDeserialize
 	output := &QueryParamsAsStringListMapOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -11114,7 +11113,7 @@ func (m *awsRestjson1_deserializeOpQueryPrecedence) HandleDeserialize(ctx contex
 	output := &QueryPrecedenceOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -12286,7 +12285,7 @@ func (m *awsRestjson1_deserializeOpStreamingTraitsRequireLength) HandleDeseriali
 	output := &StreamingTraitsRequireLengthOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -13529,7 +13528,7 @@ func (m *awsRestjson1_deserializeOpUnitInputAndOutput) HandleDeserialize(ctx con
 	output := &UnitInputAndOutputOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}

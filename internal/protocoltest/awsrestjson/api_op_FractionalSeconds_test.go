@@ -11,7 +11,7 @@ import (
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"testing"
 )
@@ -59,7 +59,7 @@ func TestClient_FractionalSeconds_Deserialize(t *testing.T) {
 					}
 					if len(c.Body) != 0 {
 						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+						response.Body = io.NopCloser(bytes.NewReader(c.Body))
 					} else {
 
 						response.Body = http.NoBody
@@ -133,7 +133,7 @@ func BenchmarkClient_FractionalSeconds_Deserialize(b *testing.B) {
 					}
 					if len(c.Body) != 0 {
 						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+						response.Body = io.NopCloser(bytes.NewReader(c.Body))
 					} else {
 
 						response.Body = http.NoBody

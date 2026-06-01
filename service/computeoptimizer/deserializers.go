@@ -13,7 +13,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 	"time"
 )
@@ -58,7 +57,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteRecommendationPreferences) HandleDes
 		return out, metadata, rpc2_deserializeOpErrorDeleteRecommendationPreferences(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1732,7 +1731,7 @@ func (m *smithyRpcv2cbor_deserializeOpPutRecommendationPreferences) HandleDeseri
 		return out, metadata, rpc2_deserializeOpErrorPutRecommendationPreferences(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 

@@ -17,7 +17,6 @@ import (
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"sync"
 	"time"
 )
@@ -1136,7 +1135,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartCallAnalyticsStreamTranscript
 
 func (*awsRestjson1_deserializeOpEventStreamStartCallAnalyticsStreamTranscription) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }
@@ -1277,7 +1276,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartMedicalScribeStream) HandleDe
 
 func (*awsRestjson1_deserializeOpEventStreamStartMedicalScribeStream) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }
@@ -1418,7 +1417,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartMedicalStreamTranscription) H
 
 func (*awsRestjson1_deserializeOpEventStreamStartMedicalStreamTranscription) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }
@@ -1559,7 +1558,7 @@ func (m *awsRestjson1_deserializeOpEventStreamStartStreamTranscription) HandleDe
 
 func (*awsRestjson1_deserializeOpEventStreamStartStreamTranscription) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }

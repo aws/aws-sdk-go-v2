@@ -3,7 +3,6 @@ package s3
 import (
 	"context"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"strings"
 	"testing"
@@ -61,6 +60,6 @@ func newGetBucketPolicyHTTPResponse(payload string) *http.Response {
 			"Content-Type": {"application/json"},
 		},
 		ContentLength: int64(len(payload)),
-		Body:          ioutil.NopCloser(strings.NewReader(payload)),
+		Body:          io.NopCloser(strings.NewReader(payload)),
 	}
 }

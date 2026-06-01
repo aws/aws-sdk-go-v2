@@ -17,7 +17,6 @@ import (
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"sync"
 	"time"
 )
@@ -528,7 +527,7 @@ func (m *awsRestjson1_deserializeOpEventStreamDuplexStream) HandleDeserialize(ct
 
 func (*awsRestjson1_deserializeOpEventStreamDuplexStream) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }
@@ -653,7 +652,7 @@ func (m *awsRestjson1_deserializeOpEventStreamDuplexStreamWithDistinctStreams) H
 
 func (*awsRestjson1_deserializeOpEventStreamDuplexStreamWithDistinctStreams) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }
@@ -818,7 +817,7 @@ func (m *awsRestjson1_deserializeOpEventStreamDuplexStreamWithInitialMessages) H
 
 func (*awsRestjson1_deserializeOpEventStreamDuplexStreamWithInitialMessages) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }
@@ -943,7 +942,7 @@ func (m *awsRestjson1_deserializeOpEventStreamInputStream) HandleDeserialize(ctx
 
 func (*awsRestjson1_deserializeOpEventStreamInputStream) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }
@@ -1068,7 +1067,7 @@ func (m *awsRestjson1_deserializeOpEventStreamInputStreamWithInitialRequest) Han
 
 func (*awsRestjson1_deserializeOpEventStreamInputStreamWithInitialRequest) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }
@@ -1181,7 +1180,7 @@ func (m *awsRestjson1_deserializeOpEventStreamOutputStream) HandleDeserialize(ct
 
 func (*awsRestjson1_deserializeOpEventStreamOutputStream) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }
@@ -1294,7 +1293,7 @@ func (m *awsRestjson1_deserializeOpEventStreamOutputStreamWithInitialResponse) H
 
 func (*awsRestjson1_deserializeOpEventStreamOutputStreamWithInitialResponse) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }

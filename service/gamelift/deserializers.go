@@ -13,7 +13,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 	"time"
 )
@@ -58,7 +57,7 @@ func (m *smithyRpcv2cbor_deserializeOpAcceptMatch) HandleDeserialize(ctx context
 		return out, metadata, rpc2_deserializeOpErrorAcceptMatch(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1212,7 +1211,7 @@ func (m *smithyRpcv2cbor_deserializeOpCreateVpcPeeringConnection) HandleDeserial
 		return out, metadata, rpc2_deserializeOpErrorCreateVpcPeeringConnection(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1261,7 +1260,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteAlias) HandleDeserialize(ctx context
 		return out, metadata, rpc2_deserializeOpErrorDeleteAlias(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1310,7 +1309,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteBuild) HandleDeserialize(ctx context
 		return out, metadata, rpc2_deserializeOpErrorDeleteBuild(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1359,7 +1358,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteContainerFleet) HandleDeserialize(ct
 		return out, metadata, rpc2_deserializeOpErrorDeleteContainerFleet(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1408,7 +1407,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteContainerGroupDefinition) HandleDese
 		return out, metadata, rpc2_deserializeOpErrorDeleteContainerGroupDefinition(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1457,7 +1456,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteFleet) HandleDeserialize(ctx context
 		return out, metadata, rpc2_deserializeOpErrorDeleteFleet(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1636,7 +1635,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteGameSessionQueue) HandleDeserialize(
 		return out, metadata, rpc2_deserializeOpErrorDeleteGameSessionQueue(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1685,7 +1684,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteLocation) HandleDeserialize(ctx cont
 		return out, metadata, rpc2_deserializeOpErrorDeleteLocation(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1734,7 +1733,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteMatchmakingConfiguration) HandleDese
 		return out, metadata, rpc2_deserializeOpErrorDeleteMatchmakingConfiguration(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1783,7 +1782,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteMatchmakingRuleSet) HandleDeserializ
 		return out, metadata, rpc2_deserializeOpErrorDeleteMatchmakingRuleSet(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1832,7 +1831,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteScalingPolicy) HandleDeserialize(ctx
 		return out, metadata, rpc2_deserializeOpErrorDeleteScalingPolicy(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1881,7 +1880,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteScript) HandleDeserialize(ctx contex
 		return out, metadata, rpc2_deserializeOpErrorDeleteScript(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1930,7 +1929,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteVpcPeeringAuthorization) HandleDeser
 		return out, metadata, rpc2_deserializeOpErrorDeleteVpcPeeringAuthorization(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1979,7 +1978,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeleteVpcPeeringConnection) HandleDeserial
 		return out, metadata, rpc2_deserializeOpErrorDeleteVpcPeeringConnection(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -2028,7 +2027,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeregisterCompute) HandleDeserialize(ctx c
 		return out, metadata, rpc2_deserializeOpErrorDeregisterCompute(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -2077,7 +2076,7 @@ func (m *smithyRpcv2cbor_deserializeOpDeregisterGameServer) HandleDeserialize(ct
 		return out, metadata, rpc2_deserializeOpErrorDeregisterGameServer(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -6286,7 +6285,7 @@ func (m *smithyRpcv2cbor_deserializeOpStopMatchmaking) HandleDeserialize(ctx con
 		return out, metadata, rpc2_deserializeOpErrorStopMatchmaking(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -6400,7 +6399,7 @@ func (m *smithyRpcv2cbor_deserializeOpTagResource) HandleDeserialize(ctx context
 		return out, metadata, rpc2_deserializeOpErrorTagResource(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -6514,7 +6513,7 @@ func (m *smithyRpcv2cbor_deserializeOpUntagResource) HandleDeserialize(ctx conte
 		return out, metadata, rpc2_deserializeOpErrorUntagResource(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 

@@ -11,7 +11,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 )
 
@@ -55,7 +54,7 @@ func (m *smithyRpcv2cbor_deserializeOpNonQueryCompatibleOperation) HandleDeseria
 		return out, metadata, rpc2_deserializeOpErrorNonQueryCompatibleOperation(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 

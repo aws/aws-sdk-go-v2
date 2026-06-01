@@ -13,7 +13,6 @@ import (
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"testing"
@@ -232,7 +231,7 @@ func TestClient_QueryCompatibleOperation_NoCustomCodeError_Deserialize(t *testin
 					}
 					if len(c.Body) != 0 {
 						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+						response.Body = io.NopCloser(bytes.NewReader(c.Body))
 					} else {
 
 						response.Body = http.NoBody
@@ -330,7 +329,7 @@ func BenchmarkClient_QueryCompatibleOperation_NoCustomCodeError_Deserialize(b *t
 					}
 					if len(c.Body) != 0 {
 						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+						response.Body = io.NopCloser(bytes.NewReader(c.Body))
 					} else {
 
 						response.Body = http.NoBody
@@ -405,7 +404,7 @@ func TestClient_QueryCompatibleOperation_CustomCodeError_Deserialize(t *testing.
 					}
 					if len(c.Body) != 0 {
 						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+						response.Body = io.NopCloser(bytes.NewReader(c.Body))
 					} else {
 
 						response.Body = http.NoBody
@@ -505,7 +504,7 @@ func BenchmarkClient_QueryCompatibleOperation_CustomCodeError_Deserialize(b *tes
 					}
 					if len(c.Body) != 0 {
 						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+						response.Body = io.NopCloser(bytes.NewReader(c.Body))
 					} else {
 
 						response.Body = http.NoBody

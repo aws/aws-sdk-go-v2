@@ -1,0 +1,9 @@
+{
+    "id": "8df6dca0-b6e4-47a7-ae82-db84c9fc87a7",
+    "type": "bugfix",
+    "description": "Replace usages of deprecated io/ioutil package with io.",
+    "collapse": false,
+    "modules": [
+        "."
+    ]
+}

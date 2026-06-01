@@ -13,7 +13,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strings"
 	"time"
 )
@@ -58,7 +57,7 @@ func (m *smithyRpcv2cbor_deserializeOpCancelCluster) HandleDeserialize(ctx conte
 		return out, metadata, rpc2_deserializeOpErrorCancelCluster(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -107,7 +106,7 @@ func (m *smithyRpcv2cbor_deserializeOpCancelJob) HandleDeserialize(ctx context.C
 		return out, metadata, rpc2_deserializeOpErrorCancelJob(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1521,7 +1520,7 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateCluster) HandleDeserialize(ctx conte
 		return out, metadata, rpc2_deserializeOpErrorUpdateCluster(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1570,7 +1569,7 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateJob) HandleDeserialize(ctx context.C
 		return out, metadata, rpc2_deserializeOpErrorUpdateJob(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1619,7 +1618,7 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateJobShipmentState) HandleDeserialize(
 		return out, metadata, rpc2_deserializeOpErrorUpdateJobShipmentState(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 
@@ -1668,7 +1667,7 @@ func (m *smithyRpcv2cbor_deserializeOpUpdateLongTermPricing) HandleDeserialize(c
 		return out, metadata, rpc2_deserializeOpErrorUpdateLongTermPricing(resp)
 	}
 
-	if _, err = io.Copy(ioutil.Discard, resp.Body); err != nil {
+	if _, err = io.Copy(io.Discard, resp.Body); err != nil {
 		return out, metadata, fmt.Errorf("discard response body: %w", err)
 	}
 

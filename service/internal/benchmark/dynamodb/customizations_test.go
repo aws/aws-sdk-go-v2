@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -74,7 +73,7 @@ func benchCustomizationsOld(b *testing.B, c testData) {
 					"X-Amz-Crc32": []string{strconv.FormatInt(c.respChecksum, 10)},
 				},
 				ContentLength: int64(len(body)),
-				Body:          ioutil.NopCloser(bytes.NewReader(body)),
+				Body:          io.NopCloser(bytes.NewReader(body)),
 			}
 		}})
 	if err != nil {
@@ -200,10 +199,10 @@ func (m *mockClient) Do(r *http.Request) (*http.Response, error) {
 	if m.ScanRespGzipBody != nil {
 		resp.Header["Content-Encoding"] = []string{"gzip"}
 		resp.ContentLength = int64(len(m.ScanRespGzipBody))
-		resp.Body = ioutil.NopCloser(bytes.NewReader(m.ScanRespGzipBody))
+		resp.Body = io.NopCloser(bytes.NewReader(m.ScanRespGzipBody))
 	} else if m.ScanRespBody != nil {
 		resp.ContentLength = int64(len(m.ScanRespBody))
-		resp.Body = ioutil.NopCloser(bytes.NewReader(m.ScanRespBody))
+		resp.Body = io.NopCloser(bytes.NewReader(m.ScanRespBody))
 	} else {
 		return nil, fmt.Errorf("no client mock response body set")
 	}
