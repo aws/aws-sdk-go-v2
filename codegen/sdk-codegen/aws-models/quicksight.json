@@ -810,6 +810,371 @@
                 "smithy.api#sensitive": {}
             }
         },
+        "com.amazonaws.quicksight#Agent": {
+            "type": "structure",
+            "members": {
+                "Spaces": {
+                    "target": "com.amazonaws.quicksight#AgentSpacesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the spaces attached to the agent.</p>"
+                    }
+                },
+                "ActionConnectors": {
+                    "target": "com.amazonaws.quicksight#AgentActionConnectorsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the action connectors attached to the agent.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.quicksight#AgentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the agent.</p>"
+                    }
+                },
+                "IconId": {
+                    "target": "com.amazonaws.quicksight#IconId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The icon identifier for the agent.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#AgentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StarterPrompts": {
+                    "target": "com.amazonaws.quicksight#StarterPromptList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of starter prompts that are displayed to users when they begin interacting with the agent.</p>"
+                    }
+                },
+                "WelcomeMessage": {
+                    "target": "com.amazonaws.quicksight#WelcomeMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The welcome message that is displayed when a user starts a conversation with the agent.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#AgentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentId": {
+                    "target": "com.amazonaws.quicksight#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentLifecycle": {
+                    "target": "com.amazonaws.quicksight#AgentLifecycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle state of the agent. Valid values are <code>PREVIEW</code> and <code>PUBLISHED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentStatus": {
+                    "target": "com.amazonaws.quicksight#AgentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the agent was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Creator": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identity of the user who created the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CustomPromptInterface": {
+                    "target": "com.amazonaws.quicksight#CustomPromptInterface",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom prompt interface configuration for the agent.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message associated with the agent, if applicable.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the agent was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An agent resource in Amazon QuickSight that provides AI-powered conversational experiences.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AgentActionConnectorsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AgentArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1284
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
+            }
+        },
+        "com.amazonaws.quicksight#AgentDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^\\P{C}*$"
+            }
+        },
+        "com.amazonaws.quicksight#AgentId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z-_.+]+$"
+            }
+        },
+        "com.amazonaws.quicksight#AgentLifecycle": {
+            "type": "enum",
+            "members": {
+                "PREVIEW": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PREVIEW"
+                    }
+                },
+                "PUBLISHED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PUBLISHED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AgentName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^(?!\\s*$).+$"
+            }
+        },
+        "com.amazonaws.quicksight#AgentOwnershipFilterAttribute": {
+            "type": "enum",
+            "members": {
+                "DIRECT_QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_SOLE_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_SOLE_OWNER"
+                    }
+                },
+                "AGENT_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AGENT_NAME"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AgentSearchFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.quicksight#AgentOwnershipFilterAttribute",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the field to filter on.</p>"
+                    }
+                },
+                "Operator": {
+                    "target": "com.amazonaws.quicksight#ComparisonOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator to use for the filter.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to filter on.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter to apply when searching agents.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AgentSearchFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AgentSearchFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AgentSpacesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AgentStatus": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                },
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#AgentSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AgentSummary"
+            }
+        },
+        "com.amazonaws.quicksight#AgentSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#AgentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentId": {
+                    "target": "com.amazonaws.quicksight#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#AgentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.quicksight#AgentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the agent.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the agent was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the agent was last updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IconId": {
+                    "target": "com.amazonaws.quicksight#IconId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The icon identifier for the agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of an agent, including its identifier, name, and metadata.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#AgentSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#AgentSummary"
+            }
+        },
+        "com.amazonaws.quicksight#AgentsMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.quicksight#AggFunction": {
             "type": "structure",
             "members": {
@@ -10363,6 +10728,23 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#ComparisonOperator": {
+            "type": "enum",
+            "members": {
+                "StringEquals": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringEquals"
+                    }
+                },
+                "StringLike": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "StringLike"
+                    }
+                }
+            }
+        },
         "com.amazonaws.quicksight#Computation": {
             "type": "structure",
             "members": {
@@ -11631,6 +12013,193 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#CreateAgent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#CreateAgentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#CreateAgentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an agent in Amazon QuickSight.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/agents",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateAgentRequest": {
+            "type": "structure",
+            "members": {
+                "Spaces": {
+                    "target": "com.amazonaws.quicksight#CreateAgentRequestSpacesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the spaces to attach to the agent.</p>"
+                    }
+                },
+                "ActionConnectors": {
+                    "target": "com.amazonaws.quicksight#CreateAgentRequestActionConnectorsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the action connectors to attach to the agent.</p>"
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the agent.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentId": {
+                    "target": "com.amazonaws.quicksight#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#AgentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.quicksight#AgentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the agent.</p>"
+                    }
+                },
+                "IconId": {
+                    "target": "com.amazonaws.quicksight#IconId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The icon identifier for the agent.</p>"
+                    }
+                },
+                "StarterPrompts": {
+                    "target": "com.amazonaws.quicksight#StarterPromptList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of starter prompts that are displayed to users when they begin interacting with the agent.</p>"
+                    }
+                },
+                "WelcomeMessage": {
+                    "target": "com.amazonaws.quicksight#WelcomeMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The welcome message that is displayed when a user starts a conversation with the agent.</p>"
+                    }
+                },
+                "AgentLifecycle": {
+                    "target": "com.amazonaws.quicksight#AgentLifecycle",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifecycle state of the agent. Valid values are <code>PREVIEW</code> and <code>PUBLISHED</code>.</p>"
+                    }
+                },
+                "CustomPromptInput": {
+                    "target": "com.amazonaws.quicksight#CustomPromptInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom prompt configuration for the agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#CreateAgentRequestActionConnectorsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateAgentRequestSpacesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateAgentResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#AgentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentId": {
+                    "target": "com.amazonaws.quicksight#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentStatus": {
+                    "target": "com.amazonaws.quicksight#AgentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentName": {
+                    "target": "com.amazonaws.quicksight#AgentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#CreateAnalysis": {
             "type": "operation",
             "input": {
@@ -12608,6 +13177,143 @@
                 },
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#CreateFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#CreateFlowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#CreateFlowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new flow in the specified Amazon Web Services account. Creates both a DRAFT and PUBLISHED (auto-published) version.</p>\n         <p>This operation is idempotent. Supply a <code>ClientToken</code> to safely retry without creating duplicate resources.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/flows",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateFlowRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account where you want to create the flow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#TitleInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name for the flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.quicksight#FlowDescriptionInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description for the flow.</p>"
+                    }
+                },
+                "FlowDefinition": {
+                    "target": "com.amazonaws.quicksight#SensitiveDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the flow, specifying the steps and configurations. This is the flow definition in Quick Flow's internal format. The format is subject to change.</p>\n         <note>\n            <p>Always derive or depend on the flow definition from the <code>DescribeFlow</code> operation to ensure you are working with the latest format.</p>\n         </note>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#PermissionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Initial permissions for the flow. If omitted, the flow is created without any permissions.</p>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.quicksight#CreateFlowRequestClientTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#CreateFlowRequestClientTokenString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.quicksight#CreateFlowResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FlowId": {
+                    "target": "com.amazonaws.quicksight#FlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
@@ -13864,6 +14570,110 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#CreateSpace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#CreateSpaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#CreateSpaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new Amazon QuickSight space. A space is a collection of resources that can be used to organize and manage QuickSight assets.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/accounts/{AwsAccountId}/spaces",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#CreateSpaceRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SpaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space. This ID is unique per Amazon Web Services Region for each Amazon Web Services account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#SpaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A display name for the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.quicksight#SpaceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the space.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#CreateSpaceResponse": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "spaceArn": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the space.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             },
@@ -15463,6 +16273,159 @@
                     "max": 64
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9+=,.@_-]+$"
+            }
+        },
+        "com.amazonaws.quicksight#CustomPromptInput": {
+            "type": "union",
+            "members": {
+                "ExistingPrompt": {
+                    "target": "com.amazonaws.quicksight#CustomPromptProfile",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An existing custom prompt profile to use for the agent.</p>"
+                    }
+                },
+                "NewPrompt": {
+                    "target": "com.amazonaws.quicksight#CustomPromptInputParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>New custom prompt parameters to configure for the agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The custom prompt input for an agent. This is a union type that can be either an existing prompt profile or new prompt parameters.</p>",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.quicksight#CustomPromptInputParameters": {
+            "type": "structure",
+            "members": {
+                "ResponseLength": {
+                    "target": "com.amazonaws.quicksight#StyleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Instructions for the desired response length.</p>"
+                    }
+                },
+                "OutputStyle": {
+                    "target": "com.amazonaws.quicksight#StyleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Instructions for the desired output style.</p>"
+                    }
+                },
+                "Identity": {
+                    "target": "com.amazonaws.quicksight#StyleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Instructions that define the agent's identity and persona.</p>"
+                    }
+                },
+                "Tone": {
+                    "target": "com.amazonaws.quicksight#StyleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Instructions for the desired tone of responses.</p>"
+                    }
+                },
+                "CustomInstructions": {
+                    "target": "com.amazonaws.quicksight#StyleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom instructions for the agent's behavior.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters for configuring a custom prompt for an agent.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CustomPromptInterface": {
+            "type": "structure",
+            "members": {
+                "ModelProfileId": {
+                    "target": "com.amazonaws.quicksight#ModelProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the model profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SubscriptionId": {
+                    "target": "com.amazonaws.quicksight#SubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subscription identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QbsAwsAccountId": {
+                    "target": "com.amazonaws.quicksight#QbsAwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the Q Business service.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResponseLength": {
+                    "target": "com.amazonaws.quicksight#StyleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Instructions for the desired response length.</p>"
+                    }
+                },
+                "OutputStyle": {
+                    "target": "com.amazonaws.quicksight#StyleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Instructions for the desired output style.</p>"
+                    }
+                },
+                "Identity": {
+                    "target": "com.amazonaws.quicksight#StyleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Instructions that define the agent's identity and persona.</p>"
+                    }
+                },
+                "Tone": {
+                    "target": "com.amazonaws.quicksight#StyleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Instructions for the desired tone of responses.</p>"
+                    }
+                },
+                "CustomInstructions": {
+                    "target": "com.amazonaws.quicksight#StyleDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Custom instructions for the agent's behavior.</p>"
+                    }
+                },
+                "promptSummary": {
+                    "target": "com.amazonaws.quicksight#SensitiveText",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of the custom prompt configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The custom prompt interface configuration that defines how an agent's prompt is configured.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#CustomPromptProfile": {
+            "type": "structure",
+            "members": {
+                "ModelProfileId": {
+                    "target": "com.amazonaws.quicksight#ModelProfileId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the model profile.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SubscriptionId": {
+                    "target": "com.amazonaws.quicksight#SubscriptionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The subscription identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "QbsAwsAccountId": {
+                    "target": "com.amazonaws.quicksight#QbsAwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the Q Business service.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reference to an existing custom prompt profile.</p>"
             }
         },
         "com.amazonaws.quicksight#CustomSql": {
@@ -20990,6 +21953,82 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DeleteAgent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteAgentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteAgentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an agent.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/agents/{AgentId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteAgentRequest": {
+            "type": "structure",
+            "members": {
+                "AgentId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the agent.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteAgentResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DeleteAnalysis": {
             "type": "operation",
             "input": {
@@ -21781,6 +22820,90 @@
             "members": {
                 "RequestId": {
                     "target": "com.amazonaws.quicksight#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteFlowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteFlowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Permanently deletes a flow from the specified Amazon Web Services account. This operation cannot be undone.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/accounts/{AwsAccountId}/flows/{FlowId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteFlowRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the flow that you are deleting.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FlowId": {
+                    "target": "com.amazonaws.quicksight#FlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the flow to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteFlowResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "smithy.api#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
@@ -22845,6 +23968,92 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteSpace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DeleteSpaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DeleteSpaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an Amazon QuickSight space.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/v1/accounts/{AwsAccountId}/spaces/{SpaceId}",
+                    "code": 204
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteSpaceRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SpaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space that you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DeleteSpaceResponse": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "spaceArn": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the space.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             },
@@ -24424,6 +25633,187 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status code of the request.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAgent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeAgentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeAgentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an agent.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/agents/{AgentId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAgentPermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeAgentPermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeAgentPermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the resource permissions for an agent.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/agents/{AgentId}/permissions",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAgentPermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AgentId": {
+                    "target": "com.amazonaws.quicksight#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the agent.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAgentPermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#AgentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentId": {
+                    "target": "com.amazonaws.quicksight#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource permissions for the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAgentRequest": {
+            "type": "structure",
+            "members": {
+                "AgentId": {
+                    "target": "com.amazonaws.quicksight#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the agent.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeAgentResponse": {
+            "type": "structure",
+            "members": {
+                "Agent": {
+                    "target": "com.amazonaws.quicksight#Agent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full details of the agent, including its configuration, status, and associations.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             },
@@ -26827,6 +28217,102 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#DescribeFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeFlowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeFlowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the full details of a flow for the latest version of the requested publish state.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/flows/{FlowId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeFlowRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the flow that you are describing.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FlowId": {
+                    "target": "com.amazonaws.quicksight#FlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the flow.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublishState": {
+                    "target": "com.amazonaws.quicksight#FlowPublishState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publish state of the flow version to describe. Valid values are <code>DRAFT</code>, <code>PUBLISHED</code>, \n            or <code>PENDING_APPROVAL</code>.</p>",
+                        "smithy.api#httpQuery": "publish-state",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeFlowResponse": {
+            "type": "structure",
+            "members": {
+                "Flow": {
+                    "target": "com.amazonaws.quicksight#FlowDetail",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The full details of the flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#DescribeFolder": {
             "type": "operation",
             "input": {
@@ -28412,6 +29898,204 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeSpace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeSpaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeSpaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an Amazon QuickSight space.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/accounts/{AwsAccountId}/spaces/{SpaceId}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeSpacePermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#DescribeSpacePermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#DescribeSpacePermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the permissions for an Amazon QuickSight space.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/accounts/{AwsAccountId}/spaces/{SpaceId}/permissions",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeSpacePermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SpaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space that you want to describe permissions for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeSpacePermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "spaceArn": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the space.</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of resource permissions for the space.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeSpaceRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SpaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space that you want to describe.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxContributors": {
+                    "target": "com.amazonaws.quicksight#MaxContributors",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of contributors to include in the response.</p>",
+                        "smithy.api#httpQuery": "maxContributors"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#DescribeSpaceResponse": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "spaceArn": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the space.</p>"
+                    }
+                },
+                "Space": {
+                    "target": "com.amazonaws.quicksight#SpaceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Contributors": {
+                    "target": "com.amazonaws.quicksight#SpaceContributorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of contributors to the space.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             },
@@ -30678,6 +32362,72 @@
                 "smithy.api#documentation": "<p>An entry that appears when a <code>KeyRegistration</code> update to Quick Sight fails.</p>"
             }
         },
+        "com.amazonaws.quicksight#FailedSpaceResourceOperation": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.quicksight#SpaceQuickSightResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceDetails": {
+                    "target": "com.amazonaws.quicksight#SpaceQuickSightResourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the resource.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message that describes why the operation failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A resource operation that failed.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#FailedSpaceResourceOperations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#FailedSpaceResourceOperation"
+            }
+        },
+        "com.amazonaws.quicksight#FailedToUpdateAssociation": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN that could not be added or removed.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the failure.</p>"
+                    }
+                },
+                "ErrorCode": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error code for the failure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a per-ARN failure when updating agent associations.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#FailedToUpdateAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#FailedToUpdateAssociation"
+            }
+        },
         "com.amazonaws.quicksight#FieldBarSeriesItem": {
             "type": "structure",
             "members": {
@@ -32220,6 +33970,96 @@
                     "min": 0,
                     "max": 1024
                 }
+            }
+        },
+        "com.amazonaws.quicksight#FlowDescriptionInput": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^(?!\\s+$)[^{}\"\\\\<>]*$"
+            }
+        },
+        "com.amazonaws.quicksight#FlowDetail": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FlowId": {
+                    "target": "com.amazonaws.quicksight#FlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#Title",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.quicksight#FlowDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the flow.</p>"
+                    }
+                },
+                "PublishState": {
+                    "target": "com.amazonaws.quicksight#FlowPublishState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The publish state of the flow. Valid values are <code>DRAFT</code>, <code>PUBLISHED</code>, \n            or <code>PENDING_APPROVAL</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time this flow was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedBy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the principal who created the flow.</p>"
+                    }
+                },
+                "LastUpdatedTime": {
+                    "target": "com.amazonaws.quicksight#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last time this flow was modified.</p>"
+                    }
+                },
+                "LastUpdatedBy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the last principal who updated the flow.</p>"
+                    }
+                },
+                "FlowDefinition": {
+                    "target": "com.amazonaws.quicksight#SensitiveDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the flow, specifying the steps and configurations. This is the flow definition in Quick Flow's internal format. The format is subject to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StepAliases": {
+                    "target": "com.amazonaws.quicksight#StepAliasList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of step alias mappings for the flow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The full details of a flow, including its definition specifying the steps.</p>"
             }
         },
         "com.amazonaws.quicksight#FlowId": {
@@ -37442,6 +39282,15 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#IconId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
         "com.amazonaws.quicksight#Identifier": {
             "type": "structure",
             "members": {
@@ -40777,6 +42626,113 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#ListAgents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListAgentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListAgentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all agents in an Amazon QuickSight account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/accounts/{AwsAccountId}/agents",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListAgentsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the agents.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#ListAgentsRequestMaxResultsInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListAgentsRequestMaxResultsInteger": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.quicksight#ListAgentsResponse": {
+            "type": "structure",
+            "members": {
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "AgentSummaries": {
+                    "target": "com.amazonaws.quicksight#AgentSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of agent summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#ListAnalyses": {
             "type": "operation",
             "input": {
@@ -43500,6 +45456,204 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#ListSpaceResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListSpaceResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListSpaceResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the resources in an Amazon QuickSight space.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/accounts/{AwsAccountId}/spaces/{SpaceId}/resources",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListSpaceResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SpaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space that you want to list resources for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListSpaceResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "spaceArn": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the space.</p>"
+                    }
+                },
+                "SpaceResources": {
+                    "target": "com.amazonaws.quicksight#SpaceResourceSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of resource summaries in the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListSpaces": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#ListSpacesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#ListSpacesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all Amazon QuickSight spaces in an Amazon Web Services account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v1/accounts/{AwsAccountId}/spaces",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListSpacesRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the spaces.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#SpacesMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#ListSpacesResponse": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "spaceArn": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the space.</p>"
+                    }
+                },
+                "SpaceSummaries": {
+                    "target": "com.amazonaws.quicksight#SpaceSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of space summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -45347,6 +47501,15 @@
                 "smithy.api#documentation": "<p>The parameters for MariaDB.</p>"
             }
         },
+        "com.amazonaws.quicksight#MaxContributors": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.quicksight#MaxResults": {
             "type": "integer",
             "traits": {
@@ -45644,6 +47807,16 @@
                         "smithy.api#enumValue": "SHOW_AS_BLANK"
                     }
                 }
+            }
+        },
+        "com.amazonaws.quicksight#ModelProfileId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{35}$"
             }
         },
         "com.amazonaws.quicksight#MySqlParameters": {
@@ -46375,6 +48548,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration that overrides the existing default values for a dataset parameter that is inherited from another dataset.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 800
+                }
             }
         },
         "com.amazonaws.quicksight#NonEmptyString": {
@@ -50461,6 +52643,26 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#PublicSpaceArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
+            }
+        },
+        "com.amazonaws.quicksight#PublicSpaceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z-_=.+]+$"
+            }
+        },
         "com.amazonaws.quicksight#PurchaseMode": {
             "type": "enum",
             "members": {
@@ -50728,6 +52930,16 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#QbsAwsAccountId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 15,
+                    "max": 15
+                },
+                "smithy.api#pattern": "^QBS[0-9]{12}$"
+            }
+        },
         "com.amazonaws.quicksight#Query": {
             "type": "string",
             "traits": {
@@ -50842,6 +53054,9 @@
                     "target": "com.amazonaws.quicksight#CreateActionConnector"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#CreateAgent"
+                },
+                {
                     "target": "com.amazonaws.quicksight#CreateAnalysis"
                 },
                 {
@@ -50858,6 +53073,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#CreateDataSource"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#CreateFlow"
                 },
                 {
                     "target": "com.amazonaws.quicksight#CreateFolder"
@@ -50888,6 +53106,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#CreateRoleMembership"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#CreateSpace"
                 },
                 {
                     "target": "com.amazonaws.quicksight#CreateTemplate"
@@ -50923,6 +53144,9 @@
                     "target": "com.amazonaws.quicksight#DeleteActionConnector"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DeleteAgent"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DeleteAnalysis"
                 },
                 {
@@ -50948,6 +53172,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteDefaultQBusinessApplication"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DeleteFlow"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteFolder"
@@ -50981,6 +53208,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteRoleMembership"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DeleteSpace"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DeleteTemplate"
@@ -51029,6 +53259,12 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DescribeActionConnectorPermissions"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeAgent"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeAgentPermissions"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DescribeAnalysis"
@@ -51097,6 +53333,9 @@
                     "target": "com.amazonaws.quicksight#DescribeDefaultQBusinessApplication"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#DescribeFlow"
+                },
+                {
                     "target": "com.amazonaws.quicksight#DescribeFolder"
                 },
                 {
@@ -51143,6 +53382,12 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#DescribeSelfUpgradeConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeSpace"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#DescribeSpacePermissions"
                 },
                 {
                     "target": "com.amazonaws.quicksight#DescribeTemplate"
@@ -51209,6 +53454,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListActionConnectors"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ListAgents"
                 },
                 {
                     "target": "com.amazonaws.quicksight#ListAnalyses"
@@ -51283,6 +53531,12 @@
                     "target": "com.amazonaws.quicksight#ListSelfUpgrades"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#ListSpaceResources"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ListSpaces"
+                },
+                {
                     "target": "com.amazonaws.quicksight#ListTagsForResource"
                 },
                 {
@@ -51337,6 +53591,9 @@
                     "target": "com.amazonaws.quicksight#SearchActionConnectors"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#SearchAgents"
+                },
+                {
                     "target": "com.amazonaws.quicksight#SearchAnalyses"
                 },
                 {
@@ -51356,6 +53613,9 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#SearchGroups"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#SearchSpaces"
                 },
                 {
                     "target": "com.amazonaws.quicksight#SearchTopics"
@@ -51395,6 +53655,12 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateActionConnectorPermissions"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateAgent"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateAgentPermissions"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateAnalysis"
@@ -51448,6 +53714,9 @@
                     "target": "com.amazonaws.quicksight#UpdateDefaultQBusinessApplication"
                 },
                 {
+                    "target": "com.amazonaws.quicksight#UpdateFlow"
+                },
+                {
                     "target": "com.amazonaws.quicksight#UpdateFlowPermissions"
                 },
                 {
@@ -51494,6 +53763,15 @@
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateSelfUpgradeConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateSpace"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateSpacePermissions"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UpdateSpaceResources"
                 },
                 {
                     "target": "com.amazonaws.quicksight#UpdateSPICECapacityConfiguration"
@@ -56071,6 +58349,107 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#SearchAgents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#SearchAgentsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#SearchAgentsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for agents based on specified filters.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/accounts/{AwsAccountId}/search/agents",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#SearchAgentsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the agents.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.quicksight#AgentSearchFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters to apply when searching agents.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#AgentsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#SearchAgentsResponse": {
+            "type": "structure",
+            "members": {
+                "AgentSummaries": {
+                    "target": "com.amazonaws.quicksight#AgentSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of agent summaries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#SearchAnalyses": {
             "type": "operation",
             "input": {
@@ -56925,6 +59304,117 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#SearchSpaces": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#SearchSpacesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#SearchSpacesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Searches for Amazon QuickSight spaces that match the specified filters.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v1/accounts/{AwsAccountId}/search/spaces",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.quicksight#SearchSpacesRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the spaces.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.quicksight#SpacesMaxResults",
+                    "traits": {
+                        "smithy.api#default": 100,
+                        "smithy.api#documentation": "<p>The maximum number of results to return.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.quicksight#SpaceQuicksightSearchFilters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters to apply to the search.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#SearchSpacesResponse": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "spaceArn": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the space.</p>"
+                    }
+                },
+                "SpaceSummaries": {
+                    "target": "com.amazonaws.quicksight#SpaceSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of space summaries that match the search criteria.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.quicksight#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#SearchTopics": {
             "type": "operation",
             "input": {
@@ -57647,6 +60137,12 @@
                 "smithy.api#documentation": "<p>A structure that represents a semantic type.</p>"
             }
         },
+        "com.amazonaws.quicksight#SensitiveDocument": {
+            "type": "document",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.quicksight#SensitiveDouble": {
             "type": "double",
             "traits": {
@@ -57716,6 +60212,12 @@
             }
         },
         "com.amazonaws.quicksight#SensitiveStringObject": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.quicksight#SensitiveText": {
             "type": "string",
             "traits": {
                 "smithy.api#sensitive": {}
@@ -59754,6 +62256,493 @@
                 }
             }
         },
+        "com.amazonaws.quicksight#SpaceContributor": {
+            "type": "structure",
+            "members": {
+                "userName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name of the contributor.</p>"
+                    }
+                },
+                "rawFileSizeBytes": {
+                    "target": "com.amazonaws.quicksight#Long",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The raw file size in bytes contributed by the user.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "percentage": {
+                    "target": "com.amazonaws.quicksight#Double",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The percentage of total contributions made by the user.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A contributor to an Amazon QuickSight space.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SpaceContributorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SpaceContributor"
+            }
+        },
+        "com.amazonaws.quicksight#SpaceDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[\\P{C}\\n\\r\\t\\f\\v\\p{Cf}]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.quicksight#SpaceDetails": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.quicksight#SpaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the space.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.quicksight#SpaceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the space.</p>"
+                    }
+                },
+                "resources": {
+                    "target": "com.amazonaws.quicksight#SpaceQuickSightResources",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resources in the space.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the space was created.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the space was last updated.</p>"
+                    }
+                },
+                "consumedSourceSize": {
+                    "target": "com.amazonaws.quicksight#Long",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The total consumed source size in bytes.</p>"
+                    }
+                },
+                "consumedSourceDocCount": {
+                    "target": "com.amazonaws.quicksight#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The number of consumed source documents.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the space.</p>"
+                    }
+                },
+                "createdByArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the user who created the space.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of an Amazon QuickSight space.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SpaceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[\\P{C}\\n\\r\\t\\f\\v\\p{Cf}]*$"
+            }
+        },
+        "com.amazonaws.quicksight#SpaceQuickSightResource": {
+            "type": "structure",
+            "members": {
+                "resourceType": {
+                    "target": "com.amazonaws.quicksight#SpaceQuickSightResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the QuickSight resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceDetails": {
+                    "target": "com.amazonaws.quicksight#SpaceQuickSightResourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the QuickSight resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A QuickSight resource that is associated with a space.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SpaceQuickSightResourceDetails": {
+            "type": "union",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.quicksight#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the QuickSight resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a QuickSight resource in a space.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SpaceQuickSightResourceType": {
+            "type": "enum",
+            "members": {
+                "TOPIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TOPIC"
+                    }
+                },
+                "DASHBOARD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DASHBOARD"
+                    }
+                },
+                "KNOWLEDGE_BASE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "KNOWLEDGE_BASE"
+                    }
+                },
+                "SPACE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPACE"
+                    }
+                },
+                "ACTION_CONNECTOR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTION_CONNECTOR"
+                    }
+                },
+                "DATA_SET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DATA_SET"
+                    }
+                },
+                "ARTIFACT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ARTIFACT"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SpaceQuickSightResources": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SpaceQuickSightResource"
+            }
+        },
+        "com.amazonaws.quicksight#SpaceQuickSightSearchFilterName": {
+            "type": "enum",
+            "members": {
+                "SPACE_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPACE_ID"
+                    }
+                },
+                "SPACE_NAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SPACE_NAME"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_VIEWER_OR_OWNER"
+                    }
+                },
+                "DIRECT_QUICKSIGHT_SOLE_OWNER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIRECT_QUICKSIGHT_SOLE_OWNER"
+                    }
+                },
+                "CONTRIBUTED_BY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONTRIBUTED_BY"
+                    }
+                },
+                "CONSUMED_SOURCE_SIZE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CONSUMED_SOURCE_SIZE"
+                    }
+                },
+                "CREATED_BY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATED_BY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SpaceQuicksightSearchFilter": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.quicksight#SpaceQuickSightSearchFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the filter field to use.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "operator": {
+                    "target": "com.amazonaws.quicksight#SpaceSearchOperator",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The comparison operator to use for the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value to use for the filter.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter to use when searching for spaces.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SpaceQuicksightSearchFilters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SpaceQuicksightSearchFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SpaceResourceOperation": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.quicksight#SpaceQuickSightResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceDetails": {
+                    "target": "com.amazonaws.quicksight#SpaceQuickSightResourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An operation to perform on a resource in a space.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SpaceResourceOperations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SpaceResourceOperation"
+            }
+        },
+        "com.amazonaws.quicksight#SpaceResourceSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SpaceResourceSummary"
+            }
+        },
+        "com.amazonaws.quicksight#SpaceResourceSummary": {
+            "type": "structure",
+            "members": {
+                "ResourceType": {
+                    "target": "com.amazonaws.quicksight#SpaceQuickSightResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceDetails": {
+                    "target": "com.amazonaws.quicksight#SpaceQuickSightResourceDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ResourceName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the resource was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of a resource in a space.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SpaceSearchOperator": {
+            "type": "enum",
+            "members": {
+                "STRING_EQUALS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING_EQUALS"
+                    }
+                },
+                "STRING_LIKE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STRING_LIKE"
+                    }
+                },
+                "NUMBER_RANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NUMBER_RANGE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.quicksight#SpaceSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#SpaceSummary"
+            }
+        },
+        "com.amazonaws.quicksight#SpaceSummary": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "spaceArn": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the space.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.quicksight#SpaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the space.</p>"
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.quicksight#SpaceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the space.</p>"
+                    }
+                },
+                "updatedAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the space was last updated.</p>"
+                    }
+                },
+                "consumedSourceSize": {
+                    "target": "com.amazonaws.quicksight#Long",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The total consumed source size in bytes.</p>"
+                    }
+                },
+                "consumedSourceDocCount": {
+                    "target": "com.amazonaws.quicksight#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The number of consumed source documents.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the space was created.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the space.</p>"
+                    }
+                },
+                "createdByArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the user who created the space.</p>"
+                    }
+                },
+                "resourcesCount": {
+                    "target": "com.amazonaws.quicksight#Integer",
+                    "traits": {
+                        "smithy.api#default": null,
+                        "smithy.api#documentation": "<p>The number of resources in the space.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of an Amazon QuickSight space.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#SpacesMaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
         "com.amazonaws.quicksight#Spacing": {
             "type": "structure",
             "members": {
@@ -60693,6 +63682,28 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#StarterPrompt": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.quicksight#StarterPromptList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#StarterPrompt"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.quicksight#StatePersistenceConfigurations": {
             "type": "structure",
             "members": {
@@ -60830,6 +63841,43 @@
         },
         "com.amazonaws.quicksight#StatusCode2": {
             "type": "integer"
+        },
+        "com.amazonaws.quicksight#StepAliasList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#StepAliasMapping"
+            }
+        },
+        "com.amazonaws.quicksight#StepAliasMapping": {
+            "type": "structure",
+            "members": {
+                "StepId": {
+                    "target": "com.amazonaws.quicksight#StepId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the step.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StepAlias": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias for the step.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A mapping between a step identifier and its alias in a flow.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#StepId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
         },
         "com.amazonaws.quicksight#String": {
             "type": "string"
@@ -61054,6 +64102,17 @@
                 "smithy.api#documentation": "<p>The configuration that defines the default value of a <code>String</code> parameter when a value has not been set.</p>"
             }
         },
+        "com.amazonaws.quicksight#StyleDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 350000
+                },
+                "smithy.api#pattern": "^[\\s\\S]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
         "com.amazonaws.quicksight#StyledCellType": {
             "type": "enum",
             "members": {
@@ -61097,6 +64156,16 @@
                     "min": 2,
                     "max": 15
                 }
+            }
+        },
+        "com.amazonaws.quicksight#SubscriptionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 32,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[a-z0-9]+$"
             }
         },
         "com.amazonaws.quicksight#SubtotalOptions": {
@@ -63781,6 +66850,16 @@
                     "min": 1,
                     "max": 128
                 }
+            }
+        },
+        "com.amazonaws.quicksight#TitleInput": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(?!\\s+$)[^{}\"\\\\<>]*$"
             }
         },
         "com.amazonaws.quicksight#TokenProviderUrl": {
@@ -67673,6 +70752,382 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#UpdateAgent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateAgentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateAgentResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing agent.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/agents/{AgentId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateAgentPermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateAgentPermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateAgentPermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#PreconditionNotMetException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the resource permissions for an agent.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/agents/{AgentId}/permissions",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateAgentPermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AgentId": {
+                    "target": "com.amazonaws.quicksight#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the agent.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "GrantPermissions": {
+                    "target": "com.amazonaws.quicksight#UpdateAgentPermissionsRequestGrantPermissionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource permissions that you want to grant on the agent.</p>"
+                    }
+                },
+                "RevokePermissions": {
+                    "target": "com.amazonaws.quicksight#UpdateAgentPermissionsRequestRevokePermissionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource permissions that you want to revoke from the agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateAgentPermissionsRequestGrantPermissionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ResourcePermission"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateAgentPermissionsRequestRevokePermissionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#ResourcePermission"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateAgentPermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#AgentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentId": {
+                    "target": "com.amazonaws.quicksight#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Permissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource permissions for the agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateAgentRequest": {
+            "type": "structure",
+            "members": {
+                "AgentId": {
+                    "target": "com.amazonaws.quicksight#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the agent.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#AgentName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.quicksight#AgentDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the agent.</p>"
+                    }
+                },
+                "IconId": {
+                    "target": "com.amazonaws.quicksight#IconId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The icon identifier for the agent.</p>"
+                    }
+                },
+                "StarterPrompts": {
+                    "target": "com.amazonaws.quicksight#StarterPromptList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of starter prompts that are displayed to users when they begin interacting with the agent.</p>"
+                    }
+                },
+                "WelcomeMessage": {
+                    "target": "com.amazonaws.quicksight#WelcomeMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The welcome message that is displayed when a user starts a conversation with the agent.</p>"
+                    }
+                },
+                "CustomPromptInput": {
+                    "target": "com.amazonaws.quicksight#CustomPromptInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The custom prompt configuration for the agent.</p>"
+                    }
+                },
+                "SpacesToAdd": {
+                    "target": "com.amazonaws.quicksight#UpdateAgentRequestSpacesToAddList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the spaces to attach to the agent.</p>"
+                    }
+                },
+                "SpacesToRemove": {
+                    "target": "com.amazonaws.quicksight#UpdateAgentRequestSpacesToRemoveList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the spaces to detach from the agent.</p>"
+                    }
+                },
+                "ActionConnectorsToAdd": {
+                    "target": "com.amazonaws.quicksight#UpdateAgentRequestActionConnectorsToAddList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the action connectors to attach to the agent.</p>"
+                    }
+                },
+                "ActionConnectorsToRemove": {
+                    "target": "com.amazonaws.quicksight#UpdateAgentRequestActionConnectorsToRemoveList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the action connectors to detach from the agent.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateAgentRequestActionConnectorsToAddList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateAgentRequestActionConnectorsToRemoveList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateAgentRequestSpacesToAddList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateAgentRequestSpacesToRemoveList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.quicksight#Arn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateAgentResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.quicksight#AgentArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentId": {
+                    "target": "com.amazonaws.quicksight#AgentId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentStatus": {
+                    "target": "com.amazonaws.quicksight#AgentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the agent.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FailedToAddSpaces": {
+                    "target": "com.amazonaws.quicksight#FailedToUpdateAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of per-ARN failures from the spaces that were requested to be added.</p>"
+                    }
+                },
+                "FailedToRemoveSpaces": {
+                    "target": "com.amazonaws.quicksight#FailedToUpdateAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of per-ARN failures from the spaces that were requested to be removed.</p>"
+                    }
+                },
+                "FailedToAddActionConnectors": {
+                    "target": "com.amazonaws.quicksight#FailedToUpdateAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of per-ARN failures from the action connectors that were requested to be added.</p>"
+                    }
+                },
+                "FailedToRemoveActionConnectors": {
+                    "target": "com.amazonaws.quicksight#FailedToUpdateAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of per-ARN failures from the action connectors that were requested to be removed.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.quicksight#UpdateAnalysis": {
             "type": "operation",
             "input": {
@@ -69618,6 +73073,47 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.quicksight#UpdateFlow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateFlowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateFlowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing flow. Supply only the fields you want to change. Updates both DRAFT and PUBLISHED versions. When <code>FlowDefinition</code> is provided, all existing steps are replaced with the new definition.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/accounts/{AwsAccountId}/flows/{FlowId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
         "com.amazonaws.quicksight#UpdateFlowPermissions": {
             "type": "operation",
             "input": {
@@ -69747,6 +73243,100 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier of the flow with updated permissions.</p>",
                         "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateFlowRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the flow that you are updating.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FlowId": {
+                    "target": "com.amazonaws.quicksight#FlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the flow to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#TitleInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated display name for the flow. Omit to preserve the existing name.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.quicksight#FlowDescriptionInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Updated description for the flow. Omit to preserve the existing description.</p>"
+                    }
+                },
+                "FlowDefinition": {
+                    "target": "com.amazonaws.quicksight#SensitiveDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The definition of the flow, specifying the steps and configurations. This is the flow definition in Quick Flow's internal format. The format is subject to change. When provided, all existing steps are replaced. Omit to preserve the existing definition.</p>\n         <note>\n            <p>Always derive or depend on the flow definition from the <code>DescribeFlow</code> operation to ensure you are working with the latest format.</p>\n         </note>"
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.quicksight#UpdateFlowRequestClientTokenString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateFlowRequestClientTokenString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateFlowResponse": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FlowId": {
+                    "target": "com.amazonaws.quicksight#FlowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the flow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.quicksight#StatusCode",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
+                        "smithy.api#httpResponseCode": {}
                     }
                 }
             },
@@ -71416,6 +75006,332 @@
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The HTTP status of the request.</p>",
                         "smithy.api#httpResponseCode": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSpace": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateSpaceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateSpaceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the metadata of an Amazon QuickSight space.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/accounts/{AwsAccountId}/spaces/{SpaceId}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSpacePermissions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateSpacePermissionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateSpacePermissionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#UnsupportedUserEditionException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the permissions for an Amazon QuickSight space.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/accounts/{AwsAccountId}/spaces/{SpaceId}/permissions",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSpacePermissionsRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SpaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space that you want to update permissions for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "GrantPermissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permissions that you want to grant on the space.</p>"
+                    }
+                },
+                "RevokePermissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permissions that you want to revoke from the space.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSpacePermissionsResponse": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "spaceArn": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the space.</p>"
+                    }
+                },
+                "permissions": {
+                    "target": "com.amazonaws.quicksight#ResourcePermissionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The updated permissions for the space.</p>"
+                    }
+                },
+                "requestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSpaceRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SpaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space that you want to update.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.quicksight#SpaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new display name for the space.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.quicksight#SpaceDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new description for the space.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSpaceResources": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.quicksight#UpdateSpaceResourcesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.quicksight#UpdateSpaceResourcesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.quicksight#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.quicksight#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Adds or removes resources from an Amazon QuickSight space.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/v1/accounts/{AwsAccountId}/spaces/{SpaceId}/resources",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSpaceResourcesRequest": {
+            "type": "structure",
+            "members": {
+                "AwsAccountId": {
+                    "target": "com.amazonaws.quicksight#AwsAccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that contains the space.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "SpaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space that you want to update resources for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AddResources": {
+                    "target": "com.amazonaws.quicksight#SpaceResourceOperations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of resources to add to the space.</p>"
+                    }
+                },
+                "RemoveResources": {
+                    "target": "com.amazonaws.quicksight#SpaceResourceOperations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of resources to remove from the space.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSpaceResourcesResponse": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "spaceArn": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the space.</p>"
+                    }
+                },
+                "FailedResourceOperations": {
+                    "target": "com.amazonaws.quicksight#FailedSpaceResourceOperations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of resource operations that failed.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.quicksight#UpdateSpaceResponse": {
+            "type": "structure",
+            "members": {
+                "spaceId": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the space.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "spaceArn": {
+                    "target": "com.amazonaws.quicksight#PublicSpaceArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the space.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services request ID for this operation.</p>"
                     }
                 }
             },
@@ -74594,6 +78510,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The credentials for authenticating with a web proxy server.</p>"
+            }
+        },
+        "com.amazonaws.quicksight#WelcomeMessage": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 300
+                },
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.quicksight#WhatIfPointScenario": {

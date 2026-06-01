@@ -100,7 +100,7 @@
                     "name": "aws-marketplace"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>AWS Marketplace is a curated digital catalog that customers can use to find, buy, deploy, and manage third-party software, data, and services to build solutions and run their businesses. The AWS Marketplace Agreement Service provides an API interface that helps AWS Marketplace sellers and buyers manage their product-related agreements, including listing, searching, creating, and filtering agreements.</p> <p>To manage agreements in AWS Marketplace, you must ensure that your AWS Identity and Access Management (IAM) policies and roles are set up. The user must have the required policies/permissions that allow them to carry out the actions in AWS:</p> <ul> <li> <p> <code>DescribeAgreement</code> – Grants permission to users to obtain detailed meta data about any of their agreements.</p> </li> <li> <p> <code>GetAgreementTerms</code> – Grants permission to users to obtain details about the terms of an agreement.</p> </li> <li> <p> <code>SearchAgreements</code> – Grants permission to users to search through all their agreements.</p> </li> </ul>",
+                "smithy.api#documentation": "<p>AWS Marketplace is a curated digital catalog that customers can use to find, buy, deploy, and manage third-party software, data, and services to build solutions and run their businesses. The AWS Marketplace Agreement Service provides an API interface that helps AWS Marketplace sellers and buyers manage their product-related agreements, including listing, searching, creating, and filtering agreements.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -1937,6 +1937,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the agreement. </p>"
                     }
+                },
+                "entitlements": {
+                    "target": "com.amazonaws.marketplaceagreement#EntitlementList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of entitlements associated with the agreement.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3312,6 +3318,26 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.marketplaceagreement#DocumentItem"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#Entitlement": {
+            "type": "structure",
+            "members": {
+                "licenseArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS License Manager license associated with the entitlement.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents an entitlement associated with an agreement.</p>"
+            }
+        },
+        "com.amazonaws.marketplaceagreement#EntitlementList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.marketplaceagreement#Entitlement"
             }
         },
         "com.amazonaws.marketplaceagreement#EntitlementType": {
