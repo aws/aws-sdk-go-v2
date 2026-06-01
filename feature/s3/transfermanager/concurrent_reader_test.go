@@ -28,7 +28,8 @@ func TestConcurrentReaderReadUsesSliceLenForBounds(t *testing.T) {
 			}
 		},
 		"received chunk": func(r *concurrentReader) {
-			r.capacity = 1
+			r.capacity = 2
+			r.receiveCount = 1
 			r.ch <- outChunk{
 				body:   bytes.NewReader([]byte("chunk")),
 				index:  1,
