@@ -1,8 +1,0 @@
-{
-    "id": "3e2735a5-e3c6-4512-ae83-8aff6b7666e4",
-    "type": "feature",
-    "description": "Adding Entitlements in SearchAgreements Response",
-    "modules": [
-        "service/marketplaceagreement"
-    ]
-}

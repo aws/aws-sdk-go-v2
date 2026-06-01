@@ -1,8 +1,0 @@
-{
-    "id": "c3e1b804-f9c7-41e5-be22-14edccf74cf3",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/cloudwatchevents"
-    ]
-}

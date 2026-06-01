@@ -1,8 +1,0 @@
-{
-    "id": "4d297541-9809-4bf5-a774-30730e47fe1a",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/lightsail"
-    ]
-}

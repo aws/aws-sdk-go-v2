@@ -1,8 +1,0 @@
-{
-    "id": "5ce9c26b-9563-4226-9e48-98c4263912b0",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/costandusagereportservice"
-    ]
-}

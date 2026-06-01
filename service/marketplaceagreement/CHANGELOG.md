@@ -1,3 +1,7 @@
+# v1.17.0 (2026-06-01)
+
+* **Feature**: Adding Entitlements in SearchAgreements Response
+
 # v1.16.2 (2026-05-29)
 
 * **Dependency Update**: Update to smithy-go v1.26.0.

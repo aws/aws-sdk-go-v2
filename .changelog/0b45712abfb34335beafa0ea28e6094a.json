@@ -1,8 +1,0 @@
-{
-    "id": "0b45712a-bfb3-4335-beaf-a0ea28e6094a",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/elasticsearchservice"
-    ]
-}

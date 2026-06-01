@@ -1,3 +1,99 @@
+# Release (2026-06-01)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/amplify`: [v1.39.0](service/amplify/CHANGELOG.md#v1390-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice`: [v1.36.0](service/applicationdiscoveryservice/CHANGELOG.md#v1360-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/appmesh`: [v1.36.0](service/appmesh/CHANGELOG.md#v1360-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/appsync`: [v1.54.0](service/appsync/CHANGELOG.md#v1540-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchevents`: [v1.33.0](service/cloudwatchevents/CHANGELOG.md#v1330-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/codepipeline`: [v1.47.0](service/codepipeline/CHANGELOG.md#v1470-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentity`: [v1.34.0](service/cognitoidentity/CHANGELOG.md#v1340-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider`: [v1.61.0](service/cognitoidentityprovider/CHANGELOG.md#v1610-2026-06-01)
+  * **Feature**: Add support for multi-region replication, enabling synchronization of user data and configurations to a secondary user pool in a standby Region. Add support for customer managed keys (CMK) in AWS KMS for encrypting user pool data at rest.
+* `github.com/aws/aws-sdk-go-v2/service/cognitosync`: [v1.30.0](service/cognitosync/CHANGELOG.md#v1300-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.63.0](service/configservice/CHANGELOG.md#v1630-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/costandusagereportservice`: [v1.35.0](service/costandusagereportservice/CHANGELOG.md#v1350-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/databasemigrationservice`: [v1.64.0](service/databasemigrationservice/CHANGELOG.md#v1640-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/datapipeline`: [v1.31.0](service/datapipeline/CHANGELOG.md#v1310-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/devicefarm`: [v1.39.0](service/devicefarm/CHANGELOG.md#v1390-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.39.0](service/directoryservice/CHANGELOG.md#v1390-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/docdb`: [v1.49.0](service/docdb/CHANGELOG.md#v1490-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ecr`: [v1.58.0](service/ecr/CHANGELOG.md#v1580-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ecs`: [v1.82.0](service/ecs/CHANGELOG.md#v1820-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.53.0](service/elasticache/CHANGELOG.md#v1530-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk`: [v1.35.0](service/elasticbeanstalk/CHANGELOG.md#v1350-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing`: [v1.34.0](service/elasticloadbalancing/CHANGELOG.md#v1340-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2`: [v1.55.0](service/elasticloadbalancingv2/CHANGELOG.md#v1550-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/elasticsearchservice`: [v1.42.0](service/elasticsearchservice/CHANGELOG.md#v1420-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.60.0](service/emr/CHANGELOG.md#v1600-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/gamelift`: [v1.55.0](service/gamelift/CHANGELOG.md#v1550-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/glacier`: [v1.33.0](service/glacier/CHANGELOG.md#v1330-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/greengrass`: [v1.33.0](service/greengrass/CHANGELOG.md#v1330-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/health`: [v1.38.0](service/health/CHANGELOG.md#v1380-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/iam`: [v1.54.0](service/iam/CHANGELOG.md#v1540-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/inspector`: [v1.31.0](service/inspector/CHANGELOG.md#v1310-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.75.0](service/iot/CHANGELOG.md#v1750-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ioteventsdata`: [v1.31.0](service/ioteventsdata/CHANGELOG.md#v1310-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/kinesisanalytics`: [v1.31.0](service/kinesisanalytics/CHANGELOG.md#v1310-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideo`: [v1.34.0](service/kinesisvideo/CHANGELOG.md#v1340-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/kinesisvideomedia`: [v1.28.0](service/kinesisvideomedia/CHANGELOG.md#v1280-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/kms`: [v1.53.0](service/kms/CHANGELOG.md#v1530-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.91.0](service/lambda/CHANGELOG.md#v1910-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice`: [v1.36.0](service/lexmodelbuildingservice/CHANGELOG.md#v1360-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.38.0](service/licensemanager/CHANGELOG.md#v1380-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/lightsail`: [v1.55.0](service/lightsail/CHANGELOG.md#v1550-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/machinelearning`: [v1.35.0](service/machinelearning/CHANGELOG.md#v1350-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/marketplaceagreement`: [v1.17.0](service/marketplaceagreement/CHANGELOG.md#v1170-2026-06-01)
+  * **Feature**: Adding Entitlements in SearchAgreements Response
+* `github.com/aws/aws-sdk-go-v2/service/marketplacecatalog`: [v1.40.0](service/marketplacecatalog/CHANGELOG.md#v1400-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/mediastoredata`: [v1.30.0](service/mediastoredata/CHANGELOG.md#v1300-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/personalize`: [v1.48.0](service/personalize/CHANGELOG.md#v1480-2026-06-01)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.113.0](service/quicksight/CHANGELOG.md#v11130-2026-06-01)
+  * **Feature**: This release adds public APIs for Amazon QuickSight Spaces, Agents, and Flows. Spaces APIs enable management of curated resource collections. Agents APIs provide lifecycle control over AI-powered agents that leverage Spaces. Flows APIs add CRUDL APIs for automated workflows.
+
 # Release (2026-05-29)
 
 ## General Highlights

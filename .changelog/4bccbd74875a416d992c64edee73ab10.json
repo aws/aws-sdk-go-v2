@@ -1,8 +1,0 @@
-{
-    "id": "4bccbd74-875a-416d-992c-64edee73ab10",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/elasticache"
-    ]
-}

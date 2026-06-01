@@ -1,8 +1,0 @@
-{
-    "id": "8e130af2-a4f0-4283-8ec9-0d703bfa0bac",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/licensemanager"
-    ]
-}

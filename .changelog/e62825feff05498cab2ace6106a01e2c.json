@@ -1,8 +1,0 @@
-{
-    "id": "e62825fe-ff05-498c-ab2a-ce6106a01e2c",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/datapipeline"
-    ]
-}

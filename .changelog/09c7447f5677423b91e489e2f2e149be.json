@@ -1,8 +1,0 @@
-{
-    "id": "09c7447f-5677-423b-91e4-89e2f2e149be",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/gamelift"
-    ]
-}

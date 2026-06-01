@@ -1,8 +1,0 @@
-{
-    "id": "66e42072-1bef-43ca-9e83-d4152bd9a093",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/cognitoidentity"
-    ]
-}

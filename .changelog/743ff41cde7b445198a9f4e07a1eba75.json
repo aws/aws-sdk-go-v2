@@ -1,8 +1,0 @@
-{
-    "id": "743ff41c-de7b-4451-98a9-f4e07a1eba75",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/databasemigrationservice"
-    ]
-}

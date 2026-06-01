@@ -1,8 +1,0 @@
-{
-    "id": "be8daa30-d380-4cf6-8662-c617154fab2c",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/kinesisvideomedia"
-    ]
-}

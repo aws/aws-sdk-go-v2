@@ -1,8 +1,0 @@
-{
-    "id": "e50c6bf4-2bc6-40cf-beaa-c529593921bb",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/cognitosync"
-    ]
-}

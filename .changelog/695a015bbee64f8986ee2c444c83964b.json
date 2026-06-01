@@ -1,8 +1,0 @@
-{
-    "id": "695a015b-bee6-4f89-86ee-2c444c83964b",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/glacier"
-    ]
-}

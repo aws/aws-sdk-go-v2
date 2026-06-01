@@ -1,3 +1,7 @@
+# v1.61.0 (2026-06-01)
+
+* **Feature**: Add support for multi-region replication, enabling synchronization of user data and configurations to a secondary user pool in a standby Region. Add support for customer managed keys (CMK) in AWS KMS for encrypting user pool data at rest.
+
 # v1.60.4 (2026-05-29)
 
 * **Dependency Update**: Update to smithy-go v1.26.0.

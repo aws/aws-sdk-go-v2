@@ -1,8 +1,0 @@
-{
-    "id": "9bcadefe-13f5-4cbd-88fd-34666168ee1b",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/health"
-    ]
-}

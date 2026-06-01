@@ -1,8 +1,0 @@
-{
-    "id": "3158621e-3025-4cf4-af19-b65e61534291",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/elasticloadbalancing"
-    ]
-}
