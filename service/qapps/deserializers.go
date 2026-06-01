@@ -19,7 +19,6 @@ import (
 	"github.com/aws/smithy-go/tracing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"strconv"
 	"strings"
 	"time"
@@ -55,7 +54,7 @@ func (m *awsRestjson1_deserializeOpAssociateLibraryItemReview) HandleDeserialize
 	output := &AssociateLibraryItemReviewOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -170,7 +169,7 @@ func (m *awsRestjson1_deserializeOpAssociateQAppWithUser) HandleDeserialize(ctx 
 	output := &AssociateQAppWithUserOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -282,7 +281,7 @@ func (m *awsRestjson1_deserializeOpBatchCreateCategory) HandleDeserialize(ctx co
 	output := &BatchCreateCategoryOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -394,7 +393,7 @@ func (m *awsRestjson1_deserializeOpBatchDeleteCategory) HandleDeserialize(ctx co
 	output := &BatchDeleteCategoryOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -506,7 +505,7 @@ func (m *awsRestjson1_deserializeOpBatchUpdateCategory) HandleDeserialize(ctx co
 	output := &BatchUpdateCategoryOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1346,7 +1345,7 @@ func (m *awsRestjson1_deserializeOpDeleteLibraryItem) HandleDeserialize(ctx cont
 	output := &DeleteLibraryItemOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1458,7 +1457,7 @@ func (m *awsRestjson1_deserializeOpDeleteQApp) HandleDeserialize(ctx context.Con
 	output := &DeleteQAppOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1752,7 +1751,7 @@ func (m *awsRestjson1_deserializeOpDisassociateLibraryItemReview) HandleDeserial
 	output := &DisassociateLibraryItemReviewOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -1867,7 +1866,7 @@ func (m *awsRestjson1_deserializeOpDisassociateQAppFromUser) HandleDeserialize(c
 	output := &DisassociateQAppFromUserOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -4610,7 +4609,7 @@ func (m *awsRestjson1_deserializeOpStopQAppSession) HandleDeserialize(ctx contex
 	output := &StopQAppSessionOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}
@@ -5223,7 +5222,7 @@ func (m *awsRestjson1_deserializeOpUpdateLibraryItemMetadata) HandleDeserialize(
 	output := &UpdateLibraryItemMetadataOutput{}
 	out.Result = output
 
-	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+	if _, err = io.Copy(io.Discard, response.Body); err != nil {
 		return out, metadata, &smithy.DeserializationError{
 			Err: fmt.Errorf("failed to discard response body, %w", err),
 		}

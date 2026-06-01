@@ -12,7 +12,6 @@ import (
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"net/url"
 	"testing"
@@ -267,7 +266,7 @@ func TestClient_HttpPayloadWithUnion_Deserialize(t *testing.T) {
 					}
 					if len(c.Body) != 0 {
 						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+						response.Body = io.NopCloser(bytes.NewReader(c.Body))
 					} else {
 
 						response.Body = http.NoBody
@@ -351,7 +350,7 @@ func BenchmarkClient_HttpPayloadWithUnion_Deserialize(b *testing.B) {
 					}
 					if len(c.Body) != 0 {
 						response.ContentLength = int64(len(c.Body))
-						response.Body = ioutil.NopCloser(bytes.NewReader(c.Body))
+						response.Body = io.NopCloser(bytes.NewReader(c.Body))
 					} else {
 
 						response.Body = http.NoBody

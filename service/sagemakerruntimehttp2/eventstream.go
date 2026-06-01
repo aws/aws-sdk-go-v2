@@ -17,7 +17,6 @@ import (
 	smithysync "github.com/aws/smithy-go/sync"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
-	"io/ioutil"
 	"sync"
 	"time"
 )
@@ -529,7 +528,7 @@ func (m *awsRestjson1_deserializeOpEventStreamInvokeEndpointWithBidirectionalStr
 
 func (*awsRestjson1_deserializeOpEventStreamInvokeEndpointWithBidirectionalStream) closeResponseBody(out middleware.DeserializeOutput) {
 	if resp, ok := out.RawResponse.(*smithyhttp.Response); ok && resp != nil && resp.Body != nil {
-		_, _ = io.Copy(ioutil.Discard, resp.Body)
+		_, _ = io.Copy(io.Discard, resp.Body)
 		_ = resp.Body.Close()
 	}
 }
