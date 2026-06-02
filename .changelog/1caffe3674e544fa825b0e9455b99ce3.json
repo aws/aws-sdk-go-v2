@@ -1,8 +1,0 @@
-{
-    "id": "1caffe36-74e5-44fa-825b-0e9455b99ce3",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/route53domains"
-    ]
-}

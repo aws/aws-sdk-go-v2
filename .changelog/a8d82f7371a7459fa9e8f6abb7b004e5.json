@@ -1,8 +1,0 @@
-{
-    "id": "a8d82f73-71a7-459f-a9e8-f6abb7b004e5",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/pinpointemail"
-    ]
-}

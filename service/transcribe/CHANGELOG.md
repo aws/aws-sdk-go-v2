@@ -1,3 +1,8 @@
+# v1.56.0 (2026-06-02)
+
+* **Feature**: Release new Language locales including am-ET, es-MX, fa-AF, ht-HT, jv-ID, km-KH, my-MM, sq-AL, ne-NP. The commit shows past locales that have already been release which include cy-gb, ga-ie, gd-gb.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.55.2 (2026-05-29)
 
 * **Dependency Update**: Update to smithy-go v1.26.0.

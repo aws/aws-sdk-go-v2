@@ -1,8 +1,0 @@
-{
-    "id": "c6596b63-d7f8-4729-a86a-11a408717b91",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/resourcegroupstaggingapi"
-    ]
-}

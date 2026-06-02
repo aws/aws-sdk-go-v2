@@ -1,3 +1,8 @@
+# v1.8.0 (2026-06-02)
+
+* **Feature**: Added iterator description to the GetRecords API response for Amazon Keyspaces Change Data Capture (CDC) streams, enabling consumers to track their current position within the stream.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.2 (2026-05-29)
 
 * **Dependency Update**: Update to smithy-go v1.26.0.

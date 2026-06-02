@@ -1,3 +1,7 @@
+# v1.42.1 (2026-06-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.42.0 (2026-05-29)
 
 * **Feature**: Reference your own AWS Secrets Manager secrets when configuring credential providers, giving you control over encryption, rotation, and access policies instead of using service-managed secrets.

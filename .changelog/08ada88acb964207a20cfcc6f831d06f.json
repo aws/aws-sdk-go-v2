@@ -1,8 +1,0 @@
-{
-    "id": "08ada88a-cb96-4207-a20c-fcc6f831d06f",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/medialive"
-    ]
-}

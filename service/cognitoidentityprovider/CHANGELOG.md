@@ -1,3 +1,7 @@
+# v1.61.1 (2026-06-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.61.0 (2026-06-01)
 
 * **Feature**: Add support for multi-region replication, enabling synchronization of user data and configurations to a secondary user pool in a standby Region. Add support for customer managed keys (CMK) in AWS KMS for encrypting user pool data at rest.

@@ -1,8 +1,0 @@
-{
-    "id": "9a0339cb-88a9-4bbd-b65c-90e3a7d40b83",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/sso"
-    ]
-}

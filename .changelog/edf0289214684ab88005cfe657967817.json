@@ -1,8 +1,0 @@
-{
-    "id": "edf02892-1468-4ab8-8005-cfe657967817",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/mediastore"
-    ]
-}

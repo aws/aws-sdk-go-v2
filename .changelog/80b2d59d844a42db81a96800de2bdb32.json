@@ -1,8 +1,0 @@
-{
-    "id": "80b2d59d-844a-42db-81a9-6800de2bdb32",
-    "type": "feature",
-    "description": "Amazon ElastiCache for Valkey now supports durability. This new capability is enabled through a Multi-AZ transactional log, enabling fast recovery and restart during failures.",
-    "modules": [
-        "service/elasticache"
-    ]
-}

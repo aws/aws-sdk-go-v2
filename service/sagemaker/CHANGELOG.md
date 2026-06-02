@@ -1,3 +1,8 @@
+# v1.251.0 (2026-06-02)
+
+* **Feature**: Amazon SageMaker Job is a new service to help you manage various workloads related to model fine tuning, evaluation etc. Two job categories are supported today, AgentRFT for multi-turn agentic reinforcement fine tuning, and AgentRFTEvaluation for evaluating base model or trained model from AgentRFT.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.250.2 (2026-05-29)
 
 * **Dependency Update**: Update to smithy-go v1.26.0.

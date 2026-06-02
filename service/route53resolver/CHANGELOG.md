@@ -1,3 +1,7 @@
+# v1.45.1 (2026-06-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.45.0 (2026-05-29)
 
 * **Feature**: Added BatchCreateFirewallRule, BatchUpdateFirewallRule, BatchDeleteFirewallRule, and ListFirewallRuleTypes APIs. Added FirewallRuleType support to Firewall Rule APIs.

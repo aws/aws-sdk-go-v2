@@ -1,3 +1,7 @@
+# v1.33.1 (2026-06-02)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.33.0 (2026-05-29)
 
 * **BREAKING CHANGE**: `ArrayValue` union members now use pointer-slice element types (`[]*int64`, `[]*float64`, `[]*bool`, `[]*string`, and `[]*ArrayValue` for nested arrays) and preserve null elements returned in SQL arrays. Previously, null elements were silently coerced to the zero value of the element type (`0`, `0.0`, `false`, `""`, or a zero-value struct), so for example `SELECT ARRAY[1, NULL, 3]::bigint[]` returned `[]int64{1, 0, 3}` and now returns `[]*int64{ptr(1), nil, ptr(3)}`. Existing code that reads elements as value types (for example `val := av.Value[0]`) won't compile; migrate by dereferencing with a nil check (`if v := av.Value[0]; v != nil { use(*v) }`) or by substituting a default when nil.

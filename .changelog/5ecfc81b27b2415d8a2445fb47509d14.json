@@ -1,8 +1,0 @@
-{
-    "id": "5ecfc81b-27b2-415d-8a24-45fb47509d14",
-    "type": "feature",
-    "description": "Adds configuration for tag propagation to Lambda-managed resources.",
-    "modules": [
-        "service/lambda"
-    ]
-}

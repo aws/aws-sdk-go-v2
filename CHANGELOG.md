@@ -1,3 +1,105 @@
+# Release (2026-06-02)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.41.10
+  * **Bug Fix**: Replace usages of deprecated io/ioutil package with io.
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatch`: [v1.58.0](service/cloudwatch/CHANGELOG.md#v1580-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.305.0](service/ec2/CHANGELOG.md#v13050-2026-06-02)
+  * **Feature**: Amazon EC2 now supports self-service cancellation of future-dated Capacity Reservations. A cancellation charge applies based on remaining commitment. Customers can generate a cancellation quote to review charges before confirming.
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.54.0](service/elasticache/CHANGELOG.md#v1540-2026-06-02)
+  * **Feature**: Amazon ElastiCache for Valkey now supports durability. This new capability is enabled through a Multi-AZ transactional log, enabling fast recovery and restart during failures.
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.11.0](service/georoutes/CHANGELOG.md#v1110-2026-06-02)
+  * **Feature**: Added Transit and Intermodal travel modes to CalculateRoutes. Plan routes using public transit (bus, subway, train, ferry) or combine transit with driving, taxi, and rental car segments in a single multi-modal route.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.79.0](service/guardduty/CHANGELOG.md#v1790-2026-06-02)
+  * **Feature**: Amazon GuardDuty Runtime Monitoring now supports 3 new SensitiveFileModified finding types (Persistence, PrivilegeEscalation, DefenseEvasion) that detect when security-sensitive system files are modified on EC2 instances or containers, indicating potential compromise through file tampering.
+* `github.com/aws/aws-sdk-go-v2/service/iot`: [v1.75.1](service/iot/CHANGELOG.md#v1751-2026-06-02)
+  * **Documentation**: Fleet indexing documentation update
+* `github.com/aws/aws-sdk-go-v2/service/keyspacesstreams`: [v1.8.0](service/keyspacesstreams/CHANGELOG.md#v180-2026-06-02)
+  * **Feature**: Added iterator description to the GetRecords API response for Amazon Keyspaces Change Data Capture (CDC) streams, enabling consumers to track their current position within the stream.
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.92.0](service/lambda/CHANGELOG.md#v1920-2026-06-02)
+  * **Feature**: Adds configuration for tag propagation to Lambda-managed resources.
+* `github.com/aws/aws-sdk-go-v2/service/lexruntimeservice`: [v1.30.0](service/lexruntimeservice/CHANGELOG.md#v1300-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/managedblockchain`: [v1.32.0](service/managedblockchain/CHANGELOG.md#v1320-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/marketplacemetering`: [v1.37.0](service/marketplacemetering/CHANGELOG.md#v1370-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/mediaconvert`: [v1.92.0](service/mediaconvert/CHANGELOG.md#v1920-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/medialive`: [v1.98.0](service/medialive/CHANGELOG.md#v1980-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/mediastore`: [v1.30.0](service/mediastore/CHANGELOG.md#v1300-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/migrationhub`: [v1.32.0](service/migrationhub/CHANGELOG.md#v1320-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/mturk`: [v1.31.0](service/mturk/CHANGELOG.md#v1310-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/neptune`: [v1.45.0](service/neptune/CHANGELOG.md#v1450-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/personalizeruntime`: [v1.34.0](service/personalizeruntime/CHANGELOG.md#v1340-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/pi`: [v1.37.0](service/pi/CHANGELOG.md#v1370-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/pinpoint`: [v1.40.0](service/pinpoint/CHANGELOG.md#v1400-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/pinpointemail`: [v1.30.0](service/pinpointemail/CHANGELOG.md#v1300-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/polly`: [v1.58.0](service/polly/CHANGELOG.md#v1580-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.37.0](service/ram/CHANGELOG.md#v1370-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/redshift`: [v1.63.0](service/redshift/CHANGELOG.md#v1630-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/rekognition`: [v1.52.0](service/rekognition/CHANGELOG.md#v1520-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroupstaggingapi`: [v1.33.0](service/resourcegroupstaggingapi/CHANGELOG.md#v1330-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.63.0](service/route53/CHANGELOG.md#v1630-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/route53domains`: [v1.36.0](service/route53domains/CHANGELOG.md#v1360-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.103.0](service/s3/CHANGELOG.md#v11030-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.251.0](service/sagemaker/CHANGELOG.md#v12510-2026-06-02)
+  * **Feature**: Amazon SageMaker Job is a new service to help you manage various workloads related to model fine tuning, evaluation etc. Two job categories are supported today, AgentRFT for multi-turn agentic reinforcement fine tuning, and AgentRFTEvaluation for evaluating base model or trained model from AgentRFT.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerjobruntime`: [v1.0.0](service/sagemakerjobruntime/CHANGELOG.md#v100-2026-06-02)
+  * **Release**: New AWS service client module
+  * **Feature**: Amazon SageMaker Job Runtime is a new service for managing trajectory data during multi-turn customization jobs. It provides APIs to send inference requests to models during job execution, mark rollouts as complete, and submit reward values for training trajectories.
+* `github.com/aws/aws-sdk-go-v2/service/secretsmanager`: [v1.42.0](service/secretsmanager/CHANGELOG.md#v1420-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/servicecatalog`: [v1.40.0](service/servicecatalog/CHANGELOG.md#v1400-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/sfn`: [v1.42.0](service/sfn/CHANGELOG.md#v1420-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/shield`: [v1.35.0](service/shield/CHANGELOG.md#v1350-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/snowball`: [v1.37.0](service/snowball/CHANGELOG.md#v1370-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/sqs`: [v1.43.0](service/sqs/CHANGELOG.md#v1430-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ssm`: [v1.69.0](service/ssm/CHANGELOG.md#v1690-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/sso`: [v1.31.0](service/sso/CHANGELOG.md#v1310-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/storagegateway`: [v1.44.0](service/storagegateway/CHANGELOG.md#v1440-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/sts`: [v1.43.0](service/sts/CHANGELOG.md#v1430-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/swf`: [v1.34.0](service/swf/CHANGELOG.md#v1340-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/transcribe`: [v1.56.0](service/transcribe/CHANGELOG.md#v1560-2026-06-02)
+  * **Feature**: Release new Language locales including am-ET, es-MX, fa-AF, ht-HT, jv-ID, km-KH, my-MM, sq-AL, ne-NP. The commit shows past locales that have already been release which include cy-gb, ga-ie, gd-gb.
+* `github.com/aws/aws-sdk-go-v2/service/transfer`: [v1.73.0](service/transfer/CHANGELOG.md#v1730-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/waf`: [v1.31.0](service/waf/CHANGELOG.md#v1310-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.37.0](service/xray/CHANGELOG.md#v1370-2026-06-02)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+
 # Release (2026-06-01)
 
 ## Module Highlights

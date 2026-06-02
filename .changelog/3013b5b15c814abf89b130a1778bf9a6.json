@@ -1,8 +1,0 @@
-{
-    "id": "3013b5b1-5c81-4abf-89b1-30a1778bf9a6",
-    "type": "documentation",
-    "description": "Fleet indexing documentation update",
-    "modules": [
-        "service/iot"
-    ]
-}

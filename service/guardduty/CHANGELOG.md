@@ -1,3 +1,8 @@
+# v1.79.0 (2026-06-02)
+
+* **Feature**: Amazon GuardDuty Runtime Monitoring now supports 3 new SensitiveFileModified finding types (Persistence, PrivilegeEscalation, DefenseEvasion) that detect when security-sensitive system files are modified on EC2 instances or containers, indicating potential compromise through file tampering.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.78.2 (2026-05-29)
 
 * **Dependency Update**: Update to smithy-go v1.26.0.

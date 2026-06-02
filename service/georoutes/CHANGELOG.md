@@ -1,3 +1,8 @@
+# v1.11.0 (2026-06-02)
+
+* **Feature**: Added Transit and Intermodal travel modes to CalculateRoutes. Plan routes using public transit (bus, subway, train, ferry) or combine transit with driving, taxi, and rental car segments in a single multi-modal route.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.1 (2026-05-29)
 
 * **Dependency Update**: Update to smithy-go v1.26.0.

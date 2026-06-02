@@ -1,8 +1,0 @@
-{
-    "id": "ed4a2e32-e1e3-449c-ac0a-d2520525694a",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/swf"
-    ]
-}

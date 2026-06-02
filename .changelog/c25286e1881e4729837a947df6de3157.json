@@ -1,8 +1,0 @@
-{
-    "id": "c25286e1-881e-4729-837a-947df6de3157",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/polly"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "0852d70b-7d7f-4752-bdac-4fb7b5bb06d9",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/sqs"
-    ]
-}
