@@ -15645,6 +15645,18 @@
                 "smithy.api#documentation": "<p>Contains details about the backup recovery point.</p>"
             }
         },
+        "com.amazonaws.guardduty#RelatedFilePathsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.guardduty#String"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
         "com.amazonaws.guardduty#RemoteAccountDetails": {
             "type": "structure",
             "members": {
@@ -16370,6 +16382,27 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The suspicious file path for which the threat intelligence details were found.</p>",
                         "smithy.api#jsonName": "threatFilePath"
+                    }
+                },
+                "FileOperation": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the type of file operation that triggered the finding, such as Write, Delete, Rename, Link, or Symlink.</p>",
+                        "smithy.api#jsonName": "fileOperation"
+                    }
+                },
+                "FilePath": {
+                    "target": "com.amazonaws.guardduty#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path of the sensitive file that was modified. Modification includes write, delete, rename, link, or symlink operations. This field is indexed for filtering.</p>",
+                        "smithy.api#jsonName": "filePath"
+                    }
+                },
+                "RelatedFilePaths": {
+                    "target": "com.amazonaws.guardduty#RelatedFilePathsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All file paths modified by the same process that triggered the finding, up to a maximum of 25 paths.</p>",
+                        "smithy.api#jsonName": "relatedFilePaths"
                     }
                 }
             },

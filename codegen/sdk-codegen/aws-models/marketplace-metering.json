@@ -61,6 +61,272 @@
                 "aws.protocols#awsJson1_1": {},
                 "smithy.api#documentation": "<fullname>Amazon Web Services Marketplace Metering Service</fullname>\n         <p>This reference provides descriptions of the low-level Marketplace Metering Service API.</p>\n         <p>Amazon Web Services Marketplace sellers can use this API to submit usage data for custom usage\n            dimensions.</p>\n         <p>For information about the permissions that you need to use this API, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/iam-user-policy-for-aws-marketplace-actions.html\">Amazon Web Services Marketplace metering and entitlement API permissions</a> in the <i>Amazon Web Services Marketplace\n                Seller Guide.</i>\n         </p>\n         <p>\n            <b>Submitting metering records</b>\n         </p>\n         <p>\n            <i>MeterUsage</i>\n         </p>\n         <ul>\n            <li>\n               <p>Submits the metering record for an Amazon Web Services Marketplace product.</p>\n            </li>\n            <li>\n               <p>Called from: Amazon Elastic Compute Cloud (Amazon EC2) instance or a container running on either\n                    Amazon Elastic Kubernetes Service (Amazon EKS) or Amazon Elastic Container Service (Amazon ECS)</p>\n            </li>\n            <li>\n               <p>Supported product types: Amazon Machine Images (AMIs) and containers</p>\n            </li>\n            <li>\n               <p>Vendor-metered tagging: Supported allocation tagging</p>\n            </li>\n         </ul>\n         <p>\n            <i>BatchMeterUsage</i>\n         </p>\n         <ul>\n            <li>\n               <p>Submits the metering record for a set of customers.\n                        <code>BatchMeterUsage</code> API calls are captured by CloudTrail. You can use\n                    CloudTrail to verify that the software as a subscription (SaaS) metering records that\n                    you sent are accurate by searching for records with the <code>eventName</code>\n                    of <code>BatchMeterUsage</code>. You can also use CloudTrail to audit records over\n                    time. For more information, see the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html\">CloudTrail User\n                        Guide</a>.</p>\n            </li>\n            <li>\n               <p>Called from: SaaS applications</p>\n            </li>\n            <li>\n               <p>Supported product type: SaaS</p>\n            </li>\n            <li>\n               <p>Vendor-metered tagging: Supports allocation tagging</p>\n            </li>\n         </ul>\n         <p>\n            <b>Accepting new customers</b>\n         </p>\n         <p>\n            <i>ResolveCustomer</i>\n         </p>\n         <ul>\n            <li>\n               <p>Resolves the registration token that the buyer submits through the browser\n                    during the registration process. Obtains a <code>CustomerIdentifier</code> along\n                    with the <code>CustomerAWSAccountId</code>, <code>ProductCode</code>, and <code>LicenseArn</code>.</p>\n            </li>\n            <li>\n               <p>Called from: SaaS application during the registration process</p>\n            </li>\n            <li>\n               <p>Supported product type: SaaS</p>\n            </li>\n            <li>\n               <p>Vendor-metered tagging: Not applicable</p>\n            </li>\n         </ul>\n         <p>\n            <b>Entitlement and metering for paid container\n            products</b>\n         </p>\n         <p>\n            <i>RegisteredUsage</i>\n         </p>\n         <ul>\n            <li>\n               <p>Provides software entitlement and metering. Paid container software products\n                    sold through Amazon Web Services Marketplace must integrate with the Marketplace Metering Service and call the\n                        <code>RegisterUsage</code> operation. Free and Bring Your Own License model\n                    (BYOL) products for Amazon ECS or Amazon EKS aren't required to call\n                        <code>RegisterUsage</code>. However, you can do so if you want to receive\n                    usage data in your seller reports. For more information about using the\n                        <code>RegisterUsage</code> operation, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/container-based-products.html\">Container-based products</a>.</p>\n            </li>\n            <li>\n               <p>Called from: Paid container software products</p>\n            </li>\n            <li>\n               <p>Supported product type: Containers</p>\n            </li>\n            <li>\n               <p>Vendor-metered tagging: Not applicable</p>\n            </li>\n         </ul>\n         <p>\n            <b>Entitlement custom metering for container\n            products</b>\n         </p>\n         <ul>\n            <li>\n               <p>MeterUsage API is available in GovCloud Regions but only supports AMI\n                    FCP products in GovCloud Regions. Flexible Consumption Pricing (FCP) Container\n                    products aren’t supported in GovCloud Regions: us-gov-west-1 and us-gov-east-1.\n                    For more information, see <a href=\"https://docs.aws.amazon.com/marketplace/latest/userguide/container-based-products.html\">Container-based products</a>.</p>\n            </li>\n            <li>\n               <p>Custom metering for container products are called using the\n                    MeterUsage API. The API is used for FCP AMI and FCP Container product\n                    metering.</p>\n            </li>\n         </ul>\n         <p>\n            <b>Custom metering for Amazon EKS is available in 17\n                Amazon Web Services Regions</b>\n         </p>\n         <ul>\n            <li>\n               <p>The metering service supports Amazon ECS and EKS for Flexible Consumption Pricing\n                    (FCP) products using MeterUsage API. Amazon ECS is supported in all\n                    Amazon Web Services Regions that MeterUsage API is available except for\n                    GovCloud.</p>\n            </li>\n            <li>\n               <p>Amazon EKS is supported in the following: us-east-1, us-east-2, us-west-1,\n                    us-west-2, eu-west-1, eu-central-1, eu-west-2, eu-west-3, eu-north-1, ap-east-1,\n                    ap-southeast-1, ap-northeast-1, ap-southeast-2, ap-northeast-2, ap-south-1,\n                    ca-central-1, sa-east-1.</p>\n               <note>\n                  <p>For questions about adding Amazon Web Services Regions for metering, contact <a href=\"mailto://aws.amazon.com/marketplace/management/contact-us/\">Amazon Web Services\n                            Marketplace Seller Operations</a>.</p>\n               </note>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWSMarketplace Metering",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-eusc"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-cn"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-us-gov"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws"
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://metering-marketplace.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://metering-marketplace.{Region}.amazonaws.eu",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://metering.marketplace-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://metering.marketplace-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://metering.marketplace.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://metering.marketplace.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 17,
+                    "nodes": "/////wAAAAH/////AAAAAAAAABAAAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAwAAAAGAAAABQAAAAgAAAAHAAAABgX14QUF9eEMAAAABwX14QQAAAAJAAAACAX14QQAAAAKAAAACQX14QQAAAALAAAACgX14QoF9eELAAAABAAAAA4AAAANAAAABQX14QcF9eEJAAAABQAAAA8F9eEIAAAACgX14QYF9eEHAAAAAwX14QEAAAARAAAABQX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {

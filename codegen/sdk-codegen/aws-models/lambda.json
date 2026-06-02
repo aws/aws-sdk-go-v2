@@ -2517,6 +2517,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time when the capacity provider was last modified.</p>"
                     }
+                },
+                "PropagateTags": {
+                    "target": "com.amazonaws.lambda#PropagateTags"
                 }
             },
             "traits": {
@@ -3640,6 +3643,12 @@
                     "target": "com.amazonaws.lambda#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of tags to associate with the capacity provider.</p>"
+                    }
+                },
+                "PropagateTags": {
+                    "target": "com.amazonaws.lambda#PropagateTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag propagation configuration for the capacity provider. Specifies tags to apply to managed resources at launch.</p>"
                     }
                 }
             },
@@ -9885,8 +9894,8 @@
                 "smithy.api#documentation": "<p>Retrieves the provisioned concurrency configuration for a function's alias or version.</p>",
                 "smithy.api#examples": [
                     {
-                        "title": "To get a provisioned concurrency configuration",
-                        "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "title": "To view a provisioned concurrency configuration",
+                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
                         "input": {
                             "FunctionName": "my-function",
                             "Qualifier": "BLUE"
@@ -9900,8 +9909,8 @@
                         }
                     },
                     {
-                        "title": "To view a provisioned concurrency configuration",
-                        "documentation": "The following example displays details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
+                        "title": "To get a provisioned concurrency configuration",
+                        "documentation": "The following example returns details for the provisioned concurrency configuration for the BLUE alias of the specified function.",
                         "input": {
                             "FunctionName": "my-function",
                             "Qualifier": "BLUE"
@@ -14574,6 +14583,49 @@
                 "smithy.api#pattern": "^o-[a-z0-9]{10,32}$"
             }
         },
+        "com.amazonaws.lambda#PropagateTags": {
+            "type": "structure",
+            "members": {
+                "Mode": {
+                    "target": "com.amazonaws.lambda#PropagateTagsMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag propagation mode. Set to <code>Explicit</code> to propagate the tags specified in <code>ExplicitTags</code> to managed resources. Set to <code>None</code> to disable tag propagation.</p>"
+                    }
+                },
+                "ExplicitTags": {
+                    "target": "com.amazonaws.lambda#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags to apply to managed resources when <code>Mode</code> is set to <code>Explicit</code>. You can specify up to 40 tags.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 40
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for tag propagation to managed resources launched by the capacity provider.</p>"
+            }
+        },
+        "com.amazonaws.lambda#PropagateTagsMode": {
+            "type": "enum",
+            "members": {
+                "None": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tag propagation is disabled. No tags are applied to managed resources.</p>",
+                        "smithy.api#enumValue": "None"
+                    }
+                },
+                "Explicit": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags specified in <code>ExplicitTags</code> are applied to managed resources at launch.</p>",
+                        "smithy.api#enumValue": "Explicit"
+                    }
+                }
+            }
+        },
         "com.amazonaws.lambda#ProvisionedConcurrencyConfig": {
             "type": "resource",
             "identifiers": {
@@ -18384,6 +18436,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The updated scaling configuration for the capacity provider.</p>"
                     }
+                },
+                "PropagateTags": {
+                    "target": "com.amazonaws.lambda#PropagateTags"
                 }
             },
             "traits": {

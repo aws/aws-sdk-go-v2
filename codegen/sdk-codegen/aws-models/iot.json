@@ -20509,7 +20509,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the live connectivity status per device.</p>",
+                "smithy.api#documentation": "<p>Retrieves the live connectivity status per device. If a device has never connected to IoT Core or was disconnected for more than 1 hour before fleet indexing's <code>thingConnectivityIndexingMode</code> was enabled, the response will have the <code>connected</code> field set to <code>false</code> with no additional session details.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/things/{thingName}/connectivity-data",
@@ -20557,13 +20557,13 @@
                 "timestamp": {
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of when the event occurred. When you enable or update the indexing configuration, this value might be the Unix epoch time (0) for devices that have never connected or have been disconnected for more than an hour.</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when the device connected or disconnected.</p>"
                     }
                 },
                 "disconnectReason": {
                     "target": "com.amazonaws.iot#DisconnectReasonValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason why the client is disconnecting. When you enable or update the indexing configuration, this value might be <code>UNKNOWN</code> for devices that have never connected or have been disconnected for more than an hour.</p>"
+                        "smithy.api#documentation": "<p>The reason that the client is disconnected.</p>"
                     }
                 },
                 "sourceIp": {
@@ -32868,7 +32868,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The query search index.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">SearchIndex</a> action.</p>",
+                "smithy.api#documentation": "<p>Searches the specified index.</p>\n         <p>If a device has never connected to IoT Core or was disconnected for more than 1 hour before fleet indexing's <code>thingConnectivityIndexingMode</code> was enabled, the <code>connectivity</code> object for this device in the response will have the <code>connected</code> field set to <code>false</code> with no additional session details.</p>\n         <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">SearchIndex</a> action.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/indices/search",
@@ -35319,13 +35319,13 @@
                 "timestamp": {
                     "target": "com.amazonaws.iot#ConnectivityTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The epoch time (in milliseconds) when the thing last connected or disconnected. If the\n      thing has been disconnected for approximately an hour, the time value might be missing. When you enable or update the indexing configuration, this value might be <code>0</code> (the Unix epoch time) for devices that have never connected or have been disconnected for more than an hour.</p>"
+                        "smithy.api#documentation": "<p>The epoch time (in milliseconds) when the thing last connected or disconnected.</p>"
                     }
                 },
                 "disconnectReason": {
                     "target": "com.amazonaws.iot#DisconnectReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The reason why the client is disconnected. When you enable or update the indexing configuration, this value might be missing for devices that have never connected or have been disconnected for more than an hour.</p>"
+                        "smithy.api#documentation": "<p>The reason that the client is disconnected.</p>"
                     }
                 },
                 "keepAliveDuration": {

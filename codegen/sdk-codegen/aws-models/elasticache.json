@@ -4573,7 +4573,7 @@
                 "AtRestEncryptionEnabled": {
                     "target": "com.amazonaws.elasticache#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A flag that enables encryption at rest when set to <code>true</code>.</p>\n         <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the\n            replication group is created. To enable encryption at rest on a replication group you\n            must set <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create the\n            replication group. </p>\n         <p>\n            <b>Required:</b> Only available when creating a replication\n            group in an Amazon VPC using Valkey <code>7.2</code> and later, Redis OSS version <code>3.2.6</code>, or Redis OSS <code>4.x</code> and\n            later.</p>\n         <p>Default: <code>true</code> when using Valkey, <code>false</code> when using Redis OSS</p>"
+                        "smithy.api#documentation": "<p>A flag that enables encryption at-rest on the replication group when set to <code>true</code>.\n            In some cases, encryption at-rest may be enabled even when this value is false.\n            Use <code>StorageEncryptionType</code> to view the effective encryption state of a cluster.</p>\n         <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the replication group is created.</p>\n         <p>Default: <code>true</code> when using Valkey, <code>false</code> when using Redis OSS</p>"
                     }
                 },
                 "KmsKeyId": {
@@ -4628,6 +4628,12 @@
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the snapshot used to create a replication group. Available for Valkey, Redis OSS only.</p>"
+                    }
+                },
+                "Durability": {
+                    "target": "com.amazonaws.elasticache#Durability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the durability setting for the replication group.\n            When set to <code>default</code>, the service determines the effective durability based on\n            the engine version, cluster mode, and other parameters. The resolved setting is reflected\n            in the <code>EffectiveDurability</code> property of the replication group. For more\n            information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html\">Durability</a>.</p>"
                     }
                 }
             },
@@ -4782,7 +4788,7 @@
                 "NetworkType": {
                     "target": "com.amazonaws.elasticache#NetworkType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IP protocol version used by the serverless cache.\n           Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>.\n           <code>ipv6</code> is only supported with ipv6-only subnets.\n           If not specified, defaults to <code>ipv4</code>, unless all provided subnets are IPv6-only, in which case it defaults to <code>ipv6</code>.\n           </p>"
+                        "smithy.api#documentation": "<p>The IP protocol version used by the serverless cache.\n           Must be either <code>ipv4</code> | <code>ipv6</code> | <code>dual_stack</code>.\n           <code>ipv6</code> is only supported with IPv6-only subnets.\n           If not specified, defaults to <code>ipv4</code>, unless all provided subnets are IPv6-only, in which case it defaults to <code>ipv6</code>.\n           </p>"
                     }
                 }
             },
@@ -9869,6 +9875,35 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.elasticache#Durability": {
+            "type": "enum",
+            "members": {
+                "DEFAULT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "default"
+                    }
+                },
+                "ASYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "async"
+                    }
+                },
+                "SYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sync"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                }
+            }
+        },
         "com.amazonaws.elasticache#EC2SecurityGroup": {
             "type": "structure",
             "members": {
@@ -9922,6 +9957,29 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration for the number of ElastiCache Processing Units (ECPU) the cache can consume per second.</p>"
+            }
+        },
+        "com.amazonaws.elasticache#EffectiveDurability": {
+            "type": "enum",
+            "members": {
+                "ASYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "async"
+                    }
+                },
+                "SYNC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sync"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "disabled"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticache#Endpoint": {
@@ -12208,6 +12266,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Enabled or Disabled. To modify cluster mode from Disabled to Enabled, you must first\n            set the cluster mode to Compatible. Compatible mode allows your Valkey or Redis OSS clients to connect\n            using both cluster mode enabled and cluster mode disabled. After you migrate all Valkey or Redis OSS\n            clients to use cluster mode enabled, you can then complete cluster mode configuration\n            and set the cluster mode to Enabled.</p>"
                     }
+                },
+                "Durability": {
+                    "target": "com.amazonaws.elasticache#Durability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the durability setting for the replication group.\n            Use this parameter to change the durability mode of an existing replication group,\n            for example from <code>sync</code> to <code>async</code> or vice versa. For more\n            information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html\">Durability</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -14042,7 +14106,7 @@
                 "AtRestEncryptionEnabled": {
                     "target": "com.amazonaws.elasticache#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A flag that enables encryption at-rest when set to <code>true</code>.</p>\n         <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the cluster\n            is created. To enable encryption at-rest on a cluster you must set\n                <code>AtRestEncryptionEnabled</code> to <code>true</code> when you create a\n            cluster.</p>\n         <p>\n            <b>Required:</b> Only available when creating a replication\n            group in an Amazon VPC using Redis OSS version <code>3.2.6</code>, <code>4.x</code> or\n            later.</p>\n         <p>Default: <code>false</code>\n         </p>"
+                        "smithy.api#documentation": "<p>A flag that enables encryption at-rest on the cluster when set to <code>true</code>.\n            In some cases, encryption at-rest may be enabled even when this value is false.\n            Use <code>StorageEncryptionType</code> to view the effective encryption state of a cluster.</p>\n         <p>You cannot modify the value of <code>AtRestEncryptionEnabled</code> after the cluster is created.</p>\n         <p>Default: <code>true</code> when using Valkey, <code>false</code> when using Redis OSS</p>"
                     }
                 },
                 "MemberClustersOutpostArns": {
@@ -14055,6 +14119,12 @@
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the KMS key used to encrypt the disk in the cluster.</p>"
+                    }
+                },
+                "StorageEncryptionType": {
+                    "target": "com.amazonaws.elasticache#StorageEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of encryption for data stored at rest in the replication group.\n            The value is <code>none</code> if at-rest encryption is not enabled,\n            <code>sse-elasticache</code> if an ElastiCache service-managed key is used, or\n            <code>sse-kms</code> if a customer-managed KMS key is used.</p>"
                     }
                 },
                 "ARN": {
@@ -14121,6 +14191,18 @@
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The engine used in a replication group. The options are valkey, memcached or redis.</p>"
+                    }
+                },
+                "Durability": {
+                    "target": "com.amazonaws.elasticache#Durability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The durability setting of the replication group. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html\">Durability</a>.</p>"
+                    }
+                },
+                "EffectiveDurability": {
+                    "target": "com.amazonaws.elasticache#EffectiveDurability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The effective durability of the replication group. When <code>Durability</code> is set to\n            <code>default</code>, the service resolves the actual durability based on the engine version,\n            cluster mode, and other parameters. This field reflects the resolved value. For more\n            information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/ConfiguringDurability.html\">Configuring Durability</a>.</p>"
                     }
                 }
             },
@@ -14889,6 +14971,12 @@
                         "smithy.api#documentation": "<p>The ID of the Amazon Web Services Key Management Service (KMS) key that is used to encrypt data at rest in the serverless cache.</p>"
                     }
                 },
+                "StorageEncryptionType": {
+                    "target": "com.amazonaws.elasticache#StorageEncryptionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of encryption for data stored at rest in the serverless cache.\n            Serverless caches are always encrypted at rest. The value is\n            <code>sse-elasticache</code> if an ElastiCache service-managed key is used, or\n            <code>sse-kms</code> if a customer-managed KMS key is used.</p>"
+                    }
+                },
                 "SecurityGroupIds": {
                     "target": "com.amazonaws.elasticache#SecurityGroupIdsList",
                     "traits": {
@@ -15572,6 +15660,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Enables data tiering. Data tiering is only supported for replication groups using the\n            r6gd node type. This parameter must be set to true when using r6gd nodes. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/dg/data-tiering.html\">Data tiering</a>.</p>"
                     }
+                },
+                "Durability": {
+                    "target": "com.amazonaws.elasticache#Durability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The durability setting of the cluster when the snapshot was taken. When restoring from this snapshot,\n            the cluster uses this durability setting unless overridden in the restore request. For more information,\n            see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/dg/Durability.html\">Durability</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -15782,6 +15876,29 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.elasticache#StorageEncryptionType": {
+            "type": "enum",
+            "members": {
+                "NONE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "none"
+                    }
+                },
+                "SSE_ELASTICACHE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sse-elasticache"
+                    }
+                },
+                "SSE_KMS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sse-kms"
+                    }
+                }
             }
         },
         "com.amazonaws.elasticache#String": {

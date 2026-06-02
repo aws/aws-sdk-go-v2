@@ -2573,6 +2573,18 @@
                         "smithy.api#enumValue": "ar-SA"
                     }
                 },
+                "AM_ET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "am-ET"
+                    }
+                },
+                "CY_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "cy-GB"
+                    }
+                },
                 "DA_DK": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -2639,10 +2651,22 @@
                         "smithy.api#enumValue": "es-ES"
                     }
                 },
+                "ES_MX": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "es-MX"
+                    }
+                },
                 "ES_US": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "es-US"
+                    }
+                },
+                "FA_AF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fa-AF"
                     }
                 },
                 "FA_IR": {
@@ -2663,6 +2687,18 @@
                         "smithy.api#enumValue": "fr-FR"
                     }
                 },
+                "GA_IE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ga-IE"
+                    }
+                },
+                "GD_GB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "gd-GB"
+                    }
+                },
                 "HE_IL": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -2673,6 +2709,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "hi-IN"
+                    }
+                },
+                "HT_HT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ht-HT"
                     }
                 },
                 "ID_ID": {
@@ -2693,10 +2735,28 @@
                         "smithy.api#enumValue": "ja-JP"
                     }
                 },
+                "JV_ID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "jv-ID"
+                    }
+                },
+                "KM_KH": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "km-KH"
+                    }
+                },
                 "KO_KR": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "ko-KR"
+                    }
+                },
+                "MY_MM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "my-MM"
                     }
                 },
                 "MS_MY": {
@@ -3035,6 +3095,12 @@
                         "smithy.api#enumValue": "no-NO"
                     }
                 },
+                "NE_NP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ne-NP"
+                    }
+                },
                 "OR_IN": {
                     "target": "smithy.api#Unit",
                     "traits": {
@@ -3093,6 +3159,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "so-SO"
+                    }
+                },
+                "SQ_AL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "sq-AL"
                     }
                 },
                 "SR_RS": {
