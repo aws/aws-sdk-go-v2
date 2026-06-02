@@ -302,6 +302,30 @@ func serializeRoadSnapTracePointList(s smithy.ShapeSerializer, schema *smithy.Sc
 	s.CloseList()
 }
 
+func serializeRouteAccessibilityAttributeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteAccessibilityAttribute) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeRouteAttributionList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteAttribution) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeRouteAvoidanceAreaGeometryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteAvoidanceAreaGeometry) {
 	if v == nil {
 		return
@@ -420,6 +444,17 @@ func serializeRouteFerryTravelStepList(s smithy.ShapeSerializer, schema *smithy.
 }
 
 func serializeRouteHazardousCargoTypeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteHazardousCargoType) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeRouteIntermodalEnabledLegsList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteIntermodalEnabledLegs) {
 	if v == nil {
 		return
 	}
@@ -593,6 +628,19 @@ func serializeRoutePassThroughWaypointList(s smithy.ShapeSerializer, schema *smi
 	s.CloseList()
 }
 
+func serializeRoutePedestrianAfterTravelStepList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RoutePedestrianAfterTravelStep) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeRoutePedestrianNoticeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RoutePedestrianNotice) {
 	if v == nil {
 		return
@@ -620,6 +668,56 @@ func serializeRoutePedestrianSpanList(s smithy.ShapeSerializer, schema *smithy.S
 }
 
 func serializeRoutePedestrianTravelStepList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RoutePedestrianTravelStep) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteRentalAfterTravelStepList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteRentalAfterTravelStep) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteRentalBeforeTravelStepList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteRentalBeforeTravelStep) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteRentalModeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteRentalMode) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeRouteRentalTravelStepList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteRentalTravelStep) {
 	if v == nil {
 		return
 	}
@@ -724,6 +822,69 @@ func serializeRouteSpanTruckAccessAttributeList(s smithy.ShapeSerializer, schema
 	s.CloseList()
 }
 
+func serializeRouteTaxiAfterTravelStepList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTaxiAfterTravelStep) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteTaxiBeforeTravelStepList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTaxiBeforeTravelStep) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteTaxiModeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTaxiMode) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeRouteTaxiNoticeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTaxiNotice) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteTaxiTravelStepList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTaxiTravelStep) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeRouteTollList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteToll) {
 	if v == nil {
 		return
@@ -787,7 +948,146 @@ func serializeRouteTollSystemList(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.CloseList()
 }
 
+func serializeRouteTransitAfterTravelStepList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTransitAfterTravelStep) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteTransitBeforeTravelStepList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTransitBeforeTravelStep) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteTransitIncidentList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTransitIncident) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteTransitIntermediateStopAttributeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTransitIntermediateStopAttribute) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeRouteTransitIntermediateStopList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTransitIntermediateStop) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteTransitModeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTransitMode) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeRouteTransitNextDepartureList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTransitNextDeparture) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteTransitNoticeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTransitNotice) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteTransitSpanList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTransitSpan) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteTransitTravelStepList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTransitTravelStep) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeRouteTransponderList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteTransponder) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteVehicleAfterTravelStepList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteVehicleAfterTravelStep) {
 	if v == nil {
 		return
 	}
@@ -809,6 +1109,17 @@ func serializeRouteVehicleIncidentList(s smithy.ShapeSerializer, schema *smithy.
 		s.WriteStruct(schema.ListMember())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteVehicleModeList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteVehicleMode) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
 	}
 	s.CloseList()
 }
@@ -866,6 +1177,19 @@ func serializeRouteVehicleTravelStepList(s smithy.ShapeSerializer, schema *smith
 }
 
 func serializeRouteWaypointList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteWaypoint) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeRouteWebLinkList(s smithy.ShapeSerializer, schema *smithy.Schema, v []types.RouteWebLink) {
 	if v == nil {
 		return
 	}
@@ -1340,6 +1664,32 @@ func deserializeRoadSnapTracePointList(d smithy.ShapeDeserializer, s *smithy.Sch
 	})
 }
 
+func deserializeRouteAccessibilityAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteAccessibilityAttribute) error {
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.RouteAccessibilityAttribute(vv))
+		return nil
+	})
+}
+
+func deserializeRouteAttributionList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteAttribution) error {
+	var vv types.RouteAttribution
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteAttribution{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeRouteAvoidanceAreaGeometryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteAvoidanceAreaGeometry) error {
 	var vv types.RouteAvoidanceAreaGeometry
 	return smithy.ReadList(d, s, func() error {
@@ -1466,6 +1816,19 @@ func deserializeRouteHazardousCargoTypeList(d smithy.ShapeDeserializer, s *smith
 		}
 
 		*v = append(*v, types.RouteHazardousCargoType(vv))
+		return nil
+	})
+}
+
+func deserializeRouteIntermodalEnabledLegsList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteIntermodalEnabledLegs) error {
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.RouteIntermodalEnabledLegs(vv))
 		return nil
 	})
 }
@@ -1639,6 +2002,19 @@ func deserializeRoutePassThroughWaypointList(d smithy.ShapeDeserializer, s *smit
 	})
 }
 
+func deserializeRoutePedestrianAfterTravelStepList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RoutePedestrianAfterTravelStep) error {
+	var vv types.RoutePedestrianAfterTravelStep
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RoutePedestrianAfterTravelStep{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeRoutePedestrianNoticeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RoutePedestrianNotice) error {
 	var vv types.RoutePedestrianNotice
 	return smithy.ReadList(d, s, func() error {
@@ -1669,6 +2045,58 @@ func deserializeRoutePedestrianTravelStepList(d smithy.ShapeDeserializer, s *smi
 	var vv types.RoutePedestrianTravelStep
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RoutePedestrianTravelStep{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteRentalAfterTravelStepList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteRentalAfterTravelStep) error {
+	var vv types.RouteRentalAfterTravelStep
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteRentalAfterTravelStep{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteRentalBeforeTravelStepList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteRentalBeforeTravelStep) error {
+	var vv types.RouteRentalBeforeTravelStep
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteRentalBeforeTravelStep{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteRentalModeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteRentalMode) error {
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.RouteRentalMode(vv))
+		return nil
+	})
+}
+
+func deserializeRouteRentalTravelStepList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteRentalTravelStep) error {
+	var vv types.RouteRentalTravelStep
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteRentalTravelStep{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -1782,6 +2210,71 @@ func deserializeRouteSpanTruckAccessAttributeList(d smithy.ShapeDeserializer, s 
 	})
 }
 
+func deserializeRouteTaxiAfterTravelStepList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTaxiAfterTravelStep) error {
+	var vv types.RouteTaxiAfterTravelStep
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteTaxiAfterTravelStep{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteTaxiBeforeTravelStepList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTaxiBeforeTravelStep) error {
+	var vv types.RouteTaxiBeforeTravelStep
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteTaxiBeforeTravelStep{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteTaxiModeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTaxiMode) error {
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.RouteTaxiMode(vv))
+		return nil
+	})
+}
+
+func deserializeRouteTaxiNoticeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTaxiNotice) error {
+	var vv types.RouteTaxiNotice
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteTaxiNotice{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteTaxiTravelStepList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTaxiTravelStep) error {
+	var vv types.RouteTaxiTravelStep
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteTaxiTravelStep{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeRouteTollList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteToll) error {
 	var vv types.RouteToll
 	return smithy.ReadList(d, s, func() error {
@@ -1847,10 +2340,153 @@ func deserializeRouteTollSystemList(d smithy.ShapeDeserializer, s *smithy.Schema
 	})
 }
 
+func deserializeRouteTransitAfterTravelStepList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTransitAfterTravelStep) error {
+	var vv types.RouteTransitAfterTravelStep
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteTransitAfterTravelStep{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteTransitBeforeTravelStepList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTransitBeforeTravelStep) error {
+	var vv types.RouteTransitBeforeTravelStep
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteTransitBeforeTravelStep{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteTransitIncidentList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTransitIncident) error {
+	var vv types.RouteTransitIncident
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteTransitIncident{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteTransitIntermediateStopAttributeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTransitIntermediateStopAttribute) error {
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.RouteTransitIntermediateStopAttribute(vv))
+		return nil
+	})
+}
+
+func deserializeRouteTransitIntermediateStopList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTransitIntermediateStop) error {
+	var vv types.RouteTransitIntermediateStop
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteTransitIntermediateStop{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteTransitModeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTransitMode) error {
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.RouteTransitMode(vv))
+		return nil
+	})
+}
+
+func deserializeRouteTransitNextDepartureList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTransitNextDeparture) error {
+	var vv types.RouteTransitNextDeparture
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteTransitNextDeparture{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteTransitNoticeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTransitNotice) error {
+	var vv types.RouteTransitNotice
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteTransitNotice{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteTransitSpanList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTransitSpan) error {
+	var vv types.RouteTransitSpan
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteTransitSpan{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteTransitTravelStepList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTransitTravelStep) error {
+	var vv types.RouteTransitTravelStep
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteTransitTravelStep{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
 func deserializeRouteTransponderList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteTransponder) error {
 	var vv types.RouteTransponder
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RouteTransponder{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteVehicleAfterTravelStepList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteVehicleAfterTravelStep) error {
+	var vv types.RouteVehicleAfterTravelStep
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteVehicleAfterTravelStep{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -1869,6 +2505,19 @@ func deserializeRouteVehicleIncidentList(d smithy.ShapeDeserializer, s *smithy.S
 		}
 
 		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteVehicleModeList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteVehicleMode) error {
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, types.RouteVehicleMode(vv))
 		return nil
 	})
 }
@@ -1929,6 +2578,19 @@ func deserializeRouteWaypointList(d smithy.ShapeDeserializer, s *smithy.Schema, 
 	var vv types.RouteWaypoint
 	return smithy.ReadList(d, s, func() error {
 		vv = types.RouteWaypoint{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeRouteWebLinkList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]types.RouteWebLink) error {
+	var vv types.RouteWebLink
+	return smithy.ReadList(d, s, func() error {
+		vv = types.RouteWebLink{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}

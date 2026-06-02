@@ -56,6 +56,20 @@ var InternalServerException = smithy.NewSchema(smithy.ShapeID{
 		StatusCode: 500})
 var InternalServerException_message *smithy.Schema
 
+var IteratorDescription = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.keyspacesstreams",
+	Name:      "IteratorDescription",
+}, smithy.ShapeTypeStructure, 1)
+var IteratorDescription_iteratorPosition *smithy.Schema
+
+var IteratorPosition = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.keyspacesstreams",
+	Name:      "IteratorPosition",
+}, smithy.ShapeTypeEnum, 2)
+var IteratorPosition_AT_TIP *smithy.Schema
+
+var IteratorPosition_BEHIND_TIP *smithy.Schema
+
 var _KeyspaceName = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.keyspacesstreams",
 	Name:      "KeyspaceName",
@@ -407,10 +421,12 @@ var GetRecordsInput_maxResults *smithy.Schema
 var GetRecordsOutput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.keyspacesstreams",
 	Name:      "GetRecordsOutput",
-}, smithy.ShapeTypeStructure, 2)
+}, smithy.ShapeTypeStructure, 3)
 var GetRecordsOutput_changeRecords *smithy.Schema
 
 var GetRecordsOutput_nextShardIterator *smithy.Schema
+
+var GetRecordsOutput_iteratorDescription *smithy.Schema
 
 var GetShardIteratorInput = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.keyspacesstreams",
@@ -490,6 +506,12 @@ func init() {
 	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
 
 	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
+
+	IteratorPosition_AT_TIP = IteratorPosition.AddMember("AT_TIP", smithyprelude.Unit)
+
+	IteratorPosition_BEHIND_TIP = IteratorPosition.AddMember("BEHIND_TIP", smithyprelude.Unit)
+
+	IteratorDescription_iteratorPosition = IteratorDescription.AddMember("iteratorPosition", IteratorPosition)
 
 	_KeyspacesCellList_member = _KeyspacesCellList.AddMember("member", KeyspacesCell)
 
@@ -680,6 +702,8 @@ func init() {
 	GetRecordsOutput_changeRecords = GetRecordsOutput.AddMember("changeRecords", _RecordList)
 
 	GetRecordsOutput_nextShardIterator = GetRecordsOutput.AddMember("nextShardIterator", _ShardIterator)
+
+	GetRecordsOutput_iteratorDescription = GetRecordsOutput.AddMember("iteratorDescription", IteratorDescription)
 
 	GetShardIteratorInput_streamArn = GetShardIteratorInput.AddMember("streamArn", _StreamArn)
 

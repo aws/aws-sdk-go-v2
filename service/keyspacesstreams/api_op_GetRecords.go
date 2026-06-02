@@ -95,6 +95,9 @@ func (v *GetRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
 		switch s {
 		case schemas.GetRecordsOutput_changeRecords:
 			return deserializeRecordList(d, schemas.GetRecordsOutput_changeRecords, &v.ChangeRecords)
+		case schemas.GetRecordsOutput_iteratorDescription:
+			v.IteratorDescription = &types.IteratorDescription{}
+			return v.IteratorDescription.Deserialize(d)
 		case schemas.GetRecordsOutput_nextShardIterator:
 			v.NextShardIterator = new(string)
 			return d.ReadString(schemas.GetRecordsOutput_nextShardIterator, v.NextShardIterator)

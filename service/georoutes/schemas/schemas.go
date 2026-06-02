@@ -12,35 +12,35 @@ var CalculateIsolines = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "CalculateIsolines",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/isolines",
+	URI:  "/v2/isolines",
 	Code: 200})
 
 var CalculateRouteMatrix = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "CalculateRouteMatrix",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/route-matrix",
+	URI:  "/v2/route-matrix",
 	Code: 200})
 
 var CalculateRoutes = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "CalculateRoutes",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/routes",
+	URI:  "/v2/routes",
 	Code: 200})
 
 var OptimizeWaypoints = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "OptimizeWaypoints",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/optimize-waypoints",
+	URI:  "/v2/optimize-waypoints",
 	Code: 200})
 
 var SnapToRoads = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "SnapToRoads",
 }, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/snap-to-roads",
+	URI:  "/v2/snap-to-roads",
 	Code: 200})
 
 var _RoutesService = smithy.NewSchema(smithy.ShapeID{
@@ -154,6 +154,11 @@ var _DurationSeconds = smithy.NewSchema(smithy.ShapeID{
 	Name:      "DurationSeconds",
 }, smithy.ShapeTypeLong, 0, &smithytraits.Sensitive{})
 
+var _EnergyKilowattHours = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "EnergyKilowattHours",
+}, smithy.ShapeTypeDouble, 0, &smithytraits.Sensitive{})
+
 var GeometryFormat = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "GeometryFormat",
@@ -166,6 +171,11 @@ var _Heading = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "Heading",
 }, smithy.ShapeTypeDouble, 0, &smithytraits.Sensitive{})
+
+var _HexColor = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "HexColor",
+}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
 var _IndexList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -321,10 +331,15 @@ var IsolineDestinationOptions_Matching *smithy.Schema
 
 var IsolineDestinationOptions_SideOfStreet *smithy.Schema
 
-var _IsolineEngineType = smithy.NewSchema(smithy.ShapeID{
+var IsolineEngineType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "IsolineEngineType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var IsolineEngineType_ELECTRIC *smithy.Schema
+
+var IsolineEngineType_INTERNAL_COMBUSTION *smithy.Schema
+
+var IsolineEngineType_PLUGIN_HYBRID *smithy.Schema
 
 var IsolineGranularityOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -334,10 +349,31 @@ var IsolineGranularityOptions_MaxPoints *smithy.Schema
 
 var IsolineGranularityOptions_MaxResolution *smithy.Schema
 
-var _IsolineHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
+var IsolineHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "IsolineHazardousCargoType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
+var IsolineHazardousCargoType_COMBUSTIBLE *smithy.Schema
+
+var IsolineHazardousCargoType_CORROSIVE *smithy.Schema
+
+var IsolineHazardousCargoType_EXPLOSIVE *smithy.Schema
+
+var IsolineHazardousCargoType_FLAMMABLE *smithy.Schema
+
+var IsolineHazardousCargoType_GAS *smithy.Schema
+
+var IsolineHazardousCargoType_HARMFUL_TO_WATER *smithy.Schema
+
+var IsolineHazardousCargoType_ORGANIC *smithy.Schema
+
+var IsolineHazardousCargoType_OTHER *smithy.Schema
+
+var IsolineHazardousCargoType_POISON *smithy.Schema
+
+var IsolineHazardousCargoType_POISONOUS_INHALATION *smithy.Schema
+
+var IsolineHazardousCargoType_RADIOACTIVE *smithy.Schema
 
 var _IsolineHazardousCargoTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -363,10 +399,15 @@ var IsolineMatchingOptions_Radius *smithy.Schema
 
 var IsolineMatchingOptions_Strategy *smithy.Schema
 
-var _IsolineOptimizationObjective = smithy.NewSchema(smithy.ShapeID{
+var IsolineOptimizationObjective = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "IsolineOptimizationObjective",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 3)
+var IsolineOptimizationObjective_ACCURATE_CALCULATION *smithy.Schema
+
+var IsolineOptimizationObjective_BALANCED_CALCULATION *smithy.Schema
+
+var IsolineOptimizationObjective_FAST_CALCULATION *smithy.Schema
 
 var IsolineOriginOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -438,10 +479,17 @@ var IsolineTrailerOptions_AxleCount *smithy.Schema
 
 var IsolineTrailerOptions_TrailerCount *smithy.Schema
 
-var _IsolineTravelMode = smithy.NewSchema(smithy.ShapeID{
+var IsolineTravelMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "IsolineTravelMode",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 4)
+var IsolineTravelMode_CAR *smithy.Schema
+
+var IsolineTravelMode_PEDESTRIAN *smithy.Schema
+
+var IsolineTravelMode_SCOOTER *smithy.Schema
+
+var IsolineTravelMode_TRUCK *smithy.Schema
 
 var IsolineTravelModeOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -495,10 +543,15 @@ var IsolineTruckOptions_WeightPerAxleGroup *smithy.Schema
 
 var IsolineTruckOptions_Width *smithy.Schema
 
-var _IsolineTruckType = smithy.NewSchema(smithy.ShapeID{
+var IsolineTruckType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "IsolineTruckType",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 3)
+var IsolineTruckType_LIGHT_TRUCK *smithy.Schema
+
+var IsolineTruckType_STRAIGHT_TRUCK *smithy.Schema
+
+var IsolineTruckType_TRACTOR *smithy.Schema
 
 var IsolineVehicleLicensePlate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -506,10 +559,15 @@ var IsolineVehicleLicensePlate = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Sensitive{})
 var IsolineVehicleLicensePlate_LastCharacter *smithy.Schema
 
-var _IsolineZoneCategory = smithy.NewSchema(smithy.ShapeID{
+var IsolineZoneCategory = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "IsolineZoneCategory",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 3)
+var IsolineZoneCategory_CONGESTION_PRICING *smithy.Schema
+
+var IsolineZoneCategory_ENVIRONMENTAL *smithy.Schema
+
+var IsolineZoneCategory_VIGNETTE *smithy.Schema
 
 var _LanguageTag = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -554,10 +612,13 @@ var _LocalizedStringList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _LocalizedStringList_member *smithy.Schema
 
-var _MatchingStrategy = smithy.NewSchema(smithy.ShapeID{
+var MatchingStrategy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "MatchingStrategy",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 2)
+var MatchingStrategy_MATCH_ANY *smithy.Schema
+
+var MatchingStrategy_MATCH_MOST_SIGNIFICANT_ROAD *smithy.Schema
 
 var MeasurementSystem = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -603,10 +664,36 @@ var _Position23 = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
 var _Position23_member *smithy.Schema
 
-var _RoadSnapHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
+var _PowerKilowatts = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "PowerKilowatts",
+}, smithy.ShapeTypeDouble, 0, &smithytraits.Sensitive{})
+
+var RoadSnapHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RoadSnapHazardousCargoType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
+var RoadSnapHazardousCargoType_COMBUSTIBLE *smithy.Schema
+
+var RoadSnapHazardousCargoType_CORROSIVE *smithy.Schema
+
+var RoadSnapHazardousCargoType_EXPLOSIVE *smithy.Schema
+
+var RoadSnapHazardousCargoType_FLAMMABLE *smithy.Schema
+
+var RoadSnapHazardousCargoType_GAS *smithy.Schema
+
+var RoadSnapHazardousCargoType_HARMFUL_TO_WATER *smithy.Schema
+
+var RoadSnapHazardousCargoType_ORGANIC *smithy.Schema
+
+var RoadSnapHazardousCargoType_OTHER *smithy.Schema
+
+var RoadSnapHazardousCargoType_POISON *smithy.Schema
+
+var RoadSnapHazardousCargoType_POISONOUS_INHALATION *smithy.Schema
+
+var RoadSnapHazardousCargoType_RADIOACTIVE *smithy.Schema
 
 var _RoadSnapHazardousCargoTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -624,10 +711,23 @@ var RoadSnapNotice_Title *smithy.Schema
 
 var RoadSnapNotice_TracePointIndexes *smithy.Schema
 
-var _RoadSnapNoticeCode = smithy.NewSchema(smithy.ShapeID{
+var RoadSnapNoticeCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RoadSnapNoticeCode",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 7, &smithytraits.Sensitive{})
+var RoadSnapNoticeCode_TRACE_POINTS_HEADING_IGNORED *smithy.Schema
+
+var RoadSnapNoticeCode_TRACE_POINTS_IGNORED *smithy.Schema
+
+var RoadSnapNoticeCode_TRACE_POINTS_MOVED_BY_LARGE_DISTANCE *smithy.Schema
+
+var RoadSnapNoticeCode_TRACE_POINTS_NOT_MATCHED *smithy.Schema
+
+var RoadSnapNoticeCode_TRACE_POINTS_OUT_OF_SEQUENCE *smithy.Schema
+
+var RoadSnapNoticeCode_TRACE_POINTS_SPEED_ESTIMATED *smithy.Schema
+
+var RoadSnapNoticeCode_TRACE_POINTS_SPEED_IGNORED *smithy.Schema
 
 var _RoadSnapNoticeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -689,10 +789,17 @@ var RoadSnapTrailerOptions = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var RoadSnapTrailerOptions_TrailerCount *smithy.Schema
 
-var _RoadSnapTravelMode = smithy.NewSchema(smithy.ShapeID{
+var RoadSnapTravelMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RoadSnapTravelMode",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 4)
+var RoadSnapTravelMode_CAR *smithy.Schema
+
+var RoadSnapTravelMode_PEDESTRIAN *smithy.Schema
+
+var RoadSnapTravelMode_SCOOTER *smithy.Schema
+
+var RoadSnapTravelMode_TRUCK *smithy.Schema
 
 var RoadSnapTravelModeOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -733,6 +840,42 @@ var Route_MajorRoadLabels *smithy.Schema
 
 var Route_Summary *smithy.Schema
 
+var RouteAccessibilityAttribute = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteAccessibilityAttribute",
+}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
+var RouteAccessibilityAttribute_WHEELCHAIR *smithy.Schema
+
+var _RouteAccessibilityAttributeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteAccessibilityAttributeList",
+}, smithy.ShapeTypeList, 1)
+var _RouteAccessibilityAttributeList_member *smithy.Schema
+
+var RouteAccessibilityAvailability = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteAccessibilityAvailability",
+}, smithy.ShapeTypeEnum, 4)
+var RouteAccessibilityAvailability_AVAILABLE *smithy.Schema
+
+var RouteAccessibilityAvailability_LIMITED *smithy.Schema
+
+var RouteAccessibilityAvailability_UNAVAILABLE *smithy.Schema
+
+var RouteAccessibilityAvailability_UNKNOWN *smithy.Schema
+
+var RouteAccessibilityAvailabilityDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteAccessibilityAvailabilityDetails",
+}, smithy.ShapeTypeStructure, 1)
+var RouteAccessibilityAvailabilityDetails_Wheelchair *smithy.Schema
+
+var RouteAccessPointDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteAccessPointDetails",
+}, smithy.ShapeTypeStructure, 1)
+var RouteAccessPointDetails_Accessibility *smithy.Schema
+
 var RouteAllowOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteAllowOptions",
@@ -740,6 +883,28 @@ var RouteAllowOptions = smithy.NewSchema(smithy.ShapeID{
 var RouteAllowOptions_Hot *smithy.Schema
 
 var RouteAllowOptions_Hov *smithy.Schema
+
+var RouteAttribution = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteAttribution",
+}, smithy.ShapeTypeStructure, 2)
+var RouteAttribution_AttributionType *smithy.Schema
+
+var RouteAttribution_WebLink *smithy.Schema
+
+var _RouteAttributionList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteAttributionList",
+}, smithy.ShapeTypeList, 1)
+var _RouteAttributionList_member *smithy.Schema
+
+var RouteAttributionType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteAttributionType",
+}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
+var RouteAttributionType_DISCLAIMER *smithy.Schema
+
+var RouteAttributionType_TARIFF *smithy.Schema
 
 var RouteAvoidanceArea = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -827,6 +992,16 @@ var RouteCarOptions_MaxSpeed *smithy.Schema
 
 var RouteCarOptions_Occupancy *smithy.Schema
 
+var RouteChargeStepDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteChargeStepDetails",
+}, smithy.ShapeTypeStructure, 3)
+var RouteChargeStepDetails_ArrivalCharge *smithy.Schema
+
+var RouteChargeStepDetails_ConsumablePower *smithy.Schema
+
+var RouteChargeStepDetails_DesiredCharge *smithy.Schema
+
 var RouteContinueHighwayStepDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteContinueHighwayStepDetails",
@@ -861,10 +1036,17 @@ var RouteDestinationOptions_SideOfStreet *smithy.Schema
 
 var RouteDestinationOptions_StopDuration *smithy.Schema
 
-var _RouteDirection = smithy.NewSchema(smithy.ShapeID{
+var RouteDirection = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteDirection",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
+var RouteDirection_EAST *smithy.Schema
+
+var RouteDirection_NORTH *smithy.Schema
+
+var RouteDirection_SOUTH *smithy.Schema
+
+var RouteDirection_WEST *smithy.Schema
 
 var RouteDriverOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -894,10 +1076,15 @@ var RouteEmissionType_Co2EmissionClass *smithy.Schema
 
 var RouteEmissionType_Type *smithy.Schema
 
-var _RouteEngineType = smithy.NewSchema(smithy.ShapeID{
+var RouteEngineType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteEngineType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var RouteEngineType_ELECTRIC *smithy.Schema
+
+var RouteEngineType_INTERNAL_COMBUSTION *smithy.Schema
+
+var RouteEngineType_PLUGIN_HYBRID *smithy.Schema
 
 var RouteEnterHighwayStepDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -947,10 +1134,11 @@ var _RouteFerryAfterTravelStepList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteFerryAfterTravelStepList_member *smithy.Schema
 
-var _RouteFerryAfterTravelStepType = smithy.NewSchema(smithy.ShapeID{
+var RouteFerryAfterTravelStepType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteFerryAfterTravelStepType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
+var RouteFerryAfterTravelStepType_DEBOARD *smithy.Schema
 
 var RouteFerryArrival = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -976,10 +1164,11 @@ var _RouteFerryBeforeTravelStepList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteFerryBeforeTravelStepList_member *smithy.Schema
 
-var _RouteFerryBeforeTravelStepType = smithy.NewSchema(smithy.ShapeID{
+var RouteFerryBeforeTravelStepType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteFerryBeforeTravelStepType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
+var RouteFerryBeforeTravelStepType_BOARD *smithy.Schema
 
 var RouteFerryDeparture = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1021,10 +1210,27 @@ var RouteFerryNotice_Code *smithy.Schema
 
 var RouteFerryNotice_Impact *smithy.Schema
 
-var _RouteFerryNoticeCode = smithy.NewSchema(smithy.ShapeID{
+var RouteFerryNoticeCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteFerryNoticeCode",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 9)
+var RouteFerryNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE *smithy.Schema
+
+var RouteFerryNoticeCode_NO_SCHEDULE *smithy.Schema
+
+var RouteFerryNoticeCode_OTHER *smithy.Schema
+
+var RouteFerryNoticeCode_VIOLATED_AVOID_FERRY *smithy.Schema
+
+var RouteFerryNoticeCode_VIOLATED_AVOID_RAIL_FERRY *smithy.Schema
+
+var RouteFerryNoticeCode_SEASONAL_CLOSURE *smithy.Schema
+
+var RouteFerryNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE *smithy.Schema
+
+var RouteFerryNoticeCode_VIOLATED_AVOID_AREAS *smithy.Schema
+
+var RouteFerryNoticeCode_VIOLATED_VEHICLE_RESTRICTION *smithy.Schema
 
 var _RouteFerryNoticeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1108,21 +1314,131 @@ var _RouteFerryTravelStepList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteFerryTravelStepList_member *smithy.Schema
 
-var _RouteFerryTravelStepType = smithy.NewSchema(smithy.ShapeID{
+var RouteFerryTravelStepType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteFerryTravelStepType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var RouteFerryTravelStepType_DEPART *smithy.Schema
 
-var _RouteHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
+var RouteFerryTravelStepType_CONTINUE *smithy.Schema
+
+var RouteFerryTravelStepType_ARRIVE *smithy.Schema
+
+var RouteHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteHazardousCargoType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
+var RouteHazardousCargoType_COMBUSTIBLE *smithy.Schema
+
+var RouteHazardousCargoType_CORROSIVE *smithy.Schema
+
+var RouteHazardousCargoType_EXPLOSIVE *smithy.Schema
+
+var RouteHazardousCargoType_FLAMMABLE *smithy.Schema
+
+var RouteHazardousCargoType_GAS *smithy.Schema
+
+var RouteHazardousCargoType_HARMFUL_TO_WATER *smithy.Schema
+
+var RouteHazardousCargoType_ORGANIC *smithy.Schema
+
+var RouteHazardousCargoType_OTHER *smithy.Schema
+
+var RouteHazardousCargoType_POISON *smithy.Schema
+
+var RouteHazardousCargoType_POISONOUS_INHALATION *smithy.Schema
+
+var RouteHazardousCargoType_RADIOACTIVE *smithy.Schema
 
 var _RouteHazardousCargoTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteHazardousCargoTypeList",
 }, smithy.ShapeTypeList, 1)
 var _RouteHazardousCargoTypeList_member *smithy.Schema
+
+var RouteIntermodalEnabledLegs = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteIntermodalEnabledLegs",
+}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
+var RouteIntermodalEnabledLegs_FIRST_LEG *smithy.Schema
+
+var RouteIntermodalEnabledLegs_LAST_LEG *smithy.Schema
+
+var RouteIntermodalEnabledLegs_ENTIRE_ROUTE *smithy.Schema
+
+var RouteIntermodalEnabledLegs_NONE *smithy.Schema
+
+var _RouteIntermodalEnabledLegsList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteIntermodalEnabledLegsList",
+}, smithy.ShapeTypeList, 1)
+var _RouteIntermodalEnabledLegsList_member *smithy.Schema
+
+var RouteIntermodalOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteIntermodalOptions",
+}, smithy.ShapeTypeStructure, 7)
+var RouteIntermodalOptions_AccessibilityAttributes *smithy.Schema
+
+var RouteIntermodalOptions_MaxTransfers *smithy.Schema
+
+var RouteIntermodalOptions_Pedestrian *smithy.Schema
+
+var RouteIntermodalOptions_Rental *smithy.Schema
+
+var RouteIntermodalOptions_Taxi *smithy.Schema
+
+var RouteIntermodalOptions_Transit *smithy.Schema
+
+var RouteIntermodalOptions_Vehicle *smithy.Schema
+
+var RouteIntermodalPedestrianOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteIntermodalPedestrianOptions",
+}, smithy.ShapeTypeStructure, 2)
+var RouteIntermodalPedestrianOptions_MaxDistance *smithy.Schema
+
+var RouteIntermodalPedestrianOptions_Speed *smithy.Schema
+
+var RouteIntermodalRentalOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteIntermodalRentalOptions",
+}, smithy.ShapeTypeStructure, 3)
+var RouteIntermodalRentalOptions_AllowedModes *smithy.Schema
+
+var RouteIntermodalRentalOptions_EnabledFor *smithy.Schema
+
+var RouteIntermodalRentalOptions_ExcludedModes *smithy.Schema
+
+var RouteIntermodalTaxiOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteIntermodalTaxiOptions",
+}, smithy.ShapeTypeStructure, 3)
+var RouteIntermodalTaxiOptions_AllowedModes *smithy.Schema
+
+var RouteIntermodalTaxiOptions_EnabledFor *smithy.Schema
+
+var RouteIntermodalTaxiOptions_ExcludedModes *smithy.Schema
+
+var RouteIntermodalTransitOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteIntermodalTransitOptions",
+}, smithy.ShapeTypeStructure, 3)
+var RouteIntermodalTransitOptions_AllowedModes *smithy.Schema
+
+var RouteIntermodalTransitOptions_EnabledFor *smithy.Schema
+
+var RouteIntermodalTransitOptions_ExcludedModes *smithy.Schema
+
+var RouteIntermodalVehicleOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteIntermodalVehicleOptions",
+}, smithy.ShapeTypeStructure, 3)
+var RouteIntermodalVehicleOptions_AllowedModes *smithy.Schema
+
+var RouteIntermodalVehicleOptions_EnabledFor *smithy.Schema
+
+var RouteIntermodalVehicleOptions_ExcludedModes *smithy.Schema
 
 var RouteKeepStepDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1139,7 +1455,7 @@ var RouteKeepStepDetails_TurnIntensity *smithy.Schema
 var RouteLeg = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteLeg",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 10)
 var RouteLeg_FerryLegDetails *smithy.Schema
 
 var RouteLeg_Geometry *smithy.Schema
@@ -1154,10 +1470,39 @@ var RouteLeg_Type *smithy.Schema
 
 var RouteLeg_VehicleLegDetails *smithy.Schema
 
-var _RouteLegAdditionalFeature = smithy.NewSchema(smithy.ShapeID{
+var RouteLeg_RentalLegDetails *smithy.Schema
+
+var RouteLeg_TaxiLegDetails *smithy.Schema
+
+var RouteLeg_TransitLegDetails *smithy.Schema
+
+var RouteLegAdditionalFeature = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteLegAdditionalFeature",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 12, &smithytraits.Sensitive{})
+var RouteLegAdditionalFeature_ELEVATION *smithy.Schema
+
+var RouteLegAdditionalFeature_INCIDENTS *smithy.Schema
+
+var RouteLegAdditionalFeature_PASS_THROUGH_WAYPOINTS *smithy.Schema
+
+var RouteLegAdditionalFeature_SUMMARY *smithy.Schema
+
+var RouteLegAdditionalFeature_TOLLS *smithy.Schema
+
+var RouteLegAdditionalFeature_TRAVEL_STEP_INSTRUCTIONS *smithy.Schema
+
+var RouteLegAdditionalFeature_TRUCK_ROAD_TYPES *smithy.Schema
+
+var RouteLegAdditionalFeature_TYPICAL_DURATION *smithy.Schema
+
+var RouteLegAdditionalFeature_ZONES *smithy.Schema
+
+var RouteLegAdditionalFeature_BOOKINGS *smithy.Schema
+
+var RouteLegAdditionalFeature_INTERMEDIATE_STOPS *smithy.Schema
+
+var RouteLegAdditionalFeature_NEXT_DEPARTURES *smithy.Schema
 
 var _RouteLegAdditionalFeatureList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1179,15 +1524,65 @@ var _RouteLegList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteLegList_member *smithy.Schema
 
-var _RouteLegTravelMode = smithy.NewSchema(smithy.ShapeID{
+var RouteLegTravelMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteLegTravelMode",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 20, &smithytraits.Sensitive{})
+var RouteLegTravelMode_CAR *smithy.Schema
 
-var _RouteLegType = smithy.NewSchema(smithy.ShapeID{
+var RouteLegTravelMode_FERRY *smithy.Schema
+
+var RouteLegTravelMode_PEDESTRIAN *smithy.Schema
+
+var RouteLegTravelMode_SCOOTER *smithy.Schema
+
+var RouteLegTravelMode_TRUCK *smithy.Schema
+
+var RouteLegTravelMode_CAR_SHUTTLE_TRAIN *smithy.Schema
+
+var RouteLegTravelMode_AERIAL_TRAMWAY *smithy.Schema
+
+var RouteLegTravelMode_AIRPLANE *smithy.Schema
+
+var RouteLegTravelMode_BUS *smithy.Schema
+
+var RouteLegTravelMode_BUS_RAPID_TRANSIT *smithy.Schema
+
+var RouteLegTravelMode_CITY_TRAIN *smithy.Schema
+
+var RouteLegTravelMode_FUNICULAR_RAILWAY *smithy.Schema
+
+var RouteLegTravelMode_HIGH_SPEED_TRAIN *smithy.Schema
+
+var RouteLegTravelMode_INTERCITY_TRAIN *smithy.Schema
+
+var RouteLegTravelMode_INTERREGIONAL_TRAIN *smithy.Schema
+
+var RouteLegTravelMode_LIGHT_RAIL *smithy.Schema
+
+var RouteLegTravelMode_MONORAIL *smithy.Schema
+
+var RouteLegTravelMode_PRIVATE_BUS *smithy.Schema
+
+var RouteLegTravelMode_REGIONAL_TRAIN *smithy.Schema
+
+var RouteLegTravelMode_SUBWAY *smithy.Schema
+
+var RouteLegType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteLegType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 6, &smithytraits.Sensitive{})
+var RouteLegType_FERRY *smithy.Schema
+
+var RouteLegType_PEDESTRIAN *smithy.Schema
+
+var RouteLegType_VEHICLE *smithy.Schema
+
+var RouteLegType_RENTAL *smithy.Schema
+
+var RouteLegType_TAXI *smithy.Schema
+
+var RouteLegType_TRANSIT *smithy.Schema
 
 var _RouteList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1369,10 +1764,27 @@ var RouteMatrixEntry_Duration *smithy.Schema
 
 var RouteMatrixEntry_Error *smithy.Schema
 
-var _RouteMatrixErrorCode = smithy.NewSchema(smithy.ShapeID{
+var RouteMatrixErrorCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteMatrixErrorCode",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 9)
+var RouteMatrixErrorCode_NO_MATCH *smithy.Schema
+
+var RouteMatrixErrorCode_NO_MATCH_DESTINATION *smithy.Schema
+
+var RouteMatrixErrorCode_NO_MATCH_ORIGIN *smithy.Schema
+
+var RouteMatrixErrorCode_NO_ROUTE *smithy.Schema
+
+var RouteMatrixErrorCode_OUT_OF_BOUNDS *smithy.Schema
+
+var RouteMatrixErrorCode_OUT_OF_BOUNDS_DESTINATION *smithy.Schema
+
+var RouteMatrixErrorCode_OUT_OF_BOUNDS_ORIGIN *smithy.Schema
+
+var RouteMatrixErrorCode_OTHER *smithy.Schema
+
+var RouteMatrixErrorCode_VIOLATION *smithy.Schema
 
 var RouteMatrixExclusionOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1380,10 +1792,31 @@ var RouteMatrixExclusionOptions = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var RouteMatrixExclusionOptions_Countries *smithy.Schema
 
-var _RouteMatrixHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
+var RouteMatrixHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteMatrixHazardousCargoType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
+var RouteMatrixHazardousCargoType_COMBUSTIBLE *smithy.Schema
+
+var RouteMatrixHazardousCargoType_CORROSIVE *smithy.Schema
+
+var RouteMatrixHazardousCargoType_EXPLOSIVE *smithy.Schema
+
+var RouteMatrixHazardousCargoType_FLAMMABLE *smithy.Schema
+
+var RouteMatrixHazardousCargoType_GAS *smithy.Schema
+
+var RouteMatrixHazardousCargoType_HARMFUL_TO_WATER *smithy.Schema
+
+var RouteMatrixHazardousCargoType_ORGANIC *smithy.Schema
+
+var RouteMatrixHazardousCargoType_OTHER *smithy.Schema
+
+var RouteMatrixHazardousCargoType_POISON *smithy.Schema
+
+var RouteMatrixHazardousCargoType_POISONOUS_INHALATION *smithy.Schema
+
+var RouteMatrixHazardousCargoType_RADIOACTIVE *smithy.Schema
 
 var _RouteMatrixHazardousCargoTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1467,10 +1900,17 @@ var RouteMatrixTrailerOptions = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var RouteMatrixTrailerOptions_TrailerCount *smithy.Schema
 
-var _RouteMatrixTravelMode = smithy.NewSchema(smithy.ShapeID{
+var RouteMatrixTravelMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteMatrixTravelMode",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 4)
+var RouteMatrixTravelMode_CAR *smithy.Schema
+
+var RouteMatrixTravelMode_PEDESTRIAN *smithy.Schema
+
+var RouteMatrixTravelMode_SCOOTER *smithy.Schema
+
+var RouteMatrixTravelMode_TRUCK *smithy.Schema
 
 var RouteMatrixTravelModeOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1518,10 +1958,15 @@ var RouteMatrixTruckOptions_WeightPerAxleGroup *smithy.Schema
 
 var RouteMatrixTruckOptions_Width *smithy.Schema
 
-var _RouteMatrixTruckType = smithy.NewSchema(smithy.ShapeID{
+var RouteMatrixTruckType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteMatrixTruckType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var RouteMatrixTruckType_LIGHT_TRUCK *smithy.Schema
+
+var RouteMatrixTruckType_STRAIGHT_TRUCK *smithy.Schema
+
+var RouteMatrixTruckType_TRACTOR *smithy.Schema
 
 var RouteMatrixVehicleLicensePlate = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1529,10 +1974,15 @@ var RouteMatrixVehicleLicensePlate = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1, &smithytraits.Sensitive{})
 var RouteMatrixVehicleLicensePlate_LastCharacter *smithy.Schema
 
-var _RouteMatrixZoneCategory = smithy.NewSchema(smithy.ShapeID{
+var RouteMatrixZoneCategory = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteMatrixZoneCategory",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var RouteMatrixZoneCategory_CONGESTION_PRICING *smithy.Schema
+
+var RouteMatrixZoneCategory_ENVIRONMENTAL *smithy.Schema
+
+var RouteMatrixZoneCategory_VIGNETTE *smithy.Schema
 
 var RouteNoticeDetailRange = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1542,10 +1992,13 @@ var RouteNoticeDetailRange_Min *smithy.Schema
 
 var RouteNoticeDetailRange_Max *smithy.Schema
 
-var _RouteNoticeImpact = smithy.NewSchema(smithy.ShapeID{
+var RouteNoticeImpact = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteNoticeImpact",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 2)
+var RouteNoticeImpact_HIGH *smithy.Schema
+
+var RouteNoticeImpact_LOW *smithy.Schema
 
 var RouteNumber = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1601,6 +2054,28 @@ var _RoutePassThroughWaypointList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RoutePassThroughWaypointList_member *smithy.Schema
 
+var RoutePedestrianAfterTravelStep = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RoutePedestrianAfterTravelStep",
+}, smithy.ShapeTypeStructure, 3)
+var RoutePedestrianAfterTravelStep_Duration *smithy.Schema
+
+var RoutePedestrianAfterTravelStep_Instruction *smithy.Schema
+
+var RoutePedestrianAfterTravelStep_Type *smithy.Schema
+
+var _RoutePedestrianAfterTravelStepList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RoutePedestrianAfterTravelStepList",
+}, smithy.ShapeTypeList, 1)
+var _RoutePedestrianAfterTravelStepList_member *smithy.Schema
+
+var RoutePedestrianAfterTravelStepType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RoutePedestrianAfterTravelStepType",
+}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
+var RoutePedestrianAfterTravelStepType_WAIT *smithy.Schema
+
 var RoutePedestrianArrival = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RoutePedestrianArrival",
@@ -1620,7 +2095,9 @@ var RoutePedestrianDeparture_Time *smithy.Schema
 var RoutePedestrianLegDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RoutePedestrianLegDetails",
-}, smithy.ShapeTypeStructure, 7)
+}, smithy.ShapeTypeStructure, 8)
+var RoutePedestrianLegDetails_AfterTravelSteps *smithy.Schema
+
 var RoutePedestrianLegDetails_Arrival *smithy.Schema
 
 var RoutePedestrianLegDetails_Departure *smithy.Schema
@@ -1643,10 +2120,21 @@ var RoutePedestrianNotice_Code *smithy.Schema
 
 var RoutePedestrianNotice_Impact *smithy.Schema
 
-var _RoutePedestrianNoticeCode = smithy.NewSchema(smithy.ShapeID{
+var RoutePedestrianNoticeCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RoutePedestrianNoticeCode",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 6)
+var RoutePedestrianNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE *smithy.Schema
+
+var RoutePedestrianNoticeCode_OTHER *smithy.Schema
+
+var RoutePedestrianNoticeCode_VIOLATED_AVOID_DIRT_ROAD *smithy.Schema
+
+var RoutePedestrianNoticeCode_VIOLATED_AVOID_TUNNEL *smithy.Schema
+
+var RoutePedestrianNoticeCode_VIOLATED_PEDESTRIAN_OPTION *smithy.Schema
+
+var RoutePedestrianNoticeCode_VIOLATED_AVOID_AREAS *smithy.Schema
 
 var _RoutePedestrianNoticeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1671,7 +2159,9 @@ var RoutePedestrianOverviewSummary_Duration *smithy.Schema
 var RoutePedestrianPlace = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RoutePedestrianPlace",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 8)
+var RoutePedestrianPlace_AccessPointDetails *smithy.Schema
+
 var RoutePedestrianPlace_Name *smithy.Schema
 
 var RoutePedestrianPlace_OriginalPosition *smithy.Schema
@@ -1680,7 +2170,23 @@ var RoutePedestrianPlace_Position *smithy.Schema
 
 var RoutePedestrianPlace_SideOfStreet *smithy.Schema
 
+var RoutePedestrianPlace_StationDetails *smithy.Schema
+
+var RoutePedestrianPlace_Type *smithy.Schema
+
 var RoutePedestrianPlace_WaypointIndex *smithy.Schema
+
+var RoutePedestrianPlaceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RoutePedestrianPlaceType",
+}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
+var RoutePedestrianPlaceType_ACCESS_POINT *smithy.Schema
+
+var RoutePedestrianPlaceType_DOCKING_STATION *smithy.Schema
+
+var RoutePedestrianPlaceType_PARKING_LOT *smithy.Schema
+
+var RoutePedestrianPlaceType_STATION *smithy.Schema
 
 var RoutePedestrianSpan = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1776,10 +2282,25 @@ var _RoutePedestrianTravelStepList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RoutePedestrianTravelStepList_member *smithy.Schema
 
-var _RoutePedestrianTravelStepType = smithy.NewSchema(smithy.ShapeID{
+var RoutePedestrianTravelStepType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RoutePedestrianTravelStepType",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 8, &smithytraits.Sensitive{})
+var RoutePedestrianTravelStepType_ARRIVE *smithy.Schema
+
+var RoutePedestrianTravelStepType_CONTINUE *smithy.Schema
+
+var RoutePedestrianTravelStepType_DEPART *smithy.Schema
+
+var RoutePedestrianTravelStepType_KEEP *smithy.Schema
+
+var RoutePedestrianTravelStepType_ROUNDABOUT_ENTER *smithy.Schema
+
+var RoutePedestrianTravelStepType_ROUNDABOUT_EXIT *smithy.Schema
+
+var RoutePedestrianTravelStepType_ROUNDABOUT_PASS *smithy.Schema
+
+var RoutePedestrianTravelStepType_TURN *smithy.Schema
 
 var RouteRampStepDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1793,6 +2314,250 @@ var RouteRampStepDetails_TurnAngle *smithy.Schema
 
 var RouteRampStepDetails_TurnIntensity *smithy.Schema
 
+var RouteRentalAfterTravelStep = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalAfterTravelStep",
+}, smithy.ShapeTypeStructure, 3)
+var RouteRentalAfterTravelStep_Duration *smithy.Schema
+
+var RouteRentalAfterTravelStep_Instruction *smithy.Schema
+
+var RouteRentalAfterTravelStep_Type *smithy.Schema
+
+var _RouteRentalAfterTravelStepList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalAfterTravelStepList",
+}, smithy.ShapeTypeList, 1)
+var _RouteRentalAfterTravelStepList_member *smithy.Schema
+
+var RouteRentalAfterTravelStepType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalAfterTravelStepType",
+}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
+var RouteRentalAfterTravelStepType_PARK *smithy.Schema
+
+var RouteRentalAgency = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalAgency",
+}, smithy.ShapeTypeStructure, 2)
+var RouteRentalAgency_Name *smithy.Schema
+
+var RouteRentalAgency_Url *smithy.Schema
+
+var RouteRentalArrival = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalArrival",
+}, smithy.ShapeTypeStructure, 2)
+var RouteRentalArrival_Place *smithy.Schema
+
+var RouteRentalArrival_Time *smithy.Schema
+
+var RouteRentalBeforeTravelStep = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalBeforeTravelStep",
+}, smithy.ShapeTypeStructure, 3)
+var RouteRentalBeforeTravelStep_Duration *smithy.Schema
+
+var RouteRentalBeforeTravelStep_Instruction *smithy.Schema
+
+var RouteRentalBeforeTravelStep_Type *smithy.Schema
+
+var _RouteRentalBeforeTravelStepList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalBeforeTravelStepList",
+}, smithy.ShapeTypeList, 1)
+var _RouteRentalBeforeTravelStepList_member *smithy.Schema
+
+var RouteRentalBeforeTravelStepType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalBeforeTravelStepType",
+}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
+var RouteRentalBeforeTravelStepType_SETUP *smithy.Schema
+
+var RouteRentalDeparture = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalDeparture",
+}, smithy.ShapeTypeStructure, 2)
+var RouteRentalDeparture_Place *smithy.Schema
+
+var RouteRentalDeparture_Time *smithy.Schema
+
+var RouteRentalLegDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalLegDetails",
+}, smithy.ShapeTypeStructure, 10)
+var RouteRentalLegDetails_AfterTravelSteps *smithy.Schema
+
+var RouteRentalLegDetails_Agency *smithy.Schema
+
+var RouteRentalLegDetails_Arrival *smithy.Schema
+
+var RouteRentalLegDetails_Attributions *smithy.Schema
+
+var RouteRentalLegDetails_BeforeTravelSteps *smithy.Schema
+
+var RouteRentalLegDetails_BookingWebLinks *smithy.Schema
+
+var RouteRentalLegDetails_Departure *smithy.Schema
+
+var RouteRentalLegDetails_Summary *smithy.Schema
+
+var RouteRentalLegDetails_Transport *smithy.Schema
+
+var RouteRentalLegDetails_TravelSteps *smithy.Schema
+
+var RouteRentalMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalMode",
+}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
+var RouteRentalMode_ALL *smithy.Schema
+
+var RouteRentalMode_CAR *smithy.Schema
+
+var _RouteRentalModeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalModeList",
+}, smithy.ShapeTypeList, 1)
+var _RouteRentalModeList_member *smithy.Schema
+
+var RouteRentalOverviewSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalOverviewSummary",
+}, smithy.ShapeTypeStructure, 2)
+var RouteRentalOverviewSummary_Duration *smithy.Schema
+
+var RouteRentalOverviewSummary_Distance *smithy.Schema
+
+var RouteRentalPlace = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalPlace",
+}, smithy.ShapeTypeStructure, 7)
+var RouteRentalPlace_AccessPointDetails *smithy.Schema
+
+var RouteRentalPlace_Name *smithy.Schema
+
+var RouteRentalPlace_OriginalPosition *smithy.Schema
+
+var RouteRentalPlace_Position *smithy.Schema
+
+var RouteRentalPlace_StationDetails *smithy.Schema
+
+var RouteRentalPlace_Type *smithy.Schema
+
+var RouteRentalPlace_WaypointIndex *smithy.Schema
+
+var RouteRentalPlaceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalPlaceType",
+}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
+var RouteRentalPlaceType_ACCESS_POINT *smithy.Schema
+
+var RouteRentalPlaceType_DOCKING_STATION *smithy.Schema
+
+var RouteRentalPlaceType_PARKING_LOT *smithy.Schema
+
+var RouteRentalPlaceType_STATION *smithy.Schema
+
+var RouteRentalSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalSummary",
+}, smithy.ShapeTypeStructure, 2)
+var RouteRentalSummary_Overview *smithy.Schema
+
+var RouteRentalSummary_TravelOnly *smithy.Schema
+
+var RouteRentalTransportModeDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalTransportModeDetails",
+}, smithy.ShapeTypeStructure, 9)
+var RouteRentalTransportModeDetails_AvailableSeats *smithy.Schema
+
+var RouteRentalTransportModeDetails_Category *smithy.Schema
+
+var RouteRentalTransportModeDetails_Color *smithy.Schema
+
+var RouteRentalTransportModeDetails_Engine *smithy.Schema
+
+var RouteRentalTransportModeDetails_LicensePlate *smithy.Schema
+
+var RouteRentalTransportModeDetails_Mode *smithy.Schema
+
+var RouteRentalTransportModeDetails_Model *smithy.Schema
+
+var RouteRentalTransportModeDetails_Name *smithy.Schema
+
+var RouteRentalTransportModeDetails_TextColor *smithy.Schema
+
+var RouteRentalTravelOnlySummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalTravelOnlySummary",
+}, smithy.ShapeTypeStructure, 1)
+var RouteRentalTravelOnlySummary_Duration *smithy.Schema
+
+var RouteRentalTravelStep = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalTravelStep",
+}, smithy.ShapeTypeStructure, 14)
+var RouteRentalTravelStep_ContinueStepDetails *smithy.Schema
+
+var RouteRentalTravelStep_Distance *smithy.Schema
+
+var RouteRentalTravelStep_Duration *smithy.Schema
+
+var RouteRentalTravelStep_ExitStepDetails *smithy.Schema
+
+var RouteRentalTravelStep_GeometryOffset *smithy.Schema
+
+var RouteRentalTravelStep_Instruction *smithy.Schema
+
+var RouteRentalTravelStep_KeepStepDetails *smithy.Schema
+
+var RouteRentalTravelStep_RampStepDetails *smithy.Schema
+
+var RouteRentalTravelStep_RoundaboutEnterStepDetails *smithy.Schema
+
+var RouteRentalTravelStep_RoundaboutExitStepDetails *smithy.Schema
+
+var RouteRentalTravelStep_RoundaboutPassStepDetails *smithy.Schema
+
+var RouteRentalTravelStep_TurnStepDetails *smithy.Schema
+
+var RouteRentalTravelStep_Type *smithy.Schema
+
+var RouteRentalTravelStep_UTurnStepDetails *smithy.Schema
+
+var _RouteRentalTravelStepList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalTravelStepList",
+}, smithy.ShapeTypeList, 1)
+var _RouteRentalTravelStepList_member *smithy.Schema
+
+var RouteRentalTravelStepType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteRentalTravelStepType",
+}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
+var RouteRentalTravelStepType_ARRIVE *smithy.Schema
+
+var RouteRentalTravelStepType_CONTINUE *smithy.Schema
+
+var RouteRentalTravelStepType_DEPART *smithy.Schema
+
+var RouteRentalTravelStepType_EXIT *smithy.Schema
+
+var RouteRentalTravelStepType_KEEP *smithy.Schema
+
+var RouteRentalTravelStepType_RAMP *smithy.Schema
+
+var RouteRentalTravelStepType_ROUNDABOUT_ENTER *smithy.Schema
+
+var RouteRentalTravelStepType_ROUNDABOUT_EXIT *smithy.Schema
+
+var RouteRentalTravelStepType_ROUNDABOUT_PASS *smithy.Schema
+
+var RouteRentalTravelStepType_TURN *smithy.Schema
+
+var RouteRentalTravelStepType_U_TURN *smithy.Schema
+
 var RouteResponseNotice = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteResponseNotice",
@@ -1801,10 +2566,21 @@ var RouteResponseNotice_Code *smithy.Schema
 
 var RouteResponseNotice_Impact *smithy.Schema
 
-var _RouteResponseNoticeCode = smithy.NewSchema(smithy.ShapeID{
+var RouteResponseNoticeCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteResponseNoticeCode",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 6)
+var RouteResponseNoticeCode_MAIN_LANGUAGE_NOT_FOUND *smithy.Schema
+
+var RouteResponseNoticeCode_OTHER *smithy.Schema
+
+var RouteResponseNoticeCode_TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS *smithy.Schema
+
+var RouteResponseNoticeCode_TRANSIT_DATA_UNAVAILABLE *smithy.Schema
+
+var RouteResponseNoticeCode_TRANSIT_ROUTE_UNAVAILABLE *smithy.Schema
+
+var RouteResponseNoticeCode_NO_TRANSIT_STATIONS_FOUND *smithy.Schema
 
 var _RouteResponseNoticeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1824,10 +2600,15 @@ var RouteRoad_Towards *smithy.Schema
 
 var RouteRoad_Type *smithy.Schema
 
-var _RouteRoadType = smithy.NewSchema(smithy.ShapeID{
+var RouteRoadType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteRoadType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var RouteRoadType_HIGHWAY *smithy.Schema
+
+var RouteRoadType_RURAL *smithy.Schema
+
+var RouteRoadType_URBAN *smithy.Schema
 
 var RouteRoundaboutEnterStepDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1877,10 +2658,13 @@ var RouteScooterOptions_MaxSpeed *smithy.Schema
 
 var RouteScooterOptions_Occupancy *smithy.Schema
 
-var _RouteSideOfStreet = smithy.NewSchema(smithy.ShapeID{
+var RouteSideOfStreet = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteSideOfStreet",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
+var RouteSideOfStreet_LEFT *smithy.Schema
+
+var RouteSideOfStreet_RIGHT *smithy.Schema
 
 var RouteSideOfStreetOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1910,10 +2694,57 @@ var _RouteSignpostLabelList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteSignpostLabelList_member *smithy.Schema
 
-var _RouteSpanAdditionalFeature = smithy.NewSchema(smithy.ShapeID{
+var RouteSpanAdditionalFeature = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteSpanAdditionalFeature",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 24)
+var RouteSpanAdditionalFeature_BEST_CASE_DURATION *smithy.Schema
+
+var RouteSpanAdditionalFeature_CAR_ACCESS *smithy.Schema
+
+var RouteSpanAdditionalFeature_COUNTRY *smithy.Schema
+
+var RouteSpanAdditionalFeature_DISTANCE *smithy.Schema
+
+var RouteSpanAdditionalFeature_DURATION *smithy.Schema
+
+var RouteSpanAdditionalFeature_DYNAMIC_SPEED *smithy.Schema
+
+var RouteSpanAdditionalFeature_FUNCTIONAL_CLASSIFICATION *smithy.Schema
+
+var RouteSpanAdditionalFeature_GATES *smithy.Schema
+
+var RouteSpanAdditionalFeature_INCIDENTS *smithy.Schema
+
+var RouteSpanAdditionalFeature_NAMES *smithy.Schema
+
+var RouteSpanAdditionalFeature_NOTICES *smithy.Schema
+
+var RouteSpanAdditionalFeature_PEDESTRIAN_ACCESS *smithy.Schema
+
+var RouteSpanAdditionalFeature_RAILWAY_CROSSINGS *smithy.Schema
+
+var RouteSpanAdditionalFeature_REGION *smithy.Schema
+
+var RouteSpanAdditionalFeature_ROAD_ATTRIBUTES *smithy.Schema
+
+var RouteSpanAdditionalFeature_ROUTE_NUMBERS *smithy.Schema
+
+var RouteSpanAdditionalFeature_SCOOTER_ACCESS *smithy.Schema
+
+var RouteSpanAdditionalFeature_SPEED_LIMIT *smithy.Schema
+
+var RouteSpanAdditionalFeature_TOLL_SYSTEMS *smithy.Schema
+
+var RouteSpanAdditionalFeature_TRUCK_ACCESS *smithy.Schema
+
+var RouteSpanAdditionalFeature_TRUCK_ROAD_TYPES *smithy.Schema
+
+var RouteSpanAdditionalFeature_TYPICAL_DURATION *smithy.Schema
+
+var RouteSpanAdditionalFeature_ZONES *smithy.Schema
+
+var RouteSpanAdditionalFeature_CONSUMPTION *smithy.Schema
 
 var _RouteSpanAdditionalFeatureList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1921,10 +2752,15 @@ var _RouteSpanAdditionalFeatureList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteSpanAdditionalFeatureList_member *smithy.Schema
 
-var _RouteSpanCarAccessAttribute = smithy.NewSchema(smithy.ShapeID{
+var RouteSpanCarAccessAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteSpanCarAccessAttribute",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var RouteSpanCarAccessAttribute_ALLOWED *smithy.Schema
+
+var RouteSpanCarAccessAttribute_NO_THROUGH_TRAFFIC *smithy.Schema
+
+var RouteSpanCarAccessAttribute_TOLL_ROAD *smithy.Schema
 
 var _RouteSpanCarAccessAttributeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1942,15 +2778,31 @@ var RouteSpanDynamicSpeedDetails_TurnDuration *smithy.Schema
 
 var RouteSpanDynamicSpeedDetails_TypicalSpeed *smithy.Schema
 
-var _RouteSpanGateAttribute = smithy.NewSchema(smithy.ShapeID{
+var RouteSpanGateAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteSpanGateAttribute",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var RouteSpanGateAttribute_EMERGENCY *smithy.Schema
 
-var _RouteSpanPedestrianAccessAttribute = smithy.NewSchema(smithy.ShapeID{
+var RouteSpanGateAttribute_KEY_ACCESS *smithy.Schema
+
+var RouteSpanGateAttribute_PERMISSION_REQUIRED *smithy.Schema
+
+var RouteSpanPedestrianAccessAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteSpanPedestrianAccessAttribute",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 6, &smithytraits.Sensitive{})
+var RouteSpanPedestrianAccessAttribute_ALLOWED *smithy.Schema
+
+var RouteSpanPedestrianAccessAttribute_INDOORS *smithy.Schema
+
+var RouteSpanPedestrianAccessAttribute_NO_THROUGH_TRAFFIC *smithy.Schema
+
+var RouteSpanPedestrianAccessAttribute_PARK *smithy.Schema
+
+var RouteSpanPedestrianAccessAttribute_STAIRS *smithy.Schema
+
+var RouteSpanPedestrianAccessAttribute_TOLL_ROAD *smithy.Schema
 
 var _RouteSpanPedestrianAccessAttributeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1958,15 +2810,41 @@ var _RouteSpanPedestrianAccessAttributeList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteSpanPedestrianAccessAttributeList_member *smithy.Schema
 
-var _RouteSpanRailwayCrossingAttribute = smithy.NewSchema(smithy.ShapeID{
+var RouteSpanRailwayCrossingAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteSpanRailwayCrossingAttribute",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
+var RouteSpanRailwayCrossingAttribute_PROTECTED *smithy.Schema
 
-var _RouteSpanRoadAttribute = smithy.NewSchema(smithy.ShapeID{
+var RouteSpanRailwayCrossingAttribute_UNPROTECTED *smithy.Schema
+
+var RouteSpanRoadAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteSpanRoadAttribute",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 12, &smithytraits.Sensitive{})
+var RouteSpanRoadAttribute_BRIDGE *smithy.Schema
+
+var RouteSpanRoadAttribute_BUILT_UP_AREA *smithy.Schema
+
+var RouteSpanRoadAttribute_CONTROLLED_ACCESS_HIGHWAY *smithy.Schema
+
+var RouteSpanRoadAttribute_DIRT_ROAD *smithy.Schema
+
+var RouteSpanRoadAttribute_DIVIDED_ROAD *smithy.Schema
+
+var RouteSpanRoadAttribute_MOTORWAY *smithy.Schema
+
+var RouteSpanRoadAttribute_PRIVATE_ROAD *smithy.Schema
+
+var RouteSpanRoadAttribute_RAMP *smithy.Schema
+
+var RouteSpanRoadAttribute_RIGHT_HAND_TRAFFIC *smithy.Schema
+
+var RouteSpanRoadAttribute_ROUNDABOUT *smithy.Schema
+
+var RouteSpanRoadAttribute_TUNNEL *smithy.Schema
+
+var RouteSpanRoadAttribute_UNDER_CONSTRUCTION *smithy.Schema
 
 var _RouteSpanRoadAttributeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1974,10 +2852,15 @@ var _RouteSpanRoadAttributeList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteSpanRoadAttributeList_member *smithy.Schema
 
-var _RouteSpanScooterAccessAttribute = smithy.NewSchema(smithy.ShapeID{
+var RouteSpanScooterAccessAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteSpanScooterAccessAttribute",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var RouteSpanScooterAccessAttribute_ALLOWED *smithy.Schema
+
+var RouteSpanScooterAccessAttribute_NO_THROUGH_TRAFFIC *smithy.Schema
+
+var RouteSpanScooterAccessAttribute_TOLL_ROAD *smithy.Schema
 
 var _RouteSpanScooterAccessAttributeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -1993,10 +2876,15 @@ var RouteSpanSpeedLimitDetails_MaxSpeed *smithy.Schema
 
 var RouteSpanSpeedLimitDetails_Unlimited *smithy.Schema
 
-var _RouteSpanTruckAccessAttribute = smithy.NewSchema(smithy.ShapeID{
+var RouteSpanTruckAccessAttribute = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteSpanTruckAccessAttribute",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var RouteSpanTruckAccessAttribute_ALLOWED *smithy.Schema
+
+var RouteSpanTruckAccessAttribute_NO_THROUGH_TRAFFIC *smithy.Schema
+
+var RouteSpanTruckAccessAttribute_TOLL_ROAD *smithy.Schema
 
 var _RouteSpanTruckAccessAttributeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2004,10 +2892,25 @@ var _RouteSpanTruckAccessAttributeList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteSpanTruckAccessAttributeList_member *smithy.Schema
 
-var _RouteSteeringDirection = smithy.NewSchema(smithy.ShapeID{
+var RouteStationDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteStationDetails",
+}, smithy.ShapeTypeStructure, 3)
+var RouteStationDetails_Accessibility *smithy.Schema
+
+var RouteStationDetails_PlatformName *smithy.Schema
+
+var RouteStationDetails_ShortName *smithy.Schema
+
+var RouteSteeringDirection = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteSteeringDirection",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var RouteSteeringDirection_LEFT *smithy.Schema
+
+var RouteSteeringDirection_RIGHT *smithy.Schema
+
+var RouteSteeringDirection_STRAIGHT *smithy.Schema
 
 var RouteSummary = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2018,6 +2921,270 @@ var RouteSummary_Distance *smithy.Schema
 var RouteSummary_Duration *smithy.Schema
 
 var RouteSummary_Tolls *smithy.Schema
+
+var RouteTaxiAfterTravelStep = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiAfterTravelStep",
+}, smithy.ShapeTypeStructure, 3)
+var RouteTaxiAfterTravelStep_Duration *smithy.Schema
+
+var RouteTaxiAfterTravelStep_Instruction *smithy.Schema
+
+var RouteTaxiAfterTravelStep_Type *smithy.Schema
+
+var _RouteTaxiAfterTravelStepList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiAfterTravelStepList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTaxiAfterTravelStepList_member *smithy.Schema
+
+var RouteTaxiAfterTravelStepType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiAfterTravelStepType",
+}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
+var RouteTaxiAfterTravelStepType_PARK *smithy.Schema
+
+var RouteTaxiAgency = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiAgency",
+}, smithy.ShapeTypeStructure, 2)
+var RouteTaxiAgency_Name *smithy.Schema
+
+var RouteTaxiAgency_Url *smithy.Schema
+
+var RouteTaxiArrival = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiArrival",
+}, smithy.ShapeTypeStructure, 2)
+var RouteTaxiArrival_Place *smithy.Schema
+
+var RouteTaxiArrival_Time *smithy.Schema
+
+var RouteTaxiBeforeTravelStep = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiBeforeTravelStep",
+}, smithy.ShapeTypeStructure, 3)
+var RouteTaxiBeforeTravelStep_Duration *smithy.Schema
+
+var RouteTaxiBeforeTravelStep_Instruction *smithy.Schema
+
+var RouteTaxiBeforeTravelStep_Type *smithy.Schema
+
+var _RouteTaxiBeforeTravelStepList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiBeforeTravelStepList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTaxiBeforeTravelStepList_member *smithy.Schema
+
+var RouteTaxiBeforeTravelStepType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiBeforeTravelStepType",
+}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
+var RouteTaxiBeforeTravelStepType_WAIT *smithy.Schema
+
+var RouteTaxiDeparture = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiDeparture",
+}, smithy.ShapeTypeStructure, 2)
+var RouteTaxiDeparture_Place *smithy.Schema
+
+var RouteTaxiDeparture_Time *smithy.Schema
+
+var RouteTaxiLegDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiLegDetails",
+}, smithy.ShapeTypeStructure, 11)
+var RouteTaxiLegDetails_AfterTravelSteps *smithy.Schema
+
+var RouteTaxiLegDetails_Agency *smithy.Schema
+
+var RouteTaxiLegDetails_Arrival *smithy.Schema
+
+var RouteTaxiLegDetails_Attributions *smithy.Schema
+
+var RouteTaxiLegDetails_BeforeTravelSteps *smithy.Schema
+
+var RouteTaxiLegDetails_BookingWebLinks *smithy.Schema
+
+var RouteTaxiLegDetails_Departure *smithy.Schema
+
+var RouteTaxiLegDetails_Notices *smithy.Schema
+
+var RouteTaxiLegDetails_Summary *smithy.Schema
+
+var RouteTaxiLegDetails_Transport *smithy.Schema
+
+var RouteTaxiLegDetails_TravelSteps *smithy.Schema
+
+var RouteTaxiMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiMode",
+}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
+var RouteTaxiMode_ALL *smithy.Schema
+
+var RouteTaxiMode_CAR *smithy.Schema
+
+var _RouteTaxiModeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiModeList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTaxiModeList_member *smithy.Schema
+
+var RouteTaxiNotice = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiNotice",
+}, smithy.ShapeTypeStructure, 2)
+var RouteTaxiNotice_Code *smithy.Schema
+
+var RouteTaxiNotice_Impact *smithy.Schema
+
+var RouteTaxiNoticeCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiNoticeCode",
+}, smithy.ShapeTypeEnum, 2)
+var RouteTaxiNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE *smithy.Schema
+
+var RouteTaxiNoticeCode_OTHER *smithy.Schema
+
+var _RouteTaxiNoticeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiNoticeList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTaxiNoticeList_member *smithy.Schema
+
+var RouteTaxiOverviewSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiOverviewSummary",
+}, smithy.ShapeTypeStructure, 2)
+var RouteTaxiOverviewSummary_Duration *smithy.Schema
+
+var RouteTaxiOverviewSummary_Distance *smithy.Schema
+
+var RouteTaxiPlace = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiPlace",
+}, smithy.ShapeTypeStructure, 7)
+var RouteTaxiPlace_AccessPointDetails *smithy.Schema
+
+var RouteTaxiPlace_Name *smithy.Schema
+
+var RouteTaxiPlace_OriginalPosition *smithy.Schema
+
+var RouteTaxiPlace_Position *smithy.Schema
+
+var RouteTaxiPlace_StationDetails *smithy.Schema
+
+var RouteTaxiPlace_Type *smithy.Schema
+
+var RouteTaxiPlace_WaypointIndex *smithy.Schema
+
+var RouteTaxiPlaceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiPlaceType",
+}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
+var RouteTaxiPlaceType_ACCESS_POINT *smithy.Schema
+
+var RouteTaxiPlaceType_STATION *smithy.Schema
+
+var RouteTaxiSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiSummary",
+}, smithy.ShapeTypeStructure, 2)
+var RouteTaxiSummary_Overview *smithy.Schema
+
+var RouteTaxiSummary_TravelOnly *smithy.Schema
+
+var RouteTaxiTransportModeDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiTransportModeDetails",
+}, smithy.ShapeTypeStructure, 9)
+var RouteTaxiTransportModeDetails_AvailableSeats *smithy.Schema
+
+var RouteTaxiTransportModeDetails_Category *smithy.Schema
+
+var RouteTaxiTransportModeDetails_Color *smithy.Schema
+
+var RouteTaxiTransportModeDetails_Engine *smithy.Schema
+
+var RouteTaxiTransportModeDetails_LicensePlate *smithy.Schema
+
+var RouteTaxiTransportModeDetails_Mode *smithy.Schema
+
+var RouteTaxiTransportModeDetails_Model *smithy.Schema
+
+var RouteTaxiTransportModeDetails_Name *smithy.Schema
+
+var RouteTaxiTransportModeDetails_TextColor *smithy.Schema
+
+var RouteTaxiTravelOnlySummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiTravelOnlySummary",
+}, smithy.ShapeTypeStructure, 1)
+var RouteTaxiTravelOnlySummary_Duration *smithy.Schema
+
+var RouteTaxiTravelStep = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiTravelStep",
+}, smithy.ShapeTypeStructure, 14)
+var RouteTaxiTravelStep_ContinueStepDetails *smithy.Schema
+
+var RouteTaxiTravelStep_Distance *smithy.Schema
+
+var RouteTaxiTravelStep_Duration *smithy.Schema
+
+var RouteTaxiTravelStep_ExitStepDetails *smithy.Schema
+
+var RouteTaxiTravelStep_GeometryOffset *smithy.Schema
+
+var RouteTaxiTravelStep_Instruction *smithy.Schema
+
+var RouteTaxiTravelStep_KeepStepDetails *smithy.Schema
+
+var RouteTaxiTravelStep_RampStepDetails *smithy.Schema
+
+var RouteTaxiTravelStep_RoundaboutEnterStepDetails *smithy.Schema
+
+var RouteTaxiTravelStep_RoundaboutExitStepDetails *smithy.Schema
+
+var RouteTaxiTravelStep_RoundaboutPassStepDetails *smithy.Schema
+
+var RouteTaxiTravelStep_TurnStepDetails *smithy.Schema
+
+var RouteTaxiTravelStep_Type *smithy.Schema
+
+var RouteTaxiTravelStep_UTurnStepDetails *smithy.Schema
+
+var _RouteTaxiTravelStepList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiTravelStepList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTaxiTravelStepList_member *smithy.Schema
+
+var RouteTaxiTravelStepType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTaxiTravelStepType",
+}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
+var RouteTaxiTravelStepType_ARRIVE *smithy.Schema
+
+var RouteTaxiTravelStepType_CONTINUE *smithy.Schema
+
+var RouteTaxiTravelStepType_DEPART *smithy.Schema
+
+var RouteTaxiTravelStepType_EXIT *smithy.Schema
+
+var RouteTaxiTravelStepType_KEEP *smithy.Schema
+
+var RouteTaxiTravelStepType_RAMP *smithy.Schema
+
+var RouteTaxiTravelStepType_ROUNDABOUT_ENTER *smithy.Schema
+
+var RouteTaxiTravelStepType_ROUNDABOUT_EXIT *smithy.Schema
+
+var RouteTaxiTravelStepType_ROUNDABOUT_PASS *smithy.Schema
+
+var RouteTaxiTravelStepType_TURN *smithy.Schema
+
+var RouteTaxiTravelStepType_U_TURN *smithy.Schema
 
 var RouteToll = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2073,15 +3240,39 @@ var RouteTollPassValidityPeriod_Period *smithy.Schema
 
 var RouteTollPassValidityPeriod_PeriodCount *smithy.Schema
 
-var _RouteTollPassValidityPeriodType = smithy.NewSchema(smithy.ShapeID{
+var RouteTollPassValidityPeriodType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteTollPassValidityPeriodType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 5, &smithytraits.Sensitive{})
+var RouteTollPassValidityPeriodType_ANNUAL *smithy.Schema
 
-var _RouteTollPaymentMethod = smithy.NewSchema(smithy.ShapeID{
+var RouteTollPassValidityPeriodType_DAYS *smithy.Schema
+
+var RouteTollPassValidityPeriodType_EXTENDED_ANNUAL *smithy.Schema
+
+var RouteTollPassValidityPeriodType_MINUTES *smithy.Schema
+
+var RouteTollPassValidityPeriodType_MONTHS *smithy.Schema
+
+var RouteTollPaymentMethod = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteTollPaymentMethod",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 8, &smithytraits.Sensitive{})
+var RouteTollPaymentMethod_BANK_CARD *smithy.Schema
+
+var RouteTollPaymentMethod_CASH *smithy.Schema
+
+var RouteTollPaymentMethod_CASH_EXACT *smithy.Schema
+
+var RouteTollPaymentMethod_CREDIT_CARD *smithy.Schema
+
+var RouteTollPaymentMethod_PASS_SUBSCRIPTION *smithy.Schema
+
+var RouteTollPaymentMethod_TRAVEL_CARD *smithy.Schema
+
+var RouteTollPaymentMethod_TRANSPONDER *smithy.Schema
+
+var RouteTollPaymentMethod_VIDEO_TOLL *smithy.Schema
 
 var _RouteTollPaymentMethodList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2185,10 +3376,11 @@ var _RouteTollSystemList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteTollSystemList_member *smithy.Schema
 
-var _RouteTollVehicleCategory = smithy.NewSchema(smithy.ShapeID{
+var RouteTollVehicleCategory = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteTollVehicleCategory",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
+var RouteTollVehicleCategory_MINIBUS *smithy.Schema
 
 var RouteTrafficOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2206,6 +3398,470 @@ var RouteTrailerOptions_AxleCount *smithy.Schema
 
 var RouteTrailerOptions_TrailerCount *smithy.Schema
 
+var RouteTransitAfterTravelStep = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitAfterTravelStep",
+}, smithy.ShapeTypeStructure, 3)
+var RouteTransitAfterTravelStep_Duration *smithy.Schema
+
+var RouteTransitAfterTravelStep_Instruction *smithy.Schema
+
+var RouteTransitAfterTravelStep_Type *smithy.Schema
+
+var _RouteTransitAfterTravelStepList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitAfterTravelStepList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTransitAfterTravelStepList_member *smithy.Schema
+
+var RouteTransitAfterTravelStepType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitAfterTravelStepType",
+}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
+var RouteTransitAfterTravelStepType_DEBOARD *smithy.Schema
+
+var RouteTransitAgency = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitAgency",
+}, smithy.ShapeTypeStructure, 2)
+var RouteTransitAgency_Name *smithy.Schema
+
+var RouteTransitAgency_Url *smithy.Schema
+
+var RouteTransitArrival = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitArrival",
+}, smithy.ShapeTypeStructure, 4)
+var RouteTransitArrival_Delay *smithy.Schema
+
+var RouteTransitArrival_Place *smithy.Schema
+
+var RouteTransitArrival_Status *smithy.Schema
+
+var RouteTransitArrival_Time *smithy.Schema
+
+var RouteTransitBeforeTravelStep = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitBeforeTravelStep",
+}, smithy.ShapeTypeStructure, 3)
+var RouteTransitBeforeTravelStep_Duration *smithy.Schema
+
+var RouteTransitBeforeTravelStep_Instruction *smithy.Schema
+
+var RouteTransitBeforeTravelStep_Type *smithy.Schema
+
+var _RouteTransitBeforeTravelStepList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitBeforeTravelStepList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTransitBeforeTravelStepList_member *smithy.Schema
+
+var RouteTransitBeforeTravelStepType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitBeforeTravelStepType",
+}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
+var RouteTransitBeforeTravelStepType_BOARD *smithy.Schema
+
+var RouteTransitDeparture = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitDeparture",
+}, smithy.ShapeTypeStructure, 4)
+var RouteTransitDeparture_Delay *smithy.Schema
+
+var RouteTransitDeparture_Place *smithy.Schema
+
+var RouteTransitDeparture_Status *smithy.Schema
+
+var RouteTransitDeparture_Time *smithy.Schema
+
+var RouteTransitIncident = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitIncident",
+}, smithy.ShapeTypeStructure, 6)
+var RouteTransitIncident_Description *smithy.Schema
+
+var RouteTransitIncident_Effect *smithy.Schema
+
+var RouteTransitIncident_EndTime *smithy.Schema
+
+var RouteTransitIncident_StartTime *smithy.Schema
+
+var RouteTransitIncident_Type *smithy.Schema
+
+var RouteTransitIncident_Url *smithy.Schema
+
+var RouteTransitIncidentEffect = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitIncidentEffect",
+}, smithy.ShapeTypeEnum, 8, &smithytraits.Sensitive{})
+var RouteTransitIncidentEffect_DELAYED *smithy.Schema
+
+var RouteTransitIncidentEffect_DETOURED *smithy.Schema
+
+var RouteTransitIncidentEffect_OTHER *smithy.Schema
+
+var RouteTransitIncidentEffect_SERVICE_ADDED *smithy.Schema
+
+var RouteTransitIncidentEffect_SERVICE_CANCELLED *smithy.Schema
+
+var RouteTransitIncidentEffect_SERVICE_MODIFIED *smithy.Schema
+
+var RouteTransitIncidentEffect_SERVICE_REDUCED *smithy.Schema
+
+var RouteTransitIncidentEffect_STOP_MOVED *smithy.Schema
+
+var _RouteTransitIncidentList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitIncidentList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTransitIncidentList_member *smithy.Schema
+
+var RouteTransitIncidentType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitIncidentType",
+}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
+var RouteTransitIncidentType_ACCIDENT *smithy.Schema
+
+var RouteTransitIncidentType_CONSTRUCTION *smithy.Schema
+
+var RouteTransitIncidentType_DEMONSTRATION *smithy.Schema
+
+var RouteTransitIncidentType_HOLIDAY *smithy.Schema
+
+var RouteTransitIncidentType_MAINTENANCE *smithy.Schema
+
+var RouteTransitIncidentType_MEDICAL_EMERGENCY *smithy.Schema
+
+var RouteTransitIncidentType_OTHER *smithy.Schema
+
+var RouteTransitIncidentType_POLICE_ACTIVITY *smithy.Schema
+
+var RouteTransitIncidentType_STRIKE *smithy.Schema
+
+var RouteTransitIncidentType_TECHNICAL_PROBLEM *smithy.Schema
+
+var RouteTransitIncidentType_WEATHER *smithy.Schema
+
+var RouteTransitIntermediateStop = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitIntermediateStop",
+}, smithy.ShapeTypeStructure, 5)
+var RouteTransitIntermediateStop_Attributes *smithy.Schema
+
+var RouteTransitIntermediateStop_Departure *smithy.Schema
+
+var RouteTransitIntermediateStop_Duration *smithy.Schema
+
+var RouteTransitIntermediateStop_GeometryOffset *smithy.Schema
+
+var RouteTransitIntermediateStop_Transport *smithy.Schema
+
+var RouteTransitIntermediateStopAttribute = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitIntermediateStopAttribute",
+}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
+var RouteTransitIntermediateStopAttribute_NO_ENTRY *smithy.Schema
+
+var RouteTransitIntermediateStopAttribute_NO_EXIT *smithy.Schema
+
+var _RouteTransitIntermediateStopAttributeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitIntermediateStopAttributeList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTransitIntermediateStopAttributeList_member *smithy.Schema
+
+var _RouteTransitIntermediateStopList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitIntermediateStopList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTransitIntermediateStopList_member *smithy.Schema
+
+var RouteTransitLegDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitLegDetails",
+}, smithy.ShapeTypeStructure, 16)
+var RouteTransitLegDetails_AfterTravelSteps *smithy.Schema
+
+var RouteTransitLegDetails_Agency *smithy.Schema
+
+var RouteTransitLegDetails_Arrival *smithy.Schema
+
+var RouteTransitLegDetails_Attributions *smithy.Schema
+
+var RouteTransitLegDetails_BeforeTravelSteps *smithy.Schema
+
+var RouteTransitLegDetails_BookingWebLinks *smithy.Schema
+
+var RouteTransitLegDetails_Departure *smithy.Schema
+
+var RouteTransitLegDetails_Incidents *smithy.Schema
+
+var RouteTransitLegDetails_IntermediateStops *smithy.Schema
+
+var RouteTransitLegDetails_NextDepartures *smithy.Schema
+
+var RouteTransitLegDetails_Notices *smithy.Schema
+
+var RouteTransitLegDetails_PassThroughWaypoints *smithy.Schema
+
+var RouteTransitLegDetails_Spans *smithy.Schema
+
+var RouteTransitLegDetails_Summary *smithy.Schema
+
+var RouteTransitLegDetails_Transport *smithy.Schema
+
+var RouteTransitLegDetails_TravelSteps *smithy.Schema
+
+var RouteTransitMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitMode",
+}, smithy.ShapeTypeEnum, 16, &smithytraits.Sensitive{})
+var RouteTransitMode_AERIAL_TRAMWAY *smithy.Schema
+
+var RouteTransitMode_AIRPLANE *smithy.Schema
+
+var RouteTransitMode_ALL *smithy.Schema
+
+var RouteTransitMode_BUS *smithy.Schema
+
+var RouteTransitMode_BUS_RAPID_TRANSIT *smithy.Schema
+
+var RouteTransitMode_CITY_TRAIN *smithy.Schema
+
+var RouteTransitMode_FERRY *smithy.Schema
+
+var RouteTransitMode_FUNICULAR_RAILWAY *smithy.Schema
+
+var RouteTransitMode_HIGH_SPEED_TRAIN *smithy.Schema
+
+var RouteTransitMode_INTERCITY_TRAIN *smithy.Schema
+
+var RouteTransitMode_INTERREGIONAL_TRAIN *smithy.Schema
+
+var RouteTransitMode_LIGHT_RAIL *smithy.Schema
+
+var RouteTransitMode_MONORAIL *smithy.Schema
+
+var RouteTransitMode_PRIVATE_BUS *smithy.Schema
+
+var RouteTransitMode_REGIONAL_TRAIN *smithy.Schema
+
+var RouteTransitMode_SUBWAY *smithy.Schema
+
+var _RouteTransitModeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitModeList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTransitModeList_member *smithy.Schema
+
+var RouteTransitNextDeparture = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitNextDeparture",
+}, smithy.ShapeTypeStructure, 5)
+var RouteTransitNextDeparture_Delay *smithy.Schema
+
+var RouteTransitNextDeparture_PlatformName *smithy.Schema
+
+var RouteTransitNextDeparture_Status *smithy.Schema
+
+var RouteTransitNextDeparture_Time *smithy.Schema
+
+var RouteTransitNextDeparture_Transport *smithy.Schema
+
+var _RouteTransitNextDepartureList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitNextDepartureList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTransitNextDepartureList_member *smithy.Schema
+
+var RouteTransitNotice = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitNotice",
+}, smithy.ShapeTypeStructure, 2)
+var RouteTransitNotice_Code *smithy.Schema
+
+var RouteTransitNotice_Impact *smithy.Schema
+
+var RouteTransitNoticeCode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitNoticeCode",
+}, smithy.ShapeTypeEnum, 12)
+var RouteTransitNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE *smithy.Schema
+
+var RouteTransitNoticeCode_INTERMEDIATE_STOPS_UNAVAILABLE *smithy.Schema
+
+var RouteTransitNoticeCode_NO_SCHEDULE *smithy.Schema
+
+var RouteTransitNoticeCode_OTHER *smithy.Schema
+
+var RouteTransitNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE *smithy.Schema
+
+var RouteTransitNoticeCode_SCHEDULED_TIMES *smithy.Schema
+
+var RouteTransitNoticeCode_SEASONAL_CLOSURE *smithy.Schema
+
+var RouteTransitNoticeCode_VIOLATED_AVOID_FERRY *smithy.Schema
+
+var RouteTransitNoticeCode_VIOLATED_AVOID_RAIL_FERRY *smithy.Schema
+
+var RouteTransitNoticeCode_VIOLATED_EXCLUDED_TRANSIT_MODE *smithy.Schema
+
+var RouteTransitNoticeCode_VIOLATED_VEHICLE_RESTRICTION *smithy.Schema
+
+var RouteTransitNoticeCode_VIOLATED_AVOID_AREAS *smithy.Schema
+
+var _RouteTransitNoticeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitNoticeList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTransitNoticeList_member *smithy.Schema
+
+var RouteTransitOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitOptions",
+}, smithy.ShapeTypeStructure, 5)
+var RouteTransitOptions_AccessibilityAttributes *smithy.Schema
+
+var RouteTransitOptions_AllowedModes *smithy.Schema
+
+var RouteTransitOptions_ExcludedModes *smithy.Schema
+
+var RouteTransitOptions_MaxTransfers *smithy.Schema
+
+var RouteTransitOptions_Pedestrian *smithy.Schema
+
+var RouteTransitOverviewSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitOverviewSummary",
+}, smithy.ShapeTypeStructure, 2)
+var RouteTransitOverviewSummary_Distance *smithy.Schema
+
+var RouteTransitOverviewSummary_Duration *smithy.Schema
+
+var RouteTransitPedestrianOptions = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitPedestrianOptions",
+}, smithy.ShapeTypeStructure, 2)
+var RouteTransitPedestrianOptions_MaxDistance *smithy.Schema
+
+var RouteTransitPedestrianOptions_Speed *smithy.Schema
+
+var RouteTransitPlace = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitPlace",
+}, smithy.ShapeTypeStructure, 6)
+var RouteTransitPlace_Name *smithy.Schema
+
+var RouteTransitPlace_OriginalPosition *smithy.Schema
+
+var RouteTransitPlace_Position *smithy.Schema
+
+var RouteTransitPlace_StationDetails *smithy.Schema
+
+var RouteTransitPlace_Type *smithy.Schema
+
+var RouteTransitPlace_WaypointIndex *smithy.Schema
+
+var RouteTransitPlaceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitPlaceType",
+}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
+var RouteTransitPlaceType_STATION *smithy.Schema
+
+var RouteTransitSpan = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitSpan",
+}, smithy.ShapeTypeStructure, 6)
+var RouteTransitSpan_Country *smithy.Schema
+
+var RouteTransitSpan_Distance *smithy.Schema
+
+var RouteTransitSpan_Duration *smithy.Schema
+
+var RouteTransitSpan_GeometryOffset *smithy.Schema
+
+var RouteTransitSpan_Names *smithy.Schema
+
+var RouteTransitSpan_Region *smithy.Schema
+
+var _RouteTransitSpanList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitSpanList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTransitSpanList_member *smithy.Schema
+
+var RouteTransitSummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitSummary",
+}, smithy.ShapeTypeStructure, 2)
+var RouteTransitSummary_Overview *smithy.Schema
+
+var RouteTransitSummary_TravelOnly *smithy.Schema
+
+var RouteTransitTransportModeDetails = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitTransportModeDetails",
+}, smithy.ShapeTypeStructure, 8)
+var RouteTransitTransportModeDetails_Accessibility *smithy.Schema
+
+var RouteTransitTransportModeDetails_Color *smithy.Schema
+
+var RouteTransitTransportModeDetails_Headsign *smithy.Schema
+
+var RouteTransitTransportModeDetails_LongRouteName *smithy.Schema
+
+var RouteTransitTransportModeDetails_Mode *smithy.Schema
+
+var RouteTransitTransportModeDetails_RouteName *smithy.Schema
+
+var RouteTransitTransportModeDetails_ShortRouteName *smithy.Schema
+
+var RouteTransitTransportModeDetails_TextColor *smithy.Schema
+
+var RouteTransitTravelOnlySummary = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitTravelOnlySummary",
+}, smithy.ShapeTypeStructure, 1)
+var RouteTransitTravelOnlySummary_Duration *smithy.Schema
+
+var RouteTransitTravelStep = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitTravelStep",
+}, smithy.ShapeTypeStructure, 5)
+var RouteTransitTravelStep_Distance *smithy.Schema
+
+var RouteTransitTravelStep_Duration *smithy.Schema
+
+var RouteTransitTravelStep_GeometryOffset *smithy.Schema
+
+var RouteTransitTravelStep_Instruction *smithy.Schema
+
+var RouteTransitTravelStep_Type *smithy.Schema
+
+var _RouteTransitTravelStepList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitTravelStepList",
+}, smithy.ShapeTypeList, 1)
+var _RouteTransitTravelStepList_member *smithy.Schema
+
+var RouteTransitTravelStepType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitTravelStepType",
+}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
+var RouteTransitTravelStepType_DEPART *smithy.Schema
+
+var RouteTransitTripStatus = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteTransitTripStatus",
+}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
+var RouteTransitTripStatus_ADDED *smithy.Schema
+
+var RouteTransitTripStatus_CANCELLED *smithy.Schema
+
+var RouteTransitTripStatus_REPLACED *smithy.Schema
+
+var RouteTransitTripStatus_SCHEDULED *smithy.Schema
+
 var RouteTransponder = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteTransponder",
@@ -2218,15 +3874,26 @@ var _RouteTransponderList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteTransponderList_member *smithy.Schema
 
-var _RouteTravelMode = smithy.NewSchema(smithy.ShapeID{
+var RouteTravelMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteTravelMode",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 6)
+var RouteTravelMode_CAR *smithy.Schema
+
+var RouteTravelMode_PEDESTRIAN *smithy.Schema
+
+var RouteTravelMode_SCOOTER *smithy.Schema
+
+var RouteTravelMode_TRUCK *smithy.Schema
+
+var RouteTravelMode_INTERMODAL *smithy.Schema
+
+var RouteTravelMode_TRANSIT *smithy.Schema
 
 var RouteTravelModeOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteTravelModeOptions",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 6)
 var RouteTravelModeOptions_Car *smithy.Schema
 
 var RouteTravelModeOptions_Pedestrian *smithy.Schema
@@ -2235,10 +3902,17 @@ var RouteTravelModeOptions_Scooter *smithy.Schema
 
 var RouteTravelModeOptions_Truck *smithy.Schema
 
-var _RouteTravelStepType = smithy.NewSchema(smithy.ShapeID{
+var RouteTravelModeOptions_Intermodal *smithy.Schema
+
+var RouteTravelModeOptions_Transit *smithy.Schema
+
+var RouteTravelStepType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteTravelStepType",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 2)
+var RouteTravelStepType_DEFAULT *smithy.Schema
+
+var RouteTravelStepType_TURN_BY_TURN *smithy.Schema
 
 var RouteTruckOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2282,15 +3956,25 @@ var RouteTruckOptions_WeightPerAxleGroup *smithy.Schema
 
 var RouteTruckOptions_Width *smithy.Schema
 
-var _RouteTruckType = smithy.NewSchema(smithy.ShapeID{
+var RouteTruckType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteTruckType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var RouteTruckType_LIGHT_TRUCK *smithy.Schema
 
-var _RouteTurnIntensity = smithy.NewSchema(smithy.ShapeID{
+var RouteTruckType_STRAIGHT_TRUCK *smithy.Schema
+
+var RouteTruckType_TRACTOR *smithy.Schema
+
+var RouteTurnIntensity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteTurnIntensity",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var RouteTurnIntensity_SHARP *smithy.Schema
+
+var RouteTurnIntensity_SLIGHT *smithy.Schema
+
+var RouteTurnIntensity_TYPICAL *smithy.Schema
 
 var RouteTurnStepDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2315,6 +3999,30 @@ var RouteUTurnStepDetails_SteeringDirection *smithy.Schema
 var RouteUTurnStepDetails_TurnAngle *smithy.Schema
 
 var RouteUTurnStepDetails_TurnIntensity *smithy.Schema
+
+var RouteVehicleAfterTravelStep = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteVehicleAfterTravelStep",
+}, smithy.ShapeTypeStructure, 4)
+var RouteVehicleAfterTravelStep_ChargeStepDetails *smithy.Schema
+
+var RouteVehicleAfterTravelStep_Duration *smithy.Schema
+
+var RouteVehicleAfterTravelStep_Instruction *smithy.Schema
+
+var RouteVehicleAfterTravelStep_Type *smithy.Schema
+
+var _RouteVehicleAfterTravelStepList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteVehicleAfterTravelStepList",
+}, smithy.ShapeTypeList, 1)
+var _RouteVehicleAfterTravelStepList_member *smithy.Schema
+
+var RouteVehicleAfterTravelStepType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteVehicleAfterTravelStepType",
+}, smithy.ShapeTypeEnum, 1, &smithytraits.Sensitive{})
+var RouteVehicleAfterTravelStepType_PARK *smithy.Schema
 
 var RouteVehicleArrival = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2352,20 +4060,50 @@ var _RouteVehicleIncidentList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteVehicleIncidentList_member *smithy.Schema
 
-var _RouteVehicleIncidentSeverity = smithy.NewSchema(smithy.ShapeID{
+var RouteVehicleIncidentSeverity = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteVehicleIncidentSeverity",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
+var RouteVehicleIncidentSeverity_CRITICAL *smithy.Schema
 
-var _RouteVehicleIncidentType = smithy.NewSchema(smithy.ShapeID{
+var RouteVehicleIncidentSeverity_HIGH *smithy.Schema
+
+var RouteVehicleIncidentSeverity_MEDIUM *smithy.Schema
+
+var RouteVehicleIncidentSeverity_LOW *smithy.Schema
+
+var RouteVehicleIncidentType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteVehicleIncidentType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
+var RouteVehicleIncidentType_ACCIDENT *smithy.Schema
+
+var RouteVehicleIncidentType_CONGESTION *smithy.Schema
+
+var RouteVehicleIncidentType_CONSTRUCTION *smithy.Schema
+
+var RouteVehicleIncidentType_DISABLED_VEHICLE *smithy.Schema
+
+var RouteVehicleIncidentType_LANE_RESTRICTION *smithy.Schema
+
+var RouteVehicleIncidentType_MASS_TRANSIT *smithy.Schema
+
+var RouteVehicleIncidentType_OTHER *smithy.Schema
+
+var RouteVehicleIncidentType_PLANNED_EVENT *smithy.Schema
+
+var RouteVehicleIncidentType_ROAD_CLOSURE *smithy.Schema
+
+var RouteVehicleIncidentType_ROAD_HAZARD *smithy.Schema
+
+var RouteVehicleIncidentType_WEATHER *smithy.Schema
 
 var RouteVehicleLegDetails = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteVehicleLegDetails",
-}, smithy.ShapeTypeStructure, 12)
+}, smithy.ShapeTypeStructure, 13)
+var RouteVehicleLegDetails_AfterTravelSteps *smithy.Schema
+
 var RouteVehicleLegDetails_Arrival *smithy.Schema
 
 var RouteVehicleLegDetails_Departure *smithy.Schema
@@ -2396,6 +4134,20 @@ var RouteVehicleLicensePlate = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var RouteVehicleLicensePlate_LastCharacter *smithy.Schema
 
+var RouteVehicleMode = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteVehicleMode",
+}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
+var RouteVehicleMode_ALL *smithy.Schema
+
+var RouteVehicleMode_CAR *smithy.Schema
+
+var _RouteVehicleModeList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteVehicleModeList",
+}, smithy.ShapeTypeList, 1)
+var _RouteVehicleModeList_member *smithy.Schema
+
 var RouteVehicleNotice = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteVehicleNotice",
@@ -2406,10 +4158,65 @@ var RouteVehicleNotice_Details *smithy.Schema
 
 var RouteVehicleNotice_Impact *smithy.Schema
 
-var _RouteVehicleNoticeCode = smithy.NewSchema(smithy.ShapeID{
+var RouteVehicleNoticeCode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteVehicleNoticeCode",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 28)
+var RouteVehicleNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE *smithy.Schema
+
+var RouteVehicleNoticeCode_OTHER *smithy.Schema
+
+var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_AVOID_TOLL_ROAD_USAGE *smithy.Schema
+
+var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_CARPOOL_USAGE *smithy.Schema
+
+var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_TURN_RESTRICTION_USAGE *smithy.Schema
+
+var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE *smithy.Schema
+
+var RouteVehicleNoticeCode_POTENTIAL_VIOLATED_ZONE_RESTRICTION_USAGE *smithy.Schema
+
+var RouteVehicleNoticeCode_SEASONAL_CLOSURE *smithy.Schema
+
+var RouteVehicleNoticeCode_TOLLS_DATA_TEMPORARILY_UNAVAILABLE *smithy.Schema
+
+var RouteVehicleNoticeCode_TOLLS_DATA_UNAVAILABLE *smithy.Schema
+
+var RouteVehicleNoticeCode_TOLL_TRANSPONDER *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_AVOID_CONTROLLED_ACCESS_HIGHWAY *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_AVOID_DIFFICULT_TURNS *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_AVOID_DIRT_ROAD *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_AVOID_SEASONAL_CLOSURE *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_AVOID_TOLL_ROAD *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_AVOID_TOLL_TRANSPONDER *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_AVOID_TRUCK_ROAD_TYPE *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_AVOID_TUNNEL *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_AVOID_U_TURNS *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_BLOCKED_ROAD *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_CARPOOL *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_EMERGENCY_GATE *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_START_DIRECTION *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_TURN_RESTRICTION *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_VEHICLE_RESTRICTION *smithy.Schema
+
+var RouteVehicleNoticeCode_VIOLATED_ZONE_RESTRICTION *smithy.Schema
+
+var RouteVehicleNoticeCode_TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS *smithy.Schema
 
 var RouteVehicleNoticeDetail = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2446,7 +4253,7 @@ var RouteVehicleOverviewSummary_TypicalDuration *smithy.Schema
 var RouteVehiclePlace = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteVehiclePlace",
-}, smithy.ShapeTypeStructure, 5)
+}, smithy.ShapeTypeStructure, 8)
 var RouteVehiclePlace_Name *smithy.Schema
 
 var RouteVehiclePlace_OriginalPosition *smithy.Schema
@@ -2456,6 +4263,24 @@ var RouteVehiclePlace_Position *smithy.Schema
 var RouteVehiclePlace_SideOfStreet *smithy.Schema
 
 var RouteVehiclePlace_WaypointIndex *smithy.Schema
+
+var RouteVehiclePlace_AccessPointDetails *smithy.Schema
+
+var RouteVehiclePlace_StationDetails *smithy.Schema
+
+var RouteVehiclePlace_Type *smithy.Schema
+
+var RouteVehiclePlaceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteVehiclePlaceType",
+}, smithy.ShapeTypeEnum, 4, &smithytraits.Sensitive{})
+var RouteVehiclePlaceType_ACCESS_POINT *smithy.Schema
+
+var RouteVehiclePlaceType_DOCKING_STATION *smithy.Schema
+
+var RouteVehiclePlaceType_PARKING_LOT *smithy.Schema
+
+var RouteVehiclePlaceType_STATION *smithy.Schema
 
 var RouteVehicleSpan = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2581,10 +4406,35 @@ var _RouteVehicleTravelStepList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteVehicleTravelStepList_member *smithy.Schema
 
-var _RouteVehicleTravelStepType = smithy.NewSchema(smithy.ShapeID{
+var RouteVehicleTravelStepType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteVehicleTravelStepType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 13, &smithytraits.Sensitive{})
+var RouteVehicleTravelStepType_ARRIVE *smithy.Schema
+
+var RouteVehicleTravelStepType_CONTINUE *smithy.Schema
+
+var RouteVehicleTravelStepType_CONTINUE_HIGHWAY *smithy.Schema
+
+var RouteVehicleTravelStepType_DEPART *smithy.Schema
+
+var RouteVehicleTravelStepType_ENTER_HIGHWAY *smithy.Schema
+
+var RouteVehicleTravelStepType_EXIT *smithy.Schema
+
+var RouteVehicleTravelStepType_KEEP *smithy.Schema
+
+var RouteVehicleTravelStepType_RAMP *smithy.Schema
+
+var RouteVehicleTravelStepType_ROUNDABOUT_ENTER *smithy.Schema
+
+var RouteVehicleTravelStepType_ROUNDABOUT_EXIT *smithy.Schema
+
+var RouteVehicleTravelStepType_ROUNDABOUT_PASS *smithy.Schema
+
+var RouteVehicleTravelStepType_TURN *smithy.Schema
+
+var RouteVehicleTravelStepType_U_TURN *smithy.Schema
 
 var RouteViolatedConstraints = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2654,6 +4504,34 @@ var _RouteWaypointList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteWaypointList_member *smithy.Schema
 
+var RouteWebLink = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteWebLink",
+}, smithy.ShapeTypeStructure, 4)
+var RouteWebLink_AnchorText *smithy.Schema
+
+var RouteWebLink_Description *smithy.Schema
+
+var RouteWebLink_DeviceType *smithy.Schema
+
+var RouteWebLink_Url *smithy.Schema
+
+var RouteWebLinkDeviceType = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteWebLinkDeviceType",
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var RouteWebLinkDeviceType_ANDROID *smithy.Schema
+
+var RouteWebLinkDeviceType_IOS *smithy.Schema
+
+var RouteWebLinkDeviceType_WEB *smithy.Schema
+
+var _RouteWebLinkList = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.georoutes",
+	Name:      "RouteWebLinkList",
+}, smithy.ShapeTypeList, 1)
+var _RouteWebLinkList_member *smithy.Schema
+
 var RouteWeightConstraint = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteWeightConstraint",
@@ -2662,10 +4540,15 @@ var RouteWeightConstraint_Type *smithy.Schema
 
 var RouteWeightConstraint_Value *smithy.Schema
 
-var _RouteWeightConstraintType = smithy.NewSchema(smithy.ShapeID{
+var RouteWeightConstraintType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteWeightConstraintType",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 3)
+var RouteWeightConstraintType_CURRENT *smithy.Schema
+
+var RouteWeightConstraintType_GROSS *smithy.Schema
+
+var RouteWeightConstraintType_UNKNOWN *smithy.Schema
 
 var RouteZone = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2675,10 +4558,15 @@ var RouteZone_Category *smithy.Schema
 
 var RouteZone_Name *smithy.Schema
 
-var _RouteZoneCategory = smithy.NewSchema(smithy.ShapeID{
+var RouteZoneCategory = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RouteZoneCategory",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 3, &smithytraits.Sensitive{})
+var RouteZoneCategory_CONGESTION_PRICING *smithy.Schema
+
+var RouteZoneCategory_ENVIRONMENTAL *smithy.Schema
+
+var RouteZoneCategory_VIGNETTE *smithy.Schema
 
 var _RouteZoneList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2686,10 +4574,13 @@ var _RouteZoneList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _RouteZoneList_member *smithy.Schema
 
-var _RoutingObjective = smithy.NewSchema(smithy.ShapeID{
+var RoutingObjective = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "RoutingObjective",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 2)
+var RoutingObjective_FASTEST_ROUTE *smithy.Schema
+
+var RoutingObjective_SHORTEST_ROUTE *smithy.Schema
 
 var _SensitiveBoolean = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2711,10 +4602,13 @@ var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
 	Name:      "SensitiveString",
 }, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
 
-var _SideOfStreetMatchingStrategy = smithy.NewSchema(smithy.ShapeID{
+var SideOfStreetMatchingStrategy = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "SideOfStreetMatchingStrategy",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 2)
+var SideOfStreetMatchingStrategy_ANY_STREET *smithy.Schema
+
+var SideOfStreetMatchingStrategy_DIVIDED_STREET_ONLY *smithy.Schema
 
 var _SpeedKilometersPerHour = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2743,10 +4637,13 @@ var _TimeThresholdList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _TimeThresholdList_member *smithy.Schema
 
-var _TrafficUsage = smithy.NewSchema(smithy.ShapeID{
+var TrafficUsage = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "TrafficUsage",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 2)
+var TrafficUsage_IGNORE_TRAFFIC_DATA *smithy.Schema
+
+var TrafficUsage_USE_TRAFFIC_DATA *smithy.Schema
 
 var _TruckRoadType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2911,10 +4808,21 @@ var _WaypointOptimizationConnectionList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _WaypointOptimizationConnectionList_member *smithy.Schema
 
-var _WaypointOptimizationConstraint = smithy.NewSchema(smithy.ShapeID{
+var WaypointOptimizationConstraint = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "WaypointOptimizationConstraint",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 6, &smithytraits.Sensitive{})
+var WaypointOptimizationConstraint_ACCESS_HOURS *smithy.Schema
+
+var WaypointOptimizationConstraint_APPOINTMENT_TIME *smithy.Schema
+
+var WaypointOptimizationConstraint_BEFORE *smithy.Schema
+
+var WaypointOptimizationConstraint_HEADING *smithy.Schema
+
+var WaypointOptimizationConstraint_SERVICE_DURATION *smithy.Schema
+
+var WaypointOptimizationConstraint_SIDE_OF_STREET *smithy.Schema
 
 var WaypointOptimizationDestinationOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -2973,10 +4881,31 @@ var _WaypointOptimizationFailedConstraintList = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _WaypointOptimizationFailedConstraintList_member *smithy.Schema
 
-var _WaypointOptimizationHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
+var WaypointOptimizationHazardousCargoType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "WaypointOptimizationHazardousCargoType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 11, &smithytraits.Sensitive{})
+var WaypointOptimizationHazardousCargoType_COMBUSTIBLE *smithy.Schema
+
+var WaypointOptimizationHazardousCargoType_CORROSIVE *smithy.Schema
+
+var WaypointOptimizationHazardousCargoType_EXPLOSIVE *smithy.Schema
+
+var WaypointOptimizationHazardousCargoType_FLAMMABLE *smithy.Schema
+
+var WaypointOptimizationHazardousCargoType_GAS *smithy.Schema
+
+var WaypointOptimizationHazardousCargoType_HARMFUL_TO_WATER *smithy.Schema
+
+var WaypointOptimizationHazardousCargoType_ORGANIC *smithy.Schema
+
+var WaypointOptimizationHazardousCargoType_OTHER *smithy.Schema
+
+var WaypointOptimizationHazardousCargoType_POISON *smithy.Schema
+
+var WaypointOptimizationHazardousCargoType_POISONOUS_INHALATION *smithy.Schema
+
+var WaypointOptimizationHazardousCargoType_RADIOACTIVE *smithy.Schema
 
 var _WaypointOptimizationHazardousCargoTypeList = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -3054,15 +4983,21 @@ var WaypointOptimizationRestProfile = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var WaypointOptimizationRestProfile_Profile *smithy.Schema
 
-var _WaypointOptimizationSequencingObjective = smithy.NewSchema(smithy.ShapeID{
+var WaypointOptimizationSequencingObjective = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "WaypointOptimizationSequencingObjective",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 2)
+var WaypointOptimizationSequencingObjective_FASTEST_ROUTE *smithy.Schema
 
-var _WaypointOptimizationServiceTimeTreatment = smithy.NewSchema(smithy.ShapeID{
+var WaypointOptimizationSequencingObjective_SHORTEST_ROUTE *smithy.Schema
+
+var WaypointOptimizationServiceTimeTreatment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "WaypointOptimizationServiceTimeTreatment",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
+var WaypointOptimizationServiceTimeTreatment_REST *smithy.Schema
+
+var WaypointOptimizationServiceTimeTreatment_WORK *smithy.Schema
 
 var WaypointOptimizationSideOfStreetOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -3096,10 +5031,17 @@ var WaypointOptimizationTrailerOptions = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeStructure, 1)
 var WaypointOptimizationTrailerOptions_TrailerCount *smithy.Schema
 
-var _WaypointOptimizationTravelMode = smithy.NewSchema(smithy.ShapeID{
+var WaypointOptimizationTravelMode = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "WaypointOptimizationTravelMode",
-}, smithy.ShapeTypeString, 0)
+}, smithy.ShapeTypeEnum, 4)
+var WaypointOptimizationTravelMode_CAR *smithy.Schema
+
+var WaypointOptimizationTravelMode_PEDESTRIAN *smithy.Schema
+
+var WaypointOptimizationTravelMode_SCOOTER *smithy.Schema
+
+var WaypointOptimizationTravelMode_TRUCK *smithy.Schema
 
 var WaypointOptimizationTravelModeOptions = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -3131,10 +5073,13 @@ var WaypointOptimizationTruckOptions_WeightPerAxle *smithy.Schema
 
 var WaypointOptimizationTruckOptions_Width *smithy.Schema
 
-var _WaypointOptimizationTruckType = smithy.NewSchema(smithy.ShapeID{
+var WaypointOptimizationTruckType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
 	Name:      "WaypointOptimizationTruckType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
+}, smithy.ShapeTypeEnum, 2, &smithytraits.Sensitive{})
+var WaypointOptimizationTruckType_STRAIGHT_TRUCK *smithy.Schema
+
+var WaypointOptimizationTruckType_TRACTOR *smithy.Schema
 
 var WaypointOptimizationWaypoint = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.georoutes",
@@ -3536,7 +5481,13 @@ func init() {
 
 	_TruckRoadTypeList_member = _TruckRoadTypeList.AddMember("member", _TruckRoadType)
 
-	IsolineAvoidanceZoneCategory_Category = IsolineAvoidanceZoneCategory.AddMember("Category", _IsolineZoneCategory)
+	IsolineZoneCategory_CONGESTION_PRICING = IsolineZoneCategory.AddMember("CONGESTION_PRICING", smithyprelude.Unit)
+
+	IsolineZoneCategory_ENVIRONMENTAL = IsolineZoneCategory.AddMember("ENVIRONMENTAL", smithyprelude.Unit)
+
+	IsolineZoneCategory_VIGNETTE = IsolineZoneCategory.AddMember("VIGNETTE", smithyprelude.Unit)
+
+	IsolineAvoidanceZoneCategory_Category = IsolineAvoidanceZoneCategory.AddMember("Category", IsolineZoneCategory)
 
 	_IsolineAvoidanceZoneCategoryList_member = _IsolineAvoidanceZoneCategoryList.AddMember("member", IsolineAvoidanceZoneCategory)
 
@@ -3564,9 +5515,15 @@ func init() {
 
 	IsolineAvoidanceOptions_ZoneCategories = IsolineAvoidanceOptions.AddMember("ZoneCategories", _IsolineAvoidanceZoneCategoryList)
 
+	IsolineEngineType_ELECTRIC = IsolineEngineType.AddMember("ELECTRIC", smithyprelude.Unit)
+
+	IsolineEngineType_INTERNAL_COMBUSTION = IsolineEngineType.AddMember("INTERNAL_COMBUSTION", smithyprelude.Unit)
+
+	IsolineEngineType_PLUGIN_HYBRID = IsolineEngineType.AddMember("PLUGIN_HYBRID", smithyprelude.Unit)
+
 	IsolineVehicleLicensePlate_LastCharacter = IsolineVehicleLicensePlate.AddMember("LastCharacter", smithyprelude.String)
 
-	IsolineCarOptions_EngineType = IsolineCarOptions.AddMember("EngineType", _IsolineEngineType)
+	IsolineCarOptions_EngineType = IsolineCarOptions.AddMember("EngineType", IsolineEngineType)
 
 	IsolineCarOptions_LicensePlate = IsolineCarOptions.AddMember("LicensePlate", IsolineVehicleLicensePlate)
 
@@ -3574,17 +5531,25 @@ func init() {
 
 	IsolineCarOptions_Occupancy = IsolineCarOptions.AddMember("Occupancy", _SensitiveInteger)
 
+	MatchingStrategy_MATCH_ANY = MatchingStrategy.AddMember("MATCH_ANY", smithyprelude.Unit)
+
+	MatchingStrategy_MATCH_MOST_SIGNIFICANT_ROAD = MatchingStrategy.AddMember("MATCH_MOST_SIGNIFICANT_ROAD", smithyprelude.Unit)
+
 	IsolineMatchingOptions_NameHint = IsolineMatchingOptions.AddMember("NameHint", _SensitiveString)
 
 	IsolineMatchingOptions_OnRoadThreshold = IsolineMatchingOptions.AddMember("OnRoadThreshold", _DistanceMeters)
 
 	IsolineMatchingOptions_Radius = IsolineMatchingOptions.AddMember("Radius", _DistanceMeters)
 
-	IsolineMatchingOptions_Strategy = IsolineMatchingOptions.AddMember("Strategy", _MatchingStrategy)
+	IsolineMatchingOptions_Strategy = IsolineMatchingOptions.AddMember("Strategy", MatchingStrategy)
+
+	SideOfStreetMatchingStrategy_ANY_STREET = SideOfStreetMatchingStrategy.AddMember("ANY_STREET", smithyprelude.Unit)
+
+	SideOfStreetMatchingStrategy_DIVIDED_STREET_ONLY = SideOfStreetMatchingStrategy.AddMember("DIVIDED_STREET_ONLY", smithyprelude.Unit)
 
 	IsolineSideOfStreetOptions_Position = IsolineSideOfStreetOptions.AddMember("Position", _Position)
 
-	IsolineSideOfStreetOptions_UseWith = IsolineSideOfStreetOptions.AddMember("UseWith", _SideOfStreetMatchingStrategy)
+	IsolineSideOfStreetOptions_UseWith = IsolineSideOfStreetOptions.AddMember("UseWith", SideOfStreetMatchingStrategy)
 
 	IsolineDestinationOptions_AvoidActionsForDistance = IsolineDestinationOptions.AddMember("AvoidActionsForDistance", _DistanceMeters)
 
@@ -3598,9 +5563,37 @@ func init() {
 
 	IsolineGranularityOptions_MaxResolution = IsolineGranularityOptions.AddMember("MaxResolution", _DistanceMeters)
 
-	_IsolineHazardousCargoTypeList_member = _IsolineHazardousCargoTypeList.AddMember("member", _IsolineHazardousCargoType)
+	IsolineHazardousCargoType_COMBUSTIBLE = IsolineHazardousCargoType.AddMember("COMBUSTIBLE", smithyprelude.Unit)
+
+	IsolineHazardousCargoType_CORROSIVE = IsolineHazardousCargoType.AddMember("CORROSIVE", smithyprelude.Unit)
+
+	IsolineHazardousCargoType_EXPLOSIVE = IsolineHazardousCargoType.AddMember("EXPLOSIVE", smithyprelude.Unit)
+
+	IsolineHazardousCargoType_FLAMMABLE = IsolineHazardousCargoType.AddMember("FLAMMABLE", smithyprelude.Unit)
+
+	IsolineHazardousCargoType_GAS = IsolineHazardousCargoType.AddMember("GAS", smithyprelude.Unit)
+
+	IsolineHazardousCargoType_HARMFUL_TO_WATER = IsolineHazardousCargoType.AddMember("HARMFUL_TO_WATER", smithyprelude.Unit)
+
+	IsolineHazardousCargoType_ORGANIC = IsolineHazardousCargoType.AddMember("ORGANIC", smithyprelude.Unit)
+
+	IsolineHazardousCargoType_OTHER = IsolineHazardousCargoType.AddMember("OTHER", smithyprelude.Unit)
+
+	IsolineHazardousCargoType_POISON = IsolineHazardousCargoType.AddMember("POISON", smithyprelude.Unit)
+
+	IsolineHazardousCargoType_POISONOUS_INHALATION = IsolineHazardousCargoType.AddMember("POISONOUS_INHALATION", smithyprelude.Unit)
+
+	IsolineHazardousCargoType_RADIOACTIVE = IsolineHazardousCargoType.AddMember("RADIOACTIVE", smithyprelude.Unit)
+
+	_IsolineHazardousCargoTypeList_member = _IsolineHazardousCargoTypeList.AddMember("member", IsolineHazardousCargoType)
 
 	_IsolineList_member = _IsolineList.AddMember("member", Isoline)
+
+	IsolineOptimizationObjective_ACCURATE_CALCULATION = IsolineOptimizationObjective.AddMember("ACCURATE_CALCULATION", smithyprelude.Unit)
+
+	IsolineOptimizationObjective_BALANCED_CALCULATION = IsolineOptimizationObjective.AddMember("BALANCED_CALCULATION", smithyprelude.Unit)
+
+	IsolineOptimizationObjective_FAST_CALCULATION = IsolineOptimizationObjective.AddMember("FAST_CALCULATION", smithyprelude.Unit)
 
 	IsolineOriginOptions_AvoidActionsForDistance = IsolineOriginOptions.AddMember("AvoidActionsForDistance", _DistanceMeters)
 
@@ -3610,7 +5603,7 @@ func init() {
 
 	IsolineOriginOptions_SideOfStreet = IsolineOriginOptions.AddMember("SideOfStreet", IsolineSideOfStreetOptions)
 
-	IsolineScooterOptions_EngineType = IsolineScooterOptions.AddMember("EngineType", _IsolineEngineType)
+	IsolineScooterOptions_EngineType = IsolineScooterOptions.AddMember("EngineType", IsolineEngineType)
 
 	IsolineScooterOptions_LicensePlate = IsolineScooterOptions.AddMember("LicensePlate", IsolineVehicleLicensePlate)
 
@@ -3624,13 +5617,31 @@ func init() {
 
 	IsolineThresholds_Time = IsolineThresholds.AddMember("Time", _TimeThresholdList)
 
+	TrafficUsage_IGNORE_TRAFFIC_DATA = TrafficUsage.AddMember("IGNORE_TRAFFIC_DATA", smithyprelude.Unit)
+
+	TrafficUsage_USE_TRAFFIC_DATA = TrafficUsage.AddMember("USE_TRAFFIC_DATA", smithyprelude.Unit)
+
 	IsolineTrafficOptions_FlowEventThresholdOverride = IsolineTrafficOptions.AddMember("FlowEventThresholdOverride", _DurationSeconds)
 
-	IsolineTrafficOptions_Usage = IsolineTrafficOptions.AddMember("Usage", _TrafficUsage)
+	IsolineTrafficOptions_Usage = IsolineTrafficOptions.AddMember("Usage", TrafficUsage)
 
 	IsolineTrailerOptions_AxleCount = IsolineTrailerOptions.AddMember("AxleCount", _SensitiveInteger)
 
 	IsolineTrailerOptions_TrailerCount = IsolineTrailerOptions.AddMember("TrailerCount", _SensitiveInteger)
+
+	IsolineTravelMode_CAR = IsolineTravelMode.AddMember("CAR", smithyprelude.Unit)
+
+	IsolineTravelMode_PEDESTRIAN = IsolineTravelMode.AddMember("PEDESTRIAN", smithyprelude.Unit)
+
+	IsolineTravelMode_SCOOTER = IsolineTravelMode.AddMember("SCOOTER", smithyprelude.Unit)
+
+	IsolineTravelMode_TRUCK = IsolineTravelMode.AddMember("TRUCK", smithyprelude.Unit)
+
+	IsolineTruckType_LIGHT_TRUCK = IsolineTruckType.AddMember("LIGHT_TRUCK", smithyprelude.Unit)
+
+	IsolineTruckType_STRAIGHT_TRUCK = IsolineTruckType.AddMember("STRAIGHT_TRUCK", smithyprelude.Unit)
+
+	IsolineTruckType_TRACTOR = IsolineTruckType.AddMember("TRACTOR", smithyprelude.Unit)
 
 	WeightPerAxleGroup_Single = WeightPerAxleGroup.AddMember("Single", _WeightKilograms)
 
@@ -3644,7 +5655,7 @@ func init() {
 
 	IsolineTruckOptions_AxleCount = IsolineTruckOptions.AddMember("AxleCount", _SensitiveInteger)
 
-	IsolineTruckOptions_EngineType = IsolineTruckOptions.AddMember("EngineType", _IsolineEngineType)
+	IsolineTruckOptions_EngineType = IsolineTruckOptions.AddMember("EngineType", IsolineEngineType)
 
 	IsolineTruckOptions_GrossWeight = IsolineTruckOptions.AddMember("GrossWeight", _WeightKilograms)
 
@@ -3670,7 +5681,7 @@ func init() {
 
 	IsolineTruckOptions_Trailer = IsolineTruckOptions.AddMember("Trailer", IsolineTrailerOptions)
 
-	IsolineTruckOptions_TruckType = IsolineTruckOptions.AddMember("TruckType", _IsolineTruckType)
+	IsolineTruckOptions_TruckType = IsolineTruckOptions.AddMember("TruckType", IsolineTruckType)
 
 	IsolineTruckOptions_TunnelRestrictionCode = IsolineTruckOptions.AddMember("TunnelRestrictionCode", _TunnelRestrictionCode)
 
@@ -3700,11 +5711,47 @@ func init() {
 
 	_Position23_member = _Position23.AddMember("member", smithyprelude.Double)
 
-	_RoadSnapHazardousCargoTypeList_member = _RoadSnapHazardousCargoTypeList.AddMember("member", _RoadSnapHazardousCargoType)
+	RoadSnapHazardousCargoType_COMBUSTIBLE = RoadSnapHazardousCargoType.AddMember("COMBUSTIBLE", smithyprelude.Unit)
+
+	RoadSnapHazardousCargoType_CORROSIVE = RoadSnapHazardousCargoType.AddMember("CORROSIVE", smithyprelude.Unit)
+
+	RoadSnapHazardousCargoType_EXPLOSIVE = RoadSnapHazardousCargoType.AddMember("EXPLOSIVE", smithyprelude.Unit)
+
+	RoadSnapHazardousCargoType_FLAMMABLE = RoadSnapHazardousCargoType.AddMember("FLAMMABLE", smithyprelude.Unit)
+
+	RoadSnapHazardousCargoType_GAS = RoadSnapHazardousCargoType.AddMember("GAS", smithyprelude.Unit)
+
+	RoadSnapHazardousCargoType_HARMFUL_TO_WATER = RoadSnapHazardousCargoType.AddMember("HARMFUL_TO_WATER", smithyprelude.Unit)
+
+	RoadSnapHazardousCargoType_ORGANIC = RoadSnapHazardousCargoType.AddMember("ORGANIC", smithyprelude.Unit)
+
+	RoadSnapHazardousCargoType_OTHER = RoadSnapHazardousCargoType.AddMember("OTHER", smithyprelude.Unit)
+
+	RoadSnapHazardousCargoType_POISON = RoadSnapHazardousCargoType.AddMember("POISON", smithyprelude.Unit)
+
+	RoadSnapHazardousCargoType_POISONOUS_INHALATION = RoadSnapHazardousCargoType.AddMember("POISONOUS_INHALATION", smithyprelude.Unit)
+
+	RoadSnapHazardousCargoType_RADIOACTIVE = RoadSnapHazardousCargoType.AddMember("RADIOACTIVE", smithyprelude.Unit)
+
+	_RoadSnapHazardousCargoTypeList_member = _RoadSnapHazardousCargoTypeList.AddMember("member", RoadSnapHazardousCargoType)
+
+	RoadSnapNoticeCode_TRACE_POINTS_HEADING_IGNORED = RoadSnapNoticeCode.AddMember("TRACE_POINTS_HEADING_IGNORED", smithyprelude.Unit)
+
+	RoadSnapNoticeCode_TRACE_POINTS_IGNORED = RoadSnapNoticeCode.AddMember("TRACE_POINTS_IGNORED", smithyprelude.Unit)
+
+	RoadSnapNoticeCode_TRACE_POINTS_MOVED_BY_LARGE_DISTANCE = RoadSnapNoticeCode.AddMember("TRACE_POINTS_MOVED_BY_LARGE_DISTANCE", smithyprelude.Unit)
+
+	RoadSnapNoticeCode_TRACE_POINTS_NOT_MATCHED = RoadSnapNoticeCode.AddMember("TRACE_POINTS_NOT_MATCHED", smithyprelude.Unit)
+
+	RoadSnapNoticeCode_TRACE_POINTS_OUT_OF_SEQUENCE = RoadSnapNoticeCode.AddMember("TRACE_POINTS_OUT_OF_SEQUENCE", smithyprelude.Unit)
+
+	RoadSnapNoticeCode_TRACE_POINTS_SPEED_ESTIMATED = RoadSnapNoticeCode.AddMember("TRACE_POINTS_SPEED_ESTIMATED", smithyprelude.Unit)
+
+	RoadSnapNoticeCode_TRACE_POINTS_SPEED_IGNORED = RoadSnapNoticeCode.AddMember("TRACE_POINTS_SPEED_IGNORED", smithyprelude.Unit)
 
 	_RoadSnapTracePointIndexList_member = _RoadSnapTracePointIndexList.AddMember("member", smithyprelude.Integer)
 
-	RoadSnapNotice_Code = RoadSnapNotice.AddMember("Code", _RoadSnapNoticeCode)
+	RoadSnapNotice_Code = RoadSnapNotice.AddMember("Code", RoadSnapNoticeCode)
 
 	RoadSnapNotice_Title = RoadSnapNotice.AddMember("Title", _SensitiveString)
 
@@ -3736,6 +5783,14 @@ func init() {
 
 	RoadSnapTrailerOptions_TrailerCount = RoadSnapTrailerOptions.AddMember("TrailerCount", _SensitiveInteger)
 
+	RoadSnapTravelMode_CAR = RoadSnapTravelMode.AddMember("CAR", smithyprelude.Unit)
+
+	RoadSnapTravelMode_PEDESTRIAN = RoadSnapTravelMode.AddMember("PEDESTRIAN", smithyprelude.Unit)
+
+	RoadSnapTravelMode_SCOOTER = RoadSnapTravelMode.AddMember("SCOOTER", smithyprelude.Unit)
+
+	RoadSnapTravelMode_TRUCK = RoadSnapTravelMode.AddMember("TRUCK", smithyprelude.Unit)
+
 	RoadSnapTruckOptions_GrossWeight = RoadSnapTruckOptions.AddMember("GrossWeight", _WeightKilograms)
 
 	RoadSnapTruckOptions_HazardousCargos = RoadSnapTruckOptions.AddMember("HazardousCargos", _RoadSnapHazardousCargoTypeList)
@@ -3752,11 +5807,13 @@ func init() {
 
 	RoadSnapTravelModeOptions_Truck = RoadSnapTravelModeOptions.AddMember("Truck", RoadSnapTruckOptions)
 
+	RouteFerryAfterTravelStepType_DEBOARD = RouteFerryAfterTravelStepType.AddMember("DEBOARD", smithyprelude.Unit)
+
 	RouteFerryAfterTravelStep_Duration = RouteFerryAfterTravelStep.AddMember("Duration", _DurationSeconds)
 
 	RouteFerryAfterTravelStep_Instruction = RouteFerryAfterTravelStep.AddMember("Instruction", _SensitiveString)
 
-	RouteFerryAfterTravelStep_Type = RouteFerryAfterTravelStep.AddMember("Type", _RouteFerryAfterTravelStepType)
+	RouteFerryAfterTravelStep_Type = RouteFerryAfterTravelStep.AddMember("Type", RouteFerryAfterTravelStepType)
 
 	_RouteFerryAfterTravelStepList_member = _RouteFerryAfterTravelStepList.AddMember("member", RouteFerryAfterTravelStep)
 
@@ -3772,11 +5829,13 @@ func init() {
 
 	RouteFerryArrival_Time = RouteFerryArrival.AddMember("Time", _TimestampWithTimezoneOffset)
 
+	RouteFerryBeforeTravelStepType_BOARD = RouteFerryBeforeTravelStepType.AddMember("BOARD", smithyprelude.Unit)
+
 	RouteFerryBeforeTravelStep_Duration = RouteFerryBeforeTravelStep.AddMember("Duration", _DurationSeconds)
 
 	RouteFerryBeforeTravelStep_Instruction = RouteFerryBeforeTravelStep.AddMember("Instruction", _SensitiveString)
 
-	RouteFerryBeforeTravelStep_Type = RouteFerryBeforeTravelStep.AddMember("Type", _RouteFerryBeforeTravelStepType)
+	RouteFerryBeforeTravelStep_Type = RouteFerryBeforeTravelStep.AddMember("Type", RouteFerryBeforeTravelStepType)
 
 	_RouteFerryBeforeTravelStepList_member = _RouteFerryBeforeTravelStepList.AddMember("member", RouteFerryBeforeTravelStep)
 
@@ -3784,9 +5843,31 @@ func init() {
 
 	RouteFerryDeparture_Time = RouteFerryDeparture.AddMember("Time", _TimestampWithTimezoneOffset)
 
-	RouteFerryNotice_Code = RouteFerryNotice.AddMember("Code", _RouteFerryNoticeCode)
+	RouteFerryNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = RouteFerryNoticeCode.AddMember("ACCURATE_POLYLINE_UNAVAILABLE", smithyprelude.Unit)
 
-	RouteFerryNotice_Impact = RouteFerryNotice.AddMember("Impact", _RouteNoticeImpact)
+	RouteFerryNoticeCode_NO_SCHEDULE = RouteFerryNoticeCode.AddMember("NO_SCHEDULE", smithyprelude.Unit)
+
+	RouteFerryNoticeCode_OTHER = RouteFerryNoticeCode.AddMember("OTHER", smithyprelude.Unit)
+
+	RouteFerryNoticeCode_VIOLATED_AVOID_FERRY = RouteFerryNoticeCode.AddMember("VIOLATED_AVOID_FERRY", smithyprelude.Unit)
+
+	RouteFerryNoticeCode_VIOLATED_AVOID_RAIL_FERRY = RouteFerryNoticeCode.AddMember("VIOLATED_AVOID_RAIL_FERRY", smithyprelude.Unit)
+
+	RouteFerryNoticeCode_SEASONAL_CLOSURE = RouteFerryNoticeCode.AddMember("SEASONAL_CLOSURE", smithyprelude.Unit)
+
+	RouteFerryNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE = RouteFerryNoticeCode.AddMember("POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE", smithyprelude.Unit)
+
+	RouteFerryNoticeCode_VIOLATED_AVOID_AREAS = RouteFerryNoticeCode.AddMember("VIOLATED_AVOID_AREAS", smithyprelude.Unit)
+
+	RouteFerryNoticeCode_VIOLATED_VEHICLE_RESTRICTION = RouteFerryNoticeCode.AddMember("VIOLATED_VEHICLE_RESTRICTION", smithyprelude.Unit)
+
+	RouteNoticeImpact_HIGH = RouteNoticeImpact.AddMember("HIGH", smithyprelude.Unit)
+
+	RouteNoticeImpact_LOW = RouteNoticeImpact.AddMember("LOW", smithyprelude.Unit)
+
+	RouteFerryNotice_Code = RouteFerryNotice.AddMember("Code", RouteFerryNoticeCode)
+
+	RouteFerryNotice_Impact = RouteFerryNotice.AddMember("Impact", RouteNoticeImpact)
 
 	_RouteFerryNoticeList_member = _RouteFerryNoticeList.AddMember("member", RouteFerryNotice)
 
@@ -3826,6 +5907,12 @@ func init() {
 
 	RouteFerrySummary_TravelOnly = RouteFerrySummary.AddMember("TravelOnly", RouteFerryTravelOnlySummary)
 
+	RouteFerryTravelStepType_DEPART = RouteFerryTravelStepType.AddMember("DEPART", smithyprelude.Unit)
+
+	RouteFerryTravelStepType_CONTINUE = RouteFerryTravelStepType.AddMember("CONTINUE", smithyprelude.Unit)
+
+	RouteFerryTravelStepType_ARRIVE = RouteFerryTravelStepType.AddMember("ARRIVE", smithyprelude.Unit)
+
 	RouteFerryTravelStep_Distance = RouteFerryTravelStep.AddMember("Distance", _DistanceMeters)
 
 	RouteFerryTravelStep_Duration = RouteFerryTravelStep.AddMember("Duration", _DurationSeconds)
@@ -3834,7 +5921,7 @@ func init() {
 
 	RouteFerryTravelStep_Instruction = RouteFerryTravelStep.AddMember("Instruction", _SensitiveString)
 
-	RouteFerryTravelStep_Type = RouteFerryTravelStep.AddMember("Type", _RouteFerryTravelStepType)
+	RouteFerryTravelStep_Type = RouteFerryTravelStep.AddMember("Type", RouteFerryTravelStepType)
 
 	_RouteFerryTravelStepList_member = _RouteFerryTravelStepList.AddMember("member", RouteFerryTravelStep)
 
@@ -3862,13 +5949,59 @@ func init() {
 
 	RouteLegGeometry_Polyline = RouteLegGeometry.AddMember("Polyline", _Polyline)
 
+	RoutePedestrianAfterTravelStepType_WAIT = RoutePedestrianAfterTravelStepType.AddMember("WAIT", smithyprelude.Unit)
+
+	RoutePedestrianAfterTravelStep_Duration = RoutePedestrianAfterTravelStep.AddMember("Duration", _DurationSeconds)
+
+	RoutePedestrianAfterTravelStep_Instruction = RoutePedestrianAfterTravelStep.AddMember("Instruction", _SensitiveString)
+
+	RoutePedestrianAfterTravelStep_Type = RoutePedestrianAfterTravelStep.AddMember("Type", RoutePedestrianAfterTravelStepType)
+
+	_RoutePedestrianAfterTravelStepList_member = _RoutePedestrianAfterTravelStepList.AddMember("member", RoutePedestrianAfterTravelStep)
+
+	RouteAccessibilityAvailability_AVAILABLE = RouteAccessibilityAvailability.AddMember("AVAILABLE", smithyprelude.Unit)
+
+	RouteAccessibilityAvailability_LIMITED = RouteAccessibilityAvailability.AddMember("LIMITED", smithyprelude.Unit)
+
+	RouteAccessibilityAvailability_UNAVAILABLE = RouteAccessibilityAvailability.AddMember("UNAVAILABLE", smithyprelude.Unit)
+
+	RouteAccessibilityAvailability_UNKNOWN = RouteAccessibilityAvailability.AddMember("UNKNOWN", smithyprelude.Unit)
+
+	RouteAccessibilityAvailabilityDetails_Wheelchair = RouteAccessibilityAvailabilityDetails.AddMember("Wheelchair", RouteAccessibilityAvailability)
+
+	RouteAccessPointDetails_Accessibility = RouteAccessPointDetails.AddMember("Accessibility", RouteAccessibilityAvailabilityDetails)
+
+	RouteSideOfStreet_LEFT = RouteSideOfStreet.AddMember("LEFT", smithyprelude.Unit)
+
+	RouteSideOfStreet_RIGHT = RouteSideOfStreet.AddMember("RIGHT", smithyprelude.Unit)
+
+	RouteStationDetails_Accessibility = RouteStationDetails.AddMember("Accessibility", RouteAccessibilityAvailabilityDetails)
+
+	RouteStationDetails_PlatformName = RouteStationDetails.AddMember("PlatformName", _SensitiveString)
+
+	RouteStationDetails_ShortName = RouteStationDetails.AddMember("ShortName", _SensitiveString)
+
+	RoutePedestrianPlaceType_ACCESS_POINT = RoutePedestrianPlaceType.AddMember("ACCESS_POINT", smithyprelude.Unit)
+
+	RoutePedestrianPlaceType_DOCKING_STATION = RoutePedestrianPlaceType.AddMember("DOCKING_STATION", smithyprelude.Unit)
+
+	RoutePedestrianPlaceType_PARKING_LOT = RoutePedestrianPlaceType.AddMember("PARKING_LOT", smithyprelude.Unit)
+
+	RoutePedestrianPlaceType_STATION = RoutePedestrianPlaceType.AddMember("STATION", smithyprelude.Unit)
+
+	RoutePedestrianPlace_AccessPointDetails = RoutePedestrianPlace.AddMember("AccessPointDetails", RouteAccessPointDetails)
+
 	RoutePedestrianPlace_Name = RoutePedestrianPlace.AddMember("Name", _SensitiveString)
 
 	RoutePedestrianPlace_OriginalPosition = RoutePedestrianPlace.AddMember("OriginalPosition", _Position23)
 
 	RoutePedestrianPlace_Position = RoutePedestrianPlace.AddMember("Position", _Position23)
 
-	RoutePedestrianPlace_SideOfStreet = RoutePedestrianPlace.AddMember("SideOfStreet", _RouteSideOfStreet)
+	RoutePedestrianPlace_SideOfStreet = RoutePedestrianPlace.AddMember("SideOfStreet", RouteSideOfStreet)
+
+	RoutePedestrianPlace_StationDetails = RoutePedestrianPlace.AddMember("StationDetails", RouteStationDetails)
+
+	RoutePedestrianPlace_Type = RoutePedestrianPlace.AddMember("Type", RoutePedestrianPlaceType)
 
 	RoutePedestrianPlace_WaypointIndex = RoutePedestrianPlace.AddMember("WaypointIndex", _SensitiveInteger)
 
@@ -3880,9 +6013,21 @@ func init() {
 
 	RoutePedestrianDeparture_Time = RoutePedestrianDeparture.AddMember("Time", _TimestampWithTimezoneOffset)
 
-	RoutePedestrianNotice_Code = RoutePedestrianNotice.AddMember("Code", _RoutePedestrianNoticeCode)
+	RoutePedestrianNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = RoutePedestrianNoticeCode.AddMember("ACCURATE_POLYLINE_UNAVAILABLE", smithyprelude.Unit)
 
-	RoutePedestrianNotice_Impact = RoutePedestrianNotice.AddMember("Impact", _RouteNoticeImpact)
+	RoutePedestrianNoticeCode_OTHER = RoutePedestrianNoticeCode.AddMember("OTHER", smithyprelude.Unit)
+
+	RoutePedestrianNoticeCode_VIOLATED_AVOID_DIRT_ROAD = RoutePedestrianNoticeCode.AddMember("VIOLATED_AVOID_DIRT_ROAD", smithyprelude.Unit)
+
+	RoutePedestrianNoticeCode_VIOLATED_AVOID_TUNNEL = RoutePedestrianNoticeCode.AddMember("VIOLATED_AVOID_TUNNEL", smithyprelude.Unit)
+
+	RoutePedestrianNoticeCode_VIOLATED_PEDESTRIAN_OPTION = RoutePedestrianNoticeCode.AddMember("VIOLATED_PEDESTRIAN_OPTION", smithyprelude.Unit)
+
+	RoutePedestrianNoticeCode_VIOLATED_AVOID_AREAS = RoutePedestrianNoticeCode.AddMember("VIOLATED_AVOID_AREAS", smithyprelude.Unit)
+
+	RoutePedestrianNotice_Code = RoutePedestrianNotice.AddMember("Code", RoutePedestrianNoticeCode)
+
+	RoutePedestrianNotice_Impact = RoutePedestrianNotice.AddMember("Impact", RouteNoticeImpact)
 
 	_RoutePedestrianNoticeList_member = _RoutePedestrianNoticeList.AddMember("member", RoutePedestrianNotice)
 
@@ -3892,11 +6037,55 @@ func init() {
 
 	RouteSpanDynamicSpeedDetails_TypicalSpeed = RouteSpanDynamicSpeedDetails.AddMember("TypicalSpeed", _SpeedKilometersPerHour)
 
-	_RouteSpanPedestrianAccessAttributeList_member = _RouteSpanPedestrianAccessAttributeList.AddMember("member", _RouteSpanPedestrianAccessAttribute)
+	RouteSpanPedestrianAccessAttribute_ALLOWED = RouteSpanPedestrianAccessAttribute.AddMember("ALLOWED", smithyprelude.Unit)
 
-	_RouteSpanRoadAttributeList_member = _RouteSpanRoadAttributeList.AddMember("member", _RouteSpanRoadAttribute)
+	RouteSpanPedestrianAccessAttribute_INDOORS = RouteSpanPedestrianAccessAttribute.AddMember("INDOORS", smithyprelude.Unit)
 
-	RouteNumber_Direction = RouteNumber.AddMember("Direction", _RouteDirection)
+	RouteSpanPedestrianAccessAttribute_NO_THROUGH_TRAFFIC = RouteSpanPedestrianAccessAttribute.AddMember("NO_THROUGH_TRAFFIC", smithyprelude.Unit)
+
+	RouteSpanPedestrianAccessAttribute_PARK = RouteSpanPedestrianAccessAttribute.AddMember("PARK", smithyprelude.Unit)
+
+	RouteSpanPedestrianAccessAttribute_STAIRS = RouteSpanPedestrianAccessAttribute.AddMember("STAIRS", smithyprelude.Unit)
+
+	RouteSpanPedestrianAccessAttribute_TOLL_ROAD = RouteSpanPedestrianAccessAttribute.AddMember("TOLL_ROAD", smithyprelude.Unit)
+
+	_RouteSpanPedestrianAccessAttributeList_member = _RouteSpanPedestrianAccessAttributeList.AddMember("member", RouteSpanPedestrianAccessAttribute)
+
+	RouteSpanRoadAttribute_BRIDGE = RouteSpanRoadAttribute.AddMember("BRIDGE", smithyprelude.Unit)
+
+	RouteSpanRoadAttribute_BUILT_UP_AREA = RouteSpanRoadAttribute.AddMember("BUILT_UP_AREA", smithyprelude.Unit)
+
+	RouteSpanRoadAttribute_CONTROLLED_ACCESS_HIGHWAY = RouteSpanRoadAttribute.AddMember("CONTROLLED_ACCESS_HIGHWAY", smithyprelude.Unit)
+
+	RouteSpanRoadAttribute_DIRT_ROAD = RouteSpanRoadAttribute.AddMember("DIRT_ROAD", smithyprelude.Unit)
+
+	RouteSpanRoadAttribute_DIVIDED_ROAD = RouteSpanRoadAttribute.AddMember("DIVIDED_ROAD", smithyprelude.Unit)
+
+	RouteSpanRoadAttribute_MOTORWAY = RouteSpanRoadAttribute.AddMember("MOTORWAY", smithyprelude.Unit)
+
+	RouteSpanRoadAttribute_PRIVATE_ROAD = RouteSpanRoadAttribute.AddMember("PRIVATE_ROAD", smithyprelude.Unit)
+
+	RouteSpanRoadAttribute_RAMP = RouteSpanRoadAttribute.AddMember("RAMP", smithyprelude.Unit)
+
+	RouteSpanRoadAttribute_RIGHT_HAND_TRAFFIC = RouteSpanRoadAttribute.AddMember("RIGHT_HAND_TRAFFIC", smithyprelude.Unit)
+
+	RouteSpanRoadAttribute_ROUNDABOUT = RouteSpanRoadAttribute.AddMember("ROUNDABOUT", smithyprelude.Unit)
+
+	RouteSpanRoadAttribute_TUNNEL = RouteSpanRoadAttribute.AddMember("TUNNEL", smithyprelude.Unit)
+
+	RouteSpanRoadAttribute_UNDER_CONSTRUCTION = RouteSpanRoadAttribute.AddMember("UNDER_CONSTRUCTION", smithyprelude.Unit)
+
+	_RouteSpanRoadAttributeList_member = _RouteSpanRoadAttributeList.AddMember("member", RouteSpanRoadAttribute)
+
+	RouteDirection_EAST = RouteDirection.AddMember("EAST", smithyprelude.Unit)
+
+	RouteDirection_NORTH = RouteDirection.AddMember("NORTH", smithyprelude.Unit)
+
+	RouteDirection_SOUTH = RouteDirection.AddMember("SOUTH", smithyprelude.Unit)
+
+	RouteDirection_WEST = RouteDirection.AddMember("WEST", smithyprelude.Unit)
+
+	RouteNumber_Direction = RouteNumber.AddMember("Direction", RouteDirection)
 
 	RouteNumber_Language = RouteNumber.AddMember("Language", _LanguageTag)
 
@@ -3952,29 +6141,47 @@ func init() {
 
 	RouteContinueStepDetails_Intersection = RouteContinueStepDetails.AddMember("Intersection", _LocalizedStringList)
 
+	RouteRoadType_HIGHWAY = RouteRoadType.AddMember("HIGHWAY", smithyprelude.Unit)
+
+	RouteRoadType_RURAL = RouteRoadType.AddMember("RURAL", smithyprelude.Unit)
+
+	RouteRoadType_URBAN = RouteRoadType.AddMember("URBAN", smithyprelude.Unit)
+
 	RouteRoad_RoadName = RouteRoad.AddMember("RoadName", _LocalizedStringList)
 
 	RouteRoad_RouteNumber = RouteRoad.AddMember("RouteNumber", _RouteNumberList)
 
 	RouteRoad_Towards = RouteRoad.AddMember("Towards", _LocalizedStringList)
 
-	RouteRoad_Type = RouteRoad.AddMember("Type", _RouteRoadType)
+	RouteRoad_Type = RouteRoad.AddMember("Type", RouteRoadType)
+
+	RouteSteeringDirection_LEFT = RouteSteeringDirection.AddMember("LEFT", smithyprelude.Unit)
+
+	RouteSteeringDirection_RIGHT = RouteSteeringDirection.AddMember("RIGHT", smithyprelude.Unit)
+
+	RouteSteeringDirection_STRAIGHT = RouteSteeringDirection.AddMember("STRAIGHT", smithyprelude.Unit)
+
+	RouteTurnIntensity_SHARP = RouteTurnIntensity.AddMember("SHARP", smithyprelude.Unit)
+
+	RouteTurnIntensity_SLIGHT = RouteTurnIntensity.AddMember("SLIGHT", smithyprelude.Unit)
+
+	RouteTurnIntensity_TYPICAL = RouteTurnIntensity.AddMember("TYPICAL", smithyprelude.Unit)
 
 	RouteKeepStepDetails_Intersection = RouteKeepStepDetails.AddMember("Intersection", _LocalizedStringList)
 
-	RouteKeepStepDetails_SteeringDirection = RouteKeepStepDetails.AddMember("SteeringDirection", _RouteSteeringDirection)
+	RouteKeepStepDetails_SteeringDirection = RouteKeepStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
 
 	RouteKeepStepDetails_TurnAngle = RouteKeepStepDetails.AddMember("TurnAngle", _TurnAngle)
 
-	RouteKeepStepDetails_TurnIntensity = RouteKeepStepDetails.AddMember("TurnIntensity", _RouteTurnIntensity)
+	RouteKeepStepDetails_TurnIntensity = RouteKeepStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
 
 	RouteRoundaboutEnterStepDetails_Intersection = RouteRoundaboutEnterStepDetails.AddMember("Intersection", _LocalizedStringList)
 
-	RouteRoundaboutEnterStepDetails_SteeringDirection = RouteRoundaboutEnterStepDetails.AddMember("SteeringDirection", _RouteSteeringDirection)
+	RouteRoundaboutEnterStepDetails_SteeringDirection = RouteRoundaboutEnterStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
 
 	RouteRoundaboutEnterStepDetails_TurnAngle = RouteRoundaboutEnterStepDetails.AddMember("TurnAngle", _TurnAngle)
 
-	RouteRoundaboutEnterStepDetails_TurnIntensity = RouteRoundaboutEnterStepDetails.AddMember("TurnIntensity", _RouteTurnIntensity)
+	RouteRoundaboutEnterStepDetails_TurnIntensity = RouteRoundaboutEnterStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
 
 	RouteRoundaboutExitStepDetails_Intersection = RouteRoundaboutExitStepDetails.AddMember("Intersection", _LocalizedStringList)
 
@@ -3982,15 +6189,15 @@ func init() {
 
 	RouteRoundaboutExitStepDetails_RoundaboutAngle = RouteRoundaboutExitStepDetails.AddMember("RoundaboutAngle", _RoundaboutAngle)
 
-	RouteRoundaboutExitStepDetails_SteeringDirection = RouteRoundaboutExitStepDetails.AddMember("SteeringDirection", _RouteSteeringDirection)
+	RouteRoundaboutExitStepDetails_SteeringDirection = RouteRoundaboutExitStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
 
 	RouteRoundaboutPassStepDetails_Intersection = RouteRoundaboutPassStepDetails.AddMember("Intersection", _LocalizedStringList)
 
-	RouteRoundaboutPassStepDetails_SteeringDirection = RouteRoundaboutPassStepDetails.AddMember("SteeringDirection", _RouteSteeringDirection)
+	RouteRoundaboutPassStepDetails_SteeringDirection = RouteRoundaboutPassStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
 
 	RouteRoundaboutPassStepDetails_TurnAngle = RouteRoundaboutPassStepDetails.AddMember("TurnAngle", _TurnAngle)
 
-	RouteRoundaboutPassStepDetails_TurnIntensity = RouteRoundaboutPassStepDetails.AddMember("TurnIntensity", _RouteTurnIntensity)
+	RouteRoundaboutPassStepDetails_TurnIntensity = RouteRoundaboutPassStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
 
 	RouteSignpostLabel_RouteNumber = RouteSignpostLabel.AddMember("RouteNumber", RouteNumber)
 
@@ -4002,11 +6209,27 @@ func init() {
 
 	RouteTurnStepDetails_Intersection = RouteTurnStepDetails.AddMember("Intersection", _LocalizedStringList)
 
-	RouteTurnStepDetails_SteeringDirection = RouteTurnStepDetails.AddMember("SteeringDirection", _RouteSteeringDirection)
+	RouteTurnStepDetails_SteeringDirection = RouteTurnStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
 
 	RouteTurnStepDetails_TurnAngle = RouteTurnStepDetails.AddMember("TurnAngle", _TurnAngle)
 
-	RouteTurnStepDetails_TurnIntensity = RouteTurnStepDetails.AddMember("TurnIntensity", _RouteTurnIntensity)
+	RouteTurnStepDetails_TurnIntensity = RouteTurnStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
+
+	RoutePedestrianTravelStepType_ARRIVE = RoutePedestrianTravelStepType.AddMember("ARRIVE", smithyprelude.Unit)
+
+	RoutePedestrianTravelStepType_CONTINUE = RoutePedestrianTravelStepType.AddMember("CONTINUE", smithyprelude.Unit)
+
+	RoutePedestrianTravelStepType_DEPART = RoutePedestrianTravelStepType.AddMember("DEPART", smithyprelude.Unit)
+
+	RoutePedestrianTravelStepType_KEEP = RoutePedestrianTravelStepType.AddMember("KEEP", smithyprelude.Unit)
+
+	RoutePedestrianTravelStepType_ROUNDABOUT_ENTER = RoutePedestrianTravelStepType.AddMember("ROUNDABOUT_ENTER", smithyprelude.Unit)
+
+	RoutePedestrianTravelStepType_ROUNDABOUT_EXIT = RoutePedestrianTravelStepType.AddMember("ROUNDABOUT_EXIT", smithyprelude.Unit)
+
+	RoutePedestrianTravelStepType_ROUNDABOUT_PASS = RoutePedestrianTravelStepType.AddMember("ROUNDABOUT_PASS", smithyprelude.Unit)
+
+	RoutePedestrianTravelStepType_TURN = RoutePedestrianTravelStepType.AddMember("TURN", smithyprelude.Unit)
 
 	RoutePedestrianTravelStep_ContinueStepDetails = RoutePedestrianTravelStep.AddMember("ContinueStepDetails", RouteContinueStepDetails)
 
@@ -4036,9 +6259,11 @@ func init() {
 
 	RoutePedestrianTravelStep_TurnStepDetails = RoutePedestrianTravelStep.AddMember("TurnStepDetails", RouteTurnStepDetails)
 
-	RoutePedestrianTravelStep_Type = RoutePedestrianTravelStep.AddMember("Type", _RoutePedestrianTravelStepType)
+	RoutePedestrianTravelStep_Type = RoutePedestrianTravelStep.AddMember("Type", RoutePedestrianTravelStepType)
 
 	_RoutePedestrianTravelStepList_member = _RoutePedestrianTravelStepList.AddMember("member", RoutePedestrianTravelStep)
+
+	RoutePedestrianLegDetails_AfterTravelSteps = RoutePedestrianLegDetails.AddMember("AfterTravelSteps", _RoutePedestrianAfterTravelStepList)
 
 	RoutePedestrianLegDetails_Arrival = RoutePedestrianLegDetails.AddMember("Arrival", RoutePedestrianArrival)
 
@@ -4054,15 +6279,99 @@ func init() {
 
 	RoutePedestrianLegDetails_TravelSteps = RoutePedestrianLegDetails.AddMember("TravelSteps", _RoutePedestrianTravelStepList)
 
+	RouteLegTravelMode_CAR = RouteLegTravelMode.AddMember("CAR", smithyprelude.Unit)
+
+	RouteLegTravelMode_FERRY = RouteLegTravelMode.AddMember("FERRY", smithyprelude.Unit)
+
+	RouteLegTravelMode_PEDESTRIAN = RouteLegTravelMode.AddMember("PEDESTRIAN", smithyprelude.Unit)
+
+	RouteLegTravelMode_SCOOTER = RouteLegTravelMode.AddMember("SCOOTER", smithyprelude.Unit)
+
+	RouteLegTravelMode_TRUCK = RouteLegTravelMode.AddMember("TRUCK", smithyprelude.Unit)
+
+	RouteLegTravelMode_CAR_SHUTTLE_TRAIN = RouteLegTravelMode.AddMember("CAR_SHUTTLE_TRAIN", smithyprelude.Unit)
+
+	RouteLegTravelMode_AERIAL_TRAMWAY = RouteLegTravelMode.AddMember("AERIAL_TRAMWAY", smithyprelude.Unit)
+
+	RouteLegTravelMode_AIRPLANE = RouteLegTravelMode.AddMember("AIRPLANE", smithyprelude.Unit)
+
+	RouteLegTravelMode_BUS = RouteLegTravelMode.AddMember("BUS", smithyprelude.Unit)
+
+	RouteLegTravelMode_BUS_RAPID_TRANSIT = RouteLegTravelMode.AddMember("BUS_RAPID_TRANSIT", smithyprelude.Unit)
+
+	RouteLegTravelMode_CITY_TRAIN = RouteLegTravelMode.AddMember("CITY_TRAIN", smithyprelude.Unit)
+
+	RouteLegTravelMode_FUNICULAR_RAILWAY = RouteLegTravelMode.AddMember("FUNICULAR_RAILWAY", smithyprelude.Unit)
+
+	RouteLegTravelMode_HIGH_SPEED_TRAIN = RouteLegTravelMode.AddMember("HIGH_SPEED_TRAIN", smithyprelude.Unit)
+
+	RouteLegTravelMode_INTERCITY_TRAIN = RouteLegTravelMode.AddMember("INTERCITY_TRAIN", smithyprelude.Unit)
+
+	RouteLegTravelMode_INTERREGIONAL_TRAIN = RouteLegTravelMode.AddMember("INTERREGIONAL_TRAIN", smithyprelude.Unit)
+
+	RouteLegTravelMode_LIGHT_RAIL = RouteLegTravelMode.AddMember("LIGHT_RAIL", smithyprelude.Unit)
+
+	RouteLegTravelMode_MONORAIL = RouteLegTravelMode.AddMember("MONORAIL", smithyprelude.Unit)
+
+	RouteLegTravelMode_PRIVATE_BUS = RouteLegTravelMode.AddMember("PRIVATE_BUS", smithyprelude.Unit)
+
+	RouteLegTravelMode_REGIONAL_TRAIN = RouteLegTravelMode.AddMember("REGIONAL_TRAIN", smithyprelude.Unit)
+
+	RouteLegTravelMode_SUBWAY = RouteLegTravelMode.AddMember("SUBWAY", smithyprelude.Unit)
+
+	RouteLegType_FERRY = RouteLegType.AddMember("FERRY", smithyprelude.Unit)
+
+	RouteLegType_PEDESTRIAN = RouteLegType.AddMember("PEDESTRIAN", smithyprelude.Unit)
+
+	RouteLegType_VEHICLE = RouteLegType.AddMember("VEHICLE", smithyprelude.Unit)
+
+	RouteLegType_RENTAL = RouteLegType.AddMember("RENTAL", smithyprelude.Unit)
+
+	RouteLegType_TAXI = RouteLegType.AddMember("TAXI", smithyprelude.Unit)
+
+	RouteLegType_TRANSIT = RouteLegType.AddMember("TRANSIT", smithyprelude.Unit)
+
+	RouteChargeStepDetails_ArrivalCharge = RouteChargeStepDetails.AddMember("ArrivalCharge", _EnergyKilowattHours)
+
+	RouteChargeStepDetails_ConsumablePower = RouteChargeStepDetails.AddMember("ConsumablePower", _PowerKilowatts)
+
+	RouteChargeStepDetails_DesiredCharge = RouteChargeStepDetails.AddMember("DesiredCharge", _EnergyKilowattHours)
+
+	RouteVehicleAfterTravelStepType_PARK = RouteVehicleAfterTravelStepType.AddMember("PARK", smithyprelude.Unit)
+
+	RouteVehicleAfterTravelStep_ChargeStepDetails = RouteVehicleAfterTravelStep.AddMember("ChargeStepDetails", RouteChargeStepDetails)
+
+	RouteVehicleAfterTravelStep_Duration = RouteVehicleAfterTravelStep.AddMember("Duration", _DurationSeconds)
+
+	RouteVehicleAfterTravelStep_Instruction = RouteVehicleAfterTravelStep.AddMember("Instruction", _SensitiveString)
+
+	RouteVehicleAfterTravelStep_Type = RouteVehicleAfterTravelStep.AddMember("Type", RouteVehicleAfterTravelStepType)
+
+	_RouteVehicleAfterTravelStepList_member = _RouteVehicleAfterTravelStepList.AddMember("member", RouteVehicleAfterTravelStep)
+
+	RouteVehiclePlaceType_ACCESS_POINT = RouteVehiclePlaceType.AddMember("ACCESS_POINT", smithyprelude.Unit)
+
+	RouteVehiclePlaceType_DOCKING_STATION = RouteVehiclePlaceType.AddMember("DOCKING_STATION", smithyprelude.Unit)
+
+	RouteVehiclePlaceType_PARKING_LOT = RouteVehiclePlaceType.AddMember("PARKING_LOT", smithyprelude.Unit)
+
+	RouteVehiclePlaceType_STATION = RouteVehiclePlaceType.AddMember("STATION", smithyprelude.Unit)
+
 	RouteVehiclePlace_Name = RouteVehiclePlace.AddMember("Name", _SensitiveString)
 
 	RouteVehiclePlace_OriginalPosition = RouteVehiclePlace.AddMember("OriginalPosition", _Position23)
 
 	RouteVehiclePlace_Position = RouteVehiclePlace.AddMember("Position", _Position23)
 
-	RouteVehiclePlace_SideOfStreet = RouteVehiclePlace.AddMember("SideOfStreet", _RouteSideOfStreet)
+	RouteVehiclePlace_SideOfStreet = RouteVehiclePlace.AddMember("SideOfStreet", RouteSideOfStreet)
 
 	RouteVehiclePlace_WaypointIndex = RouteVehiclePlace.AddMember("WaypointIndex", _SensitiveInteger)
+
+	RouteVehiclePlace_AccessPointDetails = RouteVehiclePlace.AddMember("AccessPointDetails", RouteAccessPointDetails)
+
+	RouteVehiclePlace_StationDetails = RouteVehiclePlace.AddMember("StationDetails", RouteStationDetails)
+
+	RouteVehiclePlace_Type = RouteVehiclePlace.AddMember("Type", RouteVehiclePlaceType)
 
 	RouteVehicleArrival_Place = RouteVehicleArrival.AddMember("Place", RouteVehiclePlace)
 
@@ -4072,27 +6381,147 @@ func init() {
 
 	RouteVehicleDeparture_Time = RouteVehicleDeparture.AddMember("Time", _TimestampWithTimezoneOffset)
 
+	RouteVehicleIncidentSeverity_CRITICAL = RouteVehicleIncidentSeverity.AddMember("CRITICAL", smithyprelude.Unit)
+
+	RouteVehicleIncidentSeverity_HIGH = RouteVehicleIncidentSeverity.AddMember("HIGH", smithyprelude.Unit)
+
+	RouteVehicleIncidentSeverity_MEDIUM = RouteVehicleIncidentSeverity.AddMember("MEDIUM", smithyprelude.Unit)
+
+	RouteVehicleIncidentSeverity_LOW = RouteVehicleIncidentSeverity.AddMember("LOW", smithyprelude.Unit)
+
+	RouteVehicleIncidentType_ACCIDENT = RouteVehicleIncidentType.AddMember("ACCIDENT", smithyprelude.Unit)
+
+	RouteVehicleIncidentType_CONGESTION = RouteVehicleIncidentType.AddMember("CONGESTION", smithyprelude.Unit)
+
+	RouteVehicleIncidentType_CONSTRUCTION = RouteVehicleIncidentType.AddMember("CONSTRUCTION", smithyprelude.Unit)
+
+	RouteVehicleIncidentType_DISABLED_VEHICLE = RouteVehicleIncidentType.AddMember("DISABLED_VEHICLE", smithyprelude.Unit)
+
+	RouteVehicleIncidentType_LANE_RESTRICTION = RouteVehicleIncidentType.AddMember("LANE_RESTRICTION", smithyprelude.Unit)
+
+	RouteVehicleIncidentType_MASS_TRANSIT = RouteVehicleIncidentType.AddMember("MASS_TRANSIT", smithyprelude.Unit)
+
+	RouteVehicleIncidentType_OTHER = RouteVehicleIncidentType.AddMember("OTHER", smithyprelude.Unit)
+
+	RouteVehicleIncidentType_PLANNED_EVENT = RouteVehicleIncidentType.AddMember("PLANNED_EVENT", smithyprelude.Unit)
+
+	RouteVehicleIncidentType_ROAD_CLOSURE = RouteVehicleIncidentType.AddMember("ROAD_CLOSURE", smithyprelude.Unit)
+
+	RouteVehicleIncidentType_ROAD_HAZARD = RouteVehicleIncidentType.AddMember("ROAD_HAZARD", smithyprelude.Unit)
+
+	RouteVehicleIncidentType_WEATHER = RouteVehicleIncidentType.AddMember("WEATHER", smithyprelude.Unit)
+
 	RouteVehicleIncident_Description = RouteVehicleIncident.AddMember("Description", _SensitiveString)
 
 	RouteVehicleIncident_EndTime = RouteVehicleIncident.AddMember("EndTime", _TimestampWithTimezoneOffset)
 
-	RouteVehicleIncident_Severity = RouteVehicleIncident.AddMember("Severity", _RouteVehicleIncidentSeverity)
+	RouteVehicleIncident_Severity = RouteVehicleIncident.AddMember("Severity", RouteVehicleIncidentSeverity)
 
 	RouteVehicleIncident_StartTime = RouteVehicleIncident.AddMember("StartTime", _TimestampWithTimezoneOffset)
 
-	RouteVehicleIncident_Type = RouteVehicleIncident.AddMember("Type", _RouteVehicleIncidentType)
+	RouteVehicleIncident_Type = RouteVehicleIncident.AddMember("Type", RouteVehicleIncidentType)
 
 	_RouteVehicleIncidentList_member = _RouteVehicleIncidentList.AddMember("member", RouteVehicleIncident)
+
+	RouteVehicleNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = RouteVehicleNoticeCode.AddMember("ACCURATE_POLYLINE_UNAVAILABLE", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_OTHER = RouteVehicleNoticeCode.AddMember("OTHER", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_POTENTIAL_VIOLATED_AVOID_TOLL_ROAD_USAGE = RouteVehicleNoticeCode.AddMember("POTENTIAL_VIOLATED_AVOID_TOLL_ROAD_USAGE", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_POTENTIAL_VIOLATED_CARPOOL_USAGE = RouteVehicleNoticeCode.AddMember("POTENTIAL_VIOLATED_CARPOOL_USAGE", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_POTENTIAL_VIOLATED_TURN_RESTRICTION_USAGE = RouteVehicleNoticeCode.AddMember("POTENTIAL_VIOLATED_TURN_RESTRICTION_USAGE", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE = RouteVehicleNoticeCode.AddMember("POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_POTENTIAL_VIOLATED_ZONE_RESTRICTION_USAGE = RouteVehicleNoticeCode.AddMember("POTENTIAL_VIOLATED_ZONE_RESTRICTION_USAGE", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_SEASONAL_CLOSURE = RouteVehicleNoticeCode.AddMember("SEASONAL_CLOSURE", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_TOLLS_DATA_TEMPORARILY_UNAVAILABLE = RouteVehicleNoticeCode.AddMember("TOLLS_DATA_TEMPORARILY_UNAVAILABLE", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_TOLLS_DATA_UNAVAILABLE = RouteVehicleNoticeCode.AddMember("TOLLS_DATA_UNAVAILABLE", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_TOLL_TRANSPONDER = RouteVehicleNoticeCode.AddMember("TOLL_TRANSPONDER", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_AVOID_CONTROLLED_ACCESS_HIGHWAY = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_CONTROLLED_ACCESS_HIGHWAY", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_AVOID_DIFFICULT_TURNS = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_DIFFICULT_TURNS", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_AVOID_DIRT_ROAD = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_DIRT_ROAD", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_AVOID_SEASONAL_CLOSURE = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_SEASONAL_CLOSURE", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_AVOID_TOLL_ROAD = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_TOLL_ROAD", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_AVOID_TOLL_TRANSPONDER = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_TOLL_TRANSPONDER", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_AVOID_TRUCK_ROAD_TYPE = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_TRUCK_ROAD_TYPE", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_AVOID_TUNNEL = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_TUNNEL", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_AVOID_U_TURNS = RouteVehicleNoticeCode.AddMember("VIOLATED_AVOID_U_TURNS", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_BLOCKED_ROAD = RouteVehicleNoticeCode.AddMember("VIOLATED_BLOCKED_ROAD", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_CARPOOL = RouteVehicleNoticeCode.AddMember("VIOLATED_CARPOOL", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_EMERGENCY_GATE = RouteVehicleNoticeCode.AddMember("VIOLATED_EMERGENCY_GATE", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_START_DIRECTION = RouteVehicleNoticeCode.AddMember("VIOLATED_START_DIRECTION", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_TURN_RESTRICTION = RouteVehicleNoticeCode.AddMember("VIOLATED_TURN_RESTRICTION", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_VEHICLE_RESTRICTION = RouteVehicleNoticeCode.AddMember("VIOLATED_VEHICLE_RESTRICTION", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_VIOLATED_ZONE_RESTRICTION = RouteVehicleNoticeCode.AddMember("VIOLATED_ZONE_RESTRICTION", smithyprelude.Unit)
+
+	RouteVehicleNoticeCode_TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS = RouteVehicleNoticeCode.AddMember("TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS", smithyprelude.Unit)
 
 	RouteNoticeDetailRange_Min = RouteNoticeDetailRange.AddMember("Min", smithyprelude.Integer)
 
 	RouteNoticeDetailRange_Max = RouteNoticeDetailRange.AddMember("Max", smithyprelude.Integer)
 
-	_RouteHazardousCargoTypeList_member = _RouteHazardousCargoTypeList.AddMember("member", _RouteHazardousCargoType)
+	RouteHazardousCargoType_COMBUSTIBLE = RouteHazardousCargoType.AddMember("COMBUSTIBLE", smithyprelude.Unit)
 
-	RouteWeightConstraint_Type = RouteWeightConstraint.AddMember("Type", _RouteWeightConstraintType)
+	RouteHazardousCargoType_CORROSIVE = RouteHazardousCargoType.AddMember("CORROSIVE", smithyprelude.Unit)
+
+	RouteHazardousCargoType_EXPLOSIVE = RouteHazardousCargoType.AddMember("EXPLOSIVE", smithyprelude.Unit)
+
+	RouteHazardousCargoType_FLAMMABLE = RouteHazardousCargoType.AddMember("FLAMMABLE", smithyprelude.Unit)
+
+	RouteHazardousCargoType_GAS = RouteHazardousCargoType.AddMember("GAS", smithyprelude.Unit)
+
+	RouteHazardousCargoType_HARMFUL_TO_WATER = RouteHazardousCargoType.AddMember("HARMFUL_TO_WATER", smithyprelude.Unit)
+
+	RouteHazardousCargoType_ORGANIC = RouteHazardousCargoType.AddMember("ORGANIC", smithyprelude.Unit)
+
+	RouteHazardousCargoType_OTHER = RouteHazardousCargoType.AddMember("OTHER", smithyprelude.Unit)
+
+	RouteHazardousCargoType_POISON = RouteHazardousCargoType.AddMember("POISON", smithyprelude.Unit)
+
+	RouteHazardousCargoType_POISONOUS_INHALATION = RouteHazardousCargoType.AddMember("POISONOUS_INHALATION", smithyprelude.Unit)
+
+	RouteHazardousCargoType_RADIOACTIVE = RouteHazardousCargoType.AddMember("RADIOACTIVE", smithyprelude.Unit)
+
+	_RouteHazardousCargoTypeList_member = _RouteHazardousCargoTypeList.AddMember("member", RouteHazardousCargoType)
+
+	RouteWeightConstraintType_CURRENT = RouteWeightConstraintType.AddMember("CURRENT", smithyprelude.Unit)
+
+	RouteWeightConstraintType_GROSS = RouteWeightConstraintType.AddMember("GROSS", smithyprelude.Unit)
+
+	RouteWeightConstraintType_UNKNOWN = RouteWeightConstraintType.AddMember("UNKNOWN", smithyprelude.Unit)
+
+	RouteWeightConstraint_Type = RouteWeightConstraint.AddMember("Type", RouteWeightConstraintType)
 
 	RouteWeightConstraint_Value = RouteWeightConstraint.AddMember("Value", _WeightKilograms)
+
+	RouteTruckType_LIGHT_TRUCK = RouteTruckType.AddMember("LIGHT_TRUCK", smithyprelude.Unit)
+
+	RouteTruckType_STRAIGHT_TRUCK = RouteTruckType.AddMember("STRAIGHT_TRUCK", smithyprelude.Unit)
+
+	RouteTruckType_TRACTOR = RouteTruckType.AddMember("TRACTOR", smithyprelude.Unit)
 
 	RouteViolatedConstraints_AllHazardsRestricted = RouteViolatedConstraints.AddMember("AllHazardsRestricted", _SensitiveBoolean)
 
@@ -4128,7 +6557,7 @@ func init() {
 
 	RouteViolatedConstraints_TruckRoadType = RouteViolatedConstraints.AddMember("TruckRoadType", smithyprelude.String)
 
-	RouteViolatedConstraints_TruckType = RouteViolatedConstraints.AddMember("TruckType", _RouteTruckType)
+	RouteViolatedConstraints_TruckType = RouteViolatedConstraints.AddMember("TruckType", RouteTruckType)
 
 	RouteViolatedConstraints_TunnelRestrictionCode = RouteViolatedConstraints.AddMember("TunnelRestrictionCode", _TunnelRestrictionCode)
 
@@ -4138,19 +6567,47 @@ func init() {
 
 	_RouteVehicleNoticeDetailList_member = _RouteVehicleNoticeDetailList.AddMember("member", RouteVehicleNoticeDetail)
 
-	RouteVehicleNotice_Code = RouteVehicleNotice.AddMember("Code", _RouteVehicleNoticeCode)
+	RouteVehicleNotice_Code = RouteVehicleNotice.AddMember("Code", RouteVehicleNoticeCode)
 
 	RouteVehicleNotice_Details = RouteVehicleNotice.AddMember("Details", _RouteVehicleNoticeDetailList)
 
-	RouteVehicleNotice_Impact = RouteVehicleNotice.AddMember("Impact", _RouteNoticeImpact)
+	RouteVehicleNotice_Impact = RouteVehicleNotice.AddMember("Impact", RouteNoticeImpact)
 
 	_RouteVehicleNoticeList_member = _RouteVehicleNoticeList.AddMember("member", RouteVehicleNotice)
 
-	_RouteSpanCarAccessAttributeList_member = _RouteSpanCarAccessAttributeList.AddMember("member", _RouteSpanCarAccessAttribute)
+	RouteSpanCarAccessAttribute_ALLOWED = RouteSpanCarAccessAttribute.AddMember("ALLOWED", smithyprelude.Unit)
 
-	_RouteSpanScooterAccessAttributeList_member = _RouteSpanScooterAccessAttributeList.AddMember("member", _RouteSpanScooterAccessAttribute)
+	RouteSpanCarAccessAttribute_NO_THROUGH_TRAFFIC = RouteSpanCarAccessAttribute.AddMember("NO_THROUGH_TRAFFIC", smithyprelude.Unit)
 
-	_RouteSpanTruckAccessAttributeList_member = _RouteSpanTruckAccessAttributeList.AddMember("member", _RouteSpanTruckAccessAttribute)
+	RouteSpanCarAccessAttribute_TOLL_ROAD = RouteSpanCarAccessAttribute.AddMember("TOLL_ROAD", smithyprelude.Unit)
+
+	_RouteSpanCarAccessAttributeList_member = _RouteSpanCarAccessAttributeList.AddMember("member", RouteSpanCarAccessAttribute)
+
+	RouteSpanGateAttribute_EMERGENCY = RouteSpanGateAttribute.AddMember("EMERGENCY", smithyprelude.Unit)
+
+	RouteSpanGateAttribute_KEY_ACCESS = RouteSpanGateAttribute.AddMember("KEY_ACCESS", smithyprelude.Unit)
+
+	RouteSpanGateAttribute_PERMISSION_REQUIRED = RouteSpanGateAttribute.AddMember("PERMISSION_REQUIRED", smithyprelude.Unit)
+
+	RouteSpanRailwayCrossingAttribute_PROTECTED = RouteSpanRailwayCrossingAttribute.AddMember("PROTECTED", smithyprelude.Unit)
+
+	RouteSpanRailwayCrossingAttribute_UNPROTECTED = RouteSpanRailwayCrossingAttribute.AddMember("UNPROTECTED", smithyprelude.Unit)
+
+	RouteSpanScooterAccessAttribute_ALLOWED = RouteSpanScooterAccessAttribute.AddMember("ALLOWED", smithyprelude.Unit)
+
+	RouteSpanScooterAccessAttribute_NO_THROUGH_TRAFFIC = RouteSpanScooterAccessAttribute.AddMember("NO_THROUGH_TRAFFIC", smithyprelude.Unit)
+
+	RouteSpanScooterAccessAttribute_TOLL_ROAD = RouteSpanScooterAccessAttribute.AddMember("TOLL_ROAD", smithyprelude.Unit)
+
+	_RouteSpanScooterAccessAttributeList_member = _RouteSpanScooterAccessAttributeList.AddMember("member", RouteSpanScooterAccessAttribute)
+
+	RouteSpanTruckAccessAttribute_ALLOWED = RouteSpanTruckAccessAttribute.AddMember("ALLOWED", smithyprelude.Unit)
+
+	RouteSpanTruckAccessAttribute_NO_THROUGH_TRAFFIC = RouteSpanTruckAccessAttribute.AddMember("NO_THROUGH_TRAFFIC", smithyprelude.Unit)
+
+	RouteSpanTruckAccessAttribute_TOLL_ROAD = RouteSpanTruckAccessAttribute.AddMember("TOLL_ROAD", smithyprelude.Unit)
+
+	_RouteSpanTruckAccessAttributeList_member = _RouteSpanTruckAccessAttributeList.AddMember("member", RouteSpanTruckAccessAttribute)
 
 	RouteVehicleSpan_BestCaseDuration = RouteVehicleSpan.AddMember("BestCaseDuration", _DurationSeconds)
 
@@ -4166,7 +6623,7 @@ func init() {
 
 	RouteVehicleSpan_FunctionalClassification = RouteVehicleSpan.AddMember("FunctionalClassification", _SensitiveInteger)
 
-	RouteVehicleSpan_Gate = RouteVehicleSpan.AddMember("Gate", _RouteSpanGateAttribute)
+	RouteVehicleSpan_Gate = RouteVehicleSpan.AddMember("Gate", RouteSpanGateAttribute)
 
 	RouteVehicleSpan_GeometryOffset = RouteVehicleSpan.AddMember("GeometryOffset", smithyprelude.Integer)
 
@@ -4176,7 +6633,7 @@ func init() {
 
 	RouteVehicleSpan_Notices = RouteVehicleSpan.AddMember("Notices", _IndexList)
 
-	RouteVehicleSpan_RailwayCrossing = RouteVehicleSpan.AddMember("RailwayCrossing", _RouteSpanRailwayCrossingAttribute)
+	RouteVehicleSpan_RailwayCrossing = RouteVehicleSpan.AddMember("RailwayCrossing", RouteSpanRailwayCrossingAttribute)
 
 	RouteVehicleSpan_Region = RouteVehicleSpan.AddMember("Region", _SensitiveString)
 
@@ -4240,7 +6697,17 @@ func init() {
 
 	RouteTollPrice_Value = RouteTollPrice.AddMember("Value", _SensitiveDouble)
 
-	RouteTollPassValidityPeriod_Period = RouteTollPassValidityPeriod.AddMember("Period", _RouteTollPassValidityPeriodType)
+	RouteTollPassValidityPeriodType_ANNUAL = RouteTollPassValidityPeriodType.AddMember("ANNUAL", smithyprelude.Unit)
+
+	RouteTollPassValidityPeriodType_DAYS = RouteTollPassValidityPeriodType.AddMember("DAYS", smithyprelude.Unit)
+
+	RouteTollPassValidityPeriodType_EXTENDED_ANNUAL = RouteTollPassValidityPeriodType.AddMember("EXTENDED_ANNUAL", smithyprelude.Unit)
+
+	RouteTollPassValidityPeriodType_MINUTES = RouteTollPassValidityPeriodType.AddMember("MINUTES", smithyprelude.Unit)
+
+	RouteTollPassValidityPeriodType_MONTHS = RouteTollPassValidityPeriodType.AddMember("MONTHS", smithyprelude.Unit)
+
+	RouteTollPassValidityPeriod_Period = RouteTollPassValidityPeriod.AddMember("Period", RouteTollPassValidityPeriodType)
 
 	RouteTollPassValidityPeriod_PeriodCount = RouteTollPassValidityPeriod.AddMember("PeriodCount", _SensitiveInteger)
 
@@ -4254,7 +6721,23 @@ func init() {
 
 	RouteTollPass_ValidityPeriod = RouteTollPass.AddMember("ValidityPeriod", RouteTollPassValidityPeriod)
 
-	_RouteTollPaymentMethodList_member = _RouteTollPaymentMethodList.AddMember("member", _RouteTollPaymentMethod)
+	RouteTollPaymentMethod_BANK_CARD = RouteTollPaymentMethod.AddMember("BANK_CARD", smithyprelude.Unit)
+
+	RouteTollPaymentMethod_CASH = RouteTollPaymentMethod.AddMember("CASH", smithyprelude.Unit)
+
+	RouteTollPaymentMethod_CASH_EXACT = RouteTollPaymentMethod.AddMember("CASH_EXACT", smithyprelude.Unit)
+
+	RouteTollPaymentMethod_CREDIT_CARD = RouteTollPaymentMethod.AddMember("CREDIT_CARD", smithyprelude.Unit)
+
+	RouteTollPaymentMethod_PASS_SUBSCRIPTION = RouteTollPaymentMethod.AddMember("PASS_SUBSCRIPTION", smithyprelude.Unit)
+
+	RouteTollPaymentMethod_TRAVEL_CARD = RouteTollPaymentMethod.AddMember("TRAVEL_CARD", smithyprelude.Unit)
+
+	RouteTollPaymentMethod_TRANSPONDER = RouteTollPaymentMethod.AddMember("TRANSPONDER", smithyprelude.Unit)
+
+	RouteTollPaymentMethod_VIDEO_TOLL = RouteTollPaymentMethod.AddMember("VIDEO_TOLL", smithyprelude.Unit)
+
+	_RouteTollPaymentMethodList_member = _RouteTollPaymentMethodList.AddMember("member", RouteTollPaymentMethod)
 
 	RouteTransponder_SystemName = RouteTransponder.AddMember("SystemName", _SensitiveString)
 
@@ -4294,45 +6777,71 @@ func init() {
 
 	RouteContinueHighwayStepDetails_Intersection = RouteContinueHighwayStepDetails.AddMember("Intersection", _LocalizedStringList)
 
-	RouteContinueHighwayStepDetails_SteeringDirection = RouteContinueHighwayStepDetails.AddMember("SteeringDirection", _RouteSteeringDirection)
+	RouteContinueHighwayStepDetails_SteeringDirection = RouteContinueHighwayStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
 
 	RouteContinueHighwayStepDetails_TurnAngle = RouteContinueHighwayStepDetails.AddMember("TurnAngle", _TurnAngle)
 
-	RouteContinueHighwayStepDetails_TurnIntensity = RouteContinueHighwayStepDetails.AddMember("TurnIntensity", _RouteTurnIntensity)
+	RouteContinueHighwayStepDetails_TurnIntensity = RouteContinueHighwayStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
 
 	RouteEnterHighwayStepDetails_Intersection = RouteEnterHighwayStepDetails.AddMember("Intersection", _LocalizedStringList)
 
-	RouteEnterHighwayStepDetails_SteeringDirection = RouteEnterHighwayStepDetails.AddMember("SteeringDirection", _RouteSteeringDirection)
+	RouteEnterHighwayStepDetails_SteeringDirection = RouteEnterHighwayStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
 
 	RouteEnterHighwayStepDetails_TurnAngle = RouteEnterHighwayStepDetails.AddMember("TurnAngle", _TurnAngle)
 
-	RouteEnterHighwayStepDetails_TurnIntensity = RouteEnterHighwayStepDetails.AddMember("TurnIntensity", _RouteTurnIntensity)
+	RouteEnterHighwayStepDetails_TurnIntensity = RouteEnterHighwayStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
 
 	RouteExitStepDetails_Intersection = RouteExitStepDetails.AddMember("Intersection", _LocalizedStringList)
 
 	RouteExitStepDetails_RelativeExit = RouteExitStepDetails.AddMember("RelativeExit", _SensitiveInteger)
 
-	RouteExitStepDetails_SteeringDirection = RouteExitStepDetails.AddMember("SteeringDirection", _RouteSteeringDirection)
+	RouteExitStepDetails_SteeringDirection = RouteExitStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
 
 	RouteExitStepDetails_TurnAngle = RouteExitStepDetails.AddMember("TurnAngle", _TurnAngle)
 
-	RouteExitStepDetails_TurnIntensity = RouteExitStepDetails.AddMember("TurnIntensity", _RouteTurnIntensity)
+	RouteExitStepDetails_TurnIntensity = RouteExitStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
 
 	RouteRampStepDetails_Intersection = RouteRampStepDetails.AddMember("Intersection", _LocalizedStringList)
 
-	RouteRampStepDetails_SteeringDirection = RouteRampStepDetails.AddMember("SteeringDirection", _RouteSteeringDirection)
+	RouteRampStepDetails_SteeringDirection = RouteRampStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
 
 	RouteRampStepDetails_TurnAngle = RouteRampStepDetails.AddMember("TurnAngle", _TurnAngle)
 
-	RouteRampStepDetails_TurnIntensity = RouteRampStepDetails.AddMember("TurnIntensity", _RouteTurnIntensity)
+	RouteRampStepDetails_TurnIntensity = RouteRampStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
+
+	RouteVehicleTravelStepType_ARRIVE = RouteVehicleTravelStepType.AddMember("ARRIVE", smithyprelude.Unit)
+
+	RouteVehicleTravelStepType_CONTINUE = RouteVehicleTravelStepType.AddMember("CONTINUE", smithyprelude.Unit)
+
+	RouteVehicleTravelStepType_CONTINUE_HIGHWAY = RouteVehicleTravelStepType.AddMember("CONTINUE_HIGHWAY", smithyprelude.Unit)
+
+	RouteVehicleTravelStepType_DEPART = RouteVehicleTravelStepType.AddMember("DEPART", smithyprelude.Unit)
+
+	RouteVehicleTravelStepType_ENTER_HIGHWAY = RouteVehicleTravelStepType.AddMember("ENTER_HIGHWAY", smithyprelude.Unit)
+
+	RouteVehicleTravelStepType_EXIT = RouteVehicleTravelStepType.AddMember("EXIT", smithyprelude.Unit)
+
+	RouteVehicleTravelStepType_KEEP = RouteVehicleTravelStepType.AddMember("KEEP", smithyprelude.Unit)
+
+	RouteVehicleTravelStepType_RAMP = RouteVehicleTravelStepType.AddMember("RAMP", smithyprelude.Unit)
+
+	RouteVehicleTravelStepType_ROUNDABOUT_ENTER = RouteVehicleTravelStepType.AddMember("ROUNDABOUT_ENTER", smithyprelude.Unit)
+
+	RouteVehicleTravelStepType_ROUNDABOUT_EXIT = RouteVehicleTravelStepType.AddMember("ROUNDABOUT_EXIT", smithyprelude.Unit)
+
+	RouteVehicleTravelStepType_ROUNDABOUT_PASS = RouteVehicleTravelStepType.AddMember("ROUNDABOUT_PASS", smithyprelude.Unit)
+
+	RouteVehicleTravelStepType_TURN = RouteVehicleTravelStepType.AddMember("TURN", smithyprelude.Unit)
+
+	RouteVehicleTravelStepType_U_TURN = RouteVehicleTravelStepType.AddMember("U_TURN", smithyprelude.Unit)
 
 	RouteUTurnStepDetails_Intersection = RouteUTurnStepDetails.AddMember("Intersection", _LocalizedStringList)
 
-	RouteUTurnStepDetails_SteeringDirection = RouteUTurnStepDetails.AddMember("SteeringDirection", _RouteSteeringDirection)
+	RouteUTurnStepDetails_SteeringDirection = RouteUTurnStepDetails.AddMember("SteeringDirection", RouteSteeringDirection)
 
 	RouteUTurnStepDetails_TurnAngle = RouteUTurnStepDetails.AddMember("TurnAngle", _TurnAngle)
 
-	RouteUTurnStepDetails_TurnIntensity = RouteUTurnStepDetails.AddMember("TurnIntensity", _RouteTurnIntensity)
+	RouteUTurnStepDetails_TurnIntensity = RouteUTurnStepDetails.AddMember("TurnIntensity", RouteTurnIntensity)
 
 	RouteVehicleTravelStep_ContinueHighwayStepDetails = RouteVehicleTravelStep.AddMember("ContinueHighwayStepDetails", RouteContinueHighwayStepDetails)
 
@@ -4370,17 +6879,25 @@ func init() {
 
 	RouteVehicleTravelStep_TurnStepDetails = RouteVehicleTravelStep.AddMember("TurnStepDetails", RouteTurnStepDetails)
 
-	RouteVehicleTravelStep_Type = RouteVehicleTravelStep.AddMember("Type", _RouteVehicleTravelStepType)
+	RouteVehicleTravelStep_Type = RouteVehicleTravelStep.AddMember("Type", RouteVehicleTravelStepType)
 
 	RouteVehicleTravelStep_UTurnStepDetails = RouteVehicleTravelStep.AddMember("UTurnStepDetails", RouteUTurnStepDetails)
 
 	_RouteVehicleTravelStepList_member = _RouteVehicleTravelStepList.AddMember("member", RouteVehicleTravelStep)
 
-	RouteZone_Category = RouteZone.AddMember("Category", _RouteZoneCategory)
+	RouteZoneCategory_CONGESTION_PRICING = RouteZoneCategory.AddMember("CONGESTION_PRICING", smithyprelude.Unit)
+
+	RouteZoneCategory_ENVIRONMENTAL = RouteZoneCategory.AddMember("ENVIRONMENTAL", smithyprelude.Unit)
+
+	RouteZoneCategory_VIGNETTE = RouteZoneCategory.AddMember("VIGNETTE", smithyprelude.Unit)
+
+	RouteZone_Category = RouteZone.AddMember("Category", RouteZoneCategory)
 
 	RouteZone_Name = RouteZone.AddMember("Name", _SensitiveString)
 
 	_RouteZoneList_member = _RouteZoneList.AddMember("member", RouteZone)
+
+	RouteVehicleLegDetails_AfterTravelSteps = RouteVehicleLegDetails.AddMember("AfterTravelSteps", _RouteVehicleAfterTravelStepList)
 
 	RouteVehicleLegDetails_Arrival = RouteVehicleLegDetails.AddMember("Arrival", RouteVehicleArrival)
 
@@ -4406,6 +6923,654 @@ func init() {
 
 	RouteVehicleLegDetails_Zones = RouteVehicleLegDetails.AddMember("Zones", _RouteZoneList)
 
+	RouteRentalAfterTravelStepType_PARK = RouteRentalAfterTravelStepType.AddMember("PARK", smithyprelude.Unit)
+
+	RouteRentalAfterTravelStep_Duration = RouteRentalAfterTravelStep.AddMember("Duration", _DurationSeconds)
+
+	RouteRentalAfterTravelStep_Instruction = RouteRentalAfterTravelStep.AddMember("Instruction", _SensitiveString)
+
+	RouteRentalAfterTravelStep_Type = RouteRentalAfterTravelStep.AddMember("Type", RouteRentalAfterTravelStepType)
+
+	_RouteRentalAfterTravelStepList_member = _RouteRentalAfterTravelStepList.AddMember("member", RouteRentalAfterTravelStep)
+
+	RouteRentalAgency_Name = RouteRentalAgency.AddMember("Name", _SensitiveString)
+
+	RouteRentalAgency_Url = RouteRentalAgency.AddMember("Url", _SensitiveString)
+
+	RouteRentalPlaceType_ACCESS_POINT = RouteRentalPlaceType.AddMember("ACCESS_POINT", smithyprelude.Unit)
+
+	RouteRentalPlaceType_DOCKING_STATION = RouteRentalPlaceType.AddMember("DOCKING_STATION", smithyprelude.Unit)
+
+	RouteRentalPlaceType_PARKING_LOT = RouteRentalPlaceType.AddMember("PARKING_LOT", smithyprelude.Unit)
+
+	RouteRentalPlaceType_STATION = RouteRentalPlaceType.AddMember("STATION", smithyprelude.Unit)
+
+	RouteRentalPlace_AccessPointDetails = RouteRentalPlace.AddMember("AccessPointDetails", RouteAccessPointDetails)
+
+	RouteRentalPlace_Name = RouteRentalPlace.AddMember("Name", _SensitiveString)
+
+	RouteRentalPlace_OriginalPosition = RouteRentalPlace.AddMember("OriginalPosition", _Position23)
+
+	RouteRentalPlace_Position = RouteRentalPlace.AddMember("Position", _Position23)
+
+	RouteRentalPlace_StationDetails = RouteRentalPlace.AddMember("StationDetails", RouteStationDetails)
+
+	RouteRentalPlace_Type = RouteRentalPlace.AddMember("Type", RouteRentalPlaceType)
+
+	RouteRentalPlace_WaypointIndex = RouteRentalPlace.AddMember("WaypointIndex", _SensitiveInteger)
+
+	RouteRentalArrival_Place = RouteRentalArrival.AddMember("Place", RouteRentalPlace)
+
+	RouteRentalArrival_Time = RouteRentalArrival.AddMember("Time", _TimestampWithTimezoneOffset)
+
+	RouteAttributionType_DISCLAIMER = RouteAttributionType.AddMember("DISCLAIMER", smithyprelude.Unit)
+
+	RouteAttributionType_TARIFF = RouteAttributionType.AddMember("TARIFF", smithyprelude.Unit)
+
+	RouteWebLinkDeviceType_ANDROID = RouteWebLinkDeviceType.AddMember("ANDROID", smithyprelude.Unit)
+
+	RouteWebLinkDeviceType_IOS = RouteWebLinkDeviceType.AddMember("IOS", smithyprelude.Unit)
+
+	RouteWebLinkDeviceType_WEB = RouteWebLinkDeviceType.AddMember("WEB", smithyprelude.Unit)
+
+	RouteWebLink_AnchorText = RouteWebLink.AddMember("AnchorText", _SensitiveString)
+
+	RouteWebLink_Description = RouteWebLink.AddMember("Description", _SensitiveString)
+
+	RouteWebLink_DeviceType = RouteWebLink.AddMember("DeviceType", RouteWebLinkDeviceType)
+
+	RouteWebLink_Url = RouteWebLink.AddMember("Url", _SensitiveString)
+
+	RouteAttribution_AttributionType = RouteAttribution.AddMember("AttributionType", RouteAttributionType)
+
+	RouteAttribution_WebLink = RouteAttribution.AddMember("WebLink", RouteWebLink)
+
+	_RouteAttributionList_member = _RouteAttributionList.AddMember("member", RouteAttribution)
+
+	RouteRentalBeforeTravelStepType_SETUP = RouteRentalBeforeTravelStepType.AddMember("SETUP", smithyprelude.Unit)
+
+	RouteRentalBeforeTravelStep_Duration = RouteRentalBeforeTravelStep.AddMember("Duration", _DurationSeconds)
+
+	RouteRentalBeforeTravelStep_Instruction = RouteRentalBeforeTravelStep.AddMember("Instruction", _SensitiveString)
+
+	RouteRentalBeforeTravelStep_Type = RouteRentalBeforeTravelStep.AddMember("Type", RouteRentalBeforeTravelStepType)
+
+	_RouteRentalBeforeTravelStepList_member = _RouteRentalBeforeTravelStepList.AddMember("member", RouteRentalBeforeTravelStep)
+
+	_RouteWebLinkList_member = _RouteWebLinkList.AddMember("member", RouteWebLink)
+
+	RouteRentalDeparture_Place = RouteRentalDeparture.AddMember("Place", RouteRentalPlace)
+
+	RouteRentalDeparture_Time = RouteRentalDeparture.AddMember("Time", _TimestampWithTimezoneOffset)
+
+	RouteRentalOverviewSummary_Duration = RouteRentalOverviewSummary.AddMember("Duration", _DurationSeconds)
+
+	RouteRentalOverviewSummary_Distance = RouteRentalOverviewSummary.AddMember("Distance", _DistanceMeters)
+
+	RouteRentalTravelOnlySummary_Duration = RouteRentalTravelOnlySummary.AddMember("Duration", _DurationSeconds)
+
+	RouteRentalSummary_Overview = RouteRentalSummary.AddMember("Overview", RouteRentalOverviewSummary)
+
+	RouteRentalSummary_TravelOnly = RouteRentalSummary.AddMember("TravelOnly", RouteRentalTravelOnlySummary)
+
+	RouteEngineType_ELECTRIC = RouteEngineType.AddMember("ELECTRIC", smithyprelude.Unit)
+
+	RouteEngineType_INTERNAL_COMBUSTION = RouteEngineType.AddMember("INTERNAL_COMBUSTION", smithyprelude.Unit)
+
+	RouteEngineType_PLUGIN_HYBRID = RouteEngineType.AddMember("PLUGIN_HYBRID", smithyprelude.Unit)
+
+	RouteRentalMode_ALL = RouteRentalMode.AddMember("ALL", smithyprelude.Unit)
+
+	RouteRentalMode_CAR = RouteRentalMode.AddMember("CAR", smithyprelude.Unit)
+
+	RouteRentalTransportModeDetails_AvailableSeats = RouteRentalTransportModeDetails.AddMember("AvailableSeats", _SensitiveInteger)
+
+	RouteRentalTransportModeDetails_Category = RouteRentalTransportModeDetails.AddMember("Category", _SensitiveString)
+
+	RouteRentalTransportModeDetails_Color = RouteRentalTransportModeDetails.AddMember("Color", _SensitiveString)
+
+	RouteRentalTransportModeDetails_Engine = RouteRentalTransportModeDetails.AddMember("Engine", RouteEngineType)
+
+	RouteRentalTransportModeDetails_LicensePlate = RouteRentalTransportModeDetails.AddMember("LicensePlate", _SensitiveString)
+
+	RouteRentalTransportModeDetails_Mode = RouteRentalTransportModeDetails.AddMember("Mode", RouteRentalMode)
+
+	RouteRentalTransportModeDetails_Model = RouteRentalTransportModeDetails.AddMember("Model", _SensitiveString)
+
+	RouteRentalTransportModeDetails_Name = RouteRentalTransportModeDetails.AddMember("Name", _SensitiveString)
+
+	RouteRentalTransportModeDetails_TextColor = RouteRentalTransportModeDetails.AddMember("TextColor", _SensitiveString)
+
+	RouteRentalTravelStepType_ARRIVE = RouteRentalTravelStepType.AddMember("ARRIVE", smithyprelude.Unit)
+
+	RouteRentalTravelStepType_CONTINUE = RouteRentalTravelStepType.AddMember("CONTINUE", smithyprelude.Unit)
+
+	RouteRentalTravelStepType_DEPART = RouteRentalTravelStepType.AddMember("DEPART", smithyprelude.Unit)
+
+	RouteRentalTravelStepType_EXIT = RouteRentalTravelStepType.AddMember("EXIT", smithyprelude.Unit)
+
+	RouteRentalTravelStepType_KEEP = RouteRentalTravelStepType.AddMember("KEEP", smithyprelude.Unit)
+
+	RouteRentalTravelStepType_RAMP = RouteRentalTravelStepType.AddMember("RAMP", smithyprelude.Unit)
+
+	RouteRentalTravelStepType_ROUNDABOUT_ENTER = RouteRentalTravelStepType.AddMember("ROUNDABOUT_ENTER", smithyprelude.Unit)
+
+	RouteRentalTravelStepType_ROUNDABOUT_EXIT = RouteRentalTravelStepType.AddMember("ROUNDABOUT_EXIT", smithyprelude.Unit)
+
+	RouteRentalTravelStepType_ROUNDABOUT_PASS = RouteRentalTravelStepType.AddMember("ROUNDABOUT_PASS", smithyprelude.Unit)
+
+	RouteRentalTravelStepType_TURN = RouteRentalTravelStepType.AddMember("TURN", smithyprelude.Unit)
+
+	RouteRentalTravelStepType_U_TURN = RouteRentalTravelStepType.AddMember("U_TURN", smithyprelude.Unit)
+
+	RouteRentalTravelStep_ContinueStepDetails = RouteRentalTravelStep.AddMember("ContinueStepDetails", RouteContinueStepDetails)
+
+	RouteRentalTravelStep_Distance = RouteRentalTravelStep.AddMember("Distance", _DistanceMeters)
+
+	RouteRentalTravelStep_Duration = RouteRentalTravelStep.AddMember("Duration", _DurationSeconds)
+
+	RouteRentalTravelStep_ExitStepDetails = RouteRentalTravelStep.AddMember("ExitStepDetails", RouteExitStepDetails)
+
+	RouteRentalTravelStep_GeometryOffset = RouteRentalTravelStep.AddMember("GeometryOffset", smithyprelude.Integer)
+
+	RouteRentalTravelStep_Instruction = RouteRentalTravelStep.AddMember("Instruction", _SensitiveString)
+
+	RouteRentalTravelStep_KeepStepDetails = RouteRentalTravelStep.AddMember("KeepStepDetails", RouteKeepStepDetails)
+
+	RouteRentalTravelStep_RampStepDetails = RouteRentalTravelStep.AddMember("RampStepDetails", RouteRampStepDetails)
+
+	RouteRentalTravelStep_RoundaboutEnterStepDetails = RouteRentalTravelStep.AddMember("RoundaboutEnterStepDetails", RouteRoundaboutEnterStepDetails)
+
+	RouteRentalTravelStep_RoundaboutExitStepDetails = RouteRentalTravelStep.AddMember("RoundaboutExitStepDetails", RouteRoundaboutExitStepDetails)
+
+	RouteRentalTravelStep_RoundaboutPassStepDetails = RouteRentalTravelStep.AddMember("RoundaboutPassStepDetails", RouteRoundaboutPassStepDetails)
+
+	RouteRentalTravelStep_TurnStepDetails = RouteRentalTravelStep.AddMember("TurnStepDetails", RouteTurnStepDetails)
+
+	RouteRentalTravelStep_Type = RouteRentalTravelStep.AddMember("Type", RouteRentalTravelStepType)
+
+	RouteRentalTravelStep_UTurnStepDetails = RouteRentalTravelStep.AddMember("UTurnStepDetails", RouteUTurnStepDetails)
+
+	_RouteRentalTravelStepList_member = _RouteRentalTravelStepList.AddMember("member", RouteRentalTravelStep)
+
+	RouteRentalLegDetails_AfterTravelSteps = RouteRentalLegDetails.AddMember("AfterTravelSteps", _RouteRentalAfterTravelStepList)
+
+	RouteRentalLegDetails_Agency = RouteRentalLegDetails.AddMember("Agency", RouteRentalAgency)
+
+	RouteRentalLegDetails_Arrival = RouteRentalLegDetails.AddMember("Arrival", RouteRentalArrival)
+
+	RouteRentalLegDetails_Attributions = RouteRentalLegDetails.AddMember("Attributions", _RouteAttributionList)
+
+	RouteRentalLegDetails_BeforeTravelSteps = RouteRentalLegDetails.AddMember("BeforeTravelSteps", _RouteRentalBeforeTravelStepList)
+
+	RouteRentalLegDetails_BookingWebLinks = RouteRentalLegDetails.AddMember("BookingWebLinks", _RouteWebLinkList)
+
+	RouteRentalLegDetails_Departure = RouteRentalLegDetails.AddMember("Departure", RouteRentalDeparture)
+
+	RouteRentalLegDetails_Summary = RouteRentalLegDetails.AddMember("Summary", RouteRentalSummary)
+
+	RouteRentalLegDetails_Transport = RouteRentalLegDetails.AddMember("Transport", RouteRentalTransportModeDetails)
+
+	RouteRentalLegDetails_TravelSteps = RouteRentalLegDetails.AddMember("TravelSteps", _RouteRentalTravelStepList)
+
+	RouteTaxiAfterTravelStepType_PARK = RouteTaxiAfterTravelStepType.AddMember("PARK", smithyprelude.Unit)
+
+	RouteTaxiAfterTravelStep_Duration = RouteTaxiAfterTravelStep.AddMember("Duration", _DurationSeconds)
+
+	RouteTaxiAfterTravelStep_Instruction = RouteTaxiAfterTravelStep.AddMember("Instruction", _SensitiveString)
+
+	RouteTaxiAfterTravelStep_Type = RouteTaxiAfterTravelStep.AddMember("Type", RouteTaxiAfterTravelStepType)
+
+	_RouteTaxiAfterTravelStepList_member = _RouteTaxiAfterTravelStepList.AddMember("member", RouteTaxiAfterTravelStep)
+
+	RouteTaxiAgency_Name = RouteTaxiAgency.AddMember("Name", _SensitiveString)
+
+	RouteTaxiAgency_Url = RouteTaxiAgency.AddMember("Url", _SensitiveString)
+
+	RouteTaxiPlaceType_ACCESS_POINT = RouteTaxiPlaceType.AddMember("ACCESS_POINT", smithyprelude.Unit)
+
+	RouteTaxiPlaceType_STATION = RouteTaxiPlaceType.AddMember("STATION", smithyprelude.Unit)
+
+	RouteTaxiPlace_AccessPointDetails = RouteTaxiPlace.AddMember("AccessPointDetails", RouteAccessPointDetails)
+
+	RouteTaxiPlace_Name = RouteTaxiPlace.AddMember("Name", _SensitiveString)
+
+	RouteTaxiPlace_OriginalPosition = RouteTaxiPlace.AddMember("OriginalPosition", _Position23)
+
+	RouteTaxiPlace_Position = RouteTaxiPlace.AddMember("Position", _Position23)
+
+	RouteTaxiPlace_StationDetails = RouteTaxiPlace.AddMember("StationDetails", RouteStationDetails)
+
+	RouteTaxiPlace_Type = RouteTaxiPlace.AddMember("Type", RouteTaxiPlaceType)
+
+	RouteTaxiPlace_WaypointIndex = RouteTaxiPlace.AddMember("WaypointIndex", _SensitiveInteger)
+
+	RouteTaxiArrival_Place = RouteTaxiArrival.AddMember("Place", RouteTaxiPlace)
+
+	RouteTaxiArrival_Time = RouteTaxiArrival.AddMember("Time", _TimestampWithTimezoneOffset)
+
+	RouteTaxiBeforeTravelStepType_WAIT = RouteTaxiBeforeTravelStepType.AddMember("WAIT", smithyprelude.Unit)
+
+	RouteTaxiBeforeTravelStep_Duration = RouteTaxiBeforeTravelStep.AddMember("Duration", _DurationSeconds)
+
+	RouteTaxiBeforeTravelStep_Instruction = RouteTaxiBeforeTravelStep.AddMember("Instruction", _SensitiveString)
+
+	RouteTaxiBeforeTravelStep_Type = RouteTaxiBeforeTravelStep.AddMember("Type", RouteTaxiBeforeTravelStepType)
+
+	_RouteTaxiBeforeTravelStepList_member = _RouteTaxiBeforeTravelStepList.AddMember("member", RouteTaxiBeforeTravelStep)
+
+	RouteTaxiDeparture_Place = RouteTaxiDeparture.AddMember("Place", RouteTaxiPlace)
+
+	RouteTaxiDeparture_Time = RouteTaxiDeparture.AddMember("Time", _TimestampWithTimezoneOffset)
+
+	RouteTaxiNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = RouteTaxiNoticeCode.AddMember("ACCURATE_POLYLINE_UNAVAILABLE", smithyprelude.Unit)
+
+	RouteTaxiNoticeCode_OTHER = RouteTaxiNoticeCode.AddMember("OTHER", smithyprelude.Unit)
+
+	RouteTaxiNotice_Code = RouteTaxiNotice.AddMember("Code", RouteTaxiNoticeCode)
+
+	RouteTaxiNotice_Impact = RouteTaxiNotice.AddMember("Impact", RouteNoticeImpact)
+
+	_RouteTaxiNoticeList_member = _RouteTaxiNoticeList.AddMember("member", RouteTaxiNotice)
+
+	RouteTaxiOverviewSummary_Duration = RouteTaxiOverviewSummary.AddMember("Duration", _DurationSeconds)
+
+	RouteTaxiOverviewSummary_Distance = RouteTaxiOverviewSummary.AddMember("Distance", _DistanceMeters)
+
+	RouteTaxiTravelOnlySummary_Duration = RouteTaxiTravelOnlySummary.AddMember("Duration", _DurationSeconds)
+
+	RouteTaxiSummary_Overview = RouteTaxiSummary.AddMember("Overview", RouteTaxiOverviewSummary)
+
+	RouteTaxiSummary_TravelOnly = RouteTaxiSummary.AddMember("TravelOnly", RouteTaxiTravelOnlySummary)
+
+	RouteTaxiMode_ALL = RouteTaxiMode.AddMember("ALL", smithyprelude.Unit)
+
+	RouteTaxiMode_CAR = RouteTaxiMode.AddMember("CAR", smithyprelude.Unit)
+
+	RouteTaxiTransportModeDetails_AvailableSeats = RouteTaxiTransportModeDetails.AddMember("AvailableSeats", _SensitiveInteger)
+
+	RouteTaxiTransportModeDetails_Category = RouteTaxiTransportModeDetails.AddMember("Category", _SensitiveString)
+
+	RouteTaxiTransportModeDetails_Color = RouteTaxiTransportModeDetails.AddMember("Color", _SensitiveString)
+
+	RouteTaxiTransportModeDetails_Engine = RouteTaxiTransportModeDetails.AddMember("Engine", RouteEngineType)
+
+	RouteTaxiTransportModeDetails_LicensePlate = RouteTaxiTransportModeDetails.AddMember("LicensePlate", _SensitiveString)
+
+	RouteTaxiTransportModeDetails_Mode = RouteTaxiTransportModeDetails.AddMember("Mode", RouteTaxiMode)
+
+	RouteTaxiTransportModeDetails_Model = RouteTaxiTransportModeDetails.AddMember("Model", _SensitiveString)
+
+	RouteTaxiTransportModeDetails_Name = RouteTaxiTransportModeDetails.AddMember("Name", _SensitiveString)
+
+	RouteTaxiTransportModeDetails_TextColor = RouteTaxiTransportModeDetails.AddMember("TextColor", _SensitiveString)
+
+	RouteTaxiTravelStepType_ARRIVE = RouteTaxiTravelStepType.AddMember("ARRIVE", smithyprelude.Unit)
+
+	RouteTaxiTravelStepType_CONTINUE = RouteTaxiTravelStepType.AddMember("CONTINUE", smithyprelude.Unit)
+
+	RouteTaxiTravelStepType_DEPART = RouteTaxiTravelStepType.AddMember("DEPART", smithyprelude.Unit)
+
+	RouteTaxiTravelStepType_EXIT = RouteTaxiTravelStepType.AddMember("EXIT", smithyprelude.Unit)
+
+	RouteTaxiTravelStepType_KEEP = RouteTaxiTravelStepType.AddMember("KEEP", smithyprelude.Unit)
+
+	RouteTaxiTravelStepType_RAMP = RouteTaxiTravelStepType.AddMember("RAMP", smithyprelude.Unit)
+
+	RouteTaxiTravelStepType_ROUNDABOUT_ENTER = RouteTaxiTravelStepType.AddMember("ROUNDABOUT_ENTER", smithyprelude.Unit)
+
+	RouteTaxiTravelStepType_ROUNDABOUT_EXIT = RouteTaxiTravelStepType.AddMember("ROUNDABOUT_EXIT", smithyprelude.Unit)
+
+	RouteTaxiTravelStepType_ROUNDABOUT_PASS = RouteTaxiTravelStepType.AddMember("ROUNDABOUT_PASS", smithyprelude.Unit)
+
+	RouteTaxiTravelStepType_TURN = RouteTaxiTravelStepType.AddMember("TURN", smithyprelude.Unit)
+
+	RouteTaxiTravelStepType_U_TURN = RouteTaxiTravelStepType.AddMember("U_TURN", smithyprelude.Unit)
+
+	RouteTaxiTravelStep_ContinueStepDetails = RouteTaxiTravelStep.AddMember("ContinueStepDetails", RouteContinueStepDetails)
+
+	RouteTaxiTravelStep_Distance = RouteTaxiTravelStep.AddMember("Distance", _DistanceMeters)
+
+	RouteTaxiTravelStep_Duration = RouteTaxiTravelStep.AddMember("Duration", _DurationSeconds)
+
+	RouteTaxiTravelStep_ExitStepDetails = RouteTaxiTravelStep.AddMember("ExitStepDetails", RouteExitStepDetails)
+
+	RouteTaxiTravelStep_GeometryOffset = RouteTaxiTravelStep.AddMember("GeometryOffset", smithyprelude.Integer)
+
+	RouteTaxiTravelStep_Instruction = RouteTaxiTravelStep.AddMember("Instruction", _SensitiveString)
+
+	RouteTaxiTravelStep_KeepStepDetails = RouteTaxiTravelStep.AddMember("KeepStepDetails", RouteKeepStepDetails)
+
+	RouteTaxiTravelStep_RampStepDetails = RouteTaxiTravelStep.AddMember("RampStepDetails", RouteRampStepDetails)
+
+	RouteTaxiTravelStep_RoundaboutEnterStepDetails = RouteTaxiTravelStep.AddMember("RoundaboutEnterStepDetails", RouteRoundaboutEnterStepDetails)
+
+	RouteTaxiTravelStep_RoundaboutExitStepDetails = RouteTaxiTravelStep.AddMember("RoundaboutExitStepDetails", RouteRoundaboutExitStepDetails)
+
+	RouteTaxiTravelStep_RoundaboutPassStepDetails = RouteTaxiTravelStep.AddMember("RoundaboutPassStepDetails", RouteRoundaboutPassStepDetails)
+
+	RouteTaxiTravelStep_TurnStepDetails = RouteTaxiTravelStep.AddMember("TurnStepDetails", RouteTurnStepDetails)
+
+	RouteTaxiTravelStep_Type = RouteTaxiTravelStep.AddMember("Type", RouteTaxiTravelStepType)
+
+	RouteTaxiTravelStep_UTurnStepDetails = RouteTaxiTravelStep.AddMember("UTurnStepDetails", RouteUTurnStepDetails)
+
+	_RouteTaxiTravelStepList_member = _RouteTaxiTravelStepList.AddMember("member", RouteTaxiTravelStep)
+
+	RouteTaxiLegDetails_AfterTravelSteps = RouteTaxiLegDetails.AddMember("AfterTravelSteps", _RouteTaxiAfterTravelStepList)
+
+	RouteTaxiLegDetails_Agency = RouteTaxiLegDetails.AddMember("Agency", RouteTaxiAgency)
+
+	RouteTaxiLegDetails_Arrival = RouteTaxiLegDetails.AddMember("Arrival", RouteTaxiArrival)
+
+	RouteTaxiLegDetails_Attributions = RouteTaxiLegDetails.AddMember("Attributions", _RouteAttributionList)
+
+	RouteTaxiLegDetails_BeforeTravelSteps = RouteTaxiLegDetails.AddMember("BeforeTravelSteps", _RouteTaxiBeforeTravelStepList)
+
+	RouteTaxiLegDetails_BookingWebLinks = RouteTaxiLegDetails.AddMember("BookingWebLinks", _RouteWebLinkList)
+
+	RouteTaxiLegDetails_Departure = RouteTaxiLegDetails.AddMember("Departure", RouteTaxiDeparture)
+
+	RouteTaxiLegDetails_Notices = RouteTaxiLegDetails.AddMember("Notices", _RouteTaxiNoticeList)
+
+	RouteTaxiLegDetails_Summary = RouteTaxiLegDetails.AddMember("Summary", RouteTaxiSummary)
+
+	RouteTaxiLegDetails_Transport = RouteTaxiLegDetails.AddMember("Transport", RouteTaxiTransportModeDetails)
+
+	RouteTaxiLegDetails_TravelSteps = RouteTaxiLegDetails.AddMember("TravelSteps", _RouteTaxiTravelStepList)
+
+	RouteTransitAfterTravelStepType_DEBOARD = RouteTransitAfterTravelStepType.AddMember("DEBOARD", smithyprelude.Unit)
+
+	RouteTransitAfterTravelStep_Duration = RouteTransitAfterTravelStep.AddMember("Duration", _DurationSeconds)
+
+	RouteTransitAfterTravelStep_Instruction = RouteTransitAfterTravelStep.AddMember("Instruction", _SensitiveString)
+
+	RouteTransitAfterTravelStep_Type = RouteTransitAfterTravelStep.AddMember("Type", RouteTransitAfterTravelStepType)
+
+	_RouteTransitAfterTravelStepList_member = _RouteTransitAfterTravelStepList.AddMember("member", RouteTransitAfterTravelStep)
+
+	RouteTransitAgency_Name = RouteTransitAgency.AddMember("Name", _SensitiveString)
+
+	RouteTransitAgency_Url = RouteTransitAgency.AddMember("Url", _SensitiveString)
+
+	RouteTransitPlaceType_STATION = RouteTransitPlaceType.AddMember("STATION", smithyprelude.Unit)
+
+	RouteTransitPlace_Name = RouteTransitPlace.AddMember("Name", _SensitiveString)
+
+	RouteTransitPlace_OriginalPosition = RouteTransitPlace.AddMember("OriginalPosition", _Position23)
+
+	RouteTransitPlace_Position = RouteTransitPlace.AddMember("Position", _Position23)
+
+	RouteTransitPlace_StationDetails = RouteTransitPlace.AddMember("StationDetails", RouteStationDetails)
+
+	RouteTransitPlace_Type = RouteTransitPlace.AddMember("Type", RouteTransitPlaceType)
+
+	RouteTransitPlace_WaypointIndex = RouteTransitPlace.AddMember("WaypointIndex", _SensitiveInteger)
+
+	RouteTransitTripStatus_ADDED = RouteTransitTripStatus.AddMember("ADDED", smithyprelude.Unit)
+
+	RouteTransitTripStatus_CANCELLED = RouteTransitTripStatus.AddMember("CANCELLED", smithyprelude.Unit)
+
+	RouteTransitTripStatus_REPLACED = RouteTransitTripStatus.AddMember("REPLACED", smithyprelude.Unit)
+
+	RouteTransitTripStatus_SCHEDULED = RouteTransitTripStatus.AddMember("SCHEDULED", smithyprelude.Unit)
+
+	RouteTransitArrival_Delay = RouteTransitArrival.AddMember("Delay", _DurationSeconds)
+
+	RouteTransitArrival_Place = RouteTransitArrival.AddMember("Place", RouteTransitPlace)
+
+	RouteTransitArrival_Status = RouteTransitArrival.AddMember("Status", RouteTransitTripStatus)
+
+	RouteTransitArrival_Time = RouteTransitArrival.AddMember("Time", _TimestampWithTimezoneOffset)
+
+	RouteTransitBeforeTravelStepType_BOARD = RouteTransitBeforeTravelStepType.AddMember("BOARD", smithyprelude.Unit)
+
+	RouteTransitBeforeTravelStep_Duration = RouteTransitBeforeTravelStep.AddMember("Duration", _DurationSeconds)
+
+	RouteTransitBeforeTravelStep_Instruction = RouteTransitBeforeTravelStep.AddMember("Instruction", _SensitiveString)
+
+	RouteTransitBeforeTravelStep_Type = RouteTransitBeforeTravelStep.AddMember("Type", RouteTransitBeforeTravelStepType)
+
+	_RouteTransitBeforeTravelStepList_member = _RouteTransitBeforeTravelStepList.AddMember("member", RouteTransitBeforeTravelStep)
+
+	RouteTransitDeparture_Delay = RouteTransitDeparture.AddMember("Delay", _DurationSeconds)
+
+	RouteTransitDeparture_Place = RouteTransitDeparture.AddMember("Place", RouteTransitPlace)
+
+	RouteTransitDeparture_Status = RouteTransitDeparture.AddMember("Status", RouteTransitTripStatus)
+
+	RouteTransitDeparture_Time = RouteTransitDeparture.AddMember("Time", _TimestampWithTimezoneOffset)
+
+	RouteTransitIncidentEffect_DELAYED = RouteTransitIncidentEffect.AddMember("DELAYED", smithyprelude.Unit)
+
+	RouteTransitIncidentEffect_DETOURED = RouteTransitIncidentEffect.AddMember("DETOURED", smithyprelude.Unit)
+
+	RouteTransitIncidentEffect_OTHER = RouteTransitIncidentEffect.AddMember("OTHER", smithyprelude.Unit)
+
+	RouteTransitIncidentEffect_SERVICE_ADDED = RouteTransitIncidentEffect.AddMember("SERVICE_ADDED", smithyprelude.Unit)
+
+	RouteTransitIncidentEffect_SERVICE_CANCELLED = RouteTransitIncidentEffect.AddMember("SERVICE_CANCELLED", smithyprelude.Unit)
+
+	RouteTransitIncidentEffect_SERVICE_MODIFIED = RouteTransitIncidentEffect.AddMember("SERVICE_MODIFIED", smithyprelude.Unit)
+
+	RouteTransitIncidentEffect_SERVICE_REDUCED = RouteTransitIncidentEffect.AddMember("SERVICE_REDUCED", smithyprelude.Unit)
+
+	RouteTransitIncidentEffect_STOP_MOVED = RouteTransitIncidentEffect.AddMember("STOP_MOVED", smithyprelude.Unit)
+
+	RouteTransitIncidentType_ACCIDENT = RouteTransitIncidentType.AddMember("ACCIDENT", smithyprelude.Unit)
+
+	RouteTransitIncidentType_CONSTRUCTION = RouteTransitIncidentType.AddMember("CONSTRUCTION", smithyprelude.Unit)
+
+	RouteTransitIncidentType_DEMONSTRATION = RouteTransitIncidentType.AddMember("DEMONSTRATION", smithyprelude.Unit)
+
+	RouteTransitIncidentType_HOLIDAY = RouteTransitIncidentType.AddMember("HOLIDAY", smithyprelude.Unit)
+
+	RouteTransitIncidentType_MAINTENANCE = RouteTransitIncidentType.AddMember("MAINTENANCE", smithyprelude.Unit)
+
+	RouteTransitIncidentType_MEDICAL_EMERGENCY = RouteTransitIncidentType.AddMember("MEDICAL_EMERGENCY", smithyprelude.Unit)
+
+	RouteTransitIncidentType_OTHER = RouteTransitIncidentType.AddMember("OTHER", smithyprelude.Unit)
+
+	RouteTransitIncidentType_POLICE_ACTIVITY = RouteTransitIncidentType.AddMember("POLICE_ACTIVITY", smithyprelude.Unit)
+
+	RouteTransitIncidentType_STRIKE = RouteTransitIncidentType.AddMember("STRIKE", smithyprelude.Unit)
+
+	RouteTransitIncidentType_TECHNICAL_PROBLEM = RouteTransitIncidentType.AddMember("TECHNICAL_PROBLEM", smithyprelude.Unit)
+
+	RouteTransitIncidentType_WEATHER = RouteTransitIncidentType.AddMember("WEATHER", smithyprelude.Unit)
+
+	RouteTransitIncident_Description = RouteTransitIncident.AddMember("Description", _SensitiveString)
+
+	RouteTransitIncident_Effect = RouteTransitIncident.AddMember("Effect", RouteTransitIncidentEffect)
+
+	RouteTransitIncident_EndTime = RouteTransitIncident.AddMember("EndTime", _TimestampWithTimezoneOffset)
+
+	RouteTransitIncident_StartTime = RouteTransitIncident.AddMember("StartTime", _TimestampWithTimezoneOffset)
+
+	RouteTransitIncident_Type = RouteTransitIncident.AddMember("Type", RouteTransitIncidentType)
+
+	RouteTransitIncident_Url = RouteTransitIncident.AddMember("Url", _SensitiveString)
+
+	_RouteTransitIncidentList_member = _RouteTransitIncidentList.AddMember("member", RouteTransitIncident)
+
+	RouteTransitIntermediateStopAttribute_NO_ENTRY = RouteTransitIntermediateStopAttribute.AddMember("NO_ENTRY", smithyprelude.Unit)
+
+	RouteTransitIntermediateStopAttribute_NO_EXIT = RouteTransitIntermediateStopAttribute.AddMember("NO_EXIT", smithyprelude.Unit)
+
+	_RouteTransitIntermediateStopAttributeList_member = _RouteTransitIntermediateStopAttributeList.AddMember("member", RouteTransitIntermediateStopAttribute)
+
+	RouteTransitMode_AERIAL_TRAMWAY = RouteTransitMode.AddMember("AERIAL_TRAMWAY", smithyprelude.Unit)
+
+	RouteTransitMode_AIRPLANE = RouteTransitMode.AddMember("AIRPLANE", smithyprelude.Unit)
+
+	RouteTransitMode_ALL = RouteTransitMode.AddMember("ALL", smithyprelude.Unit)
+
+	RouteTransitMode_BUS = RouteTransitMode.AddMember("BUS", smithyprelude.Unit)
+
+	RouteTransitMode_BUS_RAPID_TRANSIT = RouteTransitMode.AddMember("BUS_RAPID_TRANSIT", smithyprelude.Unit)
+
+	RouteTransitMode_CITY_TRAIN = RouteTransitMode.AddMember("CITY_TRAIN", smithyprelude.Unit)
+
+	RouteTransitMode_FERRY = RouteTransitMode.AddMember("FERRY", smithyprelude.Unit)
+
+	RouteTransitMode_FUNICULAR_RAILWAY = RouteTransitMode.AddMember("FUNICULAR_RAILWAY", smithyprelude.Unit)
+
+	RouteTransitMode_HIGH_SPEED_TRAIN = RouteTransitMode.AddMember("HIGH_SPEED_TRAIN", smithyprelude.Unit)
+
+	RouteTransitMode_INTERCITY_TRAIN = RouteTransitMode.AddMember("INTERCITY_TRAIN", smithyprelude.Unit)
+
+	RouteTransitMode_INTERREGIONAL_TRAIN = RouteTransitMode.AddMember("INTERREGIONAL_TRAIN", smithyprelude.Unit)
+
+	RouteTransitMode_LIGHT_RAIL = RouteTransitMode.AddMember("LIGHT_RAIL", smithyprelude.Unit)
+
+	RouteTransitMode_MONORAIL = RouteTransitMode.AddMember("MONORAIL", smithyprelude.Unit)
+
+	RouteTransitMode_PRIVATE_BUS = RouteTransitMode.AddMember("PRIVATE_BUS", smithyprelude.Unit)
+
+	RouteTransitMode_REGIONAL_TRAIN = RouteTransitMode.AddMember("REGIONAL_TRAIN", smithyprelude.Unit)
+
+	RouteTransitMode_SUBWAY = RouteTransitMode.AddMember("SUBWAY", smithyprelude.Unit)
+
+	RouteTransitTransportModeDetails_Accessibility = RouteTransitTransportModeDetails.AddMember("Accessibility", RouteAccessibilityAvailabilityDetails)
+
+	RouteTransitTransportModeDetails_Color = RouteTransitTransportModeDetails.AddMember("Color", _HexColor)
+
+	RouteTransitTransportModeDetails_Headsign = RouteTransitTransportModeDetails.AddMember("Headsign", _SensitiveString)
+
+	RouteTransitTransportModeDetails_LongRouteName = RouteTransitTransportModeDetails.AddMember("LongRouteName", _SensitiveString)
+
+	RouteTransitTransportModeDetails_Mode = RouteTransitTransportModeDetails.AddMember("Mode", RouteTransitMode)
+
+	RouteTransitTransportModeDetails_RouteName = RouteTransitTransportModeDetails.AddMember("RouteName", _SensitiveString)
+
+	RouteTransitTransportModeDetails_ShortRouteName = RouteTransitTransportModeDetails.AddMember("ShortRouteName", _SensitiveString)
+
+	RouteTransitTransportModeDetails_TextColor = RouteTransitTransportModeDetails.AddMember("TextColor", _HexColor)
+
+	RouteTransitIntermediateStop_Attributes = RouteTransitIntermediateStop.AddMember("Attributes", _RouteTransitIntermediateStopAttributeList)
+
+	RouteTransitIntermediateStop_Departure = RouteTransitIntermediateStop.AddMember("Departure", RouteTransitDeparture)
+
+	RouteTransitIntermediateStop_Duration = RouteTransitIntermediateStop.AddMember("Duration", _DurationSeconds)
+
+	RouteTransitIntermediateStop_GeometryOffset = RouteTransitIntermediateStop.AddMember("GeometryOffset", smithyprelude.Integer)
+
+	RouteTransitIntermediateStop_Transport = RouteTransitIntermediateStop.AddMember("Transport", RouteTransitTransportModeDetails)
+
+	_RouteTransitIntermediateStopList_member = _RouteTransitIntermediateStopList.AddMember("member", RouteTransitIntermediateStop)
+
+	RouteTransitNextDeparture_Delay = RouteTransitNextDeparture.AddMember("Delay", _DurationSeconds)
+
+	RouteTransitNextDeparture_PlatformName = RouteTransitNextDeparture.AddMember("PlatformName", _SensitiveString)
+
+	RouteTransitNextDeparture_Status = RouteTransitNextDeparture.AddMember("Status", RouteTransitTripStatus)
+
+	RouteTransitNextDeparture_Time = RouteTransitNextDeparture.AddMember("Time", _TimestampWithTimezoneOffset)
+
+	RouteTransitNextDeparture_Transport = RouteTransitNextDeparture.AddMember("Transport", RouteTransitTransportModeDetails)
+
+	_RouteTransitNextDepartureList_member = _RouteTransitNextDepartureList.AddMember("member", RouteTransitNextDeparture)
+
+	RouteTransitNoticeCode_ACCURATE_POLYLINE_UNAVAILABLE = RouteTransitNoticeCode.AddMember("ACCURATE_POLYLINE_UNAVAILABLE", smithyprelude.Unit)
+
+	RouteTransitNoticeCode_INTERMEDIATE_STOPS_UNAVAILABLE = RouteTransitNoticeCode.AddMember("INTERMEDIATE_STOPS_UNAVAILABLE", smithyprelude.Unit)
+
+	RouteTransitNoticeCode_NO_SCHEDULE = RouteTransitNoticeCode.AddMember("NO_SCHEDULE", smithyprelude.Unit)
+
+	RouteTransitNoticeCode_OTHER = RouteTransitNoticeCode.AddMember("OTHER", smithyprelude.Unit)
+
+	RouteTransitNoticeCode_POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE = RouteTransitNoticeCode.AddMember("POTENTIAL_VIOLATED_VEHICLE_RESTRICTION_USAGE", smithyprelude.Unit)
+
+	RouteTransitNoticeCode_SCHEDULED_TIMES = RouteTransitNoticeCode.AddMember("SCHEDULED_TIMES", smithyprelude.Unit)
+
+	RouteTransitNoticeCode_SEASONAL_CLOSURE = RouteTransitNoticeCode.AddMember("SEASONAL_CLOSURE", smithyprelude.Unit)
+
+	RouteTransitNoticeCode_VIOLATED_AVOID_FERRY = RouteTransitNoticeCode.AddMember("VIOLATED_AVOID_FERRY", smithyprelude.Unit)
+
+	RouteTransitNoticeCode_VIOLATED_AVOID_RAIL_FERRY = RouteTransitNoticeCode.AddMember("VIOLATED_AVOID_RAIL_FERRY", smithyprelude.Unit)
+
+	RouteTransitNoticeCode_VIOLATED_EXCLUDED_TRANSIT_MODE = RouteTransitNoticeCode.AddMember("VIOLATED_EXCLUDED_TRANSIT_MODE", smithyprelude.Unit)
+
+	RouteTransitNoticeCode_VIOLATED_VEHICLE_RESTRICTION = RouteTransitNoticeCode.AddMember("VIOLATED_VEHICLE_RESTRICTION", smithyprelude.Unit)
+
+	RouteTransitNoticeCode_VIOLATED_AVOID_AREAS = RouteTransitNoticeCode.AddMember("VIOLATED_AVOID_AREAS", smithyprelude.Unit)
+
+	RouteTransitNotice_Code = RouteTransitNotice.AddMember("Code", RouteTransitNoticeCode)
+
+	RouteTransitNotice_Impact = RouteTransitNotice.AddMember("Impact", RouteNoticeImpact)
+
+	_RouteTransitNoticeList_member = _RouteTransitNoticeList.AddMember("member", RouteTransitNotice)
+
+	RouteTransitSpan_Country = RouteTransitSpan.AddMember("Country", _CountryCode3)
+
+	RouteTransitSpan_Distance = RouteTransitSpan.AddMember("Distance", _DistanceMeters)
+
+	RouteTransitSpan_Duration = RouteTransitSpan.AddMember("Duration", _DurationSeconds)
+
+	RouteTransitSpan_GeometryOffset = RouteTransitSpan.AddMember("GeometryOffset", smithyprelude.Integer)
+
+	RouteTransitSpan_Names = RouteTransitSpan.AddMember("Names", _LocalizedStringList)
+
+	RouteTransitSpan_Region = RouteTransitSpan.AddMember("Region", _SensitiveString)
+
+	_RouteTransitSpanList_member = _RouteTransitSpanList.AddMember("member", RouteTransitSpan)
+
+	RouteTransitOverviewSummary_Distance = RouteTransitOverviewSummary.AddMember("Distance", _DistanceMeters)
+
+	RouteTransitOverviewSummary_Duration = RouteTransitOverviewSummary.AddMember("Duration", _DurationSeconds)
+
+	RouteTransitTravelOnlySummary_Duration = RouteTransitTravelOnlySummary.AddMember("Duration", _DurationSeconds)
+
+	RouteTransitSummary_Overview = RouteTransitSummary.AddMember("Overview", RouteTransitOverviewSummary)
+
+	RouteTransitSummary_TravelOnly = RouteTransitSummary.AddMember("TravelOnly", RouteTransitTravelOnlySummary)
+
+	RouteTransitTravelStepType_DEPART = RouteTransitTravelStepType.AddMember("DEPART", smithyprelude.Unit)
+
+	RouteTransitTravelStep_Distance = RouteTransitTravelStep.AddMember("Distance", _DistanceMeters)
+
+	RouteTransitTravelStep_Duration = RouteTransitTravelStep.AddMember("Duration", _DurationSeconds)
+
+	RouteTransitTravelStep_GeometryOffset = RouteTransitTravelStep.AddMember("GeometryOffset", smithyprelude.Integer)
+
+	RouteTransitTravelStep_Instruction = RouteTransitTravelStep.AddMember("Instruction", _SensitiveString)
+
+	RouteTransitTravelStep_Type = RouteTransitTravelStep.AddMember("Type", RouteTransitTravelStepType)
+
+	_RouteTransitTravelStepList_member = _RouteTransitTravelStepList.AddMember("member", RouteTransitTravelStep)
+
+	RouteTransitLegDetails_AfterTravelSteps = RouteTransitLegDetails.AddMember("AfterTravelSteps", _RouteTransitAfterTravelStepList)
+
+	RouteTransitLegDetails_Agency = RouteTransitLegDetails.AddMember("Agency", RouteTransitAgency)
+
+	RouteTransitLegDetails_Arrival = RouteTransitLegDetails.AddMember("Arrival", RouteTransitArrival)
+
+	RouteTransitLegDetails_Attributions = RouteTransitLegDetails.AddMember("Attributions", _RouteAttributionList)
+
+	RouteTransitLegDetails_BeforeTravelSteps = RouteTransitLegDetails.AddMember("BeforeTravelSteps", _RouteTransitBeforeTravelStepList)
+
+	RouteTransitLegDetails_BookingWebLinks = RouteTransitLegDetails.AddMember("BookingWebLinks", _RouteWebLinkList)
+
+	RouteTransitLegDetails_Departure = RouteTransitLegDetails.AddMember("Departure", RouteTransitDeparture)
+
+	RouteTransitLegDetails_Incidents = RouteTransitLegDetails.AddMember("Incidents", _RouteTransitIncidentList)
+
+	RouteTransitLegDetails_IntermediateStops = RouteTransitLegDetails.AddMember("IntermediateStops", _RouteTransitIntermediateStopList)
+
+	RouteTransitLegDetails_NextDepartures = RouteTransitLegDetails.AddMember("NextDepartures", _RouteTransitNextDepartureList)
+
+	RouteTransitLegDetails_Notices = RouteTransitLegDetails.AddMember("Notices", _RouteTransitNoticeList)
+
+	RouteTransitLegDetails_PassThroughWaypoints = RouteTransitLegDetails.AddMember("PassThroughWaypoints", _RoutePassThroughWaypointList)
+
+	RouteTransitLegDetails_Spans = RouteTransitLegDetails.AddMember("Spans", _RouteTransitSpanList)
+
+	RouteTransitLegDetails_Summary = RouteTransitLegDetails.AddMember("Summary", RouteTransitSummary)
+
+	RouteTransitLegDetails_Transport = RouteTransitLegDetails.AddMember("Transport", RouteTransitTransportModeDetails)
+
+	RouteTransitLegDetails_TravelSteps = RouteTransitLegDetails.AddMember("TravelSteps", _RouteTransitTravelStepList)
+
 	RouteLeg_FerryLegDetails = RouteLeg.AddMember("FerryLegDetails", RouteFerryLegDetails)
 
 	RouteLeg_Geometry = RouteLeg.AddMember("Geometry", RouteLegGeometry)
@@ -4414,11 +7579,17 @@ func init() {
 
 	RouteLeg_PedestrianLegDetails = RouteLeg.AddMember("PedestrianLegDetails", RoutePedestrianLegDetails)
 
-	RouteLeg_TravelMode = RouteLeg.AddMember("TravelMode", _RouteLegTravelMode)
+	RouteLeg_TravelMode = RouteLeg.AddMember("TravelMode", RouteLegTravelMode)
 
-	RouteLeg_Type = RouteLeg.AddMember("Type", _RouteLegType)
+	RouteLeg_Type = RouteLeg.AddMember("Type", RouteLegType)
 
 	RouteLeg_VehicleLegDetails = RouteLeg.AddMember("VehicleLegDetails", RouteVehicleLegDetails)
+
+	RouteLeg_RentalLegDetails = RouteLeg.AddMember("RentalLegDetails", RouteRentalLegDetails)
+
+	RouteLeg_TaxiLegDetails = RouteLeg.AddMember("TaxiLegDetails", RouteTaxiLegDetails)
+
+	RouteLeg_TransitLegDetails = RouteLeg.AddMember("TransitLegDetails", RouteTransitLegDetails)
 
 	_RouteLegList_member = _RouteLegList.AddMember("member", RouteLeg)
 
@@ -4452,6 +7623,10 @@ func init() {
 
 	Route_Summary = Route.AddMember("Summary", RouteSummary)
 
+	RouteAccessibilityAttribute_WHEELCHAIR = RouteAccessibilityAttribute.AddMember("WHEELCHAIR", smithyprelude.Unit)
+
+	_RouteAccessibilityAttributeList_member = _RouteAccessibilityAttributeList.AddMember("member", RouteAccessibilityAttribute)
+
 	RouteAllowOptions_Hot = RouteAllowOptions.AddMember("Hot", _SensitiveBoolean)
 
 	RouteAllowOptions_Hov = RouteAllowOptions.AddMember("Hov", _SensitiveBoolean)
@@ -4474,7 +7649,7 @@ func init() {
 
 	_RouteAvoidanceAreaList_member = _RouteAvoidanceAreaList.AddMember("member", RouteAvoidanceArea)
 
-	RouteAvoidanceZoneCategory_Category = RouteAvoidanceZoneCategory.AddMember("Category", _RouteZoneCategory)
+	RouteAvoidanceZoneCategory_Category = RouteAvoidanceZoneCategory.AddMember("Category", RouteZoneCategory)
 
 	_RouteAvoidanceZoneCategoryList_member = _RouteAvoidanceZoneCategoryList.AddMember("member", RouteAvoidanceZoneCategory)
 
@@ -4504,7 +7679,7 @@ func init() {
 
 	RouteVehicleLicensePlate_LastCharacter = RouteVehicleLicensePlate.AddMember("LastCharacter", _SensitiveString)
 
-	RouteCarOptions_EngineType = RouteCarOptions.AddMember("EngineType", _RouteEngineType)
+	RouteCarOptions_EngineType = RouteCarOptions.AddMember("EngineType", RouteEngineType)
 
 	RouteCarOptions_LicensePlate = RouteCarOptions.AddMember("LicensePlate", RouteVehicleLicensePlate)
 
@@ -4518,11 +7693,11 @@ func init() {
 
 	RouteMatchingOptions_Radius = RouteMatchingOptions.AddMember("Radius", _DistanceMeters)
 
-	RouteMatchingOptions_Strategy = RouteMatchingOptions.AddMember("Strategy", _MatchingStrategy)
+	RouteMatchingOptions_Strategy = RouteMatchingOptions.AddMember("Strategy", MatchingStrategy)
 
 	RouteSideOfStreetOptions_Position = RouteSideOfStreetOptions.AddMember("Position", _Position)
 
-	RouteSideOfStreetOptions_UseWith = RouteSideOfStreetOptions.AddMember("UseWith", _SideOfStreetMatchingStrategy)
+	RouteSideOfStreetOptions_UseWith = RouteSideOfStreetOptions.AddMember("UseWith", SideOfStreetMatchingStrategy)
 
 	RouteDestinationOptions_AvoidActionsForDistance = RouteDestinationOptions.AddMember("AvoidActionsForDistance", _DistanceMeters)
 
@@ -4550,15 +7725,121 @@ func init() {
 
 	RouteExclusionOptions_Countries = RouteExclusionOptions.AddMember("Countries", _CountryCodeList)
 
-	_RouteLegAdditionalFeatureList_member = _RouteLegAdditionalFeatureList.AddMember("member", _RouteLegAdditionalFeature)
+	RouteIntermodalEnabledLegs_FIRST_LEG = RouteIntermodalEnabledLegs.AddMember("FIRST_LEG", smithyprelude.Unit)
+
+	RouteIntermodalEnabledLegs_LAST_LEG = RouteIntermodalEnabledLegs.AddMember("LAST_LEG", smithyprelude.Unit)
+
+	RouteIntermodalEnabledLegs_ENTIRE_ROUTE = RouteIntermodalEnabledLegs.AddMember("ENTIRE_ROUTE", smithyprelude.Unit)
+
+	RouteIntermodalEnabledLegs_NONE = RouteIntermodalEnabledLegs.AddMember("NONE", smithyprelude.Unit)
+
+	_RouteIntermodalEnabledLegsList_member = _RouteIntermodalEnabledLegsList.AddMember("member", RouteIntermodalEnabledLegs)
+
+	RouteIntermodalPedestrianOptions_MaxDistance = RouteIntermodalPedestrianOptions.AddMember("MaxDistance", _DistanceMeters)
+
+	RouteIntermodalPedestrianOptions_Speed = RouteIntermodalPedestrianOptions.AddMember("Speed", _SpeedKilometersPerHour)
+
+	_RouteRentalModeList_member = _RouteRentalModeList.AddMember("member", RouteRentalMode)
+
+	RouteIntermodalRentalOptions_AllowedModes = RouteIntermodalRentalOptions.AddMember("AllowedModes", _RouteRentalModeList)
+
+	RouteIntermodalRentalOptions_EnabledFor = RouteIntermodalRentalOptions.AddMember("EnabledFor", _RouteIntermodalEnabledLegsList)
+
+	RouteIntermodalRentalOptions_ExcludedModes = RouteIntermodalRentalOptions.AddMember("ExcludedModes", _RouteRentalModeList)
+
+	_RouteTaxiModeList_member = _RouteTaxiModeList.AddMember("member", RouteTaxiMode)
+
+	RouteIntermodalTaxiOptions_AllowedModes = RouteIntermodalTaxiOptions.AddMember("AllowedModes", _RouteTaxiModeList)
+
+	RouteIntermodalTaxiOptions_EnabledFor = RouteIntermodalTaxiOptions.AddMember("EnabledFor", _RouteIntermodalEnabledLegsList)
+
+	RouteIntermodalTaxiOptions_ExcludedModes = RouteIntermodalTaxiOptions.AddMember("ExcludedModes", _RouteTaxiModeList)
+
+	_RouteTransitModeList_member = _RouteTransitModeList.AddMember("member", RouteTransitMode)
+
+	RouteIntermodalTransitOptions_AllowedModes = RouteIntermodalTransitOptions.AddMember("AllowedModes", _RouteTransitModeList)
+
+	RouteIntermodalTransitOptions_EnabledFor = RouteIntermodalTransitOptions.AddMember("EnabledFor", _RouteIntermodalEnabledLegsList)
+
+	RouteIntermodalTransitOptions_ExcludedModes = RouteIntermodalTransitOptions.AddMember("ExcludedModes", _RouteTransitModeList)
+
+	RouteVehicleMode_ALL = RouteVehicleMode.AddMember("ALL", smithyprelude.Unit)
+
+	RouteVehicleMode_CAR = RouteVehicleMode.AddMember("CAR", smithyprelude.Unit)
+
+	_RouteVehicleModeList_member = _RouteVehicleModeList.AddMember("member", RouteVehicleMode)
+
+	RouteIntermodalVehicleOptions_AllowedModes = RouteIntermodalVehicleOptions.AddMember("AllowedModes", _RouteVehicleModeList)
+
+	RouteIntermodalVehicleOptions_EnabledFor = RouteIntermodalVehicleOptions.AddMember("EnabledFor", _RouteIntermodalEnabledLegsList)
+
+	RouteIntermodalVehicleOptions_ExcludedModes = RouteIntermodalVehicleOptions.AddMember("ExcludedModes", _RouteVehicleModeList)
+
+	RouteIntermodalOptions_AccessibilityAttributes = RouteIntermodalOptions.AddMember("AccessibilityAttributes", _RouteAccessibilityAttributeList)
+
+	RouteIntermodalOptions_MaxTransfers = RouteIntermodalOptions.AddMember("MaxTransfers", smithyprelude.Integer)
+
+	RouteIntermodalOptions_Pedestrian = RouteIntermodalOptions.AddMember("Pedestrian", RouteIntermodalPedestrianOptions)
+
+	RouteIntermodalOptions_Rental = RouteIntermodalOptions.AddMember("Rental", RouteIntermodalRentalOptions)
+
+	RouteIntermodalOptions_Taxi = RouteIntermodalOptions.AddMember("Taxi", RouteIntermodalTaxiOptions)
+
+	RouteIntermodalOptions_Transit = RouteIntermodalOptions.AddMember("Transit", RouteIntermodalTransitOptions)
+
+	RouteIntermodalOptions_Vehicle = RouteIntermodalOptions.AddMember("Vehicle", RouteIntermodalVehicleOptions)
+
+	RouteLegAdditionalFeature_ELEVATION = RouteLegAdditionalFeature.AddMember("ELEVATION", smithyprelude.Unit)
+
+	RouteLegAdditionalFeature_INCIDENTS = RouteLegAdditionalFeature.AddMember("INCIDENTS", smithyprelude.Unit)
+
+	RouteLegAdditionalFeature_PASS_THROUGH_WAYPOINTS = RouteLegAdditionalFeature.AddMember("PASS_THROUGH_WAYPOINTS", smithyprelude.Unit)
+
+	RouteLegAdditionalFeature_SUMMARY = RouteLegAdditionalFeature.AddMember("SUMMARY", smithyprelude.Unit)
+
+	RouteLegAdditionalFeature_TOLLS = RouteLegAdditionalFeature.AddMember("TOLLS", smithyprelude.Unit)
+
+	RouteLegAdditionalFeature_TRAVEL_STEP_INSTRUCTIONS = RouteLegAdditionalFeature.AddMember("TRAVEL_STEP_INSTRUCTIONS", smithyprelude.Unit)
+
+	RouteLegAdditionalFeature_TRUCK_ROAD_TYPES = RouteLegAdditionalFeature.AddMember("TRUCK_ROAD_TYPES", smithyprelude.Unit)
+
+	RouteLegAdditionalFeature_TYPICAL_DURATION = RouteLegAdditionalFeature.AddMember("TYPICAL_DURATION", smithyprelude.Unit)
+
+	RouteLegAdditionalFeature_ZONES = RouteLegAdditionalFeature.AddMember("ZONES", smithyprelude.Unit)
+
+	RouteLegAdditionalFeature_BOOKINGS = RouteLegAdditionalFeature.AddMember("BOOKINGS", smithyprelude.Unit)
+
+	RouteLegAdditionalFeature_INTERMEDIATE_STOPS = RouteLegAdditionalFeature.AddMember("INTERMEDIATE_STOPS", smithyprelude.Unit)
+
+	RouteLegAdditionalFeature_NEXT_DEPARTURES = RouteLegAdditionalFeature.AddMember("NEXT_DEPARTURES", smithyprelude.Unit)
+
+	_RouteLegAdditionalFeatureList_member = _RouteLegAdditionalFeatureList.AddMember("member", RouteLegAdditionalFeature)
 
 	_RouteList_member = _RouteList.AddMember("member", Route)
+
+	RouteMatrixErrorCode_NO_MATCH = RouteMatrixErrorCode.AddMember("NO_MATCH", smithyprelude.Unit)
+
+	RouteMatrixErrorCode_NO_MATCH_DESTINATION = RouteMatrixErrorCode.AddMember("NO_MATCH_DESTINATION", smithyprelude.Unit)
+
+	RouteMatrixErrorCode_NO_MATCH_ORIGIN = RouteMatrixErrorCode.AddMember("NO_MATCH_ORIGIN", smithyprelude.Unit)
+
+	RouteMatrixErrorCode_NO_ROUTE = RouteMatrixErrorCode.AddMember("NO_ROUTE", smithyprelude.Unit)
+
+	RouteMatrixErrorCode_OUT_OF_BOUNDS = RouteMatrixErrorCode.AddMember("OUT_OF_BOUNDS", smithyprelude.Unit)
+
+	RouteMatrixErrorCode_OUT_OF_BOUNDS_DESTINATION = RouteMatrixErrorCode.AddMember("OUT_OF_BOUNDS_DESTINATION", smithyprelude.Unit)
+
+	RouteMatrixErrorCode_OUT_OF_BOUNDS_ORIGIN = RouteMatrixErrorCode.AddMember("OUT_OF_BOUNDS_ORIGIN", smithyprelude.Unit)
+
+	RouteMatrixErrorCode_OTHER = RouteMatrixErrorCode.AddMember("OTHER", smithyprelude.Unit)
+
+	RouteMatrixErrorCode_VIOLATION = RouteMatrixErrorCode.AddMember("VIOLATION", smithyprelude.Unit)
 
 	RouteMatrixEntry_Distance = RouteMatrixEntry.AddMember("Distance", _DistanceMeters)
 
 	RouteMatrixEntry_Duration = RouteMatrixEntry.AddMember("Duration", _DurationSeconds)
 
-	RouteMatrixEntry_Error = RouteMatrixEntry.AddMember("Error", _RouteMatrixErrorCode)
+	RouteMatrixEntry_Error = RouteMatrixEntry.AddMember("Error", RouteMatrixErrorCode)
 
 	_RouteMatrixRow_member = _RouteMatrixRow.AddMember("member", RouteMatrixEntry)
 
@@ -4582,7 +7863,13 @@ func init() {
 
 	_RouteMatrixAvoidanceAreaList_member = _RouteMatrixAvoidanceAreaList.AddMember("member", RouteMatrixAvoidanceArea)
 
-	RouteMatrixAvoidanceZoneCategory_Category = RouteMatrixAvoidanceZoneCategory.AddMember("Category", _RouteMatrixZoneCategory)
+	RouteMatrixZoneCategory_CONGESTION_PRICING = RouteMatrixZoneCategory.AddMember("CONGESTION_PRICING", smithyprelude.Unit)
+
+	RouteMatrixZoneCategory_ENVIRONMENTAL = RouteMatrixZoneCategory.AddMember("ENVIRONMENTAL", smithyprelude.Unit)
+
+	RouteMatrixZoneCategory_VIGNETTE = RouteMatrixZoneCategory.AddMember("VIGNETTE", smithyprelude.Unit)
+
+	RouteMatrixAvoidanceZoneCategory_Category = RouteMatrixAvoidanceZoneCategory.AddMember("Category", RouteMatrixZoneCategory)
 
 	_RouteMatrixAvoidanceZoneCategoryList_member = _RouteMatrixAvoidanceZoneCategoryList.AddMember("member", RouteMatrixAvoidanceZoneCategory)
 
@@ -4634,11 +7921,11 @@ func init() {
 
 	RouteMatrixMatchingOptions_Radius = RouteMatrixMatchingOptions.AddMember("Radius", _DistanceMeters)
 
-	RouteMatrixMatchingOptions_Strategy = RouteMatrixMatchingOptions.AddMember("Strategy", _MatchingStrategy)
+	RouteMatrixMatchingOptions_Strategy = RouteMatrixMatchingOptions.AddMember("Strategy", MatchingStrategy)
 
 	RouteMatrixSideOfStreetOptions_Position = RouteMatrixSideOfStreetOptions.AddMember("Position", _Position)
 
-	RouteMatrixSideOfStreetOptions_UseWith = RouteMatrixSideOfStreetOptions.AddMember("UseWith", _SideOfStreetMatchingStrategy)
+	RouteMatrixSideOfStreetOptions_UseWith = RouteMatrixSideOfStreetOptions.AddMember("UseWith", SideOfStreetMatchingStrategy)
 
 	RouteMatrixDestinationOptions_AvoidActionsForDistance = RouteMatrixDestinationOptions.AddMember("AvoidActionsForDistance", _DistanceMeters)
 
@@ -4656,7 +7943,29 @@ func init() {
 
 	RouteMatrixExclusionOptions_Countries = RouteMatrixExclusionOptions.AddMember("Countries", _CountryCodeList)
 
-	_RouteMatrixHazardousCargoTypeList_member = _RouteMatrixHazardousCargoTypeList.AddMember("member", _RouteMatrixHazardousCargoType)
+	RouteMatrixHazardousCargoType_COMBUSTIBLE = RouteMatrixHazardousCargoType.AddMember("COMBUSTIBLE", smithyprelude.Unit)
+
+	RouteMatrixHazardousCargoType_CORROSIVE = RouteMatrixHazardousCargoType.AddMember("CORROSIVE", smithyprelude.Unit)
+
+	RouteMatrixHazardousCargoType_EXPLOSIVE = RouteMatrixHazardousCargoType.AddMember("EXPLOSIVE", smithyprelude.Unit)
+
+	RouteMatrixHazardousCargoType_FLAMMABLE = RouteMatrixHazardousCargoType.AddMember("FLAMMABLE", smithyprelude.Unit)
+
+	RouteMatrixHazardousCargoType_GAS = RouteMatrixHazardousCargoType.AddMember("GAS", smithyprelude.Unit)
+
+	RouteMatrixHazardousCargoType_HARMFUL_TO_WATER = RouteMatrixHazardousCargoType.AddMember("HARMFUL_TO_WATER", smithyprelude.Unit)
+
+	RouteMatrixHazardousCargoType_ORGANIC = RouteMatrixHazardousCargoType.AddMember("ORGANIC", smithyprelude.Unit)
+
+	RouteMatrixHazardousCargoType_OTHER = RouteMatrixHazardousCargoType.AddMember("OTHER", smithyprelude.Unit)
+
+	RouteMatrixHazardousCargoType_POISON = RouteMatrixHazardousCargoType.AddMember("POISON", smithyprelude.Unit)
+
+	RouteMatrixHazardousCargoType_POISONOUS_INHALATION = RouteMatrixHazardousCargoType.AddMember("POISONOUS_INHALATION", smithyprelude.Unit)
+
+	RouteMatrixHazardousCargoType_RADIOACTIVE = RouteMatrixHazardousCargoType.AddMember("RADIOACTIVE", smithyprelude.Unit)
+
+	_RouteMatrixHazardousCargoTypeList_member = _RouteMatrixHazardousCargoTypeList.AddMember("member", RouteMatrixHazardousCargoType)
 
 	RouteMatrixOriginOptions_AvoidActionsForDistance = RouteMatrixOriginOptions.AddMember("AvoidActionsForDistance", _DistanceMeters)
 
@@ -4680,9 +7989,23 @@ func init() {
 
 	RouteMatrixTrafficOptions_FlowEventThresholdOverride = RouteMatrixTrafficOptions.AddMember("FlowEventThresholdOverride", _DurationSeconds)
 
-	RouteMatrixTrafficOptions_Usage = RouteMatrixTrafficOptions.AddMember("Usage", _TrafficUsage)
+	RouteMatrixTrafficOptions_Usage = RouteMatrixTrafficOptions.AddMember("Usage", TrafficUsage)
 
 	RouteMatrixTrailerOptions_TrailerCount = RouteMatrixTrailerOptions.AddMember("TrailerCount", _SensitiveInteger)
+
+	RouteMatrixTravelMode_CAR = RouteMatrixTravelMode.AddMember("CAR", smithyprelude.Unit)
+
+	RouteMatrixTravelMode_PEDESTRIAN = RouteMatrixTravelMode.AddMember("PEDESTRIAN", smithyprelude.Unit)
+
+	RouteMatrixTravelMode_SCOOTER = RouteMatrixTravelMode.AddMember("SCOOTER", smithyprelude.Unit)
+
+	RouteMatrixTravelMode_TRUCK = RouteMatrixTravelMode.AddMember("TRUCK", smithyprelude.Unit)
+
+	RouteMatrixTruckType_LIGHT_TRUCK = RouteMatrixTruckType.AddMember("LIGHT_TRUCK", smithyprelude.Unit)
+
+	RouteMatrixTruckType_STRAIGHT_TRUCK = RouteMatrixTruckType.AddMember("STRAIGHT_TRUCK", smithyprelude.Unit)
+
+	RouteMatrixTruckType_TRACTOR = RouteMatrixTruckType.AddMember("TRACTOR", smithyprelude.Unit)
 
 	RouteMatrixTruckOptions_AxleCount = RouteMatrixTruckOptions.AddMember("AxleCount", _SensitiveInteger)
 
@@ -4706,7 +8029,7 @@ func init() {
 
 	RouteMatrixTruckOptions_Trailer = RouteMatrixTruckOptions.AddMember("Trailer", RouteMatrixTrailerOptions)
 
-	RouteMatrixTruckOptions_TruckType = RouteMatrixTruckOptions.AddMember("TruckType", _RouteMatrixTruckType)
+	RouteMatrixTruckOptions_TruckType = RouteMatrixTruckOptions.AddMember("TruckType", RouteMatrixTruckType)
 
 	RouteMatrixTruckOptions_TunnelRestrictionCode = RouteMatrixTruckOptions.AddMember("TunnelRestrictionCode", _TunnelRestrictionCode)
 
@@ -4734,13 +8057,25 @@ func init() {
 
 	RoutePedestrianOptions_Speed = RoutePedestrianOptions.AddMember("Speed", _SpeedKilometersPerHour)
 
-	RouteResponseNotice_Code = RouteResponseNotice.AddMember("Code", _RouteResponseNoticeCode)
+	RouteResponseNoticeCode_MAIN_LANGUAGE_NOT_FOUND = RouteResponseNoticeCode.AddMember("MAIN_LANGUAGE_NOT_FOUND", smithyprelude.Unit)
 
-	RouteResponseNotice_Impact = RouteResponseNotice.AddMember("Impact", _RouteNoticeImpact)
+	RouteResponseNoticeCode_OTHER = RouteResponseNoticeCode.AddMember("OTHER", smithyprelude.Unit)
+
+	RouteResponseNoticeCode_TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS = RouteResponseNoticeCode.AddMember("TRAVEL_TIME_EXCEEDS_DRIVER_WORK_HOURS", smithyprelude.Unit)
+
+	RouteResponseNoticeCode_TRANSIT_DATA_UNAVAILABLE = RouteResponseNoticeCode.AddMember("TRANSIT_DATA_UNAVAILABLE", smithyprelude.Unit)
+
+	RouteResponseNoticeCode_TRANSIT_ROUTE_UNAVAILABLE = RouteResponseNoticeCode.AddMember("TRANSIT_ROUTE_UNAVAILABLE", smithyprelude.Unit)
+
+	RouteResponseNoticeCode_NO_TRANSIT_STATIONS_FOUND = RouteResponseNoticeCode.AddMember("NO_TRANSIT_STATIONS_FOUND", smithyprelude.Unit)
+
+	RouteResponseNotice_Code = RouteResponseNotice.AddMember("Code", RouteResponseNoticeCode)
+
+	RouteResponseNotice_Impact = RouteResponseNotice.AddMember("Impact", RouteNoticeImpact)
 
 	_RouteResponseNoticeList_member = _RouteResponseNoticeList.AddMember("member", RouteResponseNotice)
 
-	RouteScooterOptions_EngineType = RouteScooterOptions.AddMember("EngineType", _RouteEngineType)
+	RouteScooterOptions_EngineType = RouteScooterOptions.AddMember("EngineType", RouteEngineType)
 
 	RouteScooterOptions_LicensePlate = RouteScooterOptions.AddMember("LicensePlate", RouteVehicleLicensePlate)
 
@@ -4748,7 +8083,57 @@ func init() {
 
 	RouteScooterOptions_Occupancy = RouteScooterOptions.AddMember("Occupancy", _SensitiveInteger)
 
-	_RouteSpanAdditionalFeatureList_member = _RouteSpanAdditionalFeatureList.AddMember("member", _RouteSpanAdditionalFeature)
+	RouteSpanAdditionalFeature_BEST_CASE_DURATION = RouteSpanAdditionalFeature.AddMember("BEST_CASE_DURATION", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_CAR_ACCESS = RouteSpanAdditionalFeature.AddMember("CAR_ACCESS", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_COUNTRY = RouteSpanAdditionalFeature.AddMember("COUNTRY", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_DISTANCE = RouteSpanAdditionalFeature.AddMember("DISTANCE", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_DURATION = RouteSpanAdditionalFeature.AddMember("DURATION", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_DYNAMIC_SPEED = RouteSpanAdditionalFeature.AddMember("DYNAMIC_SPEED", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_FUNCTIONAL_CLASSIFICATION = RouteSpanAdditionalFeature.AddMember("FUNCTIONAL_CLASSIFICATION", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_GATES = RouteSpanAdditionalFeature.AddMember("GATES", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_INCIDENTS = RouteSpanAdditionalFeature.AddMember("INCIDENTS", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_NAMES = RouteSpanAdditionalFeature.AddMember("NAMES", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_NOTICES = RouteSpanAdditionalFeature.AddMember("NOTICES", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_PEDESTRIAN_ACCESS = RouteSpanAdditionalFeature.AddMember("PEDESTRIAN_ACCESS", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_RAILWAY_CROSSINGS = RouteSpanAdditionalFeature.AddMember("RAILWAY_CROSSINGS", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_REGION = RouteSpanAdditionalFeature.AddMember("REGION", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_ROAD_ATTRIBUTES = RouteSpanAdditionalFeature.AddMember("ROAD_ATTRIBUTES", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_ROUTE_NUMBERS = RouteSpanAdditionalFeature.AddMember("ROUTE_NUMBERS", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_SCOOTER_ACCESS = RouteSpanAdditionalFeature.AddMember("SCOOTER_ACCESS", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_SPEED_LIMIT = RouteSpanAdditionalFeature.AddMember("SPEED_LIMIT", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_TOLL_SYSTEMS = RouteSpanAdditionalFeature.AddMember("TOLL_SYSTEMS", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_TRUCK_ACCESS = RouteSpanAdditionalFeature.AddMember("TRUCK_ACCESS", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_TRUCK_ROAD_TYPES = RouteSpanAdditionalFeature.AddMember("TRUCK_ROAD_TYPES", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_TYPICAL_DURATION = RouteSpanAdditionalFeature.AddMember("TYPICAL_DURATION", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_ZONES = RouteSpanAdditionalFeature.AddMember("ZONES", smithyprelude.Unit)
+
+	RouteSpanAdditionalFeature_CONSUMPTION = RouteSpanAdditionalFeature.AddMember("CONSUMPTION", smithyprelude.Unit)
+
+	_RouteSpanAdditionalFeatureList_member = _RouteSpanAdditionalFeatureList.AddMember("member", RouteSpanAdditionalFeature)
+
+	RouteTollVehicleCategory_MINIBUS = RouteTollVehicleCategory.AddMember("MINIBUS", smithyprelude.Unit)
 
 	RouteTollOptions_AllTransponders = RouteTollOptions.AddMember("AllTransponders", _SensitiveBoolean)
 
@@ -4758,19 +8143,45 @@ func init() {
 
 	RouteTollOptions_EmissionType = RouteTollOptions.AddMember("EmissionType", RouteEmissionType)
 
-	RouteTollOptions_VehicleCategory = RouteTollOptions.AddMember("VehicleCategory", _RouteTollVehicleCategory)
+	RouteTollOptions_VehicleCategory = RouteTollOptions.AddMember("VehicleCategory", RouteTollVehicleCategory)
 
 	RouteTrafficOptions_FlowEventThresholdOverride = RouteTrafficOptions.AddMember("FlowEventThresholdOverride", _DurationSeconds)
 
-	RouteTrafficOptions_Usage = RouteTrafficOptions.AddMember("Usage", _TrafficUsage)
+	RouteTrafficOptions_Usage = RouteTrafficOptions.AddMember("Usage", TrafficUsage)
 
 	RouteTrailerOptions_AxleCount = RouteTrailerOptions.AddMember("AxleCount", _SensitiveInteger)
 
 	RouteTrailerOptions_TrailerCount = RouteTrailerOptions.AddMember("TrailerCount", _SensitiveInteger)
 
+	RouteTransitPedestrianOptions_MaxDistance = RouteTransitPedestrianOptions.AddMember("MaxDistance", _DistanceMeters)
+
+	RouteTransitPedestrianOptions_Speed = RouteTransitPedestrianOptions.AddMember("Speed", _SpeedKilometersPerHour)
+
+	RouteTransitOptions_AccessibilityAttributes = RouteTransitOptions.AddMember("AccessibilityAttributes", _RouteAccessibilityAttributeList)
+
+	RouteTransitOptions_AllowedModes = RouteTransitOptions.AddMember("AllowedModes", _RouteTransitModeList)
+
+	RouteTransitOptions_ExcludedModes = RouteTransitOptions.AddMember("ExcludedModes", _RouteTransitModeList)
+
+	RouteTransitOptions_MaxTransfers = RouteTransitOptions.AddMember("MaxTransfers", smithyprelude.Integer)
+
+	RouteTransitOptions_Pedestrian = RouteTransitOptions.AddMember("Pedestrian", RouteTransitPedestrianOptions)
+
+	RouteTravelMode_CAR = RouteTravelMode.AddMember("CAR", smithyprelude.Unit)
+
+	RouteTravelMode_PEDESTRIAN = RouteTravelMode.AddMember("PEDESTRIAN", smithyprelude.Unit)
+
+	RouteTravelMode_SCOOTER = RouteTravelMode.AddMember("SCOOTER", smithyprelude.Unit)
+
+	RouteTravelMode_TRUCK = RouteTravelMode.AddMember("TRUCK", smithyprelude.Unit)
+
+	RouteTravelMode_INTERMODAL = RouteTravelMode.AddMember("INTERMODAL", smithyprelude.Unit)
+
+	RouteTravelMode_TRANSIT = RouteTravelMode.AddMember("TRANSIT", smithyprelude.Unit)
+
 	RouteTruckOptions_AxleCount = RouteTruckOptions.AddMember("AxleCount", _SensitiveInteger)
 
-	RouteTruckOptions_EngineType = RouteTruckOptions.AddMember("EngineType", _RouteEngineType)
+	RouteTruckOptions_EngineType = RouteTruckOptions.AddMember("EngineType", RouteEngineType)
 
 	RouteTruckOptions_GrossWeight = RouteTruckOptions.AddMember("GrossWeight", _WeightKilograms)
 
@@ -4796,7 +8207,7 @@ func init() {
 
 	RouteTruckOptions_Trailer = RouteTruckOptions.AddMember("Trailer", RouteTrailerOptions)
 
-	RouteTruckOptions_TruckType = RouteTruckOptions.AddMember("TruckType", _RouteTruckType)
+	RouteTruckOptions_TruckType = RouteTruckOptions.AddMember("TruckType", RouteTruckType)
 
 	RouteTruckOptions_TunnelRestrictionCode = RouteTruckOptions.AddMember("TunnelRestrictionCode", _TunnelRestrictionCode)
 
@@ -4813,6 +8224,14 @@ func init() {
 	RouteTravelModeOptions_Scooter = RouteTravelModeOptions.AddMember("Scooter", RouteScooterOptions)
 
 	RouteTravelModeOptions_Truck = RouteTravelModeOptions.AddMember("Truck", RouteTruckOptions)
+
+	RouteTravelModeOptions_Intermodal = RouteTravelModeOptions.AddMember("Intermodal", RouteIntermodalOptions)
+
+	RouteTravelModeOptions_Transit = RouteTravelModeOptions.AddMember("Transit", RouteTransitOptions)
+
+	RouteTravelStepType_DEFAULT = RouteTravelStepType.AddMember("DEFAULT", smithyprelude.Unit)
+
+	RouteTravelStepType_TURN_BY_TURN = RouteTravelStepType.AddMember("TURN_BY_TURN", smithyprelude.Unit)
 
 	RouteWaypoint_AvoidActionsForDistance = RouteWaypoint.AddMember("AvoidActionsForDistance", _DistanceMeters)
 
@@ -4831,6 +8250,10 @@ func init() {
 	RouteWaypoint_StopDuration = RouteWaypoint.AddMember("StopDuration", _DurationSeconds)
 
 	_RouteWaypointList_member = _RouteWaypointList.AddMember("member", RouteWaypoint)
+
+	RoutingObjective_FASTEST_ROUTE = RoutingObjective.AddMember("FASTEST_ROUTE", smithyprelude.Unit)
+
+	RoutingObjective_SHORTEST_ROUTE = RoutingObjective.AddMember("SHORTEST_ROUTE", smithyprelude.Unit)
 
 	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String, &smithytraits.JSONName{Name: "message"})
 
@@ -4912,9 +8335,21 @@ func init() {
 
 	_WaypointOptimizationConnectionList_member = _WaypointOptimizationConnectionList.AddMember("member", WaypointOptimizationConnection)
 
+	WaypointOptimizationConstraint_ACCESS_HOURS = WaypointOptimizationConstraint.AddMember("ACCESS_HOURS", smithyprelude.Unit)
+
+	WaypointOptimizationConstraint_APPOINTMENT_TIME = WaypointOptimizationConstraint.AddMember("APPOINTMENT_TIME", smithyprelude.Unit)
+
+	WaypointOptimizationConstraint_BEFORE = WaypointOptimizationConstraint.AddMember("BEFORE", smithyprelude.Unit)
+
+	WaypointOptimizationConstraint_HEADING = WaypointOptimizationConstraint.AddMember("HEADING", smithyprelude.Unit)
+
+	WaypointOptimizationConstraint_SERVICE_DURATION = WaypointOptimizationConstraint.AddMember("SERVICE_DURATION", smithyprelude.Unit)
+
+	WaypointOptimizationConstraint_SIDE_OF_STREET = WaypointOptimizationConstraint.AddMember("SIDE_OF_STREET", smithyprelude.Unit)
+
 	WaypointOptimizationSideOfStreetOptions_Position = WaypointOptimizationSideOfStreetOptions.AddMember("Position", _Position)
 
-	WaypointOptimizationSideOfStreetOptions_UseWith = WaypointOptimizationSideOfStreetOptions.AddMember("UseWith", _SideOfStreetMatchingStrategy)
+	WaypointOptimizationSideOfStreetOptions_UseWith = WaypointOptimizationSideOfStreetOptions.AddMember("UseWith", SideOfStreetMatchingStrategy)
 
 	WaypointOptimizationDestinationOptions_AccessHours = WaypointOptimizationDestinationOptions.AddMember("AccessHours", WaypointOptimizationAccessHours)
 
@@ -4938,21 +8373,47 @@ func init() {
 
 	WaypointOptimizationRestProfile_Profile = WaypointOptimizationRestProfile.AddMember("Profile", _SensitiveString)
 
+	WaypointOptimizationServiceTimeTreatment_REST = WaypointOptimizationServiceTimeTreatment.AddMember("REST", smithyprelude.Unit)
+
+	WaypointOptimizationServiceTimeTreatment_WORK = WaypointOptimizationServiceTimeTreatment.AddMember("WORK", smithyprelude.Unit)
+
 	WaypointOptimizationDriverOptions_RestCycles = WaypointOptimizationDriverOptions.AddMember("RestCycles", WaypointOptimizationRestCycles)
 
 	WaypointOptimizationDriverOptions_RestProfile = WaypointOptimizationDriverOptions.AddMember("RestProfile", WaypointOptimizationRestProfile)
 
-	WaypointOptimizationDriverOptions_TreatServiceTimeAs = WaypointOptimizationDriverOptions.AddMember("TreatServiceTimeAs", _WaypointOptimizationServiceTimeTreatment)
+	WaypointOptimizationDriverOptions_TreatServiceTimeAs = WaypointOptimizationDriverOptions.AddMember("TreatServiceTimeAs", WaypointOptimizationServiceTimeTreatment)
 
 	WaypointOptimizationExclusionOptions_Countries = WaypointOptimizationExclusionOptions.AddMember("Countries", _CountryCodeList)
 
-	WaypointOptimizationFailedConstraint_Constraint = WaypointOptimizationFailedConstraint.AddMember("Constraint", _WaypointOptimizationConstraint)
+	WaypointOptimizationFailedConstraint_Constraint = WaypointOptimizationFailedConstraint.AddMember("Constraint", WaypointOptimizationConstraint)
 
 	WaypointOptimizationFailedConstraint_Reason = WaypointOptimizationFailedConstraint.AddMember("Reason", _SensitiveString)
 
 	_WaypointOptimizationFailedConstraintList_member = _WaypointOptimizationFailedConstraintList.AddMember("member", WaypointOptimizationFailedConstraint)
 
-	_WaypointOptimizationHazardousCargoTypeList_member = _WaypointOptimizationHazardousCargoTypeList.AddMember("member", _WaypointOptimizationHazardousCargoType)
+	WaypointOptimizationHazardousCargoType_COMBUSTIBLE = WaypointOptimizationHazardousCargoType.AddMember("COMBUSTIBLE", smithyprelude.Unit)
+
+	WaypointOptimizationHazardousCargoType_CORROSIVE = WaypointOptimizationHazardousCargoType.AddMember("CORROSIVE", smithyprelude.Unit)
+
+	WaypointOptimizationHazardousCargoType_EXPLOSIVE = WaypointOptimizationHazardousCargoType.AddMember("EXPLOSIVE", smithyprelude.Unit)
+
+	WaypointOptimizationHazardousCargoType_FLAMMABLE = WaypointOptimizationHazardousCargoType.AddMember("FLAMMABLE", smithyprelude.Unit)
+
+	WaypointOptimizationHazardousCargoType_GAS = WaypointOptimizationHazardousCargoType.AddMember("GAS", smithyprelude.Unit)
+
+	WaypointOptimizationHazardousCargoType_HARMFUL_TO_WATER = WaypointOptimizationHazardousCargoType.AddMember("HARMFUL_TO_WATER", smithyprelude.Unit)
+
+	WaypointOptimizationHazardousCargoType_ORGANIC = WaypointOptimizationHazardousCargoType.AddMember("ORGANIC", smithyprelude.Unit)
+
+	WaypointOptimizationHazardousCargoType_OTHER = WaypointOptimizationHazardousCargoType.AddMember("OTHER", smithyprelude.Unit)
+
+	WaypointOptimizationHazardousCargoType_POISON = WaypointOptimizationHazardousCargoType.AddMember("POISON", smithyprelude.Unit)
+
+	WaypointOptimizationHazardousCargoType_POISONOUS_INHALATION = WaypointOptimizationHazardousCargoType.AddMember("POISONOUS_INHALATION", smithyprelude.Unit)
+
+	WaypointOptimizationHazardousCargoType_RADIOACTIVE = WaypointOptimizationHazardousCargoType.AddMember("RADIOACTIVE", smithyprelude.Unit)
+
+	_WaypointOptimizationHazardousCargoTypeList_member = _WaypointOptimizationHazardousCargoTypeList.AddMember("member", WaypointOptimizationHazardousCargoType)
 
 	WaypointOptimizationImpedingWaypoint_FailedConstraints = WaypointOptimizationImpedingWaypoint.AddMember("FailedConstraints", _WaypointOptimizationFailedConstraintList)
 
@@ -4978,6 +8439,10 @@ func init() {
 
 	WaypointOptimizationPedestrianOptions_Speed = WaypointOptimizationPedestrianOptions.AddMember("Speed", _SpeedKilometersPerHour)
 
+	WaypointOptimizationSequencingObjective_FASTEST_ROUTE = WaypointOptimizationSequencingObjective.AddMember("FASTEST_ROUTE", smithyprelude.Unit)
+
+	WaypointOptimizationSequencingObjective_SHORTEST_ROUTE = WaypointOptimizationSequencingObjective.AddMember("SHORTEST_ROUTE", smithyprelude.Unit)
+
 	WaypointOptimizationTimeBreakdown_RestDuration = WaypointOptimizationTimeBreakdown.AddMember("RestDuration", _DurationSeconds)
 
 	WaypointOptimizationTimeBreakdown_ServiceDuration = WaypointOptimizationTimeBreakdown.AddMember("ServiceDuration", _DurationSeconds)
@@ -4986,9 +8451,21 @@ func init() {
 
 	WaypointOptimizationTimeBreakdown_WaitDuration = WaypointOptimizationTimeBreakdown.AddMember("WaitDuration", _DurationSeconds)
 
-	WaypointOptimizationTrafficOptions_Usage = WaypointOptimizationTrafficOptions.AddMember("Usage", _TrafficUsage)
+	WaypointOptimizationTrafficOptions_Usage = WaypointOptimizationTrafficOptions.AddMember("Usage", TrafficUsage)
 
 	WaypointOptimizationTrailerOptions_TrailerCount = WaypointOptimizationTrailerOptions.AddMember("TrailerCount", _SensitiveInteger)
+
+	WaypointOptimizationTravelMode_CAR = WaypointOptimizationTravelMode.AddMember("CAR", smithyprelude.Unit)
+
+	WaypointOptimizationTravelMode_PEDESTRIAN = WaypointOptimizationTravelMode.AddMember("PEDESTRIAN", smithyprelude.Unit)
+
+	WaypointOptimizationTravelMode_SCOOTER = WaypointOptimizationTravelMode.AddMember("SCOOTER", smithyprelude.Unit)
+
+	WaypointOptimizationTravelMode_TRUCK = WaypointOptimizationTravelMode.AddMember("TRUCK", smithyprelude.Unit)
+
+	WaypointOptimizationTruckType_STRAIGHT_TRUCK = WaypointOptimizationTruckType.AddMember("STRAIGHT_TRUCK", smithyprelude.Unit)
+
+	WaypointOptimizationTruckType_TRACTOR = WaypointOptimizationTruckType.AddMember("TRACTOR", smithyprelude.Unit)
 
 	WaypointOptimizationTruckOptions_GrossWeight = WaypointOptimizationTruckOptions.AddMember("GrossWeight", _WeightKilograms)
 
@@ -5000,7 +8477,7 @@ func init() {
 
 	WaypointOptimizationTruckOptions_Trailer = WaypointOptimizationTruckOptions.AddMember("Trailer", WaypointOptimizationTrailerOptions)
 
-	WaypointOptimizationTruckOptions_TruckType = WaypointOptimizationTruckOptions.AddMember("TruckType", _WaypointOptimizationTruckType)
+	WaypointOptimizationTruckOptions_TruckType = WaypointOptimizationTruckOptions.AddMember("TruckType", WaypointOptimizationTruckType)
 
 	WaypointOptimizationTruckOptions_TunnelRestrictionCode = WaypointOptimizationTruckOptions.AddMember("TunnelRestrictionCode", _TunnelRestrictionCode)
 
@@ -5050,9 +8527,9 @@ func init() {
 
 	CalculateIsolinesRequest_Key = CalculateIsolinesRequest.AddMember("Key", _ApiKey, &smithytraits.HTTPQuery{Name: "key"})
 
-	CalculateIsolinesRequest_OptimizeIsolineFor = CalculateIsolinesRequest.AddMember("OptimizeIsolineFor", _IsolineOptimizationObjective)
+	CalculateIsolinesRequest_OptimizeIsolineFor = CalculateIsolinesRequest.AddMember("OptimizeIsolineFor", IsolineOptimizationObjective)
 
-	CalculateIsolinesRequest_OptimizeRoutingFor = CalculateIsolinesRequest.AddMember("OptimizeRoutingFor", _RoutingObjective)
+	CalculateIsolinesRequest_OptimizeRoutingFor = CalculateIsolinesRequest.AddMember("OptimizeRoutingFor", RoutingObjective)
 
 	CalculateIsolinesRequest_Origin = CalculateIsolinesRequest.AddMember("Origin", _Position)
 
@@ -5062,7 +8539,7 @@ func init() {
 
 	CalculateIsolinesRequest_Traffic = CalculateIsolinesRequest.AddMember("Traffic", IsolineTrafficOptions)
 
-	CalculateIsolinesRequest_TravelMode = CalculateIsolinesRequest.AddMember("TravelMode", _IsolineTravelMode)
+	CalculateIsolinesRequest_TravelMode = CalculateIsolinesRequest.AddMember("TravelMode", IsolineTravelMode)
 
 	CalculateIsolinesRequest_TravelModeOptions = CalculateIsolinesRequest.AddMember("TravelModeOptions", IsolineTravelModeOptions)
 
@@ -5094,7 +8571,7 @@ func init() {
 
 	CalculateRouteMatrixRequest_Key = CalculateRouteMatrixRequest.AddMember("Key", _ApiKey, &smithytraits.HTTPQuery{Name: "key"})
 
-	CalculateRouteMatrixRequest_OptimizeRoutingFor = CalculateRouteMatrixRequest.AddMember("OptimizeRoutingFor", _RoutingObjective)
+	CalculateRouteMatrixRequest_OptimizeRoutingFor = CalculateRouteMatrixRequest.AddMember("OptimizeRoutingFor", RoutingObjective)
 
 	CalculateRouteMatrixRequest_Origins = CalculateRouteMatrixRequest.AddMember("Origins", _RouteMatrixOriginList)
 
@@ -5102,7 +8579,7 @@ func init() {
 
 	CalculateRouteMatrixRequest_Traffic = CalculateRouteMatrixRequest.AddMember("Traffic", RouteMatrixTrafficOptions)
 
-	CalculateRouteMatrixRequest_TravelMode = CalculateRouteMatrixRequest.AddMember("TravelMode", _RouteMatrixTravelMode)
+	CalculateRouteMatrixRequest_TravelMode = CalculateRouteMatrixRequest.AddMember("TravelMode", RouteMatrixTravelMode)
 
 	CalculateRouteMatrixRequest_TravelModeOptions = CalculateRouteMatrixRequest.AddMember("TravelModeOptions", RouteMatrixTravelModeOptions)
 
@@ -5144,7 +8621,7 @@ func init() {
 
 	CalculateRoutesRequest_MaxAlternatives = CalculateRoutesRequest.AddMember("MaxAlternatives", smithyprelude.Integer)
 
-	CalculateRoutesRequest_OptimizeRoutingFor = CalculateRoutesRequest.AddMember("OptimizeRoutingFor", _RoutingObjective)
+	CalculateRoutesRequest_OptimizeRoutingFor = CalculateRoutesRequest.AddMember("OptimizeRoutingFor", RoutingObjective)
 
 	CalculateRoutesRequest_Origin = CalculateRoutesRequest.AddMember("Origin", _Position)
 
@@ -5156,11 +8633,11 @@ func init() {
 
 	CalculateRoutesRequest_Traffic = CalculateRoutesRequest.AddMember("Traffic", RouteTrafficOptions)
 
-	CalculateRoutesRequest_TravelMode = CalculateRoutesRequest.AddMember("TravelMode", _RouteTravelMode)
+	CalculateRoutesRequest_TravelMode = CalculateRoutesRequest.AddMember("TravelMode", RouteTravelMode)
 
 	CalculateRoutesRequest_TravelModeOptions = CalculateRoutesRequest.AddMember("TravelModeOptions", RouteTravelModeOptions)
 
-	CalculateRoutesRequest_TravelStepType = CalculateRoutesRequest.AddMember("TravelStepType", _RouteTravelStepType)
+	CalculateRoutesRequest_TravelStepType = CalculateRoutesRequest.AddMember("TravelStepType", RouteTravelStepType)
 
 	CalculateRoutesRequest_Waypoints = CalculateRoutesRequest.AddMember("Waypoints", _RouteWaypointList)
 
@@ -5188,7 +8665,7 @@ func init() {
 
 	OptimizeWaypointsRequest_Key = OptimizeWaypointsRequest.AddMember("Key", _ApiKey, &smithytraits.HTTPQuery{Name: "key"})
 
-	OptimizeWaypointsRequest_OptimizeSequencingFor = OptimizeWaypointsRequest.AddMember("OptimizeSequencingFor", _WaypointOptimizationSequencingObjective)
+	OptimizeWaypointsRequest_OptimizeSequencingFor = OptimizeWaypointsRequest.AddMember("OptimizeSequencingFor", WaypointOptimizationSequencingObjective)
 
 	OptimizeWaypointsRequest_Origin = OptimizeWaypointsRequest.AddMember("Origin", _Position)
 
@@ -5196,7 +8673,7 @@ func init() {
 
 	OptimizeWaypointsRequest_Traffic = OptimizeWaypointsRequest.AddMember("Traffic", WaypointOptimizationTrafficOptions)
 
-	OptimizeWaypointsRequest_TravelMode = OptimizeWaypointsRequest.AddMember("TravelMode", _WaypointOptimizationTravelMode)
+	OptimizeWaypointsRequest_TravelMode = OptimizeWaypointsRequest.AddMember("TravelMode", WaypointOptimizationTravelMode)
 
 	OptimizeWaypointsRequest_TravelModeOptions = OptimizeWaypointsRequest.AddMember("TravelModeOptions", WaypointOptimizationTravelModeOptions)
 
@@ -5224,7 +8701,7 @@ func init() {
 
 	SnapToRoadsRequest_TracePoints = SnapToRoadsRequest.AddMember("TracePoints", _RoadSnapTracePointList)
 
-	SnapToRoadsRequest_TravelMode = SnapToRoadsRequest.AddMember("TravelMode", _RoadSnapTravelMode)
+	SnapToRoadsRequest_TravelMode = SnapToRoadsRequest.AddMember("TravelMode", RoadSnapTravelMode)
 
 	SnapToRoadsRequest_TravelModeOptions = SnapToRoadsRequest.AddMember("TravelModeOptions", RoadSnapTravelModeOptions)
 

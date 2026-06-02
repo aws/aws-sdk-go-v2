@@ -27,6 +27,32 @@ type IteratorDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IteratorDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IteratorDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IteratorDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IteratorPosition != "" {
+		s.WriteString(schemas.IteratorDescription_iteratorPosition, string(v.IteratorPosition))
+	}
+}
+func (v *IteratorDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IteratorDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IteratorDescription_iteratorPosition:
+			var ev string
+			if err := d.ReadString(schemas.IteratorDescription_iteratorPosition, &ev); err != nil {
+				return err
+			}
+			v.IteratorPosition = IteratorPosition(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents a cell in an Amazon Keyspaces table, containing both the value and
 // metadata about the cell.
 type KeyspacesCell struct {
