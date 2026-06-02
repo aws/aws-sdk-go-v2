@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type ListGiVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGiVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGiVersionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGiVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGiVersionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGiVersionsInput_nextToken, *v.NextToken)
+	}
+	if v.Shape != nil {
+		s.WriteString(schemas.ListGiVersionsInput_shape, *v.Shape)
+	}
+}
+
 type ListGiVersionsOutput struct {
 
 	// The list of GI versions and their properties.
@@ -64,16 +84,26 @@ type ListGiVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGiVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGiVersionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGiVersionsOutput_giVersions:
+			return deserializeGiVersionList(d, schemas.ListGiVersionsOutput_giVersions, &v.GiVersions)
+		case schemas.ListGiVersionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGiVersionsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGiVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListGiVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGiVersions, schemas.ListGiVersionsInput, schemas.ListGiVersionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListGiVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGiVersions, schemas.ListGiVersionsInput, schemas.ListGiVersionsOutput), output: &ListGiVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGiVersions"); err != nil {

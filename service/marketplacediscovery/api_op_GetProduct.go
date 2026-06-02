@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type GetProductInput struct {
 	ProductId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetProductInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProductInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProductInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProductId != nil {
+		s.WriteString(schemas.GetProductInput_productId, *v.ProductId)
+	}
 }
 
 type GetProductOutput struct {
@@ -121,16 +135,61 @@ type GetProductOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProductOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProductOutput_catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.GetProductOutput_catalog, v.Catalog)
+		case schemas.GetProductOutput_categories:
+			return deserializeCategoryList(d, schemas.GetProductOutput_categories, &v.Categories)
+		case schemas.GetProductOutput_deployedOnAws:
+			var ev string
+			if err := d.ReadString(schemas.GetProductOutput_deployedOnAws, &ev); err != nil {
+				return err
+			}
+			v.DeployedOnAws = types.DeployedOnAwsStatus(ev)
+			return nil
+		case schemas.GetProductOutput_fulfillmentOptionSummaries:
+			return deserializeFulfillmentOptionSummaryList(d, schemas.GetProductOutput_fulfillmentOptionSummaries, &v.FulfillmentOptionSummaries)
+		case schemas.GetProductOutput_highlights:
+			return deserializeHighlightList(d, schemas.GetProductOutput_highlights, &v.Highlights)
+		case schemas.GetProductOutput_logoThumbnailUrl:
+			v.LogoThumbnailUrl = new(string)
+			return d.ReadString(schemas.GetProductOutput_logoThumbnailUrl, v.LogoThumbnailUrl)
+		case schemas.GetProductOutput_longDescription:
+			v.LongDescription = new(string)
+			return d.ReadString(schemas.GetProductOutput_longDescription, v.LongDescription)
+		case schemas.GetProductOutput_manufacturer:
+			v.Manufacturer = &types.SellerInformation{}
+			return v.Manufacturer.Deserialize(d)
+		case schemas.GetProductOutput_productId:
+			v.ProductId = new(string)
+			return d.ReadString(schemas.GetProductOutput_productId, v.ProductId)
+		case schemas.GetProductOutput_productName:
+			v.ProductName = new(string)
+			return d.ReadString(schemas.GetProductOutput_productName, v.ProductName)
+		case schemas.GetProductOutput_promotionalMedia:
+			return deserializePromotionalMediaList(d, schemas.GetProductOutput_promotionalMedia, &v.PromotionalMedia)
+		case schemas.GetProductOutput_resources:
+			return deserializeResourceList(d, schemas.GetProductOutput_resources, &v.Resources)
+		case schemas.GetProductOutput_sellerEngagements:
+			return deserializeSellerEngagementList(d, schemas.GetProductOutput_sellerEngagements, &v.SellerEngagements)
+		case schemas.GetProductOutput_shortDescription:
+			v.ShortDescription = new(string)
+			return d.ReadString(schemas.GetProductOutput_shortDescription, v.ShortDescription)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProduct, schemas.GetProductInput, schemas.GetProductOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProduct, schemas.GetProductInput, schemas.GetProductOutput), output: &GetProductOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProduct"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type GetDatasetInput struct {
 	DatasetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDatasetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDatasetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDatasetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetId != nil {
+		s.WriteString(schemas.GetDatasetRequest_datasetId, *v.DatasetId)
+	}
 }
 
 // Response for the GetDataset operation
@@ -95,16 +109,57 @@ type GetDatasetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDatasetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDatasetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDatasetResponse_alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.GetDatasetResponse_alias, v.Alias)
+		case schemas.GetDatasetResponse_createTime:
+			return d.ReadInt64(schemas.GetDatasetResponse_createTime, &v.CreateTime)
+		case schemas.GetDatasetResponse_datasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.GetDatasetResponse_datasetArn, v.DatasetArn)
+		case schemas.GetDatasetResponse_datasetDescription:
+			v.DatasetDescription = new(string)
+			return d.ReadString(schemas.GetDatasetResponse_datasetDescription, v.DatasetDescription)
+		case schemas.GetDatasetResponse_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.GetDatasetResponse_datasetId, v.DatasetId)
+		case schemas.GetDatasetResponse_datasetTitle:
+			v.DatasetTitle = new(string)
+			return d.ReadString(schemas.GetDatasetResponse_datasetTitle, v.DatasetTitle)
+		case schemas.GetDatasetResponse_kind:
+			var ev string
+			if err := d.ReadString(schemas.GetDatasetResponse_kind, &ev); err != nil {
+				return err
+			}
+			v.Kind = types.DatasetKind(ev)
+			return nil
+		case schemas.GetDatasetResponse_lastModifiedTime:
+			return d.ReadInt64(schemas.GetDatasetResponse_lastModifiedTime, &v.LastModifiedTime)
+		case schemas.GetDatasetResponse_schemaDefinition:
+			v.SchemaDefinition = &types.SchemaUnion{}
+			return v.SchemaDefinition.Deserialize(d)
+		case schemas.GetDatasetResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetDatasetResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DatasetStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataset, schemas.GetDatasetRequest, schemas.GetDatasetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataset, schemas.GetDatasetRequest, schemas.GetDatasetResponse), output: &GetDatasetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataset"); err != nil {

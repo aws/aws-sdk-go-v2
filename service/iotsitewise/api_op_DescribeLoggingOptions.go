@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,6 +33,15 @@ type DescribeLoggingOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLoggingOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeLoggingOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeLoggingOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type DescribeLoggingOptionsOutput struct {
 
 	// The current logging options.
@@ -44,16 +55,24 @@ type DescribeLoggingOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeLoggingOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeLoggingOptionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeLoggingOptionsResponse_loggingOptions:
+			v.LoggingOptions = &types.LoggingOptions{}
+			return v.LoggingOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeLoggingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeLoggingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLoggingOptions, schemas.DescribeLoggingOptionsRequest, schemas.DescribeLoggingOptionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeLoggingOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeLoggingOptions, schemas.DescribeLoggingOptionsRequest, schemas.DescribeLoggingOptionsResponse), output: &DescribeLoggingOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeLoggingOptions"); err != nil {

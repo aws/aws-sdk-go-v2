@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type DeleteResponderGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResponderGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteResponderGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteResponderGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayId != nil {
+		s.WriteString(schemas.DeleteResponderGatewayRequest_gatewayId, *v.GatewayId)
+	}
+}
+
 type DeleteResponderGatewayOutput struct {
 
 	// The unique identifier of the gateway.
@@ -55,16 +69,31 @@ type DeleteResponderGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteResponderGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteResponderGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteResponderGatewayResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.DeleteResponderGatewayResponse_gatewayId, v.GatewayId)
+		case schemas.DeleteResponderGatewayResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteResponderGatewayResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResponderGatewayStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteResponderGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteResponderGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResponderGateway, schemas.DeleteResponderGatewayRequest, schemas.DeleteResponderGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteResponderGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteResponderGateway, schemas.DeleteResponderGatewayRequest, schemas.DeleteResponderGatewayResponse), output: &DeleteResponderGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteResponderGateway"); err != nil {

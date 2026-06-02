@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetDataRetentionBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataRetentionBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataRetentionBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataRetentionBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteString(schemas.GetDataRetentionBotRequest_networkId, *v.NetworkId)
+	}
+}
+
 type GetDataRetentionBotOutput struct {
 
 	// Indicates whether a data retention bot exists in the network.
@@ -63,16 +77,39 @@ type GetDataRetentionBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataRetentionBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataRetentionBotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataRetentionBotResponse_botExists:
+			v.BotExists = new(bool)
+			return d.ReadBool(schemas.GetDataRetentionBotResponse_botExists, v.BotExists)
+		case schemas.GetDataRetentionBotResponse_botName:
+			v.BotName = new(string)
+			return d.ReadString(schemas.GetDataRetentionBotResponse_botName, v.BotName)
+		case schemas.GetDataRetentionBotResponse_isBotActive:
+			v.IsBotActive = new(bool)
+			return d.ReadBool(schemas.GetDataRetentionBotResponse_isBotActive, v.IsBotActive)
+		case schemas.GetDataRetentionBotResponse_isDataRetentionBotRegistered:
+			v.IsDataRetentionBotRegistered = new(bool)
+			return d.ReadBool(schemas.GetDataRetentionBotResponse_isDataRetentionBotRegistered, v.IsDataRetentionBotRegistered)
+		case schemas.GetDataRetentionBotResponse_isDataRetentionServiceEnabled:
+			v.IsDataRetentionServiceEnabled = new(bool)
+			return d.ReadBool(schemas.GetDataRetentionBotResponse_isDataRetentionServiceEnabled, v.IsDataRetentionServiceEnabled)
+		case schemas.GetDataRetentionBotResponse_isPubkeyMsgAcked:
+			v.IsPubkeyMsgAcked = new(bool)
+			return d.ReadBool(schemas.GetDataRetentionBotResponse_isPubkeyMsgAcked, v.IsPubkeyMsgAcked)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataRetentionBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataRetentionBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataRetentionBot, schemas.GetDataRetentionBotRequest, schemas.GetDataRetentionBotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataRetentionBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataRetentionBot, schemas.GetDataRetentionBotRequest, schemas.GetDataRetentionBotResponse), output: &GetDataRetentionBotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataRetentionBot"); err != nil {

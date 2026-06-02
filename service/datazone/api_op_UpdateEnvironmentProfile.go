@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -60,6 +62,34 @@ type UpdateEnvironmentProfileInput struct {
 	UserParameters []types.EnvironmentParameter
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateEnvironmentProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEnvironmentProfileInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEnvironmentProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsAccountId != nil {
+		s.WriteString(schemas.UpdateEnvironmentProfileInput_awsAccountId, *v.AwsAccountId)
+	}
+	if v.AwsAccountRegion != nil {
+		s.WriteString(schemas.UpdateEnvironmentProfileInput_awsAccountRegion, *v.AwsAccountRegion)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateEnvironmentProfileInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.UpdateEnvironmentProfileInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateEnvironmentProfileInput_identifier, *v.Identifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateEnvironmentProfileInput_name, *v.Name)
+	}
+	serializeEnvironmentParametersList(s, schemas.UpdateEnvironmentProfileInput_userParameters, v.UserParameters)
 }
 
 type UpdateEnvironmentProfileOutput struct {
@@ -121,16 +151,56 @@ type UpdateEnvironmentProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEnvironmentProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEnvironmentProfileOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEnvironmentProfileOutput_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentProfileOutput_awsAccountId, v.AwsAccountId)
+		case schemas.UpdateEnvironmentProfileOutput_awsAccountRegion:
+			v.AwsAccountRegion = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentProfileOutput_awsAccountRegion, v.AwsAccountRegion)
+		case schemas.UpdateEnvironmentProfileOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateEnvironmentProfileOutput_createdAt, v.CreatedAt)
+		case schemas.UpdateEnvironmentProfileOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentProfileOutput_createdBy, v.CreatedBy)
+		case schemas.UpdateEnvironmentProfileOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentProfileOutput_description, v.Description)
+		case schemas.UpdateEnvironmentProfileOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentProfileOutput_domainId, v.DomainId)
+		case schemas.UpdateEnvironmentProfileOutput_environmentBlueprintId:
+			v.EnvironmentBlueprintId = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentProfileOutput_environmentBlueprintId, v.EnvironmentBlueprintId)
+		case schemas.UpdateEnvironmentProfileOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentProfileOutput_id, v.Id)
+		case schemas.UpdateEnvironmentProfileOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentProfileOutput_name, v.Name)
+		case schemas.UpdateEnvironmentProfileOutput_projectId:
+			v.ProjectId = new(string)
+			return d.ReadString(schemas.UpdateEnvironmentProfileOutput_projectId, v.ProjectId)
+		case schemas.UpdateEnvironmentProfileOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateEnvironmentProfileOutput_updatedAt, v.UpdatedAt)
+		case schemas.UpdateEnvironmentProfileOutput_userParameters:
+			return deserializeCustomParameterList(d, schemas.UpdateEnvironmentProfileOutput_userParameters, &v.UserParameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEnvironmentProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateEnvironmentProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironmentProfile, schemas.UpdateEnvironmentProfileInput, schemas.UpdateEnvironmentProfileOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateEnvironmentProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEnvironmentProfile, schemas.UpdateEnvironmentProfileInput, schemas.UpdateEnvironmentProfileOutput), output: &UpdateEnvironmentProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEnvironmentProfile"); err != nil {

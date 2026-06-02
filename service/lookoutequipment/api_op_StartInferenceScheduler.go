@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type StartInferenceSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInferenceSchedulerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartInferenceSchedulerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartInferenceSchedulerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InferenceSchedulerName != nil {
+		s.WriteString(schemas.StartInferenceSchedulerRequest_InferenceSchedulerName, *v.InferenceSchedulerName)
+	}
+}
+
 type StartInferenceSchedulerOutput struct {
 
 	// The Amazon Resource Name (ARN) of the inference scheduler being started.
@@ -61,16 +75,40 @@ type StartInferenceSchedulerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartInferenceSchedulerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartInferenceSchedulerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartInferenceSchedulerResponse_InferenceSchedulerArn:
+			v.InferenceSchedulerArn = new(string)
+			return d.ReadString(schemas.StartInferenceSchedulerResponse_InferenceSchedulerArn, v.InferenceSchedulerArn)
+		case schemas.StartInferenceSchedulerResponse_InferenceSchedulerName:
+			v.InferenceSchedulerName = new(string)
+			return d.ReadString(schemas.StartInferenceSchedulerResponse_InferenceSchedulerName, v.InferenceSchedulerName)
+		case schemas.StartInferenceSchedulerResponse_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.StartInferenceSchedulerResponse_ModelArn, v.ModelArn)
+		case schemas.StartInferenceSchedulerResponse_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.StartInferenceSchedulerResponse_ModelName, v.ModelName)
+		case schemas.StartInferenceSchedulerResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartInferenceSchedulerResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.InferenceSchedulerStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartInferenceScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInferenceScheduler, schemas.StartInferenceSchedulerRequest, schemas.StartInferenceSchedulerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartInferenceScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartInferenceScheduler, schemas.StartInferenceSchedulerRequest, schemas.StartInferenceSchedulerResponse), output: &StartInferenceSchedulerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartInferenceScheduler"); err != nil {

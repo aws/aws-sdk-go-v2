@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -57,6 +59,28 @@ type DescribeMapInput struct {
 	MapName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeMapInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMapRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMapInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MapName != nil {
+		s.WriteString(schemas.DescribeMapRequest_MapName, *v.MapName)
+	}
+}
+func (v *DescribeMapInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMapRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMapRequest_MapName:
+			v.MapName = new(string)
+			return d.ReadString(schemas.DescribeMapRequest_MapName, v.MapName)
+		}
+		return nil
+	})
 }
 
 type DescribeMapOutput struct {
@@ -119,16 +143,86 @@ type DescribeMapOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeMapOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeMapResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.DescribeMapResponse_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.DescribeMapResponse_CreateTime, *v.CreateTime)
+	}
+	if v.DataSource != nil {
+		s.WriteString(schemas.DescribeMapResponse_DataSource, *v.DataSource)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeMapResponse_Description, *v.Description)
+	}
+	if v.MapArn != nil {
+		s.WriteString(schemas.DescribeMapResponse_MapArn, *v.MapArn)
+	}
+	if v.MapName != nil {
+		s.WriteString(schemas.DescribeMapResponse_MapName, *v.MapName)
+	}
+	if v.PricingPlan != "" {
+		s.WriteString(schemas.DescribeMapResponse_PricingPlan, string(v.PricingPlan))
+	}
+	serializeTagMap(s, schemas.DescribeMapResponse_Tags, v.Tags)
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.DescribeMapResponse_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *DescribeMapOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeMapResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeMapResponse_Configuration:
+			v.Configuration = &types.MapConfiguration{}
+			return v.Configuration.Deserialize(d)
+		case schemas.DescribeMapResponse_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeMapResponse_CreateTime, v.CreateTime)
+		case schemas.DescribeMapResponse_DataSource:
+			v.DataSource = new(string)
+			return d.ReadString(schemas.DescribeMapResponse_DataSource, v.DataSource)
+		case schemas.DescribeMapResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeMapResponse_Description, v.Description)
+		case schemas.DescribeMapResponse_MapArn:
+			v.MapArn = new(string)
+			return d.ReadString(schemas.DescribeMapResponse_MapArn, v.MapArn)
+		case schemas.DescribeMapResponse_MapName:
+			v.MapName = new(string)
+			return d.ReadString(schemas.DescribeMapResponse_MapName, v.MapName)
+		case schemas.DescribeMapResponse_PricingPlan:
+			var ev string
+			if err := d.ReadString(schemas.DescribeMapResponse_PricingPlan, &ev); err != nil {
+				return err
+			}
+			v.PricingPlan = types.PricingPlan(ev)
+			return nil
+		case schemas.DescribeMapResponse_Tags:
+			return deserializeTagMap(d, schemas.DescribeMapResponse_Tags, &v.Tags)
+		case schemas.DescribeMapResponse_UpdateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeMapResponse_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMap, schemas.DescribeMapRequest, schemas.DescribeMapResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeMap, schemas.DescribeMapRequest, schemas.DescribeMapResponse), output: &DescribeMapOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeMap"); err != nil {

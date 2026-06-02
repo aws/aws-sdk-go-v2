@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,30 @@ type GetDocumentContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentContentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetDocumentContentRequest_applicationId, *v.ApplicationId)
+	}
+	if v.DataSourceId != nil {
+		s.WriteString(schemas.GetDocumentContentRequest_dataSourceId, *v.DataSourceId)
+	}
+	if v.DocumentId != nil {
+		s.WriteString(schemas.GetDocumentContentRequest_documentId, *v.DocumentId)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.GetDocumentContentRequest_indexId, *v.IndexId)
+	}
+	if v.OutputFormat != "" {
+		s.WriteString(schemas.GetDocumentContentRequest_outputFormat, string(v.OutputFormat))
+	}
+}
+
 type GetDocumentContentOutput struct {
 
 	// The MIME type of the document content. When outputFormat is RAW, this
@@ -86,16 +112,27 @@ type GetDocumentContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDocumentContentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDocumentContentResponse_mimeType:
+			v.MimeType = new(string)
+			return d.ReadString(schemas.GetDocumentContentResponse_mimeType, v.MimeType)
+		case schemas.GetDocumentContentResponse_presignedUrl:
+			v.PresignedUrl = new(string)
+			return d.ReadString(schemas.GetDocumentContentResponse_presignedUrl, v.PresignedUrl)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDocumentContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDocumentContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentContent, schemas.GetDocumentContentRequest, schemas.GetDocumentContentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDocumentContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentContent, schemas.GetDocumentContentRequest, schemas.GetDocumentContentResponse), output: &GetDocumentContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDocumentContent"); err != nil {

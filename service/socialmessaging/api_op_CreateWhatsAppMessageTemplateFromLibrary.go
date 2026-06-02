@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,23 @@ type CreateWhatsAppMessageTemplateFromLibraryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWhatsAppMessageTemplateFromLibraryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWhatsAppMessageTemplateFromLibraryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWhatsAppMessageTemplateFromLibraryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CreateWhatsAppMessageTemplateFromLibraryInput_id, *v.Id)
+	}
+	if v.MetaLibraryTemplate != nil {
+		s.WriteStruct(schemas.CreateWhatsAppMessageTemplateFromLibraryInput_metaLibraryTemplate)
+		v.MetaLibraryTemplate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateWhatsAppMessageTemplateFromLibraryOutput struct {
 
 	// The category of the template (for example, UTILITY or MARKETING).
@@ -61,16 +80,30 @@ type CreateWhatsAppMessageTemplateFromLibraryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWhatsAppMessageTemplateFromLibraryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWhatsAppMessageTemplateFromLibraryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWhatsAppMessageTemplateFromLibraryOutput_category:
+			v.Category = new(string)
+			return d.ReadString(schemas.CreateWhatsAppMessageTemplateFromLibraryOutput_category, v.Category)
+		case schemas.CreateWhatsAppMessageTemplateFromLibraryOutput_metaTemplateId:
+			v.MetaTemplateId = new(string)
+			return d.ReadString(schemas.CreateWhatsAppMessageTemplateFromLibraryOutput_metaTemplateId, v.MetaTemplateId)
+		case schemas.CreateWhatsAppMessageTemplateFromLibraryOutput_templateStatus:
+			v.TemplateStatus = new(string)
+			return d.ReadString(schemas.CreateWhatsAppMessageTemplateFromLibraryOutput_templateStatus, v.TemplateStatus)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWhatsAppMessageTemplateFromLibraryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWhatsAppMessageTemplateFromLibrary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWhatsAppMessageTemplateFromLibrary, schemas.CreateWhatsAppMessageTemplateFromLibraryInput, schemas.CreateWhatsAppMessageTemplateFromLibraryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWhatsAppMessageTemplateFromLibrary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWhatsAppMessageTemplateFromLibrary, schemas.CreateWhatsAppMessageTemplateFromLibraryInput, schemas.CreateWhatsAppMessageTemplateFromLibraryOutput), output: &CreateWhatsAppMessageTemplateFromLibraryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWhatsAppMessageTemplateFromLibrary"); err != nil {

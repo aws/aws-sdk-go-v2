@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type GetDestinationInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetDestinationRequest_Name, *v.Name)
+	}
 }
 
 type GetDestinationOutput struct {
@@ -73,16 +87,48 @@ type GetDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDestinationResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDestinationResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetDestinationResponse_DeliveryDestinationArn:
+			v.DeliveryDestinationArn = new(string)
+			return d.ReadString(schemas.GetDestinationResponse_DeliveryDestinationArn, v.DeliveryDestinationArn)
+		case schemas.GetDestinationResponse_DeliveryDestinationType:
+			var ev string
+			if err := d.ReadString(schemas.GetDestinationResponse_DeliveryDestinationType, &ev); err != nil {
+				return err
+			}
+			v.DeliveryDestinationType = types.DeliveryDestinationType(ev)
+			return nil
+		case schemas.GetDestinationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetDestinationResponse_Description, v.Description)
+		case schemas.GetDestinationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDestinationResponse_Name, v.Name)
+		case schemas.GetDestinationResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetDestinationResponse_RoleArn, v.RoleArn)
+		case schemas.GetDestinationResponse_Tags:
+			return deserializeTagsMap(d, schemas.GetDestinationResponse_Tags, &v.Tags)
+		case schemas.GetDestinationResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDestinationResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDestination, schemas.GetDestinationRequest, schemas.GetDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDestination, schemas.GetDestinationRequest, schemas.GetDestinationResponse), output: &GetDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDestination"); err != nil {

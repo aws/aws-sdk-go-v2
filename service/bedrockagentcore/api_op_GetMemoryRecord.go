@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,21 @@ type GetMemoryRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMemoryRecordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMemoryRecordInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMemoryRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MemoryId != nil {
+		s.WriteString(schemas.GetMemoryRecordInput_memoryId, *v.MemoryId)
+	}
+	if v.MemoryRecordId != nil {
+		s.WriteString(schemas.GetMemoryRecordInput_memoryRecordId, *v.MemoryRecordId)
+	}
+}
+
 type GetMemoryRecordOutput struct {
 
 	// The requested memory record.
@@ -58,16 +75,24 @@ type GetMemoryRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMemoryRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMemoryRecordOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMemoryRecordOutput_memoryRecord:
+			v.MemoryRecord = &types.MemoryRecord{}
+			return v.MemoryRecord.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMemoryRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMemoryRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMemoryRecord, schemas.GetMemoryRecordInput, schemas.GetMemoryRecordOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMemoryRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMemoryRecord, schemas.GetMemoryRecordInput, schemas.GetMemoryRecordOutput), output: &GetMemoryRecordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMemoryRecord"); err != nil {

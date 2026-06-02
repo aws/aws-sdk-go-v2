@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -98,6 +100,27 @@ type CreateComponentVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComponentVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateComponentVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateComponentVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateComponentVersionRequest_clientToken, *v.ClientToken)
+	}
+	if v.InlineRecipe != nil {
+		s.WriteBlob(schemas.CreateComponentVersionRequest_inlineRecipe, v.InlineRecipe)
+	}
+	if v.LambdaFunction != nil {
+		s.WriteStruct(schemas.CreateComponentVersionRequest_lambdaFunction)
+		v.LambdaFunction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateComponentVersionRequest_tags, v.Tags)
+}
+
 type CreateComponentVersionOutput struct {
 
 	// The name of the component.
@@ -132,16 +155,36 @@ type CreateComponentVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateComponentVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateComponentVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateComponentVersionResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateComponentVersionResponse_arn, v.Arn)
+		case schemas.CreateComponentVersionResponse_componentName:
+			v.ComponentName = new(string)
+			return d.ReadString(schemas.CreateComponentVersionResponse_componentName, v.ComponentName)
+		case schemas.CreateComponentVersionResponse_componentVersion:
+			v.ComponentVersion = new(string)
+			return d.ReadString(schemas.CreateComponentVersionResponse_componentVersion, v.ComponentVersion)
+		case schemas.CreateComponentVersionResponse_creationTimestamp:
+			v.CreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateComponentVersionResponse_creationTimestamp, v.CreationTimestamp)
+		case schemas.CreateComponentVersionResponse_status:
+			v.Status = &types.CloudComponentStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateComponentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateComponentVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComponentVersion, schemas.CreateComponentVersionRequest, schemas.CreateComponentVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateComponentVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComponentVersion, schemas.CreateComponentVersionRequest, schemas.CreateComponentVersionResponse), output: &CreateComponentVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateComponentVersion"); err != nil {

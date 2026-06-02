@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -62,6 +64,21 @@ type GetPolicyTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicyTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPolicyTemplateInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPolicyTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.GetPolicyTemplateInput_policyStoreId, *v.PolicyStoreId)
+	}
+	if v.PolicyTemplateId != nil {
+		s.WriteString(schemas.GetPolicyTemplateInput_policyTemplateId, *v.PolicyTemplateId)
+	}
+}
+
 type GetPolicyTemplateOutput struct {
 
 	// The date and time that the policy template was originally created.
@@ -103,16 +120,42 @@ type GetPolicyTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPolicyTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPolicyTemplateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPolicyTemplateOutput_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetPolicyTemplateOutput_createdDate, v.CreatedDate)
+		case schemas.GetPolicyTemplateOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetPolicyTemplateOutput_description, v.Description)
+		case schemas.GetPolicyTemplateOutput_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetPolicyTemplateOutput_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.GetPolicyTemplateOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetPolicyTemplateOutput_name, v.Name)
+		case schemas.GetPolicyTemplateOutput_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.GetPolicyTemplateOutput_policyStoreId, v.PolicyStoreId)
+		case schemas.GetPolicyTemplateOutput_policyTemplateId:
+			v.PolicyTemplateId = new(string)
+			return d.ReadString(schemas.GetPolicyTemplateOutput_policyTemplateId, v.PolicyTemplateId)
+		case schemas.GetPolicyTemplateOutput_statement:
+			v.Statement = new(string)
+			return d.ReadString(schemas.GetPolicyTemplateOutput_statement, v.Statement)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPolicyTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetPolicyTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyTemplate, schemas.GetPolicyTemplateInput, schemas.GetPolicyTemplateOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetPolicyTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPolicyTemplate, schemas.GetPolicyTemplateInput, schemas.GetPolicyTemplateOutput), output: &GetPolicyTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPolicyTemplate"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/repostspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/repostspace/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,22 @@ type BatchAddRoleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAddRoleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAddRoleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAddRoleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccessorIdList(s, schemas.BatchAddRoleInput_accessorIds, v.AccessorIds)
+	if v.Role != "" {
+		s.WriteString(schemas.BatchAddRoleInput_role, string(v.Role))
+	}
+	if v.SpaceId != nil {
+		s.WriteString(schemas.BatchAddRoleInput_spaceId, *v.SpaceId)
+	}
+}
+
 type BatchAddRoleOutput struct {
 
 	// An array of successfully updated accessor identifiers.
@@ -65,16 +83,25 @@ type BatchAddRoleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAddRoleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAddRoleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAddRoleOutput_addedAccessorIds:
+			return deserializeAccessorIdList(d, schemas.BatchAddRoleOutput_addedAccessorIds, &v.AddedAccessorIds)
+		case schemas.BatchAddRoleOutput_errors:
+			return deserializeBatchErrorList(d, schemas.BatchAddRoleOutput_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAddRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchAddRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAddRole, schemas.BatchAddRoleInput, schemas.BatchAddRoleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchAddRole{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAddRole, schemas.BatchAddRoleInput, schemas.BatchAddRoleOutput), output: &BatchAddRoleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchAddRole"); err != nil {

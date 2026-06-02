@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,23 @@ type CreateLabelGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLabelGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLabelGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLabelGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateLabelGroupRequest_ClientToken, *v.ClientToken)
+	}
+	serializeFaultCodes(s, schemas.CreateLabelGroupRequest_FaultCodes, v.FaultCodes)
+	if v.LabelGroupName != nil {
+		s.WriteString(schemas.CreateLabelGroupRequest_LabelGroupName, *v.LabelGroupName)
+	}
+	serializeTagList(s, schemas.CreateLabelGroupRequest_Tags, v.Tags)
+}
+
 type CreateLabelGroupOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the label group that you have created.
@@ -74,16 +93,27 @@ type CreateLabelGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLabelGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateLabelGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateLabelGroupResponse_LabelGroupArn:
+			v.LabelGroupArn = new(string)
+			return d.ReadString(schemas.CreateLabelGroupResponse_LabelGroupArn, v.LabelGroupArn)
+		case schemas.CreateLabelGroupResponse_LabelGroupName:
+			v.LabelGroupName = new(string)
+			return d.ReadString(schemas.CreateLabelGroupResponse_LabelGroupName, v.LabelGroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLabelGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateLabelGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLabelGroup, schemas.CreateLabelGroupRequest, schemas.CreateLabelGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateLabelGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLabelGroup, schemas.CreateLabelGroupRequest, schemas.CreateLabelGroupResponse), output: &CreateLabelGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLabelGroup"); err != nil {

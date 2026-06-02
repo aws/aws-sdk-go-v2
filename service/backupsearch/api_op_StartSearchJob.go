@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backupsearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backupsearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -65,6 +67,35 @@ type StartSearchJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSearchJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSearchJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSearchJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartSearchJobInput_ClientToken, *v.ClientToken)
+	}
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.StartSearchJobInput_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.ItemFilters != nil {
+		s.WriteStruct(schemas.StartSearchJobInput_ItemFilters)
+		v.ItemFilters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartSearchJobInput_Name, *v.Name)
+	}
+	if v.SearchScope != nil {
+		s.WriteStruct(schemas.StartSearchJobInput_SearchScope)
+		v.SearchScope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.StartSearchJobInput_Tags, v.Tags)
+}
+
 type StartSearchJobOutput struct {
 
 	// The date and time that a job was created, in Unix format and Coordinated
@@ -86,16 +117,30 @@ type StartSearchJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSearchJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSearchJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSearchJobOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.StartSearchJobOutput_CreationTime, v.CreationTime)
+		case schemas.StartSearchJobOutput_SearchJobArn:
+			v.SearchJobArn = new(string)
+			return d.ReadString(schemas.StartSearchJobOutput_SearchJobArn, v.SearchJobArn)
+		case schemas.StartSearchJobOutput_SearchJobIdentifier:
+			v.SearchJobIdentifier = new(string)
+			return d.ReadString(schemas.StartSearchJobOutput_SearchJobIdentifier, v.SearchJobIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSearchJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSearchJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSearchJob, schemas.StartSearchJobInput, schemas.StartSearchJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSearchJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSearchJob, schemas.StartSearchJobInput, schemas.StartSearchJobOutput), output: &StartSearchJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartSearchJob"); err != nil {

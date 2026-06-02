@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,6 +45,21 @@ type GetConfiguredModelAlgorithmAssociationInput struct {
 	MembershipIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConfiguredModelAlgorithmAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfiguredModelAlgorithmAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfiguredModelAlgorithmAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredModelAlgorithmAssociationArn != nil {
+		s.WriteString(schemas.GetConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmAssociationArn, *v.ConfiguredModelAlgorithmAssociationArn)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.GetConfiguredModelAlgorithmAssociationRequest_membershipIdentifier, *v.MembershipIdentifier)
+	}
 }
 
 type GetConfiguredModelAlgorithmAssociationOutput struct {
@@ -129,16 +146,50 @@ type GetConfiguredModelAlgorithmAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfiguredModelAlgorithmAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfiguredModelAlgorithmAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier:
+			v.CollaborationIdentifier = new(string)
+			return d.ReadString(schemas.GetConfiguredModelAlgorithmAssociationResponse_collaborationIdentifier, v.CollaborationIdentifier)
+		case schemas.GetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn:
+			v.ConfiguredModelAlgorithmArn = new(string)
+			return d.ReadString(schemas.GetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmArn, v.ConfiguredModelAlgorithmArn)
+		case schemas.GetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn:
+			v.ConfiguredModelAlgorithmAssociationArn = new(string)
+			return d.ReadString(schemas.GetConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn, v.ConfiguredModelAlgorithmAssociationArn)
+		case schemas.GetConfiguredModelAlgorithmAssociationResponse_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.GetConfiguredModelAlgorithmAssociationResponse_createTime, v.CreateTime)
+		case schemas.GetConfiguredModelAlgorithmAssociationResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetConfiguredModelAlgorithmAssociationResponse_description, v.Description)
+		case schemas.GetConfiguredModelAlgorithmAssociationResponse_membershipIdentifier:
+			v.MembershipIdentifier = new(string)
+			return d.ReadString(schemas.GetConfiguredModelAlgorithmAssociationResponse_membershipIdentifier, v.MembershipIdentifier)
+		case schemas.GetConfiguredModelAlgorithmAssociationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetConfiguredModelAlgorithmAssociationResponse_name, v.Name)
+		case schemas.GetConfiguredModelAlgorithmAssociationResponse_privacyConfiguration:
+			v.PrivacyConfiguration = &types.PrivacyConfiguration{}
+			return v.PrivacyConfiguration.Deserialize(d)
+		case schemas.GetConfiguredModelAlgorithmAssociationResponse_tags:
+			return deserializeTagMap(d, schemas.GetConfiguredModelAlgorithmAssociationResponse_tags, &v.Tags)
+		case schemas.GetConfiguredModelAlgorithmAssociationResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetConfiguredModelAlgorithmAssociationResponse_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfiguredModelAlgorithmAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfiguredModelAlgorithmAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredModelAlgorithmAssociation, schemas.GetConfiguredModelAlgorithmAssociationRequest, schemas.GetConfiguredModelAlgorithmAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfiguredModelAlgorithmAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredModelAlgorithmAssociation, schemas.GetConfiguredModelAlgorithmAssociationRequest, schemas.GetConfiguredModelAlgorithmAssociationResponse), output: &GetConfiguredModelAlgorithmAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetConfiguredModelAlgorithmAssociation"); err != nil {

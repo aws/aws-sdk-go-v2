@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datapipeline/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -81,6 +83,30 @@ type SetTaskStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetTaskStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetTaskStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetTaskStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorId != nil {
+		s.WriteString(schemas.SetTaskStatusInput_errorId, *v.ErrorId)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.SetTaskStatusInput_errorMessage, *v.ErrorMessage)
+	}
+	if v.ErrorStackTrace != nil {
+		s.WriteString(schemas.SetTaskStatusInput_errorStackTrace, *v.ErrorStackTrace)
+	}
+	if v.TaskId != nil {
+		s.WriteString(schemas.SetTaskStatusInput_taskId, *v.TaskId)
+	}
+	if v.TaskStatus != "" {
+		s.WriteString(schemas.SetTaskStatusInput_taskStatus, string(v.TaskStatus))
+	}
+}
+
 // Contains the output of SetTaskStatus.
 type SetTaskStatusOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -89,16 +115,21 @@ type SetTaskStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetTaskStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetTaskStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetTaskStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSetTaskStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetTaskStatus, schemas.SetTaskStatusInput, schemas.SetTaskStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSetTaskStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetTaskStatus, schemas.SetTaskStatusInput, schemas.SetTaskStatusOutput), output: &SetTaskStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SetTaskStatus"); err != nil {

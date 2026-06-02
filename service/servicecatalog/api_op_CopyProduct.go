@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,6 +75,32 @@ type CopyProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyProductInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyProductInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyProductInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.CopyProductInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	serializeCopyOptions(s, schemas.CopyProductInput_CopyOptions, v.CopyOptions)
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CopyProductInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.SourceProductArn != nil {
+		s.WriteString(schemas.CopyProductInput_SourceProductArn, *v.SourceProductArn)
+	}
+	serializeSourceProvisioningArtifactProperties(s, schemas.CopyProductInput_SourceProvisioningArtifactIdentifiers, v.SourceProvisioningArtifactIdentifiers)
+	if v.TargetProductId != nil {
+		s.WriteString(schemas.CopyProductInput_TargetProductId, *v.TargetProductId)
+	}
+	if v.TargetProductName != nil {
+		s.WriteString(schemas.CopyProductInput_TargetProductName, *v.TargetProductName)
+	}
+}
+
 type CopyProductOutput struct {
 
 	// The token to use to track the progress of the operation.
@@ -84,16 +112,24 @@ type CopyProductOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyProductOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyProductOutput_CopyProductToken:
+			v.CopyProductToken = new(string)
+			return d.ReadString(schemas.CopyProductOutput_CopyProductToken, v.CopyProductToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCopyProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyProduct, schemas.CopyProductInput, schemas.CopyProductOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCopyProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyProduct, schemas.CopyProductInput, schemas.CopyProductOutput), output: &CopyProductOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyProduct"); err != nil {

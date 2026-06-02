@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -41,6 +43,78 @@ type AccountRecommendationLifecycleSummary struct {
 	UpdatedOnBehalfOfJobTitle *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AccountRecommendationLifecycleSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountRecommendationLifecycleSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountRecommendationLifecycleSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.AccountRecommendationLifecycleSummary_accountId, *v.AccountId)
+	}
+	if v.AccountRecommendationArn != nil {
+		s.WriteString(schemas.AccountRecommendationLifecycleSummary_accountRecommendationArn, *v.AccountRecommendationArn)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.AccountRecommendationLifecycleSummary_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LifecycleStage != "" {
+		s.WriteString(schemas.AccountRecommendationLifecycleSummary_lifecycleStage, string(v.LifecycleStage))
+	}
+	if v.UpdateReason != nil {
+		s.WriteString(schemas.AccountRecommendationLifecycleSummary_updateReason, *v.UpdateReason)
+	}
+	if v.UpdateReasonCode != "" {
+		s.WriteString(schemas.AccountRecommendationLifecycleSummary_updateReasonCode, string(v.UpdateReasonCode))
+	}
+	if v.UpdatedOnBehalfOf != nil {
+		s.WriteString(schemas.AccountRecommendationLifecycleSummary_updatedOnBehalfOf, *v.UpdatedOnBehalfOf)
+	}
+	if v.UpdatedOnBehalfOfJobTitle != nil {
+		s.WriteString(schemas.AccountRecommendationLifecycleSummary_updatedOnBehalfOfJobTitle, *v.UpdatedOnBehalfOfJobTitle)
+	}
+}
+func (v *AccountRecommendationLifecycleSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountRecommendationLifecycleSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountRecommendationLifecycleSummary_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.AccountRecommendationLifecycleSummary_accountId, v.AccountId)
+		case schemas.AccountRecommendationLifecycleSummary_accountRecommendationArn:
+			v.AccountRecommendationArn = new(string)
+			return d.ReadString(schemas.AccountRecommendationLifecycleSummary_accountRecommendationArn, v.AccountRecommendationArn)
+		case schemas.AccountRecommendationLifecycleSummary_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AccountRecommendationLifecycleSummary_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.AccountRecommendationLifecycleSummary_lifecycleStage:
+			var ev string
+			if err := d.ReadString(schemas.AccountRecommendationLifecycleSummary_lifecycleStage, &ev); err != nil {
+				return err
+			}
+			v.LifecycleStage = RecommendationLifecycleStage(ev)
+			return nil
+		case schemas.AccountRecommendationLifecycleSummary_updateReason:
+			v.UpdateReason = new(string)
+			return d.ReadString(schemas.AccountRecommendationLifecycleSummary_updateReason, v.UpdateReason)
+		case schemas.AccountRecommendationLifecycleSummary_updateReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.AccountRecommendationLifecycleSummary_updateReasonCode, &ev); err != nil {
+				return err
+			}
+			v.UpdateReasonCode = UpdateRecommendationLifecycleStageReasonCode(ev)
+			return nil
+		case schemas.AccountRecommendationLifecycleSummary_updatedOnBehalfOf:
+			v.UpdatedOnBehalfOf = new(string)
+			return d.ReadString(schemas.AccountRecommendationLifecycleSummary_updatedOnBehalfOf, v.UpdatedOnBehalfOf)
+		case schemas.AccountRecommendationLifecycleSummary_updatedOnBehalfOfJobTitle:
+			v.UpdatedOnBehalfOfJobTitle = new(string)
+			return d.ReadString(schemas.AccountRecommendationLifecycleSummary_updatedOnBehalfOfJobTitle, v.UpdatedOnBehalfOfJobTitle)
+		}
+		return nil
+	})
 }
 
 // A summary of an AWS Trusted Advisor Check
@@ -87,6 +161,65 @@ type CheckSummary struct {
 	Source RecommendationSource
 
 	noSmithyDocumentSerde
+}
+
+func (v *CheckSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CheckSummary_arn, *v.Arn)
+	}
+	serializeRecommendationAwsServiceList(s, schemas.CheckSummary_awsServices, v.AwsServices)
+	if v.Description != nil {
+		s.WriteString(schemas.CheckSummary_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CheckSummary_id, *v.Id)
+	}
+	serializeStringMap(s, schemas.CheckSummary_metadata, v.Metadata)
+	if v.Name != nil {
+		s.WriteString(schemas.CheckSummary_name, *v.Name)
+	}
+	serializeRecommendationPillarList(s, schemas.CheckSummary_pillars, v.Pillars)
+	if v.Source != "" {
+		s.WriteString(schemas.CheckSummary_source, string(v.Source))
+	}
+}
+func (v *CheckSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CheckSummary_arn, v.Arn)
+		case schemas.CheckSummary_awsServices:
+			return deserializeRecommendationAwsServiceList(d, schemas.CheckSummary_awsServices, &v.AwsServices)
+		case schemas.CheckSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CheckSummary_description, v.Description)
+		case schemas.CheckSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CheckSummary_id, v.Id)
+		case schemas.CheckSummary_metadata:
+			return deserializeStringMap(d, schemas.CheckSummary_metadata, &v.Metadata)
+		case schemas.CheckSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CheckSummary_name, v.Name)
+		case schemas.CheckSummary_pillars:
+			return deserializeRecommendationPillarList(d, schemas.CheckSummary_pillars, &v.Pillars)
+		case schemas.CheckSummary_source:
+			var ev string
+			if err := d.ReadString(schemas.CheckSummary_source, &ev); err != nil {
+				return err
+			}
+			v.Source = RecommendationSource(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A Recommendation for accounts within an Organization
@@ -183,6 +316,166 @@ type OrganizationRecommendation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OrganizationRecommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationRecommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationRecommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.OrganizationRecommendation_arn, *v.Arn)
+	}
+	serializeRecommendationAwsServiceList(s, schemas.OrganizationRecommendation_awsServices, v.AwsServices)
+	if v.CheckArn != nil {
+		s.WriteString(schemas.OrganizationRecommendation_checkArn, *v.CheckArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.OrganizationRecommendation_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.OrganizationRecommendation_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.OrganizationRecommendation_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.OrganizationRecommendation_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.OrganizationRecommendation_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LifecycleStage != "" {
+		s.WriteString(schemas.OrganizationRecommendation_lifecycleStage, string(v.LifecycleStage))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.OrganizationRecommendation_name, *v.Name)
+	}
+	if v.PillarSpecificAggregates != nil {
+		s.WriteStruct(schemas.OrganizationRecommendation_pillarSpecificAggregates)
+		v.PillarSpecificAggregates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRecommendationPillarList(s, schemas.OrganizationRecommendation_pillars, v.Pillars)
+	if v.ResolvedAt != nil {
+		s.WriteTime(schemas.OrganizationRecommendation_resolvedAt, *v.ResolvedAt)
+	}
+	if v.ResourcesAggregates != nil {
+		s.WriteStruct(schemas.OrganizationRecommendation_resourcesAggregates)
+		v.ResourcesAggregates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.OrganizationRecommendation_source, string(v.Source))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.OrganizationRecommendation_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.OrganizationRecommendation_type, string(v.Type))
+	}
+	if v.UpdateReason != nil {
+		s.WriteString(schemas.OrganizationRecommendation_updateReason, *v.UpdateReason)
+	}
+	if v.UpdateReasonCode != "" {
+		s.WriteString(schemas.OrganizationRecommendation_updateReasonCode, string(v.UpdateReasonCode))
+	}
+	if v.UpdatedOnBehalfOf != nil {
+		s.WriteString(schemas.OrganizationRecommendation_updatedOnBehalfOf, *v.UpdatedOnBehalfOf)
+	}
+	if v.UpdatedOnBehalfOfJobTitle != nil {
+		s.WriteString(schemas.OrganizationRecommendation_updatedOnBehalfOfJobTitle, *v.UpdatedOnBehalfOfJobTitle)
+	}
+}
+func (v *OrganizationRecommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationRecommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationRecommendation_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.OrganizationRecommendation_arn, v.Arn)
+		case schemas.OrganizationRecommendation_awsServices:
+			return deserializeRecommendationAwsServiceList(d, schemas.OrganizationRecommendation_awsServices, &v.AwsServices)
+		case schemas.OrganizationRecommendation_checkArn:
+			v.CheckArn = new(string)
+			return d.ReadString(schemas.OrganizationRecommendation_checkArn, v.CheckArn)
+		case schemas.OrganizationRecommendation_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.OrganizationRecommendation_createdAt, v.CreatedAt)
+		case schemas.OrganizationRecommendation_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.OrganizationRecommendation_createdBy, v.CreatedBy)
+		case schemas.OrganizationRecommendation_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.OrganizationRecommendation_description, v.Description)
+		case schemas.OrganizationRecommendation_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.OrganizationRecommendation_id, v.Id)
+		case schemas.OrganizationRecommendation_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.OrganizationRecommendation_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.OrganizationRecommendation_lifecycleStage:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationRecommendation_lifecycleStage, &ev); err != nil {
+				return err
+			}
+			v.LifecycleStage = RecommendationLifecycleStage(ev)
+			return nil
+		case schemas.OrganizationRecommendation_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.OrganizationRecommendation_name, v.Name)
+		case schemas.OrganizationRecommendation_pillarSpecificAggregates:
+			v.PillarSpecificAggregates = &RecommendationPillarSpecificAggregates{}
+			return v.PillarSpecificAggregates.Deserialize(d)
+		case schemas.OrganizationRecommendation_pillars:
+			return deserializeRecommendationPillarList(d, schemas.OrganizationRecommendation_pillars, &v.Pillars)
+		case schemas.OrganizationRecommendation_resolvedAt:
+			v.ResolvedAt = new(time.Time)
+			return d.ReadTime(schemas.OrganizationRecommendation_resolvedAt, v.ResolvedAt)
+		case schemas.OrganizationRecommendation_resourcesAggregates:
+			v.ResourcesAggregates = &RecommendationResourcesAggregates{}
+			return v.ResourcesAggregates.Deserialize(d)
+		case schemas.OrganizationRecommendation_source:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationRecommendation_source, &ev); err != nil {
+				return err
+			}
+			v.Source = RecommendationSource(ev)
+			return nil
+		case schemas.OrganizationRecommendation_status:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationRecommendation_status, &ev); err != nil {
+				return err
+			}
+			v.Status = RecommendationStatus(ev)
+			return nil
+		case schemas.OrganizationRecommendation_type:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationRecommendation_type, &ev); err != nil {
+				return err
+			}
+			v.Type = RecommendationType(ev)
+			return nil
+		case schemas.OrganizationRecommendation_updateReason:
+			v.UpdateReason = new(string)
+			return d.ReadString(schemas.OrganizationRecommendation_updateReason, v.UpdateReason)
+		case schemas.OrganizationRecommendation_updateReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationRecommendation_updateReasonCode, &ev); err != nil {
+				return err
+			}
+			v.UpdateReasonCode = UpdateRecommendationLifecycleStageReasonCode(ev)
+			return nil
+		case schemas.OrganizationRecommendation_updatedOnBehalfOf:
+			v.UpdatedOnBehalfOf = new(string)
+			return d.ReadString(schemas.OrganizationRecommendation_updatedOnBehalfOf, v.UpdatedOnBehalfOf)
+		case schemas.OrganizationRecommendation_updatedOnBehalfOfJobTitle:
+			v.UpdatedOnBehalfOfJobTitle = new(string)
+			return d.ReadString(schemas.OrganizationRecommendation_updatedOnBehalfOfJobTitle, v.UpdatedOnBehalfOfJobTitle)
+		}
+		return nil
+	})
+}
+
 // Organization Recommendation Resource Summary
 type OrganizationRecommendationResourceSummary struct {
 
@@ -234,6 +527,87 @@ type OrganizationRecommendationResourceSummary struct {
 	ExclusionStatus ExclusionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *OrganizationRecommendationResourceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationRecommendationResourceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationRecommendationResourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.OrganizationRecommendationResourceSummary_accountId, *v.AccountId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.OrganizationRecommendationResourceSummary_arn, *v.Arn)
+	}
+	if v.AwsResourceId != nil {
+		s.WriteString(schemas.OrganizationRecommendationResourceSummary_awsResourceId, *v.AwsResourceId)
+	}
+	if v.ExclusionStatus != "" {
+		s.WriteString(schemas.OrganizationRecommendationResourceSummary_exclusionStatus, string(v.ExclusionStatus))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.OrganizationRecommendationResourceSummary_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.OrganizationRecommendationResourceSummary_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	serializeStringMap(s, schemas.OrganizationRecommendationResourceSummary_metadata, v.Metadata)
+	if v.RecommendationArn != nil {
+		s.WriteString(schemas.OrganizationRecommendationResourceSummary_recommendationArn, *v.RecommendationArn)
+	}
+	if v.RegionCode != nil {
+		s.WriteString(schemas.OrganizationRecommendationResourceSummary_regionCode, *v.RegionCode)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.OrganizationRecommendationResourceSummary_status, string(v.Status))
+	}
+}
+func (v *OrganizationRecommendationResourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationRecommendationResourceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationRecommendationResourceSummary_accountId:
+			v.AccountId = new(string)
+			return d.ReadString(schemas.OrganizationRecommendationResourceSummary_accountId, v.AccountId)
+		case schemas.OrganizationRecommendationResourceSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.OrganizationRecommendationResourceSummary_arn, v.Arn)
+		case schemas.OrganizationRecommendationResourceSummary_awsResourceId:
+			v.AwsResourceId = new(string)
+			return d.ReadString(schemas.OrganizationRecommendationResourceSummary_awsResourceId, v.AwsResourceId)
+		case schemas.OrganizationRecommendationResourceSummary_exclusionStatus:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationRecommendationResourceSummary_exclusionStatus, &ev); err != nil {
+				return err
+			}
+			v.ExclusionStatus = ExclusionStatus(ev)
+			return nil
+		case schemas.OrganizationRecommendationResourceSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.OrganizationRecommendationResourceSummary_id, v.Id)
+		case schemas.OrganizationRecommendationResourceSummary_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.OrganizationRecommendationResourceSummary_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.OrganizationRecommendationResourceSummary_metadata:
+			return deserializeStringMap(d, schemas.OrganizationRecommendationResourceSummary_metadata, &v.Metadata)
+		case schemas.OrganizationRecommendationResourceSummary_recommendationArn:
+			v.RecommendationArn = new(string)
+			return d.ReadString(schemas.OrganizationRecommendationResourceSummary_recommendationArn, v.RecommendationArn)
+		case schemas.OrganizationRecommendationResourceSummary_regionCode:
+			v.RegionCode = new(string)
+			return d.ReadString(schemas.OrganizationRecommendationResourceSummary_regionCode, v.RegionCode)
+		case schemas.OrganizationRecommendationResourceSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationRecommendationResourceSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResourceStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Summary of recommendation for accounts within an Organization
@@ -299,6 +673,120 @@ type OrganizationRecommendationSummary struct {
 	PillarSpecificAggregates *RecommendationPillarSpecificAggregates
 
 	noSmithyDocumentSerde
+}
+
+func (v *OrganizationRecommendationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OrganizationRecommendationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OrganizationRecommendationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.OrganizationRecommendationSummary_arn, *v.Arn)
+	}
+	serializeRecommendationAwsServiceList(s, schemas.OrganizationRecommendationSummary_awsServices, v.AwsServices)
+	if v.CheckArn != nil {
+		s.WriteString(schemas.OrganizationRecommendationSummary_checkArn, *v.CheckArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.OrganizationRecommendationSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.OrganizationRecommendationSummary_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.OrganizationRecommendationSummary_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LifecycleStage != "" {
+		s.WriteString(schemas.OrganizationRecommendationSummary_lifecycleStage, string(v.LifecycleStage))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.OrganizationRecommendationSummary_name, *v.Name)
+	}
+	if v.PillarSpecificAggregates != nil {
+		s.WriteStruct(schemas.OrganizationRecommendationSummary_pillarSpecificAggregates)
+		v.PillarSpecificAggregates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRecommendationPillarList(s, schemas.OrganizationRecommendationSummary_pillars, v.Pillars)
+	if v.ResourcesAggregates != nil {
+		s.WriteStruct(schemas.OrganizationRecommendationSummary_resourcesAggregates)
+		v.ResourcesAggregates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.OrganizationRecommendationSummary_source, string(v.Source))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.OrganizationRecommendationSummary_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.OrganizationRecommendationSummary_type, string(v.Type))
+	}
+}
+func (v *OrganizationRecommendationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OrganizationRecommendationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OrganizationRecommendationSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.OrganizationRecommendationSummary_arn, v.Arn)
+		case schemas.OrganizationRecommendationSummary_awsServices:
+			return deserializeRecommendationAwsServiceList(d, schemas.OrganizationRecommendationSummary_awsServices, &v.AwsServices)
+		case schemas.OrganizationRecommendationSummary_checkArn:
+			v.CheckArn = new(string)
+			return d.ReadString(schemas.OrganizationRecommendationSummary_checkArn, v.CheckArn)
+		case schemas.OrganizationRecommendationSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.OrganizationRecommendationSummary_createdAt, v.CreatedAt)
+		case schemas.OrganizationRecommendationSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.OrganizationRecommendationSummary_id, v.Id)
+		case schemas.OrganizationRecommendationSummary_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.OrganizationRecommendationSummary_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.OrganizationRecommendationSummary_lifecycleStage:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationRecommendationSummary_lifecycleStage, &ev); err != nil {
+				return err
+			}
+			v.LifecycleStage = RecommendationLifecycleStage(ev)
+			return nil
+		case schemas.OrganizationRecommendationSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.OrganizationRecommendationSummary_name, v.Name)
+		case schemas.OrganizationRecommendationSummary_pillarSpecificAggregates:
+			v.PillarSpecificAggregates = &RecommendationPillarSpecificAggregates{}
+			return v.PillarSpecificAggregates.Deserialize(d)
+		case schemas.OrganizationRecommendationSummary_pillars:
+			return deserializeRecommendationPillarList(d, schemas.OrganizationRecommendationSummary_pillars, &v.Pillars)
+		case schemas.OrganizationRecommendationSummary_resourcesAggregates:
+			v.ResourcesAggregates = &RecommendationResourcesAggregates{}
+			return v.ResourcesAggregates.Deserialize(d)
+		case schemas.OrganizationRecommendationSummary_source:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationRecommendationSummary_source, &ev); err != nil {
+				return err
+			}
+			v.Source = RecommendationSource(ev)
+			return nil
+		case schemas.OrganizationRecommendationSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationRecommendationSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = RecommendationStatus(ev)
+			return nil
+		case schemas.OrganizationRecommendationSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.OrganizationRecommendationSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = RecommendationType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A Recommendation for an Account
@@ -399,6 +887,176 @@ type Recommendation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Recommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Recommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Recommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Recommendation_arn, *v.Arn)
+	}
+	serializeRecommendationAwsServiceList(s, schemas.Recommendation_awsServices, v.AwsServices)
+	if v.CheckArn != nil {
+		s.WriteString(schemas.Recommendation_checkArn, *v.CheckArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Recommendation_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.Recommendation_createdBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Recommendation_description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Recommendation_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.Recommendation_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LifecycleStage != "" {
+		s.WriteString(schemas.Recommendation_lifecycleStage, string(v.LifecycleStage))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Recommendation_name, *v.Name)
+	}
+	if v.PillarSpecificAggregates != nil {
+		s.WriteStruct(schemas.Recommendation_pillarSpecificAggregates)
+		v.PillarSpecificAggregates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRecommendationPillarList(s, schemas.Recommendation_pillars, v.Pillars)
+	if v.ResolvedAt != nil {
+		s.WriteTime(schemas.Recommendation_resolvedAt, *v.ResolvedAt)
+	}
+	if v.ResourcesAggregates != nil {
+		s.WriteStruct(schemas.Recommendation_resourcesAggregates)
+		v.ResourcesAggregates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.Recommendation_source, string(v.Source))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Recommendation_status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.Recommendation_statusReason, string(v.StatusReason))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Recommendation_type, string(v.Type))
+	}
+	if v.UpdateReason != nil {
+		s.WriteString(schemas.Recommendation_updateReason, *v.UpdateReason)
+	}
+	if v.UpdateReasonCode != "" {
+		s.WriteString(schemas.Recommendation_updateReasonCode, string(v.UpdateReasonCode))
+	}
+	if v.UpdatedOnBehalfOf != nil {
+		s.WriteString(schemas.Recommendation_updatedOnBehalfOf, *v.UpdatedOnBehalfOf)
+	}
+	if v.UpdatedOnBehalfOfJobTitle != nil {
+		s.WriteString(schemas.Recommendation_updatedOnBehalfOfJobTitle, *v.UpdatedOnBehalfOfJobTitle)
+	}
+}
+func (v *Recommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Recommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Recommendation_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Recommendation_arn, v.Arn)
+		case schemas.Recommendation_awsServices:
+			return deserializeRecommendationAwsServiceList(d, schemas.Recommendation_awsServices, &v.AwsServices)
+		case schemas.Recommendation_checkArn:
+			v.CheckArn = new(string)
+			return d.ReadString(schemas.Recommendation_checkArn, v.CheckArn)
+		case schemas.Recommendation_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Recommendation_createdAt, v.CreatedAt)
+		case schemas.Recommendation_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.Recommendation_createdBy, v.CreatedBy)
+		case schemas.Recommendation_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Recommendation_description, v.Description)
+		case schemas.Recommendation_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Recommendation_id, v.Id)
+		case schemas.Recommendation_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Recommendation_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.Recommendation_lifecycleStage:
+			var ev string
+			if err := d.ReadString(schemas.Recommendation_lifecycleStage, &ev); err != nil {
+				return err
+			}
+			v.LifecycleStage = RecommendationLifecycleStage(ev)
+			return nil
+		case schemas.Recommendation_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Recommendation_name, v.Name)
+		case schemas.Recommendation_pillarSpecificAggregates:
+			v.PillarSpecificAggregates = &RecommendationPillarSpecificAggregates{}
+			return v.PillarSpecificAggregates.Deserialize(d)
+		case schemas.Recommendation_pillars:
+			return deserializeRecommendationPillarList(d, schemas.Recommendation_pillars, &v.Pillars)
+		case schemas.Recommendation_resolvedAt:
+			v.ResolvedAt = new(time.Time)
+			return d.ReadTime(schemas.Recommendation_resolvedAt, v.ResolvedAt)
+		case schemas.Recommendation_resourcesAggregates:
+			v.ResourcesAggregates = &RecommendationResourcesAggregates{}
+			return v.ResourcesAggregates.Deserialize(d)
+		case schemas.Recommendation_source:
+			var ev string
+			if err := d.ReadString(schemas.Recommendation_source, &ev); err != nil {
+				return err
+			}
+			v.Source = RecommendationSource(ev)
+			return nil
+		case schemas.Recommendation_status:
+			var ev string
+			if err := d.ReadString(schemas.Recommendation_status, &ev); err != nil {
+				return err
+			}
+			v.Status = RecommendationStatus(ev)
+			return nil
+		case schemas.Recommendation_statusReason:
+			var ev string
+			if err := d.ReadString(schemas.Recommendation_statusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = StatusReason(ev)
+			return nil
+		case schemas.Recommendation_type:
+			var ev string
+			if err := d.ReadString(schemas.Recommendation_type, &ev); err != nil {
+				return err
+			}
+			v.Type = RecommendationType(ev)
+			return nil
+		case schemas.Recommendation_updateReason:
+			v.UpdateReason = new(string)
+			return d.ReadString(schemas.Recommendation_updateReason, v.UpdateReason)
+		case schemas.Recommendation_updateReasonCode:
+			var ev string
+			if err := d.ReadString(schemas.Recommendation_updateReasonCode, &ev); err != nil {
+				return err
+			}
+			v.UpdateReasonCode = UpdateRecommendationLifecycleStageReasonCode(ev)
+			return nil
+		case schemas.Recommendation_updatedOnBehalfOf:
+			v.UpdatedOnBehalfOf = new(string)
+			return d.ReadString(schemas.Recommendation_updatedOnBehalfOf, v.UpdatedOnBehalfOf)
+		case schemas.Recommendation_updatedOnBehalfOfJobTitle:
+			v.UpdatedOnBehalfOfJobTitle = new(string)
+			return d.ReadString(schemas.Recommendation_updatedOnBehalfOfJobTitle, v.UpdatedOnBehalfOfJobTitle)
+		}
+		return nil
+	})
+}
+
 // Cost optimizing aggregates for a Recommendation
 type RecommendationCostOptimizingAggregates struct {
 
@@ -415,6 +1073,34 @@ type RecommendationCostOptimizingAggregates struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecommendationCostOptimizingAggregates) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationCostOptimizingAggregates)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationCostOptimizingAggregates) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedMonthlySavings != nil {
+		s.WriteFloat64(schemas.RecommendationCostOptimizingAggregates_estimatedMonthlySavings, *v.EstimatedMonthlySavings)
+	}
+	if v.EstimatedPercentMonthlySavings != nil {
+		s.WriteFloat64(schemas.RecommendationCostOptimizingAggregates_estimatedPercentMonthlySavings, *v.EstimatedPercentMonthlySavings)
+	}
+}
+func (v *RecommendationCostOptimizingAggregates) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationCostOptimizingAggregates, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationCostOptimizingAggregates_estimatedMonthlySavings:
+			v.EstimatedMonthlySavings = new(float64)
+			return d.ReadFloat64(schemas.RecommendationCostOptimizingAggregates_estimatedMonthlySavings, v.EstimatedMonthlySavings)
+		case schemas.RecommendationCostOptimizingAggregates_estimatedPercentMonthlySavings:
+			v.EstimatedPercentMonthlySavings = new(float64)
+			return d.ReadFloat64(schemas.RecommendationCostOptimizingAggregates_estimatedPercentMonthlySavings, v.EstimatedPercentMonthlySavings)
+		}
+		return nil
+	})
+}
+
 // Recommendation pillar aggregates
 type RecommendationPillarSpecificAggregates struct {
 
@@ -422,6 +1108,30 @@ type RecommendationPillarSpecificAggregates struct {
 	CostOptimizing *RecommendationCostOptimizingAggregates
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecommendationPillarSpecificAggregates) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationPillarSpecificAggregates)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationPillarSpecificAggregates) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostOptimizing != nil {
+		s.WriteStruct(schemas.RecommendationPillarSpecificAggregates_costOptimizing)
+		v.CostOptimizing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RecommendationPillarSpecificAggregates) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationPillarSpecificAggregates, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationPillarSpecificAggregates_costOptimizing:
+			v.CostOptimizing = &RecommendationCostOptimizingAggregates{}
+			return v.CostOptimizing.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The request entry for Recommendation Resource exclusion. Each entry is a
@@ -439,6 +1149,34 @@ type RecommendationResourceExclusion struct {
 	IsExcluded *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecommendationResourceExclusion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationResourceExclusion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationResourceExclusion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RecommendationResourceExclusion_arn, *v.Arn)
+	}
+	if v.IsExcluded != nil {
+		s.WriteBool(schemas.RecommendationResourceExclusion_isExcluded, *v.IsExcluded)
+	}
+}
+func (v *RecommendationResourceExclusion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationResourceExclusion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationResourceExclusion_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RecommendationResourceExclusion_arn, v.Arn)
+		case schemas.RecommendationResourceExclusion_isExcluded:
+			v.IsExcluded = new(bool)
+			return d.ReadBool(schemas.RecommendationResourceExclusion_isExcluded, v.IsExcluded)
+		}
+		return nil
+	})
 }
 
 // Aggregation of Recommendation Resources
@@ -467,6 +1205,46 @@ type RecommendationResourcesAggregates struct {
 	ExcludedCount *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecommendationResourcesAggregates) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationResourcesAggregates)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationResourcesAggregates) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCount != nil {
+		s.WriteInt64(schemas.RecommendationResourcesAggregates_errorCount, *v.ErrorCount)
+	}
+	if v.ExcludedCount != nil {
+		s.WriteInt64(schemas.RecommendationResourcesAggregates_excludedCount, *v.ExcludedCount)
+	}
+	if v.OkCount != nil {
+		s.WriteInt64(schemas.RecommendationResourcesAggregates_okCount, *v.OkCount)
+	}
+	if v.WarningCount != nil {
+		s.WriteInt64(schemas.RecommendationResourcesAggregates_warningCount, *v.WarningCount)
+	}
+}
+func (v *RecommendationResourcesAggregates) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationResourcesAggregates, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationResourcesAggregates_errorCount:
+			v.ErrorCount = new(int64)
+			return d.ReadInt64(schemas.RecommendationResourcesAggregates_errorCount, v.ErrorCount)
+		case schemas.RecommendationResourcesAggregates_excludedCount:
+			v.ExcludedCount = new(int64)
+			return d.ReadInt64(schemas.RecommendationResourcesAggregates_excludedCount, v.ExcludedCount)
+		case schemas.RecommendationResourcesAggregates_okCount:
+			v.OkCount = new(int64)
+			return d.ReadInt64(schemas.RecommendationResourcesAggregates_okCount, v.OkCount)
+		case schemas.RecommendationResourcesAggregates_warningCount:
+			v.WarningCount = new(int64)
+			return d.ReadInt64(schemas.RecommendationResourcesAggregates_warningCount, v.WarningCount)
+		}
+		return nil
+	})
 }
 
 // Summary of a Recommendation Resource
@@ -517,6 +1295,81 @@ type RecommendationResourceSummary struct {
 	ExclusionStatus ExclusionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecommendationResourceSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationResourceSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationResourceSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RecommendationResourceSummary_arn, *v.Arn)
+	}
+	if v.AwsResourceId != nil {
+		s.WriteString(schemas.RecommendationResourceSummary_awsResourceId, *v.AwsResourceId)
+	}
+	if v.ExclusionStatus != "" {
+		s.WriteString(schemas.RecommendationResourceSummary_exclusionStatus, string(v.ExclusionStatus))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RecommendationResourceSummary_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.RecommendationResourceSummary_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	serializeStringMap(s, schemas.RecommendationResourceSummary_metadata, v.Metadata)
+	if v.RecommendationArn != nil {
+		s.WriteString(schemas.RecommendationResourceSummary_recommendationArn, *v.RecommendationArn)
+	}
+	if v.RegionCode != nil {
+		s.WriteString(schemas.RecommendationResourceSummary_regionCode, *v.RegionCode)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RecommendationResourceSummary_status, string(v.Status))
+	}
+}
+func (v *RecommendationResourceSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationResourceSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationResourceSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RecommendationResourceSummary_arn, v.Arn)
+		case schemas.RecommendationResourceSummary_awsResourceId:
+			v.AwsResourceId = new(string)
+			return d.ReadString(schemas.RecommendationResourceSummary_awsResourceId, v.AwsResourceId)
+		case schemas.RecommendationResourceSummary_exclusionStatus:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationResourceSummary_exclusionStatus, &ev); err != nil {
+				return err
+			}
+			v.ExclusionStatus = ExclusionStatus(ev)
+			return nil
+		case schemas.RecommendationResourceSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RecommendationResourceSummary_id, v.Id)
+		case schemas.RecommendationResourceSummary_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.RecommendationResourceSummary_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.RecommendationResourceSummary_metadata:
+			return deserializeStringMap(d, schemas.RecommendationResourceSummary_metadata, &v.Metadata)
+		case schemas.RecommendationResourceSummary_recommendationArn:
+			v.RecommendationArn = new(string)
+			return d.ReadString(schemas.RecommendationResourceSummary_recommendationArn, v.RecommendationArn)
+		case schemas.RecommendationResourceSummary_regionCode:
+			v.RegionCode = new(string)
+			return d.ReadString(schemas.RecommendationResourceSummary_regionCode, v.RegionCode)
+		case schemas.RecommendationResourceSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationResourceSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ResourceStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Summary of Recommendation for an Account
@@ -588,6 +1441,130 @@ type RecommendationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecommendationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecommendationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecommendationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.RecommendationSummary_arn, *v.Arn)
+	}
+	serializeRecommendationAwsServiceList(s, schemas.RecommendationSummary_awsServices, v.AwsServices)
+	if v.CheckArn != nil {
+		s.WriteString(schemas.RecommendationSummary_checkArn, *v.CheckArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.RecommendationSummary_createdAt, *v.CreatedAt)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.RecommendationSummary_id, *v.Id)
+	}
+	if v.LastUpdatedAt != nil {
+		s.WriteTime(schemas.RecommendationSummary_lastUpdatedAt, *v.LastUpdatedAt)
+	}
+	if v.LifecycleStage != "" {
+		s.WriteString(schemas.RecommendationSummary_lifecycleStage, string(v.LifecycleStage))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RecommendationSummary_name, *v.Name)
+	}
+	if v.PillarSpecificAggregates != nil {
+		s.WriteStruct(schemas.RecommendationSummary_pillarSpecificAggregates)
+		v.PillarSpecificAggregates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRecommendationPillarList(s, schemas.RecommendationSummary_pillars, v.Pillars)
+	if v.ResourcesAggregates != nil {
+		s.WriteStruct(schemas.RecommendationSummary_resourcesAggregates)
+		v.ResourcesAggregates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.RecommendationSummary_source, string(v.Source))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RecommendationSummary_status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.RecommendationSummary_statusReason, string(v.StatusReason))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.RecommendationSummary_type, string(v.Type))
+	}
+}
+func (v *RecommendationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecommendationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecommendationSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RecommendationSummary_arn, v.Arn)
+		case schemas.RecommendationSummary_awsServices:
+			return deserializeRecommendationAwsServiceList(d, schemas.RecommendationSummary_awsServices, &v.AwsServices)
+		case schemas.RecommendationSummary_checkArn:
+			v.CheckArn = new(string)
+			return d.ReadString(schemas.RecommendationSummary_checkArn, v.CheckArn)
+		case schemas.RecommendationSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.RecommendationSummary_createdAt, v.CreatedAt)
+		case schemas.RecommendationSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.RecommendationSummary_id, v.Id)
+		case schemas.RecommendationSummary_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.RecommendationSummary_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.RecommendationSummary_lifecycleStage:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationSummary_lifecycleStage, &ev); err != nil {
+				return err
+			}
+			v.LifecycleStage = RecommendationLifecycleStage(ev)
+			return nil
+		case schemas.RecommendationSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RecommendationSummary_name, v.Name)
+		case schemas.RecommendationSummary_pillarSpecificAggregates:
+			v.PillarSpecificAggregates = &RecommendationPillarSpecificAggregates{}
+			return v.PillarSpecificAggregates.Deserialize(d)
+		case schemas.RecommendationSummary_pillars:
+			return deserializeRecommendationPillarList(d, schemas.RecommendationSummary_pillars, &v.Pillars)
+		case schemas.RecommendationSummary_resourcesAggregates:
+			v.ResourcesAggregates = &RecommendationResourcesAggregates{}
+			return v.ResourcesAggregates.Deserialize(d)
+		case schemas.RecommendationSummary_source:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationSummary_source, &ev); err != nil {
+				return err
+			}
+			v.Source = RecommendationSource(ev)
+			return nil
+		case schemas.RecommendationSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = RecommendationStatus(ev)
+			return nil
+		case schemas.RecommendationSummary_statusReason:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationSummary_statusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = StatusReason(ev)
+			return nil
+		case schemas.RecommendationSummary_type:
+			var ev string
+			if err := d.ReadString(schemas.RecommendationSummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = RecommendationType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The error entry for Recommendation Resource exclusion. Each entry is a
 // combination of Recommendation Resource ARN, error code and error message
 type UpdateRecommendationResourceExclusionError struct {
@@ -602,6 +1579,40 @@ type UpdateRecommendationResourceExclusionError struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateRecommendationResourceExclusionError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecommendationResourceExclusionError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecommendationResourceExclusionError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateRecommendationResourceExclusionError_arn, *v.Arn)
+	}
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.UpdateRecommendationResourceExclusionError_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.UpdateRecommendationResourceExclusionError_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *UpdateRecommendationResourceExclusionError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRecommendationResourceExclusionError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRecommendationResourceExclusionError_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateRecommendationResourceExclusionError_arn, v.Arn)
+		case schemas.UpdateRecommendationResourceExclusionError_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.UpdateRecommendationResourceExclusionError_errorCode, v.ErrorCode)
+		case schemas.UpdateRecommendationResourceExclusionError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.UpdateRecommendationResourceExclusionError_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

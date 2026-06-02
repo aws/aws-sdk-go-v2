@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -40,6 +42,48 @@ type Check struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Check) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Check)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Check) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImpairedSince != nil {
+		s.WriteTime(schemas.Check_impairedSince, *v.ImpairedSince)
+	}
+	if v.Result != "" {
+		s.WriteString(schemas.Check_result, string(v.Result))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Check_type, string(v.Type))
+	}
+}
+func (v *Check) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Check, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Check_impairedSince:
+			v.ImpairedSince = new(time.Time)
+			return d.ReadTime(schemas.Check_impairedSince, v.ImpairedSince)
+		case schemas.Check_result:
+			var ev string
+			if err := d.ReadString(schemas.Check_result, &ev); err != nil {
+				return err
+			}
+			v.Result = CheckResult(ev)
+			return nil
+		case schemas.Check_type:
+			var ev string
+			if err := d.ReadString(schemas.Check_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CheckType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The connectivity configuration for the environment. Amazon EVS requires that
 // you specify two route server peer IDs. During environment creation, the route
 // server endpoints peer with the NSX uplink VLAN for connectivity to the NSX
@@ -52,6 +96,25 @@ type ConnectivityInfo struct {
 	PrivateRouteServerPeerings []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectivityInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectivityInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectivityInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRouteServerPeeringList(s, schemas.ConnectivityInfo_privateRouteServerPeerings, v.PrivateRouteServerPeerings)
+}
+func (v *ConnectivityInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectivityInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectivityInfo_privateRouteServerPeerings:
+			return deserializeRouteServerPeeringList(d, schemas.ConnectivityInfo_privateRouteServerPeerings, &v.PrivateRouteServerPeerings)
+		}
+		return nil
+	})
 }
 
 // An object that represents a connector for an Amazon EVS environment. A
@@ -97,6 +160,97 @@ type Connector struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Connector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Connector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Connector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplianceFqdn != nil {
+		s.WriteString(schemas.Connector_applianceFqdn, *v.ApplianceFqdn)
+	}
+	serializeConnectorsChecksList(s, schemas.Connector_checks, v.Checks)
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.Connector_connectorId, *v.ConnectorId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Connector_createdAt, *v.CreatedAt)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.Connector_environmentId, *v.EnvironmentId)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.Connector_modifiedAt, *v.ModifiedAt)
+	}
+	if v.SecretArn != nil {
+		s.WriteString(schemas.Connector_secretArn, *v.SecretArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Connector_state, string(v.State))
+	}
+	if v.StateDetails != nil {
+		s.WriteString(schemas.Connector_stateDetails, *v.StateDetails)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Connector_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Connector_type, string(v.Type))
+	}
+}
+func (v *Connector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Connector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Connector_applianceFqdn:
+			v.ApplianceFqdn = new(string)
+			return d.ReadString(schemas.Connector_applianceFqdn, v.ApplianceFqdn)
+		case schemas.Connector_checks:
+			return deserializeConnectorsChecksList(d, schemas.Connector_checks, &v.Checks)
+		case schemas.Connector_connectorId:
+			v.ConnectorId = new(string)
+			return d.ReadString(schemas.Connector_connectorId, v.ConnectorId)
+		case schemas.Connector_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Connector_createdAt, v.CreatedAt)
+		case schemas.Connector_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.Connector_environmentId, v.EnvironmentId)
+		case schemas.Connector_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.Connector_modifiedAt, v.ModifiedAt)
+		case schemas.Connector_secretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.Connector_secretArn, v.SecretArn)
+		case schemas.Connector_state:
+			var ev string
+			if err := d.ReadString(schemas.Connector_state, &ev); err != nil {
+				return err
+			}
+			v.State = ConnectorState(ev)
+			return nil
+		case schemas.Connector_stateDetails:
+			v.StateDetails = new(string)
+			return d.ReadString(schemas.Connector_stateDetails, v.StateDetails)
+		case schemas.Connector_status:
+			var ev string
+			if err := d.ReadString(schemas.Connector_status, &ev); err != nil {
+				return err
+			}
+			v.Status = CheckResult(ev)
+			return nil
+		case schemas.Connector_type:
+			var ev string
+			if err := d.ReadString(schemas.Connector_type, &ev); err != nil {
+				return err
+			}
+			v.Type = ConnectorType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A check on a connector to identify connectivity health.
 type ConnectorCheck struct {
 
@@ -115,6 +269,54 @@ type ConnectorCheck struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectorCheck) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorCheck)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorCheck) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ImpairedSince != nil {
+		s.WriteTime(schemas.ConnectorCheck_impairedSince, *v.ImpairedSince)
+	}
+	if v.LastCheckAttempt != nil {
+		s.WriteTime(schemas.ConnectorCheck_lastCheckAttempt, *v.LastCheckAttempt)
+	}
+	if v.Result != "" {
+		s.WriteString(schemas.ConnectorCheck_result, string(v.Result))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ConnectorCheck_type, string(v.Type))
+	}
+}
+func (v *ConnectorCheck) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorCheck, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorCheck_impairedSince:
+			v.ImpairedSince = new(time.Time)
+			return d.ReadTime(schemas.ConnectorCheck_impairedSince, v.ImpairedSince)
+		case schemas.ConnectorCheck_lastCheckAttempt:
+			v.LastCheckAttempt = new(time.Time)
+			return d.ReadTime(schemas.ConnectorCheck_lastCheckAttempt, v.LastCheckAttempt)
+		case schemas.ConnectorCheck_result:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorCheck_result, &ev); err != nil {
+				return err
+			}
+			v.Result = CheckResult(ev)
+			return nil
+		case schemas.ConnectorCheck_type:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorCheck_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CheckType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An Elastic IP address association with the elastic network interface in the
 // VLAN subnet.
 type EipAssociation struct {
@@ -129,6 +331,40 @@ type EipAssociation struct {
 	IpAddress *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EipAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EipAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EipAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllocationId != nil {
+		s.WriteString(schemas.EipAssociation_allocationId, *v.AllocationId)
+	}
+	if v.AssociationId != nil {
+		s.WriteString(schemas.EipAssociation_associationId, *v.AssociationId)
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.EipAssociation_ipAddress, *v.IpAddress)
+	}
+}
+func (v *EipAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EipAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EipAssociation_allocationId:
+			v.AllocationId = new(string)
+			return d.ReadString(schemas.EipAssociation_allocationId, v.AllocationId)
+		case schemas.EipAssociation_associationId:
+			v.AssociationId = new(string)
+			return d.ReadString(schemas.EipAssociation_associationId, v.AssociationId)
+		case schemas.EipAssociation_ipAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.EipAssociation_ipAddress, v.IpAddress)
+		}
+		return nil
+	})
 }
 
 // An object that represents an Amazon EVS environment.
@@ -237,6 +473,151 @@ type Environment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Environment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Environment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChecksList(s, schemas.Environment_checks, v.Checks)
+	if v.ConnectivityInfo != nil {
+		s.WriteStruct(schemas.Environment_connectivityInfo)
+		v.ConnectivityInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Environment_createdAt, *v.CreatedAt)
+	}
+	serializeSecretList(s, schemas.Environment_credentials, v.Credentials)
+	if v.EnvironmentArn != nil {
+		s.WriteString(schemas.Environment_environmentArn, *v.EnvironmentArn)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.Environment_environmentId, *v.EnvironmentId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.Environment_environmentName, *v.EnvironmentName)
+	}
+	if v.EnvironmentState != "" {
+		s.WriteString(schemas.Environment_environmentState, string(v.EnvironmentState))
+	}
+	if v.EnvironmentStatus != "" {
+		s.WriteString(schemas.Environment_environmentStatus, string(v.EnvironmentStatus))
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.Environment_kmsKeyId, *v.KmsKeyId)
+	}
+	serializeLicenseInfoList(s, schemas.Environment_licenseInfo, v.LicenseInfo)
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.Environment_modifiedAt, *v.ModifiedAt)
+	}
+	if v.ServiceAccessSecurityGroups != nil {
+		s.WriteStruct(schemas.Environment_serviceAccessSecurityGroups)
+		v.ServiceAccessSecurityGroups.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceAccessSubnetId != nil {
+		s.WriteString(schemas.Environment_serviceAccessSubnetId, *v.ServiceAccessSubnetId)
+	}
+	if v.SiteId != nil {
+		s.WriteString(schemas.Environment_siteId, *v.SiteId)
+	}
+	if v.StateDetails != nil {
+		s.WriteString(schemas.Environment_stateDetails, *v.StateDetails)
+	}
+	if v.TermsAccepted != nil {
+		s.WriteBool(schemas.Environment_termsAccepted, *v.TermsAccepted)
+	}
+	if v.VcfHostnames != nil {
+		s.WriteStruct(schemas.Environment_vcfHostnames)
+		v.VcfHostnames.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VcfVersion != "" {
+		s.WriteString(schemas.Environment_vcfVersion, string(v.VcfVersion))
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.Environment_vpcId, *v.VpcId)
+	}
+}
+func (v *Environment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Environment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Environment_checks:
+			return deserializeChecksList(d, schemas.Environment_checks, &v.Checks)
+		case schemas.Environment_connectivityInfo:
+			v.ConnectivityInfo = &ConnectivityInfo{}
+			return v.ConnectivityInfo.Deserialize(d)
+		case schemas.Environment_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Environment_createdAt, v.CreatedAt)
+		case schemas.Environment_credentials:
+			return deserializeSecretList(d, schemas.Environment_credentials, &v.Credentials)
+		case schemas.Environment_environmentArn:
+			v.EnvironmentArn = new(string)
+			return d.ReadString(schemas.Environment_environmentArn, v.EnvironmentArn)
+		case schemas.Environment_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.Environment_environmentId, v.EnvironmentId)
+		case schemas.Environment_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.Environment_environmentName, v.EnvironmentName)
+		case schemas.Environment_environmentState:
+			var ev string
+			if err := d.ReadString(schemas.Environment_environmentState, &ev); err != nil {
+				return err
+			}
+			v.EnvironmentState = EnvironmentState(ev)
+			return nil
+		case schemas.Environment_environmentStatus:
+			var ev string
+			if err := d.ReadString(schemas.Environment_environmentStatus, &ev); err != nil {
+				return err
+			}
+			v.EnvironmentStatus = CheckResult(ev)
+			return nil
+		case schemas.Environment_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.Environment_kmsKeyId, v.KmsKeyId)
+		case schemas.Environment_licenseInfo:
+			return deserializeLicenseInfoList(d, schemas.Environment_licenseInfo, &v.LicenseInfo)
+		case schemas.Environment_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.Environment_modifiedAt, v.ModifiedAt)
+		case schemas.Environment_serviceAccessSecurityGroups:
+			v.ServiceAccessSecurityGroups = &ServiceAccessSecurityGroups{}
+			return v.ServiceAccessSecurityGroups.Deserialize(d)
+		case schemas.Environment_serviceAccessSubnetId:
+			v.ServiceAccessSubnetId = new(string)
+			return d.ReadString(schemas.Environment_serviceAccessSubnetId, v.ServiceAccessSubnetId)
+		case schemas.Environment_siteId:
+			v.SiteId = new(string)
+			return d.ReadString(schemas.Environment_siteId, v.SiteId)
+		case schemas.Environment_stateDetails:
+			v.StateDetails = new(string)
+			return d.ReadString(schemas.Environment_stateDetails, v.StateDetails)
+		case schemas.Environment_termsAccepted:
+			v.TermsAccepted = new(bool)
+			return d.ReadBool(schemas.Environment_termsAccepted, v.TermsAccepted)
+		case schemas.Environment_vcfHostnames:
+			v.VcfHostnames = &VcfHostnames{}
+			return v.VcfHostnames.Deserialize(d)
+		case schemas.Environment_vcfVersion:
+			var ev string
+			if err := d.ReadString(schemas.Environment_vcfVersion, &ev); err != nil {
+				return err
+			}
+			v.VcfVersion = VcfVersion(ev)
+			return nil
+		case schemas.Environment_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.Environment_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // A list of environments with summarized environment details.
 type EnvironmentSummary struct {
 
@@ -268,6 +649,82 @@ type EnvironmentSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnvironmentSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnvironmentSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnvironmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.EnvironmentSummary_createdAt, *v.CreatedAt)
+	}
+	if v.EnvironmentArn != nil {
+		s.WriteString(schemas.EnvironmentSummary_environmentArn, *v.EnvironmentArn)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.EnvironmentSummary_environmentId, *v.EnvironmentId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.EnvironmentSummary_environmentName, *v.EnvironmentName)
+	}
+	if v.EnvironmentState != "" {
+		s.WriteString(schemas.EnvironmentSummary_environmentState, string(v.EnvironmentState))
+	}
+	if v.EnvironmentStatus != "" {
+		s.WriteString(schemas.EnvironmentSummary_environmentStatus, string(v.EnvironmentStatus))
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.EnvironmentSummary_modifiedAt, *v.ModifiedAt)
+	}
+	if v.VcfVersion != "" {
+		s.WriteString(schemas.EnvironmentSummary_vcfVersion, string(v.VcfVersion))
+	}
+}
+func (v *EnvironmentSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnvironmentSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnvironmentSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.EnvironmentSummary_createdAt, v.CreatedAt)
+		case schemas.EnvironmentSummary_environmentArn:
+			v.EnvironmentArn = new(string)
+			return d.ReadString(schemas.EnvironmentSummary_environmentArn, v.EnvironmentArn)
+		case schemas.EnvironmentSummary_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.EnvironmentSummary_environmentId, v.EnvironmentId)
+		case schemas.EnvironmentSummary_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.EnvironmentSummary_environmentName, v.EnvironmentName)
+		case schemas.EnvironmentSummary_environmentState:
+			var ev string
+			if err := d.ReadString(schemas.EnvironmentSummary_environmentState, &ev); err != nil {
+				return err
+			}
+			v.EnvironmentState = EnvironmentState(ev)
+			return nil
+		case schemas.EnvironmentSummary_environmentStatus:
+			var ev string
+			if err := d.ReadString(schemas.EnvironmentSummary_environmentStatus, &ev); err != nil {
+				return err
+			}
+			v.EnvironmentStatus = CheckResult(ev)
+			return nil
+		case schemas.EnvironmentSummary_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.EnvironmentSummary_modifiedAt, v.ModifiedAt)
+		case schemas.EnvironmentSummary_vcfVersion:
+			var ev string
+			if err := d.ReadString(schemas.EnvironmentSummary_vcfVersion, &ev); err != nil {
+				return err
+			}
+			v.VcfVersion = VcfVersion(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An object that contains error details for an entitlement.
 type ErrorDetail struct {
 
@@ -282,6 +739,34 @@ type ErrorDetail struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ErrorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.ErrorDetail_errorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ErrorDetail_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *ErrorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorDetail_errorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.ErrorDetail_errorCode, v.ErrorCode)
+		case schemas.ErrorDetail_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ErrorDetail_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 // An ESX host that runs on an Amazon EC2 bare metal instance. Four hosts are
@@ -333,6 +818,99 @@ type Host struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Host) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Host)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Host) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Host_createdAt, *v.CreatedAt)
+	}
+	if v.DedicatedHostId != nil {
+		s.WriteString(schemas.Host_dedicatedHostId, *v.DedicatedHostId)
+	}
+	if v.Ec2InstanceId != nil {
+		s.WriteString(schemas.Host_ec2InstanceId, *v.Ec2InstanceId)
+	}
+	if v.HostName != nil {
+		s.WriteString(schemas.Host_hostName, *v.HostName)
+	}
+	if v.HostState != "" {
+		s.WriteString(schemas.Host_hostState, string(v.HostState))
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.Host_instanceType, string(v.InstanceType))
+	}
+	if v.IpAddress != nil {
+		s.WriteString(schemas.Host_ipAddress, *v.IpAddress)
+	}
+	if v.KeyName != nil {
+		s.WriteString(schemas.Host_keyName, *v.KeyName)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.Host_modifiedAt, *v.ModifiedAt)
+	}
+	serializeNetworkInterfaceList(s, schemas.Host_networkInterfaces, v.NetworkInterfaces)
+	if v.PlacementGroupId != nil {
+		s.WriteString(schemas.Host_placementGroupId, *v.PlacementGroupId)
+	}
+	if v.StateDetails != nil {
+		s.WriteString(schemas.Host_stateDetails, *v.StateDetails)
+	}
+}
+func (v *Host) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Host, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Host_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Host_createdAt, v.CreatedAt)
+		case schemas.Host_dedicatedHostId:
+			v.DedicatedHostId = new(string)
+			return d.ReadString(schemas.Host_dedicatedHostId, v.DedicatedHostId)
+		case schemas.Host_ec2InstanceId:
+			v.Ec2InstanceId = new(string)
+			return d.ReadString(schemas.Host_ec2InstanceId, v.Ec2InstanceId)
+		case schemas.Host_hostName:
+			v.HostName = new(string)
+			return d.ReadString(schemas.Host_hostName, v.HostName)
+		case schemas.Host_hostState:
+			var ev string
+			if err := d.ReadString(schemas.Host_hostState, &ev); err != nil {
+				return err
+			}
+			v.HostState = HostState(ev)
+			return nil
+		case schemas.Host_instanceType:
+			var ev string
+			if err := d.ReadString(schemas.Host_instanceType, &ev); err != nil {
+				return err
+			}
+			v.InstanceType = InstanceType(ev)
+			return nil
+		case schemas.Host_ipAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.Host_ipAddress, v.IpAddress)
+		case schemas.Host_keyName:
+			v.KeyName = new(string)
+			return d.ReadString(schemas.Host_keyName, v.KeyName)
+		case schemas.Host_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.Host_modifiedAt, v.ModifiedAt)
+		case schemas.Host_networkInterfaces:
+			return deserializeNetworkInterfaceList(d, schemas.Host_networkInterfaces, &v.NetworkInterfaces)
+		case schemas.Host_placementGroupId:
+			v.PlacementGroupId = new(string)
+			return d.ReadString(schemas.Host_placementGroupId, v.PlacementGroupId)
+		case schemas.Host_stateDetails:
+			v.StateDetails = new(string)
+			return d.ReadString(schemas.Host_stateDetails, v.StateDetails)
+		}
+		return nil
+	})
+}
+
 // An object that represents a host.
 //
 // You cannot use dedicatedHostId and placementGroupId together in the same
@@ -364,6 +942,56 @@ type HostInfoForCreate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HostInfoForCreate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HostInfoForCreate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HostInfoForCreate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DedicatedHostId != nil {
+		s.WriteString(schemas.HostInfoForCreate_dedicatedHostId, *v.DedicatedHostId)
+	}
+	if v.HostName != nil {
+		s.WriteString(schemas.HostInfoForCreate_hostName, *v.HostName)
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.HostInfoForCreate_instanceType, string(v.InstanceType))
+	}
+	if v.KeyName != nil {
+		s.WriteString(schemas.HostInfoForCreate_keyName, *v.KeyName)
+	}
+	if v.PlacementGroupId != nil {
+		s.WriteString(schemas.HostInfoForCreate_placementGroupId, *v.PlacementGroupId)
+	}
+}
+func (v *HostInfoForCreate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HostInfoForCreate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HostInfoForCreate_dedicatedHostId:
+			v.DedicatedHostId = new(string)
+			return d.ReadString(schemas.HostInfoForCreate_dedicatedHostId, v.DedicatedHostId)
+		case schemas.HostInfoForCreate_hostName:
+			v.HostName = new(string)
+			return d.ReadString(schemas.HostInfoForCreate_hostName, v.HostName)
+		case schemas.HostInfoForCreate_instanceType:
+			var ev string
+			if err := d.ReadString(schemas.HostInfoForCreate_instanceType, &ev); err != nil {
+				return err
+			}
+			v.InstanceType = InstanceType(ev)
+			return nil
+		case schemas.HostInfoForCreate_keyName:
+			v.KeyName = new(string)
+			return d.ReadString(schemas.HostInfoForCreate_keyName, v.KeyName)
+		case schemas.HostInfoForCreate_placementGroupId:
+			v.PlacementGroupId = new(string)
+			return d.ReadString(schemas.HostInfoForCreate_placementGroupId, v.PlacementGroupId)
+		}
+		return nil
+	})
+}
+
 // An object that represents an initial VLAN subnet for the Amazon EVS
 // environment. Amazon EVS creates initial VLAN subnets when you first create the
 // environment. Amazon EVS creates the following 10 VLAN subnets: host management
@@ -384,6 +1012,28 @@ type InitialVlanInfo struct {
 	Cidr *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InitialVlanInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitialVlanInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitialVlanInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cidr != nil {
+		s.WriteString(schemas.InitialVlanInfo_cidr, *v.Cidr)
+	}
+}
+func (v *InitialVlanInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InitialVlanInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InitialVlanInfo_cidr:
+			v.Cidr = new(string)
+			return d.ReadString(schemas.InitialVlanInfo_cidr, v.Cidr)
+		}
+		return nil
+	})
 }
 
 // The initial VLAN subnets for the environment. Amazon EVS VLAN subnets have a
@@ -478,6 +1128,113 @@ type InitialVlans struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InitialVlans) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InitialVlans)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InitialVlans) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EdgeVTep != nil {
+		s.WriteStruct(schemas.InitialVlans_edgeVTep)
+		v.EdgeVTep.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExpansionVlan1 != nil {
+		s.WriteStruct(schemas.InitialVlans_expansionVlan1)
+		v.ExpansionVlan1.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExpansionVlan2 != nil {
+		s.WriteStruct(schemas.InitialVlans_expansionVlan2)
+		v.ExpansionVlan2.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Hcx != nil {
+		s.WriteStruct(schemas.InitialVlans_hcx)
+		v.Hcx.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HcxNetworkAclId != nil {
+		s.WriteString(schemas.InitialVlans_hcxNetworkAclId, *v.HcxNetworkAclId)
+	}
+	if v.IsHcxPublic != false {
+		s.WriteBool(schemas.InitialVlans_isHcxPublic, v.IsHcxPublic)
+	}
+	if v.NsxUplink != nil {
+		s.WriteStruct(schemas.InitialVlans_nsxUplink)
+		v.NsxUplink.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VMotion != nil {
+		s.WriteStruct(schemas.InitialVlans_vMotion)
+		v.VMotion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VSan != nil {
+		s.WriteStruct(schemas.InitialVlans_vSan)
+		v.VSan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VTep != nil {
+		s.WriteStruct(schemas.InitialVlans_vTep)
+		v.VTep.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VmManagement != nil {
+		s.WriteStruct(schemas.InitialVlans_vmManagement)
+		v.VmManagement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.VmkManagement != nil {
+		s.WriteStruct(schemas.InitialVlans_vmkManagement)
+		v.VmkManagement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InitialVlans) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InitialVlans, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InitialVlans_edgeVTep:
+			v.EdgeVTep = &InitialVlanInfo{}
+			return v.EdgeVTep.Deserialize(d)
+		case schemas.InitialVlans_expansionVlan1:
+			v.ExpansionVlan1 = &InitialVlanInfo{}
+			return v.ExpansionVlan1.Deserialize(d)
+		case schemas.InitialVlans_expansionVlan2:
+			v.ExpansionVlan2 = &InitialVlanInfo{}
+			return v.ExpansionVlan2.Deserialize(d)
+		case schemas.InitialVlans_hcx:
+			v.Hcx = &InitialVlanInfo{}
+			return v.Hcx.Deserialize(d)
+		case schemas.InitialVlans_hcxNetworkAclId:
+			v.HcxNetworkAclId = new(string)
+			return d.ReadString(schemas.InitialVlans_hcxNetworkAclId, v.HcxNetworkAclId)
+		case schemas.InitialVlans_isHcxPublic:
+			return d.ReadBool(schemas.InitialVlans_isHcxPublic, &v.IsHcxPublic)
+		case schemas.InitialVlans_nsxUplink:
+			v.NsxUplink = &InitialVlanInfo{}
+			return v.NsxUplink.Deserialize(d)
+		case schemas.InitialVlans_vMotion:
+			v.VMotion = &InitialVlanInfo{}
+			return v.VMotion.Deserialize(d)
+		case schemas.InitialVlans_vSan:
+			v.VSan = &InitialVlanInfo{}
+			return v.VSan.Deserialize(d)
+		case schemas.InitialVlans_vTep:
+			v.VTep = &InitialVlanInfo{}
+			return v.VTep.Deserialize(d)
+		case schemas.InitialVlans_vmManagement:
+			v.VmManagement = &InitialVlanInfo{}
+			return v.VmManagement.Deserialize(d)
+		case schemas.InitialVlans_vmkManagement:
+			v.VmkManagement = &InitialVlanInfo{}
+			return v.VmkManagement.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about ESX versions offered for each EC2 instance type.
 type InstanceTypeEsxVersionsInfo struct {
 
@@ -492,6 +1249,35 @@ type InstanceTypeEsxVersionsInfo struct {
 	InstanceType InstanceType
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceTypeEsxVersionsInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceTypeEsxVersionsInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceTypeEsxVersionsInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEsxVersionList(s, schemas.InstanceTypeEsxVersionsInfo_esxVersions, v.EsxVersions)
+	if v.InstanceType != "" {
+		s.WriteString(schemas.InstanceTypeEsxVersionsInfo_instanceType, string(v.InstanceType))
+	}
+}
+func (v *InstanceTypeEsxVersionsInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceTypeEsxVersionsInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceTypeEsxVersionsInfo_esxVersions:
+			return deserializeEsxVersionList(d, schemas.InstanceTypeEsxVersionsInfo_esxVersions, &v.EsxVersions)
+		case schemas.InstanceTypeEsxVersionsInfo_instanceType:
+			var ev string
+			if err := d.ReadString(schemas.InstanceTypeEsxVersionsInfo_instanceType, &ev); err != nil {
+				return err
+			}
+			v.InstanceType = InstanceType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	The license information that Amazon EVS requires to create an environment.
@@ -515,6 +1301,34 @@ type LicenseInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LicenseInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LicenseInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LicenseInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SolutionKey != nil {
+		s.WriteString(schemas.LicenseInfo_solutionKey, *v.SolutionKey)
+	}
+	if v.VsanKey != nil {
+		s.WriteString(schemas.LicenseInfo_vsanKey, *v.VsanKey)
+	}
+}
+func (v *LicenseInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LicenseInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LicenseInfo_solutionKey:
+			v.SolutionKey = new(string)
+			return d.ReadString(schemas.LicenseInfo_solutionKey, v.SolutionKey)
+		case schemas.LicenseInfo_vsanKey:
+			v.VsanKey = new(string)
+			return d.ReadString(schemas.LicenseInfo_vsanKey, v.VsanKey)
+		}
+		return nil
+	})
+}
+
 // An elastic network interface (ENI) that connects hosts to the VLAN subnets.
 // Amazon EVS provisions two identically configured ENIs in the VMkernel management
 // subnet during host creation. One ENI is active, and the other is in standby mode
@@ -525,6 +1339,28 @@ type NetworkInterface struct {
 	NetworkInterfaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkInterface) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkInterface)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkInterface) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkInterfaceId != nil {
+		s.WriteString(schemas.NetworkInterface_networkInterfaceId, *v.NetworkInterfaceId)
+	}
+}
+func (v *NetworkInterface) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkInterface, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkInterface_networkInterfaceId:
+			v.NetworkInterfaceId = new(string)
+			return d.ReadString(schemas.NetworkInterface_networkInterfaceId, v.NetworkInterfaceId)
+		}
+		return nil
+	})
 }
 
 // A managed secret that contains the credentials for installing vCenter Server,
@@ -542,6 +1378,28 @@ type Secret struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Secret) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Secret)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Secret) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SecretArn != nil {
+		s.WriteString(schemas.Secret_secretArn, *v.SecretArn)
+	}
+}
+func (v *Secret) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Secret, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Secret_secretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.Secret_secretArn, v.SecretArn)
+		}
+		return nil
+	})
+}
+
 // The security groups that allow traffic between the Amazon EVS control plane and
 // your VPC for Amazon EVS service access. If a security group is not specified,
 // Amazon EVS uses the default security group in your account for service access.
@@ -551,6 +1409,25 @@ type ServiceAccessSecurityGroups struct {
 	SecurityGroups []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServiceAccessSecurityGroups) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceAccessSecurityGroups)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceAccessSecurityGroups) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroups(s, schemas.ServiceAccessSecurityGroups_securityGroups, v.SecurityGroups)
+}
+func (v *ServiceAccessSecurityGroups) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceAccessSecurityGroups, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceAccessSecurityGroups_securityGroups:
+			return deserializeSecurityGroups(d, schemas.ServiceAccessSecurityGroups_securityGroups, &v.SecurityGroups)
+		}
+		return nil
+	})
 }
 
 // Stores information about a field passed inside a request that resulted in an
@@ -568,6 +1445,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // The DNS hostnames that Amazon EVS uses to install VMware vCenter Server, NSX,
@@ -627,6 +1532,76 @@ type VcfHostnames struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VcfHostnames) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VcfHostnames)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VcfHostnames) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudBuilder != nil {
+		s.WriteString(schemas.VcfHostnames_cloudBuilder, *v.CloudBuilder)
+	}
+	if v.Nsx != nil {
+		s.WriteString(schemas.VcfHostnames_nsx, *v.Nsx)
+	}
+	if v.NsxEdge1 != nil {
+		s.WriteString(schemas.VcfHostnames_nsxEdge1, *v.NsxEdge1)
+	}
+	if v.NsxEdge2 != nil {
+		s.WriteString(schemas.VcfHostnames_nsxEdge2, *v.NsxEdge2)
+	}
+	if v.NsxManager1 != nil {
+		s.WriteString(schemas.VcfHostnames_nsxManager1, *v.NsxManager1)
+	}
+	if v.NsxManager2 != nil {
+		s.WriteString(schemas.VcfHostnames_nsxManager2, *v.NsxManager2)
+	}
+	if v.NsxManager3 != nil {
+		s.WriteString(schemas.VcfHostnames_nsxManager3, *v.NsxManager3)
+	}
+	if v.SddcManager != nil {
+		s.WriteString(schemas.VcfHostnames_sddcManager, *v.SddcManager)
+	}
+	if v.VCenter != nil {
+		s.WriteString(schemas.VcfHostnames_vCenter, *v.VCenter)
+	}
+}
+func (v *VcfHostnames) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VcfHostnames, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VcfHostnames_cloudBuilder:
+			v.CloudBuilder = new(string)
+			return d.ReadString(schemas.VcfHostnames_cloudBuilder, v.CloudBuilder)
+		case schemas.VcfHostnames_nsx:
+			v.Nsx = new(string)
+			return d.ReadString(schemas.VcfHostnames_nsx, v.Nsx)
+		case schemas.VcfHostnames_nsxEdge1:
+			v.NsxEdge1 = new(string)
+			return d.ReadString(schemas.VcfHostnames_nsxEdge1, v.NsxEdge1)
+		case schemas.VcfHostnames_nsxEdge2:
+			v.NsxEdge2 = new(string)
+			return d.ReadString(schemas.VcfHostnames_nsxEdge2, v.NsxEdge2)
+		case schemas.VcfHostnames_nsxManager1:
+			v.NsxManager1 = new(string)
+			return d.ReadString(schemas.VcfHostnames_nsxManager1, v.NsxManager1)
+		case schemas.VcfHostnames_nsxManager2:
+			v.NsxManager2 = new(string)
+			return d.ReadString(schemas.VcfHostnames_nsxManager2, v.NsxManager2)
+		case schemas.VcfHostnames_nsxManager3:
+			v.NsxManager3 = new(string)
+			return d.ReadString(schemas.VcfHostnames_nsxManager3, v.NsxManager3)
+		case schemas.VcfHostnames_sddcManager:
+			v.SddcManager = new(string)
+			return d.ReadString(schemas.VcfHostnames_sddcManager, v.SddcManager)
+		case schemas.VcfHostnames_vCenter:
+			v.VCenter = new(string)
+			return d.ReadString(schemas.VcfHostnames_vCenter, v.VCenter)
+		}
+		return nil
+	})
+}
+
 // Information about a VCF versions provided by Amazon EVS, including its status,
 // default ESX version, and EC2 instance types.
 type VcfVersionInfo struct {
@@ -663,6 +1638,47 @@ type VcfVersionInfo struct {
 	VcfVersion VcfVersion
 
 	noSmithyDocumentSerde
+}
+
+func (v *VcfVersionInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VcfVersionInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VcfVersionInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultEsxVersion != nil {
+		s.WriteString(schemas.VcfVersionInfo_defaultEsxVersion, *v.DefaultEsxVersion)
+	}
+	serializeInstanceTypeList(s, schemas.VcfVersionInfo_instanceTypes, v.InstanceTypes)
+	if v.Status != nil {
+		s.WriteString(schemas.VcfVersionInfo_status, *v.Status)
+	}
+	if v.VcfVersion != "" {
+		s.WriteString(schemas.VcfVersionInfo_vcfVersion, string(v.VcfVersion))
+	}
+}
+func (v *VcfVersionInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VcfVersionInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VcfVersionInfo_defaultEsxVersion:
+			v.DefaultEsxVersion = new(string)
+			return d.ReadString(schemas.VcfVersionInfo_defaultEsxVersion, v.DefaultEsxVersion)
+		case schemas.VcfVersionInfo_instanceTypes:
+			return deserializeInstanceTypeList(d, schemas.VcfVersionInfo_instanceTypes, &v.InstanceTypes)
+		case schemas.VcfVersionInfo_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.VcfVersionInfo_status, v.Status)
+		case schemas.VcfVersionInfo_vcfVersion:
+			var ev string
+			if err := d.ReadString(schemas.VcfVersionInfo_vcfVersion, &ev); err != nil {
+				return err
+			}
+			v.VcfVersion = VcfVersion(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The VLANs that Amazon EVS creates during environment creation.
@@ -709,6 +1725,95 @@ type Vlan struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Vlan) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Vlan)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Vlan) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.Vlan_availabilityZone, *v.AvailabilityZone)
+	}
+	if v.Cidr != nil {
+		s.WriteString(schemas.Vlan_cidr, *v.Cidr)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Vlan_createdAt, *v.CreatedAt)
+	}
+	serializeEipAssociationList(s, schemas.Vlan_eipAssociations, v.EipAssociations)
+	if v.FunctionName != nil {
+		s.WriteString(schemas.Vlan_functionName, *v.FunctionName)
+	}
+	if v.IsPublic != nil {
+		s.WriteBool(schemas.Vlan_isPublic, *v.IsPublic)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.Vlan_modifiedAt, *v.ModifiedAt)
+	}
+	if v.NetworkAclId != nil {
+		s.WriteString(schemas.Vlan_networkAclId, *v.NetworkAclId)
+	}
+	if v.StateDetails != nil {
+		s.WriteString(schemas.Vlan_stateDetails, *v.StateDetails)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.Vlan_subnetId, *v.SubnetId)
+	}
+	if v.VlanId != nil {
+		s.WriteInt32(schemas.Vlan_vlanId, *v.VlanId)
+	}
+	if v.VlanState != "" {
+		s.WriteString(schemas.Vlan_vlanState, string(v.VlanState))
+	}
+}
+func (v *Vlan) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Vlan, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Vlan_availabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.Vlan_availabilityZone, v.AvailabilityZone)
+		case schemas.Vlan_cidr:
+			v.Cidr = new(string)
+			return d.ReadString(schemas.Vlan_cidr, v.Cidr)
+		case schemas.Vlan_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Vlan_createdAt, v.CreatedAt)
+		case schemas.Vlan_eipAssociations:
+			return deserializeEipAssociationList(d, schemas.Vlan_eipAssociations, &v.EipAssociations)
+		case schemas.Vlan_functionName:
+			v.FunctionName = new(string)
+			return d.ReadString(schemas.Vlan_functionName, v.FunctionName)
+		case schemas.Vlan_isPublic:
+			v.IsPublic = new(bool)
+			return d.ReadBool(schemas.Vlan_isPublic, v.IsPublic)
+		case schemas.Vlan_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.Vlan_modifiedAt, v.ModifiedAt)
+		case schemas.Vlan_networkAclId:
+			v.NetworkAclId = new(string)
+			return d.ReadString(schemas.Vlan_networkAclId, v.NetworkAclId)
+		case schemas.Vlan_stateDetails:
+			v.StateDetails = new(string)
+			return d.ReadString(schemas.Vlan_stateDetails, v.StateDetails)
+		case schemas.Vlan_subnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.Vlan_subnetId, v.SubnetId)
+		case schemas.Vlan_vlanId:
+			v.VlanId = new(int32)
+			return d.ReadInt32(schemas.Vlan_vlanId, v.VlanId)
+		case schemas.Vlan_vlanState:
+			var ev string
+			if err := d.ReadString(schemas.Vlan_vlanState, &ev); err != nil {
+				return err
+			}
+			v.VlanState = VlanState(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An object that represents a Windows Server License entitlement for a virtual
 // machine in an Amazon EVS environment.
 type VmEntitlement struct {
@@ -744,6 +1849,92 @@ type VmEntitlement struct {
 	VmName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VmEntitlement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VmEntitlement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VmEntitlement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorId != nil {
+		s.WriteString(schemas.VmEntitlement_connectorId, *v.ConnectorId)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.VmEntitlement_environmentId, *v.EnvironmentId)
+	}
+	if v.ErrorDetail != nil {
+		s.WriteStruct(schemas.VmEntitlement_errorDetail)
+		v.ErrorDetail.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastSyncedAt != nil {
+		s.WriteTime(schemas.VmEntitlement_lastSyncedAt, *v.LastSyncedAt)
+	}
+	if v.StartedAt != nil {
+		s.WriteTime(schemas.VmEntitlement_startedAt, *v.StartedAt)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.VmEntitlement_status, string(v.Status))
+	}
+	if v.StoppedAt != nil {
+		s.WriteTime(schemas.VmEntitlement_stoppedAt, *v.StoppedAt)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.VmEntitlement_type, string(v.Type))
+	}
+	if v.VmId != nil {
+		s.WriteString(schemas.VmEntitlement_vmId, *v.VmId)
+	}
+	if v.VmName != nil {
+		s.WriteString(schemas.VmEntitlement_vmName, *v.VmName)
+	}
+}
+func (v *VmEntitlement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VmEntitlement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VmEntitlement_connectorId:
+			v.ConnectorId = new(string)
+			return d.ReadString(schemas.VmEntitlement_connectorId, v.ConnectorId)
+		case schemas.VmEntitlement_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.VmEntitlement_environmentId, v.EnvironmentId)
+		case schemas.VmEntitlement_errorDetail:
+			v.ErrorDetail = &ErrorDetail{}
+			return v.ErrorDetail.Deserialize(d)
+		case schemas.VmEntitlement_lastSyncedAt:
+			v.LastSyncedAt = new(time.Time)
+			return d.ReadTime(schemas.VmEntitlement_lastSyncedAt, v.LastSyncedAt)
+		case schemas.VmEntitlement_startedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.VmEntitlement_startedAt, v.StartedAt)
+		case schemas.VmEntitlement_status:
+			var ev string
+			if err := d.ReadString(schemas.VmEntitlement_status, &ev); err != nil {
+				return err
+			}
+			v.Status = EntitlementStatus(ev)
+			return nil
+		case schemas.VmEntitlement_stoppedAt:
+			v.StoppedAt = new(time.Time)
+			return d.ReadTime(schemas.VmEntitlement_stoppedAt, v.StoppedAt)
+		case schemas.VmEntitlement_type:
+			var ev string
+			if err := d.ReadString(schemas.VmEntitlement_type, &ev); err != nil {
+				return err
+			}
+			v.Type = EntitlementType(ev)
+			return nil
+		case schemas.VmEntitlement_vmId:
+			v.VmId = new(string)
+			return d.ReadString(schemas.VmEntitlement_vmId, v.VmId)
+		case schemas.VmEntitlement_vmName:
+			v.VmName = new(string)
+			return d.ReadString(schemas.VmEntitlement_vmName, v.VmName)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

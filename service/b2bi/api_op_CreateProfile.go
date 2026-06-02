@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/b2bi/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -66,6 +68,34 @@ type CreateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessName != nil {
+		s.WriteString(schemas.CreateProfileRequest_businessName, *v.BusinessName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateProfileRequest_clientToken, *v.ClientToken)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.CreateProfileRequest_email, *v.Email)
+	}
+	if v.Logging != "" {
+		s.WriteString(schemas.CreateProfileRequest_logging, string(v.Logging))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateProfileRequest_name, *v.Name)
+	}
+	if v.Phone != nil {
+		s.WriteString(schemas.CreateProfileRequest_phone, *v.Phone)
+	}
+	serializeTagList(s, schemas.CreateProfileRequest_tags, v.Tags)
+}
+
 type CreateProfileOutput struct {
 
 	// Returns the name for the business associated with this profile.
@@ -113,16 +143,52 @@ type CreateProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateProfileResponse_businessName:
+			v.BusinessName = new(string)
+			return d.ReadString(schemas.CreateProfileResponse_businessName, v.BusinessName)
+		case schemas.CreateProfileResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateProfileResponse_createdAt, v.CreatedAt)
+		case schemas.CreateProfileResponse_email:
+			v.Email = new(string)
+			return d.ReadString(schemas.CreateProfileResponse_email, v.Email)
+		case schemas.CreateProfileResponse_logGroupName:
+			v.LogGroupName = new(string)
+			return d.ReadString(schemas.CreateProfileResponse_logGroupName, v.LogGroupName)
+		case schemas.CreateProfileResponse_logging:
+			var ev string
+			if err := d.ReadString(schemas.CreateProfileResponse_logging, &ev); err != nil {
+				return err
+			}
+			v.Logging = types.Logging(ev)
+			return nil
+		case schemas.CreateProfileResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateProfileResponse_name, v.Name)
+		case schemas.CreateProfileResponse_phone:
+			v.Phone = new(string)
+			return d.ReadString(schemas.CreateProfileResponse_phone, v.Phone)
+		case schemas.CreateProfileResponse_profileArn:
+			v.ProfileArn = new(string)
+			return d.ReadString(schemas.CreateProfileResponse_profileArn, v.ProfileArn)
+		case schemas.CreateProfileResponse_profileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.CreateProfileResponse_profileId, v.ProfileId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProfile, schemas.CreateProfileRequest, schemas.CreateProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateProfile, schemas.CreateProfileRequest, schemas.CreateProfileResponse), output: &CreateProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateProfile"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,30 @@ type ListPlanExecutionEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlanExecutionEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlanExecutionEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlanExecutionEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.ListPlanExecutionEventsRequest_executionId, *v.ExecutionId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPlanExecutionEventsRequest_maxResults, *v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListPlanExecutionEventsRequest_name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlanExecutionEventsRequest_nextToken, *v.NextToken)
+	}
+	if v.PlanArn != nil {
+		s.WriteString(schemas.ListPlanExecutionEventsRequest_planArn, *v.PlanArn)
+	}
+}
+
 type ListPlanExecutionEventsOutput struct {
 
 	// The items in the plan execution event.
@@ -72,16 +98,26 @@ type ListPlanExecutionEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlanExecutionEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlanExecutionEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlanExecutionEventsResponse_items:
+			return deserializeExecutionEventList(d, schemas.ListPlanExecutionEventsResponse_items, &v.Items)
+		case schemas.ListPlanExecutionEventsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlanExecutionEventsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPlanExecutionEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListPlanExecutionEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlanExecutionEvents, schemas.ListPlanExecutionEventsRequest, schemas.ListPlanExecutionEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListPlanExecutionEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlanExecutionEvents, schemas.ListPlanExecutionEventsRequest, schemas.ListPlanExecutionEventsResponse), output: &ListPlanExecutionEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPlanExecutionEvents"); err != nil {

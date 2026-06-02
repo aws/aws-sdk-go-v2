@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/supportapp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supportapp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,6 +71,28 @@ type RegisterSlackWorkspaceForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterSlackWorkspaceForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterSlackWorkspaceForOrganizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterSlackWorkspaceForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TeamId != nil {
+		s.WriteString(schemas.RegisterSlackWorkspaceForOrganizationRequest_teamId, *v.TeamId)
+	}
+}
+func (v *RegisterSlackWorkspaceForOrganizationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterSlackWorkspaceForOrganizationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterSlackWorkspaceForOrganizationRequest_teamId:
+			v.TeamId = new(string)
+			return d.ReadString(schemas.RegisterSlackWorkspaceForOrganizationRequest_teamId, v.TeamId)
+		}
+		return nil
+	})
+}
+
 type RegisterSlackWorkspaceForOrganizationOutput struct {
 
 	// Whether the Amazon Web Services account is a management or member account
@@ -88,16 +112,51 @@ type RegisterSlackWorkspaceForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterSlackWorkspaceForOrganizationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterSlackWorkspaceForOrganizationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterSlackWorkspaceForOrganizationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountType != "" {
+		s.WriteString(schemas.RegisterSlackWorkspaceForOrganizationResult_accountType, string(v.AccountType))
+	}
+	if v.TeamId != nil {
+		s.WriteString(schemas.RegisterSlackWorkspaceForOrganizationResult_teamId, *v.TeamId)
+	}
+	if v.TeamName != nil {
+		s.WriteString(schemas.RegisterSlackWorkspaceForOrganizationResult_teamName, *v.TeamName)
+	}
+}
+func (v *RegisterSlackWorkspaceForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterSlackWorkspaceForOrganizationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterSlackWorkspaceForOrganizationResult_accountType:
+			var ev string
+			if err := d.ReadString(schemas.RegisterSlackWorkspaceForOrganizationResult_accountType, &ev); err != nil {
+				return err
+			}
+			v.AccountType = types.AccountType(ev)
+			return nil
+		case schemas.RegisterSlackWorkspaceForOrganizationResult_teamId:
+			v.TeamId = new(string)
+			return d.ReadString(schemas.RegisterSlackWorkspaceForOrganizationResult_teamId, v.TeamId)
+		case schemas.RegisterSlackWorkspaceForOrganizationResult_teamName:
+			v.TeamName = new(string)
+			return d.ReadString(schemas.RegisterSlackWorkspaceForOrganizationResult_teamName, v.TeamName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterSlackWorkspaceForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRegisterSlackWorkspaceForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterSlackWorkspaceForOrganization, schemas.RegisterSlackWorkspaceForOrganizationRequest, schemas.RegisterSlackWorkspaceForOrganizationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRegisterSlackWorkspaceForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterSlackWorkspaceForOrganization, schemas.RegisterSlackWorkspaceForOrganizationRequest, schemas.RegisterSlackWorkspaceForOrganizationResult), output: &RegisterSlackWorkspaceForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterSlackWorkspaceForOrganization"); err != nil {

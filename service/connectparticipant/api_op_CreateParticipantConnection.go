@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -120,6 +122,22 @@ type CreateParticipantConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateParticipantConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateParticipantConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateParticipantConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectParticipant != nil {
+		s.WriteBool(schemas.CreateParticipantConnectionRequest_ConnectParticipant, *v.ConnectParticipant)
+	}
+	if v.ParticipantToken != nil {
+		s.WriteString(schemas.CreateParticipantConnectionRequest_ParticipantToken, *v.ParticipantToken)
+	}
+	serializeConnectionTypeList(s, schemas.CreateParticipantConnectionRequest_Type, v.Type)
+}
+
 type CreateParticipantConnectionOutput struct {
 
 	// Creates the participant's connection credentials. The authentication token
@@ -139,16 +157,30 @@ type CreateParticipantConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateParticipantConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateParticipantConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateParticipantConnectionResponse_ConnectionCredentials:
+			v.ConnectionCredentials = &types.ConnectionCredentials{}
+			return v.ConnectionCredentials.Deserialize(d)
+		case schemas.CreateParticipantConnectionResponse_WebRTCConnection:
+			v.WebRTCConnection = &types.WebRTCConnection{}
+			return v.WebRTCConnection.Deserialize(d)
+		case schemas.CreateParticipantConnectionResponse_Websocket:
+			v.Websocket = &types.Websocket{}
+			return v.Websocket.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateParticipantConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateParticipantConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateParticipantConnection, schemas.CreateParticipantConnectionRequest, schemas.CreateParticipantConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateParticipantConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateParticipantConnection, schemas.CreateParticipantConnectionRequest, schemas.CreateParticipantConnectionResponse), output: &CreateParticipantConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateParticipantConnection"); err != nil {

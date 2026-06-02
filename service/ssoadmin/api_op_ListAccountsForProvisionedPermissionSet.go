@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,30 @@ type ListAccountsForProvisionedPermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountsForProvisionedPermissionSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAccountsForProvisionedPermissionSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAccountsForProvisionedPermissionSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.ListAccountsForProvisionedPermissionSetRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAccountsForProvisionedPermissionSetRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAccountsForProvisionedPermissionSetRequest_NextToken, *v.NextToken)
+	}
+	if v.PermissionSetArn != nil {
+		s.WriteString(schemas.ListAccountsForProvisionedPermissionSetRequest_PermissionSetArn, *v.PermissionSetArn)
+	}
+	if v.ProvisioningStatus != "" {
+		s.WriteString(schemas.ListAccountsForProvisionedPermissionSetRequest_ProvisioningStatus, string(v.ProvisioningStatus))
+	}
+}
+
 type ListAccountsForProvisionedPermissionSetOutput struct {
 
 	// The list of Amazon Web Services AccountIds .
@@ -71,16 +97,26 @@ type ListAccountsForProvisionedPermissionSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAccountsForProvisionedPermissionSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAccountsForProvisionedPermissionSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAccountsForProvisionedPermissionSetResponse_AccountIds:
+			return deserializeAccountList(d, schemas.ListAccountsForProvisionedPermissionSetResponse_AccountIds, &v.AccountIds)
+		case schemas.ListAccountsForProvisionedPermissionSetResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAccountsForProvisionedPermissionSetResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAccountsForProvisionedPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAccountsForProvisionedPermissionSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountsForProvisionedPermissionSet, schemas.ListAccountsForProvisionedPermissionSetRequest, schemas.ListAccountsForProvisionedPermissionSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAccountsForProvisionedPermissionSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAccountsForProvisionedPermissionSet, schemas.ListAccountsForProvisionedPermissionSetRequest, schemas.ListAccountsForProvisionedPermissionSetResponse), output: &ListAccountsForProvisionedPermissionSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAccountsForProvisionedPermissionSet"); err != nil {

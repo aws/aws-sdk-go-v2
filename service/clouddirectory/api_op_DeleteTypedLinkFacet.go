@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,21 @@ type DeleteTypedLinkFacetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTypedLinkFacetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteTypedLinkFacetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteTypedLinkFacetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteTypedLinkFacetRequest_Name, *v.Name)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.DeleteTypedLinkFacetRequest_SchemaArn, *v.SchemaArn)
+	}
+}
+
 type DeleteTypedLinkFacetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,16 +68,21 @@ type DeleteTypedLinkFacetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteTypedLinkFacetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteTypedLinkFacetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteTypedLinkFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteTypedLinkFacet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTypedLinkFacet, schemas.DeleteTypedLinkFacetRequest, schemas.DeleteTypedLinkFacetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteTypedLinkFacet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteTypedLinkFacet, schemas.DeleteTypedLinkFacetRequest, schemas.DeleteTypedLinkFacetResponse), output: &DeleteTypedLinkFacetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteTypedLinkFacet"); err != nil {

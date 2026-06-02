@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,24 @@ type ListSubCheckResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubCheckResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSubCheckResultsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSubCheckResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSubCheckResultsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSubCheckResultsInput_NextToken, *v.NextToken)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.ListSubCheckResultsInput_OperationId, *v.OperationId)
+	}
+}
+
 type ListSubCheckResultsOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when
@@ -59,16 +79,26 @@ type ListSubCheckResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubCheckResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSubCheckResultsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSubCheckResultsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSubCheckResultsOutput_NextToken, v.NextToken)
+		case schemas.ListSubCheckResultsOutput_SubCheckResults:
+			return deserializeSubCheckResultList(d, schemas.ListSubCheckResultsOutput_SubCheckResults, &v.SubCheckResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSubCheckResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSubCheckResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubCheckResults, schemas.ListSubCheckResultsInput, schemas.ListSubCheckResultsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSubCheckResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubCheckResults, schemas.ListSubCheckResultsInput, schemas.ListSubCheckResultsOutput), output: &ListSubCheckResultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSubCheckResults"); err != nil {

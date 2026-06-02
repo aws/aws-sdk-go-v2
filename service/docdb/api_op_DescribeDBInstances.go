@@ -7,6 +7,7 @@ import (
 	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -75,6 +76,25 @@ type DescribeDBInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeDBInstancesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeDBInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBInstanceIdentifier != nil {
+		s.WriteString(schemas.DescribeDBInstancesMessage_DBInstanceIdentifier, *v.DBInstanceIdentifier)
+	}
+	serializeFilterList(s, schemas.DescribeDBInstancesMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeDBInstancesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeDBInstancesMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 // Represents the output of DescribeDBInstances.
 type DescribeDBInstancesOutput struct {
 
@@ -92,16 +112,26 @@ type DescribeDBInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeDBInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DBInstanceMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DBInstanceMessage_DBInstances:
+			return deserializeDBInstanceList(d, schemas.DBInstanceMessage_DBInstances, &v.DBInstances)
+		case schemas.DBInstanceMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DBInstanceMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeDBInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeDBInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBInstances, schemas.DescribeDBInstancesMessage, schemas.DBInstanceMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeDBInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeDBInstances, schemas.DescribeDBInstancesMessage, schemas.DBInstanceMessage), output: &DescribeDBInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeDBInstances"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -53,6 +55,31 @@ type ListServiceEventsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceEventsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceEventsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceEventsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListServiceEventsRequest_endTime, *v.EndTime)
+	}
+	serializeServiceEventTypeList(s, schemas.ListServiceEventsRequest_eventTypes, v.EventTypes)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceEventsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceEventsRequest_nextToken, *v.NextToken)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.ListServiceEventsRequest_serviceArn, *v.ServiceArn)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListServiceEventsRequest_startTime, *v.StartTime)
+	}
+}
+
 type ListServiceEventsOutput struct {
 
 	// The list of service events.
@@ -69,16 +96,26 @@ type ListServiceEventsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceEventsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceEventsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceEventsResponse_events:
+			return deserializeServiceEventList(d, schemas.ListServiceEventsResponse_events, &v.Events)
+		case schemas.ListServiceEventsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceEventsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListServiceEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceEvents, schemas.ListServiceEventsRequest, schemas.ListServiceEventsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListServiceEvents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceEvents, schemas.ListServiceEventsRequest, schemas.ListServiceEventsResponse), output: &ListServiceEventsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServiceEvents"); err != nil {

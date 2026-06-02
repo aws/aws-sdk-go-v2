@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -118,6 +120,27 @@ type CreateUploadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUploadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUploadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUploadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != nil {
+		s.WriteString(schemas.CreateUploadRequest_contentType, *v.ContentType)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateUploadRequest_name, *v.Name)
+	}
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.CreateUploadRequest_projectArn, *v.ProjectArn)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateUploadRequest_type, string(v.Type))
+	}
+}
+
 // Represents the result of a create upload request.
 type CreateUploadOutput struct {
 
@@ -130,16 +153,24 @@ type CreateUploadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUploadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUploadResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUploadResult_upload:
+			v.Upload = &types.Upload{}
+			return v.Upload.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUpload, schemas.CreateUploadRequest, schemas.CreateUploadResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUpload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUpload, schemas.CreateUploadRequest, schemas.CreateUploadResult), output: &CreateUploadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateUpload"); err != nil {

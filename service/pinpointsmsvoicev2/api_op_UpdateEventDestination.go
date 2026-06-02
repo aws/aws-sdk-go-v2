@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,6 +71,40 @@ type UpdateEventDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateEventDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateEventDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogsDestination != nil {
+		s.WriteStruct(schemas.UpdateEventDestinationRequest_CloudWatchLogsDestination)
+		v.CloudWatchLogsDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.UpdateEventDestinationRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.UpdateEventDestinationRequest_Enabled, *v.Enabled)
+	}
+	if v.EventDestinationName != nil {
+		s.WriteString(schemas.UpdateEventDestinationRequest_EventDestinationName, *v.EventDestinationName)
+	}
+	if v.KinesisFirehoseDestination != nil {
+		s.WriteStruct(schemas.UpdateEventDestinationRequest_KinesisFirehoseDestination)
+		v.KinesisFirehoseDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeEventTypeList(s, schemas.UpdateEventDestinationRequest_MatchingEventTypes, v.MatchingEventTypes)
+	if v.SnsDestination != nil {
+		s.WriteStruct(schemas.UpdateEventDestinationRequest_SnsDestination)
+		v.SnsDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateEventDestinationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the ConfigurationSet that was updated.
@@ -87,16 +123,30 @@ type UpdateEventDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateEventDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateEventDestinationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateEventDestinationResult_ConfigurationSetArn:
+			v.ConfigurationSetArn = new(string)
+			return d.ReadString(schemas.UpdateEventDestinationResult_ConfigurationSetArn, v.ConfigurationSetArn)
+		case schemas.UpdateEventDestinationResult_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.UpdateEventDestinationResult_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.UpdateEventDestinationResult_EventDestination:
+			v.EventDestination = &types.EventDestination{}
+			return v.EventDestination.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateEventDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateEventDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventDestination, schemas.UpdateEventDestinationRequest, schemas.UpdateEventDestinationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateEventDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateEventDestination, schemas.UpdateEventDestinationRequest, schemas.UpdateEventDestinationResult), output: &UpdateEventDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateEventDestination"); err != nil {

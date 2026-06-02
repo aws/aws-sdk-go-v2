@@ -836,7 +836,62 @@ func TestEventStream_DuplexStream_DuplexHeadersAndExplicitPayloadInput(t *testin
 }
 
 func TestEventStream_DuplexStream_DuplexHeadersAndImplicitPayloadInput(t *testing.T) {
-	t.Skip("skipped, see SKIP_TESTS in EventStreamProtocolTestGenerator")
+	mock := newEventstreamMockHTTPClient()
+	defer mock.CloseResponse()
+	mock.KeepResponseOpen = true
+
+	client := New(Options{
+		HTTPClient:         mock,
+		Credentials:        credentials.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
+		EndpointResolverV2: &protocolTestEndpointResolver{URL: "http://localhost"},
+		APIOptions: []func(*middleware.Stack) error{
+			func(s *middleware.Stack) error {
+				s.Finalize.Remove("Retry")
+				s.Initialize.Remove("OperationInputValidation")
+				return nil
+			},
+		},
+	})
+
+	resp, err := client.DuplexStream(context.Background(), &DuplexStreamInput{})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	sendEvent := &types.EventStreamMemberHeadersAndImplicitPayload{Value: types.HeadersAndImplicitPayloadEvent{
+		Header:  ptr.String("foo"),
+		Payload: ptr.String("bar"),
+	}}
+	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+		t.Fatalf("failed to send event: %v", err)
+	}
+	mock.CloseResponse()
+	resp.GetStream().Close()
+
+	requestMsgs, err := mock.readRequestEvents()
+	if err != nil {
+		t.Fatalf("failed to read request events: %v", err)
+	}
+	if len(requestMsgs) != 1 {
+		t.Fatalf("expected 1 request events, got %d", len(requestMsgs))
+	}
+
+	{
+		expectRaw, _ := base64.StdEncoding.DecodeString("AAAAjQAAAGxoUIY5DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRJbXBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJwYXlsb2FkIjoiYmFyIn15lZtT")
+		expectMsg, _ := eventstream.NewDecoder().Decode(bytes.NewReader(expectRaw), make([]byte, 1024))
+		actualMsg := requestMsgs[0]
+		for _, eh := range expectMsg.Headers {
+			ah := actualMsg.Headers.Get(eh.Name)
+			if ah == nil {
+				t.Errorf("request event %d: missing header %q", 0, eh.Name)
+			}
+			if ah != nil && ah.String() != eh.Value.String() {
+				t.Errorf("request event %d: header %q = %v, want %v", 0, eh.Name, ah, eh.Value)
+			}
+		}
+		if !bytes.Equal(actualMsg.Payload, expectMsg.Payload) {
+			t.Errorf("request event %d: payload mismatch, got %q want %q", 0, actualMsg.Payload, expectMsg.Payload)
+		}
+	}
 }
 
 func TestEventStream_DuplexStream_DuplexClientErrorInput(t *testing.T) {
@@ -1686,7 +1741,62 @@ func TestEventStream_DuplexStream_DuplexHeadersAndExplicitPayloadOutput(t *testi
 }
 
 func TestEventStream_DuplexStream_DuplexHeadersAndImplicitPayloadOutput(t *testing.T) {
-	t.Skip("skipped, see SKIP_TESTS in EventStreamProtocolTestGenerator")
+	mock := newEventstreamMockHTTPClient()
+	defer mock.CloseResponse()
+	mock.KeepResponseOpen = true
+	mock.ResponseEvents = []eventstream.Message{
+		func() eventstream.Message {
+			raw, _ := base64.StdEncoding.DecodeString("AAAAjQAAAGxoUIY5DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRJbXBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJwYXlsb2FkIjoiYmFyIn15lZtT")
+			msg, err := eventstream.NewDecoder().Decode(bytes.NewReader(raw), make([]byte, 1024))
+			if err != nil {
+				panic(err)
+			}
+			return msg
+		}(),
+	}
+
+	client := New(Options{
+		HTTPClient:         mock,
+		Credentials:        credentials.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
+		EndpointResolverV2: &protocolTestEndpointResolver{URL: "http://localhost"},
+		APIOptions: []func(*middleware.Stack) error{
+			func(s *middleware.Stack) error {
+				s.Finalize.Remove("Retry")
+				s.Initialize.Remove("OperationInputValidation")
+				return nil
+			},
+		},
+	})
+
+	resp, err := client.DuplexStream(context.Background(), &DuplexStreamInput{})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	defer resp.GetStream().Close()
+	mock.CloseResponse()
+
+	var receivedEvents int
+	for event := range resp.GetStream().Events() {
+		receivedEvents++
+		switch receivedEvents {
+		case 1:
+			expect := &types.EventStreamMemberHeadersAndImplicitPayload{Value: types.HeadersAndImplicitPayloadEvent{
+				Header:  ptr.String("foo"),
+				Payload: ptr.String("bar"),
+			}}
+			if err := smithytesting.CompareValues(expect, event); err != nil {
+				t.Errorf("event %d mismatch: %v", receivedEvents, err)
+			}
+
+		}
+	}
+
+	if err := resp.GetStream().Err(); err != nil {
+		t.Fatalf("expect no stream error, got %v", err)
+	}
+	if receivedEvents != 1 {
+		t.Fatalf("expected 1 events, got %d", receivedEvents)
+	}
 }
 
 func TestEventStream_DuplexStream_DuplexClientErrorOutput(t *testing.T) {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,21 @@ type ListRateBasedRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRateBasedRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRateBasedRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRateBasedRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != 0 {
+		s.WriteInt32(schemas.ListRateBasedRulesRequest_Limit, v.Limit)
+	}
+	if v.NextMarker != nil {
+		s.WriteString(schemas.ListRateBasedRulesRequest_NextMarker, *v.NextMarker)
+	}
+}
+
 type ListRateBasedRulesOutput struct {
 
 	// If you have more Rules than the number that you specified for Limit in the
@@ -71,16 +88,26 @@ type ListRateBasedRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRateBasedRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRateBasedRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRateBasedRulesResponse_NextMarker:
+			v.NextMarker = new(string)
+			return d.ReadString(schemas.ListRateBasedRulesResponse_NextMarker, v.NextMarker)
+		case schemas.ListRateBasedRulesResponse_Rules:
+			return deserializeRuleSummaries(d, schemas.ListRateBasedRulesResponse_Rules, &v.Rules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRateBasedRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRateBasedRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRateBasedRules, schemas.ListRateBasedRulesRequest, schemas.ListRateBasedRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRateBasedRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRateBasedRules, schemas.ListRateBasedRulesRequest, schemas.ListRateBasedRulesResponse), output: &ListRateBasedRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRateBasedRules"); err != nil {

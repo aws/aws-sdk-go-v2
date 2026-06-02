@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,27 @@ type DeleteApplicationCloudWatchLoggingOptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationCloudWatchLoggingOptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteApplicationCloudWatchLoggingOptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteApplicationCloudWatchLoggingOptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.DeleteApplicationCloudWatchLoggingOptionRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.CloudWatchLoggingOptionId != nil {
+		s.WriteString(schemas.DeleteApplicationCloudWatchLoggingOptionRequest_CloudWatchLoggingOptionId, *v.CloudWatchLoggingOptionId)
+	}
+	if v.ConditionalToken != nil {
+		s.WriteString(schemas.DeleteApplicationCloudWatchLoggingOptionRequest_ConditionalToken, *v.ConditionalToken)
+	}
+	if v.CurrentApplicationVersionId != nil {
+		s.WriteInt64(schemas.DeleteApplicationCloudWatchLoggingOptionRequest_CurrentApplicationVersionId, *v.CurrentApplicationVersionId)
+	}
+}
+
 type DeleteApplicationCloudWatchLoggingOptionOutput struct {
 
 	// The application's Amazon Resource Name (ARN).
@@ -79,16 +102,32 @@ type DeleteApplicationCloudWatchLoggingOptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteApplicationCloudWatchLoggingOptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteApplicationCloudWatchLoggingOptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteApplicationCloudWatchLoggingOptionResponse_ApplicationARN:
+			v.ApplicationARN = new(string)
+			return d.ReadString(schemas.DeleteApplicationCloudWatchLoggingOptionResponse_ApplicationARN, v.ApplicationARN)
+		case schemas.DeleteApplicationCloudWatchLoggingOptionResponse_ApplicationVersionId:
+			v.ApplicationVersionId = new(int64)
+			return d.ReadInt64(schemas.DeleteApplicationCloudWatchLoggingOptionResponse_ApplicationVersionId, v.ApplicationVersionId)
+		case schemas.DeleteApplicationCloudWatchLoggingOptionResponse_CloudWatchLoggingOptionDescriptions:
+			return deserializeCloudWatchLoggingOptionDescriptions(d, schemas.DeleteApplicationCloudWatchLoggingOptionResponse_CloudWatchLoggingOptionDescriptions, &v.CloudWatchLoggingOptionDescriptions)
+		case schemas.DeleteApplicationCloudWatchLoggingOptionResponse_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.DeleteApplicationCloudWatchLoggingOptionResponse_OperationId, v.OperationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteApplicationCloudWatchLoggingOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteApplicationCloudWatchLoggingOption{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplicationCloudWatchLoggingOption, schemas.DeleteApplicationCloudWatchLoggingOptionRequest, schemas.DeleteApplicationCloudWatchLoggingOptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteApplicationCloudWatchLoggingOption{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteApplicationCloudWatchLoggingOption, schemas.DeleteApplicationCloudWatchLoggingOptionRequest, schemas.DeleteApplicationCloudWatchLoggingOptionResponse), output: &DeleteApplicationCloudWatchLoggingOptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteApplicationCloudWatchLoggingOption"); err != nil {

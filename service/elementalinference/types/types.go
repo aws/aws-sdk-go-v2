@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -23,6 +25,34 @@ type AspectRatio struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AspectRatio) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AspectRatio)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AspectRatio) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Height != nil {
+		s.WriteInt32(schemas.AspectRatio_height, *v.Height)
+	}
+	if v.Width != nil {
+		s.WriteInt32(schemas.AspectRatio_width, *v.Width)
+	}
+}
+func (v *AspectRatio) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AspectRatio, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AspectRatio_height:
+			v.Height = new(int32)
+			return d.ReadInt32(schemas.AspectRatio_height, v.Height)
+		case schemas.AspectRatio_width:
+			v.Width = new(int32)
+			return d.ReadInt32(schemas.AspectRatio_width, v.Width)
+		}
+		return nil
+	})
+}
+
 // A type of OutputConfig, used when the output in a feed is for the clip feature.
 type ClippingConfig struct {
 
@@ -32,6 +62,28 @@ type ClippingConfig struct {
 	CallbackMetadata *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClippingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClippingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClippingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CallbackMetadata != nil {
+		s.WriteString(schemas.ClippingConfig_callbackMetadata, *v.CallbackMetadata)
+	}
+}
+func (v *ClippingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClippingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClippingConfig_callbackMetadata:
+			v.CallbackMetadata = new(string)
+			return d.ReadString(schemas.ClippingConfig_callbackMetadata, v.CallbackMetadata)
+		}
+		return nil
+	})
 }
 
 // Contains configuration information about one output in a feed. It is used in
@@ -62,9 +114,66 @@ type CreateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreateOutput_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateOutput_name, *v.Name)
+	}
+	serializeOutputConfig(s, schemas.CreateOutput_outputConfig, v.OutputConfig)
+	if v.Status != "" {
+		s.WriteString(schemas.CreateOutput_status, string(v.Status))
+	}
+}
+func (v *CreateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateOutput_description, v.Description)
+		case schemas.CreateOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateOutput_name, v.Name)
+		case schemas.CreateOutput_outputConfig:
+			return deserializeOutputConfig(d, schemas.CreateOutput_outputConfig, &v.OutputConfig)
+		case schemas.CreateOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = OutputStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A type of OutputConfig, used when the output in a feed is for the crop feature.
 type CroppingConfig struct {
 	noSmithyDocumentSerde
+}
+
+func (v *CroppingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CroppingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CroppingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CroppingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CroppingConfig, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Contains summary information about a dictionary. Used in the ListDictionaries
@@ -99,6 +208,60 @@ type DictionarySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DictionarySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DictionarySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DictionarySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DictionarySummary_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DictionarySummary_id, *v.Id)
+	}
+	if v.Language != "" {
+		s.WriteString(schemas.DictionarySummary_language, string(v.Language))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DictionarySummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DictionarySummary_status, string(v.Status))
+	}
+}
+func (v *DictionarySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DictionarySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DictionarySummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DictionarySummary_arn, v.Arn)
+		case schemas.DictionarySummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DictionarySummary_id, v.Id)
+		case schemas.DictionarySummary_language:
+			var ev string
+			if err := d.ReadString(schemas.DictionarySummary_language, &ev); err != nil {
+				return err
+			}
+			v.Language = DictionaryLanguage(ev)
+			return nil
+		case schemas.DictionarySummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DictionarySummary_name, v.Name)
+		case schemas.DictionarySummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DictionarySummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DictionaryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains information about the resource that is associated with a feed. It is
 // used in the FeedSummary that is used in the response of a ListFeeds action.
 type FeedAssociation struct {
@@ -109,6 +272,28 @@ type FeedAssociation struct {
 	AssociatedResourceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FeedAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeedAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeedAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResourceName != nil {
+		s.WriteString(schemas.FeedAssociation_associatedResourceName, *v.AssociatedResourceName)
+	}
+}
+func (v *FeedAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeedAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeedAssociation_associatedResourceName:
+			v.AssociatedResourceName = new(string)
+			return d.ReadString(schemas.FeedAssociation_associatedResourceName, v.AssociatedResourceName)
+		}
+		return nil
+	})
 }
 
 // Contains configuration information about a feed. It is used in the ListFeeds
@@ -139,6 +324,58 @@ type FeedSummary struct {
 	Association *FeedAssociation
 
 	noSmithyDocumentSerde
+}
+
+func (v *FeedSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FeedSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FeedSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.FeedSummary_arn, *v.Arn)
+	}
+	if v.Association != nil {
+		s.WriteStruct(schemas.FeedSummary_association)
+		v.Association.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.FeedSummary_id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FeedSummary_name, *v.Name)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.FeedSummary_status, string(v.Status))
+	}
+}
+func (v *FeedSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FeedSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FeedSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.FeedSummary_arn, v.Arn)
+		case schemas.FeedSummary_association:
+			v.Association = &FeedAssociation{}
+			return v.Association.Deserialize(d)
+		case schemas.FeedSummary_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FeedSummary_id, v.Id)
+		case schemas.FeedSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FeedSummary_name, v.Name)
+		case schemas.FeedSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.FeedSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = FeedStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains configuration information about one output in a feed. It is used in
@@ -176,6 +413,53 @@ type GetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.GetOutput_description, *v.Description)
+	}
+	if v.FromAssociation != nil {
+		s.WriteBool(schemas.GetOutput_fromAssociation, *v.FromAssociation)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetOutput_name, *v.Name)
+	}
+	serializeOutputConfig(s, schemas.GetOutput_outputConfig, v.OutputConfig)
+	if v.Status != "" {
+		s.WriteString(schemas.GetOutput_status, string(v.Status))
+	}
+}
+func (v *GetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetOutput_description, v.Description)
+		case schemas.GetOutput_fromAssociation:
+			v.FromAssociation = new(bool)
+			return d.ReadBool(schemas.GetOutput_fromAssociation, v.FromAssociation)
+		case schemas.GetOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetOutput_name, v.Name)
+		case schemas.GetOutput_outputConfig:
+			return deserializeOutputConfig(d, schemas.GetOutput_outputConfig, &v.OutputConfig)
+		case schemas.GetOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = OutputStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains one typed output. It is used in the CreateOutput, GetOutput, and
 // Update Output structures.
 //
@@ -196,6 +480,14 @@ type OutputConfigMemberClipping struct {
 }
 
 func (*OutputConfigMemberClipping) isOutputConfig() {}
+func (v *OutputConfigMemberClipping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputConfig_clipping)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OutputConfigMemberClipping) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The output config type that applies to the cropping feature.
 type OutputConfigMemberCropping struct {
@@ -205,6 +497,14 @@ type OutputConfigMemberCropping struct {
 }
 
 func (*OutputConfigMemberCropping) isOutputConfig() {}
+func (v *OutputConfigMemberCropping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputConfig_cropping)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OutputConfigMemberCropping) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The output config type that applies to the smart subtitling feature.
 type OutputConfigMemberSubtitling struct {
@@ -214,6 +514,14 @@ type OutputConfigMemberSubtitling struct {
 }
 
 func (*OutputConfigMemberSubtitling) isOutputConfig() {}
+func (v *OutputConfigMemberSubtitling) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputConfig_subtitling)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OutputConfigMemberSubtitling) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A type of OutputConfig, used when the output in a feed is for the smart
 // subtitling feature. smart subtitling uses automatic speech recognition (ASR) to
@@ -244,6 +552,56 @@ type SubtitlingConfig struct {
 	ProfanityFilter ProfanityFilterMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *SubtitlingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubtitlingConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubtitlingConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AspectRatio != nil {
+		s.WriteStruct(schemas.SubtitlingConfig_aspectRatio)
+		v.AspectRatio.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Dictionary != nil {
+		s.WriteString(schemas.SubtitlingConfig_dictionary, *v.Dictionary)
+	}
+	if v.Language != "" {
+		s.WriteString(schemas.SubtitlingConfig_language, string(v.Language))
+	}
+	if v.ProfanityFilter != "" {
+		s.WriteString(schemas.SubtitlingConfig_profanityFilter, string(v.ProfanityFilter))
+	}
+}
+func (v *SubtitlingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubtitlingConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubtitlingConfig_aspectRatio:
+			v.AspectRatio = &AspectRatio{}
+			return v.AspectRatio.Deserialize(d)
+		case schemas.SubtitlingConfig_dictionary:
+			v.Dictionary = new(string)
+			return d.ReadString(schemas.SubtitlingConfig_dictionary, v.Dictionary)
+		case schemas.SubtitlingConfig_language:
+			var ev string
+			if err := d.ReadString(schemas.SubtitlingConfig_language, &ev); err != nil {
+				return err
+			}
+			v.Language = TranscriptionLanguage(ev)
+			return nil
+		case schemas.SubtitlingConfig_profanityFilter:
+			var ev string
+			if err := d.ReadString(schemas.SubtitlingConfig_profanityFilter, &ev); err != nil {
+				return err
+			}
+			v.ProfanityFilter = ProfanityFilterMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains configuration information about one output in a feed. It is used in
@@ -281,6 +639,53 @@ type UpdateOutput struct {
 	FromAssociation *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateOutput_description, *v.Description)
+	}
+	if v.FromAssociation != nil {
+		s.WriteBool(schemas.UpdateOutput_fromAssociation, *v.FromAssociation)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateOutput_name, *v.Name)
+	}
+	serializeOutputConfig(s, schemas.UpdateOutput_outputConfig, v.OutputConfig)
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateOutput_status, string(v.Status))
+	}
+}
+func (v *UpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateOutput_description, v.Description)
+		case schemas.UpdateOutput_fromAssociation:
+			v.FromAssociation = new(bool)
+			return d.ReadBool(schemas.UpdateOutput_fromAssociation, v.FromAssociation)
+		case schemas.UpdateOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateOutput_name, v.Name)
+		case schemas.UpdateOutput_outputConfig:
+			return deserializeOutputConfig(d, schemas.UpdateOutput_outputConfig, &v.OutputConfig)
+		case schemas.UpdateOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = OutputStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

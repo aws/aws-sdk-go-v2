@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,21 @@ type GetAttendeeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAttendeeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAttendeeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAttendeeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttendeeId != nil {
+		s.WriteString(schemas.GetAttendeeRequest_AttendeeId, *v.AttendeeId)
+	}
+	if v.MeetingId != nil {
+		s.WriteString(schemas.GetAttendeeRequest_MeetingId, *v.MeetingId)
+	}
+}
+
 type GetAttendeeOutput struct {
 
 	// The Amazon Chime SDK attendee information.
@@ -58,16 +75,24 @@ type GetAttendeeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAttendeeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAttendeeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAttendeeResponse_Attendee:
+			v.Attendee = &types.Attendee{}
+			return v.Attendee.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAttendee{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttendee, schemas.GetAttendeeRequest, schemas.GetAttendeeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAttendee{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAttendee, schemas.GetAttendeeRequest, schemas.GetAttendeeResponse), output: &GetAttendeeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAttendee"); err != nil {

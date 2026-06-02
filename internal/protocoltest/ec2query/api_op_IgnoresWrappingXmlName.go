@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,22 @@ type IgnoresWrappingXmlNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IgnoresWrappingXmlNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IgnoresWrappingXmlNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *IgnoresWrappingXmlNameInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type IgnoresWrappingXmlNameOutput struct {
 	Foo *string
 
@@ -41,16 +59,35 @@ type IgnoresWrappingXmlNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IgnoresWrappingXmlNameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IgnoresWrappingXmlNameOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IgnoresWrappingXmlNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Foo != nil {
+		s.WriteString(schemas.IgnoresWrappingXmlNameOutput_foo, *v.Foo)
+	}
+}
+func (v *IgnoresWrappingXmlNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IgnoresWrappingXmlNameOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IgnoresWrappingXmlNameOutput_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.IgnoresWrappingXmlNameOutput_foo, v.Foo)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationIgnoresWrappingXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsEc2query_serializeOpIgnoresWrappingXmlName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IgnoresWrappingXmlName, nil, schemas.IgnoresWrappingXmlNameOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsEc2query_deserializeOpIgnoresWrappingXmlName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.IgnoresWrappingXmlName, nil, schemas.IgnoresWrappingXmlNameOutput), output: &IgnoresWrappingXmlNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "IgnoresWrappingXmlName"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetTestGridProjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestGridProjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTestGridProjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTestGridProjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProjectArn != nil {
+		s.WriteString(schemas.GetTestGridProjectRequest_projectArn, *v.ProjectArn)
+	}
+}
+
 type GetTestGridProjectOutput struct {
 
 	// A TestGridProject.
@@ -48,16 +62,24 @@ type GetTestGridProjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTestGridProjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTestGridProjectResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTestGridProjectResult_testGridProject:
+			v.TestGridProject = &types.TestGridProject{}
+			return v.TestGridProject.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTestGridProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetTestGridProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTestGridProject, schemas.GetTestGridProjectRequest, schemas.GetTestGridProjectResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetTestGridProject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTestGridProject, schemas.GetTestGridProjectRequest, schemas.GetTestGridProjectResult), output: &GetTestGridProjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTestGridProject"); err != nil {

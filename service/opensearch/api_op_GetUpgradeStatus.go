@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,18 @@ type GetUpgradeStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUpgradeStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetUpgradeStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetUpgradeStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.GetUpgradeStatusRequest_DomainName, *v.DomainName)
+	}
+}
+
 // Container for the response returned by the GetUpgradeStatus operation.
 type GetUpgradeStatusOutput struct {
 
@@ -57,16 +71,38 @@ type GetUpgradeStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetUpgradeStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetUpgradeStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetUpgradeStatusResponse_StepStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetUpgradeStatusResponse_StepStatus, &ev); err != nil {
+				return err
+			}
+			v.StepStatus = types.UpgradeStatus(ev)
+			return nil
+		case schemas.GetUpgradeStatusResponse_UpgradeName:
+			v.UpgradeName = new(string)
+			return d.ReadString(schemas.GetUpgradeStatusResponse_UpgradeName, v.UpgradeName)
+		case schemas.GetUpgradeStatusResponse_UpgradeStep:
+			var ev string
+			if err := d.ReadString(schemas.GetUpgradeStatusResponse_UpgradeStep, &ev); err != nil {
+				return err
+			}
+			v.UpgradeStep = types.UpgradeStep(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetUpgradeStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetUpgradeStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUpgradeStatus, schemas.GetUpgradeStatusRequest, schemas.GetUpgradeStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetUpgradeStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetUpgradeStatus, schemas.GetUpgradeStatusRequest, schemas.GetUpgradeStatusResponse), output: &GetUpgradeStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetUpgradeStatus"); err != nil {

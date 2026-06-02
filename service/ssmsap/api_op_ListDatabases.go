@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,46 @@ type ListDatabasesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatabasesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatabasesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatabasesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListDatabasesInput_ApplicationId, *v.ApplicationId)
+	}
+	if v.ComponentId != nil {
+		s.WriteString(schemas.ListDatabasesInput_ComponentId, *v.ComponentId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDatabasesInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatabasesInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDatabasesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatabasesInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatabasesInput_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.ListDatabasesInput_ApplicationId, v.ApplicationId)
+		case schemas.ListDatabasesInput_ComponentId:
+			v.ComponentId = new(string)
+			return d.ReadString(schemas.ListDatabasesInput_ComponentId, v.ComponentId)
+		case schemas.ListDatabasesInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListDatabasesInput_MaxResults, v.MaxResults)
+		case schemas.ListDatabasesInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatabasesInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListDatabasesOutput struct {
 
 	// The SAP HANA databases of an application.
@@ -63,16 +105,38 @@ type ListDatabasesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDatabasesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDatabasesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDatabasesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatabaseSummaryList(s, schemas.ListDatabasesOutput_Databases, v.Databases)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDatabasesOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDatabasesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDatabasesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDatabasesOutput_Databases:
+			return deserializeDatabaseSummaryList(d, schemas.ListDatabasesOutput_Databases, &v.Databases)
+		case schemas.ListDatabasesOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDatabasesOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatabases, schemas.ListDatabasesInput, schemas.ListDatabasesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDatabases{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDatabases, schemas.ListDatabasesInput, schemas.ListDatabasesOutput), output: &ListDatabasesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDatabases"); err != nil {

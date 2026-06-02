@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -94,6 +96,28 @@ type GetPersonalizedRankingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPersonalizedRankingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPersonalizedRankingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPersonalizedRankingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CampaignArn != nil {
+		s.WriteString(schemas.GetPersonalizedRankingRequest_campaignArn, *v.CampaignArn)
+	}
+	serializeContext(s, schemas.GetPersonalizedRankingRequest_context, v.Context)
+	if v.FilterArn != nil {
+		s.WriteString(schemas.GetPersonalizedRankingRequest_filterArn, *v.FilterArn)
+	}
+	serializeFilterValues(s, schemas.GetPersonalizedRankingRequest_filterValues, v.FilterValues)
+	serializeInputList(s, schemas.GetPersonalizedRankingRequest_inputList, v.InputList)
+	serializeMetadataColumns(s, schemas.GetPersonalizedRankingRequest_metadataColumns, v.MetadataColumns)
+	if v.UserId != nil {
+		s.WriteString(schemas.GetPersonalizedRankingRequest_userId, *v.UserId)
+	}
+}
+
 type GetPersonalizedRankingOutput struct {
 
 	// A list of items in order of most likely interest to the user. The maximum is
@@ -109,16 +133,26 @@ type GetPersonalizedRankingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPersonalizedRankingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPersonalizedRankingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPersonalizedRankingResponse_personalizedRanking:
+			return deserializeItemList(d, schemas.GetPersonalizedRankingResponse_personalizedRanking, &v.PersonalizedRanking)
+		case schemas.GetPersonalizedRankingResponse_recommendationId:
+			v.RecommendationId = new(string)
+			return d.ReadString(schemas.GetPersonalizedRankingResponse_recommendationId, v.RecommendationId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPersonalizedRankingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPersonalizedRanking{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPersonalizedRanking, schemas.GetPersonalizedRankingRequest, schemas.GetPersonalizedRankingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPersonalizedRanking{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPersonalizedRanking, schemas.GetPersonalizedRankingRequest, schemas.GetPersonalizedRankingResponse), output: &GetPersonalizedRankingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPersonalizedRanking"); err != nil {

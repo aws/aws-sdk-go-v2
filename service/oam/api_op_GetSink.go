@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/oam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,21 @@ type GetSinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSinkInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetSinkInput_Identifier, *v.Identifier)
+	}
+	if v.IncludeTags != nil {
+		s.WriteBool(schemas.GetSinkInput_IncludeTags, *v.IncludeTags)
+	}
+}
+
 type GetSinkOutput struct {
 
 	// The ARN of the sink.
@@ -70,16 +87,32 @@ type GetSinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSinkOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSinkOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetSinkOutput_Arn, v.Arn)
+		case schemas.GetSinkOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetSinkOutput_Id, v.Id)
+		case schemas.GetSinkOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSinkOutput_Name, v.Name)
+		case schemas.GetSinkOutput_Tags:
+			return deserializeTagMapOutput(d, schemas.GetSinkOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSink, schemas.GetSinkInput, schemas.GetSinkOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSink, schemas.GetSinkInput, schemas.GetSinkOutput), output: &GetSinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSink"); err != nil {

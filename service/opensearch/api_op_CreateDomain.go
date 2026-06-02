@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -160,6 +162,110 @@ type CreateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDomainRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AIMLOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_AIMLOptions)
+		v.AIMLOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AccessPolicies != nil {
+		s.WriteString(schemas.CreateDomainRequest_AccessPolicies, *v.AccessPolicies)
+	}
+	serializeAdvancedOptions(s, schemas.CreateDomainRequest_AdvancedOptions, v.AdvancedOptions)
+	if v.AdvancedSecurityOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_AdvancedSecurityOptions)
+		v.AdvancedSecurityOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutoTuneOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_AutoTuneOptions)
+		v.AutoTuneOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AutomatedSnapshotPauseOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_AutomatedSnapshotPauseOptions)
+		v.AutomatedSnapshotPauseOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClusterConfig != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_ClusterConfig)
+		v.ClusterConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CognitoOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_CognitoOptions)
+		v.CognitoOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeploymentStrategyOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_DeploymentStrategyOptions)
+		v.DeploymentStrategyOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainEndpointOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_DomainEndpointOptions)
+		v.DomainEndpointOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.CreateDomainRequest_DomainName, *v.DomainName)
+	}
+	if v.EBSOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_EBSOptions)
+		v.EBSOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EncryptionAtRestOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_EncryptionAtRestOptions)
+		v.EncryptionAtRestOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.CreateDomainRequest_EngineVersion, *v.EngineVersion)
+	}
+	if v.IPAddressType != "" {
+		s.WriteString(schemas.CreateDomainRequest_IPAddressType, string(v.IPAddressType))
+	}
+	if v.IdentityCenterOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_IdentityCenterOptions)
+		v.IdentityCenterOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLogPublishingOptions(s, schemas.CreateDomainRequest_LogPublishingOptions, v.LogPublishingOptions)
+	if v.NodeToNodeEncryptionOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_NodeToNodeEncryptionOptions)
+		v.NodeToNodeEncryptionOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OffPeakWindowOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_OffPeakWindowOptions)
+		v.OffPeakWindowOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_SnapshotOptions)
+		v.SnapshotOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SoftwareUpdateOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_SoftwareUpdateOptions)
+		v.SoftwareUpdateOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateDomainRequest_TagList, v.TagList)
+	if v.VPCOptions != nil {
+		s.WriteStruct(schemas.CreateDomainRequest_VPCOptions)
+		v.VPCOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 // The result of a CreateDomain operation. Contains the status of the newly
 // created domain.
 type CreateDomainOutput struct {
@@ -173,16 +279,24 @@ type CreateDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDomainResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDomainResponse_DomainStatus:
+			v.DomainStatus = &types.DomainStatus{}
+			return v.DomainStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomain, schemas.CreateDomainRequest, schemas.CreateDomainResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDomain, schemas.CreateDomainRequest, schemas.CreateDomainResponse), output: &CreateDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDomain"); err != nil {

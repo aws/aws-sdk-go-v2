@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,27 @@ type UpdateAppInstanceUserEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppInstanceUserEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppInstanceUserEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppInstanceUserEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowMessages != "" {
+		s.WriteString(schemas.UpdateAppInstanceUserEndpointRequest_AllowMessages, string(v.AllowMessages))
+	}
+	if v.AppInstanceUserArn != nil {
+		s.WriteString(schemas.UpdateAppInstanceUserEndpointRequest_AppInstanceUserArn, *v.AppInstanceUserArn)
+	}
+	if v.EndpointId != nil {
+		s.WriteString(schemas.UpdateAppInstanceUserEndpointRequest_EndpointId, *v.EndpointId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAppInstanceUserEndpointRequest_Name, *v.Name)
+	}
+}
+
 type UpdateAppInstanceUserEndpointOutput struct {
 
 	// The ARN of the AppInstanceUser .
@@ -65,16 +88,27 @@ type UpdateAppInstanceUserEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppInstanceUserEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppInstanceUserEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAppInstanceUserEndpointResponse_AppInstanceUserArn:
+			v.AppInstanceUserArn = new(string)
+			return d.ReadString(schemas.UpdateAppInstanceUserEndpointResponse_AppInstanceUserArn, v.AppInstanceUserArn)
+		case schemas.UpdateAppInstanceUserEndpointResponse_EndpointId:
+			v.EndpointId = new(string)
+			return d.ReadString(schemas.UpdateAppInstanceUserEndpointResponse_EndpointId, v.EndpointId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAppInstanceUserEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAppInstanceUserEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppInstanceUserEndpoint, schemas.UpdateAppInstanceUserEndpointRequest, schemas.UpdateAppInstanceUserEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAppInstanceUserEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppInstanceUserEndpoint, schemas.UpdateAppInstanceUserEndpointRequest, schemas.UpdateAppInstanceUserEndpointResponse), output: &UpdateAppInstanceUserEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAppInstanceUserEndpoint"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,24 @@ type AcceptPortfolioShareInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptPortfolioShareInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptPortfolioShareInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptPortfolioShareInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.AcceptPortfolioShareInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.PortfolioId != nil {
+		s.WriteString(schemas.AcceptPortfolioShareInput_PortfolioId, *v.PortfolioId)
+	}
+	if v.PortfolioShareType != "" {
+		s.WriteString(schemas.AcceptPortfolioShareInput_PortfolioShareType, string(v.PortfolioShareType))
+	}
+}
+
 type AcceptPortfolioShareOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,16 +85,21 @@ type AcceptPortfolioShareOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptPortfolioShareOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptPortfolioShareOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptPortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpAcceptPortfolioShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptPortfolioShare, schemas.AcceptPortfolioShareInput, schemas.AcceptPortfolioShareOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpAcceptPortfolioShare{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptPortfolioShare, schemas.AcceptPortfolioShareInput, schemas.AcceptPortfolioShareOutput), output: &AcceptPortfolioShareOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptPortfolioShare"); err != nil {

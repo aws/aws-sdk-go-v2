@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,6 +73,39 @@ type ListParticipantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListParticipantsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListParticipantsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListParticipantsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FilterByPublished != false {
+		s.WriteBool(schemas.ListParticipantsRequest_filterByPublished, v.FilterByPublished)
+	}
+	if v.FilterByRecordingState != "" {
+		s.WriteString(schemas.ListParticipantsRequest_filterByRecordingState, string(v.FilterByRecordingState))
+	}
+	if v.FilterByState != "" {
+		s.WriteString(schemas.ListParticipantsRequest_filterByState, string(v.FilterByState))
+	}
+	if v.FilterByUserId != nil {
+		s.WriteString(schemas.ListParticipantsRequest_filterByUserId, *v.FilterByUserId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListParticipantsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListParticipantsRequest_nextToken, *v.NextToken)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.ListParticipantsRequest_sessionId, *v.SessionId)
+	}
+	if v.StageArn != nil {
+		s.WriteString(schemas.ListParticipantsRequest_stageArn, *v.StageArn)
+	}
+}
+
 type ListParticipantsOutput struct {
 
 	// List of the matching participants (summary information only).
@@ -88,16 +123,26 @@ type ListParticipantsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListParticipantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListParticipantsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListParticipantsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListParticipantsResponse_nextToken, v.NextToken)
+		case schemas.ListParticipantsResponse_participants:
+			return deserializeParticipantList(d, schemas.ListParticipantsResponse_participants, &v.Participants)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListParticipantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListParticipants{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListParticipants, schemas.ListParticipantsRequest, schemas.ListParticipantsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListParticipants{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListParticipants, schemas.ListParticipantsRequest, schemas.ListParticipantsResponse), output: &ListParticipantsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListParticipants"); err != nil {

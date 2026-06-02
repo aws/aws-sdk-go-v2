@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,32 @@ type ListObjectPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListObjectPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListObjectPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListObjectPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsistencyLevel != "" {
+		s.WriteString(schemas.ListObjectPoliciesRequest_ConsistencyLevel, string(v.ConsistencyLevel))
+	}
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.ListObjectPoliciesRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListObjectPoliciesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListObjectPoliciesRequest_NextToken, *v.NextToken)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.ListObjectPoliciesRequest_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListObjectPoliciesOutput struct {
 
 	// A list of policy ObjectIdentifiers , that are attached to the object.
@@ -68,16 +96,26 @@ type ListObjectPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListObjectPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListObjectPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListObjectPoliciesResponse_AttachedPolicyIds:
+			return deserializeObjectIdentifierList(d, schemas.ListObjectPoliciesResponse_AttachedPolicyIds, &v.AttachedPolicyIds)
+		case schemas.ListObjectPoliciesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListObjectPoliciesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListObjectPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListObjectPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectPolicies, schemas.ListObjectPoliciesRequest, schemas.ListObjectPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListObjectPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListObjectPolicies, schemas.ListObjectPoliciesRequest, schemas.ListObjectPoliciesResponse), output: &ListObjectPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListObjectPolicies"); err != nil {

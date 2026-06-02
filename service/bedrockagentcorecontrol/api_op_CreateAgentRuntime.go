@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -86,6 +88,48 @@ type CreateAgentRuntimeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentRuntimeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentRuntimeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentRuntimeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAgentRuntimeArtifact(s, schemas.CreateAgentRuntimeRequest_agentRuntimeArtifact, v.AgentRuntimeArtifact)
+	if v.AgentRuntimeName != nil {
+		s.WriteString(schemas.CreateAgentRuntimeRequest_agentRuntimeName, *v.AgentRuntimeName)
+	}
+	serializeAuthorizerConfiguration(s, schemas.CreateAgentRuntimeRequest_authorizerConfiguration, v.AuthorizerConfiguration)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAgentRuntimeRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAgentRuntimeRequest_description, *v.Description)
+	}
+	serializeEnvironmentVariablesMap(s, schemas.CreateAgentRuntimeRequest_environmentVariables, v.EnvironmentVariables)
+	serializeFilesystemConfigurations(s, schemas.CreateAgentRuntimeRequest_filesystemConfigurations, v.FilesystemConfigurations)
+	if v.LifecycleConfiguration != nil {
+		s.WriteStruct(schemas.CreateAgentRuntimeRequest_lifecycleConfiguration)
+		v.LifecycleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.CreateAgentRuntimeRequest_networkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProtocolConfiguration != nil {
+		s.WriteStruct(schemas.CreateAgentRuntimeRequest_protocolConfiguration)
+		v.ProtocolConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRequestHeaderConfiguration(s, schemas.CreateAgentRuntimeRequest_requestHeaderConfiguration, v.RequestHeaderConfiguration)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateAgentRuntimeRequest_roleArn, *v.RoleArn)
+	}
+	serializeTagsMap(s, schemas.CreateAgentRuntimeRequest_tags, v.Tags)
+}
+
 type CreateAgentRuntimeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the AgentCore Runtime.
@@ -122,16 +166,43 @@ type CreateAgentRuntimeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentRuntimeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAgentRuntimeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAgentRuntimeResponse_agentRuntimeArn:
+			v.AgentRuntimeArn = new(string)
+			return d.ReadString(schemas.CreateAgentRuntimeResponse_agentRuntimeArn, v.AgentRuntimeArn)
+		case schemas.CreateAgentRuntimeResponse_agentRuntimeId:
+			v.AgentRuntimeId = new(string)
+			return d.ReadString(schemas.CreateAgentRuntimeResponse_agentRuntimeId, v.AgentRuntimeId)
+		case schemas.CreateAgentRuntimeResponse_agentRuntimeVersion:
+			v.AgentRuntimeVersion = new(string)
+			return d.ReadString(schemas.CreateAgentRuntimeResponse_agentRuntimeVersion, v.AgentRuntimeVersion)
+		case schemas.CreateAgentRuntimeResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateAgentRuntimeResponse_createdAt, v.CreatedAt)
+		case schemas.CreateAgentRuntimeResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateAgentRuntimeResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AgentRuntimeStatus(ev)
+			return nil
+		case schemas.CreateAgentRuntimeResponse_workloadIdentityDetails:
+			v.WorkloadIdentityDetails = &types.WorkloadIdentityDetails{}
+			return v.WorkloadIdentityDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAgentRuntimeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAgentRuntime{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentRuntime, schemas.CreateAgentRuntimeRequest, schemas.CreateAgentRuntimeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAgentRuntime{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentRuntime, schemas.CreateAgentRuntimeRequest, schemas.CreateAgentRuntimeResponse), output: &CreateAgentRuntimeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAgentRuntime"); err != nil {

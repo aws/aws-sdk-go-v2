@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,19 @@ type UpdateResourceProfileDetectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceProfileDetectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourceProfileDetectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourceProfileDetectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.UpdateResourceProfileDetectionsRequest_resourceArn, *v.ResourceArn)
+	}
+	serialize__listOfSuppressDataIdentifier(s, schemas.UpdateResourceProfileDetectionsRequest_suppressDataIdentifiers, v.SuppressDataIdentifiers)
+}
+
 type UpdateResourceProfileDetectionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,16 +65,21 @@ type UpdateResourceProfileDetectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourceProfileDetectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResourceProfileDetectionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResourceProfileDetectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResourceProfileDetections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceProfileDetections, schemas.UpdateResourceProfileDetectionsRequest, schemas.UpdateResourceProfileDetectionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateResourceProfileDetections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourceProfileDetections, schemas.UpdateResourceProfileDetectionsRequest, schemas.UpdateResourceProfileDetectionsResponse), output: &UpdateResourceProfileDetectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateResourceProfileDetections"); err != nil {

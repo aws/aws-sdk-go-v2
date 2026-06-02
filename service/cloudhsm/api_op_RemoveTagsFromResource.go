@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +63,19 @@ type RemoveTagsFromResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsFromResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveTagsFromResourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveTagsFromResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.RemoveTagsFromResourceRequest_ResourceArn, *v.ResourceArn)
+	}
+	serializeTagKeyList(s, schemas.RemoveTagsFromResourceRequest_TagKeyList, v.TagKeyList)
+}
+
 type RemoveTagsFromResourceOutput struct {
 
 	// The status of the operation.
@@ -74,16 +89,24 @@ type RemoveTagsFromResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveTagsFromResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveTagsFromResourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveTagsFromResourceResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.RemoveTagsFromResourceResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveTagsFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRemoveTagsFromResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTagsFromResource, schemas.RemoveTagsFromResourceRequest, schemas.RemoveTagsFromResourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRemoveTagsFromResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveTagsFromResource, schemas.RemoveTagsFromResourceRequest, schemas.RemoveTagsFromResourceResponse), output: &RemoveTagsFromResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveTagsFromResource"); err != nil {

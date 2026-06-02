@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,34 @@ type DeleteContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentId != nil {
+		s.WriteString(schemas.DeleteContentRequest_contentId, *v.ContentId)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.DeleteContentRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+}
+func (v *DeleteContentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteContentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteContentRequest_contentId:
+			v.ContentId = new(string)
+			return d.ReadString(schemas.DeleteContentRequest_contentId, v.ContentId)
+		case schemas.DeleteContentRequest_knowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.DeleteContentRequest_knowledgeBaseId, v.KnowledgeBaseId)
+		}
+		return nil
+	})
+}
+
 type DeleteContentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,16 +80,29 @@ type DeleteContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteContentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteContentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteContentResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContent, schemas.DeleteContentRequest, schemas.DeleteContentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteContent, schemas.DeleteContentRequest, schemas.DeleteContentResponse), output: &DeleteContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteContent"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,18 @@ type GetSizeConstraintSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSizeConstraintSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSizeConstraintSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSizeConstraintSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SizeConstraintSetId != nil {
+		s.WriteString(schemas.GetSizeConstraintSetRequest_SizeConstraintSetId, *v.SizeConstraintSetId)
+	}
+}
+
 type GetSizeConstraintSetOutput struct {
 
 	// Information about the SizeConstraintSet that you specified in the GetSizeConstraintSet request.
@@ -69,16 +83,24 @@ type GetSizeConstraintSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSizeConstraintSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSizeConstraintSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSizeConstraintSetResponse_SizeConstraintSet:
+			v.SizeConstraintSet = &types.SizeConstraintSet{}
+			return v.SizeConstraintSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSizeConstraintSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSizeConstraintSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSizeConstraintSet, schemas.GetSizeConstraintSetRequest, schemas.GetSizeConstraintSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSizeConstraintSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSizeConstraintSet, schemas.GetSizeConstraintSetRequest, schemas.GetSizeConstraintSetResponse), output: &GetSizeConstraintSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSizeConstraintSet"); err != nil {

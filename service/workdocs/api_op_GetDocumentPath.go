@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,30 @@ type GetDocumentPathInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentPathInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentPathRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentPathInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.GetDocumentPathRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.DocumentId != nil {
+		s.WriteString(schemas.GetDocumentPathRequest_DocumentId, *v.DocumentId)
+	}
+	if v.Fields != nil {
+		s.WriteString(schemas.GetDocumentPathRequest_Fields, *v.Fields)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.GetDocumentPathRequest_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.GetDocumentPathRequest_Marker, *v.Marker)
+	}
+}
+
 type GetDocumentPathOutput struct {
 
 	// The path information.
@@ -68,16 +94,24 @@ type GetDocumentPathOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentPathOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDocumentPathResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDocumentPathResponse_Path:
+			v.Path = &types.ResourcePath{}
+			return v.Path.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDocumentPathMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDocumentPath{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentPath, schemas.GetDocumentPathRequest, schemas.GetDocumentPathResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDocumentPath{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentPath, schemas.GetDocumentPathRequest, schemas.GetDocumentPathResponse), output: &GetDocumentPathOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDocumentPath"); err != nil {

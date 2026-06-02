@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -142,6 +144,31 @@ type CreateRateBasedRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRateBasedRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRateBasedRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRateBasedRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.CreateRateBasedRuleRequest_ChangeToken, *v.ChangeToken)
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.CreateRateBasedRuleRequest_MetricName, *v.MetricName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRateBasedRuleRequest_Name, *v.Name)
+	}
+	if v.RateKey != "" {
+		s.WriteString(schemas.CreateRateBasedRuleRequest_RateKey, string(v.RateKey))
+	}
+	if v.RateLimit != nil {
+		s.WriteInt64(schemas.CreateRateBasedRuleRequest_RateLimit, *v.RateLimit)
+	}
+	serializeTagList(s, schemas.CreateRateBasedRuleRequest_Tags, v.Tags)
+}
+
 type CreateRateBasedRuleOutput struct {
 
 	// The ChangeToken that you used to submit the CreateRateBasedRule request. You
@@ -158,16 +185,27 @@ type CreateRateBasedRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRateBasedRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRateBasedRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRateBasedRuleResponse_ChangeToken:
+			v.ChangeToken = new(string)
+			return d.ReadString(schemas.CreateRateBasedRuleResponse_ChangeToken, v.ChangeToken)
+		case schemas.CreateRateBasedRuleResponse_Rule:
+			v.Rule = &types.RateBasedRule{}
+			return v.Rule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRateBasedRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateRateBasedRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRateBasedRule, schemas.CreateRateBasedRuleRequest, schemas.CreateRateBasedRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateRateBasedRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRateBasedRule, schemas.CreateRateBasedRuleRequest, schemas.CreateRateBasedRuleResponse), output: &CreateRateBasedRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRateBasedRule"); err != nil {

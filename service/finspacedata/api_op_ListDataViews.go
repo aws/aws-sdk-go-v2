@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,24 @@ type ListDataViewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataViewsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDataViewsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDataViewsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatasetId != nil {
+		s.WriteString(schemas.ListDataViewsRequest_datasetId, *v.DatasetId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDataViewsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDataViewsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListDataViewsOutput struct {
 
 	// A list of Dataviews.
@@ -60,16 +80,26 @@ type ListDataViewsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDataViewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDataViewsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDataViewsResponse_dataViews:
+			return deserializeDataViewList(d, schemas.ListDataViewsResponse_dataViews, &v.DataViews)
+		case schemas.ListDataViewsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDataViewsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDataViewsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDataViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataViews, schemas.ListDataViewsRequest, schemas.ListDataViewsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDataViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDataViews, schemas.ListDataViewsRequest, schemas.ListDataViewsResponse), output: &ListDataViewsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDataViews"); err != nil {

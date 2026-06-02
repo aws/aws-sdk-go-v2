@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,32 @@ type CreateInboundExternalLinkInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInboundExternalLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateInboundExternalLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateInboundExternalLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		s.WriteStruct(schemas.CreateInboundExternalLinkRequest_attributes)
+		v.Attributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateInboundExternalLinkRequest_clientToken, *v.ClientToken)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.CreateInboundExternalLinkRequest_gatewayId, *v.GatewayId)
+	}
+	if v.LogSettings != nil {
+		s.WriteStruct(schemas.CreateInboundExternalLinkRequest_logSettings)
+		v.LogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.CreateInboundExternalLinkRequest_tags, v.Tags)
+}
+
 type CreateInboundExternalLinkOutput struct {
 
 	// The domain name.
@@ -81,16 +109,37 @@ type CreateInboundExternalLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateInboundExternalLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateInboundExternalLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateInboundExternalLinkResponse_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.CreateInboundExternalLinkResponse_domainName, v.DomainName)
+		case schemas.CreateInboundExternalLinkResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.CreateInboundExternalLinkResponse_gatewayId, v.GatewayId)
+		case schemas.CreateInboundExternalLinkResponse_linkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.CreateInboundExternalLinkResponse_linkId, v.LinkId)
+		case schemas.CreateInboundExternalLinkResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateInboundExternalLinkResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LinkStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateInboundExternalLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateInboundExternalLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInboundExternalLink, schemas.CreateInboundExternalLinkRequest, schemas.CreateInboundExternalLinkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateInboundExternalLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateInboundExternalLink, schemas.CreateInboundExternalLinkRequest, schemas.CreateInboundExternalLinkResponse), output: &CreateInboundExternalLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateInboundExternalLink"); err != nil {

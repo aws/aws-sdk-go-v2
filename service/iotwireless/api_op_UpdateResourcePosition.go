@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,24 @@ type UpdateResourcePositionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourcePositionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateResourcePositionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateResourcePositionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GeoJsonPayload != nil {
+		s.WriteBlob(schemas.UpdateResourcePositionRequest_GeoJsonPayload, v.GeoJsonPayload)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.UpdateResourcePositionRequest_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.UpdateResourcePositionRequest_ResourceType, string(v.ResourceType))
+	}
+}
+
 type UpdateResourcePositionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -62,16 +82,21 @@ type UpdateResourcePositionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateResourcePositionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateResourcePositionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateResourcePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateResourcePosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourcePosition, schemas.UpdateResourcePositionRequest, schemas.UpdateResourcePositionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateResourcePosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateResourcePosition, schemas.UpdateResourcePositionRequest, schemas.UpdateResourcePositionResponse), output: &UpdateResourcePositionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateResourcePosition"); err != nil {

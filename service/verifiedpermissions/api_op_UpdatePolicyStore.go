@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -72,6 +74,29 @@ type UpdatePolicyStoreInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePolicyStoreInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdatePolicyStoreInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdatePolicyStoreInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionProtection != "" {
+		s.WriteString(schemas.UpdatePolicyStoreInput_deletionProtection, string(v.DeletionProtection))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdatePolicyStoreInput_description, *v.Description)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.UpdatePolicyStoreInput_policyStoreId, *v.PolicyStoreId)
+	}
+	if v.ValidationSettings != nil {
+		s.WriteStruct(schemas.UpdatePolicyStoreInput_validationSettings)
+		v.ValidationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdatePolicyStoreOutput struct {
 
 	// The [Amazon Resource Name (ARN)] of the updated policy store.
@@ -102,16 +127,33 @@ type UpdatePolicyStoreOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdatePolicyStoreOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdatePolicyStoreOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdatePolicyStoreOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdatePolicyStoreOutput_arn, v.Arn)
+		case schemas.UpdatePolicyStoreOutput_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdatePolicyStoreOutput_createdDate, v.CreatedDate)
+		case schemas.UpdatePolicyStoreOutput_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.UpdatePolicyStoreOutput_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.UpdatePolicyStoreOutput_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.UpdatePolicyStoreOutput_policyStoreId, v.PolicyStoreId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdatePolicyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdatePolicyStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePolicyStore, schemas.UpdatePolicyStoreInput, schemas.UpdatePolicyStoreOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdatePolicyStore{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdatePolicyStore, schemas.UpdatePolicyStoreInput, schemas.UpdatePolicyStoreOutput), output: &UpdatePolicyStoreOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdatePolicyStore"); err != nil {

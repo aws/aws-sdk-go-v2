@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,24 @@ type ListExperienceEntitiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExperienceEntitiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListExperienceEntitiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListExperienceEntitiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ListExperienceEntitiesRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.ListExperienceEntitiesRequest_IndexId, *v.IndexId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListExperienceEntitiesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListExperienceEntitiesOutput struct {
 
 	// If the response is truncated, Amazon Kendra returns this token, which you can
@@ -67,16 +87,26 @@ type ListExperienceEntitiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListExperienceEntitiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListExperienceEntitiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListExperienceEntitiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListExperienceEntitiesResponse_NextToken, v.NextToken)
+		case schemas.ListExperienceEntitiesResponse_SummaryItems:
+			return deserializeExperienceEntitiesSummaryList(d, schemas.ListExperienceEntitiesResponse_SummaryItems, &v.SummaryItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListExperienceEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListExperienceEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExperienceEntities, schemas.ListExperienceEntitiesRequest, schemas.ListExperienceEntitiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListExperienceEntities{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListExperienceEntities, schemas.ListExperienceEntitiesRequest, schemas.ListExperienceEntitiesResponse), output: &ListExperienceEntitiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListExperienceEntities"); err != nil {

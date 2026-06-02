@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -22,6 +24,37 @@ type AssetSummary struct {
 	Size *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssetHashes(s, schemas.AssetSummary_hashes, v.Hashes)
+	if v.Name != nil {
+		s.WriteString(schemas.AssetSummary_name, *v.Name)
+	}
+	if v.Size != nil {
+		s.WriteInt64(schemas.AssetSummary_size, *v.Size)
+	}
+}
+func (v *AssetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssetSummary_hashes:
+			return deserializeAssetHashes(d, schemas.AssetSummary_hashes, &v.Hashes)
+		case schemas.AssetSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.AssetSummary_name, v.Name)
+		case schemas.AssetSummary_size:
+			v.Size = new(int64)
+			return d.ReadInt64(schemas.AssetSummary_size, v.Size)
+		}
+		return nil
+	})
 }
 
 // A package associated with a package group.
@@ -60,6 +93,54 @@ type AssociatedPackage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatedPackage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatedPackage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatedPackage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociationType != "" {
+		s.WriteString(schemas.AssociatedPackage_associationType, string(v.AssociationType))
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.AssociatedPackage_format, string(v.Format))
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.AssociatedPackage_namespace, *v.Namespace)
+	}
+	if v.Package != nil {
+		s.WriteString(schemas.AssociatedPackage_package, *v.Package)
+	}
+}
+func (v *AssociatedPackage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatedPackage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatedPackage_associationType:
+			var ev string
+			if err := d.ReadString(schemas.AssociatedPackage_associationType, &ev); err != nil {
+				return err
+			}
+			v.AssociationType = PackageGroupAssociationType(ev)
+			return nil
+		case schemas.AssociatedPackage_format:
+			var ev string
+			if err := d.ReadString(schemas.AssociatedPackage_format, &ev); err != nil {
+				return err
+			}
+			v.Format = PackageFormat(ev)
+			return nil
+		case schemas.AssociatedPackage_namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.AssociatedPackage_namespace, v.Namespace)
+		case schemas.AssociatedPackage_package:
+			v.Package = new(string)
+			return d.ReadString(schemas.AssociatedPackage_package, v.Package)
+		}
+		return nil
+	})
+}
+
 //	Information about a domain. A domain is a container for repositories. When you
 //
 // create a domain, it is empty until you add one or more repositories.
@@ -96,6 +177,78 @@ type DomainDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DomainDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DomainDescription_arn, *v.Arn)
+	}
+	if v.AssetSizeBytes != 0 {
+		s.WriteInt64(schemas.DomainDescription_assetSizeBytes, v.AssetSizeBytes)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.DomainDescription_createdTime, *v.CreatedTime)
+	}
+	if v.EncryptionKey != nil {
+		s.WriteString(schemas.DomainDescription_encryptionKey, *v.EncryptionKey)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DomainDescription_name, *v.Name)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.DomainDescription_owner, *v.Owner)
+	}
+	if v.RepositoryCount != 0 {
+		s.WriteInt32(schemas.DomainDescription_repositoryCount, v.RepositoryCount)
+	}
+	if v.S3BucketArn != nil {
+		s.WriteString(schemas.DomainDescription_s3BucketArn, *v.S3BucketArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DomainDescription_status, string(v.Status))
+	}
+}
+func (v *DomainDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainDescription_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DomainDescription_arn, v.Arn)
+		case schemas.DomainDescription_assetSizeBytes:
+			return d.ReadInt64(schemas.DomainDescription_assetSizeBytes, &v.AssetSizeBytes)
+		case schemas.DomainDescription_createdTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.DomainDescription_createdTime, v.CreatedTime)
+		case schemas.DomainDescription_encryptionKey:
+			v.EncryptionKey = new(string)
+			return d.ReadString(schemas.DomainDescription_encryptionKey, v.EncryptionKey)
+		case schemas.DomainDescription_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DomainDescription_name, v.Name)
+		case schemas.DomainDescription_owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.DomainDescription_owner, v.Owner)
+		case schemas.DomainDescription_repositoryCount:
+			return d.ReadInt32(schemas.DomainDescription_repositoryCount, &v.RepositoryCount)
+		case schemas.DomainDescription_s3BucketArn:
+			v.S3BucketArn = new(string)
+			return d.ReadString(schemas.DomainDescription_s3BucketArn, v.S3BucketArn)
+		case schemas.DomainDescription_status:
+			var ev string
+			if err := d.ReadString(schemas.DomainDescription_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DomainStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about how a package originally entered the CodeArtifact domain. For
 // packages published directly to CodeArtifact, the entry point is the repository
 // it was published to. For packages ingested from an external repository, the
@@ -116,6 +269,34 @@ type DomainEntryPoint struct {
 	RepositoryName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DomainEntryPoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainEntryPoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainEntryPoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalConnectionName != nil {
+		s.WriteString(schemas.DomainEntryPoint_externalConnectionName, *v.ExternalConnectionName)
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.DomainEntryPoint_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *DomainEntryPoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainEntryPoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainEntryPoint_externalConnectionName:
+			v.ExternalConnectionName = new(string)
+			return d.ReadString(schemas.DomainEntryPoint_externalConnectionName, v.ExternalConnectionName)
+		case schemas.DomainEntryPoint_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.DomainEntryPoint_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
 }
 
 //	Information about a domain, including its name, Amazon Resource Name (ARN),
@@ -147,6 +328,62 @@ type DomainSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DomainSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DomainSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DomainSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DomainSummary_arn, *v.Arn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.DomainSummary_createdTime, *v.CreatedTime)
+	}
+	if v.EncryptionKey != nil {
+		s.WriteString(schemas.DomainSummary_encryptionKey, *v.EncryptionKey)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DomainSummary_name, *v.Name)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.DomainSummary_owner, *v.Owner)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DomainSummary_status, string(v.Status))
+	}
+}
+func (v *DomainSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DomainSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DomainSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DomainSummary_arn, v.Arn)
+		case schemas.DomainSummary_createdTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.DomainSummary_createdTime, v.CreatedTime)
+		case schemas.DomainSummary_encryptionKey:
+			v.EncryptionKey = new(string)
+			return d.ReadString(schemas.DomainSummary_encryptionKey, v.EncryptionKey)
+		case schemas.DomainSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DomainSummary_name, v.Name)
+		case schemas.DomainSummary_owner:
+			v.Owner = new(string)
+			return d.ReadString(schemas.DomainSummary_owner, v.Owner)
+		case schemas.DomainSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DomainSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DomainStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Details of the license data.
 type LicenseInfo struct {
 
@@ -157,6 +394,34 @@ type LicenseInfo struct {
 	Url *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LicenseInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LicenseInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LicenseInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.LicenseInfo_name, *v.Name)
+	}
+	if v.Url != nil {
+		s.WriteString(schemas.LicenseInfo_url, *v.Url)
+	}
+}
+func (v *LicenseInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LicenseInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LicenseInfo_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LicenseInfo_name, v.Name)
+		case schemas.LicenseInfo_url:
+			v.Url = new(string)
+			return d.ReadString(schemas.LicenseInfo_url, v.Url)
+		}
+		return nil
+	})
 }
 
 // Details about a package dependency.
@@ -203,6 +468,46 @@ type PackageDependency struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PackageDependency) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageDependency)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageDependency) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DependencyType != nil {
+		s.WriteString(schemas.PackageDependency_dependencyType, *v.DependencyType)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.PackageDependency_namespace, *v.Namespace)
+	}
+	if v.Package != nil {
+		s.WriteString(schemas.PackageDependency_package, *v.Package)
+	}
+	if v.VersionRequirement != nil {
+		s.WriteString(schemas.PackageDependency_versionRequirement, *v.VersionRequirement)
+	}
+}
+func (v *PackageDependency) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageDependency, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageDependency_dependencyType:
+			v.DependencyType = new(string)
+			return d.ReadString(schemas.PackageDependency_dependencyType, v.DependencyType)
+		case schemas.PackageDependency_namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.PackageDependency_namespace, v.Namespace)
+		case schemas.PackageDependency_package:
+			v.Package = new(string)
+			return d.ReadString(schemas.PackageDependency_package, v.Package)
+		case schemas.PackageDependency_versionRequirement:
+			v.VersionRequirement = new(string)
+			return d.ReadString(schemas.PackageDependency_versionRequirement, v.VersionRequirement)
+		}
+		return nil
+	})
+}
+
 // Details about a package.
 type PackageDescription struct {
 
@@ -232,6 +537,52 @@ type PackageDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PackageDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Format != "" {
+		s.WriteString(schemas.PackageDescription_format, string(v.Format))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PackageDescription_name, *v.Name)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.PackageDescription_namespace, *v.Namespace)
+	}
+	if v.OriginConfiguration != nil {
+		s.WriteStruct(schemas.PackageDescription_originConfiguration)
+		v.OriginConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PackageDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageDescription_format:
+			var ev string
+			if err := d.ReadString(schemas.PackageDescription_format, &ev); err != nil {
+				return err
+			}
+			v.Format = PackageFormat(ev)
+			return nil
+		case schemas.PackageDescription_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PackageDescription_name, v.Name)
+		case schemas.PackageDescription_namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.PackageDescription_namespace, v.Namespace)
+		case schemas.PackageDescription_originConfiguration:
+			v.OriginConfiguration = &PackageOriginConfiguration{}
+			return v.OriginConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Details about an allowed repository for a package group, including its name
 //
 // and origin configuration.
@@ -244,6 +595,38 @@ type PackageGroupAllowedRepository struct {
 	RepositoryName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PackageGroupAllowedRepository) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageGroupAllowedRepository)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageGroupAllowedRepository) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OriginRestrictionType != "" {
+		s.WriteString(schemas.PackageGroupAllowedRepository_originRestrictionType, string(v.OriginRestrictionType))
+	}
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.PackageGroupAllowedRepository_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *PackageGroupAllowedRepository) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageGroupAllowedRepository, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageGroupAllowedRepository_originRestrictionType:
+			var ev string
+			if err := d.ReadString(schemas.PackageGroupAllowedRepository_originRestrictionType, &ev); err != nil {
+				return err
+			}
+			v.OriginRestrictionType = PackageGroupOriginRestrictionType(ev)
+			return nil
+		case schemas.PackageGroupAllowedRepository_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.PackageGroupAllowedRepository_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
 }
 
 // The description of the package group.
@@ -282,6 +665,80 @@ type PackageGroupDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PackageGroupDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageGroupDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageGroupDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PackageGroupDescription_arn, *v.Arn)
+	}
+	if v.ContactInfo != nil {
+		s.WriteString(schemas.PackageGroupDescription_contactInfo, *v.ContactInfo)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.PackageGroupDescription_createdTime, *v.CreatedTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PackageGroupDescription_description, *v.Description)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.PackageGroupDescription_domainName, *v.DomainName)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.PackageGroupDescription_domainOwner, *v.DomainOwner)
+	}
+	if v.OriginConfiguration != nil {
+		s.WriteStruct(schemas.PackageGroupDescription_originConfiguration)
+		v.OriginConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Parent != nil {
+		s.WriteStruct(schemas.PackageGroupDescription_parent)
+		v.Parent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Pattern != nil {
+		s.WriteString(schemas.PackageGroupDescription_pattern, *v.Pattern)
+	}
+}
+func (v *PackageGroupDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageGroupDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageGroupDescription_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PackageGroupDescription_arn, v.Arn)
+		case schemas.PackageGroupDescription_contactInfo:
+			v.ContactInfo = new(string)
+			return d.ReadString(schemas.PackageGroupDescription_contactInfo, v.ContactInfo)
+		case schemas.PackageGroupDescription_createdTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.PackageGroupDescription_createdTime, v.CreatedTime)
+		case schemas.PackageGroupDescription_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PackageGroupDescription_description, v.Description)
+		case schemas.PackageGroupDescription_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.PackageGroupDescription_domainName, v.DomainName)
+		case schemas.PackageGroupDescription_domainOwner:
+			v.DomainOwner = new(string)
+			return d.ReadString(schemas.PackageGroupDescription_domainOwner, v.DomainOwner)
+		case schemas.PackageGroupDescription_originConfiguration:
+			v.OriginConfiguration = &PackageGroupOriginConfiguration{}
+			return v.OriginConfiguration.Deserialize(d)
+		case schemas.PackageGroupDescription_parent:
+			v.Parent = &PackageGroupReference{}
+			return v.Parent.Deserialize(d)
+		case schemas.PackageGroupDescription_pattern:
+			v.Pattern = new(string)
+			return d.ReadString(schemas.PackageGroupDescription_pattern, v.Pattern)
+		}
+		return nil
+	})
+}
+
 // The package group origin configuration that determines how package versions can
 // enter repositories.
 type PackageGroupOriginConfiguration struct {
@@ -291,6 +748,25 @@ type PackageGroupOriginConfiguration struct {
 	Restrictions map[string]PackageGroupOriginRestriction
 
 	noSmithyDocumentSerde
+}
+
+func (v *PackageGroupOriginConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageGroupOriginConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageGroupOriginConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePackageGroupOriginRestrictions(s, schemas.PackageGroupOriginConfiguration_restrictions, v.Restrictions)
+}
+func (v *PackageGroupOriginConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageGroupOriginConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageGroupOriginConfiguration_restrictions:
+			return deserializePackageGroupOriginRestrictions(d, schemas.PackageGroupOriginConfiguration_restrictions, &v.Restrictions)
+		}
+		return nil
+	})
 }
 
 // Contains information about the configured restrictions of the origin controls
@@ -321,6 +797,56 @@ type PackageGroupOriginRestriction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PackageGroupOriginRestriction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageGroupOriginRestriction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageGroupOriginRestriction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EffectiveMode != "" {
+		s.WriteString(schemas.PackageGroupOriginRestriction_effectiveMode, string(v.EffectiveMode))
+	}
+	if v.InheritedFrom != nil {
+		s.WriteStruct(schemas.PackageGroupOriginRestriction_inheritedFrom)
+		v.InheritedFrom.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Mode != "" {
+		s.WriteString(schemas.PackageGroupOriginRestriction_mode, string(v.Mode))
+	}
+	if v.RepositoriesCount != nil {
+		s.WriteInt64(schemas.PackageGroupOriginRestriction_repositoriesCount, *v.RepositoriesCount)
+	}
+}
+func (v *PackageGroupOriginRestriction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageGroupOriginRestriction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageGroupOriginRestriction_effectiveMode:
+			var ev string
+			if err := d.ReadString(schemas.PackageGroupOriginRestriction_effectiveMode, &ev); err != nil {
+				return err
+			}
+			v.EffectiveMode = PackageGroupOriginRestrictionMode(ev)
+			return nil
+		case schemas.PackageGroupOriginRestriction_inheritedFrom:
+			v.InheritedFrom = &PackageGroupReference{}
+			return v.InheritedFrom.Deserialize(d)
+		case schemas.PackageGroupOriginRestriction_mode:
+			var ev string
+			if err := d.ReadString(schemas.PackageGroupOriginRestriction_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = PackageGroupOriginRestrictionMode(ev)
+			return nil
+		case schemas.PackageGroupOriginRestriction_repositoriesCount:
+			v.RepositoriesCount = new(int64)
+			return d.ReadInt64(schemas.PackageGroupOriginRestriction_repositoriesCount, v.RepositoriesCount)
+		}
+		return nil
+	})
+}
+
 // Information about the identifiers of a package group.
 type PackageGroupReference struct {
 
@@ -333,6 +859,34 @@ type PackageGroupReference struct {
 	Pattern *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PackageGroupReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageGroupReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageGroupReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PackageGroupReference_arn, *v.Arn)
+	}
+	if v.Pattern != nil {
+		s.WriteString(schemas.PackageGroupReference_pattern, *v.Pattern)
+	}
+}
+func (v *PackageGroupReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageGroupReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageGroupReference_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PackageGroupReference_arn, v.Arn)
+		case schemas.PackageGroupReference_pattern:
+			v.Pattern = new(string)
+			return d.ReadString(schemas.PackageGroupReference_pattern, v.Pattern)
+		}
+		return nil
+	})
 }
 
 // Details about a package group.
@@ -370,6 +924,80 @@ type PackageGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PackageGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.PackageGroupSummary_arn, *v.Arn)
+	}
+	if v.ContactInfo != nil {
+		s.WriteString(schemas.PackageGroupSummary_contactInfo, *v.ContactInfo)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.PackageGroupSummary_createdTime, *v.CreatedTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PackageGroupSummary_description, *v.Description)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.PackageGroupSummary_domainName, *v.DomainName)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.PackageGroupSummary_domainOwner, *v.DomainOwner)
+	}
+	if v.OriginConfiguration != nil {
+		s.WriteStruct(schemas.PackageGroupSummary_originConfiguration)
+		v.OriginConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Parent != nil {
+		s.WriteStruct(schemas.PackageGroupSummary_parent)
+		v.Parent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Pattern != nil {
+		s.WriteString(schemas.PackageGroupSummary_pattern, *v.Pattern)
+	}
+}
+func (v *PackageGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageGroupSummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.PackageGroupSummary_arn, v.Arn)
+		case schemas.PackageGroupSummary_contactInfo:
+			v.ContactInfo = new(string)
+			return d.ReadString(schemas.PackageGroupSummary_contactInfo, v.ContactInfo)
+		case schemas.PackageGroupSummary_createdTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.PackageGroupSummary_createdTime, v.CreatedTime)
+		case schemas.PackageGroupSummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PackageGroupSummary_description, v.Description)
+		case schemas.PackageGroupSummary_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.PackageGroupSummary_domainName, v.DomainName)
+		case schemas.PackageGroupSummary_domainOwner:
+			v.DomainOwner = new(string)
+			return d.ReadString(schemas.PackageGroupSummary_domainOwner, v.DomainOwner)
+		case schemas.PackageGroupSummary_originConfiguration:
+			v.OriginConfiguration = &PackageGroupOriginConfiguration{}
+			return v.OriginConfiguration.Deserialize(d)
+		case schemas.PackageGroupSummary_parent:
+			v.Parent = &PackageGroupReference{}
+			return v.Parent.Deserialize(d)
+		case schemas.PackageGroupSummary_pattern:
+			v.Pattern = new(string)
+			return d.ReadString(schemas.PackageGroupSummary_pattern, v.Pattern)
+		}
+		return nil
+	})
+}
+
 // Details about the package origin configuration of a package.
 type PackageOriginConfiguration struct {
 
@@ -378,6 +1006,30 @@ type PackageOriginConfiguration struct {
 	Restrictions *PackageOriginRestrictions
 
 	noSmithyDocumentSerde
+}
+
+func (v *PackageOriginConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageOriginConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageOriginConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Restrictions != nil {
+		s.WriteStruct(schemas.PackageOriginConfiguration_restrictions)
+		v.Restrictions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PackageOriginConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageOriginConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageOriginConfiguration_restrictions:
+			v.Restrictions = &PackageOriginRestrictions{}
+			return v.Restrictions.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Details about the origin restrictions set on the package. The package origin
@@ -398,6 +1050,42 @@ type PackageOriginRestrictions struct {
 	Upstream AllowUpstream
 
 	noSmithyDocumentSerde
+}
+
+func (v *PackageOriginRestrictions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageOriginRestrictions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageOriginRestrictions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Publish != "" {
+		s.WriteString(schemas.PackageOriginRestrictions_publish, string(v.Publish))
+	}
+	if v.Upstream != "" {
+		s.WriteString(schemas.PackageOriginRestrictions_upstream, string(v.Upstream))
+	}
+}
+func (v *PackageOriginRestrictions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageOriginRestrictions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageOriginRestrictions_publish:
+			var ev string
+			if err := d.ReadString(schemas.PackageOriginRestrictions_publish, &ev); err != nil {
+				return err
+			}
+			v.Publish = AllowPublish(ev)
+			return nil
+		case schemas.PackageOriginRestrictions_upstream:
+			var ev string
+			if err := d.ReadString(schemas.PackageOriginRestrictions_upstream, &ev); err != nil {
+				return err
+			}
+			v.Upstream = AllowUpstream(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details about a package, including its format, namespace, and name.
@@ -431,6 +1119,52 @@ type PackageSummary struct {
 	Package *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PackageSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Format != "" {
+		s.WriteString(schemas.PackageSummary_format, string(v.Format))
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.PackageSummary_namespace, *v.Namespace)
+	}
+	if v.OriginConfiguration != nil {
+		s.WriteStruct(schemas.PackageSummary_originConfiguration)
+		v.OriginConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Package != nil {
+		s.WriteString(schemas.PackageSummary_package, *v.Package)
+	}
+}
+func (v *PackageSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageSummary_format:
+			var ev string
+			if err := d.ReadString(schemas.PackageSummary_format, &ev); err != nil {
+				return err
+			}
+			v.Format = PackageFormat(ev)
+			return nil
+		case schemas.PackageSummary_namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.PackageSummary_namespace, v.Namespace)
+		case schemas.PackageSummary_originConfiguration:
+			v.OriginConfiguration = &PackageOriginConfiguration{}
+			return v.OriginConfiguration.Deserialize(d)
+		case schemas.PackageSummary_package:
+			v.Package = new(string)
+			return d.ReadString(schemas.PackageSummary_package, v.Package)
+		}
+		return nil
+	})
 }
 
 // Details about a package version.
@@ -497,6 +1231,107 @@ type PackageVersionDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PackageVersionDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageVersionDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageVersionDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisplayName != nil {
+		s.WriteString(schemas.PackageVersionDescription_displayName, *v.DisplayName)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.PackageVersionDescription_format, string(v.Format))
+	}
+	if v.HomePage != nil {
+		s.WriteString(schemas.PackageVersionDescription_homePage, *v.HomePage)
+	}
+	serializeLicenseInfoList(s, schemas.PackageVersionDescription_licenses, v.Licenses)
+	if v.Namespace != nil {
+		s.WriteString(schemas.PackageVersionDescription_namespace, *v.Namespace)
+	}
+	if v.Origin != nil {
+		s.WriteStruct(schemas.PackageVersionDescription_origin)
+		v.Origin.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.PackageVersionDescription_packageName, *v.PackageName)
+	}
+	if v.PublishedTime != nil {
+		s.WriteTime(schemas.PackageVersionDescription_publishedTime, *v.PublishedTime)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.PackageVersionDescription_revision, *v.Revision)
+	}
+	if v.SourceCodeRepository != nil {
+		s.WriteString(schemas.PackageVersionDescription_sourceCodeRepository, *v.SourceCodeRepository)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PackageVersionDescription_status, string(v.Status))
+	}
+	if v.Summary != nil {
+		s.WriteString(schemas.PackageVersionDescription_summary, *v.Summary)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.PackageVersionDescription_version, *v.Version)
+	}
+}
+func (v *PackageVersionDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageVersionDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageVersionDescription_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.PackageVersionDescription_displayName, v.DisplayName)
+		case schemas.PackageVersionDescription_format:
+			var ev string
+			if err := d.ReadString(schemas.PackageVersionDescription_format, &ev); err != nil {
+				return err
+			}
+			v.Format = PackageFormat(ev)
+			return nil
+		case schemas.PackageVersionDescription_homePage:
+			v.HomePage = new(string)
+			return d.ReadString(schemas.PackageVersionDescription_homePage, v.HomePage)
+		case schemas.PackageVersionDescription_licenses:
+			return deserializeLicenseInfoList(d, schemas.PackageVersionDescription_licenses, &v.Licenses)
+		case schemas.PackageVersionDescription_namespace:
+			v.Namespace = new(string)
+			return d.ReadString(schemas.PackageVersionDescription_namespace, v.Namespace)
+		case schemas.PackageVersionDescription_origin:
+			v.Origin = &PackageVersionOrigin{}
+			return v.Origin.Deserialize(d)
+		case schemas.PackageVersionDescription_packageName:
+			v.PackageName = new(string)
+			return d.ReadString(schemas.PackageVersionDescription_packageName, v.PackageName)
+		case schemas.PackageVersionDescription_publishedTime:
+			v.PublishedTime = new(time.Time)
+			return d.ReadTime(schemas.PackageVersionDescription_publishedTime, v.PublishedTime)
+		case schemas.PackageVersionDescription_revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.PackageVersionDescription_revision, v.Revision)
+		case schemas.PackageVersionDescription_sourceCodeRepository:
+			v.SourceCodeRepository = new(string)
+			return d.ReadString(schemas.PackageVersionDescription_sourceCodeRepository, v.SourceCodeRepository)
+		case schemas.PackageVersionDescription_status:
+			var ev string
+			if err := d.ReadString(schemas.PackageVersionDescription_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PackageVersionStatus(ev)
+			return nil
+		case schemas.PackageVersionDescription_summary:
+			v.Summary = new(string)
+			return d.ReadString(schemas.PackageVersionDescription_summary, v.Summary)
+		case schemas.PackageVersionDescription_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.PackageVersionDescription_version, v.Version)
+		}
+		return nil
+	})
+}
+
 // l An error associated with package.
 type PackageVersionError struct {
 
@@ -521,6 +1356,38 @@ type PackageVersionError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PackageVersionError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageVersionError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageVersionError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != "" {
+		s.WriteString(schemas.PackageVersionError_errorCode, string(v.ErrorCode))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.PackageVersionError_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *PackageVersionError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageVersionError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageVersionError_errorCode:
+			var ev string
+			if err := d.ReadString(schemas.PackageVersionError_errorCode, &ev); err != nil {
+				return err
+			}
+			v.ErrorCode = PackageVersionErrorCode(ev)
+			return nil
+		case schemas.PackageVersionError_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.PackageVersionError_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
+}
+
 // Information about how a package version was added to a repository.
 type PackageVersionOrigin struct {
 
@@ -537,6 +1404,40 @@ type PackageVersionOrigin struct {
 	OriginType PackageVersionOriginType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PackageVersionOrigin) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageVersionOrigin)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageVersionOrigin) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainEntryPoint != nil {
+		s.WriteStruct(schemas.PackageVersionOrigin_domainEntryPoint)
+		v.DomainEntryPoint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OriginType != "" {
+		s.WriteString(schemas.PackageVersionOrigin_originType, string(v.OriginType))
+	}
+}
+func (v *PackageVersionOrigin) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageVersionOrigin, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageVersionOrigin_domainEntryPoint:
+			v.DomainEntryPoint = &DomainEntryPoint{}
+			return v.DomainEntryPoint.Deserialize(d)
+		case schemas.PackageVersionOrigin_originType:
+			var ev string
+			if err := d.ReadString(schemas.PackageVersionOrigin_originType, &ev); err != nil {
+				return err
+			}
+			v.OriginType = PackageVersionOriginType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	Details about a package version, including its status, version, and revision.
@@ -567,6 +1468,52 @@ type PackageVersionSummary struct {
 	Revision *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PackageVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PackageVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PackageVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Origin != nil {
+		s.WriteStruct(schemas.PackageVersionSummary_origin)
+		v.Origin.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.PackageVersionSummary_revision, *v.Revision)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.PackageVersionSummary_status, string(v.Status))
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.PackageVersionSummary_version, *v.Version)
+	}
+}
+func (v *PackageVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PackageVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PackageVersionSummary_origin:
+			v.Origin = &PackageVersionOrigin{}
+			return v.Origin.Deserialize(d)
+		case schemas.PackageVersionSummary_revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.PackageVersionSummary_revision, v.Revision)
+		case schemas.PackageVersionSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.PackageVersionSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PackageVersionStatus(ev)
+			return nil
+		case schemas.PackageVersionSummary_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.PackageVersionSummary_version, v.Version)
+		}
+		return nil
+	})
 }
 
 //	The details of a repository stored in CodeArtifact. A CodeArtifact repository
@@ -614,6 +1561,70 @@ type RepositoryDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RepositoryDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositoryDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositoryDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdministratorAccount != nil {
+		s.WriteString(schemas.RepositoryDescription_administratorAccount, *v.AdministratorAccount)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.RepositoryDescription_arn, *v.Arn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.RepositoryDescription_createdTime, *v.CreatedTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RepositoryDescription_description, *v.Description)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.RepositoryDescription_domainName, *v.DomainName)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.RepositoryDescription_domainOwner, *v.DomainOwner)
+	}
+	serializeRepositoryExternalConnectionInfoList(s, schemas.RepositoryDescription_externalConnections, v.ExternalConnections)
+	if v.Name != nil {
+		s.WriteString(schemas.RepositoryDescription_name, *v.Name)
+	}
+	serializeUpstreamRepositoryInfoList(s, schemas.RepositoryDescription_upstreams, v.Upstreams)
+}
+func (v *RepositoryDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositoryDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositoryDescription_administratorAccount:
+			v.AdministratorAccount = new(string)
+			return d.ReadString(schemas.RepositoryDescription_administratorAccount, v.AdministratorAccount)
+		case schemas.RepositoryDescription_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RepositoryDescription_arn, v.Arn)
+		case schemas.RepositoryDescription_createdTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.RepositoryDescription_createdTime, v.CreatedTime)
+		case schemas.RepositoryDescription_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RepositoryDescription_description, v.Description)
+		case schemas.RepositoryDescription_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.RepositoryDescription_domainName, v.DomainName)
+		case schemas.RepositoryDescription_domainOwner:
+			v.DomainOwner = new(string)
+			return d.ReadString(schemas.RepositoryDescription_domainOwner, v.DomainOwner)
+		case schemas.RepositoryDescription_externalConnections:
+			return deserializeRepositoryExternalConnectionInfoList(d, schemas.RepositoryDescription_externalConnections, &v.ExternalConnections)
+		case schemas.RepositoryDescription_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RepositoryDescription_name, v.Name)
+		case schemas.RepositoryDescription_upstreams:
+			return deserializeUpstreamRepositoryInfoList(d, schemas.RepositoryDescription_upstreams, &v.Upstreams)
+		}
+		return nil
+	})
+}
+
 // Contains information about the external connection of a repository.
 type RepositoryExternalConnectionInfo struct {
 
@@ -646,6 +1657,48 @@ type RepositoryExternalConnectionInfo struct {
 	Status ExternalConnectionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *RepositoryExternalConnectionInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositoryExternalConnectionInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositoryExternalConnectionInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExternalConnectionName != nil {
+		s.WriteString(schemas.RepositoryExternalConnectionInfo_externalConnectionName, *v.ExternalConnectionName)
+	}
+	if v.PackageFormat != "" {
+		s.WriteString(schemas.RepositoryExternalConnectionInfo_packageFormat, string(v.PackageFormat))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.RepositoryExternalConnectionInfo_status, string(v.Status))
+	}
+}
+func (v *RepositoryExternalConnectionInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositoryExternalConnectionInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositoryExternalConnectionInfo_externalConnectionName:
+			v.ExternalConnectionName = new(string)
+			return d.ReadString(schemas.RepositoryExternalConnectionInfo_externalConnectionName, v.ExternalConnectionName)
+		case schemas.RepositoryExternalConnectionInfo_packageFormat:
+			var ev string
+			if err := d.ReadString(schemas.RepositoryExternalConnectionInfo_packageFormat, &ev); err != nil {
+				return err
+			}
+			v.PackageFormat = PackageFormat(ev)
+			return nil
+		case schemas.RepositoryExternalConnectionInfo_status:
+			var ev string
+			if err := d.ReadString(schemas.RepositoryExternalConnectionInfo_status, &ev); err != nil {
+				return err
+			}
+			v.Status = ExternalConnectionStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 //	Details about a repository, including its Amazon Resource Name (ARN),
@@ -681,6 +1734,64 @@ type RepositorySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RepositorySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RepositorySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RepositorySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdministratorAccount != nil {
+		s.WriteString(schemas.RepositorySummary_administratorAccount, *v.AdministratorAccount)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.RepositorySummary_arn, *v.Arn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.RepositorySummary_createdTime, *v.CreatedTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.RepositorySummary_description, *v.Description)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.RepositorySummary_domainName, *v.DomainName)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.RepositorySummary_domainOwner, *v.DomainOwner)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RepositorySummary_name, *v.Name)
+	}
+}
+func (v *RepositorySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RepositorySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RepositorySummary_administratorAccount:
+			v.AdministratorAccount = new(string)
+			return d.ReadString(schemas.RepositorySummary_administratorAccount, v.AdministratorAccount)
+		case schemas.RepositorySummary_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.RepositorySummary_arn, v.Arn)
+		case schemas.RepositorySummary_createdTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.RepositorySummary_createdTime, v.CreatedTime)
+		case schemas.RepositorySummary_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.RepositorySummary_description, v.Description)
+		case schemas.RepositorySummary_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.RepositorySummary_domainName, v.DomainName)
+		case schemas.RepositorySummary_domainOwner:
+			v.DomainOwner = new(string)
+			return d.ReadString(schemas.RepositorySummary_domainOwner, v.DomainOwner)
+		case schemas.RepositorySummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RepositorySummary_name, v.Name)
+		}
+		return nil
+	})
+}
+
 //	An CodeArtifact resource policy that contains a resource ARN, document
 //
 // details, and a revision.
@@ -698,6 +1809,40 @@ type ResourcePolicy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourcePolicy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourcePolicy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourcePolicy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Document != nil {
+		s.WriteString(schemas.ResourcePolicy_document, *v.Document)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ResourcePolicy_resourceArn, *v.ResourceArn)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.ResourcePolicy_revision, *v.Revision)
+	}
+}
+func (v *ResourcePolicy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourcePolicy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourcePolicy_document:
+			v.Document = new(string)
+			return d.ReadString(schemas.ResourcePolicy_document, v.Document)
+		case schemas.ResourcePolicy_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ResourcePolicy_resourceArn, v.ResourceArn)
+		case schemas.ResourcePolicy_revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.ResourcePolicy_revision, v.Revision)
+		}
+		return nil
+	})
+}
+
 // Contains the revision and status of a package version.
 type SuccessfulPackageVersionInfo struct {
 
@@ -708,6 +1853,38 @@ type SuccessfulPackageVersionInfo struct {
 	Status PackageVersionStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *SuccessfulPackageVersionInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuccessfulPackageVersionInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuccessfulPackageVersionInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Revision != nil {
+		s.WriteString(schemas.SuccessfulPackageVersionInfo_revision, *v.Revision)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SuccessfulPackageVersionInfo_status, string(v.Status))
+	}
+}
+func (v *SuccessfulPackageVersionInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuccessfulPackageVersionInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuccessfulPackageVersionInfo_revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.SuccessfulPackageVersionInfo_revision, v.Revision)
+		case schemas.SuccessfulPackageVersionInfo_status:
+			var ev string
+			if err := d.ReadString(schemas.SuccessfulPackageVersionInfo_status, &ev); err != nil {
+				return err
+			}
+			v.Status = PackageVersionStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A tag is a key-value pair that can be used to manage, search for, or filter
@@ -727,6 +1904,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_key, v.Key)
+		case schemas.Tag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
+}
+
 //	Information about an upstream repository. A list of UpstreamRepository objects
 //
 // is an input parameter to [CreateRepository]and [UpdateRepository].
@@ -743,6 +1948,28 @@ type UpstreamRepository struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpstreamRepository) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpstreamRepository)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpstreamRepository) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.UpstreamRepository_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *UpstreamRepository) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpstreamRepository, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpstreamRepository_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.UpstreamRepository_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
+}
+
 // Information about an upstream repository.
 type UpstreamRepositoryInfo struct {
 
@@ -750,6 +1977,28 @@ type UpstreamRepositoryInfo struct {
 	RepositoryName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpstreamRepositoryInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpstreamRepositoryInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpstreamRepositoryInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RepositoryName != nil {
+		s.WriteString(schemas.UpstreamRepositoryInfo_repositoryName, *v.RepositoryName)
+	}
+}
+func (v *UpstreamRepositoryInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpstreamRepositoryInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpstreamRepositoryInfo_repositoryName:
+			v.RepositoryName = new(string)
+			return d.ReadString(schemas.UpstreamRepositoryInfo_repositoryName, v.RepositoryName)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,16 @@ type BatchAcknowledgeAlarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAcknowledgeAlarmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchAcknowledgeAlarmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchAcknowledgeAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAcknowledgeAlarmActionRequests(s, schemas.BatchAcknowledgeAlarmRequest_acknowledgeActionRequests, v.AcknowledgeActionRequests)
+}
+
 type BatchAcknowledgeAlarmOutput struct {
 
 	// A list of errors associated with the request, or null if there are no errors.
@@ -52,16 +64,23 @@ type BatchAcknowledgeAlarmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchAcknowledgeAlarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchAcknowledgeAlarmResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchAcknowledgeAlarmResponse_errorEntries:
+			return deserializeBatchAlarmActionErrorEntries(d, schemas.BatchAcknowledgeAlarmResponse_errorEntries, &v.ErrorEntries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchAcknowledgeAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchAcknowledgeAlarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAcknowledgeAlarm, schemas.BatchAcknowledgeAlarmRequest, schemas.BatchAcknowledgeAlarmResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchAcknowledgeAlarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchAcknowledgeAlarm, schemas.BatchAcknowledgeAlarmRequest, schemas.BatchAcknowledgeAlarmResponse), output: &BatchAcknowledgeAlarmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchAcknowledgeAlarm"); err != nil {

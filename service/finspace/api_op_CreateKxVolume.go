@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -78,6 +80,40 @@ type CreateKxVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKxVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateKxVolumeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateKxVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailabilityZoneIds(s, schemas.CreateKxVolumeRequest_availabilityZoneIds, v.AvailabilityZoneIds)
+	if v.AzMode != "" {
+		s.WriteString(schemas.CreateKxVolumeRequest_azMode, string(v.AzMode))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateKxVolumeRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateKxVolumeRequest_description, *v.Description)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.CreateKxVolumeRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.Nas1Configuration != nil {
+		s.WriteStruct(schemas.CreateKxVolumeRequest_nas1Configuration)
+		v.Nas1Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateKxVolumeRequest_tags, v.Tags)
+	if v.VolumeName != nil {
+		s.WriteString(schemas.CreateKxVolumeRequest_volumeName, *v.VolumeName)
+	}
+	if v.VolumeType != "" {
+		s.WriteString(schemas.CreateKxVolumeRequest_volumeType, string(v.VolumeType))
+	}
+}
+
 type CreateKxVolumeOutput struct {
 
 	// The identifier of the availability zones.
@@ -143,16 +179,65 @@ type CreateKxVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateKxVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateKxVolumeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateKxVolumeResponse_availabilityZoneIds:
+			return deserializeAvailabilityZoneIds(d, schemas.CreateKxVolumeResponse_availabilityZoneIds, &v.AvailabilityZoneIds)
+		case schemas.CreateKxVolumeResponse_azMode:
+			var ev string
+			if err := d.ReadString(schemas.CreateKxVolumeResponse_azMode, &ev); err != nil {
+				return err
+			}
+			v.AzMode = types.KxAzMode(ev)
+			return nil
+		case schemas.CreateKxVolumeResponse_createdTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateKxVolumeResponse_createdTimestamp, v.CreatedTimestamp)
+		case schemas.CreateKxVolumeResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateKxVolumeResponse_description, v.Description)
+		case schemas.CreateKxVolumeResponse_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.CreateKxVolumeResponse_environmentId, v.EnvironmentId)
+		case schemas.CreateKxVolumeResponse_nas1Configuration:
+			v.Nas1Configuration = &types.KxNAS1Configuration{}
+			return v.Nas1Configuration.Deserialize(d)
+		case schemas.CreateKxVolumeResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateKxVolumeResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.KxVolumeStatus(ev)
+			return nil
+		case schemas.CreateKxVolumeResponse_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.CreateKxVolumeResponse_statusReason, v.StatusReason)
+		case schemas.CreateKxVolumeResponse_volumeArn:
+			v.VolumeArn = new(string)
+			return d.ReadString(schemas.CreateKxVolumeResponse_volumeArn, v.VolumeArn)
+		case schemas.CreateKxVolumeResponse_volumeName:
+			v.VolumeName = new(string)
+			return d.ReadString(schemas.CreateKxVolumeResponse_volumeName, v.VolumeName)
+		case schemas.CreateKxVolumeResponse_volumeType:
+			var ev string
+			if err := d.ReadString(schemas.CreateKxVolumeResponse_volumeType, &ev); err != nil {
+				return err
+			}
+			v.VolumeType = types.KxVolumeType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateKxVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateKxVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKxVolume, schemas.CreateKxVolumeRequest, schemas.CreateKxVolumeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateKxVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateKxVolume, schemas.CreateKxVolumeRequest, schemas.CreateKxVolumeResponse), output: &CreateKxVolumeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateKxVolume"); err != nil {

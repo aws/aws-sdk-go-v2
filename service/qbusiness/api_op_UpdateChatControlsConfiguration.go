@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,6 +68,46 @@ type UpdateChatControlsConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChatControlsConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateChatControlsConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateChatControlsConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateChatControlsConfigurationRequest_applicationId, *v.ApplicationId)
+	}
+	if v.BlockedPhrasesConfigurationUpdate != nil {
+		s.WriteStruct(schemas.UpdateChatControlsConfigurationRequest_blockedPhrasesConfigurationUpdate)
+		v.BlockedPhrasesConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateChatControlsConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	if v.CreatorModeConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChatControlsConfigurationRequest_creatorModeConfiguration)
+		v.CreatorModeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HallucinationReductionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChatControlsConfigurationRequest_hallucinationReductionConfiguration)
+		v.HallucinationReductionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OrchestrationConfiguration != nil {
+		s.WriteStruct(schemas.UpdateChatControlsConfigurationRequest_orchestrationConfiguration)
+		v.OrchestrationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResponseScope != "" {
+		s.WriteString(schemas.UpdateChatControlsConfigurationRequest_responseScope, string(v.ResponseScope))
+	}
+	serializeTopicConfigurations(s, schemas.UpdateChatControlsConfigurationRequest_topicConfigurationsToCreateOrUpdate, v.TopicConfigurationsToCreateOrUpdate)
+	serializeTopicConfigurations(s, schemas.UpdateChatControlsConfigurationRequest_topicConfigurationsToDelete, v.TopicConfigurationsToDelete)
+}
+
 type UpdateChatControlsConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -73,16 +115,21 @@ type UpdateChatControlsConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateChatControlsConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateChatControlsConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateChatControlsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateChatControlsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChatControlsConfiguration, schemas.UpdateChatControlsConfigurationRequest, schemas.UpdateChatControlsConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateChatControlsConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateChatControlsConfiguration, schemas.UpdateChatControlsConfigurationRequest, schemas.UpdateChatControlsConfigurationResponse), output: &UpdateChatControlsConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateChatControlsConfiguration"); err != nil {

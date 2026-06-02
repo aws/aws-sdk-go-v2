@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -43,6 +45,34 @@ type GetDevicePositionInput struct {
 	TrackerName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDevicePositionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDevicePositionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDevicePositionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.GetDevicePositionRequest_DeviceId, *v.DeviceId)
+	}
+	if v.TrackerName != nil {
+		s.WriteString(schemas.GetDevicePositionRequest_TrackerName, *v.TrackerName)
+	}
+}
+func (v *GetDevicePositionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDevicePositionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDevicePositionRequest_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.GetDevicePositionRequest_DeviceId, v.DeviceId)
+		case schemas.GetDevicePositionRequest_TrackerName:
+			v.TrackerName = new(string)
+			return d.ReadString(schemas.GetDevicePositionRequest_TrackerName, v.TrackerName)
+		}
+		return nil
+	})
 }
 
 type GetDevicePositionOutput struct {
@@ -83,16 +113,61 @@ type GetDevicePositionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDevicePositionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDevicePositionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDevicePositionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accuracy != nil {
+		s.WriteStruct(schemas.GetDevicePositionResponse_Accuracy)
+		v.Accuracy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.GetDevicePositionResponse_DeviceId, *v.DeviceId)
+	}
+	serializePosition(s, schemas.GetDevicePositionResponse_Position, v.Position)
+	serializePositionPropertyMap(s, schemas.GetDevicePositionResponse_PositionProperties, v.PositionProperties)
+	if v.ReceivedTime != nil {
+		s.WriteTime(schemas.GetDevicePositionResponse_ReceivedTime, *v.ReceivedTime)
+	}
+	if v.SampleTime != nil {
+		s.WriteTime(schemas.GetDevicePositionResponse_SampleTime, *v.SampleTime)
+	}
+}
+func (v *GetDevicePositionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDevicePositionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDevicePositionResponse_Accuracy:
+			v.Accuracy = &types.PositionalAccuracy{}
+			return v.Accuracy.Deserialize(d)
+		case schemas.GetDevicePositionResponse_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.GetDevicePositionResponse_DeviceId, v.DeviceId)
+		case schemas.GetDevicePositionResponse_Position:
+			return deserializePosition(d, schemas.GetDevicePositionResponse_Position, &v.Position)
+		case schemas.GetDevicePositionResponse_PositionProperties:
+			return deserializePositionPropertyMap(d, schemas.GetDevicePositionResponse_PositionProperties, &v.PositionProperties)
+		case schemas.GetDevicePositionResponse_ReceivedTime:
+			v.ReceivedTime = new(time.Time)
+			return d.ReadTime(schemas.GetDevicePositionResponse_ReceivedTime, v.ReceivedTime)
+		case schemas.GetDevicePositionResponse_SampleTime:
+			v.SampleTime = new(time.Time)
+			return d.ReadTime(schemas.GetDevicePositionResponse_SampleTime, v.SampleTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDevicePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDevicePosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevicePosition, schemas.GetDevicePositionRequest, schemas.GetDevicePositionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDevicePosition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevicePosition, schemas.GetDevicePositionRequest, schemas.GetDevicePositionResponse), output: &GetDevicePositionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDevicePosition"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/scheduler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/scheduler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,6 +40,28 @@ type GetScheduleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetScheduleGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetScheduleGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetScheduleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetScheduleGroupInput_Name, *v.Name)
+	}
+}
+func (v *GetScheduleGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetScheduleGroupInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetScheduleGroupInput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetScheduleGroupInput_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 type GetScheduleGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of the schedule group.
@@ -61,16 +85,63 @@ type GetScheduleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetScheduleGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetScheduleGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetScheduleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetScheduleGroupOutput_Arn, *v.Arn)
+	}
+	if v.CreationDate != nil {
+		s.WriteTime(schemas.GetScheduleGroupOutput_CreationDate, *v.CreationDate)
+	}
+	if v.LastModificationDate != nil {
+		s.WriteTime(schemas.GetScheduleGroupOutput_LastModificationDate, *v.LastModificationDate)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetScheduleGroupOutput_Name, *v.Name)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.GetScheduleGroupOutput_State, string(v.State))
+	}
+}
+func (v *GetScheduleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetScheduleGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetScheduleGroupOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetScheduleGroupOutput_Arn, v.Arn)
+		case schemas.GetScheduleGroupOutput_CreationDate:
+			v.CreationDate = new(time.Time)
+			return d.ReadTime(schemas.GetScheduleGroupOutput_CreationDate, v.CreationDate)
+		case schemas.GetScheduleGroupOutput_LastModificationDate:
+			v.LastModificationDate = new(time.Time)
+			return d.ReadTime(schemas.GetScheduleGroupOutput_LastModificationDate, v.LastModificationDate)
+		case schemas.GetScheduleGroupOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetScheduleGroupOutput_Name, v.Name)
+		case schemas.GetScheduleGroupOutput_State:
+			var ev string
+			if err := d.ReadString(schemas.GetScheduleGroupOutput_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ScheduleGroupState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetScheduleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetScheduleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetScheduleGroup, schemas.GetScheduleGroupInput, schemas.GetScheduleGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetScheduleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetScheduleGroup, schemas.GetScheduleGroupInput, schemas.GetScheduleGroupOutput), output: &GetScheduleGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetScheduleGroup"); err != nil {

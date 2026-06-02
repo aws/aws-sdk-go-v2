@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/billing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -62,6 +64,31 @@ type CreateBillingViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBillingViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBillingViewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBillingViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateBillingViewRequest_clientToken, *v.ClientToken)
+	}
+	if v.DataFilterExpression != nil {
+		s.WriteStruct(schemas.CreateBillingViewRequest_dataFilterExpression)
+		v.DataFilterExpression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateBillingViewRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateBillingViewRequest_name, *v.Name)
+	}
+	serializeResourceTagList(s, schemas.CreateBillingViewRequest_resourceTags, v.ResourceTags)
+	serializeBillingViewSourceViewsList(s, schemas.CreateBillingViewRequest_sourceViews, v.SourceViews)
+}
+
 type CreateBillingViewOutput struct {
 
 	//  The Amazon Resource Name (ARN) that can be used to uniquely identify the
@@ -79,16 +106,27 @@ type CreateBillingViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBillingViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBillingViewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBillingViewResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateBillingViewResponse_arn, v.Arn)
+		case schemas.CreateBillingViewResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateBillingViewResponse_createdAt, v.CreatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBillingViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateBillingView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBillingView, schemas.CreateBillingViewRequest, schemas.CreateBillingViewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateBillingView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBillingView, schemas.CreateBillingViewRequest, schemas.CreateBillingViewResponse), output: &CreateBillingViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBillingView"); err != nil {

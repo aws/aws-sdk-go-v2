@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -80,6 +82,30 @@ type GetSnapshotsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSnapshotsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSnapshotsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSnapshotsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexId != nil {
+		s.WriteString(schemas.GetSnapshotsRequest_IndexId, *v.IndexId)
+	}
+	if v.Interval != "" {
+		s.WriteString(schemas.GetSnapshotsRequest_Interval, string(v.Interval))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetSnapshotsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MetricType != "" {
+		s.WriteString(schemas.GetSnapshotsRequest_MetricType, string(v.MetricType))
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetSnapshotsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type GetSnapshotsOutput struct {
 
 	// If the response is truncated, Amazon Kendra returns this token, which you can
@@ -103,16 +129,31 @@ type GetSnapshotsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSnapshotsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSnapshotsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSnapshotsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetSnapshotsResponse_NextToken, v.NextToken)
+		case schemas.GetSnapshotsResponse_SnapShotTimeFilter:
+			v.SnapShotTimeFilter = &types.TimeRange{}
+			return v.SnapShotTimeFilter.Deserialize(d)
+		case schemas.GetSnapshotsResponse_SnapshotsData:
+			return deserializeSnapshotsDataRecords(d, schemas.GetSnapshotsResponse_SnapshotsData, &v.SnapshotsData)
+		case schemas.GetSnapshotsResponse_SnapshotsDataHeader:
+			return deserializeSnapshotsDataHeaderFields(d, schemas.GetSnapshotsResponse_SnapshotsDataHeader, &v.SnapshotsDataHeader)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSnapshots, schemas.GetSnapshotsRequest, schemas.GetSnapshotsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSnapshots{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSnapshots, schemas.GetSnapshotsRequest, schemas.GetSnapshotsResponse), output: &GetSnapshotsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSnapshots"); err != nil {

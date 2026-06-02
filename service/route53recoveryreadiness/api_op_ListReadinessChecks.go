@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,21 @@ type ListReadinessChecksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReadinessChecksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListReadinessChecksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListReadinessChecksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListReadinessChecksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListReadinessChecksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListReadinessChecksOutput struct {
 
 	// The token that identifies which batch of results you want to see.
@@ -52,16 +69,26 @@ type ListReadinessChecksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListReadinessChecksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListReadinessChecksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListReadinessChecksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListReadinessChecksResponse_NextToken, v.NextToken)
+		case schemas.ListReadinessChecksResponse_ReadinessChecks:
+			return deserialize__listOfReadinessCheckOutput(d, schemas.ListReadinessChecksResponse_ReadinessChecks, &v.ReadinessChecks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListReadinessChecksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListReadinessChecks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReadinessChecks, schemas.ListReadinessChecksRequest, schemas.ListReadinessChecksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListReadinessChecks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListReadinessChecks, schemas.ListReadinessChecksRequest, schemas.ListReadinessChecksResponse), output: &ListReadinessChecksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListReadinessChecks"); err != nil {

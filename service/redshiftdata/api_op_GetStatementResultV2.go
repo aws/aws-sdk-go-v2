@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,21 @@ type GetStatementResultV2Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStatementResultV2Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetStatementResultV2Request)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetStatementResultV2Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetStatementResultV2Request_Id, *v.Id)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetStatementResultV2Request_NextToken, *v.NextToken)
+	}
+}
+
 type GetStatementResultV2Output struct {
 
 	// The results of the SQL statement in CSV format.
@@ -88,16 +105,37 @@ type GetStatementResultV2Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetStatementResultV2Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetStatementResultV2Response, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetStatementResultV2Response_ColumnMetadata:
+			return deserializeColumnMetadataList(d, schemas.GetStatementResultV2Response_ColumnMetadata, &v.ColumnMetadata)
+		case schemas.GetStatementResultV2Response_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetStatementResultV2Response_NextToken, v.NextToken)
+		case schemas.GetStatementResultV2Response_Records:
+			return deserializeFormattedSqlRecords(d, schemas.GetStatementResultV2Response_Records, &v.Records)
+		case schemas.GetStatementResultV2Response_ResultFormat:
+			var ev string
+			if err := d.ReadString(schemas.GetStatementResultV2Response_ResultFormat, &ev); err != nil {
+				return err
+			}
+			v.ResultFormat = types.ResultFormatString(ev)
+			return nil
+		case schemas.GetStatementResultV2Response_TotalNumRows:
+			return d.ReadInt64(schemas.GetStatementResultV2Response_TotalNumRows, &v.TotalNumRows)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetStatementResultV2Middlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetStatementResultV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStatementResultV2, schemas.GetStatementResultV2Request, schemas.GetStatementResultV2Response)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetStatementResultV2{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetStatementResultV2, schemas.GetStatementResultV2Request, schemas.GetStatementResultV2Response), output: &GetStatementResultV2Output{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetStatementResultV2"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,29 @@ type UpdateSecurityGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecurityGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSecurityGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSecurityGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.UpdateSecurityGroupRequest_groupId, *v.GroupId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateSecurityGroupRequest_name, *v.Name)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.UpdateSecurityGroupRequest_networkId, *v.NetworkId)
+	}
+	if v.SecurityGroupSettings != nil {
+		s.WriteStruct(schemas.UpdateSecurityGroupRequest_securityGroupSettings)
+		v.SecurityGroupSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateSecurityGroupOutput struct {
 
 	// The updated security group details, including the new settings.
@@ -65,16 +90,24 @@ type UpdateSecurityGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSecurityGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSecurityGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSecurityGroupResponse_securityGroup:
+			v.SecurityGroup = &types.SecurityGroup{}
+			return v.SecurityGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecurityGroup, schemas.UpdateSecurityGroupRequest, schemas.UpdateSecurityGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSecurityGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSecurityGroup, schemas.UpdateSecurityGroupRequest, schemas.UpdateSecurityGroupResponse), output: &UpdateSecurityGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSecurityGroup"); err != nil {

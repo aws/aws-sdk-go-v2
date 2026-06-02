@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,24 @@ type ListChatResponseConfigurationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChatResponseConfigurationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChatResponseConfigurationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChatResponseConfigurationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListChatResponseConfigurationsRequest_applicationId, *v.ApplicationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListChatResponseConfigurationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChatResponseConfigurationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListChatResponseConfigurationsOutput struct {
 
 	// A list of chat response configuration summaries, each containing key
@@ -67,16 +87,26 @@ type ListChatResponseConfigurationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChatResponseConfigurationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListChatResponseConfigurationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListChatResponseConfigurationsResponse_chatResponseConfigurations:
+			return deserializeChatResponseConfigurations(d, schemas.ListChatResponseConfigurationsResponse_chatResponseConfigurations, &v.ChatResponseConfigurations)
+		case schemas.ListChatResponseConfigurationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListChatResponseConfigurationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListChatResponseConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChatResponseConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChatResponseConfigurations, schemas.ListChatResponseConfigurationsRequest, schemas.ListChatResponseConfigurationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChatResponseConfigurations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChatResponseConfigurations, schemas.ListChatResponseConfigurationsRequest, schemas.ListChatResponseConfigurationsResponse), output: &ListChatResponseConfigurationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListChatResponseConfigurations"); err != nil {

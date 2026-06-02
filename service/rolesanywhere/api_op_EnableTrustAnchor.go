@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,28 @@ type EnableTrustAnchorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableTrustAnchorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalarTrustAnchorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableTrustAnchorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrustAnchorId != nil {
+		s.WriteString(schemas.ScalarTrustAnchorRequest_trustAnchorId, *v.TrustAnchorId)
+	}
+}
+func (v *EnableTrustAnchorInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalarTrustAnchorRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalarTrustAnchorRequest_trustAnchorId:
+			v.TrustAnchorId = new(string)
+			return d.ReadString(schemas.ScalarTrustAnchorRequest_trustAnchorId, v.TrustAnchorId)
+		}
+		return nil
+	})
+}
+
 type EnableTrustAnchorOutput struct {
 
 	// The state of the trust anchor after a read or write operation.
@@ -53,16 +77,37 @@ type EnableTrustAnchorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableTrustAnchorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrustAnchorDetailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableTrustAnchorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TrustAnchor != nil {
+		s.WriteStruct(schemas.TrustAnchorDetailResponse_trustAnchor)
+		v.TrustAnchor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EnableTrustAnchorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrustAnchorDetailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrustAnchorDetailResponse_trustAnchor:
+			v.TrustAnchor = &types.TrustAnchorDetail{}
+			return v.TrustAnchor.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableTrustAnchorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableTrustAnchor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableTrustAnchor, schemas.ScalarTrustAnchorRequest, schemas.TrustAnchorDetailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnableTrustAnchor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableTrustAnchor, schemas.ScalarTrustAnchorRequest, schemas.TrustAnchorDetailResponse), output: &EnableTrustAnchorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "EnableTrustAnchor"); err != nil {

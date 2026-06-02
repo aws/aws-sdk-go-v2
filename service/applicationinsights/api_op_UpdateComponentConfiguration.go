@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,33 @@ type UpdateComponentConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateComponentConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateComponentConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateComponentConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoConfigEnabled != nil {
+		s.WriteBool(schemas.UpdateComponentConfigurationRequest_AutoConfigEnabled, *v.AutoConfigEnabled)
+	}
+	if v.ComponentConfiguration != nil {
+		s.WriteString(schemas.UpdateComponentConfigurationRequest_ComponentConfiguration, *v.ComponentConfiguration)
+	}
+	if v.ComponentName != nil {
+		s.WriteString(schemas.UpdateComponentConfigurationRequest_ComponentName, *v.ComponentName)
+	}
+	if v.Monitor != nil {
+		s.WriteBool(schemas.UpdateComponentConfigurationRequest_Monitor, *v.Monitor)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.UpdateComponentConfigurationRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+	if v.Tier != "" {
+		s.WriteString(schemas.UpdateComponentConfigurationRequest_Tier, string(v.Tier))
+	}
+}
+
 type UpdateComponentConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -71,16 +100,21 @@ type UpdateComponentConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateComponentConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateComponentConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateComponentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateComponentConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateComponentConfiguration, schemas.UpdateComponentConfigurationRequest, schemas.UpdateComponentConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateComponentConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateComponentConfiguration, schemas.UpdateComponentConfigurationRequest, schemas.UpdateComponentConfigurationResponse), output: &UpdateComponentConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateComponentConfiguration"); err != nil {

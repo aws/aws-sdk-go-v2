@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type GetRecommendationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRecommendationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRecommendationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.GetRecommendationRequest_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.RecommendationId != nil {
+		s.WriteString(schemas.GetRecommendationRequest_recommendationId, *v.RecommendationId)
+	}
+	if v.RecommendationVersion != nil {
+		s.WriteInt64(schemas.GetRecommendationRequest_recommendationVersion, *v.RecommendationVersion)
+	}
+}
+
 // Response structure containing the requested recommendation
 type GetRecommendationOutput struct {
 
@@ -61,16 +81,24 @@ type GetRecommendationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRecommendationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRecommendationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRecommendationResponse_recommendation:
+			v.Recommendation = &types.Recommendation{}
+			return v.Recommendation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRecommendationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendation, schemas.GetRecommendationRequest, schemas.GetRecommendationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRecommendation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRecommendation, schemas.GetRecommendationRequest, schemas.GetRecommendationResponse), output: &GetRecommendationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRecommendation"); err != nil {

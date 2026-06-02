@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type DescribeFeedbackInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFeedbackInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeFeedbackRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeFeedbackInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InsightId != nil {
+		s.WriteString(schemas.DescribeFeedbackRequest_InsightId, *v.InsightId)
+	}
+}
+
 type DescribeFeedbackOutput struct {
 
 	//  Information about insight feedback received from a customer.
@@ -48,16 +62,24 @@ type DescribeFeedbackOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeFeedbackOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeFeedbackResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeFeedbackResponse_InsightFeedback:
+			v.InsightFeedback = &types.InsightFeedback{}
+			return v.InsightFeedback.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFeedback, schemas.DescribeFeedbackRequest, schemas.DescribeFeedbackResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeFeedback{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeFeedback, schemas.DescribeFeedbackRequest, schemas.DescribeFeedbackResponse), output: &DescribeFeedbackOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeFeedback"); err != nil {

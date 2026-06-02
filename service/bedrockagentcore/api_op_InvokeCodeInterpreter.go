@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -82,6 +84,35 @@ type InvokeCodeInterpreterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeCodeInterpreterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeCodeInterpreterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeCodeInterpreterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arguments != nil {
+		s.WriteStruct(schemas.InvokeCodeInterpreterRequest_arguments)
+		v.Arguments.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CodeInterpreterIdentifier != nil {
+		s.WriteString(schemas.InvokeCodeInterpreterRequest_codeInterpreterIdentifier, *v.CodeInterpreterIdentifier)
+	}
+	if v.Name != "" {
+		s.WriteString(schemas.InvokeCodeInterpreterRequest_name, string(v.Name))
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.InvokeCodeInterpreterRequest_sessionId, *v.SessionId)
+	}
+	if v.TraceId != nil {
+		s.WriteString(schemas.InvokeCodeInterpreterRequest_traceId, *v.TraceId)
+	}
+	if v.TraceParent != nil {
+		s.WriteString(schemas.InvokeCodeInterpreterRequest_traceParent, *v.TraceParent)
+	}
+}
+
 type InvokeCodeInterpreterOutput struct {
 
 	// The identifier of the code interpreter session.
@@ -95,6 +126,17 @@ type InvokeCodeInterpreterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeCodeInterpreterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeCodeInterpreterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvokeCodeInterpreterResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.InvokeCodeInterpreterResponse_sessionId, v.SessionId)
+		}
+		return nil
+	})
+}
+
 // GetStream returns the type to interact with the event stream.
 func (o *InvokeCodeInterpreterOutput) GetStream() *InvokeCodeInterpreterEventStream {
 	return o.eventStream
@@ -104,12 +146,13 @@ func (c *Client) addOperationInvokeCodeInterpreterMiddlewares(stack *middleware.
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeCodeInterpreter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeCodeInterpreter, schemas.InvokeCodeInterpreterRequest, schemas.InvokeCodeInterpreterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeCodeInterpreter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeCodeInterpreter, schemas.InvokeCodeInterpreterRequest, schemas.InvokeCodeInterpreterResponse), output: &InvokeCodeInterpreterOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeCodeInterpreter{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeCodeInterpreter"); err != nil {
@@ -117,9 +160,6 @@ func (c *Client) addOperationInvokeCodeInterpreterMiddlewares(stack *middleware.
 	}
 
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addEventStreamInvokeCodeInterpreterMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {

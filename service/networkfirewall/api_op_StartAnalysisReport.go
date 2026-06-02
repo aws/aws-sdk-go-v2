@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,24 @@ type StartAnalysisReportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAnalysisReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAnalysisReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAnalysisReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AnalysisType != "" {
+		s.WriteString(schemas.StartAnalysisReportRequest_AnalysisType, string(v.AnalysisType))
+	}
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.StartAnalysisReportRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.StartAnalysisReportRequest_FirewallName, *v.FirewallName)
+	}
+}
+
 type StartAnalysisReportOutput struct {
 
 	// The unique ID of the query that ran when you requested an analysis report.
@@ -64,16 +84,24 @@ type StartAnalysisReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAnalysisReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAnalysisReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAnalysisReportResponse_AnalysisReportId:
+			v.AnalysisReportId = new(string)
+			return d.ReadString(schemas.StartAnalysisReportResponse_AnalysisReportId, v.AnalysisReportId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAnalysisReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartAnalysisReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAnalysisReport, schemas.StartAnalysisReportRequest, schemas.StartAnalysisReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartAnalysisReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartAnalysisReport, schemas.StartAnalysisReportRequest, schemas.StartAnalysisReportResponse), output: &StartAnalysisReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartAnalysisReport"); err != nil {

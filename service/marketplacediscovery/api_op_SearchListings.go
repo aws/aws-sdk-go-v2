@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,31 @@ type SearchListingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchListingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchListingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchListingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSearchFilterList(s, schemas.SearchListingsInput_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchListingsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchListingsInput_nextToken, *v.NextToken)
+	}
+	if v.SearchText != nil {
+		s.WriteString(schemas.SearchListingsInput_searchText, *v.SearchText)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.SearchListingsInput_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.SearchListingsInput_sortOrder, string(v.SortOrder))
+	}
+}
+
 type SearchListingsOutput struct {
 
 	// The listing summaries matching the search criteria. Each summary includes the
@@ -80,16 +107,29 @@ type SearchListingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchListingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchListingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchListingsOutput_listingSummaries:
+			return deserializeListingSummaryList(d, schemas.SearchListingsOutput_listingSummaries, &v.ListingSummaries)
+		case schemas.SearchListingsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchListingsOutput_nextToken, v.NextToken)
+		case schemas.SearchListingsOutput_totalResults:
+			v.TotalResults = new(int64)
+			return d.ReadInt64(schemas.SearchListingsOutput_totalResults, v.TotalResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchListingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchListings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchListings, schemas.SearchListingsInput, schemas.SearchListingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchListings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchListings, schemas.SearchListingsInput, schemas.SearchListingsOutput), output: &SearchListingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchListings"); err != nil {

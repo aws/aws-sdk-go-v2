@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/savingsplans/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/savingsplans/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,29 @@ type DescribeSavingsPlansOfferingRatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSavingsPlansOfferingRatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSavingsPlansOfferingRatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSavingsPlansOfferingRatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSavingsPlanOfferingRateFiltersList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_filters, v.Filters)
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.DescribeSavingsPlansOfferingRatesRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSavingsPlansOfferingRatesRequest_nextToken, *v.NextToken)
+	}
+	serializeSavingsPlanRateOperationList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_operations, v.Operations)
+	serializeSavingsPlanProductTypeList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_products, v.Products)
+	serializeUUIDs(s, schemas.DescribeSavingsPlansOfferingRatesRequest_savingsPlanOfferingIds, v.SavingsPlanOfferingIds)
+	serializeSavingsPlanPaymentOptionList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_savingsPlanPaymentOptions, v.SavingsPlanPaymentOptions)
+	serializeSavingsPlanTypeList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_savingsPlanTypes, v.SavingsPlanTypes)
+	serializeSavingsPlanRateServiceCodeList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_serviceCodes, v.ServiceCodes)
+	serializeSavingsPlanRateUsageTypeList(s, schemas.DescribeSavingsPlansOfferingRatesRequest_usageTypes, v.UsageTypes)
+}
+
 type DescribeSavingsPlansOfferingRatesOutput struct {
 
 	// The token to use to retrieve the next page of results. This value is null when
@@ -79,16 +104,26 @@ type DescribeSavingsPlansOfferingRatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSavingsPlansOfferingRatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSavingsPlansOfferingRatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSavingsPlansOfferingRatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSavingsPlansOfferingRatesResponse_nextToken, v.NextToken)
+		case schemas.DescribeSavingsPlansOfferingRatesResponse_searchResults:
+			return deserializeSavingsPlanOfferingRatesList(d, schemas.DescribeSavingsPlansOfferingRatesResponse_searchResults, &v.SearchResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSavingsPlansOfferingRatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSavingsPlansOfferingRates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSavingsPlansOfferingRates, schemas.DescribeSavingsPlansOfferingRatesRequest, schemas.DescribeSavingsPlansOfferingRatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSavingsPlansOfferingRates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSavingsPlansOfferingRates, schemas.DescribeSavingsPlansOfferingRatesRequest, schemas.DescribeSavingsPlansOfferingRatesResponse), output: &DescribeSavingsPlansOfferingRatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSavingsPlansOfferingRates"); err != nil {

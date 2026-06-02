@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/wafregional/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -124,6 +126,63 @@ type ActivatedRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ActivatedRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActivatedRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActivatedRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteStruct(schemas.ActivatedRule_Action)
+		v.Action.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeExcludedRules(s, schemas.ActivatedRule_ExcludedRules, v.ExcludedRules)
+	if v.OverrideAction != nil {
+		s.WriteStruct(schemas.ActivatedRule_OverrideAction)
+		v.OverrideAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Priority != nil {
+		s.WriteInt32(schemas.ActivatedRule_Priority, *v.Priority)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.ActivatedRule_RuleId, *v.RuleId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ActivatedRule_Type, string(v.Type))
+	}
+}
+func (v *ActivatedRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActivatedRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActivatedRule_Action:
+			v.Action = &WafAction{}
+			return v.Action.Deserialize(d)
+		case schemas.ActivatedRule_ExcludedRules:
+			return deserializeExcludedRules(d, schemas.ActivatedRule_ExcludedRules, &v.ExcludedRules)
+		case schemas.ActivatedRule_OverrideAction:
+			v.OverrideAction = &WafOverrideAction{}
+			return v.OverrideAction.Deserialize(d)
+		case schemas.ActivatedRule_Priority:
+			v.Priority = new(int32)
+			return d.ReadInt32(schemas.ActivatedRule_Priority, v.Priority)
+		case schemas.ActivatedRule_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.ActivatedRule_RuleId, v.RuleId)
+		case schemas.ActivatedRule_Type:
+			var ev string
+			if err := d.ReadString(schemas.ActivatedRule_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = WafRuleType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -169,6 +228,37 @@ type ByteMatchSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ByteMatchSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ByteMatchSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ByteMatchSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByteMatchSetId != nil {
+		s.WriteString(schemas.ByteMatchSet_ByteMatchSetId, *v.ByteMatchSetId)
+	}
+	serializeByteMatchTuples(s, schemas.ByteMatchSet_ByteMatchTuples, v.ByteMatchTuples)
+	if v.Name != nil {
+		s.WriteString(schemas.ByteMatchSet_Name, *v.Name)
+	}
+}
+func (v *ByteMatchSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ByteMatchSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ByteMatchSet_ByteMatchSetId:
+			v.ByteMatchSetId = new(string)
+			return d.ReadString(schemas.ByteMatchSet_ByteMatchSetId, v.ByteMatchSetId)
+		case schemas.ByteMatchSet_ByteMatchTuples:
+			return deserializeByteMatchTuples(d, schemas.ByteMatchSet_ByteMatchTuples, &v.ByteMatchTuples)
+		case schemas.ByteMatchSet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ByteMatchSet_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -201,6 +291,34 @@ type ByteMatchSetSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ByteMatchSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ByteMatchSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ByteMatchSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ByteMatchSetId != nil {
+		s.WriteString(schemas.ByteMatchSetSummary_ByteMatchSetId, *v.ByteMatchSetId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ByteMatchSetSummary_Name, *v.Name)
+	}
+}
+func (v *ByteMatchSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ByteMatchSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ByteMatchSetSummary_ByteMatchSetId:
+			v.ByteMatchSetId = new(string)
+			return d.ReadString(schemas.ByteMatchSetSummary_ByteMatchSetId, v.ByteMatchSetId)
+		case schemas.ByteMatchSetSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ByteMatchSetSummary_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -229,6 +347,40 @@ type ByteMatchSetUpdate struct {
 	ByteMatchTuple *ByteMatchTuple
 
 	noSmithyDocumentSerde
+}
+
+func (v *ByteMatchSetUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ByteMatchSetUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ByteMatchSetUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.ByteMatchSetUpdate_Action, string(v.Action))
+	}
+	if v.ByteMatchTuple != nil {
+		s.WriteStruct(schemas.ByteMatchSetUpdate_ByteMatchTuple)
+		v.ByteMatchTuple.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ByteMatchSetUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ByteMatchSetUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ByteMatchSetUpdate_Action:
+			var ev string
+			if err := d.ReadString(schemas.ByteMatchSetUpdate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ChangeAction(ev)
+			return nil
+		case schemas.ByteMatchSetUpdate_ByteMatchTuple:
+			v.ByteMatchTuple = &ByteMatchTuple{}
+			return v.ByteMatchTuple.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -436,6 +588,55 @@ type ByteMatchTuple struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ByteMatchTuple) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ByteMatchTuple)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ByteMatchTuple) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldToMatch != nil {
+		s.WriteStruct(schemas.ByteMatchTuple_FieldToMatch)
+		v.FieldToMatch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PositionalConstraint != "" {
+		s.WriteString(schemas.ByteMatchTuple_PositionalConstraint, string(v.PositionalConstraint))
+	}
+	if v.TargetString != nil {
+		s.WriteBlob(schemas.ByteMatchTuple_TargetString, v.TargetString)
+	}
+	if v.TextTransformation != "" {
+		s.WriteString(schemas.ByteMatchTuple_TextTransformation, string(v.TextTransformation))
+	}
+}
+func (v *ByteMatchTuple) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ByteMatchTuple, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ByteMatchTuple_FieldToMatch:
+			v.FieldToMatch = &FieldToMatch{}
+			return v.FieldToMatch.Deserialize(d)
+		case schemas.ByteMatchTuple_PositionalConstraint:
+			var ev string
+			if err := d.ReadString(schemas.ByteMatchTuple_PositionalConstraint, &ev); err != nil {
+				return err
+			}
+			v.PositionalConstraint = PositionalConstraint(ev)
+			return nil
+		case schemas.ByteMatchTuple_TargetString:
+			return d.ReadBlob(schemas.ByteMatchTuple_TargetString, &v.TargetString)
+		case schemas.ByteMatchTuple_TextTransformation:
+			var ev string
+			if err := d.ReadString(schemas.ByteMatchTuple_TextTransformation, &ev); err != nil {
+				return err
+			}
+			v.TextTransformation = TextTransformation(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -457,6 +658,28 @@ type ExcludedRule struct {
 	RuleId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExcludedRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExcludedRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExcludedRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleId != nil {
+		s.WriteString(schemas.ExcludedRule_RuleId, *v.RuleId)
+	}
+}
+func (v *ExcludedRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExcludedRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExcludedRule_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.ExcludedRule_RuleId, v.RuleId)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -521,6 +744,38 @@ type FieldToMatch struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FieldToMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FieldToMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FieldToMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteString(schemas.FieldToMatch_Data, *v.Data)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.FieldToMatch_Type, string(v.Type))
+	}
+}
+func (v *FieldToMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FieldToMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FieldToMatch_Data:
+			v.Data = new(string)
+			return d.ReadString(schemas.FieldToMatch_Data, v.Data)
+		case schemas.FieldToMatch_Type:
+			var ev string
+			if err := d.ReadString(schemas.FieldToMatch_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = MatchFieldType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -547,6 +802,42 @@ type GeoMatchConstraint struct {
 	Value GeoMatchConstraintValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *GeoMatchConstraint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeoMatchConstraint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeoMatchConstraint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.GeoMatchConstraint_Type, string(v.Type))
+	}
+	if v.Value != "" {
+		s.WriteString(schemas.GeoMatchConstraint_Value, string(v.Value))
+	}
+}
+func (v *GeoMatchConstraint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeoMatchConstraint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeoMatchConstraint_Type:
+			var ev string
+			if err := d.ReadString(schemas.GeoMatchConstraint_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = GeoMatchConstraintType(ev)
+			return nil
+		case schemas.GeoMatchConstraint_Value:
+			var ev string
+			if err := d.ReadString(schemas.GeoMatchConstraint_Value, &ev); err != nil {
+				return err
+			}
+			v.Value = GeoMatchConstraintValue(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -585,6 +876,37 @@ type GeoMatchSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeoMatchSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeoMatchSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeoMatchSet) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGeoMatchConstraints(s, schemas.GeoMatchSet_GeoMatchConstraints, v.GeoMatchConstraints)
+	if v.GeoMatchSetId != nil {
+		s.WriteString(schemas.GeoMatchSet_GeoMatchSetId, *v.GeoMatchSetId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GeoMatchSet_Name, *v.Name)
+	}
+}
+func (v *GeoMatchSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeoMatchSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeoMatchSet_GeoMatchConstraints:
+			return deserializeGeoMatchConstraints(d, schemas.GeoMatchSet_GeoMatchConstraints, &v.GeoMatchConstraints)
+		case schemas.GeoMatchSet_GeoMatchSetId:
+			v.GeoMatchSetId = new(string)
+			return d.ReadString(schemas.GeoMatchSet_GeoMatchSetId, v.GeoMatchSetId)
+		case schemas.GeoMatchSet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GeoMatchSet_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -611,6 +933,34 @@ type GeoMatchSetSummary struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GeoMatchSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeoMatchSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeoMatchSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GeoMatchSetId != nil {
+		s.WriteString(schemas.GeoMatchSetSummary_GeoMatchSetId, *v.GeoMatchSetId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GeoMatchSetSummary_Name, *v.Name)
+	}
+}
+func (v *GeoMatchSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeoMatchSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeoMatchSetSummary_GeoMatchSetId:
+			v.GeoMatchSetId = new(string)
+			return d.ReadString(schemas.GeoMatchSetSummary_GeoMatchSetId, v.GeoMatchSetId)
+		case schemas.GeoMatchSetSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GeoMatchSetSummary_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -640,6 +990,40 @@ type GeoMatchSetUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeoMatchSetUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeoMatchSetUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeoMatchSetUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.GeoMatchSetUpdate_Action, string(v.Action))
+	}
+	if v.GeoMatchConstraint != nil {
+		s.WriteStruct(schemas.GeoMatchSetUpdate_GeoMatchConstraint)
+		v.GeoMatchConstraint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GeoMatchSetUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeoMatchSetUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeoMatchSetUpdate_Action:
+			var ev string
+			if err := d.ReadString(schemas.GeoMatchSetUpdate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ChangeAction(ev)
+			return nil
+		case schemas.GeoMatchSetUpdate_GeoMatchConstraint:
+			v.GeoMatchConstraint = &GeoMatchConstraint{}
+			return v.GeoMatchConstraint.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -663,6 +1047,34 @@ type HTTPHeader struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *HTTPHeader) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HTTPHeader)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HTTPHeader) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.HTTPHeader_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.HTTPHeader_Value, *v.Value)
+	}
+}
+func (v *HTTPHeader) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HTTPHeader, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HTTPHeader_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.HTTPHeader_Name, v.Name)
+		case schemas.HTTPHeader_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.HTTPHeader_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -715,6 +1127,55 @@ type HTTPRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HTTPRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HTTPRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HTTPRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientIP != nil {
+		s.WriteString(schemas.HTTPRequest_ClientIP, *v.ClientIP)
+	}
+	if v.Country != nil {
+		s.WriteString(schemas.HTTPRequest_Country, *v.Country)
+	}
+	if v.HTTPVersion != nil {
+		s.WriteString(schemas.HTTPRequest_HTTPVersion, *v.HTTPVersion)
+	}
+	serializeHTTPHeaders(s, schemas.HTTPRequest_Headers, v.Headers)
+	if v.Method != nil {
+		s.WriteString(schemas.HTTPRequest_Method, *v.Method)
+	}
+	if v.URI != nil {
+		s.WriteString(schemas.HTTPRequest_URI, *v.URI)
+	}
+}
+func (v *HTTPRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HTTPRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HTTPRequest_ClientIP:
+			v.ClientIP = new(string)
+			return d.ReadString(schemas.HTTPRequest_ClientIP, v.ClientIP)
+		case schemas.HTTPRequest_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.HTTPRequest_Country, v.Country)
+		case schemas.HTTPRequest_HTTPVersion:
+			v.HTTPVersion = new(string)
+			return d.ReadString(schemas.HTTPRequest_HTTPVersion, v.HTTPVersion)
+		case schemas.HTTPRequest_Headers:
+			return deserializeHTTPHeaders(d, schemas.HTTPRequest_Headers, &v.Headers)
+		case schemas.HTTPRequest_Method:
+			v.Method = new(string)
+			return d.ReadString(schemas.HTTPRequest_Method, v.Method)
+		case schemas.HTTPRequest_URI:
+			v.URI = new(string)
+			return d.ReadString(schemas.HTTPRequest_URI, v.URI)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -760,6 +1221,37 @@ type IPSet struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IPSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IPSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IPSet) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIPSetDescriptors(s, schemas.IPSet_IPSetDescriptors, v.IPSetDescriptors)
+	if v.IPSetId != nil {
+		s.WriteString(schemas.IPSet_IPSetId, *v.IPSetId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.IPSet_Name, *v.Name)
+	}
+}
+func (v *IPSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IPSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IPSet_IPSetDescriptors:
+			return deserializeIPSetDescriptors(d, schemas.IPSet_IPSetDescriptors, &v.IPSetDescriptors)
+		case schemas.IPSet_IPSetId:
+			v.IPSetId = new(string)
+			return d.ReadString(schemas.IPSet_IPSetId, v.IPSetId)
+		case schemas.IPSet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.IPSet_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -810,6 +1302,38 @@ type IPSetDescriptor struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IPSetDescriptor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IPSetDescriptor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IPSetDescriptor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.IPSetDescriptor_Type, string(v.Type))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.IPSetDescriptor_Value, *v.Value)
+	}
+}
+func (v *IPSetDescriptor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IPSetDescriptor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IPSetDescriptor_Type:
+			var ev string
+			if err := d.ReadString(schemas.IPSetDescriptor_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = IPSetDescriptorType(ev)
+			return nil
+		case schemas.IPSetDescriptor_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.IPSetDescriptor_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -838,6 +1362,34 @@ type IPSetSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *IPSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IPSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IPSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IPSetId != nil {
+		s.WriteString(schemas.IPSetSummary_IPSetId, *v.IPSetId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.IPSetSummary_Name, *v.Name)
+	}
+}
+func (v *IPSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IPSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IPSetSummary_IPSetId:
+			v.IPSetId = new(string)
+			return d.ReadString(schemas.IPSetSummary_IPSetId, v.IPSetId)
+		case schemas.IPSetSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.IPSetSummary_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -863,6 +1415,40 @@ type IPSetUpdate struct {
 	IPSetDescriptor *IPSetDescriptor
 
 	noSmithyDocumentSerde
+}
+
+func (v *IPSetUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IPSetUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IPSetUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.IPSetUpdate_Action, string(v.Action))
+	}
+	if v.IPSetDescriptor != nil {
+		s.WriteStruct(schemas.IPSetUpdate_IPSetDescriptor)
+		v.IPSetDescriptor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *IPSetUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IPSetUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IPSetUpdate_Action:
+			var ev string
+			if err := d.ReadString(schemas.IPSetUpdate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ChangeAction(ev)
+			return nil
+		case schemas.IPSetUpdate_IPSetDescriptor:
+			v.IPSetDescriptor = &IPSetDescriptor{}
+			return v.IPSetDescriptor.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -895,6 +1481,34 @@ type LoggingConfiguration struct {
 	RedactedFields []FieldToMatch
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLogDestinationConfigs(s, schemas.LoggingConfiguration_LogDestinationConfigs, v.LogDestinationConfigs)
+	serializeRedactedFields(s, schemas.LoggingConfiguration_RedactedFields, v.RedactedFields)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.LoggingConfiguration_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *LoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingConfiguration_LogDestinationConfigs:
+			return deserializeLogDestinationConfigs(d, schemas.LoggingConfiguration_LogDestinationConfigs, &v.LogDestinationConfigs)
+		case schemas.LoggingConfiguration_RedactedFields:
+			return deserializeRedactedFields(d, schemas.LoggingConfiguration_RedactedFields, &v.RedactedFields)
+		case schemas.LoggingConfiguration_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.LoggingConfiguration_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -937,6 +1551,44 @@ type Predicate struct {
 	Type PredicateType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Predicate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Predicate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Predicate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataId != nil {
+		s.WriteString(schemas.Predicate_DataId, *v.DataId)
+	}
+	if v.Negated != nil {
+		s.WriteBool(schemas.Predicate_Negated, *v.Negated)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Predicate_Type, string(v.Type))
+	}
+}
+func (v *Predicate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Predicate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Predicate_DataId:
+			v.DataId = new(string)
+			return d.ReadString(schemas.Predicate_DataId, v.DataId)
+		case schemas.Predicate_Negated:
+			v.Negated = new(bool)
+			return d.ReadBool(schemas.Predicate_Negated, v.Negated)
+		case schemas.Predicate_Type:
+			var ev string
+			if err := d.ReadString(schemas.Predicate_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = PredicateType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -1010,6 +1662,59 @@ type RateBasedRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RateBasedRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RateBasedRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RateBasedRule) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePredicates(s, schemas.RateBasedRule_MatchPredicates, v.MatchPredicates)
+	if v.MetricName != nil {
+		s.WriteString(schemas.RateBasedRule_MetricName, *v.MetricName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RateBasedRule_Name, *v.Name)
+	}
+	if v.RateKey != "" {
+		s.WriteString(schemas.RateBasedRule_RateKey, string(v.RateKey))
+	}
+	if v.RateLimit != nil {
+		s.WriteInt64(schemas.RateBasedRule_RateLimit, *v.RateLimit)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.RateBasedRule_RuleId, *v.RuleId)
+	}
+}
+func (v *RateBasedRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateBasedRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateBasedRule_MatchPredicates:
+			return deserializePredicates(d, schemas.RateBasedRule_MatchPredicates, &v.MatchPredicates)
+		case schemas.RateBasedRule_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.RateBasedRule_MetricName, v.MetricName)
+		case schemas.RateBasedRule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RateBasedRule_Name, v.Name)
+		case schemas.RateBasedRule_RateKey:
+			var ev string
+			if err := d.ReadString(schemas.RateBasedRule_RateKey, &ev); err != nil {
+				return err
+			}
+			v.RateKey = RateKey(ev)
+			return nil
+		case schemas.RateBasedRule_RateLimit:
+			v.RateLimit = new(int64)
+			return d.ReadInt64(schemas.RateBasedRule_RateLimit, v.RateLimit)
+		case schemas.RateBasedRule_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.RateBasedRule_RuleId, v.RuleId)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -1058,6 +1763,37 @@ type RegexMatchSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegexMatchSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegexMatchSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegexMatchSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.RegexMatchSet_Name, *v.Name)
+	}
+	if v.RegexMatchSetId != nil {
+		s.WriteString(schemas.RegexMatchSet_RegexMatchSetId, *v.RegexMatchSetId)
+	}
+	serializeRegexMatchTuples(s, schemas.RegexMatchSet_RegexMatchTuples, v.RegexMatchTuples)
+}
+func (v *RegexMatchSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegexMatchSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegexMatchSet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RegexMatchSet_Name, v.Name)
+		case schemas.RegexMatchSet_RegexMatchSetId:
+			v.RegexMatchSetId = new(string)
+			return d.ReadString(schemas.RegexMatchSet_RegexMatchSetId, v.RegexMatchSetId)
+		case schemas.RegexMatchSet_RegexMatchTuples:
+			return deserializeRegexMatchTuples(d, schemas.RegexMatchSet_RegexMatchTuples, &v.RegexMatchTuples)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -1090,6 +1826,34 @@ type RegexMatchSetSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegexMatchSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegexMatchSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegexMatchSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.RegexMatchSetSummary_Name, *v.Name)
+	}
+	if v.RegexMatchSetId != nil {
+		s.WriteString(schemas.RegexMatchSetSummary_RegexMatchSetId, *v.RegexMatchSetId)
+	}
+}
+func (v *RegexMatchSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegexMatchSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegexMatchSetSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RegexMatchSetSummary_Name, v.Name)
+		case schemas.RegexMatchSetSummary_RegexMatchSetId:
+			v.RegexMatchSetId = new(string)
+			return d.ReadString(schemas.RegexMatchSetSummary_RegexMatchSetId, v.RegexMatchSetId)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -1119,6 +1883,40 @@ type RegexMatchSetUpdate struct {
 	RegexMatchTuple *RegexMatchTuple
 
 	noSmithyDocumentSerde
+}
+
+func (v *RegexMatchSetUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegexMatchSetUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegexMatchSetUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.RegexMatchSetUpdate_Action, string(v.Action))
+	}
+	if v.RegexMatchTuple != nil {
+		s.WriteStruct(schemas.RegexMatchSetUpdate_RegexMatchTuple)
+		v.RegexMatchTuple.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RegexMatchSetUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegexMatchSetUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegexMatchSetUpdate_Action:
+			var ev string
+			if err := d.ReadString(schemas.RegexMatchSetUpdate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ChangeAction(ev)
+			return nil
+		case schemas.RegexMatchSetUpdate_RegexMatchTuple:
+			v.RegexMatchTuple = &RegexMatchTuple{}
+			return v.RegexMatchTuple.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -1239,6 +2037,46 @@ type RegexMatchTuple struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegexMatchTuple) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegexMatchTuple)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegexMatchTuple) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldToMatch != nil {
+		s.WriteStruct(schemas.RegexMatchTuple_FieldToMatch)
+		v.FieldToMatch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RegexPatternSetId != nil {
+		s.WriteString(schemas.RegexMatchTuple_RegexPatternSetId, *v.RegexPatternSetId)
+	}
+	if v.TextTransformation != "" {
+		s.WriteString(schemas.RegexMatchTuple_TextTransformation, string(v.TextTransformation))
+	}
+}
+func (v *RegexMatchTuple) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegexMatchTuple, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegexMatchTuple_FieldToMatch:
+			v.FieldToMatch = &FieldToMatch{}
+			return v.FieldToMatch.Deserialize(d)
+		case schemas.RegexMatchTuple_RegexPatternSetId:
+			v.RegexPatternSetId = new(string)
+			return d.ReadString(schemas.RegexMatchTuple_RegexPatternSetId, v.RegexPatternSetId)
+		case schemas.RegexMatchTuple_TextTransformation:
+			var ev string
+			if err := d.ReadString(schemas.RegexMatchTuple_TextTransformation, &ev); err != nil {
+				return err
+			}
+			v.TextTransformation = TextTransformation(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -1277,6 +2115,37 @@ type RegexPatternSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegexPatternSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegexPatternSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegexPatternSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.RegexPatternSet_Name, *v.Name)
+	}
+	if v.RegexPatternSetId != nil {
+		s.WriteString(schemas.RegexPatternSet_RegexPatternSetId, *v.RegexPatternSetId)
+	}
+	serializeRegexPatternStrings(s, schemas.RegexPatternSet_RegexPatternStrings, v.RegexPatternStrings)
+}
+func (v *RegexPatternSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegexPatternSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegexPatternSet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RegexPatternSet_Name, v.Name)
+		case schemas.RegexPatternSet_RegexPatternSetId:
+			v.RegexPatternSetId = new(string)
+			return d.ReadString(schemas.RegexPatternSet_RegexPatternSetId, v.RegexPatternSetId)
+		case schemas.RegexPatternSet_RegexPatternStrings:
+			return deserializeRegexPatternStrings(d, schemas.RegexPatternSet_RegexPatternStrings, &v.RegexPatternStrings)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -1310,6 +2179,34 @@ type RegexPatternSetSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegexPatternSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegexPatternSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegexPatternSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.RegexPatternSetSummary_Name, *v.Name)
+	}
+	if v.RegexPatternSetId != nil {
+		s.WriteString(schemas.RegexPatternSetSummary_RegexPatternSetId, *v.RegexPatternSetId)
+	}
+}
+func (v *RegexPatternSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegexPatternSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegexPatternSetSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RegexPatternSetSummary_Name, v.Name)
+		case schemas.RegexPatternSetSummary_RegexPatternSetId:
+			v.RegexPatternSetId = new(string)
+			return d.ReadString(schemas.RegexPatternSetSummary_RegexPatternSetId, v.RegexPatternSetId)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -1336,6 +2233,38 @@ type RegexPatternSetUpdate struct {
 	RegexPatternString *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RegexPatternSetUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegexPatternSetUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegexPatternSetUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.RegexPatternSetUpdate_Action, string(v.Action))
+	}
+	if v.RegexPatternString != nil {
+		s.WriteString(schemas.RegexPatternSetUpdate_RegexPatternString, *v.RegexPatternString)
+	}
+}
+func (v *RegexPatternSetUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegexPatternSetUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegexPatternSetUpdate_Action:
+			var ev string
+			if err := d.ReadString(schemas.RegexPatternSetUpdate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ChangeAction(ev)
+			return nil
+		case schemas.RegexPatternSetUpdate_RegexPatternString:
+			v.RegexPatternString = new(string)
+			return d.ReadString(schemas.RegexPatternSetUpdate_RegexPatternString, v.RegexPatternString)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -1391,6 +2320,43 @@ type Rule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Rule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Rule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Rule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricName != nil {
+		s.WriteString(schemas.Rule_MetricName, *v.MetricName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Rule_Name, *v.Name)
+	}
+	serializePredicates(s, schemas.Rule_Predicates, v.Predicates)
+	if v.RuleId != nil {
+		s.WriteString(schemas.Rule_RuleId, *v.RuleId)
+	}
+}
+func (v *Rule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Rule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Rule_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.Rule_MetricName, v.MetricName)
+		case schemas.Rule_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Rule_Name, v.Name)
+		case schemas.Rule_Predicates:
+			return deserializePredicates(d, schemas.Rule_Predicates, &v.Predicates)
+		case schemas.Rule_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.Rule_RuleId, v.RuleId)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -1437,6 +2403,40 @@ type RuleGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuleGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricName != nil {
+		s.WriteString(schemas.RuleGroup_MetricName, *v.MetricName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RuleGroup_Name, *v.Name)
+	}
+	if v.RuleGroupId != nil {
+		s.WriteString(schemas.RuleGroup_RuleGroupId, *v.RuleGroupId)
+	}
+}
+func (v *RuleGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleGroup_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.RuleGroup_MetricName, v.MetricName)
+		case schemas.RuleGroup_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RuleGroup_Name, v.Name)
+		case schemas.RuleGroup_RuleGroupId:
+			v.RuleGroupId = new(string)
+			return d.ReadString(schemas.RuleGroup_RuleGroupId, v.RuleGroupId)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -1469,6 +2469,34 @@ type RuleGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuleGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.RuleGroupSummary_Name, *v.Name)
+	}
+	if v.RuleGroupId != nil {
+		s.WriteString(schemas.RuleGroupSummary_RuleGroupId, *v.RuleGroupId)
+	}
+}
+func (v *RuleGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleGroupSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RuleGroupSummary_Name, v.Name)
+		case schemas.RuleGroupSummary_RuleGroupId:
+			v.RuleGroupId = new(string)
+			return d.ReadString(schemas.RuleGroupSummary_RuleGroupId, v.RuleGroupId)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -1497,6 +2525,40 @@ type RuleGroupUpdate struct {
 	ActivatedRule *ActivatedRule
 
 	noSmithyDocumentSerde
+}
+
+func (v *RuleGroupUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleGroupUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleGroupUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.RuleGroupUpdate_Action, string(v.Action))
+	}
+	if v.ActivatedRule != nil {
+		s.WriteStruct(schemas.RuleGroupUpdate_ActivatedRule)
+		v.ActivatedRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RuleGroupUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleGroupUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleGroupUpdate_Action:
+			var ev string
+			if err := d.ReadString(schemas.RuleGroupUpdate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ChangeAction(ev)
+			return nil
+		case schemas.RuleGroupUpdate_ActivatedRule:
+			v.ActivatedRule = &ActivatedRule{}
+			return v.ActivatedRule.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -1530,6 +2592,34 @@ type RuleSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuleSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.RuleSummary_Name, *v.Name)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.RuleSummary_RuleId, *v.RuleId)
+	}
+}
+func (v *RuleSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RuleSummary_Name, v.Name)
+		case schemas.RuleSummary_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.RuleSummary_RuleId, v.RuleId)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -1556,6 +2646,40 @@ type RuleUpdate struct {
 	Predicate *Predicate
 
 	noSmithyDocumentSerde
+}
+
+func (v *RuleUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.RuleUpdate_Action, string(v.Action))
+	}
+	if v.Predicate != nil {
+		s.WriteStruct(schemas.RuleUpdate_Predicate)
+		v.Predicate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RuleUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleUpdate_Action:
+			var ev string
+			if err := d.ReadString(schemas.RuleUpdate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ChangeAction(ev)
+			return nil
+		case schemas.RuleUpdate_Predicate:
+			v.Predicate = &Predicate{}
+			return v.Predicate.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -1601,6 +2725,53 @@ type SampledHTTPRequest struct {
 	Timestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *SampledHTTPRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SampledHTTPRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SampledHTTPRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.SampledHTTPRequest_Action, *v.Action)
+	}
+	if v.Request != nil {
+		s.WriteStruct(schemas.SampledHTTPRequest_Request)
+		v.Request.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleWithinRuleGroup != nil {
+		s.WriteString(schemas.SampledHTTPRequest_RuleWithinRuleGroup, *v.RuleWithinRuleGroup)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.SampledHTTPRequest_Timestamp, *v.Timestamp)
+	}
+	if v.Weight != 0 {
+		s.WriteInt64(schemas.SampledHTTPRequest_Weight, v.Weight)
+	}
+}
+func (v *SampledHTTPRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SampledHTTPRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SampledHTTPRequest_Action:
+			v.Action = new(string)
+			return d.ReadString(schemas.SampledHTTPRequest_Action, v.Action)
+		case schemas.SampledHTTPRequest_Request:
+			v.Request = &HTTPRequest{}
+			return v.Request.Deserialize(d)
+		case schemas.SampledHTTPRequest_RuleWithinRuleGroup:
+			v.RuleWithinRuleGroup = new(string)
+			return d.ReadString(schemas.SampledHTTPRequest_RuleWithinRuleGroup, v.RuleWithinRuleGroup)
+		case schemas.SampledHTTPRequest_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.SampledHTTPRequest_Timestamp, v.Timestamp)
+		case schemas.SampledHTTPRequest_Weight:
+			return d.ReadInt64(schemas.SampledHTTPRequest_Weight, &v.Weight)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -1744,6 +2915,55 @@ type SizeConstraint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SizeConstraint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SizeConstraint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SizeConstraint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.SizeConstraint_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.FieldToMatch != nil {
+		s.WriteStruct(schemas.SizeConstraint_FieldToMatch)
+		v.FieldToMatch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Size != 0 {
+		s.WriteInt64(schemas.SizeConstraint_Size, v.Size)
+	}
+	if v.TextTransformation != "" {
+		s.WriteString(schemas.SizeConstraint_TextTransformation, string(v.TextTransformation))
+	}
+}
+func (v *SizeConstraint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SizeConstraint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SizeConstraint_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.SizeConstraint_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = ComparisonOperator(ev)
+			return nil
+		case schemas.SizeConstraint_FieldToMatch:
+			v.FieldToMatch = &FieldToMatch{}
+			return v.FieldToMatch.Deserialize(d)
+		case schemas.SizeConstraint_Size:
+			return d.ReadInt64(schemas.SizeConstraint_Size, &v.Size)
+		case schemas.SizeConstraint_TextTransformation:
+			var ev string
+			if err := d.ReadString(schemas.SizeConstraint_TextTransformation, &ev); err != nil {
+				return err
+			}
+			v.TextTransformation = TextTransformation(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -1781,6 +3001,37 @@ type SizeConstraintSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SizeConstraintSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SizeConstraintSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SizeConstraintSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.SizeConstraintSet_Name, *v.Name)
+	}
+	if v.SizeConstraintSetId != nil {
+		s.WriteString(schemas.SizeConstraintSet_SizeConstraintSetId, *v.SizeConstraintSetId)
+	}
+	serializeSizeConstraints(s, schemas.SizeConstraintSet_SizeConstraints, v.SizeConstraints)
+}
+func (v *SizeConstraintSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SizeConstraintSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SizeConstraintSet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SizeConstraintSet_Name, v.Name)
+		case schemas.SizeConstraintSet_SizeConstraintSetId:
+			v.SizeConstraintSetId = new(string)
+			return d.ReadString(schemas.SizeConstraintSet_SizeConstraintSetId, v.SizeConstraintSetId)
+		case schemas.SizeConstraintSet_SizeConstraints:
+			return deserializeSizeConstraints(d, schemas.SizeConstraintSet_SizeConstraints, &v.SizeConstraints)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -1810,6 +3061,34 @@ type SizeConstraintSetSummary struct {
 	SizeConstraintSetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SizeConstraintSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SizeConstraintSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SizeConstraintSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.SizeConstraintSetSummary_Name, *v.Name)
+	}
+	if v.SizeConstraintSetId != nil {
+		s.WriteString(schemas.SizeConstraintSetSummary_SizeConstraintSetId, *v.SizeConstraintSetId)
+	}
+}
+func (v *SizeConstraintSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SizeConstraintSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SizeConstraintSetSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SizeConstraintSetSummary_Name, v.Name)
+		case schemas.SizeConstraintSetSummary_SizeConstraintSetId:
+			v.SizeConstraintSetId = new(string)
+			return d.ReadString(schemas.SizeConstraintSetSummary_SizeConstraintSetId, v.SizeConstraintSetId)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -1842,6 +3121,40 @@ type SizeConstraintSetUpdate struct {
 	SizeConstraint *SizeConstraint
 
 	noSmithyDocumentSerde
+}
+
+func (v *SizeConstraintSetUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SizeConstraintSetUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SizeConstraintSetUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.SizeConstraintSetUpdate_Action, string(v.Action))
+	}
+	if v.SizeConstraint != nil {
+		s.WriteStruct(schemas.SizeConstraintSetUpdate_SizeConstraint)
+		v.SizeConstraint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SizeConstraintSetUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SizeConstraintSetUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SizeConstraintSetUpdate_Action:
+			var ev string
+			if err := d.ReadString(schemas.SizeConstraintSetUpdate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ChangeAction(ev)
+			return nil
+		case schemas.SizeConstraintSetUpdate_SizeConstraint:
+			v.SizeConstraint = &SizeConstraint{}
+			return v.SizeConstraint.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -1885,6 +3198,37 @@ type SqlInjectionMatchSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SqlInjectionMatchSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqlInjectionMatchSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqlInjectionMatchSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.SqlInjectionMatchSet_Name, *v.Name)
+	}
+	if v.SqlInjectionMatchSetId != nil {
+		s.WriteString(schemas.SqlInjectionMatchSet_SqlInjectionMatchSetId, *v.SqlInjectionMatchSetId)
+	}
+	serializeSqlInjectionMatchTuples(s, schemas.SqlInjectionMatchSet_SqlInjectionMatchTuples, v.SqlInjectionMatchTuples)
+}
+func (v *SqlInjectionMatchSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqlInjectionMatchSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SqlInjectionMatchSet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SqlInjectionMatchSet_Name, v.Name)
+		case schemas.SqlInjectionMatchSet_SqlInjectionMatchSetId:
+			v.SqlInjectionMatchSetId = new(string)
+			return d.ReadString(schemas.SqlInjectionMatchSet_SqlInjectionMatchSetId, v.SqlInjectionMatchSetId)
+		case schemas.SqlInjectionMatchSet_SqlInjectionMatchTuples:
+			return deserializeSqlInjectionMatchTuples(d, schemas.SqlInjectionMatchSet_SqlInjectionMatchTuples, &v.SqlInjectionMatchTuples)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -1917,6 +3261,34 @@ type SqlInjectionMatchSetSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SqlInjectionMatchSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqlInjectionMatchSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqlInjectionMatchSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.SqlInjectionMatchSetSummary_Name, *v.Name)
+	}
+	if v.SqlInjectionMatchSetId != nil {
+		s.WriteString(schemas.SqlInjectionMatchSetSummary_SqlInjectionMatchSetId, *v.SqlInjectionMatchSetId)
+	}
+}
+func (v *SqlInjectionMatchSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqlInjectionMatchSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SqlInjectionMatchSetSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SqlInjectionMatchSetSummary_Name, v.Name)
+		case schemas.SqlInjectionMatchSetSummary_SqlInjectionMatchSetId:
+			v.SqlInjectionMatchSetId = new(string)
+			return d.ReadString(schemas.SqlInjectionMatchSetSummary_SqlInjectionMatchSetId, v.SqlInjectionMatchSetId)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -1946,6 +3318,40 @@ type SqlInjectionMatchSetUpdate struct {
 	SqlInjectionMatchTuple *SqlInjectionMatchTuple
 
 	noSmithyDocumentSerde
+}
+
+func (v *SqlInjectionMatchSetUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqlInjectionMatchSetUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqlInjectionMatchSetUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.SqlInjectionMatchSetUpdate_Action, string(v.Action))
+	}
+	if v.SqlInjectionMatchTuple != nil {
+		s.WriteStruct(schemas.SqlInjectionMatchSetUpdate_SqlInjectionMatchTuple)
+		v.SqlInjectionMatchTuple.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SqlInjectionMatchSetUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqlInjectionMatchSetUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SqlInjectionMatchSetUpdate_Action:
+			var ev string
+			if err := d.ReadString(schemas.SqlInjectionMatchSetUpdate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ChangeAction(ev)
+			return nil
+		case schemas.SqlInjectionMatchSetUpdate_SqlInjectionMatchTuple:
+			v.SqlInjectionMatchTuple = &SqlInjectionMatchTuple{}
+			return v.SqlInjectionMatchTuple.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -2047,6 +3453,40 @@ type SqlInjectionMatchTuple struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SqlInjectionMatchTuple) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqlInjectionMatchTuple)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqlInjectionMatchTuple) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldToMatch != nil {
+		s.WriteStruct(schemas.SqlInjectionMatchTuple_FieldToMatch)
+		v.FieldToMatch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TextTransformation != "" {
+		s.WriteString(schemas.SqlInjectionMatchTuple_TextTransformation, string(v.TextTransformation))
+	}
+}
+func (v *SqlInjectionMatchTuple) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqlInjectionMatchTuple, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SqlInjectionMatchTuple_FieldToMatch:
+			v.FieldToMatch = &FieldToMatch{}
+			return v.FieldToMatch.Deserialize(d)
+		case schemas.SqlInjectionMatchTuple_TextTransformation:
+			var ev string
+			if err := d.ReadString(schemas.SqlInjectionMatchTuple_TextTransformation, &ev); err != nil {
+				return err
+			}
+			v.TextTransformation = TextTransformation(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -2083,6 +3523,40 @@ type SubscribedRuleGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubscribedRuleGroupSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubscribedRuleGroupSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubscribedRuleGroupSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MetricName != nil {
+		s.WriteString(schemas.SubscribedRuleGroupSummary_MetricName, *v.MetricName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SubscribedRuleGroupSummary_Name, *v.Name)
+	}
+	if v.RuleGroupId != nil {
+		s.WriteString(schemas.SubscribedRuleGroupSummary_RuleGroupId, *v.RuleGroupId)
+	}
+}
+func (v *SubscribedRuleGroupSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubscribedRuleGroupSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubscribedRuleGroupSummary_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.SubscribedRuleGroupSummary_MetricName, v.MetricName)
+		case schemas.SubscribedRuleGroupSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SubscribedRuleGroupSummary_Name, v.Name)
+		case schemas.SubscribedRuleGroupSummary_RuleGroupId:
+			v.RuleGroupId = new(string)
+			return d.ReadString(schemas.SubscribedRuleGroupSummary_RuleGroupId, v.RuleGroupId)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -2117,6 +3591,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -2145,6 +3647,31 @@ type TagInfoForResource struct {
 	TagList []Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *TagInfoForResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagInfoForResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagInfoForResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.TagInfoForResource_ResourceARN, *v.ResourceARN)
+	}
+	serializeTagList(s, schemas.TagInfoForResource_TagList, v.TagList)
+}
+func (v *TagInfoForResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagInfoForResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagInfoForResource_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.TagInfoForResource_ResourceARN, v.ResourceARN)
+		case schemas.TagInfoForResource_TagList:
+			return deserializeTagList(d, schemas.TagInfoForResource_TagList, &v.TagList)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -2193,6 +3720,34 @@ type TimeWindow struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimeWindow) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeWindow)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeWindow) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.TimeWindow_EndTime, *v.EndTime)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.TimeWindow_StartTime, *v.StartTime)
+	}
+}
+func (v *TimeWindow) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeWindow, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeWindow_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.TimeWindow_EndTime, v.EndTime)
+		case schemas.TimeWindow_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.TimeWindow_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -2228,6 +3783,32 @@ type WafAction struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WafAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WafAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WafAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.WafAction_Type, string(v.Type))
+	}
+}
+func (v *WafAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WafAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WafAction_Type:
+			var ev string
+			if err := d.ReadString(schemas.WafAction_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = WafActionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -2248,6 +3829,32 @@ type WafOverrideAction struct {
 	Type WafOverrideActionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *WafOverrideAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WafOverrideAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WafOverrideAction) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Type != "" {
+		s.WriteString(schemas.WafOverrideAction_Type, string(v.Type))
+	}
+}
+func (v *WafOverrideAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WafOverrideAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WafOverrideAction_Type:
+			var ev string
+			if err := d.ReadString(schemas.WafOverrideAction_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = WafOverrideActionType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -2307,6 +3914,57 @@ type WebACL struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WebACL) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebACL)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebACL) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultAction != nil {
+		s.WriteStruct(schemas.WebACL_DefaultAction)
+		v.DefaultAction.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetricName != nil {
+		s.WriteString(schemas.WebACL_MetricName, *v.MetricName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WebACL_Name, *v.Name)
+	}
+	serializeActivatedRules(s, schemas.WebACL_Rules, v.Rules)
+	if v.WebACLArn != nil {
+		s.WriteString(schemas.WebACL_WebACLArn, *v.WebACLArn)
+	}
+	if v.WebACLId != nil {
+		s.WriteString(schemas.WebACL_WebACLId, *v.WebACLId)
+	}
+}
+func (v *WebACL) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebACL, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebACL_DefaultAction:
+			v.DefaultAction = &WafAction{}
+			return v.DefaultAction.Deserialize(d)
+		case schemas.WebACL_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.WebACL_MetricName, v.MetricName)
+		case schemas.WebACL_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WebACL_Name, v.Name)
+		case schemas.WebACL_Rules:
+			return deserializeActivatedRules(d, schemas.WebACL_Rules, &v.Rules)
+		case schemas.WebACL_WebACLArn:
+			v.WebACLArn = new(string)
+			return d.ReadString(schemas.WebACL_WebACLArn, v.WebACLArn)
+		case schemas.WebACL_WebACLId:
+			v.WebACLId = new(string)
+			return d.ReadString(schemas.WebACL_WebACLId, v.WebACLId)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -2337,6 +3995,34 @@ type WebACLSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WebACLSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebACLSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebACLSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.WebACLSummary_Name, *v.Name)
+	}
+	if v.WebACLId != nil {
+		s.WriteString(schemas.WebACLSummary_WebACLId, *v.WebACLId)
+	}
+}
+func (v *WebACLSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebACLSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebACLSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WebACLSummary_Name, v.Name)
+		case schemas.WebACLSummary_WebACLId:
+			v.WebACLId = new(string)
+			return d.ReadString(schemas.WebACLSummary_WebACLId, v.WebACLId)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -2364,6 +4050,40 @@ type WebACLUpdate struct {
 	ActivatedRule *ActivatedRule
 
 	noSmithyDocumentSerde
+}
+
+func (v *WebACLUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WebACLUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WebACLUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.WebACLUpdate_Action, string(v.Action))
+	}
+	if v.ActivatedRule != nil {
+		s.WriteStruct(schemas.WebACLUpdate_ActivatedRule)
+		v.ActivatedRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WebACLUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WebACLUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WebACLUpdate_Action:
+			var ev string
+			if err := d.ReadString(schemas.WebACLUpdate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ChangeAction(ev)
+			return nil
+		case schemas.WebACLUpdate_ActivatedRule:
+			v.ActivatedRule = &ActivatedRule{}
+			return v.ActivatedRule.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -2406,6 +4126,37 @@ type XssMatchSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XssMatchSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XssMatchSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XssMatchSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.XssMatchSet_Name, *v.Name)
+	}
+	if v.XssMatchSetId != nil {
+		s.WriteString(schemas.XssMatchSet_XssMatchSetId, *v.XssMatchSetId)
+	}
+	serializeXssMatchTuples(s, schemas.XssMatchSet_XssMatchTuples, v.XssMatchTuples)
+}
+func (v *XssMatchSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XssMatchSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XssMatchSet_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.XssMatchSet_Name, v.Name)
+		case schemas.XssMatchSet_XssMatchSetId:
+			v.XssMatchSetId = new(string)
+			return d.ReadString(schemas.XssMatchSet_XssMatchSetId, v.XssMatchSetId)
+		case schemas.XssMatchSet_XssMatchTuples:
+			return deserializeXssMatchTuples(d, schemas.XssMatchSet_XssMatchTuples, &v.XssMatchTuples)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -2437,6 +4188,34 @@ type XssMatchSetSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XssMatchSetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XssMatchSetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XssMatchSetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.XssMatchSetSummary_Name, *v.Name)
+	}
+	if v.XssMatchSetId != nil {
+		s.WriteString(schemas.XssMatchSetSummary_XssMatchSetId, *v.XssMatchSetId)
+	}
+}
+func (v *XssMatchSetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XssMatchSetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XssMatchSetSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.XssMatchSetSummary_Name, v.Name)
+		case schemas.XssMatchSetSummary_XssMatchSetId:
+			v.XssMatchSetId = new(string)
+			return d.ReadString(schemas.XssMatchSetSummary_XssMatchSetId, v.XssMatchSetId)
+		}
+		return nil
+	})
+}
+
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
 // developer guide.
 //
@@ -2466,6 +4245,40 @@ type XssMatchSetUpdate struct {
 	XssMatchTuple *XssMatchTuple
 
 	noSmithyDocumentSerde
+}
+
+func (v *XssMatchSetUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XssMatchSetUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XssMatchSetUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.XssMatchSetUpdate_Action, string(v.Action))
+	}
+	if v.XssMatchTuple != nil {
+		s.WriteStruct(schemas.XssMatchSetUpdate_XssMatchTuple)
+		v.XssMatchTuple.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *XssMatchSetUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XssMatchSetUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XssMatchSetUpdate_Action:
+			var ev string
+			if err := d.ReadString(schemas.XssMatchSetUpdate_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = ChangeAction(ev)
+			return nil
+		case schemas.XssMatchSetUpdate_XssMatchTuple:
+			v.XssMatchTuple = &XssMatchTuple{}
+			return v.XssMatchTuple.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
@@ -2565,6 +4378,40 @@ type XssMatchTuple struct {
 	TextTransformation TextTransformation
 
 	noSmithyDocumentSerde
+}
+
+func (v *XssMatchTuple) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XssMatchTuple)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XssMatchTuple) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FieldToMatch != nil {
+		s.WriteStruct(schemas.XssMatchTuple_FieldToMatch)
+		v.FieldToMatch.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TextTransformation != "" {
+		s.WriteString(schemas.XssMatchTuple_TextTransformation, string(v.TextTransformation))
+	}
+}
+func (v *XssMatchTuple) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XssMatchTuple, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XssMatchTuple_FieldToMatch:
+			v.FieldToMatch = &FieldToMatch{}
+			return v.FieldToMatch.Deserialize(d)
+		case schemas.XssMatchTuple_TextTransformation:
+			var ev string
+			if err := d.ReadString(schemas.XssMatchTuple_TextTransformation, &ev); err != nil {
+				return err
+			}
+			v.TextTransformation = TextTransformation(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

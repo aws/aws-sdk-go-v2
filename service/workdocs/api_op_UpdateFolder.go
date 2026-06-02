@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,30 @@ type UpdateFolderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFolderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFolderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFolderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.UpdateFolderRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.FolderId != nil {
+		s.WriteString(schemas.UpdateFolderRequest_FolderId, *v.FolderId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateFolderRequest_Name, *v.Name)
+	}
+	if v.ParentFolderId != nil {
+		s.WriteString(schemas.UpdateFolderRequest_ParentFolderId, *v.ParentFolderId)
+	}
+	if v.ResourceState != "" {
+		s.WriteString(schemas.UpdateFolderRequest_ResourceState, string(v.ResourceState))
+	}
+}
+
 type UpdateFolderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,16 +85,29 @@ type UpdateFolderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFolderOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFolderOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateFolderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFolder, schemas.UpdateFolderRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFolder{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFolder, schemas.UpdateFolderRequest, nil), output: &UpdateFolderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFolder"); err != nil {

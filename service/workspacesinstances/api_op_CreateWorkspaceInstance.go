@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,29 @@ type CreateWorkspaceInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWorkspaceInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWorkspaceInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingConfiguration != nil {
+		s.WriteStruct(schemas.CreateWorkspaceInstanceRequest_BillingConfiguration)
+		v.BillingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateWorkspaceInstanceRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ManagedInstance != nil {
+		s.WriteStruct(schemas.CreateWorkspaceInstanceRequest_ManagedInstance)
+		v.ManagedInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateWorkspaceInstanceRequest_Tags, v.Tags)
+}
+
 // Returns the unique identifier for the newly created WorkSpaces Instance.
 type CreateWorkspaceInstanceOutput struct {
 
@@ -64,16 +89,24 @@ type CreateWorkspaceInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWorkspaceInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWorkspaceInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWorkspaceInstanceResponse_WorkspaceInstanceId:
+			v.WorkspaceInstanceId = new(string)
+			return d.ReadString(schemas.CreateWorkspaceInstanceResponse_WorkspaceInstanceId, v.WorkspaceInstanceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWorkspaceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateWorkspaceInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspaceInstance, schemas.CreateWorkspaceInstanceRequest, schemas.CreateWorkspaceInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateWorkspaceInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWorkspaceInstance, schemas.CreateWorkspaceInstanceRequest, schemas.CreateWorkspaceInstanceResponse), output: &CreateWorkspaceInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWorkspaceInstance"); err != nil {

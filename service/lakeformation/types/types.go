@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -36,9 +38,61 @@ type AddObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddObjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddObjectInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ETag != nil {
+		s.WriteString(schemas.AddObjectInput_ETag, *v.ETag)
+	}
+	serializePartitionValuesList(s, schemas.AddObjectInput_PartitionValues, v.PartitionValues)
+	if v.Size != 0 {
+		s.WriteInt64(schemas.AddObjectInput_Size, v.Size)
+	}
+	if v.Uri != nil {
+		s.WriteString(schemas.AddObjectInput_Uri, *v.Uri)
+	}
+}
+func (v *AddObjectInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddObjectInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddObjectInput_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.AddObjectInput_ETag, v.ETag)
+		case schemas.AddObjectInput_PartitionValues:
+			return deserializePartitionValuesList(d, schemas.AddObjectInput_PartitionValues, &v.PartitionValues)
+		case schemas.AddObjectInput_Size:
+			return d.ReadInt64(schemas.AddObjectInput_Size, &v.Size)
+		case schemas.AddObjectInput_Uri:
+			v.Uri = new(string)
+			return d.ReadString(schemas.AddObjectInput_Uri, v.Uri)
+		}
+		return nil
+	})
+}
+
 // A structure that you pass to indicate you want all rows in a filter.
 type AllRowsWildcard struct {
 	noSmithyDocumentSerde
+}
+
+func (v *AllRowsWildcard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AllRowsWildcard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AllRowsWildcard) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *AllRowsWildcard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AllRowsWildcard, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // A structure used to include auditing information on the privileged API.
@@ -52,6 +106,28 @@ type AuditContext struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AuditContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuditContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuditContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalAuditContext != nil {
+		s.WriteString(schemas.AuditContext_AdditionalAuditContext, *v.AdditionalAuditContext)
+	}
+}
+func (v *AuditContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuditContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuditContext_AdditionalAuditContext:
+			v.AdditionalAuditContext = new(string)
+			return d.ReadString(schemas.AuditContext_AdditionalAuditContext, v.AdditionalAuditContext)
+		}
+		return nil
+	})
+}
+
 // A list of failures when performing a batch grant or batch revoke operation.
 type BatchPermissionsFailureEntry struct {
 
@@ -62,6 +138,38 @@ type BatchPermissionsFailureEntry struct {
 	RequestEntry *BatchPermissionsRequestEntry
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchPermissionsFailureEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPermissionsFailureEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPermissionsFailureEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error != nil {
+		s.WriteStruct(schemas.BatchPermissionsFailureEntry_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RequestEntry != nil {
+		s.WriteStruct(schemas.BatchPermissionsFailureEntry_RequestEntry)
+		v.RequestEntry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchPermissionsFailureEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPermissionsFailureEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPermissionsFailureEntry_Error:
+			v.Error = &ErrorDetail{}
+			return v.Error.Deserialize(d)
+		case schemas.BatchPermissionsFailureEntry_RequestEntry:
+			v.RequestEntry = &BatchPermissionsRequestEntry{}
+			return v.RequestEntry.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A permission to a resource granted by batch operation to the principal.
@@ -91,6 +199,58 @@ type BatchPermissionsRequestEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPermissionsRequestEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPermissionsRequestEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPermissionsRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Condition != nil {
+		s.WriteStruct(schemas.BatchPermissionsRequestEntry_Condition)
+		v.Condition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.BatchPermissionsRequestEntry_Id, *v.Id)
+	}
+	serializePermissionList(s, schemas.BatchPermissionsRequestEntry_Permissions, v.Permissions)
+	serializePermissionList(s, schemas.BatchPermissionsRequestEntry_PermissionsWithGrantOption, v.PermissionsWithGrantOption)
+	if v.Principal != nil {
+		s.WriteStruct(schemas.BatchPermissionsRequestEntry_Principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.BatchPermissionsRequestEntry_Resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchPermissionsRequestEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPermissionsRequestEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPermissionsRequestEntry_Condition:
+			v.Condition = &Condition{}
+			return v.Condition.Deserialize(d)
+		case schemas.BatchPermissionsRequestEntry_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.BatchPermissionsRequestEntry_Id, v.Id)
+		case schemas.BatchPermissionsRequestEntry_Permissions:
+			return deserializePermissionList(d, schemas.BatchPermissionsRequestEntry_Permissions, &v.Permissions)
+		case schemas.BatchPermissionsRequestEntry_PermissionsWithGrantOption:
+			return deserializePermissionList(d, schemas.BatchPermissionsRequestEntry_PermissionsWithGrantOption, &v.PermissionsWithGrantOption)
+		case schemas.BatchPermissionsRequestEntry_Principal:
+			v.Principal = &DataLakePrincipal{}
+			return v.Principal.Deserialize(d)
+		case schemas.BatchPermissionsRequestEntry_Resource:
+			v.Resource = &Resource{}
+			return v.Resource.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A structure for the catalog object.
 type CatalogResource struct {
 
@@ -98,6 +258,28 @@ type CatalogResource struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CatalogResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CatalogResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CatalogResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.CatalogResource_Id, *v.Id)
+	}
+}
+func (v *CatalogResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CatalogResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CatalogResource_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CatalogResource_Id, v.Id)
+		}
+		return nil
+	})
 }
 
 // A structure containing the name of a column resource and the LF-tags attached
@@ -113,6 +295,31 @@ type ColumnLFTag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ColumnLFTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ColumnLFTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ColumnLFTag) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLFTagsList(s, schemas.ColumnLFTag_LFTags, v.LFTags)
+	if v.Name != nil {
+		s.WriteString(schemas.ColumnLFTag_Name, *v.Name)
+	}
+}
+func (v *ColumnLFTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ColumnLFTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ColumnLFTag_LFTags:
+			return deserializeLFTagsList(d, schemas.ColumnLFTag_LFTags, &v.LFTags)
+		case schemas.ColumnLFTag_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ColumnLFTag_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A wildcard object, consisting of an optional list of excluded column names or
 // indexes.
 type ColumnWildcard struct {
@@ -121,6 +328,25 @@ type ColumnWildcard struct {
 	ExcludedColumnNames []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ColumnWildcard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ColumnWildcard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ColumnWildcard) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeColumnNames(s, schemas.ColumnWildcard_ExcludedColumnNames, v.ExcludedColumnNames)
+}
+func (v *ColumnWildcard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ColumnWildcard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ColumnWildcard_ExcludedColumnNames:
+			return deserializeColumnNames(d, schemas.ColumnWildcard_ExcludedColumnNames, &v.ExcludedColumnNames)
+		}
+		return nil
+	})
 }
 
 // A Lake Formation condition, which applies to permissions and opt-ins that
@@ -132,6 +358,28 @@ type Condition struct {
 	Expression *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Condition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Condition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Condition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Expression != nil {
+		s.WriteString(schemas.Condition_Expression, *v.Expression)
+	}
+}
+func (v *Condition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Condition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Condition_Expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.Condition_Expression, v.Expression)
+		}
+		return nil
+	})
 }
 
 // A structure for the database object.
@@ -147,6 +395,34 @@ type DatabaseResource struct {
 	CatalogId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatabaseResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatabaseResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatabaseResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.DatabaseResource_CatalogId, *v.CatalogId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DatabaseResource_Name, *v.Name)
+	}
+}
+func (v *DatabaseResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatabaseResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatabaseResource_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.DatabaseResource_CatalogId, v.CatalogId)
+		case schemas.DatabaseResource_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DatabaseResource_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // A structure that describes certain columns on certain rows.
@@ -191,6 +467,71 @@ type DataCellsFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataCellsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataCellsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataCellsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeColumnNames(s, schemas.DataCellsFilter_ColumnNames, v.ColumnNames)
+	if v.ColumnWildcard != nil {
+		s.WriteStruct(schemas.DataCellsFilter_ColumnWildcard)
+		v.ColumnWildcard.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.DataCellsFilter_DatabaseName, *v.DatabaseName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DataCellsFilter_Name, *v.Name)
+	}
+	if v.RowFilter != nil {
+		s.WriteStruct(schemas.DataCellsFilter_RowFilter)
+		v.RowFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableCatalogId != nil {
+		s.WriteString(schemas.DataCellsFilter_TableCatalogId, *v.TableCatalogId)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.DataCellsFilter_TableName, *v.TableName)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.DataCellsFilter_VersionId, *v.VersionId)
+	}
+}
+func (v *DataCellsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataCellsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataCellsFilter_ColumnNames:
+			return deserializeColumnNames(d, schemas.DataCellsFilter_ColumnNames, &v.ColumnNames)
+		case schemas.DataCellsFilter_ColumnWildcard:
+			v.ColumnWildcard = &ColumnWildcard{}
+			return v.ColumnWildcard.Deserialize(d)
+		case schemas.DataCellsFilter_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.DataCellsFilter_DatabaseName, v.DatabaseName)
+		case schemas.DataCellsFilter_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DataCellsFilter_Name, v.Name)
+		case schemas.DataCellsFilter_RowFilter:
+			v.RowFilter = &RowFilter{}
+			return v.RowFilter.Deserialize(d)
+		case schemas.DataCellsFilter_TableCatalogId:
+			v.TableCatalogId = new(string)
+			return d.ReadString(schemas.DataCellsFilter_TableCatalogId, v.TableCatalogId)
+		case schemas.DataCellsFilter_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.DataCellsFilter_TableName, v.TableName)
+		case schemas.DataCellsFilter_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.DataCellsFilter_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
+
 // A structure for a data cells filter resource.
 type DataCellsFilterResource struct {
 
@@ -209,6 +550,46 @@ type DataCellsFilterResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataCellsFilterResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataCellsFilterResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataCellsFilterResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.DataCellsFilterResource_DatabaseName, *v.DatabaseName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DataCellsFilterResource_Name, *v.Name)
+	}
+	if v.TableCatalogId != nil {
+		s.WriteString(schemas.DataCellsFilterResource_TableCatalogId, *v.TableCatalogId)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.DataCellsFilterResource_TableName, *v.TableName)
+	}
+}
+func (v *DataCellsFilterResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataCellsFilterResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataCellsFilterResource_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.DataCellsFilterResource_DatabaseName, v.DatabaseName)
+		case schemas.DataCellsFilterResource_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DataCellsFilterResource_Name, v.Name)
+		case schemas.DataCellsFilterResource_TableCatalogId:
+			v.TableCatalogId = new(string)
+			return d.ReadString(schemas.DataCellsFilterResource_TableCatalogId, v.TableCatalogId)
+		case schemas.DataCellsFilterResource_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.DataCellsFilterResource_TableName, v.TableName)
+		}
+		return nil
+	})
+}
+
 // The Lake Formation principal. Supported principals are IAM users or IAM roles.
 type DataLakePrincipal struct {
 
@@ -216,6 +597,28 @@ type DataLakePrincipal struct {
 	DataLakePrincipalIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataLakePrincipal) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakePrincipal)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakePrincipal) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataLakePrincipalIdentifier != nil {
+		s.WriteString(schemas.DataLakePrincipal_DataLakePrincipalIdentifier, *v.DataLakePrincipalIdentifier)
+	}
+}
+func (v *DataLakePrincipal) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakePrincipal, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakePrincipal_DataLakePrincipalIdentifier:
+			v.DataLakePrincipalIdentifier = new(string)
+			return d.ReadString(schemas.DataLakePrincipal_DataLakePrincipalIdentifier, v.DataLakePrincipalIdentifier)
+		}
+		return nil
+	})
 }
 
 // A structure representing a list of Lake Formation principals designated as data
@@ -319,6 +722,58 @@ type DataLakeSettings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataLakeSettings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLakeSettings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLakeSettings) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowExternalDataFiltering != nil {
+		s.WriteBool(schemas.DataLakeSettings_AllowExternalDataFiltering, *v.AllowExternalDataFiltering)
+	}
+	if v.AllowFullTableExternalDataAccess != nil {
+		s.WriteBool(schemas.DataLakeSettings_AllowFullTableExternalDataAccess, *v.AllowFullTableExternalDataAccess)
+	}
+	serializeAuthorizedSessionTagValueList(s, schemas.DataLakeSettings_AuthorizedSessionTagValueList, v.AuthorizedSessionTagValueList)
+	serializePrincipalPermissionsList(s, schemas.DataLakeSettings_CreateDatabaseDefaultPermissions, v.CreateDatabaseDefaultPermissions)
+	serializePrincipalPermissionsList(s, schemas.DataLakeSettings_CreateTableDefaultPermissions, v.CreateTableDefaultPermissions)
+	serializeDataLakePrincipalList(s, schemas.DataLakeSettings_DataLakeAdmins, v.DataLakeAdmins)
+	serializeDataLakePrincipalList(s, schemas.DataLakeSettings_ExternalDataFilteringAllowList, v.ExternalDataFilteringAllowList)
+	serializeParametersMap(s, schemas.DataLakeSettings_Parameters, v.Parameters)
+	serializeDataLakePrincipalList(s, schemas.DataLakeSettings_ReadOnlyAdmins, v.ReadOnlyAdmins)
+	serializeTrustedResourceOwners(s, schemas.DataLakeSettings_TrustedResourceOwners, v.TrustedResourceOwners)
+}
+func (v *DataLakeSettings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLakeSettings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLakeSettings_AllowExternalDataFiltering:
+			v.AllowExternalDataFiltering = new(bool)
+			return d.ReadBool(schemas.DataLakeSettings_AllowExternalDataFiltering, v.AllowExternalDataFiltering)
+		case schemas.DataLakeSettings_AllowFullTableExternalDataAccess:
+			v.AllowFullTableExternalDataAccess = new(bool)
+			return d.ReadBool(schemas.DataLakeSettings_AllowFullTableExternalDataAccess, v.AllowFullTableExternalDataAccess)
+		case schemas.DataLakeSettings_AuthorizedSessionTagValueList:
+			return deserializeAuthorizedSessionTagValueList(d, schemas.DataLakeSettings_AuthorizedSessionTagValueList, &v.AuthorizedSessionTagValueList)
+		case schemas.DataLakeSettings_CreateDatabaseDefaultPermissions:
+			return deserializePrincipalPermissionsList(d, schemas.DataLakeSettings_CreateDatabaseDefaultPermissions, &v.CreateDatabaseDefaultPermissions)
+		case schemas.DataLakeSettings_CreateTableDefaultPermissions:
+			return deserializePrincipalPermissionsList(d, schemas.DataLakeSettings_CreateTableDefaultPermissions, &v.CreateTableDefaultPermissions)
+		case schemas.DataLakeSettings_DataLakeAdmins:
+			return deserializeDataLakePrincipalList(d, schemas.DataLakeSettings_DataLakeAdmins, &v.DataLakeAdmins)
+		case schemas.DataLakeSettings_ExternalDataFilteringAllowList:
+			return deserializeDataLakePrincipalList(d, schemas.DataLakeSettings_ExternalDataFilteringAllowList, &v.ExternalDataFilteringAllowList)
+		case schemas.DataLakeSettings_Parameters:
+			return deserializeParametersMap(d, schemas.DataLakeSettings_Parameters, &v.Parameters)
+		case schemas.DataLakeSettings_ReadOnlyAdmins:
+			return deserializeDataLakePrincipalList(d, schemas.DataLakeSettings_ReadOnlyAdmins, &v.ReadOnlyAdmins)
+		case schemas.DataLakeSettings_TrustedResourceOwners:
+			return deserializeTrustedResourceOwners(d, schemas.DataLakeSettings_TrustedResourceOwners, &v.TrustedResourceOwners)
+		}
+		return nil
+	})
+}
+
 // A structure for a data location object where permissions are granted or
 // revoked.
 type DataLocationResource struct {
@@ -334,6 +789,34 @@ type DataLocationResource struct {
 	CatalogId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataLocationResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataLocationResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataLocationResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.DataLocationResource_CatalogId, *v.CatalogId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.DataLocationResource_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *DataLocationResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataLocationResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataLocationResource_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.DataLocationResource_CatalogId, v.CatalogId)
+		case schemas.DataLocationResource_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.DataLocationResource_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
 }
 
 // An object to delete from the governed table.
@@ -355,6 +838,37 @@ type DeleteObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteObjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteObjectInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ETag != nil {
+		s.WriteString(schemas.DeleteObjectInput_ETag, *v.ETag)
+	}
+	serializePartitionValuesList(s, schemas.DeleteObjectInput_PartitionValues, v.PartitionValues)
+	if v.Uri != nil {
+		s.WriteString(schemas.DeleteObjectInput_Uri, *v.Uri)
+	}
+}
+func (v *DeleteObjectInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteObjectInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteObjectInput_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.DeleteObjectInput_ETag, v.ETag)
+		case schemas.DeleteObjectInput_PartitionValues:
+			return deserializePartitionValuesList(d, schemas.DeleteObjectInput_PartitionValues, &v.PartitionValues)
+		case schemas.DeleteObjectInput_Uri:
+			v.Uri = new(string)
+			return d.ReadString(schemas.DeleteObjectInput_Uri, v.Uri)
+		}
+		return nil
+	})
+}
+
 // A structure containing the additional details to be returned in the
 // AdditionalDetails attribute of PrincipalResourcePermissions .
 //
@@ -368,6 +882,25 @@ type DetailsMap struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetailsMap) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetailsMap)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetailsMap) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourceShareList(s, schemas.DetailsMap_ResourceShare, v.ResourceShare)
+}
+func (v *DetailsMap) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetailsMap, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetailsMap_ResourceShare:
+			return deserializeResourceShareList(d, schemas.DetailsMap_ResourceShare, &v.ResourceShare)
+		}
+		return nil
+	})
+}
+
 // Contains details about an error.
 type ErrorDetail struct {
 
@@ -378,6 +911,34 @@ type ErrorDetail struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ErrorDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.ErrorDetail_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ErrorDetail_ErrorMessage, *v.ErrorMessage)
+	}
+}
+func (v *ErrorDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorDetail_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.ErrorDetail_ErrorCode, v.ErrorCode)
+		case schemas.ErrorDetail_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ErrorDetail_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 // Statistics related to the processing of a query statement.
@@ -393,6 +954,37 @@ type ExecutionStatistics struct {
 	WorkUnitsExecutedCount int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExecutionStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AverageExecutionTimeMillis != 0 {
+		s.WriteInt64(schemas.ExecutionStatistics_AverageExecutionTimeMillis, v.AverageExecutionTimeMillis)
+	}
+	if v.DataScannedBytes != 0 {
+		s.WriteInt64(schemas.ExecutionStatistics_DataScannedBytes, v.DataScannedBytes)
+	}
+	if v.WorkUnitsExecutedCount != 0 {
+		s.WriteInt64(schemas.ExecutionStatistics_WorkUnitsExecutedCount, v.WorkUnitsExecutedCount)
+	}
+}
+func (v *ExecutionStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionStatistics_AverageExecutionTimeMillis:
+			return d.ReadInt64(schemas.ExecutionStatistics_AverageExecutionTimeMillis, &v.AverageExecutionTimeMillis)
+		case schemas.ExecutionStatistics_DataScannedBytes:
+			return d.ReadInt64(schemas.ExecutionStatistics_DataScannedBytes, &v.DataScannedBytes)
+		case schemas.ExecutionStatistics_WorkUnitsExecutedCount:
+			return d.ReadInt64(schemas.ExecutionStatistics_WorkUnitsExecutedCount, &v.WorkUnitsExecutedCount)
+		}
+		return nil
+	})
 }
 
 // Configuration for enabling external data filtering for third-party applications
@@ -413,6 +1005,35 @@ type ExternalFilteringConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExternalFilteringConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExternalFilteringConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExternalFilteringConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeScopeTargets(s, schemas.ExternalFilteringConfiguration_AuthorizedTargets, v.AuthorizedTargets)
+	if v.Status != "" {
+		s.WriteString(schemas.ExternalFilteringConfiguration_Status, string(v.Status))
+	}
+}
+func (v *ExternalFilteringConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExternalFilteringConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExternalFilteringConfiguration_AuthorizedTargets:
+			return deserializeScopeTargets(d, schemas.ExternalFilteringConfiguration_AuthorizedTargets, &v.AuthorizedTargets)
+		case schemas.ExternalFilteringConfiguration_Status:
+			var ev string
+			if err := d.ReadString(schemas.ExternalFilteringConfiguration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = EnableStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // This structure describes the filtering of columns in a table based on a filter
 // condition.
 type FilterCondition struct {
@@ -427,6 +1048,45 @@ type FilterCondition struct {
 	StringValueList []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FilterCondition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FilterCondition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FilterCondition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComparisonOperator != "" {
+		s.WriteString(schemas.FilterCondition_ComparisonOperator, string(v.ComparisonOperator))
+	}
+	if v.Field != "" {
+		s.WriteString(schemas.FilterCondition_Field, string(v.Field))
+	}
+	serializeStringValueList(s, schemas.FilterCondition_StringValueList, v.StringValueList)
+}
+func (v *FilterCondition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FilterCondition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FilterCondition_ComparisonOperator:
+			var ev string
+			if err := d.ReadString(schemas.FilterCondition_ComparisonOperator, &ev); err != nil {
+				return err
+			}
+			v.ComparisonOperator = ComparisonOperator(ev)
+			return nil
+		case schemas.FilterCondition_Field:
+			var ev string
+			if err := d.ReadString(schemas.FilterCondition_Field, &ev); err != nil {
+				return err
+			}
+			v.Field = FieldNameString(ev)
+			return nil
+		case schemas.FilterCondition_StringValueList:
+			return deserializeStringValueList(d, schemas.FilterCondition_StringValueList, &v.StringValueList)
+		}
+		return nil
+	})
 }
 
 // A single principal-resource pair that has Lake Formation permissins enforced.
@@ -451,6 +1111,58 @@ type LakeFormationOptInsInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LakeFormationOptInsInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LakeFormationOptInsInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LakeFormationOptInsInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Condition != nil {
+		s.WriteStruct(schemas.LakeFormationOptInsInfo_Condition)
+		v.Condition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.LakeFormationOptInsInfo_LastModified, *v.LastModified)
+	}
+	if v.LastUpdatedBy != nil {
+		s.WriteString(schemas.LakeFormationOptInsInfo_LastUpdatedBy, *v.LastUpdatedBy)
+	}
+	if v.Principal != nil {
+		s.WriteStruct(schemas.LakeFormationOptInsInfo_Principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.LakeFormationOptInsInfo_Resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LakeFormationOptInsInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LakeFormationOptInsInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LakeFormationOptInsInfo_Condition:
+			v.Condition = &Condition{}
+			return v.Condition.Deserialize(d)
+		case schemas.LakeFormationOptInsInfo_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.LakeFormationOptInsInfo_LastModified, v.LastModified)
+		case schemas.LakeFormationOptInsInfo_LastUpdatedBy:
+			v.LastUpdatedBy = new(string)
+			return d.ReadString(schemas.LakeFormationOptInsInfo_LastUpdatedBy, v.LastUpdatedBy)
+		case schemas.LakeFormationOptInsInfo_Principal:
+			v.Principal = &DataLakePrincipal{}
+			return v.Principal.Deserialize(d)
+		case schemas.LakeFormationOptInsInfo_Resource:
+			v.Resource = &Resource{}
+			return v.Resource.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A structure that allows an admin to grant user permissions on certain
 // conditions. For example, granting a role access to all columns that do not have
 // the LF-tag 'PII' in tables that have the LF-tag 'Prod'.
@@ -472,6 +1184,31 @@ type LFTag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LFTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LFTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LFTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TagKey != nil {
+		s.WriteString(schemas.LFTag_TagKey, *v.TagKey)
+	}
+	serializeTagValueList(s, schemas.LFTag_TagValues, v.TagValues)
+}
+func (v *LFTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LFTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LFTag_TagKey:
+			v.TagKey = new(string)
+			return d.ReadString(schemas.LFTag_TagKey, v.TagKey)
+		case schemas.LFTag_TagValues:
+			return deserializeTagValueList(d, schemas.LFTag_TagValues, &v.TagValues)
+		}
+		return nil
+	})
+}
+
 // A structure containing an error related to a TagResource or UnTagResource
 // operation.
 type LFTagError struct {
@@ -483,6 +1220,38 @@ type LFTagError struct {
 	LFTag *LFTagPair
 
 	noSmithyDocumentSerde
+}
+
+func (v *LFTagError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LFTagError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LFTagError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error != nil {
+		s.WriteStruct(schemas.LFTagError_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LFTag != nil {
+		s.WriteStruct(schemas.LFTagError_LFTag)
+		v.LFTag.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LFTagError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LFTagError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LFTagError_Error:
+			v.Error = &ErrorDetail{}
+			return v.Error.Deserialize(d)
+		case schemas.LFTagError_LFTag:
+			v.LFTag = &LFTagPair{}
+			return v.LFTag.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A structure consists LF-Tag expression name and catalog ID.
@@ -503,6 +1272,43 @@ type LFTagExpression struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LFTagExpression) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LFTagExpression)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LFTagExpression) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.LFTagExpression_CatalogId, *v.CatalogId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.LFTagExpression_Description, *v.Description)
+	}
+	serializeExpression(s, schemas.LFTagExpression_Expression, v.Expression)
+	if v.Name != nil {
+		s.WriteString(schemas.LFTagExpression_Name, *v.Name)
+	}
+}
+func (v *LFTagExpression) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LFTagExpression, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LFTagExpression_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.LFTagExpression_CatalogId, v.CatalogId)
+		case schemas.LFTagExpression_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.LFTagExpression_Description, v.Description)
+		case schemas.LFTagExpression_Expression:
+			return deserializeExpression(d, schemas.LFTagExpression_Expression, &v.Expression)
+		case schemas.LFTagExpression_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LFTagExpression_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A structure containing a LF-Tag expression (keys and values).
 type LFTagExpressionResource struct {
 
@@ -515,6 +1321,34 @@ type LFTagExpressionResource struct {
 	CatalogId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LFTagExpressionResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LFTagExpressionResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LFTagExpressionResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.LFTagExpressionResource_CatalogId, *v.CatalogId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.LFTagExpressionResource_Name, *v.Name)
+	}
+}
+func (v *LFTagExpressionResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LFTagExpressionResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LFTagExpressionResource_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.LFTagExpressionResource_CatalogId, v.CatalogId)
+		case schemas.LFTagExpressionResource_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.LFTagExpressionResource_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // A structure containing an LF-tag key and values for a resource.
@@ -539,6 +1373,37 @@ type LFTagKeyResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LFTagKeyResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LFTagKeyResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LFTagKeyResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.LFTagKeyResource_CatalogId, *v.CatalogId)
+	}
+	if v.TagKey != nil {
+		s.WriteString(schemas.LFTagKeyResource_TagKey, *v.TagKey)
+	}
+	serializeTagValueList(s, schemas.LFTagKeyResource_TagValues, v.TagValues)
+}
+func (v *LFTagKeyResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LFTagKeyResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LFTagKeyResource_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.LFTagKeyResource_CatalogId, v.CatalogId)
+		case schemas.LFTagKeyResource_TagKey:
+			v.TagKey = new(string)
+			return d.ReadString(schemas.LFTagKeyResource_TagKey, v.TagKey)
+		case schemas.LFTagKeyResource_TagValues:
+			return deserializeTagValueList(d, schemas.LFTagKeyResource_TagValues, &v.TagValues)
+		}
+		return nil
+	})
+}
+
 // A structure containing an LF-tag key-value pair.
 type LFTagPair struct {
 
@@ -559,6 +1424,37 @@ type LFTagPair struct {
 	CatalogId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LFTagPair) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LFTagPair)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LFTagPair) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.LFTagPair_CatalogId, *v.CatalogId)
+	}
+	if v.TagKey != nil {
+		s.WriteString(schemas.LFTagPair_TagKey, *v.TagKey)
+	}
+	serializeTagValueList(s, schemas.LFTagPair_TagValues, v.TagValues)
+}
+func (v *LFTagPair) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LFTagPair, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LFTagPair_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.LFTagPair_CatalogId, v.CatalogId)
+		case schemas.LFTagPair_TagKey:
+			v.TagKey = new(string)
+			return d.ReadString(schemas.LFTagPair_TagKey, v.TagKey)
+		case schemas.LFTagPair_TagValues:
+			return deserializeTagValueList(d, schemas.LFTagPair_TagValues, &v.TagValues)
+		}
+		return nil
+	})
 }
 
 // A structure containing a list of LF-tag conditions or saved LF-Tag expressions
@@ -588,6 +1484,47 @@ type LFTagPolicyResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LFTagPolicyResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LFTagPolicyResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LFTagPolicyResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.LFTagPolicyResource_CatalogId, *v.CatalogId)
+	}
+	serializeExpression(s, schemas.LFTagPolicyResource_Expression, v.Expression)
+	if v.ExpressionName != nil {
+		s.WriteString(schemas.LFTagPolicyResource_ExpressionName, *v.ExpressionName)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.LFTagPolicyResource_ResourceType, string(v.ResourceType))
+	}
+}
+func (v *LFTagPolicyResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LFTagPolicyResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LFTagPolicyResource_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.LFTagPolicyResource_CatalogId, v.CatalogId)
+		case schemas.LFTagPolicyResource_Expression:
+			return deserializeExpression(d, schemas.LFTagPolicyResource_Expression, &v.Expression)
+		case schemas.LFTagPolicyResource_ExpressionName:
+			v.ExpressionName = new(string)
+			return d.ReadString(schemas.LFTagPolicyResource_ExpressionName, v.ExpressionName)
+		case schemas.LFTagPolicyResource_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.LFTagPolicyResource_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A structure containing a list of partition values and table objects.
 type PartitionObjects struct {
 
@@ -600,6 +1537,28 @@ type PartitionObjects struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PartitionObjects) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartitionObjects)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartitionObjects) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTableObjectList(s, schemas.PartitionObjects_Objects, v.Objects)
+	serializePartitionValuesList(s, schemas.PartitionObjects_PartitionValues, v.PartitionValues)
+}
+func (v *PartitionObjects) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartitionObjects, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartitionObjects_Objects:
+			return deserializeTableObjectList(d, schemas.PartitionObjects_Objects, &v.Objects)
+		case schemas.PartitionObjects_PartitionValues:
+			return deserializePartitionValuesList(d, schemas.PartitionObjects_PartitionValues, &v.PartitionValues)
+		}
+		return nil
+	})
+}
+
 // Contains a list of values defining partitions.
 type PartitionValueList struct {
 
@@ -609,6 +1568,25 @@ type PartitionValueList struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PartitionValueList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartitionValueList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartitionValueList) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeValueStringList(s, schemas.PartitionValueList_Values, v.Values)
+}
+func (v *PartitionValueList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartitionValueList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartitionValueList_Values:
+			return deserializeValueStringList(d, schemas.PartitionValueList_Values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // Statistics related to the processing of a query statement.
@@ -629,6 +1607,42 @@ type PlanningStatistics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlanningStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlanningStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlanningStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EstimatedDataToScanBytes != 0 {
+		s.WriteInt64(schemas.PlanningStatistics_EstimatedDataToScanBytes, v.EstimatedDataToScanBytes)
+	}
+	if v.PlanningTimeMillis != 0 {
+		s.WriteInt64(schemas.PlanningStatistics_PlanningTimeMillis, v.PlanningTimeMillis)
+	}
+	if v.QueueTimeMillis != 0 {
+		s.WriteInt64(schemas.PlanningStatistics_QueueTimeMillis, v.QueueTimeMillis)
+	}
+	if v.WorkUnitsGeneratedCount != 0 {
+		s.WriteInt64(schemas.PlanningStatistics_WorkUnitsGeneratedCount, v.WorkUnitsGeneratedCount)
+	}
+}
+func (v *PlanningStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlanningStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlanningStatistics_EstimatedDataToScanBytes:
+			return d.ReadInt64(schemas.PlanningStatistics_EstimatedDataToScanBytes, &v.EstimatedDataToScanBytes)
+		case schemas.PlanningStatistics_PlanningTimeMillis:
+			return d.ReadInt64(schemas.PlanningStatistics_PlanningTimeMillis, &v.PlanningTimeMillis)
+		case schemas.PlanningStatistics_QueueTimeMillis:
+			return d.ReadInt64(schemas.PlanningStatistics_QueueTimeMillis, &v.QueueTimeMillis)
+		case schemas.PlanningStatistics_WorkUnitsGeneratedCount:
+			return d.ReadInt64(schemas.PlanningStatistics_WorkUnitsGeneratedCount, &v.WorkUnitsGeneratedCount)
+		}
+		return nil
+	})
+}
+
 // Permissions granted to a principal.
 type PrincipalPermissions struct {
 
@@ -639,6 +1653,33 @@ type PrincipalPermissions struct {
 	Principal *DataLakePrincipal
 
 	noSmithyDocumentSerde
+}
+
+func (v *PrincipalPermissions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrincipalPermissions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrincipalPermissions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePermissionList(s, schemas.PrincipalPermissions_Permissions, v.Permissions)
+	if v.Principal != nil {
+		s.WriteStruct(schemas.PrincipalPermissions_Principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PrincipalPermissions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrincipalPermissions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrincipalPermissions_Permissions:
+			return deserializePermissionList(d, schemas.PrincipalPermissions_Permissions, &v.Permissions)
+		case schemas.PrincipalPermissions_Principal:
+			v.Principal = &DataLakePrincipal{}
+			return v.Principal.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The permissions granted or revoked on a resource.
@@ -675,6 +1716,72 @@ type PrincipalResourcePermissions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrincipalResourcePermissions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrincipalResourcePermissions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrincipalResourcePermissions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdditionalDetails != nil {
+		s.WriteStruct(schemas.PrincipalResourcePermissions_AdditionalDetails)
+		v.AdditionalDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Condition != nil {
+		s.WriteStruct(schemas.PrincipalResourcePermissions_Condition)
+		v.Condition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastUpdated != nil {
+		s.WriteTime(schemas.PrincipalResourcePermissions_LastUpdated, *v.LastUpdated)
+	}
+	if v.LastUpdatedBy != nil {
+		s.WriteString(schemas.PrincipalResourcePermissions_LastUpdatedBy, *v.LastUpdatedBy)
+	}
+	serializePermissionList(s, schemas.PrincipalResourcePermissions_Permissions, v.Permissions)
+	serializePermissionList(s, schemas.PrincipalResourcePermissions_PermissionsWithGrantOption, v.PermissionsWithGrantOption)
+	if v.Principal != nil {
+		s.WriteStruct(schemas.PrincipalResourcePermissions_Principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.PrincipalResourcePermissions_Resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PrincipalResourcePermissions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrincipalResourcePermissions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrincipalResourcePermissions_AdditionalDetails:
+			v.AdditionalDetails = &DetailsMap{}
+			return v.AdditionalDetails.Deserialize(d)
+		case schemas.PrincipalResourcePermissions_Condition:
+			v.Condition = &Condition{}
+			return v.Condition.Deserialize(d)
+		case schemas.PrincipalResourcePermissions_LastUpdated:
+			v.LastUpdated = new(time.Time)
+			return d.ReadTime(schemas.PrincipalResourcePermissions_LastUpdated, v.LastUpdated)
+		case schemas.PrincipalResourcePermissions_LastUpdatedBy:
+			v.LastUpdatedBy = new(string)
+			return d.ReadString(schemas.PrincipalResourcePermissions_LastUpdatedBy, v.LastUpdatedBy)
+		case schemas.PrincipalResourcePermissions_Permissions:
+			return deserializePermissionList(d, schemas.PrincipalResourcePermissions_Permissions, &v.Permissions)
+		case schemas.PrincipalResourcePermissions_PermissionsWithGrantOption:
+			return deserializePermissionList(d, schemas.PrincipalResourcePermissions_PermissionsWithGrantOption, &v.PermissionsWithGrantOption)
+		case schemas.PrincipalResourcePermissions_Principal:
+			v.Principal = &DataLakePrincipal{}
+			return v.Principal.Deserialize(d)
+		case schemas.PrincipalResourcePermissions_Resource:
+			v.Resource = &Resource{}
+			return v.Resource.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A structure containing information about the query plan.
 type QueryPlanningContext struct {
 
@@ -703,6 +1810,49 @@ type QueryPlanningContext struct {
 	TransactionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *QueryPlanningContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryPlanningContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryPlanningContext) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.QueryPlanningContext_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.QueryPlanningContext_DatabaseName, *v.DatabaseName)
+	}
+	if v.QueryAsOfTime != nil {
+		s.WriteTime(schemas.QueryPlanningContext_QueryAsOfTime, *v.QueryAsOfTime)
+	}
+	serializeQueryParameterMap(s, schemas.QueryPlanningContext_QueryParameters, v.QueryParameters)
+	if v.TransactionId != nil {
+		s.WriteString(schemas.QueryPlanningContext_TransactionId, *v.TransactionId)
+	}
+}
+func (v *QueryPlanningContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryPlanningContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryPlanningContext_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.QueryPlanningContext_CatalogId, v.CatalogId)
+		case schemas.QueryPlanningContext_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.QueryPlanningContext_DatabaseName, v.DatabaseName)
+		case schemas.QueryPlanningContext_QueryAsOfTime:
+			v.QueryAsOfTime = new(time.Time)
+			return d.ReadTime(schemas.QueryPlanningContext_QueryAsOfTime, v.QueryAsOfTime)
+		case schemas.QueryPlanningContext_QueryParameters:
+			return deserializeQueryParameterMap(d, schemas.QueryPlanningContext_QueryParameters, &v.QueryParameters)
+		case schemas.QueryPlanningContext_TransactionId:
+			v.TransactionId = new(string)
+			return d.ReadString(schemas.QueryPlanningContext_TransactionId, v.TransactionId)
+		}
+		return nil
+	})
 }
 
 // A structure used as a protocol between query engines and Lake Formation or
@@ -734,6 +1884,49 @@ type QuerySessionContext struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QuerySessionContext) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuerySessionContext)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuerySessionContext) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAdditionalContextMap(s, schemas.QuerySessionContext_AdditionalContext, v.AdditionalContext)
+	if v.ClusterId != nil {
+		s.WriteString(schemas.QuerySessionContext_ClusterId, *v.ClusterId)
+	}
+	if v.QueryAuthorizationId != nil {
+		s.WriteString(schemas.QuerySessionContext_QueryAuthorizationId, *v.QueryAuthorizationId)
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.QuerySessionContext_QueryId, *v.QueryId)
+	}
+	if v.QueryStartTime != nil {
+		s.WriteTime(schemas.QuerySessionContext_QueryStartTime, *v.QueryStartTime)
+	}
+}
+func (v *QuerySessionContext) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuerySessionContext, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuerySessionContext_AdditionalContext:
+			return deserializeAdditionalContextMap(d, schemas.QuerySessionContext_AdditionalContext, &v.AdditionalContext)
+		case schemas.QuerySessionContext_ClusterId:
+			v.ClusterId = new(string)
+			return d.ReadString(schemas.QuerySessionContext_ClusterId, v.ClusterId)
+		case schemas.QuerySessionContext_QueryAuthorizationId:
+			v.QueryAuthorizationId = new(string)
+			return d.ReadString(schemas.QuerySessionContext_QueryAuthorizationId, v.QueryAuthorizationId)
+		case schemas.QuerySessionContext_QueryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.QuerySessionContext_QueryId, v.QueryId)
+		case schemas.QuerySessionContext_QueryStartTime:
+			v.QueryStartTime = new(time.Time)
+			return d.ReadTime(schemas.QuerySessionContext_QueryStartTime, v.QueryStartTime)
+		}
+		return nil
+	})
+}
+
 // Configuration for enabling trusted identity propagation with Redshift Connect.
 type RedshiftConnect struct {
 
@@ -744,6 +1937,32 @@ type RedshiftConnect struct {
 	Authorization ServiceAuthorization
 
 	noSmithyDocumentSerde
+}
+
+func (v *RedshiftConnect) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftConnect)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RedshiftConnect) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Authorization != "" {
+		s.WriteString(schemas.RedshiftConnect_Authorization, string(v.Authorization))
+	}
+}
+func (v *RedshiftConnect) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RedshiftConnect, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RedshiftConnect_Authorization:
+			var ev string
+			if err := d.ReadString(schemas.RedshiftConnect_Authorization, &ev); err != nil {
+				return err
+			}
+			v.Authorization = ServiceAuthorization(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A union structure representing different Redshift integration scopes.
@@ -763,6 +1982,14 @@ type RedshiftScopeUnionMemberRedshiftConnect struct {
 }
 
 func (*RedshiftScopeUnionMemberRedshiftConnect) isRedshiftScopeUnion() {}
+func (v *RedshiftScopeUnionMemberRedshiftConnect) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RedshiftScopeUnion_RedshiftConnect)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *RedshiftScopeUnionMemberRedshiftConnect) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A structure for the resource.
 type Resource struct {
@@ -805,6 +2032,94 @@ type Resource struct {
 	TableWithColumns *TableWithColumnsResource
 
 	noSmithyDocumentSerde
+}
+
+func (v *Resource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteStruct(schemas.Resource_Catalog)
+		v.Catalog.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataCellsFilter != nil {
+		s.WriteStruct(schemas.Resource_DataCellsFilter)
+		v.DataCellsFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataLocation != nil {
+		s.WriteStruct(schemas.Resource_DataLocation)
+		v.DataLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Database != nil {
+		s.WriteStruct(schemas.Resource_Database)
+		v.Database.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LFTag != nil {
+		s.WriteStruct(schemas.Resource_LFTag)
+		v.LFTag.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LFTagExpression != nil {
+		s.WriteStruct(schemas.Resource_LFTagExpression)
+		v.LFTagExpression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LFTagPolicy != nil {
+		s.WriteStruct(schemas.Resource_LFTagPolicy)
+		v.LFTagPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Table != nil {
+		s.WriteStruct(schemas.Resource_Table)
+		v.Table.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableWithColumns != nil {
+		s.WriteStruct(schemas.Resource_TableWithColumns)
+		v.TableWithColumns.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resource_Catalog:
+			v.Catalog = &CatalogResource{}
+			return v.Catalog.Deserialize(d)
+		case schemas.Resource_DataCellsFilter:
+			v.DataCellsFilter = &DataCellsFilterResource{}
+			return v.DataCellsFilter.Deserialize(d)
+		case schemas.Resource_DataLocation:
+			v.DataLocation = &DataLocationResource{}
+			return v.DataLocation.Deserialize(d)
+		case schemas.Resource_Database:
+			v.Database = &DatabaseResource{}
+			return v.Database.Deserialize(d)
+		case schemas.Resource_LFTag:
+			v.LFTag = &LFTagKeyResource{}
+			return v.LFTag.Deserialize(d)
+		case schemas.Resource_LFTagExpression:
+			v.LFTagExpression = &LFTagExpressionResource{}
+			return v.LFTagExpression.Deserialize(d)
+		case schemas.Resource_LFTagPolicy:
+			v.LFTagPolicy = &LFTagPolicyResource{}
+			return v.LFTagPolicy.Deserialize(d)
+		case schemas.Resource_Table:
+			v.Table = &TableResource{}
+			return v.Table.Deserialize(d)
+		case schemas.Resource_TableWithColumns:
+			v.TableWithColumns = &TableWithColumnsResource{}
+			return v.TableWithColumns.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A structure containing information about an Lake Formation resource.
@@ -850,6 +2165,74 @@ type ResourceInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpectedResourceOwnerAccount != nil {
+		s.WriteString(schemas.ResourceInfo_ExpectedResourceOwnerAccount, *v.ExpectedResourceOwnerAccount)
+	}
+	if v.HybridAccessEnabled != nil {
+		s.WriteBool(schemas.ResourceInfo_HybridAccessEnabled, *v.HybridAccessEnabled)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.ResourceInfo_LastModified, *v.LastModified)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ResourceInfo_ResourceArn, *v.ResourceArn)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.ResourceInfo_RoleArn, *v.RoleArn)
+	}
+	if v.VerificationStatus != "" {
+		s.WriteString(schemas.ResourceInfo_VerificationStatus, string(v.VerificationStatus))
+	}
+	if v.WithFederation != nil {
+		s.WriteBool(schemas.ResourceInfo_WithFederation, *v.WithFederation)
+	}
+	if v.WithPrivilegedAccess != nil {
+		s.WriteBool(schemas.ResourceInfo_WithPrivilegedAccess, *v.WithPrivilegedAccess)
+	}
+}
+func (v *ResourceInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceInfo_ExpectedResourceOwnerAccount:
+			v.ExpectedResourceOwnerAccount = new(string)
+			return d.ReadString(schemas.ResourceInfo_ExpectedResourceOwnerAccount, v.ExpectedResourceOwnerAccount)
+		case schemas.ResourceInfo_HybridAccessEnabled:
+			v.HybridAccessEnabled = new(bool)
+			return d.ReadBool(schemas.ResourceInfo_HybridAccessEnabled, v.HybridAccessEnabled)
+		case schemas.ResourceInfo_LastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.ResourceInfo_LastModified, v.LastModified)
+		case schemas.ResourceInfo_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ResourceInfo_ResourceArn, v.ResourceArn)
+		case schemas.ResourceInfo_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.ResourceInfo_RoleArn, v.RoleArn)
+		case schemas.ResourceInfo_VerificationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ResourceInfo_VerificationStatus, &ev); err != nil {
+				return err
+			}
+			v.VerificationStatus = VerificationStatus(ev)
+			return nil
+		case schemas.ResourceInfo_WithFederation:
+			v.WithFederation = new(bool)
+			return d.ReadBool(schemas.ResourceInfo_WithFederation, v.WithFederation)
+		case schemas.ResourceInfo_WithPrivilegedAccess:
+			v.WithPrivilegedAccess = new(bool)
+			return d.ReadBool(schemas.ResourceInfo_WithPrivilegedAccess, v.WithPrivilegedAccess)
+		}
+		return nil
+	})
+}
+
 // A PartiQL predicate.
 type RowFilter struct {
 
@@ -860,6 +2243,36 @@ type RowFilter struct {
 	FilterExpression *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RowFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RowFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RowFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllRowsWildcard != nil {
+		s.WriteStruct(schemas.RowFilter_AllRowsWildcard)
+		v.AllRowsWildcard.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FilterExpression != nil {
+		s.WriteString(schemas.RowFilter_FilterExpression, *v.FilterExpression)
+	}
+}
+func (v *RowFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RowFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RowFilter_AllRowsWildcard:
+			v.AllRowsWildcard = &AllRowsWildcard{}
+			return v.AllRowsWildcard.Deserialize(d)
+		case schemas.RowFilter_FilterExpression:
+			v.FilterExpression = new(string)
+			return d.ReadString(schemas.RowFilter_FilterExpression, v.FilterExpression)
+		}
+		return nil
+	})
 }
 
 // A union structure representing different service integration types.
@@ -879,6 +2292,12 @@ type ServiceIntegrationUnionMemberRedshift struct {
 }
 
 func (*ServiceIntegrationUnionMemberRedshift) isServiceIntegrationUnion() {}
+func (v *ServiceIntegrationUnionMemberRedshift) Serialize(s smithy.ShapeSerializer) {
+	serializeRedshiftServiceIntegrations(s, schemas.ServiceIntegrationUnion_Redshift, v.Value)
+}
+func (v *ServiceIntegrationUnionMemberRedshift) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeRedshiftServiceIntegrations(d, schemas.ServiceIntegrationUnion_Redshift, &v.Value)
+}
 
 // A structure describing the configuration and details of a storage optimizer.
 type StorageOptimizer struct {
@@ -908,6 +2327,53 @@ type StorageOptimizer struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StorageOptimizer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StorageOptimizer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StorageOptimizer) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStorageOptimizerConfig(s, schemas.StorageOptimizer_Config, v.Config)
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.StorageOptimizer_ErrorMessage, *v.ErrorMessage)
+	}
+	if v.LastRunDetails != nil {
+		s.WriteString(schemas.StorageOptimizer_LastRunDetails, *v.LastRunDetails)
+	}
+	if v.StorageOptimizerType != "" {
+		s.WriteString(schemas.StorageOptimizer_StorageOptimizerType, string(v.StorageOptimizerType))
+	}
+	if v.Warnings != nil {
+		s.WriteString(schemas.StorageOptimizer_Warnings, *v.Warnings)
+	}
+}
+func (v *StorageOptimizer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StorageOptimizer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StorageOptimizer_Config:
+			return deserializeStorageOptimizerConfig(d, schemas.StorageOptimizer_Config, &v.Config)
+		case schemas.StorageOptimizer_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.StorageOptimizer_ErrorMessage, v.ErrorMessage)
+		case schemas.StorageOptimizer_LastRunDetails:
+			v.LastRunDetails = new(string)
+			return d.ReadString(schemas.StorageOptimizer_LastRunDetails, v.LastRunDetails)
+		case schemas.StorageOptimizer_StorageOptimizerType:
+			var ev string
+			if err := d.ReadString(schemas.StorageOptimizer_StorageOptimizerType, &ev); err != nil {
+				return err
+			}
+			v.StorageOptimizerType = OptimizerType(ev)
+			return nil
+		case schemas.StorageOptimizer_Warnings:
+			v.Warnings = new(string)
+			return d.ReadString(schemas.StorageOptimizer_Warnings, v.Warnings)
+		}
+		return nil
+	})
+}
+
 // Specifies the details of a governed table.
 type TableObject struct {
 
@@ -922,6 +2388,39 @@ type TableObject struct {
 	Uri *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TableObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableObject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ETag != nil {
+		s.WriteString(schemas.TableObject_ETag, *v.ETag)
+	}
+	if v.Size != 0 {
+		s.WriteInt64(schemas.TableObject_Size, v.Size)
+	}
+	if v.Uri != nil {
+		s.WriteString(schemas.TableObject_Uri, *v.Uri)
+	}
+}
+func (v *TableObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableObject_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.TableObject_ETag, v.ETag)
+		case schemas.TableObject_Size:
+			return d.ReadInt64(schemas.TableObject_Size, &v.Size)
+		case schemas.TableObject_Uri:
+			v.Uri = new(string)
+			return d.ReadString(schemas.TableObject_Uri, v.Uri)
+		}
+		return nil
+	})
 }
 
 // A structure for the table object. A table is a metadata definition that
@@ -950,9 +2449,67 @@ type TableResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TableResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.TableResource_CatalogId, *v.CatalogId)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.TableResource_DatabaseName, *v.DatabaseName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TableResource_Name, *v.Name)
+	}
+	if v.TableWildcard != nil {
+		s.WriteStruct(schemas.TableResource_TableWildcard)
+		v.TableWildcard.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TableResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableResource_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.TableResource_CatalogId, v.CatalogId)
+		case schemas.TableResource_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.TableResource_DatabaseName, v.DatabaseName)
+		case schemas.TableResource_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TableResource_Name, v.Name)
+		case schemas.TableResource_TableWildcard:
+			v.TableWildcard = &TableWildcard{}
+			return v.TableWildcard.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A wildcard object representing every table under a database.
 type TableWildcard struct {
 	noSmithyDocumentSerde
+}
+
+func (v *TableWildcard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableWildcard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableWildcard) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *TableWildcard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableWildcard, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // A structure for a table with columns object. This object is only used when
@@ -990,6 +2547,51 @@ type TableWithColumnsResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TableWithColumnsResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TableWithColumnsResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TableWithColumnsResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.TableWithColumnsResource_CatalogId, *v.CatalogId)
+	}
+	serializeColumnNames(s, schemas.TableWithColumnsResource_ColumnNames, v.ColumnNames)
+	if v.ColumnWildcard != nil {
+		s.WriteStruct(schemas.TableWithColumnsResource_ColumnWildcard)
+		v.ColumnWildcard.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.TableWithColumnsResource_DatabaseName, *v.DatabaseName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TableWithColumnsResource_Name, *v.Name)
+	}
+}
+func (v *TableWithColumnsResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TableWithColumnsResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TableWithColumnsResource_CatalogId:
+			v.CatalogId = new(string)
+			return d.ReadString(schemas.TableWithColumnsResource_CatalogId, v.CatalogId)
+		case schemas.TableWithColumnsResource_ColumnNames:
+			return deserializeColumnNames(d, schemas.TableWithColumnsResource_ColumnNames, &v.ColumnNames)
+		case schemas.TableWithColumnsResource_ColumnWildcard:
+			v.ColumnWildcard = &ColumnWildcard{}
+			return v.ColumnWildcard.Deserialize(d)
+		case schemas.TableWithColumnsResource_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.TableWithColumnsResource_DatabaseName, v.DatabaseName)
+		case schemas.TableWithColumnsResource_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TableWithColumnsResource_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A structure describing a database resource with LF-tags.
 type TaggedDatabase struct {
 
@@ -1000,6 +2602,33 @@ type TaggedDatabase struct {
 	LFTags []LFTagPair
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaggedDatabase) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaggedDatabase)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaggedDatabase) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Database != nil {
+		s.WriteStruct(schemas.TaggedDatabase_Database)
+		v.Database.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLFTagsList(s, schemas.TaggedDatabase_LFTags, v.LFTags)
+}
+func (v *TaggedDatabase) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaggedDatabase, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaggedDatabase_Database:
+			v.Database = &DatabaseResource{}
+			return v.Database.Deserialize(d)
+		case schemas.TaggedDatabase_LFTags:
+			return deserializeLFTagsList(d, schemas.TaggedDatabase_LFTags, &v.LFTags)
+		}
+		return nil
+	})
 }
 
 // A structure describing a table resource with LF-tags.
@@ -1018,6 +2647,39 @@ type TaggedTable struct {
 	Table *TableResource
 
 	noSmithyDocumentSerde
+}
+
+func (v *TaggedTable) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TaggedTable)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TaggedTable) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLFTagsList(s, schemas.TaggedTable_LFTagOnDatabase, v.LFTagOnDatabase)
+	serializeColumnLFTagsList(s, schemas.TaggedTable_LFTagsOnColumns, v.LFTagsOnColumns)
+	serializeLFTagsList(s, schemas.TaggedTable_LFTagsOnTable, v.LFTagsOnTable)
+	if v.Table != nil {
+		s.WriteStruct(schemas.TaggedTable_Table)
+		v.Table.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TaggedTable) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TaggedTable, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TaggedTable_LFTagOnDatabase:
+			return deserializeLFTagsList(d, schemas.TaggedTable_LFTagOnDatabase, &v.LFTagOnDatabase)
+		case schemas.TaggedTable_LFTagsOnColumns:
+			return deserializeColumnLFTagsList(d, schemas.TaggedTable_LFTagsOnColumns, &v.LFTagsOnColumns)
+		case schemas.TaggedTable_LFTagsOnTable:
+			return deserializeLFTagsList(d, schemas.TaggedTable_LFTagsOnTable, &v.LFTagsOnTable)
+		case schemas.TaggedTable_Table:
+			v.Table = &TableResource{}
+			return v.Table.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A temporary set of credentials for an Lake Formation user. These credentials
@@ -1044,6 +2706,46 @@ type TemporaryCredentials struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TemporaryCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemporaryCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemporaryCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKeyId != nil {
+		s.WriteString(schemas.TemporaryCredentials_AccessKeyId, *v.AccessKeyId)
+	}
+	if v.Expiration != nil {
+		s.WriteTime(schemas.TemporaryCredentials_Expiration, *v.Expiration)
+	}
+	if v.SecretAccessKey != nil {
+		s.WriteString(schemas.TemporaryCredentials_SecretAccessKey, *v.SecretAccessKey)
+	}
+	if v.SessionToken != nil {
+		s.WriteString(schemas.TemporaryCredentials_SessionToken, *v.SessionToken)
+	}
+}
+func (v *TemporaryCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemporaryCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemporaryCredentials_AccessKeyId:
+			v.AccessKeyId = new(string)
+			return d.ReadString(schemas.TemporaryCredentials_AccessKeyId, v.AccessKeyId)
+		case schemas.TemporaryCredentials_Expiration:
+			v.Expiration = new(time.Time)
+			return d.ReadTime(schemas.TemporaryCredentials_Expiration, v.Expiration)
+		case schemas.TemporaryCredentials_SecretAccessKey:
+			v.SecretAccessKey = new(string)
+			return d.ReadString(schemas.TemporaryCredentials_SecretAccessKey, v.SecretAccessKey)
+		case schemas.TemporaryCredentials_SessionToken:
+			v.SessionToken = new(string)
+			return d.ReadString(schemas.TemporaryCredentials_SessionToken, v.SessionToken)
+		}
+		return nil
+	})
+}
+
 // A structure that contains information about a transaction.
 type TransactionDescription struct {
 
@@ -1063,6 +2765,50 @@ type TransactionDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransactionDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransactionDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransactionDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransactionEndTime != nil {
+		s.WriteTime(schemas.TransactionDescription_TransactionEndTime, *v.TransactionEndTime)
+	}
+	if v.TransactionId != nil {
+		s.WriteString(schemas.TransactionDescription_TransactionId, *v.TransactionId)
+	}
+	if v.TransactionStartTime != nil {
+		s.WriteTime(schemas.TransactionDescription_TransactionStartTime, *v.TransactionStartTime)
+	}
+	if v.TransactionStatus != "" {
+		s.WriteString(schemas.TransactionDescription_TransactionStatus, string(v.TransactionStatus))
+	}
+}
+func (v *TransactionDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransactionDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransactionDescription_TransactionEndTime:
+			v.TransactionEndTime = new(time.Time)
+			return d.ReadTime(schemas.TransactionDescription_TransactionEndTime, v.TransactionEndTime)
+		case schemas.TransactionDescription_TransactionId:
+			v.TransactionId = new(string)
+			return d.ReadString(schemas.TransactionDescription_TransactionId, v.TransactionId)
+		case schemas.TransactionDescription_TransactionStartTime:
+			v.TransactionStartTime = new(time.Time)
+			return d.ReadTime(schemas.TransactionDescription_TransactionStartTime, v.TransactionStartTime)
+		case schemas.TransactionDescription_TransactionStatus:
+			var ev string
+			if err := d.ReadString(schemas.TransactionDescription_TransactionStatus, &ev); err != nil {
+				return err
+			}
+			v.TransactionStatus = TransactionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // An object that defines an Amazon S3 object to be deleted if a transaction
 // cancels, provided that VirtualPut was called before writing the object.
 type VirtualObject struct {
@@ -1076,6 +2822,34 @@ type VirtualObject struct {
 	ETag *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualObject) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualObject)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualObject) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ETag != nil {
+		s.WriteString(schemas.VirtualObject_ETag, *v.ETag)
+	}
+	if v.Uri != nil {
+		s.WriteString(schemas.VirtualObject_Uri, *v.Uri)
+	}
+}
+func (v *VirtualObject) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualObject, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualObject_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.VirtualObject_ETag, v.ETag)
+		case schemas.VirtualObject_Uri:
+			v.Uri = new(string)
+			return d.ReadString(schemas.VirtualObject_Uri, v.Uri)
+		}
+		return nil
+	})
 }
 
 // Defines the valid range of work unit IDs for querying the execution service.
@@ -1099,6 +2873,38 @@ type WorkUnitRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkUnitRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkUnitRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkUnitRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkUnitIdMax != 0 {
+		s.WriteInt64(schemas.WorkUnitRange_WorkUnitIdMax, v.WorkUnitIdMax)
+	}
+	if v.WorkUnitIdMin != 0 {
+		s.WriteInt64(schemas.WorkUnitRange_WorkUnitIdMin, v.WorkUnitIdMin)
+	}
+	if v.WorkUnitToken != nil {
+		s.WriteString(schemas.WorkUnitRange_WorkUnitToken, *v.WorkUnitToken)
+	}
+}
+func (v *WorkUnitRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkUnitRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkUnitRange_WorkUnitIdMax:
+			return d.ReadInt64(schemas.WorkUnitRange_WorkUnitIdMax, &v.WorkUnitIdMax)
+		case schemas.WorkUnitRange_WorkUnitIdMin:
+			return d.ReadInt64(schemas.WorkUnitRange_WorkUnitIdMin, &v.WorkUnitIdMin)
+		case schemas.WorkUnitRange_WorkUnitToken:
+			v.WorkUnitToken = new(string)
+			return d.ReadString(schemas.WorkUnitRange_WorkUnitToken, v.WorkUnitToken)
+		}
+		return nil
+	})
+}
+
 // Defines an object to add to or delete from a governed table.
 type WriteOperation struct {
 
@@ -1109,6 +2915,38 @@ type WriteOperation struct {
 	DeleteObject *DeleteObjectInput
 
 	noSmithyDocumentSerde
+}
+
+func (v *WriteOperation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WriteOperation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WriteOperation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddObject != nil {
+		s.WriteStruct(schemas.WriteOperation_AddObject)
+		v.AddObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeleteObject != nil {
+		s.WriteStruct(schemas.WriteOperation_DeleteObject)
+		v.DeleteObject.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WriteOperation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WriteOperation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WriteOperation_AddObject:
+			v.AddObject = &AddObjectInput{}
+			return v.AddObject.Deserialize(d)
+		case schemas.WriteOperation_DeleteObject:
+			v.DeleteObject = &DeleteObjectInput{}
+			return v.DeleteObject.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

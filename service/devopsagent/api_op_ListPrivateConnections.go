@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,15 @@ type ListPrivateConnectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrivateConnectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPrivateConnectionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPrivateConnectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 // Output containing the list of Private Connections.
 type ListPrivateConnectionsOutput struct {
 
@@ -46,16 +57,23 @@ type ListPrivateConnectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPrivateConnectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPrivateConnectionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPrivateConnectionsOutput_privateConnections:
+			return deserializePrivateConnectionSummaryList(d, schemas.ListPrivateConnectionsOutput_privateConnections, &v.PrivateConnections)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPrivateConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListPrivateConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrivateConnections, schemas.ListPrivateConnectionsInput, schemas.ListPrivateConnectionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListPrivateConnections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPrivateConnections, schemas.ListPrivateConnectionsInput, schemas.ListPrivateConnectionsOutput), output: &ListPrivateConnectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPrivateConnections"); err != nil {

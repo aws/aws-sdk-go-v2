@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,30 @@ type CreateApiKeyCredentialProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApiKeyCredentialProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApiKeyCredentialProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApiKeyCredentialProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiKey != nil {
+		s.WriteString(schemas.CreateApiKeyCredentialProviderRequest_apiKey, *v.ApiKey)
+	}
+	if v.ApiKeySecretConfig != nil {
+		s.WriteStruct(schemas.CreateApiKeyCredentialProviderRequest_apiKeySecretConfig)
+		v.ApiKeySecretConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApiKeySecretSource != "" {
+		s.WriteString(schemas.CreateApiKeyCredentialProviderRequest_apiKeySecretSource, string(v.ApiKeySecretSource))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateApiKeyCredentialProviderRequest_name, *v.Name)
+	}
+	serializeTagsMap(s, schemas.CreateApiKeyCredentialProviderRequest_tags, v.Tags)
+}
+
 type CreateApiKeyCredentialProviderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the secret containing the API key.
@@ -88,16 +114,40 @@ type CreateApiKeyCredentialProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApiKeyCredentialProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApiKeyCredentialProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApiKeyCredentialProviderResponse_apiKeySecretArn:
+			v.ApiKeySecretArn = &types.Secret{}
+			return v.ApiKeySecretArn.Deserialize(d)
+		case schemas.CreateApiKeyCredentialProviderResponse_apiKeySecretJsonKey:
+			v.ApiKeySecretJsonKey = new(string)
+			return d.ReadString(schemas.CreateApiKeyCredentialProviderResponse_apiKeySecretJsonKey, v.ApiKeySecretJsonKey)
+		case schemas.CreateApiKeyCredentialProviderResponse_apiKeySecretSource:
+			var ev string
+			if err := d.ReadString(schemas.CreateApiKeyCredentialProviderResponse_apiKeySecretSource, &ev); err != nil {
+				return err
+			}
+			v.ApiKeySecretSource = types.SecretSourceType(ev)
+			return nil
+		case schemas.CreateApiKeyCredentialProviderResponse_credentialProviderArn:
+			v.CredentialProviderArn = new(string)
+			return d.ReadString(schemas.CreateApiKeyCredentialProviderResponse_credentialProviderArn, v.CredentialProviderArn)
+		case schemas.CreateApiKeyCredentialProviderResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateApiKeyCredentialProviderResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApiKeyCredentialProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApiKeyCredentialProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApiKeyCredentialProvider, schemas.CreateApiKeyCredentialProviderRequest, schemas.CreateApiKeyCredentialProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApiKeyCredentialProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApiKeyCredentialProvider, schemas.CreateApiKeyCredentialProviderRequest, schemas.CreateApiKeyCredentialProviderResponse), output: &CreateApiKeyCredentialProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateApiKeyCredentialProvider"); err != nil {

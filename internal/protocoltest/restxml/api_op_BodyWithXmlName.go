@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +36,30 @@ type BodyWithXmlNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BodyWithXmlNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BodyWithXmlNameInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BodyWithXmlNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nested != nil {
+		s.WriteStruct(schemas.BodyWithXmlNameInputOutput_nested)
+		v.Nested.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BodyWithXmlNameInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BodyWithXmlNameInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BodyWithXmlNameInputOutput_nested:
+			v.Nested = &types.PayloadWithXmlName{}
+			return v.Nested.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type BodyWithXmlNameOutput struct {
 	Nested *types.PayloadWithXmlName
 
@@ -43,16 +69,37 @@ type BodyWithXmlNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BodyWithXmlNameOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BodyWithXmlNameInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BodyWithXmlNameOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nested != nil {
+		s.WriteStruct(schemas.BodyWithXmlNameInputOutput_nested)
+		v.Nested.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BodyWithXmlNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BodyWithXmlNameInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BodyWithXmlNameInputOutput_nested:
+			v.Nested = &types.PayloadWithXmlName{}
+			return v.Nested.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBodyWithXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpBodyWithXmlName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BodyWithXmlName, schemas.BodyWithXmlNameInputOutput, schemas.BodyWithXmlNameInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpBodyWithXmlName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BodyWithXmlName, schemas.BodyWithXmlNameInputOutput, schemas.BodyWithXmlNameInputOutput), output: &BodyWithXmlNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BodyWithXmlName"); err != nil {

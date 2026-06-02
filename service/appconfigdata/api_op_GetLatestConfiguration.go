@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appconfigdata/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,28 @@ type GetLatestConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLatestConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLatestConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLatestConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationToken != nil {
+		s.WriteString(schemas.GetLatestConfigurationRequest_ConfigurationToken, *v.ConfigurationToken)
+	}
+}
+func (v *GetLatestConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLatestConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLatestConfigurationRequest_ConfigurationToken:
+			v.ConfigurationToken = new(string)
+			return d.ReadString(schemas.GetLatestConfigurationRequest_ConfigurationToken, v.ConfigurationToken)
+		}
+		return nil
+	})
+}
+
 type GetLatestConfigurationOutput struct {
 
 	// The data of the configuration. This may be empty if the client already has the
@@ -92,16 +116,57 @@ type GetLatestConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLatestConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLatestConfigurationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLatestConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configuration != nil {
+		s.WriteBlob(schemas.GetLatestConfigurationResponse_Configuration, v.Configuration)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.GetLatestConfigurationResponse_ContentType, *v.ContentType)
+	}
+	if v.NextPollConfigurationToken != nil {
+		s.WriteString(schemas.GetLatestConfigurationResponse_NextPollConfigurationToken, *v.NextPollConfigurationToken)
+	}
+	if v.NextPollIntervalInSeconds != 0 {
+		s.WriteInt32(schemas.GetLatestConfigurationResponse_NextPollIntervalInSeconds, v.NextPollIntervalInSeconds)
+	}
+	if v.VersionLabel != nil {
+		s.WriteString(schemas.GetLatestConfigurationResponse_VersionLabel, *v.VersionLabel)
+	}
+}
+func (v *GetLatestConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLatestConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLatestConfigurationResponse_Configuration:
+			return d.ReadBlob(schemas.GetLatestConfigurationResponse_Configuration, &v.Configuration)
+		case schemas.GetLatestConfigurationResponse_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.GetLatestConfigurationResponse_ContentType, v.ContentType)
+		case schemas.GetLatestConfigurationResponse_NextPollConfigurationToken:
+			v.NextPollConfigurationToken = new(string)
+			return d.ReadString(schemas.GetLatestConfigurationResponse_NextPollConfigurationToken, v.NextPollConfigurationToken)
+		case schemas.GetLatestConfigurationResponse_NextPollIntervalInSeconds:
+			return d.ReadInt32(schemas.GetLatestConfigurationResponse_NextPollIntervalInSeconds, &v.NextPollIntervalInSeconds)
+		case schemas.GetLatestConfigurationResponse_VersionLabel:
+			v.VersionLabel = new(string)
+			return d.ReadString(schemas.GetLatestConfigurationResponse_VersionLabel, v.VersionLabel)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLatestConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLatestConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLatestConfiguration, schemas.GetLatestConfigurationRequest, schemas.GetLatestConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLatestConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLatestConfiguration, schemas.GetLatestConfigurationRequest, schemas.GetLatestConfigurationResponse), output: &GetLatestConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLatestConfiguration"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,27 @@ type CancelBenefitApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelBenefitApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelBenefitApplicationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelBenefitApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.CancelBenefitApplicationInput_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CancelBenefitApplicationInput_ClientToken, *v.ClientToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.CancelBenefitApplicationInput_Identifier, *v.Identifier)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.CancelBenefitApplicationInput_Reason, *v.Reason)
+	}
+}
+
 type CancelBenefitApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,16 +82,21 @@ type CancelBenefitApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelBenefitApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelBenefitApplicationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelBenefitApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCancelBenefitApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelBenefitApplication, schemas.CancelBenefitApplicationInput, schemas.CancelBenefitApplicationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCancelBenefitApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelBenefitApplication, schemas.CancelBenefitApplicationInput, schemas.CancelBenefitApplicationOutput), output: &CancelBenefitApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelBenefitApplication"); err != nil {

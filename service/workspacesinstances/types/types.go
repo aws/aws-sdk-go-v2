@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -19,6 +21,32 @@ type BillingConfiguration struct {
 	BillingMode BillingMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *BillingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingMode != "" {
+		s.WriteString(schemas.BillingConfiguration_BillingMode, string(v.BillingMode))
+	}
+}
+func (v *BillingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingConfiguration_BillingMode:
+			var ev string
+			if err := d.ReadString(schemas.BillingConfiguration_BillingMode, &ev); err != nil {
+				return err
+			}
+			v.BillingMode = BillingMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Defines device mapping for WorkSpace Instance storage.
@@ -39,6 +67,48 @@ type BlockDeviceMappingRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BlockDeviceMappingRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BlockDeviceMappingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BlockDeviceMappingRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceName != nil {
+		s.WriteString(schemas.BlockDeviceMappingRequest_DeviceName, *v.DeviceName)
+	}
+	if v.Ebs != nil {
+		s.WriteStruct(schemas.BlockDeviceMappingRequest_Ebs)
+		v.Ebs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NoDevice != nil {
+		s.WriteString(schemas.BlockDeviceMappingRequest_NoDevice, *v.NoDevice)
+	}
+	if v.VirtualName != nil {
+		s.WriteString(schemas.BlockDeviceMappingRequest_VirtualName, *v.VirtualName)
+	}
+}
+func (v *BlockDeviceMappingRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BlockDeviceMappingRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BlockDeviceMappingRequest_DeviceName:
+			v.DeviceName = new(string)
+			return d.ReadString(schemas.BlockDeviceMappingRequest_DeviceName, v.DeviceName)
+		case schemas.BlockDeviceMappingRequest_Ebs:
+			v.Ebs = &EbsBlockDevice{}
+			return v.Ebs.Deserialize(d)
+		case schemas.BlockDeviceMappingRequest_NoDevice:
+			v.NoDevice = new(string)
+			return d.ReadString(schemas.BlockDeviceMappingRequest_NoDevice, v.NoDevice)
+		case schemas.BlockDeviceMappingRequest_VirtualName:
+			v.VirtualName = new(string)
+			return d.ReadString(schemas.BlockDeviceMappingRequest_VirtualName, v.VirtualName)
+		}
+		return nil
+	})
+}
+
 // Specifies capacity reservation preferences.
 type CapacityReservationSpecification struct {
 
@@ -51,6 +121,40 @@ type CapacityReservationSpecification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CapacityReservationSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityReservationSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityReservationSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityReservationPreference != "" {
+		s.WriteString(schemas.CapacityReservationSpecification_CapacityReservationPreference, string(v.CapacityReservationPreference))
+	}
+	if v.CapacityReservationTarget != nil {
+		s.WriteStruct(schemas.CapacityReservationSpecification_CapacityReservationTarget)
+		v.CapacityReservationTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CapacityReservationSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityReservationSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityReservationSpecification_CapacityReservationPreference:
+			var ev string
+			if err := d.ReadString(schemas.CapacityReservationSpecification_CapacityReservationPreference, &ev); err != nil {
+				return err
+			}
+			v.CapacityReservationPreference = CapacityReservationPreferenceEnum(ev)
+			return nil
+		case schemas.CapacityReservationSpecification_CapacityReservationTarget:
+			v.CapacityReservationTarget = &CapacityReservationTarget{}
+			return v.CapacityReservationTarget.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Identifies a specific capacity reservation.
 type CapacityReservationTarget struct {
 
@@ -61,6 +165,34 @@ type CapacityReservationTarget struct {
 	CapacityReservationResourceGroupArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CapacityReservationTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapacityReservationTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapacityReservationTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapacityReservationId != nil {
+		s.WriteString(schemas.CapacityReservationTarget_CapacityReservationId, *v.CapacityReservationId)
+	}
+	if v.CapacityReservationResourceGroupArn != nil {
+		s.WriteString(schemas.CapacityReservationTarget_CapacityReservationResourceGroupArn, *v.CapacityReservationResourceGroupArn)
+	}
+}
+func (v *CapacityReservationTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapacityReservationTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapacityReservationTarget_CapacityReservationId:
+			v.CapacityReservationId = new(string)
+			return d.ReadString(schemas.CapacityReservationTarget_CapacityReservationId, v.CapacityReservationId)
+		case schemas.CapacityReservationTarget_CapacityReservationResourceGroupArn:
+			v.CapacityReservationResourceGroupArn = new(string)
+			return d.ReadString(schemas.CapacityReservationTarget_CapacityReservationResourceGroupArn, v.CapacityReservationResourceGroupArn)
+		}
+		return nil
+	})
 }
 
 // Defines connection tracking parameters for network interfaces.
@@ -78,6 +210,40 @@ type ConnectionTrackingSpecificationRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectionTrackingSpecificationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionTrackingSpecificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionTrackingSpecificationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TcpEstablishedTimeout != nil {
+		s.WriteInt32(schemas.ConnectionTrackingSpecificationRequest_TcpEstablishedTimeout, *v.TcpEstablishedTimeout)
+	}
+	if v.UdpStreamTimeout != nil {
+		s.WriteInt32(schemas.ConnectionTrackingSpecificationRequest_UdpStreamTimeout, *v.UdpStreamTimeout)
+	}
+	if v.UdpTimeout != nil {
+		s.WriteInt32(schemas.ConnectionTrackingSpecificationRequest_UdpTimeout, *v.UdpTimeout)
+	}
+}
+func (v *ConnectionTrackingSpecificationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionTrackingSpecificationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionTrackingSpecificationRequest_TcpEstablishedTimeout:
+			v.TcpEstablishedTimeout = new(int32)
+			return d.ReadInt32(schemas.ConnectionTrackingSpecificationRequest_TcpEstablishedTimeout, v.TcpEstablishedTimeout)
+		case schemas.ConnectionTrackingSpecificationRequest_UdpStreamTimeout:
+			v.UdpStreamTimeout = new(int32)
+			return d.ReadInt32(schemas.ConnectionTrackingSpecificationRequest_UdpStreamTimeout, v.UdpStreamTimeout)
+		case schemas.ConnectionTrackingSpecificationRequest_UdpTimeout:
+			v.UdpTimeout = new(int32)
+			return d.ReadInt32(schemas.ConnectionTrackingSpecificationRequest_UdpTimeout, v.UdpTimeout)
+		}
+		return nil
+	})
+}
+
 // Configures CPU-specific settings for WorkSpace Instance.
 type CpuOptionsRequest struct {
 
@@ -93,6 +259,44 @@ type CpuOptionsRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CpuOptionsRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CpuOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CpuOptionsRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmdSevSnp != "" {
+		s.WriteString(schemas.CpuOptionsRequest_AmdSevSnp, string(v.AmdSevSnp))
+	}
+	if v.CoreCount != nil {
+		s.WriteInt32(schemas.CpuOptionsRequest_CoreCount, *v.CoreCount)
+	}
+	if v.ThreadsPerCore != nil {
+		s.WriteInt32(schemas.CpuOptionsRequest_ThreadsPerCore, *v.ThreadsPerCore)
+	}
+}
+func (v *CpuOptionsRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CpuOptionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CpuOptionsRequest_AmdSevSnp:
+			var ev string
+			if err := d.ReadString(schemas.CpuOptionsRequest_AmdSevSnp, &ev); err != nil {
+				return err
+			}
+			v.AmdSevSnp = AmdSevSnpEnum(ev)
+			return nil
+		case schemas.CpuOptionsRequest_CoreCount:
+			v.CoreCount = new(int32)
+			return d.ReadInt32(schemas.CpuOptionsRequest_CoreCount, v.CoreCount)
+		case schemas.CpuOptionsRequest_ThreadsPerCore:
+			v.ThreadsPerCore = new(int32)
+			return d.ReadInt32(schemas.CpuOptionsRequest_ThreadsPerCore, v.ThreadsPerCore)
+		}
+		return nil
+	})
+}
+
 // Defines CPU credit configuration for burstable instances.
 type CreditSpecificationRequest struct {
 
@@ -100,6 +304,32 @@ type CreditSpecificationRequest struct {
 	CpuCredits CpuCreditsEnum
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreditSpecificationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreditSpecificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreditSpecificationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CpuCredits != "" {
+		s.WriteString(schemas.CreditSpecificationRequest_CpuCredits, string(v.CpuCredits))
+	}
+}
+func (v *CreditSpecificationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreditSpecificationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreditSpecificationRequest_CpuCredits:
+			var ev string
+			if err := d.ReadString(schemas.CreditSpecificationRequest_CpuCredits, &ev); err != nil {
+				return err
+			}
+			v.CpuCredits = CpuCreditsEnum(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Defines configuration for an Elastic Block Store volume.
@@ -126,6 +356,62 @@ type EbsBlockDevice struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EbsBlockDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EbsBlockDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EbsBlockDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Encrypted != nil {
+		s.WriteBool(schemas.EbsBlockDevice_Encrypted, *v.Encrypted)
+	}
+	if v.Iops != nil {
+		s.WriteInt32(schemas.EbsBlockDevice_Iops, *v.Iops)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.EbsBlockDevice_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.Throughput != nil {
+		s.WriteInt32(schemas.EbsBlockDevice_Throughput, *v.Throughput)
+	}
+	if v.VolumeSize != nil {
+		s.WriteInt32(schemas.EbsBlockDevice_VolumeSize, *v.VolumeSize)
+	}
+	if v.VolumeType != "" {
+		s.WriteString(schemas.EbsBlockDevice_VolumeType, string(v.VolumeType))
+	}
+}
+func (v *EbsBlockDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EbsBlockDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EbsBlockDevice_Encrypted:
+			v.Encrypted = new(bool)
+			return d.ReadBool(schemas.EbsBlockDevice_Encrypted, v.Encrypted)
+		case schemas.EbsBlockDevice_Iops:
+			v.Iops = new(int32)
+			return d.ReadInt32(schemas.EbsBlockDevice_Iops, v.Iops)
+		case schemas.EbsBlockDevice_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.EbsBlockDevice_KmsKeyId, v.KmsKeyId)
+		case schemas.EbsBlockDevice_Throughput:
+			v.Throughput = new(int32)
+			return d.ReadInt32(schemas.EbsBlockDevice_Throughput, v.Throughput)
+		case schemas.EbsBlockDevice_VolumeSize:
+			v.VolumeSize = new(int32)
+			return d.ReadInt32(schemas.EbsBlockDevice_VolumeSize, v.VolumeSize)
+		case schemas.EbsBlockDevice_VolumeType:
+			var ev string
+			if err := d.ReadString(schemas.EbsBlockDevice_VolumeType, &ev); err != nil {
+				return err
+			}
+			v.VolumeType = VolumeTypeEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Captures detailed error information for EC2 instance operations.
 type EC2InstanceError struct {
 
@@ -141,6 +427,40 @@ type EC2InstanceError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EC2InstanceError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2InstanceError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2InstanceError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EC2ErrorCode != nil {
+		s.WriteString(schemas.EC2InstanceError_EC2ErrorCode, *v.EC2ErrorCode)
+	}
+	if v.EC2ErrorMessage != nil {
+		s.WriteString(schemas.EC2InstanceError_EC2ErrorMessage, *v.EC2ErrorMessage)
+	}
+	if v.EC2ExceptionType != nil {
+		s.WriteString(schemas.EC2InstanceError_EC2ExceptionType, *v.EC2ExceptionType)
+	}
+}
+func (v *EC2InstanceError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2InstanceError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2InstanceError_EC2ErrorCode:
+			v.EC2ErrorCode = new(string)
+			return d.ReadString(schemas.EC2InstanceError_EC2ErrorCode, v.EC2ErrorCode)
+		case schemas.EC2InstanceError_EC2ErrorMessage:
+			v.EC2ErrorMessage = new(string)
+			return d.ReadString(schemas.EC2InstanceError_EC2ErrorMessage, v.EC2ErrorMessage)
+		case schemas.EC2InstanceError_EC2ExceptionType:
+			v.EC2ExceptionType = new(string)
+			return d.ReadString(schemas.EC2InstanceError_EC2ExceptionType, v.EC2ExceptionType)
+		}
+		return nil
+	})
+}
+
 // Represents an EC2 instance managed by WorkSpaces.
 type EC2ManagedInstance struct {
 
@@ -148,6 +468,28 @@ type EC2ManagedInstance struct {
 	InstanceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *EC2ManagedInstance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EC2ManagedInstance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EC2ManagedInstance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.EC2ManagedInstance_InstanceId, *v.InstanceId)
+	}
+}
+func (v *EC2ManagedInstance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EC2ManagedInstance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EC2ManagedInstance_InstanceId:
+			v.InstanceId = new(string)
+			return d.ReadString(schemas.EC2ManagedInstance_InstanceId, v.InstanceId)
+		}
+		return nil
+	})
 }
 
 // Defines Elastic Network Adapter (ENA) Scalable Reliable Datagram (SRD)
@@ -163,6 +505,36 @@ type EnaSrdSpecificationRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnaSrdSpecificationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnaSrdSpecificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnaSrdSpecificationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnaSrdEnabled != nil {
+		s.WriteBool(schemas.EnaSrdSpecificationRequest_EnaSrdEnabled, *v.EnaSrdEnabled)
+	}
+	if v.EnaSrdUdpSpecification != nil {
+		s.WriteStruct(schemas.EnaSrdSpecificationRequest_EnaSrdUdpSpecification)
+		v.EnaSrdUdpSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EnaSrdSpecificationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnaSrdSpecificationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnaSrdSpecificationRequest_EnaSrdEnabled:
+			v.EnaSrdEnabled = new(bool)
+			return d.ReadBool(schemas.EnaSrdSpecificationRequest_EnaSrdEnabled, v.EnaSrdEnabled)
+		case schemas.EnaSrdSpecificationRequest_EnaSrdUdpSpecification:
+			v.EnaSrdUdpSpecification = &EnaSrdUdpSpecificationRequest{}
+			return v.EnaSrdUdpSpecification.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies UDP configuration for ENA SRD.
 type EnaSrdUdpSpecificationRequest struct {
 
@@ -170,6 +542,28 @@ type EnaSrdUdpSpecificationRequest struct {
 	EnaSrdUdpEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *EnaSrdUdpSpecificationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnaSrdUdpSpecificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnaSrdUdpSpecificationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnaSrdUdpEnabled != nil {
+		s.WriteBool(schemas.EnaSrdUdpSpecificationRequest_EnaSrdUdpEnabled, *v.EnaSrdUdpEnabled)
+	}
+}
+func (v *EnaSrdUdpSpecificationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnaSrdUdpSpecificationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnaSrdUdpSpecificationRequest_EnaSrdUdpEnabled:
+			v.EnaSrdUdpEnabled = new(bool)
+			return d.ReadBool(schemas.EnaSrdUdpSpecificationRequest_EnaSrdUdpEnabled, v.EnaSrdUdpEnabled)
+		}
+		return nil
+	})
 }
 
 // Configures AWS Nitro Enclave options for the WorkSpace Instance.
@@ -181,6 +575,28 @@ type EnclaveOptionsRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnclaveOptionsRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnclaveOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnclaveOptionsRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.EnclaveOptionsRequest_Enabled, *v.Enabled)
+	}
+}
+func (v *EnclaveOptionsRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnclaveOptionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnclaveOptionsRequest_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.EnclaveOptionsRequest_Enabled, v.Enabled)
+		}
+		return nil
+	})
+}
+
 // Defines hibernation configuration for the WorkSpace Instance.
 type HibernationOptionsRequest struct {
 
@@ -188,6 +604,28 @@ type HibernationOptionsRequest struct {
 	Configured *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *HibernationOptionsRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HibernationOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HibernationOptionsRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Configured != nil {
+		s.WriteBool(schemas.HibernationOptionsRequest_Configured, *v.Configured)
+	}
+}
+func (v *HibernationOptionsRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HibernationOptionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HibernationOptionsRequest_Configured:
+			v.Configured = new(bool)
+			return d.ReadBool(schemas.HibernationOptionsRequest_Configured, v.Configured)
+		}
+		return nil
+	})
 }
 
 // Defines IAM instance profile configuration for WorkSpace Instance.
@@ -200,6 +638,34 @@ type IamInstanceProfileSpecification struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *IamInstanceProfileSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.IamInstanceProfileSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *IamInstanceProfileSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.IamInstanceProfileSpecification_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.IamInstanceProfileSpecification_Name, *v.Name)
+	}
+}
+func (v *IamInstanceProfileSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IamInstanceProfileSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IamInstanceProfileSpecification_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.IamInstanceProfileSpecification_Arn, v.Arn)
+		case schemas.IamInstanceProfileSpecification_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.IamInstanceProfileSpecification_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Defines filtering criteria for WorkSpace Instance type searches. Combines
@@ -230,6 +696,52 @@ type InstanceConfigurationFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceConfigurationFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceConfigurationFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceConfigurationFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingMode != "" {
+		s.WriteString(schemas.InstanceConfigurationFilter_BillingMode, string(v.BillingMode))
+	}
+	if v.PlatformType != "" {
+		s.WriteString(schemas.InstanceConfigurationFilter_PlatformType, string(v.PlatformType))
+	}
+	if v.Tenancy != "" {
+		s.WriteString(schemas.InstanceConfigurationFilter_Tenancy, string(v.Tenancy))
+	}
+}
+func (v *InstanceConfigurationFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceConfigurationFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceConfigurationFilter_BillingMode:
+			var ev string
+			if err := d.ReadString(schemas.InstanceConfigurationFilter_BillingMode, &ev); err != nil {
+				return err
+			}
+			v.BillingMode = BillingMode(ev)
+			return nil
+		case schemas.InstanceConfigurationFilter_PlatformType:
+			var ev string
+			if err := d.ReadString(schemas.InstanceConfigurationFilter_PlatformType, &ev); err != nil {
+				return err
+			}
+			v.PlatformType = PlatformTypeEnum(ev)
+			return nil
+		case schemas.InstanceConfigurationFilter_Tenancy:
+			var ev string
+			if err := d.ReadString(schemas.InstanceConfigurationFilter_Tenancy, &ev); err != nil {
+				return err
+			}
+			v.Tenancy = InstanceConfigurationTenancyEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents an IPv6 address configuration for a WorkSpace Instance.
 type InstanceIpv6Address struct {
 
@@ -242,6 +754,34 @@ type InstanceIpv6Address struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceIpv6Address) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceIpv6Address)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceIpv6Address) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ipv6Address != nil {
+		s.WriteString(schemas.InstanceIpv6Address_Ipv6Address, *v.Ipv6Address)
+	}
+	if v.IsPrimaryIpv6 != nil {
+		s.WriteBool(schemas.InstanceIpv6Address_IsPrimaryIpv6, *v.IsPrimaryIpv6)
+	}
+}
+func (v *InstanceIpv6Address) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceIpv6Address, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceIpv6Address_Ipv6Address:
+			v.Ipv6Address = new(string)
+			return d.ReadString(schemas.InstanceIpv6Address_Ipv6Address, v.Ipv6Address)
+		case schemas.InstanceIpv6Address_IsPrimaryIpv6:
+			v.IsPrimaryIpv6 = new(bool)
+			return d.ReadBool(schemas.InstanceIpv6Address_IsPrimaryIpv6, v.IsPrimaryIpv6)
+		}
+		return nil
+	})
+}
+
 // Configures automatic maintenance settings for WorkSpace Instance.
 type InstanceMaintenanceOptionsRequest struct {
 
@@ -249,6 +789,32 @@ type InstanceMaintenanceOptionsRequest struct {
 	AutoRecovery AutoRecoveryEnum
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceMaintenanceOptionsRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceMaintenanceOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceMaintenanceOptionsRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoRecovery != "" {
+		s.WriteString(schemas.InstanceMaintenanceOptionsRequest_AutoRecovery, string(v.AutoRecovery))
+	}
+}
+func (v *InstanceMaintenanceOptionsRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceMaintenanceOptionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceMaintenanceOptionsRequest_AutoRecovery:
+			var ev string
+			if err := d.ReadString(schemas.InstanceMaintenanceOptionsRequest_AutoRecovery, &ev); err != nil {
+				return err
+			}
+			v.AutoRecovery = AutoRecoveryEnum(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Configures marketplace-specific instance deployment options.
@@ -261,6 +827,40 @@ type InstanceMarketOptionsRequest struct {
 	SpotOptions *SpotMarketOptions
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceMarketOptionsRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceMarketOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceMarketOptionsRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MarketType != "" {
+		s.WriteString(schemas.InstanceMarketOptionsRequest_MarketType, string(v.MarketType))
+	}
+	if v.SpotOptions != nil {
+		s.WriteStruct(schemas.InstanceMarketOptionsRequest_SpotOptions)
+		v.SpotOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InstanceMarketOptionsRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceMarketOptionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceMarketOptionsRequest_MarketType:
+			var ev string
+			if err := d.ReadString(schemas.InstanceMarketOptionsRequest_MarketType, &ev); err != nil {
+				return err
+			}
+			v.MarketType = MarketTypeEnum(ev)
+			return nil
+		case schemas.InstanceMarketOptionsRequest_SpotOptions:
+			v.SpotOptions = &SpotMarketOptions{}
+			return v.SpotOptions.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Defines instance metadata service configuration.
@@ -282,6 +882,68 @@ type InstanceMetadataOptionsRequest struct {
 	InstanceMetadataTags InstanceMetadataTagsEnum
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceMetadataOptionsRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceMetadataOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceMetadataOptionsRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HttpEndpoint != "" {
+		s.WriteString(schemas.InstanceMetadataOptionsRequest_HttpEndpoint, string(v.HttpEndpoint))
+	}
+	if v.HttpProtocolIpv6 != "" {
+		s.WriteString(schemas.InstanceMetadataOptionsRequest_HttpProtocolIpv6, string(v.HttpProtocolIpv6))
+	}
+	if v.HttpPutResponseHopLimit != nil {
+		s.WriteInt32(schemas.InstanceMetadataOptionsRequest_HttpPutResponseHopLimit, *v.HttpPutResponseHopLimit)
+	}
+	if v.HttpTokens != "" {
+		s.WriteString(schemas.InstanceMetadataOptionsRequest_HttpTokens, string(v.HttpTokens))
+	}
+	if v.InstanceMetadataTags != "" {
+		s.WriteString(schemas.InstanceMetadataOptionsRequest_InstanceMetadataTags, string(v.InstanceMetadataTags))
+	}
+}
+func (v *InstanceMetadataOptionsRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceMetadataOptionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceMetadataOptionsRequest_HttpEndpoint:
+			var ev string
+			if err := d.ReadString(schemas.InstanceMetadataOptionsRequest_HttpEndpoint, &ev); err != nil {
+				return err
+			}
+			v.HttpEndpoint = HttpEndpointEnum(ev)
+			return nil
+		case schemas.InstanceMetadataOptionsRequest_HttpProtocolIpv6:
+			var ev string
+			if err := d.ReadString(schemas.InstanceMetadataOptionsRequest_HttpProtocolIpv6, &ev); err != nil {
+				return err
+			}
+			v.HttpProtocolIpv6 = HttpProtocolIpv6Enum(ev)
+			return nil
+		case schemas.InstanceMetadataOptionsRequest_HttpPutResponseHopLimit:
+			v.HttpPutResponseHopLimit = new(int32)
+			return d.ReadInt32(schemas.InstanceMetadataOptionsRequest_HttpPutResponseHopLimit, v.HttpPutResponseHopLimit)
+		case schemas.InstanceMetadataOptionsRequest_HttpTokens:
+			var ev string
+			if err := d.ReadString(schemas.InstanceMetadataOptionsRequest_HttpTokens, &ev); err != nil {
+				return err
+			}
+			v.HttpTokens = HttpTokensEnum(ev)
+			return nil
+		case schemas.InstanceMetadataOptionsRequest_InstanceMetadataTags:
+			var ev string
+			if err := d.ReadString(schemas.InstanceMetadataOptionsRequest_InstanceMetadataTags, &ev); err != nil {
+				return err
+			}
+			v.InstanceMetadataTags = InstanceMetadataTagsEnum(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Defines network interface configuration for WorkSpace Instance.
@@ -353,6 +1015,141 @@ type InstanceNetworkInterfaceSpecification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceNetworkInterfaceSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceNetworkInterfaceSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceNetworkInterfaceSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociateCarrierIpAddress != nil {
+		s.WriteBool(schemas.InstanceNetworkInterfaceSpecification_AssociateCarrierIpAddress, *v.AssociateCarrierIpAddress)
+	}
+	if v.AssociatePublicIpAddress != nil {
+		s.WriteBool(schemas.InstanceNetworkInterfaceSpecification_AssociatePublicIpAddress, *v.AssociatePublicIpAddress)
+	}
+	if v.ConnectionTrackingSpecification != nil {
+		s.WriteStruct(schemas.InstanceNetworkInterfaceSpecification_ConnectionTrackingSpecification)
+		v.ConnectionTrackingSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.InstanceNetworkInterfaceSpecification_Description, *v.Description)
+	}
+	if v.DeviceIndex != nil {
+		s.WriteInt32(schemas.InstanceNetworkInterfaceSpecification_DeviceIndex, *v.DeviceIndex)
+	}
+	if v.EnaSrdSpecification != nil {
+		s.WriteStruct(schemas.InstanceNetworkInterfaceSpecification_EnaSrdSpecification)
+		v.EnaSrdSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSecurityGroupIds(s, schemas.InstanceNetworkInterfaceSpecification_Groups, v.Groups)
+	if v.InterfaceType != "" {
+		s.WriteString(schemas.InstanceNetworkInterfaceSpecification_InterfaceType, string(v.InterfaceType))
+	}
+	if v.Ipv4PrefixCount != nil {
+		s.WriteInt32(schemas.InstanceNetworkInterfaceSpecification_Ipv4PrefixCount, *v.Ipv4PrefixCount)
+	}
+	serializeIpv4Prefixes(s, schemas.InstanceNetworkInterfaceSpecification_Ipv4Prefixes, v.Ipv4Prefixes)
+	if v.Ipv6AddressCount != nil {
+		s.WriteInt32(schemas.InstanceNetworkInterfaceSpecification_Ipv6AddressCount, *v.Ipv6AddressCount)
+	}
+	serializeIpv6Addresses(s, schemas.InstanceNetworkInterfaceSpecification_Ipv6Addresses, v.Ipv6Addresses)
+	if v.Ipv6PrefixCount != nil {
+		s.WriteInt32(schemas.InstanceNetworkInterfaceSpecification_Ipv6PrefixCount, *v.Ipv6PrefixCount)
+	}
+	serializeIpv6Prefixes(s, schemas.InstanceNetworkInterfaceSpecification_Ipv6Prefixes, v.Ipv6Prefixes)
+	if v.NetworkCardIndex != nil {
+		s.WriteInt32(schemas.InstanceNetworkInterfaceSpecification_NetworkCardIndex, *v.NetworkCardIndex)
+	}
+	if v.NetworkInterfaceId != nil {
+		s.WriteString(schemas.InstanceNetworkInterfaceSpecification_NetworkInterfaceId, *v.NetworkInterfaceId)
+	}
+	if v.PrimaryIpv6 != nil {
+		s.WriteBool(schemas.InstanceNetworkInterfaceSpecification_PrimaryIpv6, *v.PrimaryIpv6)
+	}
+	if v.PrivateIpAddress != nil {
+		s.WriteString(schemas.InstanceNetworkInterfaceSpecification_PrivateIpAddress, *v.PrivateIpAddress)
+	}
+	serializePrivateIpAddresses(s, schemas.InstanceNetworkInterfaceSpecification_PrivateIpAddresses, v.PrivateIpAddresses)
+	if v.SecondaryPrivateIpAddressCount != nil {
+		s.WriteInt32(schemas.InstanceNetworkInterfaceSpecification_SecondaryPrivateIpAddressCount, *v.SecondaryPrivateIpAddressCount)
+	}
+	if v.SubnetId != nil {
+		s.WriteString(schemas.InstanceNetworkInterfaceSpecification_SubnetId, *v.SubnetId)
+	}
+}
+func (v *InstanceNetworkInterfaceSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceNetworkInterfaceSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceNetworkInterfaceSpecification_AssociateCarrierIpAddress:
+			v.AssociateCarrierIpAddress = new(bool)
+			return d.ReadBool(schemas.InstanceNetworkInterfaceSpecification_AssociateCarrierIpAddress, v.AssociateCarrierIpAddress)
+		case schemas.InstanceNetworkInterfaceSpecification_AssociatePublicIpAddress:
+			v.AssociatePublicIpAddress = new(bool)
+			return d.ReadBool(schemas.InstanceNetworkInterfaceSpecification_AssociatePublicIpAddress, v.AssociatePublicIpAddress)
+		case schemas.InstanceNetworkInterfaceSpecification_ConnectionTrackingSpecification:
+			v.ConnectionTrackingSpecification = &ConnectionTrackingSpecificationRequest{}
+			return v.ConnectionTrackingSpecification.Deserialize(d)
+		case schemas.InstanceNetworkInterfaceSpecification_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.InstanceNetworkInterfaceSpecification_Description, v.Description)
+		case schemas.InstanceNetworkInterfaceSpecification_DeviceIndex:
+			v.DeviceIndex = new(int32)
+			return d.ReadInt32(schemas.InstanceNetworkInterfaceSpecification_DeviceIndex, v.DeviceIndex)
+		case schemas.InstanceNetworkInterfaceSpecification_EnaSrdSpecification:
+			v.EnaSrdSpecification = &EnaSrdSpecificationRequest{}
+			return v.EnaSrdSpecification.Deserialize(d)
+		case schemas.InstanceNetworkInterfaceSpecification_Groups:
+			return deserializeSecurityGroupIds(d, schemas.InstanceNetworkInterfaceSpecification_Groups, &v.Groups)
+		case schemas.InstanceNetworkInterfaceSpecification_InterfaceType:
+			var ev string
+			if err := d.ReadString(schemas.InstanceNetworkInterfaceSpecification_InterfaceType, &ev); err != nil {
+				return err
+			}
+			v.InterfaceType = InterfaceTypeEnum(ev)
+			return nil
+		case schemas.InstanceNetworkInterfaceSpecification_Ipv4PrefixCount:
+			v.Ipv4PrefixCount = new(int32)
+			return d.ReadInt32(schemas.InstanceNetworkInterfaceSpecification_Ipv4PrefixCount, v.Ipv4PrefixCount)
+		case schemas.InstanceNetworkInterfaceSpecification_Ipv4Prefixes:
+			return deserializeIpv4Prefixes(d, schemas.InstanceNetworkInterfaceSpecification_Ipv4Prefixes, &v.Ipv4Prefixes)
+		case schemas.InstanceNetworkInterfaceSpecification_Ipv6AddressCount:
+			v.Ipv6AddressCount = new(int32)
+			return d.ReadInt32(schemas.InstanceNetworkInterfaceSpecification_Ipv6AddressCount, v.Ipv6AddressCount)
+		case schemas.InstanceNetworkInterfaceSpecification_Ipv6Addresses:
+			return deserializeIpv6Addresses(d, schemas.InstanceNetworkInterfaceSpecification_Ipv6Addresses, &v.Ipv6Addresses)
+		case schemas.InstanceNetworkInterfaceSpecification_Ipv6PrefixCount:
+			v.Ipv6PrefixCount = new(int32)
+			return d.ReadInt32(schemas.InstanceNetworkInterfaceSpecification_Ipv6PrefixCount, v.Ipv6PrefixCount)
+		case schemas.InstanceNetworkInterfaceSpecification_Ipv6Prefixes:
+			return deserializeIpv6Prefixes(d, schemas.InstanceNetworkInterfaceSpecification_Ipv6Prefixes, &v.Ipv6Prefixes)
+		case schemas.InstanceNetworkInterfaceSpecification_NetworkCardIndex:
+			v.NetworkCardIndex = new(int32)
+			return d.ReadInt32(schemas.InstanceNetworkInterfaceSpecification_NetworkCardIndex, v.NetworkCardIndex)
+		case schemas.InstanceNetworkInterfaceSpecification_NetworkInterfaceId:
+			v.NetworkInterfaceId = new(string)
+			return d.ReadString(schemas.InstanceNetworkInterfaceSpecification_NetworkInterfaceId, v.NetworkInterfaceId)
+		case schemas.InstanceNetworkInterfaceSpecification_PrimaryIpv6:
+			v.PrimaryIpv6 = new(bool)
+			return d.ReadBool(schemas.InstanceNetworkInterfaceSpecification_PrimaryIpv6, v.PrimaryIpv6)
+		case schemas.InstanceNetworkInterfaceSpecification_PrivateIpAddress:
+			v.PrivateIpAddress = new(string)
+			return d.ReadString(schemas.InstanceNetworkInterfaceSpecification_PrivateIpAddress, v.PrivateIpAddress)
+		case schemas.InstanceNetworkInterfaceSpecification_PrivateIpAddresses:
+			return deserializePrivateIpAddresses(d, schemas.InstanceNetworkInterfaceSpecification_PrivateIpAddresses, &v.PrivateIpAddresses)
+		case schemas.InstanceNetworkInterfaceSpecification_SecondaryPrivateIpAddressCount:
+			v.SecondaryPrivateIpAddressCount = new(int32)
+			return d.ReadInt32(schemas.InstanceNetworkInterfaceSpecification_SecondaryPrivateIpAddressCount, v.SecondaryPrivateIpAddressCount)
+		case schemas.InstanceNetworkInterfaceSpecification_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.InstanceNetworkInterfaceSpecification_SubnetId, v.SubnetId)
+		}
+		return nil
+	})
+}
+
 // Configures network performance settings for WorkSpace Instance.
 type InstanceNetworkPerformanceOptionsRequest struct {
 
@@ -360,6 +1157,32 @@ type InstanceNetworkPerformanceOptionsRequest struct {
 	BandwidthWeighting BandwidthWeightingEnum
 
 	noSmithyDocumentSerde
+}
+
+func (v *InstanceNetworkPerformanceOptionsRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceNetworkPerformanceOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceNetworkPerformanceOptionsRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BandwidthWeighting != "" {
+		s.WriteString(schemas.InstanceNetworkPerformanceOptionsRequest_BandwidthWeighting, string(v.BandwidthWeighting))
+	}
+}
+func (v *InstanceNetworkPerformanceOptionsRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceNetworkPerformanceOptionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceNetworkPerformanceOptionsRequest_BandwidthWeighting:
+			var ev string
+			if err := d.ReadString(schemas.InstanceNetworkPerformanceOptionsRequest_BandwidthWeighting, &ev); err != nil {
+				return err
+			}
+			v.BandwidthWeighting = BandwidthWeightingEnum(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides details about a specific WorkSpace Instance type.
@@ -376,6 +1199,31 @@ type InstanceTypeInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstanceTypeInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstanceTypeInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstanceTypeInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceType != nil {
+		s.WriteString(schemas.InstanceTypeInfo_InstanceType, *v.InstanceType)
+	}
+	serializeSupportedInstanceConfigurations(s, schemas.InstanceTypeInfo_SupportedInstanceConfigurations, v.SupportedInstanceConfigurations)
+}
+func (v *InstanceTypeInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstanceTypeInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstanceTypeInfo_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.InstanceTypeInfo_InstanceType, v.InstanceType)
+		case schemas.InstanceTypeInfo_SupportedInstanceConfigurations:
+			return deserializeSupportedInstanceConfigurations(d, schemas.InstanceTypeInfo_SupportedInstanceConfigurations, &v.SupportedInstanceConfigurations)
+		}
+		return nil
+	})
+}
+
 // Specifies IPv4 prefix configuration for network interfaces.
 type Ipv4PrefixSpecificationRequest struct {
 
@@ -383,6 +1231,28 @@ type Ipv4PrefixSpecificationRequest struct {
 	Ipv4Prefix *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Ipv4PrefixSpecificationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Ipv4PrefixSpecificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Ipv4PrefixSpecificationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ipv4Prefix != nil {
+		s.WriteString(schemas.Ipv4PrefixSpecificationRequest_Ipv4Prefix, *v.Ipv4Prefix)
+	}
+}
+func (v *Ipv4PrefixSpecificationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Ipv4PrefixSpecificationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Ipv4PrefixSpecificationRequest_Ipv4Prefix:
+			v.Ipv4Prefix = new(string)
+			return d.ReadString(schemas.Ipv4PrefixSpecificationRequest_Ipv4Prefix, v.Ipv4Prefix)
+		}
+		return nil
+	})
 }
 
 // Specifies IPv6 prefix configuration for network interfaces.
@@ -394,6 +1264,28 @@ type Ipv6PrefixSpecificationRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Ipv6PrefixSpecificationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Ipv6PrefixSpecificationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Ipv6PrefixSpecificationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ipv6Prefix != nil {
+		s.WriteString(schemas.Ipv6PrefixSpecificationRequest_Ipv6Prefix, *v.Ipv6Prefix)
+	}
+}
+func (v *Ipv6PrefixSpecificationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Ipv6PrefixSpecificationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Ipv6PrefixSpecificationRequest_Ipv6Prefix:
+			v.Ipv6Prefix = new(string)
+			return d.ReadString(schemas.Ipv6PrefixSpecificationRequest_Ipv6Prefix, v.Ipv6Prefix)
+		}
+		return nil
+	})
+}
+
 // Specifies license configuration for WorkSpace Instance.
 type LicenseConfigurationRequest struct {
 
@@ -401,6 +1293,28 @@ type LicenseConfigurationRequest struct {
 	LicenseConfigurationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LicenseConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LicenseConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LicenseConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LicenseConfigurationArn != nil {
+		s.WriteString(schemas.LicenseConfigurationRequest_LicenseConfigurationArn, *v.LicenseConfigurationArn)
+	}
+}
+func (v *LicenseConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LicenseConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LicenseConfigurationRequest_LicenseConfigurationArn:
+			v.LicenseConfigurationArn = new(string)
+			return d.ReadString(schemas.LicenseConfigurationRequest_LicenseConfigurationArn, v.LicenseConfigurationArn)
+		}
+		return nil
+	})
 }
 
 // Defines comprehensive configuration for a managed WorkSpace Instance.
@@ -505,6 +1419,219 @@ type ManagedInstanceRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ManagedInstanceRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ManagedInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ManagedInstanceRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBlockDeviceMappings(s, schemas.ManagedInstanceRequest_BlockDeviceMappings, v.BlockDeviceMappings)
+	if v.CapacityReservationSpecification != nil {
+		s.WriteStruct(schemas.ManagedInstanceRequest_CapacityReservationSpecification)
+		v.CapacityReservationSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CpuOptions != nil {
+		s.WriteStruct(schemas.ManagedInstanceRequest_CpuOptions)
+		v.CpuOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreditSpecification != nil {
+		s.WriteStruct(schemas.ManagedInstanceRequest_CreditSpecification)
+		v.CreditSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisableApiStop != nil {
+		s.WriteBool(schemas.ManagedInstanceRequest_DisableApiStop, *v.DisableApiStop)
+	}
+	if v.EbsOptimized != nil {
+		s.WriteBool(schemas.ManagedInstanceRequest_EbsOptimized, *v.EbsOptimized)
+	}
+	if v.EnablePrimaryIpv6 != nil {
+		s.WriteBool(schemas.ManagedInstanceRequest_EnablePrimaryIpv6, *v.EnablePrimaryIpv6)
+	}
+	if v.EnclaveOptions != nil {
+		s.WriteStruct(schemas.ManagedInstanceRequest_EnclaveOptions)
+		v.EnclaveOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HibernationOptions != nil {
+		s.WriteStruct(schemas.ManagedInstanceRequest_HibernationOptions)
+		v.HibernationOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IamInstanceProfile != nil {
+		s.WriteStruct(schemas.ManagedInstanceRequest_IamInstanceProfile)
+		v.IamInstanceProfile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ImageId != nil {
+		s.WriteString(schemas.ManagedInstanceRequest_ImageId, *v.ImageId)
+	}
+	if v.InstanceMarketOptions != nil {
+		s.WriteStruct(schemas.ManagedInstanceRequest_InstanceMarketOptions)
+		v.InstanceMarketOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceType != nil {
+		s.WriteString(schemas.ManagedInstanceRequest_InstanceType, *v.InstanceType)
+	}
+	if v.Ipv6AddressCount != nil {
+		s.WriteInt32(schemas.ManagedInstanceRequest_Ipv6AddressCount, *v.Ipv6AddressCount)
+	}
+	serializeIpv6Addresses(s, schemas.ManagedInstanceRequest_Ipv6Addresses, v.Ipv6Addresses)
+	if v.KernelId != nil {
+		s.WriteString(schemas.ManagedInstanceRequest_KernelId, *v.KernelId)
+	}
+	if v.KeyName != nil {
+		s.WriteString(schemas.ManagedInstanceRequest_KeyName, *v.KeyName)
+	}
+	serializeLicenseSpecifications(s, schemas.ManagedInstanceRequest_LicenseSpecifications, v.LicenseSpecifications)
+	if v.MaintenanceOptions != nil {
+		s.WriteStruct(schemas.ManagedInstanceRequest_MaintenanceOptions)
+		v.MaintenanceOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MetadataOptions != nil {
+		s.WriteStruct(schemas.ManagedInstanceRequest_MetadataOptions)
+		v.MetadataOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Monitoring != nil {
+		s.WriteStruct(schemas.ManagedInstanceRequest_Monitoring)
+		v.Monitoring.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeNetworkInterfaces(s, schemas.ManagedInstanceRequest_NetworkInterfaces, v.NetworkInterfaces)
+	if v.NetworkPerformanceOptions != nil {
+		s.WriteStruct(schemas.ManagedInstanceRequest_NetworkPerformanceOptions)
+		v.NetworkPerformanceOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Placement != nil {
+		s.WriteStruct(schemas.ManagedInstanceRequest_Placement)
+		v.Placement.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrivateDnsNameOptions != nil {
+		s.WriteStruct(schemas.ManagedInstanceRequest_PrivateDnsNameOptions)
+		v.PrivateDnsNameOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrivateIpAddress != nil {
+		s.WriteString(schemas.ManagedInstanceRequest_PrivateIpAddress, *v.PrivateIpAddress)
+	}
+	if v.RamdiskId != nil {
+		s.WriteString(schemas.ManagedInstanceRequest_RamdiskId, *v.RamdiskId)
+	}
+	serializeSecurityGroupIds(s, schemas.ManagedInstanceRequest_SecurityGroupIds, v.SecurityGroupIds)
+	serializeSecurityGroupNames(s, schemas.ManagedInstanceRequest_SecurityGroups, v.SecurityGroups)
+	if v.SubnetId != nil {
+		s.WriteString(schemas.ManagedInstanceRequest_SubnetId, *v.SubnetId)
+	}
+	serializeTagSpecifications(s, schemas.ManagedInstanceRequest_TagSpecifications, v.TagSpecifications)
+	if v.UserData != nil {
+		s.WriteString(schemas.ManagedInstanceRequest_UserData, *v.UserData)
+	}
+}
+func (v *ManagedInstanceRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ManagedInstanceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ManagedInstanceRequest_BlockDeviceMappings:
+			return deserializeBlockDeviceMappings(d, schemas.ManagedInstanceRequest_BlockDeviceMappings, &v.BlockDeviceMappings)
+		case schemas.ManagedInstanceRequest_CapacityReservationSpecification:
+			v.CapacityReservationSpecification = &CapacityReservationSpecification{}
+			return v.CapacityReservationSpecification.Deserialize(d)
+		case schemas.ManagedInstanceRequest_CpuOptions:
+			v.CpuOptions = &CpuOptionsRequest{}
+			return v.CpuOptions.Deserialize(d)
+		case schemas.ManagedInstanceRequest_CreditSpecification:
+			v.CreditSpecification = &CreditSpecificationRequest{}
+			return v.CreditSpecification.Deserialize(d)
+		case schemas.ManagedInstanceRequest_DisableApiStop:
+			v.DisableApiStop = new(bool)
+			return d.ReadBool(schemas.ManagedInstanceRequest_DisableApiStop, v.DisableApiStop)
+		case schemas.ManagedInstanceRequest_EbsOptimized:
+			v.EbsOptimized = new(bool)
+			return d.ReadBool(schemas.ManagedInstanceRequest_EbsOptimized, v.EbsOptimized)
+		case schemas.ManagedInstanceRequest_EnablePrimaryIpv6:
+			v.EnablePrimaryIpv6 = new(bool)
+			return d.ReadBool(schemas.ManagedInstanceRequest_EnablePrimaryIpv6, v.EnablePrimaryIpv6)
+		case schemas.ManagedInstanceRequest_EnclaveOptions:
+			v.EnclaveOptions = &EnclaveOptionsRequest{}
+			return v.EnclaveOptions.Deserialize(d)
+		case schemas.ManagedInstanceRequest_HibernationOptions:
+			v.HibernationOptions = &HibernationOptionsRequest{}
+			return v.HibernationOptions.Deserialize(d)
+		case schemas.ManagedInstanceRequest_IamInstanceProfile:
+			v.IamInstanceProfile = &IamInstanceProfileSpecification{}
+			return v.IamInstanceProfile.Deserialize(d)
+		case schemas.ManagedInstanceRequest_ImageId:
+			v.ImageId = new(string)
+			return d.ReadString(schemas.ManagedInstanceRequest_ImageId, v.ImageId)
+		case schemas.ManagedInstanceRequest_InstanceMarketOptions:
+			v.InstanceMarketOptions = &InstanceMarketOptionsRequest{}
+			return v.InstanceMarketOptions.Deserialize(d)
+		case schemas.ManagedInstanceRequest_InstanceType:
+			v.InstanceType = new(string)
+			return d.ReadString(schemas.ManagedInstanceRequest_InstanceType, v.InstanceType)
+		case schemas.ManagedInstanceRequest_Ipv6AddressCount:
+			v.Ipv6AddressCount = new(int32)
+			return d.ReadInt32(schemas.ManagedInstanceRequest_Ipv6AddressCount, v.Ipv6AddressCount)
+		case schemas.ManagedInstanceRequest_Ipv6Addresses:
+			return deserializeIpv6Addresses(d, schemas.ManagedInstanceRequest_Ipv6Addresses, &v.Ipv6Addresses)
+		case schemas.ManagedInstanceRequest_KernelId:
+			v.KernelId = new(string)
+			return d.ReadString(schemas.ManagedInstanceRequest_KernelId, v.KernelId)
+		case schemas.ManagedInstanceRequest_KeyName:
+			v.KeyName = new(string)
+			return d.ReadString(schemas.ManagedInstanceRequest_KeyName, v.KeyName)
+		case schemas.ManagedInstanceRequest_LicenseSpecifications:
+			return deserializeLicenseSpecifications(d, schemas.ManagedInstanceRequest_LicenseSpecifications, &v.LicenseSpecifications)
+		case schemas.ManagedInstanceRequest_MaintenanceOptions:
+			v.MaintenanceOptions = &InstanceMaintenanceOptionsRequest{}
+			return v.MaintenanceOptions.Deserialize(d)
+		case schemas.ManagedInstanceRequest_MetadataOptions:
+			v.MetadataOptions = &InstanceMetadataOptionsRequest{}
+			return v.MetadataOptions.Deserialize(d)
+		case schemas.ManagedInstanceRequest_Monitoring:
+			v.Monitoring = &RunInstancesMonitoringEnabled{}
+			return v.Monitoring.Deserialize(d)
+		case schemas.ManagedInstanceRequest_NetworkInterfaces:
+			return deserializeNetworkInterfaces(d, schemas.ManagedInstanceRequest_NetworkInterfaces, &v.NetworkInterfaces)
+		case schemas.ManagedInstanceRequest_NetworkPerformanceOptions:
+			v.NetworkPerformanceOptions = &InstanceNetworkPerformanceOptionsRequest{}
+			return v.NetworkPerformanceOptions.Deserialize(d)
+		case schemas.ManagedInstanceRequest_Placement:
+			v.Placement = &Placement{}
+			return v.Placement.Deserialize(d)
+		case schemas.ManagedInstanceRequest_PrivateDnsNameOptions:
+			v.PrivateDnsNameOptions = &PrivateDnsNameOptionsRequest{}
+			return v.PrivateDnsNameOptions.Deserialize(d)
+		case schemas.ManagedInstanceRequest_PrivateIpAddress:
+			v.PrivateIpAddress = new(string)
+			return d.ReadString(schemas.ManagedInstanceRequest_PrivateIpAddress, v.PrivateIpAddress)
+		case schemas.ManagedInstanceRequest_RamdiskId:
+			v.RamdiskId = new(string)
+			return d.ReadString(schemas.ManagedInstanceRequest_RamdiskId, v.RamdiskId)
+		case schemas.ManagedInstanceRequest_SecurityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.ManagedInstanceRequest_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.ManagedInstanceRequest_SecurityGroups:
+			return deserializeSecurityGroupNames(d, schemas.ManagedInstanceRequest_SecurityGroups, &v.SecurityGroups)
+		case schemas.ManagedInstanceRequest_SubnetId:
+			v.SubnetId = new(string)
+			return d.ReadString(schemas.ManagedInstanceRequest_SubnetId, v.SubnetId)
+		case schemas.ManagedInstanceRequest_TagSpecifications:
+			return deserializeTagSpecifications(d, schemas.ManagedInstanceRequest_TagSpecifications, &v.TagSpecifications)
+		case schemas.ManagedInstanceRequest_UserData:
+			v.UserData = new(string)
+			return d.ReadString(schemas.ManagedInstanceRequest_UserData, v.UserData)
+		}
+		return nil
+	})
+}
+
 // Defines instance placement configuration for WorkSpace Instance.
 type Placement struct {
 
@@ -535,6 +1662,74 @@ type Placement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Placement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Placement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Placement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Affinity != nil {
+		s.WriteString(schemas.Placement_Affinity, *v.Affinity)
+	}
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.Placement_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.Placement_GroupId, *v.GroupId)
+	}
+	if v.GroupName != nil {
+		s.WriteString(schemas.Placement_GroupName, *v.GroupName)
+	}
+	if v.HostId != nil {
+		s.WriteString(schemas.Placement_HostId, *v.HostId)
+	}
+	if v.HostResourceGroupArn != nil {
+		s.WriteString(schemas.Placement_HostResourceGroupArn, *v.HostResourceGroupArn)
+	}
+	if v.PartitionNumber != nil {
+		s.WriteInt32(schemas.Placement_PartitionNumber, *v.PartitionNumber)
+	}
+	if v.Tenancy != "" {
+		s.WriteString(schemas.Placement_Tenancy, string(v.Tenancy))
+	}
+}
+func (v *Placement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Placement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Placement_Affinity:
+			v.Affinity = new(string)
+			return d.ReadString(schemas.Placement_Affinity, v.Affinity)
+		case schemas.Placement_AvailabilityZone:
+			v.AvailabilityZone = new(string)
+			return d.ReadString(schemas.Placement_AvailabilityZone, v.AvailabilityZone)
+		case schemas.Placement_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.Placement_GroupId, v.GroupId)
+		case schemas.Placement_GroupName:
+			v.GroupName = new(string)
+			return d.ReadString(schemas.Placement_GroupName, v.GroupName)
+		case schemas.Placement_HostId:
+			v.HostId = new(string)
+			return d.ReadString(schemas.Placement_HostId, v.HostId)
+		case schemas.Placement_HostResourceGroupArn:
+			v.HostResourceGroupArn = new(string)
+			return d.ReadString(schemas.Placement_HostResourceGroupArn, v.HostResourceGroupArn)
+		case schemas.Placement_PartitionNumber:
+			v.PartitionNumber = new(int32)
+			return d.ReadInt32(schemas.Placement_PartitionNumber, v.PartitionNumber)
+		case schemas.Placement_Tenancy:
+			var ev string
+			if err := d.ReadString(schemas.Placement_Tenancy, &ev); err != nil {
+				return err
+			}
+			v.Tenancy = TenancyEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Configures private DNS name settings for WorkSpace Instance.
 type PrivateDnsNameOptionsRequest struct {
 
@@ -550,6 +1745,44 @@ type PrivateDnsNameOptionsRequest struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrivateDnsNameOptionsRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateDnsNameOptionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateDnsNameOptionsRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableResourceNameDnsAAAARecord != nil {
+		s.WriteBool(schemas.PrivateDnsNameOptionsRequest_EnableResourceNameDnsAAAARecord, *v.EnableResourceNameDnsAAAARecord)
+	}
+	if v.EnableResourceNameDnsARecord != nil {
+		s.WriteBool(schemas.PrivateDnsNameOptionsRequest_EnableResourceNameDnsARecord, *v.EnableResourceNameDnsARecord)
+	}
+	if v.HostnameType != "" {
+		s.WriteString(schemas.PrivateDnsNameOptionsRequest_HostnameType, string(v.HostnameType))
+	}
+}
+func (v *PrivateDnsNameOptionsRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateDnsNameOptionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateDnsNameOptionsRequest_EnableResourceNameDnsAAAARecord:
+			v.EnableResourceNameDnsAAAARecord = new(bool)
+			return d.ReadBool(schemas.PrivateDnsNameOptionsRequest_EnableResourceNameDnsAAAARecord, v.EnableResourceNameDnsAAAARecord)
+		case schemas.PrivateDnsNameOptionsRequest_EnableResourceNameDnsARecord:
+			v.EnableResourceNameDnsARecord = new(bool)
+			return d.ReadBool(schemas.PrivateDnsNameOptionsRequest_EnableResourceNameDnsARecord, v.EnableResourceNameDnsARecord)
+		case schemas.PrivateDnsNameOptionsRequest_HostnameType:
+			var ev string
+			if err := d.ReadString(schemas.PrivateDnsNameOptionsRequest_HostnameType, &ev); err != nil {
+				return err
+			}
+			v.HostnameType = HostnameTypeEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Defines private IP address configuration for network interface.
 type PrivateIpAddressSpecification struct {
 
@@ -562,6 +1795,34 @@ type PrivateIpAddressSpecification struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrivateIpAddressSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateIpAddressSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateIpAddressSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Primary != nil {
+		s.WriteBool(schemas.PrivateIpAddressSpecification_Primary, *v.Primary)
+	}
+	if v.PrivateIpAddress != nil {
+		s.WriteString(schemas.PrivateIpAddressSpecification_PrivateIpAddress, *v.PrivateIpAddress)
+	}
+}
+func (v *PrivateIpAddressSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateIpAddressSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateIpAddressSpecification_Primary:
+			v.Primary = new(bool)
+			return d.ReadBool(schemas.PrivateIpAddressSpecification_Primary, v.Primary)
+		case schemas.PrivateIpAddressSpecification_PrivateIpAddress:
+			v.PrivateIpAddress = new(string)
+			return d.ReadString(schemas.PrivateIpAddressSpecification_PrivateIpAddress, v.PrivateIpAddress)
+		}
+		return nil
+	})
+}
+
 // Represents an AWS region supported by WorkSpaces Instances.
 type Region struct {
 
@@ -571,6 +1832,28 @@ type Region struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Region) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Region)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Region) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RegionName != nil {
+		s.WriteString(schemas.Region_RegionName, *v.RegionName)
+	}
+}
+func (v *Region) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Region, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Region_RegionName:
+			v.RegionName = new(string)
+			return d.ReadString(schemas.Region_RegionName, v.RegionName)
+		}
+		return nil
+	})
+}
+
 // Configures detailed monitoring for WorkSpace Instance.
 type RunInstancesMonitoringEnabled struct {
 
@@ -578,6 +1861,28 @@ type RunInstancesMonitoringEnabled struct {
 	Enabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *RunInstancesMonitoringEnabled) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunInstancesMonitoringEnabled)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunInstancesMonitoringEnabled) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.RunInstancesMonitoringEnabled_Enabled, *v.Enabled)
+	}
+}
+func (v *RunInstancesMonitoringEnabled) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RunInstancesMonitoringEnabled, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RunInstancesMonitoringEnabled_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.RunInstancesMonitoringEnabled_Enabled, v.Enabled)
+		}
+		return nil
+	})
 }
 
 // Defines configuration for spot instance deployment.
@@ -601,6 +1906,60 @@ type SpotMarketOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SpotMarketOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SpotMarketOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SpotMarketOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BlockDurationMinutes != nil {
+		s.WriteInt32(schemas.SpotMarketOptions_BlockDurationMinutes, *v.BlockDurationMinutes)
+	}
+	if v.InstanceInterruptionBehavior != "" {
+		s.WriteString(schemas.SpotMarketOptions_InstanceInterruptionBehavior, string(v.InstanceInterruptionBehavior))
+	}
+	if v.MaxPrice != nil {
+		s.WriteString(schemas.SpotMarketOptions_MaxPrice, *v.MaxPrice)
+	}
+	if v.SpotInstanceType != "" {
+		s.WriteString(schemas.SpotMarketOptions_SpotInstanceType, string(v.SpotInstanceType))
+	}
+	if v.ValidUntilUtc != nil {
+		s.WriteTime(schemas.SpotMarketOptions_ValidUntilUtc, *v.ValidUntilUtc)
+	}
+}
+func (v *SpotMarketOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SpotMarketOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SpotMarketOptions_BlockDurationMinutes:
+			v.BlockDurationMinutes = new(int32)
+			return d.ReadInt32(schemas.SpotMarketOptions_BlockDurationMinutes, v.BlockDurationMinutes)
+		case schemas.SpotMarketOptions_InstanceInterruptionBehavior:
+			var ev string
+			if err := d.ReadString(schemas.SpotMarketOptions_InstanceInterruptionBehavior, &ev); err != nil {
+				return err
+			}
+			v.InstanceInterruptionBehavior = InstanceInterruptionBehaviorEnum(ev)
+			return nil
+		case schemas.SpotMarketOptions_MaxPrice:
+			v.MaxPrice = new(string)
+			return d.ReadString(schemas.SpotMarketOptions_MaxPrice, v.MaxPrice)
+		case schemas.SpotMarketOptions_SpotInstanceType:
+			var ev string
+			if err := d.ReadString(schemas.SpotMarketOptions_SpotInstanceType, &ev); err != nil {
+				return err
+			}
+			v.SpotInstanceType = SpotInstanceTypeEnum(ev)
+			return nil
+		case schemas.SpotMarketOptions_ValidUntilUtc:
+			v.ValidUntilUtc = new(time.Time)
+			return d.ReadTime(schemas.SpotMarketOptions_ValidUntilUtc, v.ValidUntilUtc)
+		}
+		return nil
+	})
+}
+
 // Represents a single valid configuration combination that an instance type
 // supports, combining tenancy, platform type, and billing mode into one complete
 // configuration specification.
@@ -619,6 +1978,52 @@ type SupportedInstanceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SupportedInstanceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SupportedInstanceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SupportedInstanceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BillingMode != "" {
+		s.WriteString(schemas.SupportedInstanceConfiguration_BillingMode, string(v.BillingMode))
+	}
+	if v.PlatformType != "" {
+		s.WriteString(schemas.SupportedInstanceConfiguration_PlatformType, string(v.PlatformType))
+	}
+	if v.Tenancy != "" {
+		s.WriteString(schemas.SupportedInstanceConfiguration_Tenancy, string(v.Tenancy))
+	}
+}
+func (v *SupportedInstanceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SupportedInstanceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SupportedInstanceConfiguration_BillingMode:
+			var ev string
+			if err := d.ReadString(schemas.SupportedInstanceConfiguration_BillingMode, &ev); err != nil {
+				return err
+			}
+			v.BillingMode = BillingMode(ev)
+			return nil
+		case schemas.SupportedInstanceConfiguration_PlatformType:
+			var ev string
+			if err := d.ReadString(schemas.SupportedInstanceConfiguration_PlatformType, &ev); err != nil {
+				return err
+			}
+			v.PlatformType = PlatformTypeEnum(ev)
+			return nil
+		case schemas.SupportedInstanceConfiguration_Tenancy:
+			var ev string
+			if err := d.ReadString(schemas.SupportedInstanceConfiguration_Tenancy, &ev); err != nil {
+				return err
+			}
+			v.Tenancy = InstanceConfigurationTenancyEnum(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents a key-value metadata tag.
 type Tag struct {
 
@@ -631,6 +2036,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Defines tagging configuration for a resource.
 type TagSpecification struct {
 
@@ -641,6 +2074,35 @@ type TagSpecification struct {
 	Tags []Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *TagSpecification) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagSpecification)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagSpecification) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceType != "" {
+		s.WriteString(schemas.TagSpecification_ResourceType, string(v.ResourceType))
+	}
+	serializeTagList(s, schemas.TagSpecification_Tags, v.Tags)
+}
+func (v *TagSpecification) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagSpecification, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagSpecification_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.TagSpecification_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResourceTypeEnum(ev)
+			return nil
+		case schemas.TagSpecification_Tags:
+			return deserializeTagList(d, schemas.TagSpecification_Tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Represents a validation error field in an API request.
@@ -664,6 +2126,40 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_Name, *v.Name)
+	}
+	if v.Reason != nil {
+		s.WriteString(schemas.ValidationExceptionField_Reason, *v.Reason)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Message, v.Message)
+		case schemas.ValidationExceptionField_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Name, v.Name)
+		case schemas.ValidationExceptionField_Reason:
+			v.Reason = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Reason, v.Reason)
+		}
+		return nil
+	})
+}
+
 // Represents a single WorkSpace Instance.
 type WorkspaceInstance struct {
 
@@ -679,6 +2175,46 @@ type WorkspaceInstance struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WorkspaceInstance) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceInstance)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceInstance) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EC2ManagedInstance != nil {
+		s.WriteStruct(schemas.WorkspaceInstance_EC2ManagedInstance)
+		v.EC2ManagedInstance.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ProvisionState != "" {
+		s.WriteString(schemas.WorkspaceInstance_ProvisionState, string(v.ProvisionState))
+	}
+	if v.WorkspaceInstanceId != nil {
+		s.WriteString(schemas.WorkspaceInstance_WorkspaceInstanceId, *v.WorkspaceInstanceId)
+	}
+}
+func (v *WorkspaceInstance) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceInstance, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceInstance_EC2ManagedInstance:
+			v.EC2ManagedInstance = &EC2ManagedInstance{}
+			return v.EC2ManagedInstance.Deserialize(d)
+		case schemas.WorkspaceInstance_ProvisionState:
+			var ev string
+			if err := d.ReadString(schemas.WorkspaceInstance_ProvisionState, &ev); err != nil {
+				return err
+			}
+			v.ProvisionState = ProvisionStateEnum(ev)
+			return nil
+		case schemas.WorkspaceInstance_WorkspaceInstanceId:
+			v.WorkspaceInstanceId = new(string)
+			return d.ReadString(schemas.WorkspaceInstance_WorkspaceInstanceId, v.WorkspaceInstanceId)
+		}
+		return nil
+	})
+}
+
 // Captures errors specific to WorkSpace Instance operations.
 type WorkspaceInstanceError struct {
 
@@ -689,6 +2225,34 @@ type WorkspaceInstanceError struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *WorkspaceInstanceError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WorkspaceInstanceError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WorkspaceInstanceError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.WorkspaceInstanceError_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.WorkspaceInstanceError_ErrorMessage, *v.ErrorMessage)
+	}
+}
+func (v *WorkspaceInstanceError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WorkspaceInstanceError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WorkspaceInstanceError_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.WorkspaceInstanceError_ErrorCode, v.ErrorCode)
+		case schemas.WorkspaceInstanceError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.WorkspaceInstanceError_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

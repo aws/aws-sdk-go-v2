@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -172,6 +174,57 @@ type RestoreDBClusterFromSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreDBClusterFromSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreDBClusterFromSnapshotMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreDBClusterFromSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailabilityZones(s, schemas.RestoreDBClusterFromSnapshotMessage_AvailabilityZones, v.AvailabilityZones)
+	if v.DBClusterIdentifier != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_DBClusterIdentifier, *v.DBClusterIdentifier)
+	}
+	if v.DBClusterParameterGroupName != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_DBClusterParameterGroupName, *v.DBClusterParameterGroupName)
+	}
+	if v.DBSubnetGroupName != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
+	}
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.RestoreDBClusterFromSnapshotMessage_DeletionProtection, *v.DeletionProtection)
+	}
+	serializeLogTypeList(s, schemas.RestoreDBClusterFromSnapshotMessage_EnableCloudwatchLogsExports, v.EnableCloudwatchLogsExports)
+	if v.Engine != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_Engine, *v.Engine)
+	}
+	if v.EngineVersion != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_EngineVersion, *v.EngineVersion)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.NetworkType != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_NetworkType, *v.NetworkType)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.RestoreDBClusterFromSnapshotMessage_Port, *v.Port)
+	}
+	if v.ServerlessV2ScalingConfiguration != nil {
+		s.WriteStruct(schemas.RestoreDBClusterFromSnapshotMessage_ServerlessV2ScalingConfiguration)
+		v.ServerlessV2ScalingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotIdentifier != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_SnapshotIdentifier, *v.SnapshotIdentifier)
+	}
+	if v.StorageType != nil {
+		s.WriteString(schemas.RestoreDBClusterFromSnapshotMessage_StorageType, *v.StorageType)
+	}
+	serializeTagList(s, schemas.RestoreDBClusterFromSnapshotMessage_Tags, v.Tags)
+	serializeVpcSecurityGroupIdList(s, schemas.RestoreDBClusterFromSnapshotMessage_VpcSecurityGroupIds, v.VpcSecurityGroupIds)
+}
+
 type RestoreDBClusterFromSnapshotOutput struct {
 
 	// Detailed information about a cluster.
@@ -183,16 +236,24 @@ type RestoreDBClusterFromSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreDBClusterFromSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreDBClusterFromSnapshotResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreDBClusterFromSnapshotResult_DBCluster:
+			v.DBCluster = &types.DBCluster{}
+			return v.DBCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreDBClusterFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRestoreDBClusterFromSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreDBClusterFromSnapshot, schemas.RestoreDBClusterFromSnapshotMessage, schemas.RestoreDBClusterFromSnapshotResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRestoreDBClusterFromSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreDBClusterFromSnapshot, schemas.RestoreDBClusterFromSnapshotMessage, schemas.RestoreDBClusterFromSnapshotResult), output: &RestoreDBClusterFromSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RestoreDBClusterFromSnapshot"); err != nil {

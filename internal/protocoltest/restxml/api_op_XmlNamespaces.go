@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,20 @@ type XmlNamespacesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlNamespacesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlNamespacesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlNamespacesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nested != nil {
+		s.WriteStruct(schemas.XmlNamespacesRequest_nested)
+		v.Nested.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type XmlNamespacesOutput struct {
 	Nested *types.XmlNamespaceNested
 
@@ -41,16 +57,24 @@ type XmlNamespacesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlNamespacesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XmlNamespacesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XmlNamespacesResponse_nested:
+			v.Nested = &types.XmlNamespaceNested{}
+			return v.Nested.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlNamespaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlNamespaces, schemas.XmlNamespacesRequest, schemas.XmlNamespacesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpXmlNamespaces{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlNamespaces, schemas.XmlNamespacesRequest, schemas.XmlNamespacesResponse), output: &XmlNamespacesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlNamespaces"); err != nil {

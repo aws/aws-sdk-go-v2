@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -82,6 +84,42 @@ type PutStorageConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutStorageConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutStorageConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutStorageConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DisallowIngestNullNaN != nil {
+		s.WriteBool(schemas.PutStorageConfigurationRequest_disallowIngestNullNaN, *v.DisallowIngestNullNaN)
+	}
+	if v.DisassociatedDataStorage != "" {
+		s.WriteString(schemas.PutStorageConfigurationRequest_disassociatedDataStorage, string(v.DisassociatedDataStorage))
+	}
+	if v.MultiLayerStorage != nil {
+		s.WriteStruct(schemas.PutStorageConfigurationRequest_multiLayerStorage)
+		v.MultiLayerStorage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteStruct(schemas.PutStorageConfigurationRequest_retentionPeriod)
+		v.RetentionPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.PutStorageConfigurationRequest_storageType, string(v.StorageType))
+	}
+	if v.WarmTier != "" {
+		s.WriteString(schemas.PutStorageConfigurationRequest_warmTier, string(v.WarmTier))
+	}
+	if v.WarmTierRetentionPeriod != nil {
+		s.WriteStruct(schemas.PutStorageConfigurationRequest_warmTierRetentionPeriod)
+		v.WarmTierRetentionPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutStorageConfigurationOutput struct {
 
 	// Contains current status information for the configuration.
@@ -144,16 +182,57 @@ type PutStorageConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutStorageConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutStorageConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutStorageConfigurationResponse_configurationStatus:
+			v.ConfigurationStatus = &types.ConfigurationStatus{}
+			return v.ConfigurationStatus.Deserialize(d)
+		case schemas.PutStorageConfigurationResponse_disallowIngestNullNaN:
+			v.DisallowIngestNullNaN = new(bool)
+			return d.ReadBool(schemas.PutStorageConfigurationResponse_disallowIngestNullNaN, v.DisallowIngestNullNaN)
+		case schemas.PutStorageConfigurationResponse_disassociatedDataStorage:
+			var ev string
+			if err := d.ReadString(schemas.PutStorageConfigurationResponse_disassociatedDataStorage, &ev); err != nil {
+				return err
+			}
+			v.DisassociatedDataStorage = types.DisassociatedDataStorageState(ev)
+			return nil
+		case schemas.PutStorageConfigurationResponse_multiLayerStorage:
+			v.MultiLayerStorage = &types.MultiLayerStorage{}
+			return v.MultiLayerStorage.Deserialize(d)
+		case schemas.PutStorageConfigurationResponse_retentionPeriod:
+			v.RetentionPeriod = &types.RetentionPeriod{}
+			return v.RetentionPeriod.Deserialize(d)
+		case schemas.PutStorageConfigurationResponse_storageType:
+			var ev string
+			if err := d.ReadString(schemas.PutStorageConfigurationResponse_storageType, &ev); err != nil {
+				return err
+			}
+			v.StorageType = types.StorageType(ev)
+			return nil
+		case schemas.PutStorageConfigurationResponse_warmTier:
+			var ev string
+			if err := d.ReadString(schemas.PutStorageConfigurationResponse_warmTier, &ev); err != nil {
+				return err
+			}
+			v.WarmTier = types.WarmTierState(ev)
+			return nil
+		case schemas.PutStorageConfigurationResponse_warmTierRetentionPeriod:
+			v.WarmTierRetentionPeriod = &types.WarmTierRetentionPeriod{}
+			return v.WarmTierRetentionPeriod.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutStorageConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutStorageConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutStorageConfiguration, schemas.PutStorageConfigurationRequest, schemas.PutStorageConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutStorageConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutStorageConfiguration, schemas.PutStorageConfigurationRequest, schemas.PutStorageConfigurationResponse), output: &PutStorageConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutStorageConfiguration"); err != nil {

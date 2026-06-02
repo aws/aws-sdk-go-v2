@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,18 @@ type GetInvoicePDFInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvoicePDFInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInvoicePDFRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInvoicePDFInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InvoiceId != nil {
+		s.WriteString(schemas.GetInvoicePDFRequest_InvoiceId, *v.InvoiceId)
+	}
+}
+
 type GetInvoicePDFOutput struct {
 
 	//  The invoice document and supplemental documents associated with the invoice.
@@ -54,16 +68,24 @@ type GetInvoicePDFOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInvoicePDFOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInvoicePDFResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInvoicePDFResponse_InvoicePDF:
+			v.InvoicePDF = &types.InvoicePDF{}
+			return v.InvoicePDF.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInvoicePDFMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetInvoicePDF{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvoicePDF, schemas.GetInvoicePDFRequest, schemas.GetInvoicePDFResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetInvoicePDF{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInvoicePDF, schemas.GetInvoicePDFRequest, schemas.GetInvoicePDFResponse), output: &GetInvoicePDFOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetInvoicePDF"); err != nil {

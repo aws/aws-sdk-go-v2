@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,34 @@ type GetMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GetMetadataRequest_appId, *v.AppId)
+	}
+	if v.EnvironmentName != nil {
+		s.WriteString(schemas.GetMetadataRequest_environmentName, *v.EnvironmentName)
+	}
+}
+func (v *GetMetadataInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMetadataRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMetadataRequest_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.GetMetadataRequest_appId, v.AppId)
+		case schemas.GetMetadataRequest_environmentName:
+			v.EnvironmentName = new(string)
+			return d.ReadString(schemas.GetMetadataRequest_environmentName, v.EnvironmentName)
+		}
+		return nil
+	})
+}
+
 type GetMetadataOutput struct {
 
 	// Represents the configuration settings for the features metadata.
@@ -54,16 +84,32 @@ type GetMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMetadataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMetadataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMetadataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFeaturesMap(s, schemas.GetMetadataResponse_features, v.Features)
+}
+func (v *GetMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMetadataResponse_features:
+			return deserializeFeaturesMap(d, schemas.GetMetadataResponse_features, &v.Features)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetadata, schemas.GetMetadataRequest, schemas.GetMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMetadata, schemas.GetMetadataRequest, schemas.GetMetadataResponse), output: &GetMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMetadata"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,6 +68,58 @@ type UpdateProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptRoleSessionName != nil {
+		s.WriteBool(schemas.UpdateProfileRequest_acceptRoleSessionName, *v.AcceptRoleSessionName)
+	}
+	if v.DurationSeconds != nil {
+		s.WriteInt32(schemas.UpdateProfileRequest_durationSeconds, *v.DurationSeconds)
+	}
+	serializeManagedPolicyList(s, schemas.UpdateProfileRequest_managedPolicyArns, v.ManagedPolicyArns)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateProfileRequest_name, *v.Name)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.UpdateProfileRequest_profileId, *v.ProfileId)
+	}
+	serializeRoleArnList(s, schemas.UpdateProfileRequest_roleArns, v.RoleArns)
+	if v.SessionPolicy != nil {
+		s.WriteString(schemas.UpdateProfileRequest_sessionPolicy, *v.SessionPolicy)
+	}
+}
+func (v *UpdateProfileInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProfileRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProfileRequest_acceptRoleSessionName:
+			v.AcceptRoleSessionName = new(bool)
+			return d.ReadBool(schemas.UpdateProfileRequest_acceptRoleSessionName, v.AcceptRoleSessionName)
+		case schemas.UpdateProfileRequest_durationSeconds:
+			v.DurationSeconds = new(int32)
+			return d.ReadInt32(schemas.UpdateProfileRequest_durationSeconds, v.DurationSeconds)
+		case schemas.UpdateProfileRequest_managedPolicyArns:
+			return deserializeManagedPolicyList(d, schemas.UpdateProfileRequest_managedPolicyArns, &v.ManagedPolicyArns)
+		case schemas.UpdateProfileRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateProfileRequest_name, v.Name)
+		case schemas.UpdateProfileRequest_profileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.UpdateProfileRequest_profileId, v.ProfileId)
+		case schemas.UpdateProfileRequest_roleArns:
+			return deserializeRoleArnList(d, schemas.UpdateProfileRequest_roleArns, &v.RoleArns)
+		case schemas.UpdateProfileRequest_sessionPolicy:
+			v.SessionPolicy = new(string)
+			return d.ReadString(schemas.UpdateProfileRequest_sessionPolicy, v.SessionPolicy)
+		}
+		return nil
+	})
+}
+
 type UpdateProfileOutput struct {
 
 	// The state of the profile after a read or write operation.
@@ -77,16 +131,37 @@ type UpdateProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProfileOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileDetailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProfileOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Profile != nil {
+		s.WriteStruct(schemas.ProfileDetailResponse_profile)
+		v.Profile.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfileDetailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfileDetailResponse_profile:
+			v.Profile = &types.ProfileDetail{}
+			return v.Profile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfile, schemas.UpdateProfileRequest, schemas.ProfileDetailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProfile, schemas.UpdateProfileRequest, schemas.ProfileDetailResponse), output: &UpdateProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProfile"); err != nil {

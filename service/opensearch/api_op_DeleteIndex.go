@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,21 @@ type DeleteIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DeleteIndexRequest_DomainName, *v.DomainName)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.DeleteIndexRequest_IndexName, *v.IndexName)
+	}
+}
+
 type DeleteIndexOutput struct {
 
 	// The status of the index deletion operation.
@@ -57,16 +74,28 @@ type DeleteIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteIndexResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteIndexResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IndexStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIndex, schemas.DeleteIndexRequest, schemas.DeleteIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIndex, schemas.DeleteIndexRequest, schemas.DeleteIndexResponse), output: &DeleteIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteIndex"); err != nil {

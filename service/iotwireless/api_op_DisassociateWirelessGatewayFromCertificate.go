@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type DisassociateWirelessGatewayFromCertificateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateWirelessGatewayFromCertificateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateWirelessGatewayFromCertificateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateWirelessGatewayFromCertificateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DisassociateWirelessGatewayFromCertificateRequest_Id, *v.Id)
+	}
+}
+
 type DisassociateWirelessGatewayFromCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +57,21 @@ type DisassociateWirelessGatewayFromCertificateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateWirelessGatewayFromCertificateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateWirelessGatewayFromCertificateResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateWirelessGatewayFromCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateWirelessGatewayFromCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateWirelessGatewayFromCertificate, schemas.DisassociateWirelessGatewayFromCertificateRequest, schemas.DisassociateWirelessGatewayFromCertificateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateWirelessGatewayFromCertificate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateWirelessGatewayFromCertificate, schemas.DisassociateWirelessGatewayFromCertificateRequest, schemas.DisassociateWirelessGatewayFromCertificateResponse), output: &DisassociateWirelessGatewayFromCertificateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateWirelessGatewayFromCertificate"); err != nil {

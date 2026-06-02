@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -47,6 +49,46 @@ type DescribePackageVersionInput struct {
 	PatchVersion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribePackageVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePackageVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePackageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.DescribePackageVersionRequest_OwnerAccount, *v.OwnerAccount)
+	}
+	if v.PackageId != nil {
+		s.WriteString(schemas.DescribePackageVersionRequest_PackageId, *v.PackageId)
+	}
+	if v.PackageVersion != nil {
+		s.WriteString(schemas.DescribePackageVersionRequest_PackageVersion, *v.PackageVersion)
+	}
+	if v.PatchVersion != nil {
+		s.WriteString(schemas.DescribePackageVersionRequest_PatchVersion, *v.PatchVersion)
+	}
+}
+func (v *DescribePackageVersionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePackageVersionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePackageVersionRequest_OwnerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.DescribePackageVersionRequest_OwnerAccount, v.OwnerAccount)
+		case schemas.DescribePackageVersionRequest_PackageId:
+			v.PackageId = new(string)
+			return d.ReadString(schemas.DescribePackageVersionRequest_PackageId, v.PackageId)
+		case schemas.DescribePackageVersionRequest_PackageVersion:
+			v.PackageVersion = new(string)
+			return d.ReadString(schemas.DescribePackageVersionRequest_PackageVersion, v.PackageVersion)
+		case schemas.DescribePackageVersionRequest_PatchVersion:
+			v.PatchVersion = new(string)
+			return d.ReadString(schemas.DescribePackageVersionRequest_PatchVersion, v.PatchVersion)
+		}
+		return nil
+	})
 }
 
 type DescribePackageVersionOutput struct {
@@ -99,16 +141,92 @@ type DescribePackageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribePackageVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribePackageVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribePackageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IsLatestPatch != false {
+		s.WriteBool(schemas.DescribePackageVersionResponse_IsLatestPatch, v.IsLatestPatch)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.DescribePackageVersionResponse_OwnerAccount, *v.OwnerAccount)
+	}
+	if v.PackageArn != nil {
+		s.WriteString(schemas.DescribePackageVersionResponse_PackageArn, *v.PackageArn)
+	}
+	if v.PackageId != nil {
+		s.WriteString(schemas.DescribePackageVersionResponse_PackageId, *v.PackageId)
+	}
+	if v.PackageName != nil {
+		s.WriteString(schemas.DescribePackageVersionResponse_PackageName, *v.PackageName)
+	}
+	if v.PackageVersion != nil {
+		s.WriteString(schemas.DescribePackageVersionResponse_PackageVersion, *v.PackageVersion)
+	}
+	if v.PatchVersion != nil {
+		s.WriteString(schemas.DescribePackageVersionResponse_PatchVersion, *v.PatchVersion)
+	}
+	if v.RegisteredTime != nil {
+		s.WriteTime(schemas.DescribePackageVersionResponse_RegisteredTime, *v.RegisteredTime)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribePackageVersionResponse_Status, string(v.Status))
+	}
+	if v.StatusDescription != nil {
+		s.WriteString(schemas.DescribePackageVersionResponse_StatusDescription, *v.StatusDescription)
+	}
+}
+func (v *DescribePackageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribePackageVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribePackageVersionResponse_IsLatestPatch:
+			return d.ReadBool(schemas.DescribePackageVersionResponse_IsLatestPatch, &v.IsLatestPatch)
+		case schemas.DescribePackageVersionResponse_OwnerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.DescribePackageVersionResponse_OwnerAccount, v.OwnerAccount)
+		case schemas.DescribePackageVersionResponse_PackageArn:
+			v.PackageArn = new(string)
+			return d.ReadString(schemas.DescribePackageVersionResponse_PackageArn, v.PackageArn)
+		case schemas.DescribePackageVersionResponse_PackageId:
+			v.PackageId = new(string)
+			return d.ReadString(schemas.DescribePackageVersionResponse_PackageId, v.PackageId)
+		case schemas.DescribePackageVersionResponse_PackageName:
+			v.PackageName = new(string)
+			return d.ReadString(schemas.DescribePackageVersionResponse_PackageName, v.PackageName)
+		case schemas.DescribePackageVersionResponse_PackageVersion:
+			v.PackageVersion = new(string)
+			return d.ReadString(schemas.DescribePackageVersionResponse_PackageVersion, v.PackageVersion)
+		case schemas.DescribePackageVersionResponse_PatchVersion:
+			v.PatchVersion = new(string)
+			return d.ReadString(schemas.DescribePackageVersionResponse_PatchVersion, v.PatchVersion)
+		case schemas.DescribePackageVersionResponse_RegisteredTime:
+			v.RegisteredTime = new(time.Time)
+			return d.ReadTime(schemas.DescribePackageVersionResponse_RegisteredTime, v.RegisteredTime)
+		case schemas.DescribePackageVersionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribePackageVersionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PackageVersionStatus(ev)
+			return nil
+		case schemas.DescribePackageVersionResponse_StatusDescription:
+			v.StatusDescription = new(string)
+			return d.ReadString(schemas.DescribePackageVersionResponse_StatusDescription, v.StatusDescription)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribePackageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribePackageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePackageVersion, schemas.DescribePackageVersionRequest, schemas.DescribePackageVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribePackageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribePackageVersion, schemas.DescribePackageVersionRequest, schemas.DescribePackageVersionResponse), output: &DescribePackageVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribePackageVersion"); err != nil {

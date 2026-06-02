@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,19 @@ type PutOutboundRequestBatchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutOutboundRequestBatchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutOutboundRequestBatchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutOutboundRequestBatchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.PutOutboundRequestBatchRequest_id, *v.Id)
+	}
+	serializeOutboundRequestList(s, schemas.PutOutboundRequestBatchRequest_outboundRequests, v.OutboundRequests)
+}
+
 // The response for PutOutboundRequestBatch API.
 type PutOutboundRequestBatchOutput struct {
 
@@ -59,16 +74,25 @@ type PutOutboundRequestBatchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutOutboundRequestBatchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutOutboundRequestBatchResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutOutboundRequestBatchResponse_failedRequests:
+			return deserializeFailedRequestList(d, schemas.PutOutboundRequestBatchResponse_failedRequests, &v.FailedRequests)
+		case schemas.PutOutboundRequestBatchResponse_successfulRequests:
+			return deserializeSuccessfulRequestList(d, schemas.PutOutboundRequestBatchResponse_successfulRequests, &v.SuccessfulRequests)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutOutboundRequestBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutOutboundRequestBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutOutboundRequestBatch, schemas.PutOutboundRequestBatchRequest, schemas.PutOutboundRequestBatchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutOutboundRequestBatch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutOutboundRequestBatch, schemas.PutOutboundRequestBatchRequest, schemas.PutOutboundRequestBatchResponse), output: &PutOutboundRequestBatchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutOutboundRequestBatch"); err != nil {

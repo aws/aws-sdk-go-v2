@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityir/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityir/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,6 +73,27 @@ type CreateMembershipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMembershipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMembershipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMembershipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateMembershipRequest_clientToken, *v.ClientToken)
+	}
+	if v.CoverEntireOrganization != nil {
+		s.WriteBool(schemas.CreateMembershipRequest_coverEntireOrganization, *v.CoverEntireOrganization)
+	}
+	serializeIncidentResponseTeam(s, schemas.CreateMembershipRequest_incidentResponseTeam, v.IncidentResponseTeam)
+	if v.MembershipName != nil {
+		s.WriteString(schemas.CreateMembershipRequest_membershipName, *v.MembershipName)
+	}
+	serializeOptInFeatures(s, schemas.CreateMembershipRequest_optInFeatures, v.OptInFeatures)
+	serializeTagMap(s, schemas.CreateMembershipRequest_tags, v.Tags)
+}
+
 type CreateMembershipOutput struct {
 
 	// Response element for CreateMembership providing the newly created membership ID.
@@ -84,16 +107,24 @@ type CreateMembershipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMembershipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMembershipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMembershipResponse_membershipId:
+			v.MembershipId = new(string)
+			return d.ReadString(schemas.CreateMembershipResponse_membershipId, v.MembershipId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMembership, schemas.CreateMembershipRequest, schemas.CreateMembershipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMembership{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMembership, schemas.CreateMembershipRequest, schemas.CreateMembershipResponse), output: &CreateMembershipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMembership"); err != nil {

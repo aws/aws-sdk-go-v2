@@ -80,7 +80,7 @@ generate: smithy-generate smithy-generate-protocol-tests update-requires gen-rep
 gen-config-asserts gen-internal-codegen copy-attributevalue-feature gen-mod-dropreplace-smithy-. min-go-version-. \
 tidy-modules-. test-update-snapshot-internal_protocoltest add-module-license-files gen-aws-ptrs format
 
-generate-tmpreplace-smithy: smithy-generate update-requires gen-repo-mod-replace gen-mod-replace-smithy-. update-module-metadata smithy-annotate-stable \
+generate-tmpreplace-smithy: smithy-generate smithy-generate-protocol-tests update-requires gen-repo-mod-replace gen-mod-replace-smithy-. update-module-metadata smithy-annotate-stable \
 gen-config-asserts gen-internal-codegen copy-attributevalue-feature min-go-version-. \
 tidy-modules-. add-module-license-files gen-aws-ptrs format gen-mod-dropreplace-smithy-. reset-sum
 
@@ -92,6 +92,9 @@ tidy-modules-. add-module-license-files gen-aws-ptrs format gen-mod-dropreplace-
 # SMITHY_GO_BUILD_API=com.amazonaws.sqs DEV_SERVICE=sqs make generate-dev
 generate-dev: smithy-generate update-requires gen-repo-mod-replace gen-mod-replace-smithy-config gen-mod-replace-smithy-aws gen-mod-replace-smithy-service_${DEV_SERVICE} update-module-metadata smithy-annotate-stable \
 gen-config-asserts gen-internal-codegen tidy-modules-config tidy-modules-aws tidy-modules-service_${DEV_SERVICE} format-dev
+
+generate-protocoltest-dev: smithy-generate smithy-generate-protocol-tests update-requires gen-repo-mod-replace gen-mod-replace-smithy-config gen-mod-replace-smithy-aws gen-mod-replace-smithy-internal_protocoltest_${DEV_SERVICE} update-module-metadata smithy-annotate-stable \
+gen-config-asserts gen-internal-codegen tidy-modules-config tidy-modules-aws tidy-modules-internal_protocoltest_${DEV_SERVICE} format-protocoltest-dev
 
 reset-sum:
 	find . -name go.sum -exec git checkout -- {} \;
@@ -140,6 +143,9 @@ format:
 
 format-dev:
 	gofmt -w -s service/${DEV_SERVICE}
+
+format-protocoltest-dev:
+	gofmt -w -s internal/protocoltest/${DEV_SERVICE}
 
 gen-config-asserts:
 	@echo "Generating SDK config package implementor assertions"

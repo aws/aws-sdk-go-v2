@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,21 @@ type DeletePolicyStoreAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePolicyStoreAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePolicyStoreAliasInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePolicyStoreAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AliasName != nil {
+		s.WriteString(schemas.DeletePolicyStoreAliasInput_aliasName, *v.AliasName)
+	}
+	if v.DeletionMode != "" {
+		s.WriteString(schemas.DeletePolicyStoreAliasInput_deletionMode, string(v.DeletionMode))
+	}
+}
+
 type DeletePolicyStoreAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -72,16 +89,21 @@ type DeletePolicyStoreAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePolicyStoreAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePolicyStoreAliasOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePolicyStoreAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeletePolicyStoreAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePolicyStoreAlias, schemas.DeletePolicyStoreAliasInput, schemas.DeletePolicyStoreAliasOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeletePolicyStoreAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePolicyStoreAlias, schemas.DeletePolicyStoreAliasInput, schemas.DeletePolicyStoreAliasOutput), output: &DeletePolicyStoreAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePolicyStoreAlias"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -56,6 +58,34 @@ type AcceptLinkInput struct {
 	TimeoutInMillis *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *AcceptLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AcceptLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AcceptLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attributes != nil {
+		s.WriteStruct(schemas.AcceptLinkRequest_attributes)
+		v.Attributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.AcceptLinkRequest_gatewayId, *v.GatewayId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.AcceptLinkRequest_linkId, *v.LinkId)
+	}
+	if v.LogSettings != nil {
+		s.WriteStruct(schemas.AcceptLinkRequest_logSettings)
+		v.LogSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeoutInMillis != nil {
+		s.WriteInt64(schemas.AcceptLinkRequest_timeoutInMillis, *v.TimeoutInMillis)
+	}
 }
 
 type AcceptLinkOutput struct {
@@ -114,16 +144,67 @@ type AcceptLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AcceptLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AcceptLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AcceptLinkResponse_attributes:
+			v.Attributes = &types.LinkAttributes{}
+			return v.Attributes.Deserialize(d)
+		case schemas.AcceptLinkResponse_connectivityType:
+			var ev string
+			if err := d.ReadString(schemas.AcceptLinkResponse_connectivityType, &ev); err != nil {
+				return err
+			}
+			v.ConnectivityType = types.ConnectivityType(ev)
+			return nil
+		case schemas.AcceptLinkResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcceptLinkResponse_createdAt, v.CreatedAt)
+		case schemas.AcceptLinkResponse_direction:
+			var ev string
+			if err := d.ReadString(schemas.AcceptLinkResponse_direction, &ev); err != nil {
+				return err
+			}
+			v.Direction = types.LinkDirection(ev)
+			return nil
+		case schemas.AcceptLinkResponse_flowModules:
+			return deserializeModuleConfigurationList(d, schemas.AcceptLinkResponse_flowModules, &v.FlowModules)
+		case schemas.AcceptLinkResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.AcceptLinkResponse_gatewayId, v.GatewayId)
+		case schemas.AcceptLinkResponse_linkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.AcceptLinkResponse_linkId, v.LinkId)
+		case schemas.AcceptLinkResponse_logSettings:
+			v.LogSettings = &types.LinkLogSettings{}
+			return v.LogSettings.Deserialize(d)
+		case schemas.AcceptLinkResponse_peerGatewayId:
+			v.PeerGatewayId = new(string)
+			return d.ReadString(schemas.AcceptLinkResponse_peerGatewayId, v.PeerGatewayId)
+		case schemas.AcceptLinkResponse_pendingFlowModules:
+			return deserializeModuleConfigurationList(d, schemas.AcceptLinkResponse_pendingFlowModules, &v.PendingFlowModules)
+		case schemas.AcceptLinkResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.AcceptLinkResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LinkStatus(ev)
+			return nil
+		case schemas.AcceptLinkResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AcceptLinkResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAcceptLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAcceptLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptLink, schemas.AcceptLinkRequest, schemas.AcceptLinkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAcceptLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AcceptLink, schemas.AcceptLinkRequest, schemas.AcceptLinkResponse), output: &AcceptLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AcceptLink"); err != nil {

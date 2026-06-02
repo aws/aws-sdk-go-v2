@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,16 @@ type BatchGetCustomDataIdentifiersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCustomDataIdentifiersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCustomDataIdentifiersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCustomDataIdentifiersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.BatchGetCustomDataIdentifiersRequest_ids, v.Ids)
+}
+
 type BatchGetCustomDataIdentifiersOutput struct {
 
 	// An array of objects, one for each custom data identifier that matches the
@@ -53,16 +65,25 @@ type BatchGetCustomDataIdentifiersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCustomDataIdentifiersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCustomDataIdentifiersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCustomDataIdentifiersResponse_customDataIdentifiers:
+			return deserialize__listOfBatchGetCustomDataIdentifierSummary(d, schemas.BatchGetCustomDataIdentifiersResponse_customDataIdentifiers, &v.CustomDataIdentifiers)
+		case schemas.BatchGetCustomDataIdentifiersResponse_notFoundIdentifierIds:
+			return deserialize__listOf__string(d, schemas.BatchGetCustomDataIdentifiersResponse_notFoundIdentifierIds, &v.NotFoundIdentifierIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetCustomDataIdentifiersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetCustomDataIdentifiers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCustomDataIdentifiers, schemas.BatchGetCustomDataIdentifiersRequest, schemas.BatchGetCustomDataIdentifiersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetCustomDataIdentifiers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCustomDataIdentifiers, schemas.BatchGetCustomDataIdentifiersRequest, schemas.BatchGetCustomDataIdentifiersResponse), output: &BatchGetCustomDataIdentifiersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetCustomDataIdentifiers"); err != nil {

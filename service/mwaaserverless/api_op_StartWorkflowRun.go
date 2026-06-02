@@ -7,7 +7,9 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/document"
+	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mwaaserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -61,6 +63,25 @@ type StartWorkflowRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWorkflowRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartWorkflowRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartWorkflowRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartWorkflowRunRequest_ClientToken, *v.ClientToken)
+	}
+	serializeObjectMap(s, schemas.StartWorkflowRunRequest_OverrideParameters, v.OverrideParameters)
+	if v.WorkflowArn != nil {
+		s.WriteString(schemas.StartWorkflowRunRequest_WorkflowArn, *v.WorkflowArn)
+	}
+	if v.WorkflowVersion != nil {
+		s.WriteString(schemas.StartWorkflowRunRequest_WorkflowVersion, *v.WorkflowVersion)
+	}
+}
+
 type StartWorkflowRunOutput struct {
 
 	// The unique identifier of the newly started workflow run.
@@ -79,16 +100,34 @@ type StartWorkflowRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartWorkflowRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartWorkflowRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartWorkflowRunResponse_RunId:
+			v.RunId = new(string)
+			return d.ReadString(schemas.StartWorkflowRunResponse_RunId, v.RunId)
+		case schemas.StartWorkflowRunResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.StartWorkflowRunResponse_StartedAt, v.StartedAt)
+		case schemas.StartWorkflowRunResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.StartWorkflowRunResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.WorkflowRunStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartWorkflowRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStartWorkflowRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWorkflowRun, schemas.StartWorkflowRunRequest, schemas.StartWorkflowRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStartWorkflowRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartWorkflowRun, schemas.StartWorkflowRunRequest, schemas.StartWorkflowRunResponse), output: &StartWorkflowRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartWorkflowRun"); err != nil {

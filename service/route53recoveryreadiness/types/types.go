@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -38,6 +40,43 @@ type CellOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CellOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CellOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CellOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CellArn != nil {
+		s.WriteString(schemas.CellOutput_CellArn, *v.CellArn)
+	}
+	if v.CellName != nil {
+		s.WriteString(schemas.CellOutput_CellName, *v.CellName)
+	}
+	serialize__listOf__string(s, schemas.CellOutput_Cells, v.Cells)
+	serialize__listOf__string(s, schemas.CellOutput_ParentReadinessScopes, v.ParentReadinessScopes)
+	serializeTags(s, schemas.CellOutput_Tags, v.Tags)
+}
+func (v *CellOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CellOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CellOutput_CellArn:
+			v.CellArn = new(string)
+			return d.ReadString(schemas.CellOutput_CellArn, v.CellArn)
+		case schemas.CellOutput_CellName:
+			v.CellName = new(string)
+			return d.ReadString(schemas.CellOutput_CellName, v.CellName)
+		case schemas.CellOutput_Cells:
+			return deserialize__listOf__string(d, schemas.CellOutput_Cells, &v.Cells)
+		case schemas.CellOutput_ParentReadinessScopes:
+			return deserialize__listOf__string(d, schemas.CellOutput_ParentReadinessScopes, &v.ParentReadinessScopes)
+		case schemas.CellOutput_Tags:
+			return deserializeTags(d, schemas.CellOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // A component for DNS/routing control readiness checks and architecture checks.
 type DNSTargetResource struct {
 
@@ -62,6 +101,54 @@ type DNSTargetResource struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DNSTargetResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DNSTargetResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DNSTargetResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DNSTargetResource_DomainName, *v.DomainName)
+	}
+	if v.HostedZoneArn != nil {
+		s.WriteString(schemas.DNSTargetResource_HostedZoneArn, *v.HostedZoneArn)
+	}
+	if v.RecordSetId != nil {
+		s.WriteString(schemas.DNSTargetResource_RecordSetId, *v.RecordSetId)
+	}
+	if v.RecordType != nil {
+		s.WriteString(schemas.DNSTargetResource_RecordType, *v.RecordType)
+	}
+	if v.TargetResource != nil {
+		s.WriteStruct(schemas.DNSTargetResource_TargetResource)
+		v.TargetResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DNSTargetResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DNSTargetResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DNSTargetResource_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.DNSTargetResource_DomainName, v.DomainName)
+		case schemas.DNSTargetResource_HostedZoneArn:
+			v.HostedZoneArn = new(string)
+			return d.ReadString(schemas.DNSTargetResource_HostedZoneArn, v.HostedZoneArn)
+		case schemas.DNSTargetResource_RecordSetId:
+			v.RecordSetId = new(string)
+			return d.ReadString(schemas.DNSTargetResource_RecordSetId, v.RecordSetId)
+		case schemas.DNSTargetResource_RecordType:
+			v.RecordType = new(string)
+			return d.ReadString(schemas.DNSTargetResource_RecordType, v.RecordType)
+		case schemas.DNSTargetResource_TargetResource:
+			v.TargetResource = &TargetResource{}
+			return v.TargetResource.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Readiness rule information, including the resource type, rule ID, and rule
 // description.
 type ListRulesOutput struct {
@@ -84,6 +171,40 @@ type ListRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRulesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRulesOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRulesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceType != nil {
+		s.WriteString(schemas.ListRulesOutput_ResourceType, *v.ResourceType)
+	}
+	if v.RuleDescription != nil {
+		s.WriteString(schemas.ListRulesOutput_RuleDescription, *v.RuleDescription)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.ListRulesOutput_RuleId, *v.RuleId)
+	}
+}
+func (v *ListRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRulesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRulesOutput_ResourceType:
+			v.ResourceType = new(string)
+			return d.ReadString(schemas.ListRulesOutput_ResourceType, v.ResourceType)
+		case schemas.ListRulesOutput_RuleDescription:
+			v.RuleDescription = new(string)
+			return d.ReadString(schemas.ListRulesOutput_RuleDescription, v.RuleDescription)
+		case schemas.ListRulesOutput_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.ListRulesOutput_RuleId, v.RuleId)
+		}
+		return nil
+	})
+}
+
 // Information relating to readiness check status.
 type Message struct {
 
@@ -93,6 +214,28 @@ type Message struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Message) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Message)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Message) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageText != nil {
+		s.WriteString(schemas.Message_MessageText, *v.MessageText)
+	}
+}
+func (v *Message) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Message, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Message_MessageText:
+			v.MessageText = new(string)
+			return d.ReadString(schemas.Message_MessageText, v.MessageText)
+		}
+		return nil
+	})
+}
+
 // The Network Load Balancer resource that a DNS target resource points to.
 type NLBResource struct {
 
@@ -100,6 +243,28 @@ type NLBResource struct {
 	Arn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NLBResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NLBResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NLBResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.NLBResource_Arn, *v.Arn)
+	}
+}
+func (v *NLBResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NLBResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NLBResource_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.NLBResource_Arn, v.Arn)
+		}
+		return nil
+	})
 }
 
 // The Route 53 resource that a DNS target resource record points to.
@@ -112,6 +277,34 @@ type R53ResourceRecord struct {
 	RecordSetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *R53ResourceRecord) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.R53ResourceRecord)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *R53ResourceRecord) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.R53ResourceRecord_DomainName, *v.DomainName)
+	}
+	if v.RecordSetId != nil {
+		s.WriteString(schemas.R53ResourceRecord_RecordSetId, *v.RecordSetId)
+	}
+}
+func (v *R53ResourceRecord) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.R53ResourceRecord, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.R53ResourceRecord_DomainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.R53ResourceRecord_DomainName, v.DomainName)
+		case schemas.R53ResourceRecord_RecordSetId:
+			v.RecordSetId = new(string)
+			return d.ReadString(schemas.R53ResourceRecord_RecordSetId, v.RecordSetId)
+		}
+		return nil
+	})
 }
 
 // A readiness check.
@@ -136,6 +329,43 @@ type ReadinessCheckOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReadinessCheckOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReadinessCheckOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReadinessCheckOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReadinessCheckArn != nil {
+		s.WriteString(schemas.ReadinessCheckOutput_ReadinessCheckArn, *v.ReadinessCheckArn)
+	}
+	if v.ReadinessCheckName != nil {
+		s.WriteString(schemas.ReadinessCheckOutput_ReadinessCheckName, *v.ReadinessCheckName)
+	}
+	if v.ResourceSet != nil {
+		s.WriteString(schemas.ReadinessCheckOutput_ResourceSet, *v.ResourceSet)
+	}
+	serializeTags(s, schemas.ReadinessCheckOutput_Tags, v.Tags)
+}
+func (v *ReadinessCheckOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReadinessCheckOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReadinessCheckOutput_ReadinessCheckArn:
+			v.ReadinessCheckArn = new(string)
+			return d.ReadString(schemas.ReadinessCheckOutput_ReadinessCheckArn, v.ReadinessCheckArn)
+		case schemas.ReadinessCheckOutput_ReadinessCheckName:
+			v.ReadinessCheckName = new(string)
+			return d.ReadString(schemas.ReadinessCheckOutput_ReadinessCheckName, v.ReadinessCheckName)
+		case schemas.ReadinessCheckOutput_ResourceSet:
+			v.ResourceSet = new(string)
+			return d.ReadString(schemas.ReadinessCheckOutput_ResourceSet, v.ResourceSet)
+		case schemas.ReadinessCheckOutput_Tags:
+			return deserializeTags(d, schemas.ReadinessCheckOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Summary of all readiness check statuses in a recovery group, paginated in
 // GetRecoveryGroupReadinessSummary and GetCellReadinessSummary.
 type ReadinessCheckSummary struct {
@@ -149,6 +379,38 @@ type ReadinessCheckSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReadinessCheckSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReadinessCheckSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReadinessCheckSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Readiness != "" {
+		s.WriteString(schemas.ReadinessCheckSummary_Readiness, string(v.Readiness))
+	}
+	if v.ReadinessCheckName != nil {
+		s.WriteString(schemas.ReadinessCheckSummary_ReadinessCheckName, *v.ReadinessCheckName)
+	}
+}
+func (v *ReadinessCheckSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReadinessCheckSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReadinessCheckSummary_Readiness:
+			var ev string
+			if err := d.ReadString(schemas.ReadinessCheckSummary_Readiness, &ev); err != nil {
+				return err
+			}
+			v.Readiness = Readiness(ev)
+			return nil
+		case schemas.ReadinessCheckSummary_ReadinessCheckName:
+			v.ReadinessCheckName = new(string)
+			return d.ReadString(schemas.ReadinessCheckSummary_ReadinessCheckName, v.ReadinessCheckName)
+		}
+		return nil
+	})
+}
+
 // Recommendations that are provided to make an application more recovery
 // resilient.
 type Recommendation struct {
@@ -160,6 +422,28 @@ type Recommendation struct {
 	RecommendationText *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Recommendation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Recommendation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Recommendation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecommendationText != nil {
+		s.WriteString(schemas.Recommendation_RecommendationText, *v.RecommendationText)
+	}
+}
+func (v *Recommendation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Recommendation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Recommendation_RecommendationText:
+			v.RecommendationText = new(string)
+			return d.ReadString(schemas.Recommendation_RecommendationText, v.RecommendationText)
+		}
+		return nil
+	})
 }
 
 // A representation of the application, typically containing multiple cells.
@@ -186,6 +470,40 @@ type RecoveryGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecoveryGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecoveryGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecoveryGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.RecoveryGroupOutput_Cells, v.Cells)
+	if v.RecoveryGroupArn != nil {
+		s.WriteString(schemas.RecoveryGroupOutput_RecoveryGroupArn, *v.RecoveryGroupArn)
+	}
+	if v.RecoveryGroupName != nil {
+		s.WriteString(schemas.RecoveryGroupOutput_RecoveryGroupName, *v.RecoveryGroupName)
+	}
+	serializeTags(s, schemas.RecoveryGroupOutput_Tags, v.Tags)
+}
+func (v *RecoveryGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecoveryGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecoveryGroupOutput_Cells:
+			return deserialize__listOf__string(d, schemas.RecoveryGroupOutput_Cells, &v.Cells)
+		case schemas.RecoveryGroupOutput_RecoveryGroupArn:
+			v.RecoveryGroupArn = new(string)
+			return d.ReadString(schemas.RecoveryGroupOutput_RecoveryGroupArn, v.RecoveryGroupArn)
+		case schemas.RecoveryGroupOutput_RecoveryGroupName:
+			v.RecoveryGroupName = new(string)
+			return d.ReadString(schemas.RecoveryGroupOutput_RecoveryGroupName, v.RecoveryGroupName)
+		case schemas.RecoveryGroupOutput_Tags:
+			return deserializeTags(d, schemas.RecoveryGroupOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // The resource element of a resource set.
 type Resource struct {
 
@@ -204,6 +522,45 @@ type Resource struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Resource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Resource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Resource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentId != nil {
+		s.WriteString(schemas.Resource_ComponentId, *v.ComponentId)
+	}
+	if v.DnsTargetResource != nil {
+		s.WriteStruct(schemas.Resource_DnsTargetResource)
+		v.DnsTargetResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__listOf__string(s, schemas.Resource_ReadinessScopes, v.ReadinessScopes)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.Resource_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *Resource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Resource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Resource_ComponentId:
+			v.ComponentId = new(string)
+			return d.ReadString(schemas.Resource_ComponentId, v.ComponentId)
+		case schemas.Resource_DnsTargetResource:
+			v.DnsTargetResource = &DNSTargetResource{}
+			return v.DnsTargetResource.Deserialize(d)
+		case schemas.Resource_ReadinessScopes:
+			return deserialize__listOf__string(d, schemas.Resource_ReadinessScopes, &v.ReadinessScopes)
+		case schemas.Resource_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.Resource_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
 }
 
 // The result of a successful Resource request, with status for an individual
@@ -228,6 +585,50 @@ type ResourceResult struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentId != nil {
+		s.WriteString(schemas.ResourceResult_ComponentId, *v.ComponentId)
+	}
+	if v.LastCheckedTimestamp != nil {
+		s.WriteTime(schemas.ResourceResult_LastCheckedTimestamp, *v.LastCheckedTimestamp)
+	}
+	if v.Readiness != "" {
+		s.WriteString(schemas.ResourceResult_Readiness, string(v.Readiness))
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ResourceResult_ResourceArn, *v.ResourceArn)
+	}
+}
+func (v *ResourceResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceResult_ComponentId:
+			v.ComponentId = new(string)
+			return d.ReadString(schemas.ResourceResult_ComponentId, v.ComponentId)
+		case schemas.ResourceResult_LastCheckedTimestamp:
+			v.LastCheckedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ResourceResult_LastCheckedTimestamp, v.LastCheckedTimestamp)
+		case schemas.ResourceResult_Readiness:
+			var ev string
+			if err := d.ReadString(schemas.ResourceResult_Readiness, &ev); err != nil {
+				return err
+			}
+			v.Readiness = Readiness(ev)
+			return nil
+		case schemas.ResourceResult_ResourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ResourceResult_ResourceArn, v.ResourceArn)
+		}
+		return nil
+	})
 }
 
 // A collection of resources of the same type.
@@ -270,6 +671,46 @@ type ResourceSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceSetArn != nil {
+		s.WriteString(schemas.ResourceSetOutput_ResourceSetArn, *v.ResourceSetArn)
+	}
+	if v.ResourceSetName != nil {
+		s.WriteString(schemas.ResourceSetOutput_ResourceSetName, *v.ResourceSetName)
+	}
+	if v.ResourceSetType != nil {
+		s.WriteString(schemas.ResourceSetOutput_ResourceSetType, *v.ResourceSetType)
+	}
+	serialize__listOfResource(s, schemas.ResourceSetOutput_Resources, v.Resources)
+	serializeTags(s, schemas.ResourceSetOutput_Tags, v.Tags)
+}
+func (v *ResourceSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceSetOutput_ResourceSetArn:
+			v.ResourceSetArn = new(string)
+			return d.ReadString(schemas.ResourceSetOutput_ResourceSetArn, v.ResourceSetArn)
+		case schemas.ResourceSetOutput_ResourceSetName:
+			v.ResourceSetName = new(string)
+			return d.ReadString(schemas.ResourceSetOutput_ResourceSetName, v.ResourceSetName)
+		case schemas.ResourceSetOutput_ResourceSetType:
+			v.ResourceSetType = new(string)
+			return d.ReadString(schemas.ResourceSetOutput_ResourceSetType, v.ResourceSetType)
+		case schemas.ResourceSetOutput_Resources:
+			return deserialize__listOfResource(d, schemas.ResourceSetOutput_Resources, &v.Resources)
+		case schemas.ResourceSetOutput_Tags:
+			return deserializeTags(d, schemas.ResourceSetOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // The result of a successful Rule request, with status for an individual rule.
 type RuleResult struct {
 
@@ -296,6 +737,47 @@ type RuleResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RuleResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RuleResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RuleResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastCheckedTimestamp != nil {
+		s.WriteTime(schemas.RuleResult_LastCheckedTimestamp, *v.LastCheckedTimestamp)
+	}
+	serialize__listOfMessage(s, schemas.RuleResult_Messages, v.Messages)
+	if v.Readiness != "" {
+		s.WriteString(schemas.RuleResult_Readiness, string(v.Readiness))
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.RuleResult_RuleId, *v.RuleId)
+	}
+}
+func (v *RuleResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RuleResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RuleResult_LastCheckedTimestamp:
+			v.LastCheckedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.RuleResult_LastCheckedTimestamp, v.LastCheckedTimestamp)
+		case schemas.RuleResult_Messages:
+			return deserialize__listOfMessage(d, schemas.RuleResult_Messages, &v.Messages)
+		case schemas.RuleResult_Readiness:
+			var ev string
+			if err := d.ReadString(schemas.RuleResult_Readiness, &ev); err != nil {
+				return err
+			}
+			v.Readiness = Readiness(ev)
+			return nil
+		case schemas.RuleResult_RuleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.RuleResult_RuleId, v.RuleId)
+		}
+		return nil
+	})
+}
+
 // The target resource that the Route 53 record points to.
 type TargetResource struct {
 
@@ -306,6 +788,38 @@ type TargetResource struct {
 	R53Resource *R53ResourceRecord
 
 	noSmithyDocumentSerde
+}
+
+func (v *TargetResource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetResource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetResource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NLBResource != nil {
+		s.WriteStruct(schemas.TargetResource_NLBResource)
+		v.NLBResource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.R53Resource != nil {
+		s.WriteStruct(schemas.TargetResource_R53Resource)
+		v.R53Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TargetResource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetResource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetResource_NLBResource:
+			v.NLBResource = &NLBResource{}
+			return v.NLBResource.Deserialize(d)
+		case schemas.TargetResource_R53Resource:
+			v.R53Resource = &R53ResourceRecord{}
+			return v.R53Resource.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -85,6 +87,38 @@ type GetTranscriptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTranscriptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTranscriptRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTranscriptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionToken != nil {
+		s.WriteString(schemas.GetTranscriptRequest_ConnectionToken, *v.ConnectionToken)
+	}
+	if v.ContactId != nil {
+		s.WriteString(schemas.GetTranscriptRequest_ContactId, *v.ContactId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetTranscriptRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetTranscriptRequest_NextToken, *v.NextToken)
+	}
+	if v.ScanDirection != "" {
+		s.WriteString(schemas.GetTranscriptRequest_ScanDirection, string(v.ScanDirection))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.GetTranscriptRequest_SortOrder, string(v.SortOrder))
+	}
+	if v.StartPosition != nil {
+		s.WriteStruct(schemas.GetTranscriptRequest_StartPosition)
+		v.StartPosition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetTranscriptOutput struct {
 
 	// The initial contact ID for the contact.
@@ -103,16 +137,29 @@ type GetTranscriptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTranscriptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTranscriptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTranscriptResponse_InitialContactId:
+			v.InitialContactId = new(string)
+			return d.ReadString(schemas.GetTranscriptResponse_InitialContactId, v.InitialContactId)
+		case schemas.GetTranscriptResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetTranscriptResponse_NextToken, v.NextToken)
+		case schemas.GetTranscriptResponse_Transcript:
+			return deserializeTranscript(d, schemas.GetTranscriptResponse_Transcript, &v.Transcript)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTranscriptMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTranscript{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTranscript, schemas.GetTranscriptRequest, schemas.GetTranscriptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTranscript{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTranscript, schemas.GetTranscriptRequest, schemas.GetTranscriptResponse), output: &GetTranscriptOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTranscript"); err != nil {

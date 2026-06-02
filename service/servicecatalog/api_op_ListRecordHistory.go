@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,34 @@ type ListRecordHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecordHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRecordHistoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRecordHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.ListRecordHistoryInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.AccessLevelFilter != nil {
+		s.WriteStruct(schemas.ListRecordHistoryInput_AccessLevelFilter)
+		v.AccessLevelFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.ListRecordHistoryInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.ListRecordHistoryInput_PageToken, *v.PageToken)
+	}
+	if v.SearchFilter != nil {
+		s.WriteStruct(schemas.ListRecordHistoryInput_SearchFilter)
+		v.SearchFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListRecordHistoryOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -67,16 +97,26 @@ type ListRecordHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRecordHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRecordHistoryOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRecordHistoryOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ListRecordHistoryOutput_NextPageToken, v.NextPageToken)
+		case schemas.ListRecordHistoryOutput_RecordDetails:
+			return deserializeRecordDetails(d, schemas.ListRecordHistoryOutput_RecordDetails, &v.RecordDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRecordHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRecordHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecordHistory, schemas.ListRecordHistoryInput, schemas.ListRecordHistoryOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRecordHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRecordHistory, schemas.ListRecordHistoryInput, schemas.ListRecordHistoryOutput), output: &ListRecordHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRecordHistory"); err != nil {

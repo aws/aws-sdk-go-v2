@@ -7,7 +7,10 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/document"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -77,6 +80,36 @@ type CreateBenefitApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBenefitApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBenefitApplicationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBenefitApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeArns(s, schemas.CreateBenefitApplicationInput_AssociatedResources, v.AssociatedResources)
+	s.WriteDocument(schemas.CreateBenefitApplicationInput_BenefitApplicationDetails, &smithydocument.Opaque{Value: v.BenefitApplicationDetails})
+	if v.BenefitIdentifier != nil {
+		s.WriteString(schemas.CreateBenefitApplicationInput_BenefitIdentifier, *v.BenefitIdentifier)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.CreateBenefitApplicationInput_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateBenefitApplicationInput_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateBenefitApplicationInput_Description, *v.Description)
+	}
+	serializeFileInputDetails(s, schemas.CreateBenefitApplicationInput_FileDetails, v.FileDetails)
+	serializeFulfillmentTypes(s, schemas.CreateBenefitApplicationInput_FulfillmentTypes, v.FulfillmentTypes)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateBenefitApplicationInput_Name, *v.Name)
+	}
+	serializeContacts(s, schemas.CreateBenefitApplicationInput_PartnerContacts, v.PartnerContacts)
+	serializeTags(s, schemas.CreateBenefitApplicationInput_Tags, v.Tags)
+}
+
 type CreateBenefitApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the newly created benefit application.
@@ -94,16 +127,30 @@ type CreateBenefitApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBenefitApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBenefitApplicationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBenefitApplicationOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateBenefitApplicationOutput_Arn, v.Arn)
+		case schemas.CreateBenefitApplicationOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateBenefitApplicationOutput_Id, v.Id)
+		case schemas.CreateBenefitApplicationOutput_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.CreateBenefitApplicationOutput_Revision, v.Revision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBenefitApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateBenefitApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBenefitApplication, schemas.CreateBenefitApplicationInput, schemas.CreateBenefitApplicationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateBenefitApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBenefitApplication, schemas.CreateBenefitApplicationInput, schemas.CreateBenefitApplicationOutput), output: &CreateBenefitApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBenefitApplication"); err != nil {

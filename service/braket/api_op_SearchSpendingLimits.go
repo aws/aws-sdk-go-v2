@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/braket/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,22 @@ type SearchSpendingLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchSpendingLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchSpendingLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchSpendingLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSearchSpendingLimitsFilterList(s, schemas.SearchSpendingLimitsRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchSpendingLimitsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchSpendingLimitsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type SearchSpendingLimitsOutput struct {
 
 	// An array of spending limit summaries that match the specified filters.
@@ -64,16 +82,26 @@ type SearchSpendingLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchSpendingLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchSpendingLimitsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchSpendingLimitsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchSpendingLimitsResponse_nextToken, v.NextToken)
+		case schemas.SearchSpendingLimitsResponse_spendingLimits:
+			return deserializeSpendingLimitSummaryList(d, schemas.SearchSpendingLimitsResponse_spendingLimits, &v.SpendingLimits)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchSpendingLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchSpendingLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchSpendingLimits, schemas.SearchSpendingLimitsRequest, schemas.SearchSpendingLimitsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchSpendingLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchSpendingLimits, schemas.SearchSpendingLimitsRequest, schemas.SearchSpendingLimitsResponse), output: &SearchSpendingLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchSpendingLimits"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,37 @@ type CreateClusterSnapshotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterSnapshotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterSnapshotInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterSnapshotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.CreateClusterSnapshotInput_clusterArn, *v.ClusterArn)
+	}
+	if v.SnapshotName != nil {
+		s.WriteString(schemas.CreateClusterSnapshotInput_snapshotName, *v.SnapshotName)
+	}
+	serializeTagMap(s, schemas.CreateClusterSnapshotInput_tags, v.Tags)
+}
+func (v *CreateClusterSnapshotInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterSnapshotInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterSnapshotInput_clusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.CreateClusterSnapshotInput_clusterArn, v.ClusterArn)
+		case schemas.CreateClusterSnapshotInput_snapshotName:
+			v.SnapshotName = new(string)
+			return d.ReadString(schemas.CreateClusterSnapshotInput_snapshotName, v.SnapshotName)
+		case schemas.CreateClusterSnapshotInput_tags:
+			return deserializeTagMap(d, schemas.CreateClusterSnapshotInput_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateClusterSnapshotOutput struct {
 
 	// Returns information about the new elastic cluster snapshot.
@@ -59,16 +92,37 @@ type CreateClusterSnapshotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClusterSnapshotOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClusterSnapshotOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClusterSnapshotOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Snapshot != nil {
+		s.WriteStruct(schemas.CreateClusterSnapshotOutput_snapshot)
+		v.Snapshot.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateClusterSnapshotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClusterSnapshotOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClusterSnapshotOutput_snapshot:
+			v.Snapshot = &types.ClusterSnapshot{}
+			return v.Snapshot.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClusterSnapshot, schemas.CreateClusterSnapshotInput, schemas.CreateClusterSnapshotOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateClusterSnapshot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClusterSnapshot, schemas.CreateClusterSnapshotInput, schemas.CreateClusterSnapshotOutput), output: &CreateClusterSnapshotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateClusterSnapshot"); err != nil {

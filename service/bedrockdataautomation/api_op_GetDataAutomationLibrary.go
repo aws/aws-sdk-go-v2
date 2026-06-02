@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type GetDataAutomationLibraryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataAutomationLibraryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataAutomationLibraryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataAutomationLibraryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LibraryArn != nil {
+		s.WriteString(schemas.GetDataAutomationLibraryRequest_libraryArn, *v.LibraryArn)
+	}
+}
+
 // Get DataAutomationLibrary Response
 type GetDataAutomationLibraryOutput struct {
 
@@ -50,16 +64,24 @@ type GetDataAutomationLibraryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataAutomationLibraryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataAutomationLibraryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataAutomationLibraryResponse_library:
+			v.Library = &types.DataAutomationLibrary{}
+			return v.Library.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataAutomationLibraryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataAutomationLibrary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataAutomationLibrary, schemas.GetDataAutomationLibraryRequest, schemas.GetDataAutomationLibraryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataAutomationLibrary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataAutomationLibrary, schemas.GetDataAutomationLibraryRequest, schemas.GetDataAutomationLibraryResponse), output: &GetDataAutomationLibraryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataAutomationLibrary"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,40 @@ type UpdateDbClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDbClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDbClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDbClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbClusterId != nil {
+		s.WriteString(schemas.UpdateDbClusterInput_dbClusterId, *v.DbClusterId)
+	}
+	if v.DbInstanceType != "" {
+		s.WriteString(schemas.UpdateDbClusterInput_dbInstanceType, string(v.DbInstanceType))
+	}
+	if v.DbParameterGroupIdentifier != nil {
+		s.WriteString(schemas.UpdateDbClusterInput_dbParameterGroupIdentifier, *v.DbParameterGroupIdentifier)
+	}
+	if v.FailoverMode != "" {
+		s.WriteString(schemas.UpdateDbClusterInput_failoverMode, string(v.FailoverMode))
+	}
+	if v.LogDeliveryConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDbClusterInput_logDeliveryConfiguration)
+		v.LogDeliveryConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaintenanceSchedule != nil {
+		s.WriteStruct(schemas.UpdateDbClusterInput_maintenanceSchedule)
+		v.MaintenanceSchedule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.UpdateDbClusterInput_port, *v.Port)
+	}
+}
+
 type UpdateDbClusterOutput struct {
 
 	// The status of the DB cluster.
@@ -67,16 +103,28 @@ type UpdateDbClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDbClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDbClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDbClusterOutput_dbClusterStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDbClusterOutput_dbClusterStatus, &ev); err != nil {
+				return err
+			}
+			v.DbClusterStatus = types.ClusterStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDbClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateDbCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDbCluster, schemas.UpdateDbClusterInput, schemas.UpdateDbClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateDbCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDbCluster, schemas.UpdateDbClusterInput, schemas.UpdateDbClusterOutput), output: &UpdateDbClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDbCluster"); err != nil {

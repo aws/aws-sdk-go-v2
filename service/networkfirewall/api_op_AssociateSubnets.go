@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,6 +72,25 @@ type AssociateSubnetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSubnetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateSubnetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateSubnetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.AssociateSubnetsRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.AssociateSubnetsRequest_FirewallName, *v.FirewallName)
+	}
+	serializeSubnetMappings(s, schemas.AssociateSubnetsRequest_SubnetMappings, v.SubnetMappings)
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.AssociateSubnetsRequest_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type AssociateSubnetsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the firewall.
@@ -104,16 +125,32 @@ type AssociateSubnetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateSubnetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateSubnetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateSubnetsResponse_FirewallArn:
+			v.FirewallArn = new(string)
+			return d.ReadString(schemas.AssociateSubnetsResponse_FirewallArn, v.FirewallArn)
+		case schemas.AssociateSubnetsResponse_FirewallName:
+			v.FirewallName = new(string)
+			return d.ReadString(schemas.AssociateSubnetsResponse_FirewallName, v.FirewallName)
+		case schemas.AssociateSubnetsResponse_SubnetMappings:
+			return deserializeSubnetMappings(d, schemas.AssociateSubnetsResponse_SubnetMappings, &v.SubnetMappings)
+		case schemas.AssociateSubnetsResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.AssociateSubnetsResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateSubnets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSubnets, schemas.AssociateSubnetsRequest, schemas.AssociateSubnetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateSubnets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateSubnets, schemas.AssociateSubnetsRequest, schemas.AssociateSubnetsResponse), output: &AssociateSubnetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateSubnets"); err != nil {

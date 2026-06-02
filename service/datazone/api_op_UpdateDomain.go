@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -57,6 +59,38 @@ type UpdateDomainInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDomainInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDomainInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateDomainInput_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDomainInput_description, *v.Description)
+	}
+	if v.DomainExecutionRole != nil {
+		s.WriteString(schemas.UpdateDomainInput_domainExecutionRole, *v.DomainExecutionRole)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateDomainInput_identifier, *v.Identifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateDomainInput_name, *v.Name)
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.UpdateDomainInput_serviceRole, *v.ServiceRole)
+	}
+	if v.SingleSignOn != nil {
+		s.WriteStruct(schemas.UpdateDomainInput_singleSignOn)
+		v.SingleSignOn.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateDomainOutput struct {
 
 	// The identifier of the Amazon DataZone domain.
@@ -91,16 +125,45 @@ type UpdateDomainOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDomainOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDomainOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDomainOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateDomainOutput_description, v.Description)
+		case schemas.UpdateDomainOutput_domainExecutionRole:
+			v.DomainExecutionRole = new(string)
+			return d.ReadString(schemas.UpdateDomainOutput_domainExecutionRole, v.DomainExecutionRole)
+		case schemas.UpdateDomainOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateDomainOutput_id, v.Id)
+		case schemas.UpdateDomainOutput_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateDomainOutput_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.UpdateDomainOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateDomainOutput_name, v.Name)
+		case schemas.UpdateDomainOutput_rootDomainUnitId:
+			v.RootDomainUnitId = new(string)
+			return d.ReadString(schemas.UpdateDomainOutput_rootDomainUnitId, v.RootDomainUnitId)
+		case schemas.UpdateDomainOutput_serviceRole:
+			v.ServiceRole = new(string)
+			return d.ReadString(schemas.UpdateDomainOutput_serviceRole, v.ServiceRole)
+		case schemas.UpdateDomainOutput_singleSignOn:
+			v.SingleSignOn = &types.SingleSignOn{}
+			return v.SingleSignOn.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomain, schemas.UpdateDomainInput, schemas.UpdateDomainOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDomain{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDomain, schemas.UpdateDomainInput, schemas.UpdateDomainOutput), output: &UpdateDomainOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDomain"); err != nil {

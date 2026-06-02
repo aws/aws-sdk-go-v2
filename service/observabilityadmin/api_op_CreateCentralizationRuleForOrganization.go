@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,24 @@ type CreateCentralizationRuleForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCentralizationRuleForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCentralizationRuleForOrganizationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCentralizationRuleForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rule != nil {
+		s.WriteStruct(schemas.CreateCentralizationRuleForOrganizationInput_Rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleName != nil {
+		s.WriteString(schemas.CreateCentralizationRuleForOrganizationInput_RuleName, *v.RuleName)
+	}
+	serializeTagMapInput(s, schemas.CreateCentralizationRuleForOrganizationInput_Tags, v.Tags)
+}
+
 type CreateCentralizationRuleForOrganizationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created organization centralization rule.
@@ -61,16 +81,24 @@ type CreateCentralizationRuleForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCentralizationRuleForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCentralizationRuleForOrganizationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCentralizationRuleForOrganizationOutput_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.CreateCentralizationRuleForOrganizationOutput_RuleArn, v.RuleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCentralizationRuleForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCentralizationRuleForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCentralizationRuleForOrganization, schemas.CreateCentralizationRuleForOrganizationInput, schemas.CreateCentralizationRuleForOrganizationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCentralizationRuleForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCentralizationRuleForOrganization, schemas.CreateCentralizationRuleForOrganizationInput, schemas.CreateCentralizationRuleForOrganizationOutput), output: &CreateCentralizationRuleForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCentralizationRuleForOrganization"); err != nil {

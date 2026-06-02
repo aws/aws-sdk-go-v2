@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,32 @@ type UpdateDataProtectionSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataProtectionSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataProtectionSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataProtectionSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateDataProtectionSettingsRequest_clientToken, *v.ClientToken)
+	}
+	if v.DataProtectionSettingsArn != nil {
+		s.WriteString(schemas.UpdateDataProtectionSettingsRequest_dataProtectionSettingsArn, *v.DataProtectionSettingsArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateDataProtectionSettingsRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateDataProtectionSettingsRequest_displayName, *v.DisplayName)
+	}
+	if v.InlineRedactionConfiguration != nil {
+		s.WriteStruct(schemas.UpdateDataProtectionSettingsRequest_inlineRedactionConfiguration)
+		v.InlineRedactionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateDataProtectionSettingsOutput struct {
 
 	// The data protection settings.
@@ -70,16 +98,24 @@ type UpdateDataProtectionSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataProtectionSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataProtectionSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataProtectionSettingsResponse_dataProtectionSettings:
+			v.DataProtectionSettings = &types.DataProtectionSettings{}
+			return v.DataProtectionSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataProtectionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataProtectionSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataProtectionSettings, schemas.UpdateDataProtectionSettingsRequest, schemas.UpdateDataProtectionSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataProtectionSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataProtectionSettings, schemas.UpdateDataProtectionSettingsRequest, schemas.UpdateDataProtectionSettingsResponse), output: &UpdateDataProtectionSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataProtectionSettings"); err != nil {

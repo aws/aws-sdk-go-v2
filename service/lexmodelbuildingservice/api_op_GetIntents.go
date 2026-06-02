@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,24 @@ type GetIntentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIntentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIntentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetIntentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NameContains != nil {
+		s.WriteString(schemas.GetIntentsRequest_nameContains, *v.NameContains)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetIntentsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type GetIntentsOutput struct {
 
 	// An array of Intent objects. For more information, see PutBot.
@@ -71,16 +91,26 @@ type GetIntentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIntentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIntentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIntentsResponse_intents:
+			return deserializeIntentMetadataList(d, schemas.GetIntentsResponse_intents, &v.Intents)
+		case schemas.GetIntentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetIntentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIntentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetIntents{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntents, schemas.GetIntentsRequest, schemas.GetIntentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetIntents{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIntents, schemas.GetIntentsRequest, schemas.GetIntentsResponse), output: &GetIntentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIntents"); err != nil {

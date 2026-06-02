@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -62,6 +64,33 @@ type CreateApiDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApiDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApiDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApiDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionArn != nil {
+		s.WriteString(schemas.CreateApiDestinationRequest_ConnectionArn, *v.ConnectionArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateApiDestinationRequest_Description, *v.Description)
+	}
+	if v.HttpMethod != "" {
+		s.WriteString(schemas.CreateApiDestinationRequest_HttpMethod, string(v.HttpMethod))
+	}
+	if v.InvocationEndpoint != nil {
+		s.WriteString(schemas.CreateApiDestinationRequest_InvocationEndpoint, *v.InvocationEndpoint)
+	}
+	if v.InvocationRateLimitPerSecond != nil {
+		s.WriteInt32(schemas.CreateApiDestinationRequest_InvocationRateLimitPerSecond, *v.InvocationRateLimitPerSecond)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateApiDestinationRequest_Name, *v.Name)
+	}
+}
+
 type CreateApiDestinationOutput struct {
 
 	// The ARN of the API destination that was created by the request.
@@ -82,16 +111,37 @@ type CreateApiDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApiDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApiDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApiDestinationResponse_ApiDestinationArn:
+			v.ApiDestinationArn = new(string)
+			return d.ReadString(schemas.CreateApiDestinationResponse_ApiDestinationArn, v.ApiDestinationArn)
+		case schemas.CreateApiDestinationResponse_ApiDestinationState:
+			var ev string
+			if err := d.ReadString(schemas.CreateApiDestinationResponse_ApiDestinationState, &ev); err != nil {
+				return err
+			}
+			v.ApiDestinationState = types.ApiDestinationState(ev)
+			return nil
+		case schemas.CreateApiDestinationResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateApiDestinationResponse_CreationTime, v.CreationTime)
+		case schemas.CreateApiDestinationResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.CreateApiDestinationResponse_LastModifiedTime, v.LastModifiedTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApiDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateApiDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApiDestination, schemas.CreateApiDestinationRequest, schemas.CreateApiDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateApiDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApiDestination, schemas.CreateApiDestinationRequest, schemas.CreateApiDestinationResponse), output: &CreateApiDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateApiDestination"); err != nil {

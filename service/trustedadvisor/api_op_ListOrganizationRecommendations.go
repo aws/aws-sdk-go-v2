@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/trustedadvisor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -66,6 +68,45 @@ type ListOrganizationRecommendationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOrganizationRecommendationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListOrganizationRecommendationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListOrganizationRecommendationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterLastUpdatedAt != nil {
+		s.WriteTime(schemas.ListOrganizationRecommendationsRequest_afterLastUpdatedAt, *v.AfterLastUpdatedAt)
+	}
+	if v.AwsService != nil {
+		s.WriteString(schemas.ListOrganizationRecommendationsRequest_awsService, *v.AwsService)
+	}
+	if v.BeforeLastUpdatedAt != nil {
+		s.WriteTime(schemas.ListOrganizationRecommendationsRequest_beforeLastUpdatedAt, *v.BeforeLastUpdatedAt)
+	}
+	if v.CheckIdentifier != nil {
+		s.WriteString(schemas.ListOrganizationRecommendationsRequest_checkIdentifier, *v.CheckIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListOrganizationRecommendationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListOrganizationRecommendationsRequest_nextToken, *v.NextToken)
+	}
+	if v.Pillar != "" {
+		s.WriteString(schemas.ListOrganizationRecommendationsRequest_pillar, string(v.Pillar))
+	}
+	if v.Source != "" {
+		s.WriteString(schemas.ListOrganizationRecommendationsRequest_source, string(v.Source))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListOrganizationRecommendationsRequest_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListOrganizationRecommendationsRequest_type, string(v.Type))
+	}
+}
+
 type ListOrganizationRecommendationsOutput struct {
 
 	// The list of Recommendations
@@ -83,16 +124,26 @@ type ListOrganizationRecommendationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListOrganizationRecommendationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListOrganizationRecommendationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListOrganizationRecommendationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListOrganizationRecommendationsResponse_nextToken, v.NextToken)
+		case schemas.ListOrganizationRecommendationsResponse_organizationRecommendationSummaries:
+			return deserializeOrganizationRecommendationSummaryList(d, schemas.ListOrganizationRecommendationsResponse_organizationRecommendationSummaries, &v.OrganizationRecommendationSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListOrganizationRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListOrganizationRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrganizationRecommendations, schemas.ListOrganizationRecommendationsRequest, schemas.ListOrganizationRecommendationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListOrganizationRecommendations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListOrganizationRecommendations, schemas.ListOrganizationRecommendationsRequest, schemas.ListOrganizationRecommendationsResponse), output: &ListOrganizationRecommendationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListOrganizationRecommendations"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,26 @@ type ListInstanceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceTypesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListInstanceTypesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListInstanceTypesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceConfigurationFilter != nil {
+		s.WriteStruct(schemas.ListInstanceTypesRequest_InstanceConfigurationFilter)
+		v.InstanceConfigurationFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListInstanceTypesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListInstanceTypesRequest_NextToken, *v.NextToken)
+	}
+}
+
 // Contains the list of instance types supported by WorkSpaces Instances.
 type ListInstanceTypesOutput struct {
 
@@ -64,16 +86,26 @@ type ListInstanceTypesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListInstanceTypesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListInstanceTypesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListInstanceTypesResponse_InstanceTypes:
+			return deserializeInstanceTypes(d, schemas.ListInstanceTypesResponse_InstanceTypes, &v.InstanceTypes)
+		case schemas.ListInstanceTypesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListInstanceTypesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListInstanceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListInstanceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceTypes, schemas.ListInstanceTypesRequest, schemas.ListInstanceTypesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListInstanceTypes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListInstanceTypes, schemas.ListInstanceTypesRequest, schemas.ListInstanceTypesResponse), output: &ListInstanceTypesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListInstanceTypes"); err != nil {

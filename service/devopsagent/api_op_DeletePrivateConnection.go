@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,18 @@ type DeletePrivateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePrivateConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePrivateConnectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePrivateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DeletePrivateConnectionInput_name, *v.Name)
+	}
+}
+
 // Output containing the status of the Private Connection deletion.
 type DeletePrivateConnectionOutput struct {
 
@@ -58,16 +72,31 @@ type DeletePrivateConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePrivateConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePrivateConnectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePrivateConnectionOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeletePrivateConnectionOutput_name, v.Name)
+		case schemas.DeletePrivateConnectionOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeletePrivateConnectionOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PrivateConnectionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePrivateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePrivateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePrivateConnection, schemas.DeletePrivateConnectionInput, schemas.DeletePrivateConnectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePrivateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePrivateConnection, schemas.DeletePrivateConnectionInput, schemas.DeletePrivateConnectionOutput), output: &DeletePrivateConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePrivateConnection"); err != nil {

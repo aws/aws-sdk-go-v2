@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,28 @@ type RemoveApplicationInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveApplicationInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveApplicationInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveApplicationInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationInstanceId != nil {
+		s.WriteString(schemas.RemoveApplicationInstanceRequest_ApplicationInstanceId, *v.ApplicationInstanceId)
+	}
+}
+func (v *RemoveApplicationInstanceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveApplicationInstanceRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveApplicationInstanceRequest_ApplicationInstanceId:
+			v.ApplicationInstanceId = new(string)
+			return d.ReadString(schemas.RemoveApplicationInstanceRequest_ApplicationInstanceId, v.ApplicationInstanceId)
+		}
+		return nil
+	})
+}
+
 type RemoveApplicationInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +67,29 @@ type RemoveApplicationInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveApplicationInstanceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveApplicationInstanceResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveApplicationInstanceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *RemoveApplicationInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveApplicationInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveApplicationInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpRemoveApplicationInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveApplicationInstance, schemas.RemoveApplicationInstanceRequest, schemas.RemoveApplicationInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpRemoveApplicationInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveApplicationInstance, schemas.RemoveApplicationInstanceRequest, schemas.RemoveApplicationInstanceResponse), output: &RemoveApplicationInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveApplicationInstance"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connecthealth/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connecthealth/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -72,6 +74,51 @@ type StartPatientInsightsJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPatientInsightsJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartPatientInsightsJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartPatientInsightsJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartPatientInsightsJobRequest_clientToken, *v.ClientToken)
+	}
+	if v.DomainId != nil {
+		s.WriteString(schemas.StartPatientInsightsJobRequest_domainId, *v.DomainId)
+	}
+	if v.EncounterContext != nil {
+		s.WriteStruct(schemas.StartPatientInsightsJobRequest_encounterContext)
+		v.EncounterContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputDataConfig != nil {
+		s.WriteStruct(schemas.StartPatientInsightsJobRequest_inputDataConfig)
+		v.InputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InsightsContext != nil {
+		s.WriteStruct(schemas.StartPatientInsightsJobRequest_insightsContext)
+		v.InsightsContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.StartPatientInsightsJobRequest_outputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PatientContext != nil {
+		s.WriteStruct(schemas.StartPatientInsightsJobRequest_patientContext)
+		v.PatientContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UserContext != nil {
+		s.WriteStruct(schemas.StartPatientInsightsJobRequest_userContext)
+		v.UserContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type StartPatientInsightsJobOutput struct {
 
 	//
@@ -93,16 +140,30 @@ type StartPatientInsightsJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartPatientInsightsJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartPatientInsightsJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartPatientInsightsJobResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.StartPatientInsightsJobResponse_creationTime, v.CreationTime)
+		case schemas.StartPatientInsightsJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.StartPatientInsightsJobResponse_jobArn, v.JobArn)
+		case schemas.StartPatientInsightsJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.StartPatientInsightsJobResponse_jobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartPatientInsightsJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartPatientInsightsJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPatientInsightsJob, schemas.StartPatientInsightsJobRequest, schemas.StartPatientInsightsJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartPatientInsightsJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartPatientInsightsJob, schemas.StartPatientInsightsJobRequest, schemas.StartPatientInsightsJobResponse), output: &StartPatientInsightsJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartPatientInsightsJob"); err != nil {

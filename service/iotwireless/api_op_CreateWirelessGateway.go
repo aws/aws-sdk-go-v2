@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,6 +73,30 @@ type CreateWirelessGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWirelessGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateWirelessGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateWirelessGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateWirelessGatewayRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateWirelessGatewayRequest_Description, *v.Description)
+	}
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.CreateWirelessGatewayRequest_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateWirelessGatewayRequest_Name, *v.Name)
+	}
+	serializeTagList(s, schemas.CreateWirelessGatewayRequest_Tags, v.Tags)
+}
+
 type CreateWirelessGatewayOutput struct {
 
 	// The Amazon Resource Name of the new resource.
@@ -85,16 +111,27 @@ type CreateWirelessGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateWirelessGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateWirelessGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateWirelessGatewayResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateWirelessGatewayResponse_Arn, v.Arn)
+		case schemas.CreateWirelessGatewayResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateWirelessGatewayResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateWirelessGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateWirelessGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWirelessGateway, schemas.CreateWirelessGatewayRequest, schemas.CreateWirelessGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateWirelessGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateWirelessGateway, schemas.CreateWirelessGatewayRequest, schemas.CreateWirelessGatewayResponse), output: &CreateWirelessGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateWirelessGateway"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,21 @@ type UpdateMacieSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMacieSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMacieSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMacieSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingPublishingFrequency != "" {
+		s.WriteString(schemas.UpdateMacieSessionRequest_findingPublishingFrequency, string(v.FindingPublishingFrequency))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateMacieSessionRequest_status, string(v.Status))
+	}
+}
+
 type UpdateMacieSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,16 +67,21 @@ type UpdateMacieSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMacieSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMacieSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMacieSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMacieSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMacieSession, schemas.UpdateMacieSessionRequest, schemas.UpdateMacieSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMacieSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMacieSession, schemas.UpdateMacieSessionRequest, schemas.UpdateMacieSessionResponse), output: &UpdateMacieSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMacieSession"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,19 @@ type GetCloudExadataInfrastructureUnallocatedResourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCloudExadataInfrastructureUnallocatedResourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCloudExadataInfrastructureUnallocatedResourcesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCloudExadataInfrastructureUnallocatedResourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudExadataInfrastructureId != nil {
+		s.WriteString(schemas.GetCloudExadataInfrastructureUnallocatedResourcesInput_cloudExadataInfrastructureId, *v.CloudExadataInfrastructureId)
+	}
+	serializeStringList(s, schemas.GetCloudExadataInfrastructureUnallocatedResourcesInput_dbServers, v.DbServers)
+}
+
 type GetCloudExadataInfrastructureUnallocatedResourcesOutput struct {
 
 	// Details about the unallocated resources in the specified Cloud Exadata
@@ -54,16 +69,24 @@ type GetCloudExadataInfrastructureUnallocatedResourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCloudExadataInfrastructureUnallocatedResourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCloudExadataInfrastructureUnallocatedResourcesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCloudExadataInfrastructureUnallocatedResourcesOutput_cloudExadataInfrastructureUnallocatedResources:
+			v.CloudExadataInfrastructureUnallocatedResources = &types.CloudExadataInfrastructureUnallocatedResources{}
+			return v.CloudExadataInfrastructureUnallocatedResources.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCloudExadataInfrastructureUnallocatedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetCloudExadataInfrastructureUnallocatedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudExadataInfrastructureUnallocatedResources, schemas.GetCloudExadataInfrastructureUnallocatedResourcesInput, schemas.GetCloudExadataInfrastructureUnallocatedResourcesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetCloudExadataInfrastructureUnallocatedResources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCloudExadataInfrastructureUnallocatedResources, schemas.GetCloudExadataInfrastructureUnallocatedResourcesInput, schemas.GetCloudExadataInfrastructureUnallocatedResourcesOutput), output: &GetCloudExadataInfrastructureUnallocatedResourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCloudExadataInfrastructureUnallocatedResources"); err != nil {

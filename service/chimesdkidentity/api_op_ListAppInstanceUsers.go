@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,24 @@ type ListAppInstanceUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppInstanceUsersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAppInstanceUsersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAppInstanceUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceArn != nil {
+		s.WriteString(schemas.ListAppInstanceUsersRequest_AppInstanceArn, *v.AppInstanceArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAppInstanceUsersRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAppInstanceUsersRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAppInstanceUsersOutput struct {
 
 	// The ARN of the AppInstance .
@@ -60,16 +80,29 @@ type ListAppInstanceUsersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAppInstanceUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAppInstanceUsersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAppInstanceUsersResponse_AppInstanceArn:
+			v.AppInstanceArn = new(string)
+			return d.ReadString(schemas.ListAppInstanceUsersResponse_AppInstanceArn, v.AppInstanceArn)
+		case schemas.ListAppInstanceUsersResponse_AppInstanceUsers:
+			return deserializeAppInstanceUserList(d, schemas.ListAppInstanceUsersResponse_AppInstanceUsers, &v.AppInstanceUsers)
+		case schemas.ListAppInstanceUsersResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAppInstanceUsersResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAppInstanceUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAppInstanceUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppInstanceUsers, schemas.ListAppInstanceUsersRequest, schemas.ListAppInstanceUsersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAppInstanceUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAppInstanceUsers, schemas.ListAppInstanceUsersRequest, schemas.ListAppInstanceUsersResponse), output: &ListAppInstanceUsersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAppInstanceUsers"); err != nil {

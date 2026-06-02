@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -40,6 +42,59 @@ type CreateMonitorProbeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMonitorProbeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMonitorProbeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMonitorProbeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.CreateMonitorProbeInput_destination, *v.Destination)
+	}
+	if v.DestinationPort != nil {
+		s.WriteInt32(schemas.CreateMonitorProbeInput_destinationPort, *v.DestinationPort)
+	}
+	if v.PacketSize != nil {
+		s.WriteInt32(schemas.CreateMonitorProbeInput_packetSize, *v.PacketSize)
+	}
+	serializeTagMap(s, schemas.CreateMonitorProbeInput_probeTags, v.ProbeTags)
+	if v.Protocol != "" {
+		s.WriteString(schemas.CreateMonitorProbeInput_protocol, string(v.Protocol))
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.CreateMonitorProbeInput_sourceArn, *v.SourceArn)
+	}
+}
+func (v *CreateMonitorProbeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMonitorProbeInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMonitorProbeInput_destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.CreateMonitorProbeInput_destination, v.Destination)
+		case schemas.CreateMonitorProbeInput_destinationPort:
+			v.DestinationPort = new(int32)
+			return d.ReadInt32(schemas.CreateMonitorProbeInput_destinationPort, v.DestinationPort)
+		case schemas.CreateMonitorProbeInput_packetSize:
+			v.PacketSize = new(int32)
+			return d.ReadInt32(schemas.CreateMonitorProbeInput_packetSize, v.PacketSize)
+		case schemas.CreateMonitorProbeInput_probeTags:
+			return deserializeTagMap(d, schemas.CreateMonitorProbeInput_probeTags, &v.ProbeTags)
+		case schemas.CreateMonitorProbeInput_protocol:
+			var ev string
+			if err := d.ReadString(schemas.CreateMonitorProbeInput_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = Protocol(ev)
+			return nil
+		case schemas.CreateMonitorProbeInput_sourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.CreateMonitorProbeInput_sourceArn, v.SourceArn)
+		}
+		return nil
+	})
+}
+
 // Displays summary information about a monitor.
 type MonitorSummary struct {
 
@@ -66,6 +121,53 @@ type MonitorSummary struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MonitorSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonitorSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonitorSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationPeriod != nil {
+		s.WriteInt64(schemas.MonitorSummary_aggregationPeriod, *v.AggregationPeriod)
+	}
+	if v.MonitorArn != nil {
+		s.WriteString(schemas.MonitorSummary_monitorArn, *v.MonitorArn)
+	}
+	if v.MonitorName != nil {
+		s.WriteString(schemas.MonitorSummary_monitorName, *v.MonitorName)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.MonitorSummary_state, string(v.State))
+	}
+	serializeTagMap(s, schemas.MonitorSummary_tags, v.Tags)
+}
+func (v *MonitorSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonitorSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonitorSummary_aggregationPeriod:
+			v.AggregationPeriod = new(int64)
+			return d.ReadInt64(schemas.MonitorSummary_aggregationPeriod, v.AggregationPeriod)
+		case schemas.MonitorSummary_monitorArn:
+			v.MonitorArn = new(string)
+			return d.ReadString(schemas.MonitorSummary_monitorArn, v.MonitorArn)
+		case schemas.MonitorSummary_monitorName:
+			v.MonitorName = new(string)
+			return d.ReadString(schemas.MonitorSummary_monitorName, v.MonitorName)
+		case schemas.MonitorSummary_state:
+			var ev string
+			if err := d.ReadString(schemas.MonitorSummary_state, &ev); err != nil {
+				return err
+			}
+			v.State = MonitorState(ev)
+			return nil
+		case schemas.MonitorSummary_tags:
+			return deserializeTagMap(d, schemas.MonitorSummary_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Describes information about a network monitor probe.
@@ -122,6 +224,109 @@ type Probe struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Probe) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Probe)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Probe) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.Probe_addressFamily, string(v.AddressFamily))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Probe_createdAt, *v.CreatedAt)
+	}
+	if v.Destination != nil {
+		s.WriteString(schemas.Probe_destination, *v.Destination)
+	}
+	if v.DestinationPort != nil {
+		s.WriteInt32(schemas.Probe_destinationPort, *v.DestinationPort)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.Probe_modifiedAt, *v.ModifiedAt)
+	}
+	if v.PacketSize != nil {
+		s.WriteInt32(schemas.Probe_packetSize, *v.PacketSize)
+	}
+	if v.ProbeArn != nil {
+		s.WriteString(schemas.Probe_probeArn, *v.ProbeArn)
+	}
+	if v.ProbeId != nil {
+		s.WriteString(schemas.Probe_probeId, *v.ProbeId)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.Probe_protocol, string(v.Protocol))
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.Probe_sourceArn, *v.SourceArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.Probe_state, string(v.State))
+	}
+	serializeTagMap(s, schemas.Probe_tags, v.Tags)
+	if v.VpcId != nil {
+		s.WriteString(schemas.Probe_vpcId, *v.VpcId)
+	}
+}
+func (v *Probe) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Probe, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Probe_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.Probe_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = AddressFamily(ev)
+			return nil
+		case schemas.Probe_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Probe_createdAt, v.CreatedAt)
+		case schemas.Probe_destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.Probe_destination, v.Destination)
+		case schemas.Probe_destinationPort:
+			v.DestinationPort = new(int32)
+			return d.ReadInt32(schemas.Probe_destinationPort, v.DestinationPort)
+		case schemas.Probe_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.Probe_modifiedAt, v.ModifiedAt)
+		case schemas.Probe_packetSize:
+			v.PacketSize = new(int32)
+			return d.ReadInt32(schemas.Probe_packetSize, v.PacketSize)
+		case schemas.Probe_probeArn:
+			v.ProbeArn = new(string)
+			return d.ReadString(schemas.Probe_probeArn, v.ProbeArn)
+		case schemas.Probe_probeId:
+			v.ProbeId = new(string)
+			return d.ReadString(schemas.Probe_probeId, v.ProbeId)
+		case schemas.Probe_protocol:
+			var ev string
+			if err := d.ReadString(schemas.Probe_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = Protocol(ev)
+			return nil
+		case schemas.Probe_sourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.Probe_sourceArn, v.SourceArn)
+		case schemas.Probe_state:
+			var ev string
+			if err := d.ReadString(schemas.Probe_state, &ev); err != nil {
+				return err
+			}
+			v.State = ProbeState(ev)
+			return nil
+		case schemas.Probe_tags:
+			return deserializeTagMap(d, schemas.Probe_tags, &v.Tags)
+		case schemas.Probe_vpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.Probe_vpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Defines a probe when creating a probe or monitor.
 type ProbeInput struct {
 
@@ -153,6 +358,59 @@ type ProbeInput struct {
 	Tags map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProbeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProbeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProbeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.ProbeInput_destination, *v.Destination)
+	}
+	if v.DestinationPort != nil {
+		s.WriteInt32(schemas.ProbeInput_destinationPort, *v.DestinationPort)
+	}
+	if v.PacketSize != nil {
+		s.WriteInt32(schemas.ProbeInput_packetSize, *v.PacketSize)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.ProbeInput_protocol, string(v.Protocol))
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.ProbeInput_sourceArn, *v.SourceArn)
+	}
+	serializeTagMap(s, schemas.ProbeInput_tags, v.Tags)
+}
+func (v *ProbeInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProbeInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProbeInput_destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.ProbeInput_destination, v.Destination)
+		case schemas.ProbeInput_destinationPort:
+			v.DestinationPort = new(int32)
+			return d.ReadInt32(schemas.ProbeInput_destinationPort, v.DestinationPort)
+		case schemas.ProbeInput_packetSize:
+			v.PacketSize = new(int32)
+			return d.ReadInt32(schemas.ProbeInput_packetSize, v.PacketSize)
+		case schemas.ProbeInput_protocol:
+			var ev string
+			if err := d.ReadString(schemas.ProbeInput_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = Protocol(ev)
+			return nil
+		case schemas.ProbeInput_sourceArn:
+			v.SourceArn = new(string)
+			return d.ReadString(schemas.ProbeInput_sourceArn, v.SourceArn)
+		case schemas.ProbeInput_tags:
+			return deserializeTagMap(d, schemas.ProbeInput_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

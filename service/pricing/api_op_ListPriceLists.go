@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pricing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pricing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -89,6 +91,33 @@ type ListPriceListsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPriceListsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPriceListsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPriceListsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrencyCode != nil {
+		s.WriteString(schemas.ListPriceListsRequest_CurrencyCode, *v.CurrencyCode)
+	}
+	if v.EffectiveDate != nil {
+		s.WriteTime(schemas.ListPriceListsRequest_EffectiveDate, *v.EffectiveDate)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPriceListsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPriceListsRequest_NextToken, *v.NextToken)
+	}
+	if v.RegionCode != nil {
+		s.WriteString(schemas.ListPriceListsRequest_RegionCode, *v.RegionCode)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.ListPriceListsRequest_ServiceCode, *v.ServiceCode)
+	}
+}
+
 type ListPriceListsOutput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -103,16 +132,26 @@ type ListPriceListsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPriceListsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPriceListsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPriceListsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPriceListsResponse_NextToken, v.NextToken)
+		case schemas.ListPriceListsResponse_PriceLists:
+			return deserializePriceLists(d, schemas.ListPriceListsResponse_PriceLists, &v.PriceLists)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPriceListsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPriceLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPriceLists, schemas.ListPriceListsRequest, schemas.ListPriceListsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPriceLists{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPriceLists, schemas.ListPriceListsRequest, schemas.ListPriceListsResponse), output: &ListPriceListsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPriceLists"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,21 @@ type ListGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGatewaysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGatewaysRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGatewaysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGatewaysRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGatewaysRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListGatewaysOutput struct {
 
 	// A list that summarizes each gateway.
@@ -57,16 +74,26 @@ type ListGatewaysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGatewaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGatewaysResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGatewaysResponse_gatewaySummaries:
+			return deserializeGatewaySummaries(d, schemas.ListGatewaysResponse_gatewaySummaries, &v.GatewaySummaries)
+		case schemas.ListGatewaysResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGatewaysResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGateways{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGateways, schemas.ListGatewaysRequest, schemas.ListGatewaysResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGateways{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGateways, schemas.ListGatewaysRequest, schemas.ListGatewaysResponse), output: &ListGatewaysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGateways"); err != nil {

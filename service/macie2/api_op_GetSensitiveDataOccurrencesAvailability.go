@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,6 +37,18 @@ type GetSensitiveDataOccurrencesAvailabilityInput struct {
 	FindingId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSensitiveDataOccurrencesAvailabilityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSensitiveDataOccurrencesAvailabilityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSensitiveDataOccurrencesAvailabilityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingId != nil {
+		s.WriteString(schemas.GetSensitiveDataOccurrencesAvailabilityRequest_findingId, *v.FindingId)
+	}
 }
 
 type GetSensitiveDataOccurrencesAvailabilityOutput struct {
@@ -109,16 +123,30 @@ type GetSensitiveDataOccurrencesAvailabilityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSensitiveDataOccurrencesAvailabilityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSensitiveDataOccurrencesAvailabilityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSensitiveDataOccurrencesAvailabilityResponse_code:
+			var ev string
+			if err := d.ReadString(schemas.GetSensitiveDataOccurrencesAvailabilityResponse_code, &ev); err != nil {
+				return err
+			}
+			v.Code = types.AvailabilityCode(ev)
+			return nil
+		case schemas.GetSensitiveDataOccurrencesAvailabilityResponse_reasons:
+			return deserialize__listOfUnavailabilityReasonCode(d, schemas.GetSensitiveDataOccurrencesAvailabilityResponse_reasons, &v.Reasons)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSensitiveDataOccurrencesAvailabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSensitiveDataOccurrencesAvailability{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSensitiveDataOccurrencesAvailability, schemas.GetSensitiveDataOccurrencesAvailabilityRequest, schemas.GetSensitiveDataOccurrencesAvailabilityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSensitiveDataOccurrencesAvailability{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSensitiveDataOccurrencesAvailability, schemas.GetSensitiveDataOccurrencesAvailabilityRequest, schemas.GetSensitiveDataOccurrencesAvailabilityResponse), output: &GetSensitiveDataOccurrencesAvailabilityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSensitiveDataOccurrencesAvailability"); err != nil {

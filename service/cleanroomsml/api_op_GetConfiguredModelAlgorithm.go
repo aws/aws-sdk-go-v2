@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -37,6 +39,18 @@ type GetConfiguredModelAlgorithmInput struct {
 	ConfiguredModelAlgorithmArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetConfiguredModelAlgorithmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetConfiguredModelAlgorithmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetConfiguredModelAlgorithmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredModelAlgorithmArn != nil {
+		s.WriteString(schemas.GetConfiguredModelAlgorithmRequest_configuredModelAlgorithmArn, *v.ConfiguredModelAlgorithmArn)
+	}
 }
 
 type GetConfiguredModelAlgorithmOutput struct {
@@ -117,16 +131,50 @@ type GetConfiguredModelAlgorithmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetConfiguredModelAlgorithmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetConfiguredModelAlgorithmResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetConfiguredModelAlgorithmResponse_configuredModelAlgorithmArn:
+			v.ConfiguredModelAlgorithmArn = new(string)
+			return d.ReadString(schemas.GetConfiguredModelAlgorithmResponse_configuredModelAlgorithmArn, v.ConfiguredModelAlgorithmArn)
+		case schemas.GetConfiguredModelAlgorithmResponse_createTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.GetConfiguredModelAlgorithmResponse_createTime, v.CreateTime)
+		case schemas.GetConfiguredModelAlgorithmResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetConfiguredModelAlgorithmResponse_description, v.Description)
+		case schemas.GetConfiguredModelAlgorithmResponse_inferenceContainerConfig:
+			v.InferenceContainerConfig = &types.InferenceContainerConfig{}
+			return v.InferenceContainerConfig.Deserialize(d)
+		case schemas.GetConfiguredModelAlgorithmResponse_kmsKeyArn:
+			v.KmsKeyArn = new(string)
+			return d.ReadString(schemas.GetConfiguredModelAlgorithmResponse_kmsKeyArn, v.KmsKeyArn)
+		case schemas.GetConfiguredModelAlgorithmResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetConfiguredModelAlgorithmResponse_name, v.Name)
+		case schemas.GetConfiguredModelAlgorithmResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetConfiguredModelAlgorithmResponse_roleArn, v.RoleArn)
+		case schemas.GetConfiguredModelAlgorithmResponse_tags:
+			return deserializeTagMap(d, schemas.GetConfiguredModelAlgorithmResponse_tags, &v.Tags)
+		case schemas.GetConfiguredModelAlgorithmResponse_trainingContainerConfig:
+			v.TrainingContainerConfig = &types.ContainerConfig{}
+			return v.TrainingContainerConfig.Deserialize(d)
+		case schemas.GetConfiguredModelAlgorithmResponse_updateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.GetConfiguredModelAlgorithmResponse_updateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetConfiguredModelAlgorithmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetConfiguredModelAlgorithm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredModelAlgorithm, schemas.GetConfiguredModelAlgorithmRequest, schemas.GetConfiguredModelAlgorithmResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetConfiguredModelAlgorithm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetConfiguredModelAlgorithm, schemas.GetConfiguredModelAlgorithmRequest, schemas.GetConfiguredModelAlgorithmResponse), output: &GetConfiguredModelAlgorithmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetConfiguredModelAlgorithm"); err != nil {

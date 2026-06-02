@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,19 @@ type AssociateAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAccountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateAccountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAccountIdList(s, schemas.AssociateAccountsRequest_accountIds, v.AccountIds)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AssociateAccountsRequest_clientToken, *v.ClientToken)
+	}
+}
+
 type AssociateAccountsOutput struct {
 
 	//  The IDs of the member accounts that were successfully associated.
@@ -66,16 +81,25 @@ type AssociateAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateAccountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateAccountsResponse_accountIds:
+			return deserializeAccountIdList(d, schemas.AssociateAccountsResponse_accountIds, &v.AccountIds)
+		case schemas.AssociateAccountsResponse_errors:
+			return deserializeStringList(d, schemas.AssociateAccountsResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpAssociateAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAccounts, schemas.AssociateAccountsRequest, schemas.AssociateAccountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpAssociateAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateAccounts, schemas.AssociateAccountsRequest, schemas.AssociateAccountsResponse), output: &AssociateAccountsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateAccounts"); err != nil {

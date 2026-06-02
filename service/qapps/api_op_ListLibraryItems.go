@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,27 @@ type ListLibraryItemsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLibraryItemsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLibraryItemsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLibraryItemsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CategoryId != nil {
+		s.WriteString(schemas.ListLibraryItemsInput_categoryId, *v.CategoryId)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.ListLibraryItemsInput_instanceId, *v.InstanceId)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListLibraryItemsInput_limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLibraryItemsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListLibraryItemsOutput struct {
 
 	// The list of library items meeting the request criteria.
@@ -61,16 +84,26 @@ type ListLibraryItemsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLibraryItemsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLibraryItemsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLibraryItemsOutput_libraryItems:
+			return deserializeLibraryItemList(d, schemas.ListLibraryItemsOutput_libraryItems, &v.LibraryItems)
+		case schemas.ListLibraryItemsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLibraryItemsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLibraryItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLibraryItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLibraryItems, schemas.ListLibraryItemsInput, schemas.ListLibraryItemsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLibraryItems{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLibraryItems, schemas.ListLibraryItemsInput, schemas.ListLibraryItemsOutput), output: &ListLibraryItemsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLibraryItems"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,21 @@ type DeleteRegexPatternSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRegexPatternSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteRegexPatternSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteRegexPatternSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeToken != nil {
+		s.WriteString(schemas.DeleteRegexPatternSetRequest_ChangeToken, *v.ChangeToken)
+	}
+	if v.RegexPatternSetId != nil {
+		s.WriteString(schemas.DeleteRegexPatternSetRequest_RegexPatternSetId, *v.RegexPatternSetId)
+	}
+}
+
 type DeleteRegexPatternSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteRegexPatternSet request. You
@@ -66,16 +83,24 @@ type DeleteRegexPatternSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteRegexPatternSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteRegexPatternSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteRegexPatternSetResponse_ChangeToken:
+			v.ChangeToken = new(string)
+			return d.ReadString(schemas.DeleteRegexPatternSetResponse_ChangeToken, v.ChangeToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteRegexPatternSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteRegexPatternSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegexPatternSet, schemas.DeleteRegexPatternSetRequest, schemas.DeleteRegexPatternSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteRegexPatternSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteRegexPatternSet, schemas.DeleteRegexPatternSetRequest, schemas.DeleteRegexPatternSetResponse), output: &DeleteRegexPatternSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteRegexPatternSet"); err != nil {

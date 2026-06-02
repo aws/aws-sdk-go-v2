@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type DescribeArchiveInput struct {
 	ArchiveName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeArchiveInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeArchiveRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeArchiveInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArchiveName != nil {
+		s.WriteString(schemas.DescribeArchiveRequest_ArchiveName, *v.ArchiveName)
+	}
 }
 
 type DescribeArchiveOutput struct {
@@ -79,16 +93,56 @@ type DescribeArchiveOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeArchiveOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeArchiveResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeArchiveResponse_ArchiveArn:
+			v.ArchiveArn = new(string)
+			return d.ReadString(schemas.DescribeArchiveResponse_ArchiveArn, v.ArchiveArn)
+		case schemas.DescribeArchiveResponse_ArchiveName:
+			v.ArchiveName = new(string)
+			return d.ReadString(schemas.DescribeArchiveResponse_ArchiveName, v.ArchiveName)
+		case schemas.DescribeArchiveResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeArchiveResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeArchiveResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeArchiveResponse_Description, v.Description)
+		case schemas.DescribeArchiveResponse_EventCount:
+			return d.ReadInt64(schemas.DescribeArchiveResponse_EventCount, &v.EventCount)
+		case schemas.DescribeArchiveResponse_EventPattern:
+			v.EventPattern = new(string)
+			return d.ReadString(schemas.DescribeArchiveResponse_EventPattern, v.EventPattern)
+		case schemas.DescribeArchiveResponse_EventSourceArn:
+			v.EventSourceArn = new(string)
+			return d.ReadString(schemas.DescribeArchiveResponse_EventSourceArn, v.EventSourceArn)
+		case schemas.DescribeArchiveResponse_RetentionDays:
+			v.RetentionDays = new(int32)
+			return d.ReadInt32(schemas.DescribeArchiveResponse_RetentionDays, v.RetentionDays)
+		case schemas.DescribeArchiveResponse_SizeBytes:
+			return d.ReadInt64(schemas.DescribeArchiveResponse_SizeBytes, &v.SizeBytes)
+		case schemas.DescribeArchiveResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.DescribeArchiveResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.ArchiveState(ev)
+			return nil
+		case schemas.DescribeArchiveResponse_StateReason:
+			v.StateReason = new(string)
+			return d.ReadString(schemas.DescribeArchiveResponse_StateReason, v.StateReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeArchive, schemas.DescribeArchiveRequest, schemas.DescribeArchiveResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeArchive{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeArchive, schemas.DescribeArchiveRequest, schemas.DescribeArchiveResponse), output: &DescribeArchiveOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeArchive"); err != nil {

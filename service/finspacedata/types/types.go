@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -22,6 +24,45 @@ type AwsCredentials struct {
 	SessionToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AwsCredentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AwsCredentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AwsCredentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKeyId != nil {
+		s.WriteString(schemas.AwsCredentials_accessKeyId, *v.AccessKeyId)
+	}
+	if v.Expiration != 0 {
+		s.WriteInt64(schemas.AwsCredentials_expiration, v.Expiration)
+	}
+	if v.SecretAccessKey != nil {
+		s.WriteString(schemas.AwsCredentials_secretAccessKey, *v.SecretAccessKey)
+	}
+	if v.SessionToken != nil {
+		s.WriteString(schemas.AwsCredentials_sessionToken, *v.SessionToken)
+	}
+}
+func (v *AwsCredentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AwsCredentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AwsCredentials_accessKeyId:
+			v.AccessKeyId = new(string)
+			return d.ReadString(schemas.AwsCredentials_accessKeyId, v.AccessKeyId)
+		case schemas.AwsCredentials_expiration:
+			return d.ReadInt64(schemas.AwsCredentials_expiration, &v.Expiration)
+		case schemas.AwsCredentials_secretAccessKey:
+			v.SecretAccessKey = new(string)
+			return d.ReadString(schemas.AwsCredentials_secretAccessKey, v.SecretAccessKey)
+		case schemas.AwsCredentials_sessionToken:
+			v.SessionToken = new(string)
+			return d.ReadString(schemas.AwsCredentials_sessionToken, v.SessionToken)
+		}
+		return nil
+	})
 }
 
 // The structure with error messages.
@@ -52,6 +93,38 @@ type ChangesetErrorInfo struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ChangesetErrorInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChangesetErrorInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChangesetErrorInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCategory != "" {
+		s.WriteString(schemas.ChangesetErrorInfo_errorCategory, string(v.ErrorCategory))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.ChangesetErrorInfo_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *ChangesetErrorInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChangesetErrorInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChangesetErrorInfo_errorCategory:
+			var ev string
+			if err := d.ReadString(schemas.ChangesetErrorInfo_errorCategory, &ev); err != nil {
+				return err
+			}
+			v.ErrorCategory = ErrorCategory(ev)
+			return nil
+		case schemas.ChangesetErrorInfo_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.ChangesetErrorInfo_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 // A Changeset is unit of data in a Dataset.
@@ -125,6 +198,103 @@ type ChangesetSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChangesetSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChangesetSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChangesetSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveFromTimestamp != nil {
+		s.WriteInt64(schemas.ChangesetSummary_activeFromTimestamp, *v.ActiveFromTimestamp)
+	}
+	if v.ActiveUntilTimestamp != nil {
+		s.WriteInt64(schemas.ChangesetSummary_activeUntilTimestamp, *v.ActiveUntilTimestamp)
+	}
+	if v.ChangeType != "" {
+		s.WriteString(schemas.ChangesetSummary_changeType, string(v.ChangeType))
+	}
+	if v.ChangesetArn != nil {
+		s.WriteString(schemas.ChangesetSummary_changesetArn, *v.ChangesetArn)
+	}
+	if v.ChangesetId != nil {
+		s.WriteString(schemas.ChangesetSummary_changesetId, *v.ChangesetId)
+	}
+	if v.CreateTime != 0 {
+		s.WriteInt64(schemas.ChangesetSummary_createTime, v.CreateTime)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.ChangesetSummary_datasetId, *v.DatasetId)
+	}
+	if v.ErrorInfo != nil {
+		s.WriteStruct(schemas.ChangesetSummary_errorInfo)
+		v.ErrorInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFormatParams(s, schemas.ChangesetSummary_formatParams, v.FormatParams)
+	serializeSourceParams(s, schemas.ChangesetSummary_sourceParams, v.SourceParams)
+	if v.Status != "" {
+		s.WriteString(schemas.ChangesetSummary_status, string(v.Status))
+	}
+	if v.UpdatedByChangesetId != nil {
+		s.WriteString(schemas.ChangesetSummary_updatedByChangesetId, *v.UpdatedByChangesetId)
+	}
+	if v.UpdatesChangesetId != nil {
+		s.WriteString(schemas.ChangesetSummary_updatesChangesetId, *v.UpdatesChangesetId)
+	}
+}
+func (v *ChangesetSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChangesetSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChangesetSummary_activeFromTimestamp:
+			v.ActiveFromTimestamp = new(int64)
+			return d.ReadInt64(schemas.ChangesetSummary_activeFromTimestamp, v.ActiveFromTimestamp)
+		case schemas.ChangesetSummary_activeUntilTimestamp:
+			v.ActiveUntilTimestamp = new(int64)
+			return d.ReadInt64(schemas.ChangesetSummary_activeUntilTimestamp, v.ActiveUntilTimestamp)
+		case schemas.ChangesetSummary_changeType:
+			var ev string
+			if err := d.ReadString(schemas.ChangesetSummary_changeType, &ev); err != nil {
+				return err
+			}
+			v.ChangeType = ChangeType(ev)
+			return nil
+		case schemas.ChangesetSummary_changesetArn:
+			v.ChangesetArn = new(string)
+			return d.ReadString(schemas.ChangesetSummary_changesetArn, v.ChangesetArn)
+		case schemas.ChangesetSummary_changesetId:
+			v.ChangesetId = new(string)
+			return d.ReadString(schemas.ChangesetSummary_changesetId, v.ChangesetId)
+		case schemas.ChangesetSummary_createTime:
+			return d.ReadInt64(schemas.ChangesetSummary_createTime, &v.CreateTime)
+		case schemas.ChangesetSummary_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.ChangesetSummary_datasetId, v.DatasetId)
+		case schemas.ChangesetSummary_errorInfo:
+			v.ErrorInfo = &ChangesetErrorInfo{}
+			return v.ErrorInfo.Deserialize(d)
+		case schemas.ChangesetSummary_formatParams:
+			return deserializeFormatParams(d, schemas.ChangesetSummary_formatParams, &v.FormatParams)
+		case schemas.ChangesetSummary_sourceParams:
+			return deserializeSourceParams(d, schemas.ChangesetSummary_sourceParams, &v.SourceParams)
+		case schemas.ChangesetSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.ChangesetSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = IngestionStatus(ev)
+			return nil
+		case schemas.ChangesetSummary_updatedByChangesetId:
+			v.UpdatedByChangesetId = new(string)
+			return d.ReadString(schemas.ChangesetSummary_updatedByChangesetId, v.UpdatedByChangesetId)
+		case schemas.ChangesetSummary_updatesChangesetId:
+			v.UpdatesChangesetId = new(string)
+			return d.ReadString(schemas.ChangesetSummary_updatesChangesetId, v.UpdatesChangesetId)
+		}
+		return nil
+	})
+}
+
 // The definition of a column in a tabular Dataset.
 type ColumnDefinition struct {
 
@@ -164,6 +334,44 @@ type ColumnDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ColumnDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ColumnDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ColumnDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ColumnDescription != nil {
+		s.WriteString(schemas.ColumnDefinition_columnDescription, *v.ColumnDescription)
+	}
+	if v.ColumnName != nil {
+		s.WriteString(schemas.ColumnDefinition_columnName, *v.ColumnName)
+	}
+	if v.DataType != "" {
+		s.WriteString(schemas.ColumnDefinition_dataType, string(v.DataType))
+	}
+}
+func (v *ColumnDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ColumnDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ColumnDefinition_columnDescription:
+			v.ColumnDescription = new(string)
+			return d.ReadString(schemas.ColumnDefinition_columnDescription, v.ColumnDescription)
+		case schemas.ColumnDefinition_columnName:
+			v.ColumnName = new(string)
+			return d.ReadString(schemas.ColumnDefinition_columnName, v.ColumnName)
+		case schemas.ColumnDefinition_dataType:
+			var ev string
+			if err := d.ReadString(schemas.ColumnDefinition_dataType, &ev); err != nil {
+				return err
+			}
+			v.DataType = ColumnDataType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Short term API credentials.
 type Credentials struct {
 
@@ -177,6 +385,40 @@ type Credentials struct {
 	SessionToken *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Credentials) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Credentials)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Credentials) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessKeyId != nil {
+		s.WriteString(schemas.Credentials_accessKeyId, *v.AccessKeyId)
+	}
+	if v.SecretAccessKey != nil {
+		s.WriteString(schemas.Credentials_secretAccessKey, *v.SecretAccessKey)
+	}
+	if v.SessionToken != nil {
+		s.WriteString(schemas.Credentials_sessionToken, *v.SessionToken)
+	}
+}
+func (v *Credentials) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Credentials, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Credentials_accessKeyId:
+			v.AccessKeyId = new(string)
+			return d.ReadString(schemas.Credentials_accessKeyId, v.AccessKeyId)
+		case schemas.Credentials_secretAccessKey:
+			v.SecretAccessKey = new(string)
+			return d.ReadString(schemas.Credentials_secretAccessKey, v.SecretAccessKey)
+		case schemas.Credentials_sessionToken:
+			v.SessionToken = new(string)
+			return d.ReadString(schemas.Credentials_sessionToken, v.SessionToken)
+		}
+		return nil
+	})
 }
 
 // The structure for a Dataset.
@@ -223,6 +465,88 @@ type Dataset struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Dataset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Dataset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Dataset) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Alias != nil {
+		s.WriteString(schemas.Dataset_alias, *v.Alias)
+	}
+	if v.CreateTime != 0 {
+		s.WriteInt64(schemas.Dataset_createTime, v.CreateTime)
+	}
+	if v.DatasetArn != nil {
+		s.WriteString(schemas.Dataset_datasetArn, *v.DatasetArn)
+	}
+	if v.DatasetDescription != nil {
+		s.WriteString(schemas.Dataset_datasetDescription, *v.DatasetDescription)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.Dataset_datasetId, *v.DatasetId)
+	}
+	if v.DatasetTitle != nil {
+		s.WriteString(schemas.Dataset_datasetTitle, *v.DatasetTitle)
+	}
+	if v.Kind != "" {
+		s.WriteString(schemas.Dataset_kind, string(v.Kind))
+	}
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.Dataset_lastModifiedTime, v.LastModifiedTime)
+	}
+	if v.OwnerInfo != nil {
+		s.WriteStruct(schemas.Dataset_ownerInfo)
+		v.OwnerInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchemaDefinition != nil {
+		s.WriteStruct(schemas.Dataset_schemaDefinition)
+		v.SchemaDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Dataset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Dataset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Dataset_alias:
+			v.Alias = new(string)
+			return d.ReadString(schemas.Dataset_alias, v.Alias)
+		case schemas.Dataset_createTime:
+			return d.ReadInt64(schemas.Dataset_createTime, &v.CreateTime)
+		case schemas.Dataset_datasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.Dataset_datasetArn, v.DatasetArn)
+		case schemas.Dataset_datasetDescription:
+			v.DatasetDescription = new(string)
+			return d.ReadString(schemas.Dataset_datasetDescription, v.DatasetDescription)
+		case schemas.Dataset_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.Dataset_datasetId, v.DatasetId)
+		case schemas.Dataset_datasetTitle:
+			v.DatasetTitle = new(string)
+			return d.ReadString(schemas.Dataset_datasetTitle, v.DatasetTitle)
+		case schemas.Dataset_kind:
+			var ev string
+			if err := d.ReadString(schemas.Dataset_kind, &ev); err != nil {
+				return err
+			}
+			v.Kind = DatasetKind(ev)
+			return nil
+		case schemas.Dataset_lastModifiedTime:
+			return d.ReadInt64(schemas.Dataset_lastModifiedTime, &v.LastModifiedTime)
+		case schemas.Dataset_ownerInfo:
+			v.OwnerInfo = &DatasetOwnerInfo{}
+			return v.OwnerInfo.Deserialize(d)
+		case schemas.Dataset_schemaDefinition:
+			v.SchemaDefinition = &SchemaUnion{}
+			return v.SchemaDefinition.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A structure for Dataset owner info.
 type DatasetOwnerInfo struct {
 
@@ -236,6 +560,40 @@ type DatasetOwnerInfo struct {
 	PhoneNumber *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DatasetOwnerInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DatasetOwnerInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DatasetOwnerInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Email != nil {
+		s.WriteString(schemas.DatasetOwnerInfo_email, *v.Email)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DatasetOwnerInfo_name, *v.Name)
+	}
+	if v.PhoneNumber != nil {
+		s.WriteString(schemas.DatasetOwnerInfo_phoneNumber, *v.PhoneNumber)
+	}
+}
+func (v *DatasetOwnerInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DatasetOwnerInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DatasetOwnerInfo_email:
+			v.Email = new(string)
+			return d.ReadString(schemas.DatasetOwnerInfo_email, v.Email)
+		case schemas.DatasetOwnerInfo_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DatasetOwnerInfo_name, v.Name)
+		case schemas.DatasetOwnerInfo_phoneNumber:
+			v.PhoneNumber = new(string)
+			return d.ReadString(schemas.DatasetOwnerInfo_phoneNumber, v.PhoneNumber)
+		}
+		return nil
+	})
 }
 
 // Structure for the Dataview destination type parameters.
@@ -268,6 +626,41 @@ type DataViewDestinationTypeParams struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataViewDestinationTypeParams) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataViewDestinationTypeParams)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataViewDestinationTypeParams) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationType != nil {
+		s.WriteString(schemas.DataViewDestinationTypeParams_destinationType, *v.DestinationType)
+	}
+	if v.S3DestinationExportFileFormat != "" {
+		s.WriteString(schemas.DataViewDestinationTypeParams_s3DestinationExportFileFormat, string(v.S3DestinationExportFileFormat))
+	}
+	serializeS3DestinationFormatOptions(s, schemas.DataViewDestinationTypeParams_s3DestinationExportFileFormatOptions, v.S3DestinationExportFileFormatOptions)
+}
+func (v *DataViewDestinationTypeParams) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataViewDestinationTypeParams, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataViewDestinationTypeParams_destinationType:
+			v.DestinationType = new(string)
+			return d.ReadString(schemas.DataViewDestinationTypeParams_destinationType, v.DestinationType)
+		case schemas.DataViewDestinationTypeParams_s3DestinationExportFileFormat:
+			var ev string
+			if err := d.ReadString(schemas.DataViewDestinationTypeParams_s3DestinationExportFileFormat, &ev); err != nil {
+				return err
+			}
+			v.S3DestinationExportFileFormat = ExportFileFormat(ev)
+			return nil
+		case schemas.DataViewDestinationTypeParams_s3DestinationExportFileFormatOptions:
+			return deserializeS3DestinationFormatOptions(d, schemas.DataViewDestinationTypeParams_s3DestinationExportFileFormatOptions, &v.S3DestinationExportFileFormatOptions)
+		}
+		return nil
+	})
+}
+
 // The structure with error messages.
 type DataViewErrorInfo struct {
 
@@ -296,6 +689,38 @@ type DataViewErrorInfo struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataViewErrorInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataViewErrorInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataViewErrorInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCategory != "" {
+		s.WriteString(schemas.DataViewErrorInfo_errorCategory, string(v.ErrorCategory))
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.DataViewErrorInfo_errorMessage, *v.ErrorMessage)
+	}
+}
+func (v *DataViewErrorInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataViewErrorInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataViewErrorInfo_errorCategory:
+			var ev string
+			if err := d.ReadString(schemas.DataViewErrorInfo_errorCategory, &ev); err != nil {
+				return err
+			}
+			v.ErrorCategory = ErrorCategory(ev)
+			return nil
+		case schemas.DataViewErrorInfo_errorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DataViewErrorInfo_errorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 // Structure for the summary of a Dataview.
@@ -362,6 +787,93 @@ type DataViewSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DataViewSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataViewSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataViewSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AsOfTimestamp != nil {
+		s.WriteInt64(schemas.DataViewSummary_asOfTimestamp, *v.AsOfTimestamp)
+	}
+	if v.AutoUpdate != false {
+		s.WriteBool(schemas.DataViewSummary_autoUpdate, v.AutoUpdate)
+	}
+	if v.CreateTime != 0 {
+		s.WriteInt64(schemas.DataViewSummary_createTime, v.CreateTime)
+	}
+	if v.DataViewArn != nil {
+		s.WriteString(schemas.DataViewSummary_dataViewArn, *v.DataViewArn)
+	}
+	if v.DataViewId != nil {
+		s.WriteString(schemas.DataViewSummary_dataViewId, *v.DataViewId)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.DataViewSummary_datasetId, *v.DatasetId)
+	}
+	if v.DestinationTypeProperties != nil {
+		s.WriteStruct(schemas.DataViewSummary_destinationTypeProperties)
+		v.DestinationTypeProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ErrorInfo != nil {
+		s.WriteStruct(schemas.DataViewSummary_errorInfo)
+		v.ErrorInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.DataViewSummary_lastModifiedTime, v.LastModifiedTime)
+	}
+	serializePartitionColumnList(s, schemas.DataViewSummary_partitionColumns, v.PartitionColumns)
+	serializeSortColumnList(s, schemas.DataViewSummary_sortColumns, v.SortColumns)
+	if v.Status != "" {
+		s.WriteString(schemas.DataViewSummary_status, string(v.Status))
+	}
+}
+func (v *DataViewSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataViewSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataViewSummary_asOfTimestamp:
+			v.AsOfTimestamp = new(int64)
+			return d.ReadInt64(schemas.DataViewSummary_asOfTimestamp, v.AsOfTimestamp)
+		case schemas.DataViewSummary_autoUpdate:
+			return d.ReadBool(schemas.DataViewSummary_autoUpdate, &v.AutoUpdate)
+		case schemas.DataViewSummary_createTime:
+			return d.ReadInt64(schemas.DataViewSummary_createTime, &v.CreateTime)
+		case schemas.DataViewSummary_dataViewArn:
+			v.DataViewArn = new(string)
+			return d.ReadString(schemas.DataViewSummary_dataViewArn, v.DataViewArn)
+		case schemas.DataViewSummary_dataViewId:
+			v.DataViewId = new(string)
+			return d.ReadString(schemas.DataViewSummary_dataViewId, v.DataViewId)
+		case schemas.DataViewSummary_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.DataViewSummary_datasetId, v.DatasetId)
+		case schemas.DataViewSummary_destinationTypeProperties:
+			v.DestinationTypeProperties = &DataViewDestinationTypeParams{}
+			return v.DestinationTypeProperties.Deserialize(d)
+		case schemas.DataViewSummary_errorInfo:
+			v.ErrorInfo = &DataViewErrorInfo{}
+			return v.ErrorInfo.Deserialize(d)
+		case schemas.DataViewSummary_lastModifiedTime:
+			return d.ReadInt64(schemas.DataViewSummary_lastModifiedTime, &v.LastModifiedTime)
+		case schemas.DataViewSummary_partitionColumns:
+			return deserializePartitionColumnList(d, schemas.DataViewSummary_partitionColumns, &v.PartitionColumns)
+		case schemas.DataViewSummary_sortColumns:
+			return deserializeSortColumnList(d, schemas.DataViewSummary_sortColumns, &v.SortColumns)
+		case schemas.DataViewSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.DataViewSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = DataViewStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The structure for a permission group.
 type PermissionGroup struct {
 
@@ -423,6 +935,63 @@ type PermissionGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PermissionGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PermissionGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PermissionGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationPermissionList(s, schemas.PermissionGroup_applicationPermissions, v.ApplicationPermissions)
+	if v.CreateTime != 0 {
+		s.WriteInt64(schemas.PermissionGroup_createTime, v.CreateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PermissionGroup_description, *v.Description)
+	}
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.PermissionGroup_lastModifiedTime, v.LastModifiedTime)
+	}
+	if v.MembershipStatus != "" {
+		s.WriteString(schemas.PermissionGroup_membershipStatus, string(v.MembershipStatus))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PermissionGroup_name, *v.Name)
+	}
+	if v.PermissionGroupId != nil {
+		s.WriteString(schemas.PermissionGroup_permissionGroupId, *v.PermissionGroupId)
+	}
+}
+func (v *PermissionGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PermissionGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PermissionGroup_applicationPermissions:
+			return deserializeApplicationPermissionList(d, schemas.PermissionGroup_applicationPermissions, &v.ApplicationPermissions)
+		case schemas.PermissionGroup_createTime:
+			return d.ReadInt64(schemas.PermissionGroup_createTime, &v.CreateTime)
+		case schemas.PermissionGroup_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PermissionGroup_description, v.Description)
+		case schemas.PermissionGroup_lastModifiedTime:
+			return d.ReadInt64(schemas.PermissionGroup_lastModifiedTime, &v.LastModifiedTime)
+		case schemas.PermissionGroup_membershipStatus:
+			var ev string
+			if err := d.ReadString(schemas.PermissionGroup_membershipStatus, &ev); err != nil {
+				return err
+			}
+			v.MembershipStatus = PermissionGroupMembershipStatus(ev)
+			return nil
+		case schemas.PermissionGroup_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PermissionGroup_name, v.Name)
+		case schemas.PermissionGroup_permissionGroupId:
+			v.PermissionGroupId = new(string)
+			return d.ReadString(schemas.PermissionGroup_permissionGroupId, v.PermissionGroupId)
+		}
+		return nil
+	})
+}
+
 // The structure of a permission group associated with a user.
 type PermissionGroupByUser struct {
 
@@ -446,6 +1015,44 @@ type PermissionGroupByUser struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PermissionGroupByUser) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PermissionGroupByUser)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PermissionGroupByUser) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipStatus != "" {
+		s.WriteString(schemas.PermissionGroupByUser_membershipStatus, string(v.MembershipStatus))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PermissionGroupByUser_name, *v.Name)
+	}
+	if v.PermissionGroupId != nil {
+		s.WriteString(schemas.PermissionGroupByUser_permissionGroupId, *v.PermissionGroupId)
+	}
+}
+func (v *PermissionGroupByUser) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PermissionGroupByUser, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PermissionGroupByUser_membershipStatus:
+			var ev string
+			if err := d.ReadString(schemas.PermissionGroupByUser_membershipStatus, &ev); err != nil {
+				return err
+			}
+			v.MembershipStatus = PermissionGroupMembershipStatus(ev)
+			return nil
+		case schemas.PermissionGroupByUser_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PermissionGroupByUser_name, v.Name)
+		case schemas.PermissionGroupByUser_permissionGroupId:
+			v.PermissionGroupId = new(string)
+			return d.ReadString(schemas.PermissionGroupByUser_permissionGroupId, v.PermissionGroupId)
+		}
+		return nil
+	})
+}
+
 // Permission group parameters for Dataset permissions.
 //
 // Here is an example of how you could specify the PermissionGroupParams :
@@ -462,6 +1069,31 @@ type PermissionGroupParams struct {
 	PermissionGroupId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PermissionGroupParams) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PermissionGroupParams)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PermissionGroupParams) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourcePermissionsList(s, schemas.PermissionGroupParams_datasetPermissions, v.DatasetPermissions)
+	if v.PermissionGroupId != nil {
+		s.WriteString(schemas.PermissionGroupParams_permissionGroupId, *v.PermissionGroupId)
+	}
+}
+func (v *PermissionGroupParams) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PermissionGroupParams, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PermissionGroupParams_datasetPermissions:
+			return deserializeResourcePermissionsList(d, schemas.PermissionGroupParams_datasetPermissions, &v.DatasetPermissions)
+		case schemas.PermissionGroupParams_permissionGroupId:
+			v.PermissionGroupId = new(string)
+			return d.ReadString(schemas.PermissionGroupParams_permissionGroupId, v.PermissionGroupId)
+		}
+		return nil
+	})
 }
 
 // Resource permission for a dataset. When you create a dataset, all the other
@@ -495,6 +1127,28 @@ type ResourcePermission struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourcePermission) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourcePermission)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourcePermission) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Permission != nil {
+		s.WriteString(schemas.ResourcePermission_permission, *v.Permission)
+	}
+}
+func (v *ResourcePermission) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourcePermission, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourcePermission_permission:
+			v.Permission = new(string)
+			return d.ReadString(schemas.ResourcePermission_permission, v.Permission)
+		}
+		return nil
+	})
+}
+
 // The location of an external Dataview in an S3 bucket.
 type S3Location struct {
 
@@ -511,6 +1165,34 @@ type S3Location struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Location) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Location)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Location) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bucket != nil {
+		s.WriteString(schemas.S3Location_bucket, *v.Bucket)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.S3Location_key, *v.Key)
+	}
+}
+func (v *S3Location) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Location, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Location_bucket:
+			v.Bucket = new(string)
+			return d.ReadString(schemas.S3Location_bucket, v.Bucket)
+		case schemas.S3Location_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.S3Location_key, v.Key)
+		}
+		return nil
+	})
+}
+
 // Definition for a schema on a tabular Dataset.
 type SchemaDefinition struct {
 
@@ -523,6 +1205,28 @@ type SchemaDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SchemaDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeColumnList(s, schemas.SchemaDefinition_columns, v.Columns)
+	serializeColumnNameList(s, schemas.SchemaDefinition_primaryKeyColumns, v.PrimaryKeyColumns)
+}
+func (v *SchemaDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaDefinition_columns:
+			return deserializeColumnList(d, schemas.SchemaDefinition_columns, &v.Columns)
+		case schemas.SchemaDefinition_primaryKeyColumns:
+			return deserializeColumnNameList(d, schemas.SchemaDefinition_primaryKeyColumns, &v.PrimaryKeyColumns)
+		}
+		return nil
+	})
+}
+
 // A union of schema types.
 type SchemaUnion struct {
 
@@ -530,6 +1234,30 @@ type SchemaUnion struct {
 	TabularSchemaConfig *SchemaDefinition
 
 	noSmithyDocumentSerde
+}
+
+func (v *SchemaUnion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SchemaUnion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SchemaUnion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TabularSchemaConfig != nil {
+		s.WriteStruct(schemas.SchemaUnion_tabularSchemaConfig)
+		v.TabularSchemaConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SchemaUnion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaUnion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaUnion_tabularSchemaConfig:
+			v.TabularSchemaConfig = &SchemaDefinition{}
+			return v.TabularSchemaConfig.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The details of the user.
@@ -603,6 +1331,107 @@ type User struct {
 	noSmithyDocumentSerde
 }
 
+func (v *User) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.User)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiAccess != "" {
+		s.WriteString(schemas.User_apiAccess, string(v.ApiAccess))
+	}
+	if v.ApiAccessPrincipalArn != nil {
+		s.WriteString(schemas.User_apiAccessPrincipalArn, *v.ApiAccessPrincipalArn)
+	}
+	if v.CreateTime != 0 {
+		s.WriteInt64(schemas.User_createTime, v.CreateTime)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.User_emailAddress, *v.EmailAddress)
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.User_firstName, *v.FirstName)
+	}
+	if v.LastDisabledTime != 0 {
+		s.WriteInt64(schemas.User_lastDisabledTime, v.LastDisabledTime)
+	}
+	if v.LastEnabledTime != 0 {
+		s.WriteInt64(schemas.User_lastEnabledTime, v.LastEnabledTime)
+	}
+	if v.LastLoginTime != 0 {
+		s.WriteInt64(schemas.User_lastLoginTime, v.LastLoginTime)
+	}
+	if v.LastModifiedTime != 0 {
+		s.WriteInt64(schemas.User_lastModifiedTime, v.LastModifiedTime)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.User_lastName, *v.LastName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.User_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.User_type, string(v.Type))
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.User_userId, *v.UserId)
+	}
+}
+func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.User, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.User_apiAccess:
+			var ev string
+			if err := d.ReadString(schemas.User_apiAccess, &ev); err != nil {
+				return err
+			}
+			v.ApiAccess = ApiAccess(ev)
+			return nil
+		case schemas.User_apiAccessPrincipalArn:
+			v.ApiAccessPrincipalArn = new(string)
+			return d.ReadString(schemas.User_apiAccessPrincipalArn, v.ApiAccessPrincipalArn)
+		case schemas.User_createTime:
+			return d.ReadInt64(schemas.User_createTime, &v.CreateTime)
+		case schemas.User_emailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.User_emailAddress, v.EmailAddress)
+		case schemas.User_firstName:
+			v.FirstName = new(string)
+			return d.ReadString(schemas.User_firstName, v.FirstName)
+		case schemas.User_lastDisabledTime:
+			return d.ReadInt64(schemas.User_lastDisabledTime, &v.LastDisabledTime)
+		case schemas.User_lastEnabledTime:
+			return d.ReadInt64(schemas.User_lastEnabledTime, &v.LastEnabledTime)
+		case schemas.User_lastLoginTime:
+			return d.ReadInt64(schemas.User_lastLoginTime, &v.LastLoginTime)
+		case schemas.User_lastModifiedTime:
+			return d.ReadInt64(schemas.User_lastModifiedTime, &v.LastModifiedTime)
+		case schemas.User_lastName:
+			v.LastName = new(string)
+			return d.ReadString(schemas.User_lastName, v.LastName)
+		case schemas.User_status:
+			var ev string
+			if err := d.ReadString(schemas.User_status, &ev); err != nil {
+				return err
+			}
+			v.Status = UserStatus(ev)
+			return nil
+		case schemas.User_type:
+			var ev string
+			if err := d.ReadString(schemas.User_type, &ev); err != nil {
+				return err
+			}
+			v.Type = UserType(ev)
+			return nil
+		case schemas.User_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.User_userId, v.UserId)
+		}
+		return nil
+	})
+}
+
 // The structure of a user associated with a permission group.
 type UserByPermissionGroup struct {
 
@@ -659,6 +1488,92 @@ type UserByPermissionGroup struct {
 	UserId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UserByPermissionGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserByPermissionGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserByPermissionGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApiAccess != "" {
+		s.WriteString(schemas.UserByPermissionGroup_apiAccess, string(v.ApiAccess))
+	}
+	if v.ApiAccessPrincipalArn != nil {
+		s.WriteString(schemas.UserByPermissionGroup_apiAccessPrincipalArn, *v.ApiAccessPrincipalArn)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.UserByPermissionGroup_emailAddress, *v.EmailAddress)
+	}
+	if v.FirstName != nil {
+		s.WriteString(schemas.UserByPermissionGroup_firstName, *v.FirstName)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.UserByPermissionGroup_lastName, *v.LastName)
+	}
+	if v.MembershipStatus != "" {
+		s.WriteString(schemas.UserByPermissionGroup_membershipStatus, string(v.MembershipStatus))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UserByPermissionGroup_status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UserByPermissionGroup_type, string(v.Type))
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.UserByPermissionGroup_userId, *v.UserId)
+	}
+}
+func (v *UserByPermissionGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserByPermissionGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserByPermissionGroup_apiAccess:
+			var ev string
+			if err := d.ReadString(schemas.UserByPermissionGroup_apiAccess, &ev); err != nil {
+				return err
+			}
+			v.ApiAccess = ApiAccess(ev)
+			return nil
+		case schemas.UserByPermissionGroup_apiAccessPrincipalArn:
+			v.ApiAccessPrincipalArn = new(string)
+			return d.ReadString(schemas.UserByPermissionGroup_apiAccessPrincipalArn, v.ApiAccessPrincipalArn)
+		case schemas.UserByPermissionGroup_emailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.UserByPermissionGroup_emailAddress, v.EmailAddress)
+		case schemas.UserByPermissionGroup_firstName:
+			v.FirstName = new(string)
+			return d.ReadString(schemas.UserByPermissionGroup_firstName, v.FirstName)
+		case schemas.UserByPermissionGroup_lastName:
+			v.LastName = new(string)
+			return d.ReadString(schemas.UserByPermissionGroup_lastName, v.LastName)
+		case schemas.UserByPermissionGroup_membershipStatus:
+			var ev string
+			if err := d.ReadString(schemas.UserByPermissionGroup_membershipStatus, &ev); err != nil {
+				return err
+			}
+			v.MembershipStatus = PermissionGroupMembershipStatus(ev)
+			return nil
+		case schemas.UserByPermissionGroup_status:
+			var ev string
+			if err := d.ReadString(schemas.UserByPermissionGroup_status, &ev); err != nil {
+				return err
+			}
+			v.Status = UserStatus(ev)
+			return nil
+		case schemas.UserByPermissionGroup_type:
+			var ev string
+			if err := d.ReadString(schemas.UserByPermissionGroup_type, &ev); err != nil {
+				return err
+			}
+			v.Type = UserType(ev)
+			return nil
+		case schemas.UserByPermissionGroup_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.UserByPermissionGroup_userId, v.UserId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

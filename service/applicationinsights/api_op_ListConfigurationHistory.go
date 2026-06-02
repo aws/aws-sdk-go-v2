@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -73,6 +75,36 @@ type ListConfigurationHistoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationHistoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationHistoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationHistoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.ListConfigurationHistoryRequest_AccountId, *v.AccountId)
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListConfigurationHistoryRequest_EndTime, *v.EndTime)
+	}
+	if v.EventStatus != "" {
+		s.WriteString(schemas.ListConfigurationHistoryRequest_EventStatus, string(v.EventStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConfigurationHistoryRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationHistoryRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceGroupName != nil {
+		s.WriteString(schemas.ListConfigurationHistoryRequest_ResourceGroupName, *v.ResourceGroupName)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListConfigurationHistoryRequest_StartTime, *v.StartTime)
+	}
+}
+
 type ListConfigurationHistoryOutput struct {
 
 	//  The list of configuration events and their corresponding details.
@@ -90,16 +122,26 @@ type ListConfigurationHistoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationHistoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfigurationHistoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfigurationHistoryResponse_EventList:
+			return deserializeConfigurationEventList(d, schemas.ListConfigurationHistoryResponse_EventList, &v.EventList)
+		case schemas.ListConfigurationHistoryResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfigurationHistoryResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigurationHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListConfigurationHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationHistory, schemas.ListConfigurationHistoryRequest, schemas.ListConfigurationHistoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListConfigurationHistory{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationHistory, schemas.ListConfigurationHistoryRequest, schemas.ListConfigurationHistoryResponse), output: &ListConfigurationHistoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConfigurationHistory"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,18 @@ type DeleteSolFunctionPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSolFunctionPackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSolFunctionPackageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSolFunctionPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VnfPkgId != nil {
+		s.WriteString(schemas.DeleteSolFunctionPackageInput_vnfPkgId, *v.VnfPkgId)
+	}
+}
+
 type DeleteSolFunctionPackageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -53,16 +67,29 @@ type DeleteSolFunctionPackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSolFunctionPackageOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSolFunctionPackageOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSolFunctionPackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSolFunctionPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSolFunctionPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSolFunctionPackage, schemas.DeleteSolFunctionPackageInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSolFunctionPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSolFunctionPackage, schemas.DeleteSolFunctionPackageInput, nil), output: &DeleteSolFunctionPackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSolFunctionPackage"); err != nil {

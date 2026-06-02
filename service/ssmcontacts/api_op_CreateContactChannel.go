@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -77,6 +79,35 @@ type CreateContactChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContactChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContactChannelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContactChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.CreateContactChannelRequest_ContactId, *v.ContactId)
+	}
+	if v.DeferActivation != nil {
+		s.WriteBool(schemas.CreateContactChannelRequest_DeferActivation, *v.DeferActivation)
+	}
+	if v.DeliveryAddress != nil {
+		s.WriteStruct(schemas.CreateContactChannelRequest_DeliveryAddress)
+		v.DeliveryAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateContactChannelRequest_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateContactChannelRequest_Name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateContactChannelRequest_Type, string(v.Type))
+	}
+}
+
 type CreateContactChannelOutput struct {
 
 	// The Amazon Resource Name (ARN) of the contact channel.
@@ -90,16 +121,24 @@ type CreateContactChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContactChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContactChannelResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContactChannelResult_ContactChannelArn:
+			v.ContactChannelArn = new(string)
+			return d.ReadString(schemas.CreateContactChannelResult_ContactChannelArn, v.ContactChannelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContactChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateContactChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContactChannel, schemas.CreateContactChannelRequest, schemas.CreateContactChannelResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateContactChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContactChannel, schemas.CreateContactChannelRequest, schemas.CreateContactChannelResult), output: &CreateContactChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateContactChannel"); err != nil {

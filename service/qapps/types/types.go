@@ -4,6 +4,9 @@ package types
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/qapps/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/qapps/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -28,6 +31,37 @@ type AppDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AppDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AppDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AppDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppDefinitionVersion != nil {
+		s.WriteString(schemas.AppDefinition_appDefinitionVersion, *v.AppDefinitionVersion)
+	}
+	if v.CanEdit != nil {
+		s.WriteBool(schemas.AppDefinition_canEdit, *v.CanEdit)
+	}
+	serializeCardModelList(s, schemas.AppDefinition_cards, v.Cards)
+}
+func (v *AppDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AppDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AppDefinition_appDefinitionVersion:
+			v.AppDefinitionVersion = new(string)
+			return d.ReadString(schemas.AppDefinition_appDefinitionVersion, v.AppDefinitionVersion)
+		case schemas.AppDefinition_canEdit:
+			v.CanEdit = new(bool)
+			return d.ReadBool(schemas.AppDefinition_canEdit, v.CanEdit)
+		case schemas.AppDefinition_cards:
+			return deserializeCardModelList(d, schemas.AppDefinition_cards, &v.Cards)
+		}
+		return nil
+	})
+}
+
 // The input for defining an Q App.
 type AppDefinitionInput struct {
 
@@ -40,6 +74,31 @@ type AppDefinitionInput struct {
 	InitialPrompt *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AppDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AppDefinitionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AppDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCardList(s, schemas.AppDefinitionInput_cards, v.Cards)
+	if v.InitialPrompt != nil {
+		s.WriteString(schemas.AppDefinitionInput_initialPrompt, *v.InitialPrompt)
+	}
+}
+func (v *AppDefinitionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AppDefinitionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AppDefinitionInput_cards:
+			return deserializeCardList(d, schemas.AppDefinitionInput_cards, &v.Cards)
+		case schemas.AppDefinitionInput_initialPrompt:
+			v.InitialPrompt = new(string)
+			return d.ReadString(schemas.AppDefinitionInput_initialPrompt, v.InitialPrompt)
+		}
+		return nil
+	})
 }
 
 // The filter criteria used on responses based on document attributes or metadata
@@ -101,6 +160,92 @@ type AttributeFilter struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttributeFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttributeFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttributeFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAttributeFilters(s, schemas.AttributeFilter_andAllFilters, v.AndAllFilters)
+	if v.ContainsAll != nil {
+		s.WriteStruct(schemas.AttributeFilter_containsAll)
+		v.ContainsAll.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContainsAny != nil {
+		s.WriteStruct(schemas.AttributeFilter_containsAny)
+		v.ContainsAny.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EqualsTo != nil {
+		s.WriteStruct(schemas.AttributeFilter_equalsTo)
+		v.EqualsTo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GreaterThan != nil {
+		s.WriteStruct(schemas.AttributeFilter_greaterThan)
+		v.GreaterThan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GreaterThanOrEquals != nil {
+		s.WriteStruct(schemas.AttributeFilter_greaterThanOrEquals)
+		v.GreaterThanOrEquals.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LessThan != nil {
+		s.WriteStruct(schemas.AttributeFilter_lessThan)
+		v.LessThan.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LessThanOrEquals != nil {
+		s.WriteStruct(schemas.AttributeFilter_lessThanOrEquals)
+		v.LessThanOrEquals.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotFilter != nil {
+		s.WriteStruct(schemas.AttributeFilter_notFilter)
+		v.NotFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAttributeFilters(s, schemas.AttributeFilter_orAllFilters, v.OrAllFilters)
+}
+func (v *AttributeFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttributeFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttributeFilter_andAllFilters:
+			return deserializeAttributeFilters(d, schemas.AttributeFilter_andAllFilters, &v.AndAllFilters)
+		case schemas.AttributeFilter_containsAll:
+			v.ContainsAll = &DocumentAttribute{}
+			return v.ContainsAll.Deserialize(d)
+		case schemas.AttributeFilter_containsAny:
+			v.ContainsAny = &DocumentAttribute{}
+			return v.ContainsAny.Deserialize(d)
+		case schemas.AttributeFilter_equalsTo:
+			v.EqualsTo = &DocumentAttribute{}
+			return v.EqualsTo.Deserialize(d)
+		case schemas.AttributeFilter_greaterThan:
+			v.GreaterThan = &DocumentAttribute{}
+			return v.GreaterThan.Deserialize(d)
+		case schemas.AttributeFilter_greaterThanOrEquals:
+			v.GreaterThanOrEquals = &DocumentAttribute{}
+			return v.GreaterThanOrEquals.Deserialize(d)
+		case schemas.AttributeFilter_lessThan:
+			v.LessThan = &DocumentAttribute{}
+			return v.LessThan.Deserialize(d)
+		case schemas.AttributeFilter_lessThanOrEquals:
+			v.LessThanOrEquals = &DocumentAttribute{}
+			return v.LessThanOrEquals.Deserialize(d)
+		case schemas.AttributeFilter_notFilter:
+			v.NotFilter = &AttributeFilter{}
+			return v.NotFilter.Deserialize(d)
+		case schemas.AttributeFilter_orAllFilters:
+			return deserializeAttributeFilters(d, schemas.AttributeFilter_orAllFilters, &v.OrAllFilters)
+		}
+		return nil
+	})
+}
+
 // The category object to be created.
 type BatchCreateCategoryInputCategory struct {
 
@@ -118,6 +263,40 @@ type BatchCreateCategoryInputCategory struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchCreateCategoryInputCategory) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchCreateCategoryInputCategory)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchCreateCategoryInputCategory) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Color != nil {
+		s.WriteString(schemas.BatchCreateCategoryInputCategory_color, *v.Color)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.BatchCreateCategoryInputCategory_id, *v.Id)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.BatchCreateCategoryInputCategory_title, *v.Title)
+	}
+}
+func (v *BatchCreateCategoryInputCategory) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchCreateCategoryInputCategory, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchCreateCategoryInputCategory_color:
+			v.Color = new(string)
+			return d.ReadString(schemas.BatchCreateCategoryInputCategory_color, v.Color)
+		case schemas.BatchCreateCategoryInputCategory_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.BatchCreateCategoryInputCategory_id, v.Id)
+		case schemas.BatchCreateCategoryInputCategory_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.BatchCreateCategoryInputCategory_title, v.Title)
+		}
+		return nil
+	})
 }
 
 // A card representing a component or step in an Amazon Q App's flow.
@@ -141,6 +320,14 @@ type CardMemberFileUpload struct {
 }
 
 func (*CardMemberFileUpload) isCard() {}
+func (v *CardMemberFileUpload) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Card_fileUpload)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CardMemberFileUpload) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A container for the properties of the form input card.
 type CardMemberFormInput struct {
@@ -150,6 +337,14 @@ type CardMemberFormInput struct {
 }
 
 func (*CardMemberFormInput) isCard() {}
+func (v *CardMemberFormInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Card_formInput)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CardMemberFormInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A container for the properties of the plugin card.
 type CardMemberQPlugin struct {
@@ -159,6 +354,14 @@ type CardMemberQPlugin struct {
 }
 
 func (*CardMemberQPlugin) isCard() {}
+func (v *CardMemberQPlugin) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Card_qPlugin)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CardMemberQPlugin) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A container for the properties of the query card.
 type CardMemberQQuery struct {
@@ -168,6 +371,14 @@ type CardMemberQQuery struct {
 }
 
 func (*CardMemberQQuery) isCard() {}
+func (v *CardMemberQQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Card_qQuery)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CardMemberQQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A container for the properties of the text input card.
 type CardMemberTextInput struct {
@@ -177,6 +388,14 @@ type CardMemberTextInput struct {
 }
 
 func (*CardMemberTextInput) isCard() {}
+func (v *CardMemberTextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Card_textInput)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CardMemberTextInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The properties defining an input card in an Amazon Q App.
 //
@@ -199,6 +418,14 @@ type CardInputMemberFileUpload struct {
 }
 
 func (*CardInputMemberFileUpload) isCardInput() {}
+func (v *CardInputMemberFileUpload) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CardInput_fileUpload)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CardInputMemberFileUpload) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A container for the properties of the form input card.
 type CardInputMemberFormInput struct {
@@ -208,6 +435,14 @@ type CardInputMemberFormInput struct {
 }
 
 func (*CardInputMemberFormInput) isCardInput() {}
+func (v *CardInputMemberFormInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CardInput_formInput)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CardInputMemberFormInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A container for the properties of the plugin input card.
 type CardInputMemberQPlugin struct {
@@ -217,6 +452,14 @@ type CardInputMemberQPlugin struct {
 }
 
 func (*CardInputMemberQPlugin) isCardInput() {}
+func (v *CardInputMemberQPlugin) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CardInput_qPlugin)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CardInputMemberQPlugin) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A container for the properties of the query input card.
 type CardInputMemberQQuery struct {
@@ -226,6 +469,14 @@ type CardInputMemberQQuery struct {
 }
 
 func (*CardInputMemberQQuery) isCardInput() {}
+func (v *CardInputMemberQQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CardInput_qQuery)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CardInputMemberQQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A container for the properties of the text input card.
 type CardInputMemberTextInput struct {
@@ -235,6 +486,14 @@ type CardInputMemberTextInput struct {
 }
 
 func (*CardInputMemberTextInput) isCardInput() {}
+func (v *CardInputMemberTextInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CardInput_textInput)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CardInputMemberTextInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The current status and value of a card in an active Amazon Q App session.
 type CardStatus struct {
@@ -255,6 +514,41 @@ type CardStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CardStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CardStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CardStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentState != "" {
+		s.WriteString(schemas.CardStatus_currentState, string(v.CurrentState))
+	}
+	if v.CurrentValue != nil {
+		s.WriteString(schemas.CardStatus_currentValue, *v.CurrentValue)
+	}
+	serializeSubmissionList(s, schemas.CardStatus_submissions, v.Submissions)
+}
+func (v *CardStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CardStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CardStatus_currentState:
+			var ev string
+			if err := d.ReadString(schemas.CardStatus_currentState, &ev); err != nil {
+				return err
+			}
+			v.CurrentState = ExecutionStatus(ev)
+			return nil
+		case schemas.CardStatus_currentValue:
+			v.CurrentValue = new(string)
+			return d.ReadString(schemas.CardStatus_currentValue, v.CurrentValue)
+		case schemas.CardStatus_submissions:
+			return deserializeSubmissionList(d, schemas.CardStatus_submissions, &v.Submissions)
+		}
+		return nil
+	})
+}
+
 // The value or result associated with a card in a Amazon Q App session.
 type CardValue struct {
 
@@ -273,6 +567,42 @@ type CardValue struct {
 	SubmissionMutation *SubmissionMutation
 
 	noSmithyDocumentSerde
+}
+
+func (v *CardValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CardValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CardValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CardId != nil {
+		s.WriteString(schemas.CardValue_cardId, *v.CardId)
+	}
+	if v.SubmissionMutation != nil {
+		s.WriteStruct(schemas.CardValue_submissionMutation)
+		v.SubmissionMutation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.CardValue_value, *v.Value)
+	}
+}
+func (v *CardValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CardValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CardValue_cardId:
+			v.CardId = new(string)
+			return d.ReadString(schemas.CardValue_cardId, v.CardId)
+		case schemas.CardValue_submissionMutation:
+			v.SubmissionMutation = &SubmissionMutation{}
+			return v.SubmissionMutation.Deserialize(d)
+		case schemas.CardValue_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.CardValue_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // A category used to classify and filter library items for Amazon Q Apps.
@@ -297,6 +627,46 @@ type Category struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Category) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Category)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Category) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppCount != nil {
+		s.WriteInt32(schemas.Category_appCount, *v.AppCount)
+	}
+	if v.Color != nil {
+		s.WriteString(schemas.Category_color, *v.Color)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.Category_id, *v.Id)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.Category_title, *v.Title)
+	}
+}
+func (v *Category) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Category, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Category_appCount:
+			v.AppCount = new(int32)
+			return d.ReadInt32(schemas.Category_appCount, v.AppCount)
+		case schemas.Category_color:
+			v.Color = new(string)
+			return d.ReadString(schemas.Category_color, v.Color)
+		case schemas.Category_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Category_id, v.Id)
+		case schemas.Category_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.Category_title, v.Title)
+		}
+		return nil
+	})
+}
+
 // A label that web experience users associate with a library item. Web experience
 // users use Categories to tag and filter library items.
 type CategoryInput struct {
@@ -318,6 +688,40 @@ type CategoryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CategoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CategoryInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CategoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Color != nil {
+		s.WriteString(schemas.CategoryInput_color, *v.Color)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.CategoryInput_id, *v.Id)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.CategoryInput_title, *v.Title)
+	}
+}
+func (v *CategoryInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CategoryInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CategoryInput_color:
+			v.Color = new(string)
+			return d.ReadString(schemas.CategoryInput_color, v.Color)
+		case schemas.CategoryInput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CategoryInput_id, v.Id)
+		case schemas.CategoryInput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.CategoryInput_title, v.Title)
+		}
+		return nil
+	})
+}
+
 // A message in a conversation, used as input for generating an Amazon Q App
 // definition.
 type ConversationMessage struct {
@@ -335,6 +739,38 @@ type ConversationMessage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConversationMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConversationMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConversationMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Body != nil {
+		s.WriteString(schemas.ConversationMessage_body, *v.Body)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ConversationMessage_type, string(v.Type))
+	}
+}
+func (v *ConversationMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConversationMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConversationMessage_body:
+			v.Body = new(string)
+			return d.ReadString(schemas.ConversationMessage_body, v.Body)
+		case schemas.ConversationMessage_type:
+			var ev string
+			if err := d.ReadString(schemas.ConversationMessage_type, &ev); err != nil {
+				return err
+			}
+			v.Type = Sender(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A document attribute or metadata field.
 type DocumentAttribute struct {
 
@@ -349,6 +785,31 @@ type DocumentAttribute struct {
 	Value DocumentAttributeValue
 
 	noSmithyDocumentSerde
+}
+
+func (v *DocumentAttribute) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentAttribute)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentAttribute) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DocumentAttribute_name, *v.Name)
+	}
+	serializeDocumentAttributeValue(s, schemas.DocumentAttribute_value, v.Value)
+}
+func (v *DocumentAttribute) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentAttribute, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentAttribute_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DocumentAttribute_name, v.Name)
+		case schemas.DocumentAttribute_value:
+			return deserializeDocumentAttributeValue(d, schemas.DocumentAttribute_value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // The value of a document attribute. You can only provide one value for a
@@ -376,6 +837,12 @@ type DocumentAttributeValueMemberDateValue struct {
 }
 
 func (*DocumentAttributeValueMemberDateValue) isDocumentAttributeValue() {}
+func (v *DocumentAttributeValueMemberDateValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteTime(schemas.DocumentAttributeValue_dateValue, v.Value)
+}
+func (v *DocumentAttributeValueMemberDateValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadTime(schemas.DocumentAttributeValue_dateValue, &v.Value)
+}
 
 // A long integer value.
 type DocumentAttributeValueMemberLongValue struct {
@@ -385,6 +852,12 @@ type DocumentAttributeValueMemberLongValue struct {
 }
 
 func (*DocumentAttributeValueMemberLongValue) isDocumentAttributeValue() {}
+func (v *DocumentAttributeValueMemberLongValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteInt64(schemas.DocumentAttributeValue_longValue, v.Value)
+}
+func (v *DocumentAttributeValueMemberLongValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadInt64(schemas.DocumentAttributeValue_longValue, &v.Value)
+}
 
 // A list of strings.
 type DocumentAttributeValueMemberStringListValue struct {
@@ -394,6 +867,12 @@ type DocumentAttributeValueMemberStringListValue struct {
 }
 
 func (*DocumentAttributeValueMemberStringListValue) isDocumentAttributeValue() {}
+func (v *DocumentAttributeValueMemberStringListValue) Serialize(s smithy.ShapeSerializer) {
+	serializeDocumentAttributeStringListValue(s, schemas.DocumentAttributeValue_stringListValue, v.Value)
+}
+func (v *DocumentAttributeValueMemberStringListValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeDocumentAttributeStringListValue(d, schemas.DocumentAttributeValue_stringListValue, &v.Value)
+}
 
 // A string.
 type DocumentAttributeValueMemberStringValue struct {
@@ -403,6 +882,12 @@ type DocumentAttributeValueMemberStringValue struct {
 }
 
 func (*DocumentAttributeValueMemberStringValue) isDocumentAttributeValue() {}
+func (v *DocumentAttributeValueMemberStringValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.DocumentAttributeValue_stringValue, v.Value)
+}
+func (v *DocumentAttributeValueMemberStringValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.DocumentAttributeValue_stringValue, &v.Value)
+}
 
 // A card in an Amazon Q App that allows the user to upload a file.
 type FileUploadCard struct {
@@ -439,6 +924,65 @@ type FileUploadCard struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FileUploadCard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileUploadCard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileUploadCard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowOverride != nil {
+		s.WriteBool(schemas.FileUploadCard_allowOverride, *v.AllowOverride)
+	}
+	serializeDependencyList(s, schemas.FileUploadCard_dependencies, v.Dependencies)
+	if v.FileId != nil {
+		s.WriteString(schemas.FileUploadCard_fileId, *v.FileId)
+	}
+	if v.Filename != nil {
+		s.WriteString(schemas.FileUploadCard_filename, *v.Filename)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.FileUploadCard_id, *v.Id)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.FileUploadCard_title, *v.Title)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.FileUploadCard_type, string(v.Type))
+	}
+}
+func (v *FileUploadCard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileUploadCard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileUploadCard_allowOverride:
+			v.AllowOverride = new(bool)
+			return d.ReadBool(schemas.FileUploadCard_allowOverride, v.AllowOverride)
+		case schemas.FileUploadCard_dependencies:
+			return deserializeDependencyList(d, schemas.FileUploadCard_dependencies, &v.Dependencies)
+		case schemas.FileUploadCard_fileId:
+			v.FileId = new(string)
+			return d.ReadString(schemas.FileUploadCard_fileId, v.FileId)
+		case schemas.FileUploadCard_filename:
+			v.Filename = new(string)
+			return d.ReadString(schemas.FileUploadCard_filename, v.Filename)
+		case schemas.FileUploadCard_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FileUploadCard_id, v.Id)
+		case schemas.FileUploadCard_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.FileUploadCard_title, v.Title)
+		case schemas.FileUploadCard_type:
+			var ev string
+			if err := d.ReadString(schemas.FileUploadCard_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CardType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents a file upload card. It can optionally receive a filename and fileId
 // to set a default file. If not received, the user must provide the file when the
 // Q App runs.
@@ -469,6 +1013,62 @@ type FileUploadCardInput struct {
 	Filename *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FileUploadCardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FileUploadCardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FileUploadCardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowOverride != nil {
+		s.WriteBool(schemas.FileUploadCardInput_allowOverride, *v.AllowOverride)
+	}
+	if v.FileId != nil {
+		s.WriteString(schemas.FileUploadCardInput_fileId, *v.FileId)
+	}
+	if v.Filename != nil {
+		s.WriteString(schemas.FileUploadCardInput_filename, *v.Filename)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.FileUploadCardInput_id, *v.Id)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.FileUploadCardInput_title, *v.Title)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.FileUploadCardInput_type, string(v.Type))
+	}
+}
+func (v *FileUploadCardInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FileUploadCardInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FileUploadCardInput_allowOverride:
+			v.AllowOverride = new(bool)
+			return d.ReadBool(schemas.FileUploadCardInput_allowOverride, v.AllowOverride)
+		case schemas.FileUploadCardInput_fileId:
+			v.FileId = new(string)
+			return d.ReadString(schemas.FileUploadCardInput_fileId, v.FileId)
+		case schemas.FileUploadCardInput_filename:
+			v.Filename = new(string)
+			return d.ReadString(schemas.FileUploadCardInput_filename, v.Filename)
+		case schemas.FileUploadCardInput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FileUploadCardInput_id, v.Id)
+		case schemas.FileUploadCardInput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.FileUploadCardInput_title, v.Title)
+		case schemas.FileUploadCardInput_type:
+			var ev string
+			if err := d.ReadString(schemas.FileUploadCardInput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CardType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A card in an Amazon Q App that allows the user to submit a response.
@@ -509,6 +1109,65 @@ type FormInputCard struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FormInputCard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FormInputCard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FormInputCard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeMode != "" {
+		s.WriteString(schemas.FormInputCard_computeMode, string(v.ComputeMode))
+	}
+	serializeDependencyList(s, schemas.FormInputCard_dependencies, v.Dependencies)
+	if v.Id != nil {
+		s.WriteString(schemas.FormInputCard_id, *v.Id)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.FormInputCard_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.FormInputCard_title, *v.Title)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.FormInputCard_type, string(v.Type))
+	}
+}
+func (v *FormInputCard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FormInputCard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FormInputCard_computeMode:
+			var ev string
+			if err := d.ReadString(schemas.FormInputCard_computeMode, &ev); err != nil {
+				return err
+			}
+			v.ComputeMode = InputCardComputeMode(ev)
+			return nil
+		case schemas.FormInputCard_dependencies:
+			return deserializeDependencyList(d, schemas.FormInputCard_dependencies, &v.Dependencies)
+		case schemas.FormInputCard_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FormInputCard_id, v.Id)
+		case schemas.FormInputCard_metadata:
+			v.Metadata = &FormInputCardMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.FormInputCard_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.FormInputCard_title, v.Title)
+		case schemas.FormInputCard_type:
+			var ev string
+			if err := d.ReadString(schemas.FormInputCard_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CardType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Represents a form input card for an Amazon Q App.
 type FormInputCardInput struct {
 
@@ -542,6 +1201,62 @@ type FormInputCardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FormInputCardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FormInputCardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FormInputCardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeMode != "" {
+		s.WriteString(schemas.FormInputCardInput_computeMode, string(v.ComputeMode))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.FormInputCardInput_id, *v.Id)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.FormInputCardInput_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.FormInputCardInput_title, *v.Title)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.FormInputCardInput_type, string(v.Type))
+	}
+}
+func (v *FormInputCardInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FormInputCardInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FormInputCardInput_computeMode:
+			var ev string
+			if err := d.ReadString(schemas.FormInputCardInput_computeMode, &ev); err != nil {
+				return err
+			}
+			v.ComputeMode = InputCardComputeMode(ev)
+			return nil
+		case schemas.FormInputCardInput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FormInputCardInput_id, v.Id)
+		case schemas.FormInputCardInput_metadata:
+			v.Metadata = &FormInputCardMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.FormInputCardInput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.FormInputCardInput_title, v.Title)
+		case schemas.FormInputCardInput_type:
+			var ev string
+			if err := d.ReadString(schemas.FormInputCardInput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CardType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The metadata of the form input card.
 type FormInputCardMetadata struct {
 
@@ -551,6 +1266,32 @@ type FormInputCardMetadata struct {
 	Schema document.Interface
 
 	noSmithyDocumentSerde
+}
+
+func (v *FormInputCardMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FormInputCardMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FormInputCardMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.FormInputCardMetadata_schema, &smithydocument.Opaque{Value: v.Schema})
+}
+func (v *FormInputCardMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FormInputCardMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FormInputCardMetadata_schema:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.FormInputCardMetadata_schema, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Schema = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
 }
 
 // A library item is a snapshot of an Amazon Q App that can be published so the
@@ -615,6 +1356,97 @@ type LibraryItemMember struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LibraryItemMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LibraryItemMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LibraryItemMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.LibraryItemMember_appId, *v.AppId)
+	}
+	if v.AppVersion != nil {
+		s.WriteInt32(schemas.LibraryItemMember_appVersion, *v.AppVersion)
+	}
+	serializeCategoryList(s, schemas.LibraryItemMember_categories, v.Categories)
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.LibraryItemMember_createdAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.LibraryItemMember_createdBy, *v.CreatedBy)
+	}
+	if v.IsRatedByUser != nil {
+		s.WriteBool(schemas.LibraryItemMember_isRatedByUser, *v.IsRatedByUser)
+	}
+	if v.IsVerified != nil {
+		s.WriteBool(schemas.LibraryItemMember_isVerified, *v.IsVerified)
+	}
+	if v.LibraryItemId != nil {
+		s.WriteString(schemas.LibraryItemMember_libraryItemId, *v.LibraryItemId)
+	}
+	if v.RatingCount != nil {
+		s.WriteInt32(schemas.LibraryItemMember_ratingCount, *v.RatingCount)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.LibraryItemMember_status, *v.Status)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.LibraryItemMember_updatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.LibraryItemMember_updatedBy, *v.UpdatedBy)
+	}
+	if v.UserCount != nil {
+		s.WriteInt32(schemas.LibraryItemMember_userCount, *v.UserCount)
+	}
+}
+func (v *LibraryItemMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LibraryItemMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LibraryItemMember_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.LibraryItemMember_appId, v.AppId)
+		case schemas.LibraryItemMember_appVersion:
+			v.AppVersion = new(int32)
+			return d.ReadInt32(schemas.LibraryItemMember_appVersion, v.AppVersion)
+		case schemas.LibraryItemMember_categories:
+			return deserializeCategoryList(d, schemas.LibraryItemMember_categories, &v.Categories)
+		case schemas.LibraryItemMember_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.LibraryItemMember_createdAt, v.CreatedAt)
+		case schemas.LibraryItemMember_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.LibraryItemMember_createdBy, v.CreatedBy)
+		case schemas.LibraryItemMember_isRatedByUser:
+			v.IsRatedByUser = new(bool)
+			return d.ReadBool(schemas.LibraryItemMember_isRatedByUser, v.IsRatedByUser)
+		case schemas.LibraryItemMember_isVerified:
+			v.IsVerified = new(bool)
+			return d.ReadBool(schemas.LibraryItemMember_isVerified, v.IsVerified)
+		case schemas.LibraryItemMember_libraryItemId:
+			v.LibraryItemId = new(string)
+			return d.ReadString(schemas.LibraryItemMember_libraryItemId, v.LibraryItemId)
+		case schemas.LibraryItemMember_ratingCount:
+			v.RatingCount = new(int32)
+			return d.ReadInt32(schemas.LibraryItemMember_ratingCount, v.RatingCount)
+		case schemas.LibraryItemMember_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.LibraryItemMember_status, v.Status)
+		case schemas.LibraryItemMember_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.LibraryItemMember_updatedAt, v.UpdatedAt)
+		case schemas.LibraryItemMember_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.LibraryItemMember_updatedBy, v.UpdatedBy)
+		case schemas.LibraryItemMember_userCount:
+			v.UserCount = new(int32)
+			return d.ReadInt32(schemas.LibraryItemMember_userCount, v.UserCount)
+		}
+		return nil
+	})
+}
+
 // The permission to grant or revoke for a Amazon Q App.
 type PermissionInput struct {
 
@@ -631,6 +1463,38 @@ type PermissionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PermissionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PermissionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PermissionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.PermissionInput_action, string(v.Action))
+	}
+	if v.Principal != nil {
+		s.WriteString(schemas.PermissionInput_principal, *v.Principal)
+	}
+}
+func (v *PermissionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PermissionInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PermissionInput_action:
+			var ev string
+			if err := d.ReadString(schemas.PermissionInput_action, &ev); err != nil {
+				return err
+			}
+			v.Action = Action(ev)
+			return nil
+		case schemas.PermissionInput_principal:
+			v.Principal = new(string)
+			return d.ReadString(schemas.PermissionInput_principal, v.Principal)
+		}
+		return nil
+	})
+}
+
 // The permission granted to the Amazon Q App.
 type PermissionOutput struct {
 
@@ -645,6 +1509,40 @@ type PermissionOutput struct {
 	Principal *PrincipalOutput
 
 	noSmithyDocumentSerde
+}
+
+func (v *PermissionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PermissionOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PermissionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.PermissionOutput_action, string(v.Action))
+	}
+	if v.Principal != nil {
+		s.WriteStruct(schemas.PermissionOutput_principal)
+		v.Principal.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PermissionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PermissionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PermissionOutput_action:
+			var ev string
+			if err := d.ReadString(schemas.PermissionOutput_action, &ev); err != nil {
+				return err
+			}
+			v.Action = Action(ev)
+			return nil
+		case schemas.PermissionOutput_principal:
+			v.Principal = &PrincipalOutput{}
+			return v.Principal.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The definition of an Amazon Q App generated based on input such as a
@@ -667,6 +1565,42 @@ type PredictAppDefinition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PredictAppDefinition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PredictAppDefinition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PredictAppDefinition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppDefinition != nil {
+		s.WriteStruct(schemas.PredictAppDefinition_appDefinition)
+		v.AppDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PredictAppDefinition_description, *v.Description)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.PredictAppDefinition_title, *v.Title)
+	}
+}
+func (v *PredictAppDefinition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PredictAppDefinition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PredictAppDefinition_appDefinition:
+			v.AppDefinition = &AppDefinitionInput{}
+			return v.AppDefinition.Deserialize(d)
+		case schemas.PredictAppDefinition_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PredictAppDefinition_description, v.Description)
+		case schemas.PredictAppDefinition_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.PredictAppDefinition_title, v.Title)
+		}
+		return nil
+	})
+}
+
 // The input options for generating an Q App definition.
 //
 // The following types satisfy this interface:
@@ -685,6 +1619,12 @@ type PredictQAppInputOptionsMemberConversation struct {
 }
 
 func (*PredictQAppInputOptionsMemberConversation) isPredictQAppInputOptions() {}
+func (v *PredictQAppInputOptionsMemberConversation) Serialize(s smithy.ShapeSerializer) {
+	serializeMessageList(s, schemas.PredictQAppInputOptions_conversation, v.Value)
+}
+func (v *PredictQAppInputOptionsMemberConversation) Deserialize(d smithy.ShapeDeserializer) error {
+	return deserializeMessageList(d, schemas.PredictQAppInputOptions_conversation, &v.Value)
+}
 
 // A problem statement to use as input for generating the Q App definition.
 type PredictQAppInputOptionsMemberProblemStatement struct {
@@ -694,6 +1634,12 @@ type PredictQAppInputOptionsMemberProblemStatement struct {
 }
 
 func (*PredictQAppInputOptionsMemberProblemStatement) isPredictQAppInputOptions() {}
+func (v *PredictQAppInputOptionsMemberProblemStatement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.PredictQAppInputOptions_problemStatement, v.Value)
+}
+func (v *PredictQAppInputOptionsMemberProblemStatement) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.PredictQAppInputOptions_problemStatement, &v.Value)
+}
 
 // The principal for which the permission applies.
 type PrincipalOutput struct {
@@ -708,6 +1654,44 @@ type PrincipalOutput struct {
 	UserType UserType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PrincipalOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrincipalOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrincipalOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Email != nil {
+		s.WriteString(schemas.PrincipalOutput_email, *v.Email)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.PrincipalOutput_userId, *v.UserId)
+	}
+	if v.UserType != "" {
+		s.WriteString(schemas.PrincipalOutput_userType, string(v.UserType))
+	}
+}
+func (v *PrincipalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrincipalOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrincipalOutput_email:
+			v.Email = new(string)
+			return d.ReadString(schemas.PrincipalOutput_email, v.Email)
+		case schemas.PrincipalOutput_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.PrincipalOutput_userId, v.UserId)
+		case schemas.PrincipalOutput_userType:
+			var ev string
+			if err := d.ReadString(schemas.PrincipalOutput_userType, &ev); err != nil {
+				return err
+			}
+			v.UserType = UserType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The response collected for a Amazon Q App session. This container represents a
@@ -734,6 +1718,58 @@ type QAppSessionData struct {
 	Value document.Interface
 
 	noSmithyDocumentSerde
+}
+
+func (v *QAppSessionData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QAppSessionData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QAppSessionData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CardId != nil {
+		s.WriteString(schemas.QAppSessionData_cardId, *v.CardId)
+	}
+	if v.SubmissionId != nil {
+		s.WriteString(schemas.QAppSessionData_submissionId, *v.SubmissionId)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.QAppSessionData_timestamp, *v.Timestamp)
+	}
+	if v.User != nil {
+		s.WriteStruct(schemas.QAppSessionData_user)
+		v.User.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.WriteDocument(schemas.QAppSessionData_value, &smithydocument.Opaque{Value: v.Value})
+}
+func (v *QAppSessionData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QAppSessionData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QAppSessionData_cardId:
+			v.CardId = new(string)
+			return d.ReadString(schemas.QAppSessionData_cardId, v.CardId)
+		case schemas.QAppSessionData_submissionId:
+			v.SubmissionId = new(string)
+			return d.ReadString(schemas.QAppSessionData_submissionId, v.SubmissionId)
+		case schemas.QAppSessionData_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.QAppSessionData_timestamp, v.Timestamp)
+		case schemas.QAppSessionData_user:
+			v.User = &User{}
+			return v.User.Deserialize(d)
+		case schemas.QAppSessionData_value:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.QAppSessionData_value, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Value = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
 }
 
 // A card in an Q App that integrates with a third-party plugin or service.
@@ -780,6 +1816,75 @@ type QPluginCard struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QPluginCard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QPluginCard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QPluginCard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionIdentifier != nil {
+		s.WriteString(schemas.QPluginCard_actionIdentifier, *v.ActionIdentifier)
+	}
+	serializeDependencyList(s, schemas.QPluginCard_dependencies, v.Dependencies)
+	if v.Id != nil {
+		s.WriteString(schemas.QPluginCard_id, *v.Id)
+	}
+	if v.PluginId != nil {
+		s.WriteString(schemas.QPluginCard_pluginId, *v.PluginId)
+	}
+	if v.PluginType != "" {
+		s.WriteString(schemas.QPluginCard_pluginType, string(v.PluginType))
+	}
+	if v.Prompt != nil {
+		s.WriteString(schemas.QPluginCard_prompt, *v.Prompt)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.QPluginCard_title, *v.Title)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.QPluginCard_type, string(v.Type))
+	}
+}
+func (v *QPluginCard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QPluginCard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QPluginCard_actionIdentifier:
+			v.ActionIdentifier = new(string)
+			return d.ReadString(schemas.QPluginCard_actionIdentifier, v.ActionIdentifier)
+		case schemas.QPluginCard_dependencies:
+			return deserializeDependencyList(d, schemas.QPluginCard_dependencies, &v.Dependencies)
+		case schemas.QPluginCard_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.QPluginCard_id, v.Id)
+		case schemas.QPluginCard_pluginId:
+			v.PluginId = new(string)
+			return d.ReadString(schemas.QPluginCard_pluginId, v.PluginId)
+		case schemas.QPluginCard_pluginType:
+			var ev string
+			if err := d.ReadString(schemas.QPluginCard_pluginType, &ev); err != nil {
+				return err
+			}
+			v.PluginType = PluginType(ev)
+			return nil
+		case schemas.QPluginCard_prompt:
+			v.Prompt = new(string)
+			return d.ReadString(schemas.QPluginCard_prompt, v.Prompt)
+		case schemas.QPluginCard_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.QPluginCard_title, v.Title)
+		case schemas.QPluginCard_type:
+			var ev string
+			if err := d.ReadString(schemas.QPluginCard_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CardType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The input shape for defining a plugin card in an Amazon Q App.
 type QPluginCardInput struct {
 
@@ -812,6 +1917,62 @@ type QPluginCardInput struct {
 	ActionIdentifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *QPluginCardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QPluginCardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QPluginCardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionIdentifier != nil {
+		s.WriteString(schemas.QPluginCardInput_actionIdentifier, *v.ActionIdentifier)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.QPluginCardInput_id, *v.Id)
+	}
+	if v.PluginId != nil {
+		s.WriteString(schemas.QPluginCardInput_pluginId, *v.PluginId)
+	}
+	if v.Prompt != nil {
+		s.WriteString(schemas.QPluginCardInput_prompt, *v.Prompt)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.QPluginCardInput_title, *v.Title)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.QPluginCardInput_type, string(v.Type))
+	}
+}
+func (v *QPluginCardInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QPluginCardInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QPluginCardInput_actionIdentifier:
+			v.ActionIdentifier = new(string)
+			return d.ReadString(schemas.QPluginCardInput_actionIdentifier, v.ActionIdentifier)
+		case schemas.QPluginCardInput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.QPluginCardInput_id, v.Id)
+		case schemas.QPluginCardInput_pluginId:
+			v.PluginId = new(string)
+			return d.ReadString(schemas.QPluginCardInput_pluginId, v.PluginId)
+		case schemas.QPluginCardInput_prompt:
+			v.Prompt = new(string)
+			return d.ReadString(schemas.QPluginCardInput_prompt, v.Prompt)
+		case schemas.QPluginCardInput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.QPluginCardInput_title, v.Title)
+		case schemas.QPluginCardInput_type:
+			var ev string
+			if err := d.ReadString(schemas.QPluginCardInput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CardType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A card in a Amazon Q App that generates a response based on the Amazon Q
@@ -859,6 +2020,74 @@ type QQueryCard struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QQueryCard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QQueryCard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QQueryCard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeFilter != nil {
+		s.WriteStruct(schemas.QQueryCard_attributeFilter)
+		v.AttributeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeDependencyList(s, schemas.QQueryCard_dependencies, v.Dependencies)
+	if v.Id != nil {
+		s.WriteString(schemas.QQueryCard_id, *v.Id)
+	}
+	serializeMemoryReferenceList(s, schemas.QQueryCard_memoryReferences, v.MemoryReferences)
+	if v.OutputSource != "" {
+		s.WriteString(schemas.QQueryCard_outputSource, string(v.OutputSource))
+	}
+	if v.Prompt != nil {
+		s.WriteString(schemas.QQueryCard_prompt, *v.Prompt)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.QQueryCard_title, *v.Title)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.QQueryCard_type, string(v.Type))
+	}
+}
+func (v *QQueryCard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QQueryCard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QQueryCard_attributeFilter:
+			v.AttributeFilter = &AttributeFilter{}
+			return v.AttributeFilter.Deserialize(d)
+		case schemas.QQueryCard_dependencies:
+			return deserializeDependencyList(d, schemas.QQueryCard_dependencies, &v.Dependencies)
+		case schemas.QQueryCard_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.QQueryCard_id, v.Id)
+		case schemas.QQueryCard_memoryReferences:
+			return deserializeMemoryReferenceList(d, schemas.QQueryCard_memoryReferences, &v.MemoryReferences)
+		case schemas.QQueryCard_outputSource:
+			var ev string
+			if err := d.ReadString(schemas.QQueryCard_outputSource, &ev); err != nil {
+				return err
+			}
+			v.OutputSource = CardOutputSource(ev)
+			return nil
+		case schemas.QQueryCard_prompt:
+			v.Prompt = new(string)
+			return d.ReadString(schemas.QQueryCard_prompt, v.Prompt)
+		case schemas.QQueryCard_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.QQueryCard_title, v.Title)
+		case schemas.QQueryCard_type:
+			var ev string
+			if err := d.ReadString(schemas.QQueryCard_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CardType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The input shape for defining a query card in an Amazon Q App.
 type QQueryCardInput struct {
 
@@ -891,6 +2120,68 @@ type QQueryCardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QQueryCardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QQueryCardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QQueryCardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttributeFilter != nil {
+		s.WriteStruct(schemas.QQueryCardInput_attributeFilter)
+		v.AttributeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.QQueryCardInput_id, *v.Id)
+	}
+	if v.OutputSource != "" {
+		s.WriteString(schemas.QQueryCardInput_outputSource, string(v.OutputSource))
+	}
+	if v.Prompt != nil {
+		s.WriteString(schemas.QQueryCardInput_prompt, *v.Prompt)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.QQueryCardInput_title, *v.Title)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.QQueryCardInput_type, string(v.Type))
+	}
+}
+func (v *QQueryCardInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QQueryCardInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QQueryCardInput_attributeFilter:
+			v.AttributeFilter = &AttributeFilter{}
+			return v.AttributeFilter.Deserialize(d)
+		case schemas.QQueryCardInput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.QQueryCardInput_id, v.Id)
+		case schemas.QQueryCardInput_outputSource:
+			var ev string
+			if err := d.ReadString(schemas.QQueryCardInput_outputSource, &ev); err != nil {
+				return err
+			}
+			v.OutputSource = CardOutputSource(ev)
+			return nil
+		case schemas.QQueryCardInput_prompt:
+			v.Prompt = new(string)
+			return d.ReadString(schemas.QQueryCardInput_prompt, v.Prompt)
+		case schemas.QQueryCardInput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.QQueryCardInput_title, v.Title)
+		case schemas.QQueryCardInput_type:
+			var ev string
+			if err := d.ReadString(schemas.QQueryCardInput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CardType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The sharing configuration of an Amazon Q App data collection session.
 type SessionSharingConfiguration struct {
 
@@ -909,6 +2200,40 @@ type SessionSharingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SessionSharingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionSharingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionSharingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptResponses != nil {
+		s.WriteBool(schemas.SessionSharingConfiguration_acceptResponses, *v.AcceptResponses)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.SessionSharingConfiguration_enabled, *v.Enabled)
+	}
+	if v.RevealCards != nil {
+		s.WriteBool(schemas.SessionSharingConfiguration_revealCards, *v.RevealCards)
+	}
+}
+func (v *SessionSharingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionSharingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionSharingConfiguration_acceptResponses:
+			v.AcceptResponses = new(bool)
+			return d.ReadBool(schemas.SessionSharingConfiguration_acceptResponses, v.AcceptResponses)
+		case schemas.SessionSharingConfiguration_enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.SessionSharingConfiguration_enabled, v.Enabled)
+		case schemas.SessionSharingConfiguration_revealCards:
+			v.RevealCards = new(bool)
+			return d.ReadBool(schemas.SessionSharingConfiguration_revealCards, v.RevealCards)
+		}
+		return nil
+	})
+}
+
 // A record created when a user submits a form card.
 type Submission struct {
 
@@ -922,6 +2247,44 @@ type Submission struct {
 	Value document.Interface
 
 	noSmithyDocumentSerde
+}
+
+func (v *Submission) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Submission)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Submission) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SubmissionId != nil {
+		s.WriteString(schemas.Submission_submissionId, *v.SubmissionId)
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.Submission_timestamp, *v.Timestamp)
+	}
+	s.WriteDocument(schemas.Submission_value, &smithydocument.Opaque{Value: v.Value})
+}
+func (v *Submission) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Submission, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Submission_submissionId:
+			v.SubmissionId = new(string)
+			return d.ReadString(schemas.Submission_submissionId, v.SubmissionId)
+		case schemas.Submission_timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.Submission_timestamp, v.Timestamp)
+		case schemas.Submission_value:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.Submission_value, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.Value = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
 }
 
 // Represents an action performed on a submission.
@@ -938,6 +2301,38 @@ type SubmissionMutation struct {
 	SubmissionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SubmissionMutation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubmissionMutation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubmissionMutation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MutationType != "" {
+		s.WriteString(schemas.SubmissionMutation_mutationType, string(v.MutationType))
+	}
+	if v.SubmissionId != nil {
+		s.WriteString(schemas.SubmissionMutation_submissionId, *v.SubmissionId)
+	}
+}
+func (v *SubmissionMutation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubmissionMutation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubmissionMutation_mutationType:
+			var ev string
+			if err := d.ReadString(schemas.SubmissionMutation_mutationType, &ev); err != nil {
+				return err
+			}
+			v.MutationType = SubmissionMutationKind(ev)
+			return nil
+		case schemas.SubmissionMutation_submissionId:
+			v.SubmissionId = new(string)
+			return d.ReadString(schemas.SubmissionMutation_submissionId, v.SubmissionId)
+		}
+		return nil
+	})
 }
 
 // A card in an Amazon Q App that allows the user to input text.
@@ -972,6 +2367,59 @@ type TextInputCard struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TextInputCard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextInputCard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextInputCard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.TextInputCard_defaultValue, *v.DefaultValue)
+	}
+	serializeDependencyList(s, schemas.TextInputCard_dependencies, v.Dependencies)
+	if v.Id != nil {
+		s.WriteString(schemas.TextInputCard_id, *v.Id)
+	}
+	if v.Placeholder != nil {
+		s.WriteString(schemas.TextInputCard_placeholder, *v.Placeholder)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.TextInputCard_title, *v.Title)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.TextInputCard_type, string(v.Type))
+	}
+}
+func (v *TextInputCard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextInputCard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextInputCard_defaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.TextInputCard_defaultValue, v.DefaultValue)
+		case schemas.TextInputCard_dependencies:
+			return deserializeDependencyList(d, schemas.TextInputCard_dependencies, &v.Dependencies)
+		case schemas.TextInputCard_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.TextInputCard_id, v.Id)
+		case schemas.TextInputCard_placeholder:
+			v.Placeholder = new(string)
+			return d.ReadString(schemas.TextInputCard_placeholder, v.Placeholder)
+		case schemas.TextInputCard_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.TextInputCard_title, v.Title)
+		case schemas.TextInputCard_type:
+			var ev string
+			if err := d.ReadString(schemas.TextInputCard_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CardType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The input shape for defining a text input card in an Amazon Q App.
 type TextInputCardInput struct {
 
@@ -999,6 +2447,56 @@ type TextInputCardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TextInputCardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TextInputCardInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TextInputCardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.TextInputCardInput_defaultValue, *v.DefaultValue)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.TextInputCardInput_id, *v.Id)
+	}
+	if v.Placeholder != nil {
+		s.WriteString(schemas.TextInputCardInput_placeholder, *v.Placeholder)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.TextInputCardInput_title, *v.Title)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.TextInputCardInput_type, string(v.Type))
+	}
+}
+func (v *TextInputCardInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TextInputCardInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TextInputCardInput_defaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.TextInputCardInput_defaultValue, v.DefaultValue)
+		case schemas.TextInputCardInput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.TextInputCardInput_id, v.Id)
+		case schemas.TextInputCardInput_placeholder:
+			v.Placeholder = new(string)
+			return d.ReadString(schemas.TextInputCardInput_placeholder, v.Placeholder)
+		case schemas.TextInputCardInput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.TextInputCardInput_title, v.Title)
+		case schemas.TextInputCardInput_type:
+			var ev string
+			if err := d.ReadString(schemas.TextInputCardInput_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CardType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A user of an Amazon Q App.
 type User struct {
 
@@ -1006,6 +2504,28 @@ type User struct {
 	UserId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *User) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.User)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.UserId != nil {
+		s.WriteString(schemas.User_userId, *v.UserId)
+	}
+}
+func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.User, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.User_userId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.User_userId, v.UserId)
+		}
+		return nil
+	})
 }
 
 // An Amazon Q App associated with a user, either owned by the user or favorited.
@@ -1044,6 +2564,69 @@ type UserAppItem struct {
 	Status *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UserAppItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserAppItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserAppItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.UserAppItem_appArn, *v.AppArn)
+	}
+	if v.AppId != nil {
+		s.WriteString(schemas.UserAppItem_appId, *v.AppId)
+	}
+	if v.CanEdit != nil {
+		s.WriteBool(schemas.UserAppItem_canEdit, *v.CanEdit)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.UserAppItem_createdAt, *v.CreatedAt)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UserAppItem_description, *v.Description)
+	}
+	if v.IsVerified != false {
+		s.WriteBool(schemas.UserAppItem_isVerified, v.IsVerified)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.UserAppItem_status, *v.Status)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.UserAppItem_title, *v.Title)
+	}
+}
+func (v *UserAppItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserAppItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserAppItem_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.UserAppItem_appArn, v.AppArn)
+		case schemas.UserAppItem_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.UserAppItem_appId, v.AppId)
+		case schemas.UserAppItem_canEdit:
+			v.CanEdit = new(bool)
+			return d.ReadBool(schemas.UserAppItem_canEdit, v.CanEdit)
+		case schemas.UserAppItem_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UserAppItem_createdAt, v.CreatedAt)
+		case schemas.UserAppItem_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UserAppItem_description, v.Description)
+		case schemas.UserAppItem_isVerified:
+			return d.ReadBool(schemas.UserAppItem_isVerified, &v.IsVerified)
+		case schemas.UserAppItem_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.UserAppItem_status, v.Status)
+		case schemas.UserAppItem_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.UserAppItem_title, v.Title)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

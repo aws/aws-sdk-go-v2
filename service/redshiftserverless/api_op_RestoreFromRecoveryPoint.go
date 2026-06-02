@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type RestoreFromRecoveryPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreFromRecoveryPointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreFromRecoveryPointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreFromRecoveryPointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.RestoreFromRecoveryPointRequest_namespaceName, *v.NamespaceName)
+	}
+	if v.RecoveryPointId != nil {
+		s.WriteString(schemas.RestoreFromRecoveryPointRequest_recoveryPointId, *v.RecoveryPointId)
+	}
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.RestoreFromRecoveryPointRequest_workgroupName, *v.WorkgroupName)
+	}
+}
+
 type RestoreFromRecoveryPointOutput struct {
 
 	// The namespace that data was restored into.
@@ -61,16 +81,27 @@ type RestoreFromRecoveryPointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreFromRecoveryPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreFromRecoveryPointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreFromRecoveryPointResponse_namespace:
+			v.Namespace = &types.Namespace{}
+			return v.Namespace.Deserialize(d)
+		case schemas.RestoreFromRecoveryPointResponse_recoveryPointId:
+			v.RecoveryPointId = new(string)
+			return d.ReadString(schemas.RestoreFromRecoveryPointResponse_recoveryPointId, v.RecoveryPointId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreFromRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRestoreFromRecoveryPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreFromRecoveryPoint, schemas.RestoreFromRecoveryPointRequest, schemas.RestoreFromRecoveryPointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRestoreFromRecoveryPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreFromRecoveryPoint, schemas.RestoreFromRecoveryPointRequest, schemas.RestoreFromRecoveryPointResponse), output: &RestoreFromRecoveryPointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RestoreFromRecoveryPoint"); err != nil {

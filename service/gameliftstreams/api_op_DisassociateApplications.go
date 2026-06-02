@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,6 +71,19 @@ type DisassociateApplicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateApplicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateApplicationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateApplicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentifiers(s, schemas.DisassociateApplicationsInput_ApplicationIdentifiers, v.ApplicationIdentifiers)
+	if v.Identifier != nil {
+		s.WriteString(schemas.DisassociateApplicationsInput_Identifier, *v.Identifier)
+	}
+}
+
 type DisassociateApplicationsOutput struct {
 
 	// A set of applications that are disassociated from this stream group.
@@ -91,16 +106,26 @@ type DisassociateApplicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateApplicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateApplicationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateApplicationsOutput_ApplicationArns:
+			return deserializeArnList(d, schemas.DisassociateApplicationsOutput_ApplicationArns, &v.ApplicationArns)
+		case schemas.DisassociateApplicationsOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DisassociateApplicationsOutput_Arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisassociateApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateApplications, schemas.DisassociateApplicationsInput, schemas.DisassociateApplicationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisassociateApplications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateApplications, schemas.DisassociateApplicationsInput, schemas.DisassociateApplicationsOutput), output: &DisassociateApplicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateApplications"); err != nil {

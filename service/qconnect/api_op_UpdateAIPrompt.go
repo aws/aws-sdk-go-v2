@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -72,6 +74,39 @@ type UpdateAIPromptInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAIPromptInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAIPromptRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAIPromptInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AiPromptId != nil {
+		s.WriteString(schemas.UpdateAIPromptRequest_aiPromptId, *v.AiPromptId)
+	}
+	if v.AssistantId != nil {
+		s.WriteString(schemas.UpdateAIPromptRequest_assistantId, *v.AssistantId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateAIPromptRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateAIPromptRequest_description, *v.Description)
+	}
+	if v.InferenceConfiguration != nil {
+		s.WriteStruct(schemas.UpdateAIPromptRequest_inferenceConfiguration)
+		v.InferenceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModelId != nil {
+		s.WriteString(schemas.UpdateAIPromptRequest_modelId, *v.ModelId)
+	}
+	serializeAIPromptTemplateConfiguration(s, schemas.UpdateAIPromptRequest_templateConfiguration, v.TemplateConfiguration)
+	if v.VisibilityStatus != "" {
+		s.WriteString(schemas.UpdateAIPromptRequest_visibilityStatus, string(v.VisibilityStatus))
+	}
+}
+
 type UpdateAIPromptOutput struct {
 
 	// The data of the updated Amazon Q in Connect AI Prompt.
@@ -83,16 +118,24 @@ type UpdateAIPromptOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAIPromptOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAIPromptResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAIPromptResponse_aiPrompt:
+			v.AiPrompt = &types.AIPromptData{}
+			return v.AiPrompt.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAIPromptMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAIPrompt{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAIPrompt, schemas.UpdateAIPromptRequest, schemas.UpdateAIPromptResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAIPrompt{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAIPrompt, schemas.UpdateAIPromptRequest, schemas.UpdateAIPromptResponse), output: &UpdateAIPromptOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAIPrompt"); err != nil {

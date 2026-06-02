@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,21 @@ type UpdateDataRetentionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataRetentionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataRetentionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataRetentionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionType != "" {
+		s.WriteString(schemas.UpdateDataRetentionRequest_actionType, string(v.ActionType))
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.UpdateDataRetentionRequest_networkId, *v.NetworkId)
+	}
+}
+
 type UpdateDataRetentionOutput struct {
 
 	// A message indicating the result of the update operation.
@@ -56,16 +73,24 @@ type UpdateDataRetentionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataRetentionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataRetentionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataRetentionResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UpdateDataRetentionResponse_message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataRetentionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataRetention{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataRetention, schemas.UpdateDataRetentionRequest, schemas.UpdateDataRetentionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataRetention{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataRetention, schemas.UpdateDataRetentionRequest, schemas.UpdateDataRetentionResponse), output: &UpdateDataRetentionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataRetention"); err != nil {

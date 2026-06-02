@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -46,6 +48,24 @@ type GetSubscriptionTargetInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSubscriptionTargetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSubscriptionTargetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSubscriptionTargetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetSubscriptionTargetInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EnvironmentIdentifier != nil {
+		s.WriteString(schemas.GetSubscriptionTargetInput_environmentIdentifier, *v.EnvironmentIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetSubscriptionTargetInput_identifier, *v.Identifier)
+	}
 }
 
 type GetSubscriptionTargetOutput struct {
@@ -129,16 +149,70 @@ type GetSubscriptionTargetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSubscriptionTargetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSubscriptionTargetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSubscriptionTargetOutput_applicableAssetTypes:
+			return deserializeApplicableAssetTypes(d, schemas.GetSubscriptionTargetOutput_applicableAssetTypes, &v.ApplicableAssetTypes)
+		case schemas.GetSubscriptionTargetOutput_authorizedPrincipals:
+			return deserializeAuthorizedPrincipalIdentifiers(d, schemas.GetSubscriptionTargetOutput_authorizedPrincipals, &v.AuthorizedPrincipals)
+		case schemas.GetSubscriptionTargetOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSubscriptionTargetOutput_createdAt, v.CreatedAt)
+		case schemas.GetSubscriptionTargetOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetSubscriptionTargetOutput_createdBy, v.CreatedBy)
+		case schemas.GetSubscriptionTargetOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetSubscriptionTargetOutput_domainId, v.DomainId)
+		case schemas.GetSubscriptionTargetOutput_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.GetSubscriptionTargetOutput_environmentId, v.EnvironmentId)
+		case schemas.GetSubscriptionTargetOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetSubscriptionTargetOutput_id, v.Id)
+		case schemas.GetSubscriptionTargetOutput_manageAccessRole:
+			v.ManageAccessRole = new(string)
+			return d.ReadString(schemas.GetSubscriptionTargetOutput_manageAccessRole, v.ManageAccessRole)
+		case schemas.GetSubscriptionTargetOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSubscriptionTargetOutput_name, v.Name)
+		case schemas.GetSubscriptionTargetOutput_projectId:
+			v.ProjectId = new(string)
+			return d.ReadString(schemas.GetSubscriptionTargetOutput_projectId, v.ProjectId)
+		case schemas.GetSubscriptionTargetOutput_provider:
+			v.Provider = new(string)
+			return d.ReadString(schemas.GetSubscriptionTargetOutput_provider, v.Provider)
+		case schemas.GetSubscriptionTargetOutput_subscriptionGrantCreationMode:
+			var ev string
+			if err := d.ReadString(schemas.GetSubscriptionTargetOutput_subscriptionGrantCreationMode, &ev); err != nil {
+				return err
+			}
+			v.SubscriptionGrantCreationMode = types.SubscriptionGrantCreationMode(ev)
+			return nil
+		case schemas.GetSubscriptionTargetOutput_subscriptionTargetConfig:
+			return deserializeSubscriptionTargetForms(d, schemas.GetSubscriptionTargetOutput_subscriptionTargetConfig, &v.SubscriptionTargetConfig)
+		case schemas.GetSubscriptionTargetOutput_type:
+			v.Type = new(string)
+			return d.ReadString(schemas.GetSubscriptionTargetOutput_type, v.Type)
+		case schemas.GetSubscriptionTargetOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSubscriptionTargetOutput_updatedAt, v.UpdatedAt)
+		case schemas.GetSubscriptionTargetOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetSubscriptionTargetOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSubscriptionTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSubscriptionTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscriptionTarget, schemas.GetSubscriptionTargetInput, schemas.GetSubscriptionTargetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSubscriptionTarget{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscriptionTarget, schemas.GetSubscriptionTargetInput, schemas.GetSubscriptionTargetOutput), output: &GetSubscriptionTargetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSubscriptionTarget"); err != nil {

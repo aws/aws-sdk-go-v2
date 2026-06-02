@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,26 @@ type SearchRasterDataCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchRasterDataCollectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchRasterDataCollectionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchRasterDataCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.SearchRasterDataCollectionInput_Arn, *v.Arn)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.SearchRasterDataCollectionInput_NextToken, *v.NextToken)
+	}
+	if v.RasterDataCollectionQuery != nil {
+		s.WriteStruct(schemas.SearchRasterDataCollectionInput_RasterDataCollectionQuery)
+		v.RasterDataCollectionQuery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SearchRasterDataCollectionOutput struct {
 
 	// Approximate number of results in the response.
@@ -72,16 +94,29 @@ type SearchRasterDataCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchRasterDataCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchRasterDataCollectionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchRasterDataCollectionOutput_ApproximateResultCount:
+			v.ApproximateResultCount = new(int32)
+			return d.ReadInt32(schemas.SearchRasterDataCollectionOutput_ApproximateResultCount, v.ApproximateResultCount)
+		case schemas.SearchRasterDataCollectionOutput_Items:
+			return deserializeItemSourceList(d, schemas.SearchRasterDataCollectionOutput_Items, &v.Items)
+		case schemas.SearchRasterDataCollectionOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.SearchRasterDataCollectionOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchRasterDataCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchRasterDataCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchRasterDataCollection, schemas.SearchRasterDataCollectionInput, schemas.SearchRasterDataCollectionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchRasterDataCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchRasterDataCollection, schemas.SearchRasterDataCollectionInput, schemas.SearchRasterDataCollectionOutput), output: &SearchRasterDataCollectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchRasterDataCollection"); err != nil {

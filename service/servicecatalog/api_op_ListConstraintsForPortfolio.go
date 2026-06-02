@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,30 @@ type ListConstraintsForPortfolioInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConstraintsForPortfolioInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConstraintsForPortfolioInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConstraintsForPortfolioInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.ListConstraintsForPortfolioInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.ListConstraintsForPortfolioInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.ListConstraintsForPortfolioInput_PageToken, *v.PageToken)
+	}
+	if v.PortfolioId != nil {
+		s.WriteString(schemas.ListConstraintsForPortfolioInput_PortfolioId, *v.PortfolioId)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.ListConstraintsForPortfolioInput_ProductId, *v.ProductId)
+	}
+}
+
 type ListConstraintsForPortfolioOutput struct {
 
 	// Information about the constraints.
@@ -69,16 +95,26 @@ type ListConstraintsForPortfolioOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConstraintsForPortfolioOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConstraintsForPortfolioOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConstraintsForPortfolioOutput_ConstraintDetails:
+			return deserializeConstraintDetails(d, schemas.ListConstraintsForPortfolioOutput_ConstraintDetails, &v.ConstraintDetails)
+		case schemas.ListConstraintsForPortfolioOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ListConstraintsForPortfolioOutput_NextPageToken, v.NextPageToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConstraintsForPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListConstraintsForPortfolio{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConstraintsForPortfolio, schemas.ListConstraintsForPortfolioInput, schemas.ListConstraintsForPortfolioOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListConstraintsForPortfolio{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConstraintsForPortfolio, schemas.ListConstraintsForPortfolioInput, schemas.ListConstraintsForPortfolioOutput), output: &ListConstraintsForPortfolioOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConstraintsForPortfolio"); err != nil {

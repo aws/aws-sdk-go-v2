@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,27 @@ type ImportBackendStorageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportBackendStorageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportBackendStorageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportBackendStorageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.ImportBackendStorageRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.ImportBackendStorageRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.BucketName != nil {
+		s.WriteString(schemas.ImportBackendStorageRequest_BucketName, *v.BucketName)
+	}
+	if v.ServiceName != "" {
+		s.WriteString(schemas.ImportBackendStorageRequest_ServiceName, string(v.ServiceName))
+	}
+}
+
 type ImportBackendStorageOutput struct {
 
 	// The app ID.
@@ -71,16 +94,33 @@ type ImportBackendStorageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportBackendStorageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportBackendStorageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportBackendStorageResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.ImportBackendStorageResponse_AppId, v.AppId)
+		case schemas.ImportBackendStorageResponse_BackendEnvironmentName:
+			v.BackendEnvironmentName = new(string)
+			return d.ReadString(schemas.ImportBackendStorageResponse_BackendEnvironmentName, v.BackendEnvironmentName)
+		case schemas.ImportBackendStorageResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.ImportBackendStorageResponse_JobId, v.JobId)
+		case schemas.ImportBackendStorageResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ImportBackendStorageResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationImportBackendStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpImportBackendStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportBackendStorage, schemas.ImportBackendStorageRequest, schemas.ImportBackendStorageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpImportBackendStorage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ImportBackendStorage, schemas.ImportBackendStorageRequest, schemas.ImportBackendStorageResponse), output: &ImportBackendStorageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ImportBackendStorage"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,28 @@ type DescribeSimulationInput struct {
 	Simulation *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeSimulationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSimulationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSimulationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Simulation != nil {
+		s.WriteString(schemas.DescribeSimulationInput_Simulation, *v.Simulation)
+	}
+}
+func (v *DescribeSimulationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSimulationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSimulationInput_Simulation:
+			v.Simulation = new(string)
+			return d.ReadString(schemas.DescribeSimulationInput_Simulation, v.Simulation)
+		}
+		return nil
+	})
 }
 
 type DescribeSimulationOutput struct {
@@ -117,16 +141,135 @@ type DescribeSimulationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSimulationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSimulationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSimulationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DescribeSimulationOutput_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeSimulationOutput_CreationTime, *v.CreationTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeSimulationOutput_Description, *v.Description)
+	}
+	if v.ExecutionId != nil {
+		s.WriteString(schemas.DescribeSimulationOutput_ExecutionId, *v.ExecutionId)
+	}
+	if v.LiveSimulationState != nil {
+		s.WriteStruct(schemas.DescribeSimulationOutput_LiveSimulationState)
+		v.LiveSimulationState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.DescribeSimulationOutput_LoggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaximumDuration != nil {
+		s.WriteString(schemas.DescribeSimulationOutput_MaximumDuration, *v.MaximumDuration)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeSimulationOutput_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.DescribeSimulationOutput_RoleArn, *v.RoleArn)
+	}
+	if v.SchemaError != nil {
+		s.WriteString(schemas.DescribeSimulationOutput_SchemaError, *v.SchemaError)
+	}
+	if v.SchemaS3Location != nil {
+		s.WriteStruct(schemas.DescribeSimulationOutput_SchemaS3Location)
+		v.SchemaS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SnapshotS3Location != nil {
+		s.WriteStruct(schemas.DescribeSimulationOutput_SnapshotS3Location)
+		v.SnapshotS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StartError != nil {
+		s.WriteString(schemas.DescribeSimulationOutput_StartError, *v.StartError)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DescribeSimulationOutput_Status, string(v.Status))
+	}
+	if v.TargetStatus != "" {
+		s.WriteString(schemas.DescribeSimulationOutput_TargetStatus, string(v.TargetStatus))
+	}
+}
+func (v *DescribeSimulationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSimulationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSimulationOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DescribeSimulationOutput_Arn, v.Arn)
+		case schemas.DescribeSimulationOutput_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeSimulationOutput_CreationTime, v.CreationTime)
+		case schemas.DescribeSimulationOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeSimulationOutput_Description, v.Description)
+		case schemas.DescribeSimulationOutput_ExecutionId:
+			v.ExecutionId = new(string)
+			return d.ReadString(schemas.DescribeSimulationOutput_ExecutionId, v.ExecutionId)
+		case schemas.DescribeSimulationOutput_LiveSimulationState:
+			v.LiveSimulationState = &types.LiveSimulationState{}
+			return v.LiveSimulationState.Deserialize(d)
+		case schemas.DescribeSimulationOutput_LoggingConfiguration:
+			v.LoggingConfiguration = &types.LoggingConfiguration{}
+			return v.LoggingConfiguration.Deserialize(d)
+		case schemas.DescribeSimulationOutput_MaximumDuration:
+			v.MaximumDuration = new(string)
+			return d.ReadString(schemas.DescribeSimulationOutput_MaximumDuration, v.MaximumDuration)
+		case schemas.DescribeSimulationOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeSimulationOutput_Name, v.Name)
+		case schemas.DescribeSimulationOutput_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeSimulationOutput_RoleArn, v.RoleArn)
+		case schemas.DescribeSimulationOutput_SchemaError:
+			v.SchemaError = new(string)
+			return d.ReadString(schemas.DescribeSimulationOutput_SchemaError, v.SchemaError)
+		case schemas.DescribeSimulationOutput_SchemaS3Location:
+			v.SchemaS3Location = &types.S3Location{}
+			return v.SchemaS3Location.Deserialize(d)
+		case schemas.DescribeSimulationOutput_SnapshotS3Location:
+			v.SnapshotS3Location = &types.S3Location{}
+			return v.SnapshotS3Location.Deserialize(d)
+		case schemas.DescribeSimulationOutput_StartError:
+			v.StartError = new(string)
+			return d.ReadString(schemas.DescribeSimulationOutput_StartError, v.StartError)
+		case schemas.DescribeSimulationOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeSimulationOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SimulationStatus(ev)
+			return nil
+		case schemas.DescribeSimulationOutput_TargetStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeSimulationOutput_TargetStatus, &ev); err != nil {
+				return err
+			}
+			v.TargetStatus = types.SimulationTargetStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSimulationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSimulation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSimulation, schemas.DescribeSimulationInput, schemas.DescribeSimulationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSimulation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSimulation, schemas.DescribeSimulationInput, schemas.DescribeSimulationOutput), output: &DescribeSimulationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSimulation"); err != nil {

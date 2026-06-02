@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,21 @@ type ApplySchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplySchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplySchemaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplySchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.ApplySchemaRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.PublishedSchemaArn != nil {
+		s.WriteString(schemas.ApplySchemaRequest_PublishedSchemaArn, *v.PublishedSchemaArn)
+	}
+}
+
 type ApplySchemaOutput struct {
 
 	// The applied schema ARN that is associated with the copied schema in the Directory. You
@@ -60,16 +77,27 @@ type ApplySchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplySchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplySchemaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplySchemaResponse_AppliedSchemaArn:
+			v.AppliedSchemaArn = new(string)
+			return d.ReadString(schemas.ApplySchemaResponse_AppliedSchemaArn, v.AppliedSchemaArn)
+		case schemas.ApplySchemaResponse_DirectoryArn:
+			v.DirectoryArn = new(string)
+			return d.ReadString(schemas.ApplySchemaResponse_DirectoryArn, v.DirectoryArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationApplySchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpApplySchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApplySchema, schemas.ApplySchemaRequest, schemas.ApplySchemaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpApplySchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ApplySchema, schemas.ApplySchemaRequest, schemas.ApplySchemaResponse), output: &ApplySchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ApplySchema"); err != nil {

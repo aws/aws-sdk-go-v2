@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -46,6 +48,24 @@ type GetWorkflowInput struct {
 	SpaceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetWorkflowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkflowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkflowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetWorkflowRequest_id, *v.Id)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.GetWorkflowRequest_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.GetWorkflowRequest_spaceName, *v.SpaceName)
+	}
 }
 
 type GetWorkflowOutput struct {
@@ -116,16 +136,62 @@ type GetWorkflowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkflowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkflowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkflowResponse_createdTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetWorkflowResponse_createdTime, v.CreatedTime)
+		case schemas.GetWorkflowResponse_definition:
+			v.Definition = &types.WorkflowDefinition{}
+			return v.Definition.Deserialize(d)
+		case schemas.GetWorkflowResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_id, v.Id)
+		case schemas.GetWorkflowResponse_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetWorkflowResponse_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.GetWorkflowResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_name, v.Name)
+		case schemas.GetWorkflowResponse_projectName:
+			v.ProjectName = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_projectName, v.ProjectName)
+		case schemas.GetWorkflowResponse_runMode:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowResponse_runMode, &ev); err != nil {
+				return err
+			}
+			v.RunMode = types.WorkflowRunMode(ev)
+			return nil
+		case schemas.GetWorkflowResponse_sourceBranchName:
+			v.SourceBranchName = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_sourceBranchName, v.SourceBranchName)
+		case schemas.GetWorkflowResponse_sourceRepositoryName:
+			v.SourceRepositoryName = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_sourceRepositoryName, v.SourceRepositoryName)
+		case schemas.GetWorkflowResponse_spaceName:
+			v.SpaceName = new(string)
+			return d.ReadString(schemas.GetWorkflowResponse_spaceName, v.SpaceName)
+		case schemas.GetWorkflowResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetWorkflowResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.WorkflowStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflow, schemas.GetWorkflowRequest, schemas.GetWorkflowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkflow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkflow, schemas.GetWorkflowRequest, schemas.GetWorkflowResponse), output: &GetWorkflowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWorkflow"); err != nil {

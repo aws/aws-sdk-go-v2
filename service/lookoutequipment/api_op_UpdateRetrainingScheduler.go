@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -67,6 +69,30 @@ type UpdateRetrainingSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRetrainingSchedulerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRetrainingSchedulerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRetrainingSchedulerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LookbackWindow != nil {
+		s.WriteString(schemas.UpdateRetrainingSchedulerRequest_LookbackWindow, *v.LookbackWindow)
+	}
+	if v.ModelName != nil {
+		s.WriteString(schemas.UpdateRetrainingSchedulerRequest_ModelName, *v.ModelName)
+	}
+	if v.PromoteMode != "" {
+		s.WriteString(schemas.UpdateRetrainingSchedulerRequest_PromoteMode, string(v.PromoteMode))
+	}
+	if v.RetrainingFrequency != nil {
+		s.WriteString(schemas.UpdateRetrainingSchedulerRequest_RetrainingFrequency, *v.RetrainingFrequency)
+	}
+	if v.RetrainingStartDate != nil {
+		s.WriteTime(schemas.UpdateRetrainingSchedulerRequest_RetrainingStartDate, *v.RetrainingStartDate)
+	}
+}
+
 type UpdateRetrainingSchedulerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,16 +100,29 @@ type UpdateRetrainingSchedulerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRetrainingSchedulerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRetrainingSchedulerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateRetrainingSchedulerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRetrainingSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateRetrainingScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRetrainingScheduler, schemas.UpdateRetrainingSchedulerRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateRetrainingScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRetrainingScheduler, schemas.UpdateRetrainingSchedulerRequest, nil), output: &UpdateRetrainingSchedulerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRetrainingScheduler"); err != nil {

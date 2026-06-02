@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,18 @@ type DescribeAttachmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAttachmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAttachmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAttachmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.DescribeAttachmentRequest_attachmentId, *v.AttachmentId)
+	}
+}
+
 // The content and file name of the attachment returned by the DescribeAttachment operation.
 type DescribeAttachmentOutput struct {
 
@@ -68,16 +82,24 @@ type DescribeAttachmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAttachmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAttachmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAttachmentResponse_attachment:
+			v.Attachment = &types.Attachment{}
+			return v.Attachment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAttachment, schemas.DescribeAttachmentRequest, schemas.DescribeAttachmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeAttachment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAttachment, schemas.DescribeAttachmentRequest, schemas.DescribeAttachmentResponse), output: &DescribeAttachmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAttachment"); err != nil {

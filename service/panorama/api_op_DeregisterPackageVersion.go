@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,52 @@ type DeregisterPackageVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterPackageVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterPackageVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterPackageVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.DeregisterPackageVersionRequest_OwnerAccount, *v.OwnerAccount)
+	}
+	if v.PackageId != nil {
+		s.WriteString(schemas.DeregisterPackageVersionRequest_PackageId, *v.PackageId)
+	}
+	if v.PackageVersion != nil {
+		s.WriteString(schemas.DeregisterPackageVersionRequest_PackageVersion, *v.PackageVersion)
+	}
+	if v.PatchVersion != nil {
+		s.WriteString(schemas.DeregisterPackageVersionRequest_PatchVersion, *v.PatchVersion)
+	}
+	if v.UpdatedLatestPatchVersion != nil {
+		s.WriteString(schemas.DeregisterPackageVersionRequest_UpdatedLatestPatchVersion, *v.UpdatedLatestPatchVersion)
+	}
+}
+func (v *DeregisterPackageVersionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterPackageVersionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterPackageVersionRequest_OwnerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.DeregisterPackageVersionRequest_OwnerAccount, v.OwnerAccount)
+		case schemas.DeregisterPackageVersionRequest_PackageId:
+			v.PackageId = new(string)
+			return d.ReadString(schemas.DeregisterPackageVersionRequest_PackageId, v.PackageId)
+		case schemas.DeregisterPackageVersionRequest_PackageVersion:
+			v.PackageVersion = new(string)
+			return d.ReadString(schemas.DeregisterPackageVersionRequest_PackageVersion, v.PackageVersion)
+		case schemas.DeregisterPackageVersionRequest_PatchVersion:
+			v.PatchVersion = new(string)
+			return d.ReadString(schemas.DeregisterPackageVersionRequest_PatchVersion, v.PatchVersion)
+		case schemas.DeregisterPackageVersionRequest_UpdatedLatestPatchVersion:
+			v.UpdatedLatestPatchVersion = new(string)
+			return d.ReadString(schemas.DeregisterPackageVersionRequest_UpdatedLatestPatchVersion, v.UpdatedLatestPatchVersion)
+		}
+		return nil
+	})
+}
+
 type DeregisterPackageVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -59,16 +107,29 @@ type DeregisterPackageVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterPackageVersionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterPackageVersionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterPackageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeregisterPackageVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterPackageVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterPackageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterPackageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterPackageVersion, schemas.DeregisterPackageVersionRequest, schemas.DeregisterPackageVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterPackageVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterPackageVersion, schemas.DeregisterPackageVersionRequest, schemas.DeregisterPackageVersionResponse), output: &DeregisterPackageVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeregisterPackageVersion"); err != nil {

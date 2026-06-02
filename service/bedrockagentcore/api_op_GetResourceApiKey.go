@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type GetResourceApiKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceApiKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceApiKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceApiKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceCredentialProviderName != nil {
+		s.WriteString(schemas.GetResourceApiKeyRequest_resourceCredentialProviderName, *v.ResourceCredentialProviderName)
+	}
+	if v.WorkloadIdentityToken != nil {
+		s.WriteString(schemas.GetResourceApiKeyRequest_workloadIdentityToken, *v.WorkloadIdentityToken)
+	}
+}
+
 type GetResourceApiKeyOutput struct {
 
 	// The API key associated with the resource requested.
@@ -55,16 +72,24 @@ type GetResourceApiKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceApiKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceApiKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceApiKeyResponse_apiKey:
+			v.ApiKey = new(string)
+			return d.ReadString(schemas.GetResourceApiKeyResponse_apiKey, v.ApiKey)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceApiKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceApiKey, schemas.GetResourceApiKeyRequest, schemas.GetResourceApiKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceApiKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceApiKey, schemas.GetResourceApiKeyRequest, schemas.GetResourceApiKeyResponse), output: &GetResourceApiKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourceApiKey"); err != nil {

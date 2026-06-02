@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +43,21 @@ type GetPaymentConnectorInput struct {
 	PaymentManagerId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPaymentConnectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPaymentConnectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPaymentConnectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PaymentConnectorId != nil {
+		s.WriteString(schemas.GetPaymentConnectorRequest_paymentConnectorId, *v.PaymentConnectorId)
+	}
+	if v.PaymentManagerId != nil {
+		s.WriteString(schemas.GetPaymentConnectorRequest_paymentManagerId, *v.PaymentManagerId)
+	}
 }
 
 type GetPaymentConnectorOutput struct {
@@ -91,16 +108,52 @@ type GetPaymentConnectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPaymentConnectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPaymentConnectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPaymentConnectorResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPaymentConnectorResponse_createdAt, v.CreatedAt)
+		case schemas.GetPaymentConnectorResponse_credentialProviderConfigurations:
+			return deserializeCredentialsProviderConfigurations(d, schemas.GetPaymentConnectorResponse_credentialProviderConfigurations, &v.CredentialProviderConfigurations)
+		case schemas.GetPaymentConnectorResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetPaymentConnectorResponse_description, v.Description)
+		case schemas.GetPaymentConnectorResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPaymentConnectorResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetPaymentConnectorResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetPaymentConnectorResponse_name, v.Name)
+		case schemas.GetPaymentConnectorResponse_paymentConnectorId:
+			v.PaymentConnectorId = new(string)
+			return d.ReadString(schemas.GetPaymentConnectorResponse_paymentConnectorId, v.PaymentConnectorId)
+		case schemas.GetPaymentConnectorResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetPaymentConnectorResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.PaymentConnectorStatus(ev)
+			return nil
+		case schemas.GetPaymentConnectorResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.GetPaymentConnectorResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.PaymentConnectorType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPaymentConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPaymentConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPaymentConnector, schemas.GetPaymentConnectorRequest, schemas.GetPaymentConnectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPaymentConnector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPaymentConnector, schemas.GetPaymentConnectorRequest, schemas.GetPaymentConnectorResponse), output: &GetPaymentConnectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPaymentConnector"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,21 @@ type StartUserAccessTasksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartUserAccessTasksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartUserAccessTasksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartUserAccessTasksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppBundleIdentifier != nil {
+		s.WriteString(schemas.StartUserAccessTasksRequest_appBundleIdentifier, *v.AppBundleIdentifier)
+	}
+	if v.Email != nil {
+		s.WriteString(schemas.StartUserAccessTasksRequest_email, *v.Email)
+	}
+}
+
 type StartUserAccessTasksOutput struct {
 
 	// Contains a list of user access task information.
@@ -57,16 +74,23 @@ type StartUserAccessTasksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartUserAccessTasksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartUserAccessTasksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartUserAccessTasksResponse_userAccessTasksList:
+			return deserializeUserAccessTasksList(d, schemas.StartUserAccessTasksResponse_userAccessTasksList, &v.UserAccessTasksList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartUserAccessTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartUserAccessTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartUserAccessTasks, schemas.StartUserAccessTasksRequest, schemas.StartUserAccessTasksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartUserAccessTasks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartUserAccessTasks, schemas.StartUserAccessTasksRequest, schemas.StartUserAccessTasksResponse), output: &StartUserAccessTasksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartUserAccessTasks"); err != nil {

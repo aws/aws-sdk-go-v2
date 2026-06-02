@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,15 @@ type GetOciOnboardingStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOciOnboardingStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetOciOnboardingStatusInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetOciOnboardingStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetOciOnboardingStatusOutput struct {
 
 	// The existing OCI tenancy activation link for your Amazon Web Services account.
@@ -53,16 +64,37 @@ type GetOciOnboardingStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetOciOnboardingStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetOciOnboardingStatusOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetOciOnboardingStatusOutput_existingTenancyActivationLink:
+			v.ExistingTenancyActivationLink = new(string)
+			return d.ReadString(schemas.GetOciOnboardingStatusOutput_existingTenancyActivationLink, v.ExistingTenancyActivationLink)
+		case schemas.GetOciOnboardingStatusOutput_newTenancyActivationLink:
+			v.NewTenancyActivationLink = new(string)
+			return d.ReadString(schemas.GetOciOnboardingStatusOutput_newTenancyActivationLink, v.NewTenancyActivationLink)
+		case schemas.GetOciOnboardingStatusOutput_ociIdentityDomain:
+			v.OciIdentityDomain = &types.OciIdentityDomain{}
+			return v.OciIdentityDomain.Deserialize(d)
+		case schemas.GetOciOnboardingStatusOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetOciOnboardingStatusOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.OciOnboardingStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetOciOnboardingStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetOciOnboardingStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOciOnboardingStatus, schemas.GetOciOnboardingStatusInput, schemas.GetOciOnboardingStatusOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetOciOnboardingStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetOciOnboardingStatus, schemas.GetOciOnboardingStatusInput, schemas.GetOciOnboardingStatusOutput), output: &GetOciOnboardingStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetOciOnboardingStatus"); err != nil {

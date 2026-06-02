@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -89,6 +91,67 @@ type UpdateAppMonitorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppMonitorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppMonitorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppMonitorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppMonitorConfiguration != nil {
+		s.WriteStruct(schemas.UpdateAppMonitorRequest_AppMonitorConfiguration)
+		v.AppMonitorConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CustomEvents != nil {
+		s.WriteStruct(schemas.UpdateAppMonitorRequest_CustomEvents)
+		v.CustomEvents.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CwLogEnabled != nil {
+		s.WriteBool(schemas.UpdateAppMonitorRequest_CwLogEnabled, *v.CwLogEnabled)
+	}
+	if v.DeobfuscationConfiguration != nil {
+		s.WriteStruct(schemas.UpdateAppMonitorRequest_DeobfuscationConfiguration)
+		v.DeobfuscationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.UpdateAppMonitorRequest_Domain, *v.Domain)
+	}
+	serializeAppMonitorDomainList(s, schemas.UpdateAppMonitorRequest_DomainList, v.DomainList)
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateAppMonitorRequest_Name, *v.Name)
+	}
+}
+func (v *UpdateAppMonitorInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppMonitorRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAppMonitorRequest_AppMonitorConfiguration:
+			v.AppMonitorConfiguration = &types.AppMonitorConfiguration{}
+			return v.AppMonitorConfiguration.Deserialize(d)
+		case schemas.UpdateAppMonitorRequest_CustomEvents:
+			v.CustomEvents = &types.CustomEvents{}
+			return v.CustomEvents.Deserialize(d)
+		case schemas.UpdateAppMonitorRequest_CwLogEnabled:
+			v.CwLogEnabled = new(bool)
+			return d.ReadBool(schemas.UpdateAppMonitorRequest_CwLogEnabled, v.CwLogEnabled)
+		case schemas.UpdateAppMonitorRequest_DeobfuscationConfiguration:
+			v.DeobfuscationConfiguration = &types.DeobfuscationConfiguration{}
+			return v.DeobfuscationConfiguration.Deserialize(d)
+		case schemas.UpdateAppMonitorRequest_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.UpdateAppMonitorRequest_Domain, v.Domain)
+		case schemas.UpdateAppMonitorRequest_DomainList:
+			return deserializeAppMonitorDomainList(d, schemas.UpdateAppMonitorRequest_DomainList, &v.DomainList)
+		case schemas.UpdateAppMonitorRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateAppMonitorRequest_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 type UpdateAppMonitorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -96,16 +159,29 @@ type UpdateAppMonitorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAppMonitorOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAppMonitorResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAppMonitorOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateAppMonitorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAppMonitorResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateAppMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateAppMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppMonitor, schemas.UpdateAppMonitorRequest, schemas.UpdateAppMonitorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateAppMonitor{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateAppMonitor, schemas.UpdateAppMonitorRequest, schemas.UpdateAppMonitorResponse), output: &UpdateAppMonitorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateAppMonitor"); err != nil {

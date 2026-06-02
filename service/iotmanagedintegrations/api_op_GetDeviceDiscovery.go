@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type GetDeviceDiscoveryInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDeviceDiscoveryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeviceDiscoveryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeviceDiscoveryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetDeviceDiscoveryRequest_Identifier, *v.Identifier)
+	}
 }
 
 type GetDeviceDiscoveryOutput struct {
@@ -91,16 +105,58 @@ type GetDeviceDiscoveryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeviceDiscoveryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeviceDiscoveryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeviceDiscoveryResponse_AccountAssociationId:
+			v.AccountAssociationId = new(string)
+			return d.ReadString(schemas.GetDeviceDiscoveryResponse_AccountAssociationId, v.AccountAssociationId)
+		case schemas.GetDeviceDiscoveryResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetDeviceDiscoveryResponse_Arn, v.Arn)
+		case schemas.GetDeviceDiscoveryResponse_ConnectorAssociationId:
+			v.ConnectorAssociationId = new(string)
+			return d.ReadString(schemas.GetDeviceDiscoveryResponse_ConnectorAssociationId, v.ConnectorAssociationId)
+		case schemas.GetDeviceDiscoveryResponse_ControllerId:
+			v.ControllerId = new(string)
+			return d.ReadString(schemas.GetDeviceDiscoveryResponse_ControllerId, v.ControllerId)
+		case schemas.GetDeviceDiscoveryResponse_DiscoveryType:
+			var ev string
+			if err := d.ReadString(schemas.GetDeviceDiscoveryResponse_DiscoveryType, &ev); err != nil {
+				return err
+			}
+			v.DiscoveryType = types.DiscoveryType(ev)
+			return nil
+		case schemas.GetDeviceDiscoveryResponse_FinishedAt:
+			v.FinishedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDeviceDiscoveryResponse_FinishedAt, v.FinishedAt)
+		case schemas.GetDeviceDiscoveryResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetDeviceDiscoveryResponse_Id, v.Id)
+		case schemas.GetDeviceDiscoveryResponse_StartedAt:
+			v.StartedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDeviceDiscoveryResponse_StartedAt, v.StartedAt)
+		case schemas.GetDeviceDiscoveryResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetDeviceDiscoveryResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DeviceDiscoveryStatus(ev)
+			return nil
+		case schemas.GetDeviceDiscoveryResponse_Tags:
+			return deserializeTagsMap(d, schemas.GetDeviceDiscoveryResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeviceDiscoveryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeviceDiscovery{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceDiscovery, schemas.GetDeviceDiscoveryRequest, schemas.GetDeviceDiscoveryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeviceDiscovery{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeviceDiscovery, schemas.GetDeviceDiscoveryRequest, schemas.GetDeviceDiscoveryResponse), output: &GetDeviceDiscoveryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDeviceDiscovery"); err != nil {

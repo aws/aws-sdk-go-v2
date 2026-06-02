@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -103,6 +105,54 @@ type ChatSyncInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChatSyncInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ChatSyncInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ChatSyncInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActionExecution != nil {
+		s.WriteStruct(schemas.ChatSyncInput_actionExecution)
+		v.ActionExecution.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ChatSyncInput_applicationId, *v.ApplicationId)
+	}
+	serializeAttachmentsInput(s, schemas.ChatSyncInput_attachments, v.Attachments)
+	if v.AttributeFilter != nil {
+		s.WriteStruct(schemas.ChatSyncInput_attributeFilter)
+		v.AttributeFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthChallengeResponse != nil {
+		s.WriteStruct(schemas.ChatSyncInput_authChallengeResponse)
+		v.AuthChallengeResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ChatMode != "" {
+		s.WriteString(schemas.ChatSyncInput_chatMode, string(v.ChatMode))
+	}
+	serializeChatModeConfiguration(s, schemas.ChatSyncInput_chatModeConfiguration, v.ChatModeConfiguration)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ChatSyncInput_clientToken, *v.ClientToken)
+	}
+	if v.ConversationId != nil {
+		s.WriteString(schemas.ChatSyncInput_conversationId, *v.ConversationId)
+	}
+	if v.ParentMessageId != nil {
+		s.WriteString(schemas.ChatSyncInput_parentMessageId, *v.ParentMessageId)
+	}
+	serializeUserGroups(s, schemas.ChatSyncInput_userGroups, v.UserGroups)
+	if v.UserId != nil {
+		s.WriteString(schemas.ChatSyncInput_userId, *v.UserId)
+	}
+	if v.UserMessage != nil {
+		s.WriteString(schemas.ChatSyncInput_userMessage, *v.UserMessage)
+	}
+}
+
 type ChatSyncOutput struct {
 
 	// A request from Amazon Q Business to the end user for information Amazon Q
@@ -139,16 +189,43 @@ type ChatSyncOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ChatSyncOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ChatSyncOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ChatSyncOutput_actionReview:
+			v.ActionReview = &types.ActionReview{}
+			return v.ActionReview.Deserialize(d)
+		case schemas.ChatSyncOutput_authChallengeRequest:
+			v.AuthChallengeRequest = &types.AuthChallengeRequest{}
+			return v.AuthChallengeRequest.Deserialize(d)
+		case schemas.ChatSyncOutput_conversationId:
+			v.ConversationId = new(string)
+			return d.ReadString(schemas.ChatSyncOutput_conversationId, v.ConversationId)
+		case schemas.ChatSyncOutput_failedAttachments:
+			return deserializeAttachmentsOutput(d, schemas.ChatSyncOutput_failedAttachments, &v.FailedAttachments)
+		case schemas.ChatSyncOutput_sourceAttributions:
+			return deserializeSourceAttributions(d, schemas.ChatSyncOutput_sourceAttributions, &v.SourceAttributions)
+		case schemas.ChatSyncOutput_systemMessage:
+			v.SystemMessage = new(string)
+			return d.ReadString(schemas.ChatSyncOutput_systemMessage, v.SystemMessage)
+		case schemas.ChatSyncOutput_systemMessageId:
+			v.SystemMessageId = new(string)
+			return d.ReadString(schemas.ChatSyncOutput_systemMessageId, v.SystemMessageId)
+		case schemas.ChatSyncOutput_userMessageId:
+			v.UserMessageId = new(string)
+			return d.ReadString(schemas.ChatSyncOutput_userMessageId, v.UserMessageId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationChatSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpChatSync{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ChatSync, schemas.ChatSyncInput, schemas.ChatSyncOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpChatSync{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ChatSync, schemas.ChatSyncInput, schemas.ChatSyncOutput), output: &ChatSyncOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ChatSync"); err != nil {

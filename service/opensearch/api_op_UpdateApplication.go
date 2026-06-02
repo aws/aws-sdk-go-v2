@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -44,6 +46,20 @@ type UpdateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAppConfigs(s, schemas.UpdateApplicationRequest_appConfigs, v.AppConfigs)
+	serializeDataSources(s, schemas.UpdateApplicationRequest_dataSources, v.DataSources)
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateApplicationRequest_id, *v.Id)
+	}
+}
+
 type UpdateApplicationOutput struct {
 
 	// The configuration settings for the updated OpenSearch application.
@@ -79,16 +95,43 @@ type UpdateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApplicationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApplicationResponse_appConfigs:
+			return deserializeAppConfigs(d, schemas.UpdateApplicationResponse_appConfigs, &v.AppConfigs)
+		case schemas.UpdateApplicationResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateApplicationResponse_arn, v.Arn)
+		case schemas.UpdateApplicationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateApplicationResponse_createdAt, v.CreatedAt)
+		case schemas.UpdateApplicationResponse_dataSources:
+			return deserializeDataSources(d, schemas.UpdateApplicationResponse_dataSources, &v.DataSources)
+		case schemas.UpdateApplicationResponse_iamIdentityCenterOptions:
+			v.IamIdentityCenterOptions = &types.IamIdentityCenterOptions{}
+			return v.IamIdentityCenterOptions.Deserialize(d)
+		case schemas.UpdateApplicationResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateApplicationResponse_id, v.Id)
+		case schemas.UpdateApplicationResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateApplicationResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.UpdateApplicationResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateApplicationResponse_name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationRequest, schemas.UpdateApplicationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplication, schemas.UpdateApplicationRequest, schemas.UpdateApplicationResponse), output: &UpdateApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateApplication"); err != nil {

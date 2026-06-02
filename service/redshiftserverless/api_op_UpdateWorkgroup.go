@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -115,6 +117,50 @@ type UpdateWorkgroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkgroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWorkgroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWorkgroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseCapacity != nil {
+		s.WriteInt32(schemas.UpdateWorkgroupRequest_baseCapacity, *v.BaseCapacity)
+	}
+	serializeConfigParameterList(s, schemas.UpdateWorkgroupRequest_configParameters, v.ConfigParameters)
+	if v.EnhancedVpcRouting != nil {
+		s.WriteBool(schemas.UpdateWorkgroupRequest_enhancedVpcRouting, *v.EnhancedVpcRouting)
+	}
+	if v.ExtraComputeForAutomaticOptimization != nil {
+		s.WriteBool(schemas.UpdateWorkgroupRequest_extraComputeForAutomaticOptimization, *v.ExtraComputeForAutomaticOptimization)
+	}
+	if v.IpAddressType != nil {
+		s.WriteString(schemas.UpdateWorkgroupRequest_ipAddressType, *v.IpAddressType)
+	}
+	if v.MaxCapacity != nil {
+		s.WriteInt32(schemas.UpdateWorkgroupRequest_maxCapacity, *v.MaxCapacity)
+	}
+	if v.Port != nil {
+		s.WriteInt32(schemas.UpdateWorkgroupRequest_port, *v.Port)
+	}
+	if v.PricePerformanceTarget != nil {
+		s.WriteStruct(schemas.UpdateWorkgroupRequest_pricePerformanceTarget)
+		v.PricePerformanceTarget.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PubliclyAccessible != nil {
+		s.WriteBool(schemas.UpdateWorkgroupRequest_publiclyAccessible, *v.PubliclyAccessible)
+	}
+	serializeSecurityGroupIdList(s, schemas.UpdateWorkgroupRequest_securityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIdList(s, schemas.UpdateWorkgroupRequest_subnetIds, v.SubnetIds)
+	if v.TrackName != nil {
+		s.WriteString(schemas.UpdateWorkgroupRequest_trackName, *v.TrackName)
+	}
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.UpdateWorkgroupRequest_workgroupName, *v.WorkgroupName)
+	}
+}
+
 type UpdateWorkgroupOutput struct {
 
 	// The updated workgroup object.
@@ -128,16 +174,24 @@ type UpdateWorkgroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWorkgroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWorkgroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWorkgroupResponse_workgroup:
+			v.Workgroup = &types.Workgroup{}
+			return v.Workgroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateWorkgroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateWorkgroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkgroup, schemas.UpdateWorkgroupRequest, schemas.UpdateWorkgroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateWorkgroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateWorkgroup, schemas.UpdateWorkgroupRequest, schemas.UpdateWorkgroupResponse), output: &UpdateWorkgroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateWorkgroup"); err != nil {

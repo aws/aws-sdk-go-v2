@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,24 @@ type GetServiceQuotaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceQuotaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceQuotaRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceQuotaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContextId != nil {
+		s.WriteString(schemas.GetServiceQuotaRequest_ContextId, *v.ContextId)
+	}
+	if v.QuotaCode != nil {
+		s.WriteString(schemas.GetServiceQuotaRequest_QuotaCode, *v.QuotaCode)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.GetServiceQuotaRequest_ServiceCode, *v.ServiceCode)
+	}
+}
+
 type GetServiceQuotaOutput struct {
 
 	// Information about the quota.
@@ -62,16 +82,24 @@ type GetServiceQuotaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceQuotaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceQuotaResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceQuotaResponse_Quota:
+			v.Quota = &types.ServiceQuota{}
+			return v.Quota.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetServiceQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceQuota, schemas.GetServiceQuotaRequest, schemas.GetServiceQuotaResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetServiceQuota{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceQuota, schemas.GetServiceQuotaRequest, schemas.GetServiceQuotaResponse), output: &GetServiceQuotaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetServiceQuota"); err != nil {

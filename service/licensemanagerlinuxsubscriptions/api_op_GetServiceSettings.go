@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,6 +31,22 @@ func (c *Client) GetServiceSettings(ctx context.Context, params *GetServiceSetti
 
 type GetServiceSettingsInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *GetServiceSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetServiceSettingsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceSettingsRequest, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 type GetServiceSettingsOutput struct {
@@ -57,16 +75,63 @@ type GetServiceSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetServiceSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetServiceSettingsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetServiceSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringList(s, schemas.GetServiceSettingsResponse_HomeRegions, v.HomeRegions)
+	if v.LinuxSubscriptionsDiscovery != "" {
+		s.WriteString(schemas.GetServiceSettingsResponse_LinuxSubscriptionsDiscovery, string(v.LinuxSubscriptionsDiscovery))
+	}
+	if v.LinuxSubscriptionsDiscoverySettings != nil {
+		s.WriteStruct(schemas.GetServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings)
+		v.LinuxSubscriptionsDiscoverySettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.GetServiceSettingsResponse_Status, string(v.Status))
+	}
+	serializeStringMap(s, schemas.GetServiceSettingsResponse_StatusMessage, v.StatusMessage)
+}
+func (v *GetServiceSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetServiceSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetServiceSettingsResponse_HomeRegions:
+			return deserializeStringList(d, schemas.GetServiceSettingsResponse_HomeRegions, &v.HomeRegions)
+		case schemas.GetServiceSettingsResponse_LinuxSubscriptionsDiscovery:
+			var ev string
+			if err := d.ReadString(schemas.GetServiceSettingsResponse_LinuxSubscriptionsDiscovery, &ev); err != nil {
+				return err
+			}
+			v.LinuxSubscriptionsDiscovery = types.LinuxSubscriptionsDiscovery(ev)
+			return nil
+		case schemas.GetServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings:
+			v.LinuxSubscriptionsDiscoverySettings = &types.LinuxSubscriptionsDiscoverySettings{}
+			return v.LinuxSubscriptionsDiscoverySettings.Deserialize(d)
+		case schemas.GetServiceSettingsResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetServiceSettingsResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		case schemas.GetServiceSettingsResponse_StatusMessage:
+			return deserializeStringMap(d, schemas.GetServiceSettingsResponse_StatusMessage, &v.StatusMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetServiceSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetServiceSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceSettings, schemas.GetServiceSettingsRequest, schemas.GetServiceSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetServiceSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetServiceSettings, schemas.GetServiceSettingsRequest, schemas.GetServiceSettingsResponse), output: &GetServiceSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetServiceSettings"); err != nil {

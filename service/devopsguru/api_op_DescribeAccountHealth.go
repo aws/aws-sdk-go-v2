@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,15 @@ func (c *Client) DescribeAccountHealth(ctx context.Context, params *DescribeAcco
 
 type DescribeAccountHealthInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAccountHealthInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountHealthRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountHealthInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type DescribeAccountHealthOutput struct {
@@ -70,16 +81,33 @@ type DescribeAccountHealthOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountHealthOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountHealthResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountHealthResponse_AnalyzedResourceCount:
+			v.AnalyzedResourceCount = new(int64)
+			return d.ReadInt64(schemas.DescribeAccountHealthResponse_AnalyzedResourceCount, v.AnalyzedResourceCount)
+		case schemas.DescribeAccountHealthResponse_MetricsAnalyzed:
+			return d.ReadInt32(schemas.DescribeAccountHealthResponse_MetricsAnalyzed, &v.MetricsAnalyzed)
+		case schemas.DescribeAccountHealthResponse_OpenProactiveInsights:
+			return d.ReadInt32(schemas.DescribeAccountHealthResponse_OpenProactiveInsights, &v.OpenProactiveInsights)
+		case schemas.DescribeAccountHealthResponse_OpenReactiveInsights:
+			return d.ReadInt32(schemas.DescribeAccountHealthResponse_OpenReactiveInsights, &v.OpenReactiveInsights)
+		case schemas.DescribeAccountHealthResponse_ResourceHours:
+			v.ResourceHours = new(int64)
+			return d.ReadInt64(schemas.DescribeAccountHealthResponse_ResourceHours, v.ResourceHours)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAccountHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountHealth, schemas.DescribeAccountHealthRequest, schemas.DescribeAccountHealthResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAccountHealth{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountHealth, schemas.DescribeAccountHealthRequest, schemas.DescribeAccountHealthResponse), output: &DescribeAccountHealthOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAccountHealth"); err != nil {

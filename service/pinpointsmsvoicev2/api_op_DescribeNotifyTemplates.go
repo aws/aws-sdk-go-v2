@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,23 @@ type DescribeNotifyTemplatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotifyTemplatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeNotifyTemplatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeNotifyTemplatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeNotifyTemplateFilterList(s, schemas.DescribeNotifyTemplatesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeNotifyTemplatesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeNotifyTemplatesRequest_NextToken, *v.NextToken)
+	}
+	serializeNotifyTemplateIdList(s, schemas.DescribeNotifyTemplatesRequest_TemplateIds, v.TemplateIds)
+}
+
 type DescribeNotifyTemplatesOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is
@@ -69,16 +88,26 @@ type DescribeNotifyTemplatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeNotifyTemplatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeNotifyTemplatesResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeNotifyTemplatesResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeNotifyTemplatesResult_NextToken, v.NextToken)
+		case schemas.DescribeNotifyTemplatesResult_NotifyTemplates:
+			return deserializeNotifyTemplateInformationList(d, schemas.DescribeNotifyTemplatesResult_NotifyTemplates, &v.NotifyTemplates)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeNotifyTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeNotifyTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotifyTemplates, schemas.DescribeNotifyTemplatesRequest, schemas.DescribeNotifyTemplatesResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeNotifyTemplates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeNotifyTemplates, schemas.DescribeNotifyTemplatesRequest, schemas.DescribeNotifyTemplatesResult), output: &DescribeNotifyTemplatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeNotifyTemplates"); err != nil {

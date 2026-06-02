@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -21,6 +23,34 @@ type ActiveTimeRange struct {
 	ActiveBeforeInclusive *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ActiveTimeRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ActiveTimeRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ActiveTimeRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveAfterInclusive != nil {
+		s.WriteTime(schemas.ActiveTimeRange_activeAfterInclusive, *v.ActiveAfterInclusive)
+	}
+	if v.ActiveBeforeInclusive != nil {
+		s.WriteTime(schemas.ActiveTimeRange_activeBeforeInclusive, *v.ActiveBeforeInclusive)
+	}
+}
+func (v *ActiveTimeRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ActiveTimeRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ActiveTimeRange_activeAfterInclusive:
+			v.ActiveAfterInclusive = new(time.Time)
+			return d.ReadTime(schemas.ActiveTimeRange_activeAfterInclusive, v.ActiveAfterInclusive)
+		case schemas.ActiveTimeRange_activeBeforeInclusive:
+			v.ActiveBeforeInclusive = new(time.Time)
+			return d.ReadTime(schemas.ActiveTimeRange_activeBeforeInclusive, v.ActiveBeforeInclusive)
+		}
+		return nil
+	})
 }
 
 // The metadata associated to the billing view.
@@ -72,6 +102,108 @@ type BillingViewElement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BillingViewElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingViewElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingViewElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.BillingViewElement_arn, *v.Arn)
+	}
+	if v.BillingViewType != "" {
+		s.WriteString(schemas.BillingViewElement_billingViewType, string(v.BillingViewType))
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.BillingViewElement_createdAt, *v.CreatedAt)
+	}
+	if v.DataFilterExpression != nil {
+		s.WriteStruct(schemas.BillingViewElement_dataFilterExpression)
+		v.DataFilterExpression.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DerivedViewCount != nil {
+		s.WriteInt32(schemas.BillingViewElement_derivedViewCount, *v.DerivedViewCount)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.BillingViewElement_description, *v.Description)
+	}
+	if v.HealthStatus != nil {
+		s.WriteStruct(schemas.BillingViewElement_healthStatus)
+		v.HealthStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.BillingViewElement_name, *v.Name)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.BillingViewElement_ownerAccountId, *v.OwnerAccountId)
+	}
+	if v.SourceAccountId != nil {
+		s.WriteString(schemas.BillingViewElement_sourceAccountId, *v.SourceAccountId)
+	}
+	if v.SourceViewCount != nil {
+		s.WriteInt32(schemas.BillingViewElement_sourceViewCount, *v.SourceViewCount)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.BillingViewElement_updatedAt, *v.UpdatedAt)
+	}
+	if v.ViewDefinitionLastUpdatedAt != nil {
+		s.WriteTime(schemas.BillingViewElement_viewDefinitionLastUpdatedAt, *v.ViewDefinitionLastUpdatedAt)
+	}
+}
+func (v *BillingViewElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingViewElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingViewElement_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.BillingViewElement_arn, v.Arn)
+		case schemas.BillingViewElement_billingViewType:
+			var ev string
+			if err := d.ReadString(schemas.BillingViewElement_billingViewType, &ev); err != nil {
+				return err
+			}
+			v.BillingViewType = BillingViewType(ev)
+			return nil
+		case schemas.BillingViewElement_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.BillingViewElement_createdAt, v.CreatedAt)
+		case schemas.BillingViewElement_dataFilterExpression:
+			v.DataFilterExpression = &Expression{}
+			return v.DataFilterExpression.Deserialize(d)
+		case schemas.BillingViewElement_derivedViewCount:
+			v.DerivedViewCount = new(int32)
+			return d.ReadInt32(schemas.BillingViewElement_derivedViewCount, v.DerivedViewCount)
+		case schemas.BillingViewElement_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.BillingViewElement_description, v.Description)
+		case schemas.BillingViewElement_healthStatus:
+			v.HealthStatus = &BillingViewHealthStatus{}
+			return v.HealthStatus.Deserialize(d)
+		case schemas.BillingViewElement_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BillingViewElement_name, v.Name)
+		case schemas.BillingViewElement_ownerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.BillingViewElement_ownerAccountId, v.OwnerAccountId)
+		case schemas.BillingViewElement_sourceAccountId:
+			v.SourceAccountId = new(string)
+			return d.ReadString(schemas.BillingViewElement_sourceAccountId, v.SourceAccountId)
+		case schemas.BillingViewElement_sourceViewCount:
+			v.SourceViewCount = new(int32)
+			return d.ReadInt32(schemas.BillingViewElement_sourceViewCount, v.SourceViewCount)
+		case schemas.BillingViewElement_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.BillingViewElement_updatedAt, v.UpdatedAt)
+		case schemas.BillingViewElement_viewDefinitionLastUpdatedAt:
+			v.ViewDefinitionLastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.BillingViewElement_viewDefinitionLastUpdatedAt, v.ViewDefinitionLastUpdatedAt)
+		}
+		return nil
+	})
+}
+
 //	Represents the health status of a billing view, including a status code and
 //
 // optional reasons for the status.
@@ -84,6 +216,35 @@ type BillingViewHealthStatus struct {
 	StatusReasons []BillingViewStatusReason
 
 	noSmithyDocumentSerde
+}
+
+func (v *BillingViewHealthStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingViewHealthStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingViewHealthStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StatusCode != "" {
+		s.WriteString(schemas.BillingViewHealthStatus_statusCode, string(v.StatusCode))
+	}
+	serializeBillingViewStatusReasons(s, schemas.BillingViewHealthStatus_statusReasons, v.StatusReasons)
+}
+func (v *BillingViewHealthStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingViewHealthStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingViewHealthStatus_statusCode:
+			var ev string
+			if err := d.ReadString(schemas.BillingViewHealthStatus_statusCode, &ev); err != nil {
+				return err
+			}
+			v.StatusCode = BillingViewStatus(ev)
+			return nil
+		case schemas.BillingViewHealthStatus_statusReasons:
+			return deserializeBillingViewStatusReasons(d, schemas.BillingViewHealthStatus_statusReasons, &v.StatusReasons)
+		}
+		return nil
+	})
 }
 
 // A representation of a billing view.
@@ -115,6 +276,70 @@ type BillingViewListElement struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BillingViewListElement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BillingViewListElement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BillingViewListElement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.BillingViewListElement_arn, *v.Arn)
+	}
+	if v.BillingViewType != "" {
+		s.WriteString(schemas.BillingViewListElement_billingViewType, string(v.BillingViewType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.BillingViewListElement_description, *v.Description)
+	}
+	if v.HealthStatus != nil {
+		s.WriteStruct(schemas.BillingViewListElement_healthStatus)
+		v.HealthStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.BillingViewListElement_name, *v.Name)
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.BillingViewListElement_ownerAccountId, *v.OwnerAccountId)
+	}
+	if v.SourceAccountId != nil {
+		s.WriteString(schemas.BillingViewListElement_sourceAccountId, *v.SourceAccountId)
+	}
+}
+func (v *BillingViewListElement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BillingViewListElement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BillingViewListElement_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.BillingViewListElement_arn, v.Arn)
+		case schemas.BillingViewListElement_billingViewType:
+			var ev string
+			if err := d.ReadString(schemas.BillingViewListElement_billingViewType, &ev); err != nil {
+				return err
+			}
+			v.BillingViewType = BillingViewType(ev)
+			return nil
+		case schemas.BillingViewListElement_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.BillingViewListElement_description, v.Description)
+		case schemas.BillingViewListElement_healthStatus:
+			v.HealthStatus = &BillingViewHealthStatus{}
+			return v.HealthStatus.Deserialize(d)
+		case schemas.BillingViewListElement_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.BillingViewListElement_name, v.Name)
+		case schemas.BillingViewListElement_ownerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.BillingViewListElement_ownerAccountId, v.OwnerAccountId)
+		case schemas.BillingViewListElement_sourceAccountId:
+			v.SourceAccountId = new(string)
+			return d.ReadString(schemas.BillingViewListElement_sourceAccountId, v.SourceAccountId)
+		}
+		return nil
+	})
+}
+
 // The Cost Categories values used for filtering the costs.
 type CostCategoryValues struct {
 
@@ -129,6 +354,31 @@ type CostCategoryValues struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CostCategoryValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CostCategoryValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CostCategoryValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.CostCategoryValues_key, *v.Key)
+	}
+	serializeValues(s, schemas.CostCategoryValues_values, v.Values)
+}
+func (v *CostCategoryValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CostCategoryValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CostCategoryValues_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.CostCategoryValues_key, v.Key)
+		case schemas.CostCategoryValues_values:
+			return deserializeValues(d, schemas.CostCategoryValues_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 // The metadata that you can use to filter and group your results.
@@ -146,6 +396,35 @@ type DimensionValues struct {
 	Values []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DimensionValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != "" {
+		s.WriteString(schemas.DimensionValues_key, string(v.Key))
+	}
+	serializeValues(s, schemas.DimensionValues_values, v.Values)
+}
+func (v *DimensionValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionValues_key:
+			var ev string
+			if err := d.ReadString(schemas.DimensionValues_key, &ev); err != nil {
+				return err
+			}
+			v.Key = Dimension(ev)
+			return nil
+		case schemas.DimensionValues_values:
+			return deserializeValues(d, schemas.DimensionValues_values, &v.Values)
+		}
+		return nil
+	})
 }
 
 //	See [Expression]. Billing view only supports LINKED_ACCOUNT , Tags , and CostCategories .
@@ -168,6 +447,54 @@ type Expression struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Expression) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Expression)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Expression) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CostCategories != nil {
+		s.WriteStruct(schemas.Expression_costCategories)
+		v.CostCategories.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Dimensions != nil {
+		s.WriteStruct(schemas.Expression_dimensions)
+		v.Dimensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Tags != nil {
+		s.WriteStruct(schemas.Expression_tags)
+		v.Tags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.Expression_timeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Expression) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Expression, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Expression_costCategories:
+			v.CostCategories = &CostCategoryValues{}
+			return v.CostCategories.Deserialize(d)
+		case schemas.Expression_dimensions:
+			v.Dimensions = &DimensionValues{}
+			return v.Dimensions.Deserialize(d)
+		case schemas.Expression_tags:
+			v.Tags = &TagValues{}
+			return v.Tags.Deserialize(d)
+		case schemas.Expression_timeRange:
+			v.TimeRange = &TimeRange{}
+			return v.TimeRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The tag structure that contains a tag key and value.
 type ResourceTag struct {
 
@@ -180,6 +507,34 @@ type ResourceTag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourceTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.ResourceTag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.ResourceTag_value, *v.Value)
+	}
+}
+func (v *ResourceTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.ResourceTag_key, v.Key)
+		case schemas.ResourceTag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.ResourceTag_value, v.Value)
+		}
+		return nil
+	})
 }
 
 //	A structure that defines how to search for string values. You can specify a
@@ -202,6 +557,38 @@ type StringSearch struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StringSearch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StringSearch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StringSearch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SearchOption != "" {
+		s.WriteString(schemas.StringSearch_searchOption, string(v.SearchOption))
+	}
+	if v.SearchValue != nil {
+		s.WriteString(schemas.StringSearch_searchValue, *v.SearchValue)
+	}
+}
+func (v *StringSearch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StringSearch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StringSearch_searchOption:
+			var ev string
+			if err := d.ReadString(schemas.StringSearch_searchOption, &ev); err != nil {
+				return err
+			}
+			v.SearchOption = SearchOption(ev)
+			return nil
+		case schemas.StringSearch_searchValue:
+			v.SearchValue = new(string)
+			return d.ReadString(schemas.StringSearch_searchValue, v.SearchValue)
+		}
+		return nil
+	})
+}
+
 // The values that are available for a tag.
 type TagValues struct {
 
@@ -218,6 +605,31 @@ type TagValues struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TagValues) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TagValues)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TagValues) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.TagValues_key, *v.Key)
+	}
+	serializeValues(s, schemas.TagValues_values, v.Values)
+}
+func (v *TagValues) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TagValues, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TagValues_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.TagValues_key, v.Key)
+		case schemas.TagValues_values:
+			return deserializeValues(d, schemas.TagValues_values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // Specifies a time range with inclusive begin and end dates.
 type TimeRange struct {
 
@@ -228,6 +640,34 @@ type TimeRange struct {
 	EndDateInclusive *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimeRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BeginDateInclusive != nil {
+		s.WriteTime(schemas.TimeRange_beginDateInclusive, *v.BeginDateInclusive)
+	}
+	if v.EndDateInclusive != nil {
+		s.WriteTime(schemas.TimeRange_endDateInclusive, *v.EndDateInclusive)
+	}
+}
+func (v *TimeRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeRange_beginDateInclusive:
+			v.BeginDateInclusive = new(time.Time)
+			return d.ReadTime(schemas.TimeRange_beginDateInclusive, v.BeginDateInclusive)
+		case schemas.TimeRange_endDateInclusive:
+			v.EndDateInclusive = new(time.Time)
+			return d.ReadTime(schemas.TimeRange_endDateInclusive, v.EndDateInclusive)
+		}
+		return nil
+	})
 }
 
 // The field's information of a request that resulted in an exception.
@@ -244,6 +684,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

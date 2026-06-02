@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetSessionLoggerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionLoggerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSessionLoggerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSessionLoggerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SessionLoggerArn != nil {
+		s.WriteString(schemas.GetSessionLoggerRequest_sessionLoggerArn, *v.SessionLoggerArn)
+	}
+}
+
 type GetSessionLoggerOutput struct {
 
 	// The session logger details.
@@ -48,16 +62,24 @@ type GetSessionLoggerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSessionLoggerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSessionLoggerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSessionLoggerResponse_sessionLogger:
+			v.SessionLogger = &types.SessionLogger{}
+			return v.SessionLogger.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSessionLoggerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSessionLogger{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionLogger, schemas.GetSessionLoggerRequest, schemas.GetSessionLoggerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSessionLogger{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSessionLogger, schemas.GetSessionLoggerRequest, schemas.GetSessionLoggerResponse), output: &GetSessionLoggerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSessionLogger"); err != nil {

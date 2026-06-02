@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,30 @@ type UpdateDashboardInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDashboardInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDashboardRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDashboardInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateDashboardRequest_clientToken, *v.ClientToken)
+	}
+	if v.DashboardDefinition != nil {
+		s.WriteString(schemas.UpdateDashboardRequest_dashboardDefinition, *v.DashboardDefinition)
+	}
+	if v.DashboardDescription != nil {
+		s.WriteString(schemas.UpdateDashboardRequest_dashboardDescription, *v.DashboardDescription)
+	}
+	if v.DashboardId != nil {
+		s.WriteString(schemas.UpdateDashboardRequest_dashboardId, *v.DashboardId)
+	}
+	if v.DashboardName != nil {
+		s.WriteString(schemas.UpdateDashboardRequest_dashboardName, *v.DashboardName)
+	}
+}
+
 type UpdateDashboardOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -69,16 +95,21 @@ type UpdateDashboardOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDashboardOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDashboardResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDashboard, schemas.UpdateDashboardRequest, schemas.UpdateDashboardResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDashboard{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDashboard, schemas.UpdateDashboardRequest, schemas.UpdateDashboardResponse), output: &UpdateDashboardOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDashboard"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,21 @@ type UpdateHITReviewStatusInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHITReviewStatusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateHITReviewStatusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateHITReviewStatusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HITId != nil {
+		s.WriteString(schemas.UpdateHITReviewStatusRequest_HITId, *v.HITId)
+	}
+	if v.Revert != nil {
+		s.WriteBool(schemas.UpdateHITReviewStatusRequest_Revert, *v.Revert)
+	}
+}
+
 type UpdateHITReviewStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,16 +71,21 @@ type UpdateHITReviewStatusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateHITReviewStatusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateHITReviewStatusResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateHITReviewStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateHITReviewStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHITReviewStatus, schemas.UpdateHITReviewStatusRequest, schemas.UpdateHITReviewStatusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateHITReviewStatus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateHITReviewStatus, schemas.UpdateHITReviewStatusRequest, schemas.UpdateHITReviewStatusResponse), output: &UpdateHITReviewStatusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateHITReviewStatus"); err != nil {

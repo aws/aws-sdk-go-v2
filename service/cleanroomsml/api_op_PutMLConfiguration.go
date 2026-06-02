@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,23 @@ type PutMLConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMLConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutMLConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMLConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultOutputLocation != nil {
+		s.WriteStruct(schemas.PutMLConfigurationRequest_defaultOutputLocation)
+		v.DefaultOutputLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.PutMLConfigurationRequest_membershipIdentifier, *v.MembershipIdentifier)
+	}
+}
+
 type PutMLConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,16 +69,29 @@ type PutMLConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutMLConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutMLConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutMLConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutMLConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutMLConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMLConfiguration, schemas.PutMLConfigurationRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutMLConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutMLConfiguration, schemas.PutMLConfigurationRequest, nil), output: &PutMLConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutMLConfiguration"); err != nil {

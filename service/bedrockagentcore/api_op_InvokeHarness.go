@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
 	"sync"
@@ -89,6 +91,42 @@ type InvokeHarnessInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InvokeHarnessInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InvokeHarnessRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InvokeHarnessInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActorId != nil {
+		s.WriteString(schemas.InvokeHarnessRequest_actorId, *v.ActorId)
+	}
+	serializeHarnessAllowedTools(s, schemas.InvokeHarnessRequest_allowedTools, v.AllowedTools)
+	if v.HarnessArn != nil {
+		s.WriteString(schemas.InvokeHarnessRequest_harnessArn, *v.HarnessArn)
+	}
+	if v.MaxIterations != nil {
+		s.WriteInt32(schemas.InvokeHarnessRequest_maxIterations, *v.MaxIterations)
+	}
+	if v.MaxTokens != nil {
+		s.WriteInt32(schemas.InvokeHarnessRequest_maxTokens, *v.MaxTokens)
+	}
+	serializeHarnessMessages(s, schemas.InvokeHarnessRequest_messages, v.Messages)
+	serializeHarnessModelConfiguration(s, schemas.InvokeHarnessRequest_model, v.Model)
+	if v.RuntimeSessionId != nil {
+		s.WriteString(schemas.InvokeHarnessRequest_runtimeSessionId, *v.RuntimeSessionId)
+	}
+	if v.RuntimeUserId != nil {
+		s.WriteString(schemas.InvokeHarnessRequest_runtimeUserId, *v.RuntimeUserId)
+	}
+	serializeHarnessSkills(s, schemas.InvokeHarnessRequest_skills, v.Skills)
+	serializeHarnessSystemPrompt(s, schemas.InvokeHarnessRequest_systemPrompt, v.SystemPrompt)
+	if v.TimeoutSeconds != nil {
+		s.WriteInt32(schemas.InvokeHarnessRequest_timeoutSeconds, *v.TimeoutSeconds)
+	}
+	serializeHarnessTools(s, schemas.InvokeHarnessRequest_tools, v.Tools)
+}
+
 type InvokeHarnessOutput struct {
 	eventStream *InvokeHarnessEventStream
 
@@ -97,6 +135,14 @@ type InvokeHarnessOutput struct {
 	ResultMetadata middleware.Metadata
 
 	noSmithyDocumentSerde
+}
+
+func (v *InvokeHarnessOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvokeHarnessResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // GetStream returns the type to interact with the event stream.
@@ -119,12 +165,13 @@ func (c *Client) addOperationInvokeHarnessMiddlewares(stack *middleware.Stack, o
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpInvokeHarness{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeHarness, schemas.InvokeHarnessRequest, schemas.InvokeHarnessResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpInvokeHarness{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InvokeHarness, schemas.InvokeHarnessRequest, schemas.InvokeHarnessResponse), output: &InvokeHarnessOutput{}}, middleware.After); err != nil {
+		return err
+	}
+	if err := stack.Deserialize.Insert(&deserializeOpEventStreamInvokeHarness{options: &options}, "OperationDeserializer", middleware.Before); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "InvokeHarness"); err != nil {
@@ -132,9 +179,6 @@ func (c *Client) addOperationInvokeHarnessMiddlewares(stack *middleware.Stack, o
 	}
 
 	if err = addlegacyEndpointContextSetter(stack, options); err != nil {
-		return err
-	}
-	if err = addEventStreamInvokeHarnessMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = addSetLoggerMiddleware(stack, options); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,38 @@ type UpdateConfiguredAudienceModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfiguredAudienceModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConfiguredAudienceModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConfiguredAudienceModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AudienceModelArn != nil {
+		s.WriteString(schemas.UpdateConfiguredAudienceModelRequest_audienceModelArn, *v.AudienceModelArn)
+	}
+	if v.AudienceSizeConfig != nil {
+		s.WriteStruct(schemas.UpdateConfiguredAudienceModelRequest_audienceSizeConfig)
+		v.AudienceSizeConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConfiguredAudienceModelArn != nil {
+		s.WriteString(schemas.UpdateConfiguredAudienceModelRequest_configuredAudienceModelArn, *v.ConfiguredAudienceModelArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateConfiguredAudienceModelRequest_description, *v.Description)
+	}
+	if v.MinMatchingSeedSize != nil {
+		s.WriteInt32(schemas.UpdateConfiguredAudienceModelRequest_minMatchingSeedSize, *v.MinMatchingSeedSize)
+	}
+	if v.OutputConfig != nil {
+		s.WriteStruct(schemas.UpdateConfiguredAudienceModelRequest_outputConfig)
+		v.OutputConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeMetricsList(s, schemas.UpdateConfiguredAudienceModelRequest_sharedAudienceMetrics, v.SharedAudienceMetrics)
+}
+
 type UpdateConfiguredAudienceModelOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configured audience model that was
@@ -73,16 +107,24 @@ type UpdateConfiguredAudienceModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConfiguredAudienceModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConfiguredAudienceModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConfiguredAudienceModelResponse_configuredAudienceModelArn:
+			v.ConfiguredAudienceModelArn = new(string)
+			return d.ReadString(schemas.UpdateConfiguredAudienceModelResponse_configuredAudienceModelArn, v.ConfiguredAudienceModelArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConfiguredAudienceModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateConfiguredAudienceModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfiguredAudienceModel, schemas.UpdateConfiguredAudienceModelRequest, schemas.UpdateConfiguredAudienceModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateConfiguredAudienceModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConfiguredAudienceModel, schemas.UpdateConfiguredAudienceModelRequest, schemas.UpdateConfiguredAudienceModelResponse), output: &UpdateConfiguredAudienceModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateConfiguredAudienceModel"); err != nil {

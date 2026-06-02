@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -60,6 +62,30 @@ type StartNotebookExportInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNotebookExportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartNotebookExportInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartNotebookExportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartNotebookExportInput_clientToken, *v.ClientToken)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.StartNotebookExportInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.FileFormat != "" {
+		s.WriteString(schemas.StartNotebookExportInput_fileFormat, string(v.FileFormat))
+	}
+	if v.NotebookIdentifier != nil {
+		s.WriteString(schemas.StartNotebookExportInput_notebookIdentifier, *v.NotebookIdentifier)
+	}
+	if v.OwningProjectIdentifier != nil {
+		s.WriteString(schemas.StartNotebookExportInput_owningProjectIdentifier, *v.OwningProjectIdentifier)
+	}
+}
+
 type StartNotebookExportOutput struct {
 
 	// The identifier of the Amazon SageMaker Unified Studio domain.
@@ -104,16 +130,53 @@ type StartNotebookExportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartNotebookExportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartNotebookExportOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartNotebookExportOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.StartNotebookExportOutput_createdAt, v.CreatedAt)
+		case schemas.StartNotebookExportOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.StartNotebookExportOutput_createdBy, v.CreatedBy)
+		case schemas.StartNotebookExportOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.StartNotebookExportOutput_domainId, v.DomainId)
+		case schemas.StartNotebookExportOutput_fileFormat:
+			var ev string
+			if err := d.ReadString(schemas.StartNotebookExportOutput_fileFormat, &ev); err != nil {
+				return err
+			}
+			v.FileFormat = types.FileFormat(ev)
+			return nil
+		case schemas.StartNotebookExportOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartNotebookExportOutput_id, v.Id)
+		case schemas.StartNotebookExportOutput_notebookId:
+			v.NotebookId = new(string)
+			return d.ReadString(schemas.StartNotebookExportOutput_notebookId, v.NotebookId)
+		case schemas.StartNotebookExportOutput_owningProjectId:
+			v.OwningProjectId = new(string)
+			return d.ReadString(schemas.StartNotebookExportOutput_owningProjectId, v.OwningProjectId)
+		case schemas.StartNotebookExportOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.StartNotebookExportOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NotebookExportStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartNotebookExportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartNotebookExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookExport, schemas.StartNotebookExportInput, schemas.StartNotebookExportOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartNotebookExport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartNotebookExport, schemas.StartNotebookExportInput, schemas.StartNotebookExportOutput), output: &StartNotebookExportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartNotebookExport"); err != nil {

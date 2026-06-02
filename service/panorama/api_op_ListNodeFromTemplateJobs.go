@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,33 @@ type ListNodeFromTemplateJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNodeFromTemplateJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNodeFromTemplateJobsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNodeFromTemplateJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListNodeFromTemplateJobsRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNodeFromTemplateJobsRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListNodeFromTemplateJobsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNodeFromTemplateJobsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNodeFromTemplateJobsRequest_MaxResults:
+			return d.ReadInt32(schemas.ListNodeFromTemplateJobsRequest_MaxResults, &v.MaxResults)
+		case schemas.ListNodeFromTemplateJobsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNodeFromTemplateJobsRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListNodeFromTemplateJobsOutput struct {
 
 	// A list of jobs.
@@ -55,16 +84,38 @@ type ListNodeFromTemplateJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListNodeFromTemplateJobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListNodeFromTemplateJobsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListNodeFromTemplateJobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListNodeFromTemplateJobsResponse_NextToken, *v.NextToken)
+	}
+	serializeNodeFromTemplateJobList(s, schemas.ListNodeFromTemplateJobsResponse_NodeFromTemplateJobs, v.NodeFromTemplateJobs)
+}
+func (v *ListNodeFromTemplateJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListNodeFromTemplateJobsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListNodeFromTemplateJobsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListNodeFromTemplateJobsResponse_NextToken, v.NextToken)
+		case schemas.ListNodeFromTemplateJobsResponse_NodeFromTemplateJobs:
+			return deserializeNodeFromTemplateJobList(d, schemas.ListNodeFromTemplateJobsResponse_NodeFromTemplateJobs, &v.NodeFromTemplateJobs)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListNodeFromTemplateJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListNodeFromTemplateJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNodeFromTemplateJobs, schemas.ListNodeFromTemplateJobsRequest, schemas.ListNodeFromTemplateJobsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListNodeFromTemplateJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListNodeFromTemplateJobs, schemas.ListNodeFromTemplateJobsRequest, schemas.ListNodeFromTemplateJobsResponse), output: &ListNodeFromTemplateJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListNodeFromTemplateJobs"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,22 @@ type PutApplicationAuthenticationMethodInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutApplicationAuthenticationMethodInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutApplicationAuthenticationMethodRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutApplicationAuthenticationMethodInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationArn != nil {
+		s.WriteString(schemas.PutApplicationAuthenticationMethodRequest_ApplicationArn, *v.ApplicationArn)
+	}
+	serializeAuthenticationMethod(s, schemas.PutApplicationAuthenticationMethodRequest_AuthenticationMethod, v.AuthenticationMethod)
+	if v.AuthenticationMethodType != "" {
+		s.WriteString(schemas.PutApplicationAuthenticationMethodRequest_AuthenticationMethodType, string(v.AuthenticationMethodType))
+	}
+}
+
 type PutApplicationAuthenticationMethodOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,16 +75,29 @@ type PutApplicationAuthenticationMethodOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutApplicationAuthenticationMethodOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutApplicationAuthenticationMethodOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutApplicationAuthenticationMethodOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutApplicationAuthenticationMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpPutApplicationAuthenticationMethod{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutApplicationAuthenticationMethod, schemas.PutApplicationAuthenticationMethodRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpPutApplicationAuthenticationMethod{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutApplicationAuthenticationMethod, schemas.PutApplicationAuthenticationMethodRequest, nil), output: &PutApplicationAuthenticationMethodOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutApplicationAuthenticationMethod"); err != nil {

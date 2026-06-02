@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,31 @@ type GetGroupIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupIdInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupIdRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupIdInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAlternateIdentifier(s, schemas.GetGroupIdRequest_AlternateIdentifier, v.AlternateIdentifier)
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.GetGroupIdRequest_IdentityStoreId, *v.IdentityStoreId)
+	}
+}
+func (v *GetGroupIdInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGroupIdRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGroupIdRequest_AlternateIdentifier:
+			return deserializeAlternateIdentifier(d, schemas.GetGroupIdRequest_AlternateIdentifier, &v.AlternateIdentifier)
+		case schemas.GetGroupIdRequest_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.GetGroupIdRequest_IdentityStoreId, v.IdentityStoreId)
+		}
+		return nil
+	})
+}
+
 type GetGroupIdOutput struct {
 
 	// The identifier for a group in the identity store.
@@ -68,16 +95,41 @@ type GetGroupIdOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetGroupIdOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetGroupIdResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetGroupIdOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.GetGroupIdResponse_GroupId, *v.GroupId)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.GetGroupIdResponse_IdentityStoreId, *v.IdentityStoreId)
+	}
+}
+func (v *GetGroupIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetGroupIdResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetGroupIdResponse_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.GetGroupIdResponse_GroupId, v.GroupId)
+		case schemas.GetGroupIdResponse_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.GetGroupIdResponse_IdentityStoreId, v.IdentityStoreId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetGroupIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetGroupId{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupId, schemas.GetGroupIdRequest, schemas.GetGroupIdResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetGroupId{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetGroupId, schemas.GetGroupIdRequest, schemas.GetGroupIdResponse), output: &GetGroupIdOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetGroupId"); err != nil {

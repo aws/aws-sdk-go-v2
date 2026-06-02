@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifybackend/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,29 @@ type DeleteBackendAPIInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBackendAPIInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBackendAPIRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBackendAPIInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.DeleteBackendAPIRequest_AppId, *v.AppId)
+	}
+	if v.BackendEnvironmentName != nil {
+		s.WriteString(schemas.DeleteBackendAPIRequest_BackendEnvironmentName, *v.BackendEnvironmentName)
+	}
+	if v.ResourceConfig != nil {
+		s.WriteStruct(schemas.DeleteBackendAPIRequest_ResourceConfig)
+		v.ResourceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceName != nil {
+		s.WriteString(schemas.DeleteBackendAPIRequest_ResourceName, *v.ResourceName)
+	}
+}
+
 type DeleteBackendAPIOutput struct {
 
 	// The app ID.
@@ -77,16 +102,39 @@ type DeleteBackendAPIOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBackendAPIOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBackendAPIResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBackendAPIResponse_AppId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.DeleteBackendAPIResponse_AppId, v.AppId)
+		case schemas.DeleteBackendAPIResponse_BackendEnvironmentName:
+			v.BackendEnvironmentName = new(string)
+			return d.ReadString(schemas.DeleteBackendAPIResponse_BackendEnvironmentName, v.BackendEnvironmentName)
+		case schemas.DeleteBackendAPIResponse_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.DeleteBackendAPIResponse_Error, v.Error)
+		case schemas.DeleteBackendAPIResponse_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.DeleteBackendAPIResponse_JobId, v.JobId)
+		case schemas.DeleteBackendAPIResponse_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.DeleteBackendAPIResponse_Operation, v.Operation)
+		case schemas.DeleteBackendAPIResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DeleteBackendAPIResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBackendAPIMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteBackendAPI{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBackendAPI, schemas.DeleteBackendAPIRequest, schemas.DeleteBackendAPIResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteBackendAPI{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBackendAPI, schemas.DeleteBackendAPIRequest, schemas.DeleteBackendAPIResponse), output: &DeleteBackendAPIOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteBackendAPI"); err != nil {

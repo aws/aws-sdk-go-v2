@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,22 @@ type BatchReadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchReadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchReadRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchReadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConsistencyLevel != "" {
+		s.WriteString(schemas.BatchReadRequest_ConsistencyLevel, string(v.ConsistencyLevel))
+	}
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.BatchReadRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	serializeBatchReadOperationList(s, schemas.BatchReadRequest_Operations, v.Operations)
+}
+
 type BatchReadOutput struct {
 
 	// A list of all the responses for each batch read.
@@ -58,16 +76,23 @@ type BatchReadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchReadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchReadResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchReadResponse_Responses:
+			return deserializeBatchReadOperationResponseList(d, schemas.BatchReadResponse_Responses, &v.Responses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchReadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchRead{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchRead, schemas.BatchReadRequest, schemas.BatchReadResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchRead{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchRead, schemas.BatchReadRequest, schemas.BatchReadResponse), output: &BatchReadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchRead"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,16 @@ type BatchDeleteDetectorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteDetectorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDetectorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteDetectorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeleteDetectorRequests(s, schemas.BatchDeleteDetectorRequest_detectors, v.Detectors)
+}
+
 type BatchDeleteDetectorOutput struct {
 
 	// A list of errors associated with the request, or an empty array ( [] ) if there
@@ -55,16 +67,23 @@ type BatchDeleteDetectorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteDetectorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteDetectorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteDetectorResponse_batchDeleteDetectorErrorEntries:
+			return deserializeBatchDeleteDetectorErrorEntries(d, schemas.BatchDeleteDetectorResponse_batchDeleteDetectorErrorEntries, &v.BatchDeleteDetectorErrorEntries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteDetector, schemas.BatchDeleteDetectorRequest, schemas.BatchDeleteDetectorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteDetector{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteDetector, schemas.BatchDeleteDetectorRequest, schemas.BatchDeleteDetectorResponse), output: &BatchDeleteDetectorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeleteDetector"); err != nil {

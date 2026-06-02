@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/geoplaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/geoplaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -129,6 +131,43 @@ type AutocompleteInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutocompleteInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AutocompleteRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AutocompleteInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAutocompleteAdditionalFeatureList(s, schemas.AutocompleteRequest_AdditionalFeatures, v.AdditionalFeatures)
+	serializePosition(s, schemas.AutocompleteRequest_BiasPosition, v.BiasPosition)
+	if v.Filter != nil {
+		s.WriteStruct(schemas.AutocompleteRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IntendedUse != "" {
+		s.WriteString(schemas.AutocompleteRequest_IntendedUse, string(v.IntendedUse))
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.AutocompleteRequest_Key, *v.Key)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.AutocompleteRequest_Language, *v.Language)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.AutocompleteRequest_MaxResults, *v.MaxResults)
+	}
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.AutocompleteRequest_PoliticalView, *v.PoliticalView)
+	}
+	if v.PostalCodeMode != "" {
+		s.WriteString(schemas.AutocompleteRequest_PostalCodeMode, string(v.PostalCodeMode))
+	}
+	if v.QueryText != nil {
+		s.WriteString(schemas.AutocompleteRequest_QueryText, *v.QueryText)
+	}
+}
+
 type AutocompleteOutput struct {
 
 	// The pricing bucket for which the query is charged at.
@@ -149,16 +188,26 @@ type AutocompleteOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AutocompleteOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AutocompleteResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AutocompleteResponse_PricingBucket:
+			v.PricingBucket = new(string)
+			return d.ReadString(schemas.AutocompleteResponse_PricingBucket, v.PricingBucket)
+		case schemas.AutocompleteResponse_ResultItems:
+			return deserializeAutocompleteResultItemList(d, schemas.AutocompleteResponse_ResultItems, &v.ResultItems)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAutocompleteMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAutocomplete{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Autocomplete, schemas.AutocompleteRequest, schemas.AutocompleteResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAutocomplete{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Autocomplete, schemas.AutocompleteRequest, schemas.AutocompleteResponse), output: &AutocompleteOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "Autocomplete"); err != nil {

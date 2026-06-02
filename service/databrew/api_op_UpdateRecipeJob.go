@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -80,6 +82,42 @@ type UpdateRecipeJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecipeJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRecipeJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRecipeJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDataCatalogOutputList(s, schemas.UpdateRecipeJobRequest_DataCatalogOutputs, v.DataCatalogOutputs)
+	serializeDatabaseOutputList(s, schemas.UpdateRecipeJobRequest_DatabaseOutputs, v.DatabaseOutputs)
+	if v.EncryptionKeyArn != nil {
+		s.WriteString(schemas.UpdateRecipeJobRequest_EncryptionKeyArn, *v.EncryptionKeyArn)
+	}
+	if v.EncryptionMode != "" {
+		s.WriteString(schemas.UpdateRecipeJobRequest_EncryptionMode, string(v.EncryptionMode))
+	}
+	if v.LogSubscription != "" {
+		s.WriteString(schemas.UpdateRecipeJobRequest_LogSubscription, string(v.LogSubscription))
+	}
+	if v.MaxCapacity != 0 {
+		s.WriteInt32(schemas.UpdateRecipeJobRequest_MaxCapacity, v.MaxCapacity)
+	}
+	if v.MaxRetries != 0 {
+		s.WriteInt32(schemas.UpdateRecipeJobRequest_MaxRetries, v.MaxRetries)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateRecipeJobRequest_Name, *v.Name)
+	}
+	serializeOutputList(s, schemas.UpdateRecipeJobRequest_Outputs, v.Outputs)
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateRecipeJobRequest_RoleArn, *v.RoleArn)
+	}
+	if v.Timeout != 0 {
+		s.WriteInt32(schemas.UpdateRecipeJobRequest_Timeout, v.Timeout)
+	}
+}
+
 type UpdateRecipeJobOutput struct {
 
 	// The name of the job that you updated.
@@ -93,16 +131,24 @@ type UpdateRecipeJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRecipeJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRecipeJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRecipeJobResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.UpdateRecipeJobResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRecipeJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRecipeJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecipeJob, schemas.UpdateRecipeJobRequest, schemas.UpdateRecipeJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRecipeJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRecipeJob, schemas.UpdateRecipeJobRequest, schemas.UpdateRecipeJobResponse), output: &UpdateRecipeJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRecipeJob"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,26 @@ type DescribeInsightDetailsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInsightDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeInsightDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeInsightDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entity != nil {
+		s.WriteStruct(schemas.DescribeInsightDetailsRequest_Entity)
+		v.Entity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InsightId != nil {
+		s.WriteString(schemas.DescribeInsightDetailsRequest_InsightId, *v.InsightId)
+	}
+	if v.ShowHtmlContent != nil {
+		s.WriteBool(schemas.DescribeInsightDetailsRequest_ShowHtmlContent, *v.ShowHtmlContent)
+	}
+}
+
 // The result of a DescribeInsightDetails request. Contains the detailed fields
 // associated with the specified insight.
 type DescribeInsightDetailsOutput struct {
@@ -64,16 +86,23 @@ type DescribeInsightDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeInsightDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeInsightDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeInsightDetailsResponse_Fields:
+			return deserializeInsightFieldList(d, schemas.DescribeInsightDetailsResponse_Fields, &v.Fields)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeInsightDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeInsightDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInsightDetails, schemas.DescribeInsightDetailsRequest, schemas.DescribeInsightDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeInsightDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeInsightDetails, schemas.DescribeInsightDetailsRequest, schemas.DescribeInsightDetailsResponse), output: &DescribeInsightDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeInsightDetails"); err != nil {

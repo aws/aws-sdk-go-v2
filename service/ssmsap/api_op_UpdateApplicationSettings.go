@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,48 @@ type UpdateApplicationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationSettingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateApplicationSettingsInput_ApplicationId, *v.ApplicationId)
+	}
+	if v.Backint != nil {
+		s.WriteStruct(schemas.UpdateApplicationSettingsInput_Backint)
+		v.Backint.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeApplicationCredentialList(s, schemas.UpdateApplicationSettingsInput_CredentialsToAddOrUpdate, v.CredentialsToAddOrUpdate)
+	serializeApplicationCredentialList(s, schemas.UpdateApplicationSettingsInput_CredentialsToRemove, v.CredentialsToRemove)
+	if v.DatabaseArn != nil {
+		s.WriteString(schemas.UpdateApplicationSettingsInput_DatabaseArn, *v.DatabaseArn)
+	}
+}
+func (v *UpdateApplicationSettingsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApplicationSettingsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApplicationSettingsInput_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.UpdateApplicationSettingsInput_ApplicationId, v.ApplicationId)
+		case schemas.UpdateApplicationSettingsInput_Backint:
+			v.Backint = &types.BackintConfig{}
+			return v.Backint.Deserialize(d)
+		case schemas.UpdateApplicationSettingsInput_CredentialsToAddOrUpdate:
+			return deserializeApplicationCredentialList(d, schemas.UpdateApplicationSettingsInput_CredentialsToAddOrUpdate, &v.CredentialsToAddOrUpdate)
+		case schemas.UpdateApplicationSettingsInput_CredentialsToRemove:
+			return deserializeApplicationCredentialList(d, schemas.UpdateApplicationSettingsInput_CredentialsToRemove, &v.CredentialsToRemove)
+		case schemas.UpdateApplicationSettingsInput_DatabaseArn:
+			v.DatabaseArn = new(string)
+			return d.ReadString(schemas.UpdateApplicationSettingsInput_DatabaseArn, v.DatabaseArn)
+		}
+		return nil
+	})
+}
+
 type UpdateApplicationSettingsOutput struct {
 
 	// The update message.
@@ -65,16 +109,38 @@ type UpdateApplicationSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateApplicationSettingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateApplicationSettingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateApplicationSettingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.UpdateApplicationSettingsOutput_Message, *v.Message)
+	}
+	serializeOperationIdList(s, schemas.UpdateApplicationSettingsOutput_OperationIds, v.OperationIds)
+}
+func (v *UpdateApplicationSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateApplicationSettingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateApplicationSettingsOutput_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UpdateApplicationSettingsOutput_Message, v.Message)
+		case schemas.UpdateApplicationSettingsOutput_OperationIds:
+			return deserializeOperationIdList(d, schemas.UpdateApplicationSettingsOutput_OperationIds, &v.OperationIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateApplicationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateApplicationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplicationSettings, schemas.UpdateApplicationSettingsInput, schemas.UpdateApplicationSettingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateApplicationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateApplicationSettings, schemas.UpdateApplicationSettingsInput, schemas.UpdateApplicationSettingsOutput), output: &UpdateApplicationSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateApplicationSettings"); err != nil {

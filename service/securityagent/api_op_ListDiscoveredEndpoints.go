@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,30 @@ type ListDiscoveredEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDiscoveredEndpointsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDiscoveredEndpointsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDiscoveredEndpointsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.ListDiscoveredEndpointsInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDiscoveredEndpointsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDiscoveredEndpointsInput_nextToken, *v.NextToken)
+	}
+	if v.PentestJobId != nil {
+		s.WriteString(schemas.ListDiscoveredEndpointsInput_pentestJobId, *v.PentestJobId)
+	}
+	if v.Prefix != nil {
+		s.WriteString(schemas.ListDiscoveredEndpointsInput_prefix, *v.Prefix)
+	}
+}
+
 // Output for the ListDiscoveredEndpoints operation.
 type ListDiscoveredEndpointsOutput struct {
 
@@ -71,16 +97,26 @@ type ListDiscoveredEndpointsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDiscoveredEndpointsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDiscoveredEndpointsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDiscoveredEndpointsOutput_discoveredEndpoints:
+			return deserializeDiscoveredEndpointList(d, schemas.ListDiscoveredEndpointsOutput_discoveredEndpoints, &v.DiscoveredEndpoints)
+		case schemas.ListDiscoveredEndpointsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDiscoveredEndpointsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDiscoveredEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDiscoveredEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDiscoveredEndpoints, schemas.ListDiscoveredEndpointsInput, schemas.ListDiscoveredEndpointsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDiscoveredEndpoints{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDiscoveredEndpoints, schemas.ListDiscoveredEndpointsInput, schemas.ListDiscoveredEndpointsOutput), output: &ListDiscoveredEndpointsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDiscoveredEndpoints"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,21 @@ type ListProxiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProxiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProxiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProxiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProxiesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProxiesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListProxiesOutput struct {
 
 	// When you request a list of objects with a MaxResults setting, if the number of
@@ -66,16 +83,26 @@ type ListProxiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProxiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProxiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProxiesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProxiesResponse_NextToken, v.NextToken)
+		case schemas.ListProxiesResponse_Proxies:
+			return deserializeProxies(d, schemas.ListProxiesResponse_Proxies, &v.Proxies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProxiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListProxies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProxies, schemas.ListProxiesRequest, schemas.ListProxiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListProxies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProxies, schemas.ListProxiesRequest, schemas.ListProxiesResponse), output: &ListProxiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProxies"); err != nil {

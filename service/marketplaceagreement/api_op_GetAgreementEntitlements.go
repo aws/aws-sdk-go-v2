@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,24 @@ type GetAgreementEntitlementsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgreementEntitlementsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAgreementEntitlementsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAgreementEntitlementsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.GetAgreementEntitlementsInput_agreementId, *v.AgreementId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.GetAgreementEntitlementsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAgreementEntitlementsInput_nextToken, *v.NextToken)
+	}
+}
+
 type GetAgreementEntitlementsOutput struct {
 
 	// A list of agreement entitlements which are part of the latest agreement.
@@ -57,16 +77,26 @@ type GetAgreementEntitlementsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAgreementEntitlementsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAgreementEntitlementsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAgreementEntitlementsOutput_agreementEntitlements:
+			return deserializeAgreementEntitlementList(d, schemas.GetAgreementEntitlementsOutput_agreementEntitlements, &v.AgreementEntitlements)
+		case schemas.GetAgreementEntitlementsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAgreementEntitlementsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAgreementEntitlementsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetAgreementEntitlements{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgreementEntitlements, schemas.GetAgreementEntitlementsInput, schemas.GetAgreementEntitlementsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetAgreementEntitlements{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAgreementEntitlements, schemas.GetAgreementEntitlementsInput, schemas.GetAgreementEntitlementsOutput), output: &GetAgreementEntitlementsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAgreementEntitlements"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/costandusagereportservice/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,18 @@ type DeleteReportDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReportDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteReportDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteReportDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportName != nil {
+		s.WriteString(schemas.DeleteReportDefinitionRequest_ReportName, *v.ReportName)
+	}
+}
+
 // If the action is successful, the service sends back an HTTP 200 response.
 type DeleteReportDefinitionOutput struct {
 
@@ -51,16 +65,24 @@ type DeleteReportDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteReportDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteReportDefinitionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteReportDefinitionResponse_ResponseMessage:
+			v.ResponseMessage = new(string)
+			return d.ReadString(schemas.DeleteReportDefinitionResponse_ResponseMessage, v.ResponseMessage)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteReportDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteReportDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReportDefinition, schemas.DeleteReportDefinitionRequest, schemas.DeleteReportDefinitionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteReportDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteReportDefinition, schemas.DeleteReportDefinitionRequest, schemas.DeleteReportDefinitionResponse), output: &DeleteReportDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteReportDefinition"); err != nil {

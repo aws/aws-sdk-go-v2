@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,60 @@ type StartAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAppInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartAppInput_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.StartAppInput_Description, *v.Description)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.StartAppInput_Domain, *v.Domain)
+	}
+	if v.LaunchOverrides != nil {
+		s.WriteStruct(schemas.StartAppInput_LaunchOverrides)
+		v.LaunchOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartAppInput_Name, *v.Name)
+	}
+	if v.Simulation != nil {
+		s.WriteString(schemas.StartAppInput_Simulation, *v.Simulation)
+	}
+}
+func (v *StartAppInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAppInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAppInput_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.StartAppInput_ClientToken, v.ClientToken)
+		case schemas.StartAppInput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.StartAppInput_Description, v.Description)
+		case schemas.StartAppInput_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.StartAppInput_Domain, v.Domain)
+		case schemas.StartAppInput_LaunchOverrides:
+			v.LaunchOverrides = &types.LaunchOverrides{}
+			return v.LaunchOverrides.Deserialize(d)
+		case schemas.StartAppInput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartAppInput_Name, v.Name)
+		case schemas.StartAppInput_Simulation:
+			v.Simulation = new(string)
+			return d.ReadString(schemas.StartAppInput_Simulation, v.Simulation)
+		}
+		return nil
+	})
+}
+
 type StartAppOutput struct {
 
 	// The name of the domain of the app.
@@ -75,16 +131,47 @@ type StartAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartAppOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.StartAppOutput_Domain, *v.Domain)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartAppOutput_Name, *v.Name)
+	}
+	if v.Simulation != nil {
+		s.WriteString(schemas.StartAppOutput_Simulation, *v.Simulation)
+	}
+}
+func (v *StartAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartAppOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartAppOutput_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.StartAppOutput_Domain, v.Domain)
+		case schemas.StartAppOutput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartAppOutput_Name, v.Name)
+		case schemas.StartAppOutput_Simulation:
+			v.Simulation = new(string)
+			return d.ReadString(schemas.StartAppOutput_Simulation, v.Simulation)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartApp, schemas.StartAppInput, schemas.StartAppOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartApp, schemas.StartAppInput, schemas.StartAppOutput), output: &StartAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartApp"); err != nil {

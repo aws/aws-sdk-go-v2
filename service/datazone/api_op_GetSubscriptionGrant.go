@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +43,21 @@ type GetSubscriptionGrantInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSubscriptionGrantInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSubscriptionGrantInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSubscriptionGrantInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetSubscriptionGrantInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetSubscriptionGrantInput_identifier, *v.Identifier)
+	}
 }
 
 type GetSubscriptionGrantOutput struct {
@@ -105,16 +122,59 @@ type GetSubscriptionGrantOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSubscriptionGrantOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSubscriptionGrantOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSubscriptionGrantOutput_assets:
+			return deserializeSubscribedAssets(d, schemas.GetSubscriptionGrantOutput_assets, &v.Assets)
+		case schemas.GetSubscriptionGrantOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSubscriptionGrantOutput_createdAt, v.CreatedAt)
+		case schemas.GetSubscriptionGrantOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetSubscriptionGrantOutput_createdBy, v.CreatedBy)
+		case schemas.GetSubscriptionGrantOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetSubscriptionGrantOutput_domainId, v.DomainId)
+		case schemas.GetSubscriptionGrantOutput_environmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.GetSubscriptionGrantOutput_environmentId, v.EnvironmentId)
+		case schemas.GetSubscriptionGrantOutput_grantedEntity:
+			return deserializeGrantedEntity(d, schemas.GetSubscriptionGrantOutput_grantedEntity, &v.GrantedEntity)
+		case schemas.GetSubscriptionGrantOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetSubscriptionGrantOutput_id, v.Id)
+		case schemas.GetSubscriptionGrantOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetSubscriptionGrantOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SubscriptionGrantOverallStatus(ev)
+			return nil
+		case schemas.GetSubscriptionGrantOutput_subscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.GetSubscriptionGrantOutput_subscriptionId, v.SubscriptionId)
+		case schemas.GetSubscriptionGrantOutput_subscriptionTargetId:
+			v.SubscriptionTargetId = new(string)
+			return d.ReadString(schemas.GetSubscriptionGrantOutput_subscriptionTargetId, v.SubscriptionTargetId)
+		case schemas.GetSubscriptionGrantOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSubscriptionGrantOutput_updatedAt, v.UpdatedAt)
+		case schemas.GetSubscriptionGrantOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetSubscriptionGrantOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSubscriptionGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSubscriptionGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscriptionGrant, schemas.GetSubscriptionGrantInput, schemas.GetSubscriptionGrantOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSubscriptionGrant{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSubscriptionGrant, schemas.GetSubscriptionGrantInput, schemas.GetSubscriptionGrantOutput), output: &GetSubscriptionGrantOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSubscriptionGrant"); err != nil {

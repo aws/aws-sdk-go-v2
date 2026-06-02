@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,6 +68,31 @@ type AmendBenefitApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmendBenefitApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AmendBenefitApplicationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AmendBenefitApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmendmentReason != nil {
+		s.WriteString(schemas.AmendBenefitApplicationInput_AmendmentReason, *v.AmendmentReason)
+	}
+	serializeAmendmentList(s, schemas.AmendBenefitApplicationInput_Amendments, v.Amendments)
+	if v.Catalog != nil {
+		s.WriteString(schemas.AmendBenefitApplicationInput_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.AmendBenefitApplicationInput_ClientToken, *v.ClientToken)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.AmendBenefitApplicationInput_Identifier, *v.Identifier)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.AmendBenefitApplicationInput_Revision, *v.Revision)
+	}
+}
+
 type AmendBenefitApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -73,16 +100,21 @@ type AmendBenefitApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AmendBenefitApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AmendBenefitApplicationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAmendBenefitApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAmendBenefitApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AmendBenefitApplication, schemas.AmendBenefitApplicationInput, schemas.AmendBenefitApplicationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAmendBenefitApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AmendBenefitApplication, schemas.AmendBenefitApplicationInput, schemas.AmendBenefitApplicationOutput), output: &AmendBenefitApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AmendBenefitApplication"); err != nil {

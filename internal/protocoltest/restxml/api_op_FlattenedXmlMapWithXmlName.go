@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,16 @@ type FlattenedXmlMapWithXmlNameInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlattenedXmlMapWithXmlNameInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlattenedXmlMapWithXmlNameRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlattenedXmlMapWithXmlNameInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFlattenedXmlMapWithXmlNameInputOutputMap(s, schemas.FlattenedXmlMapWithXmlNameRequest_myMap, v.MyMap)
+}
+
 type FlattenedXmlMapWithXmlNameOutput struct {
 	MyMap map[string]string
 
@@ -41,16 +53,23 @@ type FlattenedXmlMapWithXmlNameOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlattenedXmlMapWithXmlNameOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlattenedXmlMapWithXmlNameResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlattenedXmlMapWithXmlNameResponse_myMap:
+			return deserializeFlattenedXmlMapWithXmlNameInputOutputMap(d, schemas.FlattenedXmlMapWithXmlNameResponse_myMap, &v.MyMap)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationFlattenedXmlMapWithXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpFlattenedXmlMapWithXmlName{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FlattenedXmlMapWithXmlName, schemas.FlattenedXmlMapWithXmlNameRequest, schemas.FlattenedXmlMapWithXmlNameResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpFlattenedXmlMapWithXmlName{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.FlattenedXmlMapWithXmlName, schemas.FlattenedXmlMapWithXmlNameRequest, schemas.FlattenedXmlMapWithXmlNameResponse), output: &FlattenedXmlMapWithXmlNameOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "FlattenedXmlMapWithXmlName"); err != nil {

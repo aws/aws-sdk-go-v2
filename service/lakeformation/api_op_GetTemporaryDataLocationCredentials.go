@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -77,6 +79,27 @@ type GetTemporaryDataLocationCredentialsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemporaryDataLocationCredentialsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTemporaryDataLocationCredentialsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTemporaryDataLocationCredentialsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuditContext != nil {
+		s.WriteStruct(schemas.GetTemporaryDataLocationCredentialsRequest_AuditContext)
+		v.AuditContext.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CredentialsScope != "" {
+		s.WriteString(schemas.GetTemporaryDataLocationCredentialsRequest_CredentialsScope, string(v.CredentialsScope))
+	}
+	serializePathStringList(s, schemas.GetTemporaryDataLocationCredentialsRequest_DataLocations, v.DataLocations)
+	if v.DurationSeconds != nil {
+		s.WriteInt32(schemas.GetTemporaryDataLocationCredentialsRequest_DurationSeconds, *v.DurationSeconds)
+	}
+}
+
 type GetTemporaryDataLocationCredentialsOutput struct {
 
 	// Refers to the Amazon S3 locations that can be accessed through the
@@ -106,16 +129,33 @@ type GetTemporaryDataLocationCredentialsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTemporaryDataLocationCredentialsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTemporaryDataLocationCredentialsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTemporaryDataLocationCredentialsResponse_AccessibleDataLocations:
+			return deserializePathStringList(d, schemas.GetTemporaryDataLocationCredentialsResponse_AccessibleDataLocations, &v.AccessibleDataLocations)
+		case schemas.GetTemporaryDataLocationCredentialsResponse_Credentials:
+			v.Credentials = &types.TemporaryCredentials{}
+			return v.Credentials.Deserialize(d)
+		case schemas.GetTemporaryDataLocationCredentialsResponse_CredentialsScope:
+			var ev string
+			if err := d.ReadString(schemas.GetTemporaryDataLocationCredentialsResponse_CredentialsScope, &ev); err != nil {
+				return err
+			}
+			v.CredentialsScope = types.CredentialsScope(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTemporaryDataLocationCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTemporaryDataLocationCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemporaryDataLocationCredentials, schemas.GetTemporaryDataLocationCredentialsRequest, schemas.GetTemporaryDataLocationCredentialsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTemporaryDataLocationCredentials{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTemporaryDataLocationCredentials, schemas.GetTemporaryDataLocationCredentialsRequest, schemas.GetTemporaryDataLocationCredentialsResponse), output: &GetTemporaryDataLocationCredentialsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTemporaryDataLocationCredentials"); err != nil {

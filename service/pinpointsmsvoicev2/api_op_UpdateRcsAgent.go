@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -63,6 +65,36 @@ type UpdateRcsAgentInput struct {
 	TwoWayEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateRcsAgentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRcsAgentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRcsAgentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionProtectionEnabled != nil {
+		s.WriteBool(schemas.UpdateRcsAgentRequest_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
+	}
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.UpdateRcsAgentRequest_OptOutListName, *v.OptOutListName)
+	}
+	if v.RcsAgentId != nil {
+		s.WriteString(schemas.UpdateRcsAgentRequest_RcsAgentId, *v.RcsAgentId)
+	}
+	if v.SelfManagedOptOutsEnabled != nil {
+		s.WriteBool(schemas.UpdateRcsAgentRequest_SelfManagedOptOutsEnabled, *v.SelfManagedOptOutsEnabled)
+	}
+	if v.TwoWayChannelArn != nil {
+		s.WriteString(schemas.UpdateRcsAgentRequest_TwoWayChannelArn, *v.TwoWayChannelArn)
+	}
+	if v.TwoWayChannelRole != nil {
+		s.WriteString(schemas.UpdateRcsAgentRequest_TwoWayChannelRole, *v.TwoWayChannelRole)
+	}
+	if v.TwoWayEnabled != nil {
+		s.WriteBool(schemas.UpdateRcsAgentRequest_TwoWayEnabled, *v.TwoWayEnabled)
+	}
 }
 
 type UpdateRcsAgentOutput struct {
@@ -124,16 +156,52 @@ type UpdateRcsAgentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRcsAgentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRcsAgentResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRcsAgentResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.UpdateRcsAgentResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.UpdateRcsAgentResult_DeletionProtectionEnabled:
+			return d.ReadBool(schemas.UpdateRcsAgentResult_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
+		case schemas.UpdateRcsAgentResult_OptOutListName:
+			v.OptOutListName = new(string)
+			return d.ReadString(schemas.UpdateRcsAgentResult_OptOutListName, v.OptOutListName)
+		case schemas.UpdateRcsAgentResult_RcsAgentArn:
+			v.RcsAgentArn = new(string)
+			return d.ReadString(schemas.UpdateRcsAgentResult_RcsAgentArn, v.RcsAgentArn)
+		case schemas.UpdateRcsAgentResult_RcsAgentId:
+			v.RcsAgentId = new(string)
+			return d.ReadString(schemas.UpdateRcsAgentResult_RcsAgentId, v.RcsAgentId)
+		case schemas.UpdateRcsAgentResult_SelfManagedOptOutsEnabled:
+			return d.ReadBool(schemas.UpdateRcsAgentResult_SelfManagedOptOutsEnabled, &v.SelfManagedOptOutsEnabled)
+		case schemas.UpdateRcsAgentResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRcsAgentResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RcsAgentStatus(ev)
+			return nil
+		case schemas.UpdateRcsAgentResult_TwoWayChannelArn:
+			v.TwoWayChannelArn = new(string)
+			return d.ReadString(schemas.UpdateRcsAgentResult_TwoWayChannelArn, v.TwoWayChannelArn)
+		case schemas.UpdateRcsAgentResult_TwoWayChannelRole:
+			v.TwoWayChannelRole = new(string)
+			return d.ReadString(schemas.UpdateRcsAgentResult_TwoWayChannelRole, v.TwoWayChannelRole)
+		case schemas.UpdateRcsAgentResult_TwoWayEnabled:
+			return d.ReadBool(schemas.UpdateRcsAgentResult_TwoWayEnabled, &v.TwoWayEnabled)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRcsAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateRcsAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRcsAgent, schemas.UpdateRcsAgentRequest, schemas.UpdateRcsAgentResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateRcsAgent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRcsAgent, schemas.UpdateRcsAgentRequest, schemas.UpdateRcsAgentResult), output: &UpdateRcsAgentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRcsAgent"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type DescribeClassificationJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeClassificationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeClassificationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeClassificationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.DescribeClassificationJobRequest_jobId, *v.JobId)
+	}
 }
 
 type DescribeClassificationJobOutput struct {
@@ -189,16 +203,92 @@ type DescribeClassificationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeClassificationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeClassificationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeClassificationJobResponse_allowListIds:
+			return deserialize__listOf__string(d, schemas.DescribeClassificationJobResponse_allowListIds, &v.AllowListIds)
+		case schemas.DescribeClassificationJobResponse_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DescribeClassificationJobResponse_clientToken, v.ClientToken)
+		case schemas.DescribeClassificationJobResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeClassificationJobResponse_createdAt, v.CreatedAt)
+		case schemas.DescribeClassificationJobResponse_customDataIdentifierIds:
+			return deserialize__listOf__string(d, schemas.DescribeClassificationJobResponse_customDataIdentifierIds, &v.CustomDataIdentifierIds)
+		case schemas.DescribeClassificationJobResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeClassificationJobResponse_description, v.Description)
+		case schemas.DescribeClassificationJobResponse_initialRun:
+			v.InitialRun = new(bool)
+			return d.ReadBool(schemas.DescribeClassificationJobResponse_initialRun, v.InitialRun)
+		case schemas.DescribeClassificationJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.DescribeClassificationJobResponse_jobArn, v.JobArn)
+		case schemas.DescribeClassificationJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.DescribeClassificationJobResponse_jobId, v.JobId)
+		case schemas.DescribeClassificationJobResponse_jobStatus:
+			var ev string
+			if err := d.ReadString(schemas.DescribeClassificationJobResponse_jobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		case schemas.DescribeClassificationJobResponse_jobType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeClassificationJobResponse_jobType, &ev); err != nil {
+				return err
+			}
+			v.JobType = types.JobType(ev)
+			return nil
+		case schemas.DescribeClassificationJobResponse_lastRunErrorStatus:
+			v.LastRunErrorStatus = &types.LastRunErrorStatus{}
+			return v.LastRunErrorStatus.Deserialize(d)
+		case schemas.DescribeClassificationJobResponse_lastRunTime:
+			v.LastRunTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeClassificationJobResponse_lastRunTime, v.LastRunTime)
+		case schemas.DescribeClassificationJobResponse_managedDataIdentifierIds:
+			return deserialize__listOf__string(d, schemas.DescribeClassificationJobResponse_managedDataIdentifierIds, &v.ManagedDataIdentifierIds)
+		case schemas.DescribeClassificationJobResponse_managedDataIdentifierSelector:
+			var ev string
+			if err := d.ReadString(schemas.DescribeClassificationJobResponse_managedDataIdentifierSelector, &ev); err != nil {
+				return err
+			}
+			v.ManagedDataIdentifierSelector = types.ManagedDataIdentifierSelector(ev)
+			return nil
+		case schemas.DescribeClassificationJobResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeClassificationJobResponse_name, v.Name)
+		case schemas.DescribeClassificationJobResponse_s3JobDefinition:
+			v.S3JobDefinition = &types.S3JobDefinition{}
+			return v.S3JobDefinition.Deserialize(d)
+		case schemas.DescribeClassificationJobResponse_samplingPercentage:
+			v.SamplingPercentage = new(int32)
+			return d.ReadInt32(schemas.DescribeClassificationJobResponse_samplingPercentage, v.SamplingPercentage)
+		case schemas.DescribeClassificationJobResponse_scheduleFrequency:
+			v.ScheduleFrequency = &types.JobScheduleFrequency{}
+			return v.ScheduleFrequency.Deserialize(d)
+		case schemas.DescribeClassificationJobResponse_statistics:
+			v.Statistics = &types.Statistics{}
+			return v.Statistics.Deserialize(d)
+		case schemas.DescribeClassificationJobResponse_tags:
+			return deserializeTagMap(d, schemas.DescribeClassificationJobResponse_tags, &v.Tags)
+		case schemas.DescribeClassificationJobResponse_userPausedDetails:
+			v.UserPausedDetails = &types.UserPausedDetails{}
+			return v.UserPausedDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeClassificationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClassificationJob, schemas.DescribeClassificationJobRequest, schemas.DescribeClassificationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeClassificationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeClassificationJob, schemas.DescribeClassificationJobRequest, schemas.DescribeClassificationJobResponse), output: &DescribeClassificationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeClassificationJob"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/launchwizard/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/launchwizard/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,24 @@ type GetDeploymentPatternVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentPatternVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeploymentPatternVersionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeploymentPatternVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeploymentPatternName != nil {
+		s.WriteString(schemas.GetDeploymentPatternVersionInput_deploymentPatternName, *v.DeploymentPatternName)
+	}
+	if v.DeploymentPatternVersionName != nil {
+		s.WriteString(schemas.GetDeploymentPatternVersionInput_deploymentPatternVersionName, *v.DeploymentPatternVersionName)
+	}
+	if v.WorkloadName != nil {
+		s.WriteString(schemas.GetDeploymentPatternVersionInput_workloadName, *v.WorkloadName)
+	}
+}
+
 type GetDeploymentPatternVersionOutput struct {
 
 	// The deployment pattern version.
@@ -65,16 +85,24 @@ type GetDeploymentPatternVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeploymentPatternVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeploymentPatternVersionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeploymentPatternVersionOutput_deploymentPatternVersion:
+			v.DeploymentPatternVersion = &types.DeploymentPatternVersionDataSummary{}
+			return v.DeploymentPatternVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeploymentPatternVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeploymentPatternVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeploymentPatternVersion, schemas.GetDeploymentPatternVersionInput, schemas.GetDeploymentPatternVersionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeploymentPatternVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeploymentPatternVersion, schemas.GetDeploymentPatternVersionInput, schemas.GetDeploymentPatternVersionOutput), output: &GetDeploymentPatternVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDeploymentPatternVersion"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,31 @@ type AttachObjectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachObjectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AttachObjectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AttachObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChildReference != nil {
+		s.WriteStruct(schemas.AttachObjectRequest_ChildReference)
+		v.ChildReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.AttachObjectRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.LinkName != nil {
+		s.WriteString(schemas.AttachObjectRequest_LinkName, *v.LinkName)
+	}
+	if v.ParentReference != nil {
+		s.WriteStruct(schemas.AttachObjectRequest_ParentReference)
+		v.ParentReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AttachObjectOutput struct {
 
 	// The attached ObjectIdentifier , which is the child ObjectIdentifier .
@@ -69,16 +96,24 @@ type AttachObjectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AttachObjectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AttachObjectResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AttachObjectResponse_AttachedObjectIdentifier:
+			v.AttachedObjectIdentifier = new(string)
+			return d.ReadString(schemas.AttachObjectResponse_AttachedObjectIdentifier, v.AttachedObjectIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAttachObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAttachObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachObject, schemas.AttachObjectRequest, schemas.AttachObjectResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAttachObject{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AttachObject, schemas.AttachObjectRequest, schemas.AttachObjectResponse), output: &AttachObjectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AttachObject"); err != nil {

@@ -7,7 +7,9 @@ import (
 	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,6 +43,28 @@ type GetReplicationSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReplicationSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReplicationSetInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReplicationSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetReplicationSetInput_arn, *v.Arn)
+	}
+}
+func (v *GetReplicationSetInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReplicationSetInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReplicationSetInput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetReplicationSetInput_arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type GetReplicationSetOutput struct {
 
 	// Details of the replication set.
@@ -54,16 +78,37 @@ type GetReplicationSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetReplicationSetOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetReplicationSetOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetReplicationSetOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReplicationSet != nil {
+		s.WriteStruct(schemas.GetReplicationSetOutput_replicationSet)
+		v.ReplicationSet.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetReplicationSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetReplicationSetOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetReplicationSetOutput_replicationSet:
+			v.ReplicationSet = &types.ReplicationSet{}
+			return v.ReplicationSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetReplicationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetReplicationSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReplicationSet, schemas.GetReplicationSetInput, schemas.GetReplicationSetOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetReplicationSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetReplicationSet, schemas.GetReplicationSetInput, schemas.GetReplicationSetOutput), output: &GetReplicationSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetReplicationSet"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -79,6 +81,38 @@ type CreatePortalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePortalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePortalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePortalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEncryptionContextMap(s, schemas.CreatePortalRequest_additionalEncryptionContext, v.AdditionalEncryptionContext)
+	if v.AuthenticationType != "" {
+		s.WriteString(schemas.CreatePortalRequest_authenticationType, string(v.AuthenticationType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePortalRequest_clientToken, *v.ClientToken)
+	}
+	if v.CustomerManagedKey != nil {
+		s.WriteString(schemas.CreatePortalRequest_customerManagedKey, *v.CustomerManagedKey)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreatePortalRequest_displayName, *v.DisplayName)
+	}
+	if v.InstanceType != "" {
+		s.WriteString(schemas.CreatePortalRequest_instanceType, string(v.InstanceType))
+	}
+	if v.MaxConcurrentSessions != nil {
+		s.WriteInt32(schemas.CreatePortalRequest_maxConcurrentSessions, *v.MaxConcurrentSessions)
+	}
+	if v.PortalCustomDomain != nil {
+		s.WriteString(schemas.CreatePortalRequest_portalCustomDomain, *v.PortalCustomDomain)
+	}
+	serializeTagList(s, schemas.CreatePortalRequest_tags, v.Tags)
+}
+
 type CreatePortalOutput struct {
 
 	// The ARN of the web portal.
@@ -98,16 +132,27 @@ type CreatePortalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePortalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePortalResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePortalResponse_portalArn:
+			v.PortalArn = new(string)
+			return d.ReadString(schemas.CreatePortalResponse_portalArn, v.PortalArn)
+		case schemas.CreatePortalResponse_portalEndpoint:
+			v.PortalEndpoint = new(string)
+			return d.ReadString(schemas.CreatePortalResponse_portalEndpoint, v.PortalEndpoint)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePortal, schemas.CreatePortalRequest, schemas.CreatePortalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePortal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePortal, schemas.CreatePortalRequest, schemas.CreatePortalResponse), output: &CreatePortalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePortal"); err != nil {

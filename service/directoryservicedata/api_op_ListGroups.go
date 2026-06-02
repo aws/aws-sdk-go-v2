@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservicedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +63,27 @@ type ListGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ListGroupsRequest_DirectoryId, *v.DirectoryId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGroupsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGroupsRequest_NextToken, *v.NextToken)
+	}
+	if v.Realm != nil {
+		s.WriteString(schemas.ListGroupsRequest_Realm, *v.Realm)
+	}
+}
+
 type ListGroupsOutput struct {
 
 	//  The identifier (ID) of the directory that's associated with the group.
@@ -82,16 +105,32 @@ type ListGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGroupsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGroupsResult_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.ListGroupsResult_DirectoryId, v.DirectoryId)
+		case schemas.ListGroupsResult_Groups:
+			return deserializeGroupSummaryList(d, schemas.ListGroupsResult_Groups, &v.Groups)
+		case schemas.ListGroupsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGroupsResult_NextToken, v.NextToken)
+		case schemas.ListGroupsResult_Realm:
+			v.Realm = new(string)
+			return d.ReadString(schemas.ListGroupsResult_Realm, v.Realm)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroups, schemas.ListGroupsRequest, schemas.ListGroupsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGroups, schemas.ListGroupsRequest, schemas.ListGroupsResult), output: &ListGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGroups"); err != nil {

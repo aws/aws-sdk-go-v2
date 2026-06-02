@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,6 +65,24 @@ type StartServiceSoftwareUpdateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartServiceSoftwareUpdateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartServiceSoftwareUpdateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartServiceSoftwareUpdateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DesiredStartTime != nil {
+		s.WriteInt64(schemas.StartServiceSoftwareUpdateRequest_DesiredStartTime, *v.DesiredStartTime)
+	}
+	if v.DomainName != nil {
+		s.WriteString(schemas.StartServiceSoftwareUpdateRequest_DomainName, *v.DomainName)
+	}
+	if v.ScheduleAt != "" {
+		s.WriteString(schemas.StartServiceSoftwareUpdateRequest_ScheduleAt, string(v.ScheduleAt))
+	}
+}
+
 // Represents the output of a StartServiceSoftwareUpdate operation. Contains the
 // status of the update.
 type StartServiceSoftwareUpdateOutput struct {
@@ -76,16 +96,24 @@ type StartServiceSoftwareUpdateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartServiceSoftwareUpdateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartServiceSoftwareUpdateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartServiceSoftwareUpdateResponse_ServiceSoftwareOptions:
+			v.ServiceSoftwareOptions = &types.ServiceSoftwareOptions{}
+			return v.ServiceSoftwareOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartServiceSoftwareUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartServiceSoftwareUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartServiceSoftwareUpdate, schemas.StartServiceSoftwareUpdateRequest, schemas.StartServiceSoftwareUpdateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartServiceSoftwareUpdate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartServiceSoftwareUpdate, schemas.StartServiceSoftwareUpdateRequest, schemas.StartServiceSoftwareUpdateResponse), output: &StartServiceSoftwareUpdateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartServiceSoftwareUpdate"); err != nil {

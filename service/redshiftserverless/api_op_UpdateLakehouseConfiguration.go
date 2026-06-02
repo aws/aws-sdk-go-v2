@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,6 +65,33 @@ type UpdateLakehouseConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLakehouseConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateLakehouseConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateLakehouseConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogName != nil {
+		s.WriteString(schemas.UpdateLakehouseConfigurationRequest_catalogName, *v.CatalogName)
+	}
+	if v.DryRun != nil {
+		s.WriteBool(schemas.UpdateLakehouseConfigurationRequest_dryRun, *v.DryRun)
+	}
+	if v.LakehouseIdcApplicationArn != nil {
+		s.WriteString(schemas.UpdateLakehouseConfigurationRequest_lakehouseIdcApplicationArn, *v.LakehouseIdcApplicationArn)
+	}
+	if v.LakehouseIdcRegistration != "" {
+		s.WriteString(schemas.UpdateLakehouseConfigurationRequest_lakehouseIdcRegistration, string(v.LakehouseIdcRegistration))
+	}
+	if v.LakehouseRegistration != "" {
+		s.WriteString(schemas.UpdateLakehouseConfigurationRequest_lakehouseRegistration, string(v.LakehouseRegistration))
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.UpdateLakehouseConfigurationRequest_namespaceName, *v.NamespaceName)
+	}
+}
+
 type UpdateLakehouseConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Glue Data Catalog associated with the
@@ -86,16 +115,33 @@ type UpdateLakehouseConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateLakehouseConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateLakehouseConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateLakehouseConfigurationResponse_catalogArn:
+			v.CatalogArn = new(string)
+			return d.ReadString(schemas.UpdateLakehouseConfigurationResponse_catalogArn, v.CatalogArn)
+		case schemas.UpdateLakehouseConfigurationResponse_lakehouseIdcApplicationArn:
+			v.LakehouseIdcApplicationArn = new(string)
+			return d.ReadString(schemas.UpdateLakehouseConfigurationResponse_lakehouseIdcApplicationArn, v.LakehouseIdcApplicationArn)
+		case schemas.UpdateLakehouseConfigurationResponse_lakehouseRegistrationStatus:
+			v.LakehouseRegistrationStatus = new(string)
+			return d.ReadString(schemas.UpdateLakehouseConfigurationResponse_lakehouseRegistrationStatus, v.LakehouseRegistrationStatus)
+		case schemas.UpdateLakehouseConfigurationResponse_namespaceName:
+			v.NamespaceName = new(string)
+			return d.ReadString(schemas.UpdateLakehouseConfigurationResponse_namespaceName, v.NamespaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateLakehouseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateLakehouseConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLakehouseConfiguration, schemas.UpdateLakehouseConfigurationRequest, schemas.UpdateLakehouseConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateLakehouseConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateLakehouseConfiguration, schemas.UpdateLakehouseConfigurationRequest, schemas.UpdateLakehouseConfigurationResponse), output: &UpdateLakehouseConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateLakehouseConfiguration"); err != nil {

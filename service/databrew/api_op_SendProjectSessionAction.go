@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,37 @@ type SendProjectSessionActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendProjectSessionActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendProjectSessionActionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendProjectSessionActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientSessionId != nil {
+		s.WriteString(schemas.SendProjectSessionActionRequest_ClientSessionId, *v.ClientSessionId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SendProjectSessionActionRequest_Name, *v.Name)
+	}
+	if v.Preview != false {
+		s.WriteBool(schemas.SendProjectSessionActionRequest_Preview, v.Preview)
+	}
+	if v.RecipeStep != nil {
+		s.WriteStruct(schemas.SendProjectSessionActionRequest_RecipeStep)
+		v.RecipeStep.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StepIndex != nil {
+		s.WriteInt32(schemas.SendProjectSessionActionRequest_StepIndex, *v.StepIndex)
+	}
+	if v.ViewFrame != nil {
+		s.WriteStruct(schemas.SendProjectSessionActionRequest_ViewFrame)
+		v.ViewFrame.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SendProjectSessionActionOutput struct {
 
 	// The name of the project that was affected by the action.
@@ -75,16 +108,30 @@ type SendProjectSessionActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendProjectSessionActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendProjectSessionActionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendProjectSessionActionResponse_ActionId:
+			v.ActionId = new(int32)
+			return d.ReadInt32(schemas.SendProjectSessionActionResponse_ActionId, v.ActionId)
+		case schemas.SendProjectSessionActionResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SendProjectSessionActionResponse_Name, v.Name)
+		case schemas.SendProjectSessionActionResponse_Result:
+			v.Result = new(string)
+			return d.ReadString(schemas.SendProjectSessionActionResponse_Result, v.Result)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendProjectSessionActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendProjectSessionAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendProjectSessionAction, schemas.SendProjectSessionActionRequest, schemas.SendProjectSessionActionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendProjectSessionAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendProjectSessionAction, schemas.SendProjectSessionActionRequest, schemas.SendProjectSessionActionResponse), output: &SendProjectSessionActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SendProjectSessionAction"); err != nil {

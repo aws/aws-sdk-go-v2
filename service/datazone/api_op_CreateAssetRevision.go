@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -87,6 +89,40 @@ type CreateAssetRevisionInput struct {
 	TypeRevision *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateAssetRevisionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAssetRevisionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAssetRevisionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAssetRevisionInput_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAssetRevisionInput_description, *v.Description)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CreateAssetRevisionInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	serializeFormInputList(s, schemas.CreateAssetRevisionInput_formsInput, v.FormsInput)
+	serializeGlossaryTerms(s, schemas.CreateAssetRevisionInput_glossaryTerms, v.GlossaryTerms)
+	if v.Identifier != nil {
+		s.WriteString(schemas.CreateAssetRevisionInput_identifier, *v.Identifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAssetRevisionInput_name, *v.Name)
+	}
+	if v.PredictionConfiguration != nil {
+		s.WriteStruct(schemas.CreateAssetRevisionInput_predictionConfiguration)
+		v.PredictionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TypeRevision != nil {
+		s.WriteString(schemas.CreateAssetRevisionInput_typeRevision, *v.TypeRevision)
+	}
 }
 
 type CreateAssetRevisionOutput struct {
@@ -177,16 +213,76 @@ type CreateAssetRevisionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAssetRevisionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAssetRevisionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAssetRevisionOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateAssetRevisionOutput_createdAt, v.CreatedAt)
+		case schemas.CreateAssetRevisionOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.CreateAssetRevisionOutput_createdBy, v.CreatedBy)
+		case schemas.CreateAssetRevisionOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateAssetRevisionOutput_description, v.Description)
+		case schemas.CreateAssetRevisionOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.CreateAssetRevisionOutput_domainId, v.DomainId)
+		case schemas.CreateAssetRevisionOutput_externalIdentifier:
+			v.ExternalIdentifier = new(string)
+			return d.ReadString(schemas.CreateAssetRevisionOutput_externalIdentifier, v.ExternalIdentifier)
+		case schemas.CreateAssetRevisionOutput_firstRevisionCreatedAt:
+			v.FirstRevisionCreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateAssetRevisionOutput_firstRevisionCreatedAt, v.FirstRevisionCreatedAt)
+		case schemas.CreateAssetRevisionOutput_firstRevisionCreatedBy:
+			v.FirstRevisionCreatedBy = new(string)
+			return d.ReadString(schemas.CreateAssetRevisionOutput_firstRevisionCreatedBy, v.FirstRevisionCreatedBy)
+		case schemas.CreateAssetRevisionOutput_formsOutput:
+			return deserializeFormOutputList(d, schemas.CreateAssetRevisionOutput_formsOutput, &v.FormsOutput)
+		case schemas.CreateAssetRevisionOutput_glossaryTerms:
+			return deserializeGlossaryTerms(d, schemas.CreateAssetRevisionOutput_glossaryTerms, &v.GlossaryTerms)
+		case schemas.CreateAssetRevisionOutput_governedGlossaryTerms:
+			return deserializeGovernedGlossaryTerms(d, schemas.CreateAssetRevisionOutput_governedGlossaryTerms, &v.GovernedGlossaryTerms)
+		case schemas.CreateAssetRevisionOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateAssetRevisionOutput_id, v.Id)
+		case schemas.CreateAssetRevisionOutput_latestTimeSeriesDataPointFormsOutput:
+			return deserializeTimeSeriesDataPointSummaryFormOutputList(d, schemas.CreateAssetRevisionOutput_latestTimeSeriesDataPointFormsOutput, &v.LatestTimeSeriesDataPointFormsOutput)
+		case schemas.CreateAssetRevisionOutput_listing:
+			v.Listing = &types.AssetListingDetails{}
+			return v.Listing.Deserialize(d)
+		case schemas.CreateAssetRevisionOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateAssetRevisionOutput_name, v.Name)
+		case schemas.CreateAssetRevisionOutput_owningProjectId:
+			v.OwningProjectId = new(string)
+			return d.ReadString(schemas.CreateAssetRevisionOutput_owningProjectId, v.OwningProjectId)
+		case schemas.CreateAssetRevisionOutput_predictionConfiguration:
+			v.PredictionConfiguration = &types.PredictionConfiguration{}
+			return v.PredictionConfiguration.Deserialize(d)
+		case schemas.CreateAssetRevisionOutput_readOnlyFormsOutput:
+			return deserializeFormOutputList(d, schemas.CreateAssetRevisionOutput_readOnlyFormsOutput, &v.ReadOnlyFormsOutput)
+		case schemas.CreateAssetRevisionOutput_revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.CreateAssetRevisionOutput_revision, v.Revision)
+		case schemas.CreateAssetRevisionOutput_typeIdentifier:
+			v.TypeIdentifier = new(string)
+			return d.ReadString(schemas.CreateAssetRevisionOutput_typeIdentifier, v.TypeIdentifier)
+		case schemas.CreateAssetRevisionOutput_typeRevision:
+			v.TypeRevision = new(string)
+			return d.ReadString(schemas.CreateAssetRevisionOutput_typeRevision, v.TypeRevision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAssetRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAssetRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssetRevision, schemas.CreateAssetRevisionInput, schemas.CreateAssetRevisionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAssetRevision{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAssetRevision, schemas.CreateAssetRevisionInput, schemas.CreateAssetRevisionOutput), output: &CreateAssetRevisionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAssetRevision"); err != nil {

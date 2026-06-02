@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,25 @@ type DescribeCertificatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCertificatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCertificatesMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCertificatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateIdentifier != nil {
+		s.WriteString(schemas.DescribeCertificatesMessage_CertificateIdentifier, *v.CertificateIdentifier)
+	}
+	serializeFilterList(s, schemas.DescribeCertificatesMessage_Filters, v.Filters)
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeCertificatesMessage_Marker, *v.Marker)
+	}
+	if v.MaxRecords != nil {
+		s.WriteInt32(schemas.DescribeCertificatesMessage_MaxRecords, *v.MaxRecords)
+	}
+}
+
 type DescribeCertificatesOutput struct {
 
 	// A list of certificates for this Amazon Web Services account.
@@ -81,16 +102,26 @@ type DescribeCertificatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCertificatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateMessage_Certificates:
+			return deserializeCertificateList(d, schemas.CertificateMessage_Certificates, &v.Certificates)
+		case schemas.CertificateMessage_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.CertificateMessage_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpDescribeCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCertificates, schemas.DescribeCertificatesMessage, schemas.CertificateMessage)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpDescribeCertificates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCertificates, schemas.DescribeCertificatesMessage, schemas.CertificateMessage), output: &DescribeCertificatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCertificates"); err != nil {

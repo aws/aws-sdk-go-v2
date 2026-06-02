@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mpa/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -86,6 +88,28 @@ type CreateApprovalTeamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApprovalTeamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApprovalTeamRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApprovalTeamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApprovalStrategy(s, schemas.CreateApprovalTeamRequest_ApprovalStrategy, v.ApprovalStrategy)
+	serializeApprovalTeamRequestApprovers(s, schemas.CreateApprovalTeamRequest_Approvers, v.Approvers)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateApprovalTeamRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateApprovalTeamRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateApprovalTeamRequest_Name, *v.Name)
+	}
+	serializePoliciesReferences(s, schemas.CreateApprovalTeamRequest_Policies, v.Policies)
+	serializeTags(s, schemas.CreateApprovalTeamRequest_Tags, v.Tags)
+}
+
 type CreateApprovalTeamOutput struct {
 
 	// Amazon Resource Name (ARN) for the team that was created.
@@ -107,16 +131,33 @@ type CreateApprovalTeamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApprovalTeamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApprovalTeamResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApprovalTeamResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateApprovalTeamResponse_Arn, v.Arn)
+		case schemas.CreateApprovalTeamResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateApprovalTeamResponse_CreationTime, v.CreationTime)
+		case schemas.CreateApprovalTeamResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateApprovalTeamResponse_Name, v.Name)
+		case schemas.CreateApprovalTeamResponse_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.CreateApprovalTeamResponse_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApprovalTeamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApprovalTeam{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApprovalTeam, schemas.CreateApprovalTeamRequest, schemas.CreateApprovalTeamResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApprovalTeam{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApprovalTeam, schemas.CreateApprovalTeamRequest, schemas.CreateApprovalTeamResponse), output: &CreateApprovalTeamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateApprovalTeam"); err != nil {

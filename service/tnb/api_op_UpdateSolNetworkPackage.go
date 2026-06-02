@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,21 @@ type UpdateSolNetworkPackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSolNetworkPackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSolNetworkPackageInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSolNetworkPackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NsdInfoId != nil {
+		s.WriteString(schemas.UpdateSolNetworkPackageInput_nsdInfoId, *v.NsdInfoId)
+	}
+	if v.NsdOperationalState != "" {
+		s.WriteString(schemas.UpdateSolNetworkPackageInput_nsdOperationalState, string(v.NsdOperationalState))
+	}
+}
+
 type UpdateSolNetworkPackageOutput struct {
 
 	// Operational state of the network service descriptor in the network package.
@@ -63,16 +80,28 @@ type UpdateSolNetworkPackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSolNetworkPackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSolNetworkPackageOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSolNetworkPackageOutput_nsdOperationalState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateSolNetworkPackageOutput_nsdOperationalState, &ev); err != nil {
+				return err
+			}
+			v.NsdOperationalState = types.NsdOperationalState(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSolNetworkPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSolNetworkPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSolNetworkPackage, schemas.UpdateSolNetworkPackageInput, schemas.UpdateSolNetworkPackageOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSolNetworkPackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSolNetworkPackage, schemas.UpdateSolNetworkPackageInput, schemas.UpdateSolNetworkPackageOutput), output: &UpdateSolNetworkPackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSolNetworkPackage"); err != nil {

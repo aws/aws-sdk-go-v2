@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/arcregionswitch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type ListPlansInRegionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlansInRegionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlansInRegionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlansInRegionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListPlansInRegionRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPlansInRegionRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListPlansInRegionOutput struct {
 
 	// Specifies that you want to receive the next page of results. Valid only if you
@@ -59,16 +76,26 @@ type ListPlansInRegionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPlansInRegionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlansInRegionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlansInRegionResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPlansInRegionResponse_nextToken, v.NextToken)
+		case schemas.ListPlansInRegionResponse_plans:
+			return deserializePlanList(d, schemas.ListPlansInRegionResponse_plans, &v.Plans)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPlansInRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListPlansInRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlansInRegion, schemas.ListPlansInRegionRequest, schemas.ListPlansInRegionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListPlansInRegion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPlansInRegion, schemas.ListPlansInRegionRequest, schemas.ListPlansInRegionResponse), output: &ListPlansInRegionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPlansInRegion"); err != nil {

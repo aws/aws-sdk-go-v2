@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type DeleteWirelessDeviceImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWirelessDeviceImportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteWirelessDeviceImportTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteWirelessDeviceImportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteWirelessDeviceImportTaskRequest_Id, *v.Id)
+	}
+}
+
 type DeleteWirelessDeviceImportTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +57,21 @@ type DeleteWirelessDeviceImportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteWirelessDeviceImportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteWirelessDeviceImportTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteWirelessDeviceImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteWirelessDeviceImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWirelessDeviceImportTask, schemas.DeleteWirelessDeviceImportTaskRequest, schemas.DeleteWirelessDeviceImportTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteWirelessDeviceImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteWirelessDeviceImportTask, schemas.DeleteWirelessDeviceImportTaskRequest, schemas.DeleteWirelessDeviceImportTaskResponse), output: &DeleteWirelessDeviceImportTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteWirelessDeviceImportTask"); err != nil {

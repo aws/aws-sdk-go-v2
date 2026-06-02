@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,21 @@ type DescribeAlarmInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAlarmInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAlarmRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAlarmInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmModelName != nil {
+		s.WriteString(schemas.DescribeAlarmRequest_alarmModelName, *v.AlarmModelName)
+	}
+	if v.KeyValue != nil {
+		s.WriteString(schemas.DescribeAlarmRequest_keyValue, *v.KeyValue)
+	}
+}
+
 type DescribeAlarmOutput struct {
 
 	// Contains information about an alarm.
@@ -54,16 +71,24 @@ type DescribeAlarmOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAlarmOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAlarmResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAlarmResponse_alarm:
+			v.Alarm = &types.Alarm{}
+			return v.Alarm.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAlarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAlarm, schemas.DescribeAlarmRequest, schemas.DescribeAlarmResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAlarm{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAlarm, schemas.DescribeAlarmRequest, schemas.DescribeAlarmResponse), output: &DescribeAlarmOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAlarm"); err != nil {

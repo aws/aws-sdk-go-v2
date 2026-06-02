@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,21 @@ type GetAccountPoolInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAccountPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccountPoolInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccountPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetAccountPoolInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetAccountPoolInput_identifier, *v.Identifier)
+	}
 }
 
 type GetAccountPoolOutput struct {
@@ -92,16 +109,57 @@ type GetAccountPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccountPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccountPoolOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccountPoolOutput_accountSource:
+			return deserializeAccountSource(d, schemas.GetAccountPoolOutput_accountSource, &v.AccountSource)
+		case schemas.GetAccountPoolOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAccountPoolOutput_createdAt, v.CreatedAt)
+		case schemas.GetAccountPoolOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetAccountPoolOutput_createdBy, v.CreatedBy)
+		case schemas.GetAccountPoolOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetAccountPoolOutput_description, v.Description)
+		case schemas.GetAccountPoolOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetAccountPoolOutput_domainId, v.DomainId)
+		case schemas.GetAccountPoolOutput_domainUnitId:
+			v.DomainUnitId = new(string)
+			return d.ReadString(schemas.GetAccountPoolOutput_domainUnitId, v.DomainUnitId)
+		case schemas.GetAccountPoolOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetAccountPoolOutput_id, v.Id)
+		case schemas.GetAccountPoolOutput_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAccountPoolOutput_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetAccountPoolOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAccountPoolOutput_name, v.Name)
+		case schemas.GetAccountPoolOutput_resolutionStrategy:
+			var ev string
+			if err := d.ReadString(schemas.GetAccountPoolOutput_resolutionStrategy, &ev); err != nil {
+				return err
+			}
+			v.ResolutionStrategy = types.ResolutionStrategy(ev)
+			return nil
+		case schemas.GetAccountPoolOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetAccountPoolOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccountPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccountPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountPool, schemas.GetAccountPoolInput, schemas.GetAccountPoolOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccountPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccountPool, schemas.GetAccountPoolInput, schemas.GetAccountPoolOutput), output: &GetAccountPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccountPool"); err != nil {

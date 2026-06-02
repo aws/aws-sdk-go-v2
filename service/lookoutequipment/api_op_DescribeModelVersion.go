@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +43,21 @@ type DescribeModelVersionInput struct {
 	ModelVersion *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeModelVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeModelVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeModelVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ModelName != nil {
+		s.WriteString(schemas.DescribeModelVersionRequest_ModelName, *v.ModelName)
+	}
+	if v.ModelVersion != nil {
+		s.WriteInt64(schemas.DescribeModelVersionRequest_ModelVersion, *v.ModelVersion)
+	}
 }
 
 type DescribeModelVersionOutput struct {
@@ -210,16 +227,142 @@ type DescribeModelVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeModelVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeModelVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeModelVersionResponse_AutoPromotionResult:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelVersionResponse_AutoPromotionResult, &ev); err != nil {
+				return err
+			}
+			v.AutoPromotionResult = types.AutoPromotionResult(ev)
+			return nil
+		case schemas.DescribeModelVersionResponse_AutoPromotionResultReason:
+			v.AutoPromotionResultReason = new(string)
+			return d.ReadString(schemas.DescribeModelVersionResponse_AutoPromotionResultReason, v.AutoPromotionResultReason)
+		case schemas.DescribeModelVersionResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelVersionResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeModelVersionResponse_DataPreProcessingConfiguration:
+			v.DataPreProcessingConfiguration = &types.DataPreProcessingConfiguration{}
+			return v.DataPreProcessingConfiguration.Deserialize(d)
+		case schemas.DescribeModelVersionResponse_DatasetArn:
+			v.DatasetArn = new(string)
+			return d.ReadString(schemas.DescribeModelVersionResponse_DatasetArn, v.DatasetArn)
+		case schemas.DescribeModelVersionResponse_DatasetName:
+			v.DatasetName = new(string)
+			return d.ReadString(schemas.DescribeModelVersionResponse_DatasetName, v.DatasetName)
+		case schemas.DescribeModelVersionResponse_EvaluationDataEndTime:
+			v.EvaluationDataEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelVersionResponse_EvaluationDataEndTime, v.EvaluationDataEndTime)
+		case schemas.DescribeModelVersionResponse_EvaluationDataStartTime:
+			v.EvaluationDataStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelVersionResponse_EvaluationDataStartTime, v.EvaluationDataStartTime)
+		case schemas.DescribeModelVersionResponse_FailedReason:
+			v.FailedReason = new(string)
+			return d.ReadString(schemas.DescribeModelVersionResponse_FailedReason, v.FailedReason)
+		case schemas.DescribeModelVersionResponse_ImportJobEndTime:
+			v.ImportJobEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelVersionResponse_ImportJobEndTime, v.ImportJobEndTime)
+		case schemas.DescribeModelVersionResponse_ImportJobStartTime:
+			v.ImportJobStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelVersionResponse_ImportJobStartTime, v.ImportJobStartTime)
+		case schemas.DescribeModelVersionResponse_ImportedDataSizeInBytes:
+			v.ImportedDataSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.DescribeModelVersionResponse_ImportedDataSizeInBytes, v.ImportedDataSizeInBytes)
+		case schemas.DescribeModelVersionResponse_LabelsInputConfiguration:
+			v.LabelsInputConfiguration = &types.LabelsInputConfiguration{}
+			return v.LabelsInputConfiguration.Deserialize(d)
+		case schemas.DescribeModelVersionResponse_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelVersionResponse_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.DescribeModelVersionResponse_ModelArn:
+			v.ModelArn = new(string)
+			return d.ReadString(schemas.DescribeModelVersionResponse_ModelArn, v.ModelArn)
+		case schemas.DescribeModelVersionResponse_ModelDiagnosticsOutputConfiguration:
+			v.ModelDiagnosticsOutputConfiguration = &types.ModelDiagnosticsOutputConfiguration{}
+			return v.ModelDiagnosticsOutputConfiguration.Deserialize(d)
+		case schemas.DescribeModelVersionResponse_ModelDiagnosticsResultsObject:
+			v.ModelDiagnosticsResultsObject = &types.S3Object{}
+			return v.ModelDiagnosticsResultsObject.Deserialize(d)
+		case schemas.DescribeModelVersionResponse_ModelMetrics:
+			v.ModelMetrics = new(string)
+			return d.ReadString(schemas.DescribeModelVersionResponse_ModelMetrics, v.ModelMetrics)
+		case schemas.DescribeModelVersionResponse_ModelName:
+			v.ModelName = new(string)
+			return d.ReadString(schemas.DescribeModelVersionResponse_ModelName, v.ModelName)
+		case schemas.DescribeModelVersionResponse_ModelQuality:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelVersionResponse_ModelQuality, &ev); err != nil {
+				return err
+			}
+			v.ModelQuality = types.ModelQuality(ev)
+			return nil
+		case schemas.DescribeModelVersionResponse_ModelVersion:
+			v.ModelVersion = new(int64)
+			return d.ReadInt64(schemas.DescribeModelVersionResponse_ModelVersion, v.ModelVersion)
+		case schemas.DescribeModelVersionResponse_ModelVersionArn:
+			v.ModelVersionArn = new(string)
+			return d.ReadString(schemas.DescribeModelVersionResponse_ModelVersionArn, v.ModelVersionArn)
+		case schemas.DescribeModelVersionResponse_OffCondition:
+			v.OffCondition = new(string)
+			return d.ReadString(schemas.DescribeModelVersionResponse_OffCondition, v.OffCondition)
+		case schemas.DescribeModelVersionResponse_PriorModelMetrics:
+			v.PriorModelMetrics = new(string)
+			return d.ReadString(schemas.DescribeModelVersionResponse_PriorModelMetrics, v.PriorModelMetrics)
+		case schemas.DescribeModelVersionResponse_RetrainingAvailableDataInDays:
+			v.RetrainingAvailableDataInDays = new(int32)
+			return d.ReadInt32(schemas.DescribeModelVersionResponse_RetrainingAvailableDataInDays, v.RetrainingAvailableDataInDays)
+		case schemas.DescribeModelVersionResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeModelVersionResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeModelVersionResponse_Schema:
+			v.Schema = new(string)
+			return d.ReadString(schemas.DescribeModelVersionResponse_Schema, v.Schema)
+		case schemas.DescribeModelVersionResponse_ServerSideKmsKeyId:
+			v.ServerSideKmsKeyId = new(string)
+			return d.ReadString(schemas.DescribeModelVersionResponse_ServerSideKmsKeyId, v.ServerSideKmsKeyId)
+		case schemas.DescribeModelVersionResponse_SourceModelVersionArn:
+			v.SourceModelVersionArn = new(string)
+			return d.ReadString(schemas.DescribeModelVersionResponse_SourceModelVersionArn, v.SourceModelVersionArn)
+		case schemas.DescribeModelVersionResponse_SourceType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelVersionResponse_SourceType, &ev); err != nil {
+				return err
+			}
+			v.SourceType = types.ModelVersionSourceType(ev)
+			return nil
+		case schemas.DescribeModelVersionResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeModelVersionResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ModelVersionStatus(ev)
+			return nil
+		case schemas.DescribeModelVersionResponse_TrainingDataEndTime:
+			v.TrainingDataEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelVersionResponse_TrainingDataEndTime, v.TrainingDataEndTime)
+		case schemas.DescribeModelVersionResponse_TrainingDataStartTime:
+			v.TrainingDataStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelVersionResponse_TrainingDataStartTime, v.TrainingDataStartTime)
+		case schemas.DescribeModelVersionResponse_TrainingExecutionEndTime:
+			v.TrainingExecutionEndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelVersionResponse_TrainingExecutionEndTime, v.TrainingExecutionEndTime)
+		case schemas.DescribeModelVersionResponse_TrainingExecutionStartTime:
+			v.TrainingExecutionStartTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeModelVersionResponse_TrainingExecutionStartTime, v.TrainingExecutionStartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModelVersion, schemas.DescribeModelVersionRequest, schemas.DescribeModelVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeModelVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeModelVersion, schemas.DescribeModelVersionRequest, schemas.DescribeModelVersionResponse), output: &DescribeModelVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeModelVersion"); err != nil {

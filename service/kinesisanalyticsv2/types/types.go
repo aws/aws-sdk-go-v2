@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -21,6 +23,40 @@ type ApplicationCodeConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationCodeConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationCodeConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationCodeConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeContent != nil {
+		s.WriteStruct(schemas.ApplicationCodeConfiguration_CodeContent)
+		v.CodeContent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CodeContentType != "" {
+		s.WriteString(schemas.ApplicationCodeConfiguration_CodeContentType, string(v.CodeContentType))
+	}
+}
+func (v *ApplicationCodeConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationCodeConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationCodeConfiguration_CodeContent:
+			v.CodeContent = &CodeContent{}
+			return v.CodeContent.Deserialize(d)
+		case schemas.ApplicationCodeConfiguration_CodeContentType:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationCodeConfiguration_CodeContentType, &ev); err != nil {
+				return err
+			}
+			v.CodeContentType = CodeContentType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes code configuration for an application.
 type ApplicationCodeConfigurationDescription struct {
 
@@ -35,6 +71,40 @@ type ApplicationCodeConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationCodeConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationCodeConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationCodeConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeContentDescription != nil {
+		s.WriteStruct(schemas.ApplicationCodeConfigurationDescription_CodeContentDescription)
+		v.CodeContentDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CodeContentType != "" {
+		s.WriteString(schemas.ApplicationCodeConfigurationDescription_CodeContentType, string(v.CodeContentType))
+	}
+}
+func (v *ApplicationCodeConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationCodeConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationCodeConfigurationDescription_CodeContentDescription:
+			v.CodeContentDescription = &CodeContentDescription{}
+			return v.CodeContentDescription.Deserialize(d)
+		case schemas.ApplicationCodeConfigurationDescription_CodeContentType:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationCodeConfigurationDescription_CodeContentType, &ev); err != nil {
+				return err
+			}
+			v.CodeContentType = CodeContentType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes code configuration updates for an application. This is supported for
 // a Managed Service for Apache Flink application or a SQL-based Kinesis Data
 // Analytics application.
@@ -47,6 +117,40 @@ type ApplicationCodeConfigurationUpdate struct {
 	CodeContentUpdate *CodeContentUpdate
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationCodeConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationCodeConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationCodeConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeContentTypeUpdate != "" {
+		s.WriteString(schemas.ApplicationCodeConfigurationUpdate_CodeContentTypeUpdate, string(v.CodeContentTypeUpdate))
+	}
+	if v.CodeContentUpdate != nil {
+		s.WriteStruct(schemas.ApplicationCodeConfigurationUpdate_CodeContentUpdate)
+		v.CodeContentUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ApplicationCodeConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationCodeConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationCodeConfigurationUpdate_CodeContentTypeUpdate:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationCodeConfigurationUpdate_CodeContentTypeUpdate, &ev); err != nil {
+				return err
+			}
+			v.CodeContentTypeUpdate = CodeContentType(ev)
+			return nil
+		case schemas.ApplicationCodeConfigurationUpdate_CodeContentUpdate:
+			v.CodeContentUpdate = &CodeContentUpdate{}
+			return v.CodeContentUpdate.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Specifies the creation parameters for a Managed Service for Apache Flink
@@ -88,6 +192,89 @@ type ApplicationConfiguration struct {
 	ZeppelinApplicationConfiguration *ZeppelinApplicationConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationCodeConfiguration != nil {
+		s.WriteStruct(schemas.ApplicationConfiguration_ApplicationCodeConfiguration)
+		v.ApplicationCodeConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationEncryptionConfiguration != nil {
+		s.WriteStruct(schemas.ApplicationConfiguration_ApplicationEncryptionConfiguration)
+		v.ApplicationEncryptionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationSnapshotConfiguration != nil {
+		s.WriteStruct(schemas.ApplicationConfiguration_ApplicationSnapshotConfiguration)
+		v.ApplicationSnapshotConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationSystemRollbackConfiguration != nil {
+		s.WriteStruct(schemas.ApplicationConfiguration_ApplicationSystemRollbackConfiguration)
+		v.ApplicationSystemRollbackConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnvironmentProperties != nil {
+		s.WriteStruct(schemas.ApplicationConfiguration_EnvironmentProperties)
+		v.EnvironmentProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlinkApplicationConfiguration != nil {
+		s.WriteStruct(schemas.ApplicationConfiguration_FlinkApplicationConfiguration)
+		v.FlinkApplicationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SqlApplicationConfiguration != nil {
+		s.WriteStruct(schemas.ApplicationConfiguration_SqlApplicationConfiguration)
+		v.SqlApplicationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeVpcConfigurations(s, schemas.ApplicationConfiguration_VpcConfigurations, v.VpcConfigurations)
+	if v.ZeppelinApplicationConfiguration != nil {
+		s.WriteStruct(schemas.ApplicationConfiguration_ZeppelinApplicationConfiguration)
+		v.ZeppelinApplicationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ApplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationConfiguration_ApplicationCodeConfiguration:
+			v.ApplicationCodeConfiguration = &ApplicationCodeConfiguration{}
+			return v.ApplicationCodeConfiguration.Deserialize(d)
+		case schemas.ApplicationConfiguration_ApplicationEncryptionConfiguration:
+			v.ApplicationEncryptionConfiguration = &ApplicationEncryptionConfiguration{}
+			return v.ApplicationEncryptionConfiguration.Deserialize(d)
+		case schemas.ApplicationConfiguration_ApplicationSnapshotConfiguration:
+			v.ApplicationSnapshotConfiguration = &ApplicationSnapshotConfiguration{}
+			return v.ApplicationSnapshotConfiguration.Deserialize(d)
+		case schemas.ApplicationConfiguration_ApplicationSystemRollbackConfiguration:
+			v.ApplicationSystemRollbackConfiguration = &ApplicationSystemRollbackConfiguration{}
+			return v.ApplicationSystemRollbackConfiguration.Deserialize(d)
+		case schemas.ApplicationConfiguration_EnvironmentProperties:
+			v.EnvironmentProperties = &EnvironmentProperties{}
+			return v.EnvironmentProperties.Deserialize(d)
+		case schemas.ApplicationConfiguration_FlinkApplicationConfiguration:
+			v.FlinkApplicationConfiguration = &FlinkApplicationConfiguration{}
+			return v.FlinkApplicationConfiguration.Deserialize(d)
+		case schemas.ApplicationConfiguration_SqlApplicationConfiguration:
+			v.SqlApplicationConfiguration = &SqlApplicationConfiguration{}
+			return v.SqlApplicationConfiguration.Deserialize(d)
+		case schemas.ApplicationConfiguration_VpcConfigurations:
+			return deserializeVpcConfigurations(d, schemas.ApplicationConfiguration_VpcConfigurations, &v.VpcConfigurations)
+		case schemas.ApplicationConfiguration_ZeppelinApplicationConfiguration:
+			v.ZeppelinApplicationConfiguration = &ZeppelinApplicationConfiguration{}
+			return v.ZeppelinApplicationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes details about the application code and starting parameters for a
@@ -134,6 +321,97 @@ type ApplicationConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationCodeConfigurationDescription != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationDescription_ApplicationCodeConfigurationDescription)
+		v.ApplicationCodeConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationEncryptionConfigurationDescription != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationDescription_ApplicationEncryptionConfigurationDescription)
+		v.ApplicationEncryptionConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationSnapshotConfigurationDescription != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationDescription_ApplicationSnapshotConfigurationDescription)
+		v.ApplicationSnapshotConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationSystemRollbackConfigurationDescription != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationDescription_ApplicationSystemRollbackConfigurationDescription)
+		v.ApplicationSystemRollbackConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnvironmentPropertyDescriptions != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationDescription_EnvironmentPropertyDescriptions)
+		v.EnvironmentPropertyDescriptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlinkApplicationConfigurationDescription != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationDescription_FlinkApplicationConfigurationDescription)
+		v.FlinkApplicationConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RunConfigurationDescription != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationDescription_RunConfigurationDescription)
+		v.RunConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SqlApplicationConfigurationDescription != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationDescription_SqlApplicationConfigurationDescription)
+		v.SqlApplicationConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeVpcConfigurationDescriptions(s, schemas.ApplicationConfigurationDescription_VpcConfigurationDescriptions, v.VpcConfigurationDescriptions)
+	if v.ZeppelinApplicationConfigurationDescription != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationDescription_ZeppelinApplicationConfigurationDescription)
+		v.ZeppelinApplicationConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ApplicationConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationConfigurationDescription_ApplicationCodeConfigurationDescription:
+			v.ApplicationCodeConfigurationDescription = &ApplicationCodeConfigurationDescription{}
+			return v.ApplicationCodeConfigurationDescription.Deserialize(d)
+		case schemas.ApplicationConfigurationDescription_ApplicationEncryptionConfigurationDescription:
+			v.ApplicationEncryptionConfigurationDescription = &ApplicationEncryptionConfigurationDescription{}
+			return v.ApplicationEncryptionConfigurationDescription.Deserialize(d)
+		case schemas.ApplicationConfigurationDescription_ApplicationSnapshotConfigurationDescription:
+			v.ApplicationSnapshotConfigurationDescription = &ApplicationSnapshotConfigurationDescription{}
+			return v.ApplicationSnapshotConfigurationDescription.Deserialize(d)
+		case schemas.ApplicationConfigurationDescription_ApplicationSystemRollbackConfigurationDescription:
+			v.ApplicationSystemRollbackConfigurationDescription = &ApplicationSystemRollbackConfigurationDescription{}
+			return v.ApplicationSystemRollbackConfigurationDescription.Deserialize(d)
+		case schemas.ApplicationConfigurationDescription_EnvironmentPropertyDescriptions:
+			v.EnvironmentPropertyDescriptions = &EnvironmentPropertyDescriptions{}
+			return v.EnvironmentPropertyDescriptions.Deserialize(d)
+		case schemas.ApplicationConfigurationDescription_FlinkApplicationConfigurationDescription:
+			v.FlinkApplicationConfigurationDescription = &FlinkApplicationConfigurationDescription{}
+			return v.FlinkApplicationConfigurationDescription.Deserialize(d)
+		case schemas.ApplicationConfigurationDescription_RunConfigurationDescription:
+			v.RunConfigurationDescription = &RunConfigurationDescription{}
+			return v.RunConfigurationDescription.Deserialize(d)
+		case schemas.ApplicationConfigurationDescription_SqlApplicationConfigurationDescription:
+			v.SqlApplicationConfigurationDescription = &SqlApplicationConfigurationDescription{}
+			return v.SqlApplicationConfigurationDescription.Deserialize(d)
+		case schemas.ApplicationConfigurationDescription_VpcConfigurationDescriptions:
+			return deserializeVpcConfigurationDescriptions(d, schemas.ApplicationConfigurationDescription_VpcConfigurationDescriptions, &v.VpcConfigurationDescriptions)
+		case schemas.ApplicationConfigurationDescription_ZeppelinApplicationConfigurationDescription:
+			v.ZeppelinApplicationConfigurationDescription = &ZeppelinApplicationConfigurationDescription{}
+			return v.ZeppelinApplicationConfigurationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes updates to an application's configuration.
 type ApplicationConfigurationUpdate struct {
 
@@ -172,6 +450,89 @@ type ApplicationConfigurationUpdate struct {
 	ZeppelinApplicationConfigurationUpdate *ZeppelinApplicationConfigurationUpdate
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationCodeConfigurationUpdate != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationUpdate_ApplicationCodeConfigurationUpdate)
+		v.ApplicationCodeConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationEncryptionConfigurationUpdate != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationUpdate_ApplicationEncryptionConfigurationUpdate)
+		v.ApplicationEncryptionConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationSnapshotConfigurationUpdate != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationUpdate_ApplicationSnapshotConfigurationUpdate)
+		v.ApplicationSnapshotConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationSystemRollbackConfigurationUpdate != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationUpdate_ApplicationSystemRollbackConfigurationUpdate)
+		v.ApplicationSystemRollbackConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnvironmentPropertyUpdates != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationUpdate_EnvironmentPropertyUpdates)
+		v.EnvironmentPropertyUpdates.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlinkApplicationConfigurationUpdate != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationUpdate_FlinkApplicationConfigurationUpdate)
+		v.FlinkApplicationConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SqlApplicationConfigurationUpdate != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationUpdate_SqlApplicationConfigurationUpdate)
+		v.SqlApplicationConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeVpcConfigurationUpdates(s, schemas.ApplicationConfigurationUpdate_VpcConfigurationUpdates, v.VpcConfigurationUpdates)
+	if v.ZeppelinApplicationConfigurationUpdate != nil {
+		s.WriteStruct(schemas.ApplicationConfigurationUpdate_ZeppelinApplicationConfigurationUpdate)
+		v.ZeppelinApplicationConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ApplicationConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationConfigurationUpdate_ApplicationCodeConfigurationUpdate:
+			v.ApplicationCodeConfigurationUpdate = &ApplicationCodeConfigurationUpdate{}
+			return v.ApplicationCodeConfigurationUpdate.Deserialize(d)
+		case schemas.ApplicationConfigurationUpdate_ApplicationEncryptionConfigurationUpdate:
+			v.ApplicationEncryptionConfigurationUpdate = &ApplicationEncryptionConfigurationUpdate{}
+			return v.ApplicationEncryptionConfigurationUpdate.Deserialize(d)
+		case schemas.ApplicationConfigurationUpdate_ApplicationSnapshotConfigurationUpdate:
+			v.ApplicationSnapshotConfigurationUpdate = &ApplicationSnapshotConfigurationUpdate{}
+			return v.ApplicationSnapshotConfigurationUpdate.Deserialize(d)
+		case schemas.ApplicationConfigurationUpdate_ApplicationSystemRollbackConfigurationUpdate:
+			v.ApplicationSystemRollbackConfigurationUpdate = &ApplicationSystemRollbackConfigurationUpdate{}
+			return v.ApplicationSystemRollbackConfigurationUpdate.Deserialize(d)
+		case schemas.ApplicationConfigurationUpdate_EnvironmentPropertyUpdates:
+			v.EnvironmentPropertyUpdates = &EnvironmentPropertyUpdates{}
+			return v.EnvironmentPropertyUpdates.Deserialize(d)
+		case schemas.ApplicationConfigurationUpdate_FlinkApplicationConfigurationUpdate:
+			v.FlinkApplicationConfigurationUpdate = &FlinkApplicationConfigurationUpdate{}
+			return v.FlinkApplicationConfigurationUpdate.Deserialize(d)
+		case schemas.ApplicationConfigurationUpdate_SqlApplicationConfigurationUpdate:
+			v.SqlApplicationConfigurationUpdate = &SqlApplicationConfigurationUpdate{}
+			return v.SqlApplicationConfigurationUpdate.Deserialize(d)
+		case schemas.ApplicationConfigurationUpdate_VpcConfigurationUpdates:
+			return deserializeVpcConfigurationUpdates(d, schemas.ApplicationConfigurationUpdate_VpcConfigurationUpdates, &v.VpcConfigurationUpdates)
+		case schemas.ApplicationConfigurationUpdate_ZeppelinApplicationConfigurationUpdate:
+			v.ZeppelinApplicationConfigurationUpdate = &ZeppelinApplicationConfigurationUpdate{}
+			return v.ZeppelinApplicationConfigurationUpdate.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the application, including the application Amazon Resource Name
@@ -251,6 +612,143 @@ type ApplicationDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationARN != nil {
+		s.WriteString(schemas.ApplicationDetail_ApplicationARN, *v.ApplicationARN)
+	}
+	if v.ApplicationConfigurationDescription != nil {
+		s.WriteStruct(schemas.ApplicationDetail_ApplicationConfigurationDescription)
+		v.ApplicationConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationDescription != nil {
+		s.WriteString(schemas.ApplicationDetail_ApplicationDescription, *v.ApplicationDescription)
+	}
+	if v.ApplicationMaintenanceConfigurationDescription != nil {
+		s.WriteStruct(schemas.ApplicationDetail_ApplicationMaintenanceConfigurationDescription)
+		v.ApplicationMaintenanceConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationMode != "" {
+		s.WriteString(schemas.ApplicationDetail_ApplicationMode, string(v.ApplicationMode))
+	}
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.ApplicationDetail_ApplicationName, *v.ApplicationName)
+	}
+	if v.ApplicationStatus != "" {
+		s.WriteString(schemas.ApplicationDetail_ApplicationStatus, string(v.ApplicationStatus))
+	}
+	if v.ApplicationVersionCreateTimestamp != nil {
+		s.WriteTime(schemas.ApplicationDetail_ApplicationVersionCreateTimestamp, *v.ApplicationVersionCreateTimestamp)
+	}
+	if v.ApplicationVersionId != nil {
+		s.WriteInt64(schemas.ApplicationDetail_ApplicationVersionId, *v.ApplicationVersionId)
+	}
+	if v.ApplicationVersionRolledBackFrom != nil {
+		s.WriteInt64(schemas.ApplicationDetail_ApplicationVersionRolledBackFrom, *v.ApplicationVersionRolledBackFrom)
+	}
+	if v.ApplicationVersionRolledBackTo != nil {
+		s.WriteInt64(schemas.ApplicationDetail_ApplicationVersionRolledBackTo, *v.ApplicationVersionRolledBackTo)
+	}
+	if v.ApplicationVersionUpdatedFrom != nil {
+		s.WriteInt64(schemas.ApplicationDetail_ApplicationVersionUpdatedFrom, *v.ApplicationVersionUpdatedFrom)
+	}
+	serializeCloudWatchLoggingOptionDescriptions(s, schemas.ApplicationDetail_CloudWatchLoggingOptionDescriptions, v.CloudWatchLoggingOptionDescriptions)
+	if v.ConditionalToken != nil {
+		s.WriteString(schemas.ApplicationDetail_ConditionalToken, *v.ConditionalToken)
+	}
+	if v.CreateTimestamp != nil {
+		s.WriteTime(schemas.ApplicationDetail_CreateTimestamp, *v.CreateTimestamp)
+	}
+	if v.LastUpdateTimestamp != nil {
+		s.WriteTime(schemas.ApplicationDetail_LastUpdateTimestamp, *v.LastUpdateTimestamp)
+	}
+	if v.RuntimeEnvironment != "" {
+		s.WriteString(schemas.ApplicationDetail_RuntimeEnvironment, string(v.RuntimeEnvironment))
+	}
+	if v.ServiceExecutionRole != nil {
+		s.WriteString(schemas.ApplicationDetail_ServiceExecutionRole, *v.ServiceExecutionRole)
+	}
+}
+func (v *ApplicationDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationDetail_ApplicationARN:
+			v.ApplicationARN = new(string)
+			return d.ReadString(schemas.ApplicationDetail_ApplicationARN, v.ApplicationARN)
+		case schemas.ApplicationDetail_ApplicationConfigurationDescription:
+			v.ApplicationConfigurationDescription = &ApplicationConfigurationDescription{}
+			return v.ApplicationConfigurationDescription.Deserialize(d)
+		case schemas.ApplicationDetail_ApplicationDescription:
+			v.ApplicationDescription = new(string)
+			return d.ReadString(schemas.ApplicationDetail_ApplicationDescription, v.ApplicationDescription)
+		case schemas.ApplicationDetail_ApplicationMaintenanceConfigurationDescription:
+			v.ApplicationMaintenanceConfigurationDescription = &ApplicationMaintenanceConfigurationDescription{}
+			return v.ApplicationMaintenanceConfigurationDescription.Deserialize(d)
+		case schemas.ApplicationDetail_ApplicationMode:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationDetail_ApplicationMode, &ev); err != nil {
+				return err
+			}
+			v.ApplicationMode = ApplicationMode(ev)
+			return nil
+		case schemas.ApplicationDetail_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.ApplicationDetail_ApplicationName, v.ApplicationName)
+		case schemas.ApplicationDetail_ApplicationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationDetail_ApplicationStatus, &ev); err != nil {
+				return err
+			}
+			v.ApplicationStatus = ApplicationStatus(ev)
+			return nil
+		case schemas.ApplicationDetail_ApplicationVersionCreateTimestamp:
+			v.ApplicationVersionCreateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ApplicationDetail_ApplicationVersionCreateTimestamp, v.ApplicationVersionCreateTimestamp)
+		case schemas.ApplicationDetail_ApplicationVersionId:
+			v.ApplicationVersionId = new(int64)
+			return d.ReadInt64(schemas.ApplicationDetail_ApplicationVersionId, v.ApplicationVersionId)
+		case schemas.ApplicationDetail_ApplicationVersionRolledBackFrom:
+			v.ApplicationVersionRolledBackFrom = new(int64)
+			return d.ReadInt64(schemas.ApplicationDetail_ApplicationVersionRolledBackFrom, v.ApplicationVersionRolledBackFrom)
+		case schemas.ApplicationDetail_ApplicationVersionRolledBackTo:
+			v.ApplicationVersionRolledBackTo = new(int64)
+			return d.ReadInt64(schemas.ApplicationDetail_ApplicationVersionRolledBackTo, v.ApplicationVersionRolledBackTo)
+		case schemas.ApplicationDetail_ApplicationVersionUpdatedFrom:
+			v.ApplicationVersionUpdatedFrom = new(int64)
+			return d.ReadInt64(schemas.ApplicationDetail_ApplicationVersionUpdatedFrom, v.ApplicationVersionUpdatedFrom)
+		case schemas.ApplicationDetail_CloudWatchLoggingOptionDescriptions:
+			return deserializeCloudWatchLoggingOptionDescriptions(d, schemas.ApplicationDetail_CloudWatchLoggingOptionDescriptions, &v.CloudWatchLoggingOptionDescriptions)
+		case schemas.ApplicationDetail_ConditionalToken:
+			v.ConditionalToken = new(string)
+			return d.ReadString(schemas.ApplicationDetail_ConditionalToken, v.ConditionalToken)
+		case schemas.ApplicationDetail_CreateTimestamp:
+			v.CreateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ApplicationDetail_CreateTimestamp, v.CreateTimestamp)
+		case schemas.ApplicationDetail_LastUpdateTimestamp:
+			v.LastUpdateTimestamp = new(time.Time)
+			return d.ReadTime(schemas.ApplicationDetail_LastUpdateTimestamp, v.LastUpdateTimestamp)
+		case schemas.ApplicationDetail_RuntimeEnvironment:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationDetail_RuntimeEnvironment, &ev); err != nil {
+				return err
+			}
+			v.RuntimeEnvironment = RuntimeEnvironment(ev)
+			return nil
+		case schemas.ApplicationDetail_ServiceExecutionRole:
+			v.ServiceExecutionRole = new(string)
+			return d.ReadString(schemas.ApplicationDetail_ServiceExecutionRole, v.ServiceExecutionRole)
+		}
+		return nil
+	})
+}
+
 // Specifies the configuration to manage encryption at rest.
 type ApplicationEncryptionConfiguration struct {
 
@@ -264,6 +762,38 @@ type ApplicationEncryptionConfiguration struct {
 	KeyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationEncryptionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationEncryptionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationEncryptionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyId != nil {
+		s.WriteString(schemas.ApplicationEncryptionConfiguration_KeyId, *v.KeyId)
+	}
+	if v.KeyType != "" {
+		s.WriteString(schemas.ApplicationEncryptionConfiguration_KeyType, string(v.KeyType))
+	}
+}
+func (v *ApplicationEncryptionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationEncryptionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationEncryptionConfiguration_KeyId:
+			v.KeyId = new(string)
+			return d.ReadString(schemas.ApplicationEncryptionConfiguration_KeyId, v.KeyId)
+		case schemas.ApplicationEncryptionConfiguration_KeyType:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationEncryptionConfiguration_KeyType, &ev); err != nil {
+				return err
+			}
+			v.KeyType = KeyType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the encryption at rest configuration.
@@ -281,6 +811,38 @@ type ApplicationEncryptionConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationEncryptionConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationEncryptionConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationEncryptionConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyId != nil {
+		s.WriteString(schemas.ApplicationEncryptionConfigurationDescription_KeyId, *v.KeyId)
+	}
+	if v.KeyType != "" {
+		s.WriteString(schemas.ApplicationEncryptionConfigurationDescription_KeyType, string(v.KeyType))
+	}
+}
+func (v *ApplicationEncryptionConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationEncryptionConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationEncryptionConfigurationDescription_KeyId:
+			v.KeyId = new(string)
+			return d.ReadString(schemas.ApplicationEncryptionConfigurationDescription_KeyId, v.KeyId)
+		case schemas.ApplicationEncryptionConfigurationDescription_KeyType:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationEncryptionConfigurationDescription_KeyType, &ev); err != nil {
+				return err
+			}
+			v.KeyType = KeyType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes configuration updates to encryption at rest.
 type ApplicationEncryptionConfigurationUpdate struct {
 
@@ -294,6 +856,38 @@ type ApplicationEncryptionConfigurationUpdate struct {
 	KeyIdUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationEncryptionConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationEncryptionConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationEncryptionConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyIdUpdate != nil {
+		s.WriteString(schemas.ApplicationEncryptionConfigurationUpdate_KeyIdUpdate, *v.KeyIdUpdate)
+	}
+	if v.KeyTypeUpdate != "" {
+		s.WriteString(schemas.ApplicationEncryptionConfigurationUpdate_KeyTypeUpdate, string(v.KeyTypeUpdate))
+	}
+}
+func (v *ApplicationEncryptionConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationEncryptionConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationEncryptionConfigurationUpdate_KeyIdUpdate:
+			v.KeyIdUpdate = new(string)
+			return d.ReadString(schemas.ApplicationEncryptionConfigurationUpdate_KeyIdUpdate, v.KeyIdUpdate)
+		case schemas.ApplicationEncryptionConfigurationUpdate_KeyTypeUpdate:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationEncryptionConfigurationUpdate_KeyTypeUpdate, &ev); err != nil {
+				return err
+			}
+			v.KeyTypeUpdate = KeyType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The details of the maintenance configuration for the application.
@@ -312,6 +906,34 @@ type ApplicationMaintenanceConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationMaintenanceConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationMaintenanceConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationMaintenanceConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationMaintenanceWindowEndTime != nil {
+		s.WriteString(schemas.ApplicationMaintenanceConfigurationDescription_ApplicationMaintenanceWindowEndTime, *v.ApplicationMaintenanceWindowEndTime)
+	}
+	if v.ApplicationMaintenanceWindowStartTime != nil {
+		s.WriteString(schemas.ApplicationMaintenanceConfigurationDescription_ApplicationMaintenanceWindowStartTime, *v.ApplicationMaintenanceWindowStartTime)
+	}
+}
+func (v *ApplicationMaintenanceConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationMaintenanceConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationMaintenanceConfigurationDescription_ApplicationMaintenanceWindowEndTime:
+			v.ApplicationMaintenanceWindowEndTime = new(string)
+			return d.ReadString(schemas.ApplicationMaintenanceConfigurationDescription_ApplicationMaintenanceWindowEndTime, v.ApplicationMaintenanceWindowEndTime)
+		case schemas.ApplicationMaintenanceConfigurationDescription_ApplicationMaintenanceWindowStartTime:
+			v.ApplicationMaintenanceWindowStartTime = new(string)
+			return d.ReadString(schemas.ApplicationMaintenanceConfigurationDescription_ApplicationMaintenanceWindowStartTime, v.ApplicationMaintenanceWindowStartTime)
+		}
+		return nil
+	})
+}
+
 // Describes the updated maintenance configuration for the application.
 type ApplicationMaintenanceConfigurationUpdate struct {
 
@@ -321,6 +943,28 @@ type ApplicationMaintenanceConfigurationUpdate struct {
 	ApplicationMaintenanceWindowStartTimeUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationMaintenanceConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationMaintenanceConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationMaintenanceConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationMaintenanceWindowStartTimeUpdate != nil {
+		s.WriteString(schemas.ApplicationMaintenanceConfigurationUpdate_ApplicationMaintenanceWindowStartTimeUpdate, *v.ApplicationMaintenanceWindowStartTimeUpdate)
+	}
+}
+func (v *ApplicationMaintenanceConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationMaintenanceConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationMaintenanceConfigurationUpdate_ApplicationMaintenanceWindowStartTimeUpdate:
+			v.ApplicationMaintenanceWindowStartTimeUpdate = new(string)
+			return d.ReadString(schemas.ApplicationMaintenanceConfigurationUpdate_ApplicationMaintenanceWindowStartTimeUpdate, v.ApplicationMaintenanceWindowStartTimeUpdate)
+		}
+		return nil
+	})
 }
 
 // A description of the aplication operation that provides information about the
@@ -343,6 +987,56 @@ type ApplicationOperationInfo struct {
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationOperationInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationOperationInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationOperationInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ApplicationOperationInfo_EndTime, *v.EndTime)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.ApplicationOperationInfo_Operation, *v.Operation)
+	}
+	if v.OperationId != nil {
+		s.WriteString(schemas.ApplicationOperationInfo_OperationId, *v.OperationId)
+	}
+	if v.OperationStatus != "" {
+		s.WriteString(schemas.ApplicationOperationInfo_OperationStatus, string(v.OperationStatus))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ApplicationOperationInfo_StartTime, *v.StartTime)
+	}
+}
+func (v *ApplicationOperationInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationOperationInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationOperationInfo_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ApplicationOperationInfo_EndTime, v.EndTime)
+		case schemas.ApplicationOperationInfo_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.ApplicationOperationInfo_Operation, v.Operation)
+		case schemas.ApplicationOperationInfo_OperationId:
+			v.OperationId = new(string)
+			return d.ReadString(schemas.ApplicationOperationInfo_OperationId, v.OperationId)
+		case schemas.ApplicationOperationInfo_OperationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationOperationInfo_OperationStatus, &ev); err != nil {
+				return err
+			}
+			v.OperationStatus = OperationStatus(ev)
+			return nil
+		case schemas.ApplicationOperationInfo_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ApplicationOperationInfo_StartTime, v.StartTime)
+		}
+		return nil
+	})
 }
 
 // A description of the application operation that provides information about the
@@ -379,6 +1073,66 @@ type ApplicationOperationInfoDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationOperationInfoDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationOperationInfoDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationOperationInfoDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationVersionChangeDetails != nil {
+		s.WriteStruct(schemas.ApplicationOperationInfoDetails_ApplicationVersionChangeDetails)
+		v.ApplicationVersionChangeDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ApplicationOperationInfoDetails_EndTime, *v.EndTime)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.ApplicationOperationInfoDetails_Operation, *v.Operation)
+	}
+	if v.OperationFailureDetails != nil {
+		s.WriteStruct(schemas.ApplicationOperationInfoDetails_OperationFailureDetails)
+		v.OperationFailureDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OperationStatus != "" {
+		s.WriteString(schemas.ApplicationOperationInfoDetails_OperationStatus, string(v.OperationStatus))
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ApplicationOperationInfoDetails_StartTime, *v.StartTime)
+	}
+}
+func (v *ApplicationOperationInfoDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationOperationInfoDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationOperationInfoDetails_ApplicationVersionChangeDetails:
+			v.ApplicationVersionChangeDetails = &ApplicationVersionChangeDetails{}
+			return v.ApplicationVersionChangeDetails.Deserialize(d)
+		case schemas.ApplicationOperationInfoDetails_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ApplicationOperationInfoDetails_EndTime, v.EndTime)
+		case schemas.ApplicationOperationInfoDetails_Operation:
+			v.Operation = new(string)
+			return d.ReadString(schemas.ApplicationOperationInfoDetails_Operation, v.Operation)
+		case schemas.ApplicationOperationInfoDetails_OperationFailureDetails:
+			v.OperationFailureDetails = &OperationFailureDetails{}
+			return v.OperationFailureDetails.Deserialize(d)
+		case schemas.ApplicationOperationInfoDetails_OperationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationOperationInfoDetails_OperationStatus, &ev); err != nil {
+				return err
+			}
+			v.OperationStatus = OperationStatus(ev)
+			return nil
+		case schemas.ApplicationOperationInfoDetails_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ApplicationOperationInfoDetails_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
+
 // Specifies the method and snapshot to use when restarting an application using
 // previously saved application state.
 type ApplicationRestoreConfiguration struct {
@@ -396,6 +1150,38 @@ type ApplicationRestoreConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationRestoreConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationRestoreConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationRestoreConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationRestoreType != "" {
+		s.WriteString(schemas.ApplicationRestoreConfiguration_ApplicationRestoreType, string(v.ApplicationRestoreType))
+	}
+	if v.SnapshotName != nil {
+		s.WriteString(schemas.ApplicationRestoreConfiguration_SnapshotName, *v.SnapshotName)
+	}
+}
+func (v *ApplicationRestoreConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationRestoreConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationRestoreConfiguration_ApplicationRestoreType:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationRestoreConfiguration_ApplicationRestoreType, &ev); err != nil {
+				return err
+			}
+			v.ApplicationRestoreType = ApplicationRestoreType(ev)
+			return nil
+		case schemas.ApplicationRestoreConfiguration_SnapshotName:
+			v.SnapshotName = new(string)
+			return d.ReadString(schemas.ApplicationRestoreConfiguration_SnapshotName, v.SnapshotName)
+		}
+		return nil
+	})
+}
+
 // Describes whether snapshots are enabled for a Managed Service for Apache Flink
 // application.
 type ApplicationSnapshotConfiguration struct {
@@ -407,6 +1193,28 @@ type ApplicationSnapshotConfiguration struct {
 	SnapshotsEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationSnapshotConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSnapshotConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSnapshotConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotsEnabled != nil {
+		s.WriteBool(schemas.ApplicationSnapshotConfiguration_SnapshotsEnabled, *v.SnapshotsEnabled)
+	}
+}
+func (v *ApplicationSnapshotConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSnapshotConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSnapshotConfiguration_SnapshotsEnabled:
+			v.SnapshotsEnabled = new(bool)
+			return d.ReadBool(schemas.ApplicationSnapshotConfiguration_SnapshotsEnabled, v.SnapshotsEnabled)
+		}
+		return nil
+	})
 }
 
 // Describes whether snapshots are enabled for a Managed Service for Apache Flink
@@ -422,6 +1230,28 @@ type ApplicationSnapshotConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationSnapshotConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSnapshotConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSnapshotConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotsEnabled != nil {
+		s.WriteBool(schemas.ApplicationSnapshotConfigurationDescription_SnapshotsEnabled, *v.SnapshotsEnabled)
+	}
+}
+func (v *ApplicationSnapshotConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSnapshotConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSnapshotConfigurationDescription_SnapshotsEnabled:
+			v.SnapshotsEnabled = new(bool)
+			return d.ReadBool(schemas.ApplicationSnapshotConfigurationDescription_SnapshotsEnabled, v.SnapshotsEnabled)
+		}
+		return nil
+	})
+}
+
 // Describes updates to whether snapshots are enabled for a Managed Service for
 // Apache Flink application.
 type ApplicationSnapshotConfigurationUpdate struct {
@@ -432,6 +1262,28 @@ type ApplicationSnapshotConfigurationUpdate struct {
 	SnapshotsEnabledUpdate *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationSnapshotConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSnapshotConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSnapshotConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnapshotsEnabledUpdate != nil {
+		s.WriteBool(schemas.ApplicationSnapshotConfigurationUpdate_SnapshotsEnabledUpdate, *v.SnapshotsEnabledUpdate)
+	}
+}
+func (v *ApplicationSnapshotConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSnapshotConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSnapshotConfigurationUpdate_SnapshotsEnabledUpdate:
+			v.SnapshotsEnabledUpdate = new(bool)
+			return d.ReadBool(schemas.ApplicationSnapshotConfigurationUpdate_SnapshotsEnabledUpdate, v.SnapshotsEnabledUpdate)
+		}
+		return nil
+	})
 }
 
 // Provides application summary information, including the application Amazon
@@ -470,6 +1322,70 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationARN != nil {
+		s.WriteString(schemas.ApplicationSummary_ApplicationARN, *v.ApplicationARN)
+	}
+	if v.ApplicationMode != "" {
+		s.WriteString(schemas.ApplicationSummary_ApplicationMode, string(v.ApplicationMode))
+	}
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.ApplicationSummary_ApplicationName, *v.ApplicationName)
+	}
+	if v.ApplicationStatus != "" {
+		s.WriteString(schemas.ApplicationSummary_ApplicationStatus, string(v.ApplicationStatus))
+	}
+	if v.ApplicationVersionId != nil {
+		s.WriteInt64(schemas.ApplicationSummary_ApplicationVersionId, *v.ApplicationVersionId)
+	}
+	if v.RuntimeEnvironment != "" {
+		s.WriteString(schemas.ApplicationSummary_RuntimeEnvironment, string(v.RuntimeEnvironment))
+	}
+}
+func (v *ApplicationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSummary_ApplicationARN:
+			v.ApplicationARN = new(string)
+			return d.ReadString(schemas.ApplicationSummary_ApplicationARN, v.ApplicationARN)
+		case schemas.ApplicationSummary_ApplicationMode:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationSummary_ApplicationMode, &ev); err != nil {
+				return err
+			}
+			v.ApplicationMode = ApplicationMode(ev)
+			return nil
+		case schemas.ApplicationSummary_ApplicationName:
+			v.ApplicationName = new(string)
+			return d.ReadString(schemas.ApplicationSummary_ApplicationName, v.ApplicationName)
+		case schemas.ApplicationSummary_ApplicationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationSummary_ApplicationStatus, &ev); err != nil {
+				return err
+			}
+			v.ApplicationStatus = ApplicationStatus(ev)
+			return nil
+		case schemas.ApplicationSummary_ApplicationVersionId:
+			v.ApplicationVersionId = new(int64)
+			return d.ReadInt64(schemas.ApplicationSummary_ApplicationVersionId, v.ApplicationVersionId)
+		case schemas.ApplicationSummary_RuntimeEnvironment:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationSummary_RuntimeEnvironment, &ev); err != nil {
+				return err
+			}
+			v.RuntimeEnvironment = RuntimeEnvironment(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the system rollback configuration for a Managed Service for Apache
 // Flink application.
 type ApplicationSystemRollbackConfiguration struct {
@@ -481,6 +1397,28 @@ type ApplicationSystemRollbackConfiguration struct {
 	RollbackEnabled *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationSystemRollbackConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSystemRollbackConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSystemRollbackConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RollbackEnabled != nil {
+		s.WriteBool(schemas.ApplicationSystemRollbackConfiguration_RollbackEnabled, *v.RollbackEnabled)
+	}
+}
+func (v *ApplicationSystemRollbackConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSystemRollbackConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSystemRollbackConfiguration_RollbackEnabled:
+			v.RollbackEnabled = new(bool)
+			return d.ReadBool(schemas.ApplicationSystemRollbackConfiguration_RollbackEnabled, v.RollbackEnabled)
+		}
+		return nil
+	})
 }
 
 // Describes the system rollback configuration for a Managed Service for Apache
@@ -496,6 +1434,28 @@ type ApplicationSystemRollbackConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationSystemRollbackConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSystemRollbackConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSystemRollbackConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RollbackEnabled != nil {
+		s.WriteBool(schemas.ApplicationSystemRollbackConfigurationDescription_RollbackEnabled, *v.RollbackEnabled)
+	}
+}
+func (v *ApplicationSystemRollbackConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSystemRollbackConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSystemRollbackConfigurationDescription_RollbackEnabled:
+			v.RollbackEnabled = new(bool)
+			return d.ReadBool(schemas.ApplicationSystemRollbackConfigurationDescription_RollbackEnabled, v.RollbackEnabled)
+		}
+		return nil
+	})
+}
+
 // Describes the system rollback configuration for a Managed Service for Apache
 // Flink application.
 type ApplicationSystemRollbackConfigurationUpdate struct {
@@ -507,6 +1467,28 @@ type ApplicationSystemRollbackConfigurationUpdate struct {
 	RollbackEnabledUpdate *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationSystemRollbackConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationSystemRollbackConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationSystemRollbackConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RollbackEnabledUpdate != nil {
+		s.WriteBool(schemas.ApplicationSystemRollbackConfigurationUpdate_RollbackEnabledUpdate, *v.RollbackEnabledUpdate)
+	}
+}
+func (v *ApplicationSystemRollbackConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationSystemRollbackConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationSystemRollbackConfigurationUpdate_RollbackEnabledUpdate:
+			v.RollbackEnabledUpdate = new(bool)
+			return d.ReadBool(schemas.ApplicationSystemRollbackConfigurationUpdate_RollbackEnabledUpdate, v.RollbackEnabledUpdate)
+		}
+		return nil
+	})
 }
 
 // Contains information about the version changes that the operation applied to
@@ -526,6 +1508,34 @@ type ApplicationVersionChangeDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationVersionChangeDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationVersionChangeDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationVersionChangeDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationVersionUpdatedFrom != nil {
+		s.WriteInt64(schemas.ApplicationVersionChangeDetails_ApplicationVersionUpdatedFrom, *v.ApplicationVersionUpdatedFrom)
+	}
+	if v.ApplicationVersionUpdatedTo != nil {
+		s.WriteInt64(schemas.ApplicationVersionChangeDetails_ApplicationVersionUpdatedTo, *v.ApplicationVersionUpdatedTo)
+	}
+}
+func (v *ApplicationVersionChangeDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationVersionChangeDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationVersionChangeDetails_ApplicationVersionUpdatedFrom:
+			v.ApplicationVersionUpdatedFrom = new(int64)
+			return d.ReadInt64(schemas.ApplicationVersionChangeDetails_ApplicationVersionUpdatedFrom, v.ApplicationVersionUpdatedFrom)
+		case schemas.ApplicationVersionChangeDetails_ApplicationVersionUpdatedTo:
+			v.ApplicationVersionUpdatedTo = new(int64)
+			return d.ReadInt64(schemas.ApplicationVersionChangeDetails_ApplicationVersionUpdatedTo, v.ApplicationVersionUpdatedTo)
+		}
+		return nil
+	})
+}
+
 // The summary of the application version.
 type ApplicationVersionSummary struct {
 
@@ -543,6 +1553,38 @@ type ApplicationVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationVersionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationVersionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationVersionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationStatus != "" {
+		s.WriteString(schemas.ApplicationVersionSummary_ApplicationStatus, string(v.ApplicationStatus))
+	}
+	if v.ApplicationVersionId != nil {
+		s.WriteInt64(schemas.ApplicationVersionSummary_ApplicationVersionId, *v.ApplicationVersionId)
+	}
+}
+func (v *ApplicationVersionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationVersionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationVersionSummary_ApplicationStatus:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationVersionSummary_ApplicationStatus, &ev); err != nil {
+				return err
+			}
+			v.ApplicationStatus = ApplicationStatus(ev)
+			return nil
+		case schemas.ApplicationVersionSummary_ApplicationVersionId:
+			v.ApplicationVersionId = new(int64)
+			return d.ReadInt64(schemas.ApplicationVersionSummary_ApplicationVersionId, v.ApplicationVersionId)
+		}
+		return nil
+	})
+}
+
 // The configuration parameters for the default Amazon Glue database. You use this
 // database for SQL queries that you write in a Managed Service for Apache Flink
 // Studio notebook.
@@ -556,6 +1598,30 @@ type CatalogConfiguration struct {
 	GlueDataCatalogConfiguration *GlueDataCatalogConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *CatalogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CatalogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CatalogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlueDataCatalogConfiguration != nil {
+		s.WriteStruct(schemas.CatalogConfiguration_GlueDataCatalogConfiguration)
+		v.GlueDataCatalogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CatalogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CatalogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CatalogConfiguration_GlueDataCatalogConfiguration:
+			v.GlueDataCatalogConfiguration = &GlueDataCatalogConfiguration{}
+			return v.GlueDataCatalogConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The configuration parameters for the default Amazon Glue database. You use this
@@ -573,6 +1639,30 @@ type CatalogConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CatalogConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CatalogConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CatalogConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlueDataCatalogConfigurationDescription != nil {
+		s.WriteStruct(schemas.CatalogConfigurationDescription_GlueDataCatalogConfigurationDescription)
+		v.GlueDataCatalogConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CatalogConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CatalogConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CatalogConfigurationDescription_GlueDataCatalogConfigurationDescription:
+			v.GlueDataCatalogConfigurationDescription = &GlueDataCatalogConfigurationDescription{}
+			return v.GlueDataCatalogConfigurationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Updates to the configuration parameters for the default Amazon Glue database.
 // You use this database for SQL queries that you write in a Managed Service for
 // Apache Flink Studio notebook.
@@ -586,6 +1676,30 @@ type CatalogConfigurationUpdate struct {
 	GlueDataCatalogConfigurationUpdate *GlueDataCatalogConfigurationUpdate
 
 	noSmithyDocumentSerde
+}
+
+func (v *CatalogConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CatalogConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CatalogConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlueDataCatalogConfigurationUpdate != nil {
+		s.WriteStruct(schemas.CatalogConfigurationUpdate_GlueDataCatalogConfigurationUpdate)
+		v.GlueDataCatalogConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CatalogConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CatalogConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CatalogConfigurationUpdate_GlueDataCatalogConfigurationUpdate:
+			v.GlueDataCatalogConfigurationUpdate = &GlueDataCatalogConfigurationUpdate{}
+			return v.GlueDataCatalogConfigurationUpdate.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes an application's checkpointing configuration. Checkpointing is the
@@ -644,6 +1758,50 @@ type CheckpointConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckpointConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckpointConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckpointConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckpointInterval != nil {
+		s.WriteInt64(schemas.CheckpointConfiguration_CheckpointInterval, *v.CheckpointInterval)
+	}
+	if v.CheckpointingEnabled != nil {
+		s.WriteBool(schemas.CheckpointConfiguration_CheckpointingEnabled, *v.CheckpointingEnabled)
+	}
+	if v.ConfigurationType != "" {
+		s.WriteString(schemas.CheckpointConfiguration_ConfigurationType, string(v.ConfigurationType))
+	}
+	if v.MinPauseBetweenCheckpoints != nil {
+		s.WriteInt64(schemas.CheckpointConfiguration_MinPauseBetweenCheckpoints, *v.MinPauseBetweenCheckpoints)
+	}
+}
+func (v *CheckpointConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckpointConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckpointConfiguration_CheckpointInterval:
+			v.CheckpointInterval = new(int64)
+			return d.ReadInt64(schemas.CheckpointConfiguration_CheckpointInterval, v.CheckpointInterval)
+		case schemas.CheckpointConfiguration_CheckpointingEnabled:
+			v.CheckpointingEnabled = new(bool)
+			return d.ReadBool(schemas.CheckpointConfiguration_CheckpointingEnabled, v.CheckpointingEnabled)
+		case schemas.CheckpointConfiguration_ConfigurationType:
+			var ev string
+			if err := d.ReadString(schemas.CheckpointConfiguration_ConfigurationType, &ev); err != nil {
+				return err
+			}
+			v.ConfigurationType = ConfigurationType(ev)
+			return nil
+		case schemas.CheckpointConfiguration_MinPauseBetweenCheckpoints:
+			v.MinPauseBetweenCheckpoints = new(int64)
+			return d.ReadInt64(schemas.CheckpointConfiguration_MinPauseBetweenCheckpoints, v.MinPauseBetweenCheckpoints)
+		}
+		return nil
+	})
+}
+
 // Describes checkpointing parameters for a Managed Service for Apache Flink
 // application.
 type CheckpointConfigurationDescription struct {
@@ -685,6 +1843,50 @@ type CheckpointConfigurationDescription struct {
 	MinPauseBetweenCheckpoints *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *CheckpointConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckpointConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckpointConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckpointInterval != nil {
+		s.WriteInt64(schemas.CheckpointConfigurationDescription_CheckpointInterval, *v.CheckpointInterval)
+	}
+	if v.CheckpointingEnabled != nil {
+		s.WriteBool(schemas.CheckpointConfigurationDescription_CheckpointingEnabled, *v.CheckpointingEnabled)
+	}
+	if v.ConfigurationType != "" {
+		s.WriteString(schemas.CheckpointConfigurationDescription_ConfigurationType, string(v.ConfigurationType))
+	}
+	if v.MinPauseBetweenCheckpoints != nil {
+		s.WriteInt64(schemas.CheckpointConfigurationDescription_MinPauseBetweenCheckpoints, *v.MinPauseBetweenCheckpoints)
+	}
+}
+func (v *CheckpointConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckpointConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckpointConfigurationDescription_CheckpointInterval:
+			v.CheckpointInterval = new(int64)
+			return d.ReadInt64(schemas.CheckpointConfigurationDescription_CheckpointInterval, v.CheckpointInterval)
+		case schemas.CheckpointConfigurationDescription_CheckpointingEnabled:
+			v.CheckpointingEnabled = new(bool)
+			return d.ReadBool(schemas.CheckpointConfigurationDescription_CheckpointingEnabled, v.CheckpointingEnabled)
+		case schemas.CheckpointConfigurationDescription_ConfigurationType:
+			var ev string
+			if err := d.ReadString(schemas.CheckpointConfigurationDescription_ConfigurationType, &ev); err != nil {
+				return err
+			}
+			v.ConfigurationType = ConfigurationType(ev)
+			return nil
+		case schemas.CheckpointConfigurationDescription_MinPauseBetweenCheckpoints:
+			v.MinPauseBetweenCheckpoints = new(int64)
+			return d.ReadInt64(schemas.CheckpointConfigurationDescription_MinPauseBetweenCheckpoints, v.MinPauseBetweenCheckpoints)
+		}
+		return nil
+	})
 }
 
 // Describes updates to the checkpointing parameters for a Managed Service for
@@ -731,6 +1933,50 @@ type CheckpointConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CheckpointConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CheckpointConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CheckpointConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckpointIntervalUpdate != nil {
+		s.WriteInt64(schemas.CheckpointConfigurationUpdate_CheckpointIntervalUpdate, *v.CheckpointIntervalUpdate)
+	}
+	if v.CheckpointingEnabledUpdate != nil {
+		s.WriteBool(schemas.CheckpointConfigurationUpdate_CheckpointingEnabledUpdate, *v.CheckpointingEnabledUpdate)
+	}
+	if v.ConfigurationTypeUpdate != "" {
+		s.WriteString(schemas.CheckpointConfigurationUpdate_ConfigurationTypeUpdate, string(v.ConfigurationTypeUpdate))
+	}
+	if v.MinPauseBetweenCheckpointsUpdate != nil {
+		s.WriteInt64(schemas.CheckpointConfigurationUpdate_MinPauseBetweenCheckpointsUpdate, *v.MinPauseBetweenCheckpointsUpdate)
+	}
+}
+func (v *CheckpointConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CheckpointConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CheckpointConfigurationUpdate_CheckpointIntervalUpdate:
+			v.CheckpointIntervalUpdate = new(int64)
+			return d.ReadInt64(schemas.CheckpointConfigurationUpdate_CheckpointIntervalUpdate, v.CheckpointIntervalUpdate)
+		case schemas.CheckpointConfigurationUpdate_CheckpointingEnabledUpdate:
+			v.CheckpointingEnabledUpdate = new(bool)
+			return d.ReadBool(schemas.CheckpointConfigurationUpdate_CheckpointingEnabledUpdate, v.CheckpointingEnabledUpdate)
+		case schemas.CheckpointConfigurationUpdate_ConfigurationTypeUpdate:
+			var ev string
+			if err := d.ReadString(schemas.CheckpointConfigurationUpdate_ConfigurationTypeUpdate, &ev); err != nil {
+				return err
+			}
+			v.ConfigurationTypeUpdate = ConfigurationType(ev)
+			return nil
+		case schemas.CheckpointConfigurationUpdate_MinPauseBetweenCheckpointsUpdate:
+			v.MinPauseBetweenCheckpointsUpdate = new(int64)
+			return d.ReadInt64(schemas.CheckpointConfigurationUpdate_MinPauseBetweenCheckpointsUpdate, v.MinPauseBetweenCheckpointsUpdate)
+		}
+		return nil
+	})
+}
+
 // Provides a description of Amazon CloudWatch logging options, including the log
 // stream Amazon Resource Name (ARN).
 type CloudWatchLoggingOption struct {
@@ -741,6 +1987,28 @@ type CloudWatchLoggingOption struct {
 	LogStreamARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloudWatchLoggingOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLoggingOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLoggingOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogStreamARN != nil {
+		s.WriteString(schemas.CloudWatchLoggingOption_LogStreamARN, *v.LogStreamARN)
+	}
+}
+func (v *CloudWatchLoggingOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLoggingOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLoggingOption_LogStreamARN:
+			v.LogStreamARN = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOption_LogStreamARN, v.LogStreamARN)
+		}
+		return nil
+	})
 }
 
 // Describes the Amazon CloudWatch logging option.
@@ -765,6 +2033,40 @@ type CloudWatchLoggingOptionDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CloudWatchLoggingOptionDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLoggingOptionDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLoggingOptionDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLoggingOptionId != nil {
+		s.WriteString(schemas.CloudWatchLoggingOptionDescription_CloudWatchLoggingOptionId, *v.CloudWatchLoggingOptionId)
+	}
+	if v.LogStreamARN != nil {
+		s.WriteString(schemas.CloudWatchLoggingOptionDescription_LogStreamARN, *v.LogStreamARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.CloudWatchLoggingOptionDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *CloudWatchLoggingOptionDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLoggingOptionDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLoggingOptionDescription_CloudWatchLoggingOptionId:
+			v.CloudWatchLoggingOptionId = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOptionDescription_CloudWatchLoggingOptionId, v.CloudWatchLoggingOptionId)
+		case schemas.CloudWatchLoggingOptionDescription_LogStreamARN:
+			v.LogStreamARN = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOptionDescription_LogStreamARN, v.LogStreamARN)
+		case schemas.CloudWatchLoggingOptionDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOptionDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // Describes the Amazon CloudWatch logging option updates.
 type CloudWatchLoggingOptionUpdate struct {
 
@@ -778,6 +2080,34 @@ type CloudWatchLoggingOptionUpdate struct {
 	LogStreamARNUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CloudWatchLoggingOptionUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CloudWatchLoggingOptionUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CloudWatchLoggingOptionUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLoggingOptionId != nil {
+		s.WriteString(schemas.CloudWatchLoggingOptionUpdate_CloudWatchLoggingOptionId, *v.CloudWatchLoggingOptionId)
+	}
+	if v.LogStreamARNUpdate != nil {
+		s.WriteString(schemas.CloudWatchLoggingOptionUpdate_LogStreamARNUpdate, *v.LogStreamARNUpdate)
+	}
+}
+func (v *CloudWatchLoggingOptionUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CloudWatchLoggingOptionUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CloudWatchLoggingOptionUpdate_CloudWatchLoggingOptionId:
+			v.CloudWatchLoggingOptionId = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOptionUpdate_CloudWatchLoggingOptionId, v.CloudWatchLoggingOptionId)
+		case schemas.CloudWatchLoggingOptionUpdate_LogStreamARNUpdate:
+			v.LogStreamARNUpdate = new(string)
+			return d.ReadString(schemas.CloudWatchLoggingOptionUpdate_LogStreamARNUpdate, v.LogStreamARNUpdate)
+		}
+		return nil
+	})
 }
 
 // Specifies either the application code, or the location of the application code,
@@ -794,6 +2124,41 @@ type CodeContent struct {
 	ZipFileContent []byte
 
 	noSmithyDocumentSerde
+}
+
+func (v *CodeContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeContent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3ContentLocation != nil {
+		s.WriteStruct(schemas.CodeContent_S3ContentLocation)
+		v.S3ContentLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TextContent != nil {
+		s.WriteString(schemas.CodeContent_TextContent, *v.TextContent)
+	}
+	if v.ZipFileContent != nil {
+		s.WriteBlob(schemas.CodeContent_ZipFileContent, v.ZipFileContent)
+	}
+}
+func (v *CodeContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeContent_S3ContentLocation:
+			v.S3ContentLocation = &S3ContentLocation{}
+			return v.S3ContentLocation.Deserialize(d)
+		case schemas.CodeContent_TextContent:
+			v.TextContent = new(string)
+			return d.ReadString(schemas.CodeContent_TextContent, v.TextContent)
+		case schemas.CodeContent_ZipFileContent:
+			return d.ReadBlob(schemas.CodeContent_ZipFileContent, &v.ZipFileContent)
+		}
+		return nil
+	})
 }
 
 // Describes details about the code of a Managed Service for Apache Flink
@@ -817,6 +2182,48 @@ type CodeContentDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CodeContentDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeContentDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeContentDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeMD5 != nil {
+		s.WriteString(schemas.CodeContentDescription_CodeMD5, *v.CodeMD5)
+	}
+	if v.CodeSize != nil {
+		s.WriteInt64(schemas.CodeContentDescription_CodeSize, *v.CodeSize)
+	}
+	if v.S3ApplicationCodeLocationDescription != nil {
+		s.WriteStruct(schemas.CodeContentDescription_S3ApplicationCodeLocationDescription)
+		v.S3ApplicationCodeLocationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TextContent != nil {
+		s.WriteString(schemas.CodeContentDescription_TextContent, *v.TextContent)
+	}
+}
+func (v *CodeContentDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeContentDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeContentDescription_CodeMD5:
+			v.CodeMD5 = new(string)
+			return d.ReadString(schemas.CodeContentDescription_CodeMD5, v.CodeMD5)
+		case schemas.CodeContentDescription_CodeSize:
+			v.CodeSize = new(int64)
+			return d.ReadInt64(schemas.CodeContentDescription_CodeSize, v.CodeSize)
+		case schemas.CodeContentDescription_S3ApplicationCodeLocationDescription:
+			v.S3ApplicationCodeLocationDescription = &S3ApplicationCodeLocationDescription{}
+			return v.S3ApplicationCodeLocationDescription.Deserialize(d)
+		case schemas.CodeContentDescription_TextContent:
+			v.TextContent = new(string)
+			return d.ReadString(schemas.CodeContentDescription_TextContent, v.TextContent)
+		}
+		return nil
+	})
+}
+
 // Describes an update to the code of an application. Not supported for Apache
 // Zeppelin.
 type CodeContentUpdate struct {
@@ -831,6 +2238,41 @@ type CodeContentUpdate struct {
 	ZipFileContentUpdate []byte
 
 	noSmithyDocumentSerde
+}
+
+func (v *CodeContentUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CodeContentUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CodeContentUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3ContentLocationUpdate != nil {
+		s.WriteStruct(schemas.CodeContentUpdate_S3ContentLocationUpdate)
+		v.S3ContentLocationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TextContentUpdate != nil {
+		s.WriteString(schemas.CodeContentUpdate_TextContentUpdate, *v.TextContentUpdate)
+	}
+	if v.ZipFileContentUpdate != nil {
+		s.WriteBlob(schemas.CodeContentUpdate_ZipFileContentUpdate, v.ZipFileContentUpdate)
+	}
+}
+func (v *CodeContentUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CodeContentUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CodeContentUpdate_S3ContentLocationUpdate:
+			v.S3ContentLocationUpdate = &S3ContentLocationUpdate{}
+			return v.S3ContentLocationUpdate.Deserialize(d)
+		case schemas.CodeContentUpdate_TextContentUpdate:
+			v.TextContentUpdate = new(string)
+			return d.ReadString(schemas.CodeContentUpdate_TextContentUpdate, v.TextContentUpdate)
+		case schemas.CodeContentUpdate_ZipFileContentUpdate:
+			return d.ReadBlob(schemas.CodeContentUpdate_ZipFileContentUpdate, &v.ZipFileContentUpdate)
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application, provides additional mapping
@@ -858,6 +2300,34 @@ type CSVMappingParameters struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CSVMappingParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CSVMappingParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CSVMappingParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordColumnDelimiter != nil {
+		s.WriteString(schemas.CSVMappingParameters_RecordColumnDelimiter, *v.RecordColumnDelimiter)
+	}
+	if v.RecordRowDelimiter != nil {
+		s.WriteString(schemas.CSVMappingParameters_RecordRowDelimiter, *v.RecordRowDelimiter)
+	}
+}
+func (v *CSVMappingParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CSVMappingParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CSVMappingParameters_RecordColumnDelimiter:
+			v.RecordColumnDelimiter = new(string)
+			return d.ReadString(schemas.CSVMappingParameters_RecordColumnDelimiter, v.RecordColumnDelimiter)
+		case schemas.CSVMappingParameters_RecordRowDelimiter:
+			v.RecordRowDelimiter = new(string)
+			return d.ReadString(schemas.CSVMappingParameters_RecordRowDelimiter, v.RecordRowDelimiter)
+		}
+		return nil
+	})
+}
+
 // Specifies dependency JARs, as well as JAR files that contain user-defined
 // functions (UDF).
 type CustomArtifactConfiguration struct {
@@ -880,6 +2350,48 @@ type CustomArtifactConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomArtifactConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomArtifactConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomArtifactConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactType != "" {
+		s.WriteString(schemas.CustomArtifactConfiguration_ArtifactType, string(v.ArtifactType))
+	}
+	if v.MavenReference != nil {
+		s.WriteStruct(schemas.CustomArtifactConfiguration_MavenReference)
+		v.MavenReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3ContentLocation != nil {
+		s.WriteStruct(schemas.CustomArtifactConfiguration_S3ContentLocation)
+		v.S3ContentLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CustomArtifactConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomArtifactConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomArtifactConfiguration_ArtifactType:
+			var ev string
+			if err := d.ReadString(schemas.CustomArtifactConfiguration_ArtifactType, &ev); err != nil {
+				return err
+			}
+			v.ArtifactType = ArtifactType(ev)
+			return nil
+		case schemas.CustomArtifactConfiguration_MavenReference:
+			v.MavenReference = &MavenReference{}
+			return v.MavenReference.Deserialize(d)
+		case schemas.CustomArtifactConfiguration_S3ContentLocation:
+			v.S3ContentLocation = &S3ContentLocation{}
+			return v.S3ContentLocation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Specifies a dependency JAR or a JAR of user-defined functions.
 type CustomArtifactConfigurationDescription struct {
 
@@ -899,6 +2411,48 @@ type CustomArtifactConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CustomArtifactConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomArtifactConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomArtifactConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactType != "" {
+		s.WriteString(schemas.CustomArtifactConfigurationDescription_ArtifactType, string(v.ArtifactType))
+	}
+	if v.MavenReferenceDescription != nil {
+		s.WriteStruct(schemas.CustomArtifactConfigurationDescription_MavenReferenceDescription)
+		v.MavenReferenceDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3ContentLocationDescription != nil {
+		s.WriteStruct(schemas.CustomArtifactConfigurationDescription_S3ContentLocationDescription)
+		v.S3ContentLocationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CustomArtifactConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomArtifactConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomArtifactConfigurationDescription_ArtifactType:
+			var ev string
+			if err := d.ReadString(schemas.CustomArtifactConfigurationDescription_ArtifactType, &ev); err != nil {
+				return err
+			}
+			v.ArtifactType = ArtifactType(ev)
+			return nil
+		case schemas.CustomArtifactConfigurationDescription_MavenReferenceDescription:
+			v.MavenReferenceDescription = &MavenReference{}
+			return v.MavenReferenceDescription.Deserialize(d)
+		case schemas.CustomArtifactConfigurationDescription_S3ContentLocationDescription:
+			v.S3ContentLocationDescription = &S3ContentLocation{}
+			return v.S3ContentLocationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The information required to deploy a Managed Service for Apache Flink Studio
 // notebook as an application with durable state.
 type DeployAsApplicationConfiguration struct {
@@ -914,6 +2468,30 @@ type DeployAsApplicationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeployAsApplicationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeployAsApplicationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeployAsApplicationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3ContentLocation != nil {
+		s.WriteStruct(schemas.DeployAsApplicationConfiguration_S3ContentLocation)
+		v.S3ContentLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeployAsApplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeployAsApplicationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeployAsApplicationConfiguration_S3ContentLocation:
+			v.S3ContentLocation = &S3ContentBaseLocation{}
+			return v.S3ContentLocation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The configuration information required to deploy an Amazon Data Analytics
 // Studio notebook as an application with durable state.
 type DeployAsApplicationConfigurationDescription struct {
@@ -927,6 +2505,30 @@ type DeployAsApplicationConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeployAsApplicationConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeployAsApplicationConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeployAsApplicationConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3ContentLocationDescription != nil {
+		s.WriteStruct(schemas.DeployAsApplicationConfigurationDescription_S3ContentLocationDescription)
+		v.S3ContentLocationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeployAsApplicationConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeployAsApplicationConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeployAsApplicationConfigurationDescription_S3ContentLocationDescription:
+			v.S3ContentLocationDescription = &S3ContentBaseLocationDescription{}
+			return v.S3ContentLocationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Updates to the configuration information required to deploy an Amazon Data
 // Analytics Studio notebook as an application with durable state.
 type DeployAsApplicationConfigurationUpdate struct {
@@ -936,6 +2538,30 @@ type DeployAsApplicationConfigurationUpdate struct {
 	S3ContentLocationUpdate *S3ContentBaseLocationUpdate
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeployAsApplicationConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeployAsApplicationConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeployAsApplicationConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3ContentLocationUpdate != nil {
+		s.WriteStruct(schemas.DeployAsApplicationConfigurationUpdate_S3ContentLocationUpdate)
+		v.S3ContentLocationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeployAsApplicationConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeployAsApplicationConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeployAsApplicationConfigurationUpdate_S3ContentLocationUpdate:
+			v.S3ContentLocationUpdate = &S3ContentBaseLocationUpdate{}
+			return v.S3ContentLocationUpdate.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the data format when records are written to the destination in a
@@ -950,6 +2576,32 @@ type DestinationSchema struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DestinationSchema) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DestinationSchema)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DestinationSchema) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordFormatType != "" {
+		s.WriteString(schemas.DestinationSchema_RecordFormatType, string(v.RecordFormatType))
+	}
+}
+func (v *DestinationSchema) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DestinationSchema, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DestinationSchema_RecordFormatType:
+			var ev string
+			if err := d.ReadString(schemas.DestinationSchema_RecordFormatType, &ev); err != nil {
+				return err
+			}
+			v.RecordFormatType = RecordFormatType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes execution properties for a Managed Service for Apache Flink
 // application.
 type EnvironmentProperties struct {
@@ -962,6 +2614,25 @@ type EnvironmentProperties struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnvironmentProperties) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnvironmentProperties)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnvironmentProperties) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePropertyGroups(s, schemas.EnvironmentProperties_PropertyGroups, v.PropertyGroups)
+}
+func (v *EnvironmentProperties) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnvironmentProperties, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnvironmentProperties_PropertyGroups:
+			return deserializePropertyGroups(d, schemas.EnvironmentProperties_PropertyGroups, &v.PropertyGroups)
+		}
+		return nil
+	})
+}
+
 // Describes the execution properties for an Apache Flink runtime.
 type EnvironmentPropertyDescriptions struct {
 
@@ -969,6 +2640,25 @@ type EnvironmentPropertyDescriptions struct {
 	PropertyGroupDescriptions []PropertyGroup
 
 	noSmithyDocumentSerde
+}
+
+func (v *EnvironmentPropertyDescriptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnvironmentPropertyDescriptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnvironmentPropertyDescriptions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePropertyGroups(s, schemas.EnvironmentPropertyDescriptions_PropertyGroupDescriptions, v.PropertyGroupDescriptions)
+}
+func (v *EnvironmentPropertyDescriptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnvironmentPropertyDescriptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnvironmentPropertyDescriptions_PropertyGroupDescriptions:
+			return deserializePropertyGroups(d, schemas.EnvironmentPropertyDescriptions_PropertyGroupDescriptions, &v.PropertyGroupDescriptions)
+		}
+		return nil
+	})
 }
 
 // Describes updates to the execution property groups for a Managed Service for
@@ -983,6 +2673,25 @@ type EnvironmentPropertyUpdates struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnvironmentPropertyUpdates) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnvironmentPropertyUpdates)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnvironmentPropertyUpdates) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePropertyGroups(s, schemas.EnvironmentPropertyUpdates_PropertyGroups, v.PropertyGroups)
+}
+func (v *EnvironmentPropertyUpdates) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnvironmentPropertyUpdates, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnvironmentPropertyUpdates_PropertyGroups:
+			return deserializePropertyGroups(d, schemas.EnvironmentPropertyUpdates_PropertyGroups, &v.PropertyGroups)
+		}
+		return nil
+	})
+}
+
 // A description of the error that caused an operation to fail.
 type ErrorInfo struct {
 
@@ -990,6 +2699,28 @@ type ErrorInfo struct {
 	ErrorString *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ErrorInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorString != nil {
+		s.WriteString(schemas.ErrorInfo_ErrorString, *v.ErrorString)
+	}
+}
+func (v *ErrorInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorInfo_ErrorString:
+			v.ErrorString = new(string)
+			return d.ReadString(schemas.ErrorInfo_ErrorString, v.ErrorString)
+		}
+		return nil
+	})
 }
 
 // Describes configuration parameters for a Managed Service for Apache Flink
@@ -1013,6 +2744,46 @@ type FlinkApplicationConfiguration struct {
 	ParallelismConfiguration *ParallelismConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *FlinkApplicationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlinkApplicationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlinkApplicationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckpointConfiguration != nil {
+		s.WriteStruct(schemas.FlinkApplicationConfiguration_CheckpointConfiguration)
+		v.CheckpointConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonitoringConfiguration != nil {
+		s.WriteStruct(schemas.FlinkApplicationConfiguration_MonitoringConfiguration)
+		v.MonitoringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParallelismConfiguration != nil {
+		s.WriteStruct(schemas.FlinkApplicationConfiguration_ParallelismConfiguration)
+		v.ParallelismConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FlinkApplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlinkApplicationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlinkApplicationConfiguration_CheckpointConfiguration:
+			v.CheckpointConfiguration = &CheckpointConfiguration{}
+			return v.CheckpointConfiguration.Deserialize(d)
+		case schemas.FlinkApplicationConfiguration_MonitoringConfiguration:
+			v.MonitoringConfiguration = &MonitoringConfiguration{}
+			return v.MonitoringConfiguration.Deserialize(d)
+		case schemas.FlinkApplicationConfiguration_ParallelismConfiguration:
+			v.ParallelismConfiguration = &ParallelismConfiguration{}
+			return v.ParallelismConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes configuration parameters for a Managed Service for Apache Flink
@@ -1042,6 +2813,52 @@ type FlinkApplicationConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlinkApplicationConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlinkApplicationConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlinkApplicationConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckpointConfigurationDescription != nil {
+		s.WriteStruct(schemas.FlinkApplicationConfigurationDescription_CheckpointConfigurationDescription)
+		v.CheckpointConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobPlanDescription != nil {
+		s.WriteString(schemas.FlinkApplicationConfigurationDescription_JobPlanDescription, *v.JobPlanDescription)
+	}
+	if v.MonitoringConfigurationDescription != nil {
+		s.WriteStruct(schemas.FlinkApplicationConfigurationDescription_MonitoringConfigurationDescription)
+		v.MonitoringConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParallelismConfigurationDescription != nil {
+		s.WriteStruct(schemas.FlinkApplicationConfigurationDescription_ParallelismConfigurationDescription)
+		v.ParallelismConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FlinkApplicationConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlinkApplicationConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlinkApplicationConfigurationDescription_CheckpointConfigurationDescription:
+			v.CheckpointConfigurationDescription = &CheckpointConfigurationDescription{}
+			return v.CheckpointConfigurationDescription.Deserialize(d)
+		case schemas.FlinkApplicationConfigurationDescription_JobPlanDescription:
+			v.JobPlanDescription = new(string)
+			return d.ReadString(schemas.FlinkApplicationConfigurationDescription_JobPlanDescription, v.JobPlanDescription)
+		case schemas.FlinkApplicationConfigurationDescription_MonitoringConfigurationDescription:
+			v.MonitoringConfigurationDescription = &MonitoringConfigurationDescription{}
+			return v.MonitoringConfigurationDescription.Deserialize(d)
+		case schemas.FlinkApplicationConfigurationDescription_ParallelismConfigurationDescription:
+			v.ParallelismConfigurationDescription = &ParallelismConfigurationDescription{}
+			return v.ParallelismConfigurationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes updates to the configuration parameters for a Managed Service for
 // Apache Flink application.
 type FlinkApplicationConfigurationUpdate struct {
@@ -1060,6 +2877,46 @@ type FlinkApplicationConfigurationUpdate struct {
 	ParallelismConfigurationUpdate *ParallelismConfigurationUpdate
 
 	noSmithyDocumentSerde
+}
+
+func (v *FlinkApplicationConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlinkApplicationConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlinkApplicationConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckpointConfigurationUpdate != nil {
+		s.WriteStruct(schemas.FlinkApplicationConfigurationUpdate_CheckpointConfigurationUpdate)
+		v.CheckpointConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonitoringConfigurationUpdate != nil {
+		s.WriteStruct(schemas.FlinkApplicationConfigurationUpdate_MonitoringConfigurationUpdate)
+		v.MonitoringConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParallelismConfigurationUpdate != nil {
+		s.WriteStruct(schemas.FlinkApplicationConfigurationUpdate_ParallelismConfigurationUpdate)
+		v.ParallelismConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FlinkApplicationConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlinkApplicationConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlinkApplicationConfigurationUpdate_CheckpointConfigurationUpdate:
+			v.CheckpointConfigurationUpdate = &CheckpointConfigurationUpdate{}
+			return v.CheckpointConfigurationUpdate.Deserialize(d)
+		case schemas.FlinkApplicationConfigurationUpdate_MonitoringConfigurationUpdate:
+			v.MonitoringConfigurationUpdate = &MonitoringConfigurationUpdate{}
+			return v.MonitoringConfigurationUpdate.Deserialize(d)
+		case schemas.FlinkApplicationConfigurationUpdate_ParallelismConfigurationUpdate:
+			v.ParallelismConfigurationUpdate = &ParallelismConfigurationUpdate{}
+			return v.ParallelismConfigurationUpdate.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the starting parameters for a Managed Service for Apache Flink
@@ -1083,6 +2940,28 @@ type FlinkRunConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FlinkRunConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FlinkRunConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FlinkRunConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowNonRestoredState != nil {
+		s.WriteBool(schemas.FlinkRunConfiguration_AllowNonRestoredState, *v.AllowNonRestoredState)
+	}
+}
+func (v *FlinkRunConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FlinkRunConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FlinkRunConfiguration_AllowNonRestoredState:
+			v.AllowNonRestoredState = new(bool)
+			return d.ReadBool(schemas.FlinkRunConfiguration_AllowNonRestoredState, v.AllowNonRestoredState)
+		}
+		return nil
+	})
+}
+
 // The configuration of the Glue Data Catalog that you use for Apache Flink SQL
 // queries and table API transforms that you write in an application.
 type GlueDataCatalogConfiguration struct {
@@ -1093,6 +2972,28 @@ type GlueDataCatalogConfiguration struct {
 	DatabaseARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GlueDataCatalogConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlueDataCatalogConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlueDataCatalogConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseARN != nil {
+		s.WriteString(schemas.GlueDataCatalogConfiguration_DatabaseARN, *v.DatabaseARN)
+	}
+}
+func (v *GlueDataCatalogConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlueDataCatalogConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlueDataCatalogConfiguration_DatabaseARN:
+			v.DatabaseARN = new(string)
+			return d.ReadString(schemas.GlueDataCatalogConfiguration_DatabaseARN, v.DatabaseARN)
+		}
+		return nil
+	})
 }
 
 // The configuration of the Glue Data Catalog that you use for Apache Flink SQL
@@ -1107,6 +3008,28 @@ type GlueDataCatalogConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GlueDataCatalogConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlueDataCatalogConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlueDataCatalogConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseARN != nil {
+		s.WriteString(schemas.GlueDataCatalogConfigurationDescription_DatabaseARN, *v.DatabaseARN)
+	}
+}
+func (v *GlueDataCatalogConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlueDataCatalogConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlueDataCatalogConfigurationDescription_DatabaseARN:
+			v.DatabaseARN = new(string)
+			return d.ReadString(schemas.GlueDataCatalogConfigurationDescription_DatabaseARN, v.DatabaseARN)
+		}
+		return nil
+	})
+}
+
 // Updates to the configuration of the Glue Data Catalog that you use for SQL
 // queries that you write in a Managed Service for Apache Flink Studio notebook.
 type GlueDataCatalogConfigurationUpdate struct {
@@ -1117,6 +3040,28 @@ type GlueDataCatalogConfigurationUpdate struct {
 	DatabaseARNUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GlueDataCatalogConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlueDataCatalogConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlueDataCatalogConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseARNUpdate != nil {
+		s.WriteString(schemas.GlueDataCatalogConfigurationUpdate_DatabaseARNUpdate, *v.DatabaseARNUpdate)
+	}
+}
+func (v *GlueDataCatalogConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlueDataCatalogConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlueDataCatalogConfigurationUpdate_DatabaseARNUpdate:
+			v.DatabaseARNUpdate = new(string)
+			return d.ReadString(schemas.GlueDataCatalogConfigurationUpdate_DatabaseARNUpdate, v.DatabaseARNUpdate)
+		}
+		return nil
+	})
 }
 
 // When you configure the application input for a SQL-based Kinesis Data Analytics
@@ -1161,6 +3106,68 @@ type Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Input)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Input) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputParallelism != nil {
+		s.WriteStruct(schemas.Input_InputParallelism)
+		v.InputParallelism.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputProcessingConfiguration != nil {
+		s.WriteStruct(schemas.Input_InputProcessingConfiguration)
+		v.InputProcessingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputSchema != nil {
+		s.WriteStruct(schemas.Input_InputSchema)
+		v.InputSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisFirehoseInput != nil {
+		s.WriteStruct(schemas.Input_KinesisFirehoseInput)
+		v.KinesisFirehoseInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamsInput != nil {
+		s.WriteStruct(schemas.Input_KinesisStreamsInput)
+		v.KinesisStreamsInput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.Input_NamePrefix, *v.NamePrefix)
+	}
+}
+func (v *Input) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Input, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Input_InputParallelism:
+			v.InputParallelism = &InputParallelism{}
+			return v.InputParallelism.Deserialize(d)
+		case schemas.Input_InputProcessingConfiguration:
+			v.InputProcessingConfiguration = &InputProcessingConfiguration{}
+			return v.InputProcessingConfiguration.Deserialize(d)
+		case schemas.Input_InputSchema:
+			v.InputSchema = &SourceSchema{}
+			return v.InputSchema.Deserialize(d)
+		case schemas.Input_KinesisFirehoseInput:
+			v.KinesisFirehoseInput = &KinesisFirehoseInput{}
+			return v.KinesisFirehoseInput.Deserialize(d)
+		case schemas.Input_KinesisStreamsInput:
+			v.KinesisStreamsInput = &KinesisStreamsInput{}
+			return v.KinesisStreamsInput.Deserialize(d)
+		case schemas.Input_NamePrefix:
+			v.NamePrefix = new(string)
+			return d.ReadString(schemas.Input_NamePrefix, v.NamePrefix)
+		}
+		return nil
+	})
+}
+
 // Describes the application input configuration for a SQL-based Kinesis Data
 // Analytics application.
 type InputDescription struct {
@@ -1203,6 +3210,85 @@ type InputDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInAppStreamNames(s, schemas.InputDescription_InAppStreamNames, v.InAppStreamNames)
+	if v.InputId != nil {
+		s.WriteString(schemas.InputDescription_InputId, *v.InputId)
+	}
+	if v.InputParallelism != nil {
+		s.WriteStruct(schemas.InputDescription_InputParallelism)
+		v.InputParallelism.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputProcessingConfigurationDescription != nil {
+		s.WriteStruct(schemas.InputDescription_InputProcessingConfigurationDescription)
+		v.InputProcessingConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputSchema != nil {
+		s.WriteStruct(schemas.InputDescription_InputSchema)
+		v.InputSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputStartingPositionConfiguration != nil {
+		s.WriteStruct(schemas.InputDescription_InputStartingPositionConfiguration)
+		v.InputStartingPositionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisFirehoseInputDescription != nil {
+		s.WriteStruct(schemas.InputDescription_KinesisFirehoseInputDescription)
+		v.KinesisFirehoseInputDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamsInputDescription != nil {
+		s.WriteStruct(schemas.InputDescription_KinesisStreamsInputDescription)
+		v.KinesisStreamsInputDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.InputDescription_NamePrefix, *v.NamePrefix)
+	}
+}
+func (v *InputDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputDescription_InAppStreamNames:
+			return deserializeInAppStreamNames(d, schemas.InputDescription_InAppStreamNames, &v.InAppStreamNames)
+		case schemas.InputDescription_InputId:
+			v.InputId = new(string)
+			return d.ReadString(schemas.InputDescription_InputId, v.InputId)
+		case schemas.InputDescription_InputParallelism:
+			v.InputParallelism = &InputParallelism{}
+			return v.InputParallelism.Deserialize(d)
+		case schemas.InputDescription_InputProcessingConfigurationDescription:
+			v.InputProcessingConfigurationDescription = &InputProcessingConfigurationDescription{}
+			return v.InputProcessingConfigurationDescription.Deserialize(d)
+		case schemas.InputDescription_InputSchema:
+			v.InputSchema = &SourceSchema{}
+			return v.InputSchema.Deserialize(d)
+		case schemas.InputDescription_InputStartingPositionConfiguration:
+			v.InputStartingPositionConfiguration = &InputStartingPositionConfiguration{}
+			return v.InputStartingPositionConfiguration.Deserialize(d)
+		case schemas.InputDescription_KinesisFirehoseInputDescription:
+			v.KinesisFirehoseInputDescription = &KinesisFirehoseInputDescription{}
+			return v.KinesisFirehoseInputDescription.Deserialize(d)
+		case schemas.InputDescription_KinesisStreamsInputDescription:
+			v.KinesisStreamsInputDescription = &KinesisStreamsInputDescription{}
+			return v.KinesisStreamsInputDescription.Deserialize(d)
+		case schemas.InputDescription_NamePrefix:
+			v.NamePrefix = new(string)
+			return d.ReadString(schemas.InputDescription_NamePrefix, v.NamePrefix)
+		}
+		return nil
+	})
+}
+
 // An object that contains the Amazon Resource Name (ARN) of the Amazon Lambda
 // function that is used to preprocess records in the stream in a SQL-based Kinesis
 // Data Analytics application.
@@ -1220,6 +3306,28 @@ type InputLambdaProcessor struct {
 	ResourceARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputLambdaProcessor) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputLambdaProcessor)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputLambdaProcessor) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.InputLambdaProcessor_ResourceARN, *v.ResourceARN)
+	}
+}
+func (v *InputLambdaProcessor) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputLambdaProcessor, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputLambdaProcessor_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.InputLambdaProcessor_ResourceARN, v.ResourceARN)
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application, an object that contains the
@@ -1249,6 +3357,34 @@ type InputLambdaProcessorDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputLambdaProcessorDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputLambdaProcessorDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputLambdaProcessorDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.InputLambdaProcessorDescription_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.InputLambdaProcessorDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *InputLambdaProcessorDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputLambdaProcessorDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputLambdaProcessorDescription_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.InputLambdaProcessorDescription_ResourceARN, v.ResourceARN)
+		case schemas.InputLambdaProcessorDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.InputLambdaProcessorDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // For a SQL-based Kinesis Data Analytics application, represents an update to the InputLambdaProcessor
 // that is used to preprocess the records in the stream.
 type InputLambdaProcessorUpdate struct {
@@ -1268,6 +3404,28 @@ type InputLambdaProcessorUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputLambdaProcessorUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputLambdaProcessorUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputLambdaProcessorUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARNUpdate != nil {
+		s.WriteString(schemas.InputLambdaProcessorUpdate_ResourceARNUpdate, *v.ResourceARNUpdate)
+	}
+}
+func (v *InputLambdaProcessorUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputLambdaProcessorUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputLambdaProcessorUpdate_ResourceARNUpdate:
+			v.ResourceARNUpdate = new(string)
+			return d.ReadString(schemas.InputLambdaProcessorUpdate_ResourceARNUpdate, v.ResourceARNUpdate)
+		}
+		return nil
+	})
+}
+
 // For a SQL-based Kinesis Data Analytics application, describes the number of
 // in-application streams to create for a given streaming source.
 type InputParallelism struct {
@@ -1276,6 +3434,28 @@ type InputParallelism struct {
 	Count *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputParallelism) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputParallelism)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputParallelism) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != nil {
+		s.WriteInt32(schemas.InputParallelism_Count, *v.Count)
+	}
+}
+func (v *InputParallelism) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputParallelism, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputParallelism_Count:
+			v.Count = new(int32)
+			return d.ReadInt32(schemas.InputParallelism_Count, v.Count)
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application, provides updates to the
@@ -1289,6 +3469,28 @@ type InputParallelismUpdate struct {
 	CountUpdate *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputParallelismUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputParallelismUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputParallelismUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CountUpdate != nil {
+		s.WriteInt32(schemas.InputParallelismUpdate_CountUpdate, *v.CountUpdate)
+	}
+}
+func (v *InputParallelismUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputParallelismUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputParallelismUpdate_CountUpdate:
+			v.CountUpdate = new(int32)
+			return d.ReadInt32(schemas.InputParallelismUpdate_CountUpdate, v.CountUpdate)
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application, describes a processor that
@@ -1307,6 +3509,30 @@ type InputProcessingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputProcessingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputProcessingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputProcessingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputLambdaProcessor != nil {
+		s.WriteStruct(schemas.InputProcessingConfiguration_InputLambdaProcessor)
+		v.InputLambdaProcessor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InputProcessingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputProcessingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputProcessingConfiguration_InputLambdaProcessor:
+			v.InputLambdaProcessor = &InputLambdaProcessor{}
+			return v.InputLambdaProcessor.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // For a SQL-based Kinesis Data Analytics application, provides the configuration
 // information about an input processor. Currently, the only input processor
 // available is [Amazon Lambda].
@@ -1320,6 +3546,30 @@ type InputProcessingConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputProcessingConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputProcessingConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputProcessingConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputLambdaProcessorDescription != nil {
+		s.WriteStruct(schemas.InputProcessingConfigurationDescription_InputLambdaProcessorDescription)
+		v.InputLambdaProcessorDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InputProcessingConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputProcessingConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputProcessingConfigurationDescription_InputLambdaProcessorDescription:
+			v.InputLambdaProcessorDescription = &InputLambdaProcessorDescription{}
+			return v.InputLambdaProcessorDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // For a SQL-based Kinesis Data Analytics application, describes updates to an InputProcessingConfiguration.
 type InputProcessingConfigurationUpdate struct {
 
@@ -1329,6 +3579,30 @@ type InputProcessingConfigurationUpdate struct {
 	InputLambdaProcessorUpdate *InputLambdaProcessorUpdate
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputProcessingConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputProcessingConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputProcessingConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputLambdaProcessorUpdate != nil {
+		s.WriteStruct(schemas.InputProcessingConfigurationUpdate_InputLambdaProcessorUpdate)
+		v.InputLambdaProcessorUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InputProcessingConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputProcessingConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputProcessingConfigurationUpdate_InputLambdaProcessorUpdate:
+			v.InputLambdaProcessorUpdate = &InputLambdaProcessorUpdate{}
+			return v.InputLambdaProcessorUpdate.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes updates for an SQL-based Kinesis Data Analytics application's input
@@ -1350,6 +3624,39 @@ type InputSchemaUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputSchemaUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputSchemaUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputSchemaUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecordColumns(s, schemas.InputSchemaUpdate_RecordColumnUpdates, v.RecordColumnUpdates)
+	if v.RecordEncodingUpdate != nil {
+		s.WriteString(schemas.InputSchemaUpdate_RecordEncodingUpdate, *v.RecordEncodingUpdate)
+	}
+	if v.RecordFormatUpdate != nil {
+		s.WriteStruct(schemas.InputSchemaUpdate_RecordFormatUpdate)
+		v.RecordFormatUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InputSchemaUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputSchemaUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputSchemaUpdate_RecordColumnUpdates:
+			return deserializeRecordColumns(d, schemas.InputSchemaUpdate_RecordColumnUpdates, &v.RecordColumnUpdates)
+		case schemas.InputSchemaUpdate_RecordEncodingUpdate:
+			v.RecordEncodingUpdate = new(string)
+			return d.ReadString(schemas.InputSchemaUpdate_RecordEncodingUpdate, v.RecordEncodingUpdate)
+		case schemas.InputSchemaUpdate_RecordFormatUpdate:
+			v.RecordFormatUpdate = &RecordFormat{}
+			return v.RecordFormatUpdate.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the point at which the application reads from the streaming source.
 type InputStartingPositionConfiguration struct {
 
@@ -1367,6 +3674,32 @@ type InputStartingPositionConfiguration struct {
 	InputStartingPosition InputStartingPosition
 
 	noSmithyDocumentSerde
+}
+
+func (v *InputStartingPositionConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputStartingPositionConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputStartingPositionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputStartingPosition != "" {
+		s.WriteString(schemas.InputStartingPositionConfiguration_InputStartingPosition, string(v.InputStartingPosition))
+	}
+}
+func (v *InputStartingPositionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputStartingPositionConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputStartingPositionConfiguration_InputStartingPosition:
+			var ev string
+			if err := d.ReadString(schemas.InputStartingPositionConfiguration_InputStartingPosition, &ev); err != nil {
+				return err
+			}
+			v.InputStartingPosition = InputStartingPosition(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application, describes updates to a
@@ -1405,6 +3738,74 @@ type InputUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputId != nil {
+		s.WriteString(schemas.InputUpdate_InputId, *v.InputId)
+	}
+	if v.InputParallelismUpdate != nil {
+		s.WriteStruct(schemas.InputUpdate_InputParallelismUpdate)
+		v.InputParallelismUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputProcessingConfigurationUpdate != nil {
+		s.WriteStruct(schemas.InputUpdate_InputProcessingConfigurationUpdate)
+		v.InputProcessingConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InputSchemaUpdate != nil {
+		s.WriteStruct(schemas.InputUpdate_InputSchemaUpdate)
+		v.InputSchemaUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisFirehoseInputUpdate != nil {
+		s.WriteStruct(schemas.InputUpdate_KinesisFirehoseInputUpdate)
+		v.KinesisFirehoseInputUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamsInputUpdate != nil {
+		s.WriteStruct(schemas.InputUpdate_KinesisStreamsInputUpdate)
+		v.KinesisStreamsInputUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NamePrefixUpdate != nil {
+		s.WriteString(schemas.InputUpdate_NamePrefixUpdate, *v.NamePrefixUpdate)
+	}
+}
+func (v *InputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputUpdate_InputId:
+			v.InputId = new(string)
+			return d.ReadString(schemas.InputUpdate_InputId, v.InputId)
+		case schemas.InputUpdate_InputParallelismUpdate:
+			v.InputParallelismUpdate = &InputParallelismUpdate{}
+			return v.InputParallelismUpdate.Deserialize(d)
+		case schemas.InputUpdate_InputProcessingConfigurationUpdate:
+			v.InputProcessingConfigurationUpdate = &InputProcessingConfigurationUpdate{}
+			return v.InputProcessingConfigurationUpdate.Deserialize(d)
+		case schemas.InputUpdate_InputSchemaUpdate:
+			v.InputSchemaUpdate = &InputSchemaUpdate{}
+			return v.InputSchemaUpdate.Deserialize(d)
+		case schemas.InputUpdate_KinesisFirehoseInputUpdate:
+			v.KinesisFirehoseInputUpdate = &KinesisFirehoseInputUpdate{}
+			return v.KinesisFirehoseInputUpdate.Deserialize(d)
+		case schemas.InputUpdate_KinesisStreamsInputUpdate:
+			v.KinesisStreamsInputUpdate = &KinesisStreamsInputUpdate{}
+			return v.KinesisStreamsInputUpdate.Deserialize(d)
+		case schemas.InputUpdate_NamePrefixUpdate:
+			v.NamePrefixUpdate = new(string)
+			return d.ReadString(schemas.InputUpdate_NamePrefixUpdate, v.NamePrefixUpdate)
+		}
+		return nil
+	})
+}
+
 // For a SQL-based Kinesis Data Analytics application, provides additional mapping
 // information when JSON is the record format on the streaming source.
 type JSONMappingParameters struct {
@@ -1415,6 +3816,28 @@ type JSONMappingParameters struct {
 	RecordRowPath *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JSONMappingParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JSONMappingParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JSONMappingParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RecordRowPath != nil {
+		s.WriteString(schemas.JSONMappingParameters_RecordRowPath, *v.RecordRowPath)
+	}
+}
+func (v *JSONMappingParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JSONMappingParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JSONMappingParameters_RecordRowPath:
+			v.RecordRowPath = new(string)
+			return d.ReadString(schemas.JSONMappingParameters_RecordRowPath, v.RecordRowPath)
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application, identifies a Kinesis Data
@@ -1428,6 +3851,28 @@ type KinesisFirehoseInput struct {
 	ResourceARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisFirehoseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisFirehoseInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisFirehoseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisFirehoseInput_ResourceARN, *v.ResourceARN)
+	}
+}
+func (v *KinesisFirehoseInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisFirehoseInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisFirehoseInput_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisFirehoseInput_ResourceARN, v.ResourceARN)
+		}
+		return nil
+	})
 }
 
 // Describes the Amazon Kinesis Data Firehose delivery stream that is configured
@@ -1450,6 +3895,34 @@ type KinesisFirehoseInputDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisFirehoseInputDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisFirehoseInputDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisFirehoseInputDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisFirehoseInputDescription_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.KinesisFirehoseInputDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *KinesisFirehoseInputDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisFirehoseInputDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisFirehoseInputDescription_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisFirehoseInputDescription_ResourceARN, v.ResourceARN)
+		case schemas.KinesisFirehoseInputDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.KinesisFirehoseInputDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // For a SQL-based Kinesis Data Analytics application, when updating application
 // input configuration, provides information about a Kinesis Data Firehose delivery
 // stream as the streaming source.
@@ -1461,6 +3934,28 @@ type KinesisFirehoseInputUpdate struct {
 	ResourceARNUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisFirehoseInputUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisFirehoseInputUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisFirehoseInputUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARNUpdate != nil {
+		s.WriteString(schemas.KinesisFirehoseInputUpdate_ResourceARNUpdate, *v.ResourceARNUpdate)
+	}
+}
+func (v *KinesisFirehoseInputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisFirehoseInputUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisFirehoseInputUpdate_ResourceARNUpdate:
+			v.ResourceARNUpdate = new(string)
+			return d.ReadString(schemas.KinesisFirehoseInputUpdate_ResourceARNUpdate, v.ResourceARNUpdate)
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application, when configuring
@@ -1475,6 +3970,28 @@ type KinesisFirehoseOutput struct {
 	ResourceARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisFirehoseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisFirehoseOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisFirehoseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisFirehoseOutput_ResourceARN, *v.ResourceARN)
+	}
+}
+func (v *KinesisFirehoseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisFirehoseOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisFirehoseOutput_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisFirehoseOutput_ResourceARN, v.ResourceARN)
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application's output, describes the
@@ -1497,6 +4014,34 @@ type KinesisFirehoseOutputDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisFirehoseOutputDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisFirehoseOutputDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisFirehoseOutputDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisFirehoseOutputDescription_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.KinesisFirehoseOutputDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *KinesisFirehoseOutputDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisFirehoseOutputDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisFirehoseOutputDescription_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisFirehoseOutputDescription_ResourceARN, v.ResourceARN)
+		case schemas.KinesisFirehoseOutputDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.KinesisFirehoseOutputDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // For a SQL-based Kinesis Data Analytics application, when updating an output
 // configuration using the UpdateApplicationoperation, provides information about a Kinesis Data
 // Firehose delivery stream that is configured as the destination.
@@ -1510,6 +4055,28 @@ type KinesisFirehoseOutputUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisFirehoseOutputUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisFirehoseOutputUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisFirehoseOutputUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARNUpdate != nil {
+		s.WriteString(schemas.KinesisFirehoseOutputUpdate_ResourceARNUpdate, *v.ResourceARNUpdate)
+	}
+}
+func (v *KinesisFirehoseOutputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisFirehoseOutputUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisFirehoseOutputUpdate_ResourceARNUpdate:
+			v.ResourceARNUpdate = new(string)
+			return d.ReadString(schemas.KinesisFirehoseOutputUpdate_ResourceARNUpdate, v.ResourceARNUpdate)
+		}
+		return nil
+	})
+}
+
 //	Identifies a Kinesis data stream as the streaming source. You provide the
 //
 // stream's Amazon Resource Name (ARN).
@@ -1521,6 +4088,28 @@ type KinesisStreamsInput struct {
 	ResourceARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisStreamsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisStreamsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisStreamsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisStreamsInput_ResourceARN, *v.ResourceARN)
+	}
+}
+func (v *KinesisStreamsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisStreamsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisStreamsInput_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisStreamsInput_ResourceARN, v.ResourceARN)
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application, describes the Kinesis data
@@ -1544,6 +4133,34 @@ type KinesisStreamsInputDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisStreamsInputDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisStreamsInputDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisStreamsInputDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisStreamsInputDescription_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.KinesisStreamsInputDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *KinesisStreamsInputDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisStreamsInputDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisStreamsInputDescription_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisStreamsInputDescription_ResourceARN, v.ResourceARN)
+		case schemas.KinesisStreamsInputDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.KinesisStreamsInputDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // When you update the input configuration for a SQL-based Kinesis Data Analytics
 // application, provides information about a Kinesis stream as the streaming
 // source.
@@ -1557,6 +4174,28 @@ type KinesisStreamsInputUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisStreamsInputUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisStreamsInputUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisStreamsInputUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARNUpdate != nil {
+		s.WriteString(schemas.KinesisStreamsInputUpdate_ResourceARNUpdate, *v.ResourceARNUpdate)
+	}
+}
+func (v *KinesisStreamsInputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisStreamsInputUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisStreamsInputUpdate_ResourceARNUpdate:
+			v.ResourceARNUpdate = new(string)
+			return d.ReadString(schemas.KinesisStreamsInputUpdate_ResourceARNUpdate, v.ResourceARNUpdate)
+		}
+		return nil
+	})
+}
+
 // When you configure a SQL-based Kinesis Data Analytics application's output,
 // identifies a Kinesis data stream as the destination. You provide the stream
 // Amazon Resource Name (ARN).
@@ -1568,6 +4207,28 @@ type KinesisStreamsOutput struct {
 	ResourceARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisStreamsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisStreamsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisStreamsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisStreamsOutput_ResourceARN, *v.ResourceARN)
+	}
+}
+func (v *KinesisStreamsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisStreamsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisStreamsOutput_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisStreamsOutput_ResourceARN, v.ResourceARN)
+		}
+		return nil
+	})
 }
 
 // For an SQL-based Kinesis Data Analytics application's output, describes the
@@ -1590,6 +4251,34 @@ type KinesisStreamsOutputDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KinesisStreamsOutputDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisStreamsOutputDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisStreamsOutputDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.KinesisStreamsOutputDescription_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.KinesisStreamsOutputDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *KinesisStreamsOutputDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisStreamsOutputDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisStreamsOutputDescription_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.KinesisStreamsOutputDescription_ResourceARN, v.ResourceARN)
+		case schemas.KinesisStreamsOutputDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.KinesisStreamsOutputDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // When you update a SQL-based Kinesis Data Analytics application's output
 // configuration using the UpdateApplicationoperation, provides information about a Kinesis data
 // stream that is configured as the destination.
@@ -1602,6 +4291,28 @@ type KinesisStreamsOutputUpdate struct {
 	ResourceARNUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *KinesisStreamsOutputUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KinesisStreamsOutputUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KinesisStreamsOutputUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARNUpdate != nil {
+		s.WriteString(schemas.KinesisStreamsOutputUpdate_ResourceARNUpdate, *v.ResourceARNUpdate)
+	}
+}
+func (v *KinesisStreamsOutputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KinesisStreamsOutputUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KinesisStreamsOutputUpdate_ResourceARNUpdate:
+			v.ResourceARNUpdate = new(string)
+			return d.ReadString(schemas.KinesisStreamsOutputUpdate_ResourceARNUpdate, v.ResourceARNUpdate)
+		}
+		return nil
+	})
 }
 
 // When you configure a SQL-based Kinesis Data Analytics application's output,
@@ -1621,6 +4332,28 @@ type LambdaOutput struct {
 	ResourceARN *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LambdaOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.LambdaOutput_ResourceARN, *v.ResourceARN)
+	}
+}
+func (v *LambdaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaOutput_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.LambdaOutput_ResourceARN, v.ResourceARN)
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application's output, describes the
@@ -1643,6 +4376,34 @@ type LambdaOutputDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaOutputDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaOutputDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaOutputDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARN != nil {
+		s.WriteString(schemas.LambdaOutputDescription_ResourceARN, *v.ResourceARN)
+	}
+	if v.RoleARN != nil {
+		s.WriteString(schemas.LambdaOutputDescription_RoleARN, *v.RoleARN)
+	}
+}
+func (v *LambdaOutputDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaOutputDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaOutputDescription_ResourceARN:
+			v.ResourceARN = new(string)
+			return d.ReadString(schemas.LambdaOutputDescription_ResourceARN, v.ResourceARN)
+		case schemas.LambdaOutputDescription_RoleARN:
+			v.RoleARN = new(string)
+			return d.ReadString(schemas.LambdaOutputDescription_RoleARN, v.RoleARN)
+		}
+		return nil
+	})
+}
+
 // When you update an SQL-based Kinesis Data Analytics application's output
 // configuration using the UpdateApplicationoperation, provides information about an Amazon Lambda
 // function that is configured as the destination.
@@ -1662,6 +4423,28 @@ type LambdaOutputUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LambdaOutputUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LambdaOutputUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LambdaOutputUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceARNUpdate != nil {
+		s.WriteString(schemas.LambdaOutputUpdate_ResourceARNUpdate, *v.ResourceARNUpdate)
+	}
+}
+func (v *LambdaOutputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LambdaOutputUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LambdaOutputUpdate_ResourceARNUpdate:
+			v.ResourceARNUpdate = new(string)
+			return d.ReadString(schemas.LambdaOutputUpdate_ResourceARNUpdate, v.ResourceARNUpdate)
+		}
+		return nil
+	})
+}
+
 // When you configure a SQL-based Kinesis Data Analytics application's input at
 // the time of creating or updating an application, provides additional mapping
 // information specific to the record format (such as JSON, CSV, or record fields
@@ -1677,6 +4460,38 @@ type MappingParameters struct {
 	JSONMappingParameters *JSONMappingParameters
 
 	noSmithyDocumentSerde
+}
+
+func (v *MappingParameters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MappingParameters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MappingParameters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CSVMappingParameters != nil {
+		s.WriteStruct(schemas.MappingParameters_CSVMappingParameters)
+		v.CSVMappingParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JSONMappingParameters != nil {
+		s.WriteStruct(schemas.MappingParameters_JSONMappingParameters)
+		v.JSONMappingParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MappingParameters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MappingParameters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MappingParameters_CSVMappingParameters:
+			v.CSVMappingParameters = &CSVMappingParameters{}
+			return v.CSVMappingParameters.Deserialize(d)
+		case schemas.MappingParameters_JSONMappingParameters:
+			v.JSONMappingParameters = &JSONMappingParameters{}
+			return v.JSONMappingParameters.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The information required to specify a Maven reference. You can use Maven
@@ -1699,6 +4514,40 @@ type MavenReference struct {
 	Version *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MavenReference) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MavenReference)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MavenReference) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArtifactId != nil {
+		s.WriteString(schemas.MavenReference_ArtifactId, *v.ArtifactId)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.MavenReference_GroupId, *v.GroupId)
+	}
+	if v.Version != nil {
+		s.WriteString(schemas.MavenReference_Version, *v.Version)
+	}
+}
+func (v *MavenReference) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MavenReference, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MavenReference_ArtifactId:
+			v.ArtifactId = new(string)
+			return d.ReadString(schemas.MavenReference_ArtifactId, v.ArtifactId)
+		case schemas.MavenReference_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.MavenReference_GroupId, v.GroupId)
+		case schemas.MavenReference_Version:
+			v.Version = new(string)
+			return d.ReadString(schemas.MavenReference_Version, v.Version)
+		}
+		return nil
+	})
 }
 
 // Describes configuration parameters for Amazon CloudWatch logging for an
@@ -1725,6 +4574,52 @@ type MonitoringConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MonitoringConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonitoringConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonitoringConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationType != "" {
+		s.WriteString(schemas.MonitoringConfiguration_ConfigurationType, string(v.ConfigurationType))
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.MonitoringConfiguration_LogLevel, string(v.LogLevel))
+	}
+	if v.MetricsLevel != "" {
+		s.WriteString(schemas.MonitoringConfiguration_MetricsLevel, string(v.MetricsLevel))
+	}
+}
+func (v *MonitoringConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonitoringConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonitoringConfiguration_ConfigurationType:
+			var ev string
+			if err := d.ReadString(schemas.MonitoringConfiguration_ConfigurationType, &ev); err != nil {
+				return err
+			}
+			v.ConfigurationType = ConfigurationType(ev)
+			return nil
+		case schemas.MonitoringConfiguration_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.MonitoringConfiguration_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LogLevel(ev)
+			return nil
+		case schemas.MonitoringConfiguration_MetricsLevel:
+			var ev string
+			if err := d.ReadString(schemas.MonitoringConfiguration_MetricsLevel, &ev); err != nil {
+				return err
+			}
+			v.MetricsLevel = MetricsLevel(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes configuration parameters for CloudWatch logging for an application.
 type MonitoringConfigurationDescription struct {
 
@@ -1739,6 +4634,52 @@ type MonitoringConfigurationDescription struct {
 	MetricsLevel MetricsLevel
 
 	noSmithyDocumentSerde
+}
+
+func (v *MonitoringConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonitoringConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonitoringConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationType != "" {
+		s.WriteString(schemas.MonitoringConfigurationDescription_ConfigurationType, string(v.ConfigurationType))
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.MonitoringConfigurationDescription_LogLevel, string(v.LogLevel))
+	}
+	if v.MetricsLevel != "" {
+		s.WriteString(schemas.MonitoringConfigurationDescription_MetricsLevel, string(v.MetricsLevel))
+	}
+}
+func (v *MonitoringConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonitoringConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonitoringConfigurationDescription_ConfigurationType:
+			var ev string
+			if err := d.ReadString(schemas.MonitoringConfigurationDescription_ConfigurationType, &ev); err != nil {
+				return err
+			}
+			v.ConfigurationType = ConfigurationType(ev)
+			return nil
+		case schemas.MonitoringConfigurationDescription_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.MonitoringConfigurationDescription_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LogLevel(ev)
+			return nil
+		case schemas.MonitoringConfigurationDescription_MetricsLevel:
+			var ev string
+			if err := d.ReadString(schemas.MonitoringConfigurationDescription_MetricsLevel, &ev); err != nil {
+				return err
+			}
+			v.MetricsLevel = MetricsLevel(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes updates to configuration parameters for Amazon CloudWatch logging for
@@ -1761,6 +4702,52 @@ type MonitoringConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MonitoringConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MonitoringConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MonitoringConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationTypeUpdate != "" {
+		s.WriteString(schemas.MonitoringConfigurationUpdate_ConfigurationTypeUpdate, string(v.ConfigurationTypeUpdate))
+	}
+	if v.LogLevelUpdate != "" {
+		s.WriteString(schemas.MonitoringConfigurationUpdate_LogLevelUpdate, string(v.LogLevelUpdate))
+	}
+	if v.MetricsLevelUpdate != "" {
+		s.WriteString(schemas.MonitoringConfigurationUpdate_MetricsLevelUpdate, string(v.MetricsLevelUpdate))
+	}
+}
+func (v *MonitoringConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MonitoringConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MonitoringConfigurationUpdate_ConfigurationTypeUpdate:
+			var ev string
+			if err := d.ReadString(schemas.MonitoringConfigurationUpdate_ConfigurationTypeUpdate, &ev); err != nil {
+				return err
+			}
+			v.ConfigurationTypeUpdate = ConfigurationType(ev)
+			return nil
+		case schemas.MonitoringConfigurationUpdate_LogLevelUpdate:
+			var ev string
+			if err := d.ReadString(schemas.MonitoringConfigurationUpdate_LogLevelUpdate, &ev); err != nil {
+				return err
+			}
+			v.LogLevelUpdate = LogLevel(ev)
+			return nil
+		case schemas.MonitoringConfigurationUpdate_MetricsLevelUpdate:
+			var ev string
+			if err := d.ReadString(schemas.MonitoringConfigurationUpdate_MetricsLevelUpdate, &ev); err != nil {
+				return err
+			}
+			v.MetricsLevelUpdate = MetricsLevel(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides a description of the operation failure.
 type OperationFailureDetails struct {
 
@@ -1772,6 +4759,36 @@ type OperationFailureDetails struct {
 	RollbackOperationId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OperationFailureDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationFailureDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationFailureDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorInfo != nil {
+		s.WriteStruct(schemas.OperationFailureDetails_ErrorInfo)
+		v.ErrorInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RollbackOperationId != nil {
+		s.WriteString(schemas.OperationFailureDetails_RollbackOperationId, *v.RollbackOperationId)
+	}
+}
+func (v *OperationFailureDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationFailureDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationFailureDetails_ErrorInfo:
+			v.ErrorInfo = &ErrorInfo{}
+			return v.ErrorInfo.Deserialize(d)
+		case schemas.OperationFailureDetails_RollbackOperationId:
+			v.RollbackOperationId = new(string)
+			return d.ReadString(schemas.OperationFailureDetails_RollbackOperationId, v.RollbackOperationId)
+		}
+		return nil
+	})
 }
 
 //	Describes a SQL-based Kinesis Data Analytics application's output
@@ -1801,6 +4818,60 @@ type Output struct {
 	LambdaOutput *LambdaOutput
 
 	noSmithyDocumentSerde
+}
+
+func (v *Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Output)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationSchema != nil {
+		s.WriteStruct(schemas.Output_DestinationSchema)
+		v.DestinationSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisFirehoseOutput != nil {
+		s.WriteStruct(schemas.Output_KinesisFirehoseOutput)
+		v.KinesisFirehoseOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamsOutput != nil {
+		s.WriteStruct(schemas.Output_KinesisStreamsOutput)
+		v.KinesisStreamsOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaOutput != nil {
+		s.WriteStruct(schemas.Output_LambdaOutput)
+		v.LambdaOutput.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Output_Name, *v.Name)
+	}
+}
+func (v *Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Output, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Output_DestinationSchema:
+			v.DestinationSchema = &DestinationSchema{}
+			return v.DestinationSchema.Deserialize(d)
+		case schemas.Output_KinesisFirehoseOutput:
+			v.KinesisFirehoseOutput = &KinesisFirehoseOutput{}
+			return v.KinesisFirehoseOutput.Deserialize(d)
+		case schemas.Output_KinesisStreamsOutput:
+			v.KinesisStreamsOutput = &KinesisStreamsOutput{}
+			return v.KinesisStreamsOutput.Deserialize(d)
+		case schemas.Output_LambdaOutput:
+			v.LambdaOutput = &LambdaOutput{}
+			return v.LambdaOutput.Deserialize(d)
+		case schemas.Output_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Output_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application, describes the application
@@ -1833,6 +4904,66 @@ type OutputDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationSchema != nil {
+		s.WriteStruct(schemas.OutputDescription_DestinationSchema)
+		v.DestinationSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisFirehoseOutputDescription != nil {
+		s.WriteStruct(schemas.OutputDescription_KinesisFirehoseOutputDescription)
+		v.KinesisFirehoseOutputDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamsOutputDescription != nil {
+		s.WriteStruct(schemas.OutputDescription_KinesisStreamsOutputDescription)
+		v.KinesisStreamsOutputDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaOutputDescription != nil {
+		s.WriteStruct(schemas.OutputDescription_LambdaOutputDescription)
+		v.LambdaOutputDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.OutputDescription_Name, *v.Name)
+	}
+	if v.OutputId != nil {
+		s.WriteString(schemas.OutputDescription_OutputId, *v.OutputId)
+	}
+}
+func (v *OutputDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputDescription_DestinationSchema:
+			v.DestinationSchema = &DestinationSchema{}
+			return v.DestinationSchema.Deserialize(d)
+		case schemas.OutputDescription_KinesisFirehoseOutputDescription:
+			v.KinesisFirehoseOutputDescription = &KinesisFirehoseOutputDescription{}
+			return v.KinesisFirehoseOutputDescription.Deserialize(d)
+		case schemas.OutputDescription_KinesisStreamsOutputDescription:
+			v.KinesisStreamsOutputDescription = &KinesisStreamsOutputDescription{}
+			return v.KinesisStreamsOutputDescription.Deserialize(d)
+		case schemas.OutputDescription_LambdaOutputDescription:
+			v.LambdaOutputDescription = &LambdaOutputDescription{}
+			return v.LambdaOutputDescription.Deserialize(d)
+		case schemas.OutputDescription_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.OutputDescription_Name, v.Name)
+		case schemas.OutputDescription_OutputId:
+			v.OutputId = new(string)
+			return d.ReadString(schemas.OutputDescription_OutputId, v.OutputId)
+		}
+		return nil
+	})
+}
+
 //	For a SQL-based Kinesis Data Analytics application, describes updates to the
 //
 // output configuration identified by the OutputId .
@@ -1861,6 +4992,66 @@ type OutputUpdate struct {
 	NameUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OutputUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationSchemaUpdate != nil {
+		s.WriteStruct(schemas.OutputUpdate_DestinationSchemaUpdate)
+		v.DestinationSchemaUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisFirehoseOutputUpdate != nil {
+		s.WriteStruct(schemas.OutputUpdate_KinesisFirehoseOutputUpdate)
+		v.KinesisFirehoseOutputUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KinesisStreamsOutputUpdate != nil {
+		s.WriteStruct(schemas.OutputUpdate_KinesisStreamsOutputUpdate)
+		v.KinesisStreamsOutputUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LambdaOutputUpdate != nil {
+		s.WriteStruct(schemas.OutputUpdate_LambdaOutputUpdate)
+		v.LambdaOutputUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NameUpdate != nil {
+		s.WriteString(schemas.OutputUpdate_NameUpdate, *v.NameUpdate)
+	}
+	if v.OutputId != nil {
+		s.WriteString(schemas.OutputUpdate_OutputId, *v.OutputId)
+	}
+}
+func (v *OutputUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputUpdate_DestinationSchemaUpdate:
+			v.DestinationSchemaUpdate = &DestinationSchema{}
+			return v.DestinationSchemaUpdate.Deserialize(d)
+		case schemas.OutputUpdate_KinesisFirehoseOutputUpdate:
+			v.KinesisFirehoseOutputUpdate = &KinesisFirehoseOutputUpdate{}
+			return v.KinesisFirehoseOutputUpdate.Deserialize(d)
+		case schemas.OutputUpdate_KinesisStreamsOutputUpdate:
+			v.KinesisStreamsOutputUpdate = &KinesisStreamsOutputUpdate{}
+			return v.KinesisStreamsOutputUpdate.Deserialize(d)
+		case schemas.OutputUpdate_LambdaOutputUpdate:
+			v.LambdaOutputUpdate = &LambdaOutputUpdate{}
+			return v.LambdaOutputUpdate.Deserialize(d)
+		case schemas.OutputUpdate_NameUpdate:
+			v.NameUpdate = new(string)
+			return d.ReadString(schemas.OutputUpdate_NameUpdate, v.NameUpdate)
+		case schemas.OutputUpdate_OutputId:
+			v.OutputId = new(string)
+			return d.ReadString(schemas.OutputUpdate_OutputId, v.OutputId)
+		}
+		return nil
+	})
 }
 
 // Describes parameters for how a Managed Service for Apache Flink application
@@ -1904,6 +5095,50 @@ type ParallelismConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ParallelismConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParallelismConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParallelismConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingEnabled != nil {
+		s.WriteBool(schemas.ParallelismConfiguration_AutoScalingEnabled, *v.AutoScalingEnabled)
+	}
+	if v.ConfigurationType != "" {
+		s.WriteString(schemas.ParallelismConfiguration_ConfigurationType, string(v.ConfigurationType))
+	}
+	if v.Parallelism != nil {
+		s.WriteInt32(schemas.ParallelismConfiguration_Parallelism, *v.Parallelism)
+	}
+	if v.ParallelismPerKPU != nil {
+		s.WriteInt32(schemas.ParallelismConfiguration_ParallelismPerKPU, *v.ParallelismPerKPU)
+	}
+}
+func (v *ParallelismConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParallelismConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParallelismConfiguration_AutoScalingEnabled:
+			v.AutoScalingEnabled = new(bool)
+			return d.ReadBool(schemas.ParallelismConfiguration_AutoScalingEnabled, v.AutoScalingEnabled)
+		case schemas.ParallelismConfiguration_ConfigurationType:
+			var ev string
+			if err := d.ReadString(schemas.ParallelismConfiguration_ConfigurationType, &ev); err != nil {
+				return err
+			}
+			v.ConfigurationType = ConfigurationType(ev)
+			return nil
+		case schemas.ParallelismConfiguration_Parallelism:
+			v.Parallelism = new(int32)
+			return d.ReadInt32(schemas.ParallelismConfiguration_Parallelism, v.Parallelism)
+		case schemas.ParallelismConfiguration_ParallelismPerKPU:
+			v.ParallelismPerKPU = new(int32)
+			return d.ReadInt32(schemas.ParallelismConfiguration_ParallelismPerKPU, v.ParallelismPerKPU)
+		}
+		return nil
+	})
+}
+
 // Describes parameters for how a Managed Service for Apache Flink application
 // executes multiple tasks simultaneously.
 type ParallelismConfigurationDescription struct {
@@ -1945,6 +5180,56 @@ type ParallelismConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ParallelismConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParallelismConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParallelismConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingEnabled != nil {
+		s.WriteBool(schemas.ParallelismConfigurationDescription_AutoScalingEnabled, *v.AutoScalingEnabled)
+	}
+	if v.ConfigurationType != "" {
+		s.WriteString(schemas.ParallelismConfigurationDescription_ConfigurationType, string(v.ConfigurationType))
+	}
+	if v.CurrentParallelism != nil {
+		s.WriteInt32(schemas.ParallelismConfigurationDescription_CurrentParallelism, *v.CurrentParallelism)
+	}
+	if v.Parallelism != nil {
+		s.WriteInt32(schemas.ParallelismConfigurationDescription_Parallelism, *v.Parallelism)
+	}
+	if v.ParallelismPerKPU != nil {
+		s.WriteInt32(schemas.ParallelismConfigurationDescription_ParallelismPerKPU, *v.ParallelismPerKPU)
+	}
+}
+func (v *ParallelismConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParallelismConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParallelismConfigurationDescription_AutoScalingEnabled:
+			v.AutoScalingEnabled = new(bool)
+			return d.ReadBool(schemas.ParallelismConfigurationDescription_AutoScalingEnabled, v.AutoScalingEnabled)
+		case schemas.ParallelismConfigurationDescription_ConfigurationType:
+			var ev string
+			if err := d.ReadString(schemas.ParallelismConfigurationDescription_ConfigurationType, &ev); err != nil {
+				return err
+			}
+			v.ConfigurationType = ConfigurationType(ev)
+			return nil
+		case schemas.ParallelismConfigurationDescription_CurrentParallelism:
+			v.CurrentParallelism = new(int32)
+			return d.ReadInt32(schemas.ParallelismConfigurationDescription_CurrentParallelism, v.CurrentParallelism)
+		case schemas.ParallelismConfigurationDescription_Parallelism:
+			v.Parallelism = new(int32)
+			return d.ReadInt32(schemas.ParallelismConfigurationDescription_Parallelism, v.Parallelism)
+		case schemas.ParallelismConfigurationDescription_ParallelismPerKPU:
+			v.ParallelismPerKPU = new(int32)
+			return d.ReadInt32(schemas.ParallelismConfigurationDescription_ParallelismPerKPU, v.ParallelismPerKPU)
+		}
+		return nil
+	})
+}
+
 // Describes updates to parameters for how an application executes multiple tasks
 // simultaneously.
 type ParallelismConfigurationUpdate struct {
@@ -1978,6 +5263,50 @@ type ParallelismConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ParallelismConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParallelismConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParallelismConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoScalingEnabledUpdate != nil {
+		s.WriteBool(schemas.ParallelismConfigurationUpdate_AutoScalingEnabledUpdate, *v.AutoScalingEnabledUpdate)
+	}
+	if v.ConfigurationTypeUpdate != "" {
+		s.WriteString(schemas.ParallelismConfigurationUpdate_ConfigurationTypeUpdate, string(v.ConfigurationTypeUpdate))
+	}
+	if v.ParallelismPerKPUUpdate != nil {
+		s.WriteInt32(schemas.ParallelismConfigurationUpdate_ParallelismPerKPUUpdate, *v.ParallelismPerKPUUpdate)
+	}
+	if v.ParallelismUpdate != nil {
+		s.WriteInt32(schemas.ParallelismConfigurationUpdate_ParallelismUpdate, *v.ParallelismUpdate)
+	}
+}
+func (v *ParallelismConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParallelismConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParallelismConfigurationUpdate_AutoScalingEnabledUpdate:
+			v.AutoScalingEnabledUpdate = new(bool)
+			return d.ReadBool(schemas.ParallelismConfigurationUpdate_AutoScalingEnabledUpdate, v.AutoScalingEnabledUpdate)
+		case schemas.ParallelismConfigurationUpdate_ConfigurationTypeUpdate:
+			var ev string
+			if err := d.ReadString(schemas.ParallelismConfigurationUpdate_ConfigurationTypeUpdate, &ev); err != nil {
+				return err
+			}
+			v.ConfigurationTypeUpdate = ConfigurationType(ev)
+			return nil
+		case schemas.ParallelismConfigurationUpdate_ParallelismPerKPUUpdate:
+			v.ParallelismPerKPUUpdate = new(int32)
+			return d.ReadInt32(schemas.ParallelismConfigurationUpdate_ParallelismPerKPUUpdate, v.ParallelismPerKPUUpdate)
+		case schemas.ParallelismConfigurationUpdate_ParallelismUpdate:
+			v.ParallelismUpdate = new(int32)
+			return d.ReadInt32(schemas.ParallelismConfigurationUpdate_ParallelismUpdate, v.ParallelismUpdate)
+		}
+		return nil
+	})
+}
+
 // Property key-value pairs passed into an application.
 type PropertyGroup struct {
 
@@ -1992,6 +5321,31 @@ type PropertyGroup struct {
 	PropertyMap map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PropertyGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PropertyGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PropertyGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PropertyGroupId != nil {
+		s.WriteString(schemas.PropertyGroup_PropertyGroupId, *v.PropertyGroupId)
+	}
+	serializePropertyMap(s, schemas.PropertyGroup_PropertyMap, v.PropertyMap)
+}
+func (v *PropertyGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PropertyGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PropertyGroup_PropertyGroupId:
+			v.PropertyGroupId = new(string)
+			return d.ReadString(schemas.PropertyGroup_PropertyGroupId, v.PropertyGroupId)
+		case schemas.PropertyGroup_PropertyMap:
+			return deserializePropertyMap(d, schemas.PropertyGroup_PropertyMap, &v.PropertyMap)
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application, describes the mapping of
@@ -2020,6 +5374,40 @@ type RecordColumn struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecordColumn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordColumn)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordColumn) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mapping != nil {
+		s.WriteString(schemas.RecordColumn_Mapping, *v.Mapping)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.RecordColumn_Name, *v.Name)
+	}
+	if v.SqlType != nil {
+		s.WriteString(schemas.RecordColumn_SqlType, *v.SqlType)
+	}
+}
+func (v *RecordColumn) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordColumn, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecordColumn_Mapping:
+			v.Mapping = new(string)
+			return d.ReadString(schemas.RecordColumn_Mapping, v.Mapping)
+		case schemas.RecordColumn_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.RecordColumn_Name, v.Name)
+		case schemas.RecordColumn_SqlType:
+			v.SqlType = new(string)
+			return d.ReadString(schemas.RecordColumn_SqlType, v.SqlType)
+		}
+		return nil
+	})
+}
+
 //	For a SQL-based Kinesis Data Analytics application, describes the record
 //
 // format and relevant mapping information that should be applied to schematize the
@@ -2038,6 +5426,40 @@ type RecordFormat struct {
 	MappingParameters *MappingParameters
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecordFormat) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecordFormat)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecordFormat) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MappingParameters != nil {
+		s.WriteStruct(schemas.RecordFormat_MappingParameters)
+		v.MappingParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RecordFormatType != "" {
+		s.WriteString(schemas.RecordFormat_RecordFormatType, string(v.RecordFormatType))
+	}
+}
+func (v *RecordFormat) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecordFormat, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecordFormat_MappingParameters:
+			v.MappingParameters = &MappingParameters{}
+			return v.MappingParameters.Deserialize(d)
+		case schemas.RecordFormat_RecordFormatType:
+			var ev string
+			if err := d.ReadString(schemas.RecordFormat_RecordFormatType, &ev); err != nil {
+				return err
+			}
+			v.RecordFormatType = RecordFormatType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application, describes the reference
@@ -2066,6 +5488,44 @@ type ReferenceDataSource struct {
 	S3ReferenceDataSource *S3ReferenceDataSource
 
 	noSmithyDocumentSerde
+}
+
+func (v *ReferenceDataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReferenceDataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReferenceDataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReferenceSchema != nil {
+		s.WriteStruct(schemas.ReferenceDataSource_ReferenceSchema)
+		v.ReferenceSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3ReferenceDataSource != nil {
+		s.WriteStruct(schemas.ReferenceDataSource_S3ReferenceDataSource)
+		v.S3ReferenceDataSource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.ReferenceDataSource_TableName, *v.TableName)
+	}
+}
+func (v *ReferenceDataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReferenceDataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReferenceDataSource_ReferenceSchema:
+			v.ReferenceSchema = &SourceSchema{}
+			return v.ReferenceSchema.Deserialize(d)
+		case schemas.ReferenceDataSource_S3ReferenceDataSource:
+			v.S3ReferenceDataSource = &S3ReferenceDataSource{}
+			return v.S3ReferenceDataSource.Deserialize(d)
+		case schemas.ReferenceDataSource_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.ReferenceDataSource_TableName, v.TableName)
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application, describes the reference
@@ -2098,6 +5558,50 @@ type ReferenceDataSourceDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReferenceDataSourceDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReferenceDataSourceDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReferenceDataSourceDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReferenceId != nil {
+		s.WriteString(schemas.ReferenceDataSourceDescription_ReferenceId, *v.ReferenceId)
+	}
+	if v.ReferenceSchema != nil {
+		s.WriteStruct(schemas.ReferenceDataSourceDescription_ReferenceSchema)
+		v.ReferenceSchema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3ReferenceDataSourceDescription != nil {
+		s.WriteStruct(schemas.ReferenceDataSourceDescription_S3ReferenceDataSourceDescription)
+		v.S3ReferenceDataSourceDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.ReferenceDataSourceDescription_TableName, *v.TableName)
+	}
+}
+func (v *ReferenceDataSourceDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReferenceDataSourceDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReferenceDataSourceDescription_ReferenceId:
+			v.ReferenceId = new(string)
+			return d.ReadString(schemas.ReferenceDataSourceDescription_ReferenceId, v.ReferenceId)
+		case schemas.ReferenceDataSourceDescription_ReferenceSchema:
+			v.ReferenceSchema = &SourceSchema{}
+			return v.ReferenceSchema.Deserialize(d)
+		case schemas.ReferenceDataSourceDescription_S3ReferenceDataSourceDescription:
+			v.S3ReferenceDataSourceDescription = &S3ReferenceDataSourceDescription{}
+			return v.S3ReferenceDataSourceDescription.Deserialize(d)
+		case schemas.ReferenceDataSourceDescription_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.ReferenceDataSourceDescription_TableName, v.TableName)
+		}
+		return nil
+	})
+}
+
 // When you update a reference data source configuration for a SQL-based Kinesis
 // Data Analytics application, this object provides all the updated values (such as
 // the source bucket name and object key name), the in-application table name that
@@ -2126,6 +5630,50 @@ type ReferenceDataSourceUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ReferenceDataSourceUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ReferenceDataSourceUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ReferenceDataSourceUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReferenceId != nil {
+		s.WriteString(schemas.ReferenceDataSourceUpdate_ReferenceId, *v.ReferenceId)
+	}
+	if v.ReferenceSchemaUpdate != nil {
+		s.WriteStruct(schemas.ReferenceDataSourceUpdate_ReferenceSchemaUpdate)
+		v.ReferenceSchemaUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3ReferenceDataSourceUpdate != nil {
+		s.WriteStruct(schemas.ReferenceDataSourceUpdate_S3ReferenceDataSourceUpdate)
+		v.S3ReferenceDataSourceUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableNameUpdate != nil {
+		s.WriteString(schemas.ReferenceDataSourceUpdate_TableNameUpdate, *v.TableNameUpdate)
+	}
+}
+func (v *ReferenceDataSourceUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ReferenceDataSourceUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ReferenceDataSourceUpdate_ReferenceId:
+			v.ReferenceId = new(string)
+			return d.ReadString(schemas.ReferenceDataSourceUpdate_ReferenceId, v.ReferenceId)
+		case schemas.ReferenceDataSourceUpdate_ReferenceSchemaUpdate:
+			v.ReferenceSchemaUpdate = &SourceSchema{}
+			return v.ReferenceSchemaUpdate.Deserialize(d)
+		case schemas.ReferenceDataSourceUpdate_S3ReferenceDataSourceUpdate:
+			v.S3ReferenceDataSourceUpdate = &S3ReferenceDataSourceUpdate{}
+			return v.S3ReferenceDataSourceUpdate.Deserialize(d)
+		case schemas.ReferenceDataSourceUpdate_TableNameUpdate:
+			v.TableNameUpdate = new(string)
+			return d.ReadString(schemas.ReferenceDataSourceUpdate_TableNameUpdate, v.TableNameUpdate)
+		}
+		return nil
+	})
+}
+
 // Describes the starting parameters for an Managed Service for Apache Flink
 // application.
 type RunConfiguration struct {
@@ -2144,6 +5692,41 @@ type RunConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RunConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationRestoreConfiguration != nil {
+		s.WriteStruct(schemas.RunConfiguration_ApplicationRestoreConfiguration)
+		v.ApplicationRestoreConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlinkRunConfiguration != nil {
+		s.WriteStruct(schemas.RunConfiguration_FlinkRunConfiguration)
+		v.FlinkRunConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSqlRunConfigurations(s, schemas.RunConfiguration_SqlRunConfigurations, v.SqlRunConfigurations)
+}
+func (v *RunConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RunConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RunConfiguration_ApplicationRestoreConfiguration:
+			v.ApplicationRestoreConfiguration = &ApplicationRestoreConfiguration{}
+			return v.ApplicationRestoreConfiguration.Deserialize(d)
+		case schemas.RunConfiguration_FlinkRunConfiguration:
+			v.FlinkRunConfiguration = &FlinkRunConfiguration{}
+			return v.FlinkRunConfiguration.Deserialize(d)
+		case schemas.RunConfiguration_SqlRunConfigurations:
+			return deserializeSqlRunConfigurations(d, schemas.RunConfiguration_SqlRunConfigurations, &v.SqlRunConfigurations)
+		}
+		return nil
+	})
+}
+
 // Describes the starting properties for a Managed Service for Apache Flink
 // application.
 type RunConfigurationDescription struct {
@@ -2158,6 +5741,38 @@ type RunConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RunConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationRestoreConfigurationDescription != nil {
+		s.WriteStruct(schemas.RunConfigurationDescription_ApplicationRestoreConfigurationDescription)
+		v.ApplicationRestoreConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlinkRunConfigurationDescription != nil {
+		s.WriteStruct(schemas.RunConfigurationDescription_FlinkRunConfigurationDescription)
+		v.FlinkRunConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RunConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RunConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RunConfigurationDescription_ApplicationRestoreConfigurationDescription:
+			v.ApplicationRestoreConfigurationDescription = &ApplicationRestoreConfiguration{}
+			return v.ApplicationRestoreConfigurationDescription.Deserialize(d)
+		case schemas.RunConfigurationDescription_FlinkRunConfigurationDescription:
+			v.FlinkRunConfigurationDescription = &FlinkRunConfiguration{}
+			return v.FlinkRunConfigurationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the updates to the starting parameters for a Managed Service for
 // Apache Flink application.
 type RunConfigurationUpdate struct {
@@ -2170,6 +5785,38 @@ type RunConfigurationUpdate struct {
 	FlinkRunConfiguration *FlinkRunConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *RunConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RunConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RunConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationRestoreConfiguration != nil {
+		s.WriteStruct(schemas.RunConfigurationUpdate_ApplicationRestoreConfiguration)
+		v.ApplicationRestoreConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlinkRunConfiguration != nil {
+		s.WriteStruct(schemas.RunConfigurationUpdate_FlinkRunConfiguration)
+		v.FlinkRunConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RunConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RunConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RunConfigurationUpdate_ApplicationRestoreConfiguration:
+			v.ApplicationRestoreConfiguration = &ApplicationRestoreConfiguration{}
+			return v.ApplicationRestoreConfiguration.Deserialize(d)
+		case schemas.RunConfigurationUpdate_FlinkRunConfiguration:
+			v.FlinkRunConfiguration = &FlinkRunConfiguration{}
+			return v.FlinkRunConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Describes the location of an application's code stored in an S3 bucket.
@@ -2192,6 +5839,40 @@ type S3ApplicationCodeLocationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3ApplicationCodeLocationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ApplicationCodeLocationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ApplicationCodeLocationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3ApplicationCodeLocationDescription_BucketARN, *v.BucketARN)
+	}
+	if v.FileKey != nil {
+		s.WriteString(schemas.S3ApplicationCodeLocationDescription_FileKey, *v.FileKey)
+	}
+	if v.ObjectVersion != nil {
+		s.WriteString(schemas.S3ApplicationCodeLocationDescription_ObjectVersion, *v.ObjectVersion)
+	}
+}
+func (v *S3ApplicationCodeLocationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ApplicationCodeLocationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ApplicationCodeLocationDescription_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3ApplicationCodeLocationDescription_BucketARN, v.BucketARN)
+		case schemas.S3ApplicationCodeLocationDescription_FileKey:
+			v.FileKey = new(string)
+			return d.ReadString(schemas.S3ApplicationCodeLocationDescription_FileKey, v.FileKey)
+		case schemas.S3ApplicationCodeLocationDescription_ObjectVersion:
+			v.ObjectVersion = new(string)
+			return d.ReadString(schemas.S3ApplicationCodeLocationDescription_ObjectVersion, v.ObjectVersion)
+		}
+		return nil
+	})
+}
+
 // For a SQL-based Kinesis Data Analytics application, provides a description of
 // an Amazon S3 data source, including the Amazon Resource Name (ARN) of the S3
 // bucket and the name of the Amazon S3 object that contains the data.
@@ -2210,6 +5891,34 @@ type S3Configuration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Configuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Configuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3Configuration_BucketARN, *v.BucketARN)
+	}
+	if v.FileKey != nil {
+		s.WriteString(schemas.S3Configuration_FileKey, *v.FileKey)
+	}
+}
+func (v *S3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Configuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Configuration_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3Configuration_BucketARN, v.BucketARN)
+		case schemas.S3Configuration_FileKey:
+			v.FileKey = new(string)
+			return d.ReadString(schemas.S3Configuration_FileKey, v.FileKey)
+		}
+		return nil
+	})
+}
+
 // The S3 bucket that holds the application information.
 type S3ContentBaseLocation struct {
 
@@ -2222,6 +5931,34 @@ type S3ContentBaseLocation struct {
 	BasePath *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3ContentBaseLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ContentBaseLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ContentBaseLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BasePath != nil {
+		s.WriteString(schemas.S3ContentBaseLocation_BasePath, *v.BasePath)
+	}
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3ContentBaseLocation_BucketARN, *v.BucketARN)
+	}
+}
+func (v *S3ContentBaseLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ContentBaseLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ContentBaseLocation_BasePath:
+			v.BasePath = new(string)
+			return d.ReadString(schemas.S3ContentBaseLocation_BasePath, v.BasePath)
+		case schemas.S3ContentBaseLocation_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3ContentBaseLocation_BucketARN, v.BucketARN)
+		}
+		return nil
+	})
 }
 
 // The description of the S3 base location that holds the application.
@@ -2238,6 +5975,34 @@ type S3ContentBaseLocationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3ContentBaseLocationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ContentBaseLocationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ContentBaseLocationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BasePath != nil {
+		s.WriteString(schemas.S3ContentBaseLocationDescription_BasePath, *v.BasePath)
+	}
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3ContentBaseLocationDescription_BucketARN, *v.BucketARN)
+	}
+}
+func (v *S3ContentBaseLocationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ContentBaseLocationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ContentBaseLocationDescription_BasePath:
+			v.BasePath = new(string)
+			return d.ReadString(schemas.S3ContentBaseLocationDescription_BasePath, v.BasePath)
+		case schemas.S3ContentBaseLocationDescription_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3ContentBaseLocationDescription_BucketARN, v.BucketARN)
+		}
+		return nil
+	})
+}
+
 // The information required to update the S3 base location that holds the
 // application.
 type S3ContentBaseLocationUpdate struct {
@@ -2249,6 +6014,34 @@ type S3ContentBaseLocationUpdate struct {
 	BucketARNUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3ContentBaseLocationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ContentBaseLocationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ContentBaseLocationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BasePathUpdate != nil {
+		s.WriteString(schemas.S3ContentBaseLocationUpdate_BasePathUpdate, *v.BasePathUpdate)
+	}
+	if v.BucketARNUpdate != nil {
+		s.WriteString(schemas.S3ContentBaseLocationUpdate_BucketARNUpdate, *v.BucketARNUpdate)
+	}
+}
+func (v *S3ContentBaseLocationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ContentBaseLocationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ContentBaseLocationUpdate_BasePathUpdate:
+			v.BasePathUpdate = new(string)
+			return d.ReadString(schemas.S3ContentBaseLocationUpdate_BasePathUpdate, v.BasePathUpdate)
+		case schemas.S3ContentBaseLocationUpdate_BucketARNUpdate:
+			v.BucketARNUpdate = new(string)
+			return d.ReadString(schemas.S3ContentBaseLocationUpdate_BucketARNUpdate, v.BucketARNUpdate)
+		}
+		return nil
+	})
 }
 
 // For a Managed Service for Apache Flink application provides a description of an
@@ -2274,6 +6067,40 @@ type S3ContentLocation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3ContentLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ContentLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ContentLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3ContentLocation_BucketARN, *v.BucketARN)
+	}
+	if v.FileKey != nil {
+		s.WriteString(schemas.S3ContentLocation_FileKey, *v.FileKey)
+	}
+	if v.ObjectVersion != nil {
+		s.WriteString(schemas.S3ContentLocation_ObjectVersion, *v.ObjectVersion)
+	}
+}
+func (v *S3ContentLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ContentLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ContentLocation_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3ContentLocation_BucketARN, v.BucketARN)
+		case schemas.S3ContentLocation_FileKey:
+			v.FileKey = new(string)
+			return d.ReadString(schemas.S3ContentLocation_FileKey, v.FileKey)
+		case schemas.S3ContentLocation_ObjectVersion:
+			v.ObjectVersion = new(string)
+			return d.ReadString(schemas.S3ContentLocation_ObjectVersion, v.ObjectVersion)
+		}
+		return nil
+	})
+}
+
 // Describes an update for the Amazon S3 code content location for an application.
 type S3ContentLocationUpdate struct {
 
@@ -2288,6 +6115,40 @@ type S3ContentLocationUpdate struct {
 	ObjectVersionUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3ContentLocationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ContentLocationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ContentLocationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARNUpdate != nil {
+		s.WriteString(schemas.S3ContentLocationUpdate_BucketARNUpdate, *v.BucketARNUpdate)
+	}
+	if v.FileKeyUpdate != nil {
+		s.WriteString(schemas.S3ContentLocationUpdate_FileKeyUpdate, *v.FileKeyUpdate)
+	}
+	if v.ObjectVersionUpdate != nil {
+		s.WriteString(schemas.S3ContentLocationUpdate_ObjectVersionUpdate, *v.ObjectVersionUpdate)
+	}
+}
+func (v *S3ContentLocationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ContentLocationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ContentLocationUpdate_BucketARNUpdate:
+			v.BucketARNUpdate = new(string)
+			return d.ReadString(schemas.S3ContentLocationUpdate_BucketARNUpdate, v.BucketARNUpdate)
+		case schemas.S3ContentLocationUpdate_FileKeyUpdate:
+			v.FileKeyUpdate = new(string)
+			return d.ReadString(schemas.S3ContentLocationUpdate_FileKeyUpdate, v.FileKeyUpdate)
+		case schemas.S3ContentLocationUpdate_ObjectVersionUpdate:
+			v.ObjectVersionUpdate = new(string)
+			return d.ReadString(schemas.S3ContentLocationUpdate_ObjectVersionUpdate, v.ObjectVersionUpdate)
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application, identifies the Amazon S3
@@ -2305,6 +6166,34 @@ type S3ReferenceDataSource struct {
 	FileKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3ReferenceDataSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ReferenceDataSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ReferenceDataSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3ReferenceDataSource_BucketARN, *v.BucketARN)
+	}
+	if v.FileKey != nil {
+		s.WriteString(schemas.S3ReferenceDataSource_FileKey, *v.FileKey)
+	}
+}
+func (v *S3ReferenceDataSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ReferenceDataSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ReferenceDataSource_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSource_BucketARN, v.BucketARN)
+		case schemas.S3ReferenceDataSource_FileKey:
+			v.FileKey = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSource_FileKey, v.FileKey)
+		}
+		return nil
+	})
 }
 
 // For a SQL-based Kinesis Data Analytics application, provides the bucket name
@@ -2332,6 +6221,40 @@ type S3ReferenceDataSourceDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3ReferenceDataSourceDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ReferenceDataSourceDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ReferenceDataSourceDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARN != nil {
+		s.WriteString(schemas.S3ReferenceDataSourceDescription_BucketARN, *v.BucketARN)
+	}
+	if v.FileKey != nil {
+		s.WriteString(schemas.S3ReferenceDataSourceDescription_FileKey, *v.FileKey)
+	}
+	if v.ReferenceRoleARN != nil {
+		s.WriteString(schemas.S3ReferenceDataSourceDescription_ReferenceRoleARN, *v.ReferenceRoleARN)
+	}
+}
+func (v *S3ReferenceDataSourceDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ReferenceDataSourceDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ReferenceDataSourceDescription_BucketARN:
+			v.BucketARN = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSourceDescription_BucketARN, v.BucketARN)
+		case schemas.S3ReferenceDataSourceDescription_FileKey:
+			v.FileKey = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSourceDescription_FileKey, v.FileKey)
+		case schemas.S3ReferenceDataSourceDescription_ReferenceRoleARN:
+			v.ReferenceRoleARN = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSourceDescription_ReferenceRoleARN, v.ReferenceRoleARN)
+		}
+		return nil
+	})
+}
+
 // For a SQL-based Kinesis Data Analytics application, describes the Amazon S3
 // bucket name and object key name for an in-application reference table.
 type S3ReferenceDataSourceUpdate struct {
@@ -2343,6 +6266,34 @@ type S3ReferenceDataSourceUpdate struct {
 	FileKeyUpdate *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *S3ReferenceDataSourceUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ReferenceDataSourceUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ReferenceDataSourceUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketARNUpdate != nil {
+		s.WriteString(schemas.S3ReferenceDataSourceUpdate_BucketARNUpdate, *v.BucketARNUpdate)
+	}
+	if v.FileKeyUpdate != nil {
+		s.WriteString(schemas.S3ReferenceDataSourceUpdate_FileKeyUpdate, *v.FileKeyUpdate)
+	}
+}
+func (v *S3ReferenceDataSourceUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ReferenceDataSourceUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ReferenceDataSourceUpdate_BucketARNUpdate:
+			v.BucketARNUpdate = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSourceUpdate_BucketARNUpdate, v.BucketARNUpdate)
+		case schemas.S3ReferenceDataSourceUpdate_FileKeyUpdate:
+			v.FileKeyUpdate = new(string)
+			return d.ReadString(schemas.S3ReferenceDataSourceUpdate_FileKeyUpdate, v.FileKeyUpdate)
+		}
+		return nil
+	})
 }
 
 // Provides details about a snapshot of application state.
@@ -2375,6 +6326,68 @@ type SnapshotDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SnapshotDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapshotDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapshotDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationEncryptionConfigurationDescription != nil {
+		s.WriteStruct(schemas.SnapshotDetails_ApplicationEncryptionConfigurationDescription)
+		v.ApplicationEncryptionConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ApplicationVersionId != nil {
+		s.WriteInt64(schemas.SnapshotDetails_ApplicationVersionId, *v.ApplicationVersionId)
+	}
+	if v.RuntimeEnvironment != "" {
+		s.WriteString(schemas.SnapshotDetails_RuntimeEnvironment, string(v.RuntimeEnvironment))
+	}
+	if v.SnapshotCreationTimestamp != nil {
+		s.WriteTime(schemas.SnapshotDetails_SnapshotCreationTimestamp, *v.SnapshotCreationTimestamp)
+	}
+	if v.SnapshotName != nil {
+		s.WriteString(schemas.SnapshotDetails_SnapshotName, *v.SnapshotName)
+	}
+	if v.SnapshotStatus != "" {
+		s.WriteString(schemas.SnapshotDetails_SnapshotStatus, string(v.SnapshotStatus))
+	}
+}
+func (v *SnapshotDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapshotDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapshotDetails_ApplicationEncryptionConfigurationDescription:
+			v.ApplicationEncryptionConfigurationDescription = &ApplicationEncryptionConfigurationDescription{}
+			return v.ApplicationEncryptionConfigurationDescription.Deserialize(d)
+		case schemas.SnapshotDetails_ApplicationVersionId:
+			v.ApplicationVersionId = new(int64)
+			return d.ReadInt64(schemas.SnapshotDetails_ApplicationVersionId, v.ApplicationVersionId)
+		case schemas.SnapshotDetails_RuntimeEnvironment:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotDetails_RuntimeEnvironment, &ev); err != nil {
+				return err
+			}
+			v.RuntimeEnvironment = RuntimeEnvironment(ev)
+			return nil
+		case schemas.SnapshotDetails_SnapshotCreationTimestamp:
+			v.SnapshotCreationTimestamp = new(time.Time)
+			return d.ReadTime(schemas.SnapshotDetails_SnapshotCreationTimestamp, v.SnapshotCreationTimestamp)
+		case schemas.SnapshotDetails_SnapshotName:
+			v.SnapshotName = new(string)
+			return d.ReadString(schemas.SnapshotDetails_SnapshotName, v.SnapshotName)
+		case schemas.SnapshotDetails_SnapshotStatus:
+			var ev string
+			if err := d.ReadString(schemas.SnapshotDetails_SnapshotStatus, &ev); err != nil {
+				return err
+			}
+			v.SnapshotStatus = SnapshotStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // For a SQL-based Kinesis Data Analytics application, describes the format of the
 // data in the streaming source, and how each data element maps to corresponding
 // columns created in the in-application stream.
@@ -2397,6 +6410,39 @@ type SourceSchema struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SourceSchema) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SourceSchema)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SourceSchema) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRecordColumns(s, schemas.SourceSchema_RecordColumns, v.RecordColumns)
+	if v.RecordEncoding != nil {
+		s.WriteString(schemas.SourceSchema_RecordEncoding, *v.RecordEncoding)
+	}
+	if v.RecordFormat != nil {
+		s.WriteStruct(schemas.SourceSchema_RecordFormat)
+		v.RecordFormat.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SourceSchema) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SourceSchema, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SourceSchema_RecordColumns:
+			return deserializeRecordColumns(d, schemas.SourceSchema_RecordColumns, &v.RecordColumns)
+		case schemas.SourceSchema_RecordEncoding:
+			v.RecordEncoding = new(string)
+			return d.ReadString(schemas.SourceSchema_RecordEncoding, v.RecordEncoding)
+		case schemas.SourceSchema_RecordFormat:
+			v.RecordFormat = &RecordFormat{}
+			return v.RecordFormat.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes the inputs, outputs, and reference data sources for a SQL-based
 // Kinesis Data Analytics application.
 type SqlApplicationConfiguration struct {
@@ -2413,6 +6459,31 @@ type SqlApplicationConfiguration struct {
 	ReferenceDataSources []ReferenceDataSource
 
 	noSmithyDocumentSerde
+}
+
+func (v *SqlApplicationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqlApplicationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqlApplicationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInputs(s, schemas.SqlApplicationConfiguration_Inputs, v.Inputs)
+	serializeOutputs(s, schemas.SqlApplicationConfiguration_Outputs, v.Outputs)
+	serializeReferenceDataSources(s, schemas.SqlApplicationConfiguration_ReferenceDataSources, v.ReferenceDataSources)
+}
+func (v *SqlApplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqlApplicationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SqlApplicationConfiguration_Inputs:
+			return deserializeInputs(d, schemas.SqlApplicationConfiguration_Inputs, &v.Inputs)
+		case schemas.SqlApplicationConfiguration_Outputs:
+			return deserializeOutputs(d, schemas.SqlApplicationConfiguration_Outputs, &v.Outputs)
+		case schemas.SqlApplicationConfiguration_ReferenceDataSources:
+			return deserializeReferenceDataSources(d, schemas.SqlApplicationConfiguration_ReferenceDataSources, &v.ReferenceDataSources)
+		}
+		return nil
+	})
 }
 
 // Describes the inputs, outputs, and reference data sources for a SQL-based
@@ -2433,6 +6504,31 @@ type SqlApplicationConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SqlApplicationConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqlApplicationConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqlApplicationConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInputDescriptions(s, schemas.SqlApplicationConfigurationDescription_InputDescriptions, v.InputDescriptions)
+	serializeOutputDescriptions(s, schemas.SqlApplicationConfigurationDescription_OutputDescriptions, v.OutputDescriptions)
+	serializeReferenceDataSourceDescriptions(s, schemas.SqlApplicationConfigurationDescription_ReferenceDataSourceDescriptions, v.ReferenceDataSourceDescriptions)
+}
+func (v *SqlApplicationConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqlApplicationConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SqlApplicationConfigurationDescription_InputDescriptions:
+			return deserializeInputDescriptions(d, schemas.SqlApplicationConfigurationDescription_InputDescriptions, &v.InputDescriptions)
+		case schemas.SqlApplicationConfigurationDescription_OutputDescriptions:
+			return deserializeOutputDescriptions(d, schemas.SqlApplicationConfigurationDescription_OutputDescriptions, &v.OutputDescriptions)
+		case schemas.SqlApplicationConfigurationDescription_ReferenceDataSourceDescriptions:
+			return deserializeReferenceDataSourceDescriptions(d, schemas.SqlApplicationConfigurationDescription_ReferenceDataSourceDescriptions, &v.ReferenceDataSourceDescriptions)
+		}
+		return nil
+	})
+}
+
 // Describes updates to the input streams, destination streams, and reference data
 // sources for a SQL-based Kinesis Data Analytics application.
 type SqlApplicationConfigurationUpdate struct {
@@ -2451,6 +6547,31 @@ type SqlApplicationConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SqlApplicationConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqlApplicationConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqlApplicationConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInputUpdates(s, schemas.SqlApplicationConfigurationUpdate_InputUpdates, v.InputUpdates)
+	serializeOutputUpdates(s, schemas.SqlApplicationConfigurationUpdate_OutputUpdates, v.OutputUpdates)
+	serializeReferenceDataSourceUpdates(s, schemas.SqlApplicationConfigurationUpdate_ReferenceDataSourceUpdates, v.ReferenceDataSourceUpdates)
+}
+func (v *SqlApplicationConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqlApplicationConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SqlApplicationConfigurationUpdate_InputUpdates:
+			return deserializeInputUpdates(d, schemas.SqlApplicationConfigurationUpdate_InputUpdates, &v.InputUpdates)
+		case schemas.SqlApplicationConfigurationUpdate_OutputUpdates:
+			return deserializeOutputUpdates(d, schemas.SqlApplicationConfigurationUpdate_OutputUpdates, &v.OutputUpdates)
+		case schemas.SqlApplicationConfigurationUpdate_ReferenceDataSourceUpdates:
+			return deserializeReferenceDataSourceUpdates(d, schemas.SqlApplicationConfigurationUpdate_ReferenceDataSourceUpdates, &v.ReferenceDataSourceUpdates)
+		}
+		return nil
+	})
+}
+
 // Describes the starting parameters for a SQL-based Kinesis Data Analytics
 // application.
 type SqlRunConfiguration struct {
@@ -2467,6 +6588,36 @@ type SqlRunConfiguration struct {
 	InputStartingPositionConfiguration *InputStartingPositionConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *SqlRunConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SqlRunConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SqlRunConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputId != nil {
+		s.WriteString(schemas.SqlRunConfiguration_InputId, *v.InputId)
+	}
+	if v.InputStartingPositionConfiguration != nil {
+		s.WriteStruct(schemas.SqlRunConfiguration_InputStartingPositionConfiguration)
+		v.InputStartingPositionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SqlRunConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SqlRunConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SqlRunConfiguration_InputId:
+			v.InputId = new(string)
+			return d.ReadString(schemas.SqlRunConfiguration_InputId, v.InputId)
+		case schemas.SqlRunConfiguration_InputStartingPositionConfiguration:
+			v.InputStartingPositionConfiguration = &InputStartingPositionConfiguration{}
+			return v.InputStartingPositionConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A key-value pair (the value is optional) that you can define and assign to
@@ -2489,6 +6640,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Describes the parameters of a VPC used by the application.
 type VpcConfiguration struct {
 
@@ -2507,6 +6686,28 @@ type VpcConfiguration struct {
 	SubnetIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupIds(s, schemas.VpcConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIds(s, schemas.VpcConfiguration_SubnetIds, v.SubnetIds)
+}
+func (v *VpcConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConfiguration_SecurityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.VpcConfiguration_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.VpcConfiguration_SubnetIds:
+			return deserializeSubnetIds(d, schemas.VpcConfiguration_SubnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
 }
 
 // Describes the parameters of a VPC used by the application.
@@ -2539,6 +6740,40 @@ type VpcConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VpcConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupIds(s, schemas.VpcConfigurationDescription_SecurityGroupIds, v.SecurityGroupIds)
+	serializeSubnetIds(s, schemas.VpcConfigurationDescription_SubnetIds, v.SubnetIds)
+	if v.VpcConfigurationId != nil {
+		s.WriteString(schemas.VpcConfigurationDescription_VpcConfigurationId, *v.VpcConfigurationId)
+	}
+	if v.VpcId != nil {
+		s.WriteString(schemas.VpcConfigurationDescription_VpcId, *v.VpcId)
+	}
+}
+func (v *VpcConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConfigurationDescription_SecurityGroupIds:
+			return deserializeSecurityGroupIds(d, schemas.VpcConfigurationDescription_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.VpcConfigurationDescription_SubnetIds:
+			return deserializeSubnetIds(d, schemas.VpcConfigurationDescription_SubnetIds, &v.SubnetIds)
+		case schemas.VpcConfigurationDescription_VpcConfigurationId:
+			v.VpcConfigurationId = new(string)
+			return d.ReadString(schemas.VpcConfigurationDescription_VpcConfigurationId, v.VpcConfigurationId)
+		case schemas.VpcConfigurationDescription_VpcId:
+			v.VpcId = new(string)
+			return d.ReadString(schemas.VpcConfigurationDescription_VpcId, v.VpcId)
+		}
+		return nil
+	})
+}
+
 // Describes updates to the VPC configuration used by the application.
 type VpcConfigurationUpdate struct {
 
@@ -2560,6 +6795,34 @@ type VpcConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VpcConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupIds(s, schemas.VpcConfigurationUpdate_SecurityGroupIdUpdates, v.SecurityGroupIdUpdates)
+	serializeSubnetIds(s, schemas.VpcConfigurationUpdate_SubnetIdUpdates, v.SubnetIdUpdates)
+	if v.VpcConfigurationId != nil {
+		s.WriteString(schemas.VpcConfigurationUpdate_VpcConfigurationId, *v.VpcConfigurationId)
+	}
+}
+func (v *VpcConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcConfigurationUpdate_SecurityGroupIdUpdates:
+			return deserializeSecurityGroupIds(d, schemas.VpcConfigurationUpdate_SecurityGroupIdUpdates, &v.SecurityGroupIdUpdates)
+		case schemas.VpcConfigurationUpdate_SubnetIdUpdates:
+			return deserializeSubnetIds(d, schemas.VpcConfigurationUpdate_SubnetIdUpdates, &v.SubnetIdUpdates)
+		case schemas.VpcConfigurationUpdate_VpcConfigurationId:
+			v.VpcConfigurationId = new(string)
+			return d.ReadString(schemas.VpcConfigurationUpdate_VpcConfigurationId, v.VpcConfigurationId)
+		}
+		return nil
+	})
+}
+
 // The configuration of a Managed Service for Apache Flink Studio notebook.
 type ZeppelinApplicationConfiguration struct {
 
@@ -2579,6 +6842,49 @@ type ZeppelinApplicationConfiguration struct {
 	MonitoringConfiguration *ZeppelinMonitoringConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *ZeppelinApplicationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZeppelinApplicationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ZeppelinApplicationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogConfiguration != nil {
+		s.WriteStruct(schemas.ZeppelinApplicationConfiguration_CatalogConfiguration)
+		v.CatalogConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCustomArtifactsConfigurationList(s, schemas.ZeppelinApplicationConfiguration_CustomArtifactsConfiguration, v.CustomArtifactsConfiguration)
+	if v.DeployAsApplicationConfiguration != nil {
+		s.WriteStruct(schemas.ZeppelinApplicationConfiguration_DeployAsApplicationConfiguration)
+		v.DeployAsApplicationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonitoringConfiguration != nil {
+		s.WriteStruct(schemas.ZeppelinApplicationConfiguration_MonitoringConfiguration)
+		v.MonitoringConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ZeppelinApplicationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZeppelinApplicationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZeppelinApplicationConfiguration_CatalogConfiguration:
+			v.CatalogConfiguration = &CatalogConfiguration{}
+			return v.CatalogConfiguration.Deserialize(d)
+		case schemas.ZeppelinApplicationConfiguration_CustomArtifactsConfiguration:
+			return deserializeCustomArtifactsConfigurationList(d, schemas.ZeppelinApplicationConfiguration_CustomArtifactsConfiguration, &v.CustomArtifactsConfiguration)
+		case schemas.ZeppelinApplicationConfiguration_DeployAsApplicationConfiguration:
+			v.DeployAsApplicationConfiguration = &DeployAsApplicationConfiguration{}
+			return v.DeployAsApplicationConfiguration.Deserialize(d)
+		case schemas.ZeppelinApplicationConfiguration_MonitoringConfiguration:
+			v.MonitoringConfiguration = &ZeppelinMonitoringConfiguration{}
+			return v.MonitoringConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The configuration of a Managed Service for Apache Flink Studio notebook.
@@ -2604,6 +6910,49 @@ type ZeppelinApplicationConfigurationDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ZeppelinApplicationConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZeppelinApplicationConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ZeppelinApplicationConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogConfigurationDescription != nil {
+		s.WriteStruct(schemas.ZeppelinApplicationConfigurationDescription_CatalogConfigurationDescription)
+		v.CatalogConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCustomArtifactsConfigurationDescriptionList(s, schemas.ZeppelinApplicationConfigurationDescription_CustomArtifactsConfigurationDescription, v.CustomArtifactsConfigurationDescription)
+	if v.DeployAsApplicationConfigurationDescription != nil {
+		s.WriteStruct(schemas.ZeppelinApplicationConfigurationDescription_DeployAsApplicationConfigurationDescription)
+		v.DeployAsApplicationConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonitoringConfigurationDescription != nil {
+		s.WriteStruct(schemas.ZeppelinApplicationConfigurationDescription_MonitoringConfigurationDescription)
+		v.MonitoringConfigurationDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ZeppelinApplicationConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZeppelinApplicationConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZeppelinApplicationConfigurationDescription_CatalogConfigurationDescription:
+			v.CatalogConfigurationDescription = &CatalogConfigurationDescription{}
+			return v.CatalogConfigurationDescription.Deserialize(d)
+		case schemas.ZeppelinApplicationConfigurationDescription_CustomArtifactsConfigurationDescription:
+			return deserializeCustomArtifactsConfigurationDescriptionList(d, schemas.ZeppelinApplicationConfigurationDescription_CustomArtifactsConfigurationDescription, &v.CustomArtifactsConfigurationDescription)
+		case schemas.ZeppelinApplicationConfigurationDescription_DeployAsApplicationConfigurationDescription:
+			v.DeployAsApplicationConfigurationDescription = &DeployAsApplicationConfigurationDescription{}
+			return v.DeployAsApplicationConfigurationDescription.Deserialize(d)
+		case schemas.ZeppelinApplicationConfigurationDescription_MonitoringConfigurationDescription:
+			v.MonitoringConfigurationDescription = &ZeppelinMonitoringConfigurationDescription{}
+			return v.MonitoringConfigurationDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Updates to the configuration of Managed Service for Apache Flink Studio
 // notebook.
 type ZeppelinApplicationConfigurationUpdate struct {
@@ -2627,6 +6976,49 @@ type ZeppelinApplicationConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ZeppelinApplicationConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZeppelinApplicationConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ZeppelinApplicationConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogConfigurationUpdate != nil {
+		s.WriteStruct(schemas.ZeppelinApplicationConfigurationUpdate_CatalogConfigurationUpdate)
+		v.CatalogConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCustomArtifactsConfigurationList(s, schemas.ZeppelinApplicationConfigurationUpdate_CustomArtifactsConfigurationUpdate, v.CustomArtifactsConfigurationUpdate)
+	if v.DeployAsApplicationConfigurationUpdate != nil {
+		s.WriteStruct(schemas.ZeppelinApplicationConfigurationUpdate_DeployAsApplicationConfigurationUpdate)
+		v.DeployAsApplicationConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MonitoringConfigurationUpdate != nil {
+		s.WriteStruct(schemas.ZeppelinApplicationConfigurationUpdate_MonitoringConfigurationUpdate)
+		v.MonitoringConfigurationUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ZeppelinApplicationConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZeppelinApplicationConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZeppelinApplicationConfigurationUpdate_CatalogConfigurationUpdate:
+			v.CatalogConfigurationUpdate = &CatalogConfigurationUpdate{}
+			return v.CatalogConfigurationUpdate.Deserialize(d)
+		case schemas.ZeppelinApplicationConfigurationUpdate_CustomArtifactsConfigurationUpdate:
+			return deserializeCustomArtifactsConfigurationList(d, schemas.ZeppelinApplicationConfigurationUpdate_CustomArtifactsConfigurationUpdate, &v.CustomArtifactsConfigurationUpdate)
+		case schemas.ZeppelinApplicationConfigurationUpdate_DeployAsApplicationConfigurationUpdate:
+			v.DeployAsApplicationConfigurationUpdate = &DeployAsApplicationConfigurationUpdate{}
+			return v.DeployAsApplicationConfigurationUpdate.Deserialize(d)
+		case schemas.ZeppelinApplicationConfigurationUpdate_MonitoringConfigurationUpdate:
+			v.MonitoringConfigurationUpdate = &ZeppelinMonitoringConfigurationUpdate{}
+			return v.MonitoringConfigurationUpdate.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Describes configuration parameters for Amazon CloudWatch logging for a Managed
 // Service for Apache Flink Studio notebook. For more information about CloudWatch
 // logging, see [Monitoring].
@@ -2642,6 +7034,32 @@ type ZeppelinMonitoringConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ZeppelinMonitoringConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZeppelinMonitoringConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ZeppelinMonitoringConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogLevel != "" {
+		s.WriteString(schemas.ZeppelinMonitoringConfiguration_LogLevel, string(v.LogLevel))
+	}
+}
+func (v *ZeppelinMonitoringConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZeppelinMonitoringConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZeppelinMonitoringConfiguration_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.ZeppelinMonitoringConfiguration_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LogLevel(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The monitoring configuration for Apache Zeppelin within a Managed Service for
 // Apache Flink Studio notebook.
 type ZeppelinMonitoringConfigurationDescription struct {
@@ -2650,6 +7068,32 @@ type ZeppelinMonitoringConfigurationDescription struct {
 	LogLevel LogLevel
 
 	noSmithyDocumentSerde
+}
+
+func (v *ZeppelinMonitoringConfigurationDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZeppelinMonitoringConfigurationDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ZeppelinMonitoringConfigurationDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogLevel != "" {
+		s.WriteString(schemas.ZeppelinMonitoringConfigurationDescription_LogLevel, string(v.LogLevel))
+	}
+}
+func (v *ZeppelinMonitoringConfigurationDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZeppelinMonitoringConfigurationDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZeppelinMonitoringConfigurationDescription_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.ZeppelinMonitoringConfigurationDescription_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LogLevel(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Updates to the monitoring configuration for Apache Zeppelin within a Managed
@@ -2663,6 +7107,32 @@ type ZeppelinMonitoringConfigurationUpdate struct {
 	LogLevelUpdate LogLevel
 
 	noSmithyDocumentSerde
+}
+
+func (v *ZeppelinMonitoringConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ZeppelinMonitoringConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ZeppelinMonitoringConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogLevelUpdate != "" {
+		s.WriteString(schemas.ZeppelinMonitoringConfigurationUpdate_LogLevelUpdate, string(v.LogLevelUpdate))
+	}
+}
+func (v *ZeppelinMonitoringConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ZeppelinMonitoringConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ZeppelinMonitoringConfigurationUpdate_LogLevelUpdate:
+			var ev string
+			if err := d.ReadString(schemas.ZeppelinMonitoringConfigurationUpdate_LogLevelUpdate, &ev); err != nil {
+				return err
+			}
+			v.LogLevelUpdate = LogLevel(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -49,6 +51,34 @@ type DescribeGroupInput struct {
 	IdentityStoreId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GroupId != nil {
+		s.WriteString(schemas.DescribeGroupRequest_GroupId, *v.GroupId)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.DescribeGroupRequest_IdentityStoreId, *v.IdentityStoreId)
+	}
+}
+func (v *DescribeGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGroupRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGroupRequest_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.DescribeGroupRequest_GroupId, v.GroupId)
+		case schemas.DescribeGroupRequest_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.DescribeGroupRequest_IdentityStoreId, v.IdentityStoreId)
+		}
+		return nil
+	})
 }
 
 type DescribeGroupOutput struct {
@@ -95,16 +125,80 @@ type DescribeGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGroupResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DescribeGroupResponse_CreatedAt, *v.CreatedAt)
+	}
+	if v.CreatedBy != nil {
+		s.WriteString(schemas.DescribeGroupResponse_CreatedBy, *v.CreatedBy)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeGroupResponse_Description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.DescribeGroupResponse_DisplayName, *v.DisplayName)
+	}
+	serializeExternalIds(s, schemas.DescribeGroupResponse_ExternalIds, v.ExternalIds)
+	if v.GroupId != nil {
+		s.WriteString(schemas.DescribeGroupResponse_GroupId, *v.GroupId)
+	}
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.DescribeGroupResponse_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DescribeGroupResponse_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.UpdatedBy != nil {
+		s.WriteString(schemas.DescribeGroupResponse_UpdatedBy, *v.UpdatedBy)
+	}
+}
+func (v *DescribeGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGroupResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeGroupResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeGroupResponse_CreatedBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_CreatedBy, v.CreatedBy)
+		case schemas.DescribeGroupResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_Description, v.Description)
+		case schemas.DescribeGroupResponse_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_DisplayName, v.DisplayName)
+		case schemas.DescribeGroupResponse_ExternalIds:
+			return deserializeExternalIds(d, schemas.DescribeGroupResponse_ExternalIds, &v.ExternalIds)
+		case schemas.DescribeGroupResponse_GroupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_GroupId, v.GroupId)
+		case schemas.DescribeGroupResponse_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_IdentityStoreId, v.IdentityStoreId)
+		case schemas.DescribeGroupResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeGroupResponse_UpdatedAt, v.UpdatedAt)
+		case schemas.DescribeGroupResponse_UpdatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.DescribeGroupResponse_UpdatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroup, schemas.DescribeGroupRequest, schemas.DescribeGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGroup, schemas.DescribeGroupRequest, schemas.DescribeGroupResponse), output: &DescribeGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeGroup"); err != nil {

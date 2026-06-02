@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type DeleteMLInputChannelDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMLInputChannelDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteMLInputChannelDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMLInputChannelDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.DeleteMLInputChannelDataRequest_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.MlInputChannelArn != nil {
+		s.WriteString(schemas.DeleteMLInputChannelDataRequest_mlInputChannelArn, *v.MlInputChannelArn)
+	}
+}
+
 type DeleteMLInputChannelDataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -49,16 +66,29 @@ type DeleteMLInputChannelDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteMLInputChannelDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteMLInputChannelDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteMLInputChannelDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteMLInputChannelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteMLInputChannelData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMLInputChannelData, schemas.DeleteMLInputChannelDataRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteMLInputChannelData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteMLInputChannelData, schemas.DeleteMLInputChannelDataRequest, nil), output: &DeleteMLInputChannelDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteMLInputChannelData"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,22 @@ type BatchDeleteUniqueIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteUniqueIdInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteUniqueIdInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteUniqueIdInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InputSource != nil {
+		s.WriteString(schemas.BatchDeleteUniqueIdInput_inputSource, *v.InputSource)
+	}
+	serializeUniqueIdList(s, schemas.BatchDeleteUniqueIdInput_uniqueIds, v.UniqueIds)
+	if v.WorkflowName != nil {
+		s.WriteString(schemas.BatchDeleteUniqueIdInput_workflowName, *v.WorkflowName)
+	}
+}
+
 type BatchDeleteUniqueIdOutput struct {
 
 	// The unique IDs that were deleted.
@@ -73,16 +91,34 @@ type BatchDeleteUniqueIdOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteUniqueIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteUniqueIdOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteUniqueIdOutput_deleted:
+			return deserializeDeletedUniqueIdList(d, schemas.BatchDeleteUniqueIdOutput_deleted, &v.Deleted)
+		case schemas.BatchDeleteUniqueIdOutput_disconnectedUniqueIds:
+			return deserializeDisconnectedUniqueIdsList(d, schemas.BatchDeleteUniqueIdOutput_disconnectedUniqueIds, &v.DisconnectedUniqueIds)
+		case schemas.BatchDeleteUniqueIdOutput_errors:
+			return deserializeDeleteUniqueIdErrorsList(d, schemas.BatchDeleteUniqueIdOutput_errors, &v.Errors)
+		case schemas.BatchDeleteUniqueIdOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.BatchDeleteUniqueIdOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DeleteUniqueIdStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchDeleteUniqueIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchDeleteUniqueId{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteUniqueId, schemas.BatchDeleteUniqueIdInput, schemas.BatchDeleteUniqueIdOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchDeleteUniqueId{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchDeleteUniqueId, schemas.BatchDeleteUniqueIdInput, schemas.BatchDeleteUniqueIdOutput), output: &BatchDeleteUniqueIdOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchDeleteUniqueId"); err != nil {

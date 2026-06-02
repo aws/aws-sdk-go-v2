@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,30 @@ type GetDocumentVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDocumentVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDocumentVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.GetDocumentVersionRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.DocumentId != nil {
+		s.WriteString(schemas.GetDocumentVersionRequest_DocumentId, *v.DocumentId)
+	}
+	if v.Fields != nil {
+		s.WriteString(schemas.GetDocumentVersionRequest_Fields, *v.Fields)
+	}
+	if v.IncludeCustomMetadata != false {
+		s.WriteBool(schemas.GetDocumentVersionRequest_IncludeCustomMetadata, v.IncludeCustomMetadata)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.GetDocumentVersionRequest_VersionId, *v.VersionId)
+	}
+}
+
 type GetDocumentVersionOutput struct {
 
 	// The custom metadata on the document version.
@@ -67,16 +93,26 @@ type GetDocumentVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDocumentVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDocumentVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDocumentVersionResponse_CustomMetadata:
+			return deserializeCustomMetadataMap(d, schemas.GetDocumentVersionResponse_CustomMetadata, &v.CustomMetadata)
+		case schemas.GetDocumentVersionResponse_Metadata:
+			v.Metadata = &types.DocumentVersionMetadata{}
+			return v.Metadata.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDocumentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDocumentVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentVersion, schemas.GetDocumentVersionRequest, schemas.GetDocumentVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDocumentVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDocumentVersion, schemas.GetDocumentVersionRequest, schemas.GetDocumentVersionResponse), output: &GetDocumentVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDocumentVersion"); err != nil {

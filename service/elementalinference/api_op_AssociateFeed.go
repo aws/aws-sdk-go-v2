@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -83,6 +85,25 @@ type AssociateFeedInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFeedInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateFeedRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateFeedInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedResourceName != nil {
+		s.WriteString(schemas.AssociateFeedRequest_associatedResourceName, *v.AssociatedResourceName)
+	}
+	if v.DryRun != false {
+		s.WriteBool(schemas.AssociateFeedRequest_dryRun, v.DryRun)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AssociateFeedRequest_id, *v.Id)
+	}
+	serializeCreateOutputList(s, schemas.AssociateFeedRequest_outputs, v.Outputs)
+}
+
 type AssociateFeedOutput struct {
 
 	// The ARN of the feed.
@@ -101,16 +122,27 @@ type AssociateFeedOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateFeedOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateFeedResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateFeedResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssociateFeedResponse_arn, v.Arn)
+		case schemas.AssociateFeedResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssociateFeedResponse_id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateFeedMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateFeed{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFeed, schemas.AssociateFeedRequest, schemas.AssociateFeedResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateFeed{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateFeed, schemas.AssociateFeedRequest, schemas.AssociateFeedResponse), output: &AssociateFeedOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateFeed"); err != nil {

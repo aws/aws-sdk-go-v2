@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/georoutes/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/georoutes/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,6 +68,33 @@ type SnapToRoadsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SnapToRoadsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnapToRoadsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnapToRoadsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.SnapToRoadsRequest_Key, *v.Key)
+	}
+	if v.SnapRadius != 0 {
+		s.WriteInt64(schemas.SnapToRoadsRequest_SnapRadius, v.SnapRadius)
+	}
+	if v.SnappedGeometryFormat != "" {
+		s.WriteString(schemas.SnapToRoadsRequest_SnappedGeometryFormat, string(v.SnappedGeometryFormat))
+	}
+	serializeRoadSnapTracePointList(s, schemas.SnapToRoadsRequest_TracePoints, v.TracePoints)
+	if v.TravelMode != "" {
+		s.WriteString(schemas.SnapToRoadsRequest_TravelMode, string(v.TravelMode))
+	}
+	if v.TravelModeOptions != nil {
+		s.WriteStruct(schemas.SnapToRoadsRequest_TravelModeOptions)
+		v.TravelModeOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type SnapToRoadsOutput struct {
 
 	// Notices are additional information returned that indicate issues that occurred
@@ -98,16 +127,38 @@ type SnapToRoadsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SnapToRoadsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnapToRoadsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnapToRoadsResponse_Notices:
+			return deserializeRoadSnapNoticeList(d, schemas.SnapToRoadsResponse_Notices, &v.Notices)
+		case schemas.SnapToRoadsResponse_PricingBucket:
+			v.PricingBucket = new(string)
+			return d.ReadString(schemas.SnapToRoadsResponse_PricingBucket, v.PricingBucket)
+		case schemas.SnapToRoadsResponse_SnappedGeometry:
+			v.SnappedGeometry = &types.RoadSnapSnappedGeometry{}
+			return v.SnappedGeometry.Deserialize(d)
+		case schemas.SnapToRoadsResponse_SnappedGeometryFormat:
+			var ev string
+			if err := d.ReadString(schemas.SnapToRoadsResponse_SnappedGeometryFormat, &ev); err != nil {
+				return err
+			}
+			v.SnappedGeometryFormat = types.GeometryFormat(ev)
+			return nil
+		case schemas.SnapToRoadsResponse_SnappedTracePoints:
+			return deserializeRoadSnapSnappedTracePointList(d, schemas.SnapToRoadsResponse_SnappedTracePoints, &v.SnappedTracePoints)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSnapToRoadsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSnapToRoads{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SnapToRoads, schemas.SnapToRoadsRequest, schemas.SnapToRoadsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSnapToRoads{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SnapToRoads, schemas.SnapToRoadsRequest, schemas.SnapToRoadsResponse), output: &SnapToRoadsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SnapToRoads"); err != nil {

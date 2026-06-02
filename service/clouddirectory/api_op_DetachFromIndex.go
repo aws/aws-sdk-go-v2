@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,28 @@ type DetachFromIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachFromIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DetachFromIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DetachFromIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.DetachFromIndexRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.IndexReference != nil {
+		s.WriteStruct(schemas.DetachFromIndexRequest_IndexReference)
+		v.IndexReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetReference != nil {
+		s.WriteStruct(schemas.DetachFromIndexRequest_TargetReference)
+		v.TargetReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type DetachFromIndexOutput struct {
 
 	// The ObjectIdentifier of the object that was detached from the index.
@@ -58,16 +82,24 @@ type DetachFromIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DetachFromIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DetachFromIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DetachFromIndexResponse_DetachedObjectIdentifier:
+			v.DetachedObjectIdentifier = new(string)
+			return d.ReadString(schemas.DetachFromIndexResponse_DetachedObjectIdentifier, v.DetachedObjectIdentifier)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDetachFromIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDetachFromIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachFromIndex, schemas.DetachFromIndexRequest, schemas.DetachFromIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDetachFromIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DetachFromIndex, schemas.DetachFromIndexRequest, schemas.DetachFromIndexResponse), output: &DetachFromIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DetachFromIndex"); err != nil {

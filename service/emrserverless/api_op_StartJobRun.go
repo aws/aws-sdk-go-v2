@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/emrserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/emrserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -75,6 +77,92 @@ type StartJobRunInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartJobRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartJobRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartJobRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.StartJobRunRequest_applicationId, *v.ApplicationId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.StartJobRunRequest_clientToken, *v.ClientToken)
+	}
+	if v.ConfigurationOverrides != nil {
+		s.WriteStruct(schemas.StartJobRunRequest_configurationOverrides)
+		v.ConfigurationOverrides.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionIamPolicy != nil {
+		s.WriteStruct(schemas.StartJobRunRequest_executionIamPolicy)
+		v.ExecutionIamPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.StartJobRunRequest_executionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.ExecutionTimeoutMinutes != nil {
+		s.WriteInt64(schemas.StartJobRunRequest_executionTimeoutMinutes, *v.ExecutionTimeoutMinutes)
+	}
+	serializeJobDriver(s, schemas.StartJobRunRequest_jobDriver, v.JobDriver)
+	if v.Mode != "" {
+		s.WriteString(schemas.StartJobRunRequest_mode, string(v.Mode))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.StartJobRunRequest_name, *v.Name)
+	}
+	if v.RetryPolicy != nil {
+		s.WriteStruct(schemas.StartJobRunRequest_retryPolicy)
+		v.RetryPolicy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.StartJobRunRequest_tags, v.Tags)
+}
+func (v *StartJobRunInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartJobRunRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartJobRunRequest_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.StartJobRunRequest_applicationId, v.ApplicationId)
+		case schemas.StartJobRunRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.StartJobRunRequest_clientToken, v.ClientToken)
+		case schemas.StartJobRunRequest_configurationOverrides:
+			v.ConfigurationOverrides = &types.ConfigurationOverrides{}
+			return v.ConfigurationOverrides.Deserialize(d)
+		case schemas.StartJobRunRequest_executionIamPolicy:
+			v.ExecutionIamPolicy = &types.JobRunExecutionIamPolicy{}
+			return v.ExecutionIamPolicy.Deserialize(d)
+		case schemas.StartJobRunRequest_executionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.StartJobRunRequest_executionRoleArn, v.ExecutionRoleArn)
+		case schemas.StartJobRunRequest_executionTimeoutMinutes:
+			v.ExecutionTimeoutMinutes = new(int64)
+			return d.ReadInt64(schemas.StartJobRunRequest_executionTimeoutMinutes, v.ExecutionTimeoutMinutes)
+		case schemas.StartJobRunRequest_jobDriver:
+			return deserializeJobDriver(d, schemas.StartJobRunRequest_jobDriver, &v.JobDriver)
+		case schemas.StartJobRunRequest_mode:
+			var ev string
+			if err := d.ReadString(schemas.StartJobRunRequest_mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = types.JobRunMode(ev)
+			return nil
+		case schemas.StartJobRunRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.StartJobRunRequest_name, v.Name)
+		case schemas.StartJobRunRequest_retryPolicy:
+			v.RetryPolicy = &types.RetryPolicy{}
+			return v.RetryPolicy.Deserialize(d)
+		case schemas.StartJobRunRequest_tags:
+			return deserializeTagMap(d, schemas.StartJobRunRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type StartJobRunOutput struct {
 
 	// This output displays the application ID on which the job run was submitted.
@@ -98,16 +186,47 @@ type StartJobRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartJobRunOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartJobRunResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartJobRunOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.StartJobRunResponse_applicationId, *v.ApplicationId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.StartJobRunResponse_arn, *v.Arn)
+	}
+	if v.JobRunId != nil {
+		s.WriteString(schemas.StartJobRunResponse_jobRunId, *v.JobRunId)
+	}
+}
+func (v *StartJobRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartJobRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartJobRunResponse_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.StartJobRunResponse_applicationId, v.ApplicationId)
+		case schemas.StartJobRunResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartJobRunResponse_arn, v.Arn)
+		case schemas.StartJobRunResponse_jobRunId:
+			v.JobRunId = new(string)
+			return d.ReadString(schemas.StartJobRunResponse_jobRunId, v.JobRunId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartJobRun, schemas.StartJobRunRequest, schemas.StartJobRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartJobRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartJobRun, schemas.StartJobRunRequest, schemas.StartJobRunResponse), output: &StartJobRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartJobRun"); err != nil {

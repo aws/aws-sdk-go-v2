@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -29,6 +31,34 @@ type AndroidApp struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AndroidApp) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AndroidApp)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AndroidApp) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateFingerprint != nil {
+		s.WriteString(schemas.AndroidApp_CertificateFingerprint, *v.CertificateFingerprint)
+	}
+	if v.Package != nil {
+		s.WriteString(schemas.AndroidApp_Package, *v.Package)
+	}
+}
+func (v *AndroidApp) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AndroidApp, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AndroidApp_CertificateFingerprint:
+			v.CertificateFingerprint = new(string)
+			return d.ReadString(schemas.AndroidApp_CertificateFingerprint, v.CertificateFingerprint)
+		case schemas.AndroidApp_Package:
+			v.Package = new(string)
+			return d.ReadString(schemas.AndroidApp_Package, v.Package)
+		}
+		return nil
+	})
+}
+
 // Options for filtering API keys.
 type ApiKeyFilter struct {
 
@@ -36,6 +66,32 @@ type ApiKeyFilter struct {
 	KeyStatus Status
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApiKeyFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApiKeyFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApiKeyFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.KeyStatus != "" {
+		s.WriteString(schemas.ApiKeyFilter_KeyStatus, string(v.KeyStatus))
+	}
+}
+func (v *ApiKeyFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApiKeyFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApiKeyFilter_KeyStatus:
+			var ev string
+			if err := d.ReadString(schemas.ApiKeyFilter_KeyStatus, &ev); err != nil {
+				return err
+			}
+			v.KeyStatus = Status(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // API Restrictions on the allowed actions, resources, and referers for an API key
@@ -176,6 +232,37 @@ type ApiKeyRestrictions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApiKeyRestrictions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApiKeyRestrictions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApiKeyRestrictions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApiKeyActionList(s, schemas.ApiKeyRestrictions_AllowActions, v.AllowActions)
+	serializeAndroidAppList(s, schemas.ApiKeyRestrictions_AllowAndroidApps, v.AllowAndroidApps)
+	serializeAppleAppList(s, schemas.ApiKeyRestrictions_AllowAppleApps, v.AllowAppleApps)
+	serializeRefererPatternList(s, schemas.ApiKeyRestrictions_AllowReferers, v.AllowReferers)
+	serializeGeoArnList(s, schemas.ApiKeyRestrictions_AllowResources, v.AllowResources)
+}
+func (v *ApiKeyRestrictions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApiKeyRestrictions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApiKeyRestrictions_AllowActions:
+			return deserializeApiKeyActionList(d, schemas.ApiKeyRestrictions_AllowActions, &v.AllowActions)
+		case schemas.ApiKeyRestrictions_AllowAndroidApps:
+			return deserializeAndroidAppList(d, schemas.ApiKeyRestrictions_AllowAndroidApps, &v.AllowAndroidApps)
+		case schemas.ApiKeyRestrictions_AllowAppleApps:
+			return deserializeAppleAppList(d, schemas.ApiKeyRestrictions_AllowAppleApps, &v.AllowAppleApps)
+		case schemas.ApiKeyRestrictions_AllowReferers:
+			return deserializeRefererPatternList(d, schemas.ApiKeyRestrictions_AllowReferers, &v.AllowReferers)
+		case schemas.ApiKeyRestrictions_AllowResources:
+			return deserializeGeoArnList(d, schemas.ApiKeyRestrictions_AllowResources, &v.AllowResources)
+		}
+		return nil
+	})
+}
+
 // Unique identifying information for an Apple app (iOS, macOS, tvOS and watchOS).
 // Consists of an Apple Bundle ID.
 type AppleApp struct {
@@ -189,6 +276,28 @@ type AppleApp struct {
 	BundleId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AppleApp) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AppleApp)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AppleApp) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BundleId != nil {
+		s.WriteString(schemas.AppleApp_BundleId, *v.BundleId)
+	}
+}
+func (v *AppleApp) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AppleApp, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AppleApp_BundleId:
+			v.BundleId = new(string)
+			return d.ReadString(schemas.AppleApp_BundleId, v.BundleId)
+		}
+		return nil
+	})
 }
 
 // Contains the tracker resource details.
@@ -207,6 +316,36 @@ type BatchDeleteDevicePositionHistoryError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchDeleteDevicePositionHistoryError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteDevicePositionHistoryError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteDevicePositionHistoryError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.BatchDeleteDevicePositionHistoryError_DeviceId, *v.DeviceId)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.BatchDeleteDevicePositionHistoryError_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchDeleteDevicePositionHistoryError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteDevicePositionHistoryError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteDevicePositionHistoryError_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.BatchDeleteDevicePositionHistoryError_DeviceId, v.DeviceId)
+		case schemas.BatchDeleteDevicePositionHistoryError_Error:
+			v.Error = &BatchItemError{}
+			return v.Error.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains error details for each geofence that failed to delete from the
 // geofence collection.
 type BatchDeleteGeofenceError struct {
@@ -222,6 +361,36 @@ type BatchDeleteGeofenceError struct {
 	GeofenceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchDeleteGeofenceError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchDeleteGeofenceError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchDeleteGeofenceError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error != nil {
+		s.WriteStruct(schemas.BatchDeleteGeofenceError_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GeofenceId != nil {
+		s.WriteString(schemas.BatchDeleteGeofenceError_GeofenceId, *v.GeofenceId)
+	}
+}
+func (v *BatchDeleteGeofenceError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchDeleteGeofenceError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchDeleteGeofenceError_Error:
+			v.Error = &BatchItemError{}
+			return v.Error.Deserialize(d)
+		case schemas.BatchDeleteGeofenceError_GeofenceId:
+			v.GeofenceId = new(string)
+			return d.ReadString(schemas.BatchDeleteGeofenceError_GeofenceId, v.GeofenceId)
+		}
+		return nil
+	})
 }
 
 // Contains error details for each device that failed to evaluate its position
@@ -249,6 +418,42 @@ type BatchEvaluateGeofencesError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchEvaluateGeofencesError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchEvaluateGeofencesError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchEvaluateGeofencesError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.BatchEvaluateGeofencesError_DeviceId, *v.DeviceId)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.BatchEvaluateGeofencesError_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SampleTime != nil {
+		s.WriteTime(schemas.BatchEvaluateGeofencesError_SampleTime, *v.SampleTime)
+	}
+}
+func (v *BatchEvaluateGeofencesError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchEvaluateGeofencesError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchEvaluateGeofencesError_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.BatchEvaluateGeofencesError_DeviceId, v.DeviceId)
+		case schemas.BatchEvaluateGeofencesError_Error:
+			v.Error = &BatchItemError{}
+			return v.Error.Deserialize(d)
+		case schemas.BatchEvaluateGeofencesError_SampleTime:
+			v.SampleTime = new(time.Time)
+			return d.ReadTime(schemas.BatchEvaluateGeofencesError_SampleTime, v.SampleTime)
+		}
+		return nil
+	})
+}
+
 // Contains error details for each device that didn't return a position.
 type BatchGetDevicePositionError struct {
 
@@ -265,6 +470,36 @@ type BatchGetDevicePositionError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetDevicePositionError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetDevicePositionError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetDevicePositionError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.BatchGetDevicePositionError_DeviceId, *v.DeviceId)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.BatchGetDevicePositionError_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchGetDevicePositionError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetDevicePositionError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetDevicePositionError_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.BatchGetDevicePositionError_DeviceId, v.DeviceId)
+		case schemas.BatchGetDevicePositionError_Error:
+			v.Error = &BatchItemError{}
+			return v.Error.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains the batch request error details associated with the request.
 type BatchItemError struct {
 
@@ -275,6 +510,38 @@ type BatchItemError struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchItemError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchItemError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchItemError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.BatchItemError_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.BatchItemError_Message, *v.Message)
+	}
+}
+func (v *BatchItemError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchItemError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchItemError_Code:
+			var ev string
+			if err := d.ReadString(schemas.BatchItemError_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = BatchItemErrorCode(ev)
+			return nil
+		case schemas.BatchItemError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchItemError_Message, v.Message)
+		}
+		return nil
+	})
 }
 
 // Contains error details for each geofence that failed to be stored in a given
@@ -292,6 +559,36 @@ type BatchPutGeofenceError struct {
 	GeofenceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BatchPutGeofenceError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutGeofenceError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutGeofenceError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Error != nil {
+		s.WriteStruct(schemas.BatchPutGeofenceError_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GeofenceId != nil {
+		s.WriteString(schemas.BatchPutGeofenceError_GeofenceId, *v.GeofenceId)
+	}
+}
+func (v *BatchPutGeofenceError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutGeofenceError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutGeofenceError_Error:
+			v.Error = &BatchItemError{}
+			return v.Error.Deserialize(d)
+		case schemas.BatchPutGeofenceError_GeofenceId:
+			v.GeofenceId = new(string)
+			return d.ReadString(schemas.BatchPutGeofenceError_GeofenceId, v.GeofenceId)
+		}
+		return nil
+	})
 }
 
 // Contains geofence geometry details.
@@ -324,6 +621,39 @@ type BatchPutGeofenceRequestEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutGeofenceRequestEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutGeofenceRequestEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutGeofenceRequestEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GeofenceId != nil {
+		s.WriteString(schemas.BatchPutGeofenceRequestEntry_GeofenceId, *v.GeofenceId)
+	}
+	serializePropertyMap(s, schemas.BatchPutGeofenceRequestEntry_GeofenceProperties, v.GeofenceProperties)
+	if v.Geometry != nil {
+		s.WriteStruct(schemas.BatchPutGeofenceRequestEntry_Geometry)
+		v.Geometry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *BatchPutGeofenceRequestEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutGeofenceRequestEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutGeofenceRequestEntry_GeofenceId:
+			v.GeofenceId = new(string)
+			return d.ReadString(schemas.BatchPutGeofenceRequestEntry_GeofenceId, v.GeofenceId)
+		case schemas.BatchPutGeofenceRequestEntry_GeofenceProperties:
+			return deserializePropertyMap(d, schemas.BatchPutGeofenceRequestEntry_GeofenceProperties, &v.GeofenceProperties)
+		case schemas.BatchPutGeofenceRequestEntry_Geometry:
+			v.Geometry = &GeofenceGeometry{}
+			return v.Geometry.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Contains a summary of each geofence that was successfully stored in a given
 // geofence collection.
 type BatchPutGeofenceSuccess struct {
@@ -352,6 +682,40 @@ type BatchPutGeofenceSuccess struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchPutGeofenceSuccess) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchPutGeofenceSuccess)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchPutGeofenceSuccess) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.BatchPutGeofenceSuccess_CreateTime, *v.CreateTime)
+	}
+	if v.GeofenceId != nil {
+		s.WriteString(schemas.BatchPutGeofenceSuccess_GeofenceId, *v.GeofenceId)
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.BatchPutGeofenceSuccess_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *BatchPutGeofenceSuccess) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchPutGeofenceSuccess, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchPutGeofenceSuccess_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.BatchPutGeofenceSuccess_CreateTime, v.CreateTime)
+		case schemas.BatchPutGeofenceSuccess_GeofenceId:
+			v.GeofenceId = new(string)
+			return d.ReadString(schemas.BatchPutGeofenceSuccess_GeofenceId, v.GeofenceId)
+		case schemas.BatchPutGeofenceSuccess_UpdateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.BatchPutGeofenceSuccess_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
+
 // Contains error details for each device that failed to update its position.
 type BatchUpdateDevicePositionError struct {
 
@@ -377,6 +741,42 @@ type BatchUpdateDevicePositionError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateDevicePositionError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateDevicePositionError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateDevicePositionError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceId != nil {
+		s.WriteString(schemas.BatchUpdateDevicePositionError_DeviceId, *v.DeviceId)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.BatchUpdateDevicePositionError_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SampleTime != nil {
+		s.WriteTime(schemas.BatchUpdateDevicePositionError_SampleTime, *v.SampleTime)
+	}
+}
+func (v *BatchUpdateDevicePositionError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateDevicePositionError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateDevicePositionError_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.BatchUpdateDevicePositionError_DeviceId, v.DeviceId)
+		case schemas.BatchUpdateDevicePositionError_Error:
+			v.Error = &BatchItemError{}
+			return v.Error.Deserialize(d)
+		case schemas.BatchUpdateDevicePositionError_SampleTime:
+			v.SampleTime = new(time.Time)
+			return d.ReadTime(schemas.BatchUpdateDevicePositionError_SampleTime, v.SampleTime)
+		}
+		return nil
+	})
+}
+
 // Contains details about additional route preferences for requests that specify
 // TravelMode as Car .
 type CalculateRouteCarModeOptions struct {
@@ -396,6 +796,34 @@ type CalculateRouteCarModeOptions struct {
 	AvoidTolls *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *CalculateRouteCarModeOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CalculateRouteCarModeOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CalculateRouteCarModeOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvoidFerries != nil {
+		s.WriteBool(schemas.CalculateRouteCarModeOptions_AvoidFerries, *v.AvoidFerries)
+	}
+	if v.AvoidTolls != nil {
+		s.WriteBool(schemas.CalculateRouteCarModeOptions_AvoidTolls, *v.AvoidTolls)
+	}
+}
+func (v *CalculateRouteCarModeOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CalculateRouteCarModeOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CalculateRouteCarModeOptions_AvoidFerries:
+			v.AvoidFerries = new(bool)
+			return d.ReadBool(schemas.CalculateRouteCarModeOptions_AvoidFerries, v.AvoidFerries)
+		case schemas.CalculateRouteCarModeOptions_AvoidTolls:
+			v.AvoidTolls = new(bool)
+			return d.ReadBool(schemas.CalculateRouteCarModeOptions_AvoidTolls, v.AvoidTolls)
+		}
+		return nil
+	})
 }
 
 // A summary of the calculated route matrix.
@@ -435,6 +863,50 @@ type CalculateRouteMatrixSummary struct {
 	RouteCount *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CalculateRouteMatrixSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CalculateRouteMatrixSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CalculateRouteMatrixSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteString(schemas.CalculateRouteMatrixSummary_DataSource, *v.DataSource)
+	}
+	if v.DistanceUnit != "" {
+		s.WriteString(schemas.CalculateRouteMatrixSummary_DistanceUnit, string(v.DistanceUnit))
+	}
+	if v.ErrorCount != nil {
+		s.WriteInt32(schemas.CalculateRouteMatrixSummary_ErrorCount, *v.ErrorCount)
+	}
+	if v.RouteCount != nil {
+		s.WriteInt32(schemas.CalculateRouteMatrixSummary_RouteCount, *v.RouteCount)
+	}
+}
+func (v *CalculateRouteMatrixSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CalculateRouteMatrixSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CalculateRouteMatrixSummary_DataSource:
+			v.DataSource = new(string)
+			return d.ReadString(schemas.CalculateRouteMatrixSummary_DataSource, v.DataSource)
+		case schemas.CalculateRouteMatrixSummary_DistanceUnit:
+			var ev string
+			if err := d.ReadString(schemas.CalculateRouteMatrixSummary_DistanceUnit, &ev); err != nil {
+				return err
+			}
+			v.DistanceUnit = DistanceUnit(ev)
+			return nil
+		case schemas.CalculateRouteMatrixSummary_ErrorCount:
+			v.ErrorCount = new(int32)
+			return d.ReadInt32(schemas.CalculateRouteMatrixSummary_ErrorCount, v.ErrorCount)
+		case schemas.CalculateRouteMatrixSummary_RouteCount:
+			v.RouteCount = new(int32)
+			return d.ReadInt32(schemas.CalculateRouteMatrixSummary_RouteCount, v.RouteCount)
+		}
+		return nil
+	})
 }
 
 // A summary of the calculated route.
@@ -502,6 +974,53 @@ type CalculateRouteSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CalculateRouteSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CalculateRouteSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CalculateRouteSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteString(schemas.CalculateRouteSummary_DataSource, *v.DataSource)
+	}
+	if v.Distance != nil {
+		s.WriteFloat64(schemas.CalculateRouteSummary_Distance, *v.Distance)
+	}
+	if v.DistanceUnit != "" {
+		s.WriteString(schemas.CalculateRouteSummary_DistanceUnit, string(v.DistanceUnit))
+	}
+	if v.DurationSeconds != nil {
+		s.WriteFloat64(schemas.CalculateRouteSummary_DurationSeconds, *v.DurationSeconds)
+	}
+	serializeBoundingBox(s, schemas.CalculateRouteSummary_RouteBBox, v.RouteBBox)
+}
+func (v *CalculateRouteSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CalculateRouteSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CalculateRouteSummary_DataSource:
+			v.DataSource = new(string)
+			return d.ReadString(schemas.CalculateRouteSummary_DataSource, v.DataSource)
+		case schemas.CalculateRouteSummary_Distance:
+			v.Distance = new(float64)
+			return d.ReadFloat64(schemas.CalculateRouteSummary_Distance, v.Distance)
+		case schemas.CalculateRouteSummary_DistanceUnit:
+			var ev string
+			if err := d.ReadString(schemas.CalculateRouteSummary_DistanceUnit, &ev); err != nil {
+				return err
+			}
+			v.DistanceUnit = DistanceUnit(ev)
+			return nil
+		case schemas.CalculateRouteSummary_DurationSeconds:
+			v.DurationSeconds = new(float64)
+			return d.ReadFloat64(schemas.CalculateRouteSummary_DurationSeconds, v.DurationSeconds)
+		case schemas.CalculateRouteSummary_RouteBBox:
+			return deserializeBoundingBox(d, schemas.CalculateRouteSummary_RouteBBox, &v.RouteBBox)
+		}
+		return nil
+	})
+}
+
 // Contains details about additional route preferences for requests that specify
 // TravelMode as Truck .
 type CalculateRouteTruckModeOptions struct {
@@ -532,6 +1051,50 @@ type CalculateRouteTruckModeOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CalculateRouteTruckModeOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CalculateRouteTruckModeOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CalculateRouteTruckModeOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvoidFerries != nil {
+		s.WriteBool(schemas.CalculateRouteTruckModeOptions_AvoidFerries, *v.AvoidFerries)
+	}
+	if v.AvoidTolls != nil {
+		s.WriteBool(schemas.CalculateRouteTruckModeOptions_AvoidTolls, *v.AvoidTolls)
+	}
+	if v.Dimensions != nil {
+		s.WriteStruct(schemas.CalculateRouteTruckModeOptions_Dimensions)
+		v.Dimensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Weight != nil {
+		s.WriteStruct(schemas.CalculateRouteTruckModeOptions_Weight)
+		v.Weight.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CalculateRouteTruckModeOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CalculateRouteTruckModeOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CalculateRouteTruckModeOptions_AvoidFerries:
+			v.AvoidFerries = new(bool)
+			return d.ReadBool(schemas.CalculateRouteTruckModeOptions_AvoidFerries, v.AvoidFerries)
+		case schemas.CalculateRouteTruckModeOptions_AvoidTolls:
+			v.AvoidTolls = new(bool)
+			return d.ReadBool(schemas.CalculateRouteTruckModeOptions_AvoidTolls, v.AvoidTolls)
+		case schemas.CalculateRouteTruckModeOptions_Dimensions:
+			v.Dimensions = &TruckDimensions{}
+			return v.Dimensions.Deserialize(d)
+		case schemas.CalculateRouteTruckModeOptions_Weight:
+			v.Weight = &TruckWeight{}
+			return v.Weight.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The cellular network communication infrastructure that the device uses.
 type CellSignals struct {
 
@@ -542,6 +1105,25 @@ type CellSignals struct {
 	LteCellDetails []LteCellDetails
 
 	noSmithyDocumentSerde
+}
+
+func (v *CellSignals) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CellSignals)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CellSignals) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLteCellDetailsList(s, schemas.CellSignals_LteCellDetails, v.LteCellDetails)
+}
+func (v *CellSignals) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CellSignals, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CellSignals_LteCellDetails:
+			return deserializeLteCellDetailsList(d, schemas.CellSignals_LteCellDetails, &v.LteCellDetails)
+		}
+		return nil
+	})
 }
 
 // A circle on the earth, as defined by a center point and a radius.
@@ -562,6 +1144,31 @@ type Circle struct {
 	Radius *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *Circle) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Circle)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Circle) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePosition(s, schemas.Circle_Center, v.Center)
+	if v.Radius != nil {
+		s.WriteFloat64(schemas.Circle_Radius, *v.Radius)
+	}
+}
+func (v *Circle) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Circle, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Circle_Center:
+			return deserializePosition(d, schemas.Circle_Center, &v.Center)
+		case schemas.Circle_Radius:
+			v.Radius = new(float64)
+			return d.ReadFloat64(schemas.Circle_Radius, v.Radius)
+		}
+		return nil
+	})
 }
 
 // Specifies the data storage option chosen for requesting Places.
@@ -592,6 +1199,32 @@ type DataSourceConfiguration struct {
 	IntendedUse IntendedUse
 
 	noSmithyDocumentSerde
+}
+
+func (v *DataSourceConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DataSourceConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DataSourceConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IntendedUse != "" {
+		s.WriteString(schemas.DataSourceConfiguration_IntendedUse, string(v.IntendedUse))
+	}
+}
+func (v *DataSourceConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DataSourceConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DataSourceConfiguration_IntendedUse:
+			var ev string
+			if err := d.ReadString(schemas.DataSourceConfiguration_IntendedUse, &ev); err != nil {
+				return err
+			}
+			v.IntendedUse = IntendedUse(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains the device position details.
@@ -630,6 +1263,54 @@ type DevicePosition struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DevicePosition) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DevicePosition)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DevicePosition) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accuracy != nil {
+		s.WriteStruct(schemas.DevicePosition_Accuracy)
+		v.Accuracy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.DevicePosition_DeviceId, *v.DeviceId)
+	}
+	serializePosition(s, schemas.DevicePosition_Position, v.Position)
+	serializePositionPropertyMap(s, schemas.DevicePosition_PositionProperties, v.PositionProperties)
+	if v.ReceivedTime != nil {
+		s.WriteTime(schemas.DevicePosition_ReceivedTime, *v.ReceivedTime)
+	}
+	if v.SampleTime != nil {
+		s.WriteTime(schemas.DevicePosition_SampleTime, *v.SampleTime)
+	}
+}
+func (v *DevicePosition) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DevicePosition, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DevicePosition_Accuracy:
+			v.Accuracy = &PositionalAccuracy{}
+			return v.Accuracy.Deserialize(d)
+		case schemas.DevicePosition_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.DevicePosition_DeviceId, v.DeviceId)
+		case schemas.DevicePosition_Position:
+			return deserializePosition(d, schemas.DevicePosition_Position, &v.Position)
+		case schemas.DevicePosition_PositionProperties:
+			return deserializePositionPropertyMap(d, schemas.DevicePosition_PositionProperties, &v.PositionProperties)
+		case schemas.DevicePosition_ReceivedTime:
+			v.ReceivedTime = new(time.Time)
+			return d.ReadTime(schemas.DevicePosition_ReceivedTime, v.ReceivedTime)
+		case schemas.DevicePosition_SampleTime:
+			v.SampleTime = new(time.Time)
+			return d.ReadTime(schemas.DevicePosition_SampleTime, v.SampleTime)
+		}
+		return nil
+	})
+}
+
 // Contains the position update details for a device.
 type DevicePositionUpdate struct {
 
@@ -666,6 +1347,48 @@ type DevicePositionUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DevicePositionUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DevicePositionUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DevicePositionUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accuracy != nil {
+		s.WriteStruct(schemas.DevicePositionUpdate_Accuracy)
+		v.Accuracy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.DevicePositionUpdate_DeviceId, *v.DeviceId)
+	}
+	serializePosition(s, schemas.DevicePositionUpdate_Position, v.Position)
+	serializePositionPropertyMap(s, schemas.DevicePositionUpdate_PositionProperties, v.PositionProperties)
+	if v.SampleTime != nil {
+		s.WriteTime(schemas.DevicePositionUpdate_SampleTime, *v.SampleTime)
+	}
+}
+func (v *DevicePositionUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DevicePositionUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DevicePositionUpdate_Accuracy:
+			v.Accuracy = &PositionalAccuracy{}
+			return v.Accuracy.Deserialize(d)
+		case schemas.DevicePositionUpdate_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.DevicePositionUpdate_DeviceId, v.DeviceId)
+		case schemas.DevicePositionUpdate_Position:
+			return deserializePosition(d, schemas.DevicePositionUpdate_Position, &v.Position)
+		case schemas.DevicePositionUpdate_PositionProperties:
+			return deserializePositionPropertyMap(d, schemas.DevicePositionUpdate_PositionProperties, &v.PositionProperties)
+		case schemas.DevicePositionUpdate_SampleTime:
+			v.SampleTime = new(time.Time)
+			return d.ReadTime(schemas.DevicePositionUpdate_SampleTime, v.SampleTime)
+		}
+		return nil
+	})
+}
+
 // The device's position, IP address, and Wi-Fi access points.
 type DeviceState struct {
 
@@ -700,6 +1423,62 @@ type DeviceState struct {
 	WiFiAccessPoints []WiFiAccessPoint
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeviceState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeviceState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeviceState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accuracy != nil {
+		s.WriteStruct(schemas.DeviceState_Accuracy)
+		v.Accuracy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CellSignals != nil {
+		s.WriteStruct(schemas.DeviceState_CellSignals)
+		v.CellSignals.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.DeviceState_DeviceId, *v.DeviceId)
+	}
+	if v.Ipv4Address != nil {
+		s.WriteString(schemas.DeviceState_Ipv4Address, *v.Ipv4Address)
+	}
+	serializePosition(s, schemas.DeviceState_Position, v.Position)
+	if v.SampleTime != nil {
+		s.WriteTime(schemas.DeviceState_SampleTime, *v.SampleTime)
+	}
+	serializeWiFiAccessPointList(s, schemas.DeviceState_WiFiAccessPoints, v.WiFiAccessPoints)
+}
+func (v *DeviceState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeviceState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeviceState_Accuracy:
+			v.Accuracy = &PositionalAccuracy{}
+			return v.Accuracy.Deserialize(d)
+		case schemas.DeviceState_CellSignals:
+			v.CellSignals = &CellSignals{}
+			return v.CellSignals.Deserialize(d)
+		case schemas.DeviceState_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.DeviceState_DeviceId, v.DeviceId)
+		case schemas.DeviceState_Ipv4Address:
+			v.Ipv4Address = new(string)
+			return d.ReadString(schemas.DeviceState_Ipv4Address, v.Ipv4Address)
+		case schemas.DeviceState_Position:
+			return deserializePosition(d, schemas.DeviceState_Position, &v.Position)
+		case schemas.DeviceState_SampleTime:
+			v.SampleTime = new(time.Time)
+			return d.ReadTime(schemas.DeviceState_SampleTime, v.SampleTime)
+		case schemas.DeviceState_WiFiAccessPoints:
+			return deserializeWiFiAccessPointList(d, schemas.DeviceState_WiFiAccessPoints, &v.WiFiAccessPoints)
+		}
+		return nil
+	})
 }
 
 // A forecasted event represents a geofence event in relation to the requested
@@ -752,6 +1531,64 @@ type ForecastedEvent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ForecastedEvent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForecastedEvent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForecastedEvent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.ForecastedEvent_EventId, *v.EventId)
+	}
+	if v.EventType != "" {
+		s.WriteString(schemas.ForecastedEvent_EventType, string(v.EventType))
+	}
+	if v.ForecastedBreachTime != nil {
+		s.WriteTime(schemas.ForecastedEvent_ForecastedBreachTime, *v.ForecastedBreachTime)
+	}
+	if v.GeofenceId != nil {
+		s.WriteString(schemas.ForecastedEvent_GeofenceId, *v.GeofenceId)
+	}
+	serializePropertyMap(s, schemas.ForecastedEvent_GeofenceProperties, v.GeofenceProperties)
+	if v.IsDeviceInGeofence != nil {
+		s.WriteBool(schemas.ForecastedEvent_IsDeviceInGeofence, *v.IsDeviceInGeofence)
+	}
+	if v.NearestDistance != 0 {
+		s.WriteFloat64(schemas.ForecastedEvent_NearestDistance, v.NearestDistance)
+	}
+}
+func (v *ForecastedEvent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForecastedEvent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForecastedEvent_EventId:
+			v.EventId = new(string)
+			return d.ReadString(schemas.ForecastedEvent_EventId, v.EventId)
+		case schemas.ForecastedEvent_EventType:
+			var ev string
+			if err := d.ReadString(schemas.ForecastedEvent_EventType, &ev); err != nil {
+				return err
+			}
+			v.EventType = ForecastedGeofenceEventType(ev)
+			return nil
+		case schemas.ForecastedEvent_ForecastedBreachTime:
+			v.ForecastedBreachTime = new(time.Time)
+			return d.ReadTime(schemas.ForecastedEvent_ForecastedBreachTime, v.ForecastedBreachTime)
+		case schemas.ForecastedEvent_GeofenceId:
+			v.GeofenceId = new(string)
+			return d.ReadString(schemas.ForecastedEvent_GeofenceId, v.GeofenceId)
+		case schemas.ForecastedEvent_GeofenceProperties:
+			return deserializePropertyMap(d, schemas.ForecastedEvent_GeofenceProperties, &v.GeofenceProperties)
+		case schemas.ForecastedEvent_IsDeviceInGeofence:
+			v.IsDeviceInGeofence = new(bool)
+			return d.ReadBool(schemas.ForecastedEvent_IsDeviceInGeofence, v.IsDeviceInGeofence)
+		case schemas.ForecastedEvent_NearestDistance:
+			return d.ReadFloat64(schemas.ForecastedEvent_NearestDistance, &v.NearestDistance)
+		}
+		return nil
+	})
+}
+
 // The device's position and speed.
 type ForecastGeofenceEventsDeviceState struct {
 
@@ -764,6 +1601,31 @@ type ForecastGeofenceEventsDeviceState struct {
 	Speed *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *ForecastGeofenceEventsDeviceState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ForecastGeofenceEventsDeviceState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ForecastGeofenceEventsDeviceState) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePosition(s, schemas.ForecastGeofenceEventsDeviceState_Position, v.Position)
+	if v.Speed != nil {
+		s.WriteFloat64(schemas.ForecastGeofenceEventsDeviceState_Speed, *v.Speed)
+	}
+}
+func (v *ForecastGeofenceEventsDeviceState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForecastGeofenceEventsDeviceState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForecastGeofenceEventsDeviceState_Position:
+			return deserializePosition(d, schemas.ForecastGeofenceEventsDeviceState_Position, &v.Position)
+		case schemas.ForecastGeofenceEventsDeviceState_Speed:
+			v.Speed = new(float64)
+			return d.ReadFloat64(schemas.ForecastGeofenceEventsDeviceState_Speed, v.Speed)
+		}
+		return nil
+	})
 }
 
 // Contains the geofence geometry details.
@@ -865,6 +1727,41 @@ type GeofenceGeometry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeofenceGeometry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeofenceGeometry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeofenceGeometry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Circle != nil {
+		s.WriteStruct(schemas.GeofenceGeometry_Circle)
+		v.Circle.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Geobuf != nil {
+		s.WriteBlob(schemas.GeofenceGeometry_Geobuf, v.Geobuf)
+	}
+	serializeMultiLinearRings(s, schemas.GeofenceGeometry_MultiPolygon, v.MultiPolygon)
+	serializeLinearRings(s, schemas.GeofenceGeometry_Polygon, v.Polygon)
+}
+func (v *GeofenceGeometry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeofenceGeometry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeofenceGeometry_Circle:
+			v.Circle = &Circle{}
+			return v.Circle.Deserialize(d)
+		case schemas.GeofenceGeometry_Geobuf:
+			return d.ReadBlob(schemas.GeofenceGeometry_Geobuf, &v.Geobuf)
+		case schemas.GeofenceGeometry_MultiPolygon:
+			return deserializeMultiLinearRings(d, schemas.GeofenceGeometry_MultiPolygon, &v.MultiPolygon)
+		case schemas.GeofenceGeometry_Polygon:
+			return deserializeLinearRings(d, schemas.GeofenceGeometry_Polygon, &v.Polygon)
+		}
+		return nil
+	})
+}
+
 // The inferred state of the device, given the provided position, IP address,
 // cellular signals, and Wi-Fi- access points.
 type InferredState struct {
@@ -888,6 +1785,45 @@ type InferredState struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InferredState) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InferredState)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InferredState) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accuracy != nil {
+		s.WriteStruct(schemas.InferredState_Accuracy)
+		v.Accuracy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviationDistance != nil {
+		s.WriteFloat64(schemas.InferredState_DeviationDistance, *v.DeviationDistance)
+	}
+	serializePosition(s, schemas.InferredState_Position, v.Position)
+	if v.ProxyDetected != nil {
+		s.WriteBool(schemas.InferredState_ProxyDetected, *v.ProxyDetected)
+	}
+}
+func (v *InferredState) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InferredState, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InferredState_Accuracy:
+			v.Accuracy = &PositionalAccuracy{}
+			return v.Accuracy.Deserialize(d)
+		case schemas.InferredState_DeviationDistance:
+			v.DeviationDistance = new(float64)
+			return d.ReadFloat64(schemas.InferredState_DeviationDistance, v.DeviationDistance)
+		case schemas.InferredState_Position:
+			return deserializePosition(d, schemas.InferredState_Position, &v.Position)
+		case schemas.InferredState_ProxyDetected:
+			v.ProxyDetected = new(bool)
+			return d.ReadBool(schemas.InferredState_ProxyDetected, v.ProxyDetected)
+		}
+		return nil
+	})
+}
+
 // Additional options for configuring job action parameters.
 type JobActionOptions struct {
 
@@ -895,6 +1831,30 @@ type JobActionOptions struct {
 	ValidateAddress *ValidateAddressActionOptions
 
 	noSmithyDocumentSerde
+}
+
+func (v *JobActionOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobActionOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobActionOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ValidateAddress != nil {
+		s.WriteStruct(schemas.JobActionOptions_ValidateAddress)
+		v.ValidateAddress.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *JobActionOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobActionOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobActionOptions_ValidateAddress:
+			v.ValidateAddress = &ValidateAddressActionOptions{}
+			return v.ValidateAddress.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Error information for failed jobs.
@@ -909,6 +1869,35 @@ type JobError struct {
 	Messages []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *JobError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.JobError_Code, string(v.Code))
+	}
+	serializeJobErrorMessagesList(s, schemas.JobError_Messages, v.Messages)
+}
+func (v *JobError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobError_Code:
+			var ev string
+			if err := d.ReadString(schemas.JobError_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = JobErrorCode(ev)
+			return nil
+		case schemas.JobError_Messages:
+			return deserializeJobErrorMessagesList(d, schemas.JobError_Messages, &v.Messages)
+		}
+		return nil
+	})
 }
 
 // Configuration for input data location and format.
@@ -936,6 +1925,38 @@ type JobInputOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobInputOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobInputOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobInputOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Format != "" {
+		s.WriteString(schemas.JobInputOptions_Format, string(v.Format))
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.JobInputOptions_Location, *v.Location)
+	}
+}
+func (v *JobInputOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobInputOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobInputOptions_Format:
+			var ev string
+			if err := d.ReadString(schemas.JobInputOptions_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = JobInputFormat(ev)
+			return nil
+		case schemas.JobInputOptions_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.JobInputOptions_Location, v.Location)
+		}
+		return nil
+	})
+}
+
 // Configuration for output data location and format.
 type JobOutputOptions struct {
 
@@ -955,6 +1976,38 @@ type JobOutputOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JobOutputOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobOutputOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobOutputOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Format != "" {
+		s.WriteString(schemas.JobOutputOptions_Format, string(v.Format))
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.JobOutputOptions_Location, *v.Location)
+	}
+}
+func (v *JobOutputOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobOutputOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobOutputOptions_Format:
+			var ev string
+			if err := d.ReadString(schemas.JobOutputOptions_Format, &ev); err != nil {
+				return err
+			}
+			v.Format = JobOutputFormat(ev)
+			return nil
+		case schemas.JobOutputOptions_Location:
+			v.Location = new(string)
+			return d.ReadString(schemas.JobOutputOptions_Location, v.Location)
+		}
+		return nil
+	})
+}
+
 // Criteria for filtering jobs.
 type JobsFilter struct {
 
@@ -962,6 +2015,32 @@ type JobsFilter struct {
 	JobStatus JobStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *JobsFilter) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JobsFilter)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JobsFilter) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobStatus != "" {
+		s.WriteString(schemas.JobsFilter_JobStatus, string(v.JobStatus))
+	}
+}
+func (v *JobsFilter) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JobsFilter, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JobsFilter_JobStatus:
+			var ev string
+			if err := d.ReadString(schemas.JobsFilter_JobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains the calculated route's details for each path between a pair of
@@ -1035,6 +2114,51 @@ type Leg struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Leg) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Leg)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Leg) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Distance != nil {
+		s.WriteFloat64(schemas.Leg_Distance, *v.Distance)
+	}
+	if v.DurationSeconds != nil {
+		s.WriteFloat64(schemas.Leg_DurationSeconds, *v.DurationSeconds)
+	}
+	serializePosition(s, schemas.Leg_EndPosition, v.EndPosition)
+	if v.Geometry != nil {
+		s.WriteStruct(schemas.Leg_Geometry)
+		v.Geometry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePosition(s, schemas.Leg_StartPosition, v.StartPosition)
+	serializeStepList(s, schemas.Leg_Steps, v.Steps)
+}
+func (v *Leg) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Leg, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Leg_Distance:
+			v.Distance = new(float64)
+			return d.ReadFloat64(schemas.Leg_Distance, v.Distance)
+		case schemas.Leg_DurationSeconds:
+			v.DurationSeconds = new(float64)
+			return d.ReadFloat64(schemas.Leg_DurationSeconds, v.DurationSeconds)
+		case schemas.Leg_EndPosition:
+			return deserializePosition(d, schemas.Leg_EndPosition, &v.EndPosition)
+		case schemas.Leg_Geometry:
+			v.Geometry = &LegGeometry{}
+			return v.Geometry.Deserialize(d)
+		case schemas.Leg_StartPosition:
+			return deserializePosition(d, schemas.Leg_StartPosition, &v.StartPosition)
+		case schemas.Leg_Steps:
+			return deserializeStepList(d, schemas.Leg_Steps, &v.Steps)
+		}
+		return nil
+	})
+}
+
 // Contains the geometry details for each path between a pair of positions. Used
 // in plotting a route leg on a map.
 type LegGeometry struct {
@@ -1048,6 +2172,25 @@ type LegGeometry struct {
 	LineString [][]float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *LegGeometry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LegGeometry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LegGeometry) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLineString(s, schemas.LegGeometry_LineString, v.LineString)
+}
+func (v *LegGeometry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LegGeometry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LegGeometry_LineString:
+			return deserializeLineString(d, schemas.LegGeometry_LineString, &v.LineString)
+		}
+		return nil
+	})
 }
 
 // Contains the tracker resource details.
@@ -1078,6 +2221,48 @@ type ListDevicePositionsResponseEntry struct {
 	PositionProperties map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListDevicePositionsResponseEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicePositionsResponseEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicePositionsResponseEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Accuracy != nil {
+		s.WriteStruct(schemas.ListDevicePositionsResponseEntry_Accuracy)
+		v.Accuracy.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceId != nil {
+		s.WriteString(schemas.ListDevicePositionsResponseEntry_DeviceId, *v.DeviceId)
+	}
+	serializePosition(s, schemas.ListDevicePositionsResponseEntry_Position, v.Position)
+	serializePositionPropertyMap(s, schemas.ListDevicePositionsResponseEntry_PositionProperties, v.PositionProperties)
+	if v.SampleTime != nil {
+		s.WriteTime(schemas.ListDevicePositionsResponseEntry_SampleTime, *v.SampleTime)
+	}
+}
+func (v *ListDevicePositionsResponseEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDevicePositionsResponseEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDevicePositionsResponseEntry_Accuracy:
+			v.Accuracy = &PositionalAccuracy{}
+			return v.Accuracy.Deserialize(d)
+		case schemas.ListDevicePositionsResponseEntry_DeviceId:
+			v.DeviceId = new(string)
+			return d.ReadString(schemas.ListDevicePositionsResponseEntry_DeviceId, v.DeviceId)
+		case schemas.ListDevicePositionsResponseEntry_Position:
+			return deserializePosition(d, schemas.ListDevicePositionsResponseEntry_Position, &v.Position)
+		case schemas.ListDevicePositionsResponseEntry_PositionProperties:
+			return deserializePositionPropertyMap(d, schemas.ListDevicePositionsResponseEntry_PositionProperties, &v.PositionProperties)
+		case schemas.ListDevicePositionsResponseEntry_SampleTime:
+			v.SampleTime = new(time.Time)
+			return d.ReadTime(schemas.ListDevicePositionsResponseEntry_SampleTime, v.SampleTime)
+		}
+		return nil
+	})
 }
 
 // Contains the geofence collection details.
@@ -1123,6 +2308,62 @@ type ListGeofenceCollectionsResponseEntry struct {
 	PricingPlanDataSource *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListGeofenceCollectionsResponseEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGeofenceCollectionsResponseEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGeofenceCollectionsResponseEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionName != nil {
+		s.WriteString(schemas.ListGeofenceCollectionsResponseEntry_CollectionName, *v.CollectionName)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.ListGeofenceCollectionsResponseEntry_CreateTime, *v.CreateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ListGeofenceCollectionsResponseEntry_Description, *v.Description)
+	}
+	if v.PricingPlan != "" {
+		s.WriteString(schemas.ListGeofenceCollectionsResponseEntry_PricingPlan, string(v.PricingPlan))
+	}
+	if v.PricingPlanDataSource != nil {
+		s.WriteString(schemas.ListGeofenceCollectionsResponseEntry_PricingPlanDataSource, *v.PricingPlanDataSource)
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.ListGeofenceCollectionsResponseEntry_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *ListGeofenceCollectionsResponseEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGeofenceCollectionsResponseEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGeofenceCollectionsResponseEntry_CollectionName:
+			v.CollectionName = new(string)
+			return d.ReadString(schemas.ListGeofenceCollectionsResponseEntry_CollectionName, v.CollectionName)
+		case schemas.ListGeofenceCollectionsResponseEntry_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.ListGeofenceCollectionsResponseEntry_CreateTime, v.CreateTime)
+		case schemas.ListGeofenceCollectionsResponseEntry_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ListGeofenceCollectionsResponseEntry_Description, v.Description)
+		case schemas.ListGeofenceCollectionsResponseEntry_PricingPlan:
+			var ev string
+			if err := d.ReadString(schemas.ListGeofenceCollectionsResponseEntry_PricingPlan, &ev); err != nil {
+				return err
+			}
+			v.PricingPlan = PricingPlan(ev)
+			return nil
+		case schemas.ListGeofenceCollectionsResponseEntry_PricingPlanDataSource:
+			v.PricingPlanDataSource = new(string)
+			return d.ReadString(schemas.ListGeofenceCollectionsResponseEntry_PricingPlanDataSource, v.PricingPlanDataSource)
+		case schemas.ListGeofenceCollectionsResponseEntry_UpdateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.ListGeofenceCollectionsResponseEntry_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
 }
 
 // Contains a list of geofences stored in a given geofence collection.
@@ -1181,6 +2422,57 @@ type ListGeofenceResponseEntry struct {
 	GeofenceProperties map[string]string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListGeofenceResponseEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGeofenceResponseEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGeofenceResponseEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.ListGeofenceResponseEntry_CreateTime, *v.CreateTime)
+	}
+	if v.GeofenceId != nil {
+		s.WriteString(schemas.ListGeofenceResponseEntry_GeofenceId, *v.GeofenceId)
+	}
+	serializePropertyMap(s, schemas.ListGeofenceResponseEntry_GeofenceProperties, v.GeofenceProperties)
+	if v.Geometry != nil {
+		s.WriteStruct(schemas.ListGeofenceResponseEntry_Geometry)
+		v.Geometry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.ListGeofenceResponseEntry_Status, *v.Status)
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.ListGeofenceResponseEntry_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *ListGeofenceResponseEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGeofenceResponseEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGeofenceResponseEntry_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.ListGeofenceResponseEntry_CreateTime, v.CreateTime)
+		case schemas.ListGeofenceResponseEntry_GeofenceId:
+			v.GeofenceId = new(string)
+			return d.ReadString(schemas.ListGeofenceResponseEntry_GeofenceId, v.GeofenceId)
+		case schemas.ListGeofenceResponseEntry_GeofenceProperties:
+			return deserializePropertyMap(d, schemas.ListGeofenceResponseEntry_GeofenceProperties, &v.GeofenceProperties)
+		case schemas.ListGeofenceResponseEntry_Geometry:
+			v.Geometry = &GeofenceGeometry{}
+			return v.Geometry.Deserialize(d)
+		case schemas.ListGeofenceResponseEntry_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.ListGeofenceResponseEntry_Status, v.Status)
+		case schemas.ListGeofenceResponseEntry_UpdateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.ListGeofenceResponseEntry_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
 }
 
 // Job summary information returned in list operations.
@@ -1253,6 +2545,116 @@ type ListJobsResponseEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListJobsResponseEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListJobsResponseEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListJobsResponseEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.ListJobsResponseEntry_Action, string(v.Action))
+	}
+	if v.ActionOptions != nil {
+		s.WriteStruct(schemas.ListJobsResponseEntry_ActionOptions)
+		v.ActionOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ListJobsResponseEntry_CreatedAt, *v.CreatedAt)
+	}
+	if v.EndedAt != nil {
+		s.WriteTime(schemas.ListJobsResponseEntry_EndedAt, *v.EndedAt)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.ListJobsResponseEntry_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.ListJobsResponseEntry_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.InputOptions != nil {
+		s.WriteStruct(schemas.ListJobsResponseEntry_InputOptions)
+		v.InputOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobArn != nil {
+		s.WriteString(schemas.ListJobsResponseEntry_JobArn, *v.JobArn)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.ListJobsResponseEntry_JobId, *v.JobId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ListJobsResponseEntry_Name, *v.Name)
+	}
+	if v.OutputOptions != nil {
+		s.WriteStruct(schemas.ListJobsResponseEntry_OutputOptions)
+		v.OutputOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListJobsResponseEntry_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ListJobsResponseEntry_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ListJobsResponseEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListJobsResponseEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListJobsResponseEntry_Action:
+			var ev string
+			if err := d.ReadString(schemas.ListJobsResponseEntry_Action, &ev); err != nil {
+				return err
+			}
+			v.Action = JobAction(ev)
+			return nil
+		case schemas.ListJobsResponseEntry_ActionOptions:
+			v.ActionOptions = &JobActionOptions{}
+			return v.ActionOptions.Deserialize(d)
+		case schemas.ListJobsResponseEntry_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ListJobsResponseEntry_CreatedAt, v.CreatedAt)
+		case schemas.ListJobsResponseEntry_EndedAt:
+			v.EndedAt = new(time.Time)
+			return d.ReadTime(schemas.ListJobsResponseEntry_EndedAt, v.EndedAt)
+		case schemas.ListJobsResponseEntry_Error:
+			v.Error = &JobError{}
+			return v.Error.Deserialize(d)
+		case schemas.ListJobsResponseEntry_ExecutionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.ListJobsResponseEntry_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.ListJobsResponseEntry_InputOptions:
+			v.InputOptions = &JobInputOptions{}
+			return v.InputOptions.Deserialize(d)
+		case schemas.ListJobsResponseEntry_JobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.ListJobsResponseEntry_JobArn, v.JobArn)
+		case schemas.ListJobsResponseEntry_JobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.ListJobsResponseEntry_JobId, v.JobId)
+		case schemas.ListJobsResponseEntry_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ListJobsResponseEntry_Name, v.Name)
+		case schemas.ListJobsResponseEntry_OutputOptions:
+			v.OutputOptions = &JobOutputOptions{}
+			return v.OutputOptions.Deserialize(d)
+		case schemas.ListJobsResponseEntry_Status:
+			var ev string
+			if err := d.ReadString(schemas.ListJobsResponseEntry_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = JobStatus(ev)
+			return nil
+		case schemas.ListJobsResponseEntry_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ListJobsResponseEntry_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // An API key resource listed in your Amazon Web Services account.
 type ListKeysResponseEntry struct {
 
@@ -1297,6 +2699,60 @@ type ListKeysResponseEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKeysResponseEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKeysResponseEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKeysResponseEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.ListKeysResponseEntry_CreateTime, *v.CreateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ListKeysResponseEntry_Description, *v.Description)
+	}
+	if v.ExpireTime != nil {
+		s.WriteTime(schemas.ListKeysResponseEntry_ExpireTime, *v.ExpireTime)
+	}
+	if v.KeyName != nil {
+		s.WriteString(schemas.ListKeysResponseEntry_KeyName, *v.KeyName)
+	}
+	if v.Restrictions != nil {
+		s.WriteStruct(schemas.ListKeysResponseEntry_Restrictions)
+		v.Restrictions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.ListKeysResponseEntry_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *ListKeysResponseEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKeysResponseEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKeysResponseEntry_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.ListKeysResponseEntry_CreateTime, v.CreateTime)
+		case schemas.ListKeysResponseEntry_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ListKeysResponseEntry_Description, v.Description)
+		case schemas.ListKeysResponseEntry_ExpireTime:
+			v.ExpireTime = new(time.Time)
+			return d.ReadTime(schemas.ListKeysResponseEntry_ExpireTime, v.ExpireTime)
+		case schemas.ListKeysResponseEntry_KeyName:
+			v.KeyName = new(string)
+			return d.ReadString(schemas.ListKeysResponseEntry_KeyName, v.KeyName)
+		case schemas.ListKeysResponseEntry_Restrictions:
+			v.Restrictions = &ApiKeyRestrictions{}
+			return v.Restrictions.Deserialize(d)
+		case schemas.ListKeysResponseEntry_UpdateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.ListKeysResponseEntry_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
+
 // Contains details of an existing map resource in your Amazon Web Services
 // account.
 type ListMapsResponseEntry struct {
@@ -1338,6 +2794,62 @@ type ListMapsResponseEntry struct {
 	PricingPlan PricingPlan
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListMapsResponseEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListMapsResponseEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListMapsResponseEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.ListMapsResponseEntry_CreateTime, *v.CreateTime)
+	}
+	if v.DataSource != nil {
+		s.WriteString(schemas.ListMapsResponseEntry_DataSource, *v.DataSource)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ListMapsResponseEntry_Description, *v.Description)
+	}
+	if v.MapName != nil {
+		s.WriteString(schemas.ListMapsResponseEntry_MapName, *v.MapName)
+	}
+	if v.PricingPlan != "" {
+		s.WriteString(schemas.ListMapsResponseEntry_PricingPlan, string(v.PricingPlan))
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.ListMapsResponseEntry_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *ListMapsResponseEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListMapsResponseEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListMapsResponseEntry_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.ListMapsResponseEntry_CreateTime, v.CreateTime)
+		case schemas.ListMapsResponseEntry_DataSource:
+			v.DataSource = new(string)
+			return d.ReadString(schemas.ListMapsResponseEntry_DataSource, v.DataSource)
+		case schemas.ListMapsResponseEntry_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ListMapsResponseEntry_Description, v.Description)
+		case schemas.ListMapsResponseEntry_MapName:
+			v.MapName = new(string)
+			return d.ReadString(schemas.ListMapsResponseEntry_MapName, v.MapName)
+		case schemas.ListMapsResponseEntry_PricingPlan:
+			var ev string
+			if err := d.ReadString(schemas.ListMapsResponseEntry_PricingPlan, &ev); err != nil {
+				return err
+			}
+			v.PricingPlan = PricingPlan(ev)
+			return nil
+		case schemas.ListMapsResponseEntry_UpdateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.ListMapsResponseEntry_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
 }
 
 // A place index resource listed in your Amazon Web Services account.
@@ -1390,6 +2902,62 @@ type ListPlaceIndexesResponseEntry struct {
 	PricingPlan PricingPlan
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListPlaceIndexesResponseEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPlaceIndexesResponseEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPlaceIndexesResponseEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.ListPlaceIndexesResponseEntry_CreateTime, *v.CreateTime)
+	}
+	if v.DataSource != nil {
+		s.WriteString(schemas.ListPlaceIndexesResponseEntry_DataSource, *v.DataSource)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ListPlaceIndexesResponseEntry_Description, *v.Description)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.ListPlaceIndexesResponseEntry_IndexName, *v.IndexName)
+	}
+	if v.PricingPlan != "" {
+		s.WriteString(schemas.ListPlaceIndexesResponseEntry_PricingPlan, string(v.PricingPlan))
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.ListPlaceIndexesResponseEntry_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *ListPlaceIndexesResponseEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPlaceIndexesResponseEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPlaceIndexesResponseEntry_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.ListPlaceIndexesResponseEntry_CreateTime, v.CreateTime)
+		case schemas.ListPlaceIndexesResponseEntry_DataSource:
+			v.DataSource = new(string)
+			return d.ReadString(schemas.ListPlaceIndexesResponseEntry_DataSource, v.DataSource)
+		case schemas.ListPlaceIndexesResponseEntry_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ListPlaceIndexesResponseEntry_Description, v.Description)
+		case schemas.ListPlaceIndexesResponseEntry_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.ListPlaceIndexesResponseEntry_IndexName, v.IndexName)
+		case schemas.ListPlaceIndexesResponseEntry_PricingPlan:
+			var ev string
+			if err := d.ReadString(schemas.ListPlaceIndexesResponseEntry_PricingPlan, &ev); err != nil {
+				return err
+			}
+			v.PricingPlan = PricingPlan(ev)
+			return nil
+		case schemas.ListPlaceIndexesResponseEntry_UpdateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.ListPlaceIndexesResponseEntry_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
 }
 
 // A route calculator resource listed in your Amazon Web Services account.
@@ -1449,6 +3017,62 @@ type ListRouteCalculatorsResponseEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRouteCalculatorsResponseEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRouteCalculatorsResponseEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRouteCalculatorsResponseEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CalculatorName != nil {
+		s.WriteString(schemas.ListRouteCalculatorsResponseEntry_CalculatorName, *v.CalculatorName)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.ListRouteCalculatorsResponseEntry_CreateTime, *v.CreateTime)
+	}
+	if v.DataSource != nil {
+		s.WriteString(schemas.ListRouteCalculatorsResponseEntry_DataSource, *v.DataSource)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ListRouteCalculatorsResponseEntry_Description, *v.Description)
+	}
+	if v.PricingPlan != "" {
+		s.WriteString(schemas.ListRouteCalculatorsResponseEntry_PricingPlan, string(v.PricingPlan))
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.ListRouteCalculatorsResponseEntry_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *ListRouteCalculatorsResponseEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRouteCalculatorsResponseEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRouteCalculatorsResponseEntry_CalculatorName:
+			v.CalculatorName = new(string)
+			return d.ReadString(schemas.ListRouteCalculatorsResponseEntry_CalculatorName, v.CalculatorName)
+		case schemas.ListRouteCalculatorsResponseEntry_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.ListRouteCalculatorsResponseEntry_CreateTime, v.CreateTime)
+		case schemas.ListRouteCalculatorsResponseEntry_DataSource:
+			v.DataSource = new(string)
+			return d.ReadString(schemas.ListRouteCalculatorsResponseEntry_DataSource, v.DataSource)
+		case schemas.ListRouteCalculatorsResponseEntry_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ListRouteCalculatorsResponseEntry_Description, v.Description)
+		case schemas.ListRouteCalculatorsResponseEntry_PricingPlan:
+			var ev string
+			if err := d.ReadString(schemas.ListRouteCalculatorsResponseEntry_PricingPlan, &ev); err != nil {
+				return err
+			}
+			v.PricingPlan = PricingPlan(ev)
+			return nil
+		case schemas.ListRouteCalculatorsResponseEntry_UpdateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.ListRouteCalculatorsResponseEntry_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
+
 // Contains the tracker resource details.
 type ListTrackersResponseEntry struct {
 
@@ -1489,6 +3113,62 @@ type ListTrackersResponseEntry struct {
 	PricingPlanDataSource *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListTrackersResponseEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrackersResponseEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrackersResponseEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.ListTrackersResponseEntry_CreateTime, *v.CreateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.ListTrackersResponseEntry_Description, *v.Description)
+	}
+	if v.PricingPlan != "" {
+		s.WriteString(schemas.ListTrackersResponseEntry_PricingPlan, string(v.PricingPlan))
+	}
+	if v.PricingPlanDataSource != nil {
+		s.WriteString(schemas.ListTrackersResponseEntry_PricingPlanDataSource, *v.PricingPlanDataSource)
+	}
+	if v.TrackerName != nil {
+		s.WriteString(schemas.ListTrackersResponseEntry_TrackerName, *v.TrackerName)
+	}
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.ListTrackersResponseEntry_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *ListTrackersResponseEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTrackersResponseEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTrackersResponseEntry_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.ListTrackersResponseEntry_CreateTime, v.CreateTime)
+		case schemas.ListTrackersResponseEntry_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.ListTrackersResponseEntry_Description, v.Description)
+		case schemas.ListTrackersResponseEntry_PricingPlan:
+			var ev string
+			if err := d.ReadString(schemas.ListTrackersResponseEntry_PricingPlan, &ev); err != nil {
+				return err
+			}
+			v.PricingPlan = PricingPlan(ev)
+			return nil
+		case schemas.ListTrackersResponseEntry_PricingPlanDataSource:
+			v.PricingPlanDataSource = new(string)
+			return d.ReadString(schemas.ListTrackersResponseEntry_PricingPlanDataSource, v.PricingPlanDataSource)
+		case schemas.ListTrackersResponseEntry_TrackerName:
+			v.TrackerName = new(string)
+			return d.ReadString(schemas.ListTrackersResponseEntry_TrackerName, v.TrackerName)
+		case schemas.ListTrackersResponseEntry_UpdateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.ListTrackersResponseEntry_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
 }
 
 // Details about the Long-Term Evolution (LTE) network.
@@ -1534,6 +3214,80 @@ type LteCellDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LteCellDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LteCellDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LteCellDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CellId != 0 {
+		s.WriteInt32(schemas.LteCellDetails_CellId, v.CellId)
+	}
+	if v.LocalId != nil {
+		s.WriteStruct(schemas.LteCellDetails_LocalId)
+		v.LocalId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Mcc != nil {
+		s.WriteInt32(schemas.LteCellDetails_Mcc, *v.Mcc)
+	}
+	if v.Mnc != nil {
+		s.WriteInt32(schemas.LteCellDetails_Mnc, *v.Mnc)
+	}
+	serializeLteNetworkMeasurementsList(s, schemas.LteCellDetails_NetworkMeasurements, v.NetworkMeasurements)
+	if v.NrCapable != nil {
+		s.WriteBool(schemas.LteCellDetails_NrCapable, *v.NrCapable)
+	}
+	if v.Rsrp != nil {
+		s.WriteInt32(schemas.LteCellDetails_Rsrp, *v.Rsrp)
+	}
+	if v.Rsrq != nil {
+		s.WriteFloat32(schemas.LteCellDetails_Rsrq, *v.Rsrq)
+	}
+	if v.Tac != nil {
+		s.WriteInt32(schemas.LteCellDetails_Tac, *v.Tac)
+	}
+	if v.TimingAdvance != nil {
+		s.WriteInt32(schemas.LteCellDetails_TimingAdvance, *v.TimingAdvance)
+	}
+}
+func (v *LteCellDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LteCellDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LteCellDetails_CellId:
+			return d.ReadInt32(schemas.LteCellDetails_CellId, &v.CellId)
+		case schemas.LteCellDetails_LocalId:
+			v.LocalId = &LteLocalId{}
+			return v.LocalId.Deserialize(d)
+		case schemas.LteCellDetails_Mcc:
+			v.Mcc = new(int32)
+			return d.ReadInt32(schemas.LteCellDetails_Mcc, v.Mcc)
+		case schemas.LteCellDetails_Mnc:
+			v.Mnc = new(int32)
+			return d.ReadInt32(schemas.LteCellDetails_Mnc, v.Mnc)
+		case schemas.LteCellDetails_NetworkMeasurements:
+			return deserializeLteNetworkMeasurementsList(d, schemas.LteCellDetails_NetworkMeasurements, &v.NetworkMeasurements)
+		case schemas.LteCellDetails_NrCapable:
+			v.NrCapable = new(bool)
+			return d.ReadBool(schemas.LteCellDetails_NrCapable, v.NrCapable)
+		case schemas.LteCellDetails_Rsrp:
+			v.Rsrp = new(int32)
+			return d.ReadInt32(schemas.LteCellDetails_Rsrp, v.Rsrp)
+		case schemas.LteCellDetails_Rsrq:
+			v.Rsrq = new(float32)
+			return d.ReadFloat32(schemas.LteCellDetails_Rsrq, v.Rsrq)
+		case schemas.LteCellDetails_Tac:
+			v.Tac = new(int32)
+			return d.ReadInt32(schemas.LteCellDetails_Tac, v.Tac)
+		case schemas.LteCellDetails_TimingAdvance:
+			v.TimingAdvance = new(int32)
+			return d.ReadInt32(schemas.LteCellDetails_TimingAdvance, v.TimingAdvance)
+		}
+		return nil
+	})
+}
+
 // LTE local identification information (local ID).
 type LteLocalId struct {
 
@@ -1549,6 +3303,32 @@ type LteLocalId struct {
 	Pci int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *LteLocalId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LteLocalId)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LteLocalId) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Earfcn != 0 {
+		s.WriteInt32(schemas.LteLocalId_Earfcn, v.Earfcn)
+	}
+	if v.Pci != 0 {
+		s.WriteInt32(schemas.LteLocalId_Pci, v.Pci)
+	}
+}
+func (v *LteLocalId) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LteLocalId, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LteLocalId_Earfcn:
+			return d.ReadInt32(schemas.LteLocalId_Earfcn, &v.Earfcn)
+		case schemas.LteLocalId_Pci:
+			return d.ReadInt32(schemas.LteLocalId_Pci, &v.Pci)
+		}
+		return nil
+	})
 }
 
 // LTE network measurements.
@@ -1578,6 +3358,49 @@ type LteNetworkMeasurements struct {
 	Rsrq *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *LteNetworkMeasurements) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LteNetworkMeasurements)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LteNetworkMeasurements) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CellId != 0 {
+		s.WriteInt32(schemas.LteNetworkMeasurements_CellId, v.CellId)
+	}
+	if v.Earfcn != 0 {
+		s.WriteInt32(schemas.LteNetworkMeasurements_Earfcn, v.Earfcn)
+	}
+	if v.Pci != 0 {
+		s.WriteInt32(schemas.LteNetworkMeasurements_Pci, v.Pci)
+	}
+	if v.Rsrp != nil {
+		s.WriteInt32(schemas.LteNetworkMeasurements_Rsrp, *v.Rsrp)
+	}
+	if v.Rsrq != nil {
+		s.WriteFloat32(schemas.LteNetworkMeasurements_Rsrq, *v.Rsrq)
+	}
+}
+func (v *LteNetworkMeasurements) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LteNetworkMeasurements, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LteNetworkMeasurements_CellId:
+			return d.ReadInt32(schemas.LteNetworkMeasurements_CellId, &v.CellId)
+		case schemas.LteNetworkMeasurements_Earfcn:
+			return d.ReadInt32(schemas.LteNetworkMeasurements_Earfcn, &v.Earfcn)
+		case schemas.LteNetworkMeasurements_Pci:
+			return d.ReadInt32(schemas.LteNetworkMeasurements_Pci, &v.Pci)
+		case schemas.LteNetworkMeasurements_Rsrp:
+			v.Rsrp = new(int32)
+			return d.ReadInt32(schemas.LteNetworkMeasurements_Rsrp, v.Rsrp)
+		case schemas.LteNetworkMeasurements_Rsrq:
+			v.Rsrq = new(float32)
+			return d.ReadFloat32(schemas.LteNetworkMeasurements_Rsrq, v.Rsrq)
+		}
+		return nil
+	})
 }
 
 // Specifies the map tile style selected from an available provider.
@@ -1709,6 +3532,37 @@ type MapConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MapConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MapConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MapConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomLayerList(s, schemas.MapConfiguration_CustomLayers, v.CustomLayers)
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.MapConfiguration_PoliticalView, *v.PoliticalView)
+	}
+	if v.Style != nil {
+		s.WriteString(schemas.MapConfiguration_Style, *v.Style)
+	}
+}
+func (v *MapConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MapConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MapConfiguration_CustomLayers:
+			return deserializeCustomLayerList(d, schemas.MapConfiguration_CustomLayers, &v.CustomLayers)
+		case schemas.MapConfiguration_PoliticalView:
+			v.PoliticalView = new(string)
+			return d.ReadString(schemas.MapConfiguration_PoliticalView, v.PoliticalView)
+		case schemas.MapConfiguration_Style:
+			v.Style = new(string)
+			return d.ReadString(schemas.MapConfiguration_Style, v.Style)
+		}
+		return nil
+	})
+}
+
 // Specifies the political view for the style.
 type MapConfigurationUpdate struct {
 
@@ -1731,6 +3585,31 @@ type MapConfigurationUpdate struct {
 	PoliticalView *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MapConfigurationUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MapConfigurationUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MapConfigurationUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCustomLayerList(s, schemas.MapConfigurationUpdate_CustomLayers, v.CustomLayers)
+	if v.PoliticalView != nil {
+		s.WriteString(schemas.MapConfigurationUpdate_PoliticalView, *v.PoliticalView)
+	}
+}
+func (v *MapConfigurationUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MapConfigurationUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MapConfigurationUpdate_CustomLayers:
+			return deserializeCustomLayerList(d, schemas.MapConfigurationUpdate_CustomLayers, &v.CustomLayers)
+		case schemas.MapConfigurationUpdate_PoliticalView:
+			v.PoliticalView = new(string)
+			return d.ReadString(schemas.MapConfigurationUpdate_PoliticalView, v.PoliticalView)
+		}
+		return nil
+	})
 }
 
 // Contains details about addresses or points of interest that match the search
@@ -1828,6 +3707,122 @@ type Place struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Place) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Place)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Place) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressNumber != nil {
+		s.WriteString(schemas.Place_AddressNumber, *v.AddressNumber)
+	}
+	serializePlaceCategoryList(s, schemas.Place_Categories, v.Categories)
+	if v.Country != nil {
+		s.WriteString(schemas.Place_Country, *v.Country)
+	}
+	if v.Geometry != nil {
+		s.WriteStruct(schemas.Place_Geometry)
+		v.Geometry.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Interpolated != nil {
+		s.WriteBool(schemas.Place_Interpolated, *v.Interpolated)
+	}
+	if v.Label != nil {
+		s.WriteString(schemas.Place_Label, *v.Label)
+	}
+	if v.Municipality != nil {
+		s.WriteString(schemas.Place_Municipality, *v.Municipality)
+	}
+	if v.Neighborhood != nil {
+		s.WriteString(schemas.Place_Neighborhood, *v.Neighborhood)
+	}
+	if v.PostalCode != nil {
+		s.WriteString(schemas.Place_PostalCode, *v.PostalCode)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.Place_Region, *v.Region)
+	}
+	if v.Street != nil {
+		s.WriteString(schemas.Place_Street, *v.Street)
+	}
+	if v.SubMunicipality != nil {
+		s.WriteString(schemas.Place_SubMunicipality, *v.SubMunicipality)
+	}
+	if v.SubRegion != nil {
+		s.WriteString(schemas.Place_SubRegion, *v.SubRegion)
+	}
+	serializePlaceSupplementalCategoryList(s, schemas.Place_SupplementalCategories, v.SupplementalCategories)
+	if v.TimeZone != nil {
+		s.WriteStruct(schemas.Place_TimeZone)
+		v.TimeZone.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UnitNumber != nil {
+		s.WriteString(schemas.Place_UnitNumber, *v.UnitNumber)
+	}
+	if v.UnitType != nil {
+		s.WriteString(schemas.Place_UnitType, *v.UnitType)
+	}
+}
+func (v *Place) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Place, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Place_AddressNumber:
+			v.AddressNumber = new(string)
+			return d.ReadString(schemas.Place_AddressNumber, v.AddressNumber)
+		case schemas.Place_Categories:
+			return deserializePlaceCategoryList(d, schemas.Place_Categories, &v.Categories)
+		case schemas.Place_Country:
+			v.Country = new(string)
+			return d.ReadString(schemas.Place_Country, v.Country)
+		case schemas.Place_Geometry:
+			v.Geometry = &PlaceGeometry{}
+			return v.Geometry.Deserialize(d)
+		case schemas.Place_Interpolated:
+			v.Interpolated = new(bool)
+			return d.ReadBool(schemas.Place_Interpolated, v.Interpolated)
+		case schemas.Place_Label:
+			v.Label = new(string)
+			return d.ReadString(schemas.Place_Label, v.Label)
+		case schemas.Place_Municipality:
+			v.Municipality = new(string)
+			return d.ReadString(schemas.Place_Municipality, v.Municipality)
+		case schemas.Place_Neighborhood:
+			v.Neighborhood = new(string)
+			return d.ReadString(schemas.Place_Neighborhood, v.Neighborhood)
+		case schemas.Place_PostalCode:
+			v.PostalCode = new(string)
+			return d.ReadString(schemas.Place_PostalCode, v.PostalCode)
+		case schemas.Place_Region:
+			v.Region = new(string)
+			return d.ReadString(schemas.Place_Region, v.Region)
+		case schemas.Place_Street:
+			v.Street = new(string)
+			return d.ReadString(schemas.Place_Street, v.Street)
+		case schemas.Place_SubMunicipality:
+			v.SubMunicipality = new(string)
+			return d.ReadString(schemas.Place_SubMunicipality, v.SubMunicipality)
+		case schemas.Place_SubRegion:
+			v.SubRegion = new(string)
+			return d.ReadString(schemas.Place_SubRegion, v.SubRegion)
+		case schemas.Place_SupplementalCategories:
+			return deserializePlaceSupplementalCategoryList(d, schemas.Place_SupplementalCategories, &v.SupplementalCategories)
+		case schemas.Place_TimeZone:
+			v.TimeZone = &TimeZone{}
+			return v.TimeZone.Deserialize(d)
+		case schemas.Place_UnitNumber:
+			v.UnitNumber = new(string)
+			return d.ReadString(schemas.Place_UnitNumber, v.UnitNumber)
+		case schemas.Place_UnitType:
+			v.UnitType = new(string)
+			return d.ReadString(schemas.Place_UnitType, v.UnitType)
+		}
+		return nil
+	})
+}
+
 // Places uses a point geometry to specify a location or a Place.
 type PlaceGeometry struct {
 
@@ -1843,6 +3838,25 @@ type PlaceGeometry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PlaceGeometry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PlaceGeometry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PlaceGeometry) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePosition(s, schemas.PlaceGeometry_Point, v.Point)
+}
+func (v *PlaceGeometry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PlaceGeometry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PlaceGeometry_Point:
+			return deserializePosition(d, schemas.PlaceGeometry_Point, &v.Point)
+		}
+		return nil
+	})
+}
+
 // Defines the level of certainty of the position.
 type PositionalAccuracy struct {
 
@@ -1853,6 +3867,28 @@ type PositionalAccuracy struct {
 	Horizontal *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *PositionalAccuracy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PositionalAccuracy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PositionalAccuracy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Horizontal != nil {
+		s.WriteFloat64(schemas.PositionalAccuracy_Horizontal, *v.Horizontal)
+	}
+}
+func (v *PositionalAccuracy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PositionalAccuracy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PositionalAccuracy_Horizontal:
+			v.Horizontal = new(float64)
+			return d.ReadFloat64(schemas.PositionalAccuracy_Horizontal, v.Horizontal)
+		}
+		return nil
+	})
 }
 
 // The result for the calculated route of one DeparturePosition DestinationPosition
@@ -1870,6 +3906,42 @@ type RouteMatrixEntry struct {
 	Error *RouteMatrixEntryError
 
 	noSmithyDocumentSerde
+}
+
+func (v *RouteMatrixEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteMatrixEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteMatrixEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Distance != nil {
+		s.WriteFloat64(schemas.RouteMatrixEntry_Distance, *v.Distance)
+	}
+	if v.DurationSeconds != nil {
+		s.WriteFloat64(schemas.RouteMatrixEntry_DurationSeconds, *v.DurationSeconds)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.RouteMatrixEntry_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RouteMatrixEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteMatrixEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteMatrixEntry_Distance:
+			v.Distance = new(float64)
+			return d.ReadFloat64(schemas.RouteMatrixEntry_Distance, v.Distance)
+		case schemas.RouteMatrixEntry_DurationSeconds:
+			v.DurationSeconds = new(float64)
+			return d.ReadFloat64(schemas.RouteMatrixEntry_DurationSeconds, v.DurationSeconds)
+		case schemas.RouteMatrixEntry_Error:
+			v.Error = &RouteMatrixEntryError{}
+			return v.Error.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // An error corresponding to the calculation of a route between the
@@ -1906,6 +3978,38 @@ type RouteMatrixEntryError struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RouteMatrixEntryError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteMatrixEntryError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteMatrixEntryError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Code != "" {
+		s.WriteString(schemas.RouteMatrixEntryError_Code, string(v.Code))
+	}
+	if v.Message != nil {
+		s.WriteString(schemas.RouteMatrixEntryError_Message, *v.Message)
+	}
+}
+func (v *RouteMatrixEntryError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteMatrixEntryError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteMatrixEntryError_Code:
+			var ev string
+			if err := d.ReadString(schemas.RouteMatrixEntryError_Code, &ev); err != nil {
+				return err
+			}
+			v.Code = RouteMatrixErrorCode(ev)
+			return nil
+		case schemas.RouteMatrixEntryError_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RouteMatrixEntryError_Message, v.Message)
+		}
+		return nil
+	})
+}
+
 // Contains a search result from a position search query that is run on a place
 // index resource.
 type SearchForPositionResult struct {
@@ -1932,6 +4036,42 @@ type SearchForPositionResult struct {
 	PlaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SearchForPositionResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchForPositionResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchForPositionResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Distance != nil {
+		s.WriteFloat64(schemas.SearchForPositionResult_Distance, *v.Distance)
+	}
+	if v.Place != nil {
+		s.WriteStruct(schemas.SearchForPositionResult_Place)
+		v.Place.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlaceId != nil {
+		s.WriteString(schemas.SearchForPositionResult_PlaceId, *v.PlaceId)
+	}
+}
+func (v *SearchForPositionResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchForPositionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchForPositionResult_Distance:
+			v.Distance = new(float64)
+			return d.ReadFloat64(schemas.SearchForPositionResult_Distance, v.Distance)
+		case schemas.SearchForPositionResult_Place:
+			v.Place = &Place{}
+			return v.Place.Deserialize(d)
+		case schemas.SearchForPositionResult_PlaceId:
+			v.PlaceId = new(string)
+			return d.ReadString(schemas.SearchForPositionResult_PlaceId, v.PlaceId)
+		}
+		return nil
+	})
 }
 
 // Contains a place suggestion resulting from a place suggestion query that is run
@@ -1969,6 +4109,40 @@ type SearchForSuggestionsResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchForSuggestionsResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchForSuggestionsResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchForSuggestionsResult) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePlaceCategoryList(s, schemas.SearchForSuggestionsResult_Categories, v.Categories)
+	if v.PlaceId != nil {
+		s.WriteString(schemas.SearchForSuggestionsResult_PlaceId, *v.PlaceId)
+	}
+	serializePlaceSupplementalCategoryList(s, schemas.SearchForSuggestionsResult_SupplementalCategories, v.SupplementalCategories)
+	if v.Text != nil {
+		s.WriteString(schemas.SearchForSuggestionsResult_Text, *v.Text)
+	}
+}
+func (v *SearchForSuggestionsResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchForSuggestionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchForSuggestionsResult_Categories:
+			return deserializePlaceCategoryList(d, schemas.SearchForSuggestionsResult_Categories, &v.Categories)
+		case schemas.SearchForSuggestionsResult_PlaceId:
+			v.PlaceId = new(string)
+			return d.ReadString(schemas.SearchForSuggestionsResult_PlaceId, v.PlaceId)
+		case schemas.SearchForSuggestionsResult_SupplementalCategories:
+			return deserializePlaceSupplementalCategoryList(d, schemas.SearchForSuggestionsResult_SupplementalCategories, &v.SupplementalCategories)
+		case schemas.SearchForSuggestionsResult_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.SearchForSuggestionsResult_Text, v.Text)
+		}
+		return nil
+	})
+}
+
 // Contains a search result from a text search query that is run on a place index
 // resource.
 type SearchForTextResult struct {
@@ -2002,6 +4176,48 @@ type SearchForTextResult struct {
 	Relevance *float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SearchForTextResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchForTextResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchForTextResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Distance != nil {
+		s.WriteFloat64(schemas.SearchForTextResult_Distance, *v.Distance)
+	}
+	if v.Place != nil {
+		s.WriteStruct(schemas.SearchForTextResult_Place)
+		v.Place.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PlaceId != nil {
+		s.WriteString(schemas.SearchForTextResult_PlaceId, *v.PlaceId)
+	}
+	if v.Relevance != nil {
+		s.WriteFloat64(schemas.SearchForTextResult_Relevance, *v.Relevance)
+	}
+}
+func (v *SearchForTextResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchForTextResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchForTextResult_Distance:
+			v.Distance = new(float64)
+			return d.ReadFloat64(schemas.SearchForTextResult_Distance, v.Distance)
+		case schemas.SearchForTextResult_Place:
+			v.Place = &Place{}
+			return v.Place.Deserialize(d)
+		case schemas.SearchForTextResult_PlaceId:
+			v.PlaceId = new(string)
+			return d.ReadString(schemas.SearchForTextResult_PlaceId, v.PlaceId)
+		case schemas.SearchForTextResult_Relevance:
+			v.Relevance = new(float64)
+			return d.ReadFloat64(schemas.SearchForTextResult_Relevance, v.Relevance)
+		}
+		return nil
+	})
 }
 
 // A summary of the request sent by using SearchPlaceIndexForPosition .
@@ -2040,6 +4256,43 @@ type SearchPlaceIndexForPositionSummary struct {
 	MaxResults *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *SearchPlaceIndexForPositionSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchPlaceIndexForPositionSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchPlaceIndexForPositionSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteString(schemas.SearchPlaceIndexForPositionSummary_DataSource, *v.DataSource)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.SearchPlaceIndexForPositionSummary_Language, *v.Language)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchPlaceIndexForPositionSummary_MaxResults, *v.MaxResults)
+	}
+	serializePosition(s, schemas.SearchPlaceIndexForPositionSummary_Position, v.Position)
+}
+func (v *SearchPlaceIndexForPositionSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchPlaceIndexForPositionSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchPlaceIndexForPositionSummary_DataSource:
+			v.DataSource = new(string)
+			return d.ReadString(schemas.SearchPlaceIndexForPositionSummary_DataSource, v.DataSource)
+		case schemas.SearchPlaceIndexForPositionSummary_Language:
+			v.Language = new(string)
+			return d.ReadString(schemas.SearchPlaceIndexForPositionSummary_Language, v.Language)
+		case schemas.SearchPlaceIndexForPositionSummary_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.SearchPlaceIndexForPositionSummary_MaxResults, v.MaxResults)
+		case schemas.SearchPlaceIndexForPositionSummary_Position:
+			return deserializePosition(d, schemas.SearchPlaceIndexForPositionSummary_Position, &v.Position)
+		}
+		return nil
+	})
 }
 
 // A summary of the request sent by using SearchPlaceIndexForSuggestions .
@@ -2096,6 +4349,58 @@ type SearchPlaceIndexForSuggestionsSummary struct {
 	MaxResults *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *SearchPlaceIndexForSuggestionsSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchPlaceIndexForSuggestionsSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchPlaceIndexForSuggestionsSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePosition(s, schemas.SearchPlaceIndexForSuggestionsSummary_BiasPosition, v.BiasPosition)
+	if v.DataSource != nil {
+		s.WriteString(schemas.SearchPlaceIndexForSuggestionsSummary_DataSource, *v.DataSource)
+	}
+	serializeBoundingBox(s, schemas.SearchPlaceIndexForSuggestionsSummary_FilterBBox, v.FilterBBox)
+	serializeFilterPlaceCategoryList(s, schemas.SearchPlaceIndexForSuggestionsSummary_FilterCategories, v.FilterCategories)
+	serializeCountryCodeList(s, schemas.SearchPlaceIndexForSuggestionsSummary_FilterCountries, v.FilterCountries)
+	if v.Language != nil {
+		s.WriteString(schemas.SearchPlaceIndexForSuggestionsSummary_Language, *v.Language)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchPlaceIndexForSuggestionsSummary_MaxResults, *v.MaxResults)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.SearchPlaceIndexForSuggestionsSummary_Text, *v.Text)
+	}
+}
+func (v *SearchPlaceIndexForSuggestionsSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchPlaceIndexForSuggestionsSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchPlaceIndexForSuggestionsSummary_BiasPosition:
+			return deserializePosition(d, schemas.SearchPlaceIndexForSuggestionsSummary_BiasPosition, &v.BiasPosition)
+		case schemas.SearchPlaceIndexForSuggestionsSummary_DataSource:
+			v.DataSource = new(string)
+			return d.ReadString(schemas.SearchPlaceIndexForSuggestionsSummary_DataSource, v.DataSource)
+		case schemas.SearchPlaceIndexForSuggestionsSummary_FilterBBox:
+			return deserializeBoundingBox(d, schemas.SearchPlaceIndexForSuggestionsSummary_FilterBBox, &v.FilterBBox)
+		case schemas.SearchPlaceIndexForSuggestionsSummary_FilterCategories:
+			return deserializeFilterPlaceCategoryList(d, schemas.SearchPlaceIndexForSuggestionsSummary_FilterCategories, &v.FilterCategories)
+		case schemas.SearchPlaceIndexForSuggestionsSummary_FilterCountries:
+			return deserializeCountryCodeList(d, schemas.SearchPlaceIndexForSuggestionsSummary_FilterCountries, &v.FilterCountries)
+		case schemas.SearchPlaceIndexForSuggestionsSummary_Language:
+			v.Language = new(string)
+			return d.ReadString(schemas.SearchPlaceIndexForSuggestionsSummary_Language, v.Language)
+		case schemas.SearchPlaceIndexForSuggestionsSummary_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.SearchPlaceIndexForSuggestionsSummary_MaxResults, v.MaxResults)
+		case schemas.SearchPlaceIndexForSuggestionsSummary_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.SearchPlaceIndexForSuggestionsSummary_Text, v.Text)
+		}
+		return nil
+	})
 }
 
 // A summary of the request sent by using SearchPlaceIndexForText .
@@ -2160,6 +4465,61 @@ type SearchPlaceIndexForTextSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchPlaceIndexForTextSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchPlaceIndexForTextSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchPlaceIndexForTextSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePosition(s, schemas.SearchPlaceIndexForTextSummary_BiasPosition, v.BiasPosition)
+	if v.DataSource != nil {
+		s.WriteString(schemas.SearchPlaceIndexForTextSummary_DataSource, *v.DataSource)
+	}
+	serializeBoundingBox(s, schemas.SearchPlaceIndexForTextSummary_FilterBBox, v.FilterBBox)
+	serializeFilterPlaceCategoryList(s, schemas.SearchPlaceIndexForTextSummary_FilterCategories, v.FilterCategories)
+	serializeCountryCodeList(s, schemas.SearchPlaceIndexForTextSummary_FilterCountries, v.FilterCountries)
+	if v.Language != nil {
+		s.WriteString(schemas.SearchPlaceIndexForTextSummary_Language, *v.Language)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchPlaceIndexForTextSummary_MaxResults, *v.MaxResults)
+	}
+	serializeBoundingBox(s, schemas.SearchPlaceIndexForTextSummary_ResultBBox, v.ResultBBox)
+	if v.Text != nil {
+		s.WriteString(schemas.SearchPlaceIndexForTextSummary_Text, *v.Text)
+	}
+}
+func (v *SearchPlaceIndexForTextSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchPlaceIndexForTextSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchPlaceIndexForTextSummary_BiasPosition:
+			return deserializePosition(d, schemas.SearchPlaceIndexForTextSummary_BiasPosition, &v.BiasPosition)
+		case schemas.SearchPlaceIndexForTextSummary_DataSource:
+			v.DataSource = new(string)
+			return d.ReadString(schemas.SearchPlaceIndexForTextSummary_DataSource, v.DataSource)
+		case schemas.SearchPlaceIndexForTextSummary_FilterBBox:
+			return deserializeBoundingBox(d, schemas.SearchPlaceIndexForTextSummary_FilterBBox, &v.FilterBBox)
+		case schemas.SearchPlaceIndexForTextSummary_FilterCategories:
+			return deserializeFilterPlaceCategoryList(d, schemas.SearchPlaceIndexForTextSummary_FilterCategories, &v.FilterCategories)
+		case schemas.SearchPlaceIndexForTextSummary_FilterCountries:
+			return deserializeCountryCodeList(d, schemas.SearchPlaceIndexForTextSummary_FilterCountries, &v.FilterCountries)
+		case schemas.SearchPlaceIndexForTextSummary_Language:
+			v.Language = new(string)
+			return d.ReadString(schemas.SearchPlaceIndexForTextSummary_Language, v.Language)
+		case schemas.SearchPlaceIndexForTextSummary_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.SearchPlaceIndexForTextSummary_MaxResults, v.MaxResults)
+		case schemas.SearchPlaceIndexForTextSummary_ResultBBox:
+			return deserializeBoundingBox(d, schemas.SearchPlaceIndexForTextSummary_ResultBBox, &v.ResultBBox)
+		case schemas.SearchPlaceIndexForTextSummary_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.SearchPlaceIndexForTextSummary_Text, v.Text)
+		}
+		return nil
+	})
+}
+
 //	Represents an element of a leg within a route. A step contains instructions
 //
 // for how to move to the next step in the leg.
@@ -2199,6 +4559,46 @@ type Step struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Step) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Step)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Step) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Distance != nil {
+		s.WriteFloat64(schemas.Step_Distance, *v.Distance)
+	}
+	if v.DurationSeconds != nil {
+		s.WriteFloat64(schemas.Step_DurationSeconds, *v.DurationSeconds)
+	}
+	serializePosition(s, schemas.Step_EndPosition, v.EndPosition)
+	if v.GeometryOffset != nil {
+		s.WriteInt32(schemas.Step_GeometryOffset, *v.GeometryOffset)
+	}
+	serializePosition(s, schemas.Step_StartPosition, v.StartPosition)
+}
+func (v *Step) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Step, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Step_Distance:
+			v.Distance = new(float64)
+			return d.ReadFloat64(schemas.Step_Distance, v.Distance)
+		case schemas.Step_DurationSeconds:
+			v.DurationSeconds = new(float64)
+			return d.ReadFloat64(schemas.Step_DurationSeconds, v.DurationSeconds)
+		case schemas.Step_EndPosition:
+			return deserializePosition(d, schemas.Step_EndPosition, &v.EndPosition)
+		case schemas.Step_GeometryOffset:
+			v.GeometryOffset = new(int32)
+			return d.ReadInt32(schemas.Step_GeometryOffset, v.GeometryOffset)
+		case schemas.Step_StartPosition:
+			return deserializePosition(d, schemas.Step_StartPosition, &v.StartPosition)
+		}
+		return nil
+	})
+}
+
 // Information about a time zone. Includes the name of the time zone and the
 // offset from UTC in seconds.
 type TimeZone struct {
@@ -2216,6 +4616,34 @@ type TimeZone struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimeZone) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeZone)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeZone) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.TimeZone_Name, *v.Name)
+	}
+	if v.Offset != nil {
+		s.WriteInt32(schemas.TimeZone_Offset, *v.Offset)
+	}
+}
+func (v *TimeZone) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeZone, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeZone_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TimeZone_Name, v.Name)
+		case schemas.TimeZone_Offset:
+			v.Offset = new(int32)
+			return d.ReadInt32(schemas.TimeZone_Offset, v.Offset)
+		}
+		return nil
+	})
+}
+
 // The geomerty used to filter device positions.
 type TrackingFilterGeometry struct {
 
@@ -2224,6 +4652,25 @@ type TrackingFilterGeometry struct {
 	Polygon [][][]float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *TrackingFilterGeometry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TrackingFilterGeometry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TrackingFilterGeometry) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeLinearRings(s, schemas.TrackingFilterGeometry_Polygon, v.Polygon)
+}
+func (v *TrackingFilterGeometry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TrackingFilterGeometry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TrackingFilterGeometry_Polygon:
+			return deserializeLinearRings(d, schemas.TrackingFilterGeometry_Polygon, &v.Polygon)
+		}
+		return nil
+	})
 }
 
 // Contains details about the truck dimensions in the unit of measurement that you
@@ -2263,6 +4710,50 @@ type TruckDimensions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TruckDimensions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TruckDimensions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TruckDimensions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Height != nil {
+		s.WriteFloat64(schemas.TruckDimensions_Height, *v.Height)
+	}
+	if v.Length != nil {
+		s.WriteFloat64(schemas.TruckDimensions_Length, *v.Length)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.TruckDimensions_Unit, string(v.Unit))
+	}
+	if v.Width != nil {
+		s.WriteFloat64(schemas.TruckDimensions_Width, *v.Width)
+	}
+}
+func (v *TruckDimensions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TruckDimensions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TruckDimensions_Height:
+			v.Height = new(float64)
+			return d.ReadFloat64(schemas.TruckDimensions_Height, v.Height)
+		case schemas.TruckDimensions_Length:
+			v.Length = new(float64)
+			return d.ReadFloat64(schemas.TruckDimensions_Length, v.Length)
+		case schemas.TruckDimensions_Unit:
+			var ev string
+			if err := d.ReadString(schemas.TruckDimensions_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = DimensionUnit(ev)
+			return nil
+		case schemas.TruckDimensions_Width:
+			v.Width = new(float64)
+			return d.ReadFloat64(schemas.TruckDimensions_Width, v.Width)
+		}
+		return nil
+	})
+}
+
 // Contains details about the truck's weight specifications. Used to avoid roads
 // that can't support or allow the total weight for requests that specify
 // TravelMode as Truck .
@@ -2281,6 +4772,38 @@ type TruckWeight struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TruckWeight) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TruckWeight)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TruckWeight) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Total != nil {
+		s.WriteFloat64(schemas.TruckWeight_Total, *v.Total)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.TruckWeight_Unit, string(v.Unit))
+	}
+}
+func (v *TruckWeight) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TruckWeight, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TruckWeight_Total:
+			v.Total = new(float64)
+			return d.ReadFloat64(schemas.TruckWeight_Total, v.Total)
+		case schemas.TruckWeight_Unit:
+			var ev string
+			if err := d.ReadString(schemas.TruckWeight_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = VehicleWeightUnit(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Options specific to address validation jobs.
 type ValidateAddressActionOptions struct {
 
@@ -2295,6 +4818,25 @@ type ValidateAddressActionOptions struct {
 	AdditionalFeatures []ValidateAddressAdditionalFeature
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidateAddressActionOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateAddressActionOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateAddressActionOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeValidateAddressAdditionalFeatureList(s, schemas.ValidateAddressActionOptions_AdditionalFeatures, v.AdditionalFeatures)
+}
+func (v *ValidateAddressActionOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateAddressActionOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateAddressActionOptions_AdditionalFeatures:
+			return deserializeValidateAddressAdditionalFeatureList(d, schemas.ValidateAddressActionOptions_AdditionalFeatures, &v.AdditionalFeatures)
+		}
+		return nil
+	})
 }
 
 // The input failed to meet the constraints specified by the AWS service in a
@@ -2314,6 +4856,34 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_Message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_Name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Message, v.Message)
+		case schemas.ValidationExceptionField_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Wi-Fi access point.
 type WiFiAccessPoint struct {
 
@@ -2328,6 +4898,34 @@ type WiFiAccessPoint struct {
 	Rss *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *WiFiAccessPoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WiFiAccessPoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WiFiAccessPoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MacAddress != nil {
+		s.WriteString(schemas.WiFiAccessPoint_MacAddress, *v.MacAddress)
+	}
+	if v.Rss != nil {
+		s.WriteInt32(schemas.WiFiAccessPoint_Rss, *v.Rss)
+	}
+}
+func (v *WiFiAccessPoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WiFiAccessPoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WiFiAccessPoint_MacAddress:
+			v.MacAddress = new(string)
+			return d.ReadString(schemas.WiFiAccessPoint_MacAddress, v.MacAddress)
+		case schemas.WiFiAccessPoint_Rss:
+			v.Rss = new(int32)
+			return d.ReadInt32(schemas.WiFiAccessPoint_Rss, v.Rss)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

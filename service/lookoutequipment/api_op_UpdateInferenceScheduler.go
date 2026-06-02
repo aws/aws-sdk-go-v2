@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -67,6 +69,37 @@ type UpdateInferenceSchedulerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInferenceSchedulerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateInferenceSchedulerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInferenceSchedulerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataDelayOffsetInMinutes != nil {
+		s.WriteInt64(schemas.UpdateInferenceSchedulerRequest_DataDelayOffsetInMinutes, *v.DataDelayOffsetInMinutes)
+	}
+	if v.DataInputConfiguration != nil {
+		s.WriteStruct(schemas.UpdateInferenceSchedulerRequest_DataInputConfiguration)
+		v.DataInputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataOutputConfiguration != nil {
+		s.WriteStruct(schemas.UpdateInferenceSchedulerRequest_DataOutputConfiguration)
+		v.DataOutputConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DataUploadFrequency != "" {
+		s.WriteString(schemas.UpdateInferenceSchedulerRequest_DataUploadFrequency, string(v.DataUploadFrequency))
+	}
+	if v.InferenceSchedulerName != nil {
+		s.WriteString(schemas.UpdateInferenceSchedulerRequest_InferenceSchedulerName, *v.InferenceSchedulerName)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.UpdateInferenceSchedulerRequest_RoleArn, *v.RoleArn)
+	}
+}
+
 type UpdateInferenceSchedulerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,16 +107,29 @@ type UpdateInferenceSchedulerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateInferenceSchedulerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateInferenceSchedulerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *UpdateInferenceSchedulerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateInferenceScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInferenceScheduler, schemas.UpdateInferenceSchedulerRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateInferenceScheduler{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateInferenceScheduler, schemas.UpdateInferenceSchedulerRequest, nil), output: &UpdateInferenceSchedulerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateInferenceScheduler"); err != nil {

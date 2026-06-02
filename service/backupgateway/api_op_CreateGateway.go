@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backupgateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,47 @@ type CreateGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGatewayInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivationKey != nil {
+		s.WriteString(schemas.CreateGatewayInput_ActivationKey, *v.ActivationKey)
+	}
+	if v.GatewayDisplayName != nil {
+		s.WriteString(schemas.CreateGatewayInput_GatewayDisplayName, *v.GatewayDisplayName)
+	}
+	if v.GatewayType != "" {
+		s.WriteString(schemas.CreateGatewayInput_GatewayType, string(v.GatewayType))
+	}
+	serializeTags(s, schemas.CreateGatewayInput_Tags, v.Tags)
+}
+func (v *CreateGatewayInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGatewayInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGatewayInput_ActivationKey:
+			v.ActivationKey = new(string)
+			return d.ReadString(schemas.CreateGatewayInput_ActivationKey, v.ActivationKey)
+		case schemas.CreateGatewayInput_GatewayDisplayName:
+			v.GatewayDisplayName = new(string)
+			return d.ReadString(schemas.CreateGatewayInput_GatewayDisplayName, v.GatewayDisplayName)
+		case schemas.CreateGatewayInput_GatewayType:
+			var ev string
+			if err := d.ReadString(schemas.CreateGatewayInput_GatewayType, &ev); err != nil {
+				return err
+			}
+			v.GatewayType = types.GatewayType(ev)
+			return nil
+		case schemas.CreateGatewayInput_Tags:
+			return deserializeTags(d, schemas.CreateGatewayInput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateGatewayOutput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway you create.
@@ -62,16 +105,35 @@ type CreateGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateGatewayOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateGatewayOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateGatewayOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayArn != nil {
+		s.WriteString(schemas.CreateGatewayOutput_GatewayArn, *v.GatewayArn)
+	}
+}
+func (v *CreateGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateGatewayOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateGatewayOutput_GatewayArn:
+			v.GatewayArn = new(string)
+			return d.ReadString(schemas.CreateGatewayOutput_GatewayArn, v.GatewayArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGateway, schemas.CreateGatewayInput, schemas.CreateGatewayOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateGateway, schemas.CreateGatewayInput, schemas.CreateGatewayOutput), output: &CreateGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateGateway"); err != nil {

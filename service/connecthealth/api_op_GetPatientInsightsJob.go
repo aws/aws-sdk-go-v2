@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connecthealth/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connecthealth/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +43,21 @@ type GetPatientInsightsJobInput struct {
 	JobId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPatientInsightsJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPatientInsightsJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPatientInsightsJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainId != nil {
+		s.WriteString(schemas.GetPatientInsightsJobRequest_domainId, *v.DomainId)
+	}
+	if v.JobId != nil {
+		s.WriteString(schemas.GetPatientInsightsJobRequest_jobId, *v.JobId)
+	}
 }
 
 type GetPatientInsightsJobOutput struct {
@@ -108,16 +125,64 @@ type GetPatientInsightsJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPatientInsightsJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPatientInsightsJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPatientInsightsJobResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.GetPatientInsightsJobResponse_creationTime, v.CreationTime)
+		case schemas.GetPatientInsightsJobResponse_encounterContext:
+			v.EncounterContext = &types.PatientInsightsEncounterContext{}
+			return v.EncounterContext.Deserialize(d)
+		case schemas.GetPatientInsightsJobResponse_inputDataConfig:
+			v.InputDataConfig = &types.InputDataConfig{}
+			return v.InputDataConfig.Deserialize(d)
+		case schemas.GetPatientInsightsJobResponse_insightsContext:
+			v.InsightsContext = &types.InsightsContext{}
+			return v.InsightsContext.Deserialize(d)
+		case schemas.GetPatientInsightsJobResponse_insightsOutput:
+			v.InsightsOutput = &types.InsightsOutput{}
+			return v.InsightsOutput.Deserialize(d)
+		case schemas.GetPatientInsightsJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.GetPatientInsightsJobResponse_jobArn, v.JobArn)
+		case schemas.GetPatientInsightsJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetPatientInsightsJobResponse_jobId, v.JobId)
+		case schemas.GetPatientInsightsJobResponse_jobStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetPatientInsightsJobResponse_jobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		case schemas.GetPatientInsightsJobResponse_outputDataConfig:
+			v.OutputDataConfig = &types.OutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.GetPatientInsightsJobResponse_patientContext:
+			v.PatientContext = &types.PatientInsightsPatientContext{}
+			return v.PatientContext.Deserialize(d)
+		case schemas.GetPatientInsightsJobResponse_statusDetails:
+			v.StatusDetails = new(string)
+			return d.ReadString(schemas.GetPatientInsightsJobResponse_statusDetails, v.StatusDetails)
+		case schemas.GetPatientInsightsJobResponse_updatedTime:
+			v.UpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetPatientInsightsJobResponse_updatedTime, v.UpdatedTime)
+		case schemas.GetPatientInsightsJobResponse_userContext:
+			v.UserContext = &types.UserContext{}
+			return v.UserContext.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPatientInsightsJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPatientInsightsJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPatientInsightsJob, schemas.GetPatientInsightsJobRequest, schemas.GetPatientInsightsJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPatientInsightsJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPatientInsightsJob, schemas.GetPatientInsightsJobRequest, schemas.GetPatientInsightsJobResponse), output: &GetPatientInsightsJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPatientInsightsJob"); err != nil {

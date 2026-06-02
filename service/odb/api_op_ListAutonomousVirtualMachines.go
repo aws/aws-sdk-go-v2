@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,24 @@ type ListAutonomousVirtualMachinesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutonomousVirtualMachinesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutonomousVirtualMachinesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutonomousVirtualMachinesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudAutonomousVmClusterId != nil {
+		s.WriteString(schemas.ListAutonomousVirtualMachinesInput_cloudAutonomousVmClusterId, *v.CloudAutonomousVmClusterId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutonomousVirtualMachinesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutonomousVirtualMachinesInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListAutonomousVirtualMachinesOutput struct {
 
 	// The list of Autonomous VMs in the specified Autonomous VM cluster.
@@ -60,16 +80,26 @@ type ListAutonomousVirtualMachinesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutonomousVirtualMachinesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutonomousVirtualMachinesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutonomousVirtualMachinesOutput_autonomousVirtualMachines:
+			return deserializeAutonomousVirtualMachineList(d, schemas.ListAutonomousVirtualMachinesOutput_autonomousVirtualMachines, &v.AutonomousVirtualMachines)
+		case schemas.ListAutonomousVirtualMachinesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutonomousVirtualMachinesOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutonomousVirtualMachinesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAutonomousVirtualMachines{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutonomousVirtualMachines, schemas.ListAutonomousVirtualMachinesInput, schemas.ListAutonomousVirtualMachinesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAutonomousVirtualMachines{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutonomousVirtualMachines, schemas.ListAutonomousVirtualMachinesInput, schemas.ListAutonomousVirtualMachinesOutput), output: &ListAutonomousVirtualMachinesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAutonomousVirtualMachines"); err != nil {

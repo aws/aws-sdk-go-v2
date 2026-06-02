@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,34 @@ type ListChannelHandshakesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChannelHandshakesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChannelHandshakesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChannelHandshakesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssociatedResourceIdentifierList(s, schemas.ListChannelHandshakesRequest_associatedResourceIdentifiers, v.AssociatedResourceIdentifiers)
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListChannelHandshakesRequest_catalog, *v.Catalog)
+	}
+	if v.HandshakeType != "" {
+		s.WriteString(schemas.ListChannelHandshakesRequest_handshakeType, string(v.HandshakeType))
+	}
+	serializeListChannelHandshakesTypeFilters(s, schemas.ListChannelHandshakesRequest_handshakeTypeFilters, v.HandshakeTypeFilters)
+	serializeListChannelHandshakesTypeSort(s, schemas.ListChannelHandshakesRequest_handshakeTypeSort, v.HandshakeTypeSort)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListChannelHandshakesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChannelHandshakesRequest_nextToken, *v.NextToken)
+	}
+	if v.ParticipantType != "" {
+		s.WriteString(schemas.ListChannelHandshakesRequest_participantType, string(v.ParticipantType))
+	}
+	serializeHandshakeStatusList(s, schemas.ListChannelHandshakesRequest_statuses, v.Statuses)
+}
+
 type ListChannelHandshakesOutput struct {
 
 	// List of channel handshakes matching the criteria.
@@ -79,16 +109,26 @@ type ListChannelHandshakesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChannelHandshakesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListChannelHandshakesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListChannelHandshakesResponse_items:
+			return deserializeChannelHandshakeSummaries(d, schemas.ListChannelHandshakesResponse_items, &v.Items)
+		case schemas.ListChannelHandshakesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListChannelHandshakesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListChannelHandshakesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListChannelHandshakes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannelHandshakes, schemas.ListChannelHandshakesRequest, schemas.ListChannelHandshakesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListChannelHandshakes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChannelHandshakes, schemas.ListChannelHandshakesRequest, schemas.ListChannelHandshakesResponse), output: &ListChannelHandshakesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListChannelHandshakes"); err != nil {

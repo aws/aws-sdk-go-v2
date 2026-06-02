@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,24 @@ type ListFacetNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFacetNamesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFacetNamesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFacetNamesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFacetNamesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFacetNamesRequest_NextToken, *v.NextToken)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.ListFacetNamesRequest_SchemaArn, *v.SchemaArn)
+	}
+}
+
 type ListFacetNamesOutput struct {
 
 	// The names of facets that exist within the schema.
@@ -56,16 +76,26 @@ type ListFacetNamesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFacetNamesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFacetNamesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFacetNamesResponse_FacetNames:
+			return deserializeFacetNameList(d, schemas.ListFacetNamesResponse_FacetNames, &v.FacetNames)
+		case schemas.ListFacetNamesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFacetNamesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFacetNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFacetNames{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFacetNames, schemas.ListFacetNamesRequest, schemas.ListFacetNamesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFacetNames{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFacetNames, schemas.ListFacetNamesRequest, schemas.ListFacetNamesResponse), output: &ListFacetNamesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFacetNames"); err != nil {

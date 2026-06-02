@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +36,31 @@ type HttpPrefixHeadersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPrefixHeadersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPrefixHeadersInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPrefixHeadersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Foo != nil {
+		s.WriteString(schemas.HttpPrefixHeadersInputOutput_foo, *v.Foo)
+	}
+	serializeFooPrefixHeaders(s, schemas.HttpPrefixHeadersInputOutput_fooMap, v.FooMap)
+}
+func (v *HttpPrefixHeadersInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPrefixHeadersInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPrefixHeadersInputOutput_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.HttpPrefixHeadersInputOutput_foo, v.Foo)
+		case schemas.HttpPrefixHeadersInputOutput_fooMap:
+			return deserializeFooPrefixHeaders(d, schemas.HttpPrefixHeadersInputOutput_fooMap, &v.FooMap)
+		}
+		return nil
+	})
+}
+
 type HttpPrefixHeadersOutput struct {
 	Foo *string
 
@@ -46,16 +73,38 @@ type HttpPrefixHeadersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPrefixHeadersOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPrefixHeadersInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPrefixHeadersOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Foo != nil {
+		s.WriteString(schemas.HttpPrefixHeadersInputOutput_foo, *v.Foo)
+	}
+	serializeFooPrefixHeaders(s, schemas.HttpPrefixHeadersInputOutput_fooMap, v.FooMap)
+}
+func (v *HttpPrefixHeadersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPrefixHeadersInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPrefixHeadersInputOutput_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.HttpPrefixHeadersInputOutput_foo, v.Foo)
+		case schemas.HttpPrefixHeadersInputOutput_fooMap:
+			return deserializeFooPrefixHeaders(d, schemas.HttpPrefixHeadersInputOutput_fooMap, &v.FooMap)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHttpPrefixHeadersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPrefixHeaders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpPrefixHeaders, schemas.HttpPrefixHeadersInputOutput, schemas.HttpPrefixHeadersInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpHttpPrefixHeaders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpPrefixHeaders, schemas.HttpPrefixHeadersInputOutput, schemas.HttpPrefixHeadersInputOutput), output: &HttpPrefixHeadersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpPrefixHeaders"); err != nil {

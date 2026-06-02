@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -95,6 +97,37 @@ type DeletePackageVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePackageVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePackageVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePackageVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.DeletePackageVersionsRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.DeletePackageVersionsRequest_domainOwner, *v.DomainOwner)
+	}
+	if v.ExpectedStatus != "" {
+		s.WriteString(schemas.DeletePackageVersionsRequest_expectedStatus, string(v.ExpectedStatus))
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.DeletePackageVersionsRequest_format, string(v.Format))
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.DeletePackageVersionsRequest_namespace, *v.Namespace)
+	}
+	if v.Package != nil {
+		s.WriteString(schemas.DeletePackageVersionsRequest_package, *v.Package)
+	}
+	if v.Repository != nil {
+		s.WriteString(schemas.DeletePackageVersionsRequest_repository, *v.Repository)
+	}
+	serializePackageVersionList(s, schemas.DeletePackageVersionsRequest_versions, v.Versions)
+}
+
 type DeletePackageVersionsOutput struct {
 
 	//  A PackageVersionError object that contains a map of errors codes for the
@@ -123,16 +156,25 @@ type DeletePackageVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePackageVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePackageVersionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePackageVersionsResult_failedVersions:
+			return deserializePackageVersionErrorMap(d, schemas.DeletePackageVersionsResult_failedVersions, &v.FailedVersions)
+		case schemas.DeletePackageVersionsResult_successfulVersions:
+			return deserializeSuccessfulPackageVersionInfoMap(d, schemas.DeletePackageVersionsResult_successfulVersions, &v.SuccessfulVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePackageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePackageVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePackageVersions, schemas.DeletePackageVersionsRequest, schemas.DeletePackageVersionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePackageVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePackageVersions, schemas.DeletePackageVersionsRequest, schemas.DeletePackageVersionsResult), output: &DeletePackageVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePackageVersions"); err != nil {

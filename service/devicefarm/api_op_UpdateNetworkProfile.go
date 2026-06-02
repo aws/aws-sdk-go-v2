@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -77,6 +79,51 @@ type UpdateNetworkProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNetworkProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNetworkProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNetworkProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateNetworkProfileRequest_arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateNetworkProfileRequest_description, *v.Description)
+	}
+	if v.DownlinkBandwidthBits != nil {
+		s.WriteInt64(schemas.UpdateNetworkProfileRequest_downlinkBandwidthBits, *v.DownlinkBandwidthBits)
+	}
+	if v.DownlinkDelayMs != nil {
+		s.WriteInt64(schemas.UpdateNetworkProfileRequest_downlinkDelayMs, *v.DownlinkDelayMs)
+	}
+	if v.DownlinkJitterMs != nil {
+		s.WriteInt64(schemas.UpdateNetworkProfileRequest_downlinkJitterMs, *v.DownlinkJitterMs)
+	}
+	if v.DownlinkLossPercent != 0 {
+		s.WriteInt32(schemas.UpdateNetworkProfileRequest_downlinkLossPercent, v.DownlinkLossPercent)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateNetworkProfileRequest_name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateNetworkProfileRequest_type, string(v.Type))
+	}
+	if v.UplinkBandwidthBits != nil {
+		s.WriteInt64(schemas.UpdateNetworkProfileRequest_uplinkBandwidthBits, *v.UplinkBandwidthBits)
+	}
+	if v.UplinkDelayMs != nil {
+		s.WriteInt64(schemas.UpdateNetworkProfileRequest_uplinkDelayMs, *v.UplinkDelayMs)
+	}
+	if v.UplinkJitterMs != nil {
+		s.WriteInt64(schemas.UpdateNetworkProfileRequest_uplinkJitterMs, *v.UplinkJitterMs)
+	}
+	if v.UplinkLossPercent != 0 {
+		s.WriteInt32(schemas.UpdateNetworkProfileRequest_uplinkLossPercent, v.UplinkLossPercent)
+	}
+}
+
 type UpdateNetworkProfileOutput struct {
 
 	// A list of the available network profiles.
@@ -88,16 +135,24 @@ type UpdateNetworkProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateNetworkProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNetworkProfileResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateNetworkProfileResult_networkProfile:
+			v.NetworkProfile = &types.NetworkProfile{}
+			return v.NetworkProfile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateNetworkProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateNetworkProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetworkProfile, schemas.UpdateNetworkProfileRequest, schemas.UpdateNetworkProfileResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateNetworkProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateNetworkProfile, schemas.UpdateNetworkProfileRequest, schemas.UpdateNetworkProfileResult), output: &UpdateNetworkProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateNetworkProfile"); err != nil {

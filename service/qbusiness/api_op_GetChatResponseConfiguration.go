@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -47,6 +49,21 @@ type GetChatResponseConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChatResponseConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChatResponseConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChatResponseConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetChatResponseConfigurationRequest_applicationId, *v.ApplicationId)
+	}
+	if v.ChatResponseConfigurationId != nil {
+		s.WriteString(schemas.GetChatResponseConfigurationRequest_chatResponseConfigurationId, *v.ChatResponseConfigurationId)
+	}
+}
+
 type GetChatResponseConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the retrieved chat response configuration,
@@ -78,16 +95,39 @@ type GetChatResponseConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChatResponseConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChatResponseConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChatResponseConfigurationResponse_chatResponseConfigurationArn:
+			v.ChatResponseConfigurationArn = new(string)
+			return d.ReadString(schemas.GetChatResponseConfigurationResponse_chatResponseConfigurationArn, v.ChatResponseConfigurationArn)
+		case schemas.GetChatResponseConfigurationResponse_chatResponseConfigurationId:
+			v.ChatResponseConfigurationId = new(string)
+			return d.ReadString(schemas.GetChatResponseConfigurationResponse_chatResponseConfigurationId, v.ChatResponseConfigurationId)
+		case schemas.GetChatResponseConfigurationResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetChatResponseConfigurationResponse_createdAt, v.CreatedAt)
+		case schemas.GetChatResponseConfigurationResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetChatResponseConfigurationResponse_displayName, v.DisplayName)
+		case schemas.GetChatResponseConfigurationResponse_inUseConfiguration:
+			v.InUseConfiguration = &types.ChatResponseConfigurationDetail{}
+			return v.InUseConfiguration.Deserialize(d)
+		case schemas.GetChatResponseConfigurationResponse_lastUpdateConfiguration:
+			v.LastUpdateConfiguration = &types.ChatResponseConfigurationDetail{}
+			return v.LastUpdateConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetChatResponseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChatResponseConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChatResponseConfiguration, schemas.GetChatResponseConfigurationRequest, schemas.GetChatResponseConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChatResponseConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChatResponseConfiguration, schemas.GetChatResponseConfigurationRequest, schemas.GetChatResponseConfigurationResponse), output: &GetChatResponseConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetChatResponseConfiguration"); err != nil {

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -24,16 +26,88 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Path != nil {
+		s.WriteString(schemas.ValidationExceptionField_path, *v.Path)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_path:
+			v.Path = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_path, v.Path)
+		}
+		return nil
+	})
+}
+
 type ClientOptionalDefaults struct {
 	Member *int32
 
 	noSmithyDocumentSerde
 }
 
+func (v *ClientOptionalDefaults) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClientOptionalDefaults)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClientOptionalDefaults) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Member != nil {
+		s.WriteInt32(schemas.ClientOptionalDefaults_member, *v.Member)
+	}
+}
+func (v *ClientOptionalDefaults) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClientOptionalDefaults, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClientOptionalDefaults_member:
+			v.Member = new(int32)
+			return d.ReadInt32(schemas.ClientOptionalDefaults_member, v.Member)
+		}
+		return nil
+	})
+}
+
 type ComplexNestedErrorData struct {
 	Foo *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ComplexNestedErrorData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ComplexNestedErrorData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ComplexNestedErrorData) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Foo != nil {
+		s.WriteString(schemas.ComplexNestedErrorData_Foo, *v.Foo)
+	}
+}
+func (v *ComplexNestedErrorData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ComplexNestedErrorData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ComplexNestedErrorData_Foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.ComplexNestedErrorData_Foo, v.Foo)
+		}
+		return nil
+	})
 }
 
 type Defaults struct {
@@ -86,12 +160,189 @@ type Defaults struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Defaults) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Defaults)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Defaults) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultBlob != nil {
+		s.WriteBlob(schemas.Defaults_defaultBlob, v.DefaultBlob)
+	}
+	if v.DefaultBoolean != nil {
+		s.WriteBool(schemas.Defaults_defaultBoolean, *v.DefaultBoolean)
+	}
+	if v.DefaultByte != nil {
+		s.WriteInt8(schemas.Defaults_defaultByte, *v.DefaultByte)
+	}
+	if v.DefaultDouble != nil {
+		s.WriteFloat64(schemas.Defaults_defaultDouble, *v.DefaultDouble)
+	}
+	if v.DefaultEnum != "" {
+		s.WriteString(schemas.Defaults_defaultEnum, string(v.DefaultEnum))
+	}
+	if v.DefaultFloat != nil {
+		s.WriteFloat32(schemas.Defaults_defaultFloat, *v.DefaultFloat)
+	}
+	if v.DefaultIntEnum != 0 {
+		s.WriteInt32(schemas.Defaults_defaultIntEnum, int32(v.DefaultIntEnum))
+	}
+	if v.DefaultInteger != nil {
+		s.WriteInt32(schemas.Defaults_defaultInteger, *v.DefaultInteger)
+	}
+	serializeTestStringList(s, schemas.Defaults_defaultList, v.DefaultList)
+	if v.DefaultLong != nil {
+		s.WriteInt64(schemas.Defaults_defaultLong, *v.DefaultLong)
+	}
+	serializeTestStringMap(s, schemas.Defaults_defaultMap, v.DefaultMap)
+	if v.DefaultShort != nil {
+		s.WriteInt16(schemas.Defaults_defaultShort, *v.DefaultShort)
+	}
+	if v.DefaultString != nil {
+		s.WriteString(schemas.Defaults_defaultString, *v.DefaultString)
+	}
+	if v.DefaultTimestamp != nil {
+		s.WriteTime(schemas.Defaults_defaultTimestamp, *v.DefaultTimestamp)
+	}
+	if v.EmptyBlob != nil {
+		s.WriteBlob(schemas.Defaults_emptyBlob, v.EmptyBlob)
+	}
+	if v.EmptyString != nil {
+		s.WriteString(schemas.Defaults_emptyString, *v.EmptyString)
+	}
+	if v.FalseBoolean != false {
+		s.WriteBool(schemas.Defaults_falseBoolean, v.FalseBoolean)
+	}
+	if v.ZeroByte != 0 {
+		s.WriteInt8(schemas.Defaults_zeroByte, v.ZeroByte)
+	}
+	if v.ZeroDouble != 0 {
+		s.WriteFloat64(schemas.Defaults_zeroDouble, v.ZeroDouble)
+	}
+	if v.ZeroFloat != 0 {
+		s.WriteFloat32(schemas.Defaults_zeroFloat, v.ZeroFloat)
+	}
+	if v.ZeroInteger != 0 {
+		s.WriteInt32(schemas.Defaults_zeroInteger, v.ZeroInteger)
+	}
+	if v.ZeroLong != 0 {
+		s.WriteInt64(schemas.Defaults_zeroLong, v.ZeroLong)
+	}
+	if v.ZeroShort != 0 {
+		s.WriteInt16(schemas.Defaults_zeroShort, v.ZeroShort)
+	}
+}
+func (v *Defaults) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Defaults, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Defaults_defaultBlob:
+			return d.ReadBlob(schemas.Defaults_defaultBlob, &v.DefaultBlob)
+		case schemas.Defaults_defaultBoolean:
+			v.DefaultBoolean = new(bool)
+			return d.ReadBool(schemas.Defaults_defaultBoolean, v.DefaultBoolean)
+		case schemas.Defaults_defaultByte:
+			v.DefaultByte = new(int8)
+			return d.ReadInt8(schemas.Defaults_defaultByte, v.DefaultByte)
+		case schemas.Defaults_defaultDouble:
+			v.DefaultDouble = new(float64)
+			return d.ReadFloat64(schemas.Defaults_defaultDouble, v.DefaultDouble)
+		case schemas.Defaults_defaultEnum:
+			var ev string
+			if err := d.ReadString(schemas.Defaults_defaultEnum, &ev); err != nil {
+				return err
+			}
+			v.DefaultEnum = TestEnum(ev)
+			return nil
+		case schemas.Defaults_defaultFloat:
+			v.DefaultFloat = new(float32)
+			return d.ReadFloat32(schemas.Defaults_defaultFloat, v.DefaultFloat)
+		case schemas.Defaults_defaultIntEnum:
+			var ev int32
+			if err := d.ReadInt32(schemas.Defaults_defaultIntEnum, &ev); err != nil {
+				return err
+			}
+			v.DefaultIntEnum = TestIntEnum(ev)
+			return nil
+		case schemas.Defaults_defaultInteger:
+			v.DefaultInteger = new(int32)
+			return d.ReadInt32(schemas.Defaults_defaultInteger, v.DefaultInteger)
+		case schemas.Defaults_defaultList:
+			return deserializeTestStringList(d, schemas.Defaults_defaultList, &v.DefaultList)
+		case schemas.Defaults_defaultLong:
+			v.DefaultLong = new(int64)
+			return d.ReadInt64(schemas.Defaults_defaultLong, v.DefaultLong)
+		case schemas.Defaults_defaultMap:
+			return deserializeTestStringMap(d, schemas.Defaults_defaultMap, &v.DefaultMap)
+		case schemas.Defaults_defaultShort:
+			v.DefaultShort = new(int16)
+			return d.ReadInt16(schemas.Defaults_defaultShort, v.DefaultShort)
+		case schemas.Defaults_defaultString:
+			v.DefaultString = new(string)
+			return d.ReadString(schemas.Defaults_defaultString, v.DefaultString)
+		case schemas.Defaults_defaultTimestamp:
+			v.DefaultTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Defaults_defaultTimestamp, v.DefaultTimestamp)
+		case schemas.Defaults_emptyBlob:
+			return d.ReadBlob(schemas.Defaults_emptyBlob, &v.EmptyBlob)
+		case schemas.Defaults_emptyString:
+			v.EmptyString = new(string)
+			return d.ReadString(schemas.Defaults_emptyString, v.EmptyString)
+		case schemas.Defaults_falseBoolean:
+			return d.ReadBool(schemas.Defaults_falseBoolean, &v.FalseBoolean)
+		case schemas.Defaults_zeroByte:
+			return d.ReadInt8(schemas.Defaults_zeroByte, &v.ZeroByte)
+		case schemas.Defaults_zeroDouble:
+			return d.ReadFloat64(schemas.Defaults_zeroDouble, &v.ZeroDouble)
+		case schemas.Defaults_zeroFloat:
+			return d.ReadFloat32(schemas.Defaults_zeroFloat, &v.ZeroFloat)
+		case schemas.Defaults_zeroInteger:
+			return d.ReadInt32(schemas.Defaults_zeroInteger, &v.ZeroInteger)
+		case schemas.Defaults_zeroLong:
+			return d.ReadInt64(schemas.Defaults_zeroLong, &v.ZeroLong)
+		case schemas.Defaults_zeroShort:
+			return d.ReadInt16(schemas.Defaults_zeroShort, &v.ZeroShort)
+		}
+		return nil
+	})
+}
+
 type RecursiveShapesInputOutputNested1 struct {
 	Foo *string
 
 	Nested *RecursiveShapesInputOutputNested2
 
 	noSmithyDocumentSerde
+}
+
+func (v *RecursiveShapesInputOutputNested1) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecursiveShapesInputOutputNested1)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecursiveShapesInputOutputNested1) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Foo != nil {
+		s.WriteString(schemas.RecursiveShapesInputOutputNested1_foo, *v.Foo)
+	}
+	if v.Nested != nil {
+		s.WriteStruct(schemas.RecursiveShapesInputOutputNested1_nested)
+		v.Nested.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RecursiveShapesInputOutputNested1) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecursiveShapesInputOutputNested1, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecursiveShapesInputOutputNested1_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.RecursiveShapesInputOutputNested1_foo, v.Foo)
+		case schemas.RecursiveShapesInputOutputNested1_nested:
+			v.Nested = &RecursiveShapesInputOutputNested2{}
+			return v.Nested.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type RecursiveShapesInputOutputNested2 struct {
@@ -102,6 +353,36 @@ type RecursiveShapesInputOutputNested2 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RecursiveShapesInputOutputNested2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RecursiveShapesInputOutputNested2)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RecursiveShapesInputOutputNested2) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bar != nil {
+		s.WriteString(schemas.RecursiveShapesInputOutputNested2_bar, *v.Bar)
+	}
+	if v.RecursiveMember != nil {
+		s.WriteStruct(schemas.RecursiveShapesInputOutputNested2_recursiveMember)
+		v.RecursiveMember.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *RecursiveShapesInputOutputNested2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RecursiveShapesInputOutputNested2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RecursiveShapesInputOutputNested2_bar:
+			v.Bar = new(string)
+			return d.ReadString(schemas.RecursiveShapesInputOutputNested2_bar, v.Bar)
+		case schemas.RecursiveShapesInputOutputNested2_recursiveMember:
+			v.RecursiveMember = &RecursiveShapesInputOutputNested1{}
+			return v.RecursiveMember.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type StructureListMember struct {
 	A *string
 
@@ -110,10 +391,60 @@ type StructureListMember struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StructureListMember) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StructureListMember)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StructureListMember) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.A != nil {
+		s.WriteString(schemas.StructureListMember_a, *v.A)
+	}
+	if v.B != nil {
+		s.WriteString(schemas.StructureListMember_b, *v.B)
+	}
+}
+func (v *StructureListMember) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StructureListMember, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StructureListMember_a:
+			v.A = new(string)
+			return d.ReadString(schemas.StructureListMember_a, v.A)
+		case schemas.StructureListMember_b:
+			v.B = new(string)
+			return d.ReadString(schemas.StructureListMember_b, v.B)
+		}
+		return nil
+	})
+}
+
 type GreetingStruct struct {
 	Hi *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GreetingStruct) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GreetingStruct)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GreetingStruct) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Hi != nil {
+		s.WriteString(schemas.GreetingStruct_hi, *v.Hi)
+	}
+}
+func (v *GreetingStruct) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GreetingStruct, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GreetingStruct_hi:
+			v.Hi = new(string)
+			return d.ReadString(schemas.GreetingStruct_hi, v.Hi)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

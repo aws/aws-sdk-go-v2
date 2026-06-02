@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,16 @@ func (e *AccessDeniedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *AccessDeniedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessDeniedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessDeniedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.AccessDeniedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A BatchWrite exception has occurred.
 type BatchWriteException struct {
@@ -63,6 +74,25 @@ func (e *BatchWriteException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BatchWriteException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BatchWriteException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchWriteException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchWriteException_Index:
+			return d.ReadInt32(schemas.BatchWriteException_Index, &v.Index)
+		case schemas.BatchWriteException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BatchWriteException_Message, v.Message)
+		case schemas.BatchWriteException_Type:
+			var ev string
+			if err := d.ReadString(schemas.BatchWriteException_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = BatchWriteExceptionType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 
 // Cannot list the parents of a Directory root.
 type CannotListParentOfRootException struct {
@@ -89,6 +119,16 @@ func (e *CannotListParentOfRootException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *CannotListParentOfRootException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *CannotListParentOfRootException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CannotListParentOfRootException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CannotListParentOfRootException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.CannotListParentOfRootException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that a Directory could not be created due to a naming conflict. Choose a
 // different name and try again.
@@ -116,6 +156,16 @@ func (e *DirectoryAlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DirectoryAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DirectoryAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryAlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryAlreadyExistsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DirectoryAlreadyExistsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A directory that has been deleted and to which access has been attempted. Note:
 // The requested resource will eventually cease to exist.
@@ -143,6 +193,16 @@ func (e *DirectoryDeletedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DirectoryDeletedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DirectoryDeletedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryDeletedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryDeletedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DirectoryDeletedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An operation can only operate on a disabled directory.
 type DirectoryNotDisabledException struct {
@@ -169,6 +229,16 @@ func (e *DirectoryNotDisabledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DirectoryNotDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DirectoryNotDisabledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryNotDisabledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryNotDisabledException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DirectoryNotDisabledException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Operations are only permitted on enabled directories.
 type DirectoryNotEnabledException struct {
@@ -195,6 +265,16 @@ func (e *DirectoryNotEnabledException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *DirectoryNotEnabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *DirectoryNotEnabledException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryNotEnabledException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryNotEnabledException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DirectoryNotEnabledException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // A facet with the same name already exists.
 type FacetAlreadyExistsException struct {
@@ -221,6 +301,16 @@ func (e *FacetAlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FacetAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *FacetAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FacetAlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FacetAlreadyExistsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FacetAlreadyExistsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Occurs when deleting a facet that contains an attribute that is a target to an
 // attribute reference in a different facet.
@@ -248,6 +338,16 @@ func (e *FacetInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FacetInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *FacetInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FacetInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FacetInUseException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FacetInUseException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified Facet could not be found.
 type FacetNotFoundException struct {
@@ -274,6 +374,16 @@ func (e *FacetNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FacetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *FacetNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FacetNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FacetNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FacetNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The Facet that you provided was not well formed or could not be validated with the
 // schema.
@@ -301,6 +411,16 @@ func (e *FacetValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *FacetValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *FacetValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FacetValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FacetValidationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.FacetValidationException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates a failure occurred while performing a check for backward
 // compatibility between the specified schema and the schema that is currently
@@ -329,6 +449,16 @@ func (e *IncompatibleSchemaException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IncompatibleSchemaException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *IncompatibleSchemaException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IncompatibleSchemaException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IncompatibleSchemaException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IncompatibleSchemaException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An object has been attempted to be attached to an object that does not have the
 // appropriate attribute value.
@@ -356,6 +486,16 @@ func (e *IndexedAttributeMissingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IndexedAttributeMissingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *IndexedAttributeMissingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.IndexedAttributeMissingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.IndexedAttributeMissingException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.IndexedAttributeMissingException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates a problem that must be resolved by Amazon Web Services. This might be
 // a transient error in which case you can retry your request until it succeeds.
@@ -387,6 +527,16 @@ func (e *InternalServiceException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServiceException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServiceException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServiceException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServiceException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the provided ARN value is not valid.
 type InvalidArnException struct {
@@ -413,6 +563,16 @@ func (e *InvalidArnException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidArnException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidArnException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidArnException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidArnException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that an attempt to make an attachment was invalid. For example,
 // attaching two nodes with a link type that is not applicable to the nodes or
@@ -441,6 +601,16 @@ func (e *InvalidAttachmentException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidAttachmentException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidAttachmentException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidAttachmentException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidAttachmentException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidAttachmentException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An attempt to modify a Facet resulted in an invalid schema exception.
 type InvalidFacetUpdateException struct {
@@ -467,6 +637,16 @@ func (e *InvalidFacetUpdateException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidFacetUpdateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidFacetUpdateException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidFacetUpdateException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidFacetUpdateException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidFacetUpdateException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the NextToken value is not valid.
 type InvalidNextTokenException struct {
@@ -493,6 +673,16 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidNextTokenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidNextTokenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidNextTokenException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidNextTokenException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Occurs when any of the rule parameter keys or values are invalid.
 type InvalidRuleException struct {
@@ -519,6 +709,16 @@ func (e *InvalidRuleException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidRuleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidRuleException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidRuleException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidRuleException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidRuleException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the provided SchemaDoc value is not valid.
 type InvalidSchemaDocException struct {
@@ -545,6 +745,16 @@ func (e *InvalidSchemaDocException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidSchemaDocException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidSchemaDocException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidSchemaDocException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidSchemaDocException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidSchemaDocException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Can occur for multiple reasons such as when you tag a resource that doesn’t
 // exist or if you specify a higher number of tags for a resource than the allowed
@@ -573,6 +783,16 @@ func (e *InvalidTaggingRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InvalidTaggingRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *InvalidTaggingRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InvalidTaggingRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InvalidTaggingRequestException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InvalidTaggingRequestException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that limits are exceeded. See [Limits] for more information.
 //
@@ -601,6 +821,16 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that a link could not be created due to a naming conflict. Choose a
 // different name and then try again.
@@ -628,6 +858,16 @@ func (e *LinkNameAlreadyInUseException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LinkNameAlreadyInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LinkNameAlreadyInUseException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LinkNameAlreadyInUseException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LinkNameAlreadyInUseException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LinkNameAlreadyInUseException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the requested operation can only operate on index objects.
 type NotIndexException struct {
@@ -654,6 +894,16 @@ func (e *NotIndexException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotIndexException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotIndexException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotIndexException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotIndexException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotIndexException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Occurs when any invalid operations are performed on an object that is not a
 // node, such as calling ListObjectChildren for a leaf node object.
@@ -681,6 +931,16 @@ func (e *NotNodeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotNodeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotNodeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotNodeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotNodeException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotNodeException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the requested operation can only operate on policy objects.
 type NotPolicyException struct {
@@ -707,6 +967,16 @@ func (e *NotPolicyException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotPolicyException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotPolicyException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotPolicyException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotPolicyException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotPolicyException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the object is not attached to the index.
 type ObjectAlreadyDetachedException struct {
@@ -733,6 +1003,16 @@ func (e *ObjectAlreadyDetachedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ObjectAlreadyDetachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ObjectAlreadyDetachedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObjectAlreadyDetachedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObjectAlreadyDetachedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ObjectAlreadyDetachedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the requested operation cannot be completed because the object
 // has not been detached from the tree.
@@ -760,6 +1040,16 @@ func (e *ObjectNotDetachedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ObjectNotDetachedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ObjectNotDetachedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ObjectNotDetachedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ObjectNotDetachedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ObjectNotDetachedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The specified resource could not be found.
 type ResourceNotFoundException struct {
@@ -786,6 +1076,16 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Occurs when a conflict with a previous successful write is detected. For
 // example, if a write operation occurs on an object and then an attempt is made to
@@ -817,6 +1117,16 @@ func (e *RetryableConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RetryableConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RetryableConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RetryableConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RetryableConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RetryableConflictException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that a schema could not be created due to a naming conflict. Please
 // select a different name and then try again.
@@ -844,6 +1154,16 @@ func (e *SchemaAlreadyExistsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SchemaAlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SchemaAlreadyExistsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaAlreadyExistsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaAlreadyExistsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SchemaAlreadyExistsException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that a schema is already published.
 type SchemaAlreadyPublishedException struct {
@@ -870,6 +1190,16 @@ func (e *SchemaAlreadyPublishedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *SchemaAlreadyPublishedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *SchemaAlreadyPublishedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SchemaAlreadyPublishedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SchemaAlreadyPublishedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.SchemaAlreadyPublishedException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The object could not be deleted because links still exist. Remove the links and
 // then try the operation again.
@@ -897,6 +1227,16 @@ func (e *StillContainsLinksException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *StillContainsLinksException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *StillContainsLinksException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StillContainsLinksException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StillContainsLinksException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.StillContainsLinksException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that the requested index type is not supported.
 type UnsupportedIndexTypeException struct {
@@ -923,6 +1263,16 @@ func (e *UnsupportedIndexTypeException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnsupportedIndexTypeException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnsupportedIndexTypeException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnsupportedIndexTypeException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnsupportedIndexTypeException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnsupportedIndexTypeException_Message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Indicates that your request is malformed in some manner. See the exception
 // message.
@@ -950,3 +1300,13 @@ func (e *ValidationException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationException_Message, v.Message)
+		}
+		return nil
+	})
+}

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,69 @@ type ListDevicesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceAggregatedStatusFilter != "" {
+		s.WriteString(schemas.ListDevicesRequest_DeviceAggregatedStatusFilter, string(v.DeviceAggregatedStatusFilter))
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListDevicesRequest_MaxResults, v.MaxResults)
+	}
+	if v.NameFilter != nil {
+		s.WriteString(schemas.ListDevicesRequest_NameFilter, *v.NameFilter)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevicesRequest_NextToken, *v.NextToken)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListDevicesRequest_SortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListDevicesRequest_SortOrder, string(v.SortOrder))
+	}
+}
+func (v *ListDevicesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDevicesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDevicesRequest_DeviceAggregatedStatusFilter:
+			var ev string
+			if err := d.ReadString(schemas.ListDevicesRequest_DeviceAggregatedStatusFilter, &ev); err != nil {
+				return err
+			}
+			v.DeviceAggregatedStatusFilter = types.DeviceAggregatedStatus(ev)
+			return nil
+		case schemas.ListDevicesRequest_MaxResults:
+			return d.ReadInt32(schemas.ListDevicesRequest_MaxResults, &v.MaxResults)
+		case schemas.ListDevicesRequest_NameFilter:
+			v.NameFilter = new(string)
+			return d.ReadString(schemas.ListDevicesRequest_NameFilter, v.NameFilter)
+		case schemas.ListDevicesRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDevicesRequest_NextToken, v.NextToken)
+		case schemas.ListDevicesRequest_SortBy:
+			var ev string
+			if err := d.ReadString(schemas.ListDevicesRequest_SortBy, &ev); err != nil {
+				return err
+			}
+			v.SortBy = types.ListDevicesSortBy(ev)
+			return nil
+		case schemas.ListDevicesRequest_SortOrder:
+			var ev string
+			if err := d.ReadString(schemas.ListDevicesRequest_SortOrder, &ev); err != nil {
+				return err
+			}
+			v.SortOrder = types.SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 type ListDevicesOutput struct {
 
 	// A list of devices.
@@ -68,16 +133,38 @@ type ListDevicesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDevicesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDevicesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDevicesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceList(s, schemas.ListDevicesResponse_Devices, v.Devices)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDevicesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListDevicesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDevicesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDevicesResponse_Devices:
+			return deserializeDeviceList(d, schemas.ListDevicesResponse_Devices, &v.Devices)
+		case schemas.ListDevicesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDevicesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevices, schemas.ListDevicesRequest, schemas.ListDevicesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDevices{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDevices, schemas.ListDevicesRequest, schemas.ListDevicesResponse), output: &ListDevicesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDevices"); err != nil {

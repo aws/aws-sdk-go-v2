@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,21 @@ type ListTrafficPoliciesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrafficPoliciesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTrafficPoliciesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTrafficPoliciesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTrafficPoliciesRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListTrafficPoliciesRequest_PageSize, *v.PageSize)
+	}
+}
+
 type ListTrafficPoliciesOutput struct {
 
 	// If NextToken is returned, there are more results available. The value of
@@ -56,16 +73,26 @@ type ListTrafficPoliciesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTrafficPoliciesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTrafficPoliciesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTrafficPoliciesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTrafficPoliciesResponse_NextToken, v.NextToken)
+		case schemas.ListTrafficPoliciesResponse_TrafficPolicies:
+			return deserializeTrafficPolicyList(d, schemas.ListTrafficPoliciesResponse_TrafficPolicies, &v.TrafficPolicies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTrafficPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListTrafficPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrafficPolicies, schemas.ListTrafficPoliciesRequest, schemas.ListTrafficPoliciesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListTrafficPolicies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTrafficPolicies, schemas.ListTrafficPoliciesRequest, schemas.ListTrafficPoliciesResponse), output: &ListTrafficPoliciesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTrafficPolicies"); err != nil {

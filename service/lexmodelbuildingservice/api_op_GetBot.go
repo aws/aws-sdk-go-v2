@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -46,6 +48,21 @@ type GetBotInput struct {
 	VersionOrAlias *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetBotRequest_name, *v.Name)
+	}
+	if v.VersionOrAlias != nil {
+		s.WriteString(schemas.GetBotRequest_versionOrAlias, *v.VersionOrAlias)
+	}
 }
 
 type GetBotOutput struct {
@@ -159,16 +176,82 @@ type GetBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBotResponse_abortStatement:
+			v.AbortStatement = &types.Statement{}
+			return v.AbortStatement.Deserialize(d)
+		case schemas.GetBotResponse_checksum:
+			v.Checksum = new(string)
+			return d.ReadString(schemas.GetBotResponse_checksum, v.Checksum)
+		case schemas.GetBotResponse_childDirected:
+			v.ChildDirected = new(bool)
+			return d.ReadBool(schemas.GetBotResponse_childDirected, v.ChildDirected)
+		case schemas.GetBotResponse_clarificationPrompt:
+			v.ClarificationPrompt = &types.Prompt{}
+			return v.ClarificationPrompt.Deserialize(d)
+		case schemas.GetBotResponse_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetBotResponse_createdDate, v.CreatedDate)
+		case schemas.GetBotResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetBotResponse_description, v.Description)
+		case schemas.GetBotResponse_detectSentiment:
+			v.DetectSentiment = new(bool)
+			return d.ReadBool(schemas.GetBotResponse_detectSentiment, v.DetectSentiment)
+		case schemas.GetBotResponse_enableModelImprovements:
+			v.EnableModelImprovements = new(bool)
+			return d.ReadBool(schemas.GetBotResponse_enableModelImprovements, v.EnableModelImprovements)
+		case schemas.GetBotResponse_failureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.GetBotResponse_failureReason, v.FailureReason)
+		case schemas.GetBotResponse_idleSessionTTLInSeconds:
+			v.IdleSessionTTLInSeconds = new(int32)
+			return d.ReadInt32(schemas.GetBotResponse_idleSessionTTLInSeconds, v.IdleSessionTTLInSeconds)
+		case schemas.GetBotResponse_intents:
+			return deserializeIntentList(d, schemas.GetBotResponse_intents, &v.Intents)
+		case schemas.GetBotResponse_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.GetBotResponse_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.GetBotResponse_locale:
+			var ev string
+			if err := d.ReadString(schemas.GetBotResponse_locale, &ev); err != nil {
+				return err
+			}
+			v.Locale = types.Locale(ev)
+			return nil
+		case schemas.GetBotResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetBotResponse_name, v.Name)
+		case schemas.GetBotResponse_nluIntentConfidenceThreshold:
+			v.NluIntentConfidenceThreshold = new(float64)
+			return d.ReadFloat64(schemas.GetBotResponse_nluIntentConfidenceThreshold, v.NluIntentConfidenceThreshold)
+		case schemas.GetBotResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetBotResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		case schemas.GetBotResponse_version:
+			v.Version = new(string)
+			return d.ReadString(schemas.GetBotResponse_version, v.Version)
+		case schemas.GetBotResponse_voiceId:
+			v.VoiceId = new(string)
+			return d.ReadString(schemas.GetBotResponse_voiceId, v.VoiceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBot, schemas.GetBotRequest, schemas.GetBotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBot, schemas.GetBotRequest, schemas.GetBotResponse), output: &GetBotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBot"); err != nil {

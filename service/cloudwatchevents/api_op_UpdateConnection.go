@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -47,6 +49,29 @@ type UpdateConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConnectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConnectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthParameters != nil {
+		s.WriteStruct(schemas.UpdateConnectionRequest_AuthParameters)
+		v.AuthParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthorizationType != "" {
+		s.WriteString(schemas.UpdateConnectionRequest_AuthorizationType, string(v.AuthorizationType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateConnectionRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateConnectionRequest_Name, *v.Name)
+	}
+}
+
 type UpdateConnectionOutput struct {
 
 	// The ARN of the connection that was updated.
@@ -70,16 +95,40 @@ type UpdateConnectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConnectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConnectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConnectionResponse_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.UpdateConnectionResponse_ConnectionArn, v.ConnectionArn)
+		case schemas.UpdateConnectionResponse_ConnectionState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateConnectionResponse_ConnectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = types.ConnectionState(ev)
+			return nil
+		case schemas.UpdateConnectionResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateConnectionResponse_CreationTime, v.CreationTime)
+		case schemas.UpdateConnectionResponse_LastAuthorizedTime:
+			v.LastAuthorizedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateConnectionResponse_LastAuthorizedTime, v.LastAuthorizedTime)
+		case schemas.UpdateConnectionResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateConnectionResponse_LastModifiedTime, v.LastModifiedTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnection, schemas.UpdateConnectionRequest, schemas.UpdateConnectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateConnection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConnection, schemas.UpdateConnectionRequest, schemas.UpdateConnectionResponse), output: &UpdateConnectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateConnection"); err != nil {

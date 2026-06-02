@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,27 @@ type ListConversationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConversationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConversationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConversationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.ListConversationsRequest_applicationId, *v.ApplicationId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConversationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConversationsRequest_nextToken, *v.NextToken)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.ListConversationsRequest_userId, *v.UserId)
+	}
+}
+
 type ListConversationsOutput struct {
 
 	// An array of summary information on the configuration of one or more Amazon Q
@@ -66,16 +89,26 @@ type ListConversationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConversationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConversationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConversationsResponse_conversations:
+			return deserializeConversations(d, schemas.ListConversationsResponse_conversations, &v.Conversations)
+		case schemas.ListConversationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConversationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConversationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConversations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConversations, schemas.ListConversationsRequest, schemas.ListConversationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConversations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConversations, schemas.ListConversationsRequest, schemas.ListConversationsResponse), output: &ListConversationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConversations"); err != nil {

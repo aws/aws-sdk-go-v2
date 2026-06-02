@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backupgateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,34 @@ type ListGatewaysInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGatewaysInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGatewaysInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGatewaysInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGatewaysInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGatewaysInput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGatewaysInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGatewaysInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGatewaysInput_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListGatewaysInput_MaxResults, v.MaxResults)
+		case schemas.ListGatewaysInput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGatewaysInput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListGatewaysOutput struct {
 
 	// A list of your gateways.
@@ -60,16 +90,38 @@ type ListGatewaysOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGatewaysOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGatewaysOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGatewaysOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGateways(s, schemas.ListGatewaysOutput_Gateways, v.Gateways)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGatewaysOutput_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGatewaysOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGatewaysOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGatewaysOutput_Gateways:
+			return deserializeGateways(d, schemas.ListGatewaysOutput_Gateways, &v.Gateways)
+		case schemas.ListGatewaysOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGatewaysOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListGateways{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGateways, schemas.ListGatewaysInput, schemas.ListGatewaysOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListGateways{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGateways, schemas.ListGatewaysInput, schemas.ListGatewaysOutput), output: &ListGatewaysOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGateways"); err != nil {

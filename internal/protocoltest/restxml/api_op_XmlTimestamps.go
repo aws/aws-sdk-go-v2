@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -46,6 +48,36 @@ type XmlTimestampsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlTimestampsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlTimestampsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlTimestampsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DateTime != nil {
+		s.WriteTime(schemas.XmlTimestampsRequest_dateTime, *v.DateTime)
+	}
+	if v.DateTimeOnTarget != nil {
+		s.WriteTime(schemas.XmlTimestampsRequest_dateTimeOnTarget, *v.DateTimeOnTarget)
+	}
+	if v.EpochSeconds != nil {
+		s.WriteTime(schemas.XmlTimestampsRequest_epochSeconds, *v.EpochSeconds)
+	}
+	if v.EpochSecondsOnTarget != nil {
+		s.WriteTime(schemas.XmlTimestampsRequest_epochSecondsOnTarget, *v.EpochSecondsOnTarget)
+	}
+	if v.HttpDate != nil {
+		s.WriteTime(schemas.XmlTimestampsRequest_httpDate, *v.HttpDate)
+	}
+	if v.HttpDateOnTarget != nil {
+		s.WriteTime(schemas.XmlTimestampsRequest_httpDateOnTarget, *v.HttpDateOnTarget)
+	}
+	if v.Normal != nil {
+		s.WriteTime(schemas.XmlTimestampsRequest_normal, *v.Normal)
+	}
+}
+
 type XmlTimestampsOutput struct {
 	DateTime *time.Time
 
@@ -67,16 +99,42 @@ type XmlTimestampsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlTimestampsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XmlTimestampsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XmlTimestampsResponse_dateTime:
+			v.DateTime = new(time.Time)
+			return d.ReadTime(schemas.XmlTimestampsResponse_dateTime, v.DateTime)
+		case schemas.XmlTimestampsResponse_dateTimeOnTarget:
+			v.DateTimeOnTarget = new(time.Time)
+			return d.ReadTime(schemas.XmlTimestampsResponse_dateTimeOnTarget, v.DateTimeOnTarget)
+		case schemas.XmlTimestampsResponse_epochSeconds:
+			v.EpochSeconds = new(time.Time)
+			return d.ReadTime(schemas.XmlTimestampsResponse_epochSeconds, v.EpochSeconds)
+		case schemas.XmlTimestampsResponse_epochSecondsOnTarget:
+			v.EpochSecondsOnTarget = new(time.Time)
+			return d.ReadTime(schemas.XmlTimestampsResponse_epochSecondsOnTarget, v.EpochSecondsOnTarget)
+		case schemas.XmlTimestampsResponse_httpDate:
+			v.HttpDate = new(time.Time)
+			return d.ReadTime(schemas.XmlTimestampsResponse_httpDate, v.HttpDate)
+		case schemas.XmlTimestampsResponse_httpDateOnTarget:
+			v.HttpDateOnTarget = new(time.Time)
+			return d.ReadTime(schemas.XmlTimestampsResponse_httpDateOnTarget, v.HttpDateOnTarget)
+		case schemas.XmlTimestampsResponse_normal:
+			v.Normal = new(time.Time)
+			return d.ReadTime(schemas.XmlTimestampsResponse_normal, v.Normal)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlTimestampsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlTimestamps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlTimestamps, schemas.XmlTimestampsRequest, schemas.XmlTimestampsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpXmlTimestamps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlTimestamps, schemas.XmlTimestampsRequest, schemas.XmlTimestampsResponse), output: &XmlTimestampsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlTimestamps"); err != nil {

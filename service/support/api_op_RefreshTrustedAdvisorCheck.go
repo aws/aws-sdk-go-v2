@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,6 +65,18 @@ type RefreshTrustedAdvisorCheckInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RefreshTrustedAdvisorCheckInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RefreshTrustedAdvisorCheckRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RefreshTrustedAdvisorCheckInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CheckId != nil {
+		s.WriteString(schemas.RefreshTrustedAdvisorCheckRequest_checkId, *v.CheckId)
+	}
+}
+
 // The current refresh status of a Trusted Advisor check.
 type RefreshTrustedAdvisorCheckOutput struct {
 
@@ -78,16 +92,24 @@ type RefreshTrustedAdvisorCheckOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RefreshTrustedAdvisorCheckOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RefreshTrustedAdvisorCheckResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RefreshTrustedAdvisorCheckResponse_status:
+			v.Status = &types.TrustedAdvisorCheckRefreshStatus{}
+			return v.Status.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRefreshTrustedAdvisorCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRefreshTrustedAdvisorCheck{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RefreshTrustedAdvisorCheck, schemas.RefreshTrustedAdvisorCheckRequest, schemas.RefreshTrustedAdvisorCheckResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRefreshTrustedAdvisorCheck{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RefreshTrustedAdvisorCheck, schemas.RefreshTrustedAdvisorCheckRequest, schemas.RefreshTrustedAdvisorCheckResponse), output: &RefreshTrustedAdvisorCheckOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RefreshTrustedAdvisorCheck"); err != nil {

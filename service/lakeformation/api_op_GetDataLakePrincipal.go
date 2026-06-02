@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -30,6 +32,15 @@ type GetDataLakePrincipalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataLakePrincipalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataLakePrincipalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataLakePrincipalInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+
 type GetDataLakePrincipalOutput struct {
 
 	// A unique identifier of the invoking principal.
@@ -41,16 +52,24 @@ type GetDataLakePrincipalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataLakePrincipalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataLakePrincipalResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataLakePrincipalResponse_Identity:
+			v.Identity = new(string)
+			return d.ReadString(schemas.GetDataLakePrincipalResponse_Identity, v.Identity)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataLakePrincipalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataLakePrincipal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataLakePrincipal, schemas.GetDataLakePrincipalRequest, schemas.GetDataLakePrincipalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataLakePrincipal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataLakePrincipal, schemas.GetDataLakePrincipalRequest, schemas.GetDataLakePrincipalResponse), output: &GetDataLakePrincipalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataLakePrincipal"); err != nil {

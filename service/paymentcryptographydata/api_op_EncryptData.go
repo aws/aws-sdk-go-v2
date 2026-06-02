@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -121,6 +123,27 @@ type EncryptDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EncryptDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EncryptDataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EncryptDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEncryptionDecryptionAttributes(s, schemas.EncryptDataInput_EncryptionAttributes, v.EncryptionAttributes)
+	if v.KeyIdentifier != nil {
+		s.WriteString(schemas.EncryptDataInput_KeyIdentifier, *v.KeyIdentifier)
+	}
+	if v.PlainText != nil {
+		s.WriteString(schemas.EncryptDataInput_PlainText, *v.PlainText)
+	}
+	if v.WrappedKey != nil {
+		s.WriteStruct(schemas.EncryptDataInput_WrappedKey)
+		v.WrappedKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type EncryptDataOutput struct {
 
 	// The encrypted ciphertext.
@@ -148,16 +171,30 @@ type EncryptDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EncryptDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EncryptDataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EncryptDataOutput_CipherText:
+			v.CipherText = new(string)
+			return d.ReadString(schemas.EncryptDataOutput_CipherText, v.CipherText)
+		case schemas.EncryptDataOutput_KeyArn:
+			v.KeyArn = new(string)
+			return d.ReadString(schemas.EncryptDataOutput_KeyArn, v.KeyArn)
+		case schemas.EncryptDataOutput_KeyCheckValue:
+			v.KeyCheckValue = new(string)
+			return d.ReadString(schemas.EncryptDataOutput_KeyCheckValue, v.KeyCheckValue)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEncryptDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEncryptData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EncryptData, schemas.EncryptDataInput, schemas.EncryptDataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEncryptData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EncryptData, schemas.EncryptDataInput, schemas.EncryptDataOutput), output: &EncryptDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "EncryptData"); err != nil {

@@ -4,6 +4,9 @@ package types
 
 import (
 	"github.com/aws/aws-sdk-go-v2/service/tnb/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/service/tnb/internal/document"
+	"github.com/aws/aws-sdk-go-v2/service/tnb/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -20,6 +23,34 @@ type ErrorInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ErrorInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cause != nil {
+		s.WriteString(schemas.ErrorInfo_cause, *v.Cause)
+	}
+	if v.Details != nil {
+		s.WriteString(schemas.ErrorInfo_details, *v.Details)
+	}
+}
+func (v *ErrorInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorInfo_cause:
+			v.Cause = new(string)
+			return d.ReadString(schemas.ErrorInfo_cause, v.Cause)
+		case schemas.ErrorInfo_details:
+			v.Details = new(string)
+			return d.ReadString(schemas.ErrorInfo_details, v.Details)
+		}
+		return nil
+	})
+}
+
 // Metadata for function package artifacts.
 //
 // Artifacts are the contents of the package descriptor file and the state of the
@@ -30,6 +61,25 @@ type FunctionArtifactMeta struct {
 	Overrides []ToscaOverride
 
 	noSmithyDocumentSerde
+}
+
+func (v *FunctionArtifactMeta) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FunctionArtifactMeta)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FunctionArtifactMeta) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOverrideList(s, schemas.FunctionArtifactMeta_overrides, v.Overrides)
+}
+func (v *FunctionArtifactMeta) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FunctionArtifactMeta, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FunctionArtifactMeta_overrides:
+			return deserializeOverrideList(d, schemas.FunctionArtifactMeta_overrides, &v.Overrides)
+		}
+		return nil
+	})
 }
 
 // The metadata of a network function instance.
@@ -48,6 +98,34 @@ type GetSolFunctionInstanceMetadata struct {
 	LastModified *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSolFunctionInstanceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSolFunctionInstanceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSolFunctionInstanceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetSolFunctionInstanceMetadata_createdAt, *v.CreatedAt)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.GetSolFunctionInstanceMetadata_lastModified, *v.LastModified)
+	}
+}
+func (v *GetSolFunctionInstanceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSolFunctionInstanceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSolFunctionInstanceMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSolFunctionInstanceMetadata_createdAt, v.CreatedAt)
+		case schemas.GetSolFunctionInstanceMetadata_lastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.GetSolFunctionInstanceMetadata_lastModified, v.LastModified)
+		}
+		return nil
+	})
 }
 
 // Metadata related to the function package.
@@ -74,6 +152,42 @@ type GetSolFunctionPackageMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSolFunctionPackageMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSolFunctionPackageMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSolFunctionPackageMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetSolFunctionPackageMetadata_createdAt, *v.CreatedAt)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.GetSolFunctionPackageMetadata_lastModified, *v.LastModified)
+	}
+	if v.Vnfd != nil {
+		s.WriteStruct(schemas.GetSolFunctionPackageMetadata_vnfd)
+		v.Vnfd.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSolFunctionPackageMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSolFunctionPackageMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSolFunctionPackageMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSolFunctionPackageMetadata_createdAt, v.CreatedAt)
+		case schemas.GetSolFunctionPackageMetadata_lastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.GetSolFunctionPackageMetadata_lastModified, v.LastModified)
+		case schemas.GetSolFunctionPackageMetadata_vnfd:
+			v.Vnfd = &FunctionArtifactMeta{}
+			return v.Vnfd.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Information about a network function.
 //
 // A network instance is a single network created in Amazon Web Services TNB that
@@ -85,6 +199,32 @@ type GetSolInstantiatedVnfInfo struct {
 	VnfState VnfOperationalState
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSolInstantiatedVnfInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSolInstantiatedVnfInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSolInstantiatedVnfInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VnfState != "" {
+		s.WriteString(schemas.GetSolInstantiatedVnfInfo_vnfState, string(v.VnfState))
+	}
+}
+func (v *GetSolInstantiatedVnfInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSolInstantiatedVnfInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSolInstantiatedVnfInfo_vnfState:
+			var ev string
+			if err := d.ReadString(schemas.GetSolInstantiatedVnfInfo_vnfState, &ev); err != nil {
+				return err
+			}
+			v.VnfState = VnfOperationalState(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The metadata of a network instance.
@@ -105,6 +245,34 @@ type GetSolNetworkInstanceMetadata struct {
 	LastModified *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSolNetworkInstanceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSolNetworkInstanceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSolNetworkInstanceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetSolNetworkInstanceMetadata_createdAt, *v.CreatedAt)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.GetSolNetworkInstanceMetadata_lastModified, *v.LastModified)
+	}
+}
+func (v *GetSolNetworkInstanceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSolNetworkInstanceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSolNetworkInstanceMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSolNetworkInstanceMetadata_createdAt, v.CreatedAt)
+		case schemas.GetSolNetworkInstanceMetadata_lastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.GetSolNetworkInstanceMetadata_lastModified, v.LastModified)
+		}
+		return nil
+	})
 }
 
 // Metadata related to a network operation occurrence.
@@ -140,6 +308,58 @@ type GetSolNetworkOperationMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSolNetworkOperationMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSolNetworkOperationMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSolNetworkOperationMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetSolNetworkOperationMetadata_createdAt, *v.CreatedAt)
+	}
+	if v.InstantiateMetadata != nil {
+		s.WriteStruct(schemas.GetSolNetworkOperationMetadata_instantiateMetadata)
+		v.InstantiateMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.GetSolNetworkOperationMetadata_lastModified, *v.LastModified)
+	}
+	if v.ModifyVnfInfoMetadata != nil {
+		s.WriteStruct(schemas.GetSolNetworkOperationMetadata_modifyVnfInfoMetadata)
+		v.ModifyVnfInfoMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateNsMetadata != nil {
+		s.WriteStruct(schemas.GetSolNetworkOperationMetadata_updateNsMetadata)
+		v.UpdateNsMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSolNetworkOperationMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSolNetworkOperationMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSolNetworkOperationMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSolNetworkOperationMetadata_createdAt, v.CreatedAt)
+		case schemas.GetSolNetworkOperationMetadata_instantiateMetadata:
+			v.InstantiateMetadata = &InstantiateMetadata{}
+			return v.InstantiateMetadata.Deserialize(d)
+		case schemas.GetSolNetworkOperationMetadata_lastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.GetSolNetworkOperationMetadata_lastModified, v.LastModified)
+		case schemas.GetSolNetworkOperationMetadata_modifyVnfInfoMetadata:
+			v.ModifyVnfInfoMetadata = &ModifyVnfInfoMetadata{}
+			return v.ModifyVnfInfoMetadata.Deserialize(d)
+		case schemas.GetSolNetworkOperationMetadata_updateNsMetadata:
+			v.UpdateNsMetadata = &UpdateNsMetadata{}
+			return v.UpdateNsMetadata.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Gets the details of a network operation.
 //
 // A network operation is any operation that is done to your network, such as
@@ -167,6 +387,61 @@ type GetSolNetworkOperationTaskDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSolNetworkOperationTaskDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSolNetworkOperationTaskDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSolNetworkOperationTaskDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeStringMap(s, schemas.GetSolNetworkOperationTaskDetails_taskContext, v.TaskContext)
+	if v.TaskEndTime != nil {
+		s.WriteTime(schemas.GetSolNetworkOperationTaskDetails_taskEndTime, *v.TaskEndTime)
+	}
+	if v.TaskErrorDetails != nil {
+		s.WriteStruct(schemas.GetSolNetworkOperationTaskDetails_taskErrorDetails)
+		v.TaskErrorDetails.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskName != nil {
+		s.WriteString(schemas.GetSolNetworkOperationTaskDetails_taskName, *v.TaskName)
+	}
+	if v.TaskStartTime != nil {
+		s.WriteTime(schemas.GetSolNetworkOperationTaskDetails_taskStartTime, *v.TaskStartTime)
+	}
+	if v.TaskStatus != "" {
+		s.WriteString(schemas.GetSolNetworkOperationTaskDetails_taskStatus, string(v.TaskStatus))
+	}
+}
+func (v *GetSolNetworkOperationTaskDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSolNetworkOperationTaskDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSolNetworkOperationTaskDetails_taskContext:
+			return deserializeStringMap(d, schemas.GetSolNetworkOperationTaskDetails_taskContext, &v.TaskContext)
+		case schemas.GetSolNetworkOperationTaskDetails_taskEndTime:
+			v.TaskEndTime = new(time.Time)
+			return d.ReadTime(schemas.GetSolNetworkOperationTaskDetails_taskEndTime, v.TaskEndTime)
+		case schemas.GetSolNetworkOperationTaskDetails_taskErrorDetails:
+			v.TaskErrorDetails = &ErrorInfo{}
+			return v.TaskErrorDetails.Deserialize(d)
+		case schemas.GetSolNetworkOperationTaskDetails_taskName:
+			v.TaskName = new(string)
+			return d.ReadString(schemas.GetSolNetworkOperationTaskDetails_taskName, v.TaskName)
+		case schemas.GetSolNetworkOperationTaskDetails_taskStartTime:
+			v.TaskStartTime = new(time.Time)
+			return d.ReadTime(schemas.GetSolNetworkOperationTaskDetails_taskStartTime, v.TaskStartTime)
+		case schemas.GetSolNetworkOperationTaskDetails_taskStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetSolNetworkOperationTaskDetails_taskStatus, &ev); err != nil {
+				return err
+			}
+			v.TaskStatus = TaskStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Metadata associated with a network package.
 //
 // A network package is a .zip file in CSAR (Cloud Service Archive) format defines
@@ -191,6 +466,42 @@ type GetSolNetworkPackageMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSolNetworkPackageMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSolNetworkPackageMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSolNetworkPackageMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.GetSolNetworkPackageMetadata_createdAt, *v.CreatedAt)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.GetSolNetworkPackageMetadata_lastModified, *v.LastModified)
+	}
+	if v.Nsd != nil {
+		s.WriteStruct(schemas.GetSolNetworkPackageMetadata_nsd)
+		v.Nsd.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSolNetworkPackageMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSolNetworkPackageMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSolNetworkPackageMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetSolNetworkPackageMetadata_createdAt, v.CreatedAt)
+		case schemas.GetSolNetworkPackageMetadata_lastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.GetSolNetworkPackageMetadata_lastModified, v.LastModified)
+		case schemas.GetSolNetworkPackageMetadata_nsd:
+			v.Nsd = &NetworkArtifactMeta{}
+			return v.Nsd.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details of resource associated with a network function.
 //
 // A network instance is a single network created in Amazon Web Services TNB that
@@ -202,6 +513,30 @@ type GetSolVnfcResourceInfo struct {
 	Metadata *GetSolVnfcResourceInfoMetadata
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSolVnfcResourceInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSolVnfcResourceInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSolVnfcResourceInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.GetSolVnfcResourceInfo_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetSolVnfcResourceInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSolVnfcResourceInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSolVnfcResourceInfo_metadata:
+			v.Metadata = &GetSolVnfcResourceInfoMetadata{}
+			return v.Metadata.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The metadata of a network function.
@@ -223,6 +558,40 @@ type GetSolVnfcResourceInfoMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSolVnfcResourceInfoMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSolVnfcResourceInfoMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSolVnfcResourceInfoMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cluster != nil {
+		s.WriteString(schemas.GetSolVnfcResourceInfoMetadata_cluster, *v.Cluster)
+	}
+	if v.HelmChart != nil {
+		s.WriteString(schemas.GetSolVnfcResourceInfoMetadata_helmChart, *v.HelmChart)
+	}
+	if v.NodeGroup != nil {
+		s.WriteString(schemas.GetSolVnfcResourceInfoMetadata_nodeGroup, *v.NodeGroup)
+	}
+}
+func (v *GetSolVnfcResourceInfoMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSolVnfcResourceInfoMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSolVnfcResourceInfoMetadata_cluster:
+			v.Cluster = new(string)
+			return d.ReadString(schemas.GetSolVnfcResourceInfoMetadata_cluster, v.Cluster)
+		case schemas.GetSolVnfcResourceInfoMetadata_helmChart:
+			v.HelmChart = new(string)
+			return d.ReadString(schemas.GetSolVnfcResourceInfoMetadata_helmChart, v.HelmChart)
+		case schemas.GetSolVnfcResourceInfoMetadata_nodeGroup:
+			v.NodeGroup = new(string)
+			return d.ReadString(schemas.GetSolVnfcResourceInfoMetadata_nodeGroup, v.NodeGroup)
+		}
+		return nil
+	})
+}
+
 // Information about the network function.
 //
 // A network function instance is a function in a function package .
@@ -235,6 +604,35 @@ type GetSolVnfInfo struct {
 	VnfcResourceInfo []GetSolVnfcResourceInfo
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSolVnfInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSolVnfInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSolVnfInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VnfState != "" {
+		s.WriteString(schemas.GetSolVnfInfo_vnfState, string(v.VnfState))
+	}
+	serializeGetSolVnfcResourceInfoList(s, schemas.GetSolVnfInfo_vnfcResourceInfo, v.VnfcResourceInfo)
+}
+func (v *GetSolVnfInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSolVnfInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSolVnfInfo_vnfState:
+			var ev string
+			if err := d.ReadString(schemas.GetSolVnfInfo_vnfState, &ev); err != nil {
+				return err
+			}
+			v.VnfState = VnfOperationalState(ev)
+			return nil
+		case schemas.GetSolVnfInfo_vnfcResourceInfo:
+			return deserializeGetSolVnfcResourceInfoList(d, schemas.GetSolVnfInfo_vnfcResourceInfo, &v.VnfcResourceInfo)
+		}
+		return nil
+	})
 }
 
 // Metadata related to the configuration properties used during instantiation of
@@ -252,6 +650,38 @@ type InstantiateMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstantiateMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstantiateMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstantiateMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.InstantiateMetadata_additionalParamsForNs, &smithydocument.Opaque{Value: v.AdditionalParamsForNs})
+	if v.NsdInfoId != nil {
+		s.WriteString(schemas.InstantiateMetadata_nsdInfoId, *v.NsdInfoId)
+	}
+}
+func (v *InstantiateMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstantiateMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstantiateMetadata_additionalParamsForNs:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.InstantiateMetadata_additionalParamsForNs, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.AdditionalParamsForNs = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.InstantiateMetadata_nsdInfoId:
+			v.NsdInfoId = new(string)
+			return d.ReadString(schemas.InstantiateMetadata_nsdInfoId, v.NsdInfoId)
+		}
+		return nil
+	})
+}
+
 // Lifecycle management operation details on the network instance.
 //
 // Lifecycle management operations are deploy, update, or delete operations.
@@ -263,6 +693,28 @@ type LcmOperationInfo struct {
 	NsLcmOpOccId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LcmOperationInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LcmOperationInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LcmOperationInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NsLcmOpOccId != nil {
+		s.WriteString(schemas.LcmOperationInfo_nsLcmOpOccId, *v.NsLcmOpOccId)
+	}
+}
+func (v *LcmOperationInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LcmOperationInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LcmOperationInfo_nsLcmOpOccId:
+			v.NsLcmOpOccId = new(string)
+			return d.ReadString(schemas.LcmOperationInfo_nsLcmOpOccId, v.NsLcmOpOccId)
+		}
+		return nil
+	})
 }
 
 // Lists information about a network function instance.
@@ -313,6 +765,78 @@ type ListSolFunctionInstanceInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolFunctionInstanceInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolFunctionInstanceInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolFunctionInstanceInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListSolFunctionInstanceInfo_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ListSolFunctionInstanceInfo_id, *v.Id)
+	}
+	if v.InstantiatedVnfInfo != nil {
+		s.WriteStruct(schemas.ListSolFunctionInstanceInfo_instantiatedVnfInfo)
+		v.InstantiatedVnfInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstantiationState != "" {
+		s.WriteString(schemas.ListSolFunctionInstanceInfo_instantiationState, string(v.InstantiationState))
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.ListSolFunctionInstanceInfo_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NsInstanceId != nil {
+		s.WriteString(schemas.ListSolFunctionInstanceInfo_nsInstanceId, *v.NsInstanceId)
+	}
+	if v.VnfPkgId != nil {
+		s.WriteString(schemas.ListSolFunctionInstanceInfo_vnfPkgId, *v.VnfPkgId)
+	}
+	if v.VnfPkgName != nil {
+		s.WriteString(schemas.ListSolFunctionInstanceInfo_vnfPkgName, *v.VnfPkgName)
+	}
+}
+func (v *ListSolFunctionInstanceInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolFunctionInstanceInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolFunctionInstanceInfo_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ListSolFunctionInstanceInfo_arn, v.Arn)
+		case schemas.ListSolFunctionInstanceInfo_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ListSolFunctionInstanceInfo_id, v.Id)
+		case schemas.ListSolFunctionInstanceInfo_instantiatedVnfInfo:
+			v.InstantiatedVnfInfo = &GetSolInstantiatedVnfInfo{}
+			return v.InstantiatedVnfInfo.Deserialize(d)
+		case schemas.ListSolFunctionInstanceInfo_instantiationState:
+			var ev string
+			if err := d.ReadString(schemas.ListSolFunctionInstanceInfo_instantiationState, &ev); err != nil {
+				return err
+			}
+			v.InstantiationState = VnfInstantiationState(ev)
+			return nil
+		case schemas.ListSolFunctionInstanceInfo_metadata:
+			v.Metadata = &ListSolFunctionInstanceMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.ListSolFunctionInstanceInfo_nsInstanceId:
+			v.NsInstanceId = new(string)
+			return d.ReadString(schemas.ListSolFunctionInstanceInfo_nsInstanceId, v.NsInstanceId)
+		case schemas.ListSolFunctionInstanceInfo_vnfPkgId:
+			v.VnfPkgId = new(string)
+			return d.ReadString(schemas.ListSolFunctionInstanceInfo_vnfPkgId, v.VnfPkgId)
+		case schemas.ListSolFunctionInstanceInfo_vnfPkgName:
+			v.VnfPkgName = new(string)
+			return d.ReadString(schemas.ListSolFunctionInstanceInfo_vnfPkgName, v.VnfPkgName)
+		}
+		return nil
+	})
+}
+
 // Lists network function instance metadata.
 //
 // A network function instance is a function in a function package .
@@ -329,6 +853,34 @@ type ListSolFunctionInstanceMetadata struct {
 	LastModified *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListSolFunctionInstanceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolFunctionInstanceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolFunctionInstanceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ListSolFunctionInstanceMetadata_createdAt, *v.CreatedAt)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.ListSolFunctionInstanceMetadata_lastModified, *v.LastModified)
+	}
+}
+func (v *ListSolFunctionInstanceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolFunctionInstanceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolFunctionInstanceMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ListSolFunctionInstanceMetadata_createdAt, v.CreatedAt)
+		case schemas.ListSolFunctionInstanceMetadata_lastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.ListSolFunctionInstanceMetadata_lastModified, v.LastModified)
+		}
+		return nil
+	})
 }
 
 // Information about a function package.
@@ -382,6 +934,96 @@ type ListSolFunctionPackageInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolFunctionPackageInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolFunctionPackageInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolFunctionPackageInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListSolFunctionPackageInfo_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ListSolFunctionPackageInfo_id, *v.Id)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.ListSolFunctionPackageInfo_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OnboardingState != "" {
+		s.WriteString(schemas.ListSolFunctionPackageInfo_onboardingState, string(v.OnboardingState))
+	}
+	if v.OperationalState != "" {
+		s.WriteString(schemas.ListSolFunctionPackageInfo_operationalState, string(v.OperationalState))
+	}
+	if v.UsageState != "" {
+		s.WriteString(schemas.ListSolFunctionPackageInfo_usageState, string(v.UsageState))
+	}
+	if v.VnfProductName != nil {
+		s.WriteString(schemas.ListSolFunctionPackageInfo_vnfProductName, *v.VnfProductName)
+	}
+	if v.VnfProvider != nil {
+		s.WriteString(schemas.ListSolFunctionPackageInfo_vnfProvider, *v.VnfProvider)
+	}
+	if v.VnfdId != nil {
+		s.WriteString(schemas.ListSolFunctionPackageInfo_vnfdId, *v.VnfdId)
+	}
+	if v.VnfdVersion != nil {
+		s.WriteString(schemas.ListSolFunctionPackageInfo_vnfdVersion, *v.VnfdVersion)
+	}
+}
+func (v *ListSolFunctionPackageInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolFunctionPackageInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolFunctionPackageInfo_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ListSolFunctionPackageInfo_arn, v.Arn)
+		case schemas.ListSolFunctionPackageInfo_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ListSolFunctionPackageInfo_id, v.Id)
+		case schemas.ListSolFunctionPackageInfo_metadata:
+			v.Metadata = &ListSolFunctionPackageMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.ListSolFunctionPackageInfo_onboardingState:
+			var ev string
+			if err := d.ReadString(schemas.ListSolFunctionPackageInfo_onboardingState, &ev); err != nil {
+				return err
+			}
+			v.OnboardingState = OnboardingState(ev)
+			return nil
+		case schemas.ListSolFunctionPackageInfo_operationalState:
+			var ev string
+			if err := d.ReadString(schemas.ListSolFunctionPackageInfo_operationalState, &ev); err != nil {
+				return err
+			}
+			v.OperationalState = OperationalState(ev)
+			return nil
+		case schemas.ListSolFunctionPackageInfo_usageState:
+			var ev string
+			if err := d.ReadString(schemas.ListSolFunctionPackageInfo_usageState, &ev); err != nil {
+				return err
+			}
+			v.UsageState = UsageState(ev)
+			return nil
+		case schemas.ListSolFunctionPackageInfo_vnfProductName:
+			v.VnfProductName = new(string)
+			return d.ReadString(schemas.ListSolFunctionPackageInfo_vnfProductName, v.VnfProductName)
+		case schemas.ListSolFunctionPackageInfo_vnfProvider:
+			v.VnfProvider = new(string)
+			return d.ReadString(schemas.ListSolFunctionPackageInfo_vnfProvider, v.VnfProvider)
+		case schemas.ListSolFunctionPackageInfo_vnfdId:
+			v.VnfdId = new(string)
+			return d.ReadString(schemas.ListSolFunctionPackageInfo_vnfdId, v.VnfdId)
+		case schemas.ListSolFunctionPackageInfo_vnfdVersion:
+			v.VnfdVersion = new(string)
+			return d.ReadString(schemas.ListSolFunctionPackageInfo_vnfdVersion, v.VnfdVersion)
+		}
+		return nil
+	})
+}
+
 // Details for the function package metadata.
 //
 // A function package is a .zip file in CSAR (Cloud Service Archive) format that
@@ -401,6 +1043,34 @@ type ListSolFunctionPackageMetadata struct {
 	LastModified *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListSolFunctionPackageMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolFunctionPackageMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolFunctionPackageMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ListSolFunctionPackageMetadata_createdAt, *v.CreatedAt)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.ListSolFunctionPackageMetadata_lastModified, *v.LastModified)
+	}
+}
+func (v *ListSolFunctionPackageMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolFunctionPackageMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolFunctionPackageMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ListSolFunctionPackageMetadata_createdAt, v.CreatedAt)
+		case schemas.ListSolFunctionPackageMetadata_lastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.ListSolFunctionPackageMetadata_lastModified, v.LastModified)
+		}
+		return nil
+	})
 }
 
 // Info about the specific network instance.
@@ -453,6 +1123,76 @@ type ListSolNetworkInstanceInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolNetworkInstanceInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolNetworkInstanceInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolNetworkInstanceInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListSolNetworkInstanceInfo_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ListSolNetworkInstanceInfo_id, *v.Id)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.ListSolNetworkInstanceInfo_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NsInstanceDescription != nil {
+		s.WriteString(schemas.ListSolNetworkInstanceInfo_nsInstanceDescription, *v.NsInstanceDescription)
+	}
+	if v.NsInstanceName != nil {
+		s.WriteString(schemas.ListSolNetworkInstanceInfo_nsInstanceName, *v.NsInstanceName)
+	}
+	if v.NsState != "" {
+		s.WriteString(schemas.ListSolNetworkInstanceInfo_nsState, string(v.NsState))
+	}
+	if v.NsdId != nil {
+		s.WriteString(schemas.ListSolNetworkInstanceInfo_nsdId, *v.NsdId)
+	}
+	if v.NsdInfoId != nil {
+		s.WriteString(schemas.ListSolNetworkInstanceInfo_nsdInfoId, *v.NsdInfoId)
+	}
+}
+func (v *ListSolNetworkInstanceInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolNetworkInstanceInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolNetworkInstanceInfo_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ListSolNetworkInstanceInfo_arn, v.Arn)
+		case schemas.ListSolNetworkInstanceInfo_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ListSolNetworkInstanceInfo_id, v.Id)
+		case schemas.ListSolNetworkInstanceInfo_metadata:
+			v.Metadata = &ListSolNetworkInstanceMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.ListSolNetworkInstanceInfo_nsInstanceDescription:
+			v.NsInstanceDescription = new(string)
+			return d.ReadString(schemas.ListSolNetworkInstanceInfo_nsInstanceDescription, v.NsInstanceDescription)
+		case schemas.ListSolNetworkInstanceInfo_nsInstanceName:
+			v.NsInstanceName = new(string)
+			return d.ReadString(schemas.ListSolNetworkInstanceInfo_nsInstanceName, v.NsInstanceName)
+		case schemas.ListSolNetworkInstanceInfo_nsState:
+			var ev string
+			if err := d.ReadString(schemas.ListSolNetworkInstanceInfo_nsState, &ev); err != nil {
+				return err
+			}
+			v.NsState = NsState(ev)
+			return nil
+		case schemas.ListSolNetworkInstanceInfo_nsdId:
+			v.NsdId = new(string)
+			return d.ReadString(schemas.ListSolNetworkInstanceInfo_nsdId, v.NsdId)
+		case schemas.ListSolNetworkInstanceInfo_nsdInfoId:
+			v.NsdInfoId = new(string)
+			return d.ReadString(schemas.ListSolNetworkInstanceInfo_nsdInfoId, v.NsdInfoId)
+		}
+		return nil
+	})
+}
+
 // Metadata details for a network instance.
 //
 // A network instance is a single network created in Amazon Web Services TNB that
@@ -471,6 +1211,34 @@ type ListSolNetworkInstanceMetadata struct {
 	LastModified *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListSolNetworkInstanceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolNetworkInstanceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolNetworkInstanceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ListSolNetworkInstanceMetadata_createdAt, *v.CreatedAt)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.ListSolNetworkInstanceMetadata_lastModified, *v.LastModified)
+	}
+}
+func (v *ListSolNetworkInstanceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolNetworkInstanceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolNetworkInstanceMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ListSolNetworkInstanceMetadata_createdAt, v.CreatedAt)
+		case schemas.ListSolNetworkInstanceMetadata_lastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.ListSolNetworkInstanceMetadata_lastModified, v.LastModified)
+		}
+		return nil
+	})
 }
 
 // Information parameters for a network operation.
@@ -514,6 +1282,86 @@ type ListSolNetworkOperationsInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolNetworkOperationsInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolNetworkOperationsInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolNetworkOperationsInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListSolNetworkOperationsInfo_arn, *v.Arn)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.ListSolNetworkOperationsInfo_error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ListSolNetworkOperationsInfo_id, *v.Id)
+	}
+	if v.LcmOperationType != "" {
+		s.WriteString(schemas.ListSolNetworkOperationsInfo_lcmOperationType, string(v.LcmOperationType))
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.ListSolNetworkOperationsInfo_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NsInstanceId != nil {
+		s.WriteString(schemas.ListSolNetworkOperationsInfo_nsInstanceId, *v.NsInstanceId)
+	}
+	if v.OperationState != "" {
+		s.WriteString(schemas.ListSolNetworkOperationsInfo_operationState, string(v.OperationState))
+	}
+	if v.UpdateType != "" {
+		s.WriteString(schemas.ListSolNetworkOperationsInfo_updateType, string(v.UpdateType))
+	}
+}
+func (v *ListSolNetworkOperationsInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolNetworkOperationsInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolNetworkOperationsInfo_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ListSolNetworkOperationsInfo_arn, v.Arn)
+		case schemas.ListSolNetworkOperationsInfo_error:
+			v.Error = &ProblemDetails{}
+			return v.Error.Deserialize(d)
+		case schemas.ListSolNetworkOperationsInfo_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ListSolNetworkOperationsInfo_id, v.Id)
+		case schemas.ListSolNetworkOperationsInfo_lcmOperationType:
+			var ev string
+			if err := d.ReadString(schemas.ListSolNetworkOperationsInfo_lcmOperationType, &ev); err != nil {
+				return err
+			}
+			v.LcmOperationType = LcmOperationType(ev)
+			return nil
+		case schemas.ListSolNetworkOperationsInfo_metadata:
+			v.Metadata = &ListSolNetworkOperationsMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.ListSolNetworkOperationsInfo_nsInstanceId:
+			v.NsInstanceId = new(string)
+			return d.ReadString(schemas.ListSolNetworkOperationsInfo_nsInstanceId, v.NsInstanceId)
+		case schemas.ListSolNetworkOperationsInfo_operationState:
+			var ev string
+			if err := d.ReadString(schemas.ListSolNetworkOperationsInfo_operationState, &ev); err != nil {
+				return err
+			}
+			v.OperationState = NsLcmOperationState(ev)
+			return nil
+		case schemas.ListSolNetworkOperationsInfo_updateType:
+			var ev string
+			if err := d.ReadString(schemas.ListSolNetworkOperationsInfo_updateType, &ev); err != nil {
+				return err
+			}
+			v.UpdateType = UpdateSolNetworkType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Metadata related to a network operation.
 //
 // A network operation is any operation that is done to your network, such as
@@ -541,6 +1389,46 @@ type ListSolNetworkOperationsMetadata struct {
 	VnfInstanceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ListSolNetworkOperationsMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolNetworkOperationsMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolNetworkOperationsMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ListSolNetworkOperationsMetadata_createdAt, *v.CreatedAt)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.ListSolNetworkOperationsMetadata_lastModified, *v.LastModified)
+	}
+	if v.NsdInfoId != nil {
+		s.WriteString(schemas.ListSolNetworkOperationsMetadata_nsdInfoId, *v.NsdInfoId)
+	}
+	if v.VnfInstanceId != nil {
+		s.WriteString(schemas.ListSolNetworkOperationsMetadata_vnfInstanceId, *v.VnfInstanceId)
+	}
+}
+func (v *ListSolNetworkOperationsMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolNetworkOperationsMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolNetworkOperationsMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ListSolNetworkOperationsMetadata_createdAt, v.CreatedAt)
+		case schemas.ListSolNetworkOperationsMetadata_lastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.ListSolNetworkOperationsMetadata_lastModified, v.LastModified)
+		case schemas.ListSolNetworkOperationsMetadata_nsdInfoId:
+			v.NsdInfoId = new(string)
+			return d.ReadString(schemas.ListSolNetworkOperationsMetadata_nsdInfoId, v.NsdInfoId)
+		case schemas.ListSolNetworkOperationsMetadata_vnfInstanceId:
+			v.VnfInstanceId = new(string)
+			return d.ReadString(schemas.ListSolNetworkOperationsMetadata_vnfInstanceId, v.VnfInstanceId)
+		}
+		return nil
+	})
 }
 
 // Details of a network package.
@@ -602,6 +1490,105 @@ type ListSolNetworkPackageInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolNetworkPackageInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolNetworkPackageInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolNetworkPackageInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ListSolNetworkPackageInfo_arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ListSolNetworkPackageInfo_id, *v.Id)
+	}
+	if v.Metadata != nil {
+		s.WriteStruct(schemas.ListSolNetworkPackageInfo_metadata)
+		v.Metadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NsdDesigner != nil {
+		s.WriteString(schemas.ListSolNetworkPackageInfo_nsdDesigner, *v.NsdDesigner)
+	}
+	if v.NsdId != nil {
+		s.WriteString(schemas.ListSolNetworkPackageInfo_nsdId, *v.NsdId)
+	}
+	if v.NsdInvariantId != nil {
+		s.WriteString(schemas.ListSolNetworkPackageInfo_nsdInvariantId, *v.NsdInvariantId)
+	}
+	if v.NsdName != nil {
+		s.WriteString(schemas.ListSolNetworkPackageInfo_nsdName, *v.NsdName)
+	}
+	if v.NsdOnboardingState != "" {
+		s.WriteString(schemas.ListSolNetworkPackageInfo_nsdOnboardingState, string(v.NsdOnboardingState))
+	}
+	if v.NsdOperationalState != "" {
+		s.WriteString(schemas.ListSolNetworkPackageInfo_nsdOperationalState, string(v.NsdOperationalState))
+	}
+	if v.NsdUsageState != "" {
+		s.WriteString(schemas.ListSolNetworkPackageInfo_nsdUsageState, string(v.NsdUsageState))
+	}
+	if v.NsdVersion != nil {
+		s.WriteString(schemas.ListSolNetworkPackageInfo_nsdVersion, *v.NsdVersion)
+	}
+	serializeVnfPkgIdList(s, schemas.ListSolNetworkPackageInfo_vnfPkgIds, v.VnfPkgIds)
+}
+func (v *ListSolNetworkPackageInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolNetworkPackageInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolNetworkPackageInfo_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ListSolNetworkPackageInfo_arn, v.Arn)
+		case schemas.ListSolNetworkPackageInfo_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ListSolNetworkPackageInfo_id, v.Id)
+		case schemas.ListSolNetworkPackageInfo_metadata:
+			v.Metadata = &ListSolNetworkPackageMetadata{}
+			return v.Metadata.Deserialize(d)
+		case schemas.ListSolNetworkPackageInfo_nsdDesigner:
+			v.NsdDesigner = new(string)
+			return d.ReadString(schemas.ListSolNetworkPackageInfo_nsdDesigner, v.NsdDesigner)
+		case schemas.ListSolNetworkPackageInfo_nsdId:
+			v.NsdId = new(string)
+			return d.ReadString(schemas.ListSolNetworkPackageInfo_nsdId, v.NsdId)
+		case schemas.ListSolNetworkPackageInfo_nsdInvariantId:
+			v.NsdInvariantId = new(string)
+			return d.ReadString(schemas.ListSolNetworkPackageInfo_nsdInvariantId, v.NsdInvariantId)
+		case schemas.ListSolNetworkPackageInfo_nsdName:
+			v.NsdName = new(string)
+			return d.ReadString(schemas.ListSolNetworkPackageInfo_nsdName, v.NsdName)
+		case schemas.ListSolNetworkPackageInfo_nsdOnboardingState:
+			var ev string
+			if err := d.ReadString(schemas.ListSolNetworkPackageInfo_nsdOnboardingState, &ev); err != nil {
+				return err
+			}
+			v.NsdOnboardingState = NsdOnboardingState(ev)
+			return nil
+		case schemas.ListSolNetworkPackageInfo_nsdOperationalState:
+			var ev string
+			if err := d.ReadString(schemas.ListSolNetworkPackageInfo_nsdOperationalState, &ev); err != nil {
+				return err
+			}
+			v.NsdOperationalState = NsdOperationalState(ev)
+			return nil
+		case schemas.ListSolNetworkPackageInfo_nsdUsageState:
+			var ev string
+			if err := d.ReadString(schemas.ListSolNetworkPackageInfo_nsdUsageState, &ev); err != nil {
+				return err
+			}
+			v.NsdUsageState = NsdUsageState(ev)
+			return nil
+		case schemas.ListSolNetworkPackageInfo_nsdVersion:
+			v.NsdVersion = new(string)
+			return d.ReadString(schemas.ListSolNetworkPackageInfo_nsdVersion, v.NsdVersion)
+		case schemas.ListSolNetworkPackageInfo_vnfPkgIds:
+			return deserializeVnfPkgIdList(d, schemas.ListSolNetworkPackageInfo_vnfPkgIds, &v.VnfPkgIds)
+		}
+		return nil
+	})
+}
+
 // Metadata related to a network package.
 //
 // A network package is a .zip file in CSAR (Cloud Service Archive) format defines
@@ -622,6 +1609,34 @@ type ListSolNetworkPackageMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSolNetworkPackageMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSolNetworkPackageMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSolNetworkPackageMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ListSolNetworkPackageMetadata_createdAt, *v.CreatedAt)
+	}
+	if v.LastModified != nil {
+		s.WriteTime(schemas.ListSolNetworkPackageMetadata_lastModified, *v.LastModified)
+	}
+}
+func (v *ListSolNetworkPackageMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSolNetworkPackageMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSolNetworkPackageMetadata_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ListSolNetworkPackageMetadata_createdAt, v.CreatedAt)
+		case schemas.ListSolNetworkPackageMetadata_lastModified:
+			v.LastModified = new(time.Time)
+			return d.ReadTime(schemas.ListSolNetworkPackageMetadata_lastModified, v.LastModified)
+		}
+		return nil
+	})
+}
+
 // Metadata related to the configuration properties used during update of a
 // specific network function in a network instance.
 type ModifyVnfInfoMetadata struct {
@@ -639,6 +1654,38 @@ type ModifyVnfInfoMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyVnfInfoMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyVnfInfoMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyVnfInfoMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.ModifyVnfInfoMetadata_vnfConfigurableProperties, &smithydocument.Opaque{Value: v.VnfConfigurableProperties})
+	if v.VnfInstanceId != nil {
+		s.WriteString(schemas.ModifyVnfInfoMetadata_vnfInstanceId, *v.VnfInstanceId)
+	}
+}
+func (v *ModifyVnfInfoMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyVnfInfoMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyVnfInfoMetadata_vnfConfigurableProperties:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.ModifyVnfInfoMetadata_vnfConfigurableProperties, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.VnfConfigurableProperties = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.ModifyVnfInfoMetadata_vnfInstanceId:
+			v.VnfInstanceId = new(string)
+			return d.ReadString(schemas.ModifyVnfInfoMetadata_vnfInstanceId, v.VnfInstanceId)
+		}
+		return nil
+	})
+}
+
 // Metadata for network package artifacts.
 //
 // Artifacts are the contents of the package descriptor file and the state of the
@@ -649,6 +1696,25 @@ type NetworkArtifactMeta struct {
 	Overrides []ToscaOverride
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkArtifactMeta) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkArtifactMeta)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkArtifactMeta) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeOverrideList(s, schemas.NetworkArtifactMeta_overrides, v.Overrides)
+}
+func (v *NetworkArtifactMeta) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkArtifactMeta, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkArtifactMeta_overrides:
+			return deserializeOverrideList(d, schemas.NetworkArtifactMeta_overrides, &v.Overrides)
+		}
+		return nil
+	})
 }
 
 // Details related to problems with AWS TNB resources.
@@ -663,6 +1729,34 @@ type ProblemDetails struct {
 	Title *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProblemDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProblemDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProblemDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Detail != nil {
+		s.WriteString(schemas.ProblemDetails_detail, *v.Detail)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.ProblemDetails_title, *v.Title)
+	}
+}
+func (v *ProblemDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProblemDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProblemDetails_detail:
+			v.Detail = new(string)
+			return d.ReadString(schemas.ProblemDetails_detail, v.Detail)
+		case schemas.ProblemDetails_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.ProblemDetails_title, v.Title)
+		}
+		return nil
+	})
 }
 
 // Update metadata in a function package.
@@ -682,6 +1776,30 @@ type PutSolFunctionPackageContentMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSolFunctionPackageContentMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSolFunctionPackageContentMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSolFunctionPackageContentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Vnfd != nil {
+		s.WriteStruct(schemas.PutSolFunctionPackageContentMetadata_vnfd)
+		v.Vnfd.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutSolFunctionPackageContentMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSolFunctionPackageContentMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutSolFunctionPackageContentMetadata_vnfd:
+			v.Vnfd = &FunctionArtifactMeta{}
+			return v.Vnfd.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Update metadata in a network package.
 //
 // A network package is a .zip file in CSAR (Cloud Service Archive) format defines
@@ -698,6 +1816,30 @@ type PutSolNetworkPackageContentMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSolNetworkPackageContentMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSolNetworkPackageContentMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSolNetworkPackageContentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nsd != nil {
+		s.WriteStruct(schemas.PutSolNetworkPackageContentMetadata_nsd)
+		v.Nsd.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PutSolNetworkPackageContentMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSolNetworkPackageContentMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutSolNetworkPackageContentMetadata_nsd:
+			v.Nsd = &NetworkArtifactMeta{}
+			return v.Nsd.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Overrides of the TOSCA node.
 type ToscaOverride struct {
 
@@ -708,6 +1850,34 @@ type ToscaOverride struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ToscaOverride) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ToscaOverride)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ToscaOverride) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DefaultValue != nil {
+		s.WriteString(schemas.ToscaOverride_defaultValue, *v.DefaultValue)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ToscaOverride_name, *v.Name)
+	}
+}
+func (v *ToscaOverride) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ToscaOverride, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ToscaOverride_defaultValue:
+			v.DefaultValue = new(string)
+			return d.ReadString(schemas.ToscaOverride_defaultValue, v.DefaultValue)
+		case schemas.ToscaOverride_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ToscaOverride_name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Metadata related to the configuration properties used during update of a
@@ -723,6 +1893,38 @@ type UpdateNsMetadata struct {
 	AdditionalParamsForNs document.Interface
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateNsMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNsMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNsMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.UpdateNsMetadata_additionalParamsForNs, &smithydocument.Opaque{Value: v.AdditionalParamsForNs})
+	if v.NsdInfoId != nil {
+		s.WriteString(schemas.UpdateNsMetadata_nsdInfoId, *v.NsdInfoId)
+	}
+}
+func (v *UpdateNsMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNsMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateNsMetadata_additionalParamsForNs:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.UpdateNsMetadata_additionalParamsForNs, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.AdditionalParamsForNs = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.UpdateNsMetadata_nsdInfoId:
+			v.NsdInfoId = new(string)
+			return d.ReadString(schemas.UpdateNsMetadata_nsdInfoId, v.NsdInfoId)
+		}
+		return nil
+	})
 }
 
 // Information parameters and/or the configurable properties for a network
@@ -747,6 +1949,38 @@ type UpdateSolNetworkModify struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSolNetworkModify) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSolNetworkModify)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSolNetworkModify) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.UpdateSolNetworkModify_vnfConfigurableProperties, &smithydocument.Opaque{Value: v.VnfConfigurableProperties})
+	if v.VnfInstanceId != nil {
+		s.WriteString(schemas.UpdateSolNetworkModify_vnfInstanceId, *v.VnfInstanceId)
+	}
+}
+func (v *UpdateSolNetworkModify) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSolNetworkModify, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSolNetworkModify_vnfConfigurableProperties:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.UpdateSolNetworkModify_vnfConfigurableProperties, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.VnfConfigurableProperties = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.UpdateSolNetworkModify_vnfInstanceId:
+			v.VnfInstanceId = new(string)
+			return d.ReadString(schemas.UpdateSolNetworkModify_vnfInstanceId, v.VnfInstanceId)
+		}
+		return nil
+	})
+}
+
 // Information parameters and/or the configurable properties for a network
 // descriptor used for update.
 type UpdateSolNetworkServiceData struct {
@@ -761,6 +1995,38 @@ type UpdateSolNetworkServiceData struct {
 	AdditionalParamsForNs document.Interface
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateSolNetworkServiceData) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSolNetworkServiceData)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSolNetworkServiceData) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.UpdateSolNetworkServiceData_additionalParamsForNs, &smithydocument.Opaque{Value: v.AdditionalParamsForNs})
+	if v.NsdInfoId != nil {
+		s.WriteString(schemas.UpdateSolNetworkServiceData_nsdInfoId, *v.NsdInfoId)
+	}
+}
+func (v *UpdateSolNetworkServiceData) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSolNetworkServiceData, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSolNetworkServiceData_additionalParamsForNs:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.UpdateSolNetworkServiceData_additionalParamsForNs, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.AdditionalParamsForNs = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		case schemas.UpdateSolNetworkServiceData_nsdInfoId:
+			v.NsdInfoId = new(string)
+			return d.ReadString(schemas.UpdateSolNetworkServiceData_nsdInfoId, v.NsdInfoId)
+		}
+		return nil
+	})
 }
 
 // Validates function package content metadata.
@@ -780,6 +2046,30 @@ type ValidateSolFunctionPackageContentMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidateSolFunctionPackageContentMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateSolFunctionPackageContentMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateSolFunctionPackageContentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Vnfd != nil {
+		s.WriteStruct(schemas.ValidateSolFunctionPackageContentMetadata_vnfd)
+		v.Vnfd.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ValidateSolFunctionPackageContentMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateSolFunctionPackageContentMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateSolFunctionPackageContentMetadata_vnfd:
+			v.Vnfd = &FunctionArtifactMeta{}
+			return v.Vnfd.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Validates network package content metadata.
 //
 // A network package is a .zip file in CSAR (Cloud Service Archive) format defines
@@ -794,6 +2084,30 @@ type ValidateSolNetworkPackageContentMetadata struct {
 	Nsd *NetworkArtifactMeta
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidateSolNetworkPackageContentMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidateSolNetworkPackageContentMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidateSolNetworkPackageContentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nsd != nil {
+		s.WriteStruct(schemas.ValidateSolNetworkPackageContentMetadata_nsd)
+		v.Nsd.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ValidateSolNetworkPackageContentMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidateSolNetworkPackageContentMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidateSolNetworkPackageContentMetadata_nsd:
+			v.Nsd = &NetworkArtifactMeta{}
+			return v.Nsd.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

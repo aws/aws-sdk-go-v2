@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -56,6 +58,25 @@ type CreateBrowserProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBrowserProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBrowserProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBrowserProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateBrowserProfileRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateBrowserProfileRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateBrowserProfileRequest_name, *v.Name)
+	}
+	serializeTagsMap(s, schemas.CreateBrowserProfileRequest_tags, v.Tags)
+}
+
 type CreateBrowserProfileOutput struct {
 
 	// The timestamp when the browser profile was created.
@@ -84,16 +105,37 @@ type CreateBrowserProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBrowserProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBrowserProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBrowserProfileResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateBrowserProfileResponse_createdAt, v.CreatedAt)
+		case schemas.CreateBrowserProfileResponse_profileArn:
+			v.ProfileArn = new(string)
+			return d.ReadString(schemas.CreateBrowserProfileResponse_profileArn, v.ProfileArn)
+		case schemas.CreateBrowserProfileResponse_profileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.CreateBrowserProfileResponse_profileId, v.ProfileId)
+		case schemas.CreateBrowserProfileResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateBrowserProfileResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BrowserProfileStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBrowserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBrowserProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBrowserProfile, schemas.CreateBrowserProfileRequest, schemas.CreateBrowserProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBrowserProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBrowserProfile, schemas.CreateBrowserProfileRequest, schemas.CreateBrowserProfileResponse), output: &CreateBrowserProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBrowserProfile"); err != nil {

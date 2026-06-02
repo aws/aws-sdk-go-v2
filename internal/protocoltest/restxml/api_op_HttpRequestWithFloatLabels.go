@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,34 @@ type HttpRequestWithFloatLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpRequestWithFloatLabelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpRequestWithFloatLabelsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRequestWithFloatLabelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Double != nil {
+		s.WriteFloat64(schemas.HttpRequestWithFloatLabelsInput_double, *v.Double)
+	}
+	if v.Float != nil {
+		s.WriteFloat32(schemas.HttpRequestWithFloatLabelsInput_float, *v.Float)
+	}
+}
+func (v *HttpRequestWithFloatLabelsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpRequestWithFloatLabelsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpRequestWithFloatLabelsInput_double:
+			v.Double = new(float64)
+			return d.ReadFloat64(schemas.HttpRequestWithFloatLabelsInput_double, v.Double)
+		case schemas.HttpRequestWithFloatLabelsInput_float:
+			v.Float = new(float32)
+			return d.ReadFloat32(schemas.HttpRequestWithFloatLabelsInput_float, v.Float)
+		}
+		return nil
+	})
+}
+
 type HttpRequestWithFloatLabelsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +73,29 @@ type HttpRequestWithFloatLabelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpRequestWithFloatLabelsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpRequestWithFloatLabelsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *HttpRequestWithFloatLabelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHttpRequestWithFloatLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpRequestWithFloatLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpRequestWithFloatLabels, schemas.HttpRequestWithFloatLabelsInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpHttpRequestWithFloatLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpRequestWithFloatLabels, schemas.HttpRequestWithFloatLabelsInput, nil), output: &HttpRequestWithFloatLabelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpRequestWithFloatLabels"); err != nil {

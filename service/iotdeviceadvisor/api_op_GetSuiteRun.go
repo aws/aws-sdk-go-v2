@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotdeviceadvisor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,6 +47,21 @@ type GetSuiteRunInput struct {
 	SuiteRunId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSuiteRunInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSuiteRunRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSuiteRunInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SuiteDefinitionId != nil {
+		s.WriteString(schemas.GetSuiteRunRequest_suiteDefinitionId, *v.SuiteDefinitionId)
+	}
+	if v.SuiteRunId != nil {
+		s.WriteString(schemas.GetSuiteRunRequest_suiteRunId, *v.SuiteRunId)
+	}
 }
 
 type GetSuiteRunOutput struct {
@@ -88,16 +105,57 @@ type GetSuiteRunOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSuiteRunOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSuiteRunResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSuiteRunResponse_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetSuiteRunResponse_endTime, v.EndTime)
+		case schemas.GetSuiteRunResponse_errorReason:
+			v.ErrorReason = new(string)
+			return d.ReadString(schemas.GetSuiteRunResponse_errorReason, v.ErrorReason)
+		case schemas.GetSuiteRunResponse_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetSuiteRunResponse_startTime, v.StartTime)
+		case schemas.GetSuiteRunResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetSuiteRunResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.SuiteRunStatus(ev)
+			return nil
+		case schemas.GetSuiteRunResponse_suiteDefinitionId:
+			v.SuiteDefinitionId = new(string)
+			return d.ReadString(schemas.GetSuiteRunResponse_suiteDefinitionId, v.SuiteDefinitionId)
+		case schemas.GetSuiteRunResponse_suiteDefinitionVersion:
+			v.SuiteDefinitionVersion = new(string)
+			return d.ReadString(schemas.GetSuiteRunResponse_suiteDefinitionVersion, v.SuiteDefinitionVersion)
+		case schemas.GetSuiteRunResponse_suiteRunArn:
+			v.SuiteRunArn = new(string)
+			return d.ReadString(schemas.GetSuiteRunResponse_suiteRunArn, v.SuiteRunArn)
+		case schemas.GetSuiteRunResponse_suiteRunConfiguration:
+			v.SuiteRunConfiguration = &types.SuiteRunConfiguration{}
+			return v.SuiteRunConfiguration.Deserialize(d)
+		case schemas.GetSuiteRunResponse_suiteRunId:
+			v.SuiteRunId = new(string)
+			return d.ReadString(schemas.GetSuiteRunResponse_suiteRunId, v.SuiteRunId)
+		case schemas.GetSuiteRunResponse_tags:
+			return deserializeTagMap(d, schemas.GetSuiteRunResponse_tags, &v.Tags)
+		case schemas.GetSuiteRunResponse_testResult:
+			v.TestResult = &types.TestResult{}
+			return v.TestResult.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSuiteRunMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSuiteRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSuiteRun, schemas.GetSuiteRunRequest, schemas.GetSuiteRunResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSuiteRun{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSuiteRun, schemas.GetSuiteRunRequest, schemas.GetSuiteRunResponse), output: &GetSuiteRunOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSuiteRun"); err != nil {

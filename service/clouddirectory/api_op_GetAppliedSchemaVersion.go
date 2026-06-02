@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type GetAppliedSchemaVersionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppliedSchemaVersionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppliedSchemaVersionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppliedSchemaVersionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.GetAppliedSchemaVersionRequest_SchemaArn, *v.SchemaArn)
+	}
+}
+
 type GetAppliedSchemaVersionOutput struct {
 
 	// Current applied schema ARN, including the minor version in use if one was
@@ -48,16 +62,24 @@ type GetAppliedSchemaVersionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppliedSchemaVersionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAppliedSchemaVersionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAppliedSchemaVersionResponse_AppliedSchemaArn:
+			v.AppliedSchemaArn = new(string)
+			return d.ReadString(schemas.GetAppliedSchemaVersionResponse_AppliedSchemaArn, v.AppliedSchemaArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAppliedSchemaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAppliedSchemaVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppliedSchemaVersion, schemas.GetAppliedSchemaVersionRequest, schemas.GetAppliedSchemaVersionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAppliedSchemaVersion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppliedSchemaVersion, schemas.GetAppliedSchemaVersionRequest, schemas.GetAppliedSchemaVersionResponse), output: &GetAppliedSchemaVersionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAppliedSchemaVersion"); err != nil {

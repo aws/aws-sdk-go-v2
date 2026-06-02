@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,24 @@ type ListHostedZoneAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHostedZoneAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHostedZoneAssociationsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHostedZoneAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHostedZoneAssociationsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHostedZoneAssociationsInput_nextToken, *v.NextToken)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListHostedZoneAssociationsInput_resourceArn, *v.ResourceArn)
+	}
+}
+
 type ListHostedZoneAssociationsOutput struct {
 
 	// List of the private hosted zone associations.
@@ -69,16 +89,26 @@ type ListHostedZoneAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHostedZoneAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHostedZoneAssociationsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHostedZoneAssociationsOutput_hostedZoneAssociations:
+			return deserializeHostedZoneAssociations(d, schemas.ListHostedZoneAssociationsOutput_hostedZoneAssociations, &v.HostedZoneAssociations)
+		case schemas.ListHostedZoneAssociationsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHostedZoneAssociationsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHostedZoneAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListHostedZoneAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHostedZoneAssociations, schemas.ListHostedZoneAssociationsInput, schemas.ListHostedZoneAssociationsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListHostedZoneAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHostedZoneAssociations, schemas.ListHostedZoneAssociationsInput, schemas.ListHostedZoneAssociationsOutput), output: &ListHostedZoneAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHostedZoneAssociations"); err != nil {

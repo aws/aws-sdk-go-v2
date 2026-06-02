@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mpa/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mpa/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -66,6 +68,24 @@ type CreateIdentitySourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIdentitySourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIdentitySourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIdentitySourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateIdentitySourceRequest_ClientToken, *v.ClientToken)
+	}
+	if v.IdentitySourceParameters != nil {
+		s.WriteStruct(schemas.CreateIdentitySourceRequest_IdentitySourceParameters)
+		v.IdentitySourceParameters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateIdentitySourceRequest_Tags, v.Tags)
+}
+
 type CreateIdentitySourceOutput struct {
 
 	// Timestamp when the identity source was created.
@@ -84,16 +104,34 @@ type CreateIdentitySourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIdentitySourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIdentitySourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIdentitySourceResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.CreateIdentitySourceResponse_CreationTime, v.CreationTime)
+		case schemas.CreateIdentitySourceResponse_IdentitySourceArn:
+			v.IdentitySourceArn = new(string)
+			return d.ReadString(schemas.CreateIdentitySourceResponse_IdentitySourceArn, v.IdentitySourceArn)
+		case schemas.CreateIdentitySourceResponse_IdentitySourceType:
+			var ev string
+			if err := d.ReadString(schemas.CreateIdentitySourceResponse_IdentitySourceType, &ev); err != nil {
+				return err
+			}
+			v.IdentitySourceType = types.IdentitySourceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIdentitySourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateIdentitySource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIdentitySource, schemas.CreateIdentitySourceRequest, schemas.CreateIdentitySourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateIdentitySource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIdentitySource, schemas.CreateIdentitySourceRequest, schemas.CreateIdentitySourceResponse), output: &CreateIdentitySourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIdentitySource"); err != nil {

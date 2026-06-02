@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type DescribeConnectorOperationInput struct {
 	ConnectorOperationArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeConnectorOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectorOperationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectorOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorOperationArn != nil {
+		s.WriteString(schemas.DescribeConnectorOperationRequest_connectorOperationArn, *v.ConnectorOperationArn)
+	}
 }
 
 type DescribeConnectorOperationOutput struct {
@@ -82,16 +96,62 @@ type DescribeConnectorOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectorOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeConnectorOperationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeConnectorOperationResponse_connectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.DescribeConnectorOperationResponse_connectorArn, v.ConnectorArn)
+		case schemas.DescribeConnectorOperationResponse_connectorOperationArn:
+			v.ConnectorOperationArn = new(string)
+			return d.ReadString(schemas.DescribeConnectorOperationResponse_connectorOperationArn, v.ConnectorOperationArn)
+		case schemas.DescribeConnectorOperationResponse_connectorOperationState:
+			var ev string
+			if err := d.ReadString(schemas.DescribeConnectorOperationResponse_connectorOperationState, &ev); err != nil {
+				return err
+			}
+			v.ConnectorOperationState = types.ConnectorOperationState(ev)
+			return nil
+		case schemas.DescribeConnectorOperationResponse_connectorOperationType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeConnectorOperationResponse_connectorOperationType, &ev); err != nil {
+				return err
+			}
+			v.ConnectorOperationType = types.ConnectorOperationType(ev)
+			return nil
+		case schemas.DescribeConnectorOperationResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeConnectorOperationResponse_creationTime, v.CreationTime)
+		case schemas.DescribeConnectorOperationResponse_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeConnectorOperationResponse_endTime, v.EndTime)
+		case schemas.DescribeConnectorOperationResponse_errorInfo:
+			v.ErrorInfo = &types.StateDescription{}
+			return v.ErrorInfo.Deserialize(d)
+		case schemas.DescribeConnectorOperationResponse_operationSteps:
+			return deserialize__listOfConnectorOperationStep(d, schemas.DescribeConnectorOperationResponse_operationSteps, &v.OperationSteps)
+		case schemas.DescribeConnectorOperationResponse_originConnectorConfiguration:
+			return deserializeConnectorConfiguration(d, schemas.DescribeConnectorOperationResponse_originConnectorConfiguration, &v.OriginConnectorConfiguration)
+		case schemas.DescribeConnectorOperationResponse_originWorkerSetting:
+			v.OriginWorkerSetting = &types.WorkerSetting{}
+			return v.OriginWorkerSetting.Deserialize(d)
+		case schemas.DescribeConnectorOperationResponse_targetConnectorConfiguration:
+			return deserializeConnectorConfiguration(d, schemas.DescribeConnectorOperationResponse_targetConnectorConfiguration, &v.TargetConnectorConfiguration)
+		case schemas.DescribeConnectorOperationResponse_targetWorkerSetting:
+			v.TargetWorkerSetting = &types.WorkerSetting{}
+			return v.TargetWorkerSetting.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConnectorOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeConnectorOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectorOperation, schemas.DescribeConnectorOperationRequest, schemas.DescribeConnectorOperationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeConnectorOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectorOperation, schemas.DescribeConnectorOperationRequest, schemas.DescribeConnectorOperationResponse), output: &DescribeConnectorOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConnectorOperation"); err != nil {

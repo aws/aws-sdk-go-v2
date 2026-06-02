@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/b2bi/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -16,6 +18,30 @@ type AdvancedOptions struct {
 	X12 *X12AdvancedOptions
 
 	noSmithyDocumentSerde
+}
+
+func (v *AdvancedOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdvancedOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdvancedOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.X12 != nil {
+		s.WriteStruct(schemas.AdvancedOptions_x12)
+		v.X12.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AdvancedOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdvancedOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdvancedOptions_x12:
+			v.X12 = &X12AdvancedOptions{}
+			return v.X12.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // A capability object. Currently, only EDI (electronic data interchange)
@@ -37,6 +63,14 @@ type CapabilityConfigurationMemberEdi struct {
 }
 
 func (*CapabilityConfigurationMemberEdi) isCapabilityConfiguration() {}
+func (v *CapabilityConfigurationMemberEdi) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapabilityConfiguration_edi)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *CapabilityConfigurationMemberEdi) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains the details for an Outbound EDI capability.
 type CapabilityOptions struct {
@@ -48,6 +82,33 @@ type CapabilityOptions struct {
 	OutboundEdi OutboundEdiOptions
 
 	noSmithyDocumentSerde
+}
+
+func (v *CapabilityOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapabilityOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapabilityOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InboundEdi != nil {
+		s.WriteStruct(schemas.CapabilityOptions_inboundEdi)
+		v.InboundEdi.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeOutboundEdiOptions(s, schemas.CapabilityOptions_outboundEdi, v.OutboundEdi)
+}
+func (v *CapabilityOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapabilityOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapabilityOptions_inboundEdi:
+			v.InboundEdi = &InboundEdiOptions{}
+			return v.InboundEdi.Deserialize(d)
+		case schemas.CapabilityOptions_outboundEdi:
+			return deserializeOutboundEdiOptions(d, schemas.CapabilityOptions_outboundEdi, &v.OutboundEdi)
+		}
+		return nil
+	})
 }
 
 // Returns the capability summary details. A trading capability contains the
@@ -82,6 +143,56 @@ type CapabilitySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CapabilitySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CapabilitySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CapabilitySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapabilityId != nil {
+		s.WriteString(schemas.CapabilitySummary_capabilityId, *v.CapabilityId)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.CapabilitySummary_createdAt, *v.CreatedAt)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.CapabilitySummary_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CapabilitySummary_name, *v.Name)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CapabilitySummary_type, string(v.Type))
+	}
+}
+func (v *CapabilitySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CapabilitySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CapabilitySummary_capabilityId:
+			v.CapabilityId = new(string)
+			return d.ReadString(schemas.CapabilitySummary_capabilityId, v.CapabilityId)
+		case schemas.CapabilitySummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CapabilitySummary_createdAt, v.CreatedAt)
+		case schemas.CapabilitySummary_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.CapabilitySummary_modifiedAt, v.ModifiedAt)
+		case schemas.CapabilitySummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CapabilitySummary_name, v.Name)
+		case schemas.CapabilitySummary_type:
+			var ev string
+			if err := d.ReadString(schemas.CapabilitySummary_type, &ev); err != nil {
+				return err
+			}
+			v.Type = CapabilityType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the input for an outbound transformation.
 type ConversionSource struct {
 
@@ -96,6 +207,35 @@ type ConversionSource struct {
 	InputFile InputFileSource
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConversionSource) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConversionSource)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConversionSource) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FileFormat != "" {
+		s.WriteString(schemas.ConversionSource_fileFormat, string(v.FileFormat))
+	}
+	serializeInputFileSource(s, schemas.ConversionSource_inputFile, v.InputFile)
+}
+func (v *ConversionSource) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConversionSource, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConversionSource_fileFormat:
+			var ev string
+			if err := d.ReadString(schemas.ConversionSource_fileFormat, &ev); err != nil {
+				return err
+			}
+			v.FileFormat = ConversionSourceFormat(ev)
+			return nil
+		case schemas.ConversionSource_inputFile:
+			return deserializeInputFileSource(d, schemas.ConversionSource_inputFile, &v.InputFile)
+		}
+		return nil
+	})
 }
 
 // Provide a sample of what the output of the transformation should look like.
@@ -118,6 +258,46 @@ type ConversionTarget struct {
 	OutputSampleFile OutputSampleFileSource
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConversionTarget) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConversionTarget)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConversionTarget) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdvancedOptions != nil {
+		s.WriteStruct(schemas.ConversionTarget_advancedOptions)
+		v.AdvancedOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FileFormat != "" {
+		s.WriteString(schemas.ConversionTarget_fileFormat, string(v.FileFormat))
+	}
+	serializeConversionTargetFormatDetails(s, schemas.ConversionTarget_formatDetails, v.FormatDetails)
+	serializeOutputSampleFileSource(s, schemas.ConversionTarget_outputSampleFile, v.OutputSampleFile)
+}
+func (v *ConversionTarget) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConversionTarget, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConversionTarget_advancedOptions:
+			v.AdvancedOptions = &AdvancedOptions{}
+			return v.AdvancedOptions.Deserialize(d)
+		case schemas.ConversionTarget_fileFormat:
+			var ev string
+			if err := d.ReadString(schemas.ConversionTarget_fileFormat, &ev); err != nil {
+				return err
+			}
+			v.FileFormat = ConversionTargetFormat(ev)
+			return nil
+		case schemas.ConversionTarget_formatDetails:
+			return deserializeConversionTargetFormatDetails(d, schemas.ConversionTarget_formatDetails, &v.FormatDetails)
+		case schemas.ConversionTarget_outputSampleFile:
+			return deserializeOutputSampleFileSource(d, schemas.ConversionTarget_outputSampleFile, &v.OutputSampleFile)
+		}
+		return nil
+	})
 }
 
 // Contains a structure describing the X12 details for the conversion target.
@@ -143,6 +323,14 @@ type ConversionTargetFormatDetailsMemberX12 struct {
 }
 
 func (*ConversionTargetFormatDetailsMemberX12) isConversionTargetFormatDetails() {}
+func (v *ConversionTargetFormatDetailsMemberX12) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConversionTargetFormatDetails_x12)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ConversionTargetFormatDetailsMemberX12) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Specifies the details for the EDI (electronic data interchange) transformation.
 type EdiConfiguration struct {
@@ -175,6 +363,57 @@ type EdiConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EdiConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EdiConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EdiConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapabilityDirection != "" {
+		s.WriteString(schemas.EdiConfiguration_capabilityDirection, string(v.CapabilityDirection))
+	}
+	if v.InputLocation != nil {
+		s.WriteStruct(schemas.EdiConfiguration_inputLocation)
+		v.InputLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OutputLocation != nil {
+		s.WriteStruct(schemas.EdiConfiguration_outputLocation)
+		v.OutputLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TransformerId != nil {
+		s.WriteString(schemas.EdiConfiguration_transformerId, *v.TransformerId)
+	}
+	serializeEdiType(s, schemas.EdiConfiguration_type, v.Type)
+}
+func (v *EdiConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EdiConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EdiConfiguration_capabilityDirection:
+			var ev string
+			if err := d.ReadString(schemas.EdiConfiguration_capabilityDirection, &ev); err != nil {
+				return err
+			}
+			v.CapabilityDirection = CapabilityDirection(ev)
+			return nil
+		case schemas.EdiConfiguration_inputLocation:
+			v.InputLocation = &S3Location{}
+			return v.InputLocation.Deserialize(d)
+		case schemas.EdiConfiguration_outputLocation:
+			v.OutputLocation = &S3Location{}
+			return v.OutputLocation.Deserialize(d)
+		case schemas.EdiConfiguration_transformerId:
+			v.TransformerId = new(string)
+			return d.ReadString(schemas.EdiConfiguration_transformerId, v.TransformerId)
+		case schemas.EdiConfiguration_type:
+			return deserializeEdiType(d, schemas.EdiConfiguration_type, &v.Type)
+		}
+		return nil
+	})
+}
+
 // Specifies the details for the EDI standard that is being used for the
 // transformer. Currently, only X12 is supported. X12 is a set of standards and
 // corresponding messages that define specific business documents.
@@ -196,6 +435,14 @@ type EdiTypeMemberX12Details struct {
 }
 
 func (*EdiTypeMemberX12Details) isEdiType() {}
+func (v *EdiTypeMemberX12Details) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EdiType_x12Details)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *EdiTypeMemberX12Details) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A structure that contains the X12 transaction set and version.
 //
@@ -220,6 +467,14 @@ type FormatOptionsMemberX12 struct {
 }
 
 func (*FormatOptionsMemberX12) isFormatOptions() {}
+func (v *FormatOptionsMemberX12) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FormatOptions_x12)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *FormatOptionsMemberX12) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains options for processing inbound EDI files. These options allow for
 // customizing how incoming EDI documents are processed.
@@ -230,6 +485,30 @@ type InboundEdiOptions struct {
 	X12 *X12InboundEdiOptions
 
 	noSmithyDocumentSerde
+}
+
+func (v *InboundEdiOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InboundEdiOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InboundEdiOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.X12 != nil {
+		s.WriteStruct(schemas.InboundEdiOptions_x12)
+		v.X12.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *InboundEdiOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InboundEdiOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InboundEdiOptions_x12:
+			v.X12 = &X12InboundEdiOptions{}
+			return v.X12.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Contains the input formatting options for an inbound transformer (takes an
@@ -252,6 +531,43 @@ type InputConversion struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InputConversion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InputConversion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InputConversion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdvancedOptions != nil {
+		s.WriteStruct(schemas.InputConversion_advancedOptions)
+		v.AdvancedOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFormatOptions(s, schemas.InputConversion_formatOptions, v.FormatOptions)
+	if v.FromFormat != "" {
+		s.WriteString(schemas.InputConversion_fromFormat, string(v.FromFormat))
+	}
+}
+func (v *InputConversion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InputConversion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InputConversion_advancedOptions:
+			v.AdvancedOptions = &AdvancedOptions{}
+			return v.AdvancedOptions.Deserialize(d)
+		case schemas.InputConversion_formatOptions:
+			return deserializeFormatOptions(d, schemas.InputConversion_formatOptions, &v.FormatOptions)
+		case schemas.InputConversion_fromFormat:
+			var ev string
+			if err := d.ReadString(schemas.InputConversion_fromFormat, &ev); err != nil {
+				return err
+			}
+			v.FromFormat = FromFormat(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The input file to use for an outbound transformation.
 //
 // The following types satisfy this interface:
@@ -270,6 +586,12 @@ type InputFileSourceMemberFileContent struct {
 }
 
 func (*InputFileSourceMemberFileContent) isInputFileSource() {}
+func (v *InputFileSourceMemberFileContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.InputFileSource_fileContent, v.Value)
+}
+func (v *InputFileSourceMemberFileContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.InputFileSource_fileContent, &v.Value)
+}
 
 // Specifies the mapping template for the transformer. This template is used to
 // map the parsed EDI file using JSONata or XSLT.
@@ -285,6 +607,38 @@ type Mapping struct {
 	Template *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Mapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Mapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Mapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Template != nil {
+		s.WriteString(schemas.Mapping_template, *v.Template)
+	}
+	if v.TemplateLanguage != "" {
+		s.WriteString(schemas.Mapping_templateLanguage, string(v.TemplateLanguage))
+	}
+}
+func (v *Mapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Mapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Mapping_template:
+			v.Template = new(string)
+			return d.ReadString(schemas.Mapping_template, v.Template)
+		case schemas.Mapping_templateLanguage:
+			var ev string
+			if err := d.ReadString(schemas.Mapping_templateLanguage, &ev); err != nil {
+				return err
+			}
+			v.TemplateLanguage = MappingTemplateLanguage(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // A container for outbound EDI options.
@@ -304,6 +658,14 @@ type OutboundEdiOptionsMemberX12 struct {
 }
 
 func (*OutboundEdiOptionsMemberX12) isOutboundEdiOptions() {}
+func (v *OutboundEdiOptionsMemberX12) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutboundEdiOptions_x12)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OutboundEdiOptionsMemberX12) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains the formatting options for an outbound transformer (takes JSON or XML
 // as input and converts it to an EDI document (currently only X12 format is
@@ -327,6 +689,43 @@ type OutputConversion struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OutputConversion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputConversion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OutputConversion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdvancedOptions != nil {
+		s.WriteStruct(schemas.OutputConversion_advancedOptions)
+		v.AdvancedOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFormatOptions(s, schemas.OutputConversion_formatOptions, v.FormatOptions)
+	if v.ToFormat != "" {
+		s.WriteString(schemas.OutputConversion_toFormat, string(v.ToFormat))
+	}
+}
+func (v *OutputConversion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OutputConversion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OutputConversion_advancedOptions:
+			v.AdvancedOptions = &AdvancedOptions{}
+			return v.AdvancedOptions.Deserialize(d)
+		case schemas.OutputConversion_formatOptions:
+			return deserializeFormatOptions(d, schemas.OutputConversion_formatOptions, &v.FormatOptions)
+		case schemas.OutputConversion_toFormat:
+			var ev string
+			if err := d.ReadString(schemas.OutputConversion_toFormat, &ev); err != nil {
+				return err
+			}
+			v.ToFormat = ToFormat(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Container for the location of a sample file used for outbound transformations.
 //
 // The following types satisfy this interface:
@@ -346,6 +745,14 @@ type OutputSampleFileSourceMemberFileLocation struct {
 }
 
 func (*OutputSampleFileSourceMemberFileLocation) isOutputSampleFileSource() {}
+func (v *OutputSampleFileSourceMemberFileLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OutputSampleFileSource_fileLocation)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *OutputSampleFileSourceMemberFileLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // A structure that contains the details for a partnership. A partnership
 // represents the connection between you and your trading partner. It ties together
@@ -387,6 +794,69 @@ type PartnershipSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PartnershipSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PartnershipSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PartnershipSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePartnershipCapabilities(s, schemas.PartnershipSummary_capabilities, v.Capabilities)
+	if v.CapabilityOptions != nil {
+		s.WriteStruct(schemas.PartnershipSummary_capabilityOptions)
+		v.CapabilityOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.PartnershipSummary_createdAt, *v.CreatedAt)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.PartnershipSummary_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.PartnershipSummary_name, *v.Name)
+	}
+	if v.PartnershipId != nil {
+		s.WriteString(schemas.PartnershipSummary_partnershipId, *v.PartnershipId)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.PartnershipSummary_profileId, *v.ProfileId)
+	}
+	if v.TradingPartnerId != nil {
+		s.WriteString(schemas.PartnershipSummary_tradingPartnerId, *v.TradingPartnerId)
+	}
+}
+func (v *PartnershipSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PartnershipSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PartnershipSummary_capabilities:
+			return deserializePartnershipCapabilities(d, schemas.PartnershipSummary_capabilities, &v.Capabilities)
+		case schemas.PartnershipSummary_capabilityOptions:
+			v.CapabilityOptions = &CapabilityOptions{}
+			return v.CapabilityOptions.Deserialize(d)
+		case schemas.PartnershipSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.PartnershipSummary_createdAt, v.CreatedAt)
+		case schemas.PartnershipSummary_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.PartnershipSummary_modifiedAt, v.ModifiedAt)
+		case schemas.PartnershipSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.PartnershipSummary_name, v.Name)
+		case schemas.PartnershipSummary_partnershipId:
+			v.PartnershipId = new(string)
+			return d.ReadString(schemas.PartnershipSummary_partnershipId, v.PartnershipId)
+		case schemas.PartnershipSummary_profileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.PartnershipSummary_profileId, v.ProfileId)
+		case schemas.PartnershipSummary_tradingPartnerId:
+			v.TradingPartnerId = new(string)
+			return d.ReadString(schemas.PartnershipSummary_tradingPartnerId, v.TradingPartnerId)
+		}
+		return nil
+	})
+}
+
 // Contains the details for a profile. A profile is the mechanism used to create
 // the concept of a private network.
 type ProfileSummary struct {
@@ -424,6 +894,68 @@ type ProfileSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProfileSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProfileSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProfileSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BusinessName != nil {
+		s.WriteString(schemas.ProfileSummary_businessName, *v.BusinessName)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ProfileSummary_createdAt, *v.CreatedAt)
+	}
+	if v.LogGroupName != nil {
+		s.WriteString(schemas.ProfileSummary_logGroupName, *v.LogGroupName)
+	}
+	if v.Logging != "" {
+		s.WriteString(schemas.ProfileSummary_logging, string(v.Logging))
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.ProfileSummary_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ProfileSummary_name, *v.Name)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.ProfileSummary_profileId, *v.ProfileId)
+	}
+}
+func (v *ProfileSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProfileSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProfileSummary_businessName:
+			v.BusinessName = new(string)
+			return d.ReadString(schemas.ProfileSummary_businessName, v.BusinessName)
+		case schemas.ProfileSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ProfileSummary_createdAt, v.CreatedAt)
+		case schemas.ProfileSummary_logGroupName:
+			v.LogGroupName = new(string)
+			return d.ReadString(schemas.ProfileSummary_logGroupName, v.LogGroupName)
+		case schemas.ProfileSummary_logging:
+			var ev string
+			if err := d.ReadString(schemas.ProfileSummary_logging, &ev); err != nil {
+				return err
+			}
+			v.Logging = Logging(ev)
+			return nil
+		case schemas.ProfileSummary_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.ProfileSummary_modifiedAt, v.ModifiedAt)
+		case schemas.ProfileSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ProfileSummary_name, v.Name)
+		case schemas.ProfileSummary_profileId:
+			v.ProfileId = new(string)
+			return d.ReadString(schemas.ProfileSummary_profileId, v.ProfileId)
+		}
+		return nil
+	})
+}
+
 // Specifies the details for the Amazon S3 file location that is being used with
 // Amazon Web Services B2B Data Interchange. File locations in Amazon S3 are
 // identified using a combination of the bucket and key.
@@ -438,6 +970,34 @@ type S3Location struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Location) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Location)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Location) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3Location_bucketName, *v.BucketName)
+	}
+	if v.Key != nil {
+		s.WriteString(schemas.S3Location_key, *v.Key)
+	}
+}
+func (v *S3Location) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Location, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Location_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3Location_bucketName, v.BucketName)
+		case schemas.S3Location_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.S3Location_key, v.Key)
+		}
+		return nil
+	})
+}
+
 // An array of the Amazon S3 keys used to identify the location for your sample
 // documents.
 type SampleDocumentKeys struct {
@@ -449,6 +1009,34 @@ type SampleDocumentKeys struct {
 	Output *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SampleDocumentKeys) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SampleDocumentKeys)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SampleDocumentKeys) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Input != nil {
+		s.WriteString(schemas.SampleDocumentKeys_input, *v.Input)
+	}
+	if v.Output != nil {
+		s.WriteString(schemas.SampleDocumentKeys_output, *v.Output)
+	}
+}
+func (v *SampleDocumentKeys) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SampleDocumentKeys, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SampleDocumentKeys_input:
+			v.Input = new(string)
+			return d.ReadString(schemas.SampleDocumentKeys_input, v.Input)
+		case schemas.SampleDocumentKeys_output:
+			v.Output = new(string)
+			return d.ReadString(schemas.SampleDocumentKeys_output, v.Output)
+		}
+		return nil
+	})
 }
 
 // Describes a structure that contains the Amazon S3 bucket and an array of the
@@ -467,6 +1055,31 @@ type SampleDocuments struct {
 	Keys []SampleDocumentKeys
 
 	noSmithyDocumentSerde
+}
+
+func (v *SampleDocuments) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SampleDocuments)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SampleDocuments) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.SampleDocuments_bucketName, *v.BucketName)
+	}
+	serializeKeyList(s, schemas.SampleDocuments_keys, v.Keys)
+}
+func (v *SampleDocuments) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SampleDocuments, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SampleDocuments_bucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.SampleDocuments_bucketName, v.BucketName)
+		case schemas.SampleDocuments_keys:
+			return deserializeKeyList(d, schemas.SampleDocuments_keys, &v.Keys)
+		}
+		return nil
+	})
 }
 
 // Creates a key-value pair for a specific resource. Tags are metadata that you
@@ -488,6 +1101,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // A data structure that contains the information to use when generating a mapping
@@ -514,6 +1155,14 @@ type TemplateDetailsMemberX12 struct {
 }
 
 func (*TemplateDetailsMemberX12) isTemplateDetails() {}
+func (v *TemplateDetailsMemberX12) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateDetails_x12)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TemplateDetailsMemberX12) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Contains the details for a transformer object. A transformer can take an EDI
 // file as input and transform it into a JSON-or XML-formatted document.
@@ -595,6 +1244,113 @@ type TransformerSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TransformerSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TransformerSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TransformerSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.TransformerSummary_createdAt, *v.CreatedAt)
+	}
+	serializeEdiType(s, schemas.TransformerSummary_ediType, v.EdiType)
+	if v.FileFormat != "" {
+		s.WriteString(schemas.TransformerSummary_fileFormat, string(v.FileFormat))
+	}
+	if v.InputConversion != nil {
+		s.WriteStruct(schemas.TransformerSummary_inputConversion)
+		v.InputConversion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Mapping != nil {
+		s.WriteStruct(schemas.TransformerSummary_mapping)
+		v.Mapping.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MappingTemplate != nil {
+		s.WriteString(schemas.TransformerSummary_mappingTemplate, *v.MappingTemplate)
+	}
+	if v.ModifiedAt != nil {
+		s.WriteTime(schemas.TransformerSummary_modifiedAt, *v.ModifiedAt)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.TransformerSummary_name, *v.Name)
+	}
+	if v.OutputConversion != nil {
+		s.WriteStruct(schemas.TransformerSummary_outputConversion)
+		v.OutputConversion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SampleDocument != nil {
+		s.WriteString(schemas.TransformerSummary_sampleDocument, *v.SampleDocument)
+	}
+	if v.SampleDocuments != nil {
+		s.WriteStruct(schemas.TransformerSummary_sampleDocuments)
+		v.SampleDocuments.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TransformerSummary_status, string(v.Status))
+	}
+	if v.TransformerId != nil {
+		s.WriteString(schemas.TransformerSummary_transformerId, *v.TransformerId)
+	}
+}
+func (v *TransformerSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TransformerSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TransformerSummary_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.TransformerSummary_createdAt, v.CreatedAt)
+		case schemas.TransformerSummary_ediType:
+			return deserializeEdiType(d, schemas.TransformerSummary_ediType, &v.EdiType)
+		case schemas.TransformerSummary_fileFormat:
+			var ev string
+			if err := d.ReadString(schemas.TransformerSummary_fileFormat, &ev); err != nil {
+				return err
+			}
+			v.FileFormat = FileFormat(ev)
+			return nil
+		case schemas.TransformerSummary_inputConversion:
+			v.InputConversion = &InputConversion{}
+			return v.InputConversion.Deserialize(d)
+		case schemas.TransformerSummary_mapping:
+			v.Mapping = &Mapping{}
+			return v.Mapping.Deserialize(d)
+		case schemas.TransformerSummary_mappingTemplate:
+			v.MappingTemplate = new(string)
+			return d.ReadString(schemas.TransformerSummary_mappingTemplate, v.MappingTemplate)
+		case schemas.TransformerSummary_modifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.TransformerSummary_modifiedAt, v.ModifiedAt)
+		case schemas.TransformerSummary_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TransformerSummary_name, v.Name)
+		case schemas.TransformerSummary_outputConversion:
+			v.OutputConversion = &OutputConversion{}
+			return v.OutputConversion.Deserialize(d)
+		case schemas.TransformerSummary_sampleDocument:
+			v.SampleDocument = new(string)
+			return d.ReadString(schemas.TransformerSummary_sampleDocument, v.SampleDocument)
+		case schemas.TransformerSummary_sampleDocuments:
+			v.SampleDocuments = &SampleDocuments{}
+			return v.SampleDocuments.Deserialize(d)
+		case schemas.TransformerSummary_status:
+			var ev string
+			if err := d.ReadString(schemas.TransformerSummary_status, &ev); err != nil {
+				return err
+			}
+			v.Status = TransformerStatus(ev)
+			return nil
+		case schemas.TransformerSummary_transformerId:
+			v.TransformerId = new(string)
+			return d.ReadString(schemas.TransformerSummary_transformerId, v.TransformerId)
+		}
+		return nil
+	})
+}
+
 // Contains options for wrapping (line folding) in X12 EDI files. Wrapping
 // controls how long lines are handled in the EDI output.
 type WrapOptions struct {
@@ -630,6 +1386,48 @@ type WrapOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WrapOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WrapOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WrapOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LineLength != nil {
+		s.WriteInt32(schemas.WrapOptions_lineLength, *v.LineLength)
+	}
+	if v.LineTerminator != "" {
+		s.WriteString(schemas.WrapOptions_lineTerminator, string(v.LineTerminator))
+	}
+	if v.WrapBy != "" {
+		s.WriteString(schemas.WrapOptions_wrapBy, string(v.WrapBy))
+	}
+}
+func (v *WrapOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WrapOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WrapOptions_lineLength:
+			v.LineLength = new(int32)
+			return d.ReadInt32(schemas.WrapOptions_lineLength, v.LineLength)
+		case schemas.WrapOptions_lineTerminator:
+			var ev string
+			if err := d.ReadString(schemas.WrapOptions_lineTerminator, &ev); err != nil {
+				return err
+			}
+			v.LineTerminator = LineTerminator(ev)
+			return nil
+		case schemas.WrapOptions_wrapBy:
+			var ev string
+			if err := d.ReadString(schemas.WrapOptions_wrapBy, &ev); err != nil {
+				return err
+			}
+			v.WrapBy = WrapFormat(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains options for configuring X12 acknowledgments. These options control how
 // functional and technical acknowledgments are handled.
 type X12AcknowledgmentOptions struct {
@@ -655,6 +1453,42 @@ type X12AcknowledgmentOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *X12AcknowledgmentOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12AcknowledgmentOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12AcknowledgmentOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FunctionalAcknowledgment != "" {
+		s.WriteString(schemas.X12AcknowledgmentOptions_functionalAcknowledgment, string(v.FunctionalAcknowledgment))
+	}
+	if v.TechnicalAcknowledgment != "" {
+		s.WriteString(schemas.X12AcknowledgmentOptions_technicalAcknowledgment, string(v.TechnicalAcknowledgment))
+	}
+}
+func (v *X12AcknowledgmentOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12AcknowledgmentOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12AcknowledgmentOptions_functionalAcknowledgment:
+			var ev string
+			if err := d.ReadString(schemas.X12AcknowledgmentOptions_functionalAcknowledgment, &ev); err != nil {
+				return err
+			}
+			v.FunctionalAcknowledgment = X12FunctionalAcknowledgment(ev)
+			return nil
+		case schemas.X12AcknowledgmentOptions_technicalAcknowledgment:
+			var ev string
+			if err := d.ReadString(schemas.X12AcknowledgmentOptions_technicalAcknowledgment, &ev); err != nil {
+				return err
+			}
+			v.TechnicalAcknowledgment = X12TechnicalAcknowledgment(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Contains advanced options specific to X12 EDI processing, such as splitting
 // large X12 files into smaller units.
 type X12AdvancedOptions struct {
@@ -670,6 +1504,38 @@ type X12AdvancedOptions struct {
 	ValidationOptions *X12ValidationOptions
 
 	noSmithyDocumentSerde
+}
+
+func (v *X12AdvancedOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12AdvancedOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12AdvancedOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SplitOptions != nil {
+		s.WriteStruct(schemas.X12AdvancedOptions_splitOptions)
+		v.SplitOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValidationOptions != nil {
+		s.WriteStruct(schemas.X12AdvancedOptions_validationOptions)
+		v.ValidationOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *X12AdvancedOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12AdvancedOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12AdvancedOptions_splitOptions:
+			v.SplitOptions = &X12SplitOptions{}
+			return v.SplitOptions.Deserialize(d)
+		case schemas.X12AdvancedOptions_validationOptions:
+			v.ValidationOptions = &X12ValidationOptions{}
+			return v.ValidationOptions.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Defines a validation rule that modifies the allowed code values for a specific
@@ -699,6 +1565,34 @@ type X12CodeListValidationRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *X12CodeListValidationRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12CodeListValidationRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12CodeListValidationRule) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCodeList(s, schemas.X12CodeListValidationRule_codesToAdd, v.CodesToAdd)
+	serializeCodeList(s, schemas.X12CodeListValidationRule_codesToRemove, v.CodesToRemove)
+	if v.ElementId != nil {
+		s.WriteString(schemas.X12CodeListValidationRule_elementId, *v.ElementId)
+	}
+}
+func (v *X12CodeListValidationRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12CodeListValidationRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12CodeListValidationRule_codesToAdd:
+			return deserializeCodeList(d, schemas.X12CodeListValidationRule_codesToAdd, &v.CodesToAdd)
+		case schemas.X12CodeListValidationRule_codesToRemove:
+			return deserializeCodeList(d, schemas.X12CodeListValidationRule_codesToRemove, &v.CodesToRemove)
+		case schemas.X12CodeListValidationRule_elementId:
+			v.ElementId = new(string)
+			return d.ReadString(schemas.X12CodeListValidationRule_elementId, v.ElementId)
+		}
+		return nil
+	})
+}
+
 // Contains configuration for X12 control numbers used in X12 EDI generation.
 // Control numbers are used to uniquely identify interchanges, functional groups,
 // and transaction sets.
@@ -725,6 +1619,40 @@ type X12ControlNumbers struct {
 	noSmithyDocumentSerde
 }
 
+func (v *X12ControlNumbers) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12ControlNumbers)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12ControlNumbers) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StartingFunctionalGroupControlNumber != nil {
+		s.WriteInt32(schemas.X12ControlNumbers_startingFunctionalGroupControlNumber, *v.StartingFunctionalGroupControlNumber)
+	}
+	if v.StartingInterchangeControlNumber != nil {
+		s.WriteInt32(schemas.X12ControlNumbers_startingInterchangeControlNumber, *v.StartingInterchangeControlNumber)
+	}
+	if v.StartingTransactionSetControlNumber != nil {
+		s.WriteInt32(schemas.X12ControlNumbers_startingTransactionSetControlNumber, *v.StartingTransactionSetControlNumber)
+	}
+}
+func (v *X12ControlNumbers) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12ControlNumbers, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12ControlNumbers_startingFunctionalGroupControlNumber:
+			v.StartingFunctionalGroupControlNumber = new(int32)
+			return d.ReadInt32(schemas.X12ControlNumbers_startingFunctionalGroupControlNumber, v.StartingFunctionalGroupControlNumber)
+		case schemas.X12ControlNumbers_startingInterchangeControlNumber:
+			v.StartingInterchangeControlNumber = new(int32)
+			return d.ReadInt32(schemas.X12ControlNumbers_startingInterchangeControlNumber, v.StartingInterchangeControlNumber)
+		case schemas.X12ControlNumbers_startingTransactionSetControlNumber:
+			v.StartingTransactionSetControlNumber = new(int32)
+			return d.ReadInt32(schemas.X12ControlNumbers_startingTransactionSetControlNumber, v.StartingTransactionSetControlNumber)
+		}
+		return nil
+	})
+}
+
 // In X12 EDI messages, delimiters are used to mark the end of segments or
 // elements, and are defined in the interchange control header. The delimiters are
 // part of the message's syntax and divide up its different elements.
@@ -740,6 +1668,40 @@ type X12Delimiters struct {
 	SegmentTerminator *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *X12Delimiters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12Delimiters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12Delimiters) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComponentSeparator != nil {
+		s.WriteString(schemas.X12Delimiters_componentSeparator, *v.ComponentSeparator)
+	}
+	if v.DataElementSeparator != nil {
+		s.WriteString(schemas.X12Delimiters_dataElementSeparator, *v.DataElementSeparator)
+	}
+	if v.SegmentTerminator != nil {
+		s.WriteString(schemas.X12Delimiters_segmentTerminator, *v.SegmentTerminator)
+	}
+}
+func (v *X12Delimiters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12Delimiters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12Delimiters_componentSeparator:
+			v.ComponentSeparator = new(string)
+			return d.ReadString(schemas.X12Delimiters_componentSeparator, v.ComponentSeparator)
+		case schemas.X12Delimiters_dataElementSeparator:
+			v.DataElementSeparator = new(string)
+			return d.ReadString(schemas.X12Delimiters_dataElementSeparator, v.DataElementSeparator)
+		case schemas.X12Delimiters_segmentTerminator:
+			v.SegmentTerminator = new(string)
+			return d.ReadString(schemas.X12Delimiters_segmentTerminator, v.SegmentTerminator)
+		}
+		return nil
+	})
 }
 
 // A structure that contains the X12 transaction set and version. The X12
@@ -759,6 +1721,42 @@ type X12Details struct {
 	Version X12Version
 
 	noSmithyDocumentSerde
+}
+
+func (v *X12Details) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12Details)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12Details) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TransactionSet != "" {
+		s.WriteString(schemas.X12Details_transactionSet, string(v.TransactionSet))
+	}
+	if v.Version != "" {
+		s.WriteString(schemas.X12Details_version, string(v.Version))
+	}
+}
+func (v *X12Details) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12Details, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12Details_transactionSet:
+			var ev string
+			if err := d.ReadString(schemas.X12Details_transactionSet, &ev); err != nil {
+				return err
+			}
+			v.TransactionSet = X12TransactionSet(ev)
+			return nil
+		case schemas.X12Details_version:
+			var ev string
+			if err := d.ReadString(schemas.X12Details_version, &ev); err != nil {
+				return err
+			}
+			v.Version = X12Version(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Defines a validation rule that specifies custom length constraints for a
@@ -793,6 +1791,40 @@ type X12ElementLengthValidationRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *X12ElementLengthValidationRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12ElementLengthValidationRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12ElementLengthValidationRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ElementId != nil {
+		s.WriteString(schemas.X12ElementLengthValidationRule_elementId, *v.ElementId)
+	}
+	if v.MaxLength != nil {
+		s.WriteInt32(schemas.X12ElementLengthValidationRule_maxLength, *v.MaxLength)
+	}
+	if v.MinLength != nil {
+		s.WriteInt32(schemas.X12ElementLengthValidationRule_minLength, *v.MinLength)
+	}
+}
+func (v *X12ElementLengthValidationRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12ElementLengthValidationRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12ElementLengthValidationRule_elementId:
+			v.ElementId = new(string)
+			return d.ReadString(schemas.X12ElementLengthValidationRule_elementId, v.ElementId)
+		case schemas.X12ElementLengthValidationRule_maxLength:
+			v.MaxLength = new(int32)
+			return d.ReadInt32(schemas.X12ElementLengthValidationRule_maxLength, v.MaxLength)
+		case schemas.X12ElementLengthValidationRule_minLength:
+			v.MinLength = new(int32)
+			return d.ReadInt32(schemas.X12ElementLengthValidationRule_minLength, v.MinLength)
+		}
+		return nil
+	})
+}
+
 // Defines a validation rule that modifies the requirement status of a specific
 // X12 element within a segment. This rule allows you to make optional elements
 // mandatory or mandatory elements optional, providing flexibility to accommodate
@@ -819,6 +1851,38 @@ type X12ElementRequirementValidationRule struct {
 	noSmithyDocumentSerde
 }
 
+func (v *X12ElementRequirementValidationRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12ElementRequirementValidationRule)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12ElementRequirementValidationRule) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ElementPosition != nil {
+		s.WriteString(schemas.X12ElementRequirementValidationRule_elementPosition, *v.ElementPosition)
+	}
+	if v.Requirement != "" {
+		s.WriteString(schemas.X12ElementRequirementValidationRule_requirement, string(v.Requirement))
+	}
+}
+func (v *X12ElementRequirementValidationRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12ElementRequirementValidationRule, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12ElementRequirementValidationRule_elementPosition:
+			v.ElementPosition = new(string)
+			return d.ReadString(schemas.X12ElementRequirementValidationRule_elementPosition, v.ElementPosition)
+		case schemas.X12ElementRequirementValidationRule_requirement:
+			var ev string
+			if err := d.ReadString(schemas.X12ElementRequirementValidationRule_requirement, &ev); err != nil {
+				return err
+			}
+			v.Requirement = ElementRequirement(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A wrapper structure for an X12 definition object.
 //
 // the X12 envelope ensures the integrity of the data and the efficiency of the
@@ -842,6 +1906,38 @@ type X12Envelope struct {
 	noSmithyDocumentSerde
 }
 
+func (v *X12Envelope) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12Envelope)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12Envelope) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Common != nil {
+		s.WriteStruct(schemas.X12Envelope_common)
+		v.Common.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WrapOptions != nil {
+		s.WriteStruct(schemas.X12Envelope_wrapOptions)
+		v.WrapOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *X12Envelope) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12Envelope, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12Envelope_common:
+			v.Common = &X12OutboundEdiHeaders{}
+			return v.Common.Deserialize(d)
+		case schemas.X12Envelope_wrapOptions:
+			v.WrapOptions = &WrapOptions{}
+			return v.WrapOptions.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Part of the X12 message structure. These are the functional group headers for
 // the X12 EDI object.
 type X12FunctionalGroupHeaders struct {
@@ -860,6 +1956,40 @@ type X12FunctionalGroupHeaders struct {
 	noSmithyDocumentSerde
 }
 
+func (v *X12FunctionalGroupHeaders) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12FunctionalGroupHeaders)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12FunctionalGroupHeaders) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationReceiverCode != nil {
+		s.WriteString(schemas.X12FunctionalGroupHeaders_applicationReceiverCode, *v.ApplicationReceiverCode)
+	}
+	if v.ApplicationSenderCode != nil {
+		s.WriteString(schemas.X12FunctionalGroupHeaders_applicationSenderCode, *v.ApplicationSenderCode)
+	}
+	if v.ResponsibleAgencyCode != nil {
+		s.WriteString(schemas.X12FunctionalGroupHeaders_responsibleAgencyCode, *v.ResponsibleAgencyCode)
+	}
+}
+func (v *X12FunctionalGroupHeaders) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12FunctionalGroupHeaders, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12FunctionalGroupHeaders_applicationReceiverCode:
+			v.ApplicationReceiverCode = new(string)
+			return d.ReadString(schemas.X12FunctionalGroupHeaders_applicationReceiverCode, v.ApplicationReceiverCode)
+		case schemas.X12FunctionalGroupHeaders_applicationSenderCode:
+			v.ApplicationSenderCode = new(string)
+			return d.ReadString(schemas.X12FunctionalGroupHeaders_applicationSenderCode, v.ApplicationSenderCode)
+		case schemas.X12FunctionalGroupHeaders_responsibleAgencyCode:
+			v.ResponsibleAgencyCode = new(string)
+			return d.ReadString(schemas.X12FunctionalGroupHeaders_responsibleAgencyCode, v.ResponsibleAgencyCode)
+		}
+		return nil
+	})
+}
+
 // Contains options specific to processing inbound X12 EDI files.
 type X12InboundEdiOptions struct {
 
@@ -868,6 +1998,30 @@ type X12InboundEdiOptions struct {
 	AcknowledgmentOptions *X12AcknowledgmentOptions
 
 	noSmithyDocumentSerde
+}
+
+func (v *X12InboundEdiOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12InboundEdiOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12InboundEdiOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcknowledgmentOptions != nil {
+		s.WriteStruct(schemas.X12InboundEdiOptions_acknowledgmentOptions)
+		v.AcknowledgmentOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *X12InboundEdiOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12InboundEdiOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12InboundEdiOptions_acknowledgmentOptions:
+			v.AcknowledgmentOptions = &X12AcknowledgmentOptions{}
+			return v.AcknowledgmentOptions.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // In X12, the Interchange Control Header is the first segment of an EDI document
@@ -924,6 +2078,64 @@ type X12InterchangeControlHeaders struct {
 	noSmithyDocumentSerde
 }
 
+func (v *X12InterchangeControlHeaders) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12InterchangeControlHeaders)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12InterchangeControlHeaders) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcknowledgmentRequestedCode != nil {
+		s.WriteString(schemas.X12InterchangeControlHeaders_acknowledgmentRequestedCode, *v.AcknowledgmentRequestedCode)
+	}
+	if v.ReceiverId != nil {
+		s.WriteString(schemas.X12InterchangeControlHeaders_receiverId, *v.ReceiverId)
+	}
+	if v.ReceiverIdQualifier != nil {
+		s.WriteString(schemas.X12InterchangeControlHeaders_receiverIdQualifier, *v.ReceiverIdQualifier)
+	}
+	if v.RepetitionSeparator != nil {
+		s.WriteString(schemas.X12InterchangeControlHeaders_repetitionSeparator, *v.RepetitionSeparator)
+	}
+	if v.SenderId != nil {
+		s.WriteString(schemas.X12InterchangeControlHeaders_senderId, *v.SenderId)
+	}
+	if v.SenderIdQualifier != nil {
+		s.WriteString(schemas.X12InterchangeControlHeaders_senderIdQualifier, *v.SenderIdQualifier)
+	}
+	if v.UsageIndicatorCode != nil {
+		s.WriteString(schemas.X12InterchangeControlHeaders_usageIndicatorCode, *v.UsageIndicatorCode)
+	}
+}
+func (v *X12InterchangeControlHeaders) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12InterchangeControlHeaders, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12InterchangeControlHeaders_acknowledgmentRequestedCode:
+			v.AcknowledgmentRequestedCode = new(string)
+			return d.ReadString(schemas.X12InterchangeControlHeaders_acknowledgmentRequestedCode, v.AcknowledgmentRequestedCode)
+		case schemas.X12InterchangeControlHeaders_receiverId:
+			v.ReceiverId = new(string)
+			return d.ReadString(schemas.X12InterchangeControlHeaders_receiverId, v.ReceiverId)
+		case schemas.X12InterchangeControlHeaders_receiverIdQualifier:
+			v.ReceiverIdQualifier = new(string)
+			return d.ReadString(schemas.X12InterchangeControlHeaders_receiverIdQualifier, v.ReceiverIdQualifier)
+		case schemas.X12InterchangeControlHeaders_repetitionSeparator:
+			v.RepetitionSeparator = new(string)
+			return d.ReadString(schemas.X12InterchangeControlHeaders_repetitionSeparator, v.RepetitionSeparator)
+		case schemas.X12InterchangeControlHeaders_senderId:
+			v.SenderId = new(string)
+			return d.ReadString(schemas.X12InterchangeControlHeaders_senderId, v.SenderId)
+		case schemas.X12InterchangeControlHeaders_senderIdQualifier:
+			v.SenderIdQualifier = new(string)
+			return d.ReadString(schemas.X12InterchangeControlHeaders_senderIdQualifier, v.SenderIdQualifier)
+		case schemas.X12InterchangeControlHeaders_usageIndicatorCode:
+			v.UsageIndicatorCode = new(string)
+			return d.ReadString(schemas.X12InterchangeControlHeaders_usageIndicatorCode, v.UsageIndicatorCode)
+		}
+		return nil
+	})
+}
+
 // A structure containing the details for an outbound EDI object.
 type X12OutboundEdiHeaders struct {
 
@@ -973,6 +2185,70 @@ type X12OutboundEdiHeaders struct {
 	noSmithyDocumentSerde
 }
 
+func (v *X12OutboundEdiHeaders) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12OutboundEdiHeaders)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12OutboundEdiHeaders) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlNumbers != nil {
+		s.WriteStruct(schemas.X12OutboundEdiHeaders_controlNumbers)
+		v.ControlNumbers.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Delimiters != nil {
+		s.WriteStruct(schemas.X12OutboundEdiHeaders_delimiters)
+		v.Delimiters.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FunctionalGroupHeaders != nil {
+		s.WriteStruct(schemas.X12OutboundEdiHeaders_functionalGroupHeaders)
+		v.FunctionalGroupHeaders.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Gs05TimeFormat != "" {
+		s.WriteString(schemas.X12OutboundEdiHeaders_gs05TimeFormat, string(v.Gs05TimeFormat))
+	}
+	if v.InterchangeControlHeaders != nil {
+		s.WriteStruct(schemas.X12OutboundEdiHeaders_interchangeControlHeaders)
+		v.InterchangeControlHeaders.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValidateEdi != nil {
+		s.WriteBool(schemas.X12OutboundEdiHeaders_validateEdi, *v.ValidateEdi)
+	}
+}
+func (v *X12OutboundEdiHeaders) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12OutboundEdiHeaders, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12OutboundEdiHeaders_controlNumbers:
+			v.ControlNumbers = &X12ControlNumbers{}
+			return v.ControlNumbers.Deserialize(d)
+		case schemas.X12OutboundEdiHeaders_delimiters:
+			v.Delimiters = &X12Delimiters{}
+			return v.Delimiters.Deserialize(d)
+		case schemas.X12OutboundEdiHeaders_functionalGroupHeaders:
+			v.FunctionalGroupHeaders = &X12FunctionalGroupHeaders{}
+			return v.FunctionalGroupHeaders.Deserialize(d)
+		case schemas.X12OutboundEdiHeaders_gs05TimeFormat:
+			var ev string
+			if err := d.ReadString(schemas.X12OutboundEdiHeaders_gs05TimeFormat, &ev); err != nil {
+				return err
+			}
+			v.Gs05TimeFormat = X12GS05TimeFormat(ev)
+			return nil
+		case schemas.X12OutboundEdiHeaders_interchangeControlHeaders:
+			v.InterchangeControlHeaders = &X12InterchangeControlHeaders{}
+			return v.InterchangeControlHeaders.Deserialize(d)
+		case schemas.X12OutboundEdiHeaders_validateEdi:
+			v.ValidateEdi = new(bool)
+			return d.ReadBool(schemas.X12OutboundEdiHeaders_validateEdi, v.ValidateEdi)
+		}
+		return nil
+	})
+}
+
 // Contains options for splitting X12 EDI files into smaller units. This is useful
 // for processing large EDI files more efficiently.
 type X12SplitOptions struct {
@@ -984,6 +2260,32 @@ type X12SplitOptions struct {
 	SplitBy X12SplitBy
 
 	noSmithyDocumentSerde
+}
+
+func (v *X12SplitOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12SplitOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12SplitOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SplitBy != "" {
+		s.WriteString(schemas.X12SplitOptions_splitBy, string(v.SplitBy))
+	}
+}
+func (v *X12SplitOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12SplitOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12SplitOptions_splitBy:
+			var ev string
+			if err := d.ReadString(schemas.X12SplitOptions_splitBy, &ev); err != nil {
+				return err
+			}
+			v.SplitBy = X12SplitBy(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Contains configuration options for X12 EDI validation. This structure allows
@@ -1001,6 +2303,25 @@ type X12ValidationOptions struct {
 	ValidationRules []X12ValidationRule
 
 	noSmithyDocumentSerde
+}
+
+func (v *X12ValidationOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12ValidationOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *X12ValidationOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeX12ValidationRules(s, schemas.X12ValidationOptions_validationRules, v.ValidationRules)
+}
+func (v *X12ValidationOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.X12ValidationOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.X12ValidationOptions_validationRules:
+			return deserializeX12ValidationRules(d, schemas.X12ValidationOptions_validationRules, &v.ValidationRules)
+		}
+		return nil
+	})
 }
 
 // Represents a single validation rule that can be applied during X12 EDI
@@ -1031,6 +2352,14 @@ type X12ValidationRuleMemberCodeListValidationRule struct {
 }
 
 func (*X12ValidationRuleMemberCodeListValidationRule) isX12ValidationRule() {}
+func (v *X12ValidationRuleMemberCodeListValidationRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12ValidationRule_codeListValidationRule)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *X12ValidationRuleMemberCodeListValidationRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Specifies an element length validation rule that defines custom length
 // constraints for a specific X12 element. This rule allows you to enforce minimum
@@ -1043,6 +2372,14 @@ type X12ValidationRuleMemberElementLengthValidationRule struct {
 }
 
 func (*X12ValidationRuleMemberElementLengthValidationRule) isX12ValidationRule() {}
+func (v *X12ValidationRuleMemberElementLengthValidationRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12ValidationRule_elementLengthValidationRule)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *X12ValidationRuleMemberElementLengthValidationRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Specifies an element requirement validation rule that modifies whether a
 // specific X12 element is required or optional within a segment. This rule
@@ -1055,6 +2392,14 @@ type X12ValidationRuleMemberElementRequirementValidationRule struct {
 }
 
 func (*X12ValidationRuleMemberElementRequirementValidationRule) isX12ValidationRule() {}
+func (v *X12ValidationRuleMemberElementRequirementValidationRule) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.X12ValidationRule_elementRequirementValidationRule)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *X12ValidationRuleMemberElementRequirementValidationRule) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
 

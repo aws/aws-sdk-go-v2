@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,6 +37,18 @@ type GetProvisioningProfileInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetProvisioningProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProvisioningProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProvisioningProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetProvisioningProfileRequest_Identifier, *v.Identifier)
+	}
 }
 
 type GetProvisioningProfileOutput struct {
@@ -67,16 +81,49 @@ type GetProvisioningProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProvisioningProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProvisioningProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProvisioningProfileResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetProvisioningProfileResponse_Arn, v.Arn)
+		case schemas.GetProvisioningProfileResponse_ClaimCertificate:
+			v.ClaimCertificate = new(string)
+			return d.ReadString(schemas.GetProvisioningProfileResponse_ClaimCertificate, v.ClaimCertificate)
+		case schemas.GetProvisioningProfileResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetProvisioningProfileResponse_Id, v.Id)
+		case schemas.GetProvisioningProfileResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetProvisioningProfileResponse_Name, v.Name)
+		case schemas.GetProvisioningProfileResponse_ProvisioningType:
+			var ev string
+			if err := d.ReadString(schemas.GetProvisioningProfileResponse_ProvisioningType, &ev); err != nil {
+				return err
+			}
+			v.ProvisioningType = types.ProvisioningType(ev)
+			return nil
+		case schemas.GetProvisioningProfileResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetProvisioningProfileResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ProvisioningProfileStatus(ev)
+			return nil
+		case schemas.GetProvisioningProfileResponse_Tags:
+			return deserializeTagsMap(d, schemas.GetProvisioningProfileResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProvisioningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetProvisioningProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProvisioningProfile, schemas.GetProvisioningProfileRequest, schemas.GetProvisioningProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetProvisioningProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProvisioningProfile, schemas.GetProvisioningProfileRequest, schemas.GetProvisioningProfileResponse), output: &GetProvisioningProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProvisioningProfile"); err != nil {

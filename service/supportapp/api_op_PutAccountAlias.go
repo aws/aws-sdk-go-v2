@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/supportapp/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,28 @@ type PutAccountAliasInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountAliasInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountAliasRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountAliasInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountAlias != nil {
+		s.WriteString(schemas.PutAccountAliasRequest_accountAlias, *v.AccountAlias)
+	}
+}
+func (v *PutAccountAliasInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAccountAliasRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAccountAliasRequest_accountAlias:
+			v.AccountAlias = new(string)
+			return d.ReadString(schemas.PutAccountAliasRequest_accountAlias, v.AccountAlias)
+		}
+		return nil
+	})
+}
+
 type PutAccountAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,16 +70,29 @@ type PutAccountAliasOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAccountAliasOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAccountAliasResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAccountAliasOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutAccountAliasOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAccountAliasResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAccountAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAccountAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountAlias, schemas.PutAccountAliasRequest, schemas.PutAccountAliasResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAccountAlias{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAccountAlias, schemas.PutAccountAliasRequest, schemas.PutAccountAliasResult), output: &PutAccountAliasOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutAccountAlias"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,28 @@ type StopClockInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopClockInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopClockInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopClockInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Simulation != nil {
+		s.WriteString(schemas.StopClockInput_Simulation, *v.Simulation)
+	}
+}
+func (v *StopClockInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopClockInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopClockInput_Simulation:
+			v.Simulation = new(string)
+			return d.ReadString(schemas.StopClockInput_Simulation, v.Simulation)
+		}
+		return nil
+	})
+}
+
 type StopClockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +67,29 @@ type StopClockOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopClockOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopClockOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopClockOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopClockOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopClockOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopClockMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopClock{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopClock, schemas.StopClockInput, schemas.StopClockOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopClock{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopClock, schemas.StopClockInput, schemas.StopClockOutput), output: &StopClockOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopClock"); err != nil {

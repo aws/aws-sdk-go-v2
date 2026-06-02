@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type DeleteControlPanelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteControlPanelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteControlPanelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteControlPanelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ControlPanelArn != nil {
+		s.WriteString(schemas.DeleteControlPanelRequest_ControlPanelArn, *v.ControlPanelArn)
+	}
+}
+
 type DeleteControlPanelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +57,21 @@ type DeleteControlPanelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteControlPanelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteControlPanelResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteControlPanelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteControlPanel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteControlPanel, schemas.DeleteControlPanelRequest, schemas.DeleteControlPanelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteControlPanel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteControlPanel, schemas.DeleteControlPanelRequest, schemas.DeleteControlPanelResponse), output: &DeleteControlPanelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteControlPanel"); err != nil {

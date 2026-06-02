@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,21 @@ type ListWorkerBlocksInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkerBlocksInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkerBlocksRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkerBlocksInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkerBlocksRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkerBlocksRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListWorkerBlocksOutput struct {
 
 	// If the previous response was incomplete (because there is more data to
@@ -58,16 +75,29 @@ type ListWorkerBlocksOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkerBlocksOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkerBlocksResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkerBlocksResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkerBlocksResponse_NextToken, v.NextToken)
+		case schemas.ListWorkerBlocksResponse_NumResults:
+			v.NumResults = new(int32)
+			return d.ReadInt32(schemas.ListWorkerBlocksResponse_NumResults, v.NumResults)
+		case schemas.ListWorkerBlocksResponse_WorkerBlocks:
+			return deserializeWorkerBlockList(d, schemas.ListWorkerBlocksResponse_WorkerBlocks, &v.WorkerBlocks)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkerBlocksMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListWorkerBlocks{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkerBlocks, schemas.ListWorkerBlocksRequest, schemas.ListWorkerBlocksResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListWorkerBlocks{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkerBlocks, schemas.ListWorkerBlocksRequest, schemas.ListWorkerBlocksResponse), output: &ListWorkerBlocksOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWorkerBlocks"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,21 @@ type ListDedicatedIpPoolsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDedicatedIpPoolsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDedicatedIpPoolsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDedicatedIpPoolsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDedicatedIpPoolsRequest_NextToken, *v.NextToken)
+	}
+	if v.PageSize != nil {
+		s.WriteInt32(schemas.ListDedicatedIpPoolsRequest_PageSize, *v.PageSize)
+	}
+}
+
 // A list of dedicated IP pools.
 type ListDedicatedIpPoolsOutput struct {
 
@@ -61,16 +78,26 @@ type ListDedicatedIpPoolsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDedicatedIpPoolsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDedicatedIpPoolsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDedicatedIpPoolsResponse_DedicatedIpPools:
+			return deserializeListOfDedicatedIpPools(d, schemas.ListDedicatedIpPoolsResponse_DedicatedIpPools, &v.DedicatedIpPools)
+		case schemas.ListDedicatedIpPoolsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDedicatedIpPoolsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDedicatedIpPoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDedicatedIpPools{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDedicatedIpPools, schemas.ListDedicatedIpPoolsRequest, schemas.ListDedicatedIpPoolsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDedicatedIpPools{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDedicatedIpPools, schemas.ListDedicatedIpPoolsRequest, schemas.ListDedicatedIpPoolsResponse), output: &ListDedicatedIpPoolsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDedicatedIpPools"); err != nil {

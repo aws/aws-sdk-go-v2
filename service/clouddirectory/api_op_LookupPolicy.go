@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,29 @@ type LookupPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LookupPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LookupPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LookupPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DirectoryArn != nil {
+		s.WriteString(schemas.LookupPolicyRequest_DirectoryArn, *v.DirectoryArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.LookupPolicyRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.LookupPolicyRequest_NextToken, *v.NextToken)
+	}
+	if v.ObjectReference != nil {
+		s.WriteStruct(schemas.LookupPolicyRequest_ObjectReference)
+		v.ObjectReference.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type LookupPolicyOutput struct {
 
 	// The pagination token.
@@ -74,16 +99,26 @@ type LookupPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LookupPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LookupPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LookupPolicyResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.LookupPolicyResponse_NextToken, v.NextToken)
+		case schemas.LookupPolicyResponse_PolicyToPathList:
+			return deserializePolicyToPathList(d, schemas.LookupPolicyResponse_PolicyToPathList, &v.PolicyToPathList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationLookupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpLookupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.LookupPolicy, schemas.LookupPolicyRequest, schemas.LookupPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpLookupPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.LookupPolicy, schemas.LookupPolicyRequest, schemas.LookupPolicyResponse), output: &LookupPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "LookupPolicy"); err != nil {

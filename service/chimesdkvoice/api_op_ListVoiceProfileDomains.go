@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,21 @@ type ListVoiceProfileDomainsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVoiceProfileDomainsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVoiceProfileDomainsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVoiceProfileDomainsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVoiceProfileDomainsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVoiceProfileDomainsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListVoiceProfileDomainsOutput struct {
 
 	// The token used to return the next page of results.
@@ -52,16 +69,26 @@ type ListVoiceProfileDomainsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVoiceProfileDomainsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVoiceProfileDomainsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVoiceProfileDomainsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVoiceProfileDomainsResponse_NextToken, v.NextToken)
+		case schemas.ListVoiceProfileDomainsResponse_VoiceProfileDomains:
+			return deserializeVoiceProfileDomainSummaryList(d, schemas.ListVoiceProfileDomainsResponse_VoiceProfileDomains, &v.VoiceProfileDomains)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVoiceProfileDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListVoiceProfileDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVoiceProfileDomains, schemas.ListVoiceProfileDomainsRequest, schemas.ListVoiceProfileDomainsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListVoiceProfileDomains{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVoiceProfileDomains, schemas.ListVoiceProfileDomainsRequest, schemas.ListVoiceProfileDomainsResponse), output: &ListVoiceProfileDomainsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListVoiceProfileDomains"); err != nil {

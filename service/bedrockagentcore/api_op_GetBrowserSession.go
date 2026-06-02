@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -59,6 +61,21 @@ type GetBrowserSessionInput struct {
 	SessionId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBrowserSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBrowserSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBrowserSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrowserIdentifier != nil {
+		s.WriteString(schemas.GetBrowserSessionRequest_browserIdentifier, *v.BrowserIdentifier)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetBrowserSessionRequest_sessionId, *v.SessionId)
+	}
 }
 
 type GetBrowserSessionOutput struct {
@@ -130,16 +147,67 @@ type GetBrowserSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBrowserSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBrowserSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBrowserSessionResponse_browserIdentifier:
+			v.BrowserIdentifier = new(string)
+			return d.ReadString(schemas.GetBrowserSessionResponse_browserIdentifier, v.BrowserIdentifier)
+		case schemas.GetBrowserSessionResponse_certificates:
+			return deserializeCertificates(d, schemas.GetBrowserSessionResponse_certificates, &v.Certificates)
+		case schemas.GetBrowserSessionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBrowserSessionResponse_createdAt, v.CreatedAt)
+		case schemas.GetBrowserSessionResponse_enterprisePolicies:
+			return deserializeBrowserEnterprisePolicies(d, schemas.GetBrowserSessionResponse_enterprisePolicies, &v.EnterprisePolicies)
+		case schemas.GetBrowserSessionResponse_extensions:
+			return deserializeBrowserExtensions(d, schemas.GetBrowserSessionResponse_extensions, &v.Extensions)
+		case schemas.GetBrowserSessionResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetBrowserSessionResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetBrowserSessionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetBrowserSessionResponse_name, v.Name)
+		case schemas.GetBrowserSessionResponse_profileConfiguration:
+			v.ProfileConfiguration = &types.BrowserProfileConfiguration{}
+			return v.ProfileConfiguration.Deserialize(d)
+		case schemas.GetBrowserSessionResponse_proxyConfiguration:
+			v.ProxyConfiguration = &types.ProxyConfiguration{}
+			return v.ProxyConfiguration.Deserialize(d)
+		case schemas.GetBrowserSessionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.GetBrowserSessionResponse_sessionId, v.SessionId)
+		case schemas.GetBrowserSessionResponse_sessionReplayArtifact:
+			v.SessionReplayArtifact = new(string)
+			return d.ReadString(schemas.GetBrowserSessionResponse_sessionReplayArtifact, v.SessionReplayArtifact)
+		case schemas.GetBrowserSessionResponse_sessionTimeoutSeconds:
+			v.SessionTimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.GetBrowserSessionResponse_sessionTimeoutSeconds, v.SessionTimeoutSeconds)
+		case schemas.GetBrowserSessionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetBrowserSessionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BrowserSessionStatus(ev)
+			return nil
+		case schemas.GetBrowserSessionResponse_streams:
+			v.Streams = &types.BrowserSessionStream{}
+			return v.Streams.Deserialize(d)
+		case schemas.GetBrowserSessionResponse_viewPort:
+			v.ViewPort = &types.ViewPort{}
+			return v.ViewPort.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBrowserSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBrowserSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBrowserSession, schemas.GetBrowserSessionRequest, schemas.GetBrowserSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBrowserSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBrowserSession, schemas.GetBrowserSessionRequest, schemas.GetBrowserSessionResponse), output: &GetBrowserSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBrowserSession"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,21 @@ type ListConfigurationCheckDefinitionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationCheckDefinitionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationCheckDefinitionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationCheckDefinitionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConfigurationCheckDefinitionsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationCheckDefinitionsInput_NextToken, *v.NextToken)
+	}
+}
+
 type ListConfigurationCheckDefinitionsOutput struct {
 
 	// The configuration check types supported by AWS Systems Manager for SAP.
@@ -54,16 +71,26 @@ type ListConfigurationCheckDefinitionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationCheckDefinitionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfigurationCheckDefinitionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfigurationCheckDefinitionsOutput_ConfigurationChecks:
+			return deserializeConfigurationCheckDefinitionList(d, schemas.ListConfigurationCheckDefinitionsOutput_ConfigurationChecks, &v.ConfigurationChecks)
+		case schemas.ListConfigurationCheckDefinitionsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfigurationCheckDefinitionsOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigurationCheckDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfigurationCheckDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationCheckDefinitions, schemas.ListConfigurationCheckDefinitionsInput, schemas.ListConfigurationCheckDefinitionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfigurationCheckDefinitions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationCheckDefinitions, schemas.ListConfigurationCheckDefinitionsInput, schemas.ListConfigurationCheckDefinitionsOutput), output: &ListConfigurationCheckDefinitionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConfigurationCheckDefinitions"); err != nil {

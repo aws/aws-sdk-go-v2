@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,40 @@ type StopAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopAppInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.App != nil {
+		s.WriteString(schemas.StopAppInput_App, *v.App)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.StopAppInput_Domain, *v.Domain)
+	}
+	if v.Simulation != nil {
+		s.WriteString(schemas.StopAppInput_Simulation, *v.Simulation)
+	}
+}
+func (v *StopAppInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopAppInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopAppInput_App:
+			v.App = new(string)
+			return d.ReadString(schemas.StopAppInput_App, v.App)
+		case schemas.StopAppInput_Domain:
+			v.Domain = new(string)
+			return d.ReadString(schemas.StopAppInput_Domain, v.Domain)
+		case schemas.StopAppInput_Simulation:
+			v.Simulation = new(string)
+			return d.ReadString(schemas.StopAppInput_Simulation, v.Simulation)
+		}
+		return nil
+	})
+}
+
 type StopAppOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,16 +90,29 @@ type StopAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopAppOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopAppOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopAppOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopAppOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopApp, schemas.StopAppInput, schemas.StopAppOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopApp, schemas.StopAppInput, schemas.StopAppOutput), output: &StopAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopApp"); err != nil {

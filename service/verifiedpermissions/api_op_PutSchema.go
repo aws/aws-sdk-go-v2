@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -66,6 +68,19 @@ type PutSchemaInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSchemaInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutSchemaInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutSchemaInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSchemaDefinition(s, schemas.PutSchemaInput_definition, v.Definition)
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.PutSchemaInput_policyStoreId, *v.PolicyStoreId)
+	}
+}
+
 type PutSchemaOutput struct {
 
 	// The date and time that the schema was originally created.
@@ -94,16 +109,32 @@ type PutSchemaOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutSchemaOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutSchemaOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutSchemaOutput_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.PutSchemaOutput_createdDate, v.CreatedDate)
+		case schemas.PutSchemaOutput_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.PutSchemaOutput_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.PutSchemaOutput_namespaces:
+			return deserializeNamespaceList(d, schemas.PutSchemaOutput_namespaces, &v.Namespaces)
+		case schemas.PutSchemaOutput_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.PutSchemaOutput_policyStoreId, v.PolicyStoreId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpPutSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSchema, schemas.PutSchemaInput, schemas.PutSchemaOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpPutSchema{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutSchema, schemas.PutSchemaInput, schemas.PutSchemaOutput), output: &PutSchemaOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutSchema"); err != nil {

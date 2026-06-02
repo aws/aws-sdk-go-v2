@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +43,21 @@ type GetEnvironmentProfileInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetEnvironmentProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetEnvironmentProfileInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetEnvironmentProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetEnvironmentProfileInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetEnvironmentProfileInput_identifier, *v.Identifier)
+	}
 }
 
 type GetEnvironmentProfileOutput struct {
@@ -98,16 +115,56 @@ type GetEnvironmentProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetEnvironmentProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetEnvironmentProfileOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetEnvironmentProfileOutput_awsAccountId:
+			v.AwsAccountId = new(string)
+			return d.ReadString(schemas.GetEnvironmentProfileOutput_awsAccountId, v.AwsAccountId)
+		case schemas.GetEnvironmentProfileOutput_awsAccountRegion:
+			v.AwsAccountRegion = new(string)
+			return d.ReadString(schemas.GetEnvironmentProfileOutput_awsAccountRegion, v.AwsAccountRegion)
+		case schemas.GetEnvironmentProfileOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEnvironmentProfileOutput_createdAt, v.CreatedAt)
+		case schemas.GetEnvironmentProfileOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetEnvironmentProfileOutput_createdBy, v.CreatedBy)
+		case schemas.GetEnvironmentProfileOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetEnvironmentProfileOutput_description, v.Description)
+		case schemas.GetEnvironmentProfileOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetEnvironmentProfileOutput_domainId, v.DomainId)
+		case schemas.GetEnvironmentProfileOutput_environmentBlueprintId:
+			v.EnvironmentBlueprintId = new(string)
+			return d.ReadString(schemas.GetEnvironmentProfileOutput_environmentBlueprintId, v.EnvironmentBlueprintId)
+		case schemas.GetEnvironmentProfileOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetEnvironmentProfileOutput_id, v.Id)
+		case schemas.GetEnvironmentProfileOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetEnvironmentProfileOutput_name, v.Name)
+		case schemas.GetEnvironmentProfileOutput_projectId:
+			v.ProjectId = new(string)
+			return d.ReadString(schemas.GetEnvironmentProfileOutput_projectId, v.ProjectId)
+		case schemas.GetEnvironmentProfileOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetEnvironmentProfileOutput_updatedAt, v.UpdatedAt)
+		case schemas.GetEnvironmentProfileOutput_userParameters:
+			return deserializeCustomParameterList(d, schemas.GetEnvironmentProfileOutput_userParameters, &v.UserParameters)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetEnvironmentProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetEnvironmentProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironmentProfile, schemas.GetEnvironmentProfileInput, schemas.GetEnvironmentProfileOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetEnvironmentProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetEnvironmentProfile, schemas.GetEnvironmentProfileInput, schemas.GetEnvironmentProfileOutput), output: &GetEnvironmentProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetEnvironmentProfile"); err != nil {

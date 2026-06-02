@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,18 @@ type GetLinkedWhatsAppBusinessAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLinkedWhatsAppBusinessAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLinkedWhatsAppBusinessAccountInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLinkedWhatsAppBusinessAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetLinkedWhatsAppBusinessAccountInput_id, *v.Id)
+	}
+}
+
 type GetLinkedWhatsAppBusinessAccountOutput struct {
 
 	// The details of the linked WhatsApp Business Account.
@@ -53,16 +67,24 @@ type GetLinkedWhatsAppBusinessAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLinkedWhatsAppBusinessAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLinkedWhatsAppBusinessAccountOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLinkedWhatsAppBusinessAccountOutput_account:
+			v.Account = &types.LinkedWhatsAppBusinessAccount{}
+			return v.Account.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLinkedWhatsAppBusinessAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLinkedWhatsAppBusinessAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLinkedWhatsAppBusinessAccount, schemas.GetLinkedWhatsAppBusinessAccountInput, schemas.GetLinkedWhatsAppBusinessAccountOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLinkedWhatsAppBusinessAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLinkedWhatsAppBusinessAccount, schemas.GetLinkedWhatsAppBusinessAccountInput, schemas.GetLinkedWhatsAppBusinessAccountOutput), output: &GetLinkedWhatsAppBusinessAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLinkedWhatsAppBusinessAccount"); err != nil {

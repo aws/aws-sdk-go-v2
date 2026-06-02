@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type DeleteProxyRuleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProxyRuleGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProxyRuleGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProxyRuleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProxyRuleGroupArn != nil {
+		s.WriteString(schemas.DeleteProxyRuleGroupRequest_ProxyRuleGroupArn, *v.ProxyRuleGroupArn)
+	}
+	if v.ProxyRuleGroupName != nil {
+		s.WriteString(schemas.DeleteProxyRuleGroupRequest_ProxyRuleGroupName, *v.ProxyRuleGroupName)
+	}
+}
+
 type DeleteProxyRuleGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) of a proxy rule group.
@@ -57,16 +74,27 @@ type DeleteProxyRuleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProxyRuleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProxyRuleGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteProxyRuleGroupResponse_ProxyRuleGroupArn:
+			v.ProxyRuleGroupArn = new(string)
+			return d.ReadString(schemas.DeleteProxyRuleGroupResponse_ProxyRuleGroupArn, v.ProxyRuleGroupArn)
+		case schemas.DeleteProxyRuleGroupResponse_ProxyRuleGroupName:
+			v.ProxyRuleGroupName = new(string)
+			return d.ReadString(schemas.DeleteProxyRuleGroupResponse_ProxyRuleGroupName, v.ProxyRuleGroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProxyRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteProxyRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProxyRuleGroup, schemas.DeleteProxyRuleGroupRequest, schemas.DeleteProxyRuleGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteProxyRuleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProxyRuleGroup, schemas.DeleteProxyRuleGroupRequest, schemas.DeleteProxyRuleGroupResponse), output: &DeleteProxyRuleGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteProxyRuleGroup"); err != nil {

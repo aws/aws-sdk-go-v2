@@ -7,7 +7,10 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/document"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,6 +63,23 @@ type SearchRegistryRecordsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchRegistryRecordsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchRegistryRecordsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchRegistryRecordsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.SearchRegistryRecordsRequest_filters, &smithydocument.Opaque{Value: v.Filters})
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.SearchRegistryRecordsRequest_maxResults, *v.MaxResults)
+	}
+	serializeRegistryIdList(s, schemas.SearchRegistryRecordsRequest_registryIds, v.RegistryIds)
+	if v.SearchQuery != nil {
+		s.WriteString(schemas.SearchRegistryRecordsRequest_searchQuery, *v.SearchQuery)
+	}
+}
+
 type SearchRegistryRecordsOutput struct {
 
 	//  The list of registry records that match the search query, ordered by relevance.
@@ -73,16 +93,23 @@ type SearchRegistryRecordsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchRegistryRecordsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchRegistryRecordsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchRegistryRecordsResponse_registryRecords:
+			return deserializeRegistryRecordSummaryList(d, schemas.SearchRegistryRecordsResponse_registryRecords, &v.RegistryRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchRegistryRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSearchRegistryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchRegistryRecords, schemas.SearchRegistryRecordsRequest, schemas.SearchRegistryRecordsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSearchRegistryRecords{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchRegistryRecords, schemas.SearchRegistryRecordsRequest, schemas.SearchRegistryRecordsResponse), output: &SearchRegistryRecordsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchRegistryRecords"); err != nil {

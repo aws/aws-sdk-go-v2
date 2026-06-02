@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/scheduler/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,34 @@ type DeleteScheduleGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScheduleGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScheduleGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScheduleGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteScheduleGroupInput_ClientToken, *v.ClientToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeleteScheduleGroupInput_Name, *v.Name)
+	}
+}
+func (v *DeleteScheduleGroupInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteScheduleGroupInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteScheduleGroupInput_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteScheduleGroupInput_ClientToken, v.ClientToken)
+		case schemas.DeleteScheduleGroupInput_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteScheduleGroupInput_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 type DeleteScheduleGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -56,16 +86,29 @@ type DeleteScheduleGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScheduleGroupOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScheduleGroupOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScheduleGroupOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteScheduleGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteScheduleGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteScheduleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteScheduleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScheduleGroup, schemas.DeleteScheduleGroupInput, schemas.DeleteScheduleGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteScheduleGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScheduleGroup, schemas.DeleteScheduleGroupInput, schemas.DeleteScheduleGroupOutput), output: &DeleteScheduleGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteScheduleGroup"); err != nil {

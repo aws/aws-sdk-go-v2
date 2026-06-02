@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,6 +71,27 @@ type UpdateFirewallPolicyChangeProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFirewallPolicyChangeProtectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFirewallPolicyChangeProtectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFirewallPolicyChangeProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.UpdateFirewallPolicyChangeProtectionRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.UpdateFirewallPolicyChangeProtectionRequest_FirewallName, *v.FirewallName)
+	}
+	if v.FirewallPolicyChangeProtection != false {
+		s.WriteBool(schemas.UpdateFirewallPolicyChangeProtectionRequest_FirewallPolicyChangeProtection, v.FirewallPolicyChangeProtection)
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateFirewallPolicyChangeProtectionRequest_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type UpdateFirewallPolicyChangeProtectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the firewall.
@@ -106,16 +129,32 @@ type UpdateFirewallPolicyChangeProtectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFirewallPolicyChangeProtectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFirewallPolicyChangeProtectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFirewallPolicyChangeProtectionResponse_FirewallArn:
+			v.FirewallArn = new(string)
+			return d.ReadString(schemas.UpdateFirewallPolicyChangeProtectionResponse_FirewallArn, v.FirewallArn)
+		case schemas.UpdateFirewallPolicyChangeProtectionResponse_FirewallName:
+			v.FirewallName = new(string)
+			return d.ReadString(schemas.UpdateFirewallPolicyChangeProtectionResponse_FirewallName, v.FirewallName)
+		case schemas.UpdateFirewallPolicyChangeProtectionResponse_FirewallPolicyChangeProtection:
+			return d.ReadBool(schemas.UpdateFirewallPolicyChangeProtectionResponse_FirewallPolicyChangeProtection, &v.FirewallPolicyChangeProtection)
+		case schemas.UpdateFirewallPolicyChangeProtectionResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.UpdateFirewallPolicyChangeProtectionResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFirewallPolicyChangeProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateFirewallPolicyChangeProtection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFirewallPolicyChangeProtection, schemas.UpdateFirewallPolicyChangeProtectionRequest, schemas.UpdateFirewallPolicyChangeProtectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateFirewallPolicyChangeProtection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFirewallPolicyChangeProtection, schemas.UpdateFirewallPolicyChangeProtectionRequest, schemas.UpdateFirewallPolicyChangeProtectionResponse), output: &UpdateFirewallPolicyChangeProtectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFirewallPolicyChangeProtection"); err != nil {

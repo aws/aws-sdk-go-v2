@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorad/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -39,6 +41,60 @@ type AccessControlEntry struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccessControlEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessControlEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessControlEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessRights != nil {
+		s.WriteStruct(schemas.AccessControlEntry_AccessRights)
+		v.AccessRights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AccessControlEntry_CreatedAt, *v.CreatedAt)
+	}
+	if v.GroupDisplayName != nil {
+		s.WriteString(schemas.AccessControlEntry_GroupDisplayName, *v.GroupDisplayName)
+	}
+	if v.GroupSecurityIdentifier != nil {
+		s.WriteString(schemas.AccessControlEntry_GroupSecurityIdentifier, *v.GroupSecurityIdentifier)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.AccessControlEntry_TemplateArn, *v.TemplateArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AccessControlEntry_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AccessControlEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessControlEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessControlEntry_AccessRights:
+			v.AccessRights = &AccessRights{}
+			return v.AccessRights.Deserialize(d)
+		case schemas.AccessControlEntry_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AccessControlEntry_CreatedAt, v.CreatedAt)
+		case schemas.AccessControlEntry_GroupDisplayName:
+			v.GroupDisplayName = new(string)
+			return d.ReadString(schemas.AccessControlEntry_GroupDisplayName, v.GroupDisplayName)
+		case schemas.AccessControlEntry_GroupSecurityIdentifier:
+			v.GroupSecurityIdentifier = new(string)
+			return d.ReadString(schemas.AccessControlEntry_GroupSecurityIdentifier, v.GroupSecurityIdentifier)
+		case schemas.AccessControlEntry_TemplateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.AccessControlEntry_TemplateArn, v.TemplateArn)
+		case schemas.AccessControlEntry_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AccessControlEntry_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Summary of group access control entries that allow or deny Active Directory
 // groups based on their security identifiers (SIDs) from enrolling and/or
 // autofenrolling with the template.
@@ -70,6 +126,60 @@ type AccessControlEntrySummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccessControlEntrySummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessControlEntrySummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessControlEntrySummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessRights != nil {
+		s.WriteStruct(schemas.AccessControlEntrySummary_AccessRights)
+		v.AccessRights.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.AccessControlEntrySummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.GroupDisplayName != nil {
+		s.WriteString(schemas.AccessControlEntrySummary_GroupDisplayName, *v.GroupDisplayName)
+	}
+	if v.GroupSecurityIdentifier != nil {
+		s.WriteString(schemas.AccessControlEntrySummary_GroupSecurityIdentifier, *v.GroupSecurityIdentifier)
+	}
+	if v.TemplateArn != nil {
+		s.WriteString(schemas.AccessControlEntrySummary_TemplateArn, *v.TemplateArn)
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.AccessControlEntrySummary_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *AccessControlEntrySummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessControlEntrySummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessControlEntrySummary_AccessRights:
+			v.AccessRights = &AccessRights{}
+			return v.AccessRights.Deserialize(d)
+		case schemas.AccessControlEntrySummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.AccessControlEntrySummary_CreatedAt, v.CreatedAt)
+		case schemas.AccessControlEntrySummary_GroupDisplayName:
+			v.GroupDisplayName = new(string)
+			return d.ReadString(schemas.AccessControlEntrySummary_GroupDisplayName, v.GroupDisplayName)
+		case schemas.AccessControlEntrySummary_GroupSecurityIdentifier:
+			v.GroupSecurityIdentifier = new(string)
+			return d.ReadString(schemas.AccessControlEntrySummary_GroupSecurityIdentifier, v.GroupSecurityIdentifier)
+		case schemas.AccessControlEntrySummary_TemplateArn:
+			v.TemplateArn = new(string)
+			return d.ReadString(schemas.AccessControlEntrySummary_TemplateArn, v.TemplateArn)
+		case schemas.AccessControlEntrySummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.AccessControlEntrySummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 //	Allow or deny permissions for an Active Directory group to enroll or
 //
 // autoenroll certificates for a template.
@@ -87,6 +197,42 @@ type AccessRights struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccessRights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccessRights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccessRights) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoEnroll != "" {
+		s.WriteString(schemas.AccessRights_AutoEnroll, string(v.AutoEnroll))
+	}
+	if v.Enroll != "" {
+		s.WriteString(schemas.AccessRights_Enroll, string(v.Enroll))
+	}
+}
+func (v *AccessRights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccessRights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccessRights_AutoEnroll:
+			var ev string
+			if err := d.ReadString(schemas.AccessRights_AutoEnroll, &ev); err != nil {
+				return err
+			}
+			v.AutoEnroll = AccessRight(ev)
+			return nil
+		case schemas.AccessRights_Enroll:
+			var ev string
+			if err := d.ReadString(schemas.AccessRights_Enroll, &ev); err != nil {
+				return err
+			}
+			v.Enroll = AccessRight(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Application policies describe what the certificate can be used for.
 type ApplicationPolicies struct {
 
@@ -99,6 +245,31 @@ type ApplicationPolicies struct {
 	Critical *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *ApplicationPolicies) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationPolicies)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationPolicies) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Critical != nil {
+		s.WriteBool(schemas.ApplicationPolicies_Critical, *v.Critical)
+	}
+	serializeApplicationPolicyList(s, schemas.ApplicationPolicies_Policies, v.Policies)
+}
+func (v *ApplicationPolicies) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationPolicies, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationPolicies_Critical:
+			v.Critical = new(bool)
+			return d.ReadBool(schemas.ApplicationPolicies_Critical, v.Critical)
+		case schemas.ApplicationPolicies_Policies:
+			return deserializeApplicationPolicyList(d, schemas.ApplicationPolicies_Policies, &v.Policies)
+		}
+		return nil
+	})
 }
 
 // Application policies describe what the certificate can be used for.
@@ -119,6 +290,12 @@ type ApplicationPolicyMemberPolicyObjectIdentifier struct {
 }
 
 func (*ApplicationPolicyMemberPolicyObjectIdentifier) isApplicationPolicy() {}
+func (v *ApplicationPolicyMemberPolicyObjectIdentifier) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.ApplicationPolicy_PolicyObjectIdentifier, v.Value)
+}
+func (v *ApplicationPolicyMemberPolicyObjectIdentifier) Deserialize(d smithy.ShapeDeserializer) error {
+	return d.ReadString(schemas.ApplicationPolicy_PolicyObjectIdentifier, &v.Value)
+}
 
 // The type of application policy
 type ApplicationPolicyMemberPolicyType struct {
@@ -128,6 +305,17 @@ type ApplicationPolicyMemberPolicyType struct {
 }
 
 func (*ApplicationPolicyMemberPolicyType) isApplicationPolicy() {}
+func (v *ApplicationPolicyMemberPolicyType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.ApplicationPolicy_PolicyType, string(v.Value))
+}
+func (v *ApplicationPolicyMemberPolicyType) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.ApplicationPolicy_PolicyType, &s); err != nil {
+		return err
+	}
+	v.Value = ApplicationPolicyType(s)
+	return nil
+}
 
 // Information describing the end of the validity period of the certificate. This
 // parameter sets the “Not After” date for the certificate. Certificate validity is
@@ -160,6 +348,38 @@ type CertificateValidity struct {
 	ValidityPeriod *ValidityPeriod
 
 	noSmithyDocumentSerde
+}
+
+func (v *CertificateValidity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateValidity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CertificateValidity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RenewalPeriod != nil {
+		s.WriteStruct(schemas.CertificateValidity_RenewalPeriod)
+		v.RenewalPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ValidityPeriod != nil {
+		s.WriteStruct(schemas.CertificateValidity_ValidityPeriod)
+		v.ValidityPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CertificateValidity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateValidity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateValidity_RenewalPeriod:
+			v.RenewalPeriod = &ValidityPeriod{}
+			return v.RenewalPeriod.Deserialize(d)
+		case schemas.CertificateValidity_ValidityPeriod:
+			v.ValidityPeriod = &ValidityPeriod{}
+			return v.ValidityPeriod.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Amazon Web Services Private CA Connector for Active Directory is a service that
@@ -201,6 +421,86 @@ type Connector struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Connector) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Connector)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Connector) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Connector_Arn, *v.Arn)
+	}
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.Connector_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+	if v.CertificateEnrollmentPolicyServerEndpoint != nil {
+		s.WriteString(schemas.Connector_CertificateEnrollmentPolicyServerEndpoint, *v.CertificateEnrollmentPolicyServerEndpoint)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Connector_CreatedAt, *v.CreatedAt)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.Connector_DirectoryId, *v.DirectoryId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Connector_Status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.Connector_StatusReason, string(v.StatusReason))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.Connector_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.VpcInformation != nil {
+		s.WriteStruct(schemas.Connector_VpcInformation)
+		v.VpcInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Connector) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Connector, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Connector_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Connector_Arn, v.Arn)
+		case schemas.Connector_CertificateAuthorityArn:
+			v.CertificateAuthorityArn = new(string)
+			return d.ReadString(schemas.Connector_CertificateAuthorityArn, v.CertificateAuthorityArn)
+		case schemas.Connector_CertificateEnrollmentPolicyServerEndpoint:
+			v.CertificateEnrollmentPolicyServerEndpoint = new(string)
+			return d.ReadString(schemas.Connector_CertificateEnrollmentPolicyServerEndpoint, v.CertificateEnrollmentPolicyServerEndpoint)
+		case schemas.Connector_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Connector_CreatedAt, v.CreatedAt)
+		case schemas.Connector_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.Connector_DirectoryId, v.DirectoryId)
+		case schemas.Connector_Status:
+			var ev string
+			if err := d.ReadString(schemas.Connector_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ConnectorStatus(ev)
+			return nil
+		case schemas.Connector_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.Connector_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = ConnectorStatusReason(ev)
+			return nil
+		case schemas.Connector_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Connector_UpdatedAt, v.UpdatedAt)
+		case schemas.Connector_VpcInformation:
+			v.VpcInformation = &VpcInformation{}
+			return v.VpcInformation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Summary description of the Amazon Web Services Private CA AD connectors
 // belonging to an Amazon Web Services account.
 type ConnectorSummary struct {
@@ -238,6 +538,86 @@ type ConnectorSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectorSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectorSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectorSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ConnectorSummary_Arn, *v.Arn)
+	}
+	if v.CertificateAuthorityArn != nil {
+		s.WriteString(schemas.ConnectorSummary_CertificateAuthorityArn, *v.CertificateAuthorityArn)
+	}
+	if v.CertificateEnrollmentPolicyServerEndpoint != nil {
+		s.WriteString(schemas.ConnectorSummary_CertificateEnrollmentPolicyServerEndpoint, *v.CertificateEnrollmentPolicyServerEndpoint)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ConnectorSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.ConnectorSummary_DirectoryId, *v.DirectoryId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ConnectorSummary_Status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.ConnectorSummary_StatusReason, string(v.StatusReason))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ConnectorSummary_UpdatedAt, *v.UpdatedAt)
+	}
+	if v.VpcInformation != nil {
+		s.WriteStruct(schemas.ConnectorSummary_VpcInformation)
+		v.VpcInformation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConnectorSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectorSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectorSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ConnectorSummary_Arn, v.Arn)
+		case schemas.ConnectorSummary_CertificateAuthorityArn:
+			v.CertificateAuthorityArn = new(string)
+			return d.ReadString(schemas.ConnectorSummary_CertificateAuthorityArn, v.CertificateAuthorityArn)
+		case schemas.ConnectorSummary_CertificateEnrollmentPolicyServerEndpoint:
+			v.CertificateEnrollmentPolicyServerEndpoint = new(string)
+			return d.ReadString(schemas.ConnectorSummary_CertificateEnrollmentPolicyServerEndpoint, v.CertificateEnrollmentPolicyServerEndpoint)
+		case schemas.ConnectorSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ConnectorSummary_CreatedAt, v.CreatedAt)
+		case schemas.ConnectorSummary_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.ConnectorSummary_DirectoryId, v.DirectoryId)
+		case schemas.ConnectorSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ConnectorStatus(ev)
+			return nil
+		case schemas.ConnectorSummary_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.ConnectorSummary_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = ConnectorStatusReason(ev)
+			return nil
+		case schemas.ConnectorSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ConnectorSummary_UpdatedAt, v.UpdatedAt)
+		case schemas.ConnectorSummary_VpcInformation:
+			v.VpcInformation = &VpcInformation{}
+			return v.VpcInformation.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The directory registration represents the authorization of the connector
 // service with a directory.
 type DirectoryRegistration struct {
@@ -263,6 +643,66 @@ type DirectoryRegistration struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DirectoryRegistration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectoryRegistration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectoryRegistration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DirectoryRegistration_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DirectoryRegistration_CreatedAt, *v.CreatedAt)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DirectoryRegistration_DirectoryId, *v.DirectoryId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DirectoryRegistration_Status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.DirectoryRegistration_StatusReason, string(v.StatusReason))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DirectoryRegistration_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DirectoryRegistration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryRegistration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryRegistration_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DirectoryRegistration_Arn, v.Arn)
+		case schemas.DirectoryRegistration_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DirectoryRegistration_CreatedAt, v.CreatedAt)
+		case schemas.DirectoryRegistration_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.DirectoryRegistration_DirectoryId, v.DirectoryId)
+		case schemas.DirectoryRegistration_Status:
+			var ev string
+			if err := d.ReadString(schemas.DirectoryRegistration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DirectoryRegistrationStatus(ev)
+			return nil
+		case schemas.DirectoryRegistration_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.DirectoryRegistration_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = DirectoryRegistrationStatusReason(ev)
+			return nil
+		case schemas.DirectoryRegistration_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DirectoryRegistration_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
 }
 
 // The directory registration represents the authorization of the connector
@@ -293,6 +733,66 @@ type DirectoryRegistrationSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DirectoryRegistrationSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectoryRegistrationSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectoryRegistrationSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DirectoryRegistrationSummary_Arn, *v.Arn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.DirectoryRegistrationSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.DirectoryId != nil {
+		s.WriteString(schemas.DirectoryRegistrationSummary_DirectoryId, *v.DirectoryId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.DirectoryRegistrationSummary_Status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.DirectoryRegistrationSummary_StatusReason, string(v.StatusReason))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.DirectoryRegistrationSummary_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *DirectoryRegistrationSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectoryRegistrationSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectoryRegistrationSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DirectoryRegistrationSummary_Arn, v.Arn)
+		case schemas.DirectoryRegistrationSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DirectoryRegistrationSummary_CreatedAt, v.CreatedAt)
+		case schemas.DirectoryRegistrationSummary_DirectoryId:
+			v.DirectoryId = new(string)
+			return d.ReadString(schemas.DirectoryRegistrationSummary_DirectoryId, v.DirectoryId)
+		case schemas.DirectoryRegistrationSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.DirectoryRegistrationSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DirectoryRegistrationStatus(ev)
+			return nil
+		case schemas.DirectoryRegistrationSummary_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.DirectoryRegistrationSummary_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = DirectoryRegistrationStatusReason(ev)
+			return nil
+		case schemas.DirectoryRegistrationSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DirectoryRegistrationSummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Template configurations for v2 template schema.
 type EnrollmentFlagsV2 struct {
 
@@ -316,6 +816,52 @@ type EnrollmentFlagsV2 struct {
 	UserInteractionRequired *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *EnrollmentFlagsV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnrollmentFlagsV2)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnrollmentFlagsV2) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableKeyReuseOnNtTokenKeysetStorageFull != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV2_EnableKeyReuseOnNtTokenKeysetStorageFull, *v.EnableKeyReuseOnNtTokenKeysetStorageFull)
+	}
+	if v.IncludeSymmetricAlgorithms != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV2_IncludeSymmetricAlgorithms, *v.IncludeSymmetricAlgorithms)
+	}
+	if v.NoSecurityExtension != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV2_NoSecurityExtension, *v.NoSecurityExtension)
+	}
+	if v.RemoveInvalidCertificateFromPersonalStore != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV2_RemoveInvalidCertificateFromPersonalStore, *v.RemoveInvalidCertificateFromPersonalStore)
+	}
+	if v.UserInteractionRequired != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV2_UserInteractionRequired, *v.UserInteractionRequired)
+	}
+}
+func (v *EnrollmentFlagsV2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnrollmentFlagsV2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnrollmentFlagsV2_EnableKeyReuseOnNtTokenKeysetStorageFull:
+			v.EnableKeyReuseOnNtTokenKeysetStorageFull = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV2_EnableKeyReuseOnNtTokenKeysetStorageFull, v.EnableKeyReuseOnNtTokenKeysetStorageFull)
+		case schemas.EnrollmentFlagsV2_IncludeSymmetricAlgorithms:
+			v.IncludeSymmetricAlgorithms = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV2_IncludeSymmetricAlgorithms, v.IncludeSymmetricAlgorithms)
+		case schemas.EnrollmentFlagsV2_NoSecurityExtension:
+			v.NoSecurityExtension = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV2_NoSecurityExtension, v.NoSecurityExtension)
+		case schemas.EnrollmentFlagsV2_RemoveInvalidCertificateFromPersonalStore:
+			v.RemoveInvalidCertificateFromPersonalStore = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV2_RemoveInvalidCertificateFromPersonalStore, v.RemoveInvalidCertificateFromPersonalStore)
+		case schemas.EnrollmentFlagsV2_UserInteractionRequired:
+			v.UserInteractionRequired = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV2_UserInteractionRequired, v.UserInteractionRequired)
+		}
+		return nil
+	})
 }
 
 // Template configurations for v3 template schema.
@@ -343,6 +889,52 @@ type EnrollmentFlagsV3 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnrollmentFlagsV3) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnrollmentFlagsV3)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnrollmentFlagsV3) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableKeyReuseOnNtTokenKeysetStorageFull != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV3_EnableKeyReuseOnNtTokenKeysetStorageFull, *v.EnableKeyReuseOnNtTokenKeysetStorageFull)
+	}
+	if v.IncludeSymmetricAlgorithms != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV3_IncludeSymmetricAlgorithms, *v.IncludeSymmetricAlgorithms)
+	}
+	if v.NoSecurityExtension != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV3_NoSecurityExtension, *v.NoSecurityExtension)
+	}
+	if v.RemoveInvalidCertificateFromPersonalStore != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV3_RemoveInvalidCertificateFromPersonalStore, *v.RemoveInvalidCertificateFromPersonalStore)
+	}
+	if v.UserInteractionRequired != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV3_UserInteractionRequired, *v.UserInteractionRequired)
+	}
+}
+func (v *EnrollmentFlagsV3) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnrollmentFlagsV3, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnrollmentFlagsV3_EnableKeyReuseOnNtTokenKeysetStorageFull:
+			v.EnableKeyReuseOnNtTokenKeysetStorageFull = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV3_EnableKeyReuseOnNtTokenKeysetStorageFull, v.EnableKeyReuseOnNtTokenKeysetStorageFull)
+		case schemas.EnrollmentFlagsV3_IncludeSymmetricAlgorithms:
+			v.IncludeSymmetricAlgorithms = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV3_IncludeSymmetricAlgorithms, v.IncludeSymmetricAlgorithms)
+		case schemas.EnrollmentFlagsV3_NoSecurityExtension:
+			v.NoSecurityExtension = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV3_NoSecurityExtension, v.NoSecurityExtension)
+		case schemas.EnrollmentFlagsV3_RemoveInvalidCertificateFromPersonalStore:
+			v.RemoveInvalidCertificateFromPersonalStore = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV3_RemoveInvalidCertificateFromPersonalStore, v.RemoveInvalidCertificateFromPersonalStore)
+		case schemas.EnrollmentFlagsV3_UserInteractionRequired:
+			v.UserInteractionRequired = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV3_UserInteractionRequired, v.UserInteractionRequired)
+		}
+		return nil
+	})
+}
+
 // Template configurations for v4 template schema.
 type EnrollmentFlagsV4 struct {
 
@@ -368,6 +960,52 @@ type EnrollmentFlagsV4 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnrollmentFlagsV4) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnrollmentFlagsV4)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnrollmentFlagsV4) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnableKeyReuseOnNtTokenKeysetStorageFull != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV4_EnableKeyReuseOnNtTokenKeysetStorageFull, *v.EnableKeyReuseOnNtTokenKeysetStorageFull)
+	}
+	if v.IncludeSymmetricAlgorithms != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV4_IncludeSymmetricAlgorithms, *v.IncludeSymmetricAlgorithms)
+	}
+	if v.NoSecurityExtension != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV4_NoSecurityExtension, *v.NoSecurityExtension)
+	}
+	if v.RemoveInvalidCertificateFromPersonalStore != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV4_RemoveInvalidCertificateFromPersonalStore, *v.RemoveInvalidCertificateFromPersonalStore)
+	}
+	if v.UserInteractionRequired != nil {
+		s.WriteBool(schemas.EnrollmentFlagsV4_UserInteractionRequired, *v.UserInteractionRequired)
+	}
+}
+func (v *EnrollmentFlagsV4) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnrollmentFlagsV4, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnrollmentFlagsV4_EnableKeyReuseOnNtTokenKeysetStorageFull:
+			v.EnableKeyReuseOnNtTokenKeysetStorageFull = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV4_EnableKeyReuseOnNtTokenKeysetStorageFull, v.EnableKeyReuseOnNtTokenKeysetStorageFull)
+		case schemas.EnrollmentFlagsV4_IncludeSymmetricAlgorithms:
+			v.IncludeSymmetricAlgorithms = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV4_IncludeSymmetricAlgorithms, v.IncludeSymmetricAlgorithms)
+		case schemas.EnrollmentFlagsV4_NoSecurityExtension:
+			v.NoSecurityExtension = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV4_NoSecurityExtension, v.NoSecurityExtension)
+		case schemas.EnrollmentFlagsV4_RemoveInvalidCertificateFromPersonalStore:
+			v.RemoveInvalidCertificateFromPersonalStore = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV4_RemoveInvalidCertificateFromPersonalStore, v.RemoveInvalidCertificateFromPersonalStore)
+		case schemas.EnrollmentFlagsV4_UserInteractionRequired:
+			v.UserInteractionRequired = new(bool)
+			return d.ReadBool(schemas.EnrollmentFlagsV4_UserInteractionRequired, v.UserInteractionRequired)
+		}
+		return nil
+	})
+}
+
 // Certificate extensions for v2 template schema
 type ExtensionsV2 struct {
 
@@ -381,6 +1019,38 @@ type ExtensionsV2 struct {
 	ApplicationPolicies *ApplicationPolicies
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExtensionsV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtensionsV2)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtensionsV2) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationPolicies != nil {
+		s.WriteStruct(schemas.ExtensionsV2_ApplicationPolicies)
+		v.ApplicationPolicies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyUsage != nil {
+		s.WriteStruct(schemas.ExtensionsV2_KeyUsage)
+		v.KeyUsage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExtensionsV2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtensionsV2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtensionsV2_ApplicationPolicies:
+			v.ApplicationPolicies = &ApplicationPolicies{}
+			return v.ApplicationPolicies.Deserialize(d)
+		case schemas.ExtensionsV2_KeyUsage:
+			v.KeyUsage = &KeyUsage{}
+			return v.KeyUsage.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Certificate extensions for v3 template schema
@@ -398,6 +1068,38 @@ type ExtensionsV3 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExtensionsV3) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtensionsV3)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtensionsV3) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationPolicies != nil {
+		s.WriteStruct(schemas.ExtensionsV3_ApplicationPolicies)
+		v.ApplicationPolicies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyUsage != nil {
+		s.WriteStruct(schemas.ExtensionsV3_KeyUsage)
+		v.KeyUsage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExtensionsV3) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtensionsV3, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtensionsV3_ApplicationPolicies:
+			v.ApplicationPolicies = &ApplicationPolicies{}
+			return v.ApplicationPolicies.Deserialize(d)
+		case schemas.ExtensionsV3_KeyUsage:
+			v.KeyUsage = &KeyUsage{}
+			return v.KeyUsage.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Certificate extensions for v4 template schema
 type ExtensionsV4 struct {
 
@@ -411,6 +1113,38 @@ type ExtensionsV4 struct {
 	ApplicationPolicies *ApplicationPolicies
 
 	noSmithyDocumentSerde
+}
+
+func (v *ExtensionsV4) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExtensionsV4)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExtensionsV4) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationPolicies != nil {
+		s.WriteStruct(schemas.ExtensionsV4_ApplicationPolicies)
+		v.ApplicationPolicies.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KeyUsage != nil {
+		s.WriteStruct(schemas.ExtensionsV4_KeyUsage)
+		v.KeyUsage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExtensionsV4) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExtensionsV4, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExtensionsV4_ApplicationPolicies:
+			v.ApplicationPolicies = &ApplicationPolicies{}
+			return v.ApplicationPolicies.Deserialize(d)
+		case schemas.ExtensionsV4_KeyUsage:
+			v.KeyUsage = &KeyUsage{}
+			return v.KeyUsage.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // General flags for v2 template schema that defines if the template is for a
@@ -428,6 +1162,34 @@ type GeneralFlagsV2 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeneralFlagsV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeneralFlagsV2)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeneralFlagsV2) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoEnrollment != nil {
+		s.WriteBool(schemas.GeneralFlagsV2_AutoEnrollment, *v.AutoEnrollment)
+	}
+	if v.MachineType != nil {
+		s.WriteBool(schemas.GeneralFlagsV2_MachineType, *v.MachineType)
+	}
+}
+func (v *GeneralFlagsV2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeneralFlagsV2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeneralFlagsV2_AutoEnrollment:
+			v.AutoEnrollment = new(bool)
+			return d.ReadBool(schemas.GeneralFlagsV2_AutoEnrollment, v.AutoEnrollment)
+		case schemas.GeneralFlagsV2_MachineType:
+			v.MachineType = new(bool)
+			return d.ReadBool(schemas.GeneralFlagsV2_MachineType, v.MachineType)
+		}
+		return nil
+	})
+}
+
 // General flags for v3 template schema that defines if the template is for a
 // machine or a user and if the template can be issued using autoenrollment.
 type GeneralFlagsV3 struct {
@@ -441,6 +1203,34 @@ type GeneralFlagsV3 struct {
 	MachineType *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *GeneralFlagsV3) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeneralFlagsV3)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeneralFlagsV3) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoEnrollment != nil {
+		s.WriteBool(schemas.GeneralFlagsV3_AutoEnrollment, *v.AutoEnrollment)
+	}
+	if v.MachineType != nil {
+		s.WriteBool(schemas.GeneralFlagsV3_MachineType, *v.MachineType)
+	}
+}
+func (v *GeneralFlagsV3) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeneralFlagsV3, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeneralFlagsV3_AutoEnrollment:
+			v.AutoEnrollment = new(bool)
+			return d.ReadBool(schemas.GeneralFlagsV3_AutoEnrollment, v.AutoEnrollment)
+		case schemas.GeneralFlagsV3_MachineType:
+			v.MachineType = new(bool)
+			return d.ReadBool(schemas.GeneralFlagsV3_MachineType, v.MachineType)
+		}
+		return nil
+	})
 }
 
 // General flags for v4 template schema that defines if the template is for a
@@ -458,6 +1248,34 @@ type GeneralFlagsV4 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeneralFlagsV4) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeneralFlagsV4)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeneralFlagsV4) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutoEnrollment != nil {
+		s.WriteBool(schemas.GeneralFlagsV4_AutoEnrollment, *v.AutoEnrollment)
+	}
+	if v.MachineType != nil {
+		s.WriteBool(schemas.GeneralFlagsV4_MachineType, *v.MachineType)
+	}
+}
+func (v *GeneralFlagsV4) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeneralFlagsV4, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeneralFlagsV4_AutoEnrollment:
+			v.AutoEnrollment = new(bool)
+			return d.ReadBool(schemas.GeneralFlagsV4_AutoEnrollment, v.AutoEnrollment)
+		case schemas.GeneralFlagsV4_MachineType:
+			v.MachineType = new(bool)
+			return d.ReadBool(schemas.GeneralFlagsV4_MachineType, v.MachineType)
+		}
+		return nil
+	})
+}
+
 // The key usage extension defines the purpose (e.g., encipherment, signature) of
 // the key contained in the certificate.
 type KeyUsage struct {
@@ -472,6 +1290,36 @@ type KeyUsage struct {
 	Critical *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *KeyUsage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyUsage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyUsage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Critical != nil {
+		s.WriteBool(schemas.KeyUsage_Critical, *v.Critical)
+	}
+	if v.UsageFlags != nil {
+		s.WriteStruct(schemas.KeyUsage_UsageFlags)
+		v.UsageFlags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *KeyUsage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyUsage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyUsage_Critical:
+			v.Critical = new(bool)
+			return d.ReadBool(schemas.KeyUsage_Critical, v.Critical)
+		case schemas.KeyUsage_UsageFlags:
+			v.UsageFlags = &KeyUsageFlags{}
+			return v.UsageFlags.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The key usage flags represent the purpose (e.g., encipherment, signature) of
@@ -500,6 +1348,52 @@ type KeyUsageFlags struct {
 	noSmithyDocumentSerde
 }
 
+func (v *KeyUsageFlags) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyUsageFlags)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyUsageFlags) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataEncipherment != nil {
+		s.WriteBool(schemas.KeyUsageFlags_DataEncipherment, *v.DataEncipherment)
+	}
+	if v.DigitalSignature != nil {
+		s.WriteBool(schemas.KeyUsageFlags_DigitalSignature, *v.DigitalSignature)
+	}
+	if v.KeyAgreement != nil {
+		s.WriteBool(schemas.KeyUsageFlags_KeyAgreement, *v.KeyAgreement)
+	}
+	if v.KeyEncipherment != nil {
+		s.WriteBool(schemas.KeyUsageFlags_KeyEncipherment, *v.KeyEncipherment)
+	}
+	if v.NonRepudiation != nil {
+		s.WriteBool(schemas.KeyUsageFlags_NonRepudiation, *v.NonRepudiation)
+	}
+}
+func (v *KeyUsageFlags) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyUsageFlags, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyUsageFlags_DataEncipherment:
+			v.DataEncipherment = new(bool)
+			return d.ReadBool(schemas.KeyUsageFlags_DataEncipherment, v.DataEncipherment)
+		case schemas.KeyUsageFlags_DigitalSignature:
+			v.DigitalSignature = new(bool)
+			return d.ReadBool(schemas.KeyUsageFlags_DigitalSignature, v.DigitalSignature)
+		case schemas.KeyUsageFlags_KeyAgreement:
+			v.KeyAgreement = new(bool)
+			return d.ReadBool(schemas.KeyUsageFlags_KeyAgreement, v.KeyAgreement)
+		case schemas.KeyUsageFlags_KeyEncipherment:
+			v.KeyEncipherment = new(bool)
+			return d.ReadBool(schemas.KeyUsageFlags_KeyEncipherment, v.KeyEncipherment)
+		case schemas.KeyUsageFlags_NonRepudiation:
+			v.NonRepudiation = new(bool)
+			return d.ReadBool(schemas.KeyUsageFlags_NonRepudiation, v.NonRepudiation)
+		}
+		return nil
+	})
+}
+
 // The key usage property defines the purpose of the private key contained in the
 // certificate. You can specify specific purposes using property flags or all by
 // using property type ALL.
@@ -521,6 +1415,14 @@ type KeyUsagePropertyMemberPropertyFlags struct {
 }
 
 func (*KeyUsagePropertyMemberPropertyFlags) isKeyUsageProperty() {}
+func (v *KeyUsagePropertyMemberPropertyFlags) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyUsageProperty_PropertyFlags)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *KeyUsagePropertyMemberPropertyFlags) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // You can specify all key usages using property type ALL. You can use property
 // type or property flags but not both.
@@ -531,6 +1433,17 @@ type KeyUsagePropertyMemberPropertyType struct {
 }
 
 func (*KeyUsagePropertyMemberPropertyType) isKeyUsageProperty() {}
+func (v *KeyUsagePropertyMemberPropertyType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteString(schemas.KeyUsageProperty_PropertyType, string(v.Value))
+}
+func (v *KeyUsagePropertyMemberPropertyType) Deserialize(d smithy.ShapeDeserializer) error {
+	var s string
+	if err := d.ReadString(schemas.KeyUsageProperty_PropertyType, &s); err != nil {
+		return err
+	}
+	v.Value = KeyUsagePropertyType(s)
+	return nil
+}
 
 // Specifies key usage.
 type KeyUsagePropertyFlags struct {
@@ -545,6 +1458,40 @@ type KeyUsagePropertyFlags struct {
 	Sign *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *KeyUsagePropertyFlags) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.KeyUsagePropertyFlags)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *KeyUsagePropertyFlags) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Decrypt != nil {
+		s.WriteBool(schemas.KeyUsagePropertyFlags_Decrypt, *v.Decrypt)
+	}
+	if v.KeyAgreement != nil {
+		s.WriteBool(schemas.KeyUsagePropertyFlags_KeyAgreement, *v.KeyAgreement)
+	}
+	if v.Sign != nil {
+		s.WriteBool(schemas.KeyUsagePropertyFlags_Sign, *v.Sign)
+	}
+}
+func (v *KeyUsagePropertyFlags) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.KeyUsagePropertyFlags, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.KeyUsagePropertyFlags_Decrypt:
+			v.Decrypt = new(bool)
+			return d.ReadBool(schemas.KeyUsagePropertyFlags_Decrypt, v.Decrypt)
+		case schemas.KeyUsagePropertyFlags_KeyAgreement:
+			v.KeyAgreement = new(bool)
+			return d.ReadBool(schemas.KeyUsagePropertyFlags_KeyAgreement, v.KeyAgreement)
+		case schemas.KeyUsagePropertyFlags_Sign:
+			v.Sign = new(bool)
+			return d.ReadBool(schemas.KeyUsagePropertyFlags_Sign, v.Sign)
+		}
+		return nil
+	})
 }
 
 // Defines the attributes of the private key.
@@ -565,6 +1512,41 @@ type PrivateKeyAttributesV2 struct {
 	CryptoProviders []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *PrivateKeyAttributesV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateKeyAttributesV2)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateKeyAttributesV2) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCryptoProvidersList(s, schemas.PrivateKeyAttributesV2_CryptoProviders, v.CryptoProviders)
+	if v.KeySpec != "" {
+		s.WriteString(schemas.PrivateKeyAttributesV2_KeySpec, string(v.KeySpec))
+	}
+	if v.MinimalKeyLength != nil {
+		s.WriteInt32(schemas.PrivateKeyAttributesV2_MinimalKeyLength, *v.MinimalKeyLength)
+	}
+}
+func (v *PrivateKeyAttributesV2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateKeyAttributesV2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateKeyAttributesV2_CryptoProviders:
+			return deserializeCryptoProvidersList(d, schemas.PrivateKeyAttributesV2_CryptoProviders, &v.CryptoProviders)
+		case schemas.PrivateKeyAttributesV2_KeySpec:
+			var ev string
+			if err := d.ReadString(schemas.PrivateKeyAttributesV2_KeySpec, &ev); err != nil {
+				return err
+			}
+			v.KeySpec = KeySpec(ev)
+			return nil
+		case schemas.PrivateKeyAttributesV2_MinimalKeyLength:
+			v.MinimalKeyLength = new(int32)
+			return d.ReadInt32(schemas.PrivateKeyAttributesV2_MinimalKeyLength, v.MinimalKeyLength)
+		}
+		return nil
+	})
 }
 
 // Defines the attributes of the private key.
@@ -599,6 +1581,54 @@ type PrivateKeyAttributesV3 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrivateKeyAttributesV3) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateKeyAttributesV3)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateKeyAttributesV3) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Algorithm != "" {
+		s.WriteString(schemas.PrivateKeyAttributesV3_Algorithm, string(v.Algorithm))
+	}
+	serializeCryptoProvidersList(s, schemas.PrivateKeyAttributesV3_CryptoProviders, v.CryptoProviders)
+	if v.KeySpec != "" {
+		s.WriteString(schemas.PrivateKeyAttributesV3_KeySpec, string(v.KeySpec))
+	}
+	serializeKeyUsageProperty(s, schemas.PrivateKeyAttributesV3_KeyUsageProperty, v.KeyUsageProperty)
+	if v.MinimalKeyLength != nil {
+		s.WriteInt32(schemas.PrivateKeyAttributesV3_MinimalKeyLength, *v.MinimalKeyLength)
+	}
+}
+func (v *PrivateKeyAttributesV3) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateKeyAttributesV3, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateKeyAttributesV3_Algorithm:
+			var ev string
+			if err := d.ReadString(schemas.PrivateKeyAttributesV3_Algorithm, &ev); err != nil {
+				return err
+			}
+			v.Algorithm = PrivateKeyAlgorithm(ev)
+			return nil
+		case schemas.PrivateKeyAttributesV3_CryptoProviders:
+			return deserializeCryptoProvidersList(d, schemas.PrivateKeyAttributesV3_CryptoProviders, &v.CryptoProviders)
+		case schemas.PrivateKeyAttributesV3_KeySpec:
+			var ev string
+			if err := d.ReadString(schemas.PrivateKeyAttributesV3_KeySpec, &ev); err != nil {
+				return err
+			}
+			v.KeySpec = KeySpec(ev)
+			return nil
+		case schemas.PrivateKeyAttributesV3_KeyUsageProperty:
+			return deserializeKeyUsageProperty(d, schemas.PrivateKeyAttributesV3_KeyUsageProperty, &v.KeyUsageProperty)
+		case schemas.PrivateKeyAttributesV3_MinimalKeyLength:
+			v.MinimalKeyLength = new(int32)
+			return d.ReadInt32(schemas.PrivateKeyAttributesV3_MinimalKeyLength, v.MinimalKeyLength)
+		}
+		return nil
+	})
+}
+
 // Defines the attributes of the private key.
 type PrivateKeyAttributesV4 struct {
 
@@ -627,6 +1657,54 @@ type PrivateKeyAttributesV4 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrivateKeyAttributesV4) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateKeyAttributesV4)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateKeyAttributesV4) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Algorithm != "" {
+		s.WriteString(schemas.PrivateKeyAttributesV4_Algorithm, string(v.Algorithm))
+	}
+	serializeCryptoProvidersList(s, schemas.PrivateKeyAttributesV4_CryptoProviders, v.CryptoProviders)
+	if v.KeySpec != "" {
+		s.WriteString(schemas.PrivateKeyAttributesV4_KeySpec, string(v.KeySpec))
+	}
+	serializeKeyUsageProperty(s, schemas.PrivateKeyAttributesV4_KeyUsageProperty, v.KeyUsageProperty)
+	if v.MinimalKeyLength != nil {
+		s.WriteInt32(schemas.PrivateKeyAttributesV4_MinimalKeyLength, *v.MinimalKeyLength)
+	}
+}
+func (v *PrivateKeyAttributesV4) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateKeyAttributesV4, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateKeyAttributesV4_Algorithm:
+			var ev string
+			if err := d.ReadString(schemas.PrivateKeyAttributesV4_Algorithm, &ev); err != nil {
+				return err
+			}
+			v.Algorithm = PrivateKeyAlgorithm(ev)
+			return nil
+		case schemas.PrivateKeyAttributesV4_CryptoProviders:
+			return deserializeCryptoProvidersList(d, schemas.PrivateKeyAttributesV4_CryptoProviders, &v.CryptoProviders)
+		case schemas.PrivateKeyAttributesV4_KeySpec:
+			var ev string
+			if err := d.ReadString(schemas.PrivateKeyAttributesV4_KeySpec, &ev); err != nil {
+				return err
+			}
+			v.KeySpec = KeySpec(ev)
+			return nil
+		case schemas.PrivateKeyAttributesV4_KeyUsageProperty:
+			return deserializeKeyUsageProperty(d, schemas.PrivateKeyAttributesV4_KeyUsageProperty, &v.KeyUsageProperty)
+		case schemas.PrivateKeyAttributesV4_MinimalKeyLength:
+			v.MinimalKeyLength = new(int32)
+			return d.ReadInt32(schemas.PrivateKeyAttributesV4_MinimalKeyLength, v.MinimalKeyLength)
+		}
+		return nil
+	})
+}
+
 // Private key flags for v2 templates specify the client compatibility, if the
 // private key can be exported, and if user input is required when using a private
 // key.
@@ -644,6 +1722,44 @@ type PrivateKeyFlagsV2 struct {
 	StrongKeyProtectionRequired *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *PrivateKeyFlagsV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateKeyFlagsV2)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateKeyFlagsV2) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientVersion != "" {
+		s.WriteString(schemas.PrivateKeyFlagsV2_ClientVersion, string(v.ClientVersion))
+	}
+	if v.ExportableKey != nil {
+		s.WriteBool(schemas.PrivateKeyFlagsV2_ExportableKey, *v.ExportableKey)
+	}
+	if v.StrongKeyProtectionRequired != nil {
+		s.WriteBool(schemas.PrivateKeyFlagsV2_StrongKeyProtectionRequired, *v.StrongKeyProtectionRequired)
+	}
+}
+func (v *PrivateKeyFlagsV2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateKeyFlagsV2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateKeyFlagsV2_ClientVersion:
+			var ev string
+			if err := d.ReadString(schemas.PrivateKeyFlagsV2_ClientVersion, &ev); err != nil {
+				return err
+			}
+			v.ClientVersion = ClientCompatibilityV2(ev)
+			return nil
+		case schemas.PrivateKeyFlagsV2_ExportableKey:
+			v.ExportableKey = new(bool)
+			return d.ReadBool(schemas.PrivateKeyFlagsV2_ExportableKey, v.ExportableKey)
+		case schemas.PrivateKeyFlagsV2_StrongKeyProtectionRequired:
+			v.StrongKeyProtectionRequired = new(bool)
+			return d.ReadBool(schemas.PrivateKeyFlagsV2_StrongKeyProtectionRequired, v.StrongKeyProtectionRequired)
+		}
+		return nil
+	})
 }
 
 // Private key flags for v3 templates specify the client compatibility, if the
@@ -667,6 +1783,50 @@ type PrivateKeyFlagsV3 struct {
 	StrongKeyProtectionRequired *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *PrivateKeyFlagsV3) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateKeyFlagsV3)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateKeyFlagsV3) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientVersion != "" {
+		s.WriteString(schemas.PrivateKeyFlagsV3_ClientVersion, string(v.ClientVersion))
+	}
+	if v.ExportableKey != nil {
+		s.WriteBool(schemas.PrivateKeyFlagsV3_ExportableKey, *v.ExportableKey)
+	}
+	if v.RequireAlternateSignatureAlgorithm != nil {
+		s.WriteBool(schemas.PrivateKeyFlagsV3_RequireAlternateSignatureAlgorithm, *v.RequireAlternateSignatureAlgorithm)
+	}
+	if v.StrongKeyProtectionRequired != nil {
+		s.WriteBool(schemas.PrivateKeyFlagsV3_StrongKeyProtectionRequired, *v.StrongKeyProtectionRequired)
+	}
+}
+func (v *PrivateKeyFlagsV3) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateKeyFlagsV3, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateKeyFlagsV3_ClientVersion:
+			var ev string
+			if err := d.ReadString(schemas.PrivateKeyFlagsV3_ClientVersion, &ev); err != nil {
+				return err
+			}
+			v.ClientVersion = ClientCompatibilityV3(ev)
+			return nil
+		case schemas.PrivateKeyFlagsV3_ExportableKey:
+			v.ExportableKey = new(bool)
+			return d.ReadBool(schemas.PrivateKeyFlagsV3_ExportableKey, v.ExportableKey)
+		case schemas.PrivateKeyFlagsV3_RequireAlternateSignatureAlgorithm:
+			v.RequireAlternateSignatureAlgorithm = new(bool)
+			return d.ReadBool(schemas.PrivateKeyFlagsV3_RequireAlternateSignatureAlgorithm, v.RequireAlternateSignatureAlgorithm)
+		case schemas.PrivateKeyFlagsV3_StrongKeyProtectionRequired:
+			v.StrongKeyProtectionRequired = new(bool)
+			return d.ReadBool(schemas.PrivateKeyFlagsV3_StrongKeyProtectionRequired, v.StrongKeyProtectionRequired)
+		}
+		return nil
+	})
 }
 
 // Private key flags for v4 templates specify the client compatibility, if the
@@ -701,6 +1861,62 @@ type PrivateKeyFlagsV4 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PrivateKeyFlagsV4) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PrivateKeyFlagsV4)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PrivateKeyFlagsV4) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientVersion != "" {
+		s.WriteString(schemas.PrivateKeyFlagsV4_ClientVersion, string(v.ClientVersion))
+	}
+	if v.ExportableKey != nil {
+		s.WriteBool(schemas.PrivateKeyFlagsV4_ExportableKey, *v.ExportableKey)
+	}
+	if v.RequireAlternateSignatureAlgorithm != nil {
+		s.WriteBool(schemas.PrivateKeyFlagsV4_RequireAlternateSignatureAlgorithm, *v.RequireAlternateSignatureAlgorithm)
+	}
+	if v.RequireSameKeyRenewal != nil {
+		s.WriteBool(schemas.PrivateKeyFlagsV4_RequireSameKeyRenewal, *v.RequireSameKeyRenewal)
+	}
+	if v.StrongKeyProtectionRequired != nil {
+		s.WriteBool(schemas.PrivateKeyFlagsV4_StrongKeyProtectionRequired, *v.StrongKeyProtectionRequired)
+	}
+	if v.UseLegacyProvider != nil {
+		s.WriteBool(schemas.PrivateKeyFlagsV4_UseLegacyProvider, *v.UseLegacyProvider)
+	}
+}
+func (v *PrivateKeyFlagsV4) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PrivateKeyFlagsV4, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PrivateKeyFlagsV4_ClientVersion:
+			var ev string
+			if err := d.ReadString(schemas.PrivateKeyFlagsV4_ClientVersion, &ev); err != nil {
+				return err
+			}
+			v.ClientVersion = ClientCompatibilityV4(ev)
+			return nil
+		case schemas.PrivateKeyFlagsV4_ExportableKey:
+			v.ExportableKey = new(bool)
+			return d.ReadBool(schemas.PrivateKeyFlagsV4_ExportableKey, v.ExportableKey)
+		case schemas.PrivateKeyFlagsV4_RequireAlternateSignatureAlgorithm:
+			v.RequireAlternateSignatureAlgorithm = new(bool)
+			return d.ReadBool(schemas.PrivateKeyFlagsV4_RequireAlternateSignatureAlgorithm, v.RequireAlternateSignatureAlgorithm)
+		case schemas.PrivateKeyFlagsV4_RequireSameKeyRenewal:
+			v.RequireSameKeyRenewal = new(bool)
+			return d.ReadBool(schemas.PrivateKeyFlagsV4_RequireSameKeyRenewal, v.RequireSameKeyRenewal)
+		case schemas.PrivateKeyFlagsV4_StrongKeyProtectionRequired:
+			v.StrongKeyProtectionRequired = new(bool)
+			return d.ReadBool(schemas.PrivateKeyFlagsV4_StrongKeyProtectionRequired, v.StrongKeyProtectionRequired)
+		case schemas.PrivateKeyFlagsV4_UseLegacyProvider:
+			v.UseLegacyProvider = new(bool)
+			return d.ReadBool(schemas.PrivateKeyFlagsV4_UseLegacyProvider, v.UseLegacyProvider)
+		}
+		return nil
+	})
+}
+
 // The service principal name that the connector uses to authenticate with Active
 // Directory.
 type ServicePrincipalName struct {
@@ -731,6 +1947,66 @@ type ServicePrincipalName struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServicePrincipalName) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServicePrincipalName)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServicePrincipalName) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.ServicePrincipalName_ConnectorArn, *v.ConnectorArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ServicePrincipalName_CreatedAt, *v.CreatedAt)
+	}
+	if v.DirectoryRegistrationArn != nil {
+		s.WriteString(schemas.ServicePrincipalName_DirectoryRegistrationArn, *v.DirectoryRegistrationArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ServicePrincipalName_Status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.ServicePrincipalName_StatusReason, string(v.StatusReason))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ServicePrincipalName_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ServicePrincipalName) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServicePrincipalName, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServicePrincipalName_ConnectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.ServicePrincipalName_ConnectorArn, v.ConnectorArn)
+		case schemas.ServicePrincipalName_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ServicePrincipalName_CreatedAt, v.CreatedAt)
+		case schemas.ServicePrincipalName_DirectoryRegistrationArn:
+			v.DirectoryRegistrationArn = new(string)
+			return d.ReadString(schemas.ServicePrincipalName_DirectoryRegistrationArn, v.DirectoryRegistrationArn)
+		case schemas.ServicePrincipalName_Status:
+			var ev string
+			if err := d.ReadString(schemas.ServicePrincipalName_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ServicePrincipalNameStatus(ev)
+			return nil
+		case schemas.ServicePrincipalName_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.ServicePrincipalName_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = ServicePrincipalNameStatusReason(ev)
+			return nil
+		case schemas.ServicePrincipalName_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ServicePrincipalName_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // The service principal name that the connector uses to authenticate with Active
 // Directory.
 type ServicePrincipalNameSummary struct {
@@ -759,6 +2035,66 @@ type ServicePrincipalNameSummary struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *ServicePrincipalNameSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServicePrincipalNameSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServicePrincipalNameSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.ServicePrincipalNameSummary_ConnectorArn, *v.ConnectorArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.ServicePrincipalNameSummary_CreatedAt, *v.CreatedAt)
+	}
+	if v.DirectoryRegistrationArn != nil {
+		s.WriteString(schemas.ServicePrincipalNameSummary_DirectoryRegistrationArn, *v.DirectoryRegistrationArn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ServicePrincipalNameSummary_Status, string(v.Status))
+	}
+	if v.StatusReason != "" {
+		s.WriteString(schemas.ServicePrincipalNameSummary_StatusReason, string(v.StatusReason))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.ServicePrincipalNameSummary_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *ServicePrincipalNameSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServicePrincipalNameSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServicePrincipalNameSummary_ConnectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.ServicePrincipalNameSummary_ConnectorArn, v.ConnectorArn)
+		case schemas.ServicePrincipalNameSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ServicePrincipalNameSummary_CreatedAt, v.CreatedAt)
+		case schemas.ServicePrincipalNameSummary_DirectoryRegistrationArn:
+			v.DirectoryRegistrationArn = new(string)
+			return d.ReadString(schemas.ServicePrincipalNameSummary_DirectoryRegistrationArn, v.DirectoryRegistrationArn)
+		case schemas.ServicePrincipalNameSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.ServicePrincipalNameSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ServicePrincipalNameStatus(ev)
+			return nil
+		case schemas.ServicePrincipalNameSummary_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.ServicePrincipalNameSummary_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = ServicePrincipalNameStatusReason(ev)
+			return nil
+		case schemas.ServicePrincipalNameSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.ServicePrincipalNameSummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
 }
 
 // Information to include in the subject name and alternate subject name of the
@@ -804,6 +2140,82 @@ type SubjectNameFlagsV2 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubjectNameFlagsV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubjectNameFlagsV2)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubjectNameFlagsV2) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequireCommonName != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV2_RequireCommonName, *v.RequireCommonName)
+	}
+	if v.RequireDirectoryPath != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV2_RequireDirectoryPath, *v.RequireDirectoryPath)
+	}
+	if v.RequireDnsAsCn != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV2_RequireDnsAsCn, *v.RequireDnsAsCn)
+	}
+	if v.RequireEmail != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV2_RequireEmail, *v.RequireEmail)
+	}
+	if v.SanRequireDirectoryGuid != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV2_SanRequireDirectoryGuid, *v.SanRequireDirectoryGuid)
+	}
+	if v.SanRequireDns != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV2_SanRequireDns, *v.SanRequireDns)
+	}
+	if v.SanRequireDomainDns != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV2_SanRequireDomainDns, *v.SanRequireDomainDns)
+	}
+	if v.SanRequireEmail != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV2_SanRequireEmail, *v.SanRequireEmail)
+	}
+	if v.SanRequireSpn != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV2_SanRequireSpn, *v.SanRequireSpn)
+	}
+	if v.SanRequireUpn != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV2_SanRequireUpn, *v.SanRequireUpn)
+	}
+}
+func (v *SubjectNameFlagsV2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubjectNameFlagsV2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubjectNameFlagsV2_RequireCommonName:
+			v.RequireCommonName = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV2_RequireCommonName, v.RequireCommonName)
+		case schemas.SubjectNameFlagsV2_RequireDirectoryPath:
+			v.RequireDirectoryPath = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV2_RequireDirectoryPath, v.RequireDirectoryPath)
+		case schemas.SubjectNameFlagsV2_RequireDnsAsCn:
+			v.RequireDnsAsCn = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV2_RequireDnsAsCn, v.RequireDnsAsCn)
+		case schemas.SubjectNameFlagsV2_RequireEmail:
+			v.RequireEmail = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV2_RequireEmail, v.RequireEmail)
+		case schemas.SubjectNameFlagsV2_SanRequireDirectoryGuid:
+			v.SanRequireDirectoryGuid = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV2_SanRequireDirectoryGuid, v.SanRequireDirectoryGuid)
+		case schemas.SubjectNameFlagsV2_SanRequireDns:
+			v.SanRequireDns = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV2_SanRequireDns, v.SanRequireDns)
+		case schemas.SubjectNameFlagsV2_SanRequireDomainDns:
+			v.SanRequireDomainDns = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV2_SanRequireDomainDns, v.SanRequireDomainDns)
+		case schemas.SubjectNameFlagsV2_SanRequireEmail:
+			v.SanRequireEmail = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV2_SanRequireEmail, v.SanRequireEmail)
+		case schemas.SubjectNameFlagsV2_SanRequireSpn:
+			v.SanRequireSpn = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV2_SanRequireSpn, v.SanRequireSpn)
+		case schemas.SubjectNameFlagsV2_SanRequireUpn:
+			v.SanRequireUpn = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV2_SanRequireUpn, v.SanRequireUpn)
+		}
+		return nil
+	})
+}
+
 // Information to include in the subject name and alternate subject name of the
 // certificate. The subject name can be common name, directory path, DNS as common
 // name, or left blank. You can optionally include email to the subject name for
@@ -847,6 +2259,82 @@ type SubjectNameFlagsV3 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SubjectNameFlagsV3) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubjectNameFlagsV3)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubjectNameFlagsV3) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequireCommonName != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV3_RequireCommonName, *v.RequireCommonName)
+	}
+	if v.RequireDirectoryPath != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV3_RequireDirectoryPath, *v.RequireDirectoryPath)
+	}
+	if v.RequireDnsAsCn != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV3_RequireDnsAsCn, *v.RequireDnsAsCn)
+	}
+	if v.RequireEmail != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV3_RequireEmail, *v.RequireEmail)
+	}
+	if v.SanRequireDirectoryGuid != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV3_SanRequireDirectoryGuid, *v.SanRequireDirectoryGuid)
+	}
+	if v.SanRequireDns != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV3_SanRequireDns, *v.SanRequireDns)
+	}
+	if v.SanRequireDomainDns != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV3_SanRequireDomainDns, *v.SanRequireDomainDns)
+	}
+	if v.SanRequireEmail != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV3_SanRequireEmail, *v.SanRequireEmail)
+	}
+	if v.SanRequireSpn != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV3_SanRequireSpn, *v.SanRequireSpn)
+	}
+	if v.SanRequireUpn != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV3_SanRequireUpn, *v.SanRequireUpn)
+	}
+}
+func (v *SubjectNameFlagsV3) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubjectNameFlagsV3, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubjectNameFlagsV3_RequireCommonName:
+			v.RequireCommonName = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV3_RequireCommonName, v.RequireCommonName)
+		case schemas.SubjectNameFlagsV3_RequireDirectoryPath:
+			v.RequireDirectoryPath = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV3_RequireDirectoryPath, v.RequireDirectoryPath)
+		case schemas.SubjectNameFlagsV3_RequireDnsAsCn:
+			v.RequireDnsAsCn = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV3_RequireDnsAsCn, v.RequireDnsAsCn)
+		case schemas.SubjectNameFlagsV3_RequireEmail:
+			v.RequireEmail = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV3_RequireEmail, v.RequireEmail)
+		case schemas.SubjectNameFlagsV3_SanRequireDirectoryGuid:
+			v.SanRequireDirectoryGuid = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV3_SanRequireDirectoryGuid, v.SanRequireDirectoryGuid)
+		case schemas.SubjectNameFlagsV3_SanRequireDns:
+			v.SanRequireDns = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV3_SanRequireDns, v.SanRequireDns)
+		case schemas.SubjectNameFlagsV3_SanRequireDomainDns:
+			v.SanRequireDomainDns = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV3_SanRequireDomainDns, v.SanRequireDomainDns)
+		case schemas.SubjectNameFlagsV3_SanRequireEmail:
+			v.SanRequireEmail = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV3_SanRequireEmail, v.SanRequireEmail)
+		case schemas.SubjectNameFlagsV3_SanRequireSpn:
+			v.SanRequireSpn = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV3_SanRequireSpn, v.SanRequireSpn)
+		case schemas.SubjectNameFlagsV3_SanRequireUpn:
+			v.SanRequireUpn = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV3_SanRequireUpn, v.SanRequireUpn)
+		}
+		return nil
+	})
+}
+
 // Information to include in the subject name and alternate subject name of the
 // certificate. The subject name can be common name, directory path, DNS as common
 // name, or left blank. You can optionally include email to the subject name for
@@ -888,6 +2376,82 @@ type SubjectNameFlagsV4 struct {
 	SanRequireUpn *bool
 
 	noSmithyDocumentSerde
+}
+
+func (v *SubjectNameFlagsV4) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SubjectNameFlagsV4)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SubjectNameFlagsV4) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RequireCommonName != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV4_RequireCommonName, *v.RequireCommonName)
+	}
+	if v.RequireDirectoryPath != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV4_RequireDirectoryPath, *v.RequireDirectoryPath)
+	}
+	if v.RequireDnsAsCn != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV4_RequireDnsAsCn, *v.RequireDnsAsCn)
+	}
+	if v.RequireEmail != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV4_RequireEmail, *v.RequireEmail)
+	}
+	if v.SanRequireDirectoryGuid != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV4_SanRequireDirectoryGuid, *v.SanRequireDirectoryGuid)
+	}
+	if v.SanRequireDns != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV4_SanRequireDns, *v.SanRequireDns)
+	}
+	if v.SanRequireDomainDns != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV4_SanRequireDomainDns, *v.SanRequireDomainDns)
+	}
+	if v.SanRequireEmail != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV4_SanRequireEmail, *v.SanRequireEmail)
+	}
+	if v.SanRequireSpn != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV4_SanRequireSpn, *v.SanRequireSpn)
+	}
+	if v.SanRequireUpn != nil {
+		s.WriteBool(schemas.SubjectNameFlagsV4_SanRequireUpn, *v.SanRequireUpn)
+	}
+}
+func (v *SubjectNameFlagsV4) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SubjectNameFlagsV4, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SubjectNameFlagsV4_RequireCommonName:
+			v.RequireCommonName = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV4_RequireCommonName, v.RequireCommonName)
+		case schemas.SubjectNameFlagsV4_RequireDirectoryPath:
+			v.RequireDirectoryPath = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV4_RequireDirectoryPath, v.RequireDirectoryPath)
+		case schemas.SubjectNameFlagsV4_RequireDnsAsCn:
+			v.RequireDnsAsCn = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV4_RequireDnsAsCn, v.RequireDnsAsCn)
+		case schemas.SubjectNameFlagsV4_RequireEmail:
+			v.RequireEmail = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV4_RequireEmail, v.RequireEmail)
+		case schemas.SubjectNameFlagsV4_SanRequireDirectoryGuid:
+			v.SanRequireDirectoryGuid = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV4_SanRequireDirectoryGuid, v.SanRequireDirectoryGuid)
+		case schemas.SubjectNameFlagsV4_SanRequireDns:
+			v.SanRequireDns = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV4_SanRequireDns, v.SanRequireDns)
+		case schemas.SubjectNameFlagsV4_SanRequireDomainDns:
+			v.SanRequireDomainDns = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV4_SanRequireDomainDns, v.SanRequireDomainDns)
+		case schemas.SubjectNameFlagsV4_SanRequireEmail:
+			v.SanRequireEmail = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV4_SanRequireEmail, v.SanRequireEmail)
+		case schemas.SubjectNameFlagsV4_SanRequireSpn:
+			v.SanRequireSpn = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV4_SanRequireSpn, v.SanRequireSpn)
+		case schemas.SubjectNameFlagsV4_SanRequireUpn:
+			v.SanRequireUpn = new(bool)
+			return d.ReadBool(schemas.SubjectNameFlagsV4_SanRequireUpn, v.SanRequireUpn)
+		}
+		return nil
+	})
 }
 
 // An Active Directory compatible certificate template. Connectors issue
@@ -938,6 +2502,85 @@ type Template struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Template) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Template)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Template) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Template_Arn, *v.Arn)
+	}
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.Template_ConnectorArn, *v.ConnectorArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Template_CreatedAt, *v.CreatedAt)
+	}
+	serializeTemplateDefinition(s, schemas.Template_Definition, v.Definition)
+	if v.Name != nil {
+		s.WriteString(schemas.Template_Name, *v.Name)
+	}
+	if v.ObjectIdentifier != nil {
+		s.WriteString(schemas.Template_ObjectIdentifier, *v.ObjectIdentifier)
+	}
+	if v.PolicySchema != nil {
+		s.WriteInt32(schemas.Template_PolicySchema, *v.PolicySchema)
+	}
+	if v.Revision != nil {
+		s.WriteStruct(schemas.Template_Revision)
+		v.Revision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Template_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.Template_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *Template) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Template, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Template_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Template_Arn, v.Arn)
+		case schemas.Template_ConnectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.Template_ConnectorArn, v.ConnectorArn)
+		case schemas.Template_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Template_CreatedAt, v.CreatedAt)
+		case schemas.Template_Definition:
+			return deserializeTemplateDefinition(d, schemas.Template_Definition, &v.Definition)
+		case schemas.Template_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Template_Name, v.Name)
+		case schemas.Template_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.Template_ObjectIdentifier, v.ObjectIdentifier)
+		case schemas.Template_PolicySchema:
+			v.PolicySchema = new(int32)
+			return d.ReadInt32(schemas.Template_PolicySchema, v.PolicySchema)
+		case schemas.Template_Revision:
+			v.Revision = &TemplateRevision{}
+			return v.Revision.Deserialize(d)
+		case schemas.Template_Status:
+			var ev string
+			if err := d.ReadString(schemas.Template_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = TemplateStatus(ev)
+			return nil
+		case schemas.Template_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.Template_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
+
 // Template configuration to define the information included in certificates.
 // Define certificate validity and renewal periods, certificate request handling
 // and enrollment options, key usage extensions, application policies, and
@@ -963,6 +2606,14 @@ type TemplateDefinitionMemberTemplateV2 struct {
 }
 
 func (*TemplateDefinitionMemberTemplateV2) isTemplateDefinition() {}
+func (v *TemplateDefinitionMemberTemplateV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateDefinition_TemplateV2)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TemplateDefinitionMemberTemplateV2) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Template configuration to define the information included in certificates.
 // Define certificate validity and renewal periods, certificate request handling
@@ -975,6 +2626,14 @@ type TemplateDefinitionMemberTemplateV3 struct {
 }
 
 func (*TemplateDefinitionMemberTemplateV3) isTemplateDefinition() {}
+func (v *TemplateDefinitionMemberTemplateV3) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateDefinition_TemplateV3)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TemplateDefinitionMemberTemplateV3) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // Template configuration to define the information included in certificates.
 // Define certificate validity and renewal periods, certificate request handling
@@ -987,6 +2646,14 @@ type TemplateDefinitionMemberTemplateV4 struct {
 }
 
 func (*TemplateDefinitionMemberTemplateV4) isTemplateDefinition() {}
+func (v *TemplateDefinitionMemberTemplateV4) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateDefinition_TemplateV4)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *TemplateDefinitionMemberTemplateV4) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
 
 // The revision version of the template. Template updates will increment the minor
 // revision. Re-enrolling all certificate holders will increment the major
@@ -1006,6 +2673,34 @@ type TemplateRevision struct {
 	MinorRevision *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *TemplateRevision) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateRevision)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateRevision) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MajorRevision != nil {
+		s.WriteInt32(schemas.TemplateRevision_MajorRevision, *v.MajorRevision)
+	}
+	if v.MinorRevision != nil {
+		s.WriteInt32(schemas.TemplateRevision_MinorRevision, *v.MinorRevision)
+	}
+}
+func (v *TemplateRevision) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateRevision, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateRevision_MajorRevision:
+			v.MajorRevision = new(int32)
+			return d.ReadInt32(schemas.TemplateRevision_MajorRevision, v.MajorRevision)
+		case schemas.TemplateRevision_MinorRevision:
+			v.MinorRevision = new(int32)
+			return d.ReadInt32(schemas.TemplateRevision_MinorRevision, v.MinorRevision)
+		}
+		return nil
+	})
 }
 
 // An Active Directory compatible certificate template. Connectors issue
@@ -1054,6 +2749,85 @@ type TemplateSummary struct {
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *TemplateSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.TemplateSummary_Arn, *v.Arn)
+	}
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.TemplateSummary_ConnectorArn, *v.ConnectorArn)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.TemplateSummary_CreatedAt, *v.CreatedAt)
+	}
+	serializeTemplateDefinition(s, schemas.TemplateSummary_Definition, v.Definition)
+	if v.Name != nil {
+		s.WriteString(schemas.TemplateSummary_Name, *v.Name)
+	}
+	if v.ObjectIdentifier != nil {
+		s.WriteString(schemas.TemplateSummary_ObjectIdentifier, *v.ObjectIdentifier)
+	}
+	if v.PolicySchema != nil {
+		s.WriteInt32(schemas.TemplateSummary_PolicySchema, *v.PolicySchema)
+	}
+	if v.Revision != nil {
+		s.WriteStruct(schemas.TemplateSummary_Revision)
+		v.Revision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.TemplateSummary_Status, string(v.Status))
+	}
+	if v.UpdatedAt != nil {
+		s.WriteTime(schemas.TemplateSummary_UpdatedAt, *v.UpdatedAt)
+	}
+}
+func (v *TemplateSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateSummary_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.TemplateSummary_Arn, v.Arn)
+		case schemas.TemplateSummary_ConnectorArn:
+			v.ConnectorArn = new(string)
+			return d.ReadString(schemas.TemplateSummary_ConnectorArn, v.ConnectorArn)
+		case schemas.TemplateSummary_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.TemplateSummary_CreatedAt, v.CreatedAt)
+		case schemas.TemplateSummary_Definition:
+			return deserializeTemplateDefinition(d, schemas.TemplateSummary_Definition, &v.Definition)
+		case schemas.TemplateSummary_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.TemplateSummary_Name, v.Name)
+		case schemas.TemplateSummary_ObjectIdentifier:
+			v.ObjectIdentifier = new(string)
+			return d.ReadString(schemas.TemplateSummary_ObjectIdentifier, v.ObjectIdentifier)
+		case schemas.TemplateSummary_PolicySchema:
+			v.PolicySchema = new(int32)
+			return d.ReadInt32(schemas.TemplateSummary_PolicySchema, v.PolicySchema)
+		case schemas.TemplateSummary_Revision:
+			v.Revision = &TemplateRevision{}
+			return v.Revision.Deserialize(d)
+		case schemas.TemplateSummary_Status:
+			var ev string
+			if err := d.ReadString(schemas.TemplateSummary_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = TemplateStatus(ev)
+			return nil
+		case schemas.TemplateSummary_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.TemplateSummary_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
 }
 
 // v2 template schema that uses Legacy Cryptographic Providers.
@@ -1107,6 +2881,81 @@ type TemplateV2 struct {
 	SupersededTemplates []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TemplateV2) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateV2)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateV2) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateValidity != nil {
+		s.WriteStruct(schemas.TemplateV2_CertificateValidity)
+		v.CertificateValidity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnrollmentFlags != nil {
+		s.WriteStruct(schemas.TemplateV2_EnrollmentFlags)
+		v.EnrollmentFlags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Extensions != nil {
+		s.WriteStruct(schemas.TemplateV2_Extensions)
+		v.Extensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GeneralFlags != nil {
+		s.WriteStruct(schemas.TemplateV2_GeneralFlags)
+		v.GeneralFlags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrivateKeyAttributes != nil {
+		s.WriteStruct(schemas.TemplateV2_PrivateKeyAttributes)
+		v.PrivateKeyAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrivateKeyFlags != nil {
+		s.WriteStruct(schemas.TemplateV2_PrivateKeyFlags)
+		v.PrivateKeyFlags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubjectNameFlags != nil {
+		s.WriteStruct(schemas.TemplateV2_SubjectNameFlags)
+		v.SubjectNameFlags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTemplateNameList(s, schemas.TemplateV2_SupersededTemplates, v.SupersededTemplates)
+}
+func (v *TemplateV2) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateV2, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateV2_CertificateValidity:
+			v.CertificateValidity = &CertificateValidity{}
+			return v.CertificateValidity.Deserialize(d)
+		case schemas.TemplateV2_EnrollmentFlags:
+			v.EnrollmentFlags = &EnrollmentFlagsV2{}
+			return v.EnrollmentFlags.Deserialize(d)
+		case schemas.TemplateV2_Extensions:
+			v.Extensions = &ExtensionsV2{}
+			return v.Extensions.Deserialize(d)
+		case schemas.TemplateV2_GeneralFlags:
+			v.GeneralFlags = &GeneralFlagsV2{}
+			return v.GeneralFlags.Deserialize(d)
+		case schemas.TemplateV2_PrivateKeyAttributes:
+			v.PrivateKeyAttributes = &PrivateKeyAttributesV2{}
+			return v.PrivateKeyAttributes.Deserialize(d)
+		case schemas.TemplateV2_PrivateKeyFlags:
+			v.PrivateKeyFlags = &PrivateKeyFlagsV2{}
+			return v.PrivateKeyFlags.Deserialize(d)
+		case schemas.TemplateV2_SubjectNameFlags:
+			v.SubjectNameFlags = &SubjectNameFlagsV2{}
+			return v.SubjectNameFlags.Deserialize(d)
+		case schemas.TemplateV2_SupersededTemplates:
+			return deserializeTemplateNameList(d, schemas.TemplateV2_SupersededTemplates, &v.SupersededTemplates)
+		}
+		return nil
+	})
 }
 
 // v3 template schema that uses Key Storage Providers.
@@ -1166,6 +3015,91 @@ type TemplateV3 struct {
 	SupersededTemplates []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TemplateV3) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateV3)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateV3) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateValidity != nil {
+		s.WriteStruct(schemas.TemplateV3_CertificateValidity)
+		v.CertificateValidity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnrollmentFlags != nil {
+		s.WriteStruct(schemas.TemplateV3_EnrollmentFlags)
+		v.EnrollmentFlags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Extensions != nil {
+		s.WriteStruct(schemas.TemplateV3_Extensions)
+		v.Extensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GeneralFlags != nil {
+		s.WriteStruct(schemas.TemplateV3_GeneralFlags)
+		v.GeneralFlags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HashAlgorithm != "" {
+		s.WriteString(schemas.TemplateV3_HashAlgorithm, string(v.HashAlgorithm))
+	}
+	if v.PrivateKeyAttributes != nil {
+		s.WriteStruct(schemas.TemplateV3_PrivateKeyAttributes)
+		v.PrivateKeyAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrivateKeyFlags != nil {
+		s.WriteStruct(schemas.TemplateV3_PrivateKeyFlags)
+		v.PrivateKeyFlags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubjectNameFlags != nil {
+		s.WriteStruct(schemas.TemplateV3_SubjectNameFlags)
+		v.SubjectNameFlags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTemplateNameList(s, schemas.TemplateV3_SupersededTemplates, v.SupersededTemplates)
+}
+func (v *TemplateV3) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateV3, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateV3_CertificateValidity:
+			v.CertificateValidity = &CertificateValidity{}
+			return v.CertificateValidity.Deserialize(d)
+		case schemas.TemplateV3_EnrollmentFlags:
+			v.EnrollmentFlags = &EnrollmentFlagsV3{}
+			return v.EnrollmentFlags.Deserialize(d)
+		case schemas.TemplateV3_Extensions:
+			v.Extensions = &ExtensionsV3{}
+			return v.Extensions.Deserialize(d)
+		case schemas.TemplateV3_GeneralFlags:
+			v.GeneralFlags = &GeneralFlagsV3{}
+			return v.GeneralFlags.Deserialize(d)
+		case schemas.TemplateV3_HashAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.TemplateV3_HashAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.HashAlgorithm = HashAlgorithm(ev)
+			return nil
+		case schemas.TemplateV3_PrivateKeyAttributes:
+			v.PrivateKeyAttributes = &PrivateKeyAttributesV3{}
+			return v.PrivateKeyAttributes.Deserialize(d)
+		case schemas.TemplateV3_PrivateKeyFlags:
+			v.PrivateKeyFlags = &PrivateKeyFlagsV3{}
+			return v.PrivateKeyFlags.Deserialize(d)
+		case schemas.TemplateV3_SubjectNameFlags:
+			v.SubjectNameFlags = &SubjectNameFlagsV3{}
+			return v.SubjectNameFlags.Deserialize(d)
+		case schemas.TemplateV3_SupersededTemplates:
+			return deserializeTemplateNameList(d, schemas.TemplateV3_SupersededTemplates, &v.SupersededTemplates)
+		}
+		return nil
+	})
 }
 
 // v4 template schema that can use either Legacy Cryptographic Providers or Key
@@ -1229,6 +3163,91 @@ type TemplateV4 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TemplateV4) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TemplateV4)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TemplateV4) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CertificateValidity != nil {
+		s.WriteStruct(schemas.TemplateV4_CertificateValidity)
+		v.CertificateValidity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.EnrollmentFlags != nil {
+		s.WriteStruct(schemas.TemplateV4_EnrollmentFlags)
+		v.EnrollmentFlags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Extensions != nil {
+		s.WriteStruct(schemas.TemplateV4_Extensions)
+		v.Extensions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GeneralFlags != nil {
+		s.WriteStruct(schemas.TemplateV4_GeneralFlags)
+		v.GeneralFlags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.HashAlgorithm != "" {
+		s.WriteString(schemas.TemplateV4_HashAlgorithm, string(v.HashAlgorithm))
+	}
+	if v.PrivateKeyAttributes != nil {
+		s.WriteStruct(schemas.TemplateV4_PrivateKeyAttributes)
+		v.PrivateKeyAttributes.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PrivateKeyFlags != nil {
+		s.WriteStruct(schemas.TemplateV4_PrivateKeyFlags)
+		v.PrivateKeyFlags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SubjectNameFlags != nil {
+		s.WriteStruct(schemas.TemplateV4_SubjectNameFlags)
+		v.SubjectNameFlags.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTemplateNameList(s, schemas.TemplateV4_SupersededTemplates, v.SupersededTemplates)
+}
+func (v *TemplateV4) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TemplateV4, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TemplateV4_CertificateValidity:
+			v.CertificateValidity = &CertificateValidity{}
+			return v.CertificateValidity.Deserialize(d)
+		case schemas.TemplateV4_EnrollmentFlags:
+			v.EnrollmentFlags = &EnrollmentFlagsV4{}
+			return v.EnrollmentFlags.Deserialize(d)
+		case schemas.TemplateV4_Extensions:
+			v.Extensions = &ExtensionsV4{}
+			return v.Extensions.Deserialize(d)
+		case schemas.TemplateV4_GeneralFlags:
+			v.GeneralFlags = &GeneralFlagsV4{}
+			return v.GeneralFlags.Deserialize(d)
+		case schemas.TemplateV4_HashAlgorithm:
+			var ev string
+			if err := d.ReadString(schemas.TemplateV4_HashAlgorithm, &ev); err != nil {
+				return err
+			}
+			v.HashAlgorithm = HashAlgorithm(ev)
+			return nil
+		case schemas.TemplateV4_PrivateKeyAttributes:
+			v.PrivateKeyAttributes = &PrivateKeyAttributesV4{}
+			return v.PrivateKeyAttributes.Deserialize(d)
+		case schemas.TemplateV4_PrivateKeyFlags:
+			v.PrivateKeyFlags = &PrivateKeyFlagsV4{}
+			return v.PrivateKeyFlags.Deserialize(d)
+		case schemas.TemplateV4_SubjectNameFlags:
+			v.SubjectNameFlags = &SubjectNameFlagsV4{}
+			return v.SubjectNameFlags.Deserialize(d)
+		case schemas.TemplateV4_SupersededTemplates:
+			return deserializeTemplateNameList(d, schemas.TemplateV4_SupersededTemplates, &v.SupersededTemplates)
+		}
+		return nil
+	})
+}
+
 // Information describing the end of the validity period of the certificate. This
 // parameter sets the “Not After” date for the certificate. Certificate validity is
 // the period of time during which a certificate is valid. Validity can be
@@ -1253,6 +3272,38 @@ type ValidityPeriod struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ValidityPeriod) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidityPeriod)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidityPeriod) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Period != nil {
+		s.WriteInt64(schemas.ValidityPeriod_Period, *v.Period)
+	}
+	if v.PeriodType != "" {
+		s.WriteString(schemas.ValidityPeriod_PeriodType, string(v.PeriodType))
+	}
+}
+func (v *ValidityPeriod) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidityPeriod, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidityPeriod_Period:
+			v.Period = new(int64)
+			return d.ReadInt64(schemas.ValidityPeriod_Period, v.Period)
+		case schemas.ValidityPeriod_PeriodType:
+			var ev string
+			if err := d.ReadString(schemas.ValidityPeriod_PeriodType, &ev); err != nil {
+				return err
+			}
+			v.PeriodType = ValidityPeriodType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about your VPC and security groups used with the connector.
 type VpcInformation struct {
 
@@ -1266,6 +3317,35 @@ type VpcInformation struct {
 	IpAddressType IpAddressType
 
 	noSmithyDocumentSerde
+}
+
+func (v *VpcInformation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VpcInformation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VpcInformation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddressType != "" {
+		s.WriteString(schemas.VpcInformation_IpAddressType, string(v.IpAddressType))
+	}
+	serializeSecurityGroupIdList(s, schemas.VpcInformation_SecurityGroupIds, v.SecurityGroupIds)
+}
+func (v *VpcInformation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VpcInformation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VpcInformation_IpAddressType:
+			var ev string
+			if err := d.ReadString(schemas.VpcInformation_IpAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = IpAddressType(ev)
+			return nil
+		case schemas.VpcInformation_SecurityGroupIds:
+			return deserializeSecurityGroupIdList(d, schemas.VpcInformation_SecurityGroupIds, &v.SecurityGroupIds)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

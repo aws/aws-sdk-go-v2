@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,18 @@ type GetAccessSourceInput struct {
 	AccessSourceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAccessSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAccessSourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAccessSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessSourceId != nil {
+		s.WriteString(schemas.GetAccessSourceInput_accessSourceId, *v.AccessSourceId)
+	}
 }
 
 type GetAccessSourceOutput struct {
@@ -100,16 +114,63 @@ type GetAccessSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAccessSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAccessSourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAccessSourceOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetAccessSourceOutput_arn, v.Arn)
+		case schemas.GetAccessSourceOutput_cidr:
+			v.Cidr = new(string)
+			return d.ReadString(schemas.GetAccessSourceOutput_cidr, v.Cidr)
+		case schemas.GetAccessSourceOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAccessSourceOutput_createdAt, v.CreatedAt)
+		case schemas.GetAccessSourceOutput_dnsViewId:
+			v.DnsViewId = new(string)
+			return d.ReadString(schemas.GetAccessSourceOutput_dnsViewId, v.DnsViewId)
+		case schemas.GetAccessSourceOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetAccessSourceOutput_id, v.Id)
+		case schemas.GetAccessSourceOutput_ipAddressType:
+			var ev string
+			if err := d.ReadString(schemas.GetAccessSourceOutput_ipAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = types.IpAddressType(ev)
+			return nil
+		case schemas.GetAccessSourceOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAccessSourceOutput_name, v.Name)
+		case schemas.GetAccessSourceOutput_protocol:
+			var ev string
+			if err := d.ReadString(schemas.GetAccessSourceOutput_protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = types.DnsProtocol(ev)
+			return nil
+		case schemas.GetAccessSourceOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetAccessSourceOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CRResourceStatus(ev)
+			return nil
+		case schemas.GetAccessSourceOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAccessSourceOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAccessSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAccessSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessSource, schemas.GetAccessSourceInput, schemas.GetAccessSourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAccessSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAccessSource, schemas.GetAccessSourceInput, schemas.GetAccessSourceOutput), output: &GetAccessSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAccessSource"); err != nil {

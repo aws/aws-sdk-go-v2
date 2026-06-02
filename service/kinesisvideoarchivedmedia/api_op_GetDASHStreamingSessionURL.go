@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -279,6 +281,41 @@ type GetDASHStreamingSessionURLInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDASHStreamingSessionURLInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDASHStreamingSessionURLInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDASHStreamingSessionURLInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DASHFragmentSelector != nil {
+		s.WriteStruct(schemas.GetDASHStreamingSessionURLInput_DASHFragmentSelector)
+		v.DASHFragmentSelector.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DisplayFragmentNumber != "" {
+		s.WriteString(schemas.GetDASHStreamingSessionURLInput_DisplayFragmentNumber, string(v.DisplayFragmentNumber))
+	}
+	if v.DisplayFragmentTimestamp != "" {
+		s.WriteString(schemas.GetDASHStreamingSessionURLInput_DisplayFragmentTimestamp, string(v.DisplayFragmentTimestamp))
+	}
+	if v.Expires != nil {
+		s.WriteInt32(schemas.GetDASHStreamingSessionURLInput_Expires, *v.Expires)
+	}
+	if v.MaxManifestFragmentResults != nil {
+		s.WriteInt64(schemas.GetDASHStreamingSessionURLInput_MaxManifestFragmentResults, *v.MaxManifestFragmentResults)
+	}
+	if v.PlaybackMode != "" {
+		s.WriteString(schemas.GetDASHStreamingSessionURLInput_PlaybackMode, string(v.PlaybackMode))
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.GetDASHStreamingSessionURLInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.GetDASHStreamingSessionURLInput_StreamName, *v.StreamName)
+	}
+}
+
 type GetDASHStreamingSessionURLOutput struct {
 
 	// The URL (containing the session token) that a media player can use to retrieve
@@ -291,16 +328,24 @@ type GetDASHStreamingSessionURLOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDASHStreamingSessionURLOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDASHStreamingSessionURLOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDASHStreamingSessionURLOutput_DASHStreamingSessionURL:
+			v.DASHStreamingSessionURL = new(string)
+			return d.ReadString(schemas.GetDASHStreamingSessionURLOutput_DASHStreamingSessionURL, v.DASHStreamingSessionURL)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDASHStreamingSessionURLMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDASHStreamingSessionURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDASHStreamingSessionURL, schemas.GetDASHStreamingSessionURLInput, schemas.GetDASHStreamingSessionURLOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDASHStreamingSessionURL{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDASHStreamingSessionURL, schemas.GetDASHStreamingSessionURLInput, schemas.GetDASHStreamingSessionURLOutput), output: &GetDASHStreamingSessionURLOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDASHStreamingSessionURL"); err != nil {

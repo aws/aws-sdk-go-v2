@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,22 @@ type UpdateRuleSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRuleSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRuleSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRuleSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RuleSetId != nil {
+		s.WriteString(schemas.UpdateRuleSetRequest_RuleSetId, *v.RuleSetId)
+	}
+	if v.RuleSetName != nil {
+		s.WriteString(schemas.UpdateRuleSetRequest_RuleSetName, *v.RuleSetName)
+	}
+	serializeRules(s, schemas.UpdateRuleSetRequest_Rules, v.Rules)
+}
+
 type UpdateRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,16 +69,21 @@ type UpdateRuleSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRuleSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRuleSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRuleSet, schemas.UpdateRuleSetRequest, schemas.UpdateRuleSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateRuleSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRuleSet, schemas.UpdateRuleSetRequest, schemas.UpdateRuleSetResponse), output: &UpdateRuleSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRuleSet"); err != nil {

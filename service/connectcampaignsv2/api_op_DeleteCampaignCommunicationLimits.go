@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,21 @@ type DeleteCampaignCommunicationLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCampaignCommunicationLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCampaignCommunicationLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCampaignCommunicationLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Config != "" {
+		s.WriteString(schemas.DeleteCampaignCommunicationLimitsRequest_config, string(v.Config))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeleteCampaignCommunicationLimitsRequest_id, *v.Id)
+	}
+}
+
 type DeleteCampaignCommunicationLimitsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,16 +67,29 @@ type DeleteCampaignCommunicationLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCampaignCommunicationLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCampaignCommunicationLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteCampaignCommunicationLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCampaignCommunicationLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCampaignCommunicationLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCampaignCommunicationLimits, schemas.DeleteCampaignCommunicationLimitsRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCampaignCommunicationLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCampaignCommunicationLimits, schemas.DeleteCampaignCommunicationLimitsRequest, nil), output: &DeleteCampaignCommunicationLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteCampaignCommunicationLimits"); err != nil {

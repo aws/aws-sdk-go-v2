@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,6 +33,25 @@ type MalformedMapInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedMapInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedMapInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedMapInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSimpleMap(s, schemas.MalformedMapInput_bodyMap, v.BodyMap)
+}
+func (v *MalformedMapInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedMapInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedMapInput_bodyMap:
+			return deserializeSimpleMap(d, schemas.MalformedMapInput_bodyMap, &v.BodyMap)
+		}
+		return nil
+	})
+}
+
 type MalformedMapOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -38,16 +59,29 @@ type MalformedMapOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedMapOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedMapOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MalformedMapOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMalformedMapMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedMap, schemas.MalformedMapInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedMap{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedMap, schemas.MalformedMapInput, nil), output: &MalformedMapOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedMap"); err != nil {

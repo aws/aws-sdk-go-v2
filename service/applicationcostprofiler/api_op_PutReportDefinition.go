@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationcostprofiler/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,32 @@ type PutReportDefinitionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutReportDefinitionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutReportDefinitionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutReportDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationS3Location != nil {
+		s.WriteStruct(schemas.PutReportDefinitionRequest_destinationS3Location)
+		v.DestinationS3Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.PutReportDefinitionRequest_format, string(v.Format))
+	}
+	if v.ReportDescription != nil {
+		s.WriteString(schemas.PutReportDefinitionRequest_reportDescription, *v.ReportDescription)
+	}
+	if v.ReportFrequency != "" {
+		s.WriteString(schemas.PutReportDefinitionRequest_reportFrequency, string(v.ReportFrequency))
+	}
+	if v.ReportId != nil {
+		s.WriteString(schemas.PutReportDefinitionRequest_reportId, *v.ReportId)
+	}
+}
+
 type PutReportDefinitionOutput struct {
 
 	// ID of the report.
@@ -70,16 +98,24 @@ type PutReportDefinitionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutReportDefinitionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutReportDefinitionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutReportDefinitionResult_reportId:
+			v.ReportId = new(string)
+			return d.ReadString(schemas.PutReportDefinitionResult_reportId, v.ReportId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutReportDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutReportDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutReportDefinition, schemas.PutReportDefinitionRequest, schemas.PutReportDefinitionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutReportDefinition{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutReportDefinition, schemas.PutReportDefinitionRequest, schemas.PutReportDefinitionResult), output: &PutReportDefinitionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutReportDefinition"); err != nil {

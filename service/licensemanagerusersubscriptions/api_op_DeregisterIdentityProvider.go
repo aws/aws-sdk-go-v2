@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,22 @@ type DeregisterIdentityProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterIdentityProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeregisterIdentityProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeregisterIdentityProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeIdentityProvider(s, schemas.DeregisterIdentityProviderRequest_IdentityProvider, v.IdentityProvider)
+	if v.IdentityProviderArn != nil {
+		s.WriteString(schemas.DeregisterIdentityProviderRequest_IdentityProviderArn, *v.IdentityProviderArn)
+	}
+	if v.Product != nil {
+		s.WriteString(schemas.DeregisterIdentityProviderRequest_Product, *v.Product)
+	}
+}
+
 type DeregisterIdentityProviderOutput struct {
 
 	// Metadata that describes the results of an identity provider operation.
@@ -59,16 +77,24 @@ type DeregisterIdentityProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeregisterIdentityProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeregisterIdentityProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeregisterIdentityProviderResponse_IdentityProviderSummary:
+			v.IdentityProviderSummary = &types.IdentityProviderSummary{}
+			return v.IdentityProviderSummary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeregisterIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeregisterIdentityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterIdentityProvider, schemas.DeregisterIdentityProviderRequest, schemas.DeregisterIdentityProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeregisterIdentityProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeregisterIdentityProvider, schemas.DeregisterIdentityProviderRequest, schemas.DeregisterIdentityProviderResponse), output: &DeregisterIdentityProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeregisterIdentityProvider"); err != nil {

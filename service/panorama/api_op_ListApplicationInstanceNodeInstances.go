@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,39 @@ type ListApplicationInstanceNodeInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationInstanceNodeInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationInstanceNodeInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationInstanceNodeInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationInstanceId != nil {
+		s.WriteString(schemas.ListApplicationInstanceNodeInstancesRequest_ApplicationInstanceId, *v.ApplicationInstanceId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListApplicationInstanceNodeInstancesRequest_MaxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationInstanceNodeInstancesRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListApplicationInstanceNodeInstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationInstanceNodeInstancesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationInstanceNodeInstancesRequest_ApplicationInstanceId:
+			v.ApplicationInstanceId = new(string)
+			return d.ReadString(schemas.ListApplicationInstanceNodeInstancesRequest_ApplicationInstanceId, v.ApplicationInstanceId)
+		case schemas.ListApplicationInstanceNodeInstancesRequest_MaxResults:
+			return d.ReadInt32(schemas.ListApplicationInstanceNodeInstancesRequest_MaxResults, &v.MaxResults)
+		case schemas.ListApplicationInstanceNodeInstancesRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationInstanceNodeInstancesRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListApplicationInstanceNodeInstancesOutput struct {
 
 	// A pagination token that's included if more results are available.
@@ -58,16 +93,38 @@ type ListApplicationInstanceNodeInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationInstanceNodeInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationInstanceNodeInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationInstanceNodeInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationInstanceNodeInstancesResponse_NextToken, *v.NextToken)
+	}
+	serializeNodeInstances(s, schemas.ListApplicationInstanceNodeInstancesResponse_NodeInstances, v.NodeInstances)
+}
+func (v *ListApplicationInstanceNodeInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationInstanceNodeInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationInstanceNodeInstancesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationInstanceNodeInstancesResponse_NextToken, v.NextToken)
+		case schemas.ListApplicationInstanceNodeInstancesResponse_NodeInstances:
+			return deserializeNodeInstances(d, schemas.ListApplicationInstanceNodeInstancesResponse_NodeInstances, &v.NodeInstances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationInstanceNodeInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListApplicationInstanceNodeInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationInstanceNodeInstances, schemas.ListApplicationInstanceNodeInstancesRequest, schemas.ListApplicationInstanceNodeInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListApplicationInstanceNodeInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationInstanceNodeInstances, schemas.ListApplicationInstanceNodeInstancesRequest, schemas.ListApplicationInstanceNodeInstancesResponse), output: &ListApplicationInstanceNodeInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApplicationInstanceNodeInstances"); err != nil {

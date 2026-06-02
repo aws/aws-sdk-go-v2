@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,27 @@ type DescribeBudgetsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBudgetsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBudgetsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBudgetsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeBudgetsRequest_AccountId, *v.AccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeBudgetsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeBudgetsRequest_NextToken, *v.NextToken)
+	}
+	if v.ShowFilterExpression != nil {
+		s.WriteBool(schemas.DescribeBudgetsRequest_ShowFilterExpression, *v.ShowFilterExpression)
+	}
+}
+
 // Response of DescribeBudgets
 type DescribeBudgetsOutput struct {
 
@@ -73,16 +96,26 @@ type DescribeBudgetsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBudgetsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBudgetsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBudgetsResponse_Budgets:
+			return deserializeBudgets(d, schemas.DescribeBudgetsResponse_Budgets, &v.Budgets)
+		case schemas.DescribeBudgetsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeBudgetsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBudgetsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBudgets{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudgets, schemas.DescribeBudgetsRequest, schemas.DescribeBudgetsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeBudgets{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudgets, schemas.DescribeBudgetsRequest, schemas.DescribeBudgetsResponse), output: &DescribeBudgetsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeBudgets"); err != nil {

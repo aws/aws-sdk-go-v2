@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,27 @@ type DisassociateVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateVolumeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Device != nil {
+		s.WriteString(schemas.DisassociateVolumeRequest_Device, *v.Device)
+	}
+	if v.DisassociateMode != "" {
+		s.WriteString(schemas.DisassociateVolumeRequest_DisassociateMode, string(v.DisassociateMode))
+	}
+	if v.VolumeId != nil {
+		s.WriteString(schemas.DisassociateVolumeRequest_VolumeId, *v.VolumeId)
+	}
+	if v.WorkspaceInstanceId != nil {
+		s.WriteString(schemas.DisassociateVolumeRequest_WorkspaceInstanceId, *v.WorkspaceInstanceId)
+	}
+}
+
 // Confirms volume detachment.
 type DisassociateVolumeOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -57,16 +80,21 @@ type DisassociateVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateVolumeResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateVolume, schemas.DisassociateVolumeRequest, schemas.DisassociateVolumeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisassociateVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateVolume, schemas.DisassociateVolumeRequest, schemas.DisassociateVolumeResponse), output: &DisassociateVolumeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateVolume"); err != nil {

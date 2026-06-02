@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,23 @@ type CreatePaymentCredentialProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePaymentCredentialProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePaymentCredentialProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePaymentCredentialProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CredentialProviderVendor != "" {
+		s.WriteString(schemas.CreatePaymentCredentialProviderRequest_credentialProviderVendor, string(v.CredentialProviderVendor))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePaymentCredentialProviderRequest_name, *v.Name)
+	}
+	serializePaymentProviderConfigurationInput(s, schemas.CreatePaymentCredentialProviderRequest_providerConfigurationInput, v.ProviderConfigurationInput)
+	serializeTagsMap(s, schemas.CreatePaymentCredentialProviderRequest_tags, v.Tags)
+}
+
 type CreatePaymentCredentialProviderOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created payment credential provider.
@@ -81,16 +100,36 @@ type CreatePaymentCredentialProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePaymentCredentialProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePaymentCredentialProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePaymentCredentialProviderResponse_credentialProviderArn:
+			v.CredentialProviderArn = new(string)
+			return d.ReadString(schemas.CreatePaymentCredentialProviderResponse_credentialProviderArn, v.CredentialProviderArn)
+		case schemas.CreatePaymentCredentialProviderResponse_credentialProviderVendor:
+			var ev string
+			if err := d.ReadString(schemas.CreatePaymentCredentialProviderResponse_credentialProviderVendor, &ev); err != nil {
+				return err
+			}
+			v.CredentialProviderVendor = types.PaymentCredentialProviderVendorType(ev)
+			return nil
+		case schemas.CreatePaymentCredentialProviderResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreatePaymentCredentialProviderResponse_name, v.Name)
+		case schemas.CreatePaymentCredentialProviderResponse_providerConfigurationOutput:
+			return deserializePaymentProviderConfigurationOutput(d, schemas.CreatePaymentCredentialProviderResponse_providerConfigurationOutput, &v.ProviderConfigurationOutput)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePaymentCredentialProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePaymentCredentialProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePaymentCredentialProvider, schemas.CreatePaymentCredentialProviderRequest, schemas.CreatePaymentCredentialProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePaymentCredentialProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePaymentCredentialProvider, schemas.CreatePaymentCredentialProviderRequest, schemas.CreatePaymentCredentialProviderResponse), output: &CreatePaymentCredentialProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePaymentCredentialProvider"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,21 @@ type ListHITsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHITsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListHITsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListHITsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListHITsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListHITsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListHITsOutput struct {
 
 	//  The list of HIT elements returned by the query.
@@ -59,16 +76,29 @@ type ListHITsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListHITsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListHITsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListHITsResponse_HITs:
+			return deserializeHITList(d, schemas.ListHITsResponse_HITs, &v.HITs)
+		case schemas.ListHITsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListHITsResponse_NextToken, v.NextToken)
+		case schemas.ListHITsResponse_NumResults:
+			v.NumResults = new(int32)
+			return d.ReadInt32(schemas.ListHITsResponse_NumResults, v.NumResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListHITsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListHITs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHITs, schemas.ListHITsRequest, schemas.ListHITsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListHITs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListHITs, schemas.ListHITsRequest, schemas.ListHITsResponse), output: &ListHITsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListHITs"); err != nil {

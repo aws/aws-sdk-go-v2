@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53profiles/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53profiles/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,27 @@ type AssociateResourceToProfileInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResourceToProfileInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateResourceToProfileRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateResourceToProfileInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.AssociateResourceToProfileRequest_Name, *v.Name)
+	}
+	if v.ProfileId != nil {
+		s.WriteString(schemas.AssociateResourceToProfileRequest_ProfileId, *v.ProfileId)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.AssociateResourceToProfileRequest_ResourceArn, *v.ResourceArn)
+	}
+	if v.ResourceProperties != nil {
+		s.WriteString(schemas.AssociateResourceToProfileRequest_ResourceProperties, *v.ResourceProperties)
+	}
+}
+
 type AssociateResourceToProfileOutput struct {
 
 	//  Infromation about the AssociateResourceToProfile , including a status message.
@@ -65,16 +88,24 @@ type AssociateResourceToProfileOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateResourceToProfileOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateResourceToProfileResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateResourceToProfileResponse_ProfileResourceAssociation:
+			v.ProfileResourceAssociation = &types.ProfileResourceAssociation{}
+			return v.ProfileResourceAssociation.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateResourceToProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateResourceToProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResourceToProfile, schemas.AssociateResourceToProfileRequest, schemas.AssociateResourceToProfileResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateResourceToProfile{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateResourceToProfile, schemas.AssociateResourceToProfileRequest, schemas.AssociateResourceToProfileResponse), output: &AssociateResourceToProfileOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateResourceToProfile"); err != nil {

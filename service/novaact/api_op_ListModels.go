@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/novaact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/novaact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type ListModelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListModelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListModelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientCompatibilityVersion != nil {
+		s.WriteInt32(schemas.ListModelsRequest_clientCompatibilityVersion, *v.ClientCompatibilityVersion)
+	}
+}
+
 type ListModelsOutput struct {
 
 	// Information about client compatibility and supported models.
@@ -61,16 +75,28 @@ type ListModelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListModelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListModelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListModelsResponse_compatibilityInformation:
+			v.CompatibilityInformation = &types.CompatibilityInformation{}
+			return v.CompatibilityInformation.Deserialize(d)
+		case schemas.ListModelsResponse_modelAliases:
+			return deserializeModelAliases(d, schemas.ListModelsResponse_modelAliases, &v.ModelAliases)
+		case schemas.ListModelsResponse_modelSummaries:
+			return deserializeModelSummaries(d, schemas.ListModelsResponse_modelSummaries, &v.ModelSummaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModels, schemas.ListModelsRequest, schemas.ListModelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListModels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListModels, schemas.ListModelsRequest, schemas.ListModelsResponse), output: &ListModelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListModels"); err != nil {

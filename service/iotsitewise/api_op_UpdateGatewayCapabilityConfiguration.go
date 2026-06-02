@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -76,6 +78,24 @@ type UpdateGatewayCapabilityConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewayCapabilityConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateGatewayCapabilityConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateGatewayCapabilityConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CapabilityConfiguration != nil {
+		s.WriteString(schemas.UpdateGatewayCapabilityConfigurationRequest_capabilityConfiguration, *v.CapabilityConfiguration)
+	}
+	if v.CapabilityNamespace != nil {
+		s.WriteString(schemas.UpdateGatewayCapabilityConfigurationRequest_capabilityNamespace, *v.CapabilityNamespace)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.UpdateGatewayCapabilityConfigurationRequest_gatewayId, *v.GatewayId)
+	}
+}
+
 type UpdateGatewayCapabilityConfigurationOutput struct {
 
 	// The namespace of the gateway capability.
@@ -110,16 +130,31 @@ type UpdateGatewayCapabilityConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateGatewayCapabilityConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateGatewayCapabilityConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateGatewayCapabilityConfigurationResponse_capabilityNamespace:
+			v.CapabilityNamespace = new(string)
+			return d.ReadString(schemas.UpdateGatewayCapabilityConfigurationResponse_capabilityNamespace, v.CapabilityNamespace)
+		case schemas.UpdateGatewayCapabilityConfigurationResponse_capabilitySyncStatus:
+			var ev string
+			if err := d.ReadString(schemas.UpdateGatewayCapabilityConfigurationResponse_capabilitySyncStatus, &ev); err != nil {
+				return err
+			}
+			v.CapabilitySyncStatus = types.CapabilitySyncStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateGatewayCapabilityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateGatewayCapabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGatewayCapabilityConfiguration, schemas.UpdateGatewayCapabilityConfigurationRequest, schemas.UpdateGatewayCapabilityConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateGatewayCapabilityConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateGatewayCapabilityConfiguration, schemas.UpdateGatewayCapabilityConfigurationRequest, schemas.UpdateGatewayCapabilityConfigurationResponse), output: &UpdateGatewayCapabilityConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateGatewayCapabilityConfiguration"); err != nil {

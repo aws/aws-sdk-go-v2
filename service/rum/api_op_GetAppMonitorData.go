@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rum/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,50 @@ type GetAppMonitorDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppMonitorDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppMonitorDataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppMonitorDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeQueryFilters(s, schemas.GetAppMonitorDataRequest_Filters, v.Filters)
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.GetAppMonitorDataRequest_MaxResults, v.MaxResults)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GetAppMonitorDataRequest_Name, *v.Name)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAppMonitorDataRequest_NextToken, *v.NextToken)
+	}
+	if v.TimeRange != nil {
+		s.WriteStruct(schemas.GetAppMonitorDataRequest_TimeRange)
+		v.TimeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *GetAppMonitorDataInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAppMonitorDataRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAppMonitorDataRequest_Filters:
+			return deserializeQueryFilters(d, schemas.GetAppMonitorDataRequest_Filters, &v.Filters)
+		case schemas.GetAppMonitorDataRequest_MaxResults:
+			return d.ReadInt32(schemas.GetAppMonitorDataRequest_MaxResults, &v.MaxResults)
+		case schemas.GetAppMonitorDataRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAppMonitorDataRequest_Name, v.Name)
+		case schemas.GetAppMonitorDataRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAppMonitorDataRequest_NextToken, v.NextToken)
+		case schemas.GetAppMonitorDataRequest_TimeRange:
+			v.TimeRange = &types.TimeRange{}
+			return v.TimeRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type GetAppMonitorDataOutput struct {
 
 	// The events that RUM collected that match your request.
@@ -69,16 +115,38 @@ type GetAppMonitorDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAppMonitorDataOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAppMonitorDataResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAppMonitorDataOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeEventDataList(s, schemas.GetAppMonitorDataResponse_Events, v.Events)
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetAppMonitorDataResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *GetAppMonitorDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAppMonitorDataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAppMonitorDataResponse_Events:
+			return deserializeEventDataList(d, schemas.GetAppMonitorDataResponse_Events, &v.Events)
+		case schemas.GetAppMonitorDataResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetAppMonitorDataResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAppMonitorDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAppMonitorData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppMonitorData, schemas.GetAppMonitorDataRequest, schemas.GetAppMonitorDataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAppMonitorData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAppMonitorData, schemas.GetAppMonitorDataRequest, schemas.GetAppMonitorDataResponse), output: &GetAppMonitorDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAppMonitorData"); err != nil {

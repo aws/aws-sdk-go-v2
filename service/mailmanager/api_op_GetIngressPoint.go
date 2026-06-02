@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -40,6 +42,21 @@ type GetIngressPointInput struct {
 	IncludeTrustStoreContents types.TrustStoreResponseOption
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetIngressPointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIngressPointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIngressPointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IncludeTrustStoreContents != "" {
+		s.WriteString(schemas.GetIngressPointRequest_IncludeTrustStoreContents, string(v.IncludeTrustStoreContents))
+	}
+	if v.IngressPointId != nil {
+		s.WriteString(schemas.GetIngressPointRequest_IngressPointId, *v.IngressPointId)
+	}
 }
 
 type GetIngressPointOutput struct {
@@ -95,16 +112,71 @@ type GetIngressPointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIngressPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIngressPointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIngressPointResponse_ARecord:
+			v.ARecord = new(string)
+			return d.ReadString(schemas.GetIngressPointResponse_ARecord, v.ARecord)
+		case schemas.GetIngressPointResponse_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetIngressPointResponse_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.GetIngressPointResponse_IngressPointArn:
+			v.IngressPointArn = new(string)
+			return d.ReadString(schemas.GetIngressPointResponse_IngressPointArn, v.IngressPointArn)
+		case schemas.GetIngressPointResponse_IngressPointAuthConfiguration:
+			v.IngressPointAuthConfiguration = &types.IngressPointAuthConfiguration{}
+			return v.IngressPointAuthConfiguration.Deserialize(d)
+		case schemas.GetIngressPointResponse_IngressPointId:
+			v.IngressPointId = new(string)
+			return d.ReadString(schemas.GetIngressPointResponse_IngressPointId, v.IngressPointId)
+		case schemas.GetIngressPointResponse_IngressPointName:
+			v.IngressPointName = new(string)
+			return d.ReadString(schemas.GetIngressPointResponse_IngressPointName, v.IngressPointName)
+		case schemas.GetIngressPointResponse_LastUpdatedTimestamp:
+			v.LastUpdatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetIngressPointResponse_LastUpdatedTimestamp, v.LastUpdatedTimestamp)
+		case schemas.GetIngressPointResponse_NetworkConfiguration:
+			return deserializeNetworkConfiguration(d, schemas.GetIngressPointResponse_NetworkConfiguration, &v.NetworkConfiguration)
+		case schemas.GetIngressPointResponse_RuleSetId:
+			v.RuleSetId = new(string)
+			return d.ReadString(schemas.GetIngressPointResponse_RuleSetId, v.RuleSetId)
+		case schemas.GetIngressPointResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.GetIngressPointResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IngressPointStatus(ev)
+			return nil
+		case schemas.GetIngressPointResponse_TlsPolicy:
+			var ev string
+			if err := d.ReadString(schemas.GetIngressPointResponse_TlsPolicy, &ev); err != nil {
+				return err
+			}
+			v.TlsPolicy = types.TlsPolicy(ev)
+			return nil
+		case schemas.GetIngressPointResponse_TrafficPolicyId:
+			v.TrafficPolicyId = new(string)
+			return d.ReadString(schemas.GetIngressPointResponse_TrafficPolicyId, v.TrafficPolicyId)
+		case schemas.GetIngressPointResponse_Type:
+			var ev string
+			if err := d.ReadString(schemas.GetIngressPointResponse_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.IngressPointType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIngressPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetIngressPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIngressPoint, schemas.GetIngressPointRequest, schemas.GetIngressPointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetIngressPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIngressPoint, schemas.GetIngressPointRequest, schemas.GetIngressPointResponse), output: &GetIngressPointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIngressPoint"); err != nil {

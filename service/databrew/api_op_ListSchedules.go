@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/databrew/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/databrew/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,24 @@ type ListSchedulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchedulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSchedulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSchedulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobName != nil {
+		s.WriteString(schemas.ListSchedulesRequest_JobName, *v.JobName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSchedulesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSchedulesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListSchedulesOutput struct {
 
 	// A list of schedules that are defined.
@@ -58,16 +78,26 @@ type ListSchedulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSchedulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSchedulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSchedulesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSchedulesResponse_NextToken, v.NextToken)
+		case schemas.ListSchedulesResponse_Schedules:
+			return deserializeScheduleList(d, schemas.ListSchedulesResponse_Schedules, &v.Schedules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSchedulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSchedules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchedules, schemas.ListSchedulesRequest, schemas.ListSchedulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSchedules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSchedules, schemas.ListSchedulesRequest, schemas.ListSchedulesResponse), output: &ListSchedulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSchedules"); err != nil {

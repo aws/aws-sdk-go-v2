@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -87,6 +89,38 @@ type CreateBulkImportJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBulkImportJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateBulkImportJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateBulkImportJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdaptiveIngestion != nil {
+		s.WriteBool(schemas.CreateBulkImportJobRequest_adaptiveIngestion, *v.AdaptiveIngestion)
+	}
+	if v.DeleteFilesAfterImport != nil {
+		s.WriteBool(schemas.CreateBulkImportJobRequest_deleteFilesAfterImport, *v.DeleteFilesAfterImport)
+	}
+	if v.ErrorReportLocation != nil {
+		s.WriteStruct(schemas.CreateBulkImportJobRequest_errorReportLocation)
+		v.ErrorReportLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeFiles(s, schemas.CreateBulkImportJobRequest_files, v.Files)
+	if v.JobConfiguration != nil {
+		s.WriteStruct(schemas.CreateBulkImportJobRequest_jobConfiguration)
+		v.JobConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateBulkImportJobRequest_jobName, *v.JobName)
+	}
+	if v.JobRoleArn != nil {
+		s.WriteString(schemas.CreateBulkImportJobRequest_jobRoleArn, *v.JobRoleArn)
+	}
+}
+
 type CreateBulkImportJobOutput struct {
 
 	// The ID of the job.
@@ -128,16 +162,34 @@ type CreateBulkImportJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateBulkImportJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateBulkImportJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateBulkImportJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CreateBulkImportJobResponse_jobId, v.JobId)
+		case schemas.CreateBulkImportJobResponse_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.CreateBulkImportJobResponse_jobName, v.JobName)
+		case schemas.CreateBulkImportJobResponse_jobStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateBulkImportJobResponse_jobStatus, &ev); err != nil {
+				return err
+			}
+			v.JobStatus = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateBulkImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateBulkImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBulkImportJob, schemas.CreateBulkImportJobRequest, schemas.CreateBulkImportJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateBulkImportJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateBulkImportJob, schemas.CreateBulkImportJobRequest, schemas.CreateBulkImportJobResponse), output: &CreateBulkImportJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateBulkImportJob"); err != nil {

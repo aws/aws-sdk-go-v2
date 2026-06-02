@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,21 @@ type ListScansInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScansInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListScansRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListScansInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListScansRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListScansRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListScansOutput struct {
 
 	// A pagination token. You can use this in future calls to ListScans to continue
@@ -60,16 +77,26 @@ type ListScansOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListScansOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListScansResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListScansResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListScansResponse_nextToken, v.NextToken)
+		case schemas.ListScansResponse_summaries:
+			return deserializeScanSummaries(d, schemas.ListScansResponse_summaries, &v.Summaries)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListScansMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListScans{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScans, schemas.ListScansRequest, schemas.ListScansResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListScans{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListScans, schemas.ListScansRequest, schemas.ListScansResponse), output: &ListScansOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListScans"); err != nil {

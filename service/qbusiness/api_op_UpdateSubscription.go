@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,24 @@ type UpdateSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSubscriptionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.UpdateSubscriptionRequest_applicationId, *v.ApplicationId)
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.UpdateSubscriptionRequest_subscriptionId, *v.SubscriptionId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.UpdateSubscriptionRequest_type, string(v.Type))
+	}
+}
+
 type UpdateSubscriptionOutput struct {
 
 	// The type of your current Amazon Q Business subscription.
@@ -71,16 +91,30 @@ type UpdateSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSubscriptionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSubscriptionResponse_currentSubscription:
+			v.CurrentSubscription = &types.SubscriptionDetails{}
+			return v.CurrentSubscription.Deserialize(d)
+		case schemas.UpdateSubscriptionResponse_nextSubscription:
+			v.NextSubscription = &types.SubscriptionDetails{}
+			return v.NextSubscription.Deserialize(d)
+		case schemas.UpdateSubscriptionResponse_subscriptionArn:
+			v.SubscriptionArn = new(string)
+			return d.ReadString(schemas.UpdateSubscriptionResponse_subscriptionArn, v.SubscriptionArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubscription, schemas.UpdateSubscriptionRequest, schemas.UpdateSubscriptionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubscription, schemas.UpdateSubscriptionRequest, schemas.UpdateSubscriptionResponse), output: &UpdateSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSubscription"); err != nil {

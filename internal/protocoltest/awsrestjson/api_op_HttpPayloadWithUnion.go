@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,25 @@ type HttpPayloadWithUnionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPayloadWithUnionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPayloadWithUnionInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPayloadWithUnionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUnionPayload(s, schemas.HttpPayloadWithUnionInputOutput_nested, v.Nested)
+}
+func (v *HttpPayloadWithUnionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPayloadWithUnionInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPayloadWithUnionInputOutput_nested:
+			return deserializeUnionPayload(d, schemas.HttpPayloadWithUnionInputOutput_nested, &v.Nested)
+		}
+		return nil
+	})
+}
+
 type HttpPayloadWithUnionOutput struct {
 	Nested types.UnionPayload
 
@@ -42,16 +63,32 @@ type HttpPayloadWithUnionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPayloadWithUnionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPayloadWithUnionInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPayloadWithUnionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeUnionPayload(s, schemas.HttpPayloadWithUnionInputOutput_nested, v.Nested)
+}
+func (v *HttpPayloadWithUnionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPayloadWithUnionInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPayloadWithUnionInputOutput_nested:
+			return deserializeUnionPayload(d, schemas.HttpPayloadWithUnionInputOutput_nested, &v.Nested)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHttpPayloadWithUnionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpHttpPayloadWithUnion{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpPayloadWithUnion, schemas.HttpPayloadWithUnionInputOutput, schemas.HttpPayloadWithUnionInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpHttpPayloadWithUnion{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpPayloadWithUnion, schemas.HttpPayloadWithUnionInputOutput, schemas.HttpPayloadWithUnionInputOutput), output: &HttpPayloadWithUnionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpPayloadWithUnion"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,21 @@ type DeleteScalingPlanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScalingPlanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteScalingPlanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteScalingPlanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScalingPlanName != nil {
+		s.WriteString(schemas.DeleteScalingPlanRequest_ScalingPlanName, *v.ScalingPlanName)
+	}
+	if v.ScalingPlanVersion != nil {
+		s.WriteInt64(schemas.DeleteScalingPlanRequest_ScalingPlanVersion, *v.ScalingPlanVersion)
+	}
+}
+
 type DeleteScalingPlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -54,16 +71,21 @@ type DeleteScalingPlanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteScalingPlanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteScalingPlanResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteScalingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDeleteScalingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScalingPlan, schemas.DeleteScalingPlanRequest, schemas.DeleteScalingPlanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDeleteScalingPlan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteScalingPlan, schemas.DeleteScalingPlanRequest, schemas.DeleteScalingPlanResponse), output: &DeleteScalingPlanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteScalingPlan"); err != nil {

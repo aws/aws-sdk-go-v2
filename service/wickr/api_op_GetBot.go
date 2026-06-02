@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,21 @@ type GetBotInput struct {
 	NetworkId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BotId != nil {
+		s.WriteString(schemas.GetBotRequest_botId, *v.BotId)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.GetBotRequest_networkId, *v.NetworkId)
+	}
 }
 
 type GetBotOutput struct {
@@ -81,16 +98,55 @@ type GetBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetBotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetBotResponse_botId:
+			v.BotId = new(string)
+			return d.ReadString(schemas.GetBotResponse_botId, v.BotId)
+		case schemas.GetBotResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetBotResponse_displayName, v.DisplayName)
+		case schemas.GetBotResponse_groupId:
+			v.GroupId = new(string)
+			return d.ReadString(schemas.GetBotResponse_groupId, v.GroupId)
+		case schemas.GetBotResponse_hasChallenge:
+			v.HasChallenge = new(bool)
+			return d.ReadBool(schemas.GetBotResponse_hasChallenge, v.HasChallenge)
+		case schemas.GetBotResponse_lastLogin:
+			v.LastLogin = new(string)
+			return d.ReadString(schemas.GetBotResponse_lastLogin, v.LastLogin)
+		case schemas.GetBotResponse_pubkey:
+			v.Pubkey = new(string)
+			return d.ReadString(schemas.GetBotResponse_pubkey, v.Pubkey)
+		case schemas.GetBotResponse_status:
+			var ev int32
+			if err := d.ReadInt32(schemas.GetBotResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.BotStatus(ev)
+			return nil
+		case schemas.GetBotResponse_suspended:
+			v.Suspended = new(bool)
+			return d.ReadBool(schemas.GetBotResponse_suspended, v.Suspended)
+		case schemas.GetBotResponse_uname:
+			v.Uname = new(string)
+			return d.ReadString(schemas.GetBotResponse_uname, v.Uname)
+		case schemas.GetBotResponse_username:
+			v.Username = new(string)
+			return d.ReadString(schemas.GetBotResponse_username, v.Username)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBot, schemas.GetBotRequest, schemas.GetBotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetBot, schemas.GetBotRequest, schemas.GetBotResponse), output: &GetBotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetBot"); err != nil {

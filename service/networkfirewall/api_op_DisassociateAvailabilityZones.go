@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,6 +75,25 @@ type DisassociateAvailabilityZonesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAvailabilityZonesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DisassociateAvailabilityZonesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisassociateAvailabilityZonesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailabilityZoneMappings(s, schemas.DisassociateAvailabilityZonesRequest_AvailabilityZoneMappings, v.AvailabilityZoneMappings)
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.DisassociateAvailabilityZonesRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.DisassociateAvailabilityZonesRequest_FirewallName, *v.FirewallName)
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.DisassociateAvailabilityZonesRequest_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type DisassociateAvailabilityZonesOutput struct {
 
 	// The remaining Availability Zones where the firewall has endpoints after the
@@ -108,16 +129,32 @@ type DisassociateAvailabilityZonesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisassociateAvailabilityZonesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DisassociateAvailabilityZonesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DisassociateAvailabilityZonesResponse_AvailabilityZoneMappings:
+			return deserializeAvailabilityZoneMappings(d, schemas.DisassociateAvailabilityZonesResponse_AvailabilityZoneMappings, &v.AvailabilityZoneMappings)
+		case schemas.DisassociateAvailabilityZonesResponse_FirewallArn:
+			v.FirewallArn = new(string)
+			return d.ReadString(schemas.DisassociateAvailabilityZonesResponse_FirewallArn, v.FirewallArn)
+		case schemas.DisassociateAvailabilityZonesResponse_FirewallName:
+			v.FirewallName = new(string)
+			return d.ReadString(schemas.DisassociateAvailabilityZonesResponse_FirewallName, v.FirewallName)
+		case schemas.DisassociateAvailabilityZonesResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.DisassociateAvailabilityZonesResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisassociateAvailabilityZonesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDisassociateAvailabilityZones{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAvailabilityZones, schemas.DisassociateAvailabilityZonesRequest, schemas.DisassociateAvailabilityZonesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDisassociateAvailabilityZones{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisassociateAvailabilityZones, schemas.DisassociateAvailabilityZonesRequest, schemas.DisassociateAvailabilityZonesResponse), output: &DisassociateAvailabilityZonesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisassociateAvailabilityZones"); err != nil {

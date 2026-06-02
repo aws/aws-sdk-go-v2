@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,6 +33,18 @@ type OperationWithOptionalInputOutputInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationWithOptionalInputOutputInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OperationWithOptionalInputOutputInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OperationWithOptionalInputOutputInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Value != nil {
+		s.WriteString(schemas.OperationWithOptionalInputOutputInput_Value, *v.Value)
+	}
+}
+
 type OperationWithOptionalInputOutputOutput struct {
 	Value *string
 
@@ -40,16 +54,24 @@ type OperationWithOptionalInputOutputOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OperationWithOptionalInputOutputOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OperationWithOptionalInputOutputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OperationWithOptionalInputOutputOutput_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.OperationWithOptionalInputOutputOutput_Value, v.Value)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationOperationWithOptionalInputOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpOperationWithOptionalInputOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OperationWithOptionalInputOutput, schemas.OperationWithOptionalInputOutputInput, schemas.OperationWithOptionalInputOutputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpOperationWithOptionalInputOutput{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.OperationWithOptionalInputOutput, schemas.OperationWithOptionalInputOutputInput, schemas.OperationWithOptionalInputOutputOutput), output: &OperationWithOptionalInputOutputOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "OperationWithOptionalInputOutput"); err != nil {

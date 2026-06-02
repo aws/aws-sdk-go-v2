@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type DeleteABTestInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteABTestInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteABTestRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteABTestInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbTestId != nil {
+		s.WriteString(schemas.DeleteABTestRequest_abTestId, *v.AbTestId)
+	}
+}
+
 type DeleteABTestOutput struct {
 
 	// The Amazon Resource Name (ARN) of the deleted A/B test.
@@ -60,16 +74,34 @@ type DeleteABTestOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteABTestOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteABTestResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteABTestResponse_abTestArn:
+			v.AbTestArn = new(string)
+			return d.ReadString(schemas.DeleteABTestResponse_abTestArn, v.AbTestArn)
+		case schemas.DeleteABTestResponse_abTestId:
+			v.AbTestId = new(string)
+			return d.ReadString(schemas.DeleteABTestResponse_abTestId, v.AbTestId)
+		case schemas.DeleteABTestResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteABTestResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ABTestStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteABTestMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteABTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteABTest, schemas.DeleteABTestRequest, schemas.DeleteABTestResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteABTest{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteABTest, schemas.DeleteABTestRequest, schemas.DeleteABTestResponse), output: &DeleteABTestOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteABTest"); err != nil {

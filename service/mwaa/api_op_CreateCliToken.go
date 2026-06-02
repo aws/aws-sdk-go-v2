@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mwaa/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,28 @@ type CreateCliTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCliTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCliTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCliTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCliTokenRequest_Name, *v.Name)
+	}
+}
+func (v *CreateCliTokenInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCliTokenRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCliTokenRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateCliTokenRequest_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 type CreateCliTokenOutput struct {
 
 	// An Airflow CLI login token.
@@ -52,16 +76,41 @@ type CreateCliTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCliTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCliTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCliTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CliToken != nil {
+		s.WriteString(schemas.CreateCliTokenResponse_CliToken, *v.CliToken)
+	}
+	if v.WebServerHostname != nil {
+		s.WriteString(schemas.CreateCliTokenResponse_WebServerHostname, *v.WebServerHostname)
+	}
+}
+func (v *CreateCliTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCliTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCliTokenResponse_CliToken:
+			v.CliToken = new(string)
+			return d.ReadString(schemas.CreateCliTokenResponse_CliToken, v.CliToken)
+		case schemas.CreateCliTokenResponse_WebServerHostname:
+			v.WebServerHostname = new(string)
+			return d.ReadString(schemas.CreateCliTokenResponse_WebServerHostname, v.WebServerHostname)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCliTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCliToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCliToken, schemas.CreateCliTokenRequest, schemas.CreateCliTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCliToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCliToken, schemas.CreateCliTokenRequest, schemas.CreateCliTokenResponse), output: &CreateCliTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCliToken"); err != nil {

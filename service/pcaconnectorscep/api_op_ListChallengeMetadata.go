@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pcaconnectorscep/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,24 @@ type ListChallengeMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChallengeMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListChallengeMetadataRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListChallengeMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectorArn != nil {
+		s.WriteString(schemas.ListChallengeMetadataRequest_ConnectorArn, *v.ConnectorArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListChallengeMetadataRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListChallengeMetadataRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListChallengeMetadataOutput struct {
 
 	// The challenge metadata for the challenges belonging to your Amazon Web Services
@@ -69,16 +89,26 @@ type ListChallengeMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListChallengeMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListChallengeMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListChallengeMetadataResponse_Challenges:
+			return deserializeChallengeMetadataList(d, schemas.ListChallengeMetadataResponse_Challenges, &v.Challenges)
+		case schemas.ListChallengeMetadataResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListChallengeMetadataResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListChallengeMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListChallengeMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChallengeMetadata, schemas.ListChallengeMetadataRequest, schemas.ListChallengeMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListChallengeMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListChallengeMetadata, schemas.ListChallengeMetadataRequest, schemas.ListChallengeMetadataResponse), output: &ListChallengeMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListChallengeMetadata"); err != nil {

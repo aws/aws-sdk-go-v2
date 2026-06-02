@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type UpdateIngestConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIngestConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateIngestConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateIngestConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateIngestConfigurationRequest_arn, *v.Arn)
+	}
+	if v.RedundantIngest != false {
+		s.WriteBool(schemas.UpdateIngestConfigurationRequest_redundantIngest, v.RedundantIngest)
+	}
+	if v.StageArn != nil {
+		s.WriteString(schemas.UpdateIngestConfigurationRequest_stageArn, *v.StageArn)
+	}
+}
+
 type UpdateIngestConfigurationOutput struct {
 
 	// The updated IngestConfiguration.
@@ -58,16 +78,24 @@ type UpdateIngestConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateIngestConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateIngestConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateIngestConfigurationResponse_ingestConfiguration:
+			v.IngestConfiguration = &types.IngestConfiguration{}
+			return v.IngestConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateIngestConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateIngestConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIngestConfiguration, schemas.UpdateIngestConfigurationRequest, schemas.UpdateIngestConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateIngestConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateIngestConfiguration, schemas.UpdateIngestConfigurationRequest, schemas.UpdateIngestConfigurationResponse), output: &UpdateIngestConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateIngestConfiguration"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,18 @@ type DeleteSchemaMappingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSchemaMappingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSchemaMappingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSchemaMappingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SchemaName != nil {
+		s.WriteString(schemas.DeleteSchemaMappingInput_schemaName, *v.SchemaName)
+	}
+}
+
 type DeleteSchemaMappingOutput struct {
 
 	// A successful operation message.
@@ -52,16 +66,24 @@ type DeleteSchemaMappingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSchemaMappingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSchemaMappingOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSchemaMappingOutput_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteSchemaMappingOutput_message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSchemaMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSchemaMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSchemaMapping, schemas.DeleteSchemaMappingInput, schemas.DeleteSchemaMappingOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSchemaMapping{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSchemaMapping, schemas.DeleteSchemaMappingInput, schemas.DeleteSchemaMappingOutput), output: &DeleteSchemaMappingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSchemaMapping"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mailmanager/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -75,6 +77,36 @@ type CreateIngressPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIngressPointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateIngressPointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateIngressPointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateIngressPointRequest_ClientToken, *v.ClientToken)
+	}
+	serializeIngressPointConfiguration(s, schemas.CreateIngressPointRequest_IngressPointConfiguration, v.IngressPointConfiguration)
+	if v.IngressPointName != nil {
+		s.WriteString(schemas.CreateIngressPointRequest_IngressPointName, *v.IngressPointName)
+	}
+	serializeNetworkConfiguration(s, schemas.CreateIngressPointRequest_NetworkConfiguration, v.NetworkConfiguration)
+	if v.RuleSetId != nil {
+		s.WriteString(schemas.CreateIngressPointRequest_RuleSetId, *v.RuleSetId)
+	}
+	serializeTagList(s, schemas.CreateIngressPointRequest_Tags, v.Tags)
+	if v.TlsPolicy != "" {
+		s.WriteString(schemas.CreateIngressPointRequest_TlsPolicy, string(v.TlsPolicy))
+	}
+	if v.TrafficPolicyId != nil {
+		s.WriteString(schemas.CreateIngressPointRequest_TrafficPolicyId, *v.TrafficPolicyId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.CreateIngressPointRequest_Type, string(v.Type))
+	}
+}
+
 type CreateIngressPointOutput struct {
 
 	// The unique identifier for a previously created ingress endpoint.
@@ -88,16 +120,24 @@ type CreateIngressPointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateIngressPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateIngressPointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateIngressPointResponse_IngressPointId:
+			v.IngressPointId = new(string)
+			return d.ReadString(schemas.CreateIngressPointResponse_IngressPointId, v.IngressPointId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateIngressPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateIngressPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIngressPoint, schemas.CreateIngressPointRequest, schemas.CreateIngressPointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateIngressPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateIngressPoint, schemas.CreateIngressPointRequest, schemas.CreateIngressPointResponse), output: &CreateIngressPointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateIngressPoint"); err != nil {

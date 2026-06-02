@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -59,6 +61,25 @@ type CreateChannelGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.CreateChannelGroupRequest_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateChannelGroupRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateChannelGroupRequest_Description, *v.Description)
+	}
+	serializeTagMap(s, schemas.CreateChannelGroupRequest_Tags, v.Tags)
+}
+
 type CreateChannelGroupOutput struct {
 
 	// The Amazon Resource Name (ARN) associated with the resource.
@@ -104,16 +125,44 @@ type CreateChannelGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChannelGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChannelGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateChannelGroupResponse_Arn, v.Arn)
+		case schemas.CreateChannelGroupResponse_ChannelGroupName:
+			v.ChannelGroupName = new(string)
+			return d.ReadString(schemas.CreateChannelGroupResponse_ChannelGroupName, v.ChannelGroupName)
+		case schemas.CreateChannelGroupResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateChannelGroupResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreateChannelGroupResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateChannelGroupResponse_Description, v.Description)
+		case schemas.CreateChannelGroupResponse_ETag:
+			v.ETag = new(string)
+			return d.ReadString(schemas.CreateChannelGroupResponse_ETag, v.ETag)
+		case schemas.CreateChannelGroupResponse_EgressDomain:
+			v.EgressDomain = new(string)
+			return d.ReadString(schemas.CreateChannelGroupResponse_EgressDomain, v.EgressDomain)
+		case schemas.CreateChannelGroupResponse_ModifiedAt:
+			v.ModifiedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateChannelGroupResponse_ModifiedAt, v.ModifiedAt)
+		case schemas.CreateChannelGroupResponse_Tags:
+			return deserializeTagMap(d, schemas.CreateChannelGroupResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChannelGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChannelGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannelGroup, schemas.CreateChannelGroupRequest, schemas.CreateChannelGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChannelGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannelGroup, schemas.CreateChannelGroupRequest, schemas.CreateChannelGroupResponse), output: &CreateChannelGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateChannelGroup"); err != nil {

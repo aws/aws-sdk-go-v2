@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/connectcampaignsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,23 @@ type PutInstanceCommunicationLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutInstanceCommunicationLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutInstanceCommunicationLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutInstanceCommunicationLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommunicationLimitsConfig != nil {
+		s.WriteStruct(schemas.PutInstanceCommunicationLimitsRequest_communicationLimitsConfig)
+		v.CommunicationLimitsConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ConnectInstanceId != nil {
+		s.WriteString(schemas.PutInstanceCommunicationLimitsRequest_connectInstanceId, *v.ConnectInstanceId)
+	}
+}
+
 type PutInstanceCommunicationLimitsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,16 +69,29 @@ type PutInstanceCommunicationLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutInstanceCommunicationLimitsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutInstanceCommunicationLimitsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *PutInstanceCommunicationLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutInstanceCommunicationLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutInstanceCommunicationLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutInstanceCommunicationLimits, schemas.PutInstanceCommunicationLimitsRequest, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutInstanceCommunicationLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutInstanceCommunicationLimits, schemas.PutInstanceCommunicationLimitsRequest, nil), output: &PutInstanceCommunicationLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutInstanceCommunicationLimits"); err != nil {

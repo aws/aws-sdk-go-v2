@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/applicationsignals/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -111,6 +113,32 @@ type ListAuditFindingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAuditFindingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAuditFindingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAuditFindingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAuditTargets(s, schemas.ListAuditFindingsInput_AuditTargets, v.AuditTargets)
+	serializeAuditors(s, schemas.ListAuditFindingsInput_Auditors, v.Auditors)
+	if v.DetailLevel != "" {
+		s.WriteString(schemas.ListAuditFindingsInput_DetailLevel, string(v.DetailLevel))
+	}
+	if v.EndTime != nil {
+		s.WriteTime(schemas.ListAuditFindingsInput_EndTime, *v.EndTime)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAuditFindingsInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAuditFindingsInput_NextToken, *v.NextToken)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.ListAuditFindingsInput_StartTime, *v.StartTime)
+	}
+}
+
 type ListAuditFindingsOutput struct {
 
 	// An array of structures, where each structure contains information about one
@@ -140,16 +168,32 @@ type ListAuditFindingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAuditFindingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAuditFindingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAuditFindingsOutput_AuditFindings:
+			return deserializeAuditFindings(d, schemas.ListAuditFindingsOutput_AuditFindings, &v.AuditFindings)
+		case schemas.ListAuditFindingsOutput_EndTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.ListAuditFindingsOutput_EndTime, v.EndTime)
+		case schemas.ListAuditFindingsOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAuditFindingsOutput_NextToken, v.NextToken)
+		case schemas.ListAuditFindingsOutput_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.ListAuditFindingsOutput_StartTime, v.StartTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAuditFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAuditFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAuditFindings, schemas.ListAuditFindingsInput, schemas.ListAuditFindingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAuditFindings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAuditFindings, schemas.ListAuditFindingsInput, schemas.ListAuditFindingsOutput), output: &ListAuditFindingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAuditFindings"); err != nil {

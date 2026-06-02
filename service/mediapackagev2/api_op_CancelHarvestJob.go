@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,30 @@ type CancelHarvestJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelHarvestJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CancelHarvestJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CancelHarvestJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelGroupName != nil {
+		s.WriteString(schemas.CancelHarvestJobRequest_ChannelGroupName, *v.ChannelGroupName)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.CancelHarvestJobRequest_ChannelName, *v.ChannelName)
+	}
+	if v.ETag != nil {
+		s.WriteString(schemas.CancelHarvestJobRequest_ETag, *v.ETag)
+	}
+	if v.HarvestJobName != nil {
+		s.WriteString(schemas.CancelHarvestJobRequest_HarvestJobName, *v.HarvestJobName)
+	}
+	if v.OriginEndpointName != nil {
+		s.WriteString(schemas.CancelHarvestJobRequest_OriginEndpointName, *v.OriginEndpointName)
+	}
+}
+
 type CancelHarvestJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,16 +91,21 @@ type CancelHarvestJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CancelHarvestJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CancelHarvestJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCancelHarvestJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCancelHarvestJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelHarvestJob, schemas.CancelHarvestJobRequest, schemas.CancelHarvestJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCancelHarvestJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CancelHarvestJob, schemas.CancelHarvestJobRequest, schemas.CancelHarvestJobResponse), output: &CancelHarvestJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CancelHarvestJob"); err != nil {

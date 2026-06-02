@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,25 @@ type UpdateSipRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSipRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSipRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSipRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Disabled != nil {
+		s.WriteBool(schemas.UpdateSipRuleRequest_Disabled, *v.Disabled)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateSipRuleRequest_Name, *v.Name)
+	}
+	if v.SipRuleId != nil {
+		s.WriteString(schemas.UpdateSipRuleRequest_SipRuleId, *v.SipRuleId)
+	}
+	serializeSipRuleTargetApplicationList(s, schemas.UpdateSipRuleRequest_TargetApplications, v.TargetApplications)
+}
+
 type UpdateSipRuleOutput struct {
 
 	// The updated SIP rule details.
@@ -59,16 +80,24 @@ type UpdateSipRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSipRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSipRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSipRuleResponse_SipRule:
+			v.SipRule = &types.SipRule{}
+			return v.SipRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSipRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateSipRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSipRule, schemas.UpdateSipRuleRequest, schemas.UpdateSipRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateSipRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSipRule, schemas.UpdateSipRuleRequest, schemas.UpdateSipRuleResponse), output: &UpdateSipRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSipRule"); err != nil {

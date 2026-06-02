@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,6 +65,39 @@ type EnableOperatorAppInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableOperatorAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EnableOperatorAppInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EnableOperatorAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.EnableOperatorAppInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.AuthFlow != "" {
+		s.WriteString(schemas.EnableOperatorAppInput_authFlow, string(v.AuthFlow))
+	}
+	if v.IdcInstanceArn != nil {
+		s.WriteString(schemas.EnableOperatorAppInput_idcInstanceArn, *v.IdcInstanceArn)
+	}
+	if v.IdpClientId != nil {
+		s.WriteString(schemas.EnableOperatorAppInput_idpClientId, *v.IdpClientId)
+	}
+	if v.IdpClientSecret != nil {
+		s.WriteString(schemas.EnableOperatorAppInput_idpClientSecret, *v.IdpClientSecret)
+	}
+	if v.IssuerUrl != nil {
+		s.WriteString(schemas.EnableOperatorAppInput_issuerUrl, *v.IssuerUrl)
+	}
+	if v.OperatorAppRoleArn != nil {
+		s.WriteString(schemas.EnableOperatorAppInput_operatorAppRoleArn, *v.OperatorAppRoleArn)
+	}
+	if v.Provider != nil {
+		s.WriteString(schemas.EnableOperatorAppInput_provider, *v.Provider)
+	}
+}
+
 // Output containing the enabled Operator App configuration.
 type EnableOperatorAppOutput struct {
 
@@ -88,16 +123,33 @@ type EnableOperatorAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *EnableOperatorAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EnableOperatorAppOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EnableOperatorAppOutput_agentSpaceId:
+			v.AgentSpaceId = new(string)
+			return d.ReadString(schemas.EnableOperatorAppOutput_agentSpaceId, v.AgentSpaceId)
+		case schemas.EnableOperatorAppOutput_iam:
+			v.Iam = &types.IamAuthConfiguration{}
+			return v.Iam.Deserialize(d)
+		case schemas.EnableOperatorAppOutput_idc:
+			v.Idc = &types.IdcAuthConfiguration{}
+			return v.Idc.Deserialize(d)
+		case schemas.EnableOperatorAppOutput_idp:
+			v.Idp = &types.IdpAuthConfiguration{}
+			return v.Idp.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationEnableOperatorAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpEnableOperatorApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableOperatorApp, schemas.EnableOperatorAppInput, schemas.EnableOperatorAppOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpEnableOperatorApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.EnableOperatorApp, schemas.EnableOperatorAppInput, schemas.EnableOperatorAppOutput), output: &EnableOperatorAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "EnableOperatorApp"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,24 @@ type DescribeChannelBanInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChannelBanInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeChannelBanRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeChannelBanInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.DescribeChannelBanRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.DescribeChannelBanRequest_ChimeBearer, *v.ChimeBearer)
+	}
+	if v.MemberArn != nil {
+		s.WriteString(schemas.DescribeChannelBanRequest_MemberArn, *v.MemberArn)
+	}
+}
+
 type DescribeChannelBanOutput struct {
 
 	// The details of the ban.
@@ -62,16 +82,24 @@ type DescribeChannelBanOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeChannelBanOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeChannelBanResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeChannelBanResponse_ChannelBan:
+			v.ChannelBan = &types.ChannelBan{}
+			return v.ChannelBan.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeChannelBanMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeChannelBan{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChannelBan, schemas.DescribeChannelBanRequest, schemas.DescribeChannelBanResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeChannelBan{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeChannelBan, schemas.DescribeChannelBanRequest, schemas.DescribeChannelBanResponse), output: &DescribeChannelBanOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeChannelBan"); err != nil {

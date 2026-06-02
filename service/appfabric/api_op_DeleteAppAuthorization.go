@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appfabric/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,21 @@ type DeleteAppAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAppAuthorizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAppAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppAuthorizationIdentifier != nil {
+		s.WriteString(schemas.DeleteAppAuthorizationRequest_appAuthorizationIdentifier, *v.AppAuthorizationIdentifier)
+	}
+	if v.AppBundleIdentifier != nil {
+		s.WriteString(schemas.DeleteAppAuthorizationRequest_appBundleIdentifier, *v.AppBundleIdentifier)
+	}
+}
+
 type DeleteAppAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -51,16 +68,21 @@ type DeleteAppAuthorizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAppAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAppAuthorizationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAppAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAppAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppAuthorization, schemas.DeleteAppAuthorizationRequest, schemas.DeleteAppAuthorizationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAppAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAppAuthorization, schemas.DeleteAppAuthorizationRequest, schemas.DeleteAppAuthorizationResponse), output: &DeleteAppAuthorizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAppAuthorization"); err != nil {

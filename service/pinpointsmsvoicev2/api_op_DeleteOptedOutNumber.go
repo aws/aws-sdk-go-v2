@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -51,6 +53,21 @@ type DeleteOptedOutNumberInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOptedOutNumberInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOptedOutNumberRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOptedOutNumberInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.DeleteOptedOutNumberRequest_OptOutListName, *v.OptOutListName)
+	}
+	if v.OptedOutNumber != nil {
+		s.WriteString(schemas.DeleteOptedOutNumberRequest_OptedOutNumber, *v.OptedOutNumber)
+	}
+}
+
 type DeleteOptedOutNumberOutput struct {
 
 	// This is true if it was the end user who requested their phone number be
@@ -77,16 +94,35 @@ type DeleteOptedOutNumberOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOptedOutNumberOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteOptedOutNumberResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteOptedOutNumberResult_EndUserOptedOut:
+			return d.ReadBool(schemas.DeleteOptedOutNumberResult_EndUserOptedOut, &v.EndUserOptedOut)
+		case schemas.DeleteOptedOutNumberResult_OptOutListArn:
+			v.OptOutListArn = new(string)
+			return d.ReadString(schemas.DeleteOptedOutNumberResult_OptOutListArn, v.OptOutListArn)
+		case schemas.DeleteOptedOutNumberResult_OptOutListName:
+			v.OptOutListName = new(string)
+			return d.ReadString(schemas.DeleteOptedOutNumberResult_OptOutListName, v.OptOutListName)
+		case schemas.DeleteOptedOutNumberResult_OptedOutNumber:
+			v.OptedOutNumber = new(string)
+			return d.ReadString(schemas.DeleteOptedOutNumberResult_OptedOutNumber, v.OptedOutNumber)
+		case schemas.DeleteOptedOutNumberResult_OptedOutTimestamp:
+			v.OptedOutTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteOptedOutNumberResult_OptedOutTimestamp, v.OptedOutTimestamp)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteOptedOutNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteOptedOutNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOptedOutNumber, schemas.DeleteOptedOutNumberRequest, schemas.DeleteOptedOutNumberResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteOptedOutNumber{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOptedOutNumber, schemas.DeleteOptedOutNumberRequest, schemas.DeleteOptedOutNumberResult), output: &DeleteOptedOutNumberOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteOptedOutNumber"); err != nil {

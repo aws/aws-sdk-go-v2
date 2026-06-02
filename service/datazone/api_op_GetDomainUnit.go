@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +43,21 @@ type GetDomainUnitInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDomainUnitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDomainUnitInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDomainUnitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetDomainUnitInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetDomainUnitInput_identifier, *v.Identifier)
+	}
 }
 
 type GetDomainUnitOutput struct {
@@ -89,16 +106,50 @@ type GetDomainUnitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDomainUnitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDomainUnitOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDomainUnitOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDomainUnitOutput_createdAt, v.CreatedAt)
+		case schemas.GetDomainUnitOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetDomainUnitOutput_createdBy, v.CreatedBy)
+		case schemas.GetDomainUnitOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetDomainUnitOutput_description, v.Description)
+		case schemas.GetDomainUnitOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetDomainUnitOutput_domainId, v.DomainId)
+		case schemas.GetDomainUnitOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetDomainUnitOutput_id, v.Id)
+		case schemas.GetDomainUnitOutput_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetDomainUnitOutput_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.GetDomainUnitOutput_lastUpdatedBy:
+			v.LastUpdatedBy = new(string)
+			return d.ReadString(schemas.GetDomainUnitOutput_lastUpdatedBy, v.LastUpdatedBy)
+		case schemas.GetDomainUnitOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDomainUnitOutput_name, v.Name)
+		case schemas.GetDomainUnitOutput_owners:
+			return deserializeDomainUnitOwners(d, schemas.GetDomainUnitOutput_owners, &v.Owners)
+		case schemas.GetDomainUnitOutput_parentDomainUnitId:
+			v.ParentDomainUnitId = new(string)
+			return d.ReadString(schemas.GetDomainUnitOutput_parentDomainUnitId, v.ParentDomainUnitId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDomainUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDomainUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainUnit, schemas.GetDomainUnitInput, schemas.GetDomainUnitOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDomainUnit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDomainUnit, schemas.GetDomainUnitInput, schemas.GetDomainUnitOutput), output: &GetDomainUnitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDomainUnit"); err != nil {

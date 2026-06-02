@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +63,28 @@ type ExecuteProvisionedProductServiceActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteProvisionedProductServiceActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteProvisionedProductServiceActionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteProvisionedProductServiceActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.ExecuteProvisionedProductServiceActionInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.ExecuteToken != nil {
+		s.WriteString(schemas.ExecuteProvisionedProductServiceActionInput_ExecuteToken, *v.ExecuteToken)
+	}
+	serializeExecutionParameterMap(s, schemas.ExecuteProvisionedProductServiceActionInput_Parameters, v.Parameters)
+	if v.ProvisionedProductId != nil {
+		s.WriteString(schemas.ExecuteProvisionedProductServiceActionInput_ProvisionedProductId, *v.ProvisionedProductId)
+	}
+	if v.ServiceActionId != nil {
+		s.WriteString(schemas.ExecuteProvisionedProductServiceActionInput_ServiceActionId, *v.ServiceActionId)
+	}
+}
+
 type ExecuteProvisionedProductServiceActionOutput struct {
 
 	// An object containing detailed information about the result of provisioning the
@@ -73,16 +97,24 @@ type ExecuteProvisionedProductServiceActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteProvisionedProductServiceActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteProvisionedProductServiceActionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecuteProvisionedProductServiceActionOutput_RecordDetail:
+			v.RecordDetail = &types.RecordDetail{}
+			return v.RecordDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecuteProvisionedProductServiceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpExecuteProvisionedProductServiceAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteProvisionedProductServiceAction, schemas.ExecuteProvisionedProductServiceActionInput, schemas.ExecuteProvisionedProductServiceActionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpExecuteProvisionedProductServiceAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteProvisionedProductServiceAction, schemas.ExecuteProvisionedProductServiceActionInput, schemas.ExecuteProvisionedProductServiceActionOutput), output: &ExecuteProvisionedProductServiceActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExecuteProvisionedProductServiceAction"); err != nil {

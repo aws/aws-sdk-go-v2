@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,34 @@ type ListAssistantsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssistantsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssistantsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssistantsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAssistantsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssistantsRequest_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssistantsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssistantsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssistantsRequest_maxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListAssistantsRequest_maxResults, v.MaxResults)
+		case schemas.ListAssistantsRequest_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssistantsRequest_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListAssistantsOutput struct {
 
 	// Information about the assistants.
@@ -55,16 +85,38 @@ type ListAssistantsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAssistantsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAssistantsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAssistantsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAssistantList(s, schemas.ListAssistantsResponse_assistantSummaries, v.AssistantSummaries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAssistantsResponse_nextToken, *v.NextToken)
+	}
+}
+func (v *ListAssistantsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAssistantsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAssistantsResponse_assistantSummaries:
+			return deserializeAssistantList(d, schemas.ListAssistantsResponse_assistantSummaries, &v.AssistantSummaries)
+		case schemas.ListAssistantsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAssistantsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAssistantsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAssistants{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssistants, schemas.ListAssistantsRequest, schemas.ListAssistantsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAssistants{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAssistants, schemas.ListAssistantsRequest, schemas.ListAssistantsResponse), output: &ListAssistantsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAssistants"); err != nil {

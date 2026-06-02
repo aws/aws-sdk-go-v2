@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -49,6 +51,24 @@ type GetLineageNodeInput struct {
 	EventTimestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetLineageNodeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetLineageNodeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetLineageNodeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetLineageNodeInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.EventTimestamp != nil {
+		s.WriteTime(schemas.GetLineageNodeInput_eventTimestamp, *v.EventTimestamp)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetLineageNodeInput_identifier, *v.Identifier)
+	}
 }
 
 type GetLineageNodeOutput struct {
@@ -110,16 +130,63 @@ type GetLineageNodeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetLineageNodeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetLineageNodeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetLineageNodeOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetLineageNodeOutput_createdAt, v.CreatedAt)
+		case schemas.GetLineageNodeOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetLineageNodeOutput_createdBy, v.CreatedBy)
+		case schemas.GetLineageNodeOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetLineageNodeOutput_description, v.Description)
+		case schemas.GetLineageNodeOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetLineageNodeOutput_domainId, v.DomainId)
+		case schemas.GetLineageNodeOutput_downstreamNodes:
+			return deserializeLineageNodeReferenceList(d, schemas.GetLineageNodeOutput_downstreamNodes, &v.DownstreamNodes)
+		case schemas.GetLineageNodeOutput_eventTimestamp:
+			v.EventTimestamp = new(time.Time)
+			return d.ReadTime(schemas.GetLineageNodeOutput_eventTimestamp, v.EventTimestamp)
+		case schemas.GetLineageNodeOutput_formsOutput:
+			return deserializeFormOutputList(d, schemas.GetLineageNodeOutput_formsOutput, &v.FormsOutput)
+		case schemas.GetLineageNodeOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetLineageNodeOutput_id, v.Id)
+		case schemas.GetLineageNodeOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetLineageNodeOutput_name, v.Name)
+		case schemas.GetLineageNodeOutput_sourceIdentifier:
+			v.SourceIdentifier = new(string)
+			return d.ReadString(schemas.GetLineageNodeOutput_sourceIdentifier, v.SourceIdentifier)
+		case schemas.GetLineageNodeOutput_typeName:
+			v.TypeName = new(string)
+			return d.ReadString(schemas.GetLineageNodeOutput_typeName, v.TypeName)
+		case schemas.GetLineageNodeOutput_typeRevision:
+			v.TypeRevision = new(string)
+			return d.ReadString(schemas.GetLineageNodeOutput_typeRevision, v.TypeRevision)
+		case schemas.GetLineageNodeOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetLineageNodeOutput_updatedAt, v.UpdatedAt)
+		case schemas.GetLineageNodeOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetLineageNodeOutput_updatedBy, v.UpdatedBy)
+		case schemas.GetLineageNodeOutput_upstreamNodes:
+			return deserializeLineageNodeReferenceList(d, schemas.GetLineageNodeOutput_upstreamNodes, &v.UpstreamNodes)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetLineageNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetLineageNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLineageNode, schemas.GetLineageNodeInput, schemas.GetLineageNodeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetLineageNode{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetLineageNode, schemas.GetLineageNodeInput, schemas.GetLineageNodeOutput), output: &GetLineageNodeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetLineageNode"); err != nil {

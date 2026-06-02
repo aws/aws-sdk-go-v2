@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,27 @@ type ListCloudConnectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCloudConnectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListCloudConnectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListCloudConnectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LambdaArn != nil {
+		s.WriteString(schemas.ListCloudConnectorsRequest_LambdaArn, *v.LambdaArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListCloudConnectorsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListCloudConnectorsRequest_NextToken, *v.NextToken)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ListCloudConnectorsRequest_Type, string(v.Type))
+	}
+}
+
 type ListCloudConnectorsOutput struct {
 
 	// The list of connectors.
@@ -60,16 +83,26 @@ type ListCloudConnectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListCloudConnectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListCloudConnectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListCloudConnectorsResponse_Items:
+			return deserializeConnectorList(d, schemas.ListCloudConnectorsResponse_Items, &v.Items)
+		case schemas.ListCloudConnectorsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListCloudConnectorsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListCloudConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListCloudConnectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCloudConnectors, schemas.ListCloudConnectorsRequest, schemas.ListCloudConnectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListCloudConnectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListCloudConnectors, schemas.ListCloudConnectorsRequest, schemas.ListCloudConnectorsResponse), output: &ListCloudConnectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListCloudConnectors"); err != nil {

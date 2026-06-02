@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralaccount/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -69,6 +71,36 @@ type CreatePartnerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartnerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePartnerRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePartnerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllianceLeadContact != nil {
+		s.WriteStruct(schemas.CreatePartnerRequest_AllianceLeadContact)
+		v.AllianceLeadContact.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.CreatePartnerRequest_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePartnerRequest_ClientToken, *v.ClientToken)
+	}
+	if v.EmailVerificationCode != nil {
+		s.WriteString(schemas.CreatePartnerRequest_EmailVerificationCode, *v.EmailVerificationCode)
+	}
+	if v.LegalName != nil {
+		s.WriteString(schemas.CreatePartnerRequest_LegalName, *v.LegalName)
+	}
+	if v.PrimarySolutionType != "" {
+		s.WriteString(schemas.CreatePartnerRequest_PrimarySolutionType, string(v.PrimarySolutionType))
+	}
+	serializeTagList(s, schemas.CreatePartnerRequest_Tags, v.Tags)
+}
+
 type CreatePartnerOutput struct {
 
 	// The alliance lead contact information for the partner account.
@@ -117,16 +149,44 @@ type CreatePartnerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePartnerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePartnerResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePartnerResponse_AllianceLeadContact:
+			v.AllianceLeadContact = &types.AllianceLeadContact{}
+			return v.AllianceLeadContact.Deserialize(d)
+		case schemas.CreatePartnerResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreatePartnerResponse_Arn, v.Arn)
+		case schemas.CreatePartnerResponse_AwsTrainingCertificationEmailDomains:
+			return deserializePartnerDomainList(d, schemas.CreatePartnerResponse_AwsTrainingCertificationEmailDomains, &v.AwsTrainingCertificationEmailDomains)
+		case schemas.CreatePartnerResponse_Catalog:
+			v.Catalog = new(string)
+			return d.ReadString(schemas.CreatePartnerResponse_Catalog, v.Catalog)
+		case schemas.CreatePartnerResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreatePartnerResponse_CreatedAt, v.CreatedAt)
+		case schemas.CreatePartnerResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreatePartnerResponse_Id, v.Id)
+		case schemas.CreatePartnerResponse_LegalName:
+			v.LegalName = new(string)
+			return d.ReadString(schemas.CreatePartnerResponse_LegalName, v.LegalName)
+		case schemas.CreatePartnerResponse_Profile:
+			v.Profile = &types.PartnerProfile{}
+			return v.Profile.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePartnerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreatePartner{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartner, schemas.CreatePartnerRequest, schemas.CreatePartnerResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreatePartner{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePartner, schemas.CreatePartnerRequest, schemas.CreatePartnerResponse), output: &CreatePartnerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePartner"); err != nil {

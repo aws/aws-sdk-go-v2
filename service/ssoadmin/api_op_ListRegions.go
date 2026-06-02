@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,24 @@ type ListRegionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListRegionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListRegionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.ListRegionsRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListRegionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListRegionsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListRegionsOutput struct {
 
 	// The pagination token to be used in subsequent calls. If the value is null, then
@@ -74,16 +94,26 @@ type ListRegionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListRegionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListRegionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListRegionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListRegionsResponse_NextToken, v.NextToken)
+		case schemas.ListRegionsResponse_Regions:
+			return deserializeRegionMetadataList(d, schemas.ListRegionsResponse_Regions, &v.Regions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListRegions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegions, schemas.ListRegionsRequest, schemas.ListRegionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListRegions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListRegions, schemas.ListRegionsRequest, schemas.ListRegionsResponse), output: &ListRegionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListRegions"); err != nil {

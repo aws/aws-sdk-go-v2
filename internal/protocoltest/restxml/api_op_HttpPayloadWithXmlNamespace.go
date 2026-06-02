@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,30 @@ type HttpPayloadWithXmlNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPayloadWithXmlNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPayloadWithXmlNamespaceInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPayloadWithXmlNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nested != nil {
+		s.WriteStruct(schemas.HttpPayloadWithXmlNamespaceInputOutput_nested)
+		v.Nested.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HttpPayloadWithXmlNamespaceInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPayloadWithXmlNamespaceInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPayloadWithXmlNamespaceInputOutput_nested:
+			v.Nested = &types.PayloadWithXmlNamespace{}
+			return v.Nested.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type HttpPayloadWithXmlNamespaceOutput struct {
 	Nested *types.PayloadWithXmlNamespace
 
@@ -42,16 +68,37 @@ type HttpPayloadWithXmlNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *HttpPayloadWithXmlNamespaceOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.HttpPayloadWithXmlNamespaceInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *HttpPayloadWithXmlNamespaceOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Nested != nil {
+		s.WriteStruct(schemas.HttpPayloadWithXmlNamespaceInputOutput_nested)
+		v.Nested.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *HttpPayloadWithXmlNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.HttpPayloadWithXmlNamespaceInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.HttpPayloadWithXmlNamespaceInputOutput_nested:
+			v.Nested = &types.PayloadWithXmlNamespace{}
+			return v.Nested.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationHttpPayloadWithXmlNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpHttpPayloadWithXmlNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpPayloadWithXmlNamespace, schemas.HttpPayloadWithXmlNamespaceInputOutput, schemas.HttpPayloadWithXmlNamespaceInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpHttpPayloadWithXmlNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.HttpPayloadWithXmlNamespace, schemas.HttpPayloadWithXmlNamespaceInputOutput, schemas.HttpPayloadWithXmlNamespaceInputOutput), output: &HttpPayloadWithXmlNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "HttpPayloadWithXmlNamespace"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -103,6 +105,25 @@ type CreatePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePolicyInput_clientToken, *v.ClientToken)
+	}
+	serializePolicyDefinition(s, schemas.CreatePolicyInput_definition, v.Definition)
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePolicyInput_name, *v.Name)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.CreatePolicyInput_policyStoreId, *v.PolicyStoreId)
+	}
+}
+
 type CreatePolicyOutput struct {
 
 	// The date and time the policy was originally created.
@@ -153,16 +174,55 @@ type CreatePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePolicyOutput_actions:
+			return deserializeActionIdentifierList(d, schemas.CreatePolicyOutput_actions, &v.Actions)
+		case schemas.CreatePolicyOutput_createdDate:
+			v.CreatedDate = new(time.Time)
+			return d.ReadTime(schemas.CreatePolicyOutput_createdDate, v.CreatedDate)
+		case schemas.CreatePolicyOutput_effect:
+			var ev string
+			if err := d.ReadString(schemas.CreatePolicyOutput_effect, &ev); err != nil {
+				return err
+			}
+			v.Effect = types.PolicyEffect(ev)
+			return nil
+		case schemas.CreatePolicyOutput_lastUpdatedDate:
+			v.LastUpdatedDate = new(time.Time)
+			return d.ReadTime(schemas.CreatePolicyOutput_lastUpdatedDate, v.LastUpdatedDate)
+		case schemas.CreatePolicyOutput_policyId:
+			v.PolicyId = new(string)
+			return d.ReadString(schemas.CreatePolicyOutput_policyId, v.PolicyId)
+		case schemas.CreatePolicyOutput_policyStoreId:
+			v.PolicyStoreId = new(string)
+			return d.ReadString(schemas.CreatePolicyOutput_policyStoreId, v.PolicyStoreId)
+		case schemas.CreatePolicyOutput_policyType:
+			var ev string
+			if err := d.ReadString(schemas.CreatePolicyOutput_policyType, &ev); err != nil {
+				return err
+			}
+			v.PolicyType = types.PolicyType(ev)
+			return nil
+		case schemas.CreatePolicyOutput_principal:
+			v.Principal = &types.EntityIdentifier{}
+			return v.Principal.Deserialize(d)
+		case schemas.CreatePolicyOutput_resource:
+			v.Resource = &types.EntityIdentifier{}
+			return v.Resource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreatePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePolicy, schemas.CreatePolicyInput, schemas.CreatePolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreatePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePolicy, schemas.CreatePolicyInput, schemas.CreatePolicyOutput), output: &CreatePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePolicy"); err != nil {

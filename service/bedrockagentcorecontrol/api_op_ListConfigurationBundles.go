@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,21 @@ type ListConfigurationBundlesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationBundlesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListConfigurationBundlesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListConfigurationBundlesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListConfigurationBundlesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListConfigurationBundlesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListConfigurationBundlesOutput struct {
 
 	// The list of configuration bundle summaries.
@@ -61,16 +78,26 @@ type ListConfigurationBundlesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListConfigurationBundlesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListConfigurationBundlesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListConfigurationBundlesResponse_bundles:
+			return deserializeConfigurationBundleSummaryList(d, schemas.ListConfigurationBundlesResponse_bundles, &v.Bundles)
+		case schemas.ListConfigurationBundlesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListConfigurationBundlesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListConfigurationBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListConfigurationBundles{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationBundles, schemas.ListConfigurationBundlesRequest, schemas.ListConfigurationBundlesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListConfigurationBundles{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListConfigurationBundles, schemas.ListConfigurationBundlesRequest, schemas.ListConfigurationBundlesResponse), output: &ListConfigurationBundlesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListConfigurationBundles"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -59,6 +61,40 @@ type UpdateCodeReviewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCodeReviewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateCodeReviewInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateCodeReviewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.UpdateCodeReviewInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.Assets != nil {
+		s.WriteStruct(schemas.UpdateCodeReviewInput_assets)
+		v.Assets.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CodeRemediationStrategy != "" {
+		s.WriteString(schemas.UpdateCodeReviewInput_codeRemediationStrategy, string(v.CodeRemediationStrategy))
+	}
+	if v.CodeReviewId != nil {
+		s.WriteString(schemas.UpdateCodeReviewInput_codeReviewId, *v.CodeReviewId)
+	}
+	if v.LogConfig != nil {
+		s.WriteStruct(schemas.UpdateCodeReviewInput_logConfig)
+		v.LogConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceRole != nil {
+		s.WriteString(schemas.UpdateCodeReviewInput_serviceRole, *v.ServiceRole)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.UpdateCodeReviewInput_title, *v.Title)
+	}
+}
+
 // Output for the UpdateCodeReview operation.
 type UpdateCodeReviewOutput struct {
 
@@ -97,16 +133,52 @@ type UpdateCodeReviewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateCodeReviewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateCodeReviewOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateCodeReviewOutput_agentSpaceId:
+			v.AgentSpaceId = new(string)
+			return d.ReadString(schemas.UpdateCodeReviewOutput_agentSpaceId, v.AgentSpaceId)
+		case schemas.UpdateCodeReviewOutput_assets:
+			v.Assets = &types.Assets{}
+			return v.Assets.Deserialize(d)
+		case schemas.UpdateCodeReviewOutput_codeRemediationStrategy:
+			var ev string
+			if err := d.ReadString(schemas.UpdateCodeReviewOutput_codeRemediationStrategy, &ev); err != nil {
+				return err
+			}
+			v.CodeRemediationStrategy = types.CodeRemediationStrategy(ev)
+			return nil
+		case schemas.UpdateCodeReviewOutput_codeReviewId:
+			v.CodeReviewId = new(string)
+			return d.ReadString(schemas.UpdateCodeReviewOutput_codeReviewId, v.CodeReviewId)
+		case schemas.UpdateCodeReviewOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateCodeReviewOutput_createdAt, v.CreatedAt)
+		case schemas.UpdateCodeReviewOutput_logConfig:
+			v.LogConfig = &types.CloudWatchLog{}
+			return v.LogConfig.Deserialize(d)
+		case schemas.UpdateCodeReviewOutput_serviceRole:
+			v.ServiceRole = new(string)
+			return d.ReadString(schemas.UpdateCodeReviewOutput_serviceRole, v.ServiceRole)
+		case schemas.UpdateCodeReviewOutput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.UpdateCodeReviewOutput_title, v.Title)
+		case schemas.UpdateCodeReviewOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.UpdateCodeReviewOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateCodeReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateCodeReview{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCodeReview, schemas.UpdateCodeReviewInput, schemas.UpdateCodeReviewOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateCodeReview{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateCodeReview, schemas.UpdateCodeReviewInput, schemas.UpdateCodeReviewOutput), output: &UpdateCodeReviewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateCodeReview"); err != nil {

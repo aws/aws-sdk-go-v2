@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,6 +62,31 @@ type CreatePermissionSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePermissionSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePermissionSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePermissionSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePermissionSetRequest_Description, *v.Description)
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.CreatePermissionSetRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePermissionSetRequest_Name, *v.Name)
+	}
+	if v.RelayState != nil {
+		s.WriteString(schemas.CreatePermissionSetRequest_RelayState, *v.RelayState)
+	}
+	if v.SessionDuration != nil {
+		s.WriteString(schemas.CreatePermissionSetRequest_SessionDuration, *v.SessionDuration)
+	}
+	serializeTagList(s, schemas.CreatePermissionSetRequest_Tags, v.Tags)
+}
+
 type CreatePermissionSetOutput struct {
 
 	// Defines the level of access on an Amazon Web Services account.
@@ -71,16 +98,24 @@ type CreatePermissionSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePermissionSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePermissionSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePermissionSetResponse_PermissionSet:
+			v.PermissionSet = &types.PermissionSet{}
+			return v.PermissionSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreatePermissionSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePermissionSet, schemas.CreatePermissionSetRequest, schemas.CreatePermissionSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreatePermissionSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePermissionSet, schemas.CreatePermissionSetRequest, schemas.CreatePermissionSetResponse), output: &CreatePermissionSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePermissionSet"); err != nil {

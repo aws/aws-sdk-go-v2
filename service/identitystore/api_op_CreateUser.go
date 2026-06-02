@@ -7,7 +7,9 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/document"
+	"github.com/aws/aws-sdk-go-v2/service/identitystore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/identitystore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -108,6 +110,120 @@ type CreateUserInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAddresses(s, schemas.CreateUserRequest_Addresses, v.Addresses)
+	if v.Birthdate != nil {
+		s.WriteString(schemas.CreateUserRequest_Birthdate, *v.Birthdate)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateUserRequest_DisplayName, *v.DisplayName)
+	}
+	serializeEmails(s, schemas.CreateUserRequest_Emails, v.Emails)
+	serializeExtensions(s, schemas.CreateUserRequest_Extensions, v.Extensions)
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.CreateUserRequest_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.Locale != nil {
+		s.WriteString(schemas.CreateUserRequest_Locale, *v.Locale)
+	}
+	if v.Name != nil {
+		s.WriteStruct(schemas.CreateUserRequest_Name)
+		v.Name.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NickName != nil {
+		s.WriteString(schemas.CreateUserRequest_NickName, *v.NickName)
+	}
+	serializePhoneNumbers(s, schemas.CreateUserRequest_PhoneNumbers, v.PhoneNumbers)
+	serializePhotos(s, schemas.CreateUserRequest_Photos, v.Photos)
+	if v.PreferredLanguage != nil {
+		s.WriteString(schemas.CreateUserRequest_PreferredLanguage, *v.PreferredLanguage)
+	}
+	if v.ProfileUrl != nil {
+		s.WriteString(schemas.CreateUserRequest_ProfileUrl, *v.ProfileUrl)
+	}
+	serializeRoles(s, schemas.CreateUserRequest_Roles, v.Roles)
+	if v.Timezone != nil {
+		s.WriteString(schemas.CreateUserRequest_Timezone, *v.Timezone)
+	}
+	if v.Title != nil {
+		s.WriteString(schemas.CreateUserRequest_Title, *v.Title)
+	}
+	if v.UserName != nil {
+		s.WriteString(schemas.CreateUserRequest_UserName, *v.UserName)
+	}
+	if v.UserType != nil {
+		s.WriteString(schemas.CreateUserRequest_UserType, *v.UserType)
+	}
+	if v.Website != nil {
+		s.WriteString(schemas.CreateUserRequest_Website, *v.Website)
+	}
+}
+func (v *CreateUserInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserRequest_Addresses:
+			return deserializeAddresses(d, schemas.CreateUserRequest_Addresses, &v.Addresses)
+		case schemas.CreateUserRequest_Birthdate:
+			v.Birthdate = new(string)
+			return d.ReadString(schemas.CreateUserRequest_Birthdate, v.Birthdate)
+		case schemas.CreateUserRequest_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.CreateUserRequest_DisplayName, v.DisplayName)
+		case schemas.CreateUserRequest_Emails:
+			return deserializeEmails(d, schemas.CreateUserRequest_Emails, &v.Emails)
+		case schemas.CreateUserRequest_Extensions:
+			return deserializeExtensions(d, schemas.CreateUserRequest_Extensions, &v.Extensions)
+		case schemas.CreateUserRequest_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.CreateUserRequest_IdentityStoreId, v.IdentityStoreId)
+		case schemas.CreateUserRequest_Locale:
+			v.Locale = new(string)
+			return d.ReadString(schemas.CreateUserRequest_Locale, v.Locale)
+		case schemas.CreateUserRequest_Name:
+			v.Name = &types.Name{}
+			return v.Name.Deserialize(d)
+		case schemas.CreateUserRequest_NickName:
+			v.NickName = new(string)
+			return d.ReadString(schemas.CreateUserRequest_NickName, v.NickName)
+		case schemas.CreateUserRequest_PhoneNumbers:
+			return deserializePhoneNumbers(d, schemas.CreateUserRequest_PhoneNumbers, &v.PhoneNumbers)
+		case schemas.CreateUserRequest_Photos:
+			return deserializePhotos(d, schemas.CreateUserRequest_Photos, &v.Photos)
+		case schemas.CreateUserRequest_PreferredLanguage:
+			v.PreferredLanguage = new(string)
+			return d.ReadString(schemas.CreateUserRequest_PreferredLanguage, v.PreferredLanguage)
+		case schemas.CreateUserRequest_ProfileUrl:
+			v.ProfileUrl = new(string)
+			return d.ReadString(schemas.CreateUserRequest_ProfileUrl, v.ProfileUrl)
+		case schemas.CreateUserRequest_Roles:
+			return deserializeRoles(d, schemas.CreateUserRequest_Roles, &v.Roles)
+		case schemas.CreateUserRequest_Timezone:
+			v.Timezone = new(string)
+			return d.ReadString(schemas.CreateUserRequest_Timezone, v.Timezone)
+		case schemas.CreateUserRequest_Title:
+			v.Title = new(string)
+			return d.ReadString(schemas.CreateUserRequest_Title, v.Title)
+		case schemas.CreateUserRequest_UserName:
+			v.UserName = new(string)
+			return d.ReadString(schemas.CreateUserRequest_UserName, v.UserName)
+		case schemas.CreateUserRequest_UserType:
+			v.UserType = new(string)
+			return d.ReadString(schemas.CreateUserRequest_UserType, v.UserType)
+		case schemas.CreateUserRequest_Website:
+			v.Website = new(string)
+			return d.ReadString(schemas.CreateUserRequest_Website, v.Website)
+		}
+		return nil
+	})
+}
+
 type CreateUserOutput struct {
 
 	// The globally unique identifier for the identity store.
@@ -126,16 +242,41 @@ type CreateUserOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateUserOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateUserResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateUserOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentityStoreId != nil {
+		s.WriteString(schemas.CreateUserResponse_IdentityStoreId, *v.IdentityStoreId)
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.CreateUserResponse_UserId, *v.UserId)
+	}
+}
+func (v *CreateUserOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateUserResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateUserResponse_IdentityStoreId:
+			v.IdentityStoreId = new(string)
+			return d.ReadString(schemas.CreateUserResponse_IdentityStoreId, v.IdentityStoreId)
+		case schemas.CreateUserResponse_UserId:
+			v.UserId = new(string)
+			return d.ReadString(schemas.CreateUserResponse_UserId, v.UserId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserRequest, schemas.CreateUserResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateUser{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateUser, schemas.CreateUserRequest, schemas.CreateUserResponse), output: &CreateUserOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateUser"); err != nil {

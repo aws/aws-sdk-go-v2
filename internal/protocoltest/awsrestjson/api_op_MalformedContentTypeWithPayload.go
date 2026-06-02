@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,27 @@ type MalformedContentTypeWithPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedContentTypeWithPayloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MalformedContentTypeWithPayloadInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedContentTypeWithPayloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Payload != nil {
+		s.WriteBlob(schemas.MalformedContentTypeWithPayloadInput_payload, v.Payload)
+	}
+}
+func (v *MalformedContentTypeWithPayloadInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MalformedContentTypeWithPayloadInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MalformedContentTypeWithPayloadInput_payload:
+			return d.ReadBlob(schemas.MalformedContentTypeWithPayloadInput_payload, &v.Payload)
+		}
+		return nil
+	})
+}
+
 type MalformedContentTypeWithPayloadOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,16 +63,29 @@ type MalformedContentTypeWithPayloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MalformedContentTypeWithPayloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MalformedContentTypeWithPayloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *MalformedContentTypeWithPayloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationMalformedContentTypeWithPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpMalformedContentTypeWithPayload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedContentTypeWithPayload, schemas.MalformedContentTypeWithPayloadInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpMalformedContentTypeWithPayload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.MalformedContentTypeWithPayload, schemas.MalformedContentTypeWithPayloadInput, nil), output: &MalformedContentTypeWithPayloadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "MalformedContentTypeWithPayload"); err != nil {

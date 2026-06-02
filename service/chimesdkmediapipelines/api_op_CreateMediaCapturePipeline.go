@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -82,6 +84,44 @@ type CreateMediaCapturePipelineInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMediaCapturePipelineInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateMediaCapturePipelineRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateMediaCapturePipelineInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChimeSdkMeetingConfiguration != nil {
+		s.WriteStruct(schemas.CreateMediaCapturePipelineRequest_ChimeSdkMeetingConfiguration)
+		v.ChimeSdkMeetingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateMediaCapturePipelineRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.SinkArn != nil {
+		s.WriteString(schemas.CreateMediaCapturePipelineRequest_SinkArn, *v.SinkArn)
+	}
+	if v.SinkIamRoleArn != nil {
+		s.WriteString(schemas.CreateMediaCapturePipelineRequest_SinkIamRoleArn, *v.SinkIamRoleArn)
+	}
+	if v.SinkType != "" {
+		s.WriteString(schemas.CreateMediaCapturePipelineRequest_SinkType, string(v.SinkType))
+	}
+	if v.SourceArn != nil {
+		s.WriteString(schemas.CreateMediaCapturePipelineRequest_SourceArn, *v.SourceArn)
+	}
+	if v.SourceType != "" {
+		s.WriteString(schemas.CreateMediaCapturePipelineRequest_SourceType, string(v.SourceType))
+	}
+	if v.SseAwsKeyManagementParams != nil {
+		s.WriteStruct(schemas.CreateMediaCapturePipelineRequest_SseAwsKeyManagementParams)
+		v.SseAwsKeyManagementParams.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.CreateMediaCapturePipelineRequest_Tags, v.Tags)
+}
+
 type CreateMediaCapturePipelineOutput struct {
 
 	// A media pipeline object, the ID, source type, source ARN, sink type, and sink
@@ -94,16 +134,24 @@ type CreateMediaCapturePipelineOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateMediaCapturePipelineOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateMediaCapturePipelineResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateMediaCapturePipelineResponse_MediaCapturePipeline:
+			v.MediaCapturePipeline = &types.MediaCapturePipeline{}
+			return v.MediaCapturePipeline.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateMediaCapturePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateMediaCapturePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMediaCapturePipeline, schemas.CreateMediaCapturePipelineRequest, schemas.CreateMediaCapturePipelineResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateMediaCapturePipeline{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateMediaCapturePipeline, schemas.CreateMediaCapturePipelineRequest, schemas.CreateMediaCapturePipelineResponse), output: &CreateMediaCapturePipelineOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateMediaCapturePipeline"); err != nil {

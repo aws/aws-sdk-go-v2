@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -98,6 +100,38 @@ type CreateLagInput struct {
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateLagInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateLagRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLagInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeTagList(s, schemas.CreateLagRequest_childConnectionTags, v.ChildConnectionTags)
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.CreateLagRequest_connectionId, *v.ConnectionId)
+	}
+	if v.ConnectionsBandwidth != nil {
+		s.WriteString(schemas.CreateLagRequest_connectionsBandwidth, *v.ConnectionsBandwidth)
+	}
+	if v.LagName != nil {
+		s.WriteString(schemas.CreateLagRequest_lagName, *v.LagName)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.CreateLagRequest_location, *v.Location)
+	}
+	if v.NumberOfConnections != 0 {
+		s.WriteInt32(schemas.CreateLagRequest_numberOfConnections, v.NumberOfConnections)
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.CreateLagRequest_providerName, *v.ProviderName)
+	}
+	if v.RequestMACSec != nil {
+		s.WriteBool(schemas.CreateLagRequest_requestMACSec, *v.RequestMACSec)
+	}
+	serializeTagList(s, schemas.CreateLagRequest_tags, v.Tags)
 }
 
 // Information about a link aggregation group (LAG).
@@ -197,16 +231,151 @@ type CreateLagOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateLagOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Lag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateLagOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowsHostedConnections != false {
+		s.WriteBool(schemas.Lag_allowsHostedConnections, v.AllowsHostedConnections)
+	}
+	if v.AwsDevice != nil {
+		s.WriteString(schemas.Lag_awsDevice, *v.AwsDevice)
+	}
+	if v.AwsDeviceV2 != nil {
+		s.WriteString(schemas.Lag_awsDeviceV2, *v.AwsDeviceV2)
+	}
+	if v.AwsLogicalDeviceId != nil {
+		s.WriteString(schemas.Lag_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
+	}
+	serializeConnectionList(s, schemas.Lag_connections, v.Connections)
+	if v.ConnectionsBandwidth != nil {
+		s.WriteString(schemas.Lag_connectionsBandwidth, *v.ConnectionsBandwidth)
+	}
+	if v.EncryptionMode != nil {
+		s.WriteString(schemas.Lag_encryptionMode, *v.EncryptionMode)
+	}
+	if v.HasLogicalRedundancy != "" {
+		s.WriteString(schemas.Lag_hasLogicalRedundancy, string(v.HasLogicalRedundancy))
+	}
+	if v.JumboFrameCapable != nil {
+		s.WriteBool(schemas.Lag_jumboFrameCapable, *v.JumboFrameCapable)
+	}
+	if v.LagId != nil {
+		s.WriteString(schemas.Lag_lagId, *v.LagId)
+	}
+	if v.LagName != nil {
+		s.WriteString(schemas.Lag_lagName, *v.LagName)
+	}
+	if v.LagState != "" {
+		s.WriteString(schemas.Lag_lagState, string(v.LagState))
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.Lag_location, *v.Location)
+	}
+	if v.MacSecCapable != nil {
+		s.WriteBool(schemas.Lag_macSecCapable, *v.MacSecCapable)
+	}
+	serializeMacSecKeyList(s, schemas.Lag_macSecKeys, v.MacSecKeys)
+	if v.MinimumLinks != 0 {
+		s.WriteInt32(schemas.Lag_minimumLinks, v.MinimumLinks)
+	}
+	if v.NumberOfConnections != 0 {
+		s.WriteInt32(schemas.Lag_numberOfConnections, v.NumberOfConnections)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.Lag_ownerAccount, *v.OwnerAccount)
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.Lag_providerName, *v.ProviderName)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.Lag_region, *v.Region)
+	}
+	serializeTagList(s, schemas.Lag_tags, v.Tags)
+}
+func (v *CreateLagOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Lag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Lag_allowsHostedConnections:
+			return d.ReadBool(schemas.Lag_allowsHostedConnections, &v.AllowsHostedConnections)
+		case schemas.Lag_awsDevice:
+			v.AwsDevice = new(string)
+			return d.ReadString(schemas.Lag_awsDevice, v.AwsDevice)
+		case schemas.Lag_awsDeviceV2:
+			v.AwsDeviceV2 = new(string)
+			return d.ReadString(schemas.Lag_awsDeviceV2, v.AwsDeviceV2)
+		case schemas.Lag_awsLogicalDeviceId:
+			v.AwsLogicalDeviceId = new(string)
+			return d.ReadString(schemas.Lag_awsLogicalDeviceId, v.AwsLogicalDeviceId)
+		case schemas.Lag_connections:
+			return deserializeConnectionList(d, schemas.Lag_connections, &v.Connections)
+		case schemas.Lag_connectionsBandwidth:
+			v.ConnectionsBandwidth = new(string)
+			return d.ReadString(schemas.Lag_connectionsBandwidth, v.ConnectionsBandwidth)
+		case schemas.Lag_encryptionMode:
+			v.EncryptionMode = new(string)
+			return d.ReadString(schemas.Lag_encryptionMode, v.EncryptionMode)
+		case schemas.Lag_hasLogicalRedundancy:
+			var ev string
+			if err := d.ReadString(schemas.Lag_hasLogicalRedundancy, &ev); err != nil {
+				return err
+			}
+			v.HasLogicalRedundancy = types.HasLogicalRedundancy(ev)
+			return nil
+		case schemas.Lag_jumboFrameCapable:
+			v.JumboFrameCapable = new(bool)
+			return d.ReadBool(schemas.Lag_jumboFrameCapable, v.JumboFrameCapable)
+		case schemas.Lag_lagId:
+			v.LagId = new(string)
+			return d.ReadString(schemas.Lag_lagId, v.LagId)
+		case schemas.Lag_lagName:
+			v.LagName = new(string)
+			return d.ReadString(schemas.Lag_lagName, v.LagName)
+		case schemas.Lag_lagState:
+			var ev string
+			if err := d.ReadString(schemas.Lag_lagState, &ev); err != nil {
+				return err
+			}
+			v.LagState = types.LagState(ev)
+			return nil
+		case schemas.Lag_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.Lag_location, v.Location)
+		case schemas.Lag_macSecCapable:
+			v.MacSecCapable = new(bool)
+			return d.ReadBool(schemas.Lag_macSecCapable, v.MacSecCapable)
+		case schemas.Lag_macSecKeys:
+			return deserializeMacSecKeyList(d, schemas.Lag_macSecKeys, &v.MacSecKeys)
+		case schemas.Lag_minimumLinks:
+			return d.ReadInt32(schemas.Lag_minimumLinks, &v.MinimumLinks)
+		case schemas.Lag_numberOfConnections:
+			return d.ReadInt32(schemas.Lag_numberOfConnections, &v.NumberOfConnections)
+		case schemas.Lag_ownerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.Lag_ownerAccount, v.OwnerAccount)
+		case schemas.Lag_providerName:
+			v.ProviderName = new(string)
+			return d.ReadString(schemas.Lag_providerName, v.ProviderName)
+		case schemas.Lag_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.Lag_region, v.Region)
+		case schemas.Lag_tags:
+			return deserializeTagList(d, schemas.Lag_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateLagMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateLag{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLag, schemas.CreateLagRequest, schemas.Lag)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateLag{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateLag, schemas.CreateLagRequest, schemas.Lag), output: &CreateLagOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateLag"); err != nil {

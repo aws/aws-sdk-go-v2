@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspace/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,24 @@ type ListKxScalingGroupsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKxScalingGroupsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListKxScalingGroupsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListKxScalingGroupsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.ListKxScalingGroupsRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.MaxResults != 0 {
+		s.WriteInt32(schemas.ListKxScalingGroupsRequest_maxResults, v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListKxScalingGroupsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListKxScalingGroupsOutput struct {
 
 	//  A token that indicates where a results page should begin.
@@ -58,16 +78,26 @@ type ListKxScalingGroupsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListKxScalingGroupsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListKxScalingGroupsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListKxScalingGroupsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListKxScalingGroupsResponse_nextToken, v.NextToken)
+		case schemas.ListKxScalingGroupsResponse_scalingGroups:
+			return deserializeKxScalingGroupList(d, schemas.ListKxScalingGroupsResponse_scalingGroups, &v.ScalingGroups)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListKxScalingGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListKxScalingGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKxScalingGroups, schemas.ListKxScalingGroupsRequest, schemas.ListKxScalingGroupsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListKxScalingGroups{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListKxScalingGroups, schemas.ListKxScalingGroupsRequest, schemas.ListKxScalingGroupsResponse), output: &ListKxScalingGroupsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListKxScalingGroups"); err != nil {

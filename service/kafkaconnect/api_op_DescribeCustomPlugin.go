@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type DescribeCustomPluginInput struct {
 	CustomPluginArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeCustomPluginInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCustomPluginRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCustomPluginInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomPluginArn != nil {
+		s.WriteString(schemas.DescribeCustomPluginRequest_customPluginArn, *v.CustomPluginArn)
+	}
 }
 
 type DescribeCustomPluginOutput struct {
@@ -68,16 +82,79 @@ type DescribeCustomPluginOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCustomPluginOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCustomPluginResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCustomPluginOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.DescribeCustomPluginResponse_creationTime, *v.CreationTime)
+	}
+	if v.CustomPluginArn != nil {
+		s.WriteString(schemas.DescribeCustomPluginResponse_customPluginArn, *v.CustomPluginArn)
+	}
+	if v.CustomPluginState != "" {
+		s.WriteString(schemas.DescribeCustomPluginResponse_customPluginState, string(v.CustomPluginState))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeCustomPluginResponse_description, *v.Description)
+	}
+	if v.LatestRevision != nil {
+		s.WriteStruct(schemas.DescribeCustomPluginResponse_latestRevision)
+		v.LatestRevision.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeCustomPluginResponse_name, *v.Name)
+	}
+	if v.StateDescription != nil {
+		s.WriteStruct(schemas.DescribeCustomPluginResponse_stateDescription)
+		v.StateDescription.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DescribeCustomPluginOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCustomPluginResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCustomPluginResponse_creationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeCustomPluginResponse_creationTime, v.CreationTime)
+		case schemas.DescribeCustomPluginResponse_customPluginArn:
+			v.CustomPluginArn = new(string)
+			return d.ReadString(schemas.DescribeCustomPluginResponse_customPluginArn, v.CustomPluginArn)
+		case schemas.DescribeCustomPluginResponse_customPluginState:
+			var ev string
+			if err := d.ReadString(schemas.DescribeCustomPluginResponse_customPluginState, &ev); err != nil {
+				return err
+			}
+			v.CustomPluginState = types.CustomPluginState(ev)
+			return nil
+		case schemas.DescribeCustomPluginResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeCustomPluginResponse_description, v.Description)
+		case schemas.DescribeCustomPluginResponse_latestRevision:
+			v.LatestRevision = &types.CustomPluginRevisionSummary{}
+			return v.LatestRevision.Deserialize(d)
+		case schemas.DescribeCustomPluginResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeCustomPluginResponse_name, v.Name)
+		case schemas.DescribeCustomPluginResponse_stateDescription:
+			v.StateDescription = &types.StateDescription{}
+			return v.StateDescription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCustomPluginMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeCustomPlugin{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCustomPlugin, schemas.DescribeCustomPluginRequest, schemas.DescribeCustomPluginResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeCustomPlugin{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCustomPlugin, schemas.DescribeCustomPluginRequest, schemas.DescribeCustomPluginResponse), output: &DescribeCustomPluginOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCustomPlugin"); err != nil {

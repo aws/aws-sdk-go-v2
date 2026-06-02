@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockdataautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,24 @@ type UpdateDataAutomationLibraryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataAutomationLibraryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateDataAutomationLibraryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateDataAutomationLibraryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateDataAutomationLibraryRequest_clientToken, *v.ClientToken)
+	}
+	if v.LibraryArn != nil {
+		s.WriteString(schemas.UpdateDataAutomationLibraryRequest_libraryArn, *v.LibraryArn)
+	}
+	if v.LibraryDescription != nil {
+		s.WriteString(schemas.UpdateDataAutomationLibraryRequest_libraryDescription, *v.LibraryDescription)
+	}
+}
+
 // Update DataAutomationLibrary Response
 type UpdateDataAutomationLibraryOutput struct {
 
@@ -59,16 +79,31 @@ type UpdateDataAutomationLibraryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateDataAutomationLibraryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateDataAutomationLibraryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateDataAutomationLibraryResponse_libraryArn:
+			v.LibraryArn = new(string)
+			return d.ReadString(schemas.UpdateDataAutomationLibraryResponse_libraryArn, v.LibraryArn)
+		case schemas.UpdateDataAutomationLibraryResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateDataAutomationLibraryResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DataAutomationLibraryStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateDataAutomationLibraryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateDataAutomationLibrary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataAutomationLibrary, schemas.UpdateDataAutomationLibraryRequest, schemas.UpdateDataAutomationLibraryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateDataAutomationLibrary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateDataAutomationLibrary, schemas.UpdateDataAutomationLibraryRequest, schemas.UpdateDataAutomationLibraryResponse), output: &UpdateDataAutomationLibraryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateDataAutomationLibrary"); err != nil {

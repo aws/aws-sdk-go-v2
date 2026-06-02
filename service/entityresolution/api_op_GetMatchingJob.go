@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,21 @@ type GetMatchingJobInput struct {
 	WorkflowName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMatchingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMatchingJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMatchingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobId != nil {
+		s.WriteString(schemas.GetMatchingJobInput_jobId, *v.JobId)
+	}
+	if v.WorkflowName != nil {
+		s.WriteString(schemas.GetMatchingJobInput_workflowName, *v.WorkflowName)
+	}
 }
 
 type GetMatchingJobOutput struct {
@@ -80,16 +97,45 @@ type GetMatchingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMatchingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMatchingJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMatchingJobOutput_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.GetMatchingJobOutput_endTime, v.EndTime)
+		case schemas.GetMatchingJobOutput_errorDetails:
+			v.ErrorDetails = &types.ErrorDetails{}
+			return v.ErrorDetails.Deserialize(d)
+		case schemas.GetMatchingJobOutput_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.GetMatchingJobOutput_jobId, v.JobId)
+		case schemas.GetMatchingJobOutput_metrics:
+			v.Metrics = &types.JobMetrics{}
+			return v.Metrics.Deserialize(d)
+		case schemas.GetMatchingJobOutput_outputSourceConfig:
+			return deserializeJobOutputSourceConfig(d, schemas.GetMatchingJobOutput_outputSourceConfig, &v.OutputSourceConfig)
+		case schemas.GetMatchingJobOutput_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.GetMatchingJobOutput_startTime, v.StartTime)
+		case schemas.GetMatchingJobOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetMatchingJobOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.JobStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMatchingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMatchingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMatchingJob, schemas.GetMatchingJobInput, schemas.GetMatchingJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMatchingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMatchingJob, schemas.GetMatchingJobInput, schemas.GetMatchingJobOutput), output: &GetMatchingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMatchingJob"); err != nil {

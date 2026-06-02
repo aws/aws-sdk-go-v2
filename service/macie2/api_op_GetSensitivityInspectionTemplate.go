@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetSensitivityInspectionTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSensitivityInspectionTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSensitivityInspectionTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSensitivityInspectionTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetSensitivityInspectionTemplateRequest_id, *v.Id)
+	}
+}
+
 type GetSensitivityInspectionTemplateOutput struct {
 
 	// The custom description of the template.
@@ -62,16 +76,36 @@ type GetSensitivityInspectionTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSensitivityInspectionTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSensitivityInspectionTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSensitivityInspectionTemplateResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetSensitivityInspectionTemplateResponse_description, v.Description)
+		case schemas.GetSensitivityInspectionTemplateResponse_excludes:
+			v.Excludes = &types.SensitivityInspectionTemplateExcludes{}
+			return v.Excludes.Deserialize(d)
+		case schemas.GetSensitivityInspectionTemplateResponse_includes:
+			v.Includes = &types.SensitivityInspectionTemplateIncludes{}
+			return v.Includes.Deserialize(d)
+		case schemas.GetSensitivityInspectionTemplateResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSensitivityInspectionTemplateResponse_name, v.Name)
+		case schemas.GetSensitivityInspectionTemplateResponse_sensitivityInspectionTemplateId:
+			v.SensitivityInspectionTemplateId = new(string)
+			return d.ReadString(schemas.GetSensitivityInspectionTemplateResponse_sensitivityInspectionTemplateId, v.SensitivityInspectionTemplateId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSensitivityInspectionTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSensitivityInspectionTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSensitivityInspectionTemplate, schemas.GetSensitivityInspectionTemplateRequest, schemas.GetSensitivityInspectionTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSensitivityInspectionTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSensitivityInspectionTemplate, schemas.GetSensitivityInspectionTemplateRequest, schemas.GetSensitivityInspectionTemplateResponse), output: &GetSensitivityInspectionTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSensitivityInspectionTemplate"); err != nil {

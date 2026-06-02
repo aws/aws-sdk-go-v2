@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/supportapp/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/supportapp/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -104,6 +106,74 @@ type CreateSlackChannelConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSlackChannelConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSlackChannelConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSlackChannelConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelId != nil {
+		s.WriteString(schemas.CreateSlackChannelConfigurationRequest_channelId, *v.ChannelId)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.CreateSlackChannelConfigurationRequest_channelName, *v.ChannelName)
+	}
+	if v.ChannelRoleArn != nil {
+		s.WriteString(schemas.CreateSlackChannelConfigurationRequest_channelRoleArn, *v.ChannelRoleArn)
+	}
+	if v.NotifyOnAddCorrespondenceToCase != nil {
+		s.WriteBool(schemas.CreateSlackChannelConfigurationRequest_notifyOnAddCorrespondenceToCase, *v.NotifyOnAddCorrespondenceToCase)
+	}
+	if v.NotifyOnCaseSeverity != "" {
+		s.WriteString(schemas.CreateSlackChannelConfigurationRequest_notifyOnCaseSeverity, string(v.NotifyOnCaseSeverity))
+	}
+	if v.NotifyOnCreateOrReopenCase != nil {
+		s.WriteBool(schemas.CreateSlackChannelConfigurationRequest_notifyOnCreateOrReopenCase, *v.NotifyOnCreateOrReopenCase)
+	}
+	if v.NotifyOnResolveCase != nil {
+		s.WriteBool(schemas.CreateSlackChannelConfigurationRequest_notifyOnResolveCase, *v.NotifyOnResolveCase)
+	}
+	if v.TeamId != nil {
+		s.WriteString(schemas.CreateSlackChannelConfigurationRequest_teamId, *v.TeamId)
+	}
+}
+func (v *CreateSlackChannelConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSlackChannelConfigurationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSlackChannelConfigurationRequest_channelId:
+			v.ChannelId = new(string)
+			return d.ReadString(schemas.CreateSlackChannelConfigurationRequest_channelId, v.ChannelId)
+		case schemas.CreateSlackChannelConfigurationRequest_channelName:
+			v.ChannelName = new(string)
+			return d.ReadString(schemas.CreateSlackChannelConfigurationRequest_channelName, v.ChannelName)
+		case schemas.CreateSlackChannelConfigurationRequest_channelRoleArn:
+			v.ChannelRoleArn = new(string)
+			return d.ReadString(schemas.CreateSlackChannelConfigurationRequest_channelRoleArn, v.ChannelRoleArn)
+		case schemas.CreateSlackChannelConfigurationRequest_notifyOnAddCorrespondenceToCase:
+			v.NotifyOnAddCorrespondenceToCase = new(bool)
+			return d.ReadBool(schemas.CreateSlackChannelConfigurationRequest_notifyOnAddCorrespondenceToCase, v.NotifyOnAddCorrespondenceToCase)
+		case schemas.CreateSlackChannelConfigurationRequest_notifyOnCaseSeverity:
+			var ev string
+			if err := d.ReadString(schemas.CreateSlackChannelConfigurationRequest_notifyOnCaseSeverity, &ev); err != nil {
+				return err
+			}
+			v.NotifyOnCaseSeverity = types.NotificationSeverityLevel(ev)
+			return nil
+		case schemas.CreateSlackChannelConfigurationRequest_notifyOnCreateOrReopenCase:
+			v.NotifyOnCreateOrReopenCase = new(bool)
+			return d.ReadBool(schemas.CreateSlackChannelConfigurationRequest_notifyOnCreateOrReopenCase, v.NotifyOnCreateOrReopenCase)
+		case schemas.CreateSlackChannelConfigurationRequest_notifyOnResolveCase:
+			v.NotifyOnResolveCase = new(bool)
+			return d.ReadBool(schemas.CreateSlackChannelConfigurationRequest_notifyOnResolveCase, v.NotifyOnResolveCase)
+		case schemas.CreateSlackChannelConfigurationRequest_teamId:
+			v.TeamId = new(string)
+			return d.ReadString(schemas.CreateSlackChannelConfigurationRequest_teamId, v.TeamId)
+		}
+		return nil
+	})
+}
+
 type CreateSlackChannelConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -111,16 +181,29 @@ type CreateSlackChannelConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSlackChannelConfigurationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSlackChannelConfigurationResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSlackChannelConfigurationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *CreateSlackChannelConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSlackChannelConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSlackChannelConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSlackChannelConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSlackChannelConfiguration, schemas.CreateSlackChannelConfigurationRequest, schemas.CreateSlackChannelConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSlackChannelConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSlackChannelConfiguration, schemas.CreateSlackChannelConfigurationRequest, schemas.CreateSlackChannelConfigurationResult), output: &CreateSlackChannelConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSlackChannelConfiguration"); err != nil {

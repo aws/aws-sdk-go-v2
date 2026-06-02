@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,18 @@ type GetSystemInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSystemInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSystemInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSystemInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetSystemInstanceRequest_id, *v.Id)
+	}
+}
+
 type GetSystemInstanceOutput struct {
 
 	// An object that describes the system instance.
@@ -55,16 +69,24 @@ type GetSystemInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSystemInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSystemInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSystemInstanceResponse_description:
+			v.Description = &types.SystemInstanceDescription{}
+			return v.Description.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetSystemInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSystemInstance, schemas.GetSystemInstanceRequest, schemas.GetSystemInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetSystemInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSystemInstance, schemas.GetSystemInstanceRequest, schemas.GetSystemInstanceResponse), output: &GetSystemInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSystemInstance"); err != nil {

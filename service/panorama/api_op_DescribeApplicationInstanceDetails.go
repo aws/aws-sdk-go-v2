@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,28 @@ type DescribeApplicationInstanceDetailsInput struct {
 	ApplicationInstanceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeApplicationInstanceDetailsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationInstanceDetailsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationInstanceDetailsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationInstanceId != nil {
+		s.WriteString(schemas.DescribeApplicationInstanceDetailsRequest_ApplicationInstanceId, *v.ApplicationInstanceId)
+	}
+}
+func (v *DescribeApplicationInstanceDetailsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApplicationInstanceDetailsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApplicationInstanceDetailsRequest_ApplicationInstanceId:
+			v.ApplicationInstanceId = new(string)
+			return d.ReadString(schemas.DescribeApplicationInstanceDetailsRequest_ApplicationInstanceId, v.ApplicationInstanceId)
+		}
+		return nil
+	})
 }
 
 type DescribeApplicationInstanceDetailsOutput struct {
@@ -70,16 +94,71 @@ type DescribeApplicationInstanceDetailsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationInstanceDetailsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationInstanceDetailsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationInstanceDetailsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationInstanceId != nil {
+		s.WriteString(schemas.DescribeApplicationInstanceDetailsResponse_ApplicationInstanceId, *v.ApplicationInstanceId)
+	}
+	if v.ApplicationInstanceIdToReplace != nil {
+		s.WriteString(schemas.DescribeApplicationInstanceDetailsResponse_ApplicationInstanceIdToReplace, *v.ApplicationInstanceIdToReplace)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.DescribeApplicationInstanceDetailsResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.DefaultRuntimeContextDevice != nil {
+		s.WriteString(schemas.DescribeApplicationInstanceDetailsResponse_DefaultRuntimeContextDevice, *v.DefaultRuntimeContextDevice)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeApplicationInstanceDetailsResponse_Description, *v.Description)
+	}
+	serializeManifestOverridesPayload(s, schemas.DescribeApplicationInstanceDetailsResponse_ManifestOverridesPayload, v.ManifestOverridesPayload)
+	serializeManifestPayload(s, schemas.DescribeApplicationInstanceDetailsResponse_ManifestPayload, v.ManifestPayload)
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeApplicationInstanceDetailsResponse_Name, *v.Name)
+	}
+}
+func (v *DescribeApplicationInstanceDetailsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApplicationInstanceDetailsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApplicationInstanceDetailsResponse_ApplicationInstanceId:
+			v.ApplicationInstanceId = new(string)
+			return d.ReadString(schemas.DescribeApplicationInstanceDetailsResponse_ApplicationInstanceId, v.ApplicationInstanceId)
+		case schemas.DescribeApplicationInstanceDetailsResponse_ApplicationInstanceIdToReplace:
+			v.ApplicationInstanceIdToReplace = new(string)
+			return d.ReadString(schemas.DescribeApplicationInstanceDetailsResponse_ApplicationInstanceIdToReplace, v.ApplicationInstanceIdToReplace)
+		case schemas.DescribeApplicationInstanceDetailsResponse_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeApplicationInstanceDetailsResponse_CreatedTime, v.CreatedTime)
+		case schemas.DescribeApplicationInstanceDetailsResponse_DefaultRuntimeContextDevice:
+			v.DefaultRuntimeContextDevice = new(string)
+			return d.ReadString(schemas.DescribeApplicationInstanceDetailsResponse_DefaultRuntimeContextDevice, v.DefaultRuntimeContextDevice)
+		case schemas.DescribeApplicationInstanceDetailsResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeApplicationInstanceDetailsResponse_Description, v.Description)
+		case schemas.DescribeApplicationInstanceDetailsResponse_ManifestOverridesPayload:
+			return deserializeManifestOverridesPayload(d, schemas.DescribeApplicationInstanceDetailsResponse_ManifestOverridesPayload, &v.ManifestOverridesPayload)
+		case schemas.DescribeApplicationInstanceDetailsResponse_ManifestPayload:
+			return deserializeManifestPayload(d, schemas.DescribeApplicationInstanceDetailsResponse_ManifestPayload, &v.ManifestPayload)
+		case schemas.DescribeApplicationInstanceDetailsResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeApplicationInstanceDetailsResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApplicationInstanceDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeApplicationInstanceDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationInstanceDetails, schemas.DescribeApplicationInstanceDetailsRequest, schemas.DescribeApplicationInstanceDetailsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeApplicationInstanceDetails{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationInstanceDetails, schemas.DescribeApplicationInstanceDetailsRequest, schemas.DescribeApplicationInstanceDetailsResponse), output: &DescribeApplicationInstanceDetailsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeApplicationInstanceDetails"); err != nil {

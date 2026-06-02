@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type DeleteProxyConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProxyConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteProxyConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteProxyConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProxyConfigurationArn != nil {
+		s.WriteString(schemas.DeleteProxyConfigurationRequest_ProxyConfigurationArn, *v.ProxyConfigurationArn)
+	}
+	if v.ProxyConfigurationName != nil {
+		s.WriteString(schemas.DeleteProxyConfigurationRequest_ProxyConfigurationName, *v.ProxyConfigurationName)
+	}
+}
+
 type DeleteProxyConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) of a proxy configuration.
@@ -57,16 +74,27 @@ type DeleteProxyConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteProxyConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteProxyConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteProxyConfigurationResponse_ProxyConfigurationArn:
+			v.ProxyConfigurationArn = new(string)
+			return d.ReadString(schemas.DeleteProxyConfigurationResponse_ProxyConfigurationArn, v.ProxyConfigurationArn)
+		case schemas.DeleteProxyConfigurationResponse_ProxyConfigurationName:
+			v.ProxyConfigurationName = new(string)
+			return d.ReadString(schemas.DeleteProxyConfigurationResponse_ProxyConfigurationName, v.ProxyConfigurationName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteProxyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteProxyConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProxyConfiguration, schemas.DeleteProxyConfigurationRequest, schemas.DeleteProxyConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteProxyConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteProxyConfiguration, schemas.DeleteProxyConfigurationRequest, schemas.DeleteProxyConfigurationResponse), output: &DeleteProxyConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteProxyConfiguration"); err != nil {

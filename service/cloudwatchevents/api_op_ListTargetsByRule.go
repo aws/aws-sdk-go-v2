@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,27 @@ type ListTargetsByRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetsByRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTargetsByRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTargetsByRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventBusName != nil {
+		s.WriteString(schemas.ListTargetsByRuleRequest_EventBusName, *v.EventBusName)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListTargetsByRuleRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTargetsByRuleRequest_NextToken, *v.NextToken)
+	}
+	if v.Rule != nil {
+		s.WriteString(schemas.ListTargetsByRuleRequest_Rule, *v.Rule)
+	}
+}
+
 type ListTargetsByRuleOutput struct {
 
 	// Indicates whether there are additional results to retrieve. If there are no
@@ -62,16 +85,26 @@ type ListTargetsByRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTargetsByRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTargetsByRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTargetsByRuleResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTargetsByRuleResponse_NextToken, v.NextToken)
+		case schemas.ListTargetsByRuleResponse_Targets:
+			return deserializeTargetList(d, schemas.ListTargetsByRuleResponse_Targets, &v.Targets)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTargetsByRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListTargetsByRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTargetsByRule, schemas.ListTargetsByRuleRequest, schemas.ListTargetsByRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListTargetsByRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTargetsByRule, schemas.ListTargetsByRuleRequest, schemas.ListTargetsByRuleResponse), output: &ListTargetsByRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTargetsByRule"); err != nil {

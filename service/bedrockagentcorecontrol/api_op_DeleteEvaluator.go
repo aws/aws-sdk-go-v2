@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,18 @@ type DeleteEvaluatorInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEvaluatorInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteEvaluatorRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteEvaluatorInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EvaluatorId != nil {
+		s.WriteString(schemas.DeleteEvaluatorRequest_evaluatorId, *v.EvaluatorId)
+	}
+}
+
 type DeleteEvaluatorOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the deleted evaluator.
@@ -62,16 +76,34 @@ type DeleteEvaluatorOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteEvaluatorOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteEvaluatorResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteEvaluatorResponse_evaluatorArn:
+			v.EvaluatorArn = new(string)
+			return d.ReadString(schemas.DeleteEvaluatorResponse_evaluatorArn, v.EvaluatorArn)
+		case schemas.DeleteEvaluatorResponse_evaluatorId:
+			v.EvaluatorId = new(string)
+			return d.ReadString(schemas.DeleteEvaluatorResponse_evaluatorId, v.EvaluatorId)
+		case schemas.DeleteEvaluatorResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteEvaluatorResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.EvaluatorStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteEvaluatorMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteEvaluator{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEvaluator, schemas.DeleteEvaluatorRequest, schemas.DeleteEvaluatorResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteEvaluator{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteEvaluator, schemas.DeleteEvaluatorRequest, schemas.DeleteEvaluatorResponse), output: &DeleteEvaluatorOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteEvaluator"); err != nil {

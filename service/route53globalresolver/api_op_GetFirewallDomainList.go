@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,18 @@ type GetFirewallDomainListInput struct {
 	FirewallDomainListId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetFirewallDomainListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFirewallDomainListInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFirewallDomainListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallDomainListId != nil {
+		s.WriteString(schemas.GetFirewallDomainListInput_firewallDomainListId, *v.FirewallDomainListId)
+	}
 }
 
 type GetFirewallDomainListOutput struct {
@@ -103,16 +117,58 @@ type GetFirewallDomainListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFirewallDomainListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFirewallDomainListOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFirewallDomainListOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetFirewallDomainListOutput_arn, v.Arn)
+		case schemas.GetFirewallDomainListOutput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.GetFirewallDomainListOutput_clientToken, v.ClientToken)
+		case schemas.GetFirewallDomainListOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFirewallDomainListOutput_createdAt, v.CreatedAt)
+		case schemas.GetFirewallDomainListOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetFirewallDomainListOutput_description, v.Description)
+		case schemas.GetFirewallDomainListOutput_domainCount:
+			v.DomainCount = new(int32)
+			return d.ReadInt32(schemas.GetFirewallDomainListOutput_domainCount, v.DomainCount)
+		case schemas.GetFirewallDomainListOutput_globalResolverId:
+			v.GlobalResolverId = new(string)
+			return d.ReadString(schemas.GetFirewallDomainListOutput_globalResolverId, v.GlobalResolverId)
+		case schemas.GetFirewallDomainListOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetFirewallDomainListOutput_id, v.Id)
+		case schemas.GetFirewallDomainListOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetFirewallDomainListOutput_name, v.Name)
+		case schemas.GetFirewallDomainListOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetFirewallDomainListOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CRResourceStatus(ev)
+			return nil
+		case schemas.GetFirewallDomainListOutput_statusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.GetFirewallDomainListOutput_statusMessage, v.StatusMessage)
+		case schemas.GetFirewallDomainListOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetFirewallDomainListOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFirewallDomainListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFirewallDomainList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFirewallDomainList, schemas.GetFirewallDomainListInput, schemas.GetFirewallDomainListOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFirewallDomainList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFirewallDomainList, schemas.GetFirewallDomainListInput, schemas.GetFirewallDomainListOutput), output: &GetFirewallDomainListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFirewallDomainList"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,24 @@ type ListVpcEndpointAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcEndpointAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListVpcEndpointAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListVpcEndpointAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.ListVpcEndpointAssociationsRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListVpcEndpointAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListVpcEndpointAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListVpcEndpointAssociationsOutput struct {
 
 	// When you request a list of objects with a MaxResults setting, if the number of
@@ -79,16 +99,26 @@ type ListVpcEndpointAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListVpcEndpointAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListVpcEndpointAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListVpcEndpointAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListVpcEndpointAssociationsResponse_NextToken, v.NextToken)
+		case schemas.ListVpcEndpointAssociationsResponse_VpcEndpointAssociations:
+			return deserializeVpcEndpointAssociations(d, schemas.ListVpcEndpointAssociationsResponse_VpcEndpointAssociations, &v.VpcEndpointAssociations)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListVpcEndpointAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListVpcEndpointAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcEndpointAssociations, schemas.ListVpcEndpointAssociationsRequest, schemas.ListVpcEndpointAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListVpcEndpointAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListVpcEndpointAssociations, schemas.ListVpcEndpointAssociationsRequest, schemas.ListVpcEndpointAssociationsResponse), output: &ListVpcEndpointAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListVpcEndpointAssociations"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerlinuxsubscriptions/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -78,6 +80,37 @@ type ListLinuxSubscriptionInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLinuxSubscriptionInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLinuxSubscriptionInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLinuxSubscriptionInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFilterList(s, schemas.ListLinuxSubscriptionInstancesRequest_Filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLinuxSubscriptionInstancesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLinuxSubscriptionInstancesRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLinuxSubscriptionInstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLinuxSubscriptionInstancesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLinuxSubscriptionInstancesRequest_Filters:
+			return deserializeFilterList(d, schemas.ListLinuxSubscriptionInstancesRequest_Filters, &v.Filters)
+		case schemas.ListLinuxSubscriptionInstancesRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListLinuxSubscriptionInstancesRequest_MaxResults, v.MaxResults)
+		case schemas.ListLinuxSubscriptionInstancesRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLinuxSubscriptionInstancesRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListLinuxSubscriptionInstancesOutput struct {
 
 	// An array that contains instance objects.
@@ -94,16 +127,38 @@ type ListLinuxSubscriptionInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLinuxSubscriptionInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLinuxSubscriptionInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLinuxSubscriptionInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstanceList(s, schemas.ListLinuxSubscriptionInstancesResponse_Instances, v.Instances)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLinuxSubscriptionInstancesResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListLinuxSubscriptionInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLinuxSubscriptionInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLinuxSubscriptionInstancesResponse_Instances:
+			return deserializeInstanceList(d, schemas.ListLinuxSubscriptionInstancesResponse_Instances, &v.Instances)
+		case schemas.ListLinuxSubscriptionInstancesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLinuxSubscriptionInstancesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLinuxSubscriptionInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLinuxSubscriptionInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLinuxSubscriptionInstances, schemas.ListLinuxSubscriptionInstancesRequest, schemas.ListLinuxSubscriptionInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLinuxSubscriptionInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLinuxSubscriptionInstances, schemas.ListLinuxSubscriptionInstancesRequest, schemas.ListLinuxSubscriptionInstancesResponse), output: &ListLinuxSubscriptionInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLinuxSubscriptionInstances"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,28 @@ type DeleteIncidentRecordInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIncidentRecordInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIncidentRecordInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIncidentRecordInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteIncidentRecordInput_arn, *v.Arn)
+	}
+}
+func (v *DeleteIncidentRecordInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIncidentRecordInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteIncidentRecordInput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteIncidentRecordInput_arn, v.Arn)
+		}
+		return nil
+	})
+}
+
 type DeleteIncidentRecordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +67,29 @@ type DeleteIncidentRecordOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIncidentRecordOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIncidentRecordOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIncidentRecordOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteIncidentRecordOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIncidentRecordOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIncidentRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteIncidentRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIncidentRecord, schemas.DeleteIncidentRecordInput, schemas.DeleteIncidentRecordOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteIncidentRecord{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIncidentRecord, schemas.DeleteIncidentRecordInput, schemas.DeleteIncidentRecordOutput), output: &DeleteIncidentRecordOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteIncidentRecord"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,21 @@ type DescribeAssetModelInterfaceRelationshipInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssetModelInterfaceRelationshipInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAssetModelInterfaceRelationshipRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAssetModelInterfaceRelationshipInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.DescribeAssetModelInterfaceRelationshipRequest_assetModelId, *v.AssetModelId)
+	}
+	if v.InterfaceAssetModelId != nil {
+		s.WriteString(schemas.DescribeAssetModelInterfaceRelationshipRequest_interfaceAssetModelId, *v.InterfaceAssetModelId)
+	}
+}
+
 type DescribeAssetModelInterfaceRelationshipOutput struct {
 
 	// The ID of the asset model.
@@ -75,16 +92,31 @@ type DescribeAssetModelInterfaceRelationshipOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAssetModelInterfaceRelationshipOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAssetModelInterfaceRelationshipResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAssetModelInterfaceRelationshipResponse_assetModelId:
+			v.AssetModelId = new(string)
+			return d.ReadString(schemas.DescribeAssetModelInterfaceRelationshipResponse_assetModelId, v.AssetModelId)
+		case schemas.DescribeAssetModelInterfaceRelationshipResponse_hierarchyMappings:
+			return deserializeHierarchyMappings(d, schemas.DescribeAssetModelInterfaceRelationshipResponse_hierarchyMappings, &v.HierarchyMappings)
+		case schemas.DescribeAssetModelInterfaceRelationshipResponse_interfaceAssetModelId:
+			v.InterfaceAssetModelId = new(string)
+			return d.ReadString(schemas.DescribeAssetModelInterfaceRelationshipResponse_interfaceAssetModelId, v.InterfaceAssetModelId)
+		case schemas.DescribeAssetModelInterfaceRelationshipResponse_propertyMappings:
+			return deserializePropertyMappings(d, schemas.DescribeAssetModelInterfaceRelationshipResponse_propertyMappings, &v.PropertyMappings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAssetModelInterfaceRelationshipMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAssetModelInterfaceRelationship{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetModelInterfaceRelationship, schemas.DescribeAssetModelInterfaceRelationshipRequest, schemas.DescribeAssetModelInterfaceRelationshipResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAssetModelInterfaceRelationship{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAssetModelInterfaceRelationship, schemas.DescribeAssetModelInterfaceRelationshipRequest, schemas.DescribeAssetModelInterfaceRelationshipResponse), output: &DescribeAssetModelInterfaceRelationshipOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAssetModelInterfaceRelationship"); err != nil {

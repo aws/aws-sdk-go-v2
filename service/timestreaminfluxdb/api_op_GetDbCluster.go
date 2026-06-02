@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreaminfluxdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type GetDbClusterInput struct {
 	DbClusterId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDbClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDbClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDbClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DbClusterId != nil {
+		s.WriteString(schemas.GetDbClusterInput_dbClusterId, *v.DbClusterId)
+	}
 }
 
 type GetDbClusterOutput struct {
@@ -132,16 +146,119 @@ type GetDbClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDbClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDbClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDbClusterOutput_allocatedStorage:
+			v.AllocatedStorage = new(int32)
+			return d.ReadInt32(schemas.GetDbClusterOutput_allocatedStorage, v.AllocatedStorage)
+		case schemas.GetDbClusterOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetDbClusterOutput_arn, v.Arn)
+		case schemas.GetDbClusterOutput_clusterConfiguration:
+			v.ClusterConfiguration = &types.ClusterConfiguration{}
+			return v.ClusterConfiguration.Deserialize(d)
+		case schemas.GetDbClusterOutput_dbInstanceType:
+			var ev string
+			if err := d.ReadString(schemas.GetDbClusterOutput_dbInstanceType, &ev); err != nil {
+				return err
+			}
+			v.DbInstanceType = types.DbInstanceType(ev)
+			return nil
+		case schemas.GetDbClusterOutput_dbParameterGroupIdentifier:
+			v.DbParameterGroupIdentifier = new(string)
+			return d.ReadString(schemas.GetDbClusterOutput_dbParameterGroupIdentifier, v.DbParameterGroupIdentifier)
+		case schemas.GetDbClusterOutput_dbStorageType:
+			var ev string
+			if err := d.ReadString(schemas.GetDbClusterOutput_dbStorageType, &ev); err != nil {
+				return err
+			}
+			v.DbStorageType = types.DbStorageType(ev)
+			return nil
+		case schemas.GetDbClusterOutput_deploymentType:
+			var ev string
+			if err := d.ReadString(schemas.GetDbClusterOutput_deploymentType, &ev); err != nil {
+				return err
+			}
+			v.DeploymentType = types.ClusterDeploymentType(ev)
+			return nil
+		case schemas.GetDbClusterOutput_endpoint:
+			v.Endpoint = new(string)
+			return d.ReadString(schemas.GetDbClusterOutput_endpoint, v.Endpoint)
+		case schemas.GetDbClusterOutput_engineType:
+			var ev string
+			if err := d.ReadString(schemas.GetDbClusterOutput_engineType, &ev); err != nil {
+				return err
+			}
+			v.EngineType = types.EngineType(ev)
+			return nil
+		case schemas.GetDbClusterOutput_failoverMode:
+			var ev string
+			if err := d.ReadString(schemas.GetDbClusterOutput_failoverMode, &ev); err != nil {
+				return err
+			}
+			v.FailoverMode = types.FailoverMode(ev)
+			return nil
+		case schemas.GetDbClusterOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetDbClusterOutput_id, v.Id)
+		case schemas.GetDbClusterOutput_influxAuthParametersSecretArn:
+			v.InfluxAuthParametersSecretArn = new(string)
+			return d.ReadString(schemas.GetDbClusterOutput_influxAuthParametersSecretArn, v.InfluxAuthParametersSecretArn)
+		case schemas.GetDbClusterOutput_lastMaintenanceTime:
+			v.LastMaintenanceTime = new(time.Time)
+			return d.ReadTime(schemas.GetDbClusterOutput_lastMaintenanceTime, v.LastMaintenanceTime)
+		case schemas.GetDbClusterOutput_logDeliveryConfiguration:
+			v.LogDeliveryConfiguration = &types.LogDeliveryConfiguration{}
+			return v.LogDeliveryConfiguration.Deserialize(d)
+		case schemas.GetDbClusterOutput_maintenanceSchedule:
+			v.MaintenanceSchedule = &types.MaintenanceSchedule{}
+			return v.MaintenanceSchedule.Deserialize(d)
+		case schemas.GetDbClusterOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDbClusterOutput_name, v.Name)
+		case schemas.GetDbClusterOutput_networkType:
+			var ev string
+			if err := d.ReadString(schemas.GetDbClusterOutput_networkType, &ev); err != nil {
+				return err
+			}
+			v.NetworkType = types.NetworkType(ev)
+			return nil
+		case schemas.GetDbClusterOutput_nextMaintenanceTime:
+			v.NextMaintenanceTime = new(time.Time)
+			return d.ReadTime(schemas.GetDbClusterOutput_nextMaintenanceTime, v.NextMaintenanceTime)
+		case schemas.GetDbClusterOutput_port:
+			v.Port = new(int32)
+			return d.ReadInt32(schemas.GetDbClusterOutput_port, v.Port)
+		case schemas.GetDbClusterOutput_publiclyAccessible:
+			v.PubliclyAccessible = new(bool)
+			return d.ReadBool(schemas.GetDbClusterOutput_publiclyAccessible, v.PubliclyAccessible)
+		case schemas.GetDbClusterOutput_readerEndpoint:
+			v.ReaderEndpoint = new(string)
+			return d.ReadString(schemas.GetDbClusterOutput_readerEndpoint, v.ReaderEndpoint)
+		case schemas.GetDbClusterOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetDbClusterOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ClusterStatus(ev)
+			return nil
+		case schemas.GetDbClusterOutput_vpcSecurityGroupIds:
+			return deserializeVpcSecurityGroupIdList(d, schemas.GetDbClusterOutput_vpcSecurityGroupIds, &v.VpcSecurityGroupIds)
+		case schemas.GetDbClusterOutput_vpcSubnetIds:
+			return deserializeVpcSubnetIdList(d, schemas.GetDbClusterOutput_vpcSubnetIds, &v.VpcSubnetIds)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDbClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetDbCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDbCluster, schemas.GetDbClusterInput, schemas.GetDbClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetDbCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDbCluster, schemas.GetDbClusterInput, schemas.GetDbClusterOutput), output: &GetDbClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDbCluster"); err != nil {

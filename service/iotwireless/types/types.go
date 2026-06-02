@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -22,6 +24,42 @@ type AbpV1_0_x struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AbpV1_0_x) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AbpV1_0_x)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AbpV1_0_x) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DevAddr != nil {
+		s.WriteString(schemas.AbpV1_0_x_DevAddr, *v.DevAddr)
+	}
+	if v.FCntStart != nil {
+		s.WriteInt32(schemas.AbpV1_0_x_FCntStart, *v.FCntStart)
+	}
+	if v.SessionKeys != nil {
+		s.WriteStruct(schemas.AbpV1_0_x_SessionKeys)
+		v.SessionKeys.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AbpV1_0_x) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AbpV1_0_x, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AbpV1_0_x_DevAddr:
+			v.DevAddr = new(string)
+			return d.ReadString(schemas.AbpV1_0_x_DevAddr, v.DevAddr)
+		case schemas.AbpV1_0_x_FCntStart:
+			v.FCntStart = new(int32)
+			return d.ReadInt32(schemas.AbpV1_0_x_FCntStart, v.FCntStart)
+		case schemas.AbpV1_0_x_SessionKeys:
+			v.SessionKeys = &SessionKeysAbpV1_0_x{}
+			return v.SessionKeys.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // ABP device object for LoRaWAN specification v1.1
 type AbpV1_1 struct {
 
@@ -35,6 +73,42 @@ type AbpV1_1 struct {
 	SessionKeys *SessionKeysAbpV1_1
 
 	noSmithyDocumentSerde
+}
+
+func (v *AbpV1_1) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AbpV1_1)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AbpV1_1) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DevAddr != nil {
+		s.WriteString(schemas.AbpV1_1_DevAddr, *v.DevAddr)
+	}
+	if v.FCntStart != nil {
+		s.WriteInt32(schemas.AbpV1_1_FCntStart, *v.FCntStart)
+	}
+	if v.SessionKeys != nil {
+		s.WriteStruct(schemas.AbpV1_1_SessionKeys)
+		v.SessionKeys.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AbpV1_1) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AbpV1_1, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AbpV1_1_DevAddr:
+			v.DevAddr = new(string)
+			return d.ReadString(schemas.AbpV1_1_DevAddr, v.DevAddr)
+		case schemas.AbpV1_1_FCntStart:
+			v.FCntStart = new(int32)
+			return d.ReadInt32(schemas.AbpV1_1_FCntStart, v.FCntStart)
+		case schemas.AbpV1_1_SessionKeys:
+			v.SessionKeys = &SessionKeysAbpV1_1{}
+			return v.SessionKeys.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The accuracy of the estimated position in meters. An empty value indicates that
@@ -54,6 +128,34 @@ type Accuracy struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Accuracy) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Accuracy)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Accuracy) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HorizontalAccuracy != nil {
+		s.WriteFloat32(schemas.Accuracy_HorizontalAccuracy, *v.HorizontalAccuracy)
+	}
+	if v.VerticalAccuracy != nil {
+		s.WriteFloat32(schemas.Accuracy_VerticalAccuracy, *v.VerticalAccuracy)
+	}
+}
+func (v *Accuracy) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Accuracy, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Accuracy_HorizontalAccuracy:
+			v.HorizontalAccuracy = new(float32)
+			return d.ReadFloat32(schemas.Accuracy_HorizontalAccuracy, v.HorizontalAccuracy)
+		case schemas.Accuracy_VerticalAccuracy:
+			v.VerticalAccuracy = new(float32)
+			return d.ReadFloat32(schemas.Accuracy_VerticalAccuracy, v.VerticalAccuracy)
+		}
+		return nil
+	})
+}
+
 // Optional configuration to customize location estimates.
 type AdvancedConfiguration struct {
 
@@ -61,6 +163,30 @@ type AdvancedConfiguration struct {
 	WiFiCellular *WiFiCellular
 
 	noSmithyDocumentSerde
+}
+
+func (v *AdvancedConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AdvancedConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AdvancedConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WiFiCellular != nil {
+		s.WriteStruct(schemas.AdvancedConfiguration_WiFiCellular)
+		v.WiFiCellular.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AdvancedConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AdvancedConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AdvancedConfiguration_WiFiCellular:
+			v.WiFiCellular = &WiFiCellular{}
+			return v.WiFiCellular.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // LoRaWAN application configuration, which can be used to perform geolocation.
@@ -80,6 +206,44 @@ type ApplicationConfig struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ApplicationConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ApplicationConfig)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ApplicationConfig) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationName != nil {
+		s.WriteString(schemas.ApplicationConfig_DestinationName, *v.DestinationName)
+	}
+	if v.FPort != nil {
+		s.WriteInt32(schemas.ApplicationConfig_FPort, *v.FPort)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ApplicationConfig_Type, string(v.Type))
+	}
+}
+func (v *ApplicationConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ApplicationConfig, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ApplicationConfig_DestinationName:
+			v.DestinationName = new(string)
+			return d.ReadString(schemas.ApplicationConfig_DestinationName, v.DestinationName)
+		case schemas.ApplicationConfig_FPort:
+			v.FPort = new(int32)
+			return d.ReadInt32(schemas.ApplicationConfig_FPort, v.FPort)
+		case schemas.ApplicationConfig_Type:
+			var ev string
+			if err := d.ReadString(schemas.ApplicationConfig_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ApplicationConfigType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Beaconing parameters for configuring the wireless gateways.
 type Beaconing struct {
 
@@ -90,6 +254,31 @@ type Beaconing struct {
 	Frequencies []int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *Beaconing) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Beaconing)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Beaconing) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataRate != nil {
+		s.WriteInt32(schemas.Beaconing_DataRate, *v.DataRate)
+	}
+	serializeBeaconingFrequencies(s, schemas.Beaconing_Frequencies, v.Frequencies)
+}
+func (v *Beaconing) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Beaconing, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Beaconing_DataRate:
+			v.DataRate = new(int32)
+			return d.ReadInt32(schemas.Beaconing_DataRate, v.DataRate)
+		case schemas.Beaconing_Frequencies:
+			return deserializeBeaconingFrequencies(d, schemas.Beaconing_Frequencies, &v.Frequencies)
+		}
+		return nil
+	})
 }
 
 // CDMA local ID information, which corresponds to the local identification
@@ -108,6 +297,34 @@ type CdmaLocalId struct {
 	PnOffset *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CdmaLocalId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CdmaLocalId)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CdmaLocalId) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CdmaChannel != nil {
+		s.WriteInt32(schemas.CdmaLocalId_CdmaChannel, *v.CdmaChannel)
+	}
+	if v.PnOffset != nil {
+		s.WriteInt32(schemas.CdmaLocalId_PnOffset, *v.PnOffset)
+	}
+}
+func (v *CdmaLocalId) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CdmaLocalId, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CdmaLocalId_CdmaChannel:
+			v.CdmaChannel = new(int32)
+			return d.ReadInt32(schemas.CdmaLocalId_CdmaChannel, v.CdmaChannel)
+		case schemas.CdmaLocalId_PnOffset:
+			v.PnOffset = new(int32)
+			return d.ReadInt32(schemas.CdmaLocalId_PnOffset, v.PnOffset)
+		}
+		return nil
+	})
 }
 
 // CDMA object for network measurement reports.
@@ -131,6 +348,46 @@ type CdmaNmrObj struct {
 	PilotPower *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *CdmaNmrObj) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CdmaNmrObj)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CdmaNmrObj) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseStationId != nil {
+		s.WriteInt32(schemas.CdmaNmrObj_BaseStationId, *v.BaseStationId)
+	}
+	if v.CdmaChannel != nil {
+		s.WriteInt32(schemas.CdmaNmrObj_CdmaChannel, *v.CdmaChannel)
+	}
+	if v.PilotPower != nil {
+		s.WriteInt32(schemas.CdmaNmrObj_PilotPower, *v.PilotPower)
+	}
+	if v.PnOffset != nil {
+		s.WriteInt32(schemas.CdmaNmrObj_PnOffset, *v.PnOffset)
+	}
+}
+func (v *CdmaNmrObj) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CdmaNmrObj, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CdmaNmrObj_BaseStationId:
+			v.BaseStationId = new(int32)
+			return d.ReadInt32(schemas.CdmaNmrObj_BaseStationId, v.BaseStationId)
+		case schemas.CdmaNmrObj_CdmaChannel:
+			v.CdmaChannel = new(int32)
+			return d.ReadInt32(schemas.CdmaNmrObj_CdmaChannel, v.CdmaChannel)
+		case schemas.CdmaNmrObj_PilotPower:
+			v.PilotPower = new(int32)
+			return d.ReadInt32(schemas.CdmaNmrObj_PilotPower, v.PilotPower)
+		case schemas.CdmaNmrObj_PnOffset:
+			v.PnOffset = new(int32)
+			return d.ReadInt32(schemas.CdmaNmrObj_PnOffset, v.PnOffset)
+		}
+		return nil
+	})
 }
 
 // CDMA (Code-division multiple access) object.
@@ -172,6 +429,75 @@ type CdmaObj struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CdmaObj) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CdmaObj)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CdmaObj) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BaseLat != nil {
+		s.WriteFloat32(schemas.CdmaObj_BaseLat, *v.BaseLat)
+	}
+	if v.BaseLng != nil {
+		s.WriteFloat32(schemas.CdmaObj_BaseLng, *v.BaseLng)
+	}
+	if v.BaseStationId != nil {
+		s.WriteInt32(schemas.CdmaObj_BaseStationId, *v.BaseStationId)
+	}
+	if v.CdmaLocalId != nil {
+		s.WriteStruct(schemas.CdmaObj_CdmaLocalId)
+		v.CdmaLocalId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeCdmaNmrList(s, schemas.CdmaObj_CdmaNmr, v.CdmaNmr)
+	if v.NetworkId != nil {
+		s.WriteInt32(schemas.CdmaObj_NetworkId, *v.NetworkId)
+	}
+	if v.PilotPower != nil {
+		s.WriteInt32(schemas.CdmaObj_PilotPower, *v.PilotPower)
+	}
+	if v.RegistrationZone != nil {
+		s.WriteInt32(schemas.CdmaObj_RegistrationZone, *v.RegistrationZone)
+	}
+	if v.SystemId != nil {
+		s.WriteInt32(schemas.CdmaObj_SystemId, *v.SystemId)
+	}
+}
+func (v *CdmaObj) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CdmaObj, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CdmaObj_BaseLat:
+			v.BaseLat = new(float32)
+			return d.ReadFloat32(schemas.CdmaObj_BaseLat, v.BaseLat)
+		case schemas.CdmaObj_BaseLng:
+			v.BaseLng = new(float32)
+			return d.ReadFloat32(schemas.CdmaObj_BaseLng, v.BaseLng)
+		case schemas.CdmaObj_BaseStationId:
+			v.BaseStationId = new(int32)
+			return d.ReadInt32(schemas.CdmaObj_BaseStationId, v.BaseStationId)
+		case schemas.CdmaObj_CdmaLocalId:
+			v.CdmaLocalId = &CdmaLocalId{}
+			return v.CdmaLocalId.Deserialize(d)
+		case schemas.CdmaObj_CdmaNmr:
+			return deserializeCdmaNmrList(d, schemas.CdmaObj_CdmaNmr, &v.CdmaNmr)
+		case schemas.CdmaObj_NetworkId:
+			v.NetworkId = new(int32)
+			return d.ReadInt32(schemas.CdmaObj_NetworkId, v.NetworkId)
+		case schemas.CdmaObj_PilotPower:
+			v.PilotPower = new(int32)
+			return d.ReadInt32(schemas.CdmaObj_PilotPower, v.PilotPower)
+		case schemas.CdmaObj_RegistrationZone:
+			v.RegistrationZone = new(int32)
+			return d.ReadInt32(schemas.CdmaObj_RegistrationZone, v.RegistrationZone)
+		case schemas.CdmaObj_SystemId:
+			v.SystemId = new(int32)
+			return d.ReadInt32(schemas.CdmaObj_SystemId, v.SystemId)
+		}
+		return nil
+	})
+}
+
 // The cell towers that were used to perform the measurements.
 type CellTowers struct {
 
@@ -193,6 +519,37 @@ type CellTowers struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CellTowers) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CellTowers)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CellTowers) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeCdmaList(s, schemas.CellTowers_Cdma, v.Cdma)
+	serializeGsmList(s, schemas.CellTowers_Gsm, v.Gsm)
+	serializeLteList(s, schemas.CellTowers_Lte, v.Lte)
+	serializeTdscdmaList(s, schemas.CellTowers_Tdscdma, v.Tdscdma)
+	serializeWcdmaList(s, schemas.CellTowers_Wcdma, v.Wcdma)
+}
+func (v *CellTowers) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CellTowers, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CellTowers_Cdma:
+			return deserializeCdmaList(d, schemas.CellTowers_Cdma, &v.Cdma)
+		case schemas.CellTowers_Gsm:
+			return deserializeGsmList(d, schemas.CellTowers_Gsm, &v.Gsm)
+		case schemas.CellTowers_Lte:
+			return deserializeLteList(d, schemas.CellTowers_Lte, &v.Lte)
+		case schemas.CellTowers_Tdscdma:
+			return deserializeTdscdmaList(d, schemas.CellTowers_Tdscdma, &v.Tdscdma)
+		case schemas.CellTowers_Wcdma:
+			return deserializeWcdmaList(d, schemas.CellTowers_Wcdma, &v.Wcdma)
+		}
+		return nil
+	})
+}
+
 // List of sidewalk certificates.
 type CertificateList struct {
 
@@ -209,6 +566,38 @@ type CertificateList struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CertificateList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CertificateList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CertificateList) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SigningAlg != "" {
+		s.WriteString(schemas.CertificateList_SigningAlg, string(v.SigningAlg))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.CertificateList_Value, *v.Value)
+	}
+}
+func (v *CertificateList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CertificateList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CertificateList_SigningAlg:
+			var ev string
+			if err := d.ReadString(schemas.CertificateList_SigningAlg, &ev); err != nil {
+				return err
+			}
+			v.SigningAlg = SigningAlg(ev)
+			return nil
+		case schemas.CertificateList_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.CertificateList_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Connection status event configuration object for enabling or disabling topic.
 type ConnectionStatusEventConfiguration struct {
 
@@ -223,6 +612,40 @@ type ConnectionStatusEventConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ConnectionStatusEventConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionStatusEventConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionStatusEventConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.ConnectionStatusEventConfiguration_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WirelessGatewayIdEventTopic != "" {
+		s.WriteString(schemas.ConnectionStatusEventConfiguration_WirelessGatewayIdEventTopic, string(v.WirelessGatewayIdEventTopic))
+	}
+}
+func (v *ConnectionStatusEventConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionStatusEventConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionStatusEventConfiguration_LoRaWAN:
+			v.LoRaWAN = &LoRaWANConnectionStatusEventNotificationConfigurations{}
+			return v.LoRaWAN.Deserialize(d)
+		case schemas.ConnectionStatusEventConfiguration_WirelessGatewayIdEventTopic:
+			var ev string
+			if err := d.ReadString(schemas.ConnectionStatusEventConfiguration_WirelessGatewayIdEventTopic, &ev); err != nil {
+				return err
+			}
+			v.WirelessGatewayIdEventTopic = EventNotificationTopicStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Connection status resource type event configuration object for enabling or
 // disabling topic.
 type ConnectionStatusResourceTypeEventConfiguration struct {
@@ -232,6 +655,30 @@ type ConnectionStatusResourceTypeEventConfiguration struct {
 	LoRaWAN *LoRaWANConnectionStatusResourceTypeEventConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *ConnectionStatusResourceTypeEventConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ConnectionStatusResourceTypeEventConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ConnectionStatusResourceTypeEventConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.ConnectionStatusResourceTypeEventConfiguration_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ConnectionStatusResourceTypeEventConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConnectionStatusResourceTypeEventConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConnectionStatusResourceTypeEventConfiguration_LoRaWAN:
+			v.LoRaWAN = &LoRaWANConnectionStatusResourceTypeEventConfiguration{}
+			return v.LoRaWAN.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The device attestation key (DAK) information.
@@ -259,6 +706,52 @@ type DakCertificateMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DakCertificateMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DakCertificateMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DakCertificateMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApId != nil {
+		s.WriteString(schemas.DakCertificateMetadata_ApId, *v.ApId)
+	}
+	if v.CertificateId != nil {
+		s.WriteString(schemas.DakCertificateMetadata_CertificateId, *v.CertificateId)
+	}
+	if v.DeviceTypeId != nil {
+		s.WriteString(schemas.DakCertificateMetadata_DeviceTypeId, *v.DeviceTypeId)
+	}
+	if v.FactorySupport != nil {
+		s.WriteBool(schemas.DakCertificateMetadata_FactorySupport, *v.FactorySupport)
+	}
+	if v.MaxAllowedSignature != nil {
+		s.WriteInt32(schemas.DakCertificateMetadata_MaxAllowedSignature, *v.MaxAllowedSignature)
+	}
+}
+func (v *DakCertificateMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DakCertificateMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DakCertificateMetadata_ApId:
+			v.ApId = new(string)
+			return d.ReadString(schemas.DakCertificateMetadata_ApId, v.ApId)
+		case schemas.DakCertificateMetadata_CertificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.DakCertificateMetadata_CertificateId, v.CertificateId)
+		case schemas.DakCertificateMetadata_DeviceTypeId:
+			v.DeviceTypeId = new(string)
+			return d.ReadString(schemas.DakCertificateMetadata_DeviceTypeId, v.DeviceTypeId)
+		case schemas.DakCertificateMetadata_FactorySupport:
+			v.FactorySupport = new(bool)
+			return d.ReadBool(schemas.DakCertificateMetadata_FactorySupport, v.FactorySupport)
+		case schemas.DakCertificateMetadata_MaxAllowedSignature:
+			v.MaxAllowedSignature = new(int32)
+			return d.ReadInt32(schemas.DakCertificateMetadata_MaxAllowedSignature, v.MaxAllowedSignature)
+		}
+		return nil
+	})
+}
+
 // Describes a destination.
 type Destinations struct {
 
@@ -283,6 +776,62 @@ type Destinations struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Destinations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Destinations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Destinations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.Destinations_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.Destinations_Description, *v.Description)
+	}
+	if v.Expression != nil {
+		s.WriteString(schemas.Destinations_Expression, *v.Expression)
+	}
+	if v.ExpressionType != "" {
+		s.WriteString(schemas.Destinations_ExpressionType, string(v.ExpressionType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Destinations_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.Destinations_RoleArn, *v.RoleArn)
+	}
+}
+func (v *Destinations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Destinations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Destinations_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Destinations_Arn, v.Arn)
+		case schemas.Destinations_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.Destinations_Description, v.Description)
+		case schemas.Destinations_Expression:
+			v.Expression = new(string)
+			return d.ReadString(schemas.Destinations_Expression, v.Expression)
+		case schemas.Destinations_ExpressionType:
+			var ev string
+			if err := d.ReadString(schemas.Destinations_ExpressionType, &ev); err != nil {
+				return err
+			}
+			v.ExpressionType = ExpressionType(ev)
+			return nil
+		case schemas.Destinations_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Destinations_Name, v.Name)
+		case schemas.Destinations_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.Destinations_RoleArn, v.RoleArn)
+		}
+		return nil
+	})
+}
+
 // Describes a device profile.
 type DeviceProfile struct {
 
@@ -296,6 +845,40 @@ type DeviceProfile struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeviceProfile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeviceProfile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeviceProfile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeviceProfile_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DeviceProfile_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DeviceProfile_Name, *v.Name)
+	}
+}
+func (v *DeviceProfile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeviceProfile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeviceProfile_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeviceProfile_Arn, v.Arn)
+		case schemas.DeviceProfile_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeviceProfile_Id, v.Id)
+		case schemas.DeviceProfile_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeviceProfile_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Device registration state event configuration object for enabling and disabling
@@ -313,6 +896,40 @@ type DeviceRegistrationStateEventConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeviceRegistrationStateEventConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeviceRegistrationStateEventConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeviceRegistrationStateEventConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.DeviceRegistrationStateEventConfiguration_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WirelessDeviceIdEventTopic != "" {
+		s.WriteString(schemas.DeviceRegistrationStateEventConfiguration_WirelessDeviceIdEventTopic, string(v.WirelessDeviceIdEventTopic))
+	}
+}
+func (v *DeviceRegistrationStateEventConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeviceRegistrationStateEventConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeviceRegistrationStateEventConfiguration_Sidewalk:
+			v.Sidewalk = &SidewalkEventNotificationConfigurations{}
+			return v.Sidewalk.Deserialize(d)
+		case schemas.DeviceRegistrationStateEventConfiguration_WirelessDeviceIdEventTopic:
+			var ev string
+			if err := d.ReadString(schemas.DeviceRegistrationStateEventConfiguration_WirelessDeviceIdEventTopic, &ev); err != nil {
+				return err
+			}
+			v.WirelessDeviceIdEventTopic = EventNotificationTopicStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Device registration state resource type event configuration object for enabling
 // or disabling topic.
 type DeviceRegistrationStateResourceTypeEventConfiguration struct {
@@ -322,6 +939,30 @@ type DeviceRegistrationStateResourceTypeEventConfiguration struct {
 	Sidewalk *SidewalkResourceTypeEventConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeviceRegistrationStateResourceTypeEventConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeviceRegistrationStateResourceTypeEventConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeviceRegistrationStateResourceTypeEventConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.DeviceRegistrationStateResourceTypeEventConfiguration_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DeviceRegistrationStateResourceTypeEventConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeviceRegistrationStateResourceTypeEventConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeviceRegistrationStateResourceTypeEventConfiguration_Sidewalk:
+			v.Sidewalk = &SidewalkResourceTypeEventConfiguration{}
+			return v.Sidewalk.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The required list of dimensions for the metric.
@@ -334,6 +975,38 @@ type Dimension struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Dimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Dimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Dimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != "" {
+		s.WriteString(schemas.Dimension_name, string(v.Name))
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Dimension_value, *v.Value)
+	}
+}
+func (v *Dimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Dimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Dimension_name:
+			var ev string
+			if err := d.ReadString(schemas.Dimension_name, &ev); err != nil {
+				return err
+			}
+			v.Name = DimensionName(ev)
+			return nil
+		case schemas.Dimension_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Dimension_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // The message in the downlink queue.
@@ -356,6 +1029,48 @@ type DownlinkQueueMessage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DownlinkQueueMessage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DownlinkQueueMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DownlinkQueueMessage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.DownlinkQueueMessage_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MessageId != nil {
+		s.WriteString(schemas.DownlinkQueueMessage_MessageId, *v.MessageId)
+	}
+	if v.ReceivedAt != nil {
+		s.WriteString(schemas.DownlinkQueueMessage_ReceivedAt, *v.ReceivedAt)
+	}
+	if v.TransmitMode != nil {
+		s.WriteInt32(schemas.DownlinkQueueMessage_TransmitMode, *v.TransmitMode)
+	}
+}
+func (v *DownlinkQueueMessage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DownlinkQueueMessage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DownlinkQueueMessage_LoRaWAN:
+			v.LoRaWAN = &LoRaWANSendDataToDevice{}
+			return v.LoRaWAN.Deserialize(d)
+		case schemas.DownlinkQueueMessage_MessageId:
+			v.MessageId = new(string)
+			return d.ReadString(schemas.DownlinkQueueMessage_MessageId, v.MessageId)
+		case schemas.DownlinkQueueMessage_ReceivedAt:
+			v.ReceivedAt = new(string)
+			return d.ReadString(schemas.DownlinkQueueMessage_ReceivedAt, v.ReceivedAt)
+		case schemas.DownlinkQueueMessage_TransmitMode:
+			v.TransmitMode = new(int32)
+			return d.ReadInt32(schemas.DownlinkQueueMessage_TransmitMode, v.TransmitMode)
+		}
+		return nil
+	})
+}
+
 // Event configuration object for a single resource.
 type EventConfigurationItem struct {
 
@@ -372,6 +1087,56 @@ type EventConfigurationItem struct {
 	PartnerType EventNotificationPartnerType
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventConfigurationItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventConfigurationItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Events != nil {
+		s.WriteStruct(schemas.EventConfigurationItem_Events)
+		v.Events.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.EventConfigurationItem_Identifier, *v.Identifier)
+	}
+	if v.IdentifierType != "" {
+		s.WriteString(schemas.EventConfigurationItem_IdentifierType, string(v.IdentifierType))
+	}
+	if v.PartnerType != "" {
+		s.WriteString(schemas.EventConfigurationItem_PartnerType, string(v.PartnerType))
+	}
+}
+func (v *EventConfigurationItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventConfigurationItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventConfigurationItem_Events:
+			v.Events = &EventNotificationItemConfigurations{}
+			return v.Events.Deserialize(d)
+		case schemas.EventConfigurationItem_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.EventConfigurationItem_Identifier, v.Identifier)
+		case schemas.EventConfigurationItem_IdentifierType:
+			var ev string
+			if err := d.ReadString(schemas.EventConfigurationItem_IdentifierType, &ev); err != nil {
+				return err
+			}
+			v.IdentifierType = IdentifierType(ev)
+			return nil
+		case schemas.EventConfigurationItem_PartnerType:
+			var ev string
+			if err := d.ReadString(schemas.EventConfigurationItem_PartnerType, &ev); err != nil {
+				return err
+			}
+			v.PartnerType = EventNotificationPartnerType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Object of all event configurations and the status of the event topics.
@@ -393,6 +1158,62 @@ type EventNotificationItemConfigurations struct {
 	Proximity *ProximityEventConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *EventNotificationItemConfigurations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.EventNotificationItemConfigurations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *EventNotificationItemConfigurations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConnectionStatus != nil {
+		s.WriteStruct(schemas.EventNotificationItemConfigurations_ConnectionStatus)
+		v.ConnectionStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceRegistrationState != nil {
+		s.WriteStruct(schemas.EventNotificationItemConfigurations_DeviceRegistrationState)
+		v.DeviceRegistrationState.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Join != nil {
+		s.WriteStruct(schemas.EventNotificationItemConfigurations_Join)
+		v.Join.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MessageDeliveryStatus != nil {
+		s.WriteStruct(schemas.EventNotificationItemConfigurations_MessageDeliveryStatus)
+		v.MessageDeliveryStatus.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Proximity != nil {
+		s.WriteStruct(schemas.EventNotificationItemConfigurations_Proximity)
+		v.Proximity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *EventNotificationItemConfigurations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.EventNotificationItemConfigurations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.EventNotificationItemConfigurations_ConnectionStatus:
+			v.ConnectionStatus = &ConnectionStatusEventConfiguration{}
+			return v.ConnectionStatus.Deserialize(d)
+		case schemas.EventNotificationItemConfigurations_DeviceRegistrationState:
+			v.DeviceRegistrationState = &DeviceRegistrationStateEventConfiguration{}
+			return v.DeviceRegistrationState.Deserialize(d)
+		case schemas.EventNotificationItemConfigurations_Join:
+			v.Join = &JoinEventConfiguration{}
+			return v.Join.Deserialize(d)
+		case schemas.EventNotificationItemConfigurations_MessageDeliveryStatus:
+			v.MessageDeliveryStatus = &MessageDeliveryStatusEventConfiguration{}
+			return v.MessageDeliveryStatus.Deserialize(d)
+		case schemas.EventNotificationItemConfigurations_Proximity:
+			v.Proximity = &ProximityEventConfiguration{}
+			return v.Proximity.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // List of FPort assigned for different LoRaWAN application packages to use
@@ -417,6 +1238,51 @@ type FPorts struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FPorts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FPorts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FPorts) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplications(s, schemas.FPorts_Applications, v.Applications)
+	if v.ClockSync != nil {
+		s.WriteInt32(schemas.FPorts_ClockSync, *v.ClockSync)
+	}
+	if v.Fuota != nil {
+		s.WriteInt32(schemas.FPorts_Fuota, *v.Fuota)
+	}
+	if v.Multicast != nil {
+		s.WriteInt32(schemas.FPorts_Multicast, *v.Multicast)
+	}
+	if v.Positioning != nil {
+		s.WriteStruct(schemas.FPorts_Positioning)
+		v.Positioning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *FPorts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FPorts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FPorts_Applications:
+			return deserializeApplications(d, schemas.FPorts_Applications, &v.Applications)
+		case schemas.FPorts_ClockSync:
+			v.ClockSync = new(int32)
+			return d.ReadInt32(schemas.FPorts_ClockSync, v.ClockSync)
+		case schemas.FPorts_Fuota:
+			v.Fuota = new(int32)
+			return d.ReadInt32(schemas.FPorts_Fuota, v.Fuota)
+		case schemas.FPorts_Multicast:
+			v.Multicast = new(int32)
+			return d.ReadInt32(schemas.FPorts_Multicast, v.Multicast)
+		case schemas.FPorts_Positioning:
+			v.Positioning = &Positioning{}
+			return v.Positioning.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A FUOTA task.
 type FuotaTask struct {
 
@@ -430,6 +1296,40 @@ type FuotaTask struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *FuotaTask) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FuotaTask)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FuotaTask) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.FuotaTask_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.FuotaTask_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FuotaTask_Name, *v.Name)
+	}
+}
+func (v *FuotaTask) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FuotaTask, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FuotaTask_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.FuotaTask_Arn, v.Arn)
+		case schemas.FuotaTask_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FuotaTask_Id, v.Id)
+		case schemas.FuotaTask_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FuotaTask_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // The log options for a FUOTA task event and can be used to set log levels for a
@@ -451,6 +1351,42 @@ type FuotaTaskEventLogOption struct {
 	LogLevel LogLevel
 
 	noSmithyDocumentSerde
+}
+
+func (v *FuotaTaskEventLogOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FuotaTaskEventLogOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FuotaTaskEventLogOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Event != "" {
+		s.WriteString(schemas.FuotaTaskEventLogOption_Event, string(v.Event))
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.FuotaTaskEventLogOption_LogLevel, string(v.LogLevel))
+	}
+}
+func (v *FuotaTaskEventLogOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FuotaTaskEventLogOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FuotaTaskEventLogOption_Event:
+			var ev string
+			if err := d.ReadString(schemas.FuotaTaskEventLogOption_Event, &ev); err != nil {
+				return err
+			}
+			v.Event = FuotaTaskEvent(ev)
+			return nil
+		case schemas.FuotaTaskEventLogOption_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.FuotaTaskEventLogOption_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LogLevel(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The log options for FUOTA tasks and can be used to set log levels for a
@@ -475,6 +1411,45 @@ type FuotaTaskLogOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FuotaTaskLogOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FuotaTaskLogOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FuotaTaskLogOption) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeFuotaTaskEventLogOptionList(s, schemas.FuotaTaskLogOption_Events, v.Events)
+	if v.LogLevel != "" {
+		s.WriteString(schemas.FuotaTaskLogOption_LogLevel, string(v.LogLevel))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.FuotaTaskLogOption_Type, string(v.Type))
+	}
+}
+func (v *FuotaTaskLogOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FuotaTaskLogOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FuotaTaskLogOption_Events:
+			return deserializeFuotaTaskEventLogOptionList(d, schemas.FuotaTaskLogOption_Events, &v.Events)
+		case schemas.FuotaTaskLogOption_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.FuotaTaskLogOption_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LogLevel(ev)
+			return nil
+		case schemas.FuotaTaskLogOption_Type:
+			var ev string
+			if err := d.ReadString(schemas.FuotaTaskLogOption_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = FuotaTaskType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Gateway list item object that specifies the frequency and list of gateways for
 // which the downlink message should be sent.
 type GatewayListItem struct {
@@ -494,6 +1469,34 @@ type GatewayListItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GatewayListItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GatewayListItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GatewayListItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DownlinkFrequency != nil {
+		s.WriteInt32(schemas.GatewayListItem_DownlinkFrequency, *v.DownlinkFrequency)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.GatewayListItem_GatewayId, *v.GatewayId)
+	}
+}
+func (v *GatewayListItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GatewayListItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GatewayListItem_DownlinkFrequency:
+			v.DownlinkFrequency = new(int32)
+			return d.ReadInt32(schemas.GatewayListItem_DownlinkFrequency, v.DownlinkFrequency)
+		case schemas.GatewayListItem_GatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.GatewayListItem_GatewayId, v.GatewayId)
+		}
+		return nil
+	})
+}
+
 // Global identity information.
 type GlobalIdentity struct {
 
@@ -508,6 +1511,34 @@ type GlobalIdentity struct {
 	Lac *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *GlobalIdentity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GlobalIdentity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GlobalIdentity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GeranCid != nil {
+		s.WriteInt32(schemas.GlobalIdentity_GeranCid, *v.GeranCid)
+	}
+	if v.Lac != nil {
+		s.WriteInt32(schemas.GlobalIdentity_Lac, *v.Lac)
+	}
+}
+func (v *GlobalIdentity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GlobalIdentity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GlobalIdentity_GeranCid:
+			v.GeranCid = new(int32)
+			return d.ReadInt32(schemas.GlobalIdentity_GeranCid, v.GeranCid)
+		case schemas.GlobalIdentity_Lac:
+			v.Lac = new(int32)
+			return d.ReadInt32(schemas.GlobalIdentity_Lac, v.Lac)
+		}
+		return nil
+	})
 }
 
 // Global navigation satellite system (GNSS) object used for positioning.
@@ -545,6 +1576,54 @@ type Gnss struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Gnss) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Gnss)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Gnss) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistAltitude != nil {
+		s.WriteFloat32(schemas.Gnss_AssistAltitude, *v.AssistAltitude)
+	}
+	serializeAssistPosition(s, schemas.Gnss_AssistPosition, v.AssistPosition)
+	if v.CaptureTime != nil {
+		s.WriteFloat32(schemas.Gnss_CaptureTime, *v.CaptureTime)
+	}
+	if v.CaptureTimeAccuracy != nil {
+		s.WriteFloat32(schemas.Gnss_CaptureTimeAccuracy, *v.CaptureTimeAccuracy)
+	}
+	if v.Payload != nil {
+		s.WriteString(schemas.Gnss_Payload, *v.Payload)
+	}
+	if v.Use2DSolver != false {
+		s.WriteBool(schemas.Gnss_Use2DSolver, v.Use2DSolver)
+	}
+}
+func (v *Gnss) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Gnss, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Gnss_AssistAltitude:
+			v.AssistAltitude = new(float32)
+			return d.ReadFloat32(schemas.Gnss_AssistAltitude, v.AssistAltitude)
+		case schemas.Gnss_AssistPosition:
+			return deserializeAssistPosition(d, schemas.Gnss_AssistPosition, &v.AssistPosition)
+		case schemas.Gnss_CaptureTime:
+			v.CaptureTime = new(float32)
+			return d.ReadFloat32(schemas.Gnss_CaptureTime, v.CaptureTime)
+		case schemas.Gnss_CaptureTimeAccuracy:
+			v.CaptureTimeAccuracy = new(float32)
+			return d.ReadFloat32(schemas.Gnss_CaptureTimeAccuracy, v.CaptureTimeAccuracy)
+		case schemas.Gnss_Payload:
+			v.Payload = new(string)
+			return d.ReadString(schemas.Gnss_Payload, v.Payload)
+		case schemas.Gnss_Use2DSolver:
+			return d.ReadBool(schemas.Gnss_Use2DSolver, &v.Use2DSolver)
+		}
+		return nil
+	})
+}
+
 // GSM local ID information, which corresponds to the local identification
 // parameters of a GSM cell.
 type GsmLocalId struct {
@@ -560,6 +1639,34 @@ type GsmLocalId struct {
 	Bsic *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *GsmLocalId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GsmLocalId)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GsmLocalId) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bcch != nil {
+		s.WriteInt32(schemas.GsmLocalId_Bcch, *v.Bcch)
+	}
+	if v.Bsic != nil {
+		s.WriteInt32(schemas.GsmLocalId_Bsic, *v.Bsic)
+	}
+}
+func (v *GsmLocalId) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GsmLocalId, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GsmLocalId_Bcch:
+			v.Bcch = new(int32)
+			return d.ReadInt32(schemas.GsmLocalId_Bcch, v.Bcch)
+		case schemas.GsmLocalId_Bsic:
+			v.Bsic = new(int32)
+			return d.ReadInt32(schemas.GsmLocalId_Bsic, v.Bsic)
+		}
+		return nil
+	})
 }
 
 // GSM object for network measurement reports.
@@ -583,6 +1690,48 @@ type GsmNmrObj struct {
 	RxLevel *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *GsmNmrObj) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GsmNmrObj)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GsmNmrObj) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Bcch != nil {
+		s.WriteInt32(schemas.GsmNmrObj_Bcch, *v.Bcch)
+	}
+	if v.Bsic != nil {
+		s.WriteInt32(schemas.GsmNmrObj_Bsic, *v.Bsic)
+	}
+	if v.GlobalIdentity != nil {
+		s.WriteStruct(schemas.GsmNmrObj_GlobalIdentity)
+		v.GlobalIdentity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RxLevel != nil {
+		s.WriteInt32(schemas.GsmNmrObj_RxLevel, *v.RxLevel)
+	}
+}
+func (v *GsmNmrObj) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GsmNmrObj, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GsmNmrObj_Bcch:
+			v.Bcch = new(int32)
+			return d.ReadInt32(schemas.GsmNmrObj_Bcch, v.Bcch)
+		case schemas.GsmNmrObj_Bsic:
+			v.Bsic = new(int32)
+			return d.ReadInt32(schemas.GsmNmrObj_Bsic, v.Bsic)
+		case schemas.GsmNmrObj_GlobalIdentity:
+			v.GlobalIdentity = &GlobalIdentity{}
+			return v.GlobalIdentity.Deserialize(d)
+		case schemas.GsmNmrObj_RxLevel:
+			v.RxLevel = new(int32)
+			return d.ReadInt32(schemas.GsmNmrObj_RxLevel, v.RxLevel)
+		}
+		return nil
+	})
 }
 
 // GSM object.
@@ -625,6 +1774,69 @@ type GsmObj struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GsmObj) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GsmObj)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GsmObj) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GeranCid != nil {
+		s.WriteInt32(schemas.GsmObj_GeranCid, *v.GeranCid)
+	}
+	if v.GsmLocalId != nil {
+		s.WriteStruct(schemas.GsmObj_GsmLocalId)
+		v.GsmLocalId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeGsmNmrList(s, schemas.GsmObj_GsmNmr, v.GsmNmr)
+	if v.GsmTimingAdvance != nil {
+		s.WriteInt32(schemas.GsmObj_GsmTimingAdvance, *v.GsmTimingAdvance)
+	}
+	if v.Lac != nil {
+		s.WriteInt32(schemas.GsmObj_Lac, *v.Lac)
+	}
+	if v.Mcc != nil {
+		s.WriteInt32(schemas.GsmObj_Mcc, *v.Mcc)
+	}
+	if v.Mnc != nil {
+		s.WriteInt32(schemas.GsmObj_Mnc, *v.Mnc)
+	}
+	if v.RxLevel != nil {
+		s.WriteInt32(schemas.GsmObj_RxLevel, *v.RxLevel)
+	}
+}
+func (v *GsmObj) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GsmObj, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GsmObj_GeranCid:
+			v.GeranCid = new(int32)
+			return d.ReadInt32(schemas.GsmObj_GeranCid, v.GeranCid)
+		case schemas.GsmObj_GsmLocalId:
+			v.GsmLocalId = &GsmLocalId{}
+			return v.GsmLocalId.Deserialize(d)
+		case schemas.GsmObj_GsmNmr:
+			return deserializeGsmNmrList(d, schemas.GsmObj_GsmNmr, &v.GsmNmr)
+		case schemas.GsmObj_GsmTimingAdvance:
+			v.GsmTimingAdvance = new(int32)
+			return d.ReadInt32(schemas.GsmObj_GsmTimingAdvance, v.GsmTimingAdvance)
+		case schemas.GsmObj_Lac:
+			v.Lac = new(int32)
+			return d.ReadInt32(schemas.GsmObj_Lac, v.Lac)
+		case schemas.GsmObj_Mcc:
+			v.Mcc = new(int32)
+			return d.ReadInt32(schemas.GsmObj_Mcc, v.Mcc)
+		case schemas.GsmObj_Mnc:
+			v.Mnc = new(int32)
+			return d.ReadInt32(schemas.GsmObj_Mnc, v.Mnc)
+		case schemas.GsmObj_RxLevel:
+			v.RxLevel = new(int32)
+			return d.ReadInt32(schemas.GsmObj_RxLevel, v.RxLevel)
+		}
+		return nil
+	})
+}
+
 // Information about a Sidewalk device that has been added to an import task.
 type ImportedSidewalkDevice struct {
 
@@ -643,6 +1855,50 @@ type ImportedSidewalkDevice struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ImportedSidewalkDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportedSidewalkDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportedSidewalkDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LastUpdateTime != nil {
+		s.WriteTime(schemas.ImportedSidewalkDevice_LastUpdateTime, *v.LastUpdateTime)
+	}
+	if v.OnboardingStatus != "" {
+		s.WriteString(schemas.ImportedSidewalkDevice_OnboardingStatus, string(v.OnboardingStatus))
+	}
+	if v.OnboardingStatusReason != nil {
+		s.WriteString(schemas.ImportedSidewalkDevice_OnboardingStatusReason, *v.OnboardingStatusReason)
+	}
+	if v.SidewalkManufacturingSn != nil {
+		s.WriteString(schemas.ImportedSidewalkDevice_SidewalkManufacturingSn, *v.SidewalkManufacturingSn)
+	}
+}
+func (v *ImportedSidewalkDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportedSidewalkDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportedSidewalkDevice_LastUpdateTime:
+			v.LastUpdateTime = new(time.Time)
+			return d.ReadTime(schemas.ImportedSidewalkDevice_LastUpdateTime, v.LastUpdateTime)
+		case schemas.ImportedSidewalkDevice_OnboardingStatus:
+			var ev string
+			if err := d.ReadString(schemas.ImportedSidewalkDevice_OnboardingStatus, &ev); err != nil {
+				return err
+			}
+			v.OnboardingStatus = OnboardStatus(ev)
+			return nil
+		case schemas.ImportedSidewalkDevice_OnboardingStatusReason:
+			v.OnboardingStatusReason = new(string)
+			return d.ReadString(schemas.ImportedSidewalkDevice_OnboardingStatusReason, v.OnboardingStatusReason)
+		case schemas.ImportedSidewalkDevice_SidewalkManufacturingSn:
+			v.SidewalkManufacturingSn = new(string)
+			return d.ReadString(schemas.ImportedSidewalkDevice_SidewalkManufacturingSn, v.SidewalkManufacturingSn)
+		}
+		return nil
+	})
+}
+
 // Information about a wireless device that has been added to an import task.
 type ImportedWirelessDevice struct {
 
@@ -651,6 +1907,30 @@ type ImportedWirelessDevice struct {
 	Sidewalk *ImportedSidewalkDevice
 
 	noSmithyDocumentSerde
+}
+
+func (v *ImportedWirelessDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ImportedWirelessDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ImportedWirelessDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.ImportedWirelessDevice_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ImportedWirelessDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ImportedWirelessDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ImportedWirelessDevice_Sidewalk:
+			v.Sidewalk = &ImportedSidewalkDevice{}
+			return v.Sidewalk.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // IP address used for resolving device location.
@@ -662,6 +1942,28 @@ type Ip struct {
 	IpAddress *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Ip) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Ip)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Ip) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IpAddress != nil {
+		s.WriteString(schemas.Ip_IpAddress, *v.IpAddress)
+	}
+}
+func (v *Ip) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Ip, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Ip_IpAddress:
+			v.IpAddress = new(string)
+			return d.ReadString(schemas.Ip_IpAddress, v.IpAddress)
+		}
+		return nil
+	})
 }
 
 // Join event configuration object for enabling or disabling topic.
@@ -677,6 +1979,40 @@ type JoinEventConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JoinEventConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JoinEventConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JoinEventConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.JoinEventConfiguration_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WirelessDeviceIdEventTopic != "" {
+		s.WriteString(schemas.JoinEventConfiguration_WirelessDeviceIdEventTopic, string(v.WirelessDeviceIdEventTopic))
+	}
+}
+func (v *JoinEventConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JoinEventConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JoinEventConfiguration_LoRaWAN:
+			v.LoRaWAN = &LoRaWANJoinEventNotificationConfigurations{}
+			return v.LoRaWAN.Deserialize(d)
+		case schemas.JoinEventConfiguration_WirelessDeviceIdEventTopic:
+			var ev string
+			if err := d.ReadString(schemas.JoinEventConfiguration_WirelessDeviceIdEventTopic, &ev); err != nil {
+				return err
+			}
+			v.WirelessDeviceIdEventTopic = EventNotificationTopicStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Join resource type event configuration object for enabling or disabling topic.
 type JoinResourceTypeEventConfiguration struct {
 
@@ -685,6 +2021,30 @@ type JoinResourceTypeEventConfiguration struct {
 	LoRaWAN *LoRaWANJoinResourceTypeEventConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *JoinResourceTypeEventConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JoinResourceTypeEventConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JoinResourceTypeEventConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.JoinResourceTypeEventConfiguration_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *JoinResourceTypeEventConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JoinResourceTypeEventConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JoinResourceTypeEventConfiguration_LoRaWAN:
+			v.LoRaWAN = &LoRaWANJoinResourceTypeEventConfiguration{}
+			return v.LoRaWAN.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Object for LoRaWAN connection status resource type event configuration.
@@ -697,6 +2057,32 @@ type LoRaWANConnectionStatusEventNotificationConfigurations struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoRaWANConnectionStatusEventNotificationConfigurations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANConnectionStatusEventNotificationConfigurations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANConnectionStatusEventNotificationConfigurations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayEuiEventTopic != "" {
+		s.WriteString(schemas.LoRaWANConnectionStatusEventNotificationConfigurations_GatewayEuiEventTopic, string(v.GatewayEuiEventTopic))
+	}
+}
+func (v *LoRaWANConnectionStatusEventNotificationConfigurations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANConnectionStatusEventNotificationConfigurations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANConnectionStatusEventNotificationConfigurations_GatewayEuiEventTopic:
+			var ev string
+			if err := d.ReadString(schemas.LoRaWANConnectionStatusEventNotificationConfigurations_GatewayEuiEventTopic, &ev); err != nil {
+				return err
+			}
+			v.GatewayEuiEventTopic = EventNotificationTopicStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Object for LoRaWAN connection status resource type event configuration.
 type LoRaWANConnectionStatusResourceTypeEventConfiguration struct {
 
@@ -705,6 +2091,32 @@ type LoRaWANConnectionStatusResourceTypeEventConfiguration struct {
 	WirelessGatewayEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoRaWANConnectionStatusResourceTypeEventConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANConnectionStatusResourceTypeEventConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANConnectionStatusResourceTypeEventConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WirelessGatewayEventTopic != "" {
+		s.WriteString(schemas.LoRaWANConnectionStatusResourceTypeEventConfiguration_WirelessGatewayEventTopic, string(v.WirelessGatewayEventTopic))
+	}
+}
+func (v *LoRaWANConnectionStatusResourceTypeEventConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANConnectionStatusResourceTypeEventConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANConnectionStatusResourceTypeEventConfiguration_WirelessGatewayEventTopic:
+			var ev string
+			if err := d.ReadString(schemas.LoRaWANConnectionStatusResourceTypeEventConfiguration_WirelessGatewayEventTopic, &ev); err != nil {
+				return err
+			}
+			v.WirelessGatewayEventTopic = EventNotificationTopicStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // LoRaWAN object for create functions.
@@ -737,6 +2149,80 @@ type LoRaWANDevice struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoRaWANDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbpV1_0_x != nil {
+		s.WriteStruct(schemas.LoRaWANDevice_AbpV1_0_x)
+		v.AbpV1_0_x.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AbpV1_1 != nil {
+		s.WriteStruct(schemas.LoRaWANDevice_AbpV1_1)
+		v.AbpV1_1.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DevEui != nil {
+		s.WriteString(schemas.LoRaWANDevice_DevEui, *v.DevEui)
+	}
+	if v.DeviceProfileId != nil {
+		s.WriteString(schemas.LoRaWANDevice_DeviceProfileId, *v.DeviceProfileId)
+	}
+	if v.FPorts != nil {
+		s.WriteStruct(schemas.LoRaWANDevice_FPorts)
+		v.FPorts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OtaaV1_0_x != nil {
+		s.WriteStruct(schemas.LoRaWANDevice_OtaaV1_0_x)
+		v.OtaaV1_0_x.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OtaaV1_1 != nil {
+		s.WriteStruct(schemas.LoRaWANDevice_OtaaV1_1)
+		v.OtaaV1_1.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceProfileId != nil {
+		s.WriteString(schemas.LoRaWANDevice_ServiceProfileId, *v.ServiceProfileId)
+	}
+}
+func (v *LoRaWANDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANDevice_AbpV1_0_x:
+			v.AbpV1_0_x = &AbpV1_0_x{}
+			return v.AbpV1_0_x.Deserialize(d)
+		case schemas.LoRaWANDevice_AbpV1_1:
+			v.AbpV1_1 = &AbpV1_1{}
+			return v.AbpV1_1.Deserialize(d)
+		case schemas.LoRaWANDevice_DevEui:
+			v.DevEui = new(string)
+			return d.ReadString(schemas.LoRaWANDevice_DevEui, v.DevEui)
+		case schemas.LoRaWANDevice_DeviceProfileId:
+			v.DeviceProfileId = new(string)
+			return d.ReadString(schemas.LoRaWANDevice_DeviceProfileId, v.DeviceProfileId)
+		case schemas.LoRaWANDevice_FPorts:
+			v.FPorts = &FPorts{}
+			return v.FPorts.Deserialize(d)
+		case schemas.LoRaWANDevice_OtaaV1_0_x:
+			v.OtaaV1_0_x = &OtaaV1_0_x{}
+			return v.OtaaV1_0_x.Deserialize(d)
+		case schemas.LoRaWANDevice_OtaaV1_1:
+			v.OtaaV1_1 = &OtaaV1_1{}
+			return v.OtaaV1_1.Deserialize(d)
+		case schemas.LoRaWANDevice_ServiceProfileId:
+			v.ServiceProfileId = new(string)
+			return d.ReadString(schemas.LoRaWANDevice_ServiceProfileId, v.ServiceProfileId)
+		}
+		return nil
+	})
+}
+
 // LoRaWAN device metatdata.
 type LoRaWANDeviceMetadata struct {
 
@@ -762,6 +2248,58 @@ type LoRaWANDeviceMetadata struct {
 	Timestamp *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoRaWANDeviceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANDeviceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANDeviceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataRate != nil {
+		s.WriteInt32(schemas.LoRaWANDeviceMetadata_DataRate, *v.DataRate)
+	}
+	if v.DevEui != nil {
+		s.WriteString(schemas.LoRaWANDeviceMetadata_DevEui, *v.DevEui)
+	}
+	if v.FPort != nil {
+		s.WriteInt32(schemas.LoRaWANDeviceMetadata_FPort, *v.FPort)
+	}
+	if v.Frequency != nil {
+		s.WriteInt32(schemas.LoRaWANDeviceMetadata_Frequency, *v.Frequency)
+	}
+	serializeLoRaWANGatewayMetadataList(s, schemas.LoRaWANDeviceMetadata_Gateways, v.Gateways)
+	serializeLoRaWANPublicGatewayMetadataList(s, schemas.LoRaWANDeviceMetadata_PublicGateways, v.PublicGateways)
+	if v.Timestamp != nil {
+		s.WriteString(schemas.LoRaWANDeviceMetadata_Timestamp, *v.Timestamp)
+	}
+}
+func (v *LoRaWANDeviceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANDeviceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANDeviceMetadata_DataRate:
+			v.DataRate = new(int32)
+			return d.ReadInt32(schemas.LoRaWANDeviceMetadata_DataRate, v.DataRate)
+		case schemas.LoRaWANDeviceMetadata_DevEui:
+			v.DevEui = new(string)
+			return d.ReadString(schemas.LoRaWANDeviceMetadata_DevEui, v.DevEui)
+		case schemas.LoRaWANDeviceMetadata_FPort:
+			v.FPort = new(int32)
+			return d.ReadInt32(schemas.LoRaWANDeviceMetadata_FPort, v.FPort)
+		case schemas.LoRaWANDeviceMetadata_Frequency:
+			v.Frequency = new(int32)
+			return d.ReadInt32(schemas.LoRaWANDeviceMetadata_Frequency, v.Frequency)
+		case schemas.LoRaWANDeviceMetadata_Gateways:
+			return deserializeLoRaWANGatewayMetadataList(d, schemas.LoRaWANDeviceMetadata_Gateways, &v.Gateways)
+		case schemas.LoRaWANDeviceMetadata_PublicGateways:
+			return deserializeLoRaWANPublicGatewayMetadataList(d, schemas.LoRaWANDeviceMetadata_PublicGateways, &v.PublicGateways)
+		case schemas.LoRaWANDeviceMetadata_Timestamp:
+			v.Timestamp = new(string)
+			return d.ReadString(schemas.LoRaWANDeviceMetadata_Timestamp, v.Timestamp)
+		}
+		return nil
+	})
 }
 
 // LoRaWANDeviceProfile object.
@@ -828,6 +2366,130 @@ type LoRaWANDeviceProfile struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoRaWANDeviceProfile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANDeviceProfile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANDeviceProfile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClassBTimeout != nil {
+		s.WriteInt32(schemas.LoRaWANDeviceProfile_ClassBTimeout, *v.ClassBTimeout)
+	}
+	if v.ClassCTimeout != nil {
+		s.WriteInt32(schemas.LoRaWANDeviceProfile_ClassCTimeout, *v.ClassCTimeout)
+	}
+	serializeFactoryPresetFreqsList(s, schemas.LoRaWANDeviceProfile_FactoryPresetFreqsList, v.FactoryPresetFreqsList)
+	if v.MacVersion != nil {
+		s.WriteString(schemas.LoRaWANDeviceProfile_MacVersion, *v.MacVersion)
+	}
+	if v.MaxDutyCycle != nil {
+		s.WriteInt32(schemas.LoRaWANDeviceProfile_MaxDutyCycle, *v.MaxDutyCycle)
+	}
+	if v.MaxEirp != nil {
+		s.WriteInt32(schemas.LoRaWANDeviceProfile_MaxEirp, *v.MaxEirp)
+	}
+	if v.PingSlotDr != nil {
+		s.WriteInt32(schemas.LoRaWANDeviceProfile_PingSlotDr, *v.PingSlotDr)
+	}
+	if v.PingSlotFreq != nil {
+		s.WriteInt32(schemas.LoRaWANDeviceProfile_PingSlotFreq, *v.PingSlotFreq)
+	}
+	if v.PingSlotPeriod != nil {
+		s.WriteInt32(schemas.LoRaWANDeviceProfile_PingSlotPeriod, *v.PingSlotPeriod)
+	}
+	if v.RegParamsRevision != nil {
+		s.WriteString(schemas.LoRaWANDeviceProfile_RegParamsRevision, *v.RegParamsRevision)
+	}
+	if v.RfRegion != nil {
+		s.WriteString(schemas.LoRaWANDeviceProfile_RfRegion, *v.RfRegion)
+	}
+	if v.RxDataRate2 != nil {
+		s.WriteInt32(schemas.LoRaWANDeviceProfile_RxDataRate2, *v.RxDataRate2)
+	}
+	if v.RxDelay1 != nil {
+		s.WriteInt32(schemas.LoRaWANDeviceProfile_RxDelay1, *v.RxDelay1)
+	}
+	if v.RxDrOffset1 != nil {
+		s.WriteInt32(schemas.LoRaWANDeviceProfile_RxDrOffset1, *v.RxDrOffset1)
+	}
+	if v.RxFreq2 != nil {
+		s.WriteInt32(schemas.LoRaWANDeviceProfile_RxFreq2, *v.RxFreq2)
+	}
+	if v.Supports32BitFCnt != false {
+		s.WriteBool(schemas.LoRaWANDeviceProfile_Supports32BitFCnt, v.Supports32BitFCnt)
+	}
+	if v.SupportsClassB != false {
+		s.WriteBool(schemas.LoRaWANDeviceProfile_SupportsClassB, v.SupportsClassB)
+	}
+	if v.SupportsClassC != false {
+		s.WriteBool(schemas.LoRaWANDeviceProfile_SupportsClassC, v.SupportsClassC)
+	}
+	if v.SupportsJoin != nil {
+		s.WriteBool(schemas.LoRaWANDeviceProfile_SupportsJoin, *v.SupportsJoin)
+	}
+}
+func (v *LoRaWANDeviceProfile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANDeviceProfile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANDeviceProfile_ClassBTimeout:
+			v.ClassBTimeout = new(int32)
+			return d.ReadInt32(schemas.LoRaWANDeviceProfile_ClassBTimeout, v.ClassBTimeout)
+		case schemas.LoRaWANDeviceProfile_ClassCTimeout:
+			v.ClassCTimeout = new(int32)
+			return d.ReadInt32(schemas.LoRaWANDeviceProfile_ClassCTimeout, v.ClassCTimeout)
+		case schemas.LoRaWANDeviceProfile_FactoryPresetFreqsList:
+			return deserializeFactoryPresetFreqsList(d, schemas.LoRaWANDeviceProfile_FactoryPresetFreqsList, &v.FactoryPresetFreqsList)
+		case schemas.LoRaWANDeviceProfile_MacVersion:
+			v.MacVersion = new(string)
+			return d.ReadString(schemas.LoRaWANDeviceProfile_MacVersion, v.MacVersion)
+		case schemas.LoRaWANDeviceProfile_MaxDutyCycle:
+			v.MaxDutyCycle = new(int32)
+			return d.ReadInt32(schemas.LoRaWANDeviceProfile_MaxDutyCycle, v.MaxDutyCycle)
+		case schemas.LoRaWANDeviceProfile_MaxEirp:
+			v.MaxEirp = new(int32)
+			return d.ReadInt32(schemas.LoRaWANDeviceProfile_MaxEirp, v.MaxEirp)
+		case schemas.LoRaWANDeviceProfile_PingSlotDr:
+			v.PingSlotDr = new(int32)
+			return d.ReadInt32(schemas.LoRaWANDeviceProfile_PingSlotDr, v.PingSlotDr)
+		case schemas.LoRaWANDeviceProfile_PingSlotFreq:
+			v.PingSlotFreq = new(int32)
+			return d.ReadInt32(schemas.LoRaWANDeviceProfile_PingSlotFreq, v.PingSlotFreq)
+		case schemas.LoRaWANDeviceProfile_PingSlotPeriod:
+			v.PingSlotPeriod = new(int32)
+			return d.ReadInt32(schemas.LoRaWANDeviceProfile_PingSlotPeriod, v.PingSlotPeriod)
+		case schemas.LoRaWANDeviceProfile_RegParamsRevision:
+			v.RegParamsRevision = new(string)
+			return d.ReadString(schemas.LoRaWANDeviceProfile_RegParamsRevision, v.RegParamsRevision)
+		case schemas.LoRaWANDeviceProfile_RfRegion:
+			v.RfRegion = new(string)
+			return d.ReadString(schemas.LoRaWANDeviceProfile_RfRegion, v.RfRegion)
+		case schemas.LoRaWANDeviceProfile_RxDataRate2:
+			v.RxDataRate2 = new(int32)
+			return d.ReadInt32(schemas.LoRaWANDeviceProfile_RxDataRate2, v.RxDataRate2)
+		case schemas.LoRaWANDeviceProfile_RxDelay1:
+			v.RxDelay1 = new(int32)
+			return d.ReadInt32(schemas.LoRaWANDeviceProfile_RxDelay1, v.RxDelay1)
+		case schemas.LoRaWANDeviceProfile_RxDrOffset1:
+			v.RxDrOffset1 = new(int32)
+			return d.ReadInt32(schemas.LoRaWANDeviceProfile_RxDrOffset1, v.RxDrOffset1)
+		case schemas.LoRaWANDeviceProfile_RxFreq2:
+			v.RxFreq2 = new(int32)
+			return d.ReadInt32(schemas.LoRaWANDeviceProfile_RxFreq2, v.RxFreq2)
+		case schemas.LoRaWANDeviceProfile_Supports32BitFCnt:
+			return d.ReadBool(schemas.LoRaWANDeviceProfile_Supports32BitFCnt, &v.Supports32BitFCnt)
+		case schemas.LoRaWANDeviceProfile_SupportsClassB:
+			return d.ReadBool(schemas.LoRaWANDeviceProfile_SupportsClassB, &v.SupportsClassB)
+		case schemas.LoRaWANDeviceProfile_SupportsClassC:
+			return d.ReadBool(schemas.LoRaWANDeviceProfile_SupportsClassC, &v.SupportsClassC)
+		case schemas.LoRaWANDeviceProfile_SupportsJoin:
+			v.SupportsJoin = new(bool)
+			return d.ReadBool(schemas.LoRaWANDeviceProfile_SupportsJoin, v.SupportsJoin)
+		}
+		return nil
+	})
+}
+
 // The LoRaWAN information used with a FUOTA task.
 type LoRaWANFuotaTask struct {
 
@@ -835,6 +2497,32 @@ type LoRaWANFuotaTask struct {
 	RfRegion SupportedRfRegion
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoRaWANFuotaTask) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANFuotaTask)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANFuotaTask) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RfRegion != "" {
+		s.WriteString(schemas.LoRaWANFuotaTask_RfRegion, string(v.RfRegion))
+	}
+}
+func (v *LoRaWANFuotaTask) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANFuotaTask, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANFuotaTask_RfRegion:
+			var ev string
+			if err := d.ReadString(schemas.LoRaWANFuotaTask_RfRegion, &ev); err != nil {
+				return err
+			}
+			v.RfRegion = SupportedRfRegion(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The LoRaWAN information returned from getting a FUOTA task.
@@ -847,6 +2535,34 @@ type LoRaWANFuotaTaskGetInfo struct {
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoRaWANFuotaTaskGetInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANFuotaTaskGetInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANFuotaTaskGetInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RfRegion != nil {
+		s.WriteString(schemas.LoRaWANFuotaTaskGetInfo_RfRegion, *v.RfRegion)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.LoRaWANFuotaTaskGetInfo_StartTime, *v.StartTime)
+	}
+}
+func (v *LoRaWANFuotaTaskGetInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANFuotaTaskGetInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANFuotaTaskGetInfo_RfRegion:
+			v.RfRegion = new(string)
+			return d.ReadString(schemas.LoRaWANFuotaTaskGetInfo_RfRegion, v.RfRegion)
+		case schemas.LoRaWANFuotaTaskGetInfo_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.LoRaWANFuotaTaskGetInfo_StartTime, v.StartTime)
+		}
+		return nil
+	})
 }
 
 // LoRaWANGateway object.
@@ -878,6 +2594,57 @@ type LoRaWANGateway struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoRaWANGateway) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANGateway)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANGateway) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Beaconing != nil {
+		s.WriteStruct(schemas.LoRaWANGateway_Beaconing)
+		v.Beaconing.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.GatewayEui != nil {
+		s.WriteString(schemas.LoRaWANGateway_GatewayEui, *v.GatewayEui)
+	}
+	serializeJoinEuiFilters(s, schemas.LoRaWANGateway_JoinEuiFilters, v.JoinEuiFilters)
+	if v.MaxEirp != nil {
+		s.WriteFloat32(schemas.LoRaWANGateway_MaxEirp, *v.MaxEirp)
+	}
+	serializeNetIdFilters(s, schemas.LoRaWANGateway_NetIdFilters, v.NetIdFilters)
+	if v.RfRegion != nil {
+		s.WriteString(schemas.LoRaWANGateway_RfRegion, *v.RfRegion)
+	}
+	serializeSubBands(s, schemas.LoRaWANGateway_SubBands, v.SubBands)
+}
+func (v *LoRaWANGateway) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANGateway, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANGateway_Beaconing:
+			v.Beaconing = &Beaconing{}
+			return v.Beaconing.Deserialize(d)
+		case schemas.LoRaWANGateway_GatewayEui:
+			v.GatewayEui = new(string)
+			return d.ReadString(schemas.LoRaWANGateway_GatewayEui, v.GatewayEui)
+		case schemas.LoRaWANGateway_JoinEuiFilters:
+			return deserializeJoinEuiFilters(d, schemas.LoRaWANGateway_JoinEuiFilters, &v.JoinEuiFilters)
+		case schemas.LoRaWANGateway_MaxEirp:
+			v.MaxEirp = new(float32)
+			return d.ReadFloat32(schemas.LoRaWANGateway_MaxEirp, v.MaxEirp)
+		case schemas.LoRaWANGateway_NetIdFilters:
+			return deserializeNetIdFilters(d, schemas.LoRaWANGateway_NetIdFilters, &v.NetIdFilters)
+		case schemas.LoRaWANGateway_RfRegion:
+			v.RfRegion = new(string)
+			return d.ReadString(schemas.LoRaWANGateway_RfRegion, v.RfRegion)
+		case schemas.LoRaWANGateway_SubBands:
+			return deserializeSubBands(d, schemas.LoRaWANGateway_SubBands, &v.SubBands)
+		}
+		return nil
+	})
+}
+
 // LoRaWANGatewayCurrentVersion object.
 type LoRaWANGatewayCurrentVersion struct {
 
@@ -885,6 +2652,30 @@ type LoRaWANGatewayCurrentVersion struct {
 	CurrentVersion *LoRaWANGatewayVersion
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoRaWANGatewayCurrentVersion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANGatewayCurrentVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANGatewayCurrentVersion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentVersion != nil {
+		s.WriteStruct(schemas.LoRaWANGatewayCurrentVersion_CurrentVersion)
+		v.CurrentVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LoRaWANGatewayCurrentVersion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANGatewayCurrentVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANGatewayCurrentVersion_CurrentVersion:
+			v.CurrentVersion = &LoRaWANGatewayVersion{}
+			return v.CurrentVersion.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // LoRaWAN gateway metatdata.
@@ -902,6 +2693,40 @@ type LoRaWANGatewayMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoRaWANGatewayMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANGatewayMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANGatewayMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayEui != nil {
+		s.WriteString(schemas.LoRaWANGatewayMetadata_GatewayEui, *v.GatewayEui)
+	}
+	if v.Rssi != nil {
+		s.WriteFloat64(schemas.LoRaWANGatewayMetadata_Rssi, *v.Rssi)
+	}
+	if v.Snr != nil {
+		s.WriteFloat64(schemas.LoRaWANGatewayMetadata_Snr, *v.Snr)
+	}
+}
+func (v *LoRaWANGatewayMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANGatewayMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANGatewayMetadata_GatewayEui:
+			v.GatewayEui = new(string)
+			return d.ReadString(schemas.LoRaWANGatewayMetadata_GatewayEui, v.GatewayEui)
+		case schemas.LoRaWANGatewayMetadata_Rssi:
+			v.Rssi = new(float64)
+			return d.ReadFloat64(schemas.LoRaWANGatewayMetadata_Rssi, v.Rssi)
+		case schemas.LoRaWANGatewayMetadata_Snr:
+			v.Snr = new(float64)
+			return d.ReadFloat64(schemas.LoRaWANGatewayMetadata_Snr, v.Snr)
+		}
+		return nil
+	})
+}
+
 // LoRaWANGatewayVersion object.
 type LoRaWANGatewayVersion struct {
 
@@ -915,6 +2740,40 @@ type LoRaWANGatewayVersion struct {
 	Station *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoRaWANGatewayVersion) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANGatewayVersion)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANGatewayVersion) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Model != nil {
+		s.WriteString(schemas.LoRaWANGatewayVersion_Model, *v.Model)
+	}
+	if v.PackageVersion != nil {
+		s.WriteString(schemas.LoRaWANGatewayVersion_PackageVersion, *v.PackageVersion)
+	}
+	if v.Station != nil {
+		s.WriteString(schemas.LoRaWANGatewayVersion_Station, *v.Station)
+	}
+}
+func (v *LoRaWANGatewayVersion) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANGatewayVersion, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANGatewayVersion_Model:
+			v.Model = new(string)
+			return d.ReadString(schemas.LoRaWANGatewayVersion_Model, v.Model)
+		case schemas.LoRaWANGatewayVersion_PackageVersion:
+			v.PackageVersion = new(string)
+			return d.ReadString(schemas.LoRaWANGatewayVersion_PackageVersion, v.PackageVersion)
+		case schemas.LoRaWANGatewayVersion_Station:
+			v.Station = new(string)
+			return d.ReadString(schemas.LoRaWANGatewayVersion_Station, v.Station)
+		}
+		return nil
+	})
 }
 
 // LoRaWANGetServiceProfileInfo object.
@@ -1000,6 +2859,150 @@ type LoRaWANGetServiceProfileInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoRaWANGetServiceProfileInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANGetServiceProfileInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANGetServiceProfileInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddGwMetadata != false {
+		s.WriteBool(schemas.LoRaWANGetServiceProfileInfo_AddGwMetadata, v.AddGwMetadata)
+	}
+	if v.ChannelMask != nil {
+		s.WriteString(schemas.LoRaWANGetServiceProfileInfo_ChannelMask, *v.ChannelMask)
+	}
+	if v.DevStatusReqFreq != nil {
+		s.WriteInt32(schemas.LoRaWANGetServiceProfileInfo_DevStatusReqFreq, *v.DevStatusReqFreq)
+	}
+	if v.DlBucketSize != nil {
+		s.WriteInt32(schemas.LoRaWANGetServiceProfileInfo_DlBucketSize, *v.DlBucketSize)
+	}
+	if v.DlRate != nil {
+		s.WriteInt32(schemas.LoRaWANGetServiceProfileInfo_DlRate, *v.DlRate)
+	}
+	if v.DlRatePolicy != nil {
+		s.WriteString(schemas.LoRaWANGetServiceProfileInfo_DlRatePolicy, *v.DlRatePolicy)
+	}
+	if v.DrMax != 0 {
+		s.WriteInt32(schemas.LoRaWANGetServiceProfileInfo_DrMax, v.DrMax)
+	}
+	if v.DrMin != 0 {
+		s.WriteInt32(schemas.LoRaWANGetServiceProfileInfo_DrMin, v.DrMin)
+	}
+	if v.HrAllowed != false {
+		s.WriteBool(schemas.LoRaWANGetServiceProfileInfo_HrAllowed, v.HrAllowed)
+	}
+	if v.MinGwDiversity != nil {
+		s.WriteInt32(schemas.LoRaWANGetServiceProfileInfo_MinGwDiversity, *v.MinGwDiversity)
+	}
+	if v.NbTransMax != nil {
+		s.WriteInt32(schemas.LoRaWANGetServiceProfileInfo_NbTransMax, *v.NbTransMax)
+	}
+	if v.NbTransMin != nil {
+		s.WriteInt32(schemas.LoRaWANGetServiceProfileInfo_NbTransMin, *v.NbTransMin)
+	}
+	if v.NwkGeoLoc != false {
+		s.WriteBool(schemas.LoRaWANGetServiceProfileInfo_NwkGeoLoc, v.NwkGeoLoc)
+	}
+	if v.PrAllowed != false {
+		s.WriteBool(schemas.LoRaWANGetServiceProfileInfo_PrAllowed, v.PrAllowed)
+	}
+	if v.RaAllowed != false {
+		s.WriteBool(schemas.LoRaWANGetServiceProfileInfo_RaAllowed, v.RaAllowed)
+	}
+	if v.ReportDevStatusBattery != false {
+		s.WriteBool(schemas.LoRaWANGetServiceProfileInfo_ReportDevStatusBattery, v.ReportDevStatusBattery)
+	}
+	if v.ReportDevStatusMargin != false {
+		s.WriteBool(schemas.LoRaWANGetServiceProfileInfo_ReportDevStatusMargin, v.ReportDevStatusMargin)
+	}
+	if v.TargetPer != 0 {
+		s.WriteInt32(schemas.LoRaWANGetServiceProfileInfo_TargetPer, v.TargetPer)
+	}
+	if v.TxPowerIndexMax != nil {
+		s.WriteInt32(schemas.LoRaWANGetServiceProfileInfo_TxPowerIndexMax, *v.TxPowerIndexMax)
+	}
+	if v.TxPowerIndexMin != nil {
+		s.WriteInt32(schemas.LoRaWANGetServiceProfileInfo_TxPowerIndexMin, *v.TxPowerIndexMin)
+	}
+	if v.UlBucketSize != nil {
+		s.WriteInt32(schemas.LoRaWANGetServiceProfileInfo_UlBucketSize, *v.UlBucketSize)
+	}
+	if v.UlRate != nil {
+		s.WriteInt32(schemas.LoRaWANGetServiceProfileInfo_UlRate, *v.UlRate)
+	}
+	if v.UlRatePolicy != nil {
+		s.WriteString(schemas.LoRaWANGetServiceProfileInfo_UlRatePolicy, *v.UlRatePolicy)
+	}
+}
+func (v *LoRaWANGetServiceProfileInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANGetServiceProfileInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANGetServiceProfileInfo_AddGwMetadata:
+			return d.ReadBool(schemas.LoRaWANGetServiceProfileInfo_AddGwMetadata, &v.AddGwMetadata)
+		case schemas.LoRaWANGetServiceProfileInfo_ChannelMask:
+			v.ChannelMask = new(string)
+			return d.ReadString(schemas.LoRaWANGetServiceProfileInfo_ChannelMask, v.ChannelMask)
+		case schemas.LoRaWANGetServiceProfileInfo_DevStatusReqFreq:
+			v.DevStatusReqFreq = new(int32)
+			return d.ReadInt32(schemas.LoRaWANGetServiceProfileInfo_DevStatusReqFreq, v.DevStatusReqFreq)
+		case schemas.LoRaWANGetServiceProfileInfo_DlBucketSize:
+			v.DlBucketSize = new(int32)
+			return d.ReadInt32(schemas.LoRaWANGetServiceProfileInfo_DlBucketSize, v.DlBucketSize)
+		case schemas.LoRaWANGetServiceProfileInfo_DlRate:
+			v.DlRate = new(int32)
+			return d.ReadInt32(schemas.LoRaWANGetServiceProfileInfo_DlRate, v.DlRate)
+		case schemas.LoRaWANGetServiceProfileInfo_DlRatePolicy:
+			v.DlRatePolicy = new(string)
+			return d.ReadString(schemas.LoRaWANGetServiceProfileInfo_DlRatePolicy, v.DlRatePolicy)
+		case schemas.LoRaWANGetServiceProfileInfo_DrMax:
+			return d.ReadInt32(schemas.LoRaWANGetServiceProfileInfo_DrMax, &v.DrMax)
+		case schemas.LoRaWANGetServiceProfileInfo_DrMin:
+			return d.ReadInt32(schemas.LoRaWANGetServiceProfileInfo_DrMin, &v.DrMin)
+		case schemas.LoRaWANGetServiceProfileInfo_HrAllowed:
+			return d.ReadBool(schemas.LoRaWANGetServiceProfileInfo_HrAllowed, &v.HrAllowed)
+		case schemas.LoRaWANGetServiceProfileInfo_MinGwDiversity:
+			v.MinGwDiversity = new(int32)
+			return d.ReadInt32(schemas.LoRaWANGetServiceProfileInfo_MinGwDiversity, v.MinGwDiversity)
+		case schemas.LoRaWANGetServiceProfileInfo_NbTransMax:
+			v.NbTransMax = new(int32)
+			return d.ReadInt32(schemas.LoRaWANGetServiceProfileInfo_NbTransMax, v.NbTransMax)
+		case schemas.LoRaWANGetServiceProfileInfo_NbTransMin:
+			v.NbTransMin = new(int32)
+			return d.ReadInt32(schemas.LoRaWANGetServiceProfileInfo_NbTransMin, v.NbTransMin)
+		case schemas.LoRaWANGetServiceProfileInfo_NwkGeoLoc:
+			return d.ReadBool(schemas.LoRaWANGetServiceProfileInfo_NwkGeoLoc, &v.NwkGeoLoc)
+		case schemas.LoRaWANGetServiceProfileInfo_PrAllowed:
+			return d.ReadBool(schemas.LoRaWANGetServiceProfileInfo_PrAllowed, &v.PrAllowed)
+		case schemas.LoRaWANGetServiceProfileInfo_RaAllowed:
+			return d.ReadBool(schemas.LoRaWANGetServiceProfileInfo_RaAllowed, &v.RaAllowed)
+		case schemas.LoRaWANGetServiceProfileInfo_ReportDevStatusBattery:
+			return d.ReadBool(schemas.LoRaWANGetServiceProfileInfo_ReportDevStatusBattery, &v.ReportDevStatusBattery)
+		case schemas.LoRaWANGetServiceProfileInfo_ReportDevStatusMargin:
+			return d.ReadBool(schemas.LoRaWANGetServiceProfileInfo_ReportDevStatusMargin, &v.ReportDevStatusMargin)
+		case schemas.LoRaWANGetServiceProfileInfo_TargetPer:
+			return d.ReadInt32(schemas.LoRaWANGetServiceProfileInfo_TargetPer, &v.TargetPer)
+		case schemas.LoRaWANGetServiceProfileInfo_TxPowerIndexMax:
+			v.TxPowerIndexMax = new(int32)
+			return d.ReadInt32(schemas.LoRaWANGetServiceProfileInfo_TxPowerIndexMax, v.TxPowerIndexMax)
+		case schemas.LoRaWANGetServiceProfileInfo_TxPowerIndexMin:
+			v.TxPowerIndexMin = new(int32)
+			return d.ReadInt32(schemas.LoRaWANGetServiceProfileInfo_TxPowerIndexMin, v.TxPowerIndexMin)
+		case schemas.LoRaWANGetServiceProfileInfo_UlBucketSize:
+			v.UlBucketSize = new(int32)
+			return d.ReadInt32(schemas.LoRaWANGetServiceProfileInfo_UlBucketSize, v.UlBucketSize)
+		case schemas.LoRaWANGetServiceProfileInfo_UlRate:
+			v.UlRate = new(int32)
+			return d.ReadInt32(schemas.LoRaWANGetServiceProfileInfo_UlRate, v.UlRate)
+		case schemas.LoRaWANGetServiceProfileInfo_UlRatePolicy:
+			v.UlRatePolicy = new(string)
+			return d.ReadString(schemas.LoRaWANGetServiceProfileInfo_UlRatePolicy, v.UlRatePolicy)
+		}
+		return nil
+	})
+}
+
 // Object for LoRaWAN join resource type event configuration.
 type LoRaWANJoinEventNotificationConfigurations struct {
 
@@ -1007,6 +3010,32 @@ type LoRaWANJoinEventNotificationConfigurations struct {
 	DevEuiEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoRaWANJoinEventNotificationConfigurations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANJoinEventNotificationConfigurations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANJoinEventNotificationConfigurations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DevEuiEventTopic != "" {
+		s.WriteString(schemas.LoRaWANJoinEventNotificationConfigurations_DevEuiEventTopic, string(v.DevEuiEventTopic))
+	}
+}
+func (v *LoRaWANJoinEventNotificationConfigurations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANJoinEventNotificationConfigurations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANJoinEventNotificationConfigurations_DevEuiEventTopic:
+			var ev string
+			if err := d.ReadString(schemas.LoRaWANJoinEventNotificationConfigurations_DevEuiEventTopic, &ev); err != nil {
+				return err
+			}
+			v.DevEuiEventTopic = EventNotificationTopicStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Object for LoRaWAN join resource type event configuration.
@@ -1018,6 +3047,32 @@ type LoRaWANJoinResourceTypeEventConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoRaWANJoinResourceTypeEventConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANJoinResourceTypeEventConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANJoinResourceTypeEventConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WirelessDeviceEventTopic != "" {
+		s.WriteString(schemas.LoRaWANJoinResourceTypeEventConfiguration_WirelessDeviceEventTopic, string(v.WirelessDeviceEventTopic))
+	}
+}
+func (v *LoRaWANJoinResourceTypeEventConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANJoinResourceTypeEventConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANJoinResourceTypeEventConfiguration_WirelessDeviceEventTopic:
+			var ev string
+			if err := d.ReadString(schemas.LoRaWANJoinResourceTypeEventConfiguration_WirelessDeviceEventTopic, &ev); err != nil {
+				return err
+			}
+			v.WirelessDeviceEventTopic = EventNotificationTopicStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // LoRaWAN object for list functions.
 type LoRaWANListDevice struct {
 
@@ -1025,6 +3080,28 @@ type LoRaWANListDevice struct {
 	DevEui *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoRaWANListDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANListDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANListDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DevEui != nil {
+		s.WriteString(schemas.LoRaWANListDevice_DevEui, *v.DevEui)
+	}
+}
+func (v *LoRaWANListDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANListDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANListDevice_DevEui:
+			v.DevEui = new(string)
+			return d.ReadString(schemas.LoRaWANListDevice_DevEui, v.DevEui)
+		}
+		return nil
+	})
 }
 
 // The LoRaWAN information that is to be used with the multicast group.
@@ -1042,6 +3119,50 @@ type LoRaWANMulticast struct {
 	RfRegion SupportedRfRegion
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoRaWANMulticast) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANMulticast)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANMulticast) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DlClass != "" {
+		s.WriteString(schemas.LoRaWANMulticast_DlClass, string(v.DlClass))
+	}
+	if v.ParticipatingGateways != nil {
+		s.WriteStruct(schemas.LoRaWANMulticast_ParticipatingGateways)
+		v.ParticipatingGateways.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RfRegion != "" {
+		s.WriteString(schemas.LoRaWANMulticast_RfRegion, string(v.RfRegion))
+	}
+}
+func (v *LoRaWANMulticast) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANMulticast, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANMulticast_DlClass:
+			var ev string
+			if err := d.ReadString(schemas.LoRaWANMulticast_DlClass, &ev); err != nil {
+				return err
+			}
+			v.DlClass = DlClass(ev)
+			return nil
+		case schemas.LoRaWANMulticast_ParticipatingGateways:
+			v.ParticipatingGateways = &ParticipatingGatewaysMulticast{}
+			return v.ParticipatingGateways.Deserialize(d)
+		case schemas.LoRaWANMulticast_RfRegion:
+			var ev string
+			if err := d.ReadString(schemas.LoRaWANMulticast_RfRegion, &ev); err != nil {
+				return err
+			}
+			v.RfRegion = SupportedRfRegion(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The LoRaWAN information that is to be returned from getting multicast group
@@ -1068,6 +3189,62 @@ type LoRaWANMulticastGet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoRaWANMulticastGet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANMulticastGet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANMulticastGet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DlClass != "" {
+		s.WriteString(schemas.LoRaWANMulticastGet_DlClass, string(v.DlClass))
+	}
+	if v.NumberOfDevicesInGroup != nil {
+		s.WriteInt32(schemas.LoRaWANMulticastGet_NumberOfDevicesInGroup, *v.NumberOfDevicesInGroup)
+	}
+	if v.NumberOfDevicesRequested != nil {
+		s.WriteInt32(schemas.LoRaWANMulticastGet_NumberOfDevicesRequested, *v.NumberOfDevicesRequested)
+	}
+	if v.ParticipatingGateways != nil {
+		s.WriteStruct(schemas.LoRaWANMulticastGet_ParticipatingGateways)
+		v.ParticipatingGateways.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RfRegion != "" {
+		s.WriteString(schemas.LoRaWANMulticastGet_RfRegion, string(v.RfRegion))
+	}
+}
+func (v *LoRaWANMulticastGet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANMulticastGet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANMulticastGet_DlClass:
+			var ev string
+			if err := d.ReadString(schemas.LoRaWANMulticastGet_DlClass, &ev); err != nil {
+				return err
+			}
+			v.DlClass = DlClass(ev)
+			return nil
+		case schemas.LoRaWANMulticastGet_NumberOfDevicesInGroup:
+			v.NumberOfDevicesInGroup = new(int32)
+			return d.ReadInt32(schemas.LoRaWANMulticastGet_NumberOfDevicesInGroup, v.NumberOfDevicesInGroup)
+		case schemas.LoRaWANMulticastGet_NumberOfDevicesRequested:
+			v.NumberOfDevicesRequested = new(int32)
+			return d.ReadInt32(schemas.LoRaWANMulticastGet_NumberOfDevicesRequested, v.NumberOfDevicesRequested)
+		case schemas.LoRaWANMulticastGet_ParticipatingGateways:
+			v.ParticipatingGateways = &ParticipatingGatewaysMulticast{}
+			return v.ParticipatingGateways.Deserialize(d)
+		case schemas.LoRaWANMulticastGet_RfRegion:
+			var ev string
+			if err := d.ReadString(schemas.LoRaWANMulticastGet_RfRegion, &ev); err != nil {
+				return err
+			}
+			v.RfRegion = SupportedRfRegion(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The metadata information of the LoRaWAN multicast group.
 type LoRaWANMulticastMetadata struct {
 
@@ -1075,6 +3252,28 @@ type LoRaWANMulticastMetadata struct {
 	FPort *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoRaWANMulticastMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANMulticastMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANMulticastMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FPort != nil {
+		s.WriteInt32(schemas.LoRaWANMulticastMetadata_FPort, *v.FPort)
+	}
+}
+func (v *LoRaWANMulticastMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANMulticastMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANMulticastMetadata_FPort:
+			v.FPort = new(int32)
+			return d.ReadInt32(schemas.LoRaWANMulticastMetadata_FPort, v.FPort)
+		}
+		return nil
+	})
 }
 
 // The LoRaWAN information used with the multicast session.
@@ -1102,6 +3301,52 @@ type LoRaWANMulticastSession struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoRaWANMulticastSession) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANMulticastSession)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANMulticastSession) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DlDr != nil {
+		s.WriteInt32(schemas.LoRaWANMulticastSession_DlDr, *v.DlDr)
+	}
+	if v.DlFreq != nil {
+		s.WriteInt32(schemas.LoRaWANMulticastSession_DlFreq, *v.DlFreq)
+	}
+	if v.PingSlotPeriod != nil {
+		s.WriteInt32(schemas.LoRaWANMulticastSession_PingSlotPeriod, *v.PingSlotPeriod)
+	}
+	if v.SessionStartTime != nil {
+		s.WriteTime(schemas.LoRaWANMulticastSession_SessionStartTime, *v.SessionStartTime)
+	}
+	if v.SessionTimeout != nil {
+		s.WriteInt32(schemas.LoRaWANMulticastSession_SessionTimeout, *v.SessionTimeout)
+	}
+}
+func (v *LoRaWANMulticastSession) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANMulticastSession, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANMulticastSession_DlDr:
+			v.DlDr = new(int32)
+			return d.ReadInt32(schemas.LoRaWANMulticastSession_DlDr, v.DlDr)
+		case schemas.LoRaWANMulticastSession_DlFreq:
+			v.DlFreq = new(int32)
+			return d.ReadInt32(schemas.LoRaWANMulticastSession_DlFreq, v.DlFreq)
+		case schemas.LoRaWANMulticastSession_PingSlotPeriod:
+			v.PingSlotPeriod = new(int32)
+			return d.ReadInt32(schemas.LoRaWANMulticastSession_PingSlotPeriod, v.PingSlotPeriod)
+		case schemas.LoRaWANMulticastSession_SessionStartTime:
+			v.SessionStartTime = new(time.Time)
+			return d.ReadTime(schemas.LoRaWANMulticastSession_SessionStartTime, v.SessionStartTime)
+		case schemas.LoRaWANMulticastSession_SessionTimeout:
+			v.SessionTimeout = new(int32)
+			return d.ReadInt32(schemas.LoRaWANMulticastSession_SessionTimeout, v.SessionTimeout)
+		}
+		return nil
+	})
+}
+
 // LoRaWAN public gateway metadata.
 type LoRaWANPublicGatewayMetadata struct {
 
@@ -1126,6 +3371,58 @@ type LoRaWANPublicGatewayMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoRaWANPublicGatewayMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANPublicGatewayMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANPublicGatewayMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DlAllowed != nil {
+		s.WriteBool(schemas.LoRaWANPublicGatewayMetadata_DlAllowed, *v.DlAllowed)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.LoRaWANPublicGatewayMetadata_Id, *v.Id)
+	}
+	if v.ProviderNetId != nil {
+		s.WriteString(schemas.LoRaWANPublicGatewayMetadata_ProviderNetId, *v.ProviderNetId)
+	}
+	if v.RfRegion != nil {
+		s.WriteString(schemas.LoRaWANPublicGatewayMetadata_RfRegion, *v.RfRegion)
+	}
+	if v.Rssi != nil {
+		s.WriteFloat64(schemas.LoRaWANPublicGatewayMetadata_Rssi, *v.Rssi)
+	}
+	if v.Snr != nil {
+		s.WriteFloat64(schemas.LoRaWANPublicGatewayMetadata_Snr, *v.Snr)
+	}
+}
+func (v *LoRaWANPublicGatewayMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANPublicGatewayMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANPublicGatewayMetadata_DlAllowed:
+			v.DlAllowed = new(bool)
+			return d.ReadBool(schemas.LoRaWANPublicGatewayMetadata_DlAllowed, v.DlAllowed)
+		case schemas.LoRaWANPublicGatewayMetadata_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.LoRaWANPublicGatewayMetadata_Id, v.Id)
+		case schemas.LoRaWANPublicGatewayMetadata_ProviderNetId:
+			v.ProviderNetId = new(string)
+			return d.ReadString(schemas.LoRaWANPublicGatewayMetadata_ProviderNetId, v.ProviderNetId)
+		case schemas.LoRaWANPublicGatewayMetadata_RfRegion:
+			v.RfRegion = new(string)
+			return d.ReadString(schemas.LoRaWANPublicGatewayMetadata_RfRegion, v.RfRegion)
+		case schemas.LoRaWANPublicGatewayMetadata_Rssi:
+			v.Rssi = new(float64)
+			return d.ReadFloat64(schemas.LoRaWANPublicGatewayMetadata_Rssi, v.Rssi)
+		case schemas.LoRaWANPublicGatewayMetadata_Snr:
+			v.Snr = new(float64)
+			return d.ReadFloat64(schemas.LoRaWANPublicGatewayMetadata_Snr, v.Snr)
+		}
+		return nil
+	})
+}
+
 // LoRaWAN router info.
 type LoRaWANSendDataToDevice struct {
 
@@ -1137,6 +3434,36 @@ type LoRaWANSendDataToDevice struct {
 	ParticipatingGateways *ParticipatingGateways
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoRaWANSendDataToDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANSendDataToDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANSendDataToDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FPort != nil {
+		s.WriteInt32(schemas.LoRaWANSendDataToDevice_FPort, *v.FPort)
+	}
+	if v.ParticipatingGateways != nil {
+		s.WriteStruct(schemas.LoRaWANSendDataToDevice_ParticipatingGateways)
+		v.ParticipatingGateways.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LoRaWANSendDataToDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANSendDataToDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANSendDataToDevice_FPort:
+			v.FPort = new(int32)
+			return d.ReadInt32(schemas.LoRaWANSendDataToDevice_FPort, v.FPort)
+		case schemas.LoRaWANSendDataToDevice_ParticipatingGateways:
+			v.ParticipatingGateways = &ParticipatingGateways{}
+			return v.ParticipatingGateways.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // LoRaWANServiceProfile object.
@@ -1180,6 +3507,73 @@ type LoRaWANServiceProfile struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoRaWANServiceProfile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANServiceProfile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANServiceProfile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddGwMetadata != false {
+		s.WriteBool(schemas.LoRaWANServiceProfile_AddGwMetadata, v.AddGwMetadata)
+	}
+	if v.DrMax != nil {
+		s.WriteInt32(schemas.LoRaWANServiceProfile_DrMax, *v.DrMax)
+	}
+	if v.DrMin != nil {
+		s.WriteInt32(schemas.LoRaWANServiceProfile_DrMin, *v.DrMin)
+	}
+	if v.NbTransMax != nil {
+		s.WriteInt32(schemas.LoRaWANServiceProfile_NbTransMax, *v.NbTransMax)
+	}
+	if v.NbTransMin != nil {
+		s.WriteInt32(schemas.LoRaWANServiceProfile_NbTransMin, *v.NbTransMin)
+	}
+	if v.PrAllowed != false {
+		s.WriteBool(schemas.LoRaWANServiceProfile_PrAllowed, v.PrAllowed)
+	}
+	if v.RaAllowed != false {
+		s.WriteBool(schemas.LoRaWANServiceProfile_RaAllowed, v.RaAllowed)
+	}
+	if v.TxPowerIndexMax != nil {
+		s.WriteInt32(schemas.LoRaWANServiceProfile_TxPowerIndexMax, *v.TxPowerIndexMax)
+	}
+	if v.TxPowerIndexMin != nil {
+		s.WriteInt32(schemas.LoRaWANServiceProfile_TxPowerIndexMin, *v.TxPowerIndexMin)
+	}
+}
+func (v *LoRaWANServiceProfile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANServiceProfile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANServiceProfile_AddGwMetadata:
+			return d.ReadBool(schemas.LoRaWANServiceProfile_AddGwMetadata, &v.AddGwMetadata)
+		case schemas.LoRaWANServiceProfile_DrMax:
+			v.DrMax = new(int32)
+			return d.ReadInt32(schemas.LoRaWANServiceProfile_DrMax, v.DrMax)
+		case schemas.LoRaWANServiceProfile_DrMin:
+			v.DrMin = new(int32)
+			return d.ReadInt32(schemas.LoRaWANServiceProfile_DrMin, v.DrMin)
+		case schemas.LoRaWANServiceProfile_NbTransMax:
+			v.NbTransMax = new(int32)
+			return d.ReadInt32(schemas.LoRaWANServiceProfile_NbTransMax, v.NbTransMax)
+		case schemas.LoRaWANServiceProfile_NbTransMin:
+			v.NbTransMin = new(int32)
+			return d.ReadInt32(schemas.LoRaWANServiceProfile_NbTransMin, v.NbTransMin)
+		case schemas.LoRaWANServiceProfile_PrAllowed:
+			return d.ReadBool(schemas.LoRaWANServiceProfile_PrAllowed, &v.PrAllowed)
+		case schemas.LoRaWANServiceProfile_RaAllowed:
+			return d.ReadBool(schemas.LoRaWANServiceProfile_RaAllowed, &v.RaAllowed)
+		case schemas.LoRaWANServiceProfile_TxPowerIndexMax:
+			v.TxPowerIndexMax = new(int32)
+			return d.ReadInt32(schemas.LoRaWANServiceProfile_TxPowerIndexMax, v.TxPowerIndexMax)
+		case schemas.LoRaWANServiceProfile_TxPowerIndexMin:
+			v.TxPowerIndexMin = new(int32)
+			return d.ReadInt32(schemas.LoRaWANServiceProfile_TxPowerIndexMin, v.TxPowerIndexMin)
+		}
+		return nil
+	})
+}
+
 // The LoRaWAN information used to start a FUOTA task.
 type LoRaWANStartFuotaTask struct {
 
@@ -1187,6 +3581,28 @@ type LoRaWANStartFuotaTask struct {
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoRaWANStartFuotaTask) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANStartFuotaTask)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANStartFuotaTask) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StartTime != nil {
+		s.WriteTime(schemas.LoRaWANStartFuotaTask_StartTime, *v.StartTime)
+	}
+}
+func (v *LoRaWANStartFuotaTask) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANStartFuotaTask, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANStartFuotaTask_StartTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.LoRaWANStartFuotaTask_StartTime, v.StartTime)
+		}
+		return nil
+	})
 }
 
 // LoRaWAN object for update functions.
@@ -1210,6 +3626,58 @@ type LoRaWANUpdateDevice struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoRaWANUpdateDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANUpdateDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANUpdateDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AbpV1_0_x != nil {
+		s.WriteStruct(schemas.LoRaWANUpdateDevice_AbpV1_0_x)
+		v.AbpV1_0_x.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AbpV1_1 != nil {
+		s.WriteStruct(schemas.LoRaWANUpdateDevice_AbpV1_1)
+		v.AbpV1_1.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DeviceProfileId != nil {
+		s.WriteString(schemas.LoRaWANUpdateDevice_DeviceProfileId, *v.DeviceProfileId)
+	}
+	if v.FPorts != nil {
+		s.WriteStruct(schemas.LoRaWANUpdateDevice_FPorts)
+		v.FPorts.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ServiceProfileId != nil {
+		s.WriteString(schemas.LoRaWANUpdateDevice_ServiceProfileId, *v.ServiceProfileId)
+	}
+}
+func (v *LoRaWANUpdateDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANUpdateDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANUpdateDevice_AbpV1_0_x:
+			v.AbpV1_0_x = &UpdateAbpV1_0_x{}
+			return v.AbpV1_0_x.Deserialize(d)
+		case schemas.LoRaWANUpdateDevice_AbpV1_1:
+			v.AbpV1_1 = &UpdateAbpV1_1{}
+			return v.AbpV1_1.Deserialize(d)
+		case schemas.LoRaWANUpdateDevice_DeviceProfileId:
+			v.DeviceProfileId = new(string)
+			return d.ReadString(schemas.LoRaWANUpdateDevice_DeviceProfileId, v.DeviceProfileId)
+		case schemas.LoRaWANUpdateDevice_FPorts:
+			v.FPorts = &UpdateFPorts{}
+			return v.FPorts.Deserialize(d)
+		case schemas.LoRaWANUpdateDevice_ServiceProfileId:
+			v.ServiceProfileId = new(string)
+			return d.ReadString(schemas.LoRaWANUpdateDevice_ServiceProfileId, v.ServiceProfileId)
+		}
+		return nil
+	})
+}
+
 // LoRaWANUpdateGatewayTaskCreate object.
 type LoRaWANUpdateGatewayTaskCreate struct {
 
@@ -1228,6 +3696,50 @@ type LoRaWANUpdateGatewayTaskCreate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoRaWANUpdateGatewayTaskCreate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANUpdateGatewayTaskCreate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANUpdateGatewayTaskCreate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentVersion != nil {
+		s.WriteStruct(schemas.LoRaWANUpdateGatewayTaskCreate_CurrentVersion)
+		v.CurrentVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SigKeyCrc != nil {
+		s.WriteInt64(schemas.LoRaWANUpdateGatewayTaskCreate_SigKeyCrc, *v.SigKeyCrc)
+	}
+	if v.UpdateSignature != nil {
+		s.WriteString(schemas.LoRaWANUpdateGatewayTaskCreate_UpdateSignature, *v.UpdateSignature)
+	}
+	if v.UpdateVersion != nil {
+		s.WriteStruct(schemas.LoRaWANUpdateGatewayTaskCreate_UpdateVersion)
+		v.UpdateVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LoRaWANUpdateGatewayTaskCreate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANUpdateGatewayTaskCreate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANUpdateGatewayTaskCreate_CurrentVersion:
+			v.CurrentVersion = &LoRaWANGatewayVersion{}
+			return v.CurrentVersion.Deserialize(d)
+		case schemas.LoRaWANUpdateGatewayTaskCreate_SigKeyCrc:
+			v.SigKeyCrc = new(int64)
+			return d.ReadInt64(schemas.LoRaWANUpdateGatewayTaskCreate_SigKeyCrc, v.SigKeyCrc)
+		case schemas.LoRaWANUpdateGatewayTaskCreate_UpdateSignature:
+			v.UpdateSignature = new(string)
+			return d.ReadString(schemas.LoRaWANUpdateGatewayTaskCreate_UpdateSignature, v.UpdateSignature)
+		case schemas.LoRaWANUpdateGatewayTaskCreate_UpdateVersion:
+			v.UpdateVersion = &LoRaWANGatewayVersion{}
+			return v.UpdateVersion.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // LoRaWANUpdateGatewayTaskEntry object.
 type LoRaWANUpdateGatewayTaskEntry struct {
 
@@ -1238,6 +3750,38 @@ type LoRaWANUpdateGatewayTaskEntry struct {
 	UpdateVersion *LoRaWANGatewayVersion
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoRaWANUpdateGatewayTaskEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoRaWANUpdateGatewayTaskEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoRaWANUpdateGatewayTaskEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentVersion != nil {
+		s.WriteStruct(schemas.LoRaWANUpdateGatewayTaskEntry_CurrentVersion)
+		v.CurrentVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateVersion != nil {
+		s.WriteStruct(schemas.LoRaWANUpdateGatewayTaskEntry_UpdateVersion)
+		v.UpdateVersion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LoRaWANUpdateGatewayTaskEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoRaWANUpdateGatewayTaskEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoRaWANUpdateGatewayTaskEntry_CurrentVersion:
+			v.CurrentVersion = &LoRaWANGatewayVersion{}
+			return v.CurrentVersion.Deserialize(d)
+		case schemas.LoRaWANUpdateGatewayTaskEntry_UpdateVersion:
+			v.UpdateVersion = &LoRaWANGatewayVersion{}
+			return v.UpdateVersion.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // LTE local identification (local ID) information.
@@ -1255,6 +3799,34 @@ type LteLocalId struct {
 	Pci *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *LteLocalId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LteLocalId)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LteLocalId) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Earfcn != nil {
+		s.WriteInt32(schemas.LteLocalId_Earfcn, *v.Earfcn)
+	}
+	if v.Pci != nil {
+		s.WriteInt32(schemas.LteLocalId_Pci, *v.Pci)
+	}
+}
+func (v *LteLocalId) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LteLocalId, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LteLocalId_Earfcn:
+			v.Earfcn = new(int32)
+			return d.ReadInt32(schemas.LteLocalId_Earfcn, v.Earfcn)
+		case schemas.LteLocalId_Pci:
+			v.Pci = new(int32)
+			return d.ReadInt32(schemas.LteLocalId_Pci, v.Pci)
+		}
+		return nil
+	})
 }
 
 // LTE object for network measurement reports.
@@ -1283,6 +3855,52 @@ type LteNmrObj struct {
 	Rsrq *float32
 
 	noSmithyDocumentSerde
+}
+
+func (v *LteNmrObj) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LteNmrObj)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LteNmrObj) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Earfcn != nil {
+		s.WriteInt32(schemas.LteNmrObj_Earfcn, *v.Earfcn)
+	}
+	if v.EutranCid != nil {
+		s.WriteInt32(schemas.LteNmrObj_EutranCid, *v.EutranCid)
+	}
+	if v.Pci != nil {
+		s.WriteInt32(schemas.LteNmrObj_Pci, *v.Pci)
+	}
+	if v.Rsrp != nil {
+		s.WriteInt32(schemas.LteNmrObj_Rsrp, *v.Rsrp)
+	}
+	if v.Rsrq != nil {
+		s.WriteFloat32(schemas.LteNmrObj_Rsrq, *v.Rsrq)
+	}
+}
+func (v *LteNmrObj) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LteNmrObj, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LteNmrObj_Earfcn:
+			v.Earfcn = new(int32)
+			return d.ReadInt32(schemas.LteNmrObj_Earfcn, v.Earfcn)
+		case schemas.LteNmrObj_EutranCid:
+			v.EutranCid = new(int32)
+			return d.ReadInt32(schemas.LteNmrObj_EutranCid, v.EutranCid)
+		case schemas.LteNmrObj_Pci:
+			v.Pci = new(int32)
+			return d.ReadInt32(schemas.LteNmrObj_Pci, v.Pci)
+		case schemas.LteNmrObj_Rsrp:
+			v.Rsrp = new(int32)
+			return d.ReadInt32(schemas.LteNmrObj_Rsrp, v.Rsrp)
+		case schemas.LteNmrObj_Rsrq:
+			v.Rsrq = new(float32)
+			return d.ReadFloat32(schemas.LteNmrObj_Rsrq, v.Rsrq)
+		}
+		return nil
+	})
 }
 
 // LTE object.
@@ -1330,6 +3948,80 @@ type LteObj struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LteObj) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LteObj)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LteObj) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EutranCid != nil {
+		s.WriteInt32(schemas.LteObj_EutranCid, *v.EutranCid)
+	}
+	if v.LteLocalId != nil {
+		s.WriteStruct(schemas.LteObj_LteLocalId)
+		v.LteLocalId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeLteNmrList(s, schemas.LteObj_LteNmr, v.LteNmr)
+	if v.LteTimingAdvance != nil {
+		s.WriteInt32(schemas.LteObj_LteTimingAdvance, *v.LteTimingAdvance)
+	}
+	if v.Mcc != nil {
+		s.WriteInt32(schemas.LteObj_Mcc, *v.Mcc)
+	}
+	if v.Mnc != nil {
+		s.WriteInt32(schemas.LteObj_Mnc, *v.Mnc)
+	}
+	if v.NrCapable != false {
+		s.WriteBool(schemas.LteObj_NrCapable, v.NrCapable)
+	}
+	if v.Rsrp != nil {
+		s.WriteInt32(schemas.LteObj_Rsrp, *v.Rsrp)
+	}
+	if v.Rsrq != nil {
+		s.WriteFloat32(schemas.LteObj_Rsrq, *v.Rsrq)
+	}
+	if v.Tac != nil {
+		s.WriteInt32(schemas.LteObj_Tac, *v.Tac)
+	}
+}
+func (v *LteObj) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LteObj, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LteObj_EutranCid:
+			v.EutranCid = new(int32)
+			return d.ReadInt32(schemas.LteObj_EutranCid, v.EutranCid)
+		case schemas.LteObj_LteLocalId:
+			v.LteLocalId = &LteLocalId{}
+			return v.LteLocalId.Deserialize(d)
+		case schemas.LteObj_LteNmr:
+			return deserializeLteNmrList(d, schemas.LteObj_LteNmr, &v.LteNmr)
+		case schemas.LteObj_LteTimingAdvance:
+			v.LteTimingAdvance = new(int32)
+			return d.ReadInt32(schemas.LteObj_LteTimingAdvance, v.LteTimingAdvance)
+		case schemas.LteObj_Mcc:
+			v.Mcc = new(int32)
+			return d.ReadInt32(schemas.LteObj_Mcc, v.Mcc)
+		case schemas.LteObj_Mnc:
+			v.Mnc = new(int32)
+			return d.ReadInt32(schemas.LteObj_Mnc, v.Mnc)
+		case schemas.LteObj_NrCapable:
+			return d.ReadBool(schemas.LteObj_NrCapable, &v.NrCapable)
+		case schemas.LteObj_Rsrp:
+			v.Rsrp = new(int32)
+			return d.ReadInt32(schemas.LteObj_Rsrp, v.Rsrp)
+		case schemas.LteObj_Rsrq:
+			v.Rsrq = new(float32)
+			return d.ReadFloat32(schemas.LteObj_Rsrq, v.Rsrq)
+		case schemas.LteObj_Tac:
+			v.Tac = new(int32)
+			return d.ReadInt32(schemas.LteObj_Tac, v.Tac)
+		}
+		return nil
+	})
+}
+
 // Message delivery status event configuration object for enabling and disabling
 // relevant topics.
 type MessageDeliveryStatusEventConfiguration struct {
@@ -1345,6 +4037,40 @@ type MessageDeliveryStatusEventConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MessageDeliveryStatusEventConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageDeliveryStatusEventConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageDeliveryStatusEventConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.MessageDeliveryStatusEventConfiguration_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WirelessDeviceIdEventTopic != "" {
+		s.WriteString(schemas.MessageDeliveryStatusEventConfiguration_WirelessDeviceIdEventTopic, string(v.WirelessDeviceIdEventTopic))
+	}
+}
+func (v *MessageDeliveryStatusEventConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageDeliveryStatusEventConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageDeliveryStatusEventConfiguration_Sidewalk:
+			v.Sidewalk = &SidewalkEventNotificationConfigurations{}
+			return v.Sidewalk.Deserialize(d)
+		case schemas.MessageDeliveryStatusEventConfiguration_WirelessDeviceIdEventTopic:
+			var ev string
+			if err := d.ReadString(schemas.MessageDeliveryStatusEventConfiguration_WirelessDeviceIdEventTopic, &ev); err != nil {
+				return err
+			}
+			v.WirelessDeviceIdEventTopic = EventNotificationTopicStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Message delivery status resource type event configuration object for enabling
 // or disabling relevant topic.
 type MessageDeliveryStatusResourceTypeEventConfiguration struct {
@@ -1354,6 +4080,30 @@ type MessageDeliveryStatusResourceTypeEventConfiguration struct {
 	Sidewalk *SidewalkResourceTypeEventConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *MessageDeliveryStatusResourceTypeEventConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MessageDeliveryStatusResourceTypeEventConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MessageDeliveryStatusResourceTypeEventConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.MessageDeliveryStatusResourceTypeEventConfiguration_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MessageDeliveryStatusResourceTypeEventConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MessageDeliveryStatusResourceTypeEventConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MessageDeliveryStatusResourceTypeEventConfiguration_Sidewalk:
+			v.Sidewalk = &SidewalkResourceTypeEventConfiguration{}
+			return v.Sidewalk.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The aggregated values of the metric.
@@ -1386,6 +4136,58 @@ type MetricQueryValue struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricQueryValue) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricQueryValue)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricQueryValue) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Avg != nil {
+		s.WriteFloat64(schemas.MetricQueryValue_Avg, *v.Avg)
+	}
+	if v.Max != nil {
+		s.WriteFloat64(schemas.MetricQueryValue_Max, *v.Max)
+	}
+	if v.Min != nil {
+		s.WriteFloat64(schemas.MetricQueryValue_Min, *v.Min)
+	}
+	if v.P90 != nil {
+		s.WriteFloat64(schemas.MetricQueryValue_P90, *v.P90)
+	}
+	if v.Std != nil {
+		s.WriteFloat64(schemas.MetricQueryValue_Std, *v.Std)
+	}
+	if v.Sum != nil {
+		s.WriteFloat64(schemas.MetricQueryValue_Sum, *v.Sum)
+	}
+}
+func (v *MetricQueryValue) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricQueryValue, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricQueryValue_Avg:
+			v.Avg = new(float64)
+			return d.ReadFloat64(schemas.MetricQueryValue_Avg, v.Avg)
+		case schemas.MetricQueryValue_Max:
+			v.Max = new(float64)
+			return d.ReadFloat64(schemas.MetricQueryValue_Max, v.Max)
+		case schemas.MetricQueryValue_Min:
+			v.Min = new(float64)
+			return d.ReadFloat64(schemas.MetricQueryValue_Min, v.Min)
+		case schemas.MetricQueryValue_P90:
+			v.P90 = new(float64)
+			return d.ReadFloat64(schemas.MetricQueryValue_P90, v.P90)
+		case schemas.MetricQueryValue_Std:
+			v.Std = new(float64)
+			return d.ReadFloat64(schemas.MetricQueryValue_Std, v.Std)
+		case schemas.MetricQueryValue_Sum:
+			v.Sum = new(float64)
+			return d.ReadFloat64(schemas.MetricQueryValue_Sum, v.Sum)
+		}
+		return nil
+	})
+}
+
 // A multicast group.
 type MulticastGroup struct {
 
@@ -1401,6 +4203,40 @@ type MulticastGroup struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MulticastGroup) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MulticastGroup)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MulticastGroup) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.MulticastGroup_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.MulticastGroup_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MulticastGroup_Name, *v.Name)
+	}
+}
+func (v *MulticastGroup) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MulticastGroup, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MulticastGroup_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.MulticastGroup_Arn, v.Arn)
+		case schemas.MulticastGroup_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MulticastGroup_Id, v.Id)
+		case schemas.MulticastGroup_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MulticastGroup_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // A multicast group that is associated with a FUOTA task.
 type MulticastGroupByFuotaTask struct {
 
@@ -1410,6 +4246,28 @@ type MulticastGroupByFuotaTask struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MulticastGroupByFuotaTask) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MulticastGroupByFuotaTask)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MulticastGroupByFuotaTask) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.MulticastGroupByFuotaTask_Id, *v.Id)
+	}
+}
+func (v *MulticastGroupByFuotaTask) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MulticastGroupByFuotaTask, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MulticastGroupByFuotaTask_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MulticastGroupByFuotaTask_Id, v.Id)
+		}
+		return nil
+	})
+}
+
 // Wireless metadata that is to be sent to multicast group.
 type MulticastWirelessMetadata struct {
 
@@ -1417,6 +4275,30 @@ type MulticastWirelessMetadata struct {
 	LoRaWAN *LoRaWANMulticastMetadata
 
 	noSmithyDocumentSerde
+}
+
+func (v *MulticastWirelessMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MulticastWirelessMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MulticastWirelessMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.MulticastWirelessMetadata_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *MulticastWirelessMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MulticastWirelessMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MulticastWirelessMetadata_LoRaWAN:
+			v.LoRaWAN = &LoRaWANMulticastMetadata{}
+			return v.LoRaWAN.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Network analyzer configurations.
@@ -1429,6 +4311,34 @@ type NetworkAnalyzerConfigurations struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkAnalyzerConfigurations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkAnalyzerConfigurations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkAnalyzerConfigurations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.NetworkAnalyzerConfigurations_Arn, *v.Arn)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.NetworkAnalyzerConfigurations_Name, *v.Name)
+	}
+}
+func (v *NetworkAnalyzerConfigurations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkAnalyzerConfigurations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkAnalyzerConfigurations_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.NetworkAnalyzerConfigurations_Arn, v.Arn)
+		case schemas.NetworkAnalyzerConfigurations_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.NetworkAnalyzerConfigurations_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // OTAA device object for v1.0.x
@@ -1451,6 +4361,46 @@ type OtaaV1_0_x struct {
 	noSmithyDocumentSerde
 }
 
+func (v *OtaaV1_0_x) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OtaaV1_0_x)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OtaaV1_0_x) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppEui != nil {
+		s.WriteString(schemas.OtaaV1_0_x_AppEui, *v.AppEui)
+	}
+	if v.AppKey != nil {
+		s.WriteString(schemas.OtaaV1_0_x_AppKey, *v.AppKey)
+	}
+	if v.GenAppKey != nil {
+		s.WriteString(schemas.OtaaV1_0_x_GenAppKey, *v.GenAppKey)
+	}
+	if v.JoinEui != nil {
+		s.WriteString(schemas.OtaaV1_0_x_JoinEui, *v.JoinEui)
+	}
+}
+func (v *OtaaV1_0_x) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OtaaV1_0_x, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OtaaV1_0_x_AppEui:
+			v.AppEui = new(string)
+			return d.ReadString(schemas.OtaaV1_0_x_AppEui, v.AppEui)
+		case schemas.OtaaV1_0_x_AppKey:
+			v.AppKey = new(string)
+			return d.ReadString(schemas.OtaaV1_0_x_AppKey, v.AppKey)
+		case schemas.OtaaV1_0_x_GenAppKey:
+			v.GenAppKey = new(string)
+			return d.ReadString(schemas.OtaaV1_0_x_GenAppKey, v.GenAppKey)
+		case schemas.OtaaV1_0_x_JoinEui:
+			v.JoinEui = new(string)
+			return d.ReadString(schemas.OtaaV1_0_x_JoinEui, v.JoinEui)
+		}
+		return nil
+	})
+}
+
 // OTAA device object for v1.1
 type OtaaV1_1 struct {
 
@@ -1464,6 +4414,40 @@ type OtaaV1_1 struct {
 	NwkKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *OtaaV1_1) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.OtaaV1_1)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *OtaaV1_1) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppKey != nil {
+		s.WriteString(schemas.OtaaV1_1_AppKey, *v.AppKey)
+	}
+	if v.JoinEui != nil {
+		s.WriteString(schemas.OtaaV1_1_JoinEui, *v.JoinEui)
+	}
+	if v.NwkKey != nil {
+		s.WriteString(schemas.OtaaV1_1_NwkKey, *v.NwkKey)
+	}
+}
+func (v *OtaaV1_1) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.OtaaV1_1, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.OtaaV1_1_AppKey:
+			v.AppKey = new(string)
+			return d.ReadString(schemas.OtaaV1_1_AppKey, v.AppKey)
+		case schemas.OtaaV1_1_JoinEui:
+			v.JoinEui = new(string)
+			return d.ReadString(schemas.OtaaV1_1_JoinEui, v.JoinEui)
+		case schemas.OtaaV1_1_NwkKey:
+			v.NwkKey = new(string)
+			return d.ReadString(schemas.OtaaV1_1_NwkKey, v.NwkKey)
+		}
+		return nil
+	})
 }
 
 // Specify the list of gateways to which you want to send downlink data traffic
@@ -1491,6 +4475,41 @@ type ParticipatingGateways struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ParticipatingGateways) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParticipatingGateways)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParticipatingGateways) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DownlinkMode != "" {
+		s.WriteString(schemas.ParticipatingGateways_DownlinkMode, string(v.DownlinkMode))
+	}
+	serializeGatewayList(s, schemas.ParticipatingGateways_GatewayList, v.GatewayList)
+	if v.TransmissionInterval != nil {
+		s.WriteInt32(schemas.ParticipatingGateways_TransmissionInterval, *v.TransmissionInterval)
+	}
+}
+func (v *ParticipatingGateways) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParticipatingGateways, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParticipatingGateways_DownlinkMode:
+			var ev string
+			if err := d.ReadString(schemas.ParticipatingGateways_DownlinkMode, &ev); err != nil {
+				return err
+			}
+			v.DownlinkMode = DownlinkMode(ev)
+			return nil
+		case schemas.ParticipatingGateways_GatewayList:
+			return deserializeGatewayList(d, schemas.ParticipatingGateways_GatewayList, &v.GatewayList)
+		case schemas.ParticipatingGateways_TransmissionInterval:
+			v.TransmissionInterval = new(int32)
+			return d.ReadInt32(schemas.ParticipatingGateways_TransmissionInterval, v.TransmissionInterval)
+		}
+		return nil
+	})
+}
+
 // Specify the list of gateways to which you want to send the multicast downlink
 // messages. The multicast message will be sent to each gateway in the list, with
 // the transmission interval as the time interval between each message.
@@ -1508,6 +4527,31 @@ type ParticipatingGatewaysMulticast struct {
 	TransmissionInterval *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *ParticipatingGatewaysMulticast) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParticipatingGatewaysMulticast)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParticipatingGatewaysMulticast) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGatewayListMulticast(s, schemas.ParticipatingGatewaysMulticast_GatewayList, v.GatewayList)
+	if v.TransmissionInterval != nil {
+		s.WriteInt32(schemas.ParticipatingGatewaysMulticast_TransmissionInterval, *v.TransmissionInterval)
+	}
+}
+func (v *ParticipatingGatewaysMulticast) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParticipatingGatewaysMulticast, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParticipatingGatewaysMulticast_GatewayList:
+			return deserializeGatewayListMulticast(d, schemas.ParticipatingGatewaysMulticast_GatewayList, &v.GatewayList)
+		case schemas.ParticipatingGatewaysMulticast_TransmissionInterval:
+			v.TransmissionInterval = new(int32)
+			return d.ReadInt32(schemas.ParticipatingGatewaysMulticast_TransmissionInterval, v.TransmissionInterval)
+		}
+		return nil
+	})
 }
 
 // The wrapper for a position configuration.
@@ -1529,6 +4573,52 @@ type PositionConfigurationItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PositionConfigurationItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PositionConfigurationItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PositionConfigurationItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Destination != nil {
+		s.WriteString(schemas.PositionConfigurationItem_Destination, *v.Destination)
+	}
+	if v.ResourceIdentifier != nil {
+		s.WriteString(schemas.PositionConfigurationItem_ResourceIdentifier, *v.ResourceIdentifier)
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.PositionConfigurationItem_ResourceType, string(v.ResourceType))
+	}
+	if v.Solvers != nil {
+		s.WriteStruct(schemas.PositionConfigurationItem_Solvers)
+		v.Solvers.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PositionConfigurationItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PositionConfigurationItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PositionConfigurationItem_Destination:
+			v.Destination = new(string)
+			return d.ReadString(schemas.PositionConfigurationItem_Destination, v.Destination)
+		case schemas.PositionConfigurationItem_ResourceIdentifier:
+			v.ResourceIdentifier = new(string)
+			return d.ReadString(schemas.PositionConfigurationItem_ResourceIdentifier, v.ResourceIdentifier)
+		case schemas.PositionConfigurationItem_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.PositionConfigurationItem_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = PositionResourceType(ev)
+			return nil
+		case schemas.PositionConfigurationItem_Solvers:
+			v.Solvers = &PositionSolverDetails{}
+			return v.Solvers.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The FPorts for the position information.
 type Positioning struct {
 
@@ -1544,6 +4634,40 @@ type Positioning struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Positioning) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Positioning)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Positioning) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClockSync != nil {
+		s.WriteInt32(schemas.Positioning_ClockSync, *v.ClockSync)
+	}
+	if v.Gnss != nil {
+		s.WriteInt32(schemas.Positioning_Gnss, *v.Gnss)
+	}
+	if v.Stream != nil {
+		s.WriteInt32(schemas.Positioning_Stream, *v.Stream)
+	}
+}
+func (v *Positioning) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Positioning, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Positioning_ClockSync:
+			v.ClockSync = new(int32)
+			return d.ReadInt32(schemas.Positioning_ClockSync, v.ClockSync)
+		case schemas.Positioning_Gnss:
+			v.Gnss = new(int32)
+			return d.ReadInt32(schemas.Positioning_Gnss, v.Gnss)
+		case schemas.Positioning_Stream:
+			v.Stream = new(int32)
+			return d.ReadInt32(schemas.Positioning_Stream, v.Stream)
+		}
+		return nil
+	})
+}
+
 // The wrapper for position solver configurations.
 type PositionSolverConfigurations struct {
 
@@ -1553,6 +4677,30 @@ type PositionSolverConfigurations struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PositionSolverConfigurations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PositionSolverConfigurations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PositionSolverConfigurations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SemtechGnss != nil {
+		s.WriteStruct(schemas.PositionSolverConfigurations_SemtechGnss)
+		v.SemtechGnss.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PositionSolverConfigurations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PositionSolverConfigurations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PositionSolverConfigurations_SemtechGnss:
+			v.SemtechGnss = &SemtechGnssConfiguration{}
+			return v.SemtechGnss.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The wrapper for position solver details.
 type PositionSolverDetails struct {
 
@@ -1560,6 +4708,30 @@ type PositionSolverDetails struct {
 	SemtechGnss *SemtechGnssDetail
 
 	noSmithyDocumentSerde
+}
+
+func (v *PositionSolverDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PositionSolverDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PositionSolverDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SemtechGnss != nil {
+		s.WriteStruct(schemas.PositionSolverDetails_SemtechGnss)
+		v.SemtechGnss.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *PositionSolverDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PositionSolverDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PositionSolverDetails_SemtechGnss:
+			v.SemtechGnss = &SemtechGnssDetail{}
+			return v.SemtechGnss.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Proximity event configuration object for enabling and disabling relevant topics.
@@ -1576,6 +4748,40 @@ type ProximityEventConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProximityEventConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProximityEventConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProximityEventConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.ProximityEventConfiguration_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WirelessDeviceIdEventTopic != "" {
+		s.WriteString(schemas.ProximityEventConfiguration_WirelessDeviceIdEventTopic, string(v.WirelessDeviceIdEventTopic))
+	}
+}
+func (v *ProximityEventConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProximityEventConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProximityEventConfiguration_Sidewalk:
+			v.Sidewalk = &SidewalkEventNotificationConfigurations{}
+			return v.Sidewalk.Deserialize(d)
+		case schemas.ProximityEventConfiguration_WirelessDeviceIdEventTopic:
+			var ev string
+			if err := d.ReadString(schemas.ProximityEventConfiguration_WirelessDeviceIdEventTopic, &ev); err != nil {
+				return err
+			}
+			v.WirelessDeviceIdEventTopic = EventNotificationTopicStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Proximity resource type event configuration object for enabling or disabling
 // topic.
 type ProximityResourceTypeEventConfiguration struct {
@@ -1585,6 +4791,30 @@ type ProximityResourceTypeEventConfiguration struct {
 	Sidewalk *SidewalkResourceTypeEventConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProximityResourceTypeEventConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProximityResourceTypeEventConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProximityResourceTypeEventConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.ProximityResourceTypeEventConfiguration_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ProximityResourceTypeEventConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProximityResourceTypeEventConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProximityResourceTypeEventConfiguration_Sidewalk:
+			v.Sidewalk = &SidewalkResourceTypeEventConfiguration{}
+			return v.Sidewalk.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Information about the Semtech GNSS solver configuration.
@@ -1601,6 +4831,42 @@ type SemtechGnssConfiguration struct {
 	Status PositionConfigurationStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *SemtechGnssConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SemtechGnssConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SemtechGnssConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fec != "" {
+		s.WriteString(schemas.SemtechGnssConfiguration_Fec, string(v.Fec))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SemtechGnssConfiguration_Status, string(v.Status))
+	}
+}
+func (v *SemtechGnssConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SemtechGnssConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SemtechGnssConfiguration_Fec:
+			var ev string
+			if err := d.ReadString(schemas.SemtechGnssConfiguration_Fec, &ev); err != nil {
+				return err
+			}
+			v.Fec = PositionConfigurationFec(ev)
+			return nil
+		case schemas.SemtechGnssConfiguration_Status:
+			var ev string
+			if err := d.ReadString(schemas.SemtechGnssConfiguration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = PositionConfigurationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Details of the Semtech GNSS solver object.
@@ -1621,6 +4887,62 @@ type SemtechGnssDetail struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SemtechGnssDetail) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SemtechGnssDetail)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SemtechGnssDetail) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Fec != "" {
+		s.WriteString(schemas.SemtechGnssDetail_Fec, string(v.Fec))
+	}
+	if v.Provider != "" {
+		s.WriteString(schemas.SemtechGnssDetail_Provider, string(v.Provider))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SemtechGnssDetail_Status, string(v.Status))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SemtechGnssDetail_Type, string(v.Type))
+	}
+}
+func (v *SemtechGnssDetail) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SemtechGnssDetail, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SemtechGnssDetail_Fec:
+			var ev string
+			if err := d.ReadString(schemas.SemtechGnssDetail_Fec, &ev); err != nil {
+				return err
+			}
+			v.Fec = PositionConfigurationFec(ev)
+			return nil
+		case schemas.SemtechGnssDetail_Provider:
+			var ev string
+			if err := d.ReadString(schemas.SemtechGnssDetail_Provider, &ev); err != nil {
+				return err
+			}
+			v.Provider = PositionSolverProvider(ev)
+			return nil
+		case schemas.SemtechGnssDetail_Status:
+			var ev string
+			if err := d.ReadString(schemas.SemtechGnssDetail_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = PositionConfigurationStatus(ev)
+			return nil
+		case schemas.SemtechGnssDetail_Type:
+			var ev string
+			if err := d.ReadString(schemas.SemtechGnssDetail_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = PositionSolverType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Information about a service profile.
 type ServiceProfile struct {
 
@@ -1636,6 +4958,40 @@ type ServiceProfile struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ServiceProfile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ServiceProfile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ServiceProfile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ServiceProfile_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.ServiceProfile_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ServiceProfile_Name, *v.Name)
+	}
+}
+func (v *ServiceProfile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceProfile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceProfile_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ServiceProfile_Arn, v.Arn)
+		case schemas.ServiceProfile_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ServiceProfile_Id, v.Id)
+		case schemas.ServiceProfile_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ServiceProfile_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Session keys for ABP v1.1
 type SessionKeysAbpV1_0_x struct {
 
@@ -1646,6 +5002,34 @@ type SessionKeysAbpV1_0_x struct {
 	NwkSKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SessionKeysAbpV1_0_x) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionKeysAbpV1_0_x)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionKeysAbpV1_0_x) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppSKey != nil {
+		s.WriteString(schemas.SessionKeysAbpV1_0_x_AppSKey, *v.AppSKey)
+	}
+	if v.NwkSKey != nil {
+		s.WriteString(schemas.SessionKeysAbpV1_0_x_NwkSKey, *v.NwkSKey)
+	}
+}
+func (v *SessionKeysAbpV1_0_x) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionKeysAbpV1_0_x, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionKeysAbpV1_0_x_AppSKey:
+			v.AppSKey = new(string)
+			return d.ReadString(schemas.SessionKeysAbpV1_0_x_AppSKey, v.AppSKey)
+		case schemas.SessionKeysAbpV1_0_x_NwkSKey:
+			v.NwkSKey = new(string)
+			return d.ReadString(schemas.SessionKeysAbpV1_0_x_NwkSKey, v.NwkSKey)
+		}
+		return nil
+	})
 }
 
 // Session keys for ABP v1.1
@@ -1666,6 +5050,46 @@ type SessionKeysAbpV1_1 struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SessionKeysAbpV1_1) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SessionKeysAbpV1_1)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SessionKeysAbpV1_1) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppSKey != nil {
+		s.WriteString(schemas.SessionKeysAbpV1_1_AppSKey, *v.AppSKey)
+	}
+	if v.FNwkSIntKey != nil {
+		s.WriteString(schemas.SessionKeysAbpV1_1_FNwkSIntKey, *v.FNwkSIntKey)
+	}
+	if v.NwkSEncKey != nil {
+		s.WriteString(schemas.SessionKeysAbpV1_1_NwkSEncKey, *v.NwkSEncKey)
+	}
+	if v.SNwkSIntKey != nil {
+		s.WriteString(schemas.SessionKeysAbpV1_1_SNwkSIntKey, *v.SNwkSIntKey)
+	}
+}
+func (v *SessionKeysAbpV1_1) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SessionKeysAbpV1_1, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SessionKeysAbpV1_1_AppSKey:
+			v.AppSKey = new(string)
+			return d.ReadString(schemas.SessionKeysAbpV1_1_AppSKey, v.AppSKey)
+		case schemas.SessionKeysAbpV1_1_FNwkSIntKey:
+			v.FNwkSIntKey = new(string)
+			return d.ReadString(schemas.SessionKeysAbpV1_1_FNwkSIntKey, v.FNwkSIntKey)
+		case schemas.SessionKeysAbpV1_1_NwkSEncKey:
+			v.NwkSEncKey = new(string)
+			return d.ReadString(schemas.SessionKeysAbpV1_1_NwkSEncKey, v.NwkSEncKey)
+		case schemas.SessionKeysAbpV1_1_SNwkSIntKey:
+			v.SNwkSIntKey = new(string)
+			return d.ReadString(schemas.SessionKeysAbpV1_1_SNwkSIntKey, v.SNwkSIntKey)
+		}
+		return nil
+	})
+}
+
 // Information about a Sidewalk account.
 type SidewalkAccountInfo struct {
 
@@ -1676,6 +5100,34 @@ type SidewalkAccountInfo struct {
 	AppServerPrivateKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SidewalkAccountInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkAccountInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkAccountInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmazonId != nil {
+		s.WriteString(schemas.SidewalkAccountInfo_AmazonId, *v.AmazonId)
+	}
+	if v.AppServerPrivateKey != nil {
+		s.WriteString(schemas.SidewalkAccountInfo_AppServerPrivateKey, *v.AppServerPrivateKey)
+	}
+}
+func (v *SidewalkAccountInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkAccountInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkAccountInfo_AmazonId:
+			v.AmazonId = new(string)
+			return d.ReadString(schemas.SidewalkAccountInfo_AmazonId, v.AmazonId)
+		case schemas.SidewalkAccountInfo_AppServerPrivateKey:
+			v.AppServerPrivateKey = new(string)
+			return d.ReadString(schemas.SidewalkAccountInfo_AppServerPrivateKey, v.AppServerPrivateKey)
+		}
+		return nil
+	})
 }
 
 // Information about a Sidewalk account.
@@ -1693,9 +5145,59 @@ type SidewalkAccountInfoWithFingerprint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SidewalkAccountInfoWithFingerprint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkAccountInfoWithFingerprint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkAccountInfoWithFingerprint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmazonId != nil {
+		s.WriteString(schemas.SidewalkAccountInfoWithFingerprint_AmazonId, *v.AmazonId)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.SidewalkAccountInfoWithFingerprint_Arn, *v.Arn)
+	}
+	if v.Fingerprint != nil {
+		s.WriteString(schemas.SidewalkAccountInfoWithFingerprint_Fingerprint, *v.Fingerprint)
+	}
+}
+func (v *SidewalkAccountInfoWithFingerprint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkAccountInfoWithFingerprint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkAccountInfoWithFingerprint_AmazonId:
+			v.AmazonId = new(string)
+			return d.ReadString(schemas.SidewalkAccountInfoWithFingerprint_AmazonId, v.AmazonId)
+		case schemas.SidewalkAccountInfoWithFingerprint_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.SidewalkAccountInfoWithFingerprint_Arn, v.Arn)
+		case schemas.SidewalkAccountInfoWithFingerprint_Fingerprint:
+			v.Fingerprint = new(string)
+			return d.ReadString(schemas.SidewalkAccountInfoWithFingerprint_Fingerprint, v.Fingerprint)
+		}
+		return nil
+	})
+}
+
 // Sidewalk object for creating a device profile.
 type SidewalkCreateDeviceProfile struct {
 	noSmithyDocumentSerde
+}
+
+func (v *SidewalkCreateDeviceProfile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkCreateDeviceProfile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkCreateDeviceProfile) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *SidewalkCreateDeviceProfile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkCreateDeviceProfile, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
 }
 
 // Sidewalk object for creating a wireless device.
@@ -1711,6 +5213,42 @@ type SidewalkCreateWirelessDevice struct {
 	SidewalkManufacturingSn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SidewalkCreateWirelessDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkCreateWirelessDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkCreateWirelessDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceProfileId != nil {
+		s.WriteString(schemas.SidewalkCreateWirelessDevice_DeviceProfileId, *v.DeviceProfileId)
+	}
+	if v.Positioning != nil {
+		s.WriteStruct(schemas.SidewalkCreateWirelessDevice_Positioning)
+		v.Positioning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SidewalkManufacturingSn != nil {
+		s.WriteString(schemas.SidewalkCreateWirelessDevice_SidewalkManufacturingSn, *v.SidewalkManufacturingSn)
+	}
+}
+func (v *SidewalkCreateWirelessDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkCreateWirelessDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkCreateWirelessDevice_DeviceProfileId:
+			v.DeviceProfileId = new(string)
+			return d.ReadString(schemas.SidewalkCreateWirelessDevice_DeviceProfileId, v.DeviceProfileId)
+		case schemas.SidewalkCreateWirelessDevice_Positioning:
+			v.Positioning = &SidewalkPositioning{}
+			return v.Positioning.Deserialize(d)
+		case schemas.SidewalkCreateWirelessDevice_SidewalkManufacturingSn:
+			v.SidewalkManufacturingSn = new(string)
+			return d.ReadString(schemas.SidewalkCreateWirelessDevice_SidewalkManufacturingSn, v.SidewalkManufacturingSn)
+		}
+		return nil
+	})
 }
 
 // Sidewalk device object.
@@ -1746,6 +5284,76 @@ type SidewalkDevice struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SidewalkDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmazonId != nil {
+		s.WriteString(schemas.SidewalkDevice_AmazonId, *v.AmazonId)
+	}
+	if v.CertificateId != nil {
+		s.WriteString(schemas.SidewalkDevice_CertificateId, *v.CertificateId)
+	}
+	serializeDeviceCertificateList(s, schemas.SidewalkDevice_DeviceCertificates, v.DeviceCertificates)
+	if v.DeviceProfileId != nil {
+		s.WriteString(schemas.SidewalkDevice_DeviceProfileId, *v.DeviceProfileId)
+	}
+	if v.Positioning != nil {
+		s.WriteStruct(schemas.SidewalkDevice_Positioning)
+		v.Positioning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePrivateKeysList(s, schemas.SidewalkDevice_PrivateKeys, v.PrivateKeys)
+	if v.SidewalkId != nil {
+		s.WriteString(schemas.SidewalkDevice_SidewalkId, *v.SidewalkId)
+	}
+	if v.SidewalkManufacturingSn != nil {
+		s.WriteString(schemas.SidewalkDevice_SidewalkManufacturingSn, *v.SidewalkManufacturingSn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SidewalkDevice_Status, string(v.Status))
+	}
+}
+func (v *SidewalkDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkDevice_AmazonId:
+			v.AmazonId = new(string)
+			return d.ReadString(schemas.SidewalkDevice_AmazonId, v.AmazonId)
+		case schemas.SidewalkDevice_CertificateId:
+			v.CertificateId = new(string)
+			return d.ReadString(schemas.SidewalkDevice_CertificateId, v.CertificateId)
+		case schemas.SidewalkDevice_DeviceCertificates:
+			return deserializeDeviceCertificateList(d, schemas.SidewalkDevice_DeviceCertificates, &v.DeviceCertificates)
+		case schemas.SidewalkDevice_DeviceProfileId:
+			v.DeviceProfileId = new(string)
+			return d.ReadString(schemas.SidewalkDevice_DeviceProfileId, v.DeviceProfileId)
+		case schemas.SidewalkDevice_Positioning:
+			v.Positioning = &SidewalkPositioning{}
+			return v.Positioning.Deserialize(d)
+		case schemas.SidewalkDevice_PrivateKeys:
+			return deserializePrivateKeysList(d, schemas.SidewalkDevice_PrivateKeys, &v.PrivateKeys)
+		case schemas.SidewalkDevice_SidewalkId:
+			v.SidewalkId = new(string)
+			return d.ReadString(schemas.SidewalkDevice_SidewalkId, v.SidewalkId)
+		case schemas.SidewalkDevice_SidewalkManufacturingSn:
+			v.SidewalkManufacturingSn = new(string)
+			return d.ReadString(schemas.SidewalkDevice_SidewalkManufacturingSn, v.SidewalkManufacturingSn)
+		case schemas.SidewalkDevice_Status:
+			var ev string
+			if err := d.ReadString(schemas.SidewalkDevice_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = WirelessDeviceSidewalkStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // MetaData for Sidewalk device.
 type SidewalkDeviceMetadata struct {
 
@@ -1764,6 +5372,58 @@ type SidewalkDeviceMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SidewalkDeviceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkDeviceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkDeviceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BatteryLevel != "" {
+		s.WriteString(schemas.SidewalkDeviceMetadata_BatteryLevel, string(v.BatteryLevel))
+	}
+	if v.DeviceState != "" {
+		s.WriteString(schemas.SidewalkDeviceMetadata_DeviceState, string(v.DeviceState))
+	}
+	if v.Event != "" {
+		s.WriteString(schemas.SidewalkDeviceMetadata_Event, string(v.Event))
+	}
+	if v.Rssi != nil {
+		s.WriteInt32(schemas.SidewalkDeviceMetadata_Rssi, *v.Rssi)
+	}
+}
+func (v *SidewalkDeviceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkDeviceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkDeviceMetadata_BatteryLevel:
+			var ev string
+			if err := d.ReadString(schemas.SidewalkDeviceMetadata_BatteryLevel, &ev); err != nil {
+				return err
+			}
+			v.BatteryLevel = BatteryLevel(ev)
+			return nil
+		case schemas.SidewalkDeviceMetadata_DeviceState:
+			var ev string
+			if err := d.ReadString(schemas.SidewalkDeviceMetadata_DeviceState, &ev); err != nil {
+				return err
+			}
+			v.DeviceState = DeviceState(ev)
+			return nil
+		case schemas.SidewalkDeviceMetadata_Event:
+			var ev string
+			if err := d.ReadString(schemas.SidewalkDeviceMetadata_Event, &ev); err != nil {
+				return err
+			}
+			v.Event = Event(ev)
+			return nil
+		case schemas.SidewalkDeviceMetadata_Rssi:
+			v.Rssi = new(int32)
+			return d.ReadInt32(schemas.SidewalkDeviceMetadata_Rssi, v.Rssi)
+		}
+		return nil
+	})
+}
+
 // SidewalkEventNotificationConfigurations object, which is the event
 // configuration object for Sidewalk-related event topics.
 type SidewalkEventNotificationConfigurations struct {
@@ -1772,6 +5432,32 @@ type SidewalkEventNotificationConfigurations struct {
 	AmazonIdEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *SidewalkEventNotificationConfigurations) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkEventNotificationConfigurations)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkEventNotificationConfigurations) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmazonIdEventTopic != "" {
+		s.WriteString(schemas.SidewalkEventNotificationConfigurations_AmazonIdEventTopic, string(v.AmazonIdEventTopic))
+	}
+}
+func (v *SidewalkEventNotificationConfigurations) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkEventNotificationConfigurations, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkEventNotificationConfigurations_AmazonIdEventTopic:
+			var ev string
+			if err := d.ReadString(schemas.SidewalkEventNotificationConfigurations_AmazonIdEventTopic, &ev); err != nil {
+				return err
+			}
+			v.AmazonIdEventTopic = EventNotificationTopicStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Gets information about a Sidewalk device profile.
@@ -1789,6 +5475,37 @@ type SidewalkGetDeviceProfile struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SidewalkGetDeviceProfile) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkGetDeviceProfile)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkGetDeviceProfile) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationServerPublicKey != nil {
+		s.WriteString(schemas.SidewalkGetDeviceProfile_ApplicationServerPublicKey, *v.ApplicationServerPublicKey)
+	}
+	serializeDakCertificateMetadataList(s, schemas.SidewalkGetDeviceProfile_DakCertificateMetadata, v.DakCertificateMetadata)
+	if v.QualificationStatus != nil {
+		s.WriteBool(schemas.SidewalkGetDeviceProfile_QualificationStatus, *v.QualificationStatus)
+	}
+}
+func (v *SidewalkGetDeviceProfile) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkGetDeviceProfile, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkGetDeviceProfile_ApplicationServerPublicKey:
+			v.ApplicationServerPublicKey = new(string)
+			return d.ReadString(schemas.SidewalkGetDeviceProfile_ApplicationServerPublicKey, v.ApplicationServerPublicKey)
+		case schemas.SidewalkGetDeviceProfile_DakCertificateMetadata:
+			return deserializeDakCertificateMetadataList(d, schemas.SidewalkGetDeviceProfile_DakCertificateMetadata, &v.DakCertificateMetadata)
+		case schemas.SidewalkGetDeviceProfile_QualificationStatus:
+			v.QualificationStatus = new(bool)
+			return d.ReadBool(schemas.SidewalkGetDeviceProfile_QualificationStatus, v.QualificationStatus)
+		}
+		return nil
+	})
+}
+
 // Sidewalk-related information for devices in an import task that are being
 // onboarded.
 type SidewalkGetStartImportInfo struct {
@@ -1804,6 +5521,39 @@ type SidewalkGetStartImportInfo struct {
 	Role *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SidewalkGetStartImportInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkGetStartImportInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkGetStartImportInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDeviceCreationFileList(s, schemas.SidewalkGetStartImportInfo_DeviceCreationFileList, v.DeviceCreationFileList)
+	if v.Positioning != nil {
+		s.WriteStruct(schemas.SidewalkGetStartImportInfo_Positioning)
+		v.Positioning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.SidewalkGetStartImportInfo_Role, *v.Role)
+	}
+}
+func (v *SidewalkGetStartImportInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkGetStartImportInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkGetStartImportInfo_DeviceCreationFileList:
+			return deserializeDeviceCreationFileList(d, schemas.SidewalkGetStartImportInfo_DeviceCreationFileList, &v.DeviceCreationFileList)
+		case schemas.SidewalkGetStartImportInfo_Positioning:
+			v.Positioning = &SidewalkPositioning{}
+			return v.Positioning.Deserialize(d)
+		case schemas.SidewalkGetStartImportInfo_Role:
+			v.Role = new(string)
+			return d.ReadString(schemas.SidewalkGetStartImportInfo_Role, v.Role)
+		}
+		return nil
+	})
 }
 
 // Sidewalk object used by list functions.
@@ -1833,6 +5583,67 @@ type SidewalkListDevice struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SidewalkListDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkListDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkListDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmazonId != nil {
+		s.WriteString(schemas.SidewalkListDevice_AmazonId, *v.AmazonId)
+	}
+	serializeDeviceCertificateList(s, schemas.SidewalkListDevice_DeviceCertificates, v.DeviceCertificates)
+	if v.DeviceProfileId != nil {
+		s.WriteString(schemas.SidewalkListDevice_DeviceProfileId, *v.DeviceProfileId)
+	}
+	if v.Positioning != nil {
+		s.WriteStruct(schemas.SidewalkListDevice_Positioning)
+		v.Positioning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SidewalkId != nil {
+		s.WriteString(schemas.SidewalkListDevice_SidewalkId, *v.SidewalkId)
+	}
+	if v.SidewalkManufacturingSn != nil {
+		s.WriteString(schemas.SidewalkListDevice_SidewalkManufacturingSn, *v.SidewalkManufacturingSn)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.SidewalkListDevice_Status, string(v.Status))
+	}
+}
+func (v *SidewalkListDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkListDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkListDevice_AmazonId:
+			v.AmazonId = new(string)
+			return d.ReadString(schemas.SidewalkListDevice_AmazonId, v.AmazonId)
+		case schemas.SidewalkListDevice_DeviceCertificates:
+			return deserializeDeviceCertificateList(d, schemas.SidewalkListDevice_DeviceCertificates, &v.DeviceCertificates)
+		case schemas.SidewalkListDevice_DeviceProfileId:
+			v.DeviceProfileId = new(string)
+			return d.ReadString(schemas.SidewalkListDevice_DeviceProfileId, v.DeviceProfileId)
+		case schemas.SidewalkListDevice_Positioning:
+			v.Positioning = &SidewalkPositioning{}
+			return v.Positioning.Deserialize(d)
+		case schemas.SidewalkListDevice_SidewalkId:
+			v.SidewalkId = new(string)
+			return d.ReadString(schemas.SidewalkListDevice_SidewalkId, v.SidewalkId)
+		case schemas.SidewalkListDevice_SidewalkManufacturingSn:
+			v.SidewalkManufacturingSn = new(string)
+			return d.ReadString(schemas.SidewalkListDevice_SidewalkManufacturingSn, v.SidewalkManufacturingSn)
+		case schemas.SidewalkListDevice_Status:
+			var ev string
+			if err := d.ReadString(schemas.SidewalkListDevice_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = WirelessDeviceSidewalkStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The Sidewalk-related object containing positioning information used to
 // configure Sidewalk devices during import.
 type SidewalkListDevicesForImportInfo struct {
@@ -1841,6 +5652,30 @@ type SidewalkListDevicesForImportInfo struct {
 	Positioning *SidewalkPositioning
 
 	noSmithyDocumentSerde
+}
+
+func (v *SidewalkListDevicesForImportInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkListDevicesForImportInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkListDevicesForImportInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Positioning != nil {
+		s.WriteStruct(schemas.SidewalkListDevicesForImportInfo_Positioning)
+		v.Positioning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SidewalkListDevicesForImportInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkListDevicesForImportInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkListDevicesForImportInfo_Positioning:
+			v.Positioning = &SidewalkPositioning{}
+			return v.Positioning.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The Positioning object of the Sidewalk device.
@@ -1852,6 +5687,28 @@ type SidewalkPositioning struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SidewalkPositioning) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkPositioning)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkPositioning) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DestinationName != nil {
+		s.WriteString(schemas.SidewalkPositioning_DestinationName, *v.DestinationName)
+	}
+}
+func (v *SidewalkPositioning) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkPositioning, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkPositioning_DestinationName:
+			v.DestinationName = new(string)
+			return d.ReadString(schemas.SidewalkPositioning_DestinationName, v.DestinationName)
+		}
+		return nil
+	})
+}
+
 // Sidewalk resource type event configuration object for enabling or disabling
 // topic.
 type SidewalkResourceTypeEventConfiguration struct {
@@ -1860,6 +5717,32 @@ type SidewalkResourceTypeEventConfiguration struct {
 	WirelessDeviceEventTopic EventNotificationTopicStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *SidewalkResourceTypeEventConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkResourceTypeEventConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkResourceTypeEventConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WirelessDeviceEventTopic != "" {
+		s.WriteString(schemas.SidewalkResourceTypeEventConfiguration_WirelessDeviceEventTopic, string(v.WirelessDeviceEventTopic))
+	}
+}
+func (v *SidewalkResourceTypeEventConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkResourceTypeEventConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkResourceTypeEventConfiguration_WirelessDeviceEventTopic:
+			var ev string
+			if err := d.ReadString(schemas.SidewalkResourceTypeEventConfiguration_WirelessDeviceEventTopic, &ev); err != nil {
+				return err
+			}
+			v.WirelessDeviceEventTopic = EventNotificationTopicStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about a Sidewalk router.
@@ -1877,6 +5760,44 @@ type SidewalkSendDataToDevice struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SidewalkSendDataToDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkSendDataToDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkSendDataToDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AckModeRetryDurationSecs != nil {
+		s.WriteInt32(schemas.SidewalkSendDataToDevice_AckModeRetryDurationSecs, *v.AckModeRetryDurationSecs)
+	}
+	if v.MessageType != "" {
+		s.WriteString(schemas.SidewalkSendDataToDevice_MessageType, string(v.MessageType))
+	}
+	if v.Seq != nil {
+		s.WriteInt32(schemas.SidewalkSendDataToDevice_Seq, *v.Seq)
+	}
+}
+func (v *SidewalkSendDataToDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkSendDataToDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkSendDataToDevice_AckModeRetryDurationSecs:
+			v.AckModeRetryDurationSecs = new(int32)
+			return d.ReadInt32(schemas.SidewalkSendDataToDevice_AckModeRetryDurationSecs, v.AckModeRetryDurationSecs)
+		case schemas.SidewalkSendDataToDevice_MessageType:
+			var ev string
+			if err := d.ReadString(schemas.SidewalkSendDataToDevice_MessageType, &ev); err != nil {
+				return err
+			}
+			v.MessageType = MessageType(ev)
+			return nil
+		case schemas.SidewalkSendDataToDevice_Seq:
+			v.Seq = new(int32)
+			return d.ReadInt32(schemas.SidewalkSendDataToDevice_Seq, v.Seq)
+		}
+		return nil
+	})
+}
+
 // Information about an import task created for an individual Sidewalk device.
 type SidewalkSingleStartImportInfo struct {
 
@@ -1888,6 +5809,36 @@ type SidewalkSingleStartImportInfo struct {
 	SidewalkManufacturingSn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SidewalkSingleStartImportInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkSingleStartImportInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkSingleStartImportInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Positioning != nil {
+		s.WriteStruct(schemas.SidewalkSingleStartImportInfo_Positioning)
+		v.Positioning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SidewalkManufacturingSn != nil {
+		s.WriteString(schemas.SidewalkSingleStartImportInfo_SidewalkManufacturingSn, *v.SidewalkManufacturingSn)
+	}
+}
+func (v *SidewalkSingleStartImportInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkSingleStartImportInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkSingleStartImportInfo_Positioning:
+			v.Positioning = &SidewalkPositioning{}
+			return v.Positioning.Deserialize(d)
+		case schemas.SidewalkSingleStartImportInfo_SidewalkManufacturingSn:
+			v.SidewalkManufacturingSn = new(string)
+			return d.ReadString(schemas.SidewalkSingleStartImportInfo_SidewalkManufacturingSn, v.SidewalkManufacturingSn)
+		}
+		return nil
+	})
 }
 
 // Information about an import task created for bulk provisioning.
@@ -1907,6 +5858,42 @@ type SidewalkStartImportInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SidewalkStartImportInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkStartImportInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkStartImportInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceCreationFile != nil {
+		s.WriteString(schemas.SidewalkStartImportInfo_DeviceCreationFile, *v.DeviceCreationFile)
+	}
+	if v.Positioning != nil {
+		s.WriteStruct(schemas.SidewalkStartImportInfo_Positioning)
+		v.Positioning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Role != nil {
+		s.WriteString(schemas.SidewalkStartImportInfo_Role, *v.Role)
+	}
+}
+func (v *SidewalkStartImportInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkStartImportInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkStartImportInfo_DeviceCreationFile:
+			v.DeviceCreationFile = new(string)
+			return d.ReadString(schemas.SidewalkStartImportInfo_DeviceCreationFile, v.DeviceCreationFile)
+		case schemas.SidewalkStartImportInfo_Positioning:
+			v.Positioning = &SidewalkPositioning{}
+			return v.Positioning.Deserialize(d)
+		case schemas.SidewalkStartImportInfo_Role:
+			v.Role = new(string)
+			return d.ReadString(schemas.SidewalkStartImportInfo_Role, v.Role)
+		}
+		return nil
+	})
+}
+
 // Sidewalk update.
 type SidewalkUpdateAccount struct {
 
@@ -1914,6 +5901,28 @@ type SidewalkUpdateAccount struct {
 	AppServerPrivateKey *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SidewalkUpdateAccount) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkUpdateAccount)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkUpdateAccount) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppServerPrivateKey != nil {
+		s.WriteString(schemas.SidewalkUpdateAccount_AppServerPrivateKey, *v.AppServerPrivateKey)
+	}
+}
+func (v *SidewalkUpdateAccount) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkUpdateAccount, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkUpdateAccount_AppServerPrivateKey:
+			v.AppServerPrivateKey = new(string)
+			return d.ReadString(schemas.SidewalkUpdateAccount_AppServerPrivateKey, v.AppServerPrivateKey)
+		}
+		return nil
+	})
 }
 
 // Sidewalk object information for updating an import task.
@@ -1926,6 +5935,28 @@ type SidewalkUpdateImportInfo struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SidewalkUpdateImportInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkUpdateImportInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkUpdateImportInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeviceCreationFile != nil {
+		s.WriteString(schemas.SidewalkUpdateImportInfo_DeviceCreationFile, *v.DeviceCreationFile)
+	}
+}
+func (v *SidewalkUpdateImportInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkUpdateImportInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkUpdateImportInfo_DeviceCreationFile:
+			v.DeviceCreationFile = new(string)
+			return d.ReadString(schemas.SidewalkUpdateImportInfo_DeviceCreationFile, v.DeviceCreationFile)
+		}
+		return nil
+	})
+}
+
 // Sidewalk object for updating a wireless device.
 type SidewalkUpdateWirelessDevice struct {
 
@@ -1935,6 +5966,30 @@ type SidewalkUpdateWirelessDevice struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SidewalkUpdateWirelessDevice) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SidewalkUpdateWirelessDevice)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SidewalkUpdateWirelessDevice) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Positioning != nil {
+		s.WriteStruct(schemas.SidewalkUpdateWirelessDevice_Positioning)
+		v.Positioning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SidewalkUpdateWirelessDevice) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SidewalkUpdateWirelessDevice, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SidewalkUpdateWirelessDevice_Positioning:
+			v.Positioning = &SidewalkPositioning{}
+			return v.Positioning.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // The configuration of summary metrics.
 type SummaryMetricConfiguration struct {
 
@@ -1942,6 +5997,32 @@ type SummaryMetricConfiguration struct {
 	Status SummaryMetricConfigurationStatus
 
 	noSmithyDocumentSerde
+}
+
+func (v *SummaryMetricConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SummaryMetricConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SummaryMetricConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.SummaryMetricConfiguration_Status, string(v.Status))
+	}
+}
+func (v *SummaryMetricConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SummaryMetricConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SummaryMetricConfiguration_Status:
+			var ev string
+			if err := d.ReadString(schemas.SummaryMetricConfiguration_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = SummaryMetricConfigurationStatus(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // The summary metric query object.
@@ -1966,6 +6047,63 @@ type SummaryMetricQuery struct {
 	StartTimestamp *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *SummaryMetricQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SummaryMetricQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SummaryMetricQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationPeriod != "" {
+		s.WriteString(schemas.SummaryMetricQuery_AggregationPeriod, string(v.AggregationPeriod))
+	}
+	serializeDimensions(s, schemas.SummaryMetricQuery_Dimensions, v.Dimensions)
+	if v.EndTimestamp != nil {
+		s.WriteTime(schemas.SummaryMetricQuery_EndTimestamp, *v.EndTimestamp)
+	}
+	if v.MetricName != "" {
+		s.WriteString(schemas.SummaryMetricQuery_MetricName, string(v.MetricName))
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.SummaryMetricQuery_QueryId, *v.QueryId)
+	}
+	if v.StartTimestamp != nil {
+		s.WriteTime(schemas.SummaryMetricQuery_StartTimestamp, *v.StartTimestamp)
+	}
+}
+func (v *SummaryMetricQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SummaryMetricQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SummaryMetricQuery_AggregationPeriod:
+			var ev string
+			if err := d.ReadString(schemas.SummaryMetricQuery_AggregationPeriod, &ev); err != nil {
+				return err
+			}
+			v.AggregationPeriod = AggregationPeriod(ev)
+			return nil
+		case schemas.SummaryMetricQuery_Dimensions:
+			return deserializeDimensions(d, schemas.SummaryMetricQuery_Dimensions, &v.Dimensions)
+		case schemas.SummaryMetricQuery_EndTimestamp:
+			v.EndTimestamp = new(time.Time)
+			return d.ReadTime(schemas.SummaryMetricQuery_EndTimestamp, v.EndTimestamp)
+		case schemas.SummaryMetricQuery_MetricName:
+			var ev string
+			if err := d.ReadString(schemas.SummaryMetricQuery_MetricName, &ev); err != nil {
+				return err
+			}
+			v.MetricName = MetricName(ev)
+			return nil
+		case schemas.SummaryMetricQuery_QueryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.SummaryMetricQuery_QueryId, v.QueryId)
+		case schemas.SummaryMetricQuery_StartTimestamp:
+			v.StartTimestamp = new(time.Time)
+			return d.ReadTime(schemas.SummaryMetricQuery_StartTimestamp, v.StartTimestamp)
+		}
+		return nil
+	})
 }
 
 // The result of the summary metrics aggregation operation.
@@ -2007,6 +6145,91 @@ type SummaryMetricQueryResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SummaryMetricQueryResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SummaryMetricQueryResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SummaryMetricQueryResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AggregationPeriod != "" {
+		s.WriteString(schemas.SummaryMetricQueryResult_AggregationPeriod, string(v.AggregationPeriod))
+	}
+	serializeDimensions(s, schemas.SummaryMetricQueryResult_Dimensions, v.Dimensions)
+	if v.EndTimestamp != nil {
+		s.WriteTime(schemas.SummaryMetricQueryResult_EndTimestamp, *v.EndTimestamp)
+	}
+	if v.Error != nil {
+		s.WriteString(schemas.SummaryMetricQueryResult_Error, *v.Error)
+	}
+	if v.MetricName != "" {
+		s.WriteString(schemas.SummaryMetricQueryResult_MetricName, string(v.MetricName))
+	}
+	if v.QueryId != nil {
+		s.WriteString(schemas.SummaryMetricQueryResult_QueryId, *v.QueryId)
+	}
+	if v.QueryStatus != "" {
+		s.WriteString(schemas.SummaryMetricQueryResult_QueryStatus, string(v.QueryStatus))
+	}
+	if v.StartTimestamp != nil {
+		s.WriteTime(schemas.SummaryMetricQueryResult_StartTimestamp, *v.StartTimestamp)
+	}
+	serializeMetricQueryTimestamps(s, schemas.SummaryMetricQueryResult_Timestamps, v.Timestamps)
+	if v.Unit != nil {
+		s.WriteString(schemas.SummaryMetricQueryResult_Unit, *v.Unit)
+	}
+	serializeMetricQueryValues(s, schemas.SummaryMetricQueryResult_Values, v.Values)
+}
+func (v *SummaryMetricQueryResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SummaryMetricQueryResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SummaryMetricQueryResult_AggregationPeriod:
+			var ev string
+			if err := d.ReadString(schemas.SummaryMetricQueryResult_AggregationPeriod, &ev); err != nil {
+				return err
+			}
+			v.AggregationPeriod = AggregationPeriod(ev)
+			return nil
+		case schemas.SummaryMetricQueryResult_Dimensions:
+			return deserializeDimensions(d, schemas.SummaryMetricQueryResult_Dimensions, &v.Dimensions)
+		case schemas.SummaryMetricQueryResult_EndTimestamp:
+			v.EndTimestamp = new(time.Time)
+			return d.ReadTime(schemas.SummaryMetricQueryResult_EndTimestamp, v.EndTimestamp)
+		case schemas.SummaryMetricQueryResult_Error:
+			v.Error = new(string)
+			return d.ReadString(schemas.SummaryMetricQueryResult_Error, v.Error)
+		case schemas.SummaryMetricQueryResult_MetricName:
+			var ev string
+			if err := d.ReadString(schemas.SummaryMetricQueryResult_MetricName, &ev); err != nil {
+				return err
+			}
+			v.MetricName = MetricName(ev)
+			return nil
+		case schemas.SummaryMetricQueryResult_QueryId:
+			v.QueryId = new(string)
+			return d.ReadString(schemas.SummaryMetricQueryResult_QueryId, v.QueryId)
+		case schemas.SummaryMetricQueryResult_QueryStatus:
+			var ev string
+			if err := d.ReadString(schemas.SummaryMetricQueryResult_QueryStatus, &ev); err != nil {
+				return err
+			}
+			v.QueryStatus = MetricQueryStatus(ev)
+			return nil
+		case schemas.SummaryMetricQueryResult_StartTimestamp:
+			v.StartTimestamp = new(time.Time)
+			return d.ReadTime(schemas.SummaryMetricQueryResult_StartTimestamp, v.StartTimestamp)
+		case schemas.SummaryMetricQueryResult_Timestamps:
+			return deserializeMetricQueryTimestamps(d, schemas.SummaryMetricQueryResult_Timestamps, &v.Timestamps)
+		case schemas.SummaryMetricQueryResult_Unit:
+			v.Unit = new(string)
+			return d.ReadString(schemas.SummaryMetricQueryResult_Unit, v.Unit)
+		case schemas.SummaryMetricQueryResult_Values:
+			return deserializeMetricQueryValues(d, schemas.SummaryMetricQueryResult_Values, &v.Values)
+		}
+		return nil
+	})
+}
+
 // A simple label consisting of a customer-defined key-value pair
 type Tag struct {
 
@@ -2021,6 +6244,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // TD-SCDMA local identification (local Id) information.
@@ -2038,6 +6289,34 @@ type TdscdmaLocalId struct {
 	Uarfcn *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *TdscdmaLocalId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TdscdmaLocalId)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TdscdmaLocalId) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CellParams != nil {
+		s.WriteInt32(schemas.TdscdmaLocalId_CellParams, *v.CellParams)
+	}
+	if v.Uarfcn != nil {
+		s.WriteInt32(schemas.TdscdmaLocalId_Uarfcn, *v.Uarfcn)
+	}
+}
+func (v *TdscdmaLocalId) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TdscdmaLocalId, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TdscdmaLocalId_CellParams:
+			v.CellParams = new(int32)
+			return d.ReadInt32(schemas.TdscdmaLocalId_CellParams, v.CellParams)
+		case schemas.TdscdmaLocalId_Uarfcn:
+			v.Uarfcn = new(int32)
+			return d.ReadInt32(schemas.TdscdmaLocalId_Uarfcn, v.Uarfcn)
+		}
+		return nil
+	})
 }
 
 // TD-SCDMA object for network measurement reports.
@@ -2065,6 +6344,52 @@ type TdscdmaNmrObj struct {
 	UtranCid *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *TdscdmaNmrObj) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TdscdmaNmrObj)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TdscdmaNmrObj) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CellParams != nil {
+		s.WriteInt32(schemas.TdscdmaNmrObj_CellParams, *v.CellParams)
+	}
+	if v.PathLoss != nil {
+		s.WriteInt32(schemas.TdscdmaNmrObj_PathLoss, *v.PathLoss)
+	}
+	if v.Rscp != nil {
+		s.WriteInt32(schemas.TdscdmaNmrObj_Rscp, *v.Rscp)
+	}
+	if v.Uarfcn != nil {
+		s.WriteInt32(schemas.TdscdmaNmrObj_Uarfcn, *v.Uarfcn)
+	}
+	if v.UtranCid != nil {
+		s.WriteInt32(schemas.TdscdmaNmrObj_UtranCid, *v.UtranCid)
+	}
+}
+func (v *TdscdmaNmrObj) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TdscdmaNmrObj, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TdscdmaNmrObj_CellParams:
+			v.CellParams = new(int32)
+			return d.ReadInt32(schemas.TdscdmaNmrObj_CellParams, v.CellParams)
+		case schemas.TdscdmaNmrObj_PathLoss:
+			v.PathLoss = new(int32)
+			return d.ReadInt32(schemas.TdscdmaNmrObj_PathLoss, v.PathLoss)
+		case schemas.TdscdmaNmrObj_Rscp:
+			v.Rscp = new(int32)
+			return d.ReadInt32(schemas.TdscdmaNmrObj_Rscp, v.Rscp)
+		case schemas.TdscdmaNmrObj_Uarfcn:
+			v.Uarfcn = new(int32)
+			return d.ReadInt32(schemas.TdscdmaNmrObj_Uarfcn, v.Uarfcn)
+		case schemas.TdscdmaNmrObj_UtranCid:
+			v.UtranCid = new(int32)
+			return d.ReadInt32(schemas.TdscdmaNmrObj_UtranCid, v.UtranCid)
+		}
+		return nil
+	})
 }
 
 // TD-SCDMA object.
@@ -2108,6 +6433,75 @@ type TdscdmaObj struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TdscdmaObj) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TdscdmaObj)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TdscdmaObj) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Lac != nil {
+		s.WriteInt32(schemas.TdscdmaObj_Lac, *v.Lac)
+	}
+	if v.Mcc != nil {
+		s.WriteInt32(schemas.TdscdmaObj_Mcc, *v.Mcc)
+	}
+	if v.Mnc != nil {
+		s.WriteInt32(schemas.TdscdmaObj_Mnc, *v.Mnc)
+	}
+	if v.PathLoss != nil {
+		s.WriteInt32(schemas.TdscdmaObj_PathLoss, *v.PathLoss)
+	}
+	if v.Rscp != nil {
+		s.WriteInt32(schemas.TdscdmaObj_Rscp, *v.Rscp)
+	}
+	if v.TdscdmaLocalId != nil {
+		s.WriteStruct(schemas.TdscdmaObj_TdscdmaLocalId)
+		v.TdscdmaLocalId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTdscdmaNmrList(s, schemas.TdscdmaObj_TdscdmaNmr, v.TdscdmaNmr)
+	if v.TdscdmaTimingAdvance != nil {
+		s.WriteInt32(schemas.TdscdmaObj_TdscdmaTimingAdvance, *v.TdscdmaTimingAdvance)
+	}
+	if v.UtranCid != nil {
+		s.WriteInt32(schemas.TdscdmaObj_UtranCid, *v.UtranCid)
+	}
+}
+func (v *TdscdmaObj) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TdscdmaObj, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TdscdmaObj_Lac:
+			v.Lac = new(int32)
+			return d.ReadInt32(schemas.TdscdmaObj_Lac, v.Lac)
+		case schemas.TdscdmaObj_Mcc:
+			v.Mcc = new(int32)
+			return d.ReadInt32(schemas.TdscdmaObj_Mcc, v.Mcc)
+		case schemas.TdscdmaObj_Mnc:
+			v.Mnc = new(int32)
+			return d.ReadInt32(schemas.TdscdmaObj_Mnc, v.Mnc)
+		case schemas.TdscdmaObj_PathLoss:
+			v.PathLoss = new(int32)
+			return d.ReadInt32(schemas.TdscdmaObj_PathLoss, v.PathLoss)
+		case schemas.TdscdmaObj_Rscp:
+			v.Rscp = new(int32)
+			return d.ReadInt32(schemas.TdscdmaObj_Rscp, v.Rscp)
+		case schemas.TdscdmaObj_TdscdmaLocalId:
+			v.TdscdmaLocalId = &TdscdmaLocalId{}
+			return v.TdscdmaLocalId.Deserialize(d)
+		case schemas.TdscdmaObj_TdscdmaNmr:
+			return deserializeTdscdmaNmrList(d, schemas.TdscdmaObj_TdscdmaNmr, &v.TdscdmaNmr)
+		case schemas.TdscdmaObj_TdscdmaTimingAdvance:
+			v.TdscdmaTimingAdvance = new(int32)
+			return d.ReadInt32(schemas.TdscdmaObj_TdscdmaTimingAdvance, v.TdscdmaTimingAdvance)
+		case schemas.TdscdmaObj_UtranCid:
+			v.UtranCid = new(int32)
+			return d.ReadInt32(schemas.TdscdmaObj_UtranCid, v.UtranCid)
+		}
+		return nil
+	})
+}
+
 // Trace content for your wireless devices, gateways, and multicast groups.
 type TraceContent struct {
 
@@ -2129,6 +6523,52 @@ type TraceContent struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TraceContent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TraceContent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TraceContent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LogLevel != "" {
+		s.WriteString(schemas.TraceContent_LogLevel, string(v.LogLevel))
+	}
+	if v.MulticastFrameInfo != "" {
+		s.WriteString(schemas.TraceContent_MulticastFrameInfo, string(v.MulticastFrameInfo))
+	}
+	if v.WirelessDeviceFrameInfo != "" {
+		s.WriteString(schemas.TraceContent_WirelessDeviceFrameInfo, string(v.WirelessDeviceFrameInfo))
+	}
+}
+func (v *TraceContent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TraceContent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TraceContent_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.TraceContent_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LogLevel(ev)
+			return nil
+		case schemas.TraceContent_MulticastFrameInfo:
+			var ev string
+			if err := d.ReadString(schemas.TraceContent_MulticastFrameInfo, &ev); err != nil {
+				return err
+			}
+			v.MulticastFrameInfo = MulticastFrameInfo(ev)
+			return nil
+		case schemas.TraceContent_WirelessDeviceFrameInfo:
+			var ev string
+			if err := d.ReadString(schemas.TraceContent_WirelessDeviceFrameInfo, &ev); err != nil {
+				return err
+			}
+			v.WirelessDeviceFrameInfo = WirelessDeviceFrameInfo(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // ABP device object for LoRaWAN specification v1.0.x
 type UpdateAbpV1_0_x struct {
 
@@ -2138,6 +6578,28 @@ type UpdateAbpV1_0_x struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateAbpV1_0_x) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAbpV1_0_x)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAbpV1_0_x) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FCntStart != nil {
+		s.WriteInt32(schemas.UpdateAbpV1_0_x_FCntStart, *v.FCntStart)
+	}
+}
+func (v *UpdateAbpV1_0_x) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAbpV1_0_x, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAbpV1_0_x_FCntStart:
+			v.FCntStart = new(int32)
+			return d.ReadInt32(schemas.UpdateAbpV1_0_x_FCntStart, v.FCntStart)
+		}
+		return nil
+	})
+}
+
 // ABP device object for LoRaWAN specification v1.1
 type UpdateAbpV1_1 struct {
 
@@ -2145,6 +6607,28 @@ type UpdateAbpV1_1 struct {
 	FCntStart *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateAbpV1_1) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateAbpV1_1)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateAbpV1_1) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FCntStart != nil {
+		s.WriteInt32(schemas.UpdateAbpV1_1_FCntStart, *v.FCntStart)
+	}
+}
+func (v *UpdateAbpV1_1) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateAbpV1_1, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateAbpV1_1_FCntStart:
+			v.FCntStart = new(int32)
+			return d.ReadInt32(schemas.UpdateAbpV1_1_FCntStart, v.FCntStart)
+		}
+		return nil
+	})
 }
 
 // Object for updating the FPorts information.
@@ -2158,6 +6642,33 @@ type UpdateFPorts struct {
 	Positioning *Positioning
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateFPorts) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFPorts)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFPorts) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplications(s, schemas.UpdateFPorts_Applications, v.Applications)
+	if v.Positioning != nil {
+		s.WriteStruct(schemas.UpdateFPorts_Positioning)
+		v.Positioning.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateFPorts) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFPorts, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateFPorts_Applications:
+			return deserializeApplications(d, schemas.UpdateFPorts_Applications, &v.Applications)
+		case schemas.UpdateFPorts_Positioning:
+			v.Positioning = &Positioning{}
+			return v.Positioning.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // UpdateWirelessGatewayTaskCreate object.
@@ -2175,6 +6686,42 @@ type UpdateWirelessGatewayTaskCreate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateWirelessGatewayTaskCreate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWirelessGatewayTaskCreate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWirelessGatewayTaskCreate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.UpdateWirelessGatewayTaskCreate_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UpdateDataRole != nil {
+		s.WriteString(schemas.UpdateWirelessGatewayTaskCreate_UpdateDataRole, *v.UpdateDataRole)
+	}
+	if v.UpdateDataSource != nil {
+		s.WriteString(schemas.UpdateWirelessGatewayTaskCreate_UpdateDataSource, *v.UpdateDataSource)
+	}
+}
+func (v *UpdateWirelessGatewayTaskCreate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWirelessGatewayTaskCreate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWirelessGatewayTaskCreate_LoRaWAN:
+			v.LoRaWAN = &LoRaWANUpdateGatewayTaskCreate{}
+			return v.LoRaWAN.Deserialize(d)
+		case schemas.UpdateWirelessGatewayTaskCreate_UpdateDataRole:
+			v.UpdateDataRole = new(string)
+			return d.ReadString(schemas.UpdateWirelessGatewayTaskCreate_UpdateDataRole, v.UpdateDataRole)
+		case schemas.UpdateWirelessGatewayTaskCreate_UpdateDataSource:
+			v.UpdateDataSource = new(string)
+			return d.ReadString(schemas.UpdateWirelessGatewayTaskCreate_UpdateDataSource, v.UpdateDataSource)
+		}
+		return nil
+	})
+}
+
 // UpdateWirelessGatewayTaskEntry object.
 type UpdateWirelessGatewayTaskEntry struct {
 
@@ -2188,6 +6735,42 @@ type UpdateWirelessGatewayTaskEntry struct {
 	LoRaWAN *LoRaWANUpdateGatewayTaskEntry
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateWirelessGatewayTaskEntry) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateWirelessGatewayTaskEntry)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateWirelessGatewayTaskEntry) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.UpdateWirelessGatewayTaskEntry_Arn, *v.Arn)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateWirelessGatewayTaskEntry_Id, *v.Id)
+	}
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.UpdateWirelessGatewayTaskEntry_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *UpdateWirelessGatewayTaskEntry) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateWirelessGatewayTaskEntry, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateWirelessGatewayTaskEntry_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateWirelessGatewayTaskEntry_Arn, v.Arn)
+		case schemas.UpdateWirelessGatewayTaskEntry_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateWirelessGatewayTaskEntry_Id, v.Id)
+		case schemas.UpdateWirelessGatewayTaskEntry_LoRaWAN:
+			v.LoRaWAN = &LoRaWANUpdateGatewayTaskEntry{}
+			return v.LoRaWAN.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // WCDMA local identification (local ID) information.
@@ -2204,6 +6787,34 @@ type WcdmaLocalId struct {
 	Uarfcndl *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *WcdmaLocalId) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WcdmaLocalId)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WcdmaLocalId) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Psc != nil {
+		s.WriteInt32(schemas.WcdmaLocalId_Psc, *v.Psc)
+	}
+	if v.Uarfcndl != nil {
+		s.WriteInt32(schemas.WcdmaLocalId_Uarfcndl, *v.Uarfcndl)
+	}
+}
+func (v *WcdmaLocalId) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WcdmaLocalId, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WcdmaLocalId_Psc:
+			v.Psc = new(int32)
+			return d.ReadInt32(schemas.WcdmaLocalId_Psc, v.Psc)
+		case schemas.WcdmaLocalId_Uarfcndl:
+			v.Uarfcndl = new(int32)
+			return d.ReadInt32(schemas.WcdmaLocalId_Uarfcndl, v.Uarfcndl)
+		}
+		return nil
+	})
 }
 
 // Network Measurement Reports.
@@ -2232,6 +6843,52 @@ type WcdmaNmrObj struct {
 	Rscp *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *WcdmaNmrObj) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WcdmaNmrObj)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WcdmaNmrObj) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PathLoss != nil {
+		s.WriteInt32(schemas.WcdmaNmrObj_PathLoss, *v.PathLoss)
+	}
+	if v.Psc != nil {
+		s.WriteInt32(schemas.WcdmaNmrObj_Psc, *v.Psc)
+	}
+	if v.Rscp != nil {
+		s.WriteInt32(schemas.WcdmaNmrObj_Rscp, *v.Rscp)
+	}
+	if v.Uarfcndl != nil {
+		s.WriteInt32(schemas.WcdmaNmrObj_Uarfcndl, *v.Uarfcndl)
+	}
+	if v.UtranCid != nil {
+		s.WriteInt32(schemas.WcdmaNmrObj_UtranCid, *v.UtranCid)
+	}
+}
+func (v *WcdmaNmrObj) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WcdmaNmrObj, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WcdmaNmrObj_PathLoss:
+			v.PathLoss = new(int32)
+			return d.ReadInt32(schemas.WcdmaNmrObj_PathLoss, v.PathLoss)
+		case schemas.WcdmaNmrObj_Psc:
+			v.Psc = new(int32)
+			return d.ReadInt32(schemas.WcdmaNmrObj_Psc, v.Psc)
+		case schemas.WcdmaNmrObj_Rscp:
+			v.Rscp = new(int32)
+			return d.ReadInt32(schemas.WcdmaNmrObj_Rscp, v.Rscp)
+		case schemas.WcdmaNmrObj_Uarfcndl:
+			v.Uarfcndl = new(int32)
+			return d.ReadInt32(schemas.WcdmaNmrObj_Uarfcndl, v.Uarfcndl)
+		case schemas.WcdmaNmrObj_UtranCid:
+			v.UtranCid = new(int32)
+			return d.ReadInt32(schemas.WcdmaNmrObj_UtranCid, v.UtranCid)
+		}
+		return nil
+	})
 }
 
 // WCDMA.
@@ -2271,6 +6928,69 @@ type WcdmaObj struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WcdmaObj) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WcdmaObj)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WcdmaObj) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Lac != nil {
+		s.WriteInt32(schemas.WcdmaObj_Lac, *v.Lac)
+	}
+	if v.Mcc != nil {
+		s.WriteInt32(schemas.WcdmaObj_Mcc, *v.Mcc)
+	}
+	if v.Mnc != nil {
+		s.WriteInt32(schemas.WcdmaObj_Mnc, *v.Mnc)
+	}
+	if v.PathLoss != nil {
+		s.WriteInt32(schemas.WcdmaObj_PathLoss, *v.PathLoss)
+	}
+	if v.Rscp != nil {
+		s.WriteInt32(schemas.WcdmaObj_Rscp, *v.Rscp)
+	}
+	if v.UtranCid != nil {
+		s.WriteInt32(schemas.WcdmaObj_UtranCid, *v.UtranCid)
+	}
+	if v.WcdmaLocalId != nil {
+		s.WriteStruct(schemas.WcdmaObj_WcdmaLocalId)
+		v.WcdmaLocalId.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeWcdmaNmrList(s, schemas.WcdmaObj_WcdmaNmr, v.WcdmaNmr)
+}
+func (v *WcdmaObj) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WcdmaObj, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WcdmaObj_Lac:
+			v.Lac = new(int32)
+			return d.ReadInt32(schemas.WcdmaObj_Lac, v.Lac)
+		case schemas.WcdmaObj_Mcc:
+			v.Mcc = new(int32)
+			return d.ReadInt32(schemas.WcdmaObj_Mcc, v.Mcc)
+		case schemas.WcdmaObj_Mnc:
+			v.Mnc = new(int32)
+			return d.ReadInt32(schemas.WcdmaObj_Mnc, v.Mnc)
+		case schemas.WcdmaObj_PathLoss:
+			v.PathLoss = new(int32)
+			return d.ReadInt32(schemas.WcdmaObj_PathLoss, v.PathLoss)
+		case schemas.WcdmaObj_Rscp:
+			v.Rscp = new(int32)
+			return d.ReadInt32(schemas.WcdmaObj_Rscp, v.Rscp)
+		case schemas.WcdmaObj_UtranCid:
+			v.UtranCid = new(int32)
+			return d.ReadInt32(schemas.WcdmaObj_UtranCid, v.UtranCid)
+		case schemas.WcdmaObj_WcdmaLocalId:
+			v.WcdmaLocalId = &WcdmaLocalId{}
+			return v.WcdmaLocalId.Deserialize(d)
+		case schemas.WcdmaObj_WcdmaNmr:
+			return deserializeWcdmaNmrList(d, schemas.WcdmaObj_WcdmaNmr, &v.WcdmaNmr)
+		}
+		return nil
+	})
+}
+
 // Wi-Fi access point.
 type WiFiAccessPoint struct {
 
@@ -2287,6 +7007,34 @@ type WiFiAccessPoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WiFiAccessPoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WiFiAccessPoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WiFiAccessPoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MacAddress != nil {
+		s.WriteString(schemas.WiFiAccessPoint_MacAddress, *v.MacAddress)
+	}
+	if v.Rss != nil {
+		s.WriteInt32(schemas.WiFiAccessPoint_Rss, *v.Rss)
+	}
+}
+func (v *WiFiAccessPoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WiFiAccessPoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WiFiAccessPoint_MacAddress:
+			v.MacAddress = new(string)
+			return d.ReadString(schemas.WiFiAccessPoint_MacAddress, v.MacAddress)
+		case schemas.WiFiAccessPoint_Rss:
+			v.Rss = new(int32)
+			return d.ReadInt32(schemas.WiFiAccessPoint_Rss, v.Rss)
+		}
+		return nil
+	})
+}
+
 // Configuration for WiFi and cellular location payloads.
 type WiFiCellular struct {
 
@@ -2295,6 +7043,28 @@ type WiFiCellular struct {
 	ConfidencePercent *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *WiFiCellular) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WiFiCellular)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WiFiCellular) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfidencePercent != nil {
+		s.WriteInt32(schemas.WiFiCellular_ConfidencePercent, *v.ConfidencePercent)
+	}
+}
+func (v *WiFiCellular) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WiFiCellular, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WiFiCellular_ConfidencePercent:
+			v.ConfidencePercent = new(int32)
+			return d.ReadInt32(schemas.WiFiCellular_ConfidencePercent, v.ConfidencePercent)
+		}
+		return nil
+	})
 }
 
 // The log options for a wireless device event and can be used to set log levels
@@ -2318,6 +7088,42 @@ type WirelessDeviceEventLogOption struct {
 	LogLevel LogLevel
 
 	noSmithyDocumentSerde
+}
+
+func (v *WirelessDeviceEventLogOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WirelessDeviceEventLogOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WirelessDeviceEventLogOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Event != "" {
+		s.WriteString(schemas.WirelessDeviceEventLogOption_Event, string(v.Event))
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.WirelessDeviceEventLogOption_LogLevel, string(v.LogLevel))
+	}
+}
+func (v *WirelessDeviceEventLogOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WirelessDeviceEventLogOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WirelessDeviceEventLogOption_Event:
+			var ev string
+			if err := d.ReadString(schemas.WirelessDeviceEventLogOption_Event, &ev); err != nil {
+				return err
+			}
+			v.Event = WirelessDeviceEvent(ev)
+			return nil
+		case schemas.WirelessDeviceEventLogOption_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.WirelessDeviceEventLogOption_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LogLevel(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about an import task for wireless devices.
@@ -2368,6 +7174,104 @@ type WirelessDeviceImportTask struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WirelessDeviceImportTask) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WirelessDeviceImportTask)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WirelessDeviceImportTask) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.WirelessDeviceImportTask_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.WirelessDeviceImportTask_CreationTime, *v.CreationTime)
+	}
+	if v.DestinationName != nil {
+		s.WriteString(schemas.WirelessDeviceImportTask_DestinationName, *v.DestinationName)
+	}
+	if v.FailedImportedDeviceCount != nil {
+		s.WriteInt64(schemas.WirelessDeviceImportTask_FailedImportedDeviceCount, *v.FailedImportedDeviceCount)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.WirelessDeviceImportTask_Id, *v.Id)
+	}
+	if v.InitializedImportedDeviceCount != nil {
+		s.WriteInt64(schemas.WirelessDeviceImportTask_InitializedImportedDeviceCount, *v.InitializedImportedDeviceCount)
+	}
+	if v.OnboardedImportedDeviceCount != nil {
+		s.WriteInt64(schemas.WirelessDeviceImportTask_OnboardedImportedDeviceCount, *v.OnboardedImportedDeviceCount)
+	}
+	if v.PendingImportedDeviceCount != nil {
+		s.WriteInt64(schemas.WirelessDeviceImportTask_PendingImportedDeviceCount, *v.PendingImportedDeviceCount)
+	}
+	if v.Positioning != "" {
+		s.WriteString(schemas.WirelessDeviceImportTask_Positioning, string(v.Positioning))
+	}
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.WirelessDeviceImportTask_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.WirelessDeviceImportTask_Status, string(v.Status))
+	}
+	if v.StatusReason != nil {
+		s.WriteString(schemas.WirelessDeviceImportTask_StatusReason, *v.StatusReason)
+	}
+}
+func (v *WirelessDeviceImportTask) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WirelessDeviceImportTask, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WirelessDeviceImportTask_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.WirelessDeviceImportTask_Arn, v.Arn)
+		case schemas.WirelessDeviceImportTask_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.WirelessDeviceImportTask_CreationTime, v.CreationTime)
+		case schemas.WirelessDeviceImportTask_DestinationName:
+			v.DestinationName = new(string)
+			return d.ReadString(schemas.WirelessDeviceImportTask_DestinationName, v.DestinationName)
+		case schemas.WirelessDeviceImportTask_FailedImportedDeviceCount:
+			v.FailedImportedDeviceCount = new(int64)
+			return d.ReadInt64(schemas.WirelessDeviceImportTask_FailedImportedDeviceCount, v.FailedImportedDeviceCount)
+		case schemas.WirelessDeviceImportTask_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.WirelessDeviceImportTask_Id, v.Id)
+		case schemas.WirelessDeviceImportTask_InitializedImportedDeviceCount:
+			v.InitializedImportedDeviceCount = new(int64)
+			return d.ReadInt64(schemas.WirelessDeviceImportTask_InitializedImportedDeviceCount, v.InitializedImportedDeviceCount)
+		case schemas.WirelessDeviceImportTask_OnboardedImportedDeviceCount:
+			v.OnboardedImportedDeviceCount = new(int64)
+			return d.ReadInt64(schemas.WirelessDeviceImportTask_OnboardedImportedDeviceCount, v.OnboardedImportedDeviceCount)
+		case schemas.WirelessDeviceImportTask_PendingImportedDeviceCount:
+			v.PendingImportedDeviceCount = new(int64)
+			return d.ReadInt64(schemas.WirelessDeviceImportTask_PendingImportedDeviceCount, v.PendingImportedDeviceCount)
+		case schemas.WirelessDeviceImportTask_Positioning:
+			var ev string
+			if err := d.ReadString(schemas.WirelessDeviceImportTask_Positioning, &ev); err != nil {
+				return err
+			}
+			v.Positioning = PositioningConfigStatus(ev)
+			return nil
+		case schemas.WirelessDeviceImportTask_Sidewalk:
+			v.Sidewalk = &SidewalkGetStartImportInfo{}
+			return v.Sidewalk.Deserialize(d)
+		case schemas.WirelessDeviceImportTask_Status:
+			var ev string
+			if err := d.ReadString(schemas.WirelessDeviceImportTask_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ImportTaskStatus(ev)
+			return nil
+		case schemas.WirelessDeviceImportTask_StatusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.WirelessDeviceImportTask_StatusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
+
 // The log options for wireless devices and can be used to set log levels for a
 // specific type of wireless device.
 type WirelessDeviceLogOption struct {
@@ -2388,6 +7292,45 @@ type WirelessDeviceLogOption struct {
 	Events []WirelessDeviceEventLogOption
 
 	noSmithyDocumentSerde
+}
+
+func (v *WirelessDeviceLogOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WirelessDeviceLogOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WirelessDeviceLogOption) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWirelessDeviceEventLogOptionList(s, schemas.WirelessDeviceLogOption_Events, v.Events)
+	if v.LogLevel != "" {
+		s.WriteString(schemas.WirelessDeviceLogOption_LogLevel, string(v.LogLevel))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.WirelessDeviceLogOption_Type, string(v.Type))
+	}
+}
+func (v *WirelessDeviceLogOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WirelessDeviceLogOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WirelessDeviceLogOption_Events:
+			return deserializeWirelessDeviceEventLogOptionList(d, schemas.WirelessDeviceLogOption_Events, &v.Events)
+		case schemas.WirelessDeviceLogOption_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.WirelessDeviceLogOption_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LogLevel(ev)
+			return nil
+		case schemas.WirelessDeviceLogOption_Type:
+			var ev string
+			if err := d.ReadString(schemas.WirelessDeviceLogOption_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = WirelessDeviceType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about a wireless device's operation.
@@ -2435,6 +7378,110 @@ type WirelessDeviceStatistics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WirelessDeviceStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WirelessDeviceStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WirelessDeviceStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.WirelessDeviceStatistics_Arn, *v.Arn)
+	}
+	if v.DestinationName != nil {
+		s.WriteString(schemas.WirelessDeviceStatistics_DestinationName, *v.DestinationName)
+	}
+	if v.FuotaDeviceStatus != "" {
+		s.WriteString(schemas.WirelessDeviceStatistics_FuotaDeviceStatus, string(v.FuotaDeviceStatus))
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.WirelessDeviceStatistics_Id, *v.Id)
+	}
+	if v.LastUplinkReceivedAt != nil {
+		s.WriteString(schemas.WirelessDeviceStatistics_LastUplinkReceivedAt, *v.LastUplinkReceivedAt)
+	}
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.WirelessDeviceStatistics_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.McGroupId != nil {
+		s.WriteInt32(schemas.WirelessDeviceStatistics_McGroupId, *v.McGroupId)
+	}
+	if v.MulticastDeviceStatus != nil {
+		s.WriteString(schemas.WirelessDeviceStatistics_MulticastDeviceStatus, *v.MulticastDeviceStatus)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WirelessDeviceStatistics_Name, *v.Name)
+	}
+	if v.Positioning != "" {
+		s.WriteString(schemas.WirelessDeviceStatistics_Positioning, string(v.Positioning))
+	}
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.WirelessDeviceStatistics_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.WirelessDeviceStatistics_Type, string(v.Type))
+	}
+}
+func (v *WirelessDeviceStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WirelessDeviceStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WirelessDeviceStatistics_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.WirelessDeviceStatistics_Arn, v.Arn)
+		case schemas.WirelessDeviceStatistics_DestinationName:
+			v.DestinationName = new(string)
+			return d.ReadString(schemas.WirelessDeviceStatistics_DestinationName, v.DestinationName)
+		case schemas.WirelessDeviceStatistics_FuotaDeviceStatus:
+			var ev string
+			if err := d.ReadString(schemas.WirelessDeviceStatistics_FuotaDeviceStatus, &ev); err != nil {
+				return err
+			}
+			v.FuotaDeviceStatus = FuotaDeviceStatus(ev)
+			return nil
+		case schemas.WirelessDeviceStatistics_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.WirelessDeviceStatistics_Id, v.Id)
+		case schemas.WirelessDeviceStatistics_LastUplinkReceivedAt:
+			v.LastUplinkReceivedAt = new(string)
+			return d.ReadString(schemas.WirelessDeviceStatistics_LastUplinkReceivedAt, v.LastUplinkReceivedAt)
+		case schemas.WirelessDeviceStatistics_LoRaWAN:
+			v.LoRaWAN = &LoRaWANListDevice{}
+			return v.LoRaWAN.Deserialize(d)
+		case schemas.WirelessDeviceStatistics_McGroupId:
+			v.McGroupId = new(int32)
+			return d.ReadInt32(schemas.WirelessDeviceStatistics_McGroupId, v.McGroupId)
+		case schemas.WirelessDeviceStatistics_MulticastDeviceStatus:
+			v.MulticastDeviceStatus = new(string)
+			return d.ReadString(schemas.WirelessDeviceStatistics_MulticastDeviceStatus, v.MulticastDeviceStatus)
+		case schemas.WirelessDeviceStatistics_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WirelessDeviceStatistics_Name, v.Name)
+		case schemas.WirelessDeviceStatistics_Positioning:
+			var ev string
+			if err := d.ReadString(schemas.WirelessDeviceStatistics_Positioning, &ev); err != nil {
+				return err
+			}
+			v.Positioning = PositioningConfigStatus(ev)
+			return nil
+		case schemas.WirelessDeviceStatistics_Sidewalk:
+			v.Sidewalk = &SidewalkListDevice{}
+			return v.Sidewalk.Deserialize(d)
+		case schemas.WirelessDeviceStatistics_Type:
+			var ev string
+			if err := d.ReadString(schemas.WirelessDeviceStatistics_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = WirelessDeviceType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The log options for a wireless gateway event and can be used to set log levels
 // for a specific wireless gateway event.
 //
@@ -2457,6 +7504,42 @@ type WirelessGatewayEventLogOption struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WirelessGatewayEventLogOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WirelessGatewayEventLogOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WirelessGatewayEventLogOption) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Event != "" {
+		s.WriteString(schemas.WirelessGatewayEventLogOption_Event, string(v.Event))
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.WirelessGatewayEventLogOption_LogLevel, string(v.LogLevel))
+	}
+}
+func (v *WirelessGatewayEventLogOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WirelessGatewayEventLogOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WirelessGatewayEventLogOption_Event:
+			var ev string
+			if err := d.ReadString(schemas.WirelessGatewayEventLogOption_Event, &ev); err != nil {
+				return err
+			}
+			v.Event = WirelessGatewayEvent(ev)
+			return nil
+		case schemas.WirelessGatewayEventLogOption_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.WirelessGatewayEventLogOption_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LogLevel(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // The log options for wireless gateways and can be used to set log levels for a
 // specific type of wireless gateway.
 type WirelessGatewayLogOption struct {
@@ -2477,6 +7560,45 @@ type WirelessGatewayLogOption struct {
 	Events []WirelessGatewayEventLogOption
 
 	noSmithyDocumentSerde
+}
+
+func (v *WirelessGatewayLogOption) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WirelessGatewayLogOption)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WirelessGatewayLogOption) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeWirelessGatewayEventLogOptionList(s, schemas.WirelessGatewayLogOption_Events, v.Events)
+	if v.LogLevel != "" {
+		s.WriteString(schemas.WirelessGatewayLogOption_LogLevel, string(v.LogLevel))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.WirelessGatewayLogOption_Type, string(v.Type))
+	}
+}
+func (v *WirelessGatewayLogOption) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WirelessGatewayLogOption, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WirelessGatewayLogOption_Events:
+			return deserializeWirelessGatewayEventLogOptionList(d, schemas.WirelessGatewayLogOption_Events, &v.Events)
+		case schemas.WirelessGatewayLogOption_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.WirelessGatewayLogOption_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LogLevel(ev)
+			return nil
+		case schemas.WirelessGatewayLogOption_Type:
+			var ev string
+			if err := d.ReadString(schemas.WirelessGatewayLogOption_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = WirelessGatewayType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about a wireless gateway's operation.
@@ -2505,6 +7627,60 @@ type WirelessGatewayStatistics struct {
 	noSmithyDocumentSerde
 }
 
+func (v *WirelessGatewayStatistics) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WirelessGatewayStatistics)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WirelessGatewayStatistics) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.WirelessGatewayStatistics_Arn, *v.Arn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.WirelessGatewayStatistics_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.WirelessGatewayStatistics_Id, *v.Id)
+	}
+	if v.LastUplinkReceivedAt != nil {
+		s.WriteString(schemas.WirelessGatewayStatistics_LastUplinkReceivedAt, *v.LastUplinkReceivedAt)
+	}
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.WirelessGatewayStatistics_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.WirelessGatewayStatistics_Name, *v.Name)
+	}
+}
+func (v *WirelessGatewayStatistics) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WirelessGatewayStatistics, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WirelessGatewayStatistics_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.WirelessGatewayStatistics_Arn, v.Arn)
+		case schemas.WirelessGatewayStatistics_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.WirelessGatewayStatistics_Description, v.Description)
+		case schemas.WirelessGatewayStatistics_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.WirelessGatewayStatistics_Id, v.Id)
+		case schemas.WirelessGatewayStatistics_LastUplinkReceivedAt:
+			v.LastUplinkReceivedAt = new(string)
+			return d.ReadString(schemas.WirelessGatewayStatistics_LastUplinkReceivedAt, v.LastUplinkReceivedAt)
+		case schemas.WirelessGatewayStatistics_LoRaWAN:
+			v.LoRaWAN = &LoRaWANGateway{}
+			return v.LoRaWAN.Deserialize(d)
+		case schemas.WirelessGatewayStatistics_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.WirelessGatewayStatistics_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // WirelessMetadata object.
 type WirelessMetadata struct {
 
@@ -2515,6 +7691,38 @@ type WirelessMetadata struct {
 	Sidewalk *SidewalkSendDataToDevice
 
 	noSmithyDocumentSerde
+}
+
+func (v *WirelessMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.WirelessMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *WirelessMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoRaWAN != nil {
+		s.WriteStruct(schemas.WirelessMetadata_LoRaWAN)
+		v.LoRaWAN.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.WirelessMetadata_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *WirelessMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.WirelessMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.WirelessMetadata_LoRaWAN:
+			v.LoRaWAN = &LoRaWANSendDataToDevice{}
+			return v.LoRaWAN.Deserialize(d)
+		case schemas.WirelessMetadata_Sidewalk:
+			v.Sidewalk = &SidewalkSendDataToDevice{}
+			return v.Sidewalk.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacediscovery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type ListFulfillmentOptionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFulfillmentOptionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListFulfillmentOptionsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListFulfillmentOptionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListFulfillmentOptionsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListFulfillmentOptionsInput_nextToken, *v.NextToken)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.ListFulfillmentOptionsInput_productId, *v.ProductId)
+	}
+}
+
 type ListFulfillmentOptionsOutput struct {
 
 	// The fulfillment options available for the product. Each option describes how
@@ -65,16 +85,26 @@ type ListFulfillmentOptionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListFulfillmentOptionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListFulfillmentOptionsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListFulfillmentOptionsOutput_fulfillmentOptions:
+			return deserializeFulfillmentOptionsList(d, schemas.ListFulfillmentOptionsOutput_fulfillmentOptions, &v.FulfillmentOptions)
+		case schemas.ListFulfillmentOptionsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListFulfillmentOptionsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListFulfillmentOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListFulfillmentOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFulfillmentOptions, schemas.ListFulfillmentOptionsInput, schemas.ListFulfillmentOptionsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListFulfillmentOptions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListFulfillmentOptions, schemas.ListFulfillmentOptionsInput, schemas.ListFulfillmentOptionsOutput), output: &ListFulfillmentOptionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListFulfillmentOptions"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -144,6 +146,61 @@ type CreatePlaceIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePlaceIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePlaceIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePlaceIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DataSource != nil {
+		s.WriteString(schemas.CreatePlaceIndexRequest_DataSource, *v.DataSource)
+	}
+	if v.DataSourceConfiguration != nil {
+		s.WriteStruct(schemas.CreatePlaceIndexRequest_DataSourceConfiguration)
+		v.DataSourceConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePlaceIndexRequest_Description, *v.Description)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.CreatePlaceIndexRequest_IndexName, *v.IndexName)
+	}
+	if v.PricingPlan != "" {
+		s.WriteString(schemas.CreatePlaceIndexRequest_PricingPlan, string(v.PricingPlan))
+	}
+	serializeTagMap(s, schemas.CreatePlaceIndexRequest_Tags, v.Tags)
+}
+func (v *CreatePlaceIndexInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePlaceIndexRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePlaceIndexRequest_DataSource:
+			v.DataSource = new(string)
+			return d.ReadString(schemas.CreatePlaceIndexRequest_DataSource, v.DataSource)
+		case schemas.CreatePlaceIndexRequest_DataSourceConfiguration:
+			v.DataSourceConfiguration = &types.DataSourceConfiguration{}
+			return v.DataSourceConfiguration.Deserialize(d)
+		case schemas.CreatePlaceIndexRequest_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreatePlaceIndexRequest_Description, v.Description)
+		case schemas.CreatePlaceIndexRequest_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.CreatePlaceIndexRequest_IndexName, v.IndexName)
+		case schemas.CreatePlaceIndexRequest_PricingPlan:
+			var ev string
+			if err := d.ReadString(schemas.CreatePlaceIndexRequest_PricingPlan, &ev); err != nil {
+				return err
+			}
+			v.PricingPlan = types.PricingPlan(ev)
+			return nil
+		case schemas.CreatePlaceIndexRequest_Tags:
+			return deserializeTagMap(d, schemas.CreatePlaceIndexRequest_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreatePlaceIndexOutput struct {
 
 	// The timestamp for when the place index resource was created in [ISO 8601] format:
@@ -173,16 +230,47 @@ type CreatePlaceIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePlaceIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePlaceIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePlaceIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.CreatePlaceIndexResponse_CreateTime, *v.CreateTime)
+	}
+	if v.IndexArn != nil {
+		s.WriteString(schemas.CreatePlaceIndexResponse_IndexArn, *v.IndexArn)
+	}
+	if v.IndexName != nil {
+		s.WriteString(schemas.CreatePlaceIndexResponse_IndexName, *v.IndexName)
+	}
+}
+func (v *CreatePlaceIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePlaceIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePlaceIndexResponse_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.CreatePlaceIndexResponse_CreateTime, v.CreateTime)
+		case schemas.CreatePlaceIndexResponse_IndexArn:
+			v.IndexArn = new(string)
+			return d.ReadString(schemas.CreatePlaceIndexResponse_IndexArn, v.IndexArn)
+		case schemas.CreatePlaceIndexResponse_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.CreatePlaceIndexResponse_IndexName, v.IndexName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePlaceIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePlaceIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlaceIndex, schemas.CreatePlaceIndexRequest, schemas.CreatePlaceIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePlaceIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePlaceIndex, schemas.CreatePlaceIndexRequest, schemas.CreatePlaceIndexResponse), output: &CreatePlaceIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePlaceIndex"); err != nil {

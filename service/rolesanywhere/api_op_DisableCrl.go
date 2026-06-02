@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rolesanywhere/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,28 @@ type DisableCrlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableCrlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScalarCrlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableCrlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrlId != nil {
+		s.WriteString(schemas.ScalarCrlRequest_crlId, *v.CrlId)
+	}
+}
+func (v *DisableCrlInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScalarCrlRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScalarCrlRequest_crlId:
+			v.CrlId = new(string)
+			return d.ReadString(schemas.ScalarCrlRequest_crlId, v.CrlId)
+		}
+		return nil
+	})
+}
+
 type DisableCrlOutput struct {
 
 	// The state of the certificate revocation list (CRL) after a read or write
@@ -53,16 +77,37 @@ type DisableCrlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DisableCrlOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CrlDetailResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DisableCrlOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Crl != nil {
+		s.WriteStruct(schemas.CrlDetailResponse_crl)
+		v.Crl.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *DisableCrlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CrlDetailResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CrlDetailResponse_crl:
+			v.Crl = &types.CrlDetail{}
+			return v.Crl.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDisableCrlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDisableCrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableCrl, schemas.ScalarCrlRequest, schemas.CrlDetailResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDisableCrl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DisableCrl, schemas.ScalarCrlRequest, schemas.CrlDetailResponse), output: &DisableCrlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DisableCrl"); err != nil {

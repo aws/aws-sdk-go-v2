@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kafkaconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,30 @@ type CreateCustomPluginInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomPluginInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomPluginRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomPluginInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentType != "" {
+		s.WriteString(schemas.CreateCustomPluginRequest_contentType, string(v.ContentType))
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCustomPluginRequest_description, *v.Description)
+	}
+	if v.Location != nil {
+		s.WriteStruct(schemas.CreateCustomPluginRequest_location)
+		v.Location.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCustomPluginRequest_name, *v.Name)
+	}
+	serializeTags(s, schemas.CreateCustomPluginRequest_tags, v.Tags)
+}
+
 type CreateCustomPluginOutput struct {
 
 	// The Amazon Resource Name (ARN) that Amazon assigned to the custom plugin.
@@ -73,16 +99,56 @@ type CreateCustomPluginOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCustomPluginOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCustomPluginResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCustomPluginOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CustomPluginArn != nil {
+		s.WriteString(schemas.CreateCustomPluginResponse_customPluginArn, *v.CustomPluginArn)
+	}
+	if v.CustomPluginState != "" {
+		s.WriteString(schemas.CreateCustomPluginResponse_customPluginState, string(v.CustomPluginState))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateCustomPluginResponse_name, *v.Name)
+	}
+	if v.Revision != 0 {
+		s.WriteInt64(schemas.CreateCustomPluginResponse_revision, v.Revision)
+	}
+}
+func (v *CreateCustomPluginOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCustomPluginResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCustomPluginResponse_customPluginArn:
+			v.CustomPluginArn = new(string)
+			return d.ReadString(schemas.CreateCustomPluginResponse_customPluginArn, v.CustomPluginArn)
+		case schemas.CreateCustomPluginResponse_customPluginState:
+			var ev string
+			if err := d.ReadString(schemas.CreateCustomPluginResponse_customPluginState, &ev); err != nil {
+				return err
+			}
+			v.CustomPluginState = types.CustomPluginState(ev)
+			return nil
+		case schemas.CreateCustomPluginResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateCustomPluginResponse_name, v.Name)
+		case schemas.CreateCustomPluginResponse_revision:
+			return d.ReadInt64(schemas.CreateCustomPluginResponse_revision, &v.Revision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCustomPluginMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateCustomPlugin{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomPlugin, schemas.CreateCustomPluginRequest, schemas.CreateCustomPluginResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateCustomPlugin{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCustomPlugin, schemas.CreateCustomPluginRequest, schemas.CreateCustomPluginResponse), output: &CreateCustomPluginOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCustomPlugin"); err != nil {

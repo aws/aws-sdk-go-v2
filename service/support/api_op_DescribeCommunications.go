@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/support/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -72,6 +74,30 @@ type DescribeCommunicationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCommunicationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeCommunicationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCommunicationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AfterTime != nil {
+		s.WriteString(schemas.DescribeCommunicationsRequest_afterTime, *v.AfterTime)
+	}
+	if v.BeforeTime != nil {
+		s.WriteString(schemas.DescribeCommunicationsRequest_beforeTime, *v.BeforeTime)
+	}
+	if v.CaseId != nil {
+		s.WriteString(schemas.DescribeCommunicationsRequest_caseId, *v.CaseId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeCommunicationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeCommunicationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 // The communications returned by the DescribeCommunications operation.
 type DescribeCommunicationsOutput struct {
 
@@ -87,16 +113,26 @@ type DescribeCommunicationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCommunicationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCommunicationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCommunicationsResponse_communications:
+			return deserializeCommunicationList(d, schemas.DescribeCommunicationsResponse_communications, &v.Communications)
+		case schemas.DescribeCommunicationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeCommunicationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCommunicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCommunications{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCommunications, schemas.DescribeCommunicationsRequest, schemas.DescribeCommunicationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCommunications{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCommunications, schemas.DescribeCommunicationsRequest, schemas.DescribeCommunicationsResponse), output: &DescribeCommunicationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCommunications"); err != nil {

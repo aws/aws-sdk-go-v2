@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/billing/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type DeleteBillingViewInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBillingViewInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteBillingViewRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteBillingViewInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.DeleteBillingViewRequest_arn, *v.Arn)
+	}
+	if v.Force != false {
+		s.WriteBool(schemas.DeleteBillingViewRequest_force, v.Force)
+	}
+}
+
 type DeleteBillingViewOutput struct {
 
 	//  The Amazon Resource Name (ARN) that can be used to uniquely identify the
@@ -56,16 +73,24 @@ type DeleteBillingViewOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteBillingViewOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteBillingViewResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteBillingViewResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteBillingViewResponse_arn, v.Arn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteBillingViewMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteBillingView{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBillingView, schemas.DeleteBillingViewRequest, schemas.DeleteBillingViewResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteBillingView{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteBillingView, schemas.DeleteBillingViewRequest, schemas.DeleteBillingViewResponse), output: &DeleteBillingViewOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteBillingView"); err != nil {

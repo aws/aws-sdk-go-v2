@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,34 @@ type DeleteAssistantAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssistantAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAssistantAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssistantAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssistantAssociationId != nil {
+		s.WriteString(schemas.DeleteAssistantAssociationRequest_assistantAssociationId, *v.AssistantAssociationId)
+	}
+	if v.AssistantId != nil {
+		s.WriteString(schemas.DeleteAssistantAssociationRequest_assistantId, *v.AssistantId)
+	}
+}
+func (v *DeleteAssistantAssociationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAssistantAssociationRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAssistantAssociationRequest_assistantAssociationId:
+			v.AssistantAssociationId = new(string)
+			return d.ReadString(schemas.DeleteAssistantAssociationRequest_assistantAssociationId, v.AssistantAssociationId)
+		case schemas.DeleteAssistantAssociationRequest_assistantId:
+			v.AssistantId = new(string)
+			return d.ReadString(schemas.DeleteAssistantAssociationRequest_assistantId, v.AssistantId)
+		}
+		return nil
+	})
+}
+
 type DeleteAssistantAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -50,16 +80,29 @@ type DeleteAssistantAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssistantAssociationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAssistantAssociationResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssistantAssociationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteAssistantAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAssistantAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAssistantAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAssistantAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssistantAssociation, schemas.DeleteAssistantAssociationRequest, schemas.DeleteAssistantAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAssistantAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssistantAssociation, schemas.DeleteAssistantAssociationRequest, schemas.DeleteAssistantAssociationResponse), output: &DeleteAssistantAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAssistantAssociation"); err != nil {

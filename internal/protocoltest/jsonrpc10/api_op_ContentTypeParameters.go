@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,18 @@ type ContentTypeParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContentTypeParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ContentTypeParametersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ContentTypeParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Value != nil {
+		s.WriteInt32(schemas.ContentTypeParametersInput_value, *v.Value)
+	}
+}
+
 type ContentTypeParametersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -40,16 +54,21 @@ type ContentTypeParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ContentTypeParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ContentTypeParametersOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationContentTypeParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpContentTypeParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ContentTypeParameters, schemas.ContentTypeParametersInput, schemas.ContentTypeParametersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpContentTypeParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ContentTypeParameters, schemas.ContentTypeParametersInput, schemas.ContentTypeParametersOutput), output: &ContentTypeParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ContentTypeParameters"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -88,6 +90,33 @@ type CreateConfiguredModelAlgorithmAssociationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfiguredModelAlgorithmAssociationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConfiguredModelAlgorithmAssociationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConfiguredModelAlgorithmAssociationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfiguredModelAlgorithmArn != nil {
+		s.WriteString(schemas.CreateConfiguredModelAlgorithmAssociationRequest_configuredModelAlgorithmArn, *v.ConfiguredModelAlgorithmArn)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConfiguredModelAlgorithmAssociationRequest_description, *v.Description)
+	}
+	if v.MembershipIdentifier != nil {
+		s.WriteString(schemas.CreateConfiguredModelAlgorithmAssociationRequest_membershipIdentifier, *v.MembershipIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConfiguredModelAlgorithmAssociationRequest_name, *v.Name)
+	}
+	if v.PrivacyConfiguration != nil {
+		s.WriteStruct(schemas.CreateConfiguredModelAlgorithmAssociationRequest_privacyConfiguration)
+		v.PrivacyConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateConfiguredModelAlgorithmAssociationRequest_tags, v.Tags)
+}
+
 type CreateConfiguredModelAlgorithmAssociationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the configured model algorithm association.
@@ -101,16 +130,24 @@ type CreateConfiguredModelAlgorithmAssociationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConfiguredModelAlgorithmAssociationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConfiguredModelAlgorithmAssociationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn:
+			v.ConfiguredModelAlgorithmAssociationArn = new(string)
+			return d.ReadString(schemas.CreateConfiguredModelAlgorithmAssociationResponse_configuredModelAlgorithmAssociationArn, v.ConfiguredModelAlgorithmAssociationArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConfiguredModelAlgorithmAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConfiguredModelAlgorithmAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfiguredModelAlgorithmAssociation, schemas.CreateConfiguredModelAlgorithmAssociationRequest, schemas.CreateConfiguredModelAlgorithmAssociationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConfiguredModelAlgorithmAssociation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConfiguredModelAlgorithmAssociation, schemas.CreateConfiguredModelAlgorithmAssociationRequest, schemas.CreateConfiguredModelAlgorithmAssociationResponse), output: &CreateConfiguredModelAlgorithmAssociationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConfiguredModelAlgorithmAssociation"); err != nil {

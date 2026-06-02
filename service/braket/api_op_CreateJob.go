@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/braket/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -105,6 +107,100 @@ type CreateJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlgorithmSpecification != nil {
+		s.WriteStruct(schemas.CreateJobRequest_algorithmSpecification)
+		v.AlgorithmSpecification.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeAssociations(s, schemas.CreateJobRequest_associations, v.Associations)
+	if v.CheckpointConfig != nil {
+		s.WriteStruct(schemas.CreateJobRequest_checkpointConfig)
+		v.CheckpointConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateJobRequest_clientToken, *v.ClientToken)
+	}
+	if v.DeviceConfig != nil {
+		s.WriteStruct(schemas.CreateJobRequest_deviceConfig)
+		v.DeviceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeHyperParameters(s, schemas.CreateJobRequest_hyperParameters, v.HyperParameters)
+	serializeInputConfigList(s, schemas.CreateJobRequest_inputDataConfig, v.InputDataConfig)
+	if v.InstanceConfig != nil {
+		s.WriteStruct(schemas.CreateJobRequest_instanceConfig)
+		v.InstanceConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.JobName != nil {
+		s.WriteString(schemas.CreateJobRequest_jobName, *v.JobName)
+	}
+	if v.OutputDataConfig != nil {
+		s.WriteStruct(schemas.CreateJobRequest_outputDataConfig)
+		v.OutputDataConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateJobRequest_roleArn, *v.RoleArn)
+	}
+	if v.StoppingCondition != nil {
+		s.WriteStruct(schemas.CreateJobRequest_stoppingCondition)
+		v.StoppingCondition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagsMap(s, schemas.CreateJobRequest_tags, v.Tags)
+}
+func (v *CreateJobInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateJobRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateJobRequest_algorithmSpecification:
+			v.AlgorithmSpecification = &types.AlgorithmSpecification{}
+			return v.AlgorithmSpecification.Deserialize(d)
+		case schemas.CreateJobRequest_associations:
+			return deserializeAssociations(d, schemas.CreateJobRequest_associations, &v.Associations)
+		case schemas.CreateJobRequest_checkpointConfig:
+			v.CheckpointConfig = &types.JobCheckpointConfig{}
+			return v.CheckpointConfig.Deserialize(d)
+		case schemas.CreateJobRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateJobRequest_clientToken, v.ClientToken)
+		case schemas.CreateJobRequest_deviceConfig:
+			v.DeviceConfig = &types.DeviceConfig{}
+			return v.DeviceConfig.Deserialize(d)
+		case schemas.CreateJobRequest_hyperParameters:
+			return deserializeHyperParameters(d, schemas.CreateJobRequest_hyperParameters, &v.HyperParameters)
+		case schemas.CreateJobRequest_inputDataConfig:
+			return deserializeInputConfigList(d, schemas.CreateJobRequest_inputDataConfig, &v.InputDataConfig)
+		case schemas.CreateJobRequest_instanceConfig:
+			v.InstanceConfig = &types.InstanceConfig{}
+			return v.InstanceConfig.Deserialize(d)
+		case schemas.CreateJobRequest_jobName:
+			v.JobName = new(string)
+			return d.ReadString(schemas.CreateJobRequest_jobName, v.JobName)
+		case schemas.CreateJobRequest_outputDataConfig:
+			v.OutputDataConfig = &types.JobOutputDataConfig{}
+			return v.OutputDataConfig.Deserialize(d)
+		case schemas.CreateJobRequest_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.CreateJobRequest_roleArn, v.RoleArn)
+		case schemas.CreateJobRequest_stoppingCondition:
+			v.StoppingCondition = &types.JobStoppingCondition{}
+			return v.StoppingCondition.Deserialize(d)
+		case schemas.CreateJobRequest_tags:
+			return deserializeTagsMap(d, schemas.CreateJobRequest_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateJobOutput struct {
 
 	// The ARN of the Amazon Braket hybrid job created.
@@ -118,16 +214,35 @@ type CreateJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateJobOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateJobResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateJobOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.JobArn != nil {
+		s.WriteString(schemas.CreateJobResponse_jobArn, *v.JobArn)
+	}
+}
+func (v *CreateJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.CreateJobResponse_jobArn, v.JobArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJob, schemas.CreateJobRequest, schemas.CreateJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateJob, schemas.CreateJobRequest, schemas.CreateJobResponse), output: &CreateJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateJob"); err != nil {

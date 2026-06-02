@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -34,6 +35,16 @@ func (e *BadRequestError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BadRequestError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadRequestError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadRequestError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadRequestError_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // Access to the requested resource is forbidden. This error occurs when the
 // authenticated user does not have the necessary permissions to perform the
@@ -62,6 +73,16 @@ func (e *ForbiddenError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ForbiddenError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ForbiddenError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForbiddenError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForbiddenError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ForbiddenError_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // An unexpected error occurred on the server while processing the request. This
 // indicates a problem with the Wickr service itself rather than with the request.
@@ -90,6 +111,16 @@ func (e *InternalServerError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *InternalServerError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InternalServerError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InternalServerError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.InternalServerError_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was throttled because too many requests were sent in a short period
 // of time. Wait a moment and retry the request. Consider implementing exponential
@@ -118,6 +149,16 @@ func (e *RateLimitError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *RateLimitError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *RateLimitError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RateLimitError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RateLimitError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.RateLimitError_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The requested resource could not be found. This error occurs when you try to
 // access or modify a network, user, bot, security group, or other resource that
@@ -146,6 +187,16 @@ func (e *ResourceNotFoundError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundError_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // The request was not authenticated or the authentication credentials were
 // invalid. This error occurs when the request lacks valid authentication
@@ -174,6 +225,16 @@ func (e *UnauthorizedError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnauthorizedError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnauthorizedError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnauthorizedError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnauthorizedError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnauthorizedError_message, v.Message)
+		}
+		return nil
+	})
+}
 
 // One or more fields in the request failed validation. This error provides
 // detailed information about which fields were invalid and why, allowing you to
@@ -204,3 +265,15 @@ func (e *ValidationError) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ValidationError) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ValidationError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationError_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationError_message, v.Message)
+		case schemas.ValidationError_reasons:
+			return deserializeErrorDetailList(d, schemas.ValidationError_reasons, &v.Reasons)
+		}
+		return nil
+	})
+}

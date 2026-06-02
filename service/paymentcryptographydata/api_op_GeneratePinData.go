@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -110,6 +112,36 @@ type GeneratePinDataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeneratePinDataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GeneratePinDataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GeneratePinDataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EncryptionKeyIdentifier != nil {
+		s.WriteString(schemas.GeneratePinDataInput_EncryptionKeyIdentifier, *v.EncryptionKeyIdentifier)
+	}
+	if v.EncryptionWrappedKey != nil {
+		s.WriteStruct(schemas.GeneratePinDataInput_EncryptionWrappedKey)
+		v.EncryptionWrappedKey.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializePinGenerationAttributes(s, schemas.GeneratePinDataInput_GenerationAttributes, v.GenerationAttributes)
+	if v.GenerationKeyIdentifier != nil {
+		s.WriteString(schemas.GeneratePinDataInput_GenerationKeyIdentifier, *v.GenerationKeyIdentifier)
+	}
+	if v.PinBlockFormat != "" {
+		s.WriteString(schemas.GeneratePinDataInput_PinBlockFormat, string(v.PinBlockFormat))
+	}
+	if v.PinDataLength != nil {
+		s.WriteInt32(schemas.GeneratePinDataInput_PinDataLength, *v.PinDataLength)
+	}
+	if v.PrimaryAccountNumber != nil {
+		s.WriteString(schemas.GeneratePinDataInput_PrimaryAccountNumber, *v.PrimaryAccountNumber)
+	}
+}
+
 type GeneratePinDataOutput struct {
 
 	// The PIN block encrypted under PEK from Amazon Web Services Payment
@@ -165,16 +197,38 @@ type GeneratePinDataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GeneratePinDataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GeneratePinDataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GeneratePinDataOutput_EncryptedPinBlock:
+			v.EncryptedPinBlock = new(string)
+			return d.ReadString(schemas.GeneratePinDataOutput_EncryptedPinBlock, v.EncryptedPinBlock)
+		case schemas.GeneratePinDataOutput_EncryptionKeyArn:
+			v.EncryptionKeyArn = new(string)
+			return d.ReadString(schemas.GeneratePinDataOutput_EncryptionKeyArn, v.EncryptionKeyArn)
+		case schemas.GeneratePinDataOutput_EncryptionKeyCheckValue:
+			v.EncryptionKeyCheckValue = new(string)
+			return d.ReadString(schemas.GeneratePinDataOutput_EncryptionKeyCheckValue, v.EncryptionKeyCheckValue)
+		case schemas.GeneratePinDataOutput_GenerationKeyArn:
+			v.GenerationKeyArn = new(string)
+			return d.ReadString(schemas.GeneratePinDataOutput_GenerationKeyArn, v.GenerationKeyArn)
+		case schemas.GeneratePinDataOutput_GenerationKeyCheckValue:
+			v.GenerationKeyCheckValue = new(string)
+			return d.ReadString(schemas.GeneratePinDataOutput_GenerationKeyCheckValue, v.GenerationKeyCheckValue)
+		case schemas.GeneratePinDataOutput_PinData:
+			return deserializePinData(d, schemas.GeneratePinDataOutput_PinData, &v.PinData)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGeneratePinDataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGeneratePinData{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GeneratePinData, schemas.GeneratePinDataInput, schemas.GeneratePinDataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGeneratePinData{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GeneratePinData, schemas.GeneratePinDataInput, schemas.GeneratePinDataOutput), output: &GeneratePinDataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GeneratePinData"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/appintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,18 @@ type GetDataIntegrationInput struct {
 	Identifier *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDataIntegrationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDataIntegrationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDataIntegrationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetDataIntegrationRequest_Identifier, *v.Identifier)
+	}
 }
 
 type GetDataIntegrationOutput struct {
@@ -82,16 +96,49 @@ type GetDataIntegrationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDataIntegrationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDataIntegrationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDataIntegrationResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetDataIntegrationResponse_Arn, v.Arn)
+		case schemas.GetDataIntegrationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetDataIntegrationResponse_Description, v.Description)
+		case schemas.GetDataIntegrationResponse_FileConfiguration:
+			v.FileConfiguration = &types.FileConfiguration{}
+			return v.FileConfiguration.Deserialize(d)
+		case schemas.GetDataIntegrationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetDataIntegrationResponse_Id, v.Id)
+		case schemas.GetDataIntegrationResponse_KmsKey:
+			v.KmsKey = new(string)
+			return d.ReadString(schemas.GetDataIntegrationResponse_KmsKey, v.KmsKey)
+		case schemas.GetDataIntegrationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetDataIntegrationResponse_Name, v.Name)
+		case schemas.GetDataIntegrationResponse_ObjectConfiguration:
+			return deserializeObjectConfiguration(d, schemas.GetDataIntegrationResponse_ObjectConfiguration, &v.ObjectConfiguration)
+		case schemas.GetDataIntegrationResponse_ScheduleConfiguration:
+			v.ScheduleConfiguration = &types.ScheduleConfiguration{}
+			return v.ScheduleConfiguration.Deserialize(d)
+		case schemas.GetDataIntegrationResponse_SourceURI:
+			v.SourceURI = new(string)
+			return d.ReadString(schemas.GetDataIntegrationResponse_SourceURI, v.SourceURI)
+		case schemas.GetDataIntegrationResponse_Tags:
+			return deserializeTagMap(d, schemas.GetDataIntegrationResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDataIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDataIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataIntegration, schemas.GetDataIntegrationRequest, schemas.GetDataIntegrationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDataIntegration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDataIntegration, schemas.GetDataIntegrationRequest, schemas.GetDataIntegrationResponse), output: &GetDataIntegrationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDataIntegration"); err != nil {

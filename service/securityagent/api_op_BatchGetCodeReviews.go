@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,19 @@ type BatchGetCodeReviewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCodeReviewsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchGetCodeReviewsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchGetCodeReviewsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.BatchGetCodeReviewsInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	serializeCodeReviewIdList(s, schemas.BatchGetCodeReviewsInput_codeReviewIds, v.CodeReviewIds)
+}
+
 // Output for the BatchGetCodeReviews operation.
 type BatchGetCodeReviewsOutput struct {
 
@@ -58,16 +73,25 @@ type BatchGetCodeReviewsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchGetCodeReviewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchGetCodeReviewsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchGetCodeReviewsOutput_codeReviews:
+			return deserializeCodeReviewList(d, schemas.BatchGetCodeReviewsOutput_codeReviews, &v.CodeReviews)
+		case schemas.BatchGetCodeReviewsOutput_notFound:
+			return deserializeCodeReviewIdList(d, schemas.BatchGetCodeReviewsOutput_notFound, &v.NotFound)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchGetCodeReviewsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchGetCodeReviews{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCodeReviews, schemas.BatchGetCodeReviewsInput, schemas.BatchGetCodeReviewsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchGetCodeReviews{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchGetCodeReviews, schemas.BatchGetCodeReviewsInput, schemas.BatchGetCodeReviewsOutput), output: &BatchGetCodeReviewsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchGetCodeReviews"); err != nil {

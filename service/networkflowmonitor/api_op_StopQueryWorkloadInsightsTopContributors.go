@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkflowmonitor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,21 @@ type StopQueryWorkloadInsightsTopContributorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopQueryWorkloadInsightsTopContributorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopQueryWorkloadInsightsTopContributorsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopQueryWorkloadInsightsTopContributorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryId != nil {
+		s.WriteString(schemas.StopQueryWorkloadInsightsTopContributorsInput_queryId, *v.QueryId)
+	}
+	if v.ScopeId != nil {
+		s.WriteString(schemas.StopQueryWorkloadInsightsTopContributorsInput_scopeId, *v.ScopeId)
+	}
+}
+
 type StopQueryWorkloadInsightsTopContributorsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -57,16 +74,21 @@ type StopQueryWorkloadInsightsTopContributorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopQueryWorkloadInsightsTopContributorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopQueryWorkloadInsightsTopContributorsOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopQueryWorkloadInsightsTopContributorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopQueryWorkloadInsightsTopContributors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopQueryWorkloadInsightsTopContributors, schemas.StopQueryWorkloadInsightsTopContributorsInput, schemas.StopQueryWorkloadInsightsTopContributorsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopQueryWorkloadInsightsTopContributors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopQueryWorkloadInsightsTopContributors, schemas.StopQueryWorkloadInsightsTopContributorsInput, schemas.StopQueryWorkloadInsightsTopContributorsOutput), output: &StopQueryWorkloadInsightsTopContributorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopQueryWorkloadInsightsTopContributors"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesthinclient/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetSoftwareSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSoftwareSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSoftwareSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSoftwareSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetSoftwareSetRequest_id, *v.Id)
+	}
+}
+
 type GetSoftwareSetOutput struct {
 
 	// Describes a software set.
@@ -48,16 +62,24 @@ type GetSoftwareSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSoftwareSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSoftwareSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSoftwareSetResponse_softwareSet:
+			v.SoftwareSet = &types.SoftwareSet{}
+			return v.SoftwareSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSoftwareSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSoftwareSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSoftwareSet, schemas.GetSoftwareSetRequest, schemas.GetSoftwareSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSoftwareSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSoftwareSet, schemas.GetSoftwareSetRequest, schemas.GetSoftwareSetResponse), output: &GetSoftwareSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSoftwareSet"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -78,6 +80,45 @@ type RestoreTableFromRecoveryPointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreTableFromRecoveryPointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RestoreTableFromRecoveryPointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RestoreTableFromRecoveryPointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActivateCaseSensitiveIdentifier != nil {
+		s.WriteBool(schemas.RestoreTableFromRecoveryPointRequest_activateCaseSensitiveIdentifier, *v.ActivateCaseSensitiveIdentifier)
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.RestoreTableFromRecoveryPointRequest_namespaceName, *v.NamespaceName)
+	}
+	if v.NewTableName != nil {
+		s.WriteString(schemas.RestoreTableFromRecoveryPointRequest_newTableName, *v.NewTableName)
+	}
+	if v.RecoveryPointId != nil {
+		s.WriteString(schemas.RestoreTableFromRecoveryPointRequest_recoveryPointId, *v.RecoveryPointId)
+	}
+	if v.SourceDatabaseName != nil {
+		s.WriteString(schemas.RestoreTableFromRecoveryPointRequest_sourceDatabaseName, *v.SourceDatabaseName)
+	}
+	if v.SourceSchemaName != nil {
+		s.WriteString(schemas.RestoreTableFromRecoveryPointRequest_sourceSchemaName, *v.SourceSchemaName)
+	}
+	if v.SourceTableName != nil {
+		s.WriteString(schemas.RestoreTableFromRecoveryPointRequest_sourceTableName, *v.SourceTableName)
+	}
+	if v.TargetDatabaseName != nil {
+		s.WriteString(schemas.RestoreTableFromRecoveryPointRequest_targetDatabaseName, *v.TargetDatabaseName)
+	}
+	if v.TargetSchemaName != nil {
+		s.WriteString(schemas.RestoreTableFromRecoveryPointRequest_targetSchemaName, *v.TargetSchemaName)
+	}
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.RestoreTableFromRecoveryPointRequest_workgroupName, *v.WorkgroupName)
+	}
+}
+
 type RestoreTableFromRecoveryPointOutput struct {
 
 	// Contains information about a table restore request.
@@ -89,16 +130,24 @@ type RestoreTableFromRecoveryPointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RestoreTableFromRecoveryPointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RestoreTableFromRecoveryPointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RestoreTableFromRecoveryPointResponse_tableRestoreStatus:
+			v.TableRestoreStatus = &types.TableRestoreStatus{}
+			return v.TableRestoreStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRestoreTableFromRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpRestoreTableFromRecoveryPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreTableFromRecoveryPoint, schemas.RestoreTableFromRecoveryPointRequest, schemas.RestoreTableFromRecoveryPointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpRestoreTableFromRecoveryPoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RestoreTableFromRecoveryPoint, schemas.RestoreTableFromRecoveryPointRequest, schemas.RestoreTableFromRecoveryPointResponse), output: &RestoreTableFromRecoveryPointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RestoreTableFromRecoveryPoint"); err != nil {

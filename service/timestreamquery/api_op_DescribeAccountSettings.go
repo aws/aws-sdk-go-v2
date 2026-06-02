@@ -7,7 +7,9 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +35,15 @@ func (c *Client) DescribeAccountSettings(ctx context.Context, params *DescribeAc
 
 type DescribeAccountSettingsInput struct {
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAccountSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccountSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccountSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
 }
 
 type DescribeAccountSettingsOutput struct {
@@ -63,16 +74,34 @@ type DescribeAccountSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccountSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccountSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccountSettingsResponse_MaxQueryTCU:
+			v.MaxQueryTCU = new(int32)
+			return d.ReadInt32(schemas.DescribeAccountSettingsResponse_MaxQueryTCU, v.MaxQueryTCU)
+		case schemas.DescribeAccountSettingsResponse_QueryCompute:
+			v.QueryCompute = &types.QueryComputeResponse{}
+			return v.QueryCompute.Deserialize(d)
+		case schemas.DescribeAccountSettingsResponse_QueryPricingModel:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAccountSettingsResponse_QueryPricingModel, &ev); err != nil {
+				return err
+			}
+			v.QueryPricingModel = types.QueryPricingModel(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountSettings, schemas.DescribeAccountSettingsRequest, schemas.DescribeAccountSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeAccountSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccountSettings, schemas.DescribeAccountSettingsRequest, schemas.DescribeAccountSettingsResponse), output: &DescribeAccountSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAccountSettings"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,21 @@ type InstallToRemoteAccessSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstallToRemoteAccessSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.InstallToRemoteAccessSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *InstallToRemoteAccessSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppArn != nil {
+		s.WriteString(schemas.InstallToRemoteAccessSessionRequest_appArn, *v.AppArn)
+	}
+	if v.RemoteAccessSessionArn != nil {
+		s.WriteString(schemas.InstallToRemoteAccessSessionRequest_remoteAccessSessionArn, *v.RemoteAccessSessionArn)
+	}
+}
+
 // Represents the response from the server after AWS Device Farm makes a request
 // to install to a remote access session.
 type InstallToRemoteAccessSessionOutput struct {
@@ -60,16 +77,24 @@ type InstallToRemoteAccessSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *InstallToRemoteAccessSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.InstallToRemoteAccessSessionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.InstallToRemoteAccessSessionResult_appUpload:
+			v.AppUpload = &types.Upload{}
+			return v.AppUpload.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationInstallToRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpInstallToRemoteAccessSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InstallToRemoteAccessSession, schemas.InstallToRemoteAccessSessionRequest, schemas.InstallToRemoteAccessSessionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpInstallToRemoteAccessSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.InstallToRemoteAccessSession, schemas.InstallToRemoteAccessSessionRequest, schemas.InstallToRemoteAccessSessionResult), output: &InstallToRemoteAccessSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "InstallToRemoteAccessSession"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptune/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,22 @@ type ModifyDBSubnetGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBSubnetGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyDBSubnetGroupMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyDBSubnetGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DBSubnetGroupDescription != nil {
+		s.WriteString(schemas.ModifyDBSubnetGroupMessage_DBSubnetGroupDescription, *v.DBSubnetGroupDescription)
+	}
+	if v.DBSubnetGroupName != nil {
+		s.WriteString(schemas.ModifyDBSubnetGroupMessage_DBSubnetGroupName, *v.DBSubnetGroupName)
+	}
+	serializeSubnetIdentifierList(s, schemas.ModifyDBSubnetGroupMessage_SubnetIds, v.SubnetIds)
+}
+
 type ModifyDBSubnetGroupOutput struct {
 
 	// Contains the details of an Amazon Neptune DB subnet group.
@@ -65,16 +83,24 @@ type ModifyDBSubnetGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyDBSubnetGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyDBSubnetGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyDBSubnetGroupResult_DBSubnetGroup:
+			v.DBSubnetGroup = &types.DBSubnetGroup{}
+			return v.DBSubnetGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyDBSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyDBSubnetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBSubnetGroup, schemas.ModifyDBSubnetGroupMessage, schemas.ModifyDBSubnetGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyDBSubnetGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyDBSubnetGroup, schemas.ModifyDBSubnetGroupMessage, schemas.ModifyDBSubnetGroupResult), output: &ModifyDBSubnetGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyDBSubnetGroup"); err != nil {

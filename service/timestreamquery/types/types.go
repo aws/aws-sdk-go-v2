@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/timestreamquery/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -23,6 +25,36 @@ type AccountSettingsNotificationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AccountSettingsNotificationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AccountSettingsNotificationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AccountSettingsNotificationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.RoleArn != nil {
+		s.WriteString(schemas.AccountSettingsNotificationConfiguration_RoleArn, *v.RoleArn)
+	}
+	if v.SnsConfiguration != nil {
+		s.WriteStruct(schemas.AccountSettingsNotificationConfiguration_SnsConfiguration)
+		v.SnsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *AccountSettingsNotificationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AccountSettingsNotificationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AccountSettingsNotificationConfiguration_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.AccountSettingsNotificationConfiguration_RoleArn, v.RoleArn)
+		case schemas.AccountSettingsNotificationConfiguration_SnsConfiguration:
+			v.SnsConfiguration = &SnsConfiguration{}
+			return v.SnsConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 //	Contains the metadata for query results such as the column names, data types,
 //
 // and other attributes.
@@ -40,6 +72,36 @@ type ColumnInfo struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ColumnInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ColumnInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ColumnInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ColumnInfo_Name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteStruct(schemas.ColumnInfo_Type)
+		v.Type.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ColumnInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ColumnInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ColumnInfo_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ColumnInfo_Name, v.Name)
+		case schemas.ColumnInfo_Type:
+			v.Type = &Type{}
+			return v.Type.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Datum represents a single data point in a query result.
@@ -64,6 +126,48 @@ type Datum struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Datum) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Datum)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Datum) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatumList(s, schemas.Datum_ArrayValue, v.ArrayValue)
+	if v.NullValue != nil {
+		s.WriteBool(schemas.Datum_NullValue, *v.NullValue)
+	}
+	if v.RowValue != nil {
+		s.WriteStruct(schemas.Datum_RowValue)
+		v.RowValue.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScalarValue != nil {
+		s.WriteString(schemas.Datum_ScalarValue, *v.ScalarValue)
+	}
+	serializeTimeSeriesDataPointList(s, schemas.Datum_TimeSeriesValue, v.TimeSeriesValue)
+}
+func (v *Datum) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Datum, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Datum_ArrayValue:
+			return deserializeDatumList(d, schemas.Datum_ArrayValue, &v.ArrayValue)
+		case schemas.Datum_NullValue:
+			v.NullValue = new(bool)
+			return d.ReadBool(schemas.Datum_NullValue, v.NullValue)
+		case schemas.Datum_RowValue:
+			v.RowValue = &Row{}
+			return v.RowValue.Deserialize(d)
+		case schemas.Datum_ScalarValue:
+			v.ScalarValue = new(string)
+			return d.ReadString(schemas.Datum_ScalarValue, v.ScalarValue)
+		case schemas.Datum_TimeSeriesValue:
+			return deserializeTimeSeriesDataPointList(d, schemas.Datum_TimeSeriesValue, &v.TimeSeriesValue)
+		}
+		return nil
+	})
+}
+
 // This type is used to map column(s) from the query result to a dimension in the
 // destination table.
 type DimensionMapping struct {
@@ -79,6 +183,38 @@ type DimensionMapping struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DimensionMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DimensionMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DimensionMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DimensionValueType != "" {
+		s.WriteString(schemas.DimensionMapping_DimensionValueType, string(v.DimensionValueType))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DimensionMapping_Name, *v.Name)
+	}
+}
+func (v *DimensionMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DimensionMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DimensionMapping_DimensionValueType:
+			var ev string
+			if err := d.ReadString(schemas.DimensionMapping_DimensionValueType, &ev); err != nil {
+				return err
+			}
+			v.DimensionValueType = DimensionValueType(ev)
+			return nil
+		case schemas.DimensionMapping_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DimensionMapping_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // Represents an available endpoint against which to make API calls against, as
@@ -98,6 +234,33 @@ type Endpoint struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Endpoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Endpoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Endpoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Address != nil {
+		s.WriteString(schemas.Endpoint_Address, *v.Address)
+	}
+	if v.CachePeriodInMinutes != 0 {
+		s.WriteInt64(schemas.Endpoint_CachePeriodInMinutes, v.CachePeriodInMinutes)
+	}
+}
+func (v *Endpoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Endpoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Endpoint_Address:
+			v.Address = new(string)
+			return d.ReadString(schemas.Endpoint_Address, v.Address)
+		case schemas.Endpoint_CachePeriodInMinutes:
+			return d.ReadInt64(schemas.Endpoint_CachePeriodInMinutes, &v.CachePeriodInMinutes)
+		}
+		return nil
+	})
+}
+
 // Configuration required for error reporting.
 type ErrorReportConfiguration struct {
 
@@ -109,6 +272,30 @@ type ErrorReportConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ErrorReportConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorReportConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorReportConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3Configuration != nil {
+		s.WriteStruct(schemas.ErrorReportConfiguration_S3Configuration)
+		v.S3Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ErrorReportConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorReportConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorReportConfiguration_S3Configuration:
+			v.S3Configuration = &S3Configuration{}
+			return v.S3Configuration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // This contains the location of the error report for a single scheduled query
 // call.
 type ErrorReportLocation struct {
@@ -117,6 +304,30 @@ type ErrorReportLocation struct {
 	S3ReportLocation *S3ReportLocation
 
 	noSmithyDocumentSerde
+}
+
+func (v *ErrorReportLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ErrorReportLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ErrorReportLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.S3ReportLocation != nil {
+		s.WriteStruct(schemas.ErrorReportLocation_S3ReportLocation)
+		v.S3ReportLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ErrorReportLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ErrorReportLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ErrorReportLocation_S3ReportLocation:
+			v.S3ReportLocation = &S3ReportLocation{}
+			return v.S3ReportLocation.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Statistics for a single scheduled query run.
@@ -145,6 +356,52 @@ type ExecutionStats struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecutionStats) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionStats)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecutionStats) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BytesMetered != 0 {
+		s.WriteInt64(schemas.ExecutionStats_BytesMetered, v.BytesMetered)
+	}
+	if v.CumulativeBytesScanned != 0 {
+		s.WriteInt64(schemas.ExecutionStats_CumulativeBytesScanned, v.CumulativeBytesScanned)
+	}
+	if v.DataWrites != 0 {
+		s.WriteInt64(schemas.ExecutionStats_DataWrites, v.DataWrites)
+	}
+	if v.ExecutionTimeInMillis != 0 {
+		s.WriteInt64(schemas.ExecutionStats_ExecutionTimeInMillis, v.ExecutionTimeInMillis)
+	}
+	if v.QueryResultRows != 0 {
+		s.WriteInt64(schemas.ExecutionStats_QueryResultRows, v.QueryResultRows)
+	}
+	if v.RecordsIngested != 0 {
+		s.WriteInt64(schemas.ExecutionStats_RecordsIngested, v.RecordsIngested)
+	}
+}
+func (v *ExecutionStats) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecutionStats, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecutionStats_BytesMetered:
+			return d.ReadInt64(schemas.ExecutionStats_BytesMetered, &v.BytesMetered)
+		case schemas.ExecutionStats_CumulativeBytesScanned:
+			return d.ReadInt64(schemas.ExecutionStats_CumulativeBytesScanned, &v.CumulativeBytesScanned)
+		case schemas.ExecutionStats_DataWrites:
+			return d.ReadInt64(schemas.ExecutionStats_DataWrites, &v.DataWrites)
+		case schemas.ExecutionStats_ExecutionTimeInMillis:
+			return d.ReadInt64(schemas.ExecutionStats_ExecutionTimeInMillis, &v.ExecutionTimeInMillis)
+		case schemas.ExecutionStats_QueryResultRows:
+			return d.ReadInt64(schemas.ExecutionStats_QueryResultRows, &v.QueryResultRows)
+		case schemas.ExecutionStats_RecordsIngested:
+			return d.ReadInt64(schemas.ExecutionStats_RecordsIngested, &v.RecordsIngested)
+		}
+		return nil
+	})
+}
+
 // Configuration object that contains the most recent account settings update,
 // visible only if settings have been updated previously.
 type LastUpdate struct {
@@ -161,6 +418,44 @@ type LastUpdate struct {
 	TargetQueryTCU *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *LastUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LastUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LastUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Status != "" {
+		s.WriteString(schemas.LastUpdate_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.LastUpdate_StatusMessage, *v.StatusMessage)
+	}
+	if v.TargetQueryTCU != nil {
+		s.WriteInt32(schemas.LastUpdate_TargetQueryTCU, *v.TargetQueryTCU)
+	}
+}
+func (v *LastUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LastUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LastUpdate_Status:
+			var ev string
+			if err := d.ReadString(schemas.LastUpdate_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = LastUpdateStatus(ev)
+			return nil
+		case schemas.LastUpdate_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.LastUpdate_StatusMessage, v.StatusMessage)
+		case schemas.LastUpdate_TargetQueryTCU:
+			v.TargetQueryTCU = new(int32)
+			return d.ReadInt32(schemas.LastUpdate_TargetQueryTCU, v.TargetQueryTCU)
+		}
+		return nil
+	})
 }
 
 // MixedMeasureMappings are mappings that can be used to ingest data into a
@@ -192,6 +487,53 @@ type MixedMeasureMapping struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MixedMeasureMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MixedMeasureMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MixedMeasureMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeasureName != nil {
+		s.WriteString(schemas.MixedMeasureMapping_MeasureName, *v.MeasureName)
+	}
+	if v.MeasureValueType != "" {
+		s.WriteString(schemas.MixedMeasureMapping_MeasureValueType, string(v.MeasureValueType))
+	}
+	serializeMultiMeasureAttributeMappingList(s, schemas.MixedMeasureMapping_MultiMeasureAttributeMappings, v.MultiMeasureAttributeMappings)
+	if v.SourceColumn != nil {
+		s.WriteString(schemas.MixedMeasureMapping_SourceColumn, *v.SourceColumn)
+	}
+	if v.TargetMeasureName != nil {
+		s.WriteString(schemas.MixedMeasureMapping_TargetMeasureName, *v.TargetMeasureName)
+	}
+}
+func (v *MixedMeasureMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MixedMeasureMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MixedMeasureMapping_MeasureName:
+			v.MeasureName = new(string)
+			return d.ReadString(schemas.MixedMeasureMapping_MeasureName, v.MeasureName)
+		case schemas.MixedMeasureMapping_MeasureValueType:
+			var ev string
+			if err := d.ReadString(schemas.MixedMeasureMapping_MeasureValueType, &ev); err != nil {
+				return err
+			}
+			v.MeasureValueType = MeasureValueType(ev)
+			return nil
+		case schemas.MixedMeasureMapping_MultiMeasureAttributeMappings:
+			return deserializeMultiMeasureAttributeMappingList(d, schemas.MixedMeasureMapping_MultiMeasureAttributeMappings, &v.MultiMeasureAttributeMappings)
+		case schemas.MixedMeasureMapping_SourceColumn:
+			v.SourceColumn = new(string)
+			return d.ReadString(schemas.MixedMeasureMapping_SourceColumn, v.SourceColumn)
+		case schemas.MixedMeasureMapping_TargetMeasureName:
+			v.TargetMeasureName = new(string)
+			return d.ReadString(schemas.MixedMeasureMapping_TargetMeasureName, v.TargetMeasureName)
+		}
+		return nil
+	})
+}
+
 // Attribute mapping for MULTI value measures.
 type MultiMeasureAttributeMapping struct {
 
@@ -210,6 +552,44 @@ type MultiMeasureAttributeMapping struct {
 	TargetMultiMeasureAttributeName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *MultiMeasureAttributeMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiMeasureAttributeMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultiMeasureAttributeMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MeasureValueType != "" {
+		s.WriteString(schemas.MultiMeasureAttributeMapping_MeasureValueType, string(v.MeasureValueType))
+	}
+	if v.SourceColumn != nil {
+		s.WriteString(schemas.MultiMeasureAttributeMapping_SourceColumn, *v.SourceColumn)
+	}
+	if v.TargetMultiMeasureAttributeName != nil {
+		s.WriteString(schemas.MultiMeasureAttributeMapping_TargetMultiMeasureAttributeName, *v.TargetMultiMeasureAttributeName)
+	}
+}
+func (v *MultiMeasureAttributeMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultiMeasureAttributeMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultiMeasureAttributeMapping_MeasureValueType:
+			var ev string
+			if err := d.ReadString(schemas.MultiMeasureAttributeMapping_MeasureValueType, &ev); err != nil {
+				return err
+			}
+			v.MeasureValueType = ScalarMeasureValueType(ev)
+			return nil
+		case schemas.MultiMeasureAttributeMapping_SourceColumn:
+			v.SourceColumn = new(string)
+			return d.ReadString(schemas.MultiMeasureAttributeMapping_SourceColumn, v.SourceColumn)
+		case schemas.MultiMeasureAttributeMapping_TargetMultiMeasureAttributeName:
+			v.TargetMultiMeasureAttributeName = new(string)
+			return d.ReadString(schemas.MultiMeasureAttributeMapping_TargetMultiMeasureAttributeName, v.TargetMultiMeasureAttributeName)
+		}
+		return nil
+	})
 }
 
 // Only one of MixedMeasureMappings or MultiMeasureMappings is to be provided.
@@ -231,6 +611,31 @@ type MultiMeasureMappings struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MultiMeasureMappings) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MultiMeasureMappings)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MultiMeasureMappings) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMultiMeasureAttributeMappingList(s, schemas.MultiMeasureMappings_MultiMeasureAttributeMappings, v.MultiMeasureAttributeMappings)
+	if v.TargetMultiMeasureName != nil {
+		s.WriteString(schemas.MultiMeasureMappings_TargetMultiMeasureName, *v.TargetMultiMeasureName)
+	}
+}
+func (v *MultiMeasureMappings) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MultiMeasureMappings, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MultiMeasureMappings_MultiMeasureAttributeMappings:
+			return deserializeMultiMeasureAttributeMappingList(d, schemas.MultiMeasureMappings_MultiMeasureAttributeMappings, &v.MultiMeasureAttributeMappings)
+		case schemas.MultiMeasureMappings_TargetMultiMeasureName:
+			v.TargetMultiMeasureName = new(string)
+			return d.ReadString(schemas.MultiMeasureMappings_TargetMultiMeasureName, v.TargetMultiMeasureName)
+		}
+		return nil
+	})
+}
+
 // Notification configuration for a scheduled query. A notification is sent by
 // Timestream when a scheduled query is created, its state is updated or when it is
 // deleted.
@@ -244,6 +649,30 @@ type NotificationConfiguration struct {
 	SnsConfiguration *SnsConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *NotificationConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SnsConfiguration != nil {
+		s.WriteStruct(schemas.NotificationConfiguration_SnsConfiguration)
+		v.SnsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NotificationConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationConfiguration_SnsConfiguration:
+			v.SnsConfiguration = &SnsConfiguration{}
+			return v.SnsConfiguration.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Mapping for named parameters.
@@ -265,6 +694,36 @@ type ParameterMapping struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ParameterMapping) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ParameterMapping)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ParameterMapping) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.ParameterMapping_Name, *v.Name)
+	}
+	if v.Type != nil {
+		s.WriteStruct(schemas.ParameterMapping_Type)
+		v.Type.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ParameterMapping) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ParameterMapping, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ParameterMapping_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ParameterMapping_Name, v.Name)
+		case schemas.ParameterMapping_Type:
+			v.Type = &Type{}
+			return v.Type.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A request to update the provisioned capacity settings for querying data.
 type ProvisionedCapacityRequest struct {
 
@@ -279,6 +738,36 @@ type ProvisionedCapacityRequest struct {
 	NotificationConfiguration *AccountSettingsNotificationConfiguration
 
 	noSmithyDocumentSerde
+}
+
+func (v *ProvisionedCapacityRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProvisionedCapacityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProvisionedCapacityRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NotificationConfiguration != nil {
+		s.WriteStruct(schemas.ProvisionedCapacityRequest_NotificationConfiguration)
+		v.NotificationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TargetQueryTCU != nil {
+		s.WriteInt32(schemas.ProvisionedCapacityRequest_TargetQueryTCU, *v.TargetQueryTCU)
+	}
+}
+func (v *ProvisionedCapacityRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProvisionedCapacityRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProvisionedCapacityRequest_NotificationConfiguration:
+			v.NotificationConfiguration = &AccountSettingsNotificationConfiguration{}
+			return v.NotificationConfiguration.Deserialize(d)
+		case schemas.ProvisionedCapacityRequest_TargetQueryTCU:
+			v.TargetQueryTCU = new(int32)
+			return d.ReadInt32(schemas.ProvisionedCapacityRequest_TargetQueryTCU, v.TargetQueryTCU)
+		}
+		return nil
+	})
 }
 
 // The response to a request to update the provisioned capacity settings for
@@ -300,6 +789,44 @@ type ProvisionedCapacityResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ProvisionedCapacityResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ProvisionedCapacityResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ProvisionedCapacityResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ActiveQueryTCU != nil {
+		s.WriteInt32(schemas.ProvisionedCapacityResponse_ActiveQueryTCU, *v.ActiveQueryTCU)
+	}
+	if v.LastUpdate != nil {
+		s.WriteStruct(schemas.ProvisionedCapacityResponse_LastUpdate)
+		v.LastUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.NotificationConfiguration != nil {
+		s.WriteStruct(schemas.ProvisionedCapacityResponse_NotificationConfiguration)
+		v.NotificationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ProvisionedCapacityResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ProvisionedCapacityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ProvisionedCapacityResponse_ActiveQueryTCU:
+			v.ActiveQueryTCU = new(int32)
+			return d.ReadInt32(schemas.ProvisionedCapacityResponse_ActiveQueryTCU, v.ActiveQueryTCU)
+		case schemas.ProvisionedCapacityResponse_LastUpdate:
+			v.LastUpdate = &LastUpdate{}
+			return v.LastUpdate.Deserialize(d)
+		case schemas.ProvisionedCapacityResponse_NotificationConfiguration:
+			v.NotificationConfiguration = &AccountSettingsNotificationConfiguration{}
+			return v.NotificationConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // A request to retrieve or update the compute capacity settings for querying data.
 type QueryComputeRequest struct {
 
@@ -313,6 +840,40 @@ type QueryComputeRequest struct {
 	ProvisionedCapacity *ProvisionedCapacityRequest
 
 	noSmithyDocumentSerde
+}
+
+func (v *QueryComputeRequest) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryComputeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryComputeRequest) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeMode != "" {
+		s.WriteString(schemas.QueryComputeRequest_ComputeMode, string(v.ComputeMode))
+	}
+	if v.ProvisionedCapacity != nil {
+		s.WriteStruct(schemas.QueryComputeRequest_ProvisionedCapacity)
+		v.ProvisionedCapacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *QueryComputeRequest) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryComputeRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryComputeRequest_ComputeMode:
+			var ev string
+			if err := d.ReadString(schemas.QueryComputeRequest_ComputeMode, &ev); err != nil {
+				return err
+			}
+			v.ComputeMode = ComputeMode(ev)
+			return nil
+		case schemas.QueryComputeRequest_ProvisionedCapacity:
+			v.ProvisionedCapacity = &ProvisionedCapacityRequest{}
+			return v.ProvisionedCapacity.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The response to a request to retrieve or update the compute capacity settings
@@ -329,6 +890,40 @@ type QueryComputeResponse struct {
 	ProvisionedCapacity *ProvisionedCapacityResponse
 
 	noSmithyDocumentSerde
+}
+
+func (v *QueryComputeResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryComputeResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryComputeResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ComputeMode != "" {
+		s.WriteString(schemas.QueryComputeResponse_ComputeMode, string(v.ComputeMode))
+	}
+	if v.ProvisionedCapacity != nil {
+		s.WriteStruct(schemas.QueryComputeResponse_ProvisionedCapacity)
+		v.ProvisionedCapacity.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *QueryComputeResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryComputeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryComputeResponse_ComputeMode:
+			var ev string
+			if err := d.ReadString(schemas.QueryComputeResponse_ComputeMode, &ev); err != nil {
+				return err
+			}
+			v.ComputeMode = ComputeMode(ev)
+			return nil
+		case schemas.QueryComputeResponse_ProvisionedCapacity:
+			v.ProvisionedCapacity = &ProvisionedCapacityResponse{}
+			return v.ProvisionedCapacity.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // QueryInsights is a performance tuning feature that helps you optimize your
@@ -380,6 +975,32 @@ type QueryInsights struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryInsights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryInsights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryInsights) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.QueryInsights_Mode, string(v.Mode))
+	}
+}
+func (v *QueryInsights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryInsights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryInsights_Mode:
+			var ev string
+			if err := d.ReadString(schemas.QueryInsights_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = QueryInsightsMode(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Provides various insights and metrics related to the query that you executed.
 type QueryInsightsResponse struct {
 
@@ -423,6 +1044,74 @@ type QueryInsightsResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryInsightsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryInsightsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryInsightsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputBytes != nil {
+		s.WriteInt64(schemas.QueryInsightsResponse_OutputBytes, *v.OutputBytes)
+	}
+	if v.OutputRows != nil {
+		s.WriteInt64(schemas.QueryInsightsResponse_OutputRows, *v.OutputRows)
+	}
+	if v.QuerySpatialCoverage != nil {
+		s.WriteStruct(schemas.QueryInsightsResponse_QuerySpatialCoverage)
+		v.QuerySpatialCoverage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryTableCount != nil {
+		s.WriteInt64(schemas.QueryInsightsResponse_QueryTableCount, *v.QueryTableCount)
+	}
+	if v.QueryTemporalRange != nil {
+		s.WriteStruct(schemas.QueryInsightsResponse_QueryTemporalRange)
+		v.QueryTemporalRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.UnloadPartitionCount != nil {
+		s.WriteInt64(schemas.QueryInsightsResponse_UnloadPartitionCount, *v.UnloadPartitionCount)
+	}
+	if v.UnloadWrittenBytes != nil {
+		s.WriteInt64(schemas.QueryInsightsResponse_UnloadWrittenBytes, *v.UnloadWrittenBytes)
+	}
+	if v.UnloadWrittenRows != nil {
+		s.WriteInt64(schemas.QueryInsightsResponse_UnloadWrittenRows, *v.UnloadWrittenRows)
+	}
+}
+func (v *QueryInsightsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryInsightsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryInsightsResponse_OutputBytes:
+			v.OutputBytes = new(int64)
+			return d.ReadInt64(schemas.QueryInsightsResponse_OutputBytes, v.OutputBytes)
+		case schemas.QueryInsightsResponse_OutputRows:
+			v.OutputRows = new(int64)
+			return d.ReadInt64(schemas.QueryInsightsResponse_OutputRows, v.OutputRows)
+		case schemas.QueryInsightsResponse_QuerySpatialCoverage:
+			v.QuerySpatialCoverage = &QuerySpatialCoverage{}
+			return v.QuerySpatialCoverage.Deserialize(d)
+		case schemas.QueryInsightsResponse_QueryTableCount:
+			v.QueryTableCount = new(int64)
+			return d.ReadInt64(schemas.QueryInsightsResponse_QueryTableCount, v.QueryTableCount)
+		case schemas.QueryInsightsResponse_QueryTemporalRange:
+			v.QueryTemporalRange = &QueryTemporalRange{}
+			return v.QueryTemporalRange.Deserialize(d)
+		case schemas.QueryInsightsResponse_UnloadPartitionCount:
+			v.UnloadPartitionCount = new(int64)
+			return d.ReadInt64(schemas.QueryInsightsResponse_UnloadPartitionCount, v.UnloadPartitionCount)
+		case schemas.QueryInsightsResponse_UnloadWrittenBytes:
+			v.UnloadWrittenBytes = new(int64)
+			return d.ReadInt64(schemas.QueryInsightsResponse_UnloadWrittenBytes, v.UnloadWrittenBytes)
+		case schemas.QueryInsightsResponse_UnloadWrittenRows:
+			v.UnloadWrittenRows = new(int64)
+			return d.ReadInt64(schemas.QueryInsightsResponse_UnloadWrittenRows, v.UnloadWrittenRows)
+		}
+		return nil
+	})
+}
+
 // Provides insights into the spatial coverage of the query, including the table
 // with sub-optimal (max) spatial pruning. This information can help you identify
 // areas for improvement in your partitioning strategy to enhance spatial pruning
@@ -452,6 +1141,30 @@ type QuerySpatialCoverage struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QuerySpatialCoverage) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuerySpatialCoverage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuerySpatialCoverage) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Max != nil {
+		s.WriteStruct(schemas.QuerySpatialCoverage_Max)
+		v.Max.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *QuerySpatialCoverage) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuerySpatialCoverage, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuerySpatialCoverage_Max:
+			v.Max = &QuerySpatialCoverageMax{}
+			return v.Max.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides insights into the table with the most sub-optimal spatial range
 // scanned by your query.
 type QuerySpatialCoverageMax struct {
@@ -470,6 +1183,36 @@ type QuerySpatialCoverageMax struct {
 	Value float64
 
 	noSmithyDocumentSerde
+}
+
+func (v *QuerySpatialCoverageMax) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QuerySpatialCoverageMax)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QuerySpatialCoverageMax) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePartitionKeyList(s, schemas.QuerySpatialCoverageMax_PartitionKey, v.PartitionKey)
+	if v.TableArn != nil {
+		s.WriteString(schemas.QuerySpatialCoverageMax_TableArn, *v.TableArn)
+	}
+	if v.Value != 0 {
+		s.WriteFloat64(schemas.QuerySpatialCoverageMax_Value, v.Value)
+	}
+}
+func (v *QuerySpatialCoverageMax) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QuerySpatialCoverageMax, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QuerySpatialCoverageMax_PartitionKey:
+			return deserializePartitionKeyList(d, schemas.QuerySpatialCoverageMax_PartitionKey, &v.PartitionKey)
+		case schemas.QuerySpatialCoverageMax_TableArn:
+			v.TableArn = new(string)
+			return d.ReadString(schemas.QuerySpatialCoverageMax_TableArn, v.TableArn)
+		case schemas.QuerySpatialCoverageMax_Value:
+			return d.ReadFloat64(schemas.QuerySpatialCoverageMax_Value, &v.Value)
+		}
+		return nil
+	})
 }
 
 // Information about the status of the query, including progress and bytes scanned.
@@ -492,6 +1235,37 @@ type QueryStatus struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CumulativeBytesMetered != 0 {
+		s.WriteInt64(schemas.QueryStatus_CumulativeBytesMetered, v.CumulativeBytesMetered)
+	}
+	if v.CumulativeBytesScanned != 0 {
+		s.WriteInt64(schemas.QueryStatus_CumulativeBytesScanned, v.CumulativeBytesScanned)
+	}
+	if v.ProgressPercentage != 0 {
+		s.WriteFloat64(schemas.QueryStatus_ProgressPercentage, v.ProgressPercentage)
+	}
+}
+func (v *QueryStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryStatus_CumulativeBytesMetered:
+			return d.ReadInt64(schemas.QueryStatus_CumulativeBytesMetered, &v.CumulativeBytesMetered)
+		case schemas.QueryStatus_CumulativeBytesScanned:
+			return d.ReadInt64(schemas.QueryStatus_CumulativeBytesScanned, &v.CumulativeBytesScanned)
+		case schemas.QueryStatus_ProgressPercentage:
+			return d.ReadFloat64(schemas.QueryStatus_ProgressPercentage, &v.ProgressPercentage)
+		}
+		return nil
+	})
+}
+
 // Provides insights into the temporal range of the query, including the table
 // with the largest (max) time range.
 type QueryTemporalRange struct {
@@ -509,6 +1283,30 @@ type QueryTemporalRange struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryTemporalRange) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryTemporalRange)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryTemporalRange) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Max != nil {
+		s.WriteStruct(schemas.QueryTemporalRange_Max)
+		v.Max.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *QueryTemporalRange) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryTemporalRange, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryTemporalRange_Max:
+			v.Max = &QueryTemporalRangeMax{}
+			return v.Max.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Provides insights into the table with the most sub-optimal temporal pruning
 // scanned by your query.
 type QueryTemporalRangeMax struct {
@@ -523,6 +1321,33 @@ type QueryTemporalRangeMax struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryTemporalRangeMax) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryTemporalRangeMax)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryTemporalRangeMax) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TableArn != nil {
+		s.WriteString(schemas.QueryTemporalRangeMax_TableArn, *v.TableArn)
+	}
+	if v.Value != 0 {
+		s.WriteInt64(schemas.QueryTemporalRangeMax_Value, v.Value)
+	}
+}
+func (v *QueryTemporalRangeMax) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryTemporalRangeMax, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryTemporalRangeMax_TableArn:
+			v.TableArn = new(string)
+			return d.ReadString(schemas.QueryTemporalRangeMax_TableArn, v.TableArn)
+		case schemas.QueryTemporalRangeMax_Value:
+			return d.ReadInt64(schemas.QueryTemporalRangeMax_Value, &v.Value)
+		}
+		return nil
+	})
+}
+
 // Represents a single row in the query results.
 type Row struct {
 
@@ -532,6 +1357,25 @@ type Row struct {
 	Data []Datum
 
 	noSmithyDocumentSerde
+}
+
+func (v *Row) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Row)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Row) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDatumList(s, schemas.Row_Data, v.Data)
+}
+func (v *Row) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Row, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Row_Data:
+			return deserializeDatumList(d, schemas.Row_Data, &v.Data)
+		}
+		return nil
+	})
 }
 
 // Details on S3 location for error reports that result from running a query.
@@ -553,6 +1397,44 @@ type S3Configuration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3Configuration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3Configuration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3Configuration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3Configuration_BucketName, *v.BucketName)
+	}
+	if v.EncryptionOption != "" {
+		s.WriteString(schemas.S3Configuration_EncryptionOption, string(v.EncryptionOption))
+	}
+	if v.ObjectKeyPrefix != nil {
+		s.WriteString(schemas.S3Configuration_ObjectKeyPrefix, *v.ObjectKeyPrefix)
+	}
+}
+func (v *S3Configuration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3Configuration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3Configuration_BucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3Configuration_BucketName, v.BucketName)
+		case schemas.S3Configuration_EncryptionOption:
+			var ev string
+			if err := d.ReadString(schemas.S3Configuration_EncryptionOption, &ev); err != nil {
+				return err
+			}
+			v.EncryptionOption = S3EncryptionOption(ev)
+			return nil
+		case schemas.S3Configuration_ObjectKeyPrefix:
+			v.ObjectKeyPrefix = new(string)
+			return d.ReadString(schemas.S3Configuration_ObjectKeyPrefix, v.ObjectKeyPrefix)
+		}
+		return nil
+	})
+}
+
 // S3 report location for the scheduled query run.
 type S3ReportLocation struct {
 
@@ -565,6 +1447,34 @@ type S3ReportLocation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *S3ReportLocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.S3ReportLocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *S3ReportLocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BucketName != nil {
+		s.WriteString(schemas.S3ReportLocation_BucketName, *v.BucketName)
+	}
+	if v.ObjectKey != nil {
+		s.WriteString(schemas.S3ReportLocation_ObjectKey, *v.ObjectKey)
+	}
+}
+func (v *S3ReportLocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.S3ReportLocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.S3ReportLocation_BucketName:
+			v.BucketName = new(string)
+			return d.ReadString(schemas.S3ReportLocation_BucketName, v.BucketName)
+		case schemas.S3ReportLocation_ObjectKey:
+			v.ObjectKey = new(string)
+			return d.ReadString(schemas.S3ReportLocation_ObjectKey, v.ObjectKey)
+		}
+		return nil
+	})
+}
+
 // Configuration of the schedule of the query.
 type ScheduleConfiguration struct {
 
@@ -575,6 +1485,28 @@ type ScheduleConfiguration struct {
 	ScheduleExpression *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScheduleConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduleConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduleConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ScheduleExpression != nil {
+		s.WriteString(schemas.ScheduleConfiguration_ScheduleExpression, *v.ScheduleExpression)
+	}
+}
+func (v *ScheduleConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduleConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduleConfiguration_ScheduleExpression:
+			v.ScheduleExpression = new(string)
+			return d.ReadString(schemas.ScheduleConfiguration_ScheduleExpression, v.ScheduleExpression)
+		}
+		return nil
+	})
 }
 
 // Scheduled Query
@@ -614,6 +1546,88 @@ type ScheduledQuery struct {
 	TargetDestination *TargetDestination
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScheduledQuery) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledQuery)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduledQuery) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ScheduledQuery_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ScheduledQuery_CreationTime, *v.CreationTime)
+	}
+	if v.ErrorReportConfiguration != nil {
+		s.WriteStruct(schemas.ScheduledQuery_ErrorReportConfiguration)
+		v.ErrorReportConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LastRunStatus != "" {
+		s.WriteString(schemas.ScheduledQuery_LastRunStatus, string(v.LastRunStatus))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ScheduledQuery_Name, *v.Name)
+	}
+	if v.NextInvocationTime != nil {
+		s.WriteTime(schemas.ScheduledQuery_NextInvocationTime, *v.NextInvocationTime)
+	}
+	if v.PreviousInvocationTime != nil {
+		s.WriteTime(schemas.ScheduledQuery_PreviousInvocationTime, *v.PreviousInvocationTime)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ScheduledQuery_State, string(v.State))
+	}
+	if v.TargetDestination != nil {
+		s.WriteStruct(schemas.ScheduledQuery_TargetDestination)
+		v.TargetDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ScheduledQuery) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledQuery, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledQuery_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ScheduledQuery_Arn, v.Arn)
+		case schemas.ScheduledQuery_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledQuery_CreationTime, v.CreationTime)
+		case schemas.ScheduledQuery_ErrorReportConfiguration:
+			v.ErrorReportConfiguration = &ErrorReportConfiguration{}
+			return v.ErrorReportConfiguration.Deserialize(d)
+		case schemas.ScheduledQuery_LastRunStatus:
+			var ev string
+			if err := d.ReadString(schemas.ScheduledQuery_LastRunStatus, &ev); err != nil {
+				return err
+			}
+			v.LastRunStatus = ScheduledQueryRunStatus(ev)
+			return nil
+		case schemas.ScheduledQuery_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ScheduledQuery_Name, v.Name)
+		case schemas.ScheduledQuery_NextInvocationTime:
+			v.NextInvocationTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledQuery_NextInvocationTime, v.NextInvocationTime)
+		case schemas.ScheduledQuery_PreviousInvocationTime:
+			v.PreviousInvocationTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledQuery_PreviousInvocationTime, v.PreviousInvocationTime)
+		case schemas.ScheduledQuery_State:
+			var ev string
+			if err := d.ReadString(schemas.ScheduledQuery_State, &ev); err != nil {
+				return err
+			}
+			v.State = ScheduledQueryState(ev)
+			return nil
+		case schemas.ScheduledQuery_TargetDestination:
+			v.TargetDestination = &TargetDestination{}
+			return v.TargetDestination.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // Structure that describes scheduled query.
@@ -679,6 +1693,123 @@ type ScheduledQueryDescription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScheduledQueryDescription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledQueryDescription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduledQueryDescription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.ScheduledQueryDescription_Arn, *v.Arn)
+	}
+	if v.CreationTime != nil {
+		s.WriteTime(schemas.ScheduledQueryDescription_CreationTime, *v.CreationTime)
+	}
+	if v.ErrorReportConfiguration != nil {
+		s.WriteStruct(schemas.ScheduledQueryDescription_ErrorReportConfiguration)
+		v.ErrorReportConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.ScheduledQueryDescription_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.LastRunSummary != nil {
+		s.WriteStruct(schemas.ScheduledQueryDescription_LastRunSummary)
+		v.LastRunSummary.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ScheduledQueryDescription_Name, *v.Name)
+	}
+	if v.NextInvocationTime != nil {
+		s.WriteTime(schemas.ScheduledQueryDescription_NextInvocationTime, *v.NextInvocationTime)
+	}
+	if v.NotificationConfiguration != nil {
+		s.WriteStruct(schemas.ScheduledQueryDescription_NotificationConfiguration)
+		v.NotificationConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PreviousInvocationTime != nil {
+		s.WriteTime(schemas.ScheduledQueryDescription_PreviousInvocationTime, *v.PreviousInvocationTime)
+	}
+	if v.QueryString != nil {
+		s.WriteString(schemas.ScheduledQueryDescription_QueryString, *v.QueryString)
+	}
+	serializeScheduledQueryRunSummaryList(s, schemas.ScheduledQueryDescription_RecentlyFailedRuns, v.RecentlyFailedRuns)
+	if v.ScheduleConfiguration != nil {
+		s.WriteStruct(schemas.ScheduledQueryDescription_ScheduleConfiguration)
+		v.ScheduleConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ScheduledQueryExecutionRoleArn != nil {
+		s.WriteString(schemas.ScheduledQueryDescription_ScheduledQueryExecutionRoleArn, *v.ScheduledQueryExecutionRoleArn)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.ScheduledQueryDescription_State, string(v.State))
+	}
+	if v.TargetConfiguration != nil {
+		s.WriteStruct(schemas.ScheduledQueryDescription_TargetConfiguration)
+		v.TargetConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ScheduledQueryDescription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledQueryDescription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledQueryDescription_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.ScheduledQueryDescription_Arn, v.Arn)
+		case schemas.ScheduledQueryDescription_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledQueryDescription_CreationTime, v.CreationTime)
+		case schemas.ScheduledQueryDescription_ErrorReportConfiguration:
+			v.ErrorReportConfiguration = &ErrorReportConfiguration{}
+			return v.ErrorReportConfiguration.Deserialize(d)
+		case schemas.ScheduledQueryDescription_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.ScheduledQueryDescription_KmsKeyId, v.KmsKeyId)
+		case schemas.ScheduledQueryDescription_LastRunSummary:
+			v.LastRunSummary = &ScheduledQueryRunSummary{}
+			return v.LastRunSummary.Deserialize(d)
+		case schemas.ScheduledQueryDescription_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ScheduledQueryDescription_Name, v.Name)
+		case schemas.ScheduledQueryDescription_NextInvocationTime:
+			v.NextInvocationTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledQueryDescription_NextInvocationTime, v.NextInvocationTime)
+		case schemas.ScheduledQueryDescription_NotificationConfiguration:
+			v.NotificationConfiguration = &NotificationConfiguration{}
+			return v.NotificationConfiguration.Deserialize(d)
+		case schemas.ScheduledQueryDescription_PreviousInvocationTime:
+			v.PreviousInvocationTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledQueryDescription_PreviousInvocationTime, v.PreviousInvocationTime)
+		case schemas.ScheduledQueryDescription_QueryString:
+			v.QueryString = new(string)
+			return d.ReadString(schemas.ScheduledQueryDescription_QueryString, v.QueryString)
+		case schemas.ScheduledQueryDescription_RecentlyFailedRuns:
+			return deserializeScheduledQueryRunSummaryList(d, schemas.ScheduledQueryDescription_RecentlyFailedRuns, &v.RecentlyFailedRuns)
+		case schemas.ScheduledQueryDescription_ScheduleConfiguration:
+			v.ScheduleConfiguration = &ScheduleConfiguration{}
+			return v.ScheduleConfiguration.Deserialize(d)
+		case schemas.ScheduledQueryDescription_ScheduledQueryExecutionRoleArn:
+			v.ScheduledQueryExecutionRoleArn = new(string)
+			return d.ReadString(schemas.ScheduledQueryDescription_ScheduledQueryExecutionRoleArn, v.ScheduledQueryExecutionRoleArn)
+		case schemas.ScheduledQueryDescription_State:
+			var ev string
+			if err := d.ReadString(schemas.ScheduledQueryDescription_State, &ev); err != nil {
+				return err
+			}
+			v.State = ScheduledQueryState(ev)
+			return nil
+		case schemas.ScheduledQueryDescription_TargetConfiguration:
+			v.TargetConfiguration = &TargetConfiguration{}
+			return v.TargetConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Encapsulates settings for enabling QueryInsights on an
 // ExecuteScheduledQueryRequest .
 type ScheduledQueryInsights struct {
@@ -695,6 +1826,32 @@ type ScheduledQueryInsights struct {
 	Mode ScheduledQueryInsightsMode
 
 	noSmithyDocumentSerde
+}
+
+func (v *ScheduledQueryInsights) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledQueryInsights)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduledQueryInsights) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Mode != "" {
+		s.WriteString(schemas.ScheduledQueryInsights_Mode, string(v.Mode))
+	}
+}
+func (v *ScheduledQueryInsights) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledQueryInsights, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledQueryInsights_Mode:
+			var ev string
+			if err := d.ReadString(schemas.ScheduledQueryInsights_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = ScheduledQueryInsightsMode(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Provides various insights and metrics related to the
@@ -732,6 +1889,56 @@ type ScheduledQueryInsightsResponse struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScheduledQueryInsightsResponse) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledQueryInsightsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduledQueryInsightsResponse) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OutputBytes != nil {
+		s.WriteInt64(schemas.ScheduledQueryInsightsResponse_OutputBytes, *v.OutputBytes)
+	}
+	if v.OutputRows != nil {
+		s.WriteInt64(schemas.ScheduledQueryInsightsResponse_OutputRows, *v.OutputRows)
+	}
+	if v.QuerySpatialCoverage != nil {
+		s.WriteStruct(schemas.ScheduledQueryInsightsResponse_QuerySpatialCoverage)
+		v.QuerySpatialCoverage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.QueryTableCount != nil {
+		s.WriteInt64(schemas.ScheduledQueryInsightsResponse_QueryTableCount, *v.QueryTableCount)
+	}
+	if v.QueryTemporalRange != nil {
+		s.WriteStruct(schemas.ScheduledQueryInsightsResponse_QueryTemporalRange)
+		v.QueryTemporalRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ScheduledQueryInsightsResponse) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledQueryInsightsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledQueryInsightsResponse_OutputBytes:
+			v.OutputBytes = new(int64)
+			return d.ReadInt64(schemas.ScheduledQueryInsightsResponse_OutputBytes, v.OutputBytes)
+		case schemas.ScheduledQueryInsightsResponse_OutputRows:
+			v.OutputRows = new(int64)
+			return d.ReadInt64(schemas.ScheduledQueryInsightsResponse_OutputRows, v.OutputRows)
+		case schemas.ScheduledQueryInsightsResponse_QuerySpatialCoverage:
+			v.QuerySpatialCoverage = &QuerySpatialCoverage{}
+			return v.QuerySpatialCoverage.Deserialize(d)
+		case schemas.ScheduledQueryInsightsResponse_QueryTableCount:
+			v.QueryTableCount = new(int64)
+			return d.ReadInt64(schemas.ScheduledQueryInsightsResponse_QueryTableCount, v.QueryTableCount)
+		case schemas.ScheduledQueryInsightsResponse_QueryTemporalRange:
+			v.QueryTemporalRange = &QueryTemporalRange{}
+			return v.QueryTemporalRange.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Run summary for the scheduled query
 type ScheduledQueryRunSummary struct {
 
@@ -762,6 +1969,74 @@ type ScheduledQueryRunSummary struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ScheduledQueryRunSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ScheduledQueryRunSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ScheduledQueryRunSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorReportLocation != nil {
+		s.WriteStruct(schemas.ScheduledQueryRunSummary_ErrorReportLocation)
+		v.ErrorReportLocation.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExecutionStats != nil {
+		s.WriteStruct(schemas.ScheduledQueryRunSummary_ExecutionStats)
+		v.ExecutionStats.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FailureReason != nil {
+		s.WriteString(schemas.ScheduledQueryRunSummary_FailureReason, *v.FailureReason)
+	}
+	if v.InvocationTime != nil {
+		s.WriteTime(schemas.ScheduledQueryRunSummary_InvocationTime, *v.InvocationTime)
+	}
+	if v.QueryInsightsResponse != nil {
+		s.WriteStruct(schemas.ScheduledQueryRunSummary_QueryInsightsResponse)
+		v.QueryInsightsResponse.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RunStatus != "" {
+		s.WriteString(schemas.ScheduledQueryRunSummary_RunStatus, string(v.RunStatus))
+	}
+	if v.TriggerTime != nil {
+		s.WriteTime(schemas.ScheduledQueryRunSummary_TriggerTime, *v.TriggerTime)
+	}
+}
+func (v *ScheduledQueryRunSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ScheduledQueryRunSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ScheduledQueryRunSummary_ErrorReportLocation:
+			v.ErrorReportLocation = &ErrorReportLocation{}
+			return v.ErrorReportLocation.Deserialize(d)
+		case schemas.ScheduledQueryRunSummary_ExecutionStats:
+			v.ExecutionStats = &ExecutionStats{}
+			return v.ExecutionStats.Deserialize(d)
+		case schemas.ScheduledQueryRunSummary_FailureReason:
+			v.FailureReason = new(string)
+			return d.ReadString(schemas.ScheduledQueryRunSummary_FailureReason, v.FailureReason)
+		case schemas.ScheduledQueryRunSummary_InvocationTime:
+			v.InvocationTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledQueryRunSummary_InvocationTime, v.InvocationTime)
+		case schemas.ScheduledQueryRunSummary_QueryInsightsResponse:
+			v.QueryInsightsResponse = &ScheduledQueryInsightsResponse{}
+			return v.QueryInsightsResponse.Deserialize(d)
+		case schemas.ScheduledQueryRunSummary_RunStatus:
+			var ev string
+			if err := d.ReadString(schemas.ScheduledQueryRunSummary_RunStatus, &ev); err != nil {
+				return err
+			}
+			v.RunStatus = ScheduledQueryRunStatus(ev)
+			return nil
+		case schemas.ScheduledQueryRunSummary_TriggerTime:
+			v.TriggerTime = new(time.Time)
+			return d.ReadTime(schemas.ScheduledQueryRunSummary_TriggerTime, v.TriggerTime)
+		}
+		return nil
+	})
+}
+
 // Details of the column that is returned by the query.
 type SelectColumn struct {
 
@@ -786,6 +2061,54 @@ type SelectColumn struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SelectColumn) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SelectColumn)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SelectColumn) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Aliased != nil {
+		s.WriteBool(schemas.SelectColumn_Aliased, *v.Aliased)
+	}
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.SelectColumn_DatabaseName, *v.DatabaseName)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.SelectColumn_Name, *v.Name)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.SelectColumn_TableName, *v.TableName)
+	}
+	if v.Type != nil {
+		s.WriteStruct(schemas.SelectColumn_Type)
+		v.Type.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *SelectColumn) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SelectColumn, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SelectColumn_Aliased:
+			v.Aliased = new(bool)
+			return d.ReadBool(schemas.SelectColumn_Aliased, v.Aliased)
+		case schemas.SelectColumn_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.SelectColumn_DatabaseName, v.DatabaseName)
+		case schemas.SelectColumn_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.SelectColumn_Name, v.Name)
+		case schemas.SelectColumn_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.SelectColumn_TableName, v.TableName)
+		case schemas.SelectColumn_Type:
+			v.Type = &Type{}
+			return v.Type.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Details on SNS that are required to send the notification.
 type SnsConfiguration struct {
 
@@ -795,6 +2118,28 @@ type SnsConfiguration struct {
 	TopicArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *SnsConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SnsConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SnsConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TopicArn != nil {
+		s.WriteString(schemas.SnsConfiguration_TopicArn, *v.TopicArn)
+	}
+}
+func (v *SnsConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SnsConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SnsConfiguration_TopicArn:
+			v.TopicArn = new(string)
+			return d.ReadString(schemas.SnsConfiguration_TopicArn, v.TopicArn)
+		}
+		return nil
+	})
 }
 
 // A tag is a label that you assign to a Timestream database and/or table. Each
@@ -816,6 +2161,34 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_Key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_Value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_Key, v.Key)
+		case schemas.Tag_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Configuration used for writing the output of a query.
 type TargetConfiguration struct {
 
@@ -827,6 +2200,30 @@ type TargetConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TargetConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TimestreamConfiguration != nil {
+		s.WriteStruct(schemas.TargetConfiguration_TimestreamConfiguration)
+		v.TimestreamConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TargetConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetConfiguration_TimestreamConfiguration:
+			v.TimestreamConfiguration = &TimestreamConfiguration{}
+			return v.TimestreamConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Destination details to write data for a target data source. Current supported
 // data source is Timestream.
 type TargetDestination struct {
@@ -835,6 +2232,30 @@ type TargetDestination struct {
 	TimestreamDestination *TimestreamDestination
 
 	noSmithyDocumentSerde
+}
+
+func (v *TargetDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TargetDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TargetDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TimestreamDestination != nil {
+		s.WriteStruct(schemas.TargetDestination_TimestreamDestination)
+		v.TimestreamDestination.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TargetDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TargetDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TargetDestination_TimestreamDestination:
+			v.TimestreamDestination = &TimestreamDestination{}
+			return v.TimestreamDestination.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 // The timeseries data type represents the values of a measure over time. A time
@@ -854,6 +2275,36 @@ type TimeSeriesDataPoint struct {
 	Value *Datum
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimeSeriesDataPoint) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimeSeriesDataPoint)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimeSeriesDataPoint) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Time != nil {
+		s.WriteString(schemas.TimeSeriesDataPoint_Time, *v.Time)
+	}
+	if v.Value != nil {
+		s.WriteStruct(schemas.TimeSeriesDataPoint_Value)
+		v.Value.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *TimeSeriesDataPoint) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimeSeriesDataPoint, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimeSeriesDataPoint_Time:
+			v.Time = new(string)
+			return d.ReadString(schemas.TimeSeriesDataPoint_Time, v.Time)
+		case schemas.TimeSeriesDataPoint_Value:
+			v.Value = &Datum{}
+			return v.Value.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	Configuration to write data into Timestream database and table. This
@@ -897,6 +2348,60 @@ type TimestreamConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TimestreamConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimestreamConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimestreamConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.TimestreamConfiguration_DatabaseName, *v.DatabaseName)
+	}
+	serializeDimensionMappingList(s, schemas.TimestreamConfiguration_DimensionMappings, v.DimensionMappings)
+	if v.MeasureNameColumn != nil {
+		s.WriteString(schemas.TimestreamConfiguration_MeasureNameColumn, *v.MeasureNameColumn)
+	}
+	serializeMixedMeasureMappingList(s, schemas.TimestreamConfiguration_MixedMeasureMappings, v.MixedMeasureMappings)
+	if v.MultiMeasureMappings != nil {
+		s.WriteStruct(schemas.TimestreamConfiguration_MultiMeasureMappings)
+		v.MultiMeasureMappings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.TimestreamConfiguration_TableName, *v.TableName)
+	}
+	if v.TimeColumn != nil {
+		s.WriteString(schemas.TimestreamConfiguration_TimeColumn, *v.TimeColumn)
+	}
+}
+func (v *TimestreamConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimestreamConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimestreamConfiguration_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.TimestreamConfiguration_DatabaseName, v.DatabaseName)
+		case schemas.TimestreamConfiguration_DimensionMappings:
+			return deserializeDimensionMappingList(d, schemas.TimestreamConfiguration_DimensionMappings, &v.DimensionMappings)
+		case schemas.TimestreamConfiguration_MeasureNameColumn:
+			v.MeasureNameColumn = new(string)
+			return d.ReadString(schemas.TimestreamConfiguration_MeasureNameColumn, v.MeasureNameColumn)
+		case schemas.TimestreamConfiguration_MixedMeasureMappings:
+			return deserializeMixedMeasureMappingList(d, schemas.TimestreamConfiguration_MixedMeasureMappings, &v.MixedMeasureMappings)
+		case schemas.TimestreamConfiguration_MultiMeasureMappings:
+			v.MultiMeasureMappings = &MultiMeasureMappings{}
+			return v.MultiMeasureMappings.Deserialize(d)
+		case schemas.TimestreamConfiguration_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.TimestreamConfiguration_TableName, v.TableName)
+		case schemas.TimestreamConfiguration_TimeColumn:
+			v.TimeColumn = new(string)
+			return d.ReadString(schemas.TimestreamConfiguration_TimeColumn, v.TimeColumn)
+		}
+		return nil
+	})
+}
+
 // Destination for scheduled query.
 type TimestreamDestination struct {
 
@@ -907,6 +2412,34 @@ type TimestreamDestination struct {
 	TableName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *TimestreamDestination) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TimestreamDestination)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TimestreamDestination) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.TimestreamDestination_DatabaseName, *v.DatabaseName)
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.TimestreamDestination_TableName, *v.TableName)
+	}
+}
+func (v *TimestreamDestination) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TimestreamDestination, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TimestreamDestination_DatabaseName:
+			v.DatabaseName = new(string)
+			return d.ReadString(schemas.TimestreamDestination_DatabaseName, v.DatabaseName)
+		case schemas.TimestreamDestination_TableName:
+			v.TableName = new(string)
+			return d.ReadString(schemas.TimestreamDestination_TableName, v.TableName)
+		}
+		return nil
+	})
 }
 
 // Contains the data type of a column in a query result set. The data type can be
@@ -931,6 +2464,51 @@ type Type struct {
 	TimeSeriesMeasureValueColumnInfo *ColumnInfo
 
 	noSmithyDocumentSerde
+}
+
+func (v *Type) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Type)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Type) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ArrayColumnInfo != nil {
+		s.WriteStruct(schemas.Type_ArrayColumnInfo)
+		v.ArrayColumnInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeColumnInfoList(s, schemas.Type_RowColumnInfo, v.RowColumnInfo)
+	if v.ScalarType != "" {
+		s.WriteString(schemas.Type_ScalarType, string(v.ScalarType))
+	}
+	if v.TimeSeriesMeasureValueColumnInfo != nil {
+		s.WriteStruct(schemas.Type_TimeSeriesMeasureValueColumnInfo)
+		v.TimeSeriesMeasureValueColumnInfo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *Type) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Type, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Type_ArrayColumnInfo:
+			v.ArrayColumnInfo = &ColumnInfo{}
+			return v.ArrayColumnInfo.Deserialize(d)
+		case schemas.Type_RowColumnInfo:
+			return deserializeColumnInfoList(d, schemas.Type_RowColumnInfo, &v.RowColumnInfo)
+		case schemas.Type_ScalarType:
+			var ev string
+			if err := d.ReadString(schemas.Type_ScalarType, &ev); err != nil {
+				return err
+			}
+			v.ScalarType = ScalarType(ev)
+			return nil
+		case schemas.Type_TimeSeriesMeasureValueColumnInfo:
+			v.TimeSeriesMeasureValueColumnInfo = &ColumnInfo{}
+			return v.TimeSeriesMeasureValueColumnInfo.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

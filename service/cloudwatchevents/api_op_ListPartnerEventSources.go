@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,24 @@ type ListPartnerEventSourcesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPartnerEventSourcesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListPartnerEventSourcesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListPartnerEventSourcesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListPartnerEventSourcesRequest_Limit, *v.Limit)
+	}
+	if v.NamePrefix != nil {
+		s.WriteString(schemas.ListPartnerEventSourcesRequest_NamePrefix, *v.NamePrefix)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListPartnerEventSourcesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListPartnerEventSourcesOutput struct {
 
 	// A token you can use in a subsequent operation to retrieve the next set of
@@ -64,16 +84,26 @@ type ListPartnerEventSourcesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListPartnerEventSourcesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListPartnerEventSourcesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListPartnerEventSourcesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListPartnerEventSourcesResponse_NextToken, v.NextToken)
+		case schemas.ListPartnerEventSourcesResponse_PartnerEventSources:
+			return deserializePartnerEventSourceList(d, schemas.ListPartnerEventSourcesResponse_PartnerEventSources, &v.PartnerEventSources)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListPartnerEventSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListPartnerEventSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPartnerEventSources, schemas.ListPartnerEventSourcesRequest, schemas.ListPartnerEventSourcesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListPartnerEventSources{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListPartnerEventSources, schemas.ListPartnerEventSourcesRequest, schemas.ListPartnerEventSourcesResponse), output: &ListPartnerEventSourcesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListPartnerEventSources"); err != nil {

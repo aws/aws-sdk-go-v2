@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,24 @@ type AssociateBenefitApplicationResourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateBenefitApplicationResourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateBenefitApplicationResourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateBenefitApplicationResourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BenefitApplicationIdentifier != nil {
+		s.WriteString(schemas.AssociateBenefitApplicationResourceInput_BenefitApplicationIdentifier, *v.BenefitApplicationIdentifier)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.AssociateBenefitApplicationResourceInput_Catalog, *v.Catalog)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.AssociateBenefitApplicationResourceInput_ResourceArn, *v.ResourceArn)
+	}
+}
+
 type AssociateBenefitApplicationResourceOutput struct {
 
 	// The Amazon Resource Name (ARN) of the benefit application after the resource
@@ -68,16 +88,30 @@ type AssociateBenefitApplicationResourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateBenefitApplicationResourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateBenefitApplicationResourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateBenefitApplicationResourceOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.AssociateBenefitApplicationResourceOutput_Arn, v.Arn)
+		case schemas.AssociateBenefitApplicationResourceOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssociateBenefitApplicationResourceOutput_Id, v.Id)
+		case schemas.AssociateBenefitApplicationResourceOutput_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.AssociateBenefitApplicationResourceOutput_Revision, v.Revision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateBenefitApplicationResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpAssociateBenefitApplicationResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateBenefitApplicationResource, schemas.AssociateBenefitApplicationResourceInput, schemas.AssociateBenefitApplicationResourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpAssociateBenefitApplicationResource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateBenefitApplicationResource, schemas.AssociateBenefitApplicationResourceInput, schemas.AssociateBenefitApplicationResourceOutput), output: &AssociateBenefitApplicationResourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateBenefitApplicationResource"); err != nil {

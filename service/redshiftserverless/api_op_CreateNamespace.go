@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -82,6 +84,45 @@ type CreateNamespaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNamespaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNamespaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNamespaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminPasswordSecretKmsKeyId != nil {
+		s.WriteString(schemas.CreateNamespaceRequest_adminPasswordSecretKmsKeyId, *v.AdminPasswordSecretKmsKeyId)
+	}
+	if v.AdminUserPassword != nil {
+		s.WriteString(schemas.CreateNamespaceRequest_adminUserPassword, *v.AdminUserPassword)
+	}
+	if v.AdminUsername != nil {
+		s.WriteString(schemas.CreateNamespaceRequest_adminUsername, *v.AdminUsername)
+	}
+	if v.DbName != nil {
+		s.WriteString(schemas.CreateNamespaceRequest_dbName, *v.DbName)
+	}
+	if v.DefaultIamRoleArn != nil {
+		s.WriteString(schemas.CreateNamespaceRequest_defaultIamRoleArn, *v.DefaultIamRoleArn)
+	}
+	serializeIamRoleArnList(s, schemas.CreateNamespaceRequest_iamRoles, v.IamRoles)
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateNamespaceRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	serializeLogExportList(s, schemas.CreateNamespaceRequest_logExports, v.LogExports)
+	if v.ManageAdminPassword != nil {
+		s.WriteBool(schemas.CreateNamespaceRequest_manageAdminPassword, *v.ManageAdminPassword)
+	}
+	if v.NamespaceName != nil {
+		s.WriteString(schemas.CreateNamespaceRequest_namespaceName, *v.NamespaceName)
+	}
+	if v.RedshiftIdcApplicationArn != nil {
+		s.WriteString(schemas.CreateNamespaceRequest_redshiftIdcApplicationArn, *v.RedshiftIdcApplicationArn)
+	}
+	serializeTagList(s, schemas.CreateNamespaceRequest_tags, v.Tags)
+}
+
 type CreateNamespaceOutput struct {
 
 	// The created namespace object.
@@ -93,16 +134,24 @@ type CreateNamespaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNamespaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNamespaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNamespaceResponse_namespace:
+			v.Namespace = &types.Namespace{}
+			return v.Namespace.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNamespace, schemas.CreateNamespaceRequest, schemas.CreateNamespaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateNamespace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNamespace, schemas.CreateNamespaceRequest, schemas.CreateNamespaceResponse), output: &CreateNamespaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateNamespace"); err != nil {

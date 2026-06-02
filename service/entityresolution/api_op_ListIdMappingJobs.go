@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/entityresolution/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,24 @@ type ListIdMappingJobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdMappingJobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListIdMappingJobsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListIdMappingJobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListIdMappingJobsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListIdMappingJobsInput_nextToken, *v.NextToken)
+	}
+	if v.WorkflowName != nil {
+		s.WriteString(schemas.ListIdMappingJobsInput_workflowName, *v.WorkflowName)
+	}
+}
+
 type ListIdMappingJobsOutput struct {
 
 	// A list of JobSummary objects.
@@ -57,16 +77,26 @@ type ListIdMappingJobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListIdMappingJobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListIdMappingJobsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListIdMappingJobsOutput_jobs:
+			return deserializeJobList(d, schemas.ListIdMappingJobsOutput_jobs, &v.Jobs)
+		case schemas.ListIdMappingJobsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListIdMappingJobsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListIdMappingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListIdMappingJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdMappingJobs, schemas.ListIdMappingJobsInput, schemas.ListIdMappingJobsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListIdMappingJobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListIdMappingJobs, schemas.ListIdMappingJobsInput, schemas.ListIdMappingJobsOutput), output: &ListIdMappingJobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListIdMappingJobs"); err != nil {

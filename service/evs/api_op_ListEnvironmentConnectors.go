@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,24 @@ type ListEnvironmentConnectorsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentConnectorsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListEnvironmentConnectorsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListEnvironmentConnectorsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.ListEnvironmentConnectorsRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListEnvironmentConnectorsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListEnvironmentConnectorsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListEnvironmentConnectorsOutput struct {
 
 	// A list of connectors in the environment.
@@ -64,16 +84,26 @@ type ListEnvironmentConnectorsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListEnvironmentConnectorsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListEnvironmentConnectorsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListEnvironmentConnectorsResponse_connectors:
+			return deserializeConnectorList(d, schemas.ListEnvironmentConnectorsResponse_connectors, &v.Connectors)
+		case schemas.ListEnvironmentConnectorsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListEnvironmentConnectorsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListEnvironmentConnectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListEnvironmentConnectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentConnectors, schemas.ListEnvironmentConnectorsRequest, schemas.ListEnvironmentConnectorsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListEnvironmentConnectors{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListEnvironmentConnectors, schemas.ListEnvironmentConnectorsRequest, schemas.ListEnvironmentConnectorsResponse), output: &ListEnvironmentConnectorsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListEnvironmentConnectors"); err != nil {

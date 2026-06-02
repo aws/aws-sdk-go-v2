@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -121,6 +123,52 @@ type ExecuteStatementInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteStatementInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecuteStatementInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExecuteStatementInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.ExecuteStatementInput_ClientToken, *v.ClientToken)
+	}
+	if v.ClusterIdentifier != nil {
+		s.WriteString(schemas.ExecuteStatementInput_ClusterIdentifier, *v.ClusterIdentifier)
+	}
+	if v.Database != nil {
+		s.WriteString(schemas.ExecuteStatementInput_Database, *v.Database)
+	}
+	if v.DbUser != nil {
+		s.WriteString(schemas.ExecuteStatementInput_DbUser, *v.DbUser)
+	}
+	serializeSqlParametersList(s, schemas.ExecuteStatementInput_Parameters, v.Parameters)
+	if v.ResultFormat != "" {
+		s.WriteString(schemas.ExecuteStatementInput_ResultFormat, string(v.ResultFormat))
+	}
+	if v.SecretArn != nil {
+		s.WriteString(schemas.ExecuteStatementInput_SecretArn, *v.SecretArn)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.ExecuteStatementInput_SessionId, *v.SessionId)
+	}
+	if v.SessionKeepAliveSeconds != nil {
+		s.WriteInt32(schemas.ExecuteStatementInput_SessionKeepAliveSeconds, *v.SessionKeepAliveSeconds)
+	}
+	if v.Sql != nil {
+		s.WriteString(schemas.ExecuteStatementInput_Sql, *v.Sql)
+	}
+	if v.StatementName != nil {
+		s.WriteString(schemas.ExecuteStatementInput_StatementName, *v.StatementName)
+	}
+	if v.WithEvent != nil {
+		s.WriteBool(schemas.ExecuteStatementInput_WithEvent, *v.WithEvent)
+	}
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.ExecuteStatementInput_WorkgroupName, *v.WorkgroupName)
+	}
+}
+
 type ExecuteStatementOutput struct {
 
 	// The cluster identifier. This element is not returned when connecting to a
@@ -159,16 +207,47 @@ type ExecuteStatementOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExecuteStatementOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExecuteStatementOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExecuteStatementOutput_ClusterIdentifier:
+			v.ClusterIdentifier = new(string)
+			return d.ReadString(schemas.ExecuteStatementOutput_ClusterIdentifier, v.ClusterIdentifier)
+		case schemas.ExecuteStatementOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.ExecuteStatementOutput_CreatedAt, v.CreatedAt)
+		case schemas.ExecuteStatementOutput_Database:
+			v.Database = new(string)
+			return d.ReadString(schemas.ExecuteStatementOutput_Database, v.Database)
+		case schemas.ExecuteStatementOutput_DbGroups:
+			return deserializeDbGroupList(d, schemas.ExecuteStatementOutput_DbGroups, &v.DbGroups)
+		case schemas.ExecuteStatementOutput_DbUser:
+			v.DbUser = new(string)
+			return d.ReadString(schemas.ExecuteStatementOutput_DbUser, v.DbUser)
+		case schemas.ExecuteStatementOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ExecuteStatementOutput_Id, v.Id)
+		case schemas.ExecuteStatementOutput_SecretArn:
+			v.SecretArn = new(string)
+			return d.ReadString(schemas.ExecuteStatementOutput_SecretArn, v.SecretArn)
+		case schemas.ExecuteStatementOutput_SessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.ExecuteStatementOutput_SessionId, v.SessionId)
+		case schemas.ExecuteStatementOutput_WorkgroupName:
+			v.WorkgroupName = new(string)
+			return d.ReadString(schemas.ExecuteStatementOutput_WorkgroupName, v.WorkgroupName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpExecuteStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteStatement, schemas.ExecuteStatementInput, schemas.ExecuteStatementOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpExecuteStatement{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExecuteStatement, schemas.ExecuteStatementInput, schemas.ExecuteStatementOutput), output: &ExecuteStatementOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExecuteStatement"); err != nil {

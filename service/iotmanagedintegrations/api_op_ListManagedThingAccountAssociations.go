@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,27 @@ type ListManagedThingAccountAssociationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedThingAccountAssociationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListManagedThingAccountAssociationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListManagedThingAccountAssociationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountAssociationId != nil {
+		s.WriteString(schemas.ListManagedThingAccountAssociationsRequest_AccountAssociationId, *v.AccountAssociationId)
+	}
+	if v.ManagedThingId != nil {
+		s.WriteString(schemas.ListManagedThingAccountAssociationsRequest_ManagedThingId, *v.ManagedThingId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListManagedThingAccountAssociationsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListManagedThingAccountAssociationsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListManagedThingAccountAssociationsOutput struct {
 
 	// The list of managed thing associations that match the specified criteria,
@@ -61,16 +84,26 @@ type ListManagedThingAccountAssociationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListManagedThingAccountAssociationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListManagedThingAccountAssociationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListManagedThingAccountAssociationsResponse_Items:
+			return deserializeManagedThingAssociationList(d, schemas.ListManagedThingAccountAssociationsResponse_Items, &v.Items)
+		case schemas.ListManagedThingAccountAssociationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListManagedThingAccountAssociationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListManagedThingAccountAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListManagedThingAccountAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedThingAccountAssociations, schemas.ListManagedThingAccountAssociationsRequest, schemas.ListManagedThingAccountAssociationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListManagedThingAccountAssociations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListManagedThingAccountAssociations, schemas.ListManagedThingAccountAssociationsRequest, schemas.ListManagedThingAccountAssociationsResponse), output: &ListManagedThingAccountAssociationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListManagedThingAccountAssociations"); err != nil {

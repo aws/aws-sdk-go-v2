@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,27 @@ type ListLinkRoutingRulesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLinkRoutingRulesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLinkRoutingRulesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLinkRoutingRulesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayId != nil {
+		s.WriteString(schemas.ListLinkRoutingRulesRequest_gatewayId, *v.GatewayId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.ListLinkRoutingRulesRequest_linkId, *v.LinkId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLinkRoutingRulesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLinkRoutingRulesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListLinkRoutingRulesOutput struct {
 
 	// If nextToken is returned, there are more results available. The value of
@@ -74,16 +97,26 @@ type ListLinkRoutingRulesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLinkRoutingRulesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLinkRoutingRulesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLinkRoutingRulesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLinkRoutingRulesResponse_nextToken, v.NextToken)
+		case schemas.ListLinkRoutingRulesResponse_rules:
+			return deserializeLinkRoutingRuleList(d, schemas.ListLinkRoutingRulesResponse_rules, &v.Rules)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLinkRoutingRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListLinkRoutingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLinkRoutingRules, schemas.ListLinkRoutingRulesRequest, schemas.ListLinkRoutingRulesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListLinkRoutingRules{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLinkRoutingRules, schemas.ListLinkRoutingRulesRequest, schemas.ListLinkRoutingRulesResponse), output: &ListLinkRoutingRulesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLinkRoutingRules"); err != nil {

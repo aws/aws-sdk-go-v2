@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,24 @@ type ListTypedLinkFacetNamesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTypedLinkFacetNamesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTypedLinkFacetNamesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTypedLinkFacetNamesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTypedLinkFacetNamesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTypedLinkFacetNamesRequest_NextToken, *v.NextToken)
+	}
+	if v.SchemaArn != nil {
+		s.WriteString(schemas.ListTypedLinkFacetNamesRequest_SchemaArn, *v.SchemaArn)
+	}
+}
+
 type ListTypedLinkFacetNamesOutput struct {
 
 	// The names of typed link facets that exist within the schema.
@@ -60,16 +80,26 @@ type ListTypedLinkFacetNamesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTypedLinkFacetNamesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTypedLinkFacetNamesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTypedLinkFacetNamesResponse_FacetNames:
+			return deserializeTypedLinkNameList(d, schemas.ListTypedLinkFacetNamesResponse_FacetNames, &v.FacetNames)
+		case schemas.ListTypedLinkFacetNamesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTypedLinkFacetNamesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTypedLinkFacetNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTypedLinkFacetNames{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTypedLinkFacetNames, schemas.ListTypedLinkFacetNamesRequest, schemas.ListTypedLinkFacetNamesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTypedLinkFacetNames{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTypedLinkFacetNames, schemas.ListTypedLinkFacetNamesRequest, schemas.ListTypedLinkFacetNamesResponse), output: &ListTypedLinkFacetNamesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTypedLinkFacetNames"); err != nil {

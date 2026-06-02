@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,27 @@ type ListProxySessionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProxySessionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListProxySessionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListProxySessionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListProxySessionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListProxySessionsRequest_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListProxySessionsRequest_Status, string(v.Status))
+	}
+	if v.VoiceConnectorId != nil {
+		s.WriteString(schemas.ListProxySessionsRequest_VoiceConnectorId, *v.VoiceConnectorId)
+	}
+}
+
 type ListProxySessionsOutput struct {
 
 	// The token used to retrieve the next page of results.
@@ -60,16 +83,26 @@ type ListProxySessionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListProxySessionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListProxySessionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListProxySessionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListProxySessionsResponse_NextToken, v.NextToken)
+		case schemas.ListProxySessionsResponse_ProxySessions:
+			return deserializeProxySessions(d, schemas.ListProxySessionsResponse_ProxySessions, &v.ProxySessions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListProxySessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListProxySessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProxySessions, schemas.ListProxySessionsRequest, schemas.ListProxySessionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListProxySessions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListProxySessions, schemas.ListProxySessionsRequest, schemas.ListProxySessionsResponse), output: &ListProxySessionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListProxySessions"); err != nil {

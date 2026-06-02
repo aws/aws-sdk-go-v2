@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,6 +33,28 @@ type NullOperationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NullOperationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NullOperationInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NullOperationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.String_ != nil {
+		s.WriteString(schemas.NullOperationInputOutput_string, *v.String_)
+	}
+}
+func (v *NullOperationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NullOperationInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NullOperationInputOutput_string:
+			v.String_ = new(string)
+			return d.ReadString(schemas.NullOperationInputOutput_string, v.String_)
+		}
+		return nil
+	})
+}
+
 type NullOperationOutput struct {
 	String_ *string
 
@@ -40,16 +64,35 @@ type NullOperationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NullOperationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NullOperationInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NullOperationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.String_ != nil {
+		s.WriteString(schemas.NullOperationInputOutput_string, *v.String_)
+	}
+}
+func (v *NullOperationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NullOperationInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NullOperationInputOutput_string:
+			v.String_ = new(string)
+			return d.ReadString(schemas.NullOperationInputOutput_string, v.String_)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationNullOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNullOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NullOperation, schemas.NullOperationInputOutput, schemas.NullOperationInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpNullOperation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NullOperation, schemas.NullOperationInputOutput, schemas.NullOperationInputOutput), output: &NullOperationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "NullOperation"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,21 @@ type SetDefaultMessageTypeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetDefaultMessageTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetDefaultMessageTypeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetDefaultMessageTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SetDefaultMessageTypeRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.MessageType != "" {
+		s.WriteString(schemas.SetDefaultMessageTypeRequest_MessageType, string(v.MessageType))
+	}
+}
+
 type SetDefaultMessageTypeOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated configuration set.
@@ -68,16 +85,34 @@ type SetDefaultMessageTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetDefaultMessageTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetDefaultMessageTypeResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetDefaultMessageTypeResult_ConfigurationSetArn:
+			v.ConfigurationSetArn = new(string)
+			return d.ReadString(schemas.SetDefaultMessageTypeResult_ConfigurationSetArn, v.ConfigurationSetArn)
+		case schemas.SetDefaultMessageTypeResult_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.SetDefaultMessageTypeResult_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.SetDefaultMessageTypeResult_MessageType:
+			var ev string
+			if err := d.ReadString(schemas.SetDefaultMessageTypeResult_MessageType, &ev); err != nil {
+				return err
+			}
+			v.MessageType = types.MessageType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetDefaultMessageTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSetDefaultMessageType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetDefaultMessageType, schemas.SetDefaultMessageTypeRequest, schemas.SetDefaultMessageTypeResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSetDefaultMessageType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetDefaultMessageType, schemas.SetDefaultMessageTypeRequest, schemas.SetDefaultMessageTypeResult), output: &SetDefaultMessageTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SetDefaultMessageType"); err != nil {

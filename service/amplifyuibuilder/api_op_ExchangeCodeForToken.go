@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/amplifyuibuilder/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,40 @@ type ExchangeCodeForTokenInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExchangeCodeForTokenInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExchangeCodeForTokenRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExchangeCodeForTokenInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Provider != "" {
+		s.WriteString(schemas.ExchangeCodeForTokenRequest_provider, string(v.Provider))
+	}
+	if v.Request != nil {
+		s.WriteStruct(schemas.ExchangeCodeForTokenRequest_request)
+		v.Request.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *ExchangeCodeForTokenInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExchangeCodeForTokenRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExchangeCodeForTokenRequest_provider:
+			var ev string
+			if err := d.ReadString(schemas.ExchangeCodeForTokenRequest_provider, &ev); err != nil {
+				return err
+			}
+			v.Provider = types.TokenProviders(ev)
+			return nil
+		case schemas.ExchangeCodeForTokenRequest_request:
+			v.Request = &types.ExchangeCodeForTokenRequestBody{}
+			return v.Request.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 type ExchangeCodeForTokenOutput struct {
 
 	// The access token.
@@ -68,16 +104,47 @@ type ExchangeCodeForTokenOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ExchangeCodeForTokenOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExchangeCodeForTokenResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ExchangeCodeForTokenOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessToken != nil {
+		s.WriteString(schemas.ExchangeCodeForTokenResponse_accessToken, *v.AccessToken)
+	}
+	if v.ExpiresIn != nil {
+		s.WriteInt32(schemas.ExchangeCodeForTokenResponse_expiresIn, *v.ExpiresIn)
+	}
+	if v.RefreshToken != nil {
+		s.WriteString(schemas.ExchangeCodeForTokenResponse_refreshToken, *v.RefreshToken)
+	}
+}
+func (v *ExchangeCodeForTokenOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ExchangeCodeForTokenResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ExchangeCodeForTokenResponse_accessToken:
+			v.AccessToken = new(string)
+			return d.ReadString(schemas.ExchangeCodeForTokenResponse_accessToken, v.AccessToken)
+		case schemas.ExchangeCodeForTokenResponse_expiresIn:
+			v.ExpiresIn = new(int32)
+			return d.ReadInt32(schemas.ExchangeCodeForTokenResponse_expiresIn, v.ExpiresIn)
+		case schemas.ExchangeCodeForTokenResponse_refreshToken:
+			v.RefreshToken = new(string)
+			return d.ReadString(schemas.ExchangeCodeForTokenResponse_refreshToken, v.RefreshToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationExchangeCodeForTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpExchangeCodeForToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExchangeCodeForToken, schemas.ExchangeCodeForTokenRequest, schemas.ExchangeCodeForTokenResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpExchangeCodeForToken{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ExchangeCodeForToken, schemas.ExchangeCodeForTokenRequest, schemas.ExchangeCodeForTokenResponse), output: &ExchangeCodeForTokenOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ExchangeCodeForToken"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/evs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/evs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -71,6 +73,29 @@ type CreateEnvironmentHostInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentHostInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentHostRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentHostInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateEnvironmentHostRequest_clientToken, *v.ClientToken)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.CreateEnvironmentHostRequest_environmentId, *v.EnvironmentId)
+	}
+	if v.EsxVersion != nil {
+		s.WriteString(schemas.CreateEnvironmentHostRequest_esxVersion, *v.EsxVersion)
+	}
+	if v.Host != nil {
+		s.WriteStruct(schemas.CreateEnvironmentHostRequest_host)
+		v.Host.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateEnvironmentHostOutput struct {
 
 	// A summary of the environment that the host is created in.
@@ -85,16 +110,27 @@ type CreateEnvironmentHostOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentHostOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEnvironmentHostResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEnvironmentHostResponse_environmentSummary:
+			v.EnvironmentSummary = &types.EnvironmentSummary{}
+			return v.EnvironmentSummary.Deserialize(d)
+		case schemas.CreateEnvironmentHostResponse_host:
+			v.Host = &types.Host{}
+			return v.Host.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEnvironmentHostMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateEnvironmentHost{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentHost, schemas.CreateEnvironmentHostRequest, schemas.CreateEnvironmentHostResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateEnvironmentHost{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironmentHost, schemas.CreateEnvironmentHostRequest, schemas.CreateEnvironmentHostResponse), output: &CreateEnvironmentHostOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEnvironmentHost"); err != nil {

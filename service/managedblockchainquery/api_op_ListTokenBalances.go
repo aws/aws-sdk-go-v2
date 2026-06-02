@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -72,6 +74,31 @@ type ListTokenBalancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTokenBalancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListTokenBalancesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListTokenBalancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListTokenBalancesInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListTokenBalancesInput_nextToken, *v.NextToken)
+	}
+	if v.OwnerFilter != nil {
+		s.WriteStruct(schemas.ListTokenBalancesInput_ownerFilter)
+		v.OwnerFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TokenFilter != nil {
+		s.WriteStruct(schemas.ListTokenBalancesInput_tokenFilter)
+		v.TokenFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type ListTokenBalancesOutput struct {
 
 	// An array of TokenBalance objects. Each object contains details about the token
@@ -89,16 +116,26 @@ type ListTokenBalancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListTokenBalancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListTokenBalancesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListTokenBalancesOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListTokenBalancesOutput_nextToken, v.NextToken)
+		case schemas.ListTokenBalancesOutput_tokenBalances:
+			return deserializeTokenBalanceList(d, schemas.ListTokenBalancesOutput_tokenBalances, &v.TokenBalances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListTokenBalancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListTokenBalances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTokenBalances, schemas.ListTokenBalancesInput, schemas.ListTokenBalancesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListTokenBalances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListTokenBalances, schemas.ListTokenBalancesInput, schemas.ListTokenBalancesOutput), output: &ListTokenBalancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListTokenBalances"); err != nil {

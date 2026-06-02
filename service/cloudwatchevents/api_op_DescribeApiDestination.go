@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchevents/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type DescribeApiDestinationInput struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeApiDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApiDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApiDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.DescribeApiDestinationRequest_Name, *v.Name)
+	}
 }
 
 type DescribeApiDestinationOutput struct {
@@ -82,16 +96,59 @@ type DescribeApiDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApiDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApiDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApiDestinationResponse_ApiDestinationArn:
+			v.ApiDestinationArn = new(string)
+			return d.ReadString(schemas.DescribeApiDestinationResponse_ApiDestinationArn, v.ApiDestinationArn)
+		case schemas.DescribeApiDestinationResponse_ApiDestinationState:
+			var ev string
+			if err := d.ReadString(schemas.DescribeApiDestinationResponse_ApiDestinationState, &ev); err != nil {
+				return err
+			}
+			v.ApiDestinationState = types.ApiDestinationState(ev)
+			return nil
+		case schemas.DescribeApiDestinationResponse_ConnectionArn:
+			v.ConnectionArn = new(string)
+			return d.ReadString(schemas.DescribeApiDestinationResponse_ConnectionArn, v.ConnectionArn)
+		case schemas.DescribeApiDestinationResponse_CreationTime:
+			v.CreationTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeApiDestinationResponse_CreationTime, v.CreationTime)
+		case schemas.DescribeApiDestinationResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeApiDestinationResponse_Description, v.Description)
+		case schemas.DescribeApiDestinationResponse_HttpMethod:
+			var ev string
+			if err := d.ReadString(schemas.DescribeApiDestinationResponse_HttpMethod, &ev); err != nil {
+				return err
+			}
+			v.HttpMethod = types.ApiDestinationHttpMethod(ev)
+			return nil
+		case schemas.DescribeApiDestinationResponse_InvocationEndpoint:
+			v.InvocationEndpoint = new(string)
+			return d.ReadString(schemas.DescribeApiDestinationResponse_InvocationEndpoint, v.InvocationEndpoint)
+		case schemas.DescribeApiDestinationResponse_InvocationRateLimitPerSecond:
+			v.InvocationRateLimitPerSecond = new(int32)
+			return d.ReadInt32(schemas.DescribeApiDestinationResponse_InvocationRateLimitPerSecond, v.InvocationRateLimitPerSecond)
+		case schemas.DescribeApiDestinationResponse_LastModifiedTime:
+			v.LastModifiedTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeApiDestinationResponse_LastModifiedTime, v.LastModifiedTime)
+		case schemas.DescribeApiDestinationResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeApiDestinationResponse_Name, v.Name)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApiDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApiDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApiDestination, schemas.DescribeApiDestinationRequest, schemas.DescribeApiDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeApiDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApiDestination, schemas.DescribeApiDestinationRequest, schemas.DescribeApiDestinationResponse), output: &DescribeApiDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeApiDestination"); err != nil {

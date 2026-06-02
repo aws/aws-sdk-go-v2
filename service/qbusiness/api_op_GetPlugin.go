@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +43,21 @@ type GetPluginInput struct {
 	PluginId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetPluginInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPluginRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPluginInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetPluginRequest_applicationId, *v.ApplicationId)
+	}
+	if v.PluginId != nil {
+		s.WriteString(schemas.GetPluginRequest_pluginId, *v.PluginId)
+	}
 }
 
 type GetPluginOutput struct {
@@ -88,16 +105,68 @@ type GetPluginOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPluginOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPluginResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPluginResponse_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetPluginResponse_applicationId, v.ApplicationId)
+		case schemas.GetPluginResponse_authConfiguration:
+			return deserializePluginAuthConfiguration(d, schemas.GetPluginResponse_authConfiguration, &v.AuthConfiguration)
+		case schemas.GetPluginResponse_buildStatus:
+			var ev string
+			if err := d.ReadString(schemas.GetPluginResponse_buildStatus, &ev); err != nil {
+				return err
+			}
+			v.BuildStatus = types.PluginBuildStatus(ev)
+			return nil
+		case schemas.GetPluginResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPluginResponse_createdAt, v.CreatedAt)
+		case schemas.GetPluginResponse_customPluginConfiguration:
+			v.CustomPluginConfiguration = &types.CustomPluginConfiguration{}
+			return v.CustomPluginConfiguration.Deserialize(d)
+		case schemas.GetPluginResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetPluginResponse_displayName, v.DisplayName)
+		case schemas.GetPluginResponse_pluginArn:
+			v.PluginArn = new(string)
+			return d.ReadString(schemas.GetPluginResponse_pluginArn, v.PluginArn)
+		case schemas.GetPluginResponse_pluginId:
+			v.PluginId = new(string)
+			return d.ReadString(schemas.GetPluginResponse_pluginId, v.PluginId)
+		case schemas.GetPluginResponse_serverUrl:
+			v.ServerUrl = new(string)
+			return d.ReadString(schemas.GetPluginResponse_serverUrl, v.ServerUrl)
+		case schemas.GetPluginResponse_state:
+			var ev string
+			if err := d.ReadString(schemas.GetPluginResponse_state, &ev); err != nil {
+				return err
+			}
+			v.State = types.PluginState(ev)
+			return nil
+		case schemas.GetPluginResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.GetPluginResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.PluginType(ev)
+			return nil
+		case schemas.GetPluginResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetPluginResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPluginMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPlugin{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlugin, schemas.GetPluginRequest, schemas.GetPluginResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPlugin{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPlugin, schemas.GetPluginRequest, schemas.GetPluginResponse), output: &GetPluginOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPlugin"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -61,6 +63,24 @@ type GetAssetTypeInput struct {
 	Revision *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetAssetTypeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetAssetTypeInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetAssetTypeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.GetAssetTypeInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.GetAssetTypeInput_identifier, *v.Identifier)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.GetAssetTypeInput_revision, *v.Revision)
+	}
 }
 
 type GetAssetTypeOutput struct {
@@ -119,16 +139,56 @@ type GetAssetTypeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetAssetTypeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetAssetTypeOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetAssetTypeOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAssetTypeOutput_createdAt, v.CreatedAt)
+		case schemas.GetAssetTypeOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetAssetTypeOutput_createdBy, v.CreatedBy)
+		case schemas.GetAssetTypeOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetAssetTypeOutput_description, v.Description)
+		case schemas.GetAssetTypeOutput_domainId:
+			v.DomainId = new(string)
+			return d.ReadString(schemas.GetAssetTypeOutput_domainId, v.DomainId)
+		case schemas.GetAssetTypeOutput_formsOutput:
+			return deserializeFormsOutputMap(d, schemas.GetAssetTypeOutput_formsOutput, &v.FormsOutput)
+		case schemas.GetAssetTypeOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetAssetTypeOutput_name, v.Name)
+		case schemas.GetAssetTypeOutput_originDomainId:
+			v.OriginDomainId = new(string)
+			return d.ReadString(schemas.GetAssetTypeOutput_originDomainId, v.OriginDomainId)
+		case schemas.GetAssetTypeOutput_originProjectId:
+			v.OriginProjectId = new(string)
+			return d.ReadString(schemas.GetAssetTypeOutput_originProjectId, v.OriginProjectId)
+		case schemas.GetAssetTypeOutput_owningProjectId:
+			v.OwningProjectId = new(string)
+			return d.ReadString(schemas.GetAssetTypeOutput_owningProjectId, v.OwningProjectId)
+		case schemas.GetAssetTypeOutput_revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.GetAssetTypeOutput_revision, v.Revision)
+		case schemas.GetAssetTypeOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetAssetTypeOutput_updatedAt, v.UpdatedAt)
+		case schemas.GetAssetTypeOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetAssetTypeOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetAssetTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetAssetType{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetType, schemas.GetAssetTypeInput, schemas.GetAssetTypeOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetAssetType{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetAssetType, schemas.GetAssetTypeInput, schemas.GetAssetTypeOutput), output: &GetAssetTypeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetAssetType"); err != nil {

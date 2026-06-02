@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,21 @@ type SetDefaultSenderIdInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetDefaultSenderIdInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SetDefaultSenderIdRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SetDefaultSenderIdInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ConfigurationSetName != nil {
+		s.WriteString(schemas.SetDefaultSenderIdRequest_ConfigurationSetName, *v.ConfigurationSetName)
+	}
+	if v.SenderId != nil {
+		s.WriteString(schemas.SetDefaultSenderIdRequest_SenderId, *v.SenderId)
+	}
+}
+
 type SetDefaultSenderIdOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated configuration set.
@@ -68,16 +85,30 @@ type SetDefaultSenderIdOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SetDefaultSenderIdOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SetDefaultSenderIdResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SetDefaultSenderIdResult_ConfigurationSetArn:
+			v.ConfigurationSetArn = new(string)
+			return d.ReadString(schemas.SetDefaultSenderIdResult_ConfigurationSetArn, v.ConfigurationSetArn)
+		case schemas.SetDefaultSenderIdResult_ConfigurationSetName:
+			v.ConfigurationSetName = new(string)
+			return d.ReadString(schemas.SetDefaultSenderIdResult_ConfigurationSetName, v.ConfigurationSetName)
+		case schemas.SetDefaultSenderIdResult_SenderId:
+			v.SenderId = new(string)
+			return d.ReadString(schemas.SetDefaultSenderIdResult_SenderId, v.SenderId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSetDefaultSenderIdMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpSetDefaultSenderId{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetDefaultSenderId, schemas.SetDefaultSenderIdRequest, schemas.SetDefaultSenderIdResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpSetDefaultSenderId{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SetDefaultSenderId, schemas.SetDefaultSenderIdRequest, schemas.SetDefaultSenderIdResult), output: &SetDefaultSenderIdOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SetDefaultSenderId"); err != nil {

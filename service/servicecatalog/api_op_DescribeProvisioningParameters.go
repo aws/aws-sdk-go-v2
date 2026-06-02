@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -69,6 +71,36 @@ type DescribeProvisioningParametersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProvisioningParametersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProvisioningParametersInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProvisioningParametersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.DescribeProvisioningParametersInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.PathId != nil {
+		s.WriteString(schemas.DescribeProvisioningParametersInput_PathId, *v.PathId)
+	}
+	if v.PathName != nil {
+		s.WriteString(schemas.DescribeProvisioningParametersInput_PathName, *v.PathName)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.DescribeProvisioningParametersInput_ProductId, *v.ProductId)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.DescribeProvisioningParametersInput_ProductName, *v.ProductName)
+	}
+	if v.ProvisioningArtifactId != nil {
+		s.WriteString(schemas.DescribeProvisioningParametersInput_ProvisioningArtifactId, *v.ProvisioningArtifactId)
+	}
+	if v.ProvisioningArtifactName != nil {
+		s.WriteString(schemas.DescribeProvisioningParametersInput_ProvisioningArtifactName, *v.ProvisioningArtifactName)
+	}
+}
+
 type DescribeProvisioningParametersOutput struct {
 
 	// Information about the constraints used to provision the product.
@@ -105,16 +137,36 @@ type DescribeProvisioningParametersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProvisioningParametersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProvisioningParametersOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProvisioningParametersOutput_ConstraintSummaries:
+			return deserializeConstraintSummaries(d, schemas.DescribeProvisioningParametersOutput_ConstraintSummaries, &v.ConstraintSummaries)
+		case schemas.DescribeProvisioningParametersOutput_ProvisioningArtifactOutputKeys:
+			return deserializeProvisioningArtifactOutputs(d, schemas.DescribeProvisioningParametersOutput_ProvisioningArtifactOutputKeys, &v.ProvisioningArtifactOutputKeys)
+		case schemas.DescribeProvisioningParametersOutput_ProvisioningArtifactOutputs:
+			return deserializeProvisioningArtifactOutputs(d, schemas.DescribeProvisioningParametersOutput_ProvisioningArtifactOutputs, &v.ProvisioningArtifactOutputs)
+		case schemas.DescribeProvisioningParametersOutput_ProvisioningArtifactParameters:
+			return deserializeProvisioningArtifactParameters(d, schemas.DescribeProvisioningParametersOutput_ProvisioningArtifactParameters, &v.ProvisioningArtifactParameters)
+		case schemas.DescribeProvisioningParametersOutput_ProvisioningArtifactPreferences:
+			v.ProvisioningArtifactPreferences = &types.ProvisioningArtifactPreferences{}
+			return v.ProvisioningArtifactPreferences.Deserialize(d)
+		case schemas.DescribeProvisioningParametersOutput_TagOptions:
+			return deserializeTagOptionSummaries(d, schemas.DescribeProvisioningParametersOutput_TagOptions, &v.TagOptions)
+		case schemas.DescribeProvisioningParametersOutput_UsageInstructions:
+			return deserializeUsageInstructions(d, schemas.DescribeProvisioningParametersOutput_UsageInstructions, &v.UsageInstructions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProvisioningParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProvisioningParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProvisioningParameters, schemas.DescribeProvisioningParametersInput, schemas.DescribeProvisioningParametersOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeProvisioningParameters{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProvisioningParameters, schemas.DescribeProvisioningParametersInput, schemas.DescribeProvisioningParametersOutput), output: &DescribeProvisioningParametersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeProvisioningParameters"); err != nil {

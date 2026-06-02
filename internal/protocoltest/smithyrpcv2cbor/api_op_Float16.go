@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,6 +31,22 @@ type Float16Input struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Float16Input) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Float16Input) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *Float16Input) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type Float16Output struct {
 	Value *float64
 
@@ -38,16 +56,35 @@ type Float16Output struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Float16Output) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Float16Output)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Float16Output) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Value != nil {
+		s.WriteFloat64(schemas.Float16Output_value, *v.Value)
+	}
+}
+func (v *Float16Output) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Float16Output, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Float16Output_value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.Float16Output_value, v.Value)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationFloat16Middlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpFloat16{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Float16, nil, schemas.Float16Output)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpFloat16{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.Float16, nil, schemas.Float16Output), output: &Float16Output{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "Float16"); err != nil {

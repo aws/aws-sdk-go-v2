@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,22 @@ type DeleteSparqlStatisticsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSparqlStatisticsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSparqlStatisticsInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeleteSparqlStatisticsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DeleteSparqlStatisticsOutput struct {
 
 	// The deletion payload.
@@ -55,16 +73,30 @@ type DeleteSparqlStatisticsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSparqlStatisticsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSparqlStatisticsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteSparqlStatisticsOutput_payload:
+			v.Payload = &types.DeleteStatisticsValueMap{}
+			return v.Payload.Deserialize(d)
+		case schemas.DeleteSparqlStatisticsOutput_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.DeleteSparqlStatisticsOutput_status, v.Status)
+		case schemas.DeleteSparqlStatisticsOutput_statusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.DeleteSparqlStatisticsOutput_statusCode, v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSparqlStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSparqlStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSparqlStatistics, nil, schemas.DeleteSparqlStatisticsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSparqlStatistics{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSparqlStatistics, nil, schemas.DeleteSparqlStatisticsOutput), output: &DeleteSparqlStatisticsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSparqlStatistics"); err != nil {

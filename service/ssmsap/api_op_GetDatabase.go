@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmsap/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,46 @@ type GetDatabaseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDatabaseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDatabaseInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDatabaseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetDatabaseInput_ApplicationId, *v.ApplicationId)
+	}
+	if v.ComponentId != nil {
+		s.WriteString(schemas.GetDatabaseInput_ComponentId, *v.ComponentId)
+	}
+	if v.DatabaseArn != nil {
+		s.WriteString(schemas.GetDatabaseInput_DatabaseArn, *v.DatabaseArn)
+	}
+	if v.DatabaseId != nil {
+		s.WriteString(schemas.GetDatabaseInput_DatabaseId, *v.DatabaseId)
+	}
+}
+func (v *GetDatabaseInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDatabaseInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDatabaseInput_ApplicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetDatabaseInput_ApplicationId, v.ApplicationId)
+		case schemas.GetDatabaseInput_ComponentId:
+			v.ComponentId = new(string)
+			return d.ReadString(schemas.GetDatabaseInput_ComponentId, v.ComponentId)
+		case schemas.GetDatabaseInput_DatabaseArn:
+			v.DatabaseArn = new(string)
+			return d.ReadString(schemas.GetDatabaseInput_DatabaseArn, v.DatabaseArn)
+		case schemas.GetDatabaseInput_DatabaseId:
+			v.DatabaseId = new(string)
+			return d.ReadString(schemas.GetDatabaseInput_DatabaseId, v.DatabaseId)
+		}
+		return nil
+	})
+}
+
 type GetDatabaseOutput struct {
 
 	// The SAP HANA database of an application registered with AWS Systems Manager for
@@ -60,16 +102,40 @@ type GetDatabaseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDatabaseOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDatabaseOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDatabaseOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Database != nil {
+		s.WriteStruct(schemas.GetDatabaseOutput_Database)
+		v.Database.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.GetDatabaseOutput_Tags, v.Tags)
+}
+func (v *GetDatabaseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDatabaseOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDatabaseOutput_Database:
+			v.Database = &types.Database{}
+			return v.Database.Deserialize(d)
+		case schemas.GetDatabaseOutput_Tags:
+			return deserializeTagMap(d, schemas.GetDatabaseOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDatabase, schemas.GetDatabaseInput, schemas.GetDatabaseOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDatabase{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDatabase, schemas.GetDatabaseInput, schemas.GetDatabaseOutput), output: &GetDatabaseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDatabase"); err != nil {

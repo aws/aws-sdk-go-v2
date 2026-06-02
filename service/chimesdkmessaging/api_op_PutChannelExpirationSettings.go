@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,26 @@ type PutChannelExpirationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutChannelExpirationSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutChannelExpirationSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutChannelExpirationSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelArn != nil {
+		s.WriteString(schemas.PutChannelExpirationSettingsRequest_ChannelArn, *v.ChannelArn)
+	}
+	if v.ChimeBearer != nil {
+		s.WriteString(schemas.PutChannelExpirationSettingsRequest_ChimeBearer, *v.ChimeBearer)
+	}
+	if v.ExpirationSettings != nil {
+		s.WriteStruct(schemas.PutChannelExpirationSettingsRequest_ExpirationSettings)
+		v.ExpirationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutChannelExpirationSettingsOutput struct {
 
 	// The channel ARN.
@@ -67,16 +89,27 @@ type PutChannelExpirationSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutChannelExpirationSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutChannelExpirationSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutChannelExpirationSettingsResponse_ChannelArn:
+			v.ChannelArn = new(string)
+			return d.ReadString(schemas.PutChannelExpirationSettingsResponse_ChannelArn, v.ChannelArn)
+		case schemas.PutChannelExpirationSettingsResponse_ExpirationSettings:
+			v.ExpirationSettings = &types.ExpirationSettings{}
+			return v.ExpirationSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutChannelExpirationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutChannelExpirationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutChannelExpirationSettings, schemas.PutChannelExpirationSettingsRequest, schemas.PutChannelExpirationSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutChannelExpirationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutChannelExpirationSettings, schemas.PutChannelExpirationSettingsRequest, schemas.PutChannelExpirationSettingsResponse), output: &PutChannelExpirationSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutChannelExpirationSettings"); err != nil {

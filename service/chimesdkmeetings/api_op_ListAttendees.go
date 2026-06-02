@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,24 @@ type ListAttendeesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttendeesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAttendeesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAttendeesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAttendeesRequest_MaxResults, *v.MaxResults)
+	}
+	if v.MeetingId != nil {
+		s.WriteString(schemas.ListAttendeesRequest_MeetingId, *v.MeetingId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAttendeesRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListAttendeesOutput struct {
 
 	// The Amazon Chime SDK attendee information.
@@ -62,16 +82,26 @@ type ListAttendeesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAttendeesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAttendeesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAttendeesResponse_Attendees:
+			return deserializeAttendeeList(d, schemas.ListAttendeesResponse_Attendees, &v.Attendees)
+		case schemas.ListAttendeesResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAttendeesResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAttendeesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAttendees{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttendees, schemas.ListAttendeesRequest, schemas.ListAttendeesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAttendees{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAttendees, schemas.ListAttendeesRequest, schemas.ListAttendeesResponse), output: &ListAttendeesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAttendees"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/budgets/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,24 @@ type DescribeBudgetNotificationsForAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBudgetNotificationsForAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeBudgetNotificationsForAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeBudgetNotificationsForAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccountId != nil {
+		s.WriteString(schemas.DescribeBudgetNotificationsForAccountRequest_AccountId, *v.AccountId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeBudgetNotificationsForAccountRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeBudgetNotificationsForAccountRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeBudgetNotificationsForAccountOutput struct {
 
 	//  A list of budget names and associated notifications for an account.
@@ -58,16 +78,26 @@ type DescribeBudgetNotificationsForAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeBudgetNotificationsForAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeBudgetNotificationsForAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeBudgetNotificationsForAccountResponse_BudgetNotificationsForAccount:
+			return deserializeBudgetNotificationsForAccountList(d, schemas.DescribeBudgetNotificationsForAccountResponse_BudgetNotificationsForAccount, &v.BudgetNotificationsForAccount)
+		case schemas.DescribeBudgetNotificationsForAccountResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeBudgetNotificationsForAccountResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeBudgetNotificationsForAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeBudgetNotificationsForAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudgetNotificationsForAccount, schemas.DescribeBudgetNotificationsForAccountRequest, schemas.DescribeBudgetNotificationsForAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeBudgetNotificationsForAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeBudgetNotificationsForAccount, schemas.DescribeBudgetNotificationsForAccountRequest, schemas.DescribeBudgetNotificationsForAccountResponse), output: &DescribeBudgetNotificationsForAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeBudgetNotificationsForAccount"); err != nil {

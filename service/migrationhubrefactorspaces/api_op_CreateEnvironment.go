@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -67,6 +69,53 @@ type CreateEnvironmentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateEnvironmentRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEnvironmentRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEnvironmentRequest_Name, *v.Name)
+	}
+	if v.NetworkFabricType != "" {
+		s.WriteString(schemas.CreateEnvironmentRequest_NetworkFabricType, string(v.NetworkFabricType))
+	}
+	serializeTagMap(s, schemas.CreateEnvironmentRequest_Tags, v.Tags)
+}
+func (v *CreateEnvironmentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEnvironmentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEnvironmentRequest_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateEnvironmentRequest_ClientToken, v.ClientToken)
+		case schemas.CreateEnvironmentRequest_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateEnvironmentRequest_Description, v.Description)
+		case schemas.CreateEnvironmentRequest_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateEnvironmentRequest_Name, v.Name)
+		case schemas.CreateEnvironmentRequest_NetworkFabricType:
+			var ev string
+			if err := d.ReadString(schemas.CreateEnvironmentRequest_NetworkFabricType, &ev); err != nil {
+				return err
+			}
+			v.NetworkFabricType = types.NetworkFabricType(ev)
+			return nil
+		case schemas.CreateEnvironmentRequest_Tags:
+			return deserializeTagMap(d, schemas.CreateEnvironmentRequest_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 type CreateEnvironmentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the environment.
@@ -106,16 +155,94 @@ type CreateEnvironmentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateEnvironmentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateEnvironmentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateEnvironmentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.CreateEnvironmentResponse_Arn, *v.Arn)
+	}
+	if v.CreatedTime != nil {
+		s.WriteTime(schemas.CreateEnvironmentResponse_CreatedTime, *v.CreatedTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateEnvironmentResponse_Description, *v.Description)
+	}
+	if v.EnvironmentId != nil {
+		s.WriteString(schemas.CreateEnvironmentResponse_EnvironmentId, *v.EnvironmentId)
+	}
+	if v.LastUpdatedTime != nil {
+		s.WriteTime(schemas.CreateEnvironmentResponse_LastUpdatedTime, *v.LastUpdatedTime)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateEnvironmentResponse_Name, *v.Name)
+	}
+	if v.NetworkFabricType != "" {
+		s.WriteString(schemas.CreateEnvironmentResponse_NetworkFabricType, string(v.NetworkFabricType))
+	}
+	if v.OwnerAccountId != nil {
+		s.WriteString(schemas.CreateEnvironmentResponse_OwnerAccountId, *v.OwnerAccountId)
+	}
+	if v.State != "" {
+		s.WriteString(schemas.CreateEnvironmentResponse_State, string(v.State))
+	}
+	serializeTagMap(s, schemas.CreateEnvironmentResponse_Tags, v.Tags)
+}
+func (v *CreateEnvironmentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateEnvironmentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateEnvironmentResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateEnvironmentResponse_Arn, v.Arn)
+		case schemas.CreateEnvironmentResponse_CreatedTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.CreateEnvironmentResponse_CreatedTime, v.CreatedTime)
+		case schemas.CreateEnvironmentResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateEnvironmentResponse_Description, v.Description)
+		case schemas.CreateEnvironmentResponse_EnvironmentId:
+			v.EnvironmentId = new(string)
+			return d.ReadString(schemas.CreateEnvironmentResponse_EnvironmentId, v.EnvironmentId)
+		case schemas.CreateEnvironmentResponse_LastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.CreateEnvironmentResponse_LastUpdatedTime, v.LastUpdatedTime)
+		case schemas.CreateEnvironmentResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateEnvironmentResponse_Name, v.Name)
+		case schemas.CreateEnvironmentResponse_NetworkFabricType:
+			var ev string
+			if err := d.ReadString(schemas.CreateEnvironmentResponse_NetworkFabricType, &ev); err != nil {
+				return err
+			}
+			v.NetworkFabricType = types.NetworkFabricType(ev)
+			return nil
+		case schemas.CreateEnvironmentResponse_OwnerAccountId:
+			v.OwnerAccountId = new(string)
+			return d.ReadString(schemas.CreateEnvironmentResponse_OwnerAccountId, v.OwnerAccountId)
+		case schemas.CreateEnvironmentResponse_State:
+			var ev string
+			if err := d.ReadString(schemas.CreateEnvironmentResponse_State, &ev); err != nil {
+				return err
+			}
+			v.State = types.EnvironmentState(ev)
+			return nil
+		case schemas.CreateEnvironmentResponse_Tags:
+			return deserializeTagMap(d, schemas.CreateEnvironmentResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironment, schemas.CreateEnvironmentRequest, schemas.CreateEnvironmentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateEnvironment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateEnvironment, schemas.CreateEnvironmentRequest, schemas.CreateEnvironmentResponse), output: &CreateEnvironmentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateEnvironment"); err != nil {

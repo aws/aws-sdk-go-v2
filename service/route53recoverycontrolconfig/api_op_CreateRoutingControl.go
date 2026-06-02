@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,27 @@ type CreateRoutingControlInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRoutingControlInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRoutingControlRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRoutingControlInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRoutingControlRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.CreateRoutingControlRequest_ClusterArn, *v.ClusterArn)
+	}
+	if v.ControlPanelArn != nil {
+		s.WriteString(schemas.CreateRoutingControlRequest_ControlPanelArn, *v.ControlPanelArn)
+	}
+	if v.RoutingControlName != nil {
+		s.WriteString(schemas.CreateRoutingControlRequest_RoutingControlName, *v.RoutingControlName)
+	}
+}
+
 type CreateRoutingControlOutput struct {
 
 	// The routing control that is created.
@@ -69,16 +92,24 @@ type CreateRoutingControlOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRoutingControlOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRoutingControlResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRoutingControlResponse_RoutingControl:
+			v.RoutingControl = &types.RoutingControl{}
+			return v.RoutingControl.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRoutingControlMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRoutingControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoutingControl, schemas.CreateRoutingControlRequest, schemas.CreateRoutingControlResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRoutingControl{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRoutingControl, schemas.CreateRoutingControlRequest, schemas.CreateRoutingControlResponse), output: &CreateRoutingControlOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRoutingControl"); err != nil {

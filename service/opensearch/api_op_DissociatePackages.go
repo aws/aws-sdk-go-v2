@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,19 @@ type DissociatePackagesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DissociatePackagesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DissociatePackagesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DissociatePackagesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DomainName != nil {
+		s.WriteString(schemas.DissociatePackagesRequest_DomainName, *v.DomainName)
+	}
+	serializePackageIDList(s, schemas.DissociatePackagesRequest_PackageList, v.PackageList)
+}
+
 type DissociatePackagesOutput struct {
 
 	// A list of package details for the packages that were dissociated from the
@@ -55,16 +70,23 @@ type DissociatePackagesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DissociatePackagesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DissociatePackagesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DissociatePackagesResponse_DomainPackageDetailsList:
+			return deserializeDomainPackageDetailsList(d, schemas.DissociatePackagesResponse_DomainPackageDetailsList, &v.DomainPackageDetailsList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDissociatePackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDissociatePackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DissociatePackages, schemas.DissociatePackagesRequest, schemas.DissociatePackagesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDissociatePackages{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DissociatePackages, schemas.DissociatePackagesRequest, schemas.DissociatePackagesResponse), output: &DissociatePackagesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DissociatePackages"); err != nil {

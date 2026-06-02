@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,24 @@ type ListContactChannelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactChannelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListContactChannelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListContactChannelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContactId != nil {
+		s.WriteString(schemas.ListContactChannelsRequest_ContactId, *v.ContactId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListContactChannelsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListContactChannelsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListContactChannelsOutput struct {
 
 	// A list of contact channels related to the specified contact.
@@ -59,16 +79,26 @@ type ListContactChannelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListContactChannelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListContactChannelsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListContactChannelsResult_ContactChannels:
+			return deserializeContactChannelList(d, schemas.ListContactChannelsResult_ContactChannels, &v.ContactChannels)
+		case schemas.ListContactChannelsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListContactChannelsResult_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListContactChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListContactChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContactChannels, schemas.ListContactChannelsRequest, schemas.ListContactChannelsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListContactChannels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListContactChannels, schemas.ListContactChannelsRequest, schemas.ListContactChannelsResult), output: &ListContactChannelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListContactChannels"); err != nil {

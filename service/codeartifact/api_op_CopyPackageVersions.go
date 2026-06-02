@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -114,6 +116,44 @@ type CopyPackageVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyPackageVersionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CopyPackageVersionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CopyPackageVersionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowOverwrite != nil {
+		s.WriteBool(schemas.CopyPackageVersionsRequest_allowOverwrite, *v.AllowOverwrite)
+	}
+	if v.DestinationRepository != nil {
+		s.WriteString(schemas.CopyPackageVersionsRequest_destinationRepository, *v.DestinationRepository)
+	}
+	if v.Domain != nil {
+		s.WriteString(schemas.CopyPackageVersionsRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.CopyPackageVersionsRequest_domainOwner, *v.DomainOwner)
+	}
+	if v.Format != "" {
+		s.WriteString(schemas.CopyPackageVersionsRequest_format, string(v.Format))
+	}
+	if v.IncludeFromUpstream != nil {
+		s.WriteBool(schemas.CopyPackageVersionsRequest_includeFromUpstream, *v.IncludeFromUpstream)
+	}
+	if v.Namespace != nil {
+		s.WriteString(schemas.CopyPackageVersionsRequest_namespace, *v.Namespace)
+	}
+	if v.Package != nil {
+		s.WriteString(schemas.CopyPackageVersionsRequest_package, *v.Package)
+	}
+	if v.SourceRepository != nil {
+		s.WriteString(schemas.CopyPackageVersionsRequest_sourceRepository, *v.SourceRepository)
+	}
+	serializePackageVersionRevisionMap(s, schemas.CopyPackageVersionsRequest_versionRevisions, v.VersionRevisions)
+	serializePackageVersionList(s, schemas.CopyPackageVersionsRequest_versions, v.Versions)
+}
+
 type CopyPackageVersionsOutput struct {
 
 	//  A map of package versions that failed to copy and their error codes. The
@@ -142,16 +182,25 @@ type CopyPackageVersionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CopyPackageVersionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CopyPackageVersionsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CopyPackageVersionsResult_failedVersions:
+			return deserializePackageVersionErrorMap(d, schemas.CopyPackageVersionsResult_failedVersions, &v.FailedVersions)
+		case schemas.CopyPackageVersionsResult_successfulVersions:
+			return deserializeSuccessfulPackageVersionInfoMap(d, schemas.CopyPackageVersionsResult_successfulVersions, &v.SuccessfulVersions)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCopyPackageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCopyPackageVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyPackageVersions, schemas.CopyPackageVersionsRequest, schemas.CopyPackageVersionsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCopyPackageVersions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CopyPackageVersions, schemas.CopyPackageVersionsRequest, schemas.CopyPackageVersionsResult), output: &CopyPackageVersionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CopyPackageVersions"); err != nil {

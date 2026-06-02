@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,21 @@ type AssociateBrowserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateBrowserSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateBrowserSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateBrowserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.BrowserSettingsArn != nil {
+		s.WriteString(schemas.AssociateBrowserSettingsRequest_browserSettingsArn, *v.BrowserSettingsArn)
+	}
+	if v.PortalArn != nil {
+		s.WriteString(schemas.AssociateBrowserSettingsRequest_portalArn, *v.PortalArn)
+	}
+}
+
 type AssociateBrowserSettingsOutput struct {
 
 	// The ARN of the browser settings.
@@ -59,16 +76,27 @@ type AssociateBrowserSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateBrowserSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateBrowserSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateBrowserSettingsResponse_browserSettingsArn:
+			v.BrowserSettingsArn = new(string)
+			return d.ReadString(schemas.AssociateBrowserSettingsResponse_browserSettingsArn, v.BrowserSettingsArn)
+		case schemas.AssociateBrowserSettingsResponse_portalArn:
+			v.PortalArn = new(string)
+			return d.ReadString(schemas.AssociateBrowserSettingsResponse_portalArn, v.PortalArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateBrowserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateBrowserSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateBrowserSettings, schemas.AssociateBrowserSettingsRequest, schemas.AssociateBrowserSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateBrowserSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateBrowserSettings, schemas.AssociateBrowserSettingsRequest, schemas.AssociateBrowserSettingsResponse), output: &AssociateBrowserSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateBrowserSettings"); err != nil {

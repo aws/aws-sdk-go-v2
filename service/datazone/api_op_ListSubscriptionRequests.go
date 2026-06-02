@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -84,6 +86,51 @@ type ListSubscriptionRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubscriptionRequestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListSubscriptionRequestsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListSubscriptionRequestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApproverProjectId != nil {
+		s.WriteString(schemas.ListSubscriptionRequestsInput_approverProjectId, *v.ApproverProjectId)
+	}
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.ListSubscriptionRequestsInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListSubscriptionRequestsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListSubscriptionRequestsInput_nextToken, *v.NextToken)
+	}
+	if v.OwningGroupId != nil {
+		s.WriteString(schemas.ListSubscriptionRequestsInput_owningGroupId, *v.OwningGroupId)
+	}
+	if v.OwningIamPrincipalArn != nil {
+		s.WriteString(schemas.ListSubscriptionRequestsInput_owningIamPrincipalArn, *v.OwningIamPrincipalArn)
+	}
+	if v.OwningProjectId != nil {
+		s.WriteString(schemas.ListSubscriptionRequestsInput_owningProjectId, *v.OwningProjectId)
+	}
+	if v.OwningUserId != nil {
+		s.WriteString(schemas.ListSubscriptionRequestsInput_owningUserId, *v.OwningUserId)
+	}
+	if v.SortBy != "" {
+		s.WriteString(schemas.ListSubscriptionRequestsInput_sortBy, string(v.SortBy))
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.ListSubscriptionRequestsInput_sortOrder, string(v.SortOrder))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListSubscriptionRequestsInput_status, string(v.Status))
+	}
+	if v.SubscribedListingId != nil {
+		s.WriteString(schemas.ListSubscriptionRequestsInput_subscribedListingId, *v.SubscribedListingId)
+	}
+}
+
 type ListSubscriptionRequestsOutput struct {
 
 	// The results of the ListSubscriptionRequests action.
@@ -105,16 +152,26 @@ type ListSubscriptionRequestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListSubscriptionRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListSubscriptionRequestsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListSubscriptionRequestsOutput_items:
+			return deserializeSubscriptionRequests(d, schemas.ListSubscriptionRequestsOutput_items, &v.Items)
+		case schemas.ListSubscriptionRequestsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListSubscriptionRequestsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListSubscriptionRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListSubscriptionRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscriptionRequests, schemas.ListSubscriptionRequestsInput, schemas.ListSubscriptionRequestsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListSubscriptionRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListSubscriptionRequests, schemas.ListSubscriptionRequestsInput, schemas.ListSubscriptionRequestsOutput), output: &ListSubscriptionRequestsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListSubscriptionRequests"); err != nil {

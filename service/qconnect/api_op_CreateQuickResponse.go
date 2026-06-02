@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -89,6 +91,47 @@ type CreateQuickResponseInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQuickResponseInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateQuickResponseRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateQuickResponseInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeChannels(s, schemas.CreateQuickResponseRequest_channels, v.Channels)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateQuickResponseRequest_clientToken, *v.ClientToken)
+	}
+	serializeQuickResponseDataProvider(s, schemas.CreateQuickResponseRequest_content, v.Content)
+	if v.ContentType != nil {
+		s.WriteString(schemas.CreateQuickResponseRequest_contentType, *v.ContentType)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateQuickResponseRequest_description, *v.Description)
+	}
+	if v.GroupingConfiguration != nil {
+		s.WriteStruct(schemas.CreateQuickResponseRequest_groupingConfiguration)
+		v.GroupingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsActive != nil {
+		s.WriteBool(schemas.CreateQuickResponseRequest_isActive, *v.IsActive)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.CreateQuickResponseRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	if v.Language != nil {
+		s.WriteString(schemas.CreateQuickResponseRequest_language, *v.Language)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateQuickResponseRequest_name, *v.Name)
+	}
+	if v.ShortcutKey != nil {
+		s.WriteString(schemas.CreateQuickResponseRequest_shortcutKey, *v.ShortcutKey)
+	}
+	serializeTags(s, schemas.CreateQuickResponseRequest_tags, v.Tags)
+}
+
 type CreateQuickResponseOutput struct {
 
 	// The quick response.
@@ -100,16 +143,24 @@ type CreateQuickResponseOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateQuickResponseOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateQuickResponseResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateQuickResponseResponse_quickResponse:
+			v.QuickResponse = &types.QuickResponseData{}
+			return v.QuickResponse.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateQuickResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateQuickResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQuickResponse, schemas.CreateQuickResponseRequest, schemas.CreateQuickResponseResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateQuickResponse{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateQuickResponse, schemas.CreateQuickResponseRequest, schemas.CreateQuickResponseResponse), output: &CreateQuickResponseOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateQuickResponse"); err != nil {

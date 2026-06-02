@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -55,6 +57,27 @@ type AddArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddArtifactInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.AddArtifactInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.ArtifactContent != nil {
+		s.WriteBlob(schemas.AddArtifactInput_artifactContent, v.ArtifactContent)
+	}
+	if v.ArtifactType != "" {
+		s.WriteString(schemas.AddArtifactInput_artifactType, string(v.ArtifactType))
+	}
+	if v.FileName != nil {
+		s.WriteString(schemas.AddArtifactInput_fileName, *v.FileName)
+	}
+}
+
 type AddArtifactOutput struct {
 
 	// The unique identifier assigned to the uploaded artifact.
@@ -68,16 +91,24 @@ type AddArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddArtifactOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddArtifactOutput_artifactId:
+			v.ArtifactId = new(string)
+			return d.ReadString(schemas.AddArtifactOutput_artifactId, v.ArtifactId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddArtifact, schemas.AddArtifactInput, schemas.AddArtifactOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddArtifact, schemas.AddArtifactInput, schemas.AddArtifactOutput), output: &AddArtifactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AddArtifact"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/eksauth/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/eksauth/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,21 @@ type AssumeRoleForPodIdentityInput struct {
 	Token *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssumeRoleForPodIdentityInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssumeRoleForPodIdentityRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssumeRoleForPodIdentityInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterName != nil {
+		s.WriteString(schemas.AssumeRoleForPodIdentityRequest_clusterName, *v.ClusterName)
+	}
+	if v.Token != nil {
+		s.WriteString(schemas.AssumeRoleForPodIdentityRequest_token, *v.Token)
+	}
 }
 
 type AssumeRoleForPodIdentityOutput struct {
@@ -91,16 +108,36 @@ type AssumeRoleForPodIdentityOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssumeRoleForPodIdentityOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssumeRoleForPodIdentityResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssumeRoleForPodIdentityResponse_assumedRoleUser:
+			v.AssumedRoleUser = &types.AssumedRoleUser{}
+			return v.AssumedRoleUser.Deserialize(d)
+		case schemas.AssumeRoleForPodIdentityResponse_audience:
+			v.Audience = new(string)
+			return d.ReadString(schemas.AssumeRoleForPodIdentityResponse_audience, v.Audience)
+		case schemas.AssumeRoleForPodIdentityResponse_credentials:
+			v.Credentials = &types.Credentials{}
+			return v.Credentials.Deserialize(d)
+		case schemas.AssumeRoleForPodIdentityResponse_podIdentityAssociation:
+			v.PodIdentityAssociation = &types.PodIdentityAssociation{}
+			return v.PodIdentityAssociation.Deserialize(d)
+		case schemas.AssumeRoleForPodIdentityResponse_subject:
+			v.Subject = &types.Subject{}
+			return v.Subject.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssumeRoleForPodIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssumeRoleForPodIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeRoleForPodIdentity, schemas.AssumeRoleForPodIdentityRequest, schemas.AssumeRoleForPodIdentityResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssumeRoleForPodIdentity{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssumeRoleForPodIdentity, schemas.AssumeRoleForPodIdentityRequest, schemas.AssumeRoleForPodIdentityResponse), output: &AssumeRoleForPodIdentityOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssumeRoleForPodIdentity"); err != nil {

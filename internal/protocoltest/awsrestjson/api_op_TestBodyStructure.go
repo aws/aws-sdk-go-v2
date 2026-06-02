@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,36 @@ type TestBodyStructureInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestBodyStructureInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestBodyStructureInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestBodyStructureInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestConfig != nil {
+		s.WriteStruct(schemas.TestBodyStructureInputOutput_testConfig)
+		v.TestConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestId != nil {
+		s.WriteString(schemas.TestBodyStructureInputOutput_testId, *v.TestId)
+	}
+}
+func (v *TestBodyStructureInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestBodyStructureInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestBodyStructureInputOutput_testConfig:
+			v.TestConfig = &types.TestConfig{}
+			return v.TestConfig.Deserialize(d)
+		case schemas.TestBodyStructureInputOutput_testId:
+			v.TestId = new(string)
+			return d.ReadString(schemas.TestBodyStructureInputOutput_testId, v.TestId)
+		}
+		return nil
+	})
+}
+
 type TestBodyStructureOutput struct {
 	TestConfig *types.TestConfig
 
@@ -49,16 +81,43 @@ type TestBodyStructureOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *TestBodyStructureOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.TestBodyStructureInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *TestBodyStructureOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.TestConfig != nil {
+		s.WriteStruct(schemas.TestBodyStructureInputOutput_testConfig)
+		v.TestConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TestId != nil {
+		s.WriteString(schemas.TestBodyStructureInputOutput_testId, *v.TestId)
+	}
+}
+func (v *TestBodyStructureOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TestBodyStructureInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TestBodyStructureInputOutput_testConfig:
+			v.TestConfig = &types.TestConfig{}
+			return v.TestConfig.Deserialize(d)
+		case schemas.TestBodyStructureInputOutput_testId:
+			v.TestId = new(string)
+			return d.ReadString(schemas.TestBodyStructureInputOutput_testId, v.TestId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationTestBodyStructureMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpTestBodyStructure{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestBodyStructure, schemas.TestBodyStructureInputOutput, schemas.TestBodyStructureInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpTestBodyStructure{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.TestBodyStructure, schemas.TestBodyStructureInputOutput, schemas.TestBodyStructureInputOutput), output: &TestBodyStructureOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "TestBodyStructure"); err != nil {

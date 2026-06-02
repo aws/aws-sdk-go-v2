@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizerautomation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,24 @@ type ListAutomationEventStepsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomationEventStepsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAutomationEventStepsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAutomationEventStepsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EventId != nil {
+		s.WriteString(schemas.ListAutomationEventStepsRequest_eventId, *v.EventId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAutomationEventStepsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAutomationEventStepsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAutomationEventStepsOutput struct {
 
 	//  The list of steps for the specified automation event.
@@ -61,16 +81,26 @@ type ListAutomationEventStepsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAutomationEventStepsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAutomationEventStepsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAutomationEventStepsResponse_automationEventSteps:
+			return deserializeAutomationEventSteps(d, schemas.ListAutomationEventStepsResponse_automationEventSteps, &v.AutomationEventSteps)
+		case schemas.ListAutomationEventStepsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAutomationEventStepsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAutomationEventStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpListAutomationEventSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomationEventSteps, schemas.ListAutomationEventStepsRequest, schemas.ListAutomationEventStepsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpListAutomationEventSteps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAutomationEventSteps, schemas.ListAutomationEventStepsRequest, schemas.ListAutomationEventStepsResponse), output: &ListAutomationEventStepsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAutomationEventSteps"); err != nil {

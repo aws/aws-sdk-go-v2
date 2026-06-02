@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,28 @@ type DescribeGeofenceCollectionInput struct {
 	CollectionName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeGeofenceCollectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGeofenceCollectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGeofenceCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionName != nil {
+		s.WriteString(schemas.DescribeGeofenceCollectionRequest_CollectionName, *v.CollectionName)
+	}
+}
+func (v *DescribeGeofenceCollectionInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGeofenceCollectionRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGeofenceCollectionRequest_CollectionName:
+			v.CollectionName = new(string)
+			return d.ReadString(schemas.DescribeGeofenceCollectionRequest_CollectionName, v.CollectionName)
+		}
+		return nil
+	})
 }
 
 type DescribeGeofenceCollectionOutput struct {
@@ -102,16 +126,90 @@ type DescribeGeofenceCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeGeofenceCollectionOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeGeofenceCollectionResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeGeofenceCollectionOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CollectionArn != nil {
+		s.WriteString(schemas.DescribeGeofenceCollectionResponse_CollectionArn, *v.CollectionArn)
+	}
+	if v.CollectionName != nil {
+		s.WriteString(schemas.DescribeGeofenceCollectionResponse_CollectionName, *v.CollectionName)
+	}
+	if v.CreateTime != nil {
+		s.WriteTime(schemas.DescribeGeofenceCollectionResponse_CreateTime, *v.CreateTime)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.DescribeGeofenceCollectionResponse_Description, *v.Description)
+	}
+	if v.GeofenceCount != nil {
+		s.WriteInt32(schemas.DescribeGeofenceCollectionResponse_GeofenceCount, *v.GeofenceCount)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.DescribeGeofenceCollectionResponse_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.PricingPlan != "" {
+		s.WriteString(schemas.DescribeGeofenceCollectionResponse_PricingPlan, string(v.PricingPlan))
+	}
+	if v.PricingPlanDataSource != nil {
+		s.WriteString(schemas.DescribeGeofenceCollectionResponse_PricingPlanDataSource, *v.PricingPlanDataSource)
+	}
+	serializeTagMap(s, schemas.DescribeGeofenceCollectionResponse_Tags, v.Tags)
+	if v.UpdateTime != nil {
+		s.WriteTime(schemas.DescribeGeofenceCollectionResponse_UpdateTime, *v.UpdateTime)
+	}
+}
+func (v *DescribeGeofenceCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeGeofenceCollectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeGeofenceCollectionResponse_CollectionArn:
+			v.CollectionArn = new(string)
+			return d.ReadString(schemas.DescribeGeofenceCollectionResponse_CollectionArn, v.CollectionArn)
+		case schemas.DescribeGeofenceCollectionResponse_CollectionName:
+			v.CollectionName = new(string)
+			return d.ReadString(schemas.DescribeGeofenceCollectionResponse_CollectionName, v.CollectionName)
+		case schemas.DescribeGeofenceCollectionResponse_CreateTime:
+			v.CreateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeGeofenceCollectionResponse_CreateTime, v.CreateTime)
+		case schemas.DescribeGeofenceCollectionResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeGeofenceCollectionResponse_Description, v.Description)
+		case schemas.DescribeGeofenceCollectionResponse_GeofenceCount:
+			v.GeofenceCount = new(int32)
+			return d.ReadInt32(schemas.DescribeGeofenceCollectionResponse_GeofenceCount, v.GeofenceCount)
+		case schemas.DescribeGeofenceCollectionResponse_KmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.DescribeGeofenceCollectionResponse_KmsKeyId, v.KmsKeyId)
+		case schemas.DescribeGeofenceCollectionResponse_PricingPlan:
+			var ev string
+			if err := d.ReadString(schemas.DescribeGeofenceCollectionResponse_PricingPlan, &ev); err != nil {
+				return err
+			}
+			v.PricingPlan = types.PricingPlan(ev)
+			return nil
+		case schemas.DescribeGeofenceCollectionResponse_PricingPlanDataSource:
+			v.PricingPlanDataSource = new(string)
+			return d.ReadString(schemas.DescribeGeofenceCollectionResponse_PricingPlanDataSource, v.PricingPlanDataSource)
+		case schemas.DescribeGeofenceCollectionResponse_Tags:
+			return deserializeTagMap(d, schemas.DescribeGeofenceCollectionResponse_Tags, &v.Tags)
+		case schemas.DescribeGeofenceCollectionResponse_UpdateTime:
+			v.UpdateTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeGeofenceCollectionResponse_UpdateTime, v.UpdateTime)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeGeofenceCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeGeofenceCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGeofenceCollection, schemas.DescribeGeofenceCollectionRequest, schemas.DescribeGeofenceCollectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeGeofenceCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeGeofenceCollection, schemas.DescribeGeofenceCollectionRequest, schemas.DescribeGeofenceCollectionResponse), output: &DescribeGeofenceCollectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeGeofenceCollection"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/invoicing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/invoicing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,18 @@ type GetProcurementPortalPreferenceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProcurementPortalPreferenceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetProcurementPortalPreferenceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetProcurementPortalPreferenceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ProcurementPortalPreferenceArn != nil {
+		s.WriteString(schemas.GetProcurementPortalPreferenceRequest_ProcurementPortalPreferenceArn, *v.ProcurementPortalPreferenceArn)
+	}
+}
+
 type GetProcurementPortalPreferenceOutput struct {
 
 	// The detailed configuration of the requested procurement portal preference.
@@ -56,16 +70,24 @@ type GetProcurementPortalPreferenceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetProcurementPortalPreferenceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetProcurementPortalPreferenceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetProcurementPortalPreferenceResponse_ProcurementPortalPreference:
+			v.ProcurementPortalPreference = &types.ProcurementPortalPreference{}
+			return v.ProcurementPortalPreference.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetProcurementPortalPreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetProcurementPortalPreference{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProcurementPortalPreference, schemas.GetProcurementPortalPreferenceRequest, schemas.GetProcurementPortalPreferenceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetProcurementPortalPreference{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetProcurementPortalPreference, schemas.GetProcurementPortalPreferenceRequest, schemas.GetProcurementPortalPreferenceResponse), output: &GetProcurementPortalPreferenceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetProcurementPortalPreference"); err != nil {

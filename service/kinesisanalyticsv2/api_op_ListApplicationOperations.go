@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -56,6 +58,30 @@ type ListApplicationOperationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationOperationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationOperationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationOperationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationName != nil {
+		s.WriteString(schemas.ListApplicationOperationsRequest_ApplicationName, *v.ApplicationName)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.ListApplicationOperationsRequest_Limit, *v.Limit)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationOperationsRequest_NextToken, *v.NextToken)
+	}
+	if v.Operation != nil {
+		s.WriteString(schemas.ListApplicationOperationsRequest_Operation, *v.Operation)
+	}
+	if v.OperationStatus != "" {
+		s.WriteString(schemas.ListApplicationOperationsRequest_OperationStatus, string(v.OperationStatus))
+	}
+}
+
 // A response that returns a list of operations for an application.
 type ListApplicationOperationsOutput struct {
 
@@ -72,16 +98,26 @@ type ListApplicationOperationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationOperationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationOperationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationOperationsResponse_ApplicationOperationInfoList:
+			return deserializeApplicationOperationInfoList(d, schemas.ListApplicationOperationsResponse_ApplicationOperationInfoList, &v.ApplicationOperationInfoList)
+		case schemas.ListApplicationOperationsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationOperationsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApplicationOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationOperations, schemas.ListApplicationOperationsRequest, schemas.ListApplicationOperationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListApplicationOperations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationOperations, schemas.ListApplicationOperationsRequest, schemas.ListApplicationOperationsResponse), output: &ListApplicationOperationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApplicationOperations"); err != nil {

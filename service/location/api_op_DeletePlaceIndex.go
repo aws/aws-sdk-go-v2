@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,28 @@ type DeletePlaceIndexInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePlaceIndexInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePlaceIndexRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePlaceIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexName != nil {
+		s.WriteString(schemas.DeletePlaceIndexRequest_IndexName, *v.IndexName)
+	}
+}
+func (v *DeletePlaceIndexInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePlaceIndexRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePlaceIndexRequest_IndexName:
+			v.IndexName = new(string)
+			return d.ReadString(schemas.DeletePlaceIndexRequest_IndexName, v.IndexName)
+		}
+		return nil
+	})
+}
+
 type DeletePlaceIndexOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -64,16 +88,29 @@ type DeletePlaceIndexOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePlaceIndexOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePlaceIndexResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePlaceIndexOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DeletePlaceIndexOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePlaceIndexResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePlaceIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePlaceIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePlaceIndex, schemas.DeletePlaceIndexRequest, schemas.DeletePlaceIndexResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePlaceIndex{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePlaceIndex, schemas.DeletePlaceIndexRequest, schemas.DeletePlaceIndexResponse), output: &DeletePlaceIndexOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePlaceIndex"); err != nil {

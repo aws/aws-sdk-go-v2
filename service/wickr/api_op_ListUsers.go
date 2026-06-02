@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/wickr/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -72,6 +74,45 @@ type ListUsersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUsersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUsersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirstName != nil {
+		s.WriteString(schemas.ListUsersRequest_firstName, *v.FirstName)
+	}
+	if v.GroupId != nil {
+		s.WriteString(schemas.ListUsersRequest_groupId, *v.GroupId)
+	}
+	if v.LastName != nil {
+		s.WriteString(schemas.ListUsersRequest_lastName, *v.LastName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUsersRequest_maxResults, *v.MaxResults)
+	}
+	if v.NetworkId != nil {
+		s.WriteString(schemas.ListUsersRequest_networkId, *v.NetworkId)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUsersRequest_nextToken, *v.NextToken)
+	}
+	if v.SortDirection != "" {
+		s.WriteString(schemas.ListUsersRequest_sortDirection, string(v.SortDirection))
+	}
+	if v.SortFields != nil {
+		s.WriteString(schemas.ListUsersRequest_sortFields, *v.SortFields)
+	}
+	if v.Status != 0 {
+		s.WriteInt32(schemas.ListUsersRequest_status, int32(v.Status))
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.ListUsersRequest_username, *v.Username)
+	}
+}
+
 type ListUsersOutput struct {
 
 	// The token to use for retrieving the next page of results. If this is not
@@ -88,16 +129,26 @@ type ListUsersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUsersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUsersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUsersResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUsersResponse_nextToken, v.NextToken)
+		case schemas.ListUsersResponse_users:
+			return deserializeUsers(d, schemas.ListUsersResponse_users, &v.Users)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsers, schemas.ListUsersRequest, schemas.ListUsersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUsers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUsers, schemas.ListUsersRequest, schemas.ListUsersResponse), output: &ListUsersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListUsers"); err != nil {

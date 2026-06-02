@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssmguiconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +36,18 @@ type DeleteConnectionRecordingPreferencesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectionRecordingPreferencesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteConnectionRecordingPreferencesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteConnectionRecordingPreferencesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteConnectionRecordingPreferencesRequest_ClientToken, *v.ClientToken)
+	}
+}
+
 type DeleteConnectionRecordingPreferencesOutput struct {
 
 	// Service-provided idempotency token.
@@ -45,16 +59,24 @@ type DeleteConnectionRecordingPreferencesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteConnectionRecordingPreferencesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteConnectionRecordingPreferencesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteConnectionRecordingPreferencesResponse_ClientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteConnectionRecordingPreferencesResponse_ClientToken, v.ClientToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteConnectionRecordingPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteConnectionRecordingPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnectionRecordingPreferences, schemas.DeleteConnectionRecordingPreferencesRequest, schemas.DeleteConnectionRecordingPreferencesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteConnectionRecordingPreferences{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteConnectionRecordingPreferences, schemas.DeleteConnectionRecordingPreferencesRequest, schemas.DeleteConnectionRecordingPreferencesResponse), output: &DeleteConnectionRecordingPreferencesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteConnectionRecordingPreferences"); err != nil {

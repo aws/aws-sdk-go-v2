@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -92,6 +94,30 @@ type GetSparqlStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSparqlStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSparqlStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSparqlStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommitNum != nil {
+		s.WriteInt64(schemas.GetSparqlStreamInput_commitNum, *v.CommitNum)
+	}
+	if v.Encoding != "" {
+		s.WriteString(schemas.GetSparqlStreamInput_encoding, string(v.Encoding))
+	}
+	if v.IteratorType != "" {
+		s.WriteString(schemas.GetSparqlStreamInput_iteratorType, string(v.IteratorType))
+	}
+	if v.Limit != nil {
+		s.WriteInt64(schemas.GetSparqlStreamInput_limit, *v.Limit)
+	}
+	if v.OpNum != nil {
+		s.WriteInt64(schemas.GetSparqlStreamInput_opNum, *v.OpNum)
+	}
+}
+
 type GetSparqlStreamOutput struct {
 
 	// Serialization format for the change records being returned. Currently, the only
@@ -131,16 +157,34 @@ type GetSparqlStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSparqlStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSparqlStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSparqlStreamOutput_format:
+			v.Format = new(string)
+			return d.ReadString(schemas.GetSparqlStreamOutput_format, v.Format)
+		case schemas.GetSparqlStreamOutput_lastEventId:
+			return deserializeStringValuedMap(d, schemas.GetSparqlStreamOutput_lastEventId, &v.LastEventId)
+		case schemas.GetSparqlStreamOutput_lastTrxTimestampInMillis:
+			v.LastTrxTimestampInMillis = new(int64)
+			return d.ReadInt64(schemas.GetSparqlStreamOutput_lastTrxTimestampInMillis, v.LastTrxTimestampInMillis)
+		case schemas.GetSparqlStreamOutput_records:
+			return deserializeSparqlRecordsList(d, schemas.GetSparqlStreamOutput_records, &v.Records)
+		case schemas.GetSparqlStreamOutput_totalRecords:
+			v.TotalRecords = new(int32)
+			return d.ReadInt32(schemas.GetSparqlStreamOutput_totalRecords, v.TotalRecords)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSparqlStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSparqlStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSparqlStream, schemas.GetSparqlStreamInput, schemas.GetSparqlStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSparqlStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSparqlStream, schemas.GetSparqlStreamInput, schemas.GetSparqlStreamOutput), output: &GetSparqlStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSparqlStream"); err != nil {

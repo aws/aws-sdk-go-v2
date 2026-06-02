@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,21 @@ type ListUserSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListUserSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListUserSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListUserSettingsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListUserSettingsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListUserSettingsOutput struct {
 
 	// The pagination token used to retrieve the next page of results for this
@@ -54,16 +71,26 @@ type ListUserSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListUserSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListUserSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListUserSettingsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListUserSettingsResponse_nextToken, v.NextToken)
+		case schemas.ListUserSettingsResponse_userSettings:
+			return deserializeUserSettingsList(d, schemas.ListUserSettingsResponse_userSettings, &v.UserSettings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListUserSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserSettings, schemas.ListUserSettingsRequest, schemas.ListUserSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListUserSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListUserSettings, schemas.ListUserSettingsRequest, schemas.ListUserSettingsResponse), output: &ListUserSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListUserSettings"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,21 @@ type GetChangesetInput struct {
 	DatasetId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetChangesetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetChangesetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetChangesetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangesetId != nil {
+		s.WriteString(schemas.GetChangesetRequest_changesetId, *v.ChangesetId)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.GetChangesetRequest_datasetId, *v.DatasetId)
+	}
 }
 
 // The response from a describe changeset operation
@@ -108,16 +125,65 @@ type GetChangesetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetChangesetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetChangesetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetChangesetResponse_activeFromTimestamp:
+			v.ActiveFromTimestamp = new(int64)
+			return d.ReadInt64(schemas.GetChangesetResponse_activeFromTimestamp, v.ActiveFromTimestamp)
+		case schemas.GetChangesetResponse_activeUntilTimestamp:
+			v.ActiveUntilTimestamp = new(int64)
+			return d.ReadInt64(schemas.GetChangesetResponse_activeUntilTimestamp, v.ActiveUntilTimestamp)
+		case schemas.GetChangesetResponse_changeType:
+			var ev string
+			if err := d.ReadString(schemas.GetChangesetResponse_changeType, &ev); err != nil {
+				return err
+			}
+			v.ChangeType = types.ChangeType(ev)
+			return nil
+		case schemas.GetChangesetResponse_changesetArn:
+			v.ChangesetArn = new(string)
+			return d.ReadString(schemas.GetChangesetResponse_changesetArn, v.ChangesetArn)
+		case schemas.GetChangesetResponse_changesetId:
+			v.ChangesetId = new(string)
+			return d.ReadString(schemas.GetChangesetResponse_changesetId, v.ChangesetId)
+		case schemas.GetChangesetResponse_createTime:
+			return d.ReadInt64(schemas.GetChangesetResponse_createTime, &v.CreateTime)
+		case schemas.GetChangesetResponse_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.GetChangesetResponse_datasetId, v.DatasetId)
+		case schemas.GetChangesetResponse_errorInfo:
+			v.ErrorInfo = &types.ChangesetErrorInfo{}
+			return v.ErrorInfo.Deserialize(d)
+		case schemas.GetChangesetResponse_formatParams:
+			return deserializeFormatParams(d, schemas.GetChangesetResponse_formatParams, &v.FormatParams)
+		case schemas.GetChangesetResponse_sourceParams:
+			return deserializeSourceParams(d, schemas.GetChangesetResponse_sourceParams, &v.SourceParams)
+		case schemas.GetChangesetResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetChangesetResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.IngestionStatus(ev)
+			return nil
+		case schemas.GetChangesetResponse_updatedByChangesetId:
+			v.UpdatedByChangesetId = new(string)
+			return d.ReadString(schemas.GetChangesetResponse_updatedByChangesetId, v.UpdatedByChangesetId)
+		case schemas.GetChangesetResponse_updatesChangesetId:
+			v.UpdatesChangesetId = new(string)
+			return d.ReadString(schemas.GetChangesetResponse_updatesChangesetId, v.UpdatesChangesetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetChangesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetChangeset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChangeset, schemas.GetChangesetRequest, schemas.GetChangesetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetChangeset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetChangeset, schemas.GetChangesetRequest, schemas.GetChangesetResponse), output: &GetChangesetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetChangeset"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/datazone/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -77,6 +79,37 @@ type CreateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateRuleInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != "" {
+		s.WriteString(schemas.CreateRuleInput_action, string(v.Action))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateRuleInput_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateRuleInput_description, *v.Description)
+	}
+	serializeRuleDetail(s, schemas.CreateRuleInput_detail, v.Detail)
+	if v.DomainIdentifier != nil {
+		s.WriteString(schemas.CreateRuleInput_domainIdentifier, *v.DomainIdentifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateRuleInput_name, *v.Name)
+	}
+	if v.Scope != nil {
+		s.WriteStruct(schemas.CreateRuleInput_scope)
+		v.Scope.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeRuleTarget(s, schemas.CreateRuleInput_target, v.Target)
+}
+
 type CreateRuleOutput struct {
 
 	// The action of the rule.
@@ -136,16 +169,64 @@ type CreateRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateRuleOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateRuleOutput_action:
+			var ev string
+			if err := d.ReadString(schemas.CreateRuleOutput_action, &ev); err != nil {
+				return err
+			}
+			v.Action = types.RuleAction(ev)
+			return nil
+		case schemas.CreateRuleOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateRuleOutput_createdAt, v.CreatedAt)
+		case schemas.CreateRuleOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.CreateRuleOutput_createdBy, v.CreatedBy)
+		case schemas.CreateRuleOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateRuleOutput_description, v.Description)
+		case schemas.CreateRuleOutput_detail:
+			return deserializeRuleDetail(d, schemas.CreateRuleOutput_detail, &v.Detail)
+		case schemas.CreateRuleOutput_identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.CreateRuleOutput_identifier, v.Identifier)
+		case schemas.CreateRuleOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateRuleOutput_name, v.Name)
+		case schemas.CreateRuleOutput_ruleType:
+			var ev string
+			if err := d.ReadString(schemas.CreateRuleOutput_ruleType, &ev); err != nil {
+				return err
+			}
+			v.RuleType = types.RuleType(ev)
+			return nil
+		case schemas.CreateRuleOutput_scope:
+			v.Scope = &types.RuleScope{}
+			return v.Scope.Deserialize(d)
+		case schemas.CreateRuleOutput_target:
+			return deserializeRuleTarget(d, schemas.CreateRuleOutput_target, &v.Target)
+		case schemas.CreateRuleOutput_targetType:
+			var ev string
+			if err := d.ReadString(schemas.CreateRuleOutput_targetType, &ev); err != nil {
+				return err
+			}
+			v.TargetType = types.RuleTargetType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRule, schemas.CreateRuleInput, schemas.CreateRuleOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateRule, schemas.CreateRuleInput, schemas.CreateRuleOutput), output: &CreateRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateRule"); err != nil {

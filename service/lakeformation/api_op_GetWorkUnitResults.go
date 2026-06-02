@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -51,6 +53,24 @@ type GetWorkUnitResultsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkUnitResultsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkUnitResultsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkUnitResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.QueryId != nil {
+		s.WriteString(schemas.GetWorkUnitResultsRequest_QueryId, *v.QueryId)
+	}
+	if v.WorkUnitId != 0 {
+		s.WriteInt64(schemas.GetWorkUnitResultsRequest_WorkUnitId, v.WorkUnitId)
+	}
+	if v.WorkUnitToken != nil {
+		s.WriteString(schemas.GetWorkUnitResultsRequest_WorkUnitToken, *v.WorkUnitToken)
+	}
+}
+
 // A structure for the output.
 type GetWorkUnitResultsOutput struct {
 
@@ -64,16 +84,29 @@ type GetWorkUnitResultsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkUnitResultsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkUnitResultsResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+func (v *GetWorkUnitResultsOutput) GetPayloadStream() io.Reader { return v.ResultStream }
+
+var _ smithy.StreamingInput = (*GetWorkUnitResultsOutput)(nil)
+
+func (v *GetWorkUnitResultsOutput) SetPayloadStream(r io.ReadCloser) { v.ResultStream = r }
+
+var _ smithy.StreamingOutput = (*GetWorkUnitResultsOutput)(nil)
+
 func (c *Client) addOperationGetWorkUnitResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetWorkUnitResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkUnitResults, schemas.GetWorkUnitResultsRequest, schemas.GetWorkUnitResultsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetWorkUnitResults{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkUnitResults, schemas.GetWorkUnitResultsRequest, schemas.GetWorkUnitResultsResponse), output: &GetWorkUnitResultsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWorkUnitResults"); err != nil {

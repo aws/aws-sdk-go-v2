@@ -7,7 +7,10 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/document"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -128,6 +131,53 @@ type CreateDataSourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDataSourceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDataSourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.CreateDataSourceRequest_applicationId, *v.ApplicationId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateDataSourceRequest_clientToken, *v.ClientToken)
+	}
+	s.WriteDocument(schemas.CreateDataSourceRequest_configuration, &smithydocument.Opaque{Value: v.Configuration})
+	if v.Description != nil {
+		s.WriteString(schemas.CreateDataSourceRequest_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateDataSourceRequest_displayName, *v.DisplayName)
+	}
+	if v.DocumentEnrichmentConfiguration != nil {
+		s.WriteStruct(schemas.CreateDataSourceRequest_documentEnrichmentConfiguration)
+		v.DocumentEnrichmentConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.CreateDataSourceRequest_indexId, *v.IndexId)
+	}
+	if v.MediaExtractionConfiguration != nil {
+		s.WriteStruct(schemas.CreateDataSourceRequest_mediaExtractionConfiguration)
+		v.MediaExtractionConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateDataSourceRequest_roleArn, *v.RoleArn)
+	}
+	if v.SyncSchedule != nil {
+		s.WriteString(schemas.CreateDataSourceRequest_syncSchedule, *v.SyncSchedule)
+	}
+	serializeTags(s, schemas.CreateDataSourceRequest_tags, v.Tags)
+	if v.VpcConfiguration != nil {
+		s.WriteStruct(schemas.CreateDataSourceRequest_vpcConfiguration)
+		v.VpcConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateDataSourceOutput struct {
 
 	//  The Amazon Resource Name (ARN) of a data source in an Amazon Q Business
@@ -143,16 +193,27 @@ type CreateDataSourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDataSourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDataSourceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDataSourceResponse_dataSourceArn:
+			v.DataSourceArn = new(string)
+			return d.ReadString(schemas.CreateDataSourceResponse_dataSourceArn, v.DataSourceArn)
+		case schemas.CreateDataSourceResponse_dataSourceId:
+			v.DataSourceId = new(string)
+			return d.ReadString(schemas.CreateDataSourceResponse_dataSourceId, v.DataSourceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSource, schemas.CreateDataSourceRequest, schemas.CreateDataSourceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDataSource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDataSource, schemas.CreateDataSourceRequest, schemas.CreateDataSourceResponse), output: &CreateDataSourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDataSource"); err != nil {

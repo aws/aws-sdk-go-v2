@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -81,6 +83,49 @@ type UpdateProductInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProductInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProductInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProductInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.UpdateProductInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	serializeAddTags(s, schemas.UpdateProductInput_AddTags, v.AddTags)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateProductInput_Description, *v.Description)
+	}
+	if v.Distributor != nil {
+		s.WriteString(schemas.UpdateProductInput_Distributor, *v.Distributor)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateProductInput_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateProductInput_Name, *v.Name)
+	}
+	if v.Owner != nil {
+		s.WriteString(schemas.UpdateProductInput_Owner, *v.Owner)
+	}
+	serializeTagKeys(s, schemas.UpdateProductInput_RemoveTags, v.RemoveTags)
+	if v.SourceConnection != nil {
+		s.WriteStruct(schemas.UpdateProductInput_SourceConnection)
+		v.SourceConnection.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SupportDescription != nil {
+		s.WriteString(schemas.UpdateProductInput_SupportDescription, *v.SupportDescription)
+	}
+	if v.SupportEmail != nil {
+		s.WriteString(schemas.UpdateProductInput_SupportEmail, *v.SupportEmail)
+	}
+	if v.SupportUrl != nil {
+		s.WriteString(schemas.UpdateProductInput_SupportUrl, *v.SupportUrl)
+	}
+}
+
 type UpdateProductOutput struct {
 
 	// Information about the product view.
@@ -95,16 +140,26 @@ type UpdateProductOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProductOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProductOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProductOutput_ProductViewDetail:
+			v.ProductViewDetail = &types.ProductViewDetail{}
+			return v.ProductViewDetail.Deserialize(d)
+		case schemas.UpdateProductOutput_Tags:
+			return deserializeTags(d, schemas.UpdateProductOutput_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProductMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProduct, schemas.UpdateProductInput, schemas.UpdateProductOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateProduct{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProduct, schemas.UpdateProductInput, schemas.UpdateProductOutput), output: &UpdateProductOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProduct"); err != nil {

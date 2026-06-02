@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/sagemakergeospatial/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type StopVectorEnrichmentJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopVectorEnrichmentJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopVectorEnrichmentJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopVectorEnrichmentJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.StopVectorEnrichmentJobInput_Arn, *v.Arn)
+	}
+}
+
 type StopVectorEnrichmentJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -43,16 +57,21 @@ type StopVectorEnrichmentJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopVectorEnrichmentJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopVectorEnrichmentJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopVectorEnrichmentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopVectorEnrichmentJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopVectorEnrichmentJob, schemas.StopVectorEnrichmentJobInput, schemas.StopVectorEnrichmentJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopVectorEnrichmentJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopVectorEnrichmentJob, schemas.StopVectorEnrichmentJobInput, schemas.StopVectorEnrichmentJobOutput), output: &StopVectorEnrichmentJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopVectorEnrichmentJob"); err != nil {

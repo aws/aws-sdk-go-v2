@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,28 @@ type UpdateServiceActionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceActionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateServiceActionInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateServiceActionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.UpdateServiceActionInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	serializeServiceActionDefinitionMap(s, schemas.UpdateServiceActionInput_Definition, v.Definition)
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateServiceActionInput_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateServiceActionInput_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateServiceActionInput_Name, *v.Name)
+	}
+}
+
 type UpdateServiceActionOutput struct {
 
 	// Detailed information about the self-service action.
@@ -64,16 +88,24 @@ type UpdateServiceActionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateServiceActionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateServiceActionOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateServiceActionOutput_ServiceActionDetail:
+			v.ServiceActionDetail = &types.ServiceActionDetail{}
+			return v.ServiceActionDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateServiceActionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateServiceAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceAction, schemas.UpdateServiceActionInput, schemas.UpdateServiceActionOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateServiceAction{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateServiceAction, schemas.UpdateServiceActionInput, schemas.UpdateServiceActionOutput), output: &UpdateServiceActionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateServiceAction"); err != nil {

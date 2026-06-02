@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,6 +47,24 @@ type GetSourceRepositoryInput struct {
 	SpaceName *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetSourceRepositoryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSourceRepositoryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSourceRepositoryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetSourceRepositoryRequest_name, *v.Name)
+	}
+	if v.ProjectName != nil {
+		s.WriteString(schemas.GetSourceRepositoryRequest_projectName, *v.ProjectName)
+	}
+	if v.SpaceName != nil {
+		s.WriteString(schemas.GetSourceRepositoryRequest_spaceName, *v.SpaceName)
+	}
 }
 
 type GetSourceRepositoryOutput struct {
@@ -89,16 +109,39 @@ type GetSourceRepositoryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSourceRepositoryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSourceRepositoryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSourceRepositoryResponse_createdTime:
+			v.CreatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetSourceRepositoryResponse_createdTime, v.CreatedTime)
+		case schemas.GetSourceRepositoryResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetSourceRepositoryResponse_description, v.Description)
+		case schemas.GetSourceRepositoryResponse_lastUpdatedTime:
+			v.LastUpdatedTime = new(time.Time)
+			return d.ReadTime(schemas.GetSourceRepositoryResponse_lastUpdatedTime, v.LastUpdatedTime)
+		case schemas.GetSourceRepositoryResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSourceRepositoryResponse_name, v.Name)
+		case schemas.GetSourceRepositoryResponse_projectName:
+			v.ProjectName = new(string)
+			return d.ReadString(schemas.GetSourceRepositoryResponse_projectName, v.ProjectName)
+		case schemas.GetSourceRepositoryResponse_spaceName:
+			v.SpaceName = new(string)
+			return d.ReadString(schemas.GetSourceRepositoryResponse_spaceName, v.SpaceName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSourceRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSourceRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSourceRepository, schemas.GetSourceRepositoryRequest, schemas.GetSourceRepositoryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSourceRepository{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSourceRepository, schemas.GetSourceRepositoryRequest, schemas.GetSourceRepositoryResponse), output: &GetSourceRepositoryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSourceRepository"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,22 @@ type DescribeCustomerMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCustomerMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeCustomerMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *DescribeCustomerMetadataInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type DescribeCustomerMetadataOutput struct {
 
 	// The list of customer agreements.
@@ -55,16 +73,30 @@ type DescribeCustomerMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeCustomerMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeCustomerMetadataResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeCustomerMetadataResponse_agreements:
+			return deserializeAgreementList(d, schemas.DescribeCustomerMetadataResponse_agreements, &v.Agreements)
+		case schemas.DescribeCustomerMetadataResponse_nniPartnerType:
+			var ev string
+			if err := d.ReadString(schemas.DescribeCustomerMetadataResponse_nniPartnerType, &ev); err != nil {
+				return err
+			}
+			v.NniPartnerType = types.NniPartnerType(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeCustomerMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeCustomerMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCustomerMetadata, nil, schemas.DescribeCustomerMetadataResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeCustomerMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeCustomerMetadata, nil, schemas.DescribeCustomerMetadataResponse), output: &DescribeCustomerMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeCustomerMetadata"); err != nil {

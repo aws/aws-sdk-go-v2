@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lakeformation/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,26 @@ type GetResourceLFTagsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceLFTagsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceLFTagsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceLFTagsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CatalogId != nil {
+		s.WriteString(schemas.GetResourceLFTagsRequest_CatalogId, *v.CatalogId)
+	}
+	if v.Resource != nil {
+		s.WriteStruct(schemas.GetResourceLFTagsRequest_Resource)
+		v.Resource.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ShowAssignedLFTags != nil {
+		s.WriteBool(schemas.GetResourceLFTagsRequest_ShowAssignedLFTags, *v.ShowAssignedLFTags)
+	}
+}
+
 type GetResourceLFTagsOutput struct {
 
 	// A list of LF-tags applied to a database resource.
@@ -63,16 +85,27 @@ type GetResourceLFTagsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceLFTagsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceLFTagsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceLFTagsResponse_LFTagOnDatabase:
+			return deserializeLFTagsList(d, schemas.GetResourceLFTagsResponse_LFTagOnDatabase, &v.LFTagOnDatabase)
+		case schemas.GetResourceLFTagsResponse_LFTagsOnColumns:
+			return deserializeColumnLFTagsList(d, schemas.GetResourceLFTagsResponse_LFTagsOnColumns, &v.LFTagsOnColumns)
+		case schemas.GetResourceLFTagsResponse_LFTagsOnTable:
+			return deserializeLFTagsList(d, schemas.GetResourceLFTagsResponse_LFTagsOnTable, &v.LFTagsOnTable)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceLFTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceLFTags, schemas.GetResourceLFTagsRequest, schemas.GetResourceLFTagsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceLFTags{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceLFTags, schemas.GetResourceLFTagsRequest, schemas.GetResourceLFTagsResponse), output: &GetResourceLFTagsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourceLFTags"); err != nil {

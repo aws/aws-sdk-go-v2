@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devopsguru/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,21 @@ type GetResourceCollectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceCollectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetResourceCollectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetResourceCollectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NextToken != nil {
+		s.WriteString(schemas.GetResourceCollectionRequest_NextToken, *v.NextToken)
+	}
+	if v.ResourceCollectionType != "" {
+		s.WriteString(schemas.GetResourceCollectionRequest_ResourceCollectionType, string(v.ResourceCollectionType))
+	}
+}
+
 type GetResourceCollectionOutput struct {
 
 	// The pagination token to use to retrieve the next page of results for this
@@ -70,16 +87,27 @@ type GetResourceCollectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetResourceCollectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetResourceCollectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetResourceCollectionResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.GetResourceCollectionResponse_NextToken, v.NextToken)
+		case schemas.GetResourceCollectionResponse_ResourceCollection:
+			v.ResourceCollection = &types.ResourceCollectionFilter{}
+			return v.ResourceCollection.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetResourceCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetResourceCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceCollection, schemas.GetResourceCollectionRequest, schemas.GetResourceCollectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetResourceCollection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetResourceCollection, schemas.GetResourceCollectionRequest, schemas.GetResourceCollectionResponse), output: &GetResourceCollectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetResourceCollection"); err != nil {

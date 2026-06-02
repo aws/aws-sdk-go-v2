@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -73,6 +75,26 @@ type CreateChannelFlowInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelFlowInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChannelFlowRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChannelFlowInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceArn != nil {
+		s.WriteString(schemas.CreateChannelFlowRequest_AppInstanceArn, *v.AppInstanceArn)
+	}
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.CreateChannelFlowRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateChannelFlowRequest_Name, *v.Name)
+	}
+	serializeProcessorList(s, schemas.CreateChannelFlowRequest_Processors, v.Processors)
+	serializeTagList(s, schemas.CreateChannelFlowRequest_Tags, v.Tags)
+}
+
 type CreateChannelFlowOutput struct {
 
 	// The ARN of the channel flow.
@@ -84,16 +106,24 @@ type CreateChannelFlowOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChannelFlowOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChannelFlowResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChannelFlowResponse_ChannelFlowArn:
+			v.ChannelFlowArn = new(string)
+			return d.ReadString(schemas.CreateChannelFlowResponse_ChannelFlowArn, v.ChannelFlowArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChannelFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChannelFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannelFlow, schemas.CreateChannelFlowRequest, schemas.CreateChannelFlowResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChannelFlow{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChannelFlow, schemas.CreateChannelFlowRequest, schemas.CreateChannelFlowResponse), output: &CreateChannelFlowOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateChannelFlow"); err != nil {

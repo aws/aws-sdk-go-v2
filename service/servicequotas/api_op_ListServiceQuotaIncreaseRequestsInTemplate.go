@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicequotas/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,27 @@ type ListServiceQuotaIncreaseRequestsInTemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceQuotaIncreaseRequestsInTemplateInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListServiceQuotaIncreaseRequestsInTemplateRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListServiceQuotaIncreaseRequestsInTemplateInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsRegion != nil {
+		s.WriteString(schemas.ListServiceQuotaIncreaseRequestsInTemplateRequest_AwsRegion, *v.AwsRegion)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListServiceQuotaIncreaseRequestsInTemplateRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListServiceQuotaIncreaseRequestsInTemplateRequest_NextToken, *v.NextToken)
+	}
+	if v.ServiceCode != nil {
+		s.WriteString(schemas.ListServiceQuotaIncreaseRequestsInTemplateRequest_ServiceCode, *v.ServiceCode)
+	}
+}
+
 type ListServiceQuotaIncreaseRequestsInTemplateOutput struct {
 
 	// If present, indicates that more output is available than is included in the
@@ -74,16 +97,26 @@ type ListServiceQuotaIncreaseRequestsInTemplateOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListServiceQuotaIncreaseRequestsInTemplateOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListServiceQuotaIncreaseRequestsInTemplateResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListServiceQuotaIncreaseRequestsInTemplateResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListServiceQuotaIncreaseRequestsInTemplateResponse_NextToken, v.NextToken)
+		case schemas.ListServiceQuotaIncreaseRequestsInTemplateResponse_ServiceQuotaIncreaseRequestInTemplateList:
+			return deserializeServiceQuotaIncreaseRequestInTemplateList(d, schemas.ListServiceQuotaIncreaseRequestsInTemplateResponse_ServiceQuotaIncreaseRequestInTemplateList, &v.ServiceQuotaIncreaseRequestInTemplateList)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListServiceQuotaIncreaseRequestsInTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListServiceQuotaIncreaseRequestsInTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceQuotaIncreaseRequestsInTemplate, schemas.ListServiceQuotaIncreaseRequestsInTemplateRequest, schemas.ListServiceQuotaIncreaseRequestsInTemplateResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListServiceQuotaIncreaseRequestsInTemplate{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListServiceQuotaIncreaseRequestsInTemplate, schemas.ListServiceQuotaIncreaseRequestsInTemplateRequest, schemas.ListServiceQuotaIncreaseRequestsInTemplateResponse), output: &ListServiceQuotaIncreaseRequestsInTemplateOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListServiceQuotaIncreaseRequestsInTemplate"); err != nil {

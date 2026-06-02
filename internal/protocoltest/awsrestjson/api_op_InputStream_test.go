@@ -821,7 +821,61 @@ func TestEventStream_InputStream_HeadersAndExplicitPayloadInput(t *testing.T) {
 }
 
 func TestEventStream_InputStream_HeadersAndImplicitPayloadInput(t *testing.T) {
-	t.Skip("skipped, see SKIP_TESTS in EventStreamProtocolTestGenerator")
+	mock := newEventstreamMockHTTPClient()
+	defer mock.CloseResponse()
+
+	client := New(Options{
+		HTTPClient:         mock,
+		Credentials:        credentials.NewStaticCredentialsProvider("AKID", "SECRET", "SESSION"),
+		EndpointResolverV2: &protocolTestEndpointResolver{URL: "http://localhost"},
+		APIOptions: []func(*middleware.Stack) error{
+			func(s *middleware.Stack) error {
+				s.Finalize.Remove("Retry")
+				s.Initialize.Remove("OperationInputValidation")
+				return nil
+			},
+		},
+	})
+
+	resp, err := client.InputStream(context.Background(), &InputStreamInput{})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+	sendEvent := &types.EventStreamMemberHeadersAndImplicitPayload{Value: types.HeadersAndImplicitPayloadEvent{
+		Header:  ptr.String("foo"),
+		Payload: ptr.String("bar"),
+	}}
+	if err := resp.GetStream().Send(context.Background(), sendEvent); err != nil {
+		t.Fatalf("failed to send event: %v", err)
+	}
+	mock.CloseResponse()
+	resp.GetStream().Close()
+
+	requestMsgs, err := mock.readRequestEvents()
+	if err != nil {
+		t.Fatalf("failed to read request events: %v", err)
+	}
+	if len(requestMsgs) != 1 {
+		t.Fatalf("expected 1 request events, got %d", len(requestMsgs))
+	}
+
+	{
+		expectRaw, _ := base64.StdEncoding.DecodeString("AAAAjQAAAGxoUIY5DTptZXNzYWdlLXR5cGUHAAVldmVudAs6ZXZlbnQtdHlwZQcAGWhlYWRlcnNBbmRJbXBsaWNpdFBheWxvYWQNOmNvbnRlbnQtdHlwZQcAEGFwcGxpY2F0aW9uL2pzb24GaGVhZGVyBwADZm9veyJwYXlsb2FkIjoiYmFyIn15lZtT")
+		expectMsg, _ := eventstream.NewDecoder().Decode(bytes.NewReader(expectRaw), make([]byte, 1024))
+		actualMsg := requestMsgs[0]
+		for _, eh := range expectMsg.Headers {
+			ah := actualMsg.Headers.Get(eh.Name)
+			if ah == nil {
+				t.Errorf("request event %d: missing header %q", 0, eh.Name)
+			}
+			if ah != nil && ah.String() != eh.Value.String() {
+				t.Errorf("request event %d: header %q = %v, want %v", 0, eh.Name, ah, eh.Value)
+			}
+		}
+		if !bytes.Equal(actualMsg.Payload, expectMsg.Payload) {
+			t.Errorf("request event %d: payload mismatch, got %q want %q", 0, actualMsg.Payload, expectMsg.Payload)
+		}
+	}
 }
 
 func TestEventStream_InputStream_ClientErrorInput(t *testing.T) {

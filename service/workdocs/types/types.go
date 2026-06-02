@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -47,6 +49,89 @@ type Activity struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Activity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Activity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Activity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommentMetadata != nil {
+		s.WriteStruct(schemas.Activity_CommentMetadata)
+		v.CommentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Initiator != nil {
+		s.WriteStruct(schemas.Activity_Initiator)
+		v.Initiator.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.IsIndirectActivity != false {
+		s.WriteBool(schemas.Activity_IsIndirectActivity, v.IsIndirectActivity)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.Activity_OrganizationId, *v.OrganizationId)
+	}
+	if v.OriginalParent != nil {
+		s.WriteStruct(schemas.Activity_OriginalParent)
+		v.OriginalParent.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Participants != nil {
+		s.WriteStruct(schemas.Activity_Participants)
+		v.Participants.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceMetadata != nil {
+		s.WriteStruct(schemas.Activity_ResourceMetadata)
+		v.ResourceMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TimeStamp != nil {
+		s.WriteTime(schemas.Activity_TimeStamp, *v.TimeStamp)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.Activity_Type, string(v.Type))
+	}
+}
+func (v *Activity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Activity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Activity_CommentMetadata:
+			v.CommentMetadata = &CommentMetadata{}
+			return v.CommentMetadata.Deserialize(d)
+		case schemas.Activity_Initiator:
+			v.Initiator = &UserMetadata{}
+			return v.Initiator.Deserialize(d)
+		case schemas.Activity_IsIndirectActivity:
+			return d.ReadBool(schemas.Activity_IsIndirectActivity, &v.IsIndirectActivity)
+		case schemas.Activity_OrganizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.Activity_OrganizationId, v.OrganizationId)
+		case schemas.Activity_OriginalParent:
+			v.OriginalParent = &ResourceMetadata{}
+			return v.OriginalParent.Deserialize(d)
+		case schemas.Activity_Participants:
+			v.Participants = &Participants{}
+			return v.Participants.Deserialize(d)
+		case schemas.Activity_ResourceMetadata:
+			v.ResourceMetadata = &ResourceMetadata{}
+			return v.ResourceMetadata.Deserialize(d)
+		case schemas.Activity_TimeStamp:
+			v.TimeStamp = new(time.Time)
+			return d.ReadTime(schemas.Activity_TimeStamp, v.TimeStamp)
+		case schemas.Activity_Type:
+			var ev string
+			if err := d.ReadString(schemas.Activity_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ActivityType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes a comment.
 type Comment struct {
 
@@ -85,6 +170,86 @@ type Comment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Comment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Comment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Comment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommentId != nil {
+		s.WriteString(schemas.Comment_CommentId, *v.CommentId)
+	}
+	if v.Contributor != nil {
+		s.WriteStruct(schemas.Comment_Contributor)
+		v.Contributor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.Comment_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.ParentId != nil {
+		s.WriteString(schemas.Comment_ParentId, *v.ParentId)
+	}
+	if v.RecipientId != nil {
+		s.WriteString(schemas.Comment_RecipientId, *v.RecipientId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Comment_Status, string(v.Status))
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.Comment_Text, *v.Text)
+	}
+	if v.ThreadId != nil {
+		s.WriteString(schemas.Comment_ThreadId, *v.ThreadId)
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.Comment_Visibility, string(v.Visibility))
+	}
+}
+func (v *Comment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Comment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Comment_CommentId:
+			v.CommentId = new(string)
+			return d.ReadString(schemas.Comment_CommentId, v.CommentId)
+		case schemas.Comment_Contributor:
+			v.Contributor = &User{}
+			return v.Contributor.Deserialize(d)
+		case schemas.Comment_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.Comment_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.Comment_ParentId:
+			v.ParentId = new(string)
+			return d.ReadString(schemas.Comment_ParentId, v.ParentId)
+		case schemas.Comment_RecipientId:
+			v.RecipientId = new(string)
+			return d.ReadString(schemas.Comment_RecipientId, v.RecipientId)
+		case schemas.Comment_Status:
+			var ev string
+			if err := d.ReadString(schemas.Comment_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = CommentStatusType(ev)
+			return nil
+		case schemas.Comment_Text:
+			v.Text = new(string)
+			return d.ReadString(schemas.Comment_Text, v.Text)
+		case schemas.Comment_ThreadId:
+			v.ThreadId = new(string)
+			return d.ReadString(schemas.Comment_ThreadId, v.ThreadId)
+		case schemas.Comment_Visibility:
+			var ev string
+			if err := d.ReadString(schemas.Comment_Visibility, &ev); err != nil {
+				return err
+			}
+			v.Visibility = CommentVisibilityType(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the metadata of a comment.
 type CommentMetadata struct {
 
@@ -109,6 +274,64 @@ type CommentMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CommentMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CommentMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CommentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommentId != nil {
+		s.WriteString(schemas.CommentMetadata_CommentId, *v.CommentId)
+	}
+	if v.CommentStatus != "" {
+		s.WriteString(schemas.CommentMetadata_CommentStatus, string(v.CommentStatus))
+	}
+	if v.Contributor != nil {
+		s.WriteStruct(schemas.CommentMetadata_Contributor)
+		v.Contributor.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ContributorId != nil {
+		s.WriteString(schemas.CommentMetadata_ContributorId, *v.ContributorId)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.CommentMetadata_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.RecipientId != nil {
+		s.WriteString(schemas.CommentMetadata_RecipientId, *v.RecipientId)
+	}
+}
+func (v *CommentMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CommentMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CommentMetadata_CommentId:
+			v.CommentId = new(string)
+			return d.ReadString(schemas.CommentMetadata_CommentId, v.CommentId)
+		case schemas.CommentMetadata_CommentStatus:
+			var ev string
+			if err := d.ReadString(schemas.CommentMetadata_CommentStatus, &ev); err != nil {
+				return err
+			}
+			v.CommentStatus = CommentStatusType(ev)
+			return nil
+		case schemas.CommentMetadata_Contributor:
+			v.Contributor = &User{}
+			return v.Contributor.Deserialize(d)
+		case schemas.CommentMetadata_ContributorId:
+			v.ContributorId = new(string)
+			return d.ReadString(schemas.CommentMetadata_ContributorId, v.ContributorId)
+		case schemas.CommentMetadata_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CommentMetadata_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.CommentMetadata_RecipientId:
+			v.RecipientId = new(string)
+			return d.ReadString(schemas.CommentMetadata_RecipientId, v.RecipientId)
+		}
+		return nil
+	})
+}
+
 // Filters results based on timestamp range (in epochs).
 type DateRangeType struct {
 
@@ -119,6 +342,34 @@ type DateRangeType struct {
 	StartValue *time.Time
 
 	noSmithyDocumentSerde
+}
+
+func (v *DateRangeType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DateRangeType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DateRangeType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndValue != nil {
+		s.WriteTime(schemas.DateRangeType_EndValue, *v.EndValue)
+	}
+	if v.StartValue != nil {
+		s.WriteTime(schemas.DateRangeType_StartValue, *v.StartValue)
+	}
+}
+func (v *DateRangeType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DateRangeType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DateRangeType_EndValue:
+			v.EndValue = new(time.Time)
+			return d.ReadTime(schemas.DateRangeType_EndValue, v.EndValue)
+		case schemas.DateRangeType_StartValue:
+			v.StartValue = new(time.Time)
+			return d.ReadTime(schemas.DateRangeType_StartValue, v.StartValue)
+		}
+		return nil
+	})
 }
 
 // Describes the document.
@@ -149,6 +400,73 @@ type DocumentMetadata struct {
 	ResourceState ResourceStateType
 
 	noSmithyDocumentSerde
+}
+
+func (v *DocumentMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DocumentMetadata_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.CreatorId != nil {
+		s.WriteString(schemas.DocumentMetadata_CreatorId, *v.CreatorId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DocumentMetadata_Id, *v.Id)
+	}
+	serializeSharedLabels(s, schemas.DocumentMetadata_Labels, v.Labels)
+	if v.LatestVersionMetadata != nil {
+		s.WriteStruct(schemas.DocumentMetadata_LatestVersionMetadata)
+		v.LatestVersionMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ModifiedTimestamp != nil {
+		s.WriteTime(schemas.DocumentMetadata_ModifiedTimestamp, *v.ModifiedTimestamp)
+	}
+	if v.ParentFolderId != nil {
+		s.WriteString(schemas.DocumentMetadata_ParentFolderId, *v.ParentFolderId)
+	}
+	if v.ResourceState != "" {
+		s.WriteString(schemas.DocumentMetadata_ResourceState, string(v.ResourceState))
+	}
+}
+func (v *DocumentMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentMetadata_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DocumentMetadata_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DocumentMetadata_CreatorId:
+			v.CreatorId = new(string)
+			return d.ReadString(schemas.DocumentMetadata_CreatorId, v.CreatorId)
+		case schemas.DocumentMetadata_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DocumentMetadata_Id, v.Id)
+		case schemas.DocumentMetadata_Labels:
+			return deserializeSharedLabels(d, schemas.DocumentMetadata_Labels, &v.Labels)
+		case schemas.DocumentMetadata_LatestVersionMetadata:
+			v.LatestVersionMetadata = &DocumentVersionMetadata{}
+			return v.LatestVersionMetadata.Deserialize(d)
+		case schemas.DocumentMetadata_ModifiedTimestamp:
+			v.ModifiedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DocumentMetadata_ModifiedTimestamp, v.ModifiedTimestamp)
+		case schemas.DocumentMetadata_ParentFolderId:
+			v.ParentFolderId = new(string)
+			return d.ReadString(schemas.DocumentMetadata_ParentFolderId, v.ParentFolderId)
+		case schemas.DocumentMetadata_ResourceState:
+			var ev string
+			if err := d.ReadString(schemas.DocumentMetadata_ResourceState, &ev); err != nil {
+				return err
+			}
+			v.ResourceState = ResourceStateType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a version of a document.
@@ -196,6 +514,98 @@ type DocumentVersionMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentVersionMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentVersionMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentVersionMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ContentCreatedTimestamp != nil {
+		s.WriteTime(schemas.DocumentVersionMetadata_ContentCreatedTimestamp, *v.ContentCreatedTimestamp)
+	}
+	if v.ContentModifiedTimestamp != nil {
+		s.WriteTime(schemas.DocumentVersionMetadata_ContentModifiedTimestamp, *v.ContentModifiedTimestamp)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.DocumentVersionMetadata_ContentType, *v.ContentType)
+	}
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.DocumentVersionMetadata_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.CreatorId != nil {
+		s.WriteString(schemas.DocumentVersionMetadata_CreatorId, *v.CreatorId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.DocumentVersionMetadata_Id, *v.Id)
+	}
+	if v.ModifiedTimestamp != nil {
+		s.WriteTime(schemas.DocumentVersionMetadata_ModifiedTimestamp, *v.ModifiedTimestamp)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.DocumentVersionMetadata_Name, *v.Name)
+	}
+	if v.Signature != nil {
+		s.WriteString(schemas.DocumentVersionMetadata_Signature, *v.Signature)
+	}
+	if v.Size != nil {
+		s.WriteInt64(schemas.DocumentVersionMetadata_Size, *v.Size)
+	}
+	serializeDocumentSourceUrlMap(s, schemas.DocumentVersionMetadata_Source, v.Source)
+	if v.Status != "" {
+		s.WriteString(schemas.DocumentVersionMetadata_Status, string(v.Status))
+	}
+	serializeDocumentThumbnailUrlMap(s, schemas.DocumentVersionMetadata_Thumbnail, v.Thumbnail)
+}
+func (v *DocumentVersionMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentVersionMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentVersionMetadata_ContentCreatedTimestamp:
+			v.ContentCreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DocumentVersionMetadata_ContentCreatedTimestamp, v.ContentCreatedTimestamp)
+		case schemas.DocumentVersionMetadata_ContentModifiedTimestamp:
+			v.ContentModifiedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DocumentVersionMetadata_ContentModifiedTimestamp, v.ContentModifiedTimestamp)
+		case schemas.DocumentVersionMetadata_ContentType:
+			v.ContentType = new(string)
+			return d.ReadString(schemas.DocumentVersionMetadata_ContentType, v.ContentType)
+		case schemas.DocumentVersionMetadata_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DocumentVersionMetadata_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DocumentVersionMetadata_CreatorId:
+			v.CreatorId = new(string)
+			return d.ReadString(schemas.DocumentVersionMetadata_CreatorId, v.CreatorId)
+		case schemas.DocumentVersionMetadata_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DocumentVersionMetadata_Id, v.Id)
+		case schemas.DocumentVersionMetadata_ModifiedTimestamp:
+			v.ModifiedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DocumentVersionMetadata_ModifiedTimestamp, v.ModifiedTimestamp)
+		case schemas.DocumentVersionMetadata_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DocumentVersionMetadata_Name, v.Name)
+		case schemas.DocumentVersionMetadata_Signature:
+			v.Signature = new(string)
+			return d.ReadString(schemas.DocumentVersionMetadata_Signature, v.Signature)
+		case schemas.DocumentVersionMetadata_Size:
+			v.Size = new(int64)
+			return d.ReadInt64(schemas.DocumentVersionMetadata_Size, v.Size)
+		case schemas.DocumentVersionMetadata_Source:
+			return deserializeDocumentSourceUrlMap(d, schemas.DocumentVersionMetadata_Source, &v.Source)
+		case schemas.DocumentVersionMetadata_Status:
+			var ev string
+			if err := d.ReadString(schemas.DocumentVersionMetadata_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = DocumentStatusType(ev)
+			return nil
+		case schemas.DocumentVersionMetadata_Thumbnail:
+			return deserializeDocumentThumbnailUrlMap(d, schemas.DocumentVersionMetadata_Thumbnail, &v.Thumbnail)
+		}
+		return nil
+	})
+}
+
 // Filters results based on entity metadata.
 type Filters struct {
 
@@ -230,6 +640,67 @@ type Filters struct {
 	TextLocales []LanguageCodeType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Filters) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Filters)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Filters) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSearchAncestorIdList(s, schemas.Filters_AncestorIds, v.AncestorIds)
+	serializeSearchContentCategoryTypeList(s, schemas.Filters_ContentCategories, v.ContentCategories)
+	if v.CreatedRange != nil {
+		s.WriteStruct(schemas.Filters_CreatedRange)
+		v.CreatedRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSearchLabelList(s, schemas.Filters_Labels, v.Labels)
+	if v.ModifiedRange != nil {
+		s.WriteStruct(schemas.Filters_ModifiedRange)
+		v.ModifiedRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSearchPrincipalTypeList(s, schemas.Filters_Principals, v.Principals)
+	serializeSearchResourceTypeList(s, schemas.Filters_ResourceTypes, v.ResourceTypes)
+	serializeSearchCollectionTypeList(s, schemas.Filters_SearchCollectionTypes, v.SearchCollectionTypes)
+	if v.SizeRange != nil {
+		s.WriteStruct(schemas.Filters_SizeRange)
+		v.SizeRange.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTextLocaleTypeList(s, schemas.Filters_TextLocales, v.TextLocales)
+}
+func (v *Filters) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Filters, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Filters_AncestorIds:
+			return deserializeSearchAncestorIdList(d, schemas.Filters_AncestorIds, &v.AncestorIds)
+		case schemas.Filters_ContentCategories:
+			return deserializeSearchContentCategoryTypeList(d, schemas.Filters_ContentCategories, &v.ContentCategories)
+		case schemas.Filters_CreatedRange:
+			v.CreatedRange = &DateRangeType{}
+			return v.CreatedRange.Deserialize(d)
+		case schemas.Filters_Labels:
+			return deserializeSearchLabelList(d, schemas.Filters_Labels, &v.Labels)
+		case schemas.Filters_ModifiedRange:
+			v.ModifiedRange = &DateRangeType{}
+			return v.ModifiedRange.Deserialize(d)
+		case schemas.Filters_Principals:
+			return deserializeSearchPrincipalTypeList(d, schemas.Filters_Principals, &v.Principals)
+		case schemas.Filters_ResourceTypes:
+			return deserializeSearchResourceTypeList(d, schemas.Filters_ResourceTypes, &v.ResourceTypes)
+		case schemas.Filters_SearchCollectionTypes:
+			return deserializeSearchCollectionTypeList(d, schemas.Filters_SearchCollectionTypes, &v.SearchCollectionTypes)
+		case schemas.Filters_SizeRange:
+			v.SizeRange = &LongRangeType{}
+			return v.SizeRange.Deserialize(d)
+		case schemas.Filters_TextLocales:
+			return deserializeTextLocaleTypeList(d, schemas.Filters_TextLocales, &v.TextLocales)
+		}
+		return nil
+	})
 }
 
 // Describes a folder.
@@ -271,6 +742,89 @@ type FolderMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FolderMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FolderMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FolderMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.FolderMetadata_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.CreatorId != nil {
+		s.WriteString(schemas.FolderMetadata_CreatorId, *v.CreatorId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.FolderMetadata_Id, *v.Id)
+	}
+	serializeSharedLabels(s, schemas.FolderMetadata_Labels, v.Labels)
+	if v.LatestVersionSize != nil {
+		s.WriteInt64(schemas.FolderMetadata_LatestVersionSize, *v.LatestVersionSize)
+	}
+	if v.ModifiedTimestamp != nil {
+		s.WriteTime(schemas.FolderMetadata_ModifiedTimestamp, *v.ModifiedTimestamp)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.FolderMetadata_Name, *v.Name)
+	}
+	if v.ParentFolderId != nil {
+		s.WriteString(schemas.FolderMetadata_ParentFolderId, *v.ParentFolderId)
+	}
+	if v.ResourceState != "" {
+		s.WriteString(schemas.FolderMetadata_ResourceState, string(v.ResourceState))
+	}
+	if v.Signature != nil {
+		s.WriteString(schemas.FolderMetadata_Signature, *v.Signature)
+	}
+	if v.Size != nil {
+		s.WriteInt64(schemas.FolderMetadata_Size, *v.Size)
+	}
+}
+func (v *FolderMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FolderMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FolderMetadata_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.FolderMetadata_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.FolderMetadata_CreatorId:
+			v.CreatorId = new(string)
+			return d.ReadString(schemas.FolderMetadata_CreatorId, v.CreatorId)
+		case schemas.FolderMetadata_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.FolderMetadata_Id, v.Id)
+		case schemas.FolderMetadata_Labels:
+			return deserializeSharedLabels(d, schemas.FolderMetadata_Labels, &v.Labels)
+		case schemas.FolderMetadata_LatestVersionSize:
+			v.LatestVersionSize = new(int64)
+			return d.ReadInt64(schemas.FolderMetadata_LatestVersionSize, v.LatestVersionSize)
+		case schemas.FolderMetadata_ModifiedTimestamp:
+			v.ModifiedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.FolderMetadata_ModifiedTimestamp, v.ModifiedTimestamp)
+		case schemas.FolderMetadata_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.FolderMetadata_Name, v.Name)
+		case schemas.FolderMetadata_ParentFolderId:
+			v.ParentFolderId = new(string)
+			return d.ReadString(schemas.FolderMetadata_ParentFolderId, v.ParentFolderId)
+		case schemas.FolderMetadata_ResourceState:
+			var ev string
+			if err := d.ReadString(schemas.FolderMetadata_ResourceState, &ev); err != nil {
+				return err
+			}
+			v.ResourceState = ResourceStateType(ev)
+			return nil
+		case schemas.FolderMetadata_Signature:
+			v.Signature = new(string)
+			return d.ReadString(schemas.FolderMetadata_Signature, v.Signature)
+		case schemas.FolderMetadata_Size:
+			v.Size = new(int64)
+			return d.ReadInt64(schemas.FolderMetadata_Size, v.Size)
+		}
+		return nil
+	})
+}
+
 // Describes the metadata of a user group.
 type GroupMetadata struct {
 
@@ -283,6 +837,34 @@ type GroupMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GroupMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GroupMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GroupMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GroupMetadata_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.GroupMetadata_Name, *v.Name)
+	}
+}
+func (v *GroupMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GroupMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GroupMetadata_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GroupMetadata_Id, v.Id)
+		case schemas.GroupMetadata_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GroupMetadata_Name, v.Name)
+		}
+		return nil
+	})
+}
+
 // Filter based on size (in bytes).
 type LongRangeType struct {
 
@@ -293,6 +875,34 @@ type LongRangeType struct {
 	StartValue *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *LongRangeType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LongRangeType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LongRangeType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndValue != nil {
+		s.WriteInt64(schemas.LongRangeType_EndValue, *v.EndValue)
+	}
+	if v.StartValue != nil {
+		s.WriteInt64(schemas.LongRangeType_StartValue, *v.StartValue)
+	}
+}
+func (v *LongRangeType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LongRangeType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LongRangeType_EndValue:
+			v.EndValue = new(int64)
+			return d.ReadInt64(schemas.LongRangeType_EndValue, v.EndValue)
+		case schemas.LongRangeType_StartValue:
+			v.StartValue = new(int64)
+			return d.ReadInt64(schemas.LongRangeType_StartValue, v.StartValue)
+		}
+		return nil
+	})
 }
 
 // Set of options which defines notification preferences of given action.
@@ -308,6 +918,33 @@ type NotificationOptions struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotificationOptions) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotificationOptions)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotificationOptions) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailMessage != nil {
+		s.WriteString(schemas.NotificationOptions_EmailMessage, *v.EmailMessage)
+	}
+	if v.SendEmail != false {
+		s.WriteBool(schemas.NotificationOptions_SendEmail, v.SendEmail)
+	}
+}
+func (v *NotificationOptions) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotificationOptions, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotificationOptions_EmailMessage:
+			v.EmailMessage = new(string)
+			return d.ReadString(schemas.NotificationOptions_EmailMessage, v.EmailMessage)
+		case schemas.NotificationOptions_SendEmail:
+			return d.ReadBool(schemas.NotificationOptions_SendEmail, &v.SendEmail)
+		}
+		return nil
+	})
+}
+
 // Describes the users or user groups.
 type Participants struct {
 
@@ -320,6 +957,28 @@ type Participants struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Participants) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Participants)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Participants) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeGroupMetadataList(s, schemas.Participants_Groups, v.Groups)
+	serializeUserMetadataList(s, schemas.Participants_Users, v.Users)
+}
+func (v *Participants) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Participants, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Participants_Groups:
+			return deserializeGroupMetadataList(d, schemas.Participants_Groups, &v.Groups)
+		case schemas.Participants_Users:
+			return deserializeUserMetadataList(d, schemas.Participants_Users, &v.Users)
+		}
+		return nil
+	})
+}
+
 // Describes the permissions.
 type PermissionInfo struct {
 
@@ -330,6 +989,42 @@ type PermissionInfo struct {
 	Type RolePermissionType
 
 	noSmithyDocumentSerde
+}
+
+func (v *PermissionInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PermissionInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PermissionInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Role != "" {
+		s.WriteString(schemas.PermissionInfo_Role, string(v.Role))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.PermissionInfo_Type, string(v.Type))
+	}
+}
+func (v *PermissionInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PermissionInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PermissionInfo_Role:
+			var ev string
+			if err := d.ReadString(schemas.PermissionInfo_Role, &ev); err != nil {
+				return err
+			}
+			v.Role = RoleType(ev)
+			return nil
+		case schemas.PermissionInfo_Type:
+			var ev string
+			if err := d.ReadString(schemas.PermissionInfo_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = RolePermissionType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a resource.
@@ -345,6 +1040,41 @@ type Principal struct {
 	Type PrincipalType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Principal) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Principal)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Principal) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.Principal_Id, *v.Id)
+	}
+	serializePermissionInfoList(s, schemas.Principal_Roles, v.Roles)
+	if v.Type != "" {
+		s.WriteString(schemas.Principal_Type, string(v.Type))
+	}
+}
+func (v *Principal) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Principal, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Principal_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Principal_Id, v.Id)
+		case schemas.Principal_Roles:
+			return deserializePermissionInfoList(d, schemas.Principal_Roles, &v.Roles)
+		case schemas.Principal_Type:
+			var ev string
+			if err := d.ReadString(schemas.Principal_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = PrincipalType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the metadata of a resource.
@@ -375,6 +1105,70 @@ type ResourceMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ResourceMetadata_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResourceMetadata_Name, *v.Name)
+	}
+	if v.OriginalName != nil {
+		s.WriteString(schemas.ResourceMetadata_OriginalName, *v.OriginalName)
+	}
+	if v.Owner != nil {
+		s.WriteStruct(schemas.ResourceMetadata_Owner)
+		v.Owner.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ParentId != nil {
+		s.WriteString(schemas.ResourceMetadata_ParentId, *v.ParentId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.ResourceMetadata_Type, string(v.Type))
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.ResourceMetadata_VersionId, *v.VersionId)
+	}
+}
+func (v *ResourceMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceMetadata_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ResourceMetadata_Id, v.Id)
+		case schemas.ResourceMetadata_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResourceMetadata_Name, v.Name)
+		case schemas.ResourceMetadata_OriginalName:
+			v.OriginalName = new(string)
+			return d.ReadString(schemas.ResourceMetadata_OriginalName, v.OriginalName)
+		case schemas.ResourceMetadata_Owner:
+			v.Owner = &UserMetadata{}
+			return v.Owner.Deserialize(d)
+		case schemas.ResourceMetadata_ParentId:
+			v.ParentId = new(string)
+			return d.ReadString(schemas.ResourceMetadata_ParentId, v.ParentId)
+		case schemas.ResourceMetadata_Type:
+			var ev string
+			if err := d.ReadString(schemas.ResourceMetadata_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = ResourceType(ev)
+			return nil
+		case schemas.ResourceMetadata_VersionId:
+			v.VersionId = new(string)
+			return d.ReadString(schemas.ResourceMetadata_VersionId, v.VersionId)
+		}
+		return nil
+	})
+}
+
 // Describes the path information of a resource.
 type ResourcePath struct {
 
@@ -382,6 +1176,25 @@ type ResourcePath struct {
 	Components []ResourcePathComponent
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourcePath) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourcePath)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourcePath) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeResourcePathComponentList(s, schemas.ResourcePath_Components, v.Components)
+}
+func (v *ResourcePath) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourcePath, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourcePath_Components:
+			return deserializeResourcePathComponentList(d, schemas.ResourcePath_Components, &v.Components)
+		}
+		return nil
+	})
 }
 
 // Describes the resource path.
@@ -394,6 +1207,34 @@ type ResourcePathComponent struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourcePathComponent) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourcePathComponent)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourcePathComponent) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.ResourcePathComponent_Id, *v.Id)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ResourcePathComponent_Name, *v.Name)
+	}
+}
+func (v *ResourcePathComponent) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourcePathComponent, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourcePathComponent_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.ResourcePathComponent_Id, v.Id)
+		case schemas.ResourcePathComponent_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ResourcePathComponent_Name, v.Name)
+		}
+		return nil
+	})
 }
 
 // List of Documents, Folders, Comments, and Document Versions matching the query.
@@ -420,6 +1261,70 @@ type ResponseItem struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResponseItem) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResponseItem)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResponseItem) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CommentMetadata != nil {
+		s.WriteStruct(schemas.ResponseItem_CommentMetadata)
+		v.CommentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DocumentMetadata != nil {
+		s.WriteStruct(schemas.ResponseItem_DocumentMetadata)
+		v.DocumentMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DocumentVersionMetadata != nil {
+		s.WriteStruct(schemas.ResponseItem_DocumentVersionMetadata)
+		v.DocumentVersionMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FolderMetadata != nil {
+		s.WriteStruct(schemas.ResponseItem_FolderMetadata)
+		v.FolderMetadata.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceType != "" {
+		s.WriteString(schemas.ResponseItem_ResourceType, string(v.ResourceType))
+	}
+	if v.WebUrl != nil {
+		s.WriteString(schemas.ResponseItem_WebUrl, *v.WebUrl)
+	}
+}
+func (v *ResponseItem) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResponseItem, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResponseItem_CommentMetadata:
+			v.CommentMetadata = &CommentMetadata{}
+			return v.CommentMetadata.Deserialize(d)
+		case schemas.ResponseItem_DocumentMetadata:
+			v.DocumentMetadata = &DocumentMetadata{}
+			return v.DocumentMetadata.Deserialize(d)
+		case schemas.ResponseItem_DocumentVersionMetadata:
+			v.DocumentVersionMetadata = &DocumentVersionMetadata{}
+			return v.DocumentVersionMetadata.Deserialize(d)
+		case schemas.ResponseItem_FolderMetadata:
+			v.FolderMetadata = &FolderMetadata{}
+			return v.FolderMetadata.Deserialize(d)
+		case schemas.ResponseItem_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.ResponseItem_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = ResponseItemType(ev)
+			return nil
+		case schemas.ResponseItem_WebUrl:
+			v.WebUrl = new(string)
+			return d.ReadString(schemas.ResponseItem_WebUrl, v.WebUrl)
+		}
+		return nil
+	})
+}
+
 // Filter based on UserIds or GroupIds.
 type SearchPrincipalType struct {
 
@@ -434,6 +1339,31 @@ type SearchPrincipalType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchPrincipalType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchPrincipalType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchPrincipalType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.SearchPrincipalType_Id, *v.Id)
+	}
+	serializeSearchPrincipalRoleList(s, schemas.SearchPrincipalType_Roles, v.Roles)
+}
+func (v *SearchPrincipalType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchPrincipalType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchPrincipalType_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SearchPrincipalType_Id, v.Id)
+		case schemas.SearchPrincipalType_Roles:
+			return deserializeSearchPrincipalRoleList(d, schemas.SearchPrincipalType_Roles, &v.Roles)
+		}
+		return nil
+	})
+}
+
 // The result of the sort operation.
 type SearchSortResult struct {
 
@@ -444,6 +1374,42 @@ type SearchSortResult struct {
 	Order SortOrder
 
 	noSmithyDocumentSerde
+}
+
+func (v *SearchSortResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchSortResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchSortResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Field != "" {
+		s.WriteString(schemas.SearchSortResult_Field, string(v.Field))
+	}
+	if v.Order != "" {
+		s.WriteString(schemas.SearchSortResult_Order, string(v.Order))
+	}
+}
+func (v *SearchSortResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchSortResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchSortResult_Field:
+			var ev string
+			if err := d.ReadString(schemas.SearchSortResult_Field, &ev); err != nil {
+				return err
+			}
+			v.Field = OrderByFieldType(ev)
+			return nil
+		case schemas.SearchSortResult_Order:
+			var ev string
+			if err := d.ReadString(schemas.SearchSortResult_Order, &ev); err != nil {
+				return err
+			}
+			v.Order = SortOrder(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the recipient type and ID, if available.
@@ -465,6 +1431,48 @@ type SharePrincipal struct {
 	Type PrincipalType
 
 	noSmithyDocumentSerde
+}
+
+func (v *SharePrincipal) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SharePrincipal)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SharePrincipal) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.SharePrincipal_Id, *v.Id)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.SharePrincipal_Role, string(v.Role))
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.SharePrincipal_Type, string(v.Type))
+	}
+}
+func (v *SharePrincipal) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SharePrincipal, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SharePrincipal_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SharePrincipal_Id, v.Id)
+		case schemas.SharePrincipal_Role:
+			var ev string
+			if err := d.ReadString(schemas.SharePrincipal_Role, &ev); err != nil {
+				return err
+			}
+			v.Role = RoleType(ev)
+			return nil
+		case schemas.SharePrincipal_Type:
+			var ev string
+			if err := d.ReadString(schemas.SharePrincipal_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = PrincipalType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the share results of a resource.
@@ -491,6 +1499,66 @@ type ShareResult struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ShareResult) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ShareResult)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ShareResult) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InviteePrincipalId != nil {
+		s.WriteString(schemas.ShareResult_InviteePrincipalId, *v.InviteePrincipalId)
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.ShareResult_PrincipalId, *v.PrincipalId)
+	}
+	if v.Role != "" {
+		s.WriteString(schemas.ShareResult_Role, string(v.Role))
+	}
+	if v.ShareId != nil {
+		s.WriteString(schemas.ShareResult_ShareId, *v.ShareId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ShareResult_Status, string(v.Status))
+	}
+	if v.StatusMessage != nil {
+		s.WriteString(schemas.ShareResult_StatusMessage, *v.StatusMessage)
+	}
+}
+func (v *ShareResult) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ShareResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ShareResult_InviteePrincipalId:
+			v.InviteePrincipalId = new(string)
+			return d.ReadString(schemas.ShareResult_InviteePrincipalId, v.InviteePrincipalId)
+		case schemas.ShareResult_PrincipalId:
+			v.PrincipalId = new(string)
+			return d.ReadString(schemas.ShareResult_PrincipalId, v.PrincipalId)
+		case schemas.ShareResult_Role:
+			var ev string
+			if err := d.ReadString(schemas.ShareResult_Role, &ev); err != nil {
+				return err
+			}
+			v.Role = RoleType(ev)
+			return nil
+		case schemas.ShareResult_ShareId:
+			v.ShareId = new(string)
+			return d.ReadString(schemas.ShareResult_ShareId, v.ShareId)
+		case schemas.ShareResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.ShareResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = ShareStatusType(ev)
+			return nil
+		case schemas.ShareResult_StatusMessage:
+			v.StatusMessage = new(string)
+			return d.ReadString(schemas.ShareResult_StatusMessage, v.StatusMessage)
+		}
+		return nil
+	})
+}
+
 // Describes the storage for a user.
 type StorageRuleType struct {
 
@@ -501,6 +1569,38 @@ type StorageRuleType struct {
 	StorageType StorageType
 
 	noSmithyDocumentSerde
+}
+
+func (v *StorageRuleType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StorageRuleType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StorageRuleType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageAllocatedInBytes != nil {
+		s.WriteInt64(schemas.StorageRuleType_StorageAllocatedInBytes, *v.StorageAllocatedInBytes)
+	}
+	if v.StorageType != "" {
+		s.WriteString(schemas.StorageRuleType_StorageType, string(v.StorageType))
+	}
+}
+func (v *StorageRuleType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StorageRuleType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StorageRuleType_StorageAllocatedInBytes:
+			v.StorageAllocatedInBytes = new(int64)
+			return d.ReadInt64(schemas.StorageRuleType_StorageAllocatedInBytes, v.StorageAllocatedInBytes)
+		case schemas.StorageRuleType_StorageType:
+			var ev string
+			if err := d.ReadString(schemas.StorageRuleType_StorageType, &ev); err != nil {
+				return err
+			}
+			v.StorageType = StorageType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes a subscription.
@@ -518,6 +1618,44 @@ type Subscription struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Subscription) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Subscription)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Subscription) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EndPoint != nil {
+		s.WriteString(schemas.Subscription_EndPoint, *v.EndPoint)
+	}
+	if v.Protocol != "" {
+		s.WriteString(schemas.Subscription_Protocol, string(v.Protocol))
+	}
+	if v.SubscriptionId != nil {
+		s.WriteString(schemas.Subscription_SubscriptionId, *v.SubscriptionId)
+	}
+}
+func (v *Subscription) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Subscription, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Subscription_EndPoint:
+			v.EndPoint = new(string)
+			return d.ReadString(schemas.Subscription_EndPoint, v.EndPoint)
+		case schemas.Subscription_Protocol:
+			var ev string
+			if err := d.ReadString(schemas.Subscription_Protocol, &ev); err != nil {
+				return err
+			}
+			v.Protocol = SubscriptionProtocolType(ev)
+			return nil
+		case schemas.Subscription_SubscriptionId:
+			v.SubscriptionId = new(string)
+			return d.ReadString(schemas.Subscription_SubscriptionId, v.SubscriptionId)
+		}
+		return nil
+	})
+}
+
 // Describes the upload.
 type UploadMetadata struct {
 
@@ -528,6 +1666,31 @@ type UploadMetadata struct {
 	UploadUrl *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UploadMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UploadMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UploadMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSignedHeaderMap(s, schemas.UploadMetadata_SignedHeaders, v.SignedHeaders)
+	if v.UploadUrl != nil {
+		s.WriteString(schemas.UploadMetadata_UploadUrl, *v.UploadUrl)
+	}
+}
+func (v *UploadMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UploadMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UploadMetadata_SignedHeaders:
+			return deserializeSignedHeaderMap(d, schemas.UploadMetadata_SignedHeaders, &v.SignedHeaders)
+		case schemas.UploadMetadata_UploadUrl:
+			v.UploadUrl = new(string)
+			return d.ReadString(schemas.UploadMetadata_UploadUrl, v.UploadUrl)
+		}
+		return nil
+	})
 }
 
 // Describes a user.
@@ -581,6 +1744,126 @@ type User struct {
 	noSmithyDocumentSerde
 }
 
+func (v *User) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.User)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *User) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedTimestamp != nil {
+		s.WriteTime(schemas.User_CreatedTimestamp, *v.CreatedTimestamp)
+	}
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.User_EmailAddress, *v.EmailAddress)
+	}
+	if v.GivenName != nil {
+		s.WriteString(schemas.User_GivenName, *v.GivenName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.User_Id, *v.Id)
+	}
+	if v.Locale != "" {
+		s.WriteString(schemas.User_Locale, string(v.Locale))
+	}
+	if v.ModifiedTimestamp != nil {
+		s.WriteTime(schemas.User_ModifiedTimestamp, *v.ModifiedTimestamp)
+	}
+	if v.OrganizationId != nil {
+		s.WriteString(schemas.User_OrganizationId, *v.OrganizationId)
+	}
+	if v.RecycleBinFolderId != nil {
+		s.WriteString(schemas.User_RecycleBinFolderId, *v.RecycleBinFolderId)
+	}
+	if v.RootFolderId != nil {
+		s.WriteString(schemas.User_RootFolderId, *v.RootFolderId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.User_Status, string(v.Status))
+	}
+	if v.Storage != nil {
+		s.WriteStruct(schemas.User_Storage)
+		v.Storage.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Surname != nil {
+		s.WriteString(schemas.User_Surname, *v.Surname)
+	}
+	if v.TimeZoneId != nil {
+		s.WriteString(schemas.User_TimeZoneId, *v.TimeZoneId)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.User_Type, string(v.Type))
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.User_Username, *v.Username)
+	}
+}
+func (v *User) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.User, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.User_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.User_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.User_EmailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.User_EmailAddress, v.EmailAddress)
+		case schemas.User_GivenName:
+			v.GivenName = new(string)
+			return d.ReadString(schemas.User_GivenName, v.GivenName)
+		case schemas.User_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.User_Id, v.Id)
+		case schemas.User_Locale:
+			var ev string
+			if err := d.ReadString(schemas.User_Locale, &ev); err != nil {
+				return err
+			}
+			v.Locale = LocaleType(ev)
+			return nil
+		case schemas.User_ModifiedTimestamp:
+			v.ModifiedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.User_ModifiedTimestamp, v.ModifiedTimestamp)
+		case schemas.User_OrganizationId:
+			v.OrganizationId = new(string)
+			return d.ReadString(schemas.User_OrganizationId, v.OrganizationId)
+		case schemas.User_RecycleBinFolderId:
+			v.RecycleBinFolderId = new(string)
+			return d.ReadString(schemas.User_RecycleBinFolderId, v.RecycleBinFolderId)
+		case schemas.User_RootFolderId:
+			v.RootFolderId = new(string)
+			return d.ReadString(schemas.User_RootFolderId, v.RootFolderId)
+		case schemas.User_Status:
+			var ev string
+			if err := d.ReadString(schemas.User_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = UserStatusType(ev)
+			return nil
+		case schemas.User_Storage:
+			v.Storage = &UserStorageMetadata{}
+			return v.Storage.Deserialize(d)
+		case schemas.User_Surname:
+			v.Surname = new(string)
+			return d.ReadString(schemas.User_Surname, v.Surname)
+		case schemas.User_TimeZoneId:
+			v.TimeZoneId = new(string)
+			return d.ReadString(schemas.User_TimeZoneId, v.TimeZoneId)
+		case schemas.User_Type:
+			var ev string
+			if err := d.ReadString(schemas.User_Type, &ev); err != nil {
+				return err
+			}
+			v.Type = UserType(ev)
+			return nil
+		case schemas.User_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.User_Username, v.Username)
+		}
+		return nil
+	})
+}
+
 // Describes the metadata of the user.
 type UserMetadata struct {
 
@@ -602,6 +1885,52 @@ type UserMetadata struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UserMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.EmailAddress != nil {
+		s.WriteString(schemas.UserMetadata_EmailAddress, *v.EmailAddress)
+	}
+	if v.GivenName != nil {
+		s.WriteString(schemas.UserMetadata_GivenName, *v.GivenName)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UserMetadata_Id, *v.Id)
+	}
+	if v.Surname != nil {
+		s.WriteString(schemas.UserMetadata_Surname, *v.Surname)
+	}
+	if v.Username != nil {
+		s.WriteString(schemas.UserMetadata_Username, *v.Username)
+	}
+}
+func (v *UserMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserMetadata_EmailAddress:
+			v.EmailAddress = new(string)
+			return d.ReadString(schemas.UserMetadata_EmailAddress, v.EmailAddress)
+		case schemas.UserMetadata_GivenName:
+			v.GivenName = new(string)
+			return d.ReadString(schemas.UserMetadata_GivenName, v.GivenName)
+		case schemas.UserMetadata_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UserMetadata_Id, v.Id)
+		case schemas.UserMetadata_Surname:
+			v.Surname = new(string)
+			return d.ReadString(schemas.UserMetadata_Surname, v.Surname)
+		case schemas.UserMetadata_Username:
+			v.Username = new(string)
+			return d.ReadString(schemas.UserMetadata_Username, v.Username)
+		}
+		return nil
+	})
+}
+
 // Describes the storage for a user.
 type UserStorageMetadata struct {
 
@@ -612,6 +1941,36 @@ type UserStorageMetadata struct {
 	StorageUtilizedInBytes *int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *UserStorageMetadata) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UserStorageMetadata)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UserStorageMetadata) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.StorageRule != nil {
+		s.WriteStruct(schemas.UserStorageMetadata_StorageRule)
+		v.StorageRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.StorageUtilizedInBytes != nil {
+		s.WriteInt64(schemas.UserStorageMetadata_StorageUtilizedInBytes, *v.StorageUtilizedInBytes)
+	}
+}
+func (v *UserStorageMetadata) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UserStorageMetadata, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UserStorageMetadata_StorageRule:
+			v.StorageRule = &StorageRuleType{}
+			return v.StorageRule.Deserialize(d)
+		case schemas.UserStorageMetadata_StorageUtilizedInBytes:
+			v.StorageUtilizedInBytes = new(int64)
+			return d.ReadInt64(schemas.UserStorageMetadata_StorageUtilizedInBytes, v.StorageUtilizedInBytes)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

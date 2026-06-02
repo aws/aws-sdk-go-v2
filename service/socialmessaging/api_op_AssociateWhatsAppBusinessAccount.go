@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/socialmessaging/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,25 @@ type AssociateWhatsAppBusinessAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateWhatsAppBusinessAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociateWhatsAppBusinessAccountInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociateWhatsAppBusinessAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SetupFinalization != nil {
+		s.WriteStruct(schemas.AssociateWhatsAppBusinessAccountInput_setupFinalization)
+		v.SetupFinalization.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SignupCallback != nil {
+		s.WriteStruct(schemas.AssociateWhatsAppBusinessAccountInput_signupCallback)
+		v.SignupCallback.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type AssociateWhatsAppBusinessAccountOutput struct {
 
 	// The ID of the WhatsApp Business Account that was linked to your Amazon Web
@@ -58,16 +79,30 @@ type AssociateWhatsAppBusinessAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociateWhatsAppBusinessAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociateWhatsAppBusinessAccountOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociateWhatsAppBusinessAccountOutput_linkedWhatsAppBusinessAccountId:
+			v.LinkedWhatsAppBusinessAccountId = new(string)
+			return d.ReadString(schemas.AssociateWhatsAppBusinessAccountOutput_linkedWhatsAppBusinessAccountId, v.LinkedWhatsAppBusinessAccountId)
+		case schemas.AssociateWhatsAppBusinessAccountOutput_signupCallbackResult:
+			v.SignupCallbackResult = &types.WhatsAppSignupCallbackResult{}
+			return v.SignupCallbackResult.Deserialize(d)
+		case schemas.AssociateWhatsAppBusinessAccountOutput_statusCode:
+			v.StatusCode = new(int32)
+			return d.ReadInt32(schemas.AssociateWhatsAppBusinessAccountOutput_statusCode, v.StatusCode)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAssociateWhatsAppBusinessAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAssociateWhatsAppBusinessAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateWhatsAppBusinessAccount, schemas.AssociateWhatsAppBusinessAccountInput, schemas.AssociateWhatsAppBusinessAccountOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAssociateWhatsAppBusinessAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AssociateWhatsAppBusinessAccount, schemas.AssociateWhatsAppBusinessAccountInput, schemas.AssociateWhatsAppBusinessAccountOutput), output: &AssociateWhatsAppBusinessAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AssociateWhatsAppBusinessAccount"); err != nil {

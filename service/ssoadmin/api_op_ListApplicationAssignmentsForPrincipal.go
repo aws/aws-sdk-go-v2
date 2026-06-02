@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -74,6 +76,35 @@ type ListApplicationAssignmentsForPrincipalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationAssignmentsForPrincipalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListApplicationAssignmentsForPrincipalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListApplicationAssignmentsForPrincipalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Filter != nil {
+		s.WriteStruct(schemas.ListApplicationAssignmentsForPrincipalRequest_Filter)
+		v.Filter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.InstanceArn != nil {
+		s.WriteString(schemas.ListApplicationAssignmentsForPrincipalRequest_InstanceArn, *v.InstanceArn)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListApplicationAssignmentsForPrincipalRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListApplicationAssignmentsForPrincipalRequest_NextToken, *v.NextToken)
+	}
+	if v.PrincipalId != nil {
+		s.WriteString(schemas.ListApplicationAssignmentsForPrincipalRequest_PrincipalId, *v.PrincipalId)
+	}
+	if v.PrincipalType != "" {
+		s.WriteString(schemas.ListApplicationAssignmentsForPrincipalRequest_PrincipalType, string(v.PrincipalType))
+	}
+}
+
 type ListApplicationAssignmentsForPrincipalOutput struct {
 
 	// An array list of the application assignments for the specified principal.
@@ -92,16 +123,26 @@ type ListApplicationAssignmentsForPrincipalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListApplicationAssignmentsForPrincipalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListApplicationAssignmentsForPrincipalResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListApplicationAssignmentsForPrincipalResponse_ApplicationAssignments:
+			return deserializeApplicationAssignmentListForPrincipal(d, schemas.ListApplicationAssignmentsForPrincipalResponse_ApplicationAssignments, &v.ApplicationAssignments)
+		case schemas.ListApplicationAssignmentsForPrincipalResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListApplicationAssignmentsForPrincipalResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListApplicationAssignmentsForPrincipalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListApplicationAssignmentsForPrincipal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationAssignmentsForPrincipal, schemas.ListApplicationAssignmentsForPrincipalRequest, schemas.ListApplicationAssignmentsForPrincipalResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListApplicationAssignmentsForPrincipal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListApplicationAssignmentsForPrincipal, schemas.ListApplicationAssignmentsForPrincipalRequest, schemas.ListApplicationAssignmentsForPrincipalResponse), output: &ListApplicationAssignmentsForPrincipalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListApplicationAssignmentsForPrincipal"); err != nil {

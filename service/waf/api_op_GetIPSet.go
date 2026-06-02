@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,18 @@ type GetIPSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIPSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetIPSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetIPSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IPSetId != nil {
+		s.WriteString(schemas.GetIPSetRequest_IPSetId, *v.IPSetId)
+	}
+}
+
 type GetIPSetOutput struct {
 
 	// Information about the IPSet that you specified in the GetIPSet request. For more
@@ -65,16 +79,24 @@ type GetIPSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetIPSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetIPSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetIPSetResponse_IPSet:
+			v.IPSet = &types.IPSet{}
+			return v.IPSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIPSet, schemas.GetIPSetRequest, schemas.GetIPSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetIPSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetIPSet, schemas.GetIPSetRequest, schemas.GetIPSetResponse), output: &GetIPSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetIPSet"); err != nil {

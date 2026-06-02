@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type GetWorkgroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkgroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetWorkgroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetWorkgroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.WorkgroupName != nil {
+		s.WriteString(schemas.GetWorkgroupRequest_workgroupName, *v.WorkgroupName)
+	}
+}
+
 type GetWorkgroupOutput struct {
 
 	// The returned workgroup object.
@@ -50,16 +64,24 @@ type GetWorkgroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetWorkgroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetWorkgroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetWorkgroupResponse_workgroup:
+			v.Workgroup = &types.Workgroup{}
+			return v.Workgroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetWorkgroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetWorkgroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkgroup, schemas.GetWorkgroupRequest, schemas.GetWorkgroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetWorkgroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetWorkgroup, schemas.GetWorkgroupRequest, schemas.GetWorkgroupResponse), output: &GetWorkgroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetWorkgroup"); err != nil {

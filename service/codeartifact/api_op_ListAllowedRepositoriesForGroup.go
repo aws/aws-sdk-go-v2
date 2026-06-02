@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codeartifact/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,6 +65,33 @@ type ListAllowedRepositoriesForGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAllowedRepositoriesForGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAllowedRepositoriesForGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAllowedRepositoriesForGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Domain != nil {
+		s.WriteString(schemas.ListAllowedRepositoriesForGroupRequest_domain, *v.Domain)
+	}
+	if v.DomainOwner != nil {
+		s.WriteString(schemas.ListAllowedRepositoriesForGroupRequest_domainOwner, *v.DomainOwner)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAllowedRepositoriesForGroupRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAllowedRepositoriesForGroupRequest_nextToken, *v.NextToken)
+	}
+	if v.OriginRestrictionType != "" {
+		s.WriteString(schemas.ListAllowedRepositoriesForGroupRequest_originRestrictionType, string(v.OriginRestrictionType))
+	}
+	if v.PackageGroup != nil {
+		s.WriteString(schemas.ListAllowedRepositoriesForGroupRequest_packageGroup, *v.PackageGroup)
+	}
+}
+
 type ListAllowedRepositoriesForGroupOutput struct {
 
 	// The list of allowed repositories for the package group and origin configuration
@@ -79,16 +108,26 @@ type ListAllowedRepositoriesForGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAllowedRepositoriesForGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAllowedRepositoriesForGroupResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAllowedRepositoriesForGroupResult_allowedRepositories:
+			return deserializeRepositoryNameList(d, schemas.ListAllowedRepositoriesForGroupResult_allowedRepositories, &v.AllowedRepositories)
+		case schemas.ListAllowedRepositoriesForGroupResult_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAllowedRepositoriesForGroupResult_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAllowedRepositoriesForGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAllowedRepositoriesForGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAllowedRepositoriesForGroup, schemas.ListAllowedRepositoriesForGroupRequest, schemas.ListAllowedRepositoriesForGroupResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAllowedRepositoriesForGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAllowedRepositoriesForGroup, schemas.ListAllowedRepositoriesForGroupRequest, schemas.ListAllowedRepositoriesForGroupResult), output: &ListAllowedRepositoriesForGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAllowedRepositoriesForGroup"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/oam/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type GetSinkPolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSinkPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSinkPolicyInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSinkPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SinkIdentifier != nil {
+		s.WriteString(schemas.GetSinkPolicyInput_SinkIdentifier, *v.SinkIdentifier)
+	}
+}
+
 type GetSinkPolicyOutput struct {
 
 	// The policy that you specified, in JSON format.
@@ -55,16 +69,30 @@ type GetSinkPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSinkPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSinkPolicyOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSinkPolicyOutput_Policy:
+			v.Policy = new(string)
+			return d.ReadString(schemas.GetSinkPolicyOutput_Policy, v.Policy)
+		case schemas.GetSinkPolicyOutput_SinkArn:
+			v.SinkArn = new(string)
+			return d.ReadString(schemas.GetSinkPolicyOutput_SinkArn, v.SinkArn)
+		case schemas.GetSinkPolicyOutput_SinkId:
+			v.SinkId = new(string)
+			return d.ReadString(schemas.GetSinkPolicyOutput_SinkId, v.SinkId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSinkPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSinkPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSinkPolicy, schemas.GetSinkPolicyInput, schemas.GetSinkPolicyOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSinkPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSinkPolicy, schemas.GetSinkPolicyInput, schemas.GetSinkPolicyOutput), output: &GetSinkPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSinkPolicy"); err != nil {

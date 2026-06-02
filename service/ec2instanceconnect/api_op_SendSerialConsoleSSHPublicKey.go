@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -54,6 +56,24 @@ type SendSerialConsoleSSHPublicKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendSerialConsoleSSHPublicKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendSerialConsoleSSHPublicKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendSerialConsoleSSHPublicKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.SendSerialConsoleSSHPublicKeyRequest_InstanceId, *v.InstanceId)
+	}
+	if v.SSHPublicKey != nil {
+		s.WriteString(schemas.SendSerialConsoleSSHPublicKeyRequest_SSHPublicKey, *v.SSHPublicKey)
+	}
+	if v.SerialPort != 0 {
+		s.WriteInt32(schemas.SendSerialConsoleSSHPublicKeyRequest_SerialPort, v.SerialPort)
+	}
+}
+
 type SendSerialConsoleSSHPublicKeyOutput struct {
 
 	// The ID of the request. Please provide this ID when contacting AWS Support for
@@ -69,16 +89,26 @@ type SendSerialConsoleSSHPublicKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendSerialConsoleSSHPublicKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendSerialConsoleSSHPublicKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendSerialConsoleSSHPublicKeyResponse_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.SendSerialConsoleSSHPublicKeyResponse_RequestId, v.RequestId)
+		case schemas.SendSerialConsoleSSHPublicKeyResponse_Success:
+			return d.ReadBool(schemas.SendSerialConsoleSSHPublicKeyResponse_Success, &v.Success)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendSerialConsoleSSHPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSendSerialConsoleSSHPublicKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendSerialConsoleSSHPublicKey, schemas.SendSerialConsoleSSHPublicKeyRequest, schemas.SendSerialConsoleSSHPublicKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSendSerialConsoleSSHPublicKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendSerialConsoleSSHPublicKey, schemas.SendSerialConsoleSSHPublicKeyRequest, schemas.SendSerialConsoleSSHPublicKeyResponse), output: &SendSerialConsoleSSHPublicKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SendSerialConsoleSSHPublicKey"); err != nil {

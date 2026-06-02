@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -61,6 +63,21 @@ type GetCodeInterpreterSessionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCodeInterpreterSessionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetCodeInterpreterSessionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetCodeInterpreterSessionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CodeInterpreterIdentifier != nil {
+		s.WriteString(schemas.GetCodeInterpreterSessionRequest_codeInterpreterIdentifier, *v.CodeInterpreterIdentifier)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.GetCodeInterpreterSessionRequest_sessionId, *v.SessionId)
+	}
+}
+
 type GetCodeInterpreterSessionOutput struct {
 
 	// The identifier of the code interpreter.
@@ -97,16 +114,45 @@ type GetCodeInterpreterSessionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetCodeInterpreterSessionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetCodeInterpreterSessionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetCodeInterpreterSessionResponse_certificates:
+			return deserializeCertificates(d, schemas.GetCodeInterpreterSessionResponse_certificates, &v.Certificates)
+		case schemas.GetCodeInterpreterSessionResponse_codeInterpreterIdentifier:
+			v.CodeInterpreterIdentifier = new(string)
+			return d.ReadString(schemas.GetCodeInterpreterSessionResponse_codeInterpreterIdentifier, v.CodeInterpreterIdentifier)
+		case schemas.GetCodeInterpreterSessionResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetCodeInterpreterSessionResponse_createdAt, v.CreatedAt)
+		case schemas.GetCodeInterpreterSessionResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetCodeInterpreterSessionResponse_name, v.Name)
+		case schemas.GetCodeInterpreterSessionResponse_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.GetCodeInterpreterSessionResponse_sessionId, v.SessionId)
+		case schemas.GetCodeInterpreterSessionResponse_sessionTimeoutSeconds:
+			v.SessionTimeoutSeconds = new(int32)
+			return d.ReadInt32(schemas.GetCodeInterpreterSessionResponse_sessionTimeoutSeconds, v.SessionTimeoutSeconds)
+		case schemas.GetCodeInterpreterSessionResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetCodeInterpreterSessionResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CodeInterpreterSessionStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetCodeInterpreterSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetCodeInterpreterSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeInterpreterSession, schemas.GetCodeInterpreterSessionRequest, schemas.GetCodeInterpreterSessionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetCodeInterpreterSession{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetCodeInterpreterSession, schemas.GetCodeInterpreterSessionRequest, schemas.GetCodeInterpreterSessionResponse), output: &GetCodeInterpreterSessionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetCodeInterpreterSession"); err != nil {

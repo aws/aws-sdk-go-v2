@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,30 @@ type GetTokenBalanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTokenBalanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetTokenBalanceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetTokenBalanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AtBlockchainInstant != nil {
+		s.WriteStruct(schemas.GetTokenBalanceInput_atBlockchainInstant)
+		v.AtBlockchainInstant.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.OwnerIdentifier != nil {
+		s.WriteStruct(schemas.GetTokenBalanceInput_ownerIdentifier)
+		v.OwnerIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TokenIdentifier != nil {
+		s.WriteStruct(schemas.GetTokenBalanceInput_tokenIdentifier)
+		v.TokenIdentifier.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type GetTokenBalanceOutput struct {
 
 	// The container for time.
@@ -84,16 +110,36 @@ type GetTokenBalanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetTokenBalanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetTokenBalanceOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetTokenBalanceOutput_atBlockchainInstant:
+			v.AtBlockchainInstant = &types.BlockchainInstant{}
+			return v.AtBlockchainInstant.Deserialize(d)
+		case schemas.GetTokenBalanceOutput_balance:
+			v.Balance = new(string)
+			return d.ReadString(schemas.GetTokenBalanceOutput_balance, v.Balance)
+		case schemas.GetTokenBalanceOutput_lastUpdatedTime:
+			v.LastUpdatedTime = &types.BlockchainInstant{}
+			return v.LastUpdatedTime.Deserialize(d)
+		case schemas.GetTokenBalanceOutput_ownerIdentifier:
+			v.OwnerIdentifier = &types.OwnerIdentifier{}
+			return v.OwnerIdentifier.Deserialize(d)
+		case schemas.GetTokenBalanceOutput_tokenIdentifier:
+			v.TokenIdentifier = &types.TokenIdentifier{}
+			return v.TokenIdentifier.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetTokenBalanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetTokenBalance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTokenBalance, schemas.GetTokenBalanceInput, schemas.GetTokenBalanceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetTokenBalance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetTokenBalance, schemas.GetTokenBalanceInput, schemas.GetTokenBalanceOutput), output: &GetTokenBalanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetTokenBalance"); err != nil {

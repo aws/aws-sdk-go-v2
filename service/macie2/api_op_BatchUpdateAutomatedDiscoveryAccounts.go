@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,16 @@ type BatchUpdateAutomatedDiscoveryAccountsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateAutomatedDiscoveryAccountsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BatchUpdateAutomatedDiscoveryAccountsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BatchUpdateAutomatedDiscoveryAccountsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOfAutomatedDiscoveryAccountUpdate(s, schemas.BatchUpdateAutomatedDiscoveryAccountsRequest_accounts, v.Accounts)
+}
+
 type BatchUpdateAutomatedDiscoveryAccountsOutput struct {
 
 	// An array of objects, one for each account whose status wasn't changed. Each
@@ -52,16 +64,23 @@ type BatchUpdateAutomatedDiscoveryAccountsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *BatchUpdateAutomatedDiscoveryAccountsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BatchUpdateAutomatedDiscoveryAccountsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BatchUpdateAutomatedDiscoveryAccountsResponse_errors:
+			return deserialize__listOfAutomatedDiscoveryAccountUpdateError(d, schemas.BatchUpdateAutomatedDiscoveryAccountsResponse_errors, &v.Errors)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationBatchUpdateAutomatedDiscoveryAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpBatchUpdateAutomatedDiscoveryAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateAutomatedDiscoveryAccounts, schemas.BatchUpdateAutomatedDiscoveryAccountsRequest, schemas.BatchUpdateAutomatedDiscoveryAccountsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpBatchUpdateAutomatedDiscoveryAccounts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.BatchUpdateAutomatedDiscoveryAccounts, schemas.BatchUpdateAutomatedDiscoveryAccountsRequest, schemas.BatchUpdateAutomatedDiscoveryAccountsResponse), output: &BatchUpdateAutomatedDiscoveryAccountsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "BatchUpdateAutomatedDiscoveryAccounts"); err != nil {

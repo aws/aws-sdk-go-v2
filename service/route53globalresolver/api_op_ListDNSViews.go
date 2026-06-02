@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,24 @@ type ListDNSViewsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDNSViewsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDNSViewsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDNSViewsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalResolverId != nil {
+		s.WriteString(schemas.ListDNSViewsInput_globalResolverId, *v.GlobalResolverId)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDNSViewsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDNSViewsInput_nextToken, *v.NextToken)
+	}
+}
+
 type ListDNSViewsOutput struct {
 
 	// An array of information about the DNS views, such as whether DNSSEC is enabled,
@@ -69,16 +89,26 @@ type ListDNSViewsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDNSViewsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDNSViewsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDNSViewsOutput_dnsViews:
+			return deserializeDNSViews(d, schemas.ListDNSViewsOutput_dnsViews, &v.DnsViews)
+		case schemas.ListDNSViewsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDNSViewsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDNSViewsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDNSViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDNSViews, schemas.ListDNSViewsInput, schemas.ListDNSViewsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDNSViews{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDNSViews, schemas.ListDNSViewsInput, schemas.ListDNSViewsOutput), output: &ListDNSViewsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDNSViews"); err != nil {

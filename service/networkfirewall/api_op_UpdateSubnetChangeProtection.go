@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,27 @@ type UpdateSubnetChangeProtectionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSubnetChangeProtectionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateSubnetChangeProtectionRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateSubnetChangeProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FirewallArn != nil {
+		s.WriteString(schemas.UpdateSubnetChangeProtectionRequest_FirewallArn, *v.FirewallArn)
+	}
+	if v.FirewallName != nil {
+		s.WriteString(schemas.UpdateSubnetChangeProtectionRequest_FirewallName, *v.FirewallName)
+	}
+	if v.SubnetChangeProtection != false {
+		s.WriteBool(schemas.UpdateSubnetChangeProtectionRequest_SubnetChangeProtection, v.SubnetChangeProtection)
+	}
+	if v.UpdateToken != nil {
+		s.WriteString(schemas.UpdateSubnetChangeProtectionRequest_UpdateToken, *v.UpdateToken)
+	}
+}
+
 type UpdateSubnetChangeProtectionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the firewall.
@@ -102,16 +125,32 @@ type UpdateSubnetChangeProtectionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateSubnetChangeProtectionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateSubnetChangeProtectionResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateSubnetChangeProtectionResponse_FirewallArn:
+			v.FirewallArn = new(string)
+			return d.ReadString(schemas.UpdateSubnetChangeProtectionResponse_FirewallArn, v.FirewallArn)
+		case schemas.UpdateSubnetChangeProtectionResponse_FirewallName:
+			v.FirewallName = new(string)
+			return d.ReadString(schemas.UpdateSubnetChangeProtectionResponse_FirewallName, v.FirewallName)
+		case schemas.UpdateSubnetChangeProtectionResponse_SubnetChangeProtection:
+			return d.ReadBool(schemas.UpdateSubnetChangeProtectionResponse_SubnetChangeProtection, &v.SubnetChangeProtection)
+		case schemas.UpdateSubnetChangeProtectionResponse_UpdateToken:
+			v.UpdateToken = new(string)
+			return d.ReadString(schemas.UpdateSubnetChangeProtectionResponse_UpdateToken, v.UpdateToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateSubnetChangeProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateSubnetChangeProtection{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubnetChangeProtection, schemas.UpdateSubnetChangeProtectionRequest, schemas.UpdateSubnetChangeProtectionResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateSubnetChangeProtection{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateSubnetChangeProtection, schemas.UpdateSubnetChangeProtectionRequest, schemas.UpdateSubnetChangeProtectionResponse), output: &UpdateSubnetChangeProtectionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateSubnetChangeProtection"); err != nil {

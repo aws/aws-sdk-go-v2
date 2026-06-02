@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +43,21 @@ type DescribeThesaurusInput struct {
 	IndexId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeThesaurusInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeThesaurusRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeThesaurusInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.DescribeThesaurusRequest_Id, *v.Id)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.DescribeThesaurusRequest_IndexId, *v.IndexId)
+	}
 }
 
 type DescribeThesaurusOutput struct {
@@ -98,16 +115,64 @@ type DescribeThesaurusOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeThesaurusOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeThesaurusResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeThesaurusResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeThesaurusResponse_CreatedAt, v.CreatedAt)
+		case schemas.DescribeThesaurusResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DescribeThesaurusResponse_Description, v.Description)
+		case schemas.DescribeThesaurusResponse_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.DescribeThesaurusResponse_ErrorMessage, v.ErrorMessage)
+		case schemas.DescribeThesaurusResponse_FileSizeBytes:
+			v.FileSizeBytes = new(int64)
+			return d.ReadInt64(schemas.DescribeThesaurusResponse_FileSizeBytes, v.FileSizeBytes)
+		case schemas.DescribeThesaurusResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DescribeThesaurusResponse_Id, v.Id)
+		case schemas.DescribeThesaurusResponse_IndexId:
+			v.IndexId = new(string)
+			return d.ReadString(schemas.DescribeThesaurusResponse_IndexId, v.IndexId)
+		case schemas.DescribeThesaurusResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DescribeThesaurusResponse_Name, v.Name)
+		case schemas.DescribeThesaurusResponse_RoleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.DescribeThesaurusResponse_RoleArn, v.RoleArn)
+		case schemas.DescribeThesaurusResponse_SourceS3Path:
+			v.SourceS3Path = &types.S3Path{}
+			return v.SourceS3Path.Deserialize(d)
+		case schemas.DescribeThesaurusResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeThesaurusResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ThesaurusStatus(ev)
+			return nil
+		case schemas.DescribeThesaurusResponse_SynonymRuleCount:
+			v.SynonymRuleCount = new(int64)
+			return d.ReadInt64(schemas.DescribeThesaurusResponse_SynonymRuleCount, v.SynonymRuleCount)
+		case schemas.DescribeThesaurusResponse_TermCount:
+			v.TermCount = new(int64)
+			return d.ReadInt64(schemas.DescribeThesaurusResponse_TermCount, v.TermCount)
+		case schemas.DescribeThesaurusResponse_UpdatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DescribeThesaurusResponse_UpdatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeThesaurus{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThesaurus, schemas.DescribeThesaurusRequest, schemas.DescribeThesaurusResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeThesaurus{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeThesaurus, schemas.DescribeThesaurusRequest, schemas.DescribeThesaurusResponse), output: &DescribeThesaurusOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeThesaurus"); err != nil {

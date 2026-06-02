@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -80,6 +82,64 @@ type CreateContentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateContentRequest_clientToken, *v.ClientToken)
+	}
+	if v.KnowledgeBaseId != nil {
+		s.WriteString(schemas.CreateContentRequest_knowledgeBaseId, *v.KnowledgeBaseId)
+	}
+	serializeContentMetadata(s, schemas.CreateContentRequest_metadata, v.Metadata)
+	if v.Name != nil {
+		s.WriteString(schemas.CreateContentRequest_name, *v.Name)
+	}
+	if v.OverrideLinkOutUri != nil {
+		s.WriteString(schemas.CreateContentRequest_overrideLinkOutUri, *v.OverrideLinkOutUri)
+	}
+	serializeTags(s, schemas.CreateContentRequest_tags, v.Tags)
+	if v.Title != nil {
+		s.WriteString(schemas.CreateContentRequest_title, *v.Title)
+	}
+	if v.UploadId != nil {
+		s.WriteString(schemas.CreateContentRequest_uploadId, *v.UploadId)
+	}
+}
+func (v *CreateContentInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContentRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContentRequest_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.CreateContentRequest_clientToken, v.ClientToken)
+		case schemas.CreateContentRequest_knowledgeBaseId:
+			v.KnowledgeBaseId = new(string)
+			return d.ReadString(schemas.CreateContentRequest_knowledgeBaseId, v.KnowledgeBaseId)
+		case schemas.CreateContentRequest_metadata:
+			return deserializeContentMetadata(d, schemas.CreateContentRequest_metadata, &v.Metadata)
+		case schemas.CreateContentRequest_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateContentRequest_name, v.Name)
+		case schemas.CreateContentRequest_overrideLinkOutUri:
+			v.OverrideLinkOutUri = new(string)
+			return d.ReadString(schemas.CreateContentRequest_overrideLinkOutUri, v.OverrideLinkOutUri)
+		case schemas.CreateContentRequest_tags:
+			return deserializeTags(d, schemas.CreateContentRequest_tags, &v.Tags)
+		case schemas.CreateContentRequest_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.CreateContentRequest_title, v.Title)
+		case schemas.CreateContentRequest_uploadId:
+			v.UploadId = new(string)
+			return d.ReadString(schemas.CreateContentRequest_uploadId, v.UploadId)
+		}
+		return nil
+	})
+}
+
 type CreateContentOutput struct {
 
 	// The content.
@@ -91,16 +151,37 @@ type CreateContentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateContentOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateContentResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateContentOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Content != nil {
+		s.WriteStruct(schemas.CreateContentResponse_content)
+		v.Content.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *CreateContentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateContentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateContentResponse_content:
+			v.Content = &types.ContentData{}
+			return v.Content.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateContentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContent, schemas.CreateContentRequest, schemas.CreateContentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateContent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateContent, schemas.CreateContentRequest, schemas.CreateContentResponse), output: &CreateContentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateContent"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,24 @@ type DeleteLinkRoutingRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLinkRoutingRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteLinkRoutingRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteLinkRoutingRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayId != nil {
+		s.WriteString(schemas.DeleteLinkRoutingRuleRequest_gatewayId, *v.GatewayId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.DeleteLinkRoutingRuleRequest_linkId, *v.LinkId)
+	}
+	if v.RuleId != nil {
+		s.WriteString(schemas.DeleteLinkRoutingRuleRequest_ruleId, *v.RuleId)
+	}
+}
+
 type DeleteLinkRoutingRuleOutput struct {
 
 	// The unique identifier of the routing rule.
@@ -65,16 +85,31 @@ type DeleteLinkRoutingRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteLinkRoutingRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteLinkRoutingRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteLinkRoutingRuleResponse_ruleId:
+			v.RuleId = new(string)
+			return d.ReadString(schemas.DeleteLinkRoutingRuleResponse_ruleId, v.RuleId)
+		case schemas.DeleteLinkRoutingRuleResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteLinkRoutingRuleResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RuleStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteLinkRoutingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteLinkRoutingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLinkRoutingRule, schemas.DeleteLinkRoutingRuleRequest, schemas.DeleteLinkRoutingRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteLinkRoutingRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteLinkRoutingRule, schemas.DeleteLinkRoutingRuleRequest, schemas.DeleteLinkRoutingRuleResponse), output: &DeleteLinkRoutingRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteLinkRoutingRule"); err != nil {

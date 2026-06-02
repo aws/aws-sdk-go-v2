@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -37,6 +39,18 @@ type DescribeAccessPolicyInput struct {
 	AccessPolicyId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeAccessPolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeAccessPolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeAccessPolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AccessPolicyId != nil {
+		s.WriteString(schemas.DescribeAccessPolicyRequest_accessPolicyId, *v.AccessPolicyId)
+	}
 }
 
 type DescribeAccessPolicyOutput struct {
@@ -89,16 +103,46 @@ type DescribeAccessPolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeAccessPolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeAccessPolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeAccessPolicyResponse_accessPolicyArn:
+			v.AccessPolicyArn = new(string)
+			return d.ReadString(schemas.DescribeAccessPolicyResponse_accessPolicyArn, v.AccessPolicyArn)
+		case schemas.DescribeAccessPolicyResponse_accessPolicyCreationDate:
+			v.AccessPolicyCreationDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeAccessPolicyResponse_accessPolicyCreationDate, v.AccessPolicyCreationDate)
+		case schemas.DescribeAccessPolicyResponse_accessPolicyId:
+			v.AccessPolicyId = new(string)
+			return d.ReadString(schemas.DescribeAccessPolicyResponse_accessPolicyId, v.AccessPolicyId)
+		case schemas.DescribeAccessPolicyResponse_accessPolicyIdentity:
+			v.AccessPolicyIdentity = &types.Identity{}
+			return v.AccessPolicyIdentity.Deserialize(d)
+		case schemas.DescribeAccessPolicyResponse_accessPolicyLastUpdateDate:
+			v.AccessPolicyLastUpdateDate = new(time.Time)
+			return d.ReadTime(schemas.DescribeAccessPolicyResponse_accessPolicyLastUpdateDate, v.AccessPolicyLastUpdateDate)
+		case schemas.DescribeAccessPolicyResponse_accessPolicyPermission:
+			var ev string
+			if err := d.ReadString(schemas.DescribeAccessPolicyResponse_accessPolicyPermission, &ev); err != nil {
+				return err
+			}
+			v.AccessPolicyPermission = types.Permission(ev)
+			return nil
+		case schemas.DescribeAccessPolicyResponse_accessPolicyResource:
+			v.AccessPolicyResource = &types.Resource{}
+			return v.AccessPolicyResource.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccessPolicy, schemas.DescribeAccessPolicyRequest, schemas.DescribeAccessPolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeAccessPolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeAccessPolicy, schemas.DescribeAccessPolicyRequest, schemas.DescribeAccessPolicyResponse), output: &DescribeAccessPolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeAccessPolicy"); err != nil {

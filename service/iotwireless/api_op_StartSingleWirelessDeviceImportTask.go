@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,33 @@ type StartSingleWirelessDeviceImportTaskInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSingleWirelessDeviceImportTaskInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartSingleWirelessDeviceImportTaskRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartSingleWirelessDeviceImportTaskInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientRequestToken != nil {
+		s.WriteString(schemas.StartSingleWirelessDeviceImportTaskRequest_ClientRequestToken, *v.ClientRequestToken)
+	}
+	if v.DestinationName != nil {
+		s.WriteString(schemas.StartSingleWirelessDeviceImportTaskRequest_DestinationName, *v.DestinationName)
+	}
+	if v.DeviceName != nil {
+		s.WriteString(schemas.StartSingleWirelessDeviceImportTaskRequest_DeviceName, *v.DeviceName)
+	}
+	if v.Positioning != "" {
+		s.WriteString(schemas.StartSingleWirelessDeviceImportTaskRequest_Positioning, string(v.Positioning))
+	}
+	if v.Sidewalk != nil {
+		s.WriteStruct(schemas.StartSingleWirelessDeviceImportTaskRequest_Sidewalk)
+		v.Sidewalk.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagList(s, schemas.StartSingleWirelessDeviceImportTaskRequest_Tags, v.Tags)
+}
+
 type StartSingleWirelessDeviceImportTaskOutput struct {
 
 	// The ARN (Amazon Resource Name) of the import task.
@@ -79,16 +108,27 @@ type StartSingleWirelessDeviceImportTaskOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartSingleWirelessDeviceImportTaskOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartSingleWirelessDeviceImportTaskResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StartSingleWirelessDeviceImportTaskResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.StartSingleWirelessDeviceImportTaskResponse_Arn, v.Arn)
+		case schemas.StartSingleWirelessDeviceImportTaskResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.StartSingleWirelessDeviceImportTaskResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartSingleWirelessDeviceImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartSingleWirelessDeviceImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSingleWirelessDeviceImportTask, schemas.StartSingleWirelessDeviceImportTaskRequest, schemas.StartSingleWirelessDeviceImportTaskResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartSingleWirelessDeviceImportTask{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartSingleWirelessDeviceImportTask, schemas.StartSingleWirelessDeviceImportTaskRequest, schemas.StartSingleWirelessDeviceImportTaskResponse), output: &StartSingleWirelessDeviceImportTaskOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartSingleWirelessDeviceImportTask"); err != nil {

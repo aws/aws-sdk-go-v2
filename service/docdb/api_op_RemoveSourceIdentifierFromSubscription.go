@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,21 @@ type RemoveSourceIdentifierFromSubscriptionInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveSourceIdentifierFromSubscriptionInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RemoveSourceIdentifierFromSubscriptionMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RemoveSourceIdentifierFromSubscriptionInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SourceIdentifier != nil {
+		s.WriteString(schemas.RemoveSourceIdentifierFromSubscriptionMessage_SourceIdentifier, *v.SourceIdentifier)
+	}
+	if v.SubscriptionName != nil {
+		s.WriteString(schemas.RemoveSourceIdentifierFromSubscriptionMessage_SubscriptionName, *v.SubscriptionName)
+	}
+}
+
 type RemoveSourceIdentifierFromSubscriptionOutput struct {
 
 	// Detailed information about an event to which you have subscribed.
@@ -57,16 +74,24 @@ type RemoveSourceIdentifierFromSubscriptionOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RemoveSourceIdentifierFromSubscriptionOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RemoveSourceIdentifierFromSubscriptionResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RemoveSourceIdentifierFromSubscriptionResult_EventSubscription:
+			v.EventSubscription = &types.EventSubscription{}
+			return v.EventSubscription.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRemoveSourceIdentifierFromSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRemoveSourceIdentifierFromSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveSourceIdentifierFromSubscription, schemas.RemoveSourceIdentifierFromSubscriptionMessage, schemas.RemoveSourceIdentifierFromSubscriptionResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRemoveSourceIdentifierFromSubscription{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RemoveSourceIdentifierFromSubscription, schemas.RemoveSourceIdentifierFromSubscriptionMessage, schemas.RemoveSourceIdentifierFromSubscriptionResult), output: &RemoveSourceIdentifierFromSubscriptionOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RemoveSourceIdentifierFromSubscription"); err != nil {

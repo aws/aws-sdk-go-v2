@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -148,6 +150,50 @@ type CreateClassificationJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClassificationJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateClassificationJobRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateClassificationJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serialize__listOf__string(s, schemas.CreateClassificationJobRequest_allowListIds, v.AllowListIds)
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateClassificationJobRequest_clientToken, *v.ClientToken)
+	}
+	serialize__listOf__string(s, schemas.CreateClassificationJobRequest_customDataIdentifierIds, v.CustomDataIdentifierIds)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateClassificationJobRequest_description, *v.Description)
+	}
+	if v.InitialRun != nil {
+		s.WriteBool(schemas.CreateClassificationJobRequest_initialRun, *v.InitialRun)
+	}
+	if v.JobType != "" {
+		s.WriteString(schemas.CreateClassificationJobRequest_jobType, string(v.JobType))
+	}
+	serialize__listOf__string(s, schemas.CreateClassificationJobRequest_managedDataIdentifierIds, v.ManagedDataIdentifierIds)
+	if v.ManagedDataIdentifierSelector != "" {
+		s.WriteString(schemas.CreateClassificationJobRequest_managedDataIdentifierSelector, string(v.ManagedDataIdentifierSelector))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateClassificationJobRequest_name, *v.Name)
+	}
+	if v.S3JobDefinition != nil {
+		s.WriteStruct(schemas.CreateClassificationJobRequest_s3JobDefinition)
+		v.S3JobDefinition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SamplingPercentage != nil {
+		s.WriteInt32(schemas.CreateClassificationJobRequest_samplingPercentage, *v.SamplingPercentage)
+	}
+	if v.ScheduleFrequency != nil {
+		s.WriteStruct(schemas.CreateClassificationJobRequest_scheduleFrequency)
+		v.ScheduleFrequency.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTagMap(s, schemas.CreateClassificationJobRequest_tags, v.Tags)
+}
+
 type CreateClassificationJobOutput struct {
 
 	// The Amazon Resource Name (ARN) of the job.
@@ -162,16 +208,27 @@ type CreateClassificationJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateClassificationJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateClassificationJobResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateClassificationJobResponse_jobArn:
+			v.JobArn = new(string)
+			return d.ReadString(schemas.CreateClassificationJobResponse_jobArn, v.JobArn)
+		case schemas.CreateClassificationJobResponse_jobId:
+			v.JobId = new(string)
+			return d.ReadString(schemas.CreateClassificationJobResponse_jobId, v.JobId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateClassificationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClassificationJob, schemas.CreateClassificationJobRequest, schemas.CreateClassificationJobResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateClassificationJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateClassificationJob, schemas.CreateClassificationJobRequest, schemas.CreateClassificationJobResponse), output: &CreateClassificationJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateClassificationJob"); err != nil {

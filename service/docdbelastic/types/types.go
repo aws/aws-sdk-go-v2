@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -98,6 +100,123 @@ type Cluster struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Cluster) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Cluster)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Cluster) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminUserName != nil {
+		s.WriteString(schemas.Cluster_adminUserName, *v.AdminUserName)
+	}
+	if v.AuthType != "" {
+		s.WriteString(schemas.Cluster_authType, string(v.AuthType))
+	}
+	if v.BackupRetentionPeriod != nil {
+		s.WriteInt32(schemas.Cluster_backupRetentionPeriod, *v.BackupRetentionPeriod)
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.Cluster_clusterArn, *v.ClusterArn)
+	}
+	if v.ClusterEndpoint != nil {
+		s.WriteString(schemas.Cluster_clusterEndpoint, *v.ClusterEndpoint)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.Cluster_clusterName, *v.ClusterName)
+	}
+	if v.CreateTime != nil {
+		s.WriteString(schemas.Cluster_createTime, *v.CreateTime)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.Cluster_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.PreferredBackupWindow != nil {
+		s.WriteString(schemas.Cluster_preferredBackupWindow, *v.PreferredBackupWindow)
+	}
+	if v.PreferredMaintenanceWindow != nil {
+		s.WriteString(schemas.Cluster_preferredMaintenanceWindow, *v.PreferredMaintenanceWindow)
+	}
+	if v.ShardCapacity != nil {
+		s.WriteInt32(schemas.Cluster_shardCapacity, *v.ShardCapacity)
+	}
+	if v.ShardCount != nil {
+		s.WriteInt32(schemas.Cluster_shardCount, *v.ShardCount)
+	}
+	if v.ShardInstanceCount != nil {
+		s.WriteInt32(schemas.Cluster_shardInstanceCount, *v.ShardInstanceCount)
+	}
+	serializeShardList(s, schemas.Cluster_shards, v.Shards)
+	if v.Status != "" {
+		s.WriteString(schemas.Cluster_status, string(v.Status))
+	}
+	serializeStringList(s, schemas.Cluster_subnetIds, v.SubnetIds)
+	serializeStringList(s, schemas.Cluster_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+}
+func (v *Cluster) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Cluster, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Cluster_adminUserName:
+			v.AdminUserName = new(string)
+			return d.ReadString(schemas.Cluster_adminUserName, v.AdminUserName)
+		case schemas.Cluster_authType:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_authType, &ev); err != nil {
+				return err
+			}
+			v.AuthType = Auth(ev)
+			return nil
+		case schemas.Cluster_backupRetentionPeriod:
+			v.BackupRetentionPeriod = new(int32)
+			return d.ReadInt32(schemas.Cluster_backupRetentionPeriod, v.BackupRetentionPeriod)
+		case schemas.Cluster_clusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.Cluster_clusterArn, v.ClusterArn)
+		case schemas.Cluster_clusterEndpoint:
+			v.ClusterEndpoint = new(string)
+			return d.ReadString(schemas.Cluster_clusterEndpoint, v.ClusterEndpoint)
+		case schemas.Cluster_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.Cluster_clusterName, v.ClusterName)
+		case schemas.Cluster_createTime:
+			v.CreateTime = new(string)
+			return d.ReadString(schemas.Cluster_createTime, v.CreateTime)
+		case schemas.Cluster_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.Cluster_kmsKeyId, v.KmsKeyId)
+		case schemas.Cluster_preferredBackupWindow:
+			v.PreferredBackupWindow = new(string)
+			return d.ReadString(schemas.Cluster_preferredBackupWindow, v.PreferredBackupWindow)
+		case schemas.Cluster_preferredMaintenanceWindow:
+			v.PreferredMaintenanceWindow = new(string)
+			return d.ReadString(schemas.Cluster_preferredMaintenanceWindow, v.PreferredMaintenanceWindow)
+		case schemas.Cluster_shardCapacity:
+			v.ShardCapacity = new(int32)
+			return d.ReadInt32(schemas.Cluster_shardCapacity, v.ShardCapacity)
+		case schemas.Cluster_shardCount:
+			v.ShardCount = new(int32)
+			return d.ReadInt32(schemas.Cluster_shardCount, v.ShardCount)
+		case schemas.Cluster_shardInstanceCount:
+			v.ShardInstanceCount = new(int32)
+			return d.ReadInt32(schemas.Cluster_shardInstanceCount, v.ShardInstanceCount)
+		case schemas.Cluster_shards:
+			return deserializeShardList(d, schemas.Cluster_shards, &v.Shards)
+		case schemas.Cluster_status:
+			var ev string
+			if err := d.ReadString(schemas.Cluster_status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		case schemas.Cluster_subnetIds:
+			return deserializeStringList(d, schemas.Cluster_subnetIds, &v.SubnetIds)
+		case schemas.Cluster_vpcSecurityGroupIds:
+			return deserializeStringList(d, schemas.Cluster_vpcSecurityGroupIds, &v.VpcSecurityGroupIds)
+		}
+		return nil
+	})
+}
+
 // A list of Amazon DocumentDB elastic clusters.
 type ClusterInList struct {
 
@@ -117,6 +236,44 @@ type ClusterInList struct {
 	Status Status
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClusterInList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterInList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterInList) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ClusterInList_clusterArn, *v.ClusterArn)
+	}
+	if v.ClusterName != nil {
+		s.WriteString(schemas.ClusterInList_clusterName, *v.ClusterName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ClusterInList_status, string(v.Status))
+	}
+}
+func (v *ClusterInList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterInList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterInList_clusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.ClusterInList_clusterArn, v.ClusterArn)
+		case schemas.ClusterInList_clusterName:
+			v.ClusterName = new(string)
+			return d.ReadString(schemas.ClusterInList_clusterName, v.ClusterName)
+		case schemas.ClusterInList_status:
+			var ev string
+			if err := d.ReadString(schemas.ClusterInList_status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Returns information about a specific elastic cluster snapshot.
@@ -192,6 +349,90 @@ type ClusterSnapshot struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ClusterSnapshot) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterSnapshot)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterSnapshot) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AdminUserName != nil {
+		s.WriteString(schemas.ClusterSnapshot_adminUserName, *v.AdminUserName)
+	}
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ClusterSnapshot_clusterArn, *v.ClusterArn)
+	}
+	if v.ClusterCreationTime != nil {
+		s.WriteString(schemas.ClusterSnapshot_clusterCreationTime, *v.ClusterCreationTime)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.ClusterSnapshot_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.SnapshotArn != nil {
+		s.WriteString(schemas.ClusterSnapshot_snapshotArn, *v.SnapshotArn)
+	}
+	if v.SnapshotCreationTime != nil {
+		s.WriteString(schemas.ClusterSnapshot_snapshotCreationTime, *v.SnapshotCreationTime)
+	}
+	if v.SnapshotName != nil {
+		s.WriteString(schemas.ClusterSnapshot_snapshotName, *v.SnapshotName)
+	}
+	if v.SnapshotType != "" {
+		s.WriteString(schemas.ClusterSnapshot_snapshotType, string(v.SnapshotType))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ClusterSnapshot_status, string(v.Status))
+	}
+	serializeStringList(s, schemas.ClusterSnapshot_subnetIds, v.SubnetIds)
+	serializeStringList(s, schemas.ClusterSnapshot_vpcSecurityGroupIds, v.VpcSecurityGroupIds)
+}
+func (v *ClusterSnapshot) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterSnapshot, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterSnapshot_adminUserName:
+			v.AdminUserName = new(string)
+			return d.ReadString(schemas.ClusterSnapshot_adminUserName, v.AdminUserName)
+		case schemas.ClusterSnapshot_clusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.ClusterSnapshot_clusterArn, v.ClusterArn)
+		case schemas.ClusterSnapshot_clusterCreationTime:
+			v.ClusterCreationTime = new(string)
+			return d.ReadString(schemas.ClusterSnapshot_clusterCreationTime, v.ClusterCreationTime)
+		case schemas.ClusterSnapshot_kmsKeyId:
+			v.KmsKeyId = new(string)
+			return d.ReadString(schemas.ClusterSnapshot_kmsKeyId, v.KmsKeyId)
+		case schemas.ClusterSnapshot_snapshotArn:
+			v.SnapshotArn = new(string)
+			return d.ReadString(schemas.ClusterSnapshot_snapshotArn, v.SnapshotArn)
+		case schemas.ClusterSnapshot_snapshotCreationTime:
+			v.SnapshotCreationTime = new(string)
+			return d.ReadString(schemas.ClusterSnapshot_snapshotCreationTime, v.SnapshotCreationTime)
+		case schemas.ClusterSnapshot_snapshotName:
+			v.SnapshotName = new(string)
+			return d.ReadString(schemas.ClusterSnapshot_snapshotName, v.SnapshotName)
+		case schemas.ClusterSnapshot_snapshotType:
+			var ev string
+			if err := d.ReadString(schemas.ClusterSnapshot_snapshotType, &ev); err != nil {
+				return err
+			}
+			v.SnapshotType = SnapshotType(ev)
+			return nil
+		case schemas.ClusterSnapshot_status:
+			var ev string
+			if err := d.ReadString(schemas.ClusterSnapshot_status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		case schemas.ClusterSnapshot_subnetIds:
+			return deserializeStringList(d, schemas.ClusterSnapshot_subnetIds, &v.SubnetIds)
+		case schemas.ClusterSnapshot_vpcSecurityGroupIds:
+			return deserializeStringList(d, schemas.ClusterSnapshot_vpcSecurityGroupIds, &v.VpcSecurityGroupIds)
+		}
+		return nil
+	})
+}
+
 // A list of elastic cluster snapshots.
 type ClusterSnapshotInList struct {
 
@@ -222,6 +463,56 @@ type ClusterSnapshotInList struct {
 	Status Status
 
 	noSmithyDocumentSerde
+}
+
+func (v *ClusterSnapshotInList) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ClusterSnapshotInList)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ClusterSnapshotInList) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClusterArn != nil {
+		s.WriteString(schemas.ClusterSnapshotInList_clusterArn, *v.ClusterArn)
+	}
+	if v.SnapshotArn != nil {
+		s.WriteString(schemas.ClusterSnapshotInList_snapshotArn, *v.SnapshotArn)
+	}
+	if v.SnapshotCreationTime != nil {
+		s.WriteString(schemas.ClusterSnapshotInList_snapshotCreationTime, *v.SnapshotCreationTime)
+	}
+	if v.SnapshotName != nil {
+		s.WriteString(schemas.ClusterSnapshotInList_snapshotName, *v.SnapshotName)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ClusterSnapshotInList_status, string(v.Status))
+	}
+}
+func (v *ClusterSnapshotInList) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ClusterSnapshotInList, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ClusterSnapshotInList_clusterArn:
+			v.ClusterArn = new(string)
+			return d.ReadString(schemas.ClusterSnapshotInList_clusterArn, v.ClusterArn)
+		case schemas.ClusterSnapshotInList_snapshotArn:
+			v.SnapshotArn = new(string)
+			return d.ReadString(schemas.ClusterSnapshotInList_snapshotArn, v.SnapshotArn)
+		case schemas.ClusterSnapshotInList_snapshotCreationTime:
+			v.SnapshotCreationTime = new(string)
+			return d.ReadString(schemas.ClusterSnapshotInList_snapshotCreationTime, v.SnapshotCreationTime)
+		case schemas.ClusterSnapshotInList_snapshotName:
+			v.SnapshotName = new(string)
+			return d.ReadString(schemas.ClusterSnapshotInList_snapshotName, v.SnapshotName)
+		case schemas.ClusterSnapshotInList_status:
+			var ev string
+			if err := d.ReadString(schemas.ClusterSnapshotInList_status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Retrieves the details of maintenance actions that are pending.
@@ -257,6 +548,58 @@ type PendingMaintenanceActionDetails struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PendingMaintenanceActionDetails) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PendingMaintenanceActionDetails)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PendingMaintenanceActionDetails) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Action != nil {
+		s.WriteString(schemas.PendingMaintenanceActionDetails_action, *v.Action)
+	}
+	if v.AutoAppliedAfterDate != nil {
+		s.WriteString(schemas.PendingMaintenanceActionDetails_autoAppliedAfterDate, *v.AutoAppliedAfterDate)
+	}
+	if v.CurrentApplyDate != nil {
+		s.WriteString(schemas.PendingMaintenanceActionDetails_currentApplyDate, *v.CurrentApplyDate)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.PendingMaintenanceActionDetails_description, *v.Description)
+	}
+	if v.ForcedApplyDate != nil {
+		s.WriteString(schemas.PendingMaintenanceActionDetails_forcedApplyDate, *v.ForcedApplyDate)
+	}
+	if v.OptInStatus != nil {
+		s.WriteString(schemas.PendingMaintenanceActionDetails_optInStatus, *v.OptInStatus)
+	}
+}
+func (v *PendingMaintenanceActionDetails) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PendingMaintenanceActionDetails, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PendingMaintenanceActionDetails_action:
+			v.Action = new(string)
+			return d.ReadString(schemas.PendingMaintenanceActionDetails_action, v.Action)
+		case schemas.PendingMaintenanceActionDetails_autoAppliedAfterDate:
+			v.AutoAppliedAfterDate = new(string)
+			return d.ReadString(schemas.PendingMaintenanceActionDetails_autoAppliedAfterDate, v.AutoAppliedAfterDate)
+		case schemas.PendingMaintenanceActionDetails_currentApplyDate:
+			v.CurrentApplyDate = new(string)
+			return d.ReadString(schemas.PendingMaintenanceActionDetails_currentApplyDate, v.CurrentApplyDate)
+		case schemas.PendingMaintenanceActionDetails_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.PendingMaintenanceActionDetails_description, v.Description)
+		case schemas.PendingMaintenanceActionDetails_forcedApplyDate:
+			v.ForcedApplyDate = new(string)
+			return d.ReadString(schemas.PendingMaintenanceActionDetails_forcedApplyDate, v.ForcedApplyDate)
+		case schemas.PendingMaintenanceActionDetails_optInStatus:
+			v.OptInStatus = new(string)
+			return d.ReadString(schemas.PendingMaintenanceActionDetails_optInStatus, v.OptInStatus)
+		}
+		return nil
+	})
+}
+
 // Provides information about a pending maintenance action for a resource.
 type ResourcePendingMaintenanceAction struct {
 
@@ -268,6 +611,31 @@ type ResourcePendingMaintenanceAction struct {
 	ResourceArn *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ResourcePendingMaintenanceAction) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourcePendingMaintenanceAction)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourcePendingMaintenanceAction) SerializeMembers(s smithy.ShapeSerializer) {
+	serializePendingMaintenanceActionDetailsList(s, schemas.ResourcePendingMaintenanceAction_pendingMaintenanceActionDetails, v.PendingMaintenanceActionDetails)
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ResourcePendingMaintenanceAction_resourceArn, *v.ResourceArn)
+	}
+}
+func (v *ResourcePendingMaintenanceAction) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourcePendingMaintenanceAction, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourcePendingMaintenanceAction_pendingMaintenanceActionDetails:
+			return deserializePendingMaintenanceActionDetailsList(d, schemas.ResourcePendingMaintenanceAction_pendingMaintenanceActionDetails, &v.PendingMaintenanceActionDetails)
+		case schemas.ResourcePendingMaintenanceAction_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ResourcePendingMaintenanceAction_resourceArn, v.ResourceArn)
+		}
+		return nil
+	})
 }
 
 // The name of the shard.
@@ -291,6 +659,44 @@ type Shard struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Shard) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Shard)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Shard) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreateTime != nil {
+		s.WriteString(schemas.Shard_createTime, *v.CreateTime)
+	}
+	if v.ShardId != nil {
+		s.WriteString(schemas.Shard_shardId, *v.ShardId)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Shard_status, string(v.Status))
+	}
+}
+func (v *Shard) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Shard, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Shard_createTime:
+			v.CreateTime = new(string)
+			return d.ReadString(schemas.Shard_createTime, v.CreateTime)
+		case schemas.Shard_shardId:
+			v.ShardId = new(string)
+			return d.ReadString(schemas.Shard_shardId, v.ShardId)
+		case schemas.Shard_status:
+			var ev string
+			if err := d.ReadString(schemas.Shard_status, &ev); err != nil {
+				return err
+			}
+			v.Status = Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // A specific field in which a given validation exception occurred.
 type ValidationExceptionField struct {
 
@@ -305,6 +711,34 @@ type ValidationExceptionField struct {
 	Name *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *ValidationExceptionField) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ValidationExceptionField)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ValidationExceptionField) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.ValidationExceptionField_message, *v.Message)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.ValidationExceptionField_name, *v.Name)
+	}
+}
+func (v *ValidationExceptionField) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ValidationExceptionField, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ValidationExceptionField_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_message, v.Message)
+		case schemas.ValidationExceptionField_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.ValidationExceptionField_name, v.Name)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

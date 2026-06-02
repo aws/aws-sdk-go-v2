@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rbin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rbin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -78,6 +80,31 @@ type UpdateRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRuleRequest_Description, *v.Description)
+	}
+	serializeExcludeResourceTags(s, schemas.UpdateRuleRequest_ExcludeResourceTags, v.ExcludeResourceTags)
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateRuleRequest_Identifier, *v.Identifier)
+	}
+	serializeResourceTags(s, schemas.UpdateRuleRequest_ResourceTags, v.ResourceTags)
+	if v.ResourceType != "" {
+		s.WriteString(schemas.UpdateRuleRequest_ResourceType, string(v.ResourceType))
+	}
+	if v.RetentionPeriod != nil {
+		s.WriteStruct(schemas.UpdateRuleRequest_RetentionPeriod)
+		v.RetentionPeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateRuleOutput struct {
 
 	// The retention rule description.
@@ -136,16 +163,61 @@ type UpdateRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRuleResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.UpdateRuleResponse_Description, v.Description)
+		case schemas.UpdateRuleResponse_ExcludeResourceTags:
+			return deserializeExcludeResourceTags(d, schemas.UpdateRuleResponse_ExcludeResourceTags, &v.ExcludeResourceTags)
+		case schemas.UpdateRuleResponse_Identifier:
+			v.Identifier = new(string)
+			return d.ReadString(schemas.UpdateRuleResponse_Identifier, v.Identifier)
+		case schemas.UpdateRuleResponse_LockEndTime:
+			v.LockEndTime = new(time.Time)
+			return d.ReadTime(schemas.UpdateRuleResponse_LockEndTime, v.LockEndTime)
+		case schemas.UpdateRuleResponse_LockState:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRuleResponse_LockState, &ev); err != nil {
+				return err
+			}
+			v.LockState = types.LockState(ev)
+			return nil
+		case schemas.UpdateRuleResponse_ResourceTags:
+			return deserializeResourceTags(d, schemas.UpdateRuleResponse_ResourceTags, &v.ResourceTags)
+		case schemas.UpdateRuleResponse_ResourceType:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRuleResponse_ResourceType, &ev); err != nil {
+				return err
+			}
+			v.ResourceType = types.ResourceType(ev)
+			return nil
+		case schemas.UpdateRuleResponse_RetentionPeriod:
+			v.RetentionPeriod = &types.RetentionPeriod{}
+			return v.RetentionPeriod.Deserialize(d)
+		case schemas.UpdateRuleResponse_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.UpdateRuleResponse_RuleArn, v.RuleArn)
+		case schemas.UpdateRuleResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRuleResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RuleStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRule, schemas.UpdateRuleRequest, schemas.UpdateRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRule, schemas.UpdateRuleRequest, schemas.UpdateRuleResponse), output: &UpdateRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRule"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,19 @@ type RegisterInstancesWithLoadBalancerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterInstancesWithLoadBalancerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RegisterEndPointsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RegisterInstancesWithLoadBalancerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeInstances(s, schemas.RegisterEndPointsInput_Instances, v.Instances)
+	if v.LoadBalancerName != nil {
+		s.WriteString(schemas.RegisterEndPointsInput_LoadBalancerName, *v.LoadBalancerName)
+	}
+}
+
 // Contains the output of RegisterInstancesWithLoadBalancer.
 type RegisterInstancesWithLoadBalancerOutput struct {
 
@@ -77,16 +92,23 @@ type RegisterInstancesWithLoadBalancerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RegisterInstancesWithLoadBalancerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RegisterEndPointsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RegisterEndPointsOutput_Instances:
+			return deserializeInstances(d, schemas.RegisterEndPointsOutput_Instances, &v.Instances)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRegisterInstancesWithLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpRegisterInstancesWithLoadBalancer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterInstancesWithLoadBalancer, schemas.RegisterEndPointsInput, schemas.RegisterEndPointsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpRegisterInstancesWithLoadBalancer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RegisterInstancesWithLoadBalancer, schemas.RegisterEndPointsInput, schemas.RegisterEndPointsOutput), output: &RegisterInstancesWithLoadBalancerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RegisterInstancesWithLoadBalancer"); err != nil {

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,6 +36,21 @@ type XmlAttributesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlAttributesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.XmlAttributesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *XmlAttributesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Attr != nil {
+		s.WriteString(schemas.XmlAttributesRequest_attr, *v.Attr)
+	}
+	if v.Foo != nil {
+		s.WriteString(schemas.XmlAttributesRequest_foo, *v.Foo)
+	}
+}
+
 type XmlAttributesOutput struct {
 	Attr *string
 
@@ -45,16 +62,27 @@ type XmlAttributesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *XmlAttributesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.XmlAttributesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.XmlAttributesResponse_attr:
+			v.Attr = new(string)
+			return d.ReadString(schemas.XmlAttributesResponse_attr, v.Attr)
+		case schemas.XmlAttributesResponse_foo:
+			v.Foo = new(string)
+			return d.ReadString(schemas.XmlAttributesResponse_foo, v.Foo)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationXmlAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpXmlAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlAttributes, schemas.XmlAttributesRequest, schemas.XmlAttributesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpXmlAttributes{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.XmlAttributes, schemas.XmlAttributesRequest, schemas.XmlAttributesResponse), output: &XmlAttributesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "XmlAttributes"); err != nil {

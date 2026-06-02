@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,24 @@ type UpdateRequesterGatewayInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRequesterGatewayInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateRequesterGatewayRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateRequesterGatewayInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateRequesterGatewayRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateRequesterGatewayRequest_description, *v.Description)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.UpdateRequesterGatewayRequest_gatewayId, *v.GatewayId)
+	}
+}
+
 type UpdateRequesterGatewayOutput struct {
 
 	// The unique identifier of the gateway.
@@ -63,16 +83,31 @@ type UpdateRequesterGatewayOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateRequesterGatewayOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateRequesterGatewayResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateRequesterGatewayResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.UpdateRequesterGatewayResponse_gatewayId, v.GatewayId)
+		case schemas.UpdateRequesterGatewayResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateRequesterGatewayResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RequesterGatewayStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateRequesterGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateRequesterGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRequesterGateway, schemas.UpdateRequesterGatewayRequest, schemas.UpdateRequesterGatewayResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateRequesterGateway{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateRequesterGateway, schemas.UpdateRequesterGatewayRequest, schemas.UpdateRequesterGatewayResponse), output: &UpdateRequesterGatewayOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateRequesterGateway"); err != nil {

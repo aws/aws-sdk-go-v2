@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,6 +68,36 @@ type GetPaymentInstrumentBalanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPaymentInstrumentBalanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetPaymentInstrumentBalanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetPaymentInstrumentBalanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentName != nil {
+		s.WriteString(schemas.GetPaymentInstrumentBalanceRequest_agentName, *v.AgentName)
+	}
+	if v.Chain != "" {
+		s.WriteString(schemas.GetPaymentInstrumentBalanceRequest_chain, string(v.Chain))
+	}
+	if v.PaymentConnectorId != nil {
+		s.WriteString(schemas.GetPaymentInstrumentBalanceRequest_paymentConnectorId, *v.PaymentConnectorId)
+	}
+	if v.PaymentInstrumentId != nil {
+		s.WriteString(schemas.GetPaymentInstrumentBalanceRequest_paymentInstrumentId, *v.PaymentInstrumentId)
+	}
+	if v.PaymentManagerArn != nil {
+		s.WriteString(schemas.GetPaymentInstrumentBalanceRequest_paymentManagerArn, *v.PaymentManagerArn)
+	}
+	if v.Token != "" {
+		s.WriteString(schemas.GetPaymentInstrumentBalanceRequest_token, string(v.Token))
+	}
+	if v.UserId != nil {
+		s.WriteString(schemas.GetPaymentInstrumentBalanceRequest_userId, *v.UserId)
+	}
+}
+
 // Response structure for getting payment instrument balance.
 type GetPaymentInstrumentBalanceOutput struct {
 
@@ -85,16 +117,27 @@ type GetPaymentInstrumentBalanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetPaymentInstrumentBalanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetPaymentInstrumentBalanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetPaymentInstrumentBalanceResponse_paymentInstrumentId:
+			v.PaymentInstrumentId = new(string)
+			return d.ReadString(schemas.GetPaymentInstrumentBalanceResponse_paymentInstrumentId, v.PaymentInstrumentId)
+		case schemas.GetPaymentInstrumentBalanceResponse_tokenBalance:
+			v.TokenBalance = &types.TokenBalance{}
+			return v.TokenBalance.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetPaymentInstrumentBalanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetPaymentInstrumentBalance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPaymentInstrumentBalance, schemas.GetPaymentInstrumentBalanceRequest, schemas.GetPaymentInstrumentBalanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetPaymentInstrumentBalance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetPaymentInstrumentBalance, schemas.GetPaymentInstrumentBalanceRequest, schemas.GetPaymentInstrumentBalanceResponse), output: &GetPaymentInstrumentBalanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetPaymentInstrumentBalance"); err != nil {

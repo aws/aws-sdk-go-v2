@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,18 @@ type DescribeConnectionsOnInterconnectInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectionsOnInterconnectInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeConnectionsOnInterconnectRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectionsOnInterconnectInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InterconnectId != nil {
+		s.WriteString(schemas.DescribeConnectionsOnInterconnectRequest_interconnectId, *v.InterconnectId)
+	}
+}
+
 type DescribeConnectionsOnInterconnectOutput struct {
 
 	// The connections.
@@ -58,16 +72,38 @@ type DescribeConnectionsOnInterconnectOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeConnectionsOnInterconnectOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Connections)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeConnectionsOnInterconnectOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeConnectionList(s, schemas.Connections_connections, v.Connections)
+	if v.NextToken != nil {
+		s.WriteString(schemas.Connections_nextToken, *v.NextToken)
+	}
+}
+func (v *DescribeConnectionsOnInterconnectOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Connections, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Connections_connections:
+			return deserializeConnectionList(d, schemas.Connections_connections, &v.Connections)
+		case schemas.Connections_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.Connections_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeConnectionsOnInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeConnectionsOnInterconnect{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectionsOnInterconnect, schemas.DescribeConnectionsOnInterconnectRequest, schemas.Connections)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeConnectionsOnInterconnect{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeConnectionsOnInterconnect, schemas.DescribeConnectionsOnInterconnectRequest, schemas.Connections), output: &DescribeConnectionsOnInterconnectOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeConnectionsOnInterconnect"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/rtbfabric/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,6 +45,21 @@ type GetInboundExternalLinkInput struct {
 	LinkId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetInboundExternalLinkInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetInboundExternalLinkRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetInboundExternalLinkInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GatewayId != nil {
+		s.WriteString(schemas.GetInboundExternalLinkRequest_gatewayId, *v.GatewayId)
+	}
+	if v.LinkId != nil {
+		s.WriteString(schemas.GetInboundExternalLinkRequest_linkId, *v.LinkId)
+	}
 }
 
 type GetInboundExternalLinkOutput struct {
@@ -98,16 +115,62 @@ type GetInboundExternalLinkOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetInboundExternalLinkOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetInboundExternalLinkResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetInboundExternalLinkResponse_attributes:
+			v.Attributes = &types.LinkAttributes{}
+			return v.Attributes.Deserialize(d)
+		case schemas.GetInboundExternalLinkResponse_connectivityType:
+			var ev string
+			if err := d.ReadString(schemas.GetInboundExternalLinkResponse_connectivityType, &ev); err != nil {
+				return err
+			}
+			v.ConnectivityType = types.ConnectivityType(ev)
+			return nil
+		case schemas.GetInboundExternalLinkResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetInboundExternalLinkResponse_createdAt, v.CreatedAt)
+		case schemas.GetInboundExternalLinkResponse_domainName:
+			v.DomainName = new(string)
+			return d.ReadString(schemas.GetInboundExternalLinkResponse_domainName, v.DomainName)
+		case schemas.GetInboundExternalLinkResponse_flowModules:
+			return deserializeModuleConfigurationList(d, schemas.GetInboundExternalLinkResponse_flowModules, &v.FlowModules)
+		case schemas.GetInboundExternalLinkResponse_gatewayId:
+			v.GatewayId = new(string)
+			return d.ReadString(schemas.GetInboundExternalLinkResponse_gatewayId, v.GatewayId)
+		case schemas.GetInboundExternalLinkResponse_linkId:
+			v.LinkId = new(string)
+			return d.ReadString(schemas.GetInboundExternalLinkResponse_linkId, v.LinkId)
+		case schemas.GetInboundExternalLinkResponse_logSettings:
+			v.LogSettings = &types.LinkLogSettings{}
+			return v.LogSettings.Deserialize(d)
+		case schemas.GetInboundExternalLinkResponse_pendingFlowModules:
+			return deserializeModuleConfigurationList(d, schemas.GetInboundExternalLinkResponse_pendingFlowModules, &v.PendingFlowModules)
+		case schemas.GetInboundExternalLinkResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetInboundExternalLinkResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.LinkStatus(ev)
+			return nil
+		case schemas.GetInboundExternalLinkResponse_tags:
+			return deserializeTagsMap(d, schemas.GetInboundExternalLinkResponse_tags, &v.Tags)
+		case schemas.GetInboundExternalLinkResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetInboundExternalLinkResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetInboundExternalLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetInboundExternalLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInboundExternalLink, schemas.GetInboundExternalLinkRequest, schemas.GetInboundExternalLinkResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetInboundExternalLink{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetInboundExternalLink, schemas.GetInboundExternalLinkRequest, schemas.GetInboundExternalLinkResponse), output: &GetInboundExternalLinkOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetInboundExternalLink"); err != nil {

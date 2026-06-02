@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -337,6 +339,29 @@ type CreateStreamGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateStreamGroupInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateStreamGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateStreamGroupInput_ClientToken, *v.ClientToken)
+	}
+	if v.DefaultApplicationIdentifier != nil {
+		s.WriteString(schemas.CreateStreamGroupInput_DefaultApplicationIdentifier, *v.DefaultApplicationIdentifier)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateStreamGroupInput_Description, *v.Description)
+	}
+	serializeLocationConfigurations(s, schemas.CreateStreamGroupInput_LocationConfigurations, v.LocationConfigurations)
+	if v.StreamClass != "" {
+		s.WriteString(schemas.CreateStreamGroupInput_StreamClass, string(v.StreamClass))
+	}
+	serializeTags(s, schemas.CreateStreamGroupInput_Tags, v.Tags)
+}
+
 type CreateStreamGroupOutput struct {
 
 	// The [Amazon Resource Name (ARN)] that is assigned to the stream group resource and that uniquely identifies
@@ -653,16 +678,67 @@ type CreateStreamGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateStreamGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateStreamGroupOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateStreamGroupOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateStreamGroupOutput_Arn, v.Arn)
+		case schemas.CreateStreamGroupOutput_AssociatedApplications:
+			return deserializeArnList(d, schemas.CreateStreamGroupOutput_AssociatedApplications, &v.AssociatedApplications)
+		case schemas.CreateStreamGroupOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateStreamGroupOutput_CreatedAt, v.CreatedAt)
+		case schemas.CreateStreamGroupOutput_DefaultApplication:
+			v.DefaultApplication = &types.DefaultApplication{}
+			return v.DefaultApplication.Deserialize(d)
+		case schemas.CreateStreamGroupOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateStreamGroupOutput_Description, v.Description)
+		case schemas.CreateStreamGroupOutput_ExpiresAt:
+			v.ExpiresAt = new(time.Time)
+			return d.ReadTime(schemas.CreateStreamGroupOutput_ExpiresAt, v.ExpiresAt)
+		case schemas.CreateStreamGroupOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateStreamGroupOutput_Id, v.Id)
+		case schemas.CreateStreamGroupOutput_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateStreamGroupOutput_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.CreateStreamGroupOutput_LocationStates:
+			return deserializeLocationStates(d, schemas.CreateStreamGroupOutput_LocationStates, &v.LocationStates)
+		case schemas.CreateStreamGroupOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateStreamGroupOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.StreamGroupStatus(ev)
+			return nil
+		case schemas.CreateStreamGroupOutput_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.CreateStreamGroupOutput_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = types.StreamGroupStatusReason(ev)
+			return nil
+		case schemas.CreateStreamGroupOutput_StreamClass:
+			var ev string
+			if err := d.ReadString(schemas.CreateStreamGroupOutput_StreamClass, &ev); err != nil {
+				return err
+			}
+			v.StreamClass = types.StreamClass(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateStreamGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateStreamGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamGroup, schemas.CreateStreamGroupInput, schemas.CreateStreamGroupOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateStreamGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateStreamGroup, schemas.CreateStreamGroupInput, schemas.CreateStreamGroupOutput), output: &CreateStreamGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateStreamGroup"); err != nil {

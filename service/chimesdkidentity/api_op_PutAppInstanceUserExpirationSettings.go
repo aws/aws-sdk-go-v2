@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkidentity/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,23 @@ type PutAppInstanceUserExpirationSettingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAppInstanceUserExpirationSettingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutAppInstanceUserExpirationSettingsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutAppInstanceUserExpirationSettingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppInstanceUserArn != nil {
+		s.WriteString(schemas.PutAppInstanceUserExpirationSettingsRequest_AppInstanceUserArn, *v.AppInstanceUserArn)
+	}
+	if v.ExpirationSettings != nil {
+		s.WriteStruct(schemas.PutAppInstanceUserExpirationSettingsRequest_ExpirationSettings)
+		v.ExpirationSettings.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutAppInstanceUserExpirationSettingsOutput struct {
 
 	// The ARN of the AppInstanceUser .
@@ -62,16 +81,27 @@ type PutAppInstanceUserExpirationSettingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutAppInstanceUserExpirationSettingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutAppInstanceUserExpirationSettingsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.PutAppInstanceUserExpirationSettingsResponse_AppInstanceUserArn:
+			v.AppInstanceUserArn = new(string)
+			return d.ReadString(schemas.PutAppInstanceUserExpirationSettingsResponse_AppInstanceUserArn, v.AppInstanceUserArn)
+		case schemas.PutAppInstanceUserExpirationSettingsResponse_ExpirationSettings:
+			v.ExpirationSettings = &types.ExpirationSettings{}
+			return v.ExpirationSettings.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutAppInstanceUserExpirationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutAppInstanceUserExpirationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAppInstanceUserExpirationSettings, schemas.PutAppInstanceUserExpirationSettingsRequest, schemas.PutAppInstanceUserExpirationSettingsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutAppInstanceUserExpirationSettings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutAppInstanceUserExpirationSettings, schemas.PutAppInstanceUserExpirationSettingsRequest, schemas.PutAppInstanceUserExpirationSettingsResponse), output: &PutAppInstanceUserExpirationSettingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutAppInstanceUserExpirationSettings"); err != nil {

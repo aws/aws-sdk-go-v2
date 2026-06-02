@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesinstances/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,43 @@ type CreateVolumeInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVolumeInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVolumeRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVolumeInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilityZone != nil {
+		s.WriteString(schemas.CreateVolumeRequest_AvailabilityZone, *v.AvailabilityZone)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateVolumeRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Encrypted != nil {
+		s.WriteBool(schemas.CreateVolumeRequest_Encrypted, *v.Encrypted)
+	}
+	if v.Iops != nil {
+		s.WriteInt32(schemas.CreateVolumeRequest_Iops, *v.Iops)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreateVolumeRequest_KmsKeyId, *v.KmsKeyId)
+	}
+	if v.SizeInGB != nil {
+		s.WriteInt32(schemas.CreateVolumeRequest_SizeInGB, *v.SizeInGB)
+	}
+	if v.SnapshotId != nil {
+		s.WriteString(schemas.CreateVolumeRequest_SnapshotId, *v.SnapshotId)
+	}
+	serializeTagSpecifications(s, schemas.CreateVolumeRequest_TagSpecifications, v.TagSpecifications)
+	if v.Throughput != nil {
+		s.WriteInt32(schemas.CreateVolumeRequest_Throughput, *v.Throughput)
+	}
+	if v.VolumeType != "" {
+		s.WriteString(schemas.CreateVolumeRequest_VolumeType, string(v.VolumeType))
+	}
+}
+
 // Returns the created volume identifier.
 type CreateVolumeOutput struct {
 
@@ -77,16 +116,24 @@ type CreateVolumeOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVolumeOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVolumeResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVolumeResponse_VolumeId:
+			v.VolumeId = new(string)
+			return d.ReadString(schemas.CreateVolumeResponse_VolumeId, v.VolumeId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVolume, schemas.CreateVolumeRequest, schemas.CreateVolumeResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateVolume{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVolume, schemas.CreateVolumeRequest, schemas.CreateVolumeResponse), output: &CreateVolumeOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateVolume"); err != nil {

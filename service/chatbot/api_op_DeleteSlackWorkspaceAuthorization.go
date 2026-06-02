@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chatbot/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type DeleteSlackWorkspaceAuthorizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSlackWorkspaceAuthorizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteSlackWorkspaceAuthorizationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteSlackWorkspaceAuthorizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SlackTeamId != nil {
+		s.WriteString(schemas.DeleteSlackWorkspaceAuthorizationRequest_SlackTeamId, *v.SlackTeamId)
+	}
+}
+
 type DeleteSlackWorkspaceAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -45,16 +59,21 @@ type DeleteSlackWorkspaceAuthorizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteSlackWorkspaceAuthorizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteSlackWorkspaceAuthorizationResult, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteSlackWorkspaceAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteSlackWorkspaceAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSlackWorkspaceAuthorization, schemas.DeleteSlackWorkspaceAuthorizationRequest, schemas.DeleteSlackWorkspaceAuthorizationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteSlackWorkspaceAuthorization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteSlackWorkspaceAuthorization, schemas.DeleteSlackWorkspaceAuthorizationRequest, schemas.DeleteSlackWorkspaceAuthorizationResult), output: &DeleteSlackWorkspaceAuthorizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteSlackWorkspaceAuthorization"); err != nil {

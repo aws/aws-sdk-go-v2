@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,36 @@ type SearchProvisionedProductsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchProvisionedProductsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchProvisionedProductsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchProvisionedProductsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.SearchProvisionedProductsInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.AccessLevelFilter != nil {
+		s.WriteStruct(schemas.SearchProvisionedProductsInput_AccessLevelFilter)
+		v.AccessLevelFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeProvisionedProductFilters(s, schemas.SearchProvisionedProductsInput_Filters, v.Filters)
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.SearchProvisionedProductsInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.SearchProvisionedProductsInput_PageToken, *v.PageToken)
+	}
+	if v.SortBy != nil {
+		s.WriteString(schemas.SearchProvisionedProductsInput_SortBy, *v.SortBy)
+	}
+	if v.SortOrder != "" {
+		s.WriteString(schemas.SearchProvisionedProductsInput_SortOrder, string(v.SortOrder))
+	}
+}
+
 type SearchProvisionedProductsOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -86,16 +118,28 @@ type SearchProvisionedProductsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SearchProvisionedProductsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchProvisionedProductsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchProvisionedProductsOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.SearchProvisionedProductsOutput_NextPageToken, v.NextPageToken)
+		case schemas.SearchProvisionedProductsOutput_ProvisionedProducts:
+			return deserializeProvisionedProductAttributes(d, schemas.SearchProvisionedProductsOutput_ProvisionedProducts, &v.ProvisionedProducts)
+		case schemas.SearchProvisionedProductsOutput_TotalResultsCount:
+			return d.ReadInt32(schemas.SearchProvisionedProductsOutput_TotalResultsCount, &v.TotalResultsCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSearchProvisionedProductsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpSearchProvisionedProducts{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchProvisionedProducts, schemas.SearchProvisionedProductsInput, schemas.SearchProvisionedProductsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpSearchProvisionedProducts{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SearchProvisionedProducts, schemas.SearchProvisionedProductsInput, schemas.SearchProvisionedProductsOutput), output: &SearchProvisionedProductsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SearchProvisionedProducts"); err != nil {

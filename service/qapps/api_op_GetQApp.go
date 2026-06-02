@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,6 +47,24 @@ type GetQAppInput struct {
 	AppVersion *int32
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetQAppInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetQAppInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetQAppInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AppId != nil {
+		s.WriteString(schemas.GetQAppInput_appId, *v.AppId)
+	}
+	if v.AppVersion != nil {
+		s.WriteInt32(schemas.GetQAppInput_appVersion, *v.AppVersion)
+	}
+	if v.InstanceId != nil {
+		s.WriteString(schemas.GetQAppInput_instanceId, *v.InstanceId)
+	}
 }
 
 type GetQAppOutput struct {
@@ -115,16 +135,63 @@ type GetQAppOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetQAppOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetQAppOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetQAppOutput_appArn:
+			v.AppArn = new(string)
+			return d.ReadString(schemas.GetQAppOutput_appArn, v.AppArn)
+		case schemas.GetQAppOutput_appDefinition:
+			v.AppDefinition = &types.AppDefinition{}
+			return v.AppDefinition.Deserialize(d)
+		case schemas.GetQAppOutput_appId:
+			v.AppId = new(string)
+			return d.ReadString(schemas.GetQAppOutput_appId, v.AppId)
+		case schemas.GetQAppOutput_appVersion:
+			v.AppVersion = new(int32)
+			return d.ReadInt32(schemas.GetQAppOutput_appVersion, v.AppVersion)
+		case schemas.GetQAppOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetQAppOutput_createdAt, v.CreatedAt)
+		case schemas.GetQAppOutput_createdBy:
+			v.CreatedBy = new(string)
+			return d.ReadString(schemas.GetQAppOutput_createdBy, v.CreatedBy)
+		case schemas.GetQAppOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetQAppOutput_description, v.Description)
+		case schemas.GetQAppOutput_initialPrompt:
+			v.InitialPrompt = new(string)
+			return d.ReadString(schemas.GetQAppOutput_initialPrompt, v.InitialPrompt)
+		case schemas.GetQAppOutput_requiredCapabilities:
+			return deserializeAppRequiredCapabilities(d, schemas.GetQAppOutput_requiredCapabilities, &v.RequiredCapabilities)
+		case schemas.GetQAppOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.GetQAppOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AppStatus(ev)
+			return nil
+		case schemas.GetQAppOutput_title:
+			v.Title = new(string)
+			return d.ReadString(schemas.GetQAppOutput_title, v.Title)
+		case schemas.GetQAppOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetQAppOutput_updatedAt, v.UpdatedAt)
+		case schemas.GetQAppOutput_updatedBy:
+			v.UpdatedBy = new(string)
+			return d.ReadString(schemas.GetQAppOutput_updatedBy, v.UpdatedBy)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetQAppMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetQApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQApp, schemas.GetQAppInput, schemas.GetQAppOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetQApp{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetQApp, schemas.GetQAppInput, schemas.GetQAppOutput), output: &GetQAppOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetQApp"); err != nil {

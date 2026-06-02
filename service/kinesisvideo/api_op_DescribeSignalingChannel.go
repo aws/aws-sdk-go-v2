@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,21 @@ type DescribeSignalingChannelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSignalingChannelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSignalingChannelInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSignalingChannelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChannelARN != nil {
+		s.WriteString(schemas.DescribeSignalingChannelInput_ChannelARN, *v.ChannelARN)
+	}
+	if v.ChannelName != nil {
+		s.WriteString(schemas.DescribeSignalingChannelInput_ChannelName, *v.ChannelName)
+	}
+}
+
 type DescribeSignalingChannelOutput struct {
 
 	// A structure that encapsulates the specified signaling channel's metadata and
@@ -52,16 +69,24 @@ type DescribeSignalingChannelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSignalingChannelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSignalingChannelOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSignalingChannelOutput_ChannelInfo:
+			v.ChannelInfo = &types.ChannelInfo{}
+			return v.ChannelInfo.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSignalingChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeSignalingChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSignalingChannel, schemas.DescribeSignalingChannelInput, schemas.DescribeSignalingChannelOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeSignalingChannel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSignalingChannel, schemas.DescribeSignalingChannelInput, schemas.DescribeSignalingChannelOutput), output: &DescribeSignalingChannelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSignalingChannel"); err != nil {

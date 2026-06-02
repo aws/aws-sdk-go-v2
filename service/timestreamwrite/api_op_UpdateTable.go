@@ -7,7 +7,9 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
+	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,36 @@ type UpdateTableInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTableRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTableInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DatabaseName != nil {
+		s.WriteString(schemas.UpdateTableRequest_DatabaseName, *v.DatabaseName)
+	}
+	if v.MagneticStoreWriteProperties != nil {
+		s.WriteStruct(schemas.UpdateTableRequest_MagneticStoreWriteProperties)
+		v.MagneticStoreWriteProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RetentionProperties != nil {
+		s.WriteStruct(schemas.UpdateTableRequest_RetentionProperties)
+		v.RetentionProperties.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Schema != nil {
+		s.WriteStruct(schemas.UpdateTableRequest_Schema)
+		v.Schema.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TableName != nil {
+		s.WriteString(schemas.UpdateTableRequest_TableName, *v.TableName)
+	}
+}
+
 type UpdateTableOutput struct {
 
 	// The updated Timestream table.
@@ -73,16 +105,24 @@ type UpdateTableOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTableOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTableResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTableResponse_Table:
+			v.Table = &types.Table{}
+			return v.Table.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTable, schemas.UpdateTableRequest, schemas.UpdateTableResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateTable{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTable, schemas.UpdateTableRequest, schemas.UpdateTableResponse), output: &UpdateTableOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTable"); err != nil {

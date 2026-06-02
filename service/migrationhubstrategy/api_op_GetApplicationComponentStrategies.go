@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,28 @@ type GetApplicationComponentStrategiesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationComponentStrategiesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationComponentStrategiesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationComponentStrategiesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationComponentId != nil {
+		s.WriteString(schemas.GetApplicationComponentStrategiesRequest_applicationComponentId, *v.ApplicationComponentId)
+	}
+}
+func (v *GetApplicationComponentStrategiesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationComponentStrategiesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationComponentStrategiesRequest_applicationComponentId:
+			v.ApplicationComponentId = new(string)
+			return d.ReadString(schemas.GetApplicationComponentStrategiesRequest_applicationComponentId, v.ApplicationComponentId)
+		}
+		return nil
+	})
+}
+
 type GetApplicationComponentStrategiesOutput struct {
 
 	//  A list of application component strategy recommendations.
@@ -50,16 +74,32 @@ type GetApplicationComponentStrategiesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetApplicationComponentStrategiesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetApplicationComponentStrategiesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetApplicationComponentStrategiesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeApplicationComponentStrategies(s, schemas.GetApplicationComponentStrategiesResponse_applicationComponentStrategies, v.ApplicationComponentStrategies)
+}
+func (v *GetApplicationComponentStrategiesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetApplicationComponentStrategiesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetApplicationComponentStrategiesResponse_applicationComponentStrategies:
+			return deserializeApplicationComponentStrategies(d, schemas.GetApplicationComponentStrategiesResponse_applicationComponentStrategies, &v.ApplicationComponentStrategies)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetApplicationComponentStrategiesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetApplicationComponentStrategies{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationComponentStrategies, schemas.GetApplicationComponentStrategiesRequest, schemas.GetApplicationComponentStrategiesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetApplicationComponentStrategies{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetApplicationComponentStrategies, schemas.GetApplicationComponentStrategiesRequest, schemas.GetApplicationComponentStrategiesResponse), output: &GetApplicationComponentStrategiesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetApplicationComponentStrategies"); err != nil {

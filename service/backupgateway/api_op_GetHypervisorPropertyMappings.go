@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/backupgateway/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/backupgateway/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,28 @@ type GetHypervisorPropertyMappingsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHypervisorPropertyMappingsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHypervisorPropertyMappingsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHypervisorPropertyMappingsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HypervisorArn != nil {
+		s.WriteString(schemas.GetHypervisorPropertyMappingsInput_HypervisorArn, *v.HypervisorArn)
+	}
+}
+func (v *GetHypervisorPropertyMappingsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHypervisorPropertyMappingsInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHypervisorPropertyMappingsInput_HypervisorArn:
+			v.HypervisorArn = new(string)
+			return d.ReadString(schemas.GetHypervisorPropertyMappingsInput_HypervisorArn, v.HypervisorArn)
+		}
+		return nil
+	})
+}
+
 type GetHypervisorPropertyMappingsOutput struct {
 
 	// The Amazon Resource Name (ARN) of the hypervisor.
@@ -58,16 +82,44 @@ type GetHypervisorPropertyMappingsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetHypervisorPropertyMappingsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetHypervisorPropertyMappingsOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetHypervisorPropertyMappingsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HypervisorArn != nil {
+		s.WriteString(schemas.GetHypervisorPropertyMappingsOutput_HypervisorArn, *v.HypervisorArn)
+	}
+	if v.IamRoleArn != nil {
+		s.WriteString(schemas.GetHypervisorPropertyMappingsOutput_IamRoleArn, *v.IamRoleArn)
+	}
+	serializeVmwareToAwsTagMappings(s, schemas.GetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings, v.VmwareToAwsTagMappings)
+}
+func (v *GetHypervisorPropertyMappingsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetHypervisorPropertyMappingsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetHypervisorPropertyMappingsOutput_HypervisorArn:
+			v.HypervisorArn = new(string)
+			return d.ReadString(schemas.GetHypervisorPropertyMappingsOutput_HypervisorArn, v.HypervisorArn)
+		case schemas.GetHypervisorPropertyMappingsOutput_IamRoleArn:
+			v.IamRoleArn = new(string)
+			return d.ReadString(schemas.GetHypervisorPropertyMappingsOutput_IamRoleArn, v.IamRoleArn)
+		case schemas.GetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings:
+			return deserializeVmwareToAwsTagMappings(d, schemas.GetHypervisorPropertyMappingsOutput_VmwareToAwsTagMappings, &v.VmwareToAwsTagMappings)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetHypervisorPropertyMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpGetHypervisorPropertyMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHypervisorPropertyMappings, schemas.GetHypervisorPropertyMappingsInput, schemas.GetHypervisorPropertyMappingsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpGetHypervisorPropertyMappings{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetHypervisorPropertyMappings, schemas.GetHypervisorPropertyMappingsInput, schemas.GetHypervisorPropertyMappingsOutput), output: &GetHypervisorPropertyMappingsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetHypervisorPropertyMappings"); err != nil {

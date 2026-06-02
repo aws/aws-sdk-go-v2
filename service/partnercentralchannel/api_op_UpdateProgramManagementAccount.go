@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralchannel/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -48,6 +50,27 @@ type UpdateProgramManagementAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProgramManagementAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateProgramManagementAccountRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateProgramManagementAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Catalog != nil {
+		s.WriteString(schemas.UpdateProgramManagementAccountRequest_catalog, *v.Catalog)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.UpdateProgramManagementAccountRequest_displayName, *v.DisplayName)
+	}
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateProgramManagementAccountRequest_identifier, *v.Identifier)
+	}
+	if v.Revision != nil {
+		s.WriteString(schemas.UpdateProgramManagementAccountRequest_revision, *v.Revision)
+	}
+}
+
 type UpdateProgramManagementAccountOutput struct {
 
 	// Details of the updated program management account.
@@ -59,16 +82,24 @@ type UpdateProgramManagementAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateProgramManagementAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateProgramManagementAccountResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateProgramManagementAccountResponse_programManagementAccountDetail:
+			v.ProgramManagementAccountDetail = &types.UpdateProgramManagementAccountDetail{}
+			return v.ProgramManagementAccountDetail.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateProgramManagementAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateProgramManagementAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProgramManagementAccount, schemas.UpdateProgramManagementAccountRequest, schemas.UpdateProgramManagementAccountResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateProgramManagementAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateProgramManagementAccount, schemas.UpdateProgramManagementAccountRequest, schemas.UpdateProgramManagementAccountResponse), output: &UpdateProgramManagementAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateProgramManagementAccount"); err != nil {

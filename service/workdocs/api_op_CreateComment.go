@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,6 +68,39 @@ type CreateCommentInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCommentInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCommentRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCommentInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.CreateCommentRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.DocumentId != nil {
+		s.WriteString(schemas.CreateCommentRequest_DocumentId, *v.DocumentId)
+	}
+	if v.NotifyCollaborators != false {
+		s.WriteBool(schemas.CreateCommentRequest_NotifyCollaborators, v.NotifyCollaborators)
+	}
+	if v.ParentId != nil {
+		s.WriteString(schemas.CreateCommentRequest_ParentId, *v.ParentId)
+	}
+	if v.Text != nil {
+		s.WriteString(schemas.CreateCommentRequest_Text, *v.Text)
+	}
+	if v.ThreadId != nil {
+		s.WriteString(schemas.CreateCommentRequest_ThreadId, *v.ThreadId)
+	}
+	if v.VersionId != nil {
+		s.WriteString(schemas.CreateCommentRequest_VersionId, *v.VersionId)
+	}
+	if v.Visibility != "" {
+		s.WriteString(schemas.CreateCommentRequest_Visibility, string(v.Visibility))
+	}
+}
+
 type CreateCommentOutput struct {
 
 	// The comment that has been created.
@@ -77,16 +112,24 @@ type CreateCommentOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCommentOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCommentResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCommentResponse_Comment:
+			v.Comment = &types.Comment{}
+			return v.Comment.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCommentMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateComment{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComment, schemas.CreateCommentRequest, schemas.CreateCommentResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateComment{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateComment, schemas.CreateCommentRequest, schemas.CreateCommentResponse), output: &CreateCommentOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateComment"); err != nil {

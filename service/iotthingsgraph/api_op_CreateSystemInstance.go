@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -85,6 +87,38 @@ type CreateSystemInstanceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSystemInstanceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSystemInstanceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSystemInstanceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Definition != nil {
+		s.WriteStruct(schemas.CreateSystemInstanceRequest_definition)
+		v.Definition.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.FlowActionsRoleArn != nil {
+		s.WriteString(schemas.CreateSystemInstanceRequest_flowActionsRoleArn, *v.FlowActionsRoleArn)
+	}
+	if v.GreengrassGroupName != nil {
+		s.WriteString(schemas.CreateSystemInstanceRequest_greengrassGroupName, *v.GreengrassGroupName)
+	}
+	if v.MetricsConfiguration != nil {
+		s.WriteStruct(schemas.CreateSystemInstanceRequest_metricsConfiguration)
+		v.MetricsConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.S3BucketName != nil {
+		s.WriteString(schemas.CreateSystemInstanceRequest_s3BucketName, *v.S3BucketName)
+	}
+	serializeTagList(s, schemas.CreateSystemInstanceRequest_tags, v.Tags)
+	if v.Target != "" {
+		s.WriteString(schemas.CreateSystemInstanceRequest_target, string(v.Target))
+	}
+}
+
 type CreateSystemInstanceOutput struct {
 
 	// The summary object that describes the new system instance.
@@ -96,16 +130,24 @@ type CreateSystemInstanceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSystemInstanceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSystemInstanceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSystemInstanceResponse_summary:
+			v.Summary = &types.SystemInstanceSummary{}
+			return v.Summary.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateSystemInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSystemInstance, schemas.CreateSystemInstanceRequest, schemas.CreateSystemInstanceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateSystemInstance{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSystemInstance, schemas.CreateSystemInstanceRequest, schemas.CreateSystemInstanceResponse), output: &CreateSystemInstanceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSystemInstance"); err != nil {

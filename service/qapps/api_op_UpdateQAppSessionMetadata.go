@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qapps/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qapps/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -50,6 +52,29 @@ type UpdateQAppSessionMetadataInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQAppSessionMetadataInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateQAppSessionMetadataInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateQAppSessionMetadataInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.InstanceId != nil {
+		s.WriteString(schemas.UpdateQAppSessionMetadataInput_instanceId, *v.InstanceId)
+	}
+	if v.SessionId != nil {
+		s.WriteString(schemas.UpdateQAppSessionMetadataInput_sessionId, *v.SessionId)
+	}
+	if v.SessionName != nil {
+		s.WriteString(schemas.UpdateQAppSessionMetadataInput_sessionName, *v.SessionName)
+	}
+	if v.SharingConfiguration != nil {
+		s.WriteStruct(schemas.UpdateQAppSessionMetadataInput_sharingConfiguration)
+		v.SharingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type UpdateQAppSessionMetadataOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated Q App session.
@@ -76,16 +101,33 @@ type UpdateQAppSessionMetadataOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateQAppSessionMetadataOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateQAppSessionMetadataOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateQAppSessionMetadataOutput_sessionArn:
+			v.SessionArn = new(string)
+			return d.ReadString(schemas.UpdateQAppSessionMetadataOutput_sessionArn, v.SessionArn)
+		case schemas.UpdateQAppSessionMetadataOutput_sessionId:
+			v.SessionId = new(string)
+			return d.ReadString(schemas.UpdateQAppSessionMetadataOutput_sessionId, v.SessionId)
+		case schemas.UpdateQAppSessionMetadataOutput_sessionName:
+			v.SessionName = new(string)
+			return d.ReadString(schemas.UpdateQAppSessionMetadataOutput_sessionName, v.SessionName)
+		case schemas.UpdateQAppSessionMetadataOutput_sharingConfiguration:
+			v.SharingConfiguration = &types.SessionSharingConfiguration{}
+			return v.SharingConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateQAppSessionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateQAppSessionMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQAppSessionMetadata, schemas.UpdateQAppSessionMetadataInput, schemas.UpdateQAppSessionMetadataOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateQAppSessionMetadata{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateQAppSessionMetadata, schemas.UpdateQAppSessionMetadataInput, schemas.UpdateQAppSessionMetadataOutput), output: &UpdateQAppSessionMetadataOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateQAppSessionMetadata"); err != nil {

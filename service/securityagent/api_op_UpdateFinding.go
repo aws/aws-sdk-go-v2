@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/securityagent/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,27 @@ type UpdateFindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFindingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateFindingInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateFindingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.UpdateFindingInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.FindingId != nil {
+		s.WriteString(schemas.UpdateFindingInput_findingId, *v.FindingId)
+	}
+	if v.RiskLevel != "" {
+		s.WriteString(schemas.UpdateFindingInput_riskLevel, string(v.RiskLevel))
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.UpdateFindingInput_status, string(v.Status))
+	}
+}
+
 // Output for the UpdateFinding operation.
 type UpdateFindingOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -57,16 +80,21 @@ type UpdateFindingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateFindingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateFindingOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateFindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateFinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFinding, schemas.UpdateFindingInput, schemas.UpdateFindingOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateFinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateFinding, schemas.UpdateFindingInput, schemas.UpdateFindingOutput), output: &UpdateFindingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateFinding"); err != nil {

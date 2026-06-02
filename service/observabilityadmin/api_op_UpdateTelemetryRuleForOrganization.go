@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/observabilityadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,6 +48,23 @@ type UpdateTelemetryRuleForOrganizationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTelemetryRuleForOrganizationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateTelemetryRuleForOrganizationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateTelemetryRuleForOrganizationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rule != nil {
+		s.WriteStruct(schemas.UpdateTelemetryRuleForOrganizationInput_Rule)
+		v.Rule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.RuleIdentifier != nil {
+		s.WriteString(schemas.UpdateTelemetryRuleForOrganizationInput_RuleIdentifier, *v.RuleIdentifier)
+	}
+}
+
 type UpdateTelemetryRuleForOrganizationOutput struct {
 
 	//  The Amazon Resource Name (ARN) of the updated organization telemetry rule.
@@ -57,16 +76,24 @@ type UpdateTelemetryRuleForOrganizationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateTelemetryRuleForOrganizationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateTelemetryRuleForOrganizationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateTelemetryRuleForOrganizationOutput_RuleArn:
+			v.RuleArn = new(string)
+			return d.ReadString(schemas.UpdateTelemetryRuleForOrganizationOutput_RuleArn, v.RuleArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateTelemetryRuleForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateTelemetryRuleForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTelemetryRuleForOrganization, schemas.UpdateTelemetryRuleForOrganizationInput, schemas.UpdateTelemetryRuleForOrganizationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateTelemetryRuleForOrganization{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateTelemetryRuleForOrganization, schemas.UpdateTelemetryRuleForOrganizationInput, schemas.UpdateTelemetryRuleForOrganizationOutput), output: &UpdateTelemetryRuleForOrganizationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateTelemetryRuleForOrganization"); err != nil {

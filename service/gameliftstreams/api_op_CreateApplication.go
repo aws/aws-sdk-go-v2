@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -156,6 +158,37 @@ type CreateApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateApplicationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationLogOutputUri != nil {
+		s.WriteString(schemas.CreateApplicationInput_ApplicationLogOutputUri, *v.ApplicationLogOutputUri)
+	}
+	serializeFilePaths(s, schemas.CreateApplicationInput_ApplicationLogPaths, v.ApplicationLogPaths)
+	if v.ApplicationSourceUri != nil {
+		s.WriteString(schemas.CreateApplicationInput_ApplicationSourceUri, *v.ApplicationSourceUri)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateApplicationInput_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateApplicationInput_Description, *v.Description)
+	}
+	if v.ExecutablePath != nil {
+		s.WriteString(schemas.CreateApplicationInput_ExecutablePath, *v.ExecutablePath)
+	}
+	if v.RuntimeEnvironment != nil {
+		s.WriteStruct(schemas.CreateApplicationInput_RuntimeEnvironment)
+		v.RuntimeEnvironment.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeTags(s, schemas.CreateApplicationInput_Tags, v.Tags)
+}
+
 type CreateApplicationOutput struct {
 
 	// The [Amazon Resource Name (ARN)] that's assigned to an application resource and uniquely identifies it
@@ -259,16 +292,68 @@ type CreateApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateApplicationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateApplicationOutput_ApplicationLogOutputUri:
+			v.ApplicationLogOutputUri = new(string)
+			return d.ReadString(schemas.CreateApplicationOutput_ApplicationLogOutputUri, v.ApplicationLogOutputUri)
+		case schemas.CreateApplicationOutput_ApplicationLogPaths:
+			return deserializeFilePaths(d, schemas.CreateApplicationOutput_ApplicationLogPaths, &v.ApplicationLogPaths)
+		case schemas.CreateApplicationOutput_ApplicationSourceUri:
+			v.ApplicationSourceUri = new(string)
+			return d.ReadString(schemas.CreateApplicationOutput_ApplicationSourceUri, v.ApplicationSourceUri)
+		case schemas.CreateApplicationOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateApplicationOutput_Arn, v.Arn)
+		case schemas.CreateApplicationOutput_AssociatedStreamGroups:
+			return deserializeArnList(d, schemas.CreateApplicationOutput_AssociatedStreamGroups, &v.AssociatedStreamGroups)
+		case schemas.CreateApplicationOutput_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateApplicationOutput_CreatedAt, v.CreatedAt)
+		case schemas.CreateApplicationOutput_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.CreateApplicationOutput_Description, v.Description)
+		case schemas.CreateApplicationOutput_ExecutablePath:
+			v.ExecutablePath = new(string)
+			return d.ReadString(schemas.CreateApplicationOutput_ExecutablePath, v.ExecutablePath)
+		case schemas.CreateApplicationOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateApplicationOutput_Id, v.Id)
+		case schemas.CreateApplicationOutput_LastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateApplicationOutput_LastUpdatedAt, v.LastUpdatedAt)
+		case schemas.CreateApplicationOutput_ReplicationStatuses:
+			return deserializeReplicationStatuses(d, schemas.CreateApplicationOutput_ReplicationStatuses, &v.ReplicationStatuses)
+		case schemas.CreateApplicationOutput_RuntimeEnvironment:
+			v.RuntimeEnvironment = &types.RuntimeEnvironment{}
+			return v.RuntimeEnvironment.Deserialize(d)
+		case schemas.CreateApplicationOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateApplicationOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ApplicationStatus(ev)
+			return nil
+		case schemas.CreateApplicationOutput_StatusReason:
+			var ev string
+			if err := d.ReadString(schemas.CreateApplicationOutput_StatusReason, &ev); err != nil {
+				return err
+			}
+			v.StatusReason = types.ApplicationStatusReason(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationInput, schemas.CreateApplicationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateApplication, schemas.CreateApplicationInput, schemas.CreateApplicationOutput), output: &CreateApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateApplication"); err != nil {

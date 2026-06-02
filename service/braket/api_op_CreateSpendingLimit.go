@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/braket/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/braket/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +63,30 @@ type CreateSpendingLimitInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSpendingLimitInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSpendingLimitRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSpendingLimitInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateSpendingLimitRequest_clientToken, *v.ClientToken)
+	}
+	if v.DeviceArn != nil {
+		s.WriteString(schemas.CreateSpendingLimitRequest_deviceArn, *v.DeviceArn)
+	}
+	if v.SpendingLimit != nil {
+		s.WriteString(schemas.CreateSpendingLimitRequest_spendingLimit, *v.SpendingLimit)
+	}
+	serializeTagsMap(s, schemas.CreateSpendingLimitRequest_tags, v.Tags)
+	if v.TimePeriod != nil {
+		s.WriteStruct(schemas.CreateSpendingLimitRequest_timePeriod)
+		v.TimePeriod.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateSpendingLimitOutput struct {
 
 	// The Amazon Resource Name (ARN) of the created spending limit.
@@ -74,16 +100,24 @@ type CreateSpendingLimitOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSpendingLimitOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSpendingLimitResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSpendingLimitResponse_spendingLimitArn:
+			v.SpendingLimitArn = new(string)
+			return d.ReadString(schemas.CreateSpendingLimitResponse_spendingLimitArn, v.SpendingLimitArn)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSpendingLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSpendingLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSpendingLimit, schemas.CreateSpendingLimitRequest, schemas.CreateSpendingLimitResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSpendingLimit{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSpendingLimit, schemas.CreateSpendingLimitRequest, schemas.CreateSpendingLimitResponse), output: &CreateSpendingLimitOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSpendingLimit"); err != nil {

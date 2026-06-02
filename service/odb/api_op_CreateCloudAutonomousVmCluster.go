@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/odb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/odb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -104,6 +106,64 @@ type CreateCloudAutonomousVmClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCloudAutonomousVmClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateCloudAutonomousVmClusterInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateCloudAutonomousVmClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AutonomousDataStorageSizeInTBs != nil {
+		s.WriteFloat64(schemas.CreateCloudAutonomousVmClusterInput_autonomousDataStorageSizeInTBs, *v.AutonomousDataStorageSizeInTBs)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateCloudAutonomousVmClusterInput_clientToken, *v.ClientToken)
+	}
+	if v.CloudExadataInfrastructureId != nil {
+		s.WriteString(schemas.CreateCloudAutonomousVmClusterInput_cloudExadataInfrastructureId, *v.CloudExadataInfrastructureId)
+	}
+	if v.CpuCoreCountPerNode != nil {
+		s.WriteInt32(schemas.CreateCloudAutonomousVmClusterInput_cpuCoreCountPerNode, *v.CpuCoreCountPerNode)
+	}
+	serializeStringList(s, schemas.CreateCloudAutonomousVmClusterInput_dbServers, v.DbServers)
+	if v.Description != nil {
+		s.WriteString(schemas.CreateCloudAutonomousVmClusterInput_description, *v.Description)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateCloudAutonomousVmClusterInput_displayName, *v.DisplayName)
+	}
+	if v.IsMtlsEnabledVmCluster != nil {
+		s.WriteBool(schemas.CreateCloudAutonomousVmClusterInput_isMtlsEnabledVmCluster, *v.IsMtlsEnabledVmCluster)
+	}
+	if v.LicenseModel != "" {
+		s.WriteString(schemas.CreateCloudAutonomousVmClusterInput_licenseModel, string(v.LicenseModel))
+	}
+	if v.MaintenanceWindow != nil {
+		s.WriteStruct(schemas.CreateCloudAutonomousVmClusterInput_maintenanceWindow)
+		v.MaintenanceWindow.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MemoryPerOracleComputeUnitInGBs != nil {
+		s.WriteInt32(schemas.CreateCloudAutonomousVmClusterInput_memoryPerOracleComputeUnitInGBs, *v.MemoryPerOracleComputeUnitInGBs)
+	}
+	if v.OdbNetworkId != nil {
+		s.WriteString(schemas.CreateCloudAutonomousVmClusterInput_odbNetworkId, *v.OdbNetworkId)
+	}
+	if v.ScanListenerPortNonTls != nil {
+		s.WriteInt32(schemas.CreateCloudAutonomousVmClusterInput_scanListenerPortNonTls, *v.ScanListenerPortNonTls)
+	}
+	if v.ScanListenerPortTls != nil {
+		s.WriteInt32(schemas.CreateCloudAutonomousVmClusterInput_scanListenerPortTls, *v.ScanListenerPortTls)
+	}
+	serializeRequestTagMap(s, schemas.CreateCloudAutonomousVmClusterInput_tags, v.Tags)
+	if v.TimeZone != nil {
+		s.WriteString(schemas.CreateCloudAutonomousVmClusterInput_timeZone, *v.TimeZone)
+	}
+	if v.TotalContainerDatabases != nil {
+		s.WriteInt32(schemas.CreateCloudAutonomousVmClusterInput_totalContainerDatabases, *v.TotalContainerDatabases)
+	}
+}
+
 type CreateCloudAutonomousVmClusterOutput struct {
 
 	// The unique identifier of the created Autonomous VM cluster.
@@ -127,16 +187,37 @@ type CreateCloudAutonomousVmClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateCloudAutonomousVmClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateCloudAutonomousVmClusterOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateCloudAutonomousVmClusterOutput_cloudAutonomousVmClusterId:
+			v.CloudAutonomousVmClusterId = new(string)
+			return d.ReadString(schemas.CreateCloudAutonomousVmClusterOutput_cloudAutonomousVmClusterId, v.CloudAutonomousVmClusterId)
+		case schemas.CreateCloudAutonomousVmClusterOutput_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.CreateCloudAutonomousVmClusterOutput_displayName, v.DisplayName)
+		case schemas.CreateCloudAutonomousVmClusterOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateCloudAutonomousVmClusterOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.ResourceStatus(ev)
+			return nil
+		case schemas.CreateCloudAutonomousVmClusterOutput_statusReason:
+			v.StatusReason = new(string)
+			return d.ReadString(schemas.CreateCloudAutonomousVmClusterOutput_statusReason, v.StatusReason)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateCloudAutonomousVmClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateCloudAutonomousVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCloudAutonomousVmCluster, schemas.CreateCloudAutonomousVmClusterInput, schemas.CreateCloudAutonomousVmClusterOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateCloudAutonomousVmCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateCloudAutonomousVmCluster, schemas.CreateCloudAutonomousVmClusterInput, schemas.CreateCloudAutonomousVmClusterOutput), output: &CreateCloudAutonomousVmClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateCloudAutonomousVmCluster"); err != nil {

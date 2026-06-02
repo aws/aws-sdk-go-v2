@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -45,6 +47,18 @@ type DeleteOptOutListInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOptOutListInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteOptOutListRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteOptOutListInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.OptOutListName != nil {
+		s.WriteString(schemas.DeleteOptOutListRequest_OptOutListName, *v.OptOutListName)
+	}
+}
+
 type DeleteOptOutListOutput struct {
 
 	// The time when the OptOutList was created, in [UNIX epoch time] format.
@@ -64,16 +78,30 @@ type DeleteOptOutListOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteOptOutListOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteOptOutListResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteOptOutListResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.DeleteOptOutListResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.DeleteOptOutListResult_OptOutListArn:
+			v.OptOutListArn = new(string)
+			return d.ReadString(schemas.DeleteOptOutListResult_OptOutListArn, v.OptOutListArn)
+		case schemas.DeleteOptOutListResult_OptOutListName:
+			v.OptOutListName = new(string)
+			return d.ReadString(schemas.DeleteOptOutListResult_OptOutListName, v.OptOutListName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteOptOutListMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteOptOutList{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOptOutList, schemas.DeleteOptOutListRequest, schemas.DeleteOptOutListResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteOptOutList{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteOptOutList, schemas.DeleteOptOutListRequest, schemas.DeleteOptOutListResult), output: &DeleteOptOutListOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteOptOutList"); err != nil {

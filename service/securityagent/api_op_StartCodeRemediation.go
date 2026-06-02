@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/securityagent/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,25 @@ type StartCodeRemediationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCodeRemediationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StartCodeRemediationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StartCodeRemediationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentSpaceId != nil {
+		s.WriteString(schemas.StartCodeRemediationInput_agentSpaceId, *v.AgentSpaceId)
+	}
+	if v.CodeReviewJobId != nil {
+		s.WriteString(schemas.StartCodeRemediationInput_codeReviewJobId, *v.CodeReviewJobId)
+	}
+	serializeFindingIdList(s, schemas.StartCodeRemediationInput_findingIds, v.FindingIds)
+	if v.PentestJobId != nil {
+		s.WriteString(schemas.StartCodeRemediationInput_pentestJobId, *v.PentestJobId)
+	}
+}
+
 // Output for the StartCodeRemediation operation.
 type StartCodeRemediationOutput struct {
 	// Metadata pertaining to the operation's result.
@@ -59,16 +80,21 @@ type StartCodeRemediationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StartCodeRemediationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StartCodeRemediationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStartCodeRemediationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStartCodeRemediation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCodeRemediation, schemas.StartCodeRemediationInput, schemas.StartCodeRemediationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStartCodeRemediation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StartCodeRemediation, schemas.StartCodeRemediationInput, schemas.StartCodeRemediationOutput), output: &StartCodeRemediationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StartCodeRemediation"); err != nil {

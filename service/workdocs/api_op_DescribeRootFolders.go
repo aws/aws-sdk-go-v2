@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,24 @@ type DescribeRootFoldersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRootFoldersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeRootFoldersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeRootFoldersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.DescribeRootFoldersRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.Limit != nil {
+		s.WriteInt32(schemas.DescribeRootFoldersRequest_Limit, *v.Limit)
+	}
+	if v.Marker != nil {
+		s.WriteString(schemas.DescribeRootFoldersRequest_Marker, *v.Marker)
+	}
+}
+
 type DescribeRootFoldersOutput struct {
 
 	// The user's special folders.
@@ -67,16 +87,26 @@ type DescribeRootFoldersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeRootFoldersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeRootFoldersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeRootFoldersResponse_Folders:
+			return deserializeFolderMetadataList(d, schemas.DescribeRootFoldersResponse_Folders, &v.Folders)
+		case schemas.DescribeRootFoldersResponse_Marker:
+			v.Marker = new(string)
+			return d.ReadString(schemas.DescribeRootFoldersResponse_Marker, v.Marker)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeRootFoldersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDescribeRootFolders{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRootFolders, schemas.DescribeRootFoldersRequest, schemas.DescribeRootFoldersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDescribeRootFolders{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeRootFolders, schemas.DescribeRootFoldersRequest, schemas.DescribeRootFoldersResponse), output: &DescribeRootFoldersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeRootFolders"); err != nil {

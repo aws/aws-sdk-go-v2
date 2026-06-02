@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/cloudfrontkeyvaluestore/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,20 @@ type GetKeyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetKeyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetKeyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetKeyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.GetKeyRequest_Key, *v.Key)
+	}
+	if v.KvsARN != nil {
+		s.WriteString(schemas.GetKeyRequest_KvsARN, *v.KvsARN)
+	}
+}
 func (in *GetKeyInput) bindEndpointParams(p *EndpointParameters) {
 
 	p.KvsARN = in.KvsARN
@@ -76,16 +92,33 @@ type GetKeyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetKeyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetKeyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetKeyResponse_ItemCount:
+			v.ItemCount = new(int32)
+			return d.ReadInt32(schemas.GetKeyResponse_ItemCount, v.ItemCount)
+		case schemas.GetKeyResponse_Key:
+			v.Key = new(string)
+			return d.ReadString(schemas.GetKeyResponse_Key, v.Key)
+		case schemas.GetKeyResponse_TotalSizeInBytes:
+			v.TotalSizeInBytes = new(int64)
+			return d.ReadInt64(schemas.GetKeyResponse_TotalSizeInBytes, v.TotalSizeInBytes)
+		case schemas.GetKeyResponse_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.GetKeyResponse_Value, v.Value)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKey, schemas.GetKeyRequest, schemas.GetKeyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetKey{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetKey, schemas.GetKeyRequest, schemas.GetKeyResponse), output: &GetKeyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetKey"); err != nil {

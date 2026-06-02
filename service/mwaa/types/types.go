@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/mwaa/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -25,6 +27,34 @@ type Dimension struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Dimension) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Dimension)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Dimension) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.Dimension_Name, *v.Name)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Dimension_Value, *v.Value)
+	}
+}
+func (v *Dimension) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Dimension, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Dimension_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Dimension_Name, v.Name)
+		case schemas.Dimension_Value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Dimension_Value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Describes an Amazon Managed Workflows for Apache Airflow (MWAA) environment.
@@ -300,6 +330,238 @@ type Environment struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Environment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Environment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Environment) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAirflowConfigurationOptions(s, schemas.Environment_AirflowConfigurationOptions, v.AirflowConfigurationOptions)
+	if v.AirflowVersion != nil {
+		s.WriteString(schemas.Environment_AirflowVersion, *v.AirflowVersion)
+	}
+	if v.Arn != nil {
+		s.WriteString(schemas.Environment_Arn, *v.Arn)
+	}
+	if v.CeleryExecutorQueue != nil {
+		s.WriteString(schemas.Environment_CeleryExecutorQueue, *v.CeleryExecutorQueue)
+	}
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.Environment_CreatedAt, *v.CreatedAt)
+	}
+	if v.DagS3Path != nil {
+		s.WriteString(schemas.Environment_DagS3Path, *v.DagS3Path)
+	}
+	if v.DatabaseVpcEndpointService != nil {
+		s.WriteString(schemas.Environment_DatabaseVpcEndpointService, *v.DatabaseVpcEndpointService)
+	}
+	if v.EndpointManagement != "" {
+		s.WriteString(schemas.Environment_EndpointManagement, string(v.EndpointManagement))
+	}
+	if v.EnvironmentClass != nil {
+		s.WriteString(schemas.Environment_EnvironmentClass, *v.EnvironmentClass)
+	}
+	if v.ExecutionRoleArn != nil {
+		s.WriteString(schemas.Environment_ExecutionRoleArn, *v.ExecutionRoleArn)
+	}
+	if v.KmsKey != nil {
+		s.WriteString(schemas.Environment_KmsKey, *v.KmsKey)
+	}
+	if v.LastUpdate != nil {
+		s.WriteStruct(schemas.Environment_LastUpdate)
+		v.LastUpdate.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.LoggingConfiguration != nil {
+		s.WriteStruct(schemas.Environment_LoggingConfiguration)
+		v.LoggingConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MaxWebservers != nil {
+		s.WriteInt32(schemas.Environment_MaxWebservers, *v.MaxWebservers)
+	}
+	if v.MaxWorkers != nil {
+		s.WriteInt32(schemas.Environment_MaxWorkers, *v.MaxWorkers)
+	}
+	if v.MinWebservers != nil {
+		s.WriteInt32(schemas.Environment_MinWebservers, *v.MinWebservers)
+	}
+	if v.MinWorkers != nil {
+		s.WriteInt32(schemas.Environment_MinWorkers, *v.MinWorkers)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.Environment_Name, *v.Name)
+	}
+	if v.NetworkConfiguration != nil {
+		s.WriteStruct(schemas.Environment_NetworkConfiguration)
+		v.NetworkConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.PluginsS3ObjectVersion != nil {
+		s.WriteString(schemas.Environment_PluginsS3ObjectVersion, *v.PluginsS3ObjectVersion)
+	}
+	if v.PluginsS3Path != nil {
+		s.WriteString(schemas.Environment_PluginsS3Path, *v.PluginsS3Path)
+	}
+	if v.RequirementsS3ObjectVersion != nil {
+		s.WriteString(schemas.Environment_RequirementsS3ObjectVersion, *v.RequirementsS3ObjectVersion)
+	}
+	if v.RequirementsS3Path != nil {
+		s.WriteString(schemas.Environment_RequirementsS3Path, *v.RequirementsS3Path)
+	}
+	if v.Schedulers != nil {
+		s.WriteInt32(schemas.Environment_Schedulers, *v.Schedulers)
+	}
+	if v.ServiceRoleArn != nil {
+		s.WriteString(schemas.Environment_ServiceRoleArn, *v.ServiceRoleArn)
+	}
+	if v.SourceBucketArn != nil {
+		s.WriteString(schemas.Environment_SourceBucketArn, *v.SourceBucketArn)
+	}
+	if v.StartupScriptS3ObjectVersion != nil {
+		s.WriteString(schemas.Environment_StartupScriptS3ObjectVersion, *v.StartupScriptS3ObjectVersion)
+	}
+	if v.StartupScriptS3Path != nil {
+		s.WriteString(schemas.Environment_StartupScriptS3Path, *v.StartupScriptS3Path)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.Environment_Status, string(v.Status))
+	}
+	serializeTagMap(s, schemas.Environment_Tags, v.Tags)
+	if v.WebserverAccessMode != "" {
+		s.WriteString(schemas.Environment_WebserverAccessMode, string(v.WebserverAccessMode))
+	}
+	if v.WebserverUrl != nil {
+		s.WriteString(schemas.Environment_WebserverUrl, *v.WebserverUrl)
+	}
+	if v.WebserverVpcEndpointService != nil {
+		s.WriteString(schemas.Environment_WebserverVpcEndpointService, *v.WebserverVpcEndpointService)
+	}
+	if v.WeeklyMaintenanceWindowStart != nil {
+		s.WriteString(schemas.Environment_WeeklyMaintenanceWindowStart, *v.WeeklyMaintenanceWindowStart)
+	}
+}
+func (v *Environment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Environment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Environment_AirflowConfigurationOptions:
+			return deserializeAirflowConfigurationOptions(d, schemas.Environment_AirflowConfigurationOptions, &v.AirflowConfigurationOptions)
+		case schemas.Environment_AirflowVersion:
+			v.AirflowVersion = new(string)
+			return d.ReadString(schemas.Environment_AirflowVersion, v.AirflowVersion)
+		case schemas.Environment_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.Environment_Arn, v.Arn)
+		case schemas.Environment_CeleryExecutorQueue:
+			v.CeleryExecutorQueue = new(string)
+			return d.ReadString(schemas.Environment_CeleryExecutorQueue, v.CeleryExecutorQueue)
+		case schemas.Environment_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.Environment_CreatedAt, v.CreatedAt)
+		case schemas.Environment_DagS3Path:
+			v.DagS3Path = new(string)
+			return d.ReadString(schemas.Environment_DagS3Path, v.DagS3Path)
+		case schemas.Environment_DatabaseVpcEndpointService:
+			v.DatabaseVpcEndpointService = new(string)
+			return d.ReadString(schemas.Environment_DatabaseVpcEndpointService, v.DatabaseVpcEndpointService)
+		case schemas.Environment_EndpointManagement:
+			var ev string
+			if err := d.ReadString(schemas.Environment_EndpointManagement, &ev); err != nil {
+				return err
+			}
+			v.EndpointManagement = EndpointManagement(ev)
+			return nil
+		case schemas.Environment_EnvironmentClass:
+			v.EnvironmentClass = new(string)
+			return d.ReadString(schemas.Environment_EnvironmentClass, v.EnvironmentClass)
+		case schemas.Environment_ExecutionRoleArn:
+			v.ExecutionRoleArn = new(string)
+			return d.ReadString(schemas.Environment_ExecutionRoleArn, v.ExecutionRoleArn)
+		case schemas.Environment_KmsKey:
+			v.KmsKey = new(string)
+			return d.ReadString(schemas.Environment_KmsKey, v.KmsKey)
+		case schemas.Environment_LastUpdate:
+			v.LastUpdate = &LastUpdate{}
+			return v.LastUpdate.Deserialize(d)
+		case schemas.Environment_LoggingConfiguration:
+			v.LoggingConfiguration = &LoggingConfiguration{}
+			return v.LoggingConfiguration.Deserialize(d)
+		case schemas.Environment_MaxWebservers:
+			v.MaxWebservers = new(int32)
+			return d.ReadInt32(schemas.Environment_MaxWebservers, v.MaxWebservers)
+		case schemas.Environment_MaxWorkers:
+			v.MaxWorkers = new(int32)
+			return d.ReadInt32(schemas.Environment_MaxWorkers, v.MaxWorkers)
+		case schemas.Environment_MinWebservers:
+			v.MinWebservers = new(int32)
+			return d.ReadInt32(schemas.Environment_MinWebservers, v.MinWebservers)
+		case schemas.Environment_MinWorkers:
+			v.MinWorkers = new(int32)
+			return d.ReadInt32(schemas.Environment_MinWorkers, v.MinWorkers)
+		case schemas.Environment_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.Environment_Name, v.Name)
+		case schemas.Environment_NetworkConfiguration:
+			v.NetworkConfiguration = &NetworkConfiguration{}
+			return v.NetworkConfiguration.Deserialize(d)
+		case schemas.Environment_PluginsS3ObjectVersion:
+			v.PluginsS3ObjectVersion = new(string)
+			return d.ReadString(schemas.Environment_PluginsS3ObjectVersion, v.PluginsS3ObjectVersion)
+		case schemas.Environment_PluginsS3Path:
+			v.PluginsS3Path = new(string)
+			return d.ReadString(schemas.Environment_PluginsS3Path, v.PluginsS3Path)
+		case schemas.Environment_RequirementsS3ObjectVersion:
+			v.RequirementsS3ObjectVersion = new(string)
+			return d.ReadString(schemas.Environment_RequirementsS3ObjectVersion, v.RequirementsS3ObjectVersion)
+		case schemas.Environment_RequirementsS3Path:
+			v.RequirementsS3Path = new(string)
+			return d.ReadString(schemas.Environment_RequirementsS3Path, v.RequirementsS3Path)
+		case schemas.Environment_Schedulers:
+			v.Schedulers = new(int32)
+			return d.ReadInt32(schemas.Environment_Schedulers, v.Schedulers)
+		case schemas.Environment_ServiceRoleArn:
+			v.ServiceRoleArn = new(string)
+			return d.ReadString(schemas.Environment_ServiceRoleArn, v.ServiceRoleArn)
+		case schemas.Environment_SourceBucketArn:
+			v.SourceBucketArn = new(string)
+			return d.ReadString(schemas.Environment_SourceBucketArn, v.SourceBucketArn)
+		case schemas.Environment_StartupScriptS3ObjectVersion:
+			v.StartupScriptS3ObjectVersion = new(string)
+			return d.ReadString(schemas.Environment_StartupScriptS3ObjectVersion, v.StartupScriptS3ObjectVersion)
+		case schemas.Environment_StartupScriptS3Path:
+			v.StartupScriptS3Path = new(string)
+			return d.ReadString(schemas.Environment_StartupScriptS3Path, v.StartupScriptS3Path)
+		case schemas.Environment_Status:
+			var ev string
+			if err := d.ReadString(schemas.Environment_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = EnvironmentStatus(ev)
+			return nil
+		case schemas.Environment_Tags:
+			return deserializeTagMap(d, schemas.Environment_Tags, &v.Tags)
+		case schemas.Environment_WebserverAccessMode:
+			var ev string
+			if err := d.ReadString(schemas.Environment_WebserverAccessMode, &ev); err != nil {
+				return err
+			}
+			v.WebserverAccessMode = WebserverAccessMode(ev)
+			return nil
+		case schemas.Environment_WebserverUrl:
+			v.WebserverUrl = new(string)
+			return d.ReadString(schemas.Environment_WebserverUrl, v.WebserverUrl)
+		case schemas.Environment_WebserverVpcEndpointService:
+			v.WebserverVpcEndpointService = new(string)
+			return d.ReadString(schemas.Environment_WebserverVpcEndpointService, v.WebserverVpcEndpointService)
+		case schemas.Environment_WeeklyMaintenanceWindowStart:
+			v.WeeklyMaintenanceWindowStart = new(string)
+			return d.ReadString(schemas.Environment_WeeklyMaintenanceWindowStart, v.WeeklyMaintenanceWindowStart)
+		}
+		return nil
+	})
+}
+
 // Describes the status of the last update on the environment, and any errors that
 // were encountered.
 type LastUpdate struct {
@@ -323,6 +585,62 @@ type LastUpdate struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LastUpdate) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LastUpdate)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LastUpdate) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAt != nil {
+		s.WriteTime(schemas.LastUpdate_CreatedAt, *v.CreatedAt)
+	}
+	if v.Error != nil {
+		s.WriteStruct(schemas.LastUpdate_Error)
+		v.Error.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Source != nil {
+		s.WriteString(schemas.LastUpdate_Source, *v.Source)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.LastUpdate_Status, string(v.Status))
+	}
+	if v.WorkerReplacementStrategy != "" {
+		s.WriteString(schemas.LastUpdate_WorkerReplacementStrategy, string(v.WorkerReplacementStrategy))
+	}
+}
+func (v *LastUpdate) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LastUpdate, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LastUpdate_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.LastUpdate_CreatedAt, v.CreatedAt)
+		case schemas.LastUpdate_Error:
+			v.Error = &UpdateError{}
+			return v.Error.Deserialize(d)
+		case schemas.LastUpdate_Source:
+			v.Source = new(string)
+			return d.ReadString(schemas.LastUpdate_Source, v.Source)
+		case schemas.LastUpdate_Status:
+			var ev string
+			if err := d.ReadString(schemas.LastUpdate_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = UpdateStatus(ev)
+			return nil
+		case schemas.LastUpdate_WorkerReplacementStrategy:
+			var ev string
+			if err := d.ReadString(schemas.LastUpdate_WorkerReplacementStrategy, &ev); err != nil {
+				return err
+			}
+			v.WorkerReplacementStrategy = WorkerReplacementStrategy(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Describes the Apache Airflow log types that are published to CloudWatch Logs.
 type LoggingConfiguration struct {
 
@@ -344,6 +662,62 @@ type LoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *LoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DagProcessingLogs != nil {
+		s.WriteStruct(schemas.LoggingConfiguration_DagProcessingLogs)
+		v.DagProcessingLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchedulerLogs != nil {
+		s.WriteStruct(schemas.LoggingConfiguration_SchedulerLogs)
+		v.SchedulerLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskLogs != nil {
+		s.WriteStruct(schemas.LoggingConfiguration_TaskLogs)
+		v.TaskLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebserverLogs != nil {
+		s.WriteStruct(schemas.LoggingConfiguration_WebserverLogs)
+		v.WebserverLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkerLogs != nil {
+		s.WriteStruct(schemas.LoggingConfiguration_WorkerLogs)
+		v.WorkerLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingConfiguration_DagProcessingLogs:
+			v.DagProcessingLogs = &ModuleLoggingConfiguration{}
+			return v.DagProcessingLogs.Deserialize(d)
+		case schemas.LoggingConfiguration_SchedulerLogs:
+			v.SchedulerLogs = &ModuleLoggingConfiguration{}
+			return v.SchedulerLogs.Deserialize(d)
+		case schemas.LoggingConfiguration_TaskLogs:
+			v.TaskLogs = &ModuleLoggingConfiguration{}
+			return v.TaskLogs.Deserialize(d)
+		case schemas.LoggingConfiguration_WebserverLogs:
+			v.WebserverLogs = &ModuleLoggingConfiguration{}
+			return v.WebserverLogs.Deserialize(d)
+		case schemas.LoggingConfiguration_WorkerLogs:
+			v.WorkerLogs = &ModuleLoggingConfiguration{}
+			return v.WorkerLogs.Deserialize(d)
+		}
+		return nil
+	})
+}
+
 // Defines the Apache Airflow log types to send to CloudWatch Logs.
 type LoggingConfigurationInput struct {
 
@@ -363,6 +737,62 @@ type LoggingConfigurationInput struct {
 	WorkerLogs *ModuleLoggingConfigurationInput
 
 	noSmithyDocumentSerde
+}
+
+func (v *LoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.LoggingConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *LoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DagProcessingLogs != nil {
+		s.WriteStruct(schemas.LoggingConfigurationInput_DagProcessingLogs)
+		v.DagProcessingLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.SchedulerLogs != nil {
+		s.WriteStruct(schemas.LoggingConfigurationInput_SchedulerLogs)
+		v.SchedulerLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.TaskLogs != nil {
+		s.WriteStruct(schemas.LoggingConfigurationInput_TaskLogs)
+		v.TaskLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WebserverLogs != nil {
+		s.WriteStruct(schemas.LoggingConfigurationInput_WebserverLogs)
+		v.WebserverLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.WorkerLogs != nil {
+		s.WriteStruct(schemas.LoggingConfigurationInput_WorkerLogs)
+		v.WorkerLogs.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *LoggingConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LoggingConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LoggingConfigurationInput_DagProcessingLogs:
+			v.DagProcessingLogs = &ModuleLoggingConfigurationInput{}
+			return v.DagProcessingLogs.Deserialize(d)
+		case schemas.LoggingConfigurationInput_SchedulerLogs:
+			v.SchedulerLogs = &ModuleLoggingConfigurationInput{}
+			return v.SchedulerLogs.Deserialize(d)
+		case schemas.LoggingConfigurationInput_TaskLogs:
+			v.TaskLogs = &ModuleLoggingConfigurationInput{}
+			return v.TaskLogs.Deserialize(d)
+		case schemas.LoggingConfigurationInput_WebserverLogs:
+			v.WebserverLogs = &ModuleLoggingConfigurationInput{}
+			return v.WebserverLogs.Deserialize(d)
+		case schemas.LoggingConfigurationInput_WorkerLogs:
+			v.WorkerLogs = &ModuleLoggingConfigurationInput{}
+			return v.WorkerLogs.Deserialize(d)
+		}
+		return nil
+	})
 }
 
 //	Internal only. Collects Apache Airflow metrics. To learn more about the
@@ -404,6 +834,61 @@ type MetricDatum struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MetricDatum) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetricDatum)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetricDatum) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDimensions(s, schemas.MetricDatum_Dimensions, v.Dimensions)
+	if v.MetricName != nil {
+		s.WriteString(schemas.MetricDatum_MetricName, *v.MetricName)
+	}
+	if v.StatisticValues != nil {
+		s.WriteStruct(schemas.MetricDatum_StatisticValues)
+		v.StatisticValues.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Timestamp != nil {
+		s.WriteTime(schemas.MetricDatum_Timestamp, *v.Timestamp)
+	}
+	if v.Unit != "" {
+		s.WriteString(schemas.MetricDatum_Unit, string(v.Unit))
+	}
+	if v.Value != nil {
+		s.WriteFloat64(schemas.MetricDatum_Value, *v.Value)
+	}
+}
+func (v *MetricDatum) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetricDatum, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetricDatum_Dimensions:
+			return deserializeDimensions(d, schemas.MetricDatum_Dimensions, &v.Dimensions)
+		case schemas.MetricDatum_MetricName:
+			v.MetricName = new(string)
+			return d.ReadString(schemas.MetricDatum_MetricName, v.MetricName)
+		case schemas.MetricDatum_StatisticValues:
+			v.StatisticValues = &StatisticSet{}
+			return v.StatisticValues.Deserialize(d)
+		case schemas.MetricDatum_Timestamp:
+			v.Timestamp = new(time.Time)
+			return d.ReadTime(schemas.MetricDatum_Timestamp, v.Timestamp)
+		case schemas.MetricDatum_Unit:
+			var ev string
+			if err := d.ReadString(schemas.MetricDatum_Unit, &ev); err != nil {
+				return err
+			}
+			v.Unit = Unit(ev)
+			return nil
+		case schemas.MetricDatum_Value:
+			v.Value = new(float64)
+			return d.ReadFloat64(schemas.MetricDatum_Value, v.Value)
+		}
+		return nil
+	})
+}
+
 // Describes the Apache Airflow log details for the log type (e.g.
 // DagProcessingLogs ).
 type ModuleLoggingConfiguration struct {
@@ -424,6 +909,44 @@ type ModuleLoggingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModuleLoggingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModuleLoggingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModuleLoggingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CloudWatchLogGroupArn != nil {
+		s.WriteString(schemas.ModuleLoggingConfiguration_CloudWatchLogGroupArn, *v.CloudWatchLogGroupArn)
+	}
+	if v.Enabled != nil {
+		s.WriteBool(schemas.ModuleLoggingConfiguration_Enabled, *v.Enabled)
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.ModuleLoggingConfiguration_LogLevel, string(v.LogLevel))
+	}
+}
+func (v *ModuleLoggingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModuleLoggingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModuleLoggingConfiguration_CloudWatchLogGroupArn:
+			v.CloudWatchLogGroupArn = new(string)
+			return d.ReadString(schemas.ModuleLoggingConfiguration_CloudWatchLogGroupArn, v.CloudWatchLogGroupArn)
+		case schemas.ModuleLoggingConfiguration_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.ModuleLoggingConfiguration_Enabled, v.Enabled)
+		case schemas.ModuleLoggingConfiguration_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.ModuleLoggingConfiguration_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LoggingLevel(ev)
+			return nil
+		}
+		return nil
+	})
+}
+
 // Enables the Apache Airflow log type (e.g. DagProcessingLogs ) and defines the
 // log level to send to CloudWatch Logs (e.g. INFO ).
 type ModuleLoggingConfigurationInput struct {
@@ -440,6 +963,38 @@ type ModuleLoggingConfigurationInput struct {
 	LogLevel LoggingLevel
 
 	noSmithyDocumentSerde
+}
+
+func (v *ModuleLoggingConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModuleLoggingConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModuleLoggingConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Enabled != nil {
+		s.WriteBool(schemas.ModuleLoggingConfigurationInput_Enabled, *v.Enabled)
+	}
+	if v.LogLevel != "" {
+		s.WriteString(schemas.ModuleLoggingConfigurationInput_LogLevel, string(v.LogLevel))
+	}
+}
+func (v *ModuleLoggingConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModuleLoggingConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModuleLoggingConfigurationInput_Enabled:
+			v.Enabled = new(bool)
+			return d.ReadBool(schemas.ModuleLoggingConfigurationInput_Enabled, v.Enabled)
+		case schemas.ModuleLoggingConfigurationInput_LogLevel:
+			var ev string
+			if err := d.ReadString(schemas.ModuleLoggingConfigurationInput_LogLevel, &ev); err != nil {
+				return err
+			}
+			v.LogLevel = LoggingLevel(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Describes the VPC networking components used to secure and enable network
@@ -460,6 +1015,28 @@ type NetworkConfiguration struct {
 	SubnetIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NetworkConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NetworkConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NetworkConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupList(s, schemas.NetworkConfiguration_SecurityGroupIds, v.SecurityGroupIds)
+	serializeSubnetList(s, schemas.NetworkConfiguration_SubnetIds, v.SubnetIds)
+}
+func (v *NetworkConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NetworkConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NetworkConfiguration_SecurityGroupIds:
+			return deserializeSecurityGroupList(d, schemas.NetworkConfiguration_SecurityGroupIds, &v.SecurityGroupIds)
+		case schemas.NetworkConfiguration_SubnetIds:
+			return deserializeSubnetList(d, schemas.NetworkConfiguration_SubnetIds, &v.SubnetIds)
+		}
+		return nil
+	})
 }
 
 //	Internal only. Represents a set of statistics that describe a specific metric.
@@ -484,6 +1061,46 @@ type StatisticSet struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StatisticSet) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StatisticSet)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StatisticSet) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Maximum != nil {
+		s.WriteFloat64(schemas.StatisticSet_Maximum, *v.Maximum)
+	}
+	if v.Minimum != nil {
+		s.WriteFloat64(schemas.StatisticSet_Minimum, *v.Minimum)
+	}
+	if v.SampleCount != nil {
+		s.WriteInt32(schemas.StatisticSet_SampleCount, *v.SampleCount)
+	}
+	if v.Sum != nil {
+		s.WriteFloat64(schemas.StatisticSet_Sum, *v.Sum)
+	}
+}
+func (v *StatisticSet) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StatisticSet, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StatisticSet_Maximum:
+			v.Maximum = new(float64)
+			return d.ReadFloat64(schemas.StatisticSet_Maximum, v.Maximum)
+		case schemas.StatisticSet_Minimum:
+			v.Minimum = new(float64)
+			return d.ReadFloat64(schemas.StatisticSet_Minimum, v.Minimum)
+		case schemas.StatisticSet_SampleCount:
+			v.SampleCount = new(int32)
+			return d.ReadInt32(schemas.StatisticSet_SampleCount, v.SampleCount)
+		case schemas.StatisticSet_Sum:
+			v.Sum = new(float64)
+			return d.ReadFloat64(schemas.StatisticSet_Sum, v.Sum)
+		}
+		return nil
+	})
+}
+
 // Describes the error(s) encountered with the last update of the environment.
 type UpdateError struct {
 
@@ -494,6 +1111,34 @@ type UpdateError struct {
 	ErrorMessage *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateError) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateError)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateError) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ErrorCode != nil {
+		s.WriteString(schemas.UpdateError_ErrorCode, *v.ErrorCode)
+	}
+	if v.ErrorMessage != nil {
+		s.WriteString(schemas.UpdateError_ErrorMessage, *v.ErrorMessage)
+	}
+}
+func (v *UpdateError) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateError, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateError_ErrorCode:
+			v.ErrorCode = new(string)
+			return d.ReadString(schemas.UpdateError_ErrorCode, v.ErrorCode)
+		case schemas.UpdateError_ErrorMessage:
+			v.ErrorMessage = new(string)
+			return d.ReadString(schemas.UpdateError_ErrorMessage, v.ErrorMessage)
+		}
+		return nil
+	})
 }
 
 // Defines the VPC networking components used to secure and enable network traffic
@@ -512,6 +1157,25 @@ type UpdateNetworkConfigurationInput struct {
 	SecurityGroupIds []string
 
 	noSmithyDocumentSerde
+}
+
+func (v *UpdateNetworkConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateNetworkConfigurationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateNetworkConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeSecurityGroupList(s, schemas.UpdateNetworkConfigurationInput_SecurityGroupIds, v.SecurityGroupIds)
+}
+func (v *UpdateNetworkConfigurationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateNetworkConfigurationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateNetworkConfigurationInput_SecurityGroupIds:
+			return deserializeSecurityGroupList(d, schemas.UpdateNetworkConfigurationInput_SecurityGroupIds, &v.SecurityGroupIds)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,28 @@ type StopSimulationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSimulationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSimulationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSimulationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Simulation != nil {
+		s.WriteString(schemas.StopSimulationInput_Simulation, *v.Simulation)
+	}
+}
+func (v *StopSimulationInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopSimulationInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.StopSimulationInput_Simulation:
+			v.Simulation = new(string)
+			return d.ReadString(schemas.StopSimulationInput_Simulation, v.Simulation)
+		}
+		return nil
+	})
+}
+
 type StopSimulationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -46,16 +70,29 @@ type StopSimulationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopSimulationOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopSimulationOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopSimulationOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *StopSimulationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopSimulationOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopSimulationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpStopSimulation{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSimulation, schemas.StopSimulationInput, schemas.StopSimulationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpStopSimulation{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopSimulation, schemas.StopSimulationInput, schemas.StopSimulationOutput), output: &StopSimulationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopSimulation"); err != nil {

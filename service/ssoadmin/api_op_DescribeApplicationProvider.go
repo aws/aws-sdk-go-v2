@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -39,6 +41,18 @@ type DescribeApplicationProviderInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationProviderInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeApplicationProviderRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeApplicationProviderInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationProviderArn != nil {
+		s.WriteString(schemas.DescribeApplicationProviderRequest_ApplicationProviderArn, *v.ApplicationProviderArn)
+	}
+}
+
 type DescribeApplicationProviderOutput struct {
 
 	// The ARN of the application provider.
@@ -61,16 +75,37 @@ type DescribeApplicationProviderOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeApplicationProviderOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeApplicationProviderResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeApplicationProviderResponse_ApplicationProviderArn:
+			v.ApplicationProviderArn = new(string)
+			return d.ReadString(schemas.DescribeApplicationProviderResponse_ApplicationProviderArn, v.ApplicationProviderArn)
+		case schemas.DescribeApplicationProviderResponse_DisplayData:
+			v.DisplayData = &types.DisplayData{}
+			return v.DisplayData.Deserialize(d)
+		case schemas.DescribeApplicationProviderResponse_FederationProtocol:
+			var ev string
+			if err := d.ReadString(schemas.DescribeApplicationProviderResponse_FederationProtocol, &ev); err != nil {
+				return err
+			}
+			v.FederationProtocol = types.FederationProtocol(ev)
+			return nil
+		case schemas.DescribeApplicationProviderResponse_ResourceServerConfig:
+			v.ResourceServerConfig = &types.ResourceServerConfig{}
+			return v.ResourceServerConfig.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeApplicationProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeApplicationProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationProvider, schemas.DescribeApplicationProviderRequest, schemas.DescribeApplicationProviderResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeApplicationProvider{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeApplicationProvider, schemas.DescribeApplicationProviderRequest, schemas.DescribeApplicationProviderResponse), output: &DescribeApplicationProviderOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeApplicationProvider"); err != nil {

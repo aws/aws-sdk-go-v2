@@ -7,6 +7,10 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/internal/document"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,6 +37,32 @@ type DocumentTypeAsPayloadInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentTypeAsPayloadInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentTypeAsPayloadInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentTypeAsPayloadInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.DocumentTypeAsPayloadInputOutput_documentValue, &smithydocument.Opaque{Value: v.DocumentValue})
+}
+func (v *DocumentTypeAsPayloadInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentTypeAsPayloadInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentTypeAsPayloadInputOutput_documentValue:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.DocumentTypeAsPayloadInputOutput_documentValue, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.DocumentValue = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
+
 type DocumentTypeAsPayloadOutput struct {
 	DocumentValue document.Interface
 
@@ -42,16 +72,39 @@ type DocumentTypeAsPayloadOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DocumentTypeAsPayloadOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentTypeAsPayloadInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentTypeAsPayloadOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.DocumentTypeAsPayloadInputOutput_documentValue, &smithydocument.Opaque{Value: v.DocumentValue})
+}
+func (v *DocumentTypeAsPayloadOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentTypeAsPayloadInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentTypeAsPayloadInputOutput_documentValue:
+			var dv smithydocument.Value
+			if err := d.ReadDocument(schemas.DocumentTypeAsPayloadInputOutput_documentValue, &dv); err != nil {
+				return err
+			}
+			if ov, ok := dv.(smithydocument.Opaque); ok {
+				v.DocumentValue = internaldocument.NewDocumentUnmarshaler(ov.Value)
+			}
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDocumentTypeAsPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDocumentTypeAsPayload{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DocumentTypeAsPayload, schemas.DocumentTypeAsPayloadInputOutput, schemas.DocumentTypeAsPayloadInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDocumentTypeAsPayload{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DocumentTypeAsPayload, schemas.DocumentTypeAsPayloadInputOutput, schemas.DocumentTypeAsPayloadInputOutput), output: &DocumentTypeAsPayloadOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DocumentTypeAsPayload"); err != nil {

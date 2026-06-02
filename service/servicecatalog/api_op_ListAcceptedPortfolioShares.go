@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -61,6 +63,27 @@ type ListAcceptedPortfolioSharesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAcceptedPortfolioSharesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAcceptedPortfolioSharesInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAcceptedPortfolioSharesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.ListAcceptedPortfolioSharesInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.PageSize != 0 {
+		s.WriteInt32(schemas.ListAcceptedPortfolioSharesInput_PageSize, v.PageSize)
+	}
+	if v.PageToken != nil {
+		s.WriteString(schemas.ListAcceptedPortfolioSharesInput_PageToken, *v.PageToken)
+	}
+	if v.PortfolioShareType != "" {
+		s.WriteString(schemas.ListAcceptedPortfolioSharesInput_PortfolioShareType, string(v.PortfolioShareType))
+	}
+}
+
 type ListAcceptedPortfolioSharesOutput struct {
 
 	// The page token to use to retrieve the next set of results. If there are no
@@ -76,16 +99,26 @@ type ListAcceptedPortfolioSharesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAcceptedPortfolioSharesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAcceptedPortfolioSharesOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAcceptedPortfolioSharesOutput_NextPageToken:
+			v.NextPageToken = new(string)
+			return d.ReadString(schemas.ListAcceptedPortfolioSharesOutput_NextPageToken, v.NextPageToken)
+		case schemas.ListAcceptedPortfolioSharesOutput_PortfolioDetails:
+			return deserializePortfolioDetails(d, schemas.ListAcceptedPortfolioSharesOutput_PortfolioDetails, &v.PortfolioDetails)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAcceptedPortfolioSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpListAcceptedPortfolioShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAcceptedPortfolioShares, schemas.ListAcceptedPortfolioSharesInput, schemas.ListAcceptedPortfolioSharesOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpListAcceptedPortfolioShares{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAcceptedPortfolioShares, schemas.ListAcceptedPortfolioSharesInput, schemas.ListAcceptedPortfolioSharesOutput), output: &ListAcceptedPortfolioSharesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAcceptedPortfolioShares"); err != nil {

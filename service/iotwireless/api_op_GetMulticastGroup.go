@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotwireless/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -36,6 +38,18 @@ type GetMulticastGroupInput struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetMulticastGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMulticastGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMulticastGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetMulticastGroupRequest_Id, *v.Id)
+	}
 }
 
 type GetMulticastGroupOutput struct {
@@ -68,16 +82,42 @@ type GetMulticastGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMulticastGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMulticastGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMulticastGroupResponse_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.GetMulticastGroupResponse_Arn, v.Arn)
+		case schemas.GetMulticastGroupResponse_CreatedAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetMulticastGroupResponse_CreatedAt, v.CreatedAt)
+		case schemas.GetMulticastGroupResponse_Description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetMulticastGroupResponse_Description, v.Description)
+		case schemas.GetMulticastGroupResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetMulticastGroupResponse_Id, v.Id)
+		case schemas.GetMulticastGroupResponse_LoRaWAN:
+			v.LoRaWAN = &types.LoRaWANMulticastGet{}
+			return v.LoRaWAN.Deserialize(d)
+		case schemas.GetMulticastGroupResponse_Name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetMulticastGroupResponse_Name, v.Name)
+		case schemas.GetMulticastGroupResponse_Status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetMulticastGroupResponse_Status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMulticastGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMulticastGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMulticastGroup, schemas.GetMulticastGroupRequest, schemas.GetMulticastGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMulticastGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMulticastGroup, schemas.GetMulticastGroupRequest, schemas.GetMulticastGroupResponse), output: &GetMulticastGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMulticastGroup"); err != nil {

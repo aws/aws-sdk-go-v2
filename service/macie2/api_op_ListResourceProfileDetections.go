@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,24 @@ type ListResourceProfileDetectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceProfileDetectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListResourceProfileDetectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListResourceProfileDetectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListResourceProfileDetectionsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListResourceProfileDetectionsRequest_nextToken, *v.NextToken)
+	}
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ListResourceProfileDetectionsRequest_resourceArn, *v.ResourceArn)
+	}
+}
+
 type ListResourceProfileDetectionsOutput struct {
 
 	// An array of objects, one for each type of sensitive data that Amazon Macie
@@ -63,16 +83,26 @@ type ListResourceProfileDetectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListResourceProfileDetectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListResourceProfileDetectionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListResourceProfileDetectionsResponse_detections:
+			return deserialize__listOfDetection(d, schemas.ListResourceProfileDetectionsResponse_detections, &v.Detections)
+		case schemas.ListResourceProfileDetectionsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListResourceProfileDetectionsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListResourceProfileDetectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListResourceProfileDetections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceProfileDetections, schemas.ListResourceProfileDetectionsRequest, schemas.ListResourceProfileDetectionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListResourceProfileDetections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListResourceProfileDetections, schemas.ListResourceProfileDetectionsRequest, schemas.ListResourceProfileDetectionsResponse), output: &ListResourceProfileDetectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListResourceProfileDetections"); err != nil {

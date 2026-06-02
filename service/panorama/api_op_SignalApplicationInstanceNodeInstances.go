@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/panorama/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/panorama/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,31 @@ type SignalApplicationInstanceNodeInstancesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignalApplicationInstanceNodeInstancesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignalApplicationInstanceNodeInstancesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignalApplicationInstanceNodeInstancesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationInstanceId != nil {
+		s.WriteString(schemas.SignalApplicationInstanceNodeInstancesRequest_ApplicationInstanceId, *v.ApplicationInstanceId)
+	}
+	serializeNodeSignalList(s, schemas.SignalApplicationInstanceNodeInstancesRequest_NodeSignals, v.NodeSignals)
+}
+func (v *SignalApplicationInstanceNodeInstancesInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignalApplicationInstanceNodeInstancesRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignalApplicationInstanceNodeInstancesRequest_ApplicationInstanceId:
+			v.ApplicationInstanceId = new(string)
+			return d.ReadString(schemas.SignalApplicationInstanceNodeInstancesRequest_ApplicationInstanceId, v.ApplicationInstanceId)
+		case schemas.SignalApplicationInstanceNodeInstancesRequest_NodeSignals:
+			return deserializeNodeSignalList(d, schemas.SignalApplicationInstanceNodeInstancesRequest_NodeSignals, &v.NodeSignals)
+		}
+		return nil
+	})
+}
+
 type SignalApplicationInstanceNodeInstancesOutput struct {
 
 	// An application instance ID.
@@ -55,16 +82,35 @@ type SignalApplicationInstanceNodeInstancesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SignalApplicationInstanceNodeInstancesOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SignalApplicationInstanceNodeInstancesResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SignalApplicationInstanceNodeInstancesOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationInstanceId != nil {
+		s.WriteString(schemas.SignalApplicationInstanceNodeInstancesResponse_ApplicationInstanceId, *v.ApplicationInstanceId)
+	}
+}
+func (v *SignalApplicationInstanceNodeInstancesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SignalApplicationInstanceNodeInstancesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SignalApplicationInstanceNodeInstancesResponse_ApplicationInstanceId:
+			v.ApplicationInstanceId = new(string)
+			return d.ReadString(schemas.SignalApplicationInstanceNodeInstancesResponse_ApplicationInstanceId, v.ApplicationInstanceId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSignalApplicationInstanceNodeInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSignalApplicationInstanceNodeInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SignalApplicationInstanceNodeInstances, schemas.SignalApplicationInstanceNodeInstancesRequest, schemas.SignalApplicationInstanceNodeInstancesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSignalApplicationInstanceNodeInstances{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SignalApplicationInstanceNodeInstances, schemas.SignalApplicationInstanceNodeInstancesRequest, schemas.SignalApplicationInstanceNodeInstancesResponse), output: &SignalApplicationInstanceNodeInstancesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SignalApplicationInstanceNodeInstances"); err != nil {

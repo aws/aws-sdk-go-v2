@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -41,6 +43,21 @@ type DeleteCodeInterpreterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCodeInterpreterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteCodeInterpreterRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteCodeInterpreterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteCodeInterpreterRequest_clientToken, *v.ClientToken)
+	}
+	if v.CodeInterpreterId != nil {
+		s.WriteString(schemas.DeleteCodeInterpreterRequest_codeInterpreterId, *v.CodeInterpreterId)
+	}
+}
+
 type DeleteCodeInterpreterOutput struct {
 
 	// The unique identifier of the deleted code interpreter.
@@ -64,16 +81,34 @@ type DeleteCodeInterpreterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteCodeInterpreterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteCodeInterpreterResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteCodeInterpreterResponse_codeInterpreterId:
+			v.CodeInterpreterId = new(string)
+			return d.ReadString(schemas.DeleteCodeInterpreterResponse_codeInterpreterId, v.CodeInterpreterId)
+		case schemas.DeleteCodeInterpreterResponse_lastUpdatedAt:
+			v.LastUpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeleteCodeInterpreterResponse_lastUpdatedAt, v.LastUpdatedAt)
+		case schemas.DeleteCodeInterpreterResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteCodeInterpreterResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CodeInterpreterStatus(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteCodeInterpreterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteCodeInterpreter{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCodeInterpreter, schemas.DeleteCodeInterpreterRequest, schemas.DeleteCodeInterpreterResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteCodeInterpreter{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteCodeInterpreter, schemas.DeleteCodeInterpreterRequest, schemas.DeleteCodeInterpreterResponse), output: &DeleteCodeInterpreterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteCodeInterpreter"); err != nil {

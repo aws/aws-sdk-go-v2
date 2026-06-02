@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,21 @@ type DescribeSpendLimitsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSpendLimitsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeSpendLimitsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeSpendLimitsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.DescribeSpendLimitsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.DescribeSpendLimitsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type DescribeSpendLimitsOutput struct {
 
 	// The token to be used for the next set of paginated results. If this field is
@@ -61,16 +78,26 @@ type DescribeSpendLimitsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeSpendLimitsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeSpendLimitsResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeSpendLimitsResult_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.DescribeSpendLimitsResult_NextToken, v.NextToken)
+		case schemas.DescribeSpendLimitsResult_SpendLimits:
+			return deserializeSpendLimitList(d, schemas.DescribeSpendLimitsResult_SpendLimits, &v.SpendLimits)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeSpendLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDescribeSpendLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSpendLimits, schemas.DescribeSpendLimitsRequest, schemas.DescribeSpendLimitsResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDescribeSpendLimits{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeSpendLimits, schemas.DescribeSpendLimitsRequest, schemas.DescribeSpendLimitsResult), output: &DescribeSpendLimitsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeSpendLimits"); err != nil {

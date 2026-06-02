@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,28 @@ type QueryIdempotencyTokenAutoFillInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryIdempotencyTokenAutoFillInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.QueryIdempotencyTokenAutoFillInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryIdempotencyTokenAutoFillInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Token != nil {
+		s.WriteString(schemas.QueryIdempotencyTokenAutoFillInput_token, *v.Token)
+	}
+}
+func (v *QueryIdempotencyTokenAutoFillInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.QueryIdempotencyTokenAutoFillInput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.QueryIdempotencyTokenAutoFillInput_token:
+			v.Token = new(string)
+			return d.ReadString(schemas.QueryIdempotencyTokenAutoFillInput_token, v.Token)
+		}
+		return nil
+	})
+}
+
 type QueryIdempotencyTokenAutoFillOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -39,16 +63,29 @@ type QueryIdempotencyTokenAutoFillOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *QueryIdempotencyTokenAutoFillOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(nil)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *QueryIdempotencyTokenAutoFillOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *QueryIdempotencyTokenAutoFillOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, nil, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationQueryIdempotencyTokenAutoFillMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpQueryIdempotencyTokenAutoFill{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryIdempotencyTokenAutoFill, schemas.QueryIdempotencyTokenAutoFillInput, nil)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpQueryIdempotencyTokenAutoFill{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.QueryIdempotencyTokenAutoFill, schemas.QueryIdempotencyTokenAutoFillInput, nil), output: &QueryIdempotencyTokenAutoFillOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "QueryIdempotencyTokenAutoFill"); err != nil {

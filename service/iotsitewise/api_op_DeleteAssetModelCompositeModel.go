@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -70,6 +72,33 @@ type DeleteAssetModelCompositeModelInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssetModelCompositeModelInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteAssetModelCompositeModelRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteAssetModelCompositeModelInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetModelCompositeModelId != nil {
+		s.WriteString(schemas.DeleteAssetModelCompositeModelRequest_assetModelCompositeModelId, *v.AssetModelCompositeModelId)
+	}
+	if v.AssetModelId != nil {
+		s.WriteString(schemas.DeleteAssetModelCompositeModelRequest_assetModelId, *v.AssetModelId)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.DeleteAssetModelCompositeModelRequest_clientToken, *v.ClientToken)
+	}
+	if v.IfMatch != nil {
+		s.WriteString(schemas.DeleteAssetModelCompositeModelRequest_ifMatch, *v.IfMatch)
+	}
+	if v.IfNoneMatch != nil {
+		s.WriteString(schemas.DeleteAssetModelCompositeModelRequest_ifNoneMatch, *v.IfNoneMatch)
+	}
+	if v.MatchForVersionType != "" {
+		s.WriteString(schemas.DeleteAssetModelCompositeModelRequest_matchForVersionType, string(v.MatchForVersionType))
+	}
+}
+
 type DeleteAssetModelCompositeModelOutput struct {
 
 	// Contains current status information for an asset model. For more information,
@@ -86,16 +115,24 @@ type DeleteAssetModelCompositeModelOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteAssetModelCompositeModelOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteAssetModelCompositeModelResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteAssetModelCompositeModelResponse_assetModelStatus:
+			v.AssetModelStatus = &types.AssetModelStatus{}
+			return v.AssetModelStatus.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteAssetModelCompositeModelMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteAssetModelCompositeModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssetModelCompositeModel, schemas.DeleteAssetModelCompositeModelRequest, schemas.DeleteAssetModelCompositeModelResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteAssetModelCompositeModel{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteAssetModelCompositeModel, schemas.DeleteAssetModelCompositeModelRequest, schemas.DeleteAssetModelCompositeModelResponse), output: &DeleteAssetModelCompositeModelOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteAssetModelCompositeModel"); err != nil {

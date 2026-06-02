@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cborquerycompatible/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,6 +31,22 @@ type GetItemInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetItemInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetItemInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetItemInput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetItemInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetItemInput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
+
 type GetItemOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -36,16 +54,29 @@ type GetItemOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetItemOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetItemOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetItemOutput) SerializeMembers(s smithy.ShapeSerializer) {
+}
+func (v *GetItemOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetItemOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetItemMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpGetItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetItem, schemas.GetItemInput, schemas.GetItemOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpGetItem{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetItem, schemas.GetItemInput, schemas.GetItemOutput), output: &GetItemOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetItem"); err != nil {

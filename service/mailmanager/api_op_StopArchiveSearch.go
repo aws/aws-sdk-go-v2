@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mailmanager/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type StopArchiveSearchInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopArchiveSearchInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.StopArchiveSearchRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *StopArchiveSearchInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.SearchId != nil {
+		s.WriteString(schemas.StopArchiveSearchRequest_SearchId, *v.SearchId)
+	}
+}
+
 // The response indicating if the request to stop the search job succeeded.
 //
 // On success, returns an HTTP 200 status code. On failure, returns an error
@@ -48,16 +62,21 @@ type StopArchiveSearchOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *StopArchiveSearchOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.StopArchiveSearchResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationStopArchiveSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpStopArchiveSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopArchiveSearch, schemas.StopArchiveSearchRequest, schemas.StopArchiveSearchResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpStopArchiveSearch{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.StopArchiveSearch, schemas.StopArchiveSearchRequest, schemas.StopArchiveSearchResponse), output: &StopArchiveSearchOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "StopArchiveSearch"); err != nil {

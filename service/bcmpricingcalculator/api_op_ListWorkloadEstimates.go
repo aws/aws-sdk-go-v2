@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bcmpricingcalculator/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -47,6 +49,32 @@ type ListWorkloadEstimatesInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadEstimatesInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListWorkloadEstimatesRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListWorkloadEstimatesInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CreatedAtFilter != nil {
+		s.WriteStruct(schemas.ListWorkloadEstimatesRequest_createdAtFilter)
+		v.CreatedAtFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ExpiresAtFilter != nil {
+		s.WriteStruct(schemas.ListWorkloadEstimatesRequest_expiresAtFilter)
+		v.ExpiresAtFilter.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeListWorkloadEstimatesFilters(s, schemas.ListWorkloadEstimatesRequest_filters, v.Filters)
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListWorkloadEstimatesRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListWorkloadEstimatesRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListWorkloadEstimatesOutput struct {
 
 	//  The list of workload estimates for the account.
@@ -61,16 +89,26 @@ type ListWorkloadEstimatesOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListWorkloadEstimatesOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListWorkloadEstimatesResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListWorkloadEstimatesResponse_items:
+			return deserializeWorkloadEstimateSummaries(d, schemas.ListWorkloadEstimatesResponse_items, &v.Items)
+		case schemas.ListWorkloadEstimatesResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListWorkloadEstimatesResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListWorkloadEstimatesMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListWorkloadEstimates{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloadEstimates, schemas.ListWorkloadEstimatesRequest, schemas.ListWorkloadEstimatesResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListWorkloadEstimates{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListWorkloadEstimates, schemas.ListWorkloadEstimatesRequest, schemas.ListWorkloadEstimatesResponse), output: &ListWorkloadEstimatesOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListWorkloadEstimates"); err != nil {

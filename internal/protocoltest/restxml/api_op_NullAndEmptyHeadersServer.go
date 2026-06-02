@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,37 @@ type NullAndEmptyHeadersServerInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NullAndEmptyHeadersServerInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NullAndEmptyHeadersIO)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NullAndEmptyHeadersServerInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.A != nil {
+		s.WriteString(schemas.NullAndEmptyHeadersIO_a, *v.A)
+	}
+	if v.B != nil {
+		s.WriteString(schemas.NullAndEmptyHeadersIO_b, *v.B)
+	}
+	serializeStringList(s, schemas.NullAndEmptyHeadersIO_c, v.C)
+}
+func (v *NullAndEmptyHeadersServerInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NullAndEmptyHeadersIO, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NullAndEmptyHeadersIO_a:
+			v.A = new(string)
+			return d.ReadString(schemas.NullAndEmptyHeadersIO_a, v.A)
+		case schemas.NullAndEmptyHeadersIO_b:
+			v.B = new(string)
+			return d.ReadString(schemas.NullAndEmptyHeadersIO_b, v.B)
+		case schemas.NullAndEmptyHeadersIO_c:
+			return deserializeStringList(d, schemas.NullAndEmptyHeadersIO_c, &v.C)
+		}
+		return nil
+	})
+}
+
 type NullAndEmptyHeadersServerOutput struct {
 	A *string
 
@@ -49,16 +82,44 @@ type NullAndEmptyHeadersServerOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NullAndEmptyHeadersServerOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NullAndEmptyHeadersIO)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NullAndEmptyHeadersServerOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.A != nil {
+		s.WriteString(schemas.NullAndEmptyHeadersIO_a, *v.A)
+	}
+	if v.B != nil {
+		s.WriteString(schemas.NullAndEmptyHeadersIO_b, *v.B)
+	}
+	serializeStringList(s, schemas.NullAndEmptyHeadersIO_c, v.C)
+}
+func (v *NullAndEmptyHeadersServerOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NullAndEmptyHeadersIO, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NullAndEmptyHeadersIO_a:
+			v.A = new(string)
+			return d.ReadString(schemas.NullAndEmptyHeadersIO_a, v.A)
+		case schemas.NullAndEmptyHeadersIO_b:
+			v.B = new(string)
+			return d.ReadString(schemas.NullAndEmptyHeadersIO_b, v.B)
+		case schemas.NullAndEmptyHeadersIO_c:
+			return deserializeStringList(d, schemas.NullAndEmptyHeadersIO_c, &v.C)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationNullAndEmptyHeadersServerMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestxml_serializeOpNullAndEmptyHeadersServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NullAndEmptyHeadersServer, schemas.NullAndEmptyHeadersIO, schemas.NullAndEmptyHeadersIO)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestxml_deserializeOpNullAndEmptyHeadersServer{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NullAndEmptyHeadersServer, schemas.NullAndEmptyHeadersIO, schemas.NullAndEmptyHeadersIO), output: &NullAndEmptyHeadersServerOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "NullAndEmptyHeadersServer"); err != nil {

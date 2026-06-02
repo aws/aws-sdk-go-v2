@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,30 @@ type ListDeploymentsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeploymentsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListDeploymentsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListDeploymentsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.HistoryFilter != "" {
+		s.WriteString(schemas.ListDeploymentsRequest_historyFilter, string(v.HistoryFilter))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListDeploymentsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListDeploymentsRequest_nextToken, *v.NextToken)
+	}
+	if v.ParentTargetArn != nil {
+		s.WriteString(schemas.ListDeploymentsRequest_parentTargetArn, *v.ParentTargetArn)
+	}
+	if v.TargetArn != nil {
+		s.WriteString(schemas.ListDeploymentsRequest_targetArn, *v.TargetArn)
+	}
+}
+
 type ListDeploymentsOutput struct {
 
 	// A list that summarizes each deployment.
@@ -74,16 +100,26 @@ type ListDeploymentsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListDeploymentsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListDeploymentsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListDeploymentsResponse_deployments:
+			return deserializeDeploymentList(d, schemas.ListDeploymentsResponse_deployments, &v.Deployments)
+		case schemas.ListDeploymentsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListDeploymentsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeployments, schemas.ListDeploymentsRequest, schemas.ListDeploymentsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListDeployments{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListDeployments, schemas.ListDeploymentsRequest, schemas.ListDeploymentsResponse), output: &ListDeploymentsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListDeployments"); err != nil {

@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -35,6 +36,22 @@ func (e *BadRequestException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *BadRequestException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BadRequestException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BadRequestException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.BadRequestException_Code, v.Code)
+		case schemas.BadRequestException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.BadRequestException_Message, v.Message)
+		case schemas.BadRequestException_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.BadRequestException_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 
 // Multiple instances of the same request have been made simultaneously.
 type ConflictException struct {
@@ -64,6 +81,22 @@ func (e *ConflictException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ConflictException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ConflictException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ConflictException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ConflictException_Code, v.Code)
+		case schemas.ConflictException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ConflictException_Message, v.Message)
+		case schemas.ConflictException_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ConflictException_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 
 // The client is permanently forbidden from making the request.
 type ForbiddenException struct {
@@ -93,6 +126,22 @@ func (e *ForbiddenException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ForbiddenException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ForbiddenException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ForbiddenException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ForbiddenException_Code, v.Code)
+		case schemas.ForbiddenException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ForbiddenException_Message, v.Message)
+		case schemas.ForbiddenException_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ForbiddenException_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 
 // The request exceeds the resource limit.
 type LimitExceededException struct {
@@ -122,6 +171,22 @@ func (e *LimitExceededException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *LimitExceededException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.LimitExceededException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.LimitExceededException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.LimitExceededException_Code, v.Code)
+		case schemas.LimitExceededException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.LimitExceededException_Message, v.Message)
+		case schemas.LimitExceededException_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.LimitExceededException_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 
 // One or more of the resources in the request does not exist in the system.
 type NotFoundException struct {
@@ -151,6 +216,22 @@ func (e *NotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *NotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotFoundException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.NotFoundException_Code, v.Code)
+		case schemas.NotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.NotFoundException_Message, v.Message)
+		case schemas.NotFoundException_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.NotFoundException_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 
 // The resource that you want to tag couldn't be found.
 type ResourceNotFoundException struct {
@@ -181,6 +262,25 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ResourceNotFoundException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceNotFoundException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceNotFoundException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Code, v.Code)
+		case schemas.ResourceNotFoundException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_Message, v.Message)
+		case schemas.ResourceNotFoundException_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_RequestId, v.RequestId)
+		case schemas.ResourceNotFoundException_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.ResourceNotFoundException_ResourceName, v.ResourceName)
+		}
+		return nil
+	})
+}
 
 // The service encountered an unexpected error.
 type ServiceFailureException struct {
@@ -210,6 +310,22 @@ func (e *ServiceFailureException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceFailureException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceFailureException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceFailureException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ServiceFailureException_Code, v.Code)
+		case schemas.ServiceFailureException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceFailureException_Message, v.Message)
+		case schemas.ServiceFailureException_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ServiceFailureException_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 
 // The service is currently unavailable.
 type ServiceUnavailableException struct {
@@ -240,6 +356,25 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+func (v *ServiceUnavailableException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ServiceUnavailableException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ServiceUnavailableException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_Code, v.Code)
+		case schemas.ServiceUnavailableException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_Message, v.Message)
+		case schemas.ServiceUnavailableException_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_RequestId, v.RequestId)
+		case schemas.ServiceUnavailableException_RetryAfterSeconds:
+			v.RetryAfterSeconds = new(string)
+			return d.ReadString(schemas.ServiceUnavailableException_RetryAfterSeconds, v.RetryAfterSeconds)
+		}
+		return nil
+	})
+}
 
 // The number of customer requests exceeds the request rate limit.
 type ThrottlingException struct {
@@ -269,6 +404,22 @@ func (e *ThrottlingException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ThrottlingException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ThrottlingException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ThrottlingException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.ThrottlingException_Code, v.Code)
+		case schemas.ThrottlingException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.ThrottlingException_Message, v.Message)
+		case schemas.ThrottlingException_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.ThrottlingException_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 
 // Too many tags were added to the specified resource.
 type TooManyTagsException struct {
@@ -299,6 +450,25 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *TooManyTagsException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.TooManyTagsException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.TooManyTagsException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.TooManyTagsException_Code, v.Code)
+		case schemas.TooManyTagsException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.TooManyTagsException_Message, v.Message)
+		case schemas.TooManyTagsException_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.TooManyTagsException_RequestId, v.RequestId)
+		case schemas.TooManyTagsException_ResourceName:
+			v.ResourceName = new(string)
+			return d.ReadString(schemas.TooManyTagsException_ResourceName, v.ResourceName)
+		}
+		return nil
+	})
+}
 
 // The user isn't authorized to request a resource.
 type UnauthorizedException struct {
@@ -328,6 +498,22 @@ func (e *UnauthorizedException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnauthorizedException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnauthorizedException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnauthorizedException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.UnauthorizedException_Code, v.Code)
+		case schemas.UnauthorizedException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnauthorizedException_Message, v.Message)
+		case schemas.UnauthorizedException_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UnauthorizedException_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}
 
 // The request was well-formed but was unable to be followed due to semantic
 // errors.
@@ -358,3 +544,19 @@ func (e *UnprocessableEntityException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *UnprocessableEntityException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *UnprocessableEntityException) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UnprocessableEntityException, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UnprocessableEntityException_Code:
+			v.Code = new(string)
+			return d.ReadString(schemas.UnprocessableEntityException_Code, v.Code)
+		case schemas.UnprocessableEntityException_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.UnprocessableEntityException_Message, v.Message)
+		case schemas.UnprocessableEntityException_RequestId:
+			v.RequestId = new(string)
+			return d.ReadString(schemas.UnprocessableEntityException_RequestId, v.RequestId)
+		}
+		return nil
+	})
+}

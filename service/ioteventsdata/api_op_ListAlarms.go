@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/ioteventsdata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,24 @@ type ListAlarmsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAlarmsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAlarmsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAlarmsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AlarmModelName != nil {
+		s.WriteString(schemas.ListAlarmsRequest_alarmModelName, *v.AlarmModelName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAlarmsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAlarmsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListAlarmsOutput struct {
 
 	// A list that summarizes each alarm.
@@ -59,16 +79,26 @@ type ListAlarmsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAlarmsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAlarmsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAlarmsResponse_alarmSummaries:
+			return deserializeAlarmSummaries(d, schemas.ListAlarmsResponse_alarmSummaries, &v.AlarmSummaries)
+		case schemas.ListAlarmsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAlarmsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAlarmsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListAlarms{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAlarms, schemas.ListAlarmsRequest, schemas.ListAlarmsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListAlarms{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAlarms, schemas.ListAlarmsRequest, schemas.ListAlarmsResponse), output: &ListAlarmsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAlarms"); err != nil {

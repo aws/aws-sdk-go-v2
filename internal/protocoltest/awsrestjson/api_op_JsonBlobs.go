@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,6 +34,27 @@ type JsonBlobsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonBlobsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonBlobsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonBlobsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteBlob(schemas.JsonBlobsInputOutput_data, v.Data)
+	}
+}
+func (v *JsonBlobsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonBlobsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonBlobsInputOutput_data:
+			return d.ReadBlob(schemas.JsonBlobsInputOutput_data, &v.Data)
+		}
+		return nil
+	})
+}
+
 type JsonBlobsOutput struct {
 	Data []byte
 
@@ -41,16 +64,34 @@ type JsonBlobsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *JsonBlobsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.JsonBlobsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *JsonBlobsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Data != nil {
+		s.WriteBlob(schemas.JsonBlobsInputOutput_data, v.Data)
+	}
+}
+func (v *JsonBlobsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.JsonBlobsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.JsonBlobsInputOutput_data:
+			return d.ReadBlob(schemas.JsonBlobsInputOutput_data, &v.Data)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationJsonBlobsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpJsonBlobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonBlobs, schemas.JsonBlobsInputOutput, schemas.JsonBlobsInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpJsonBlobs{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.JsonBlobs, schemas.JsonBlobsInputOutput, schemas.JsonBlobsInputOutput), output: &JsonBlobsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "JsonBlobs"); err != nil {

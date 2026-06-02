@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53globalresolver/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -44,6 +46,18 @@ type DeleteGlobalResolverInput struct {
 	GlobalResolverId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DeleteGlobalResolverInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteGlobalResolverInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteGlobalResolverInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.GlobalResolverId != nil {
+		s.WriteString(schemas.DeleteGlobalResolverInput_globalResolverId, *v.GlobalResolverId)
+	}
 }
 
 type DeleteGlobalResolverOutput struct {
@@ -123,16 +137,68 @@ type DeleteGlobalResolverOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteGlobalResolverOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteGlobalResolverOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteGlobalResolverOutput_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.DeleteGlobalResolverOutput_arn, v.Arn)
+		case schemas.DeleteGlobalResolverOutput_clientToken:
+			v.ClientToken = new(string)
+			return d.ReadString(schemas.DeleteGlobalResolverOutput_clientToken, v.ClientToken)
+		case schemas.DeleteGlobalResolverOutput_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeleteGlobalResolverOutput_createdAt, v.CreatedAt)
+		case schemas.DeleteGlobalResolverOutput_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.DeleteGlobalResolverOutput_description, v.Description)
+		case schemas.DeleteGlobalResolverOutput_dnsName:
+			v.DnsName = new(string)
+			return d.ReadString(schemas.DeleteGlobalResolverOutput_dnsName, v.DnsName)
+		case schemas.DeleteGlobalResolverOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.DeleteGlobalResolverOutput_id, v.Id)
+		case schemas.DeleteGlobalResolverOutput_ipAddressType:
+			var ev string
+			if err := d.ReadString(schemas.DeleteGlobalResolverOutput_ipAddressType, &ev); err != nil {
+				return err
+			}
+			v.IpAddressType = types.GlobalResolverIpAddressType(ev)
+			return nil
+		case schemas.DeleteGlobalResolverOutput_ipv4Addresses:
+			return deserializeIPv4Addresses(d, schemas.DeleteGlobalResolverOutput_ipv4Addresses, &v.Ipv4Addresses)
+		case schemas.DeleteGlobalResolverOutput_ipv6Addresses:
+			return deserializeIPv6Addresses(d, schemas.DeleteGlobalResolverOutput_ipv6Addresses, &v.Ipv6Addresses)
+		case schemas.DeleteGlobalResolverOutput_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.DeleteGlobalResolverOutput_name, v.Name)
+		case schemas.DeleteGlobalResolverOutput_observabilityRegion:
+			v.ObservabilityRegion = new(string)
+			return d.ReadString(schemas.DeleteGlobalResolverOutput_observabilityRegion, v.ObservabilityRegion)
+		case schemas.DeleteGlobalResolverOutput_regions:
+			return deserializeRegions(d, schemas.DeleteGlobalResolverOutput_regions, &v.Regions)
+		case schemas.DeleteGlobalResolverOutput_status:
+			var ev string
+			if err := d.ReadString(schemas.DeleteGlobalResolverOutput_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.CRResourceStatus(ev)
+			return nil
+		case schemas.DeleteGlobalResolverOutput_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.DeleteGlobalResolverOutput_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteGlobalResolverMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteGlobalResolver{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGlobalResolver, schemas.DeleteGlobalResolverInput, schemas.DeleteGlobalResolverOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteGlobalResolver{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteGlobalResolver, schemas.DeleteGlobalResolverInput, schemas.DeleteGlobalResolverOutput), output: &DeleteGlobalResolverOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteGlobalResolver"); err != nil {

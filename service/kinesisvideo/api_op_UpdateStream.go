@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kinesisvideo/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -72,6 +74,30 @@ type UpdateStreamInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStreamInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateStreamInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateStreamInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CurrentVersion != nil {
+		s.WriteString(schemas.UpdateStreamInput_CurrentVersion, *v.CurrentVersion)
+	}
+	if v.DeviceName != nil {
+		s.WriteString(schemas.UpdateStreamInput_DeviceName, *v.DeviceName)
+	}
+	if v.MediaType != nil {
+		s.WriteString(schemas.UpdateStreamInput_MediaType, *v.MediaType)
+	}
+	if v.StreamARN != nil {
+		s.WriteString(schemas.UpdateStreamInput_StreamARN, *v.StreamARN)
+	}
+	if v.StreamName != nil {
+		s.WriteString(schemas.UpdateStreamInput_StreamName, *v.StreamName)
+	}
+}
+
 type UpdateStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -79,16 +105,21 @@ type UpdateStreamOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateStreamOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateStreamOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStream, schemas.UpdateStreamInput, schemas.UpdateStreamOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateStream{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateStream, schemas.UpdateStreamInput, schemas.UpdateStreamOutput), output: &UpdateStreamOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateStream"); err != nil {

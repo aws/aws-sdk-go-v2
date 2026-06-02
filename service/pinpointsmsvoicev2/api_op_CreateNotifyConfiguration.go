@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -73,6 +75,36 @@ type CreateNotifyConfigurationInput struct {
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *CreateNotifyConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateNotifyConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateNotifyConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateNotifyConfigurationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.DefaultTemplateId != nil {
+		s.WriteString(schemas.CreateNotifyConfigurationRequest_DefaultTemplateId, *v.DefaultTemplateId)
+	}
+	if v.DeletionProtectionEnabled != nil {
+		s.WriteBool(schemas.CreateNotifyConfigurationRequest_DeletionProtectionEnabled, *v.DeletionProtectionEnabled)
+	}
+	if v.DisplayName != nil {
+		s.WriteString(schemas.CreateNotifyConfigurationRequest_DisplayName, *v.DisplayName)
+	}
+	serializeNotifyEnabledChannelsList(s, schemas.CreateNotifyConfigurationRequest_EnabledChannels, v.EnabledChannels)
+	serializeIsoCountryCodeList(s, schemas.CreateNotifyConfigurationRequest_EnabledCountries, v.EnabledCountries)
+	if v.PoolId != nil {
+		s.WriteString(schemas.CreateNotifyConfigurationRequest_PoolId, *v.PoolId)
+	}
+	serializeTagList(s, schemas.CreateNotifyConfigurationRequest_Tags, v.Tags)
+	if v.UseCase != "" {
+		s.WriteString(schemas.CreateNotifyConfigurationRequest_UseCase, string(v.UseCase))
+	}
 }
 
 type CreateNotifyConfigurationOutput struct {
@@ -153,16 +185,78 @@ type CreateNotifyConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateNotifyConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateNotifyConfigurationResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateNotifyConfigurationResult_CreatedTimestamp:
+			v.CreatedTimestamp = new(time.Time)
+			return d.ReadTime(schemas.CreateNotifyConfigurationResult_CreatedTimestamp, v.CreatedTimestamp)
+		case schemas.CreateNotifyConfigurationResult_DefaultTemplateId:
+			v.DefaultTemplateId = new(string)
+			return d.ReadString(schemas.CreateNotifyConfigurationResult_DefaultTemplateId, v.DefaultTemplateId)
+		case schemas.CreateNotifyConfigurationResult_DeletionProtectionEnabled:
+			return d.ReadBool(schemas.CreateNotifyConfigurationResult_DeletionProtectionEnabled, &v.DeletionProtectionEnabled)
+		case schemas.CreateNotifyConfigurationResult_DisplayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.CreateNotifyConfigurationResult_DisplayName, v.DisplayName)
+		case schemas.CreateNotifyConfigurationResult_EnabledChannels:
+			return deserializeNotifyEnabledChannelsList(d, schemas.CreateNotifyConfigurationResult_EnabledChannels, &v.EnabledChannels)
+		case schemas.CreateNotifyConfigurationResult_EnabledCountries:
+			return deserializeIsoCountryCodeList(d, schemas.CreateNotifyConfigurationResult_EnabledCountries, &v.EnabledCountries)
+		case schemas.CreateNotifyConfigurationResult_NotifyConfigurationArn:
+			v.NotifyConfigurationArn = new(string)
+			return d.ReadString(schemas.CreateNotifyConfigurationResult_NotifyConfigurationArn, v.NotifyConfigurationArn)
+		case schemas.CreateNotifyConfigurationResult_NotifyConfigurationId:
+			v.NotifyConfigurationId = new(string)
+			return d.ReadString(schemas.CreateNotifyConfigurationResult_NotifyConfigurationId, v.NotifyConfigurationId)
+		case schemas.CreateNotifyConfigurationResult_PoolId:
+			v.PoolId = new(string)
+			return d.ReadString(schemas.CreateNotifyConfigurationResult_PoolId, v.PoolId)
+		case schemas.CreateNotifyConfigurationResult_RejectionReason:
+			v.RejectionReason = new(string)
+			return d.ReadString(schemas.CreateNotifyConfigurationResult_RejectionReason, v.RejectionReason)
+		case schemas.CreateNotifyConfigurationResult_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateNotifyConfigurationResult_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.NotifyConfigurationStatus(ev)
+			return nil
+		case schemas.CreateNotifyConfigurationResult_Tags:
+			return deserializeTagList(d, schemas.CreateNotifyConfigurationResult_Tags, &v.Tags)
+		case schemas.CreateNotifyConfigurationResult_Tier:
+			var ev string
+			if err := d.ReadString(schemas.CreateNotifyConfigurationResult_Tier, &ev); err != nil {
+				return err
+			}
+			v.Tier = types.NotifyConfigurationTier(ev)
+			return nil
+		case schemas.CreateNotifyConfigurationResult_TierUpgradeStatus:
+			var ev string
+			if err := d.ReadString(schemas.CreateNotifyConfigurationResult_TierUpgradeStatus, &ev); err != nil {
+				return err
+			}
+			v.TierUpgradeStatus = types.TierUpgradeStatus(ev)
+			return nil
+		case schemas.CreateNotifyConfigurationResult_UseCase:
+			var ev string
+			if err := d.ReadString(schemas.CreateNotifyConfigurationResult_UseCase, &ev); err != nil {
+				return err
+			}
+			v.UseCase = types.NotifyConfigurationUseCase(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateNotifyConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpCreateNotifyConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotifyConfiguration, schemas.CreateNotifyConfigurationRequest, schemas.CreateNotifyConfigurationResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpCreateNotifyConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateNotifyConfiguration, schemas.CreateNotifyConfigurationRequest, schemas.CreateNotifyConfigurationResult), output: &CreateNotifyConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateNotifyConfiguration"); err != nil {

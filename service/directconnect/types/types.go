@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
@@ -25,6 +27,40 @@ type AssociatedCoreNetwork struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AssociatedCoreNetwork) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatedCoreNetwork)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatedCoreNetwork) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentId != nil {
+		s.WriteString(schemas.AssociatedCoreNetwork_attachmentId, *v.AttachmentId)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.AssociatedCoreNetwork_id, *v.Id)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.AssociatedCoreNetwork_ownerAccount, *v.OwnerAccount)
+	}
+}
+func (v *AssociatedCoreNetwork) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatedCoreNetwork, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatedCoreNetwork_attachmentId:
+			v.AttachmentId = new(string)
+			return d.ReadString(schemas.AssociatedCoreNetwork_attachmentId, v.AttachmentId)
+		case schemas.AssociatedCoreNetwork_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssociatedCoreNetwork_id, v.Id)
+		case schemas.AssociatedCoreNetwork_ownerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.AssociatedCoreNetwork_ownerAccount, v.OwnerAccount)
+		}
+		return nil
+	})
+}
+
 // Information about the associated gateway.
 type AssociatedGateway struct {
 
@@ -42,6 +78,50 @@ type AssociatedGateway struct {
 	Type GatewayType
 
 	noSmithyDocumentSerde
+}
+
+func (v *AssociatedGateway) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AssociatedGateway)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AssociatedGateway) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.AssociatedGateway_id, *v.Id)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.AssociatedGateway_ownerAccount, *v.OwnerAccount)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.AssociatedGateway_region, *v.Region)
+	}
+	if v.Type != "" {
+		s.WriteString(schemas.AssociatedGateway_type, string(v.Type))
+	}
+}
+func (v *AssociatedGateway) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AssociatedGateway, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AssociatedGateway_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.AssociatedGateway_id, v.Id)
+		case schemas.AssociatedGateway_ownerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.AssociatedGateway_ownerAccount, v.OwnerAccount)
+		case schemas.AssociatedGateway_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.AssociatedGateway_region, v.Region)
+		case schemas.AssociatedGateway_type:
+			var ev string
+			if err := d.ReadString(schemas.AssociatedGateway_type, &ev); err != nil {
+				return err
+			}
+			v.Type = GatewayType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about a BGP peer.
@@ -121,6 +201,99 @@ type BGPPeer struct {
 	CustomerAddress *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *BGPPeer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BGPPeer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BGPPeer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.BGPPeer_addressFamily, string(v.AddressFamily))
+	}
+	if v.AmazonAddress != nil {
+		s.WriteString(schemas.BGPPeer_amazonAddress, *v.AmazonAddress)
+	}
+	if v.Asn != 0 {
+		s.WriteInt32(schemas.BGPPeer_asn, v.Asn)
+	}
+	if v.AsnLong != nil {
+		s.WriteInt64(schemas.BGPPeer_asnLong, *v.AsnLong)
+	}
+	if v.AuthKey != nil {
+		s.WriteString(schemas.BGPPeer_authKey, *v.AuthKey)
+	}
+	if v.AwsDeviceV2 != nil {
+		s.WriteString(schemas.BGPPeer_awsDeviceV2, *v.AwsDeviceV2)
+	}
+	if v.AwsLogicalDeviceId != nil {
+		s.WriteString(schemas.BGPPeer_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
+	}
+	if v.BgpPeerId != nil {
+		s.WriteString(schemas.BGPPeer_bgpPeerId, *v.BgpPeerId)
+	}
+	if v.BgpPeerState != "" {
+		s.WriteString(schemas.BGPPeer_bgpPeerState, string(v.BgpPeerState))
+	}
+	if v.BgpStatus != "" {
+		s.WriteString(schemas.BGPPeer_bgpStatus, string(v.BgpStatus))
+	}
+	if v.CustomerAddress != nil {
+		s.WriteString(schemas.BGPPeer_customerAddress, *v.CustomerAddress)
+	}
+}
+func (v *BGPPeer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BGPPeer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BGPPeer_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.BGPPeer_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = AddressFamily(ev)
+			return nil
+		case schemas.BGPPeer_amazonAddress:
+			v.AmazonAddress = new(string)
+			return d.ReadString(schemas.BGPPeer_amazonAddress, v.AmazonAddress)
+		case schemas.BGPPeer_asn:
+			return d.ReadInt32(schemas.BGPPeer_asn, &v.Asn)
+		case schemas.BGPPeer_asnLong:
+			v.AsnLong = new(int64)
+			return d.ReadInt64(schemas.BGPPeer_asnLong, v.AsnLong)
+		case schemas.BGPPeer_authKey:
+			v.AuthKey = new(string)
+			return d.ReadString(schemas.BGPPeer_authKey, v.AuthKey)
+		case schemas.BGPPeer_awsDeviceV2:
+			v.AwsDeviceV2 = new(string)
+			return d.ReadString(schemas.BGPPeer_awsDeviceV2, v.AwsDeviceV2)
+		case schemas.BGPPeer_awsLogicalDeviceId:
+			v.AwsLogicalDeviceId = new(string)
+			return d.ReadString(schemas.BGPPeer_awsLogicalDeviceId, v.AwsLogicalDeviceId)
+		case schemas.BGPPeer_bgpPeerId:
+			v.BgpPeerId = new(string)
+			return d.ReadString(schemas.BGPPeer_bgpPeerId, v.BgpPeerId)
+		case schemas.BGPPeer_bgpPeerState:
+			var ev string
+			if err := d.ReadString(schemas.BGPPeer_bgpPeerState, &ev); err != nil {
+				return err
+			}
+			v.BgpPeerState = BGPPeerState(ev)
+			return nil
+		case schemas.BGPPeer_bgpStatus:
+			var ev string
+			if err := d.ReadString(schemas.BGPPeer_bgpStatus, &ev); err != nil {
+				return err
+			}
+			v.BgpStatus = BGPStatus(ev)
+			return nil
+		case schemas.BGPPeer_customerAddress:
+			v.CustomerAddress = new(string)
+			return d.ReadString(schemas.BGPPeer_customerAddress, v.CustomerAddress)
+		}
+		return nil
+	})
 }
 
 // Information about an Direct Connect connection.
@@ -231,6 +404,161 @@ type Connection struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Connection) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Connection)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Connection) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsDevice != nil {
+		s.WriteString(schemas.Connection_awsDevice, *v.AwsDevice)
+	}
+	if v.AwsDeviceV2 != nil {
+		s.WriteString(schemas.Connection_awsDeviceV2, *v.AwsDeviceV2)
+	}
+	if v.AwsLogicalDeviceId != nil {
+		s.WriteString(schemas.Connection_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
+	}
+	if v.Bandwidth != nil {
+		s.WriteString(schemas.Connection_bandwidth, *v.Bandwidth)
+	}
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.Connection_connectionId, *v.ConnectionId)
+	}
+	if v.ConnectionName != nil {
+		s.WriteString(schemas.Connection_connectionName, *v.ConnectionName)
+	}
+	if v.ConnectionState != "" {
+		s.WriteString(schemas.Connection_connectionState, string(v.ConnectionState))
+	}
+	if v.EncryptionMode != nil {
+		s.WriteString(schemas.Connection_encryptionMode, *v.EncryptionMode)
+	}
+	if v.HasLogicalRedundancy != "" {
+		s.WriteString(schemas.Connection_hasLogicalRedundancy, string(v.HasLogicalRedundancy))
+	}
+	if v.JumboFrameCapable != nil {
+		s.WriteBool(schemas.Connection_jumboFrameCapable, *v.JumboFrameCapable)
+	}
+	if v.LagId != nil {
+		s.WriteString(schemas.Connection_lagId, *v.LagId)
+	}
+	if v.LoaIssueTime != nil {
+		s.WriteTime(schemas.Connection_loaIssueTime, *v.LoaIssueTime)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.Connection_location, *v.Location)
+	}
+	if v.MacSecCapable != nil {
+		s.WriteBool(schemas.Connection_macSecCapable, *v.MacSecCapable)
+	}
+	serializeMacSecKeyList(s, schemas.Connection_macSecKeys, v.MacSecKeys)
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.Connection_ownerAccount, *v.OwnerAccount)
+	}
+	if v.PartnerInterconnectMacSecCapable != nil {
+		s.WriteBool(schemas.Connection_partnerInterconnectMacSecCapable, *v.PartnerInterconnectMacSecCapable)
+	}
+	if v.PartnerName != nil {
+		s.WriteString(schemas.Connection_partnerName, *v.PartnerName)
+	}
+	if v.PortEncryptionStatus != nil {
+		s.WriteString(schemas.Connection_portEncryptionStatus, *v.PortEncryptionStatus)
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.Connection_providerName, *v.ProviderName)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.Connection_region, *v.Region)
+	}
+	serializeTagList(s, schemas.Connection_tags, v.Tags)
+	if v.Vlan != 0 {
+		s.WriteInt32(schemas.Connection_vlan, v.Vlan)
+	}
+}
+func (v *Connection) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Connection, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Connection_awsDevice:
+			v.AwsDevice = new(string)
+			return d.ReadString(schemas.Connection_awsDevice, v.AwsDevice)
+		case schemas.Connection_awsDeviceV2:
+			v.AwsDeviceV2 = new(string)
+			return d.ReadString(schemas.Connection_awsDeviceV2, v.AwsDeviceV2)
+		case schemas.Connection_awsLogicalDeviceId:
+			v.AwsLogicalDeviceId = new(string)
+			return d.ReadString(schemas.Connection_awsLogicalDeviceId, v.AwsLogicalDeviceId)
+		case schemas.Connection_bandwidth:
+			v.Bandwidth = new(string)
+			return d.ReadString(schemas.Connection_bandwidth, v.Bandwidth)
+		case schemas.Connection_connectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.Connection_connectionId, v.ConnectionId)
+		case schemas.Connection_connectionName:
+			v.ConnectionName = new(string)
+			return d.ReadString(schemas.Connection_connectionName, v.ConnectionName)
+		case schemas.Connection_connectionState:
+			var ev string
+			if err := d.ReadString(schemas.Connection_connectionState, &ev); err != nil {
+				return err
+			}
+			v.ConnectionState = ConnectionState(ev)
+			return nil
+		case schemas.Connection_encryptionMode:
+			v.EncryptionMode = new(string)
+			return d.ReadString(schemas.Connection_encryptionMode, v.EncryptionMode)
+		case schemas.Connection_hasLogicalRedundancy:
+			var ev string
+			if err := d.ReadString(schemas.Connection_hasLogicalRedundancy, &ev); err != nil {
+				return err
+			}
+			v.HasLogicalRedundancy = HasLogicalRedundancy(ev)
+			return nil
+		case schemas.Connection_jumboFrameCapable:
+			v.JumboFrameCapable = new(bool)
+			return d.ReadBool(schemas.Connection_jumboFrameCapable, v.JumboFrameCapable)
+		case schemas.Connection_lagId:
+			v.LagId = new(string)
+			return d.ReadString(schemas.Connection_lagId, v.LagId)
+		case schemas.Connection_loaIssueTime:
+			v.LoaIssueTime = new(time.Time)
+			return d.ReadTime(schemas.Connection_loaIssueTime, v.LoaIssueTime)
+		case schemas.Connection_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.Connection_location, v.Location)
+		case schemas.Connection_macSecCapable:
+			v.MacSecCapable = new(bool)
+			return d.ReadBool(schemas.Connection_macSecCapable, v.MacSecCapable)
+		case schemas.Connection_macSecKeys:
+			return deserializeMacSecKeyList(d, schemas.Connection_macSecKeys, &v.MacSecKeys)
+		case schemas.Connection_ownerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.Connection_ownerAccount, v.OwnerAccount)
+		case schemas.Connection_partnerInterconnectMacSecCapable:
+			v.PartnerInterconnectMacSecCapable = new(bool)
+			return d.ReadBool(schemas.Connection_partnerInterconnectMacSecCapable, v.PartnerInterconnectMacSecCapable)
+		case schemas.Connection_partnerName:
+			v.PartnerName = new(string)
+			return d.ReadString(schemas.Connection_partnerName, v.PartnerName)
+		case schemas.Connection_portEncryptionStatus:
+			v.PortEncryptionStatus = new(string)
+			return d.ReadString(schemas.Connection_portEncryptionStatus, v.PortEncryptionStatus)
+		case schemas.Connection_providerName:
+			v.ProviderName = new(string)
+			return d.ReadString(schemas.Connection_providerName, v.ProviderName)
+		case schemas.Connection_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.Connection_region, v.Region)
+		case schemas.Connection_tags:
+			return deserializeTagList(d, schemas.Connection_tags, &v.Tags)
+		case schemas.Connection_vlan:
+			return d.ReadInt32(schemas.Connection_vlan, &v.Vlan)
+		}
+		return nil
+	})
+}
+
 // The name and status of a customer agreement.
 type CustomerAgreement struct {
 
@@ -241,6 +569,34 @@ type CustomerAgreement struct {
 	Status *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *CustomerAgreement) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CustomerAgreement)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CustomerAgreement) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementName != nil {
+		s.WriteString(schemas.CustomerAgreement_agreementName, *v.AgreementName)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.CustomerAgreement_status, *v.Status)
+	}
+}
+func (v *CustomerAgreement) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CustomerAgreement, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CustomerAgreement_agreementName:
+			v.AgreementName = new(string)
+			return d.ReadString(schemas.CustomerAgreement_agreementName, v.AgreementName)
+		case schemas.CustomerAgreement_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.CustomerAgreement_status, v.Status)
+		}
+		return nil
+	})
 }
 
 // Information about a Direct Connect gateway, which enables you to connect
@@ -277,6 +633,65 @@ type DirectConnectGateway struct {
 	Tags []Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *DirectConnectGateway) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectConnectGateway)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectConnectGateway) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AmazonSideAsn != nil {
+		s.WriteInt64(schemas.DirectConnectGateway_amazonSideAsn, *v.AmazonSideAsn)
+	}
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.DirectConnectGateway_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.DirectConnectGatewayName != nil {
+		s.WriteString(schemas.DirectConnectGateway_directConnectGatewayName, *v.DirectConnectGatewayName)
+	}
+	if v.DirectConnectGatewayState != "" {
+		s.WriteString(schemas.DirectConnectGateway_directConnectGatewayState, string(v.DirectConnectGatewayState))
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.DirectConnectGateway_ownerAccount, *v.OwnerAccount)
+	}
+	if v.StateChangeError != nil {
+		s.WriteString(schemas.DirectConnectGateway_stateChangeError, *v.StateChangeError)
+	}
+	serializeTagList(s, schemas.DirectConnectGateway_tags, v.Tags)
+}
+func (v *DirectConnectGateway) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectConnectGateway, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectConnectGateway_amazonSideAsn:
+			v.AmazonSideAsn = new(int64)
+			return d.ReadInt64(schemas.DirectConnectGateway_amazonSideAsn, v.AmazonSideAsn)
+		case schemas.DirectConnectGateway_directConnectGatewayId:
+			v.DirectConnectGatewayId = new(string)
+			return d.ReadString(schemas.DirectConnectGateway_directConnectGatewayId, v.DirectConnectGatewayId)
+		case schemas.DirectConnectGateway_directConnectGatewayName:
+			v.DirectConnectGatewayName = new(string)
+			return d.ReadString(schemas.DirectConnectGateway_directConnectGatewayName, v.DirectConnectGatewayName)
+		case schemas.DirectConnectGateway_directConnectGatewayState:
+			var ev string
+			if err := d.ReadString(schemas.DirectConnectGateway_directConnectGatewayState, &ev); err != nil {
+				return err
+			}
+			v.DirectConnectGatewayState = DirectConnectGatewayState(ev)
+			return nil
+		case schemas.DirectConnectGateway_ownerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.DirectConnectGateway_ownerAccount, v.OwnerAccount)
+		case schemas.DirectConnectGateway_stateChangeError:
+			v.StateChangeError = new(string)
+			return d.ReadString(schemas.DirectConnectGateway_stateChangeError, v.StateChangeError)
+		case schemas.DirectConnectGateway_tags:
+			return deserializeTagList(d, schemas.DirectConnectGateway_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Information about an association between a Direct Connect gateway and a virtual
@@ -338,6 +753,93 @@ type DirectConnectGatewayAssociation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DirectConnectGatewayAssociation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectConnectGatewayAssociation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectConnectGatewayAssociation) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRouteFilterPrefixList(s, schemas.DirectConnectGatewayAssociation_allowedPrefixesToDirectConnectGateway, v.AllowedPrefixesToDirectConnectGateway)
+	if v.AssociatedCoreNetwork != nil {
+		s.WriteStruct(schemas.DirectConnectGatewayAssociation_associatedCoreNetwork)
+		v.AssociatedCoreNetwork.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AssociatedGateway != nil {
+		s.WriteStruct(schemas.DirectConnectGatewayAssociation_associatedGateway)
+		v.AssociatedGateway.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AssociationId != nil {
+		s.WriteString(schemas.DirectConnectGatewayAssociation_associationId, *v.AssociationId)
+	}
+	if v.AssociationState != "" {
+		s.WriteString(schemas.DirectConnectGatewayAssociation_associationState, string(v.AssociationState))
+	}
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.DirectConnectGatewayAssociation_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.DirectConnectGatewayOwnerAccount != nil {
+		s.WriteString(schemas.DirectConnectGatewayAssociation_directConnectGatewayOwnerAccount, *v.DirectConnectGatewayOwnerAccount)
+	}
+	if v.StateChangeError != nil {
+		s.WriteString(schemas.DirectConnectGatewayAssociation_stateChangeError, *v.StateChangeError)
+	}
+	if v.VirtualGatewayId != nil {
+		s.WriteString(schemas.DirectConnectGatewayAssociation_virtualGatewayId, *v.VirtualGatewayId)
+	}
+	if v.VirtualGatewayOwnerAccount != nil {
+		s.WriteString(schemas.DirectConnectGatewayAssociation_virtualGatewayOwnerAccount, *v.VirtualGatewayOwnerAccount)
+	}
+	if v.VirtualGatewayRegion != nil {
+		s.WriteString(schemas.DirectConnectGatewayAssociation_virtualGatewayRegion, *v.VirtualGatewayRegion)
+	}
+}
+func (v *DirectConnectGatewayAssociation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectConnectGatewayAssociation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectConnectGatewayAssociation_allowedPrefixesToDirectConnectGateway:
+			return deserializeRouteFilterPrefixList(d, schemas.DirectConnectGatewayAssociation_allowedPrefixesToDirectConnectGateway, &v.AllowedPrefixesToDirectConnectGateway)
+		case schemas.DirectConnectGatewayAssociation_associatedCoreNetwork:
+			v.AssociatedCoreNetwork = &AssociatedCoreNetwork{}
+			return v.AssociatedCoreNetwork.Deserialize(d)
+		case schemas.DirectConnectGatewayAssociation_associatedGateway:
+			v.AssociatedGateway = &AssociatedGateway{}
+			return v.AssociatedGateway.Deserialize(d)
+		case schemas.DirectConnectGatewayAssociation_associationId:
+			v.AssociationId = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAssociation_associationId, v.AssociationId)
+		case schemas.DirectConnectGatewayAssociation_associationState:
+			var ev string
+			if err := d.ReadString(schemas.DirectConnectGatewayAssociation_associationState, &ev); err != nil {
+				return err
+			}
+			v.AssociationState = DirectConnectGatewayAssociationState(ev)
+			return nil
+		case schemas.DirectConnectGatewayAssociation_directConnectGatewayId:
+			v.DirectConnectGatewayId = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAssociation_directConnectGatewayId, v.DirectConnectGatewayId)
+		case schemas.DirectConnectGatewayAssociation_directConnectGatewayOwnerAccount:
+			v.DirectConnectGatewayOwnerAccount = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAssociation_directConnectGatewayOwnerAccount, v.DirectConnectGatewayOwnerAccount)
+		case schemas.DirectConnectGatewayAssociation_stateChangeError:
+			v.StateChangeError = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAssociation_stateChangeError, v.StateChangeError)
+		case schemas.DirectConnectGatewayAssociation_virtualGatewayId:
+			v.VirtualGatewayId = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAssociation_virtualGatewayId, v.VirtualGatewayId)
+		case schemas.DirectConnectGatewayAssociation_virtualGatewayOwnerAccount:
+			v.VirtualGatewayOwnerAccount = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAssociation_virtualGatewayOwnerAccount, v.VirtualGatewayOwnerAccount)
+		case schemas.DirectConnectGatewayAssociation_virtualGatewayRegion:
+			v.VirtualGatewayRegion = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAssociation_virtualGatewayRegion, v.VirtualGatewayRegion)
+		}
+		return nil
+	})
+}
+
 // Information about the proposal request to attach a virtual private gateway to a
 // Direct Connect gateway.
 type DirectConnectGatewayAssociationProposal struct {
@@ -373,6 +875,64 @@ type DirectConnectGatewayAssociationProposal struct {
 	RequestedAllowedPrefixesToDirectConnectGateway []RouteFilterPrefix
 
 	noSmithyDocumentSerde
+}
+
+func (v *DirectConnectGatewayAssociationProposal) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectConnectGatewayAssociationProposal)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectConnectGatewayAssociationProposal) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssociatedGateway != nil {
+		s.WriteStruct(schemas.DirectConnectGatewayAssociationProposal_associatedGateway)
+		v.AssociatedGateway.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.DirectConnectGatewayAssociationProposal_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.DirectConnectGatewayOwnerAccount != nil {
+		s.WriteString(schemas.DirectConnectGatewayAssociationProposal_directConnectGatewayOwnerAccount, *v.DirectConnectGatewayOwnerAccount)
+	}
+	serializeRouteFilterPrefixList(s, schemas.DirectConnectGatewayAssociationProposal_existingAllowedPrefixesToDirectConnectGateway, v.ExistingAllowedPrefixesToDirectConnectGateway)
+	if v.ProposalId != nil {
+		s.WriteString(schemas.DirectConnectGatewayAssociationProposal_proposalId, *v.ProposalId)
+	}
+	if v.ProposalState != "" {
+		s.WriteString(schemas.DirectConnectGatewayAssociationProposal_proposalState, string(v.ProposalState))
+	}
+	serializeRouteFilterPrefixList(s, schemas.DirectConnectGatewayAssociationProposal_requestedAllowedPrefixesToDirectConnectGateway, v.RequestedAllowedPrefixesToDirectConnectGateway)
+}
+func (v *DirectConnectGatewayAssociationProposal) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectConnectGatewayAssociationProposal, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectConnectGatewayAssociationProposal_associatedGateway:
+			v.AssociatedGateway = &AssociatedGateway{}
+			return v.AssociatedGateway.Deserialize(d)
+		case schemas.DirectConnectGatewayAssociationProposal_directConnectGatewayId:
+			v.DirectConnectGatewayId = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAssociationProposal_directConnectGatewayId, v.DirectConnectGatewayId)
+		case schemas.DirectConnectGatewayAssociationProposal_directConnectGatewayOwnerAccount:
+			v.DirectConnectGatewayOwnerAccount = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAssociationProposal_directConnectGatewayOwnerAccount, v.DirectConnectGatewayOwnerAccount)
+		case schemas.DirectConnectGatewayAssociationProposal_existingAllowedPrefixesToDirectConnectGateway:
+			return deserializeRouteFilterPrefixList(d, schemas.DirectConnectGatewayAssociationProposal_existingAllowedPrefixesToDirectConnectGateway, &v.ExistingAllowedPrefixesToDirectConnectGateway)
+		case schemas.DirectConnectGatewayAssociationProposal_proposalId:
+			v.ProposalId = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAssociationProposal_proposalId, v.ProposalId)
+		case schemas.DirectConnectGatewayAssociationProposal_proposalState:
+			var ev string
+			if err := d.ReadString(schemas.DirectConnectGatewayAssociationProposal_proposalState, &ev); err != nil {
+				return err
+			}
+			v.ProposalState = DirectConnectGatewayAssociationProposalState(ev)
+			return nil
+		case schemas.DirectConnectGatewayAssociationProposal_requestedAllowedPrefixesToDirectConnectGateway:
+			return deserializeRouteFilterPrefixList(d, schemas.DirectConnectGatewayAssociationProposal_requestedAllowedPrefixesToDirectConnectGateway, &v.RequestedAllowedPrefixesToDirectConnectGateway)
+		}
+		return nil
+	})
 }
 
 // Information about an attachment between a Direct Connect gateway and a virtual
@@ -413,6 +973,72 @@ type DirectConnectGatewayAttachment struct {
 	VirtualInterfaceRegion *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DirectConnectGatewayAttachment) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DirectConnectGatewayAttachment)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DirectConnectGatewayAttachment) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AttachmentState != "" {
+		s.WriteString(schemas.DirectConnectGatewayAttachment_attachmentState, string(v.AttachmentState))
+	}
+	if v.AttachmentType != "" {
+		s.WriteString(schemas.DirectConnectGatewayAttachment_attachmentType, string(v.AttachmentType))
+	}
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.DirectConnectGatewayAttachment_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.StateChangeError != nil {
+		s.WriteString(schemas.DirectConnectGatewayAttachment_stateChangeError, *v.StateChangeError)
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.DirectConnectGatewayAttachment_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+	if v.VirtualInterfaceOwnerAccount != nil {
+		s.WriteString(schemas.DirectConnectGatewayAttachment_virtualInterfaceOwnerAccount, *v.VirtualInterfaceOwnerAccount)
+	}
+	if v.VirtualInterfaceRegion != nil {
+		s.WriteString(schemas.DirectConnectGatewayAttachment_virtualInterfaceRegion, *v.VirtualInterfaceRegion)
+	}
+}
+func (v *DirectConnectGatewayAttachment) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DirectConnectGatewayAttachment, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DirectConnectGatewayAttachment_attachmentState:
+			var ev string
+			if err := d.ReadString(schemas.DirectConnectGatewayAttachment_attachmentState, &ev); err != nil {
+				return err
+			}
+			v.AttachmentState = DirectConnectGatewayAttachmentState(ev)
+			return nil
+		case schemas.DirectConnectGatewayAttachment_attachmentType:
+			var ev string
+			if err := d.ReadString(schemas.DirectConnectGatewayAttachment_attachmentType, &ev); err != nil {
+				return err
+			}
+			v.AttachmentType = DirectConnectGatewayAttachmentType(ev)
+			return nil
+		case schemas.DirectConnectGatewayAttachment_directConnectGatewayId:
+			v.DirectConnectGatewayId = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAttachment_directConnectGatewayId, v.DirectConnectGatewayId)
+		case schemas.DirectConnectGatewayAttachment_stateChangeError:
+			v.StateChangeError = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAttachment_stateChangeError, v.StateChangeError)
+		case schemas.DirectConnectGatewayAttachment_virtualInterfaceId:
+			v.VirtualInterfaceId = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAttachment_virtualInterfaceId, v.VirtualInterfaceId)
+		case schemas.DirectConnectGatewayAttachment_virtualInterfaceOwnerAccount:
+			v.VirtualInterfaceOwnerAccount = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAttachment_virtualInterfaceOwnerAccount, v.VirtualInterfaceOwnerAccount)
+		case schemas.DirectConnectGatewayAttachment_virtualInterfaceRegion:
+			v.VirtualInterfaceRegion = new(string)
+			return d.ReadString(schemas.DirectConnectGatewayAttachment_virtualInterfaceRegion, v.VirtualInterfaceRegion)
+		}
+		return nil
+	})
 }
 
 // Information about an interconnect.
@@ -501,6 +1127,138 @@ type Interconnect struct {
 	Tags []Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *Interconnect) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Interconnect)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Interconnect) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AwsDevice != nil {
+		s.WriteString(schemas.Interconnect_awsDevice, *v.AwsDevice)
+	}
+	if v.AwsDeviceV2 != nil {
+		s.WriteString(schemas.Interconnect_awsDeviceV2, *v.AwsDeviceV2)
+	}
+	if v.AwsLogicalDeviceId != nil {
+		s.WriteString(schemas.Interconnect_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
+	}
+	if v.Bandwidth != nil {
+		s.WriteString(schemas.Interconnect_bandwidth, *v.Bandwidth)
+	}
+	if v.EncryptionMode != nil {
+		s.WriteString(schemas.Interconnect_encryptionMode, *v.EncryptionMode)
+	}
+	if v.HasLogicalRedundancy != "" {
+		s.WriteString(schemas.Interconnect_hasLogicalRedundancy, string(v.HasLogicalRedundancy))
+	}
+	if v.InterconnectId != nil {
+		s.WriteString(schemas.Interconnect_interconnectId, *v.InterconnectId)
+	}
+	if v.InterconnectName != nil {
+		s.WriteString(schemas.Interconnect_interconnectName, *v.InterconnectName)
+	}
+	if v.InterconnectState != "" {
+		s.WriteString(schemas.Interconnect_interconnectState, string(v.InterconnectState))
+	}
+	if v.JumboFrameCapable != nil {
+		s.WriteBool(schemas.Interconnect_jumboFrameCapable, *v.JumboFrameCapable)
+	}
+	if v.LagId != nil {
+		s.WriteString(schemas.Interconnect_lagId, *v.LagId)
+	}
+	if v.LoaIssueTime != nil {
+		s.WriteTime(schemas.Interconnect_loaIssueTime, *v.LoaIssueTime)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.Interconnect_location, *v.Location)
+	}
+	if v.MacSecCapable != nil {
+		s.WriteBool(schemas.Interconnect_macSecCapable, *v.MacSecCapable)
+	}
+	serializeMacSecKeyList(s, schemas.Interconnect_macSecKeys, v.MacSecKeys)
+	if v.PortEncryptionStatus != nil {
+		s.WriteString(schemas.Interconnect_portEncryptionStatus, *v.PortEncryptionStatus)
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.Interconnect_providerName, *v.ProviderName)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.Interconnect_region, *v.Region)
+	}
+	serializeTagList(s, schemas.Interconnect_tags, v.Tags)
+}
+func (v *Interconnect) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Interconnect, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Interconnect_awsDevice:
+			v.AwsDevice = new(string)
+			return d.ReadString(schemas.Interconnect_awsDevice, v.AwsDevice)
+		case schemas.Interconnect_awsDeviceV2:
+			v.AwsDeviceV2 = new(string)
+			return d.ReadString(schemas.Interconnect_awsDeviceV2, v.AwsDeviceV2)
+		case schemas.Interconnect_awsLogicalDeviceId:
+			v.AwsLogicalDeviceId = new(string)
+			return d.ReadString(schemas.Interconnect_awsLogicalDeviceId, v.AwsLogicalDeviceId)
+		case schemas.Interconnect_bandwidth:
+			v.Bandwidth = new(string)
+			return d.ReadString(schemas.Interconnect_bandwidth, v.Bandwidth)
+		case schemas.Interconnect_encryptionMode:
+			v.EncryptionMode = new(string)
+			return d.ReadString(schemas.Interconnect_encryptionMode, v.EncryptionMode)
+		case schemas.Interconnect_hasLogicalRedundancy:
+			var ev string
+			if err := d.ReadString(schemas.Interconnect_hasLogicalRedundancy, &ev); err != nil {
+				return err
+			}
+			v.HasLogicalRedundancy = HasLogicalRedundancy(ev)
+			return nil
+		case schemas.Interconnect_interconnectId:
+			v.InterconnectId = new(string)
+			return d.ReadString(schemas.Interconnect_interconnectId, v.InterconnectId)
+		case schemas.Interconnect_interconnectName:
+			v.InterconnectName = new(string)
+			return d.ReadString(schemas.Interconnect_interconnectName, v.InterconnectName)
+		case schemas.Interconnect_interconnectState:
+			var ev string
+			if err := d.ReadString(schemas.Interconnect_interconnectState, &ev); err != nil {
+				return err
+			}
+			v.InterconnectState = InterconnectState(ev)
+			return nil
+		case schemas.Interconnect_jumboFrameCapable:
+			v.JumboFrameCapable = new(bool)
+			return d.ReadBool(schemas.Interconnect_jumboFrameCapable, v.JumboFrameCapable)
+		case schemas.Interconnect_lagId:
+			v.LagId = new(string)
+			return d.ReadString(schemas.Interconnect_lagId, v.LagId)
+		case schemas.Interconnect_loaIssueTime:
+			v.LoaIssueTime = new(time.Time)
+			return d.ReadTime(schemas.Interconnect_loaIssueTime, v.LoaIssueTime)
+		case schemas.Interconnect_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.Interconnect_location, v.Location)
+		case schemas.Interconnect_macSecCapable:
+			v.MacSecCapable = new(bool)
+			return d.ReadBool(schemas.Interconnect_macSecCapable, v.MacSecCapable)
+		case schemas.Interconnect_macSecKeys:
+			return deserializeMacSecKeyList(d, schemas.Interconnect_macSecKeys, &v.MacSecKeys)
+		case schemas.Interconnect_portEncryptionStatus:
+			v.PortEncryptionStatus = new(string)
+			return d.ReadString(schemas.Interconnect_portEncryptionStatus, v.PortEncryptionStatus)
+		case schemas.Interconnect_providerName:
+			v.ProviderName = new(string)
+			return d.ReadString(schemas.Interconnect_providerName, v.ProviderName)
+		case schemas.Interconnect_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.Interconnect_region, v.Region)
+		case schemas.Interconnect_tags:
+			return deserializeTagList(d, schemas.Interconnect_tags, &v.Tags)
+		}
+		return nil
+	})
 }
 
 // Information about a link aggregation group (LAG).
@@ -597,6 +1355,144 @@ type Lag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Lag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Lag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Lag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AllowsHostedConnections != false {
+		s.WriteBool(schemas.Lag_allowsHostedConnections, v.AllowsHostedConnections)
+	}
+	if v.AwsDevice != nil {
+		s.WriteString(schemas.Lag_awsDevice, *v.AwsDevice)
+	}
+	if v.AwsDeviceV2 != nil {
+		s.WriteString(schemas.Lag_awsDeviceV2, *v.AwsDeviceV2)
+	}
+	if v.AwsLogicalDeviceId != nil {
+		s.WriteString(schemas.Lag_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
+	}
+	serializeConnectionList(s, schemas.Lag_connections, v.Connections)
+	if v.ConnectionsBandwidth != nil {
+		s.WriteString(schemas.Lag_connectionsBandwidth, *v.ConnectionsBandwidth)
+	}
+	if v.EncryptionMode != nil {
+		s.WriteString(schemas.Lag_encryptionMode, *v.EncryptionMode)
+	}
+	if v.HasLogicalRedundancy != "" {
+		s.WriteString(schemas.Lag_hasLogicalRedundancy, string(v.HasLogicalRedundancy))
+	}
+	if v.JumboFrameCapable != nil {
+		s.WriteBool(schemas.Lag_jumboFrameCapable, *v.JumboFrameCapable)
+	}
+	if v.LagId != nil {
+		s.WriteString(schemas.Lag_lagId, *v.LagId)
+	}
+	if v.LagName != nil {
+		s.WriteString(schemas.Lag_lagName, *v.LagName)
+	}
+	if v.LagState != "" {
+		s.WriteString(schemas.Lag_lagState, string(v.LagState))
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.Lag_location, *v.Location)
+	}
+	if v.MacSecCapable != nil {
+		s.WriteBool(schemas.Lag_macSecCapable, *v.MacSecCapable)
+	}
+	serializeMacSecKeyList(s, schemas.Lag_macSecKeys, v.MacSecKeys)
+	if v.MinimumLinks != 0 {
+		s.WriteInt32(schemas.Lag_minimumLinks, v.MinimumLinks)
+	}
+	if v.NumberOfConnections != 0 {
+		s.WriteInt32(schemas.Lag_numberOfConnections, v.NumberOfConnections)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.Lag_ownerAccount, *v.OwnerAccount)
+	}
+	if v.ProviderName != nil {
+		s.WriteString(schemas.Lag_providerName, *v.ProviderName)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.Lag_region, *v.Region)
+	}
+	serializeTagList(s, schemas.Lag_tags, v.Tags)
+}
+func (v *Lag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Lag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Lag_allowsHostedConnections:
+			return d.ReadBool(schemas.Lag_allowsHostedConnections, &v.AllowsHostedConnections)
+		case schemas.Lag_awsDevice:
+			v.AwsDevice = new(string)
+			return d.ReadString(schemas.Lag_awsDevice, v.AwsDevice)
+		case schemas.Lag_awsDeviceV2:
+			v.AwsDeviceV2 = new(string)
+			return d.ReadString(schemas.Lag_awsDeviceV2, v.AwsDeviceV2)
+		case schemas.Lag_awsLogicalDeviceId:
+			v.AwsLogicalDeviceId = new(string)
+			return d.ReadString(schemas.Lag_awsLogicalDeviceId, v.AwsLogicalDeviceId)
+		case schemas.Lag_connections:
+			return deserializeConnectionList(d, schemas.Lag_connections, &v.Connections)
+		case schemas.Lag_connectionsBandwidth:
+			v.ConnectionsBandwidth = new(string)
+			return d.ReadString(schemas.Lag_connectionsBandwidth, v.ConnectionsBandwidth)
+		case schemas.Lag_encryptionMode:
+			v.EncryptionMode = new(string)
+			return d.ReadString(schemas.Lag_encryptionMode, v.EncryptionMode)
+		case schemas.Lag_hasLogicalRedundancy:
+			var ev string
+			if err := d.ReadString(schemas.Lag_hasLogicalRedundancy, &ev); err != nil {
+				return err
+			}
+			v.HasLogicalRedundancy = HasLogicalRedundancy(ev)
+			return nil
+		case schemas.Lag_jumboFrameCapable:
+			v.JumboFrameCapable = new(bool)
+			return d.ReadBool(schemas.Lag_jumboFrameCapable, v.JumboFrameCapable)
+		case schemas.Lag_lagId:
+			v.LagId = new(string)
+			return d.ReadString(schemas.Lag_lagId, v.LagId)
+		case schemas.Lag_lagName:
+			v.LagName = new(string)
+			return d.ReadString(schemas.Lag_lagName, v.LagName)
+		case schemas.Lag_lagState:
+			var ev string
+			if err := d.ReadString(schemas.Lag_lagState, &ev); err != nil {
+				return err
+			}
+			v.LagState = LagState(ev)
+			return nil
+		case schemas.Lag_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.Lag_location, v.Location)
+		case schemas.Lag_macSecCapable:
+			v.MacSecCapable = new(bool)
+			return d.ReadBool(schemas.Lag_macSecCapable, v.MacSecCapable)
+		case schemas.Lag_macSecKeys:
+			return deserializeMacSecKeyList(d, schemas.Lag_macSecKeys, &v.MacSecKeys)
+		case schemas.Lag_minimumLinks:
+			return d.ReadInt32(schemas.Lag_minimumLinks, &v.MinimumLinks)
+		case schemas.Lag_numberOfConnections:
+			return d.ReadInt32(schemas.Lag_numberOfConnections, &v.NumberOfConnections)
+		case schemas.Lag_ownerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.Lag_ownerAccount, v.OwnerAccount)
+		case schemas.Lag_providerName:
+			v.ProviderName = new(string)
+			return d.ReadString(schemas.Lag_providerName, v.ProviderName)
+		case schemas.Lag_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.Lag_region, v.Region)
+		case schemas.Lag_tags:
+			return deserializeTagList(d, schemas.Lag_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Information about a Letter of Authorization - Connecting Facility Assignment
 // (LOA-CFA) for a connection.
 type Loa struct {
@@ -609,6 +1505,37 @@ type Loa struct {
 	LoaContentType LoaContentType
 
 	noSmithyDocumentSerde
+}
+
+func (v *Loa) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Loa)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Loa) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.LoaContent != nil {
+		s.WriteBlob(schemas.Loa_loaContent, v.LoaContent)
+	}
+	if v.LoaContentType != "" {
+		s.WriteString(schemas.Loa_loaContentType, string(v.LoaContentType))
+	}
+}
+func (v *Loa) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Loa, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Loa_loaContent:
+			return d.ReadBlob(schemas.Loa_loaContent, &v.LoaContent)
+		case schemas.Loa_loaContentType:
+			var ev string
+			if err := d.ReadString(schemas.Loa_loaContentType, &ev); err != nil {
+				return err
+			}
+			v.LoaContentType = LoaContentType(ev)
+			return nil
+		}
+		return nil
+	})
 }
 
 // Information about an Direct Connect location.
@@ -634,6 +1561,49 @@ type Location struct {
 	Region *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Location) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Location)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Location) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeAvailableMacSecPortSpeeds(s, schemas.Location_availableMacSecPortSpeeds, v.AvailableMacSecPortSpeeds)
+	serializeAvailablePortSpeeds(s, schemas.Location_availablePortSpeeds, v.AvailablePortSpeeds)
+	serializeProviderList(s, schemas.Location_availableProviders, v.AvailableProviders)
+	if v.LocationCode != nil {
+		s.WriteString(schemas.Location_locationCode, *v.LocationCode)
+	}
+	if v.LocationName != nil {
+		s.WriteString(schemas.Location_locationName, *v.LocationName)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.Location_region, *v.Region)
+	}
+}
+func (v *Location) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Location, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Location_availableMacSecPortSpeeds:
+			return deserializeAvailableMacSecPortSpeeds(d, schemas.Location_availableMacSecPortSpeeds, &v.AvailableMacSecPortSpeeds)
+		case schemas.Location_availablePortSpeeds:
+			return deserializeAvailablePortSpeeds(d, schemas.Location_availablePortSpeeds, &v.AvailablePortSpeeds)
+		case schemas.Location_availableProviders:
+			return deserializeProviderList(d, schemas.Location_availableProviders, &v.AvailableProviders)
+		case schemas.Location_locationCode:
+			v.LocationCode = new(string)
+			return d.ReadString(schemas.Location_locationCode, v.LocationCode)
+		case schemas.Location_locationName:
+			v.LocationName = new(string)
+			return d.ReadString(schemas.Location_locationName, v.LocationName)
+		case schemas.Location_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.Location_region, v.Region)
+		}
+		return nil
+	})
 }
 
 // Information about the MAC Security (MACsec) secret key.
@@ -669,6 +1639,46 @@ type MacSecKey struct {
 	noSmithyDocumentSerde
 }
 
+func (v *MacSecKey) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MacSecKey)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MacSecKey) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ckn != nil {
+		s.WriteString(schemas.MacSecKey_ckn, *v.Ckn)
+	}
+	if v.SecretARN != nil {
+		s.WriteString(schemas.MacSecKey_secretARN, *v.SecretARN)
+	}
+	if v.StartOn != nil {
+		s.WriteString(schemas.MacSecKey_startOn, *v.StartOn)
+	}
+	if v.State != nil {
+		s.WriteString(schemas.MacSecKey_state, *v.State)
+	}
+}
+func (v *MacSecKey) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MacSecKey, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MacSecKey_ckn:
+			v.Ckn = new(string)
+			return d.ReadString(schemas.MacSecKey_ckn, v.Ckn)
+		case schemas.MacSecKey_secretARN:
+			v.SecretARN = new(string)
+			return d.ReadString(schemas.MacSecKey_secretARN, v.SecretARN)
+		case schemas.MacSecKey_startOn:
+			v.StartOn = new(string)
+			return d.ReadString(schemas.MacSecKey_startOn, v.StartOn)
+		case schemas.MacSecKey_state:
+			v.State = new(string)
+			return d.ReadString(schemas.MacSecKey_state, v.State)
+		}
+		return nil
+	})
+}
+
 // Information about a new BGP peer.
 type NewBGPPeer struct {
 
@@ -694,6 +1704,61 @@ type NewBGPPeer struct {
 	CustomerAddress *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *NewBGPPeer) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NewBGPPeer)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NewBGPPeer) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.NewBGPPeer_addressFamily, string(v.AddressFamily))
+	}
+	if v.AmazonAddress != nil {
+		s.WriteString(schemas.NewBGPPeer_amazonAddress, *v.AmazonAddress)
+	}
+	if v.Asn != 0 {
+		s.WriteInt32(schemas.NewBGPPeer_asn, v.Asn)
+	}
+	if v.AsnLong != nil {
+		s.WriteInt64(schemas.NewBGPPeer_asnLong, *v.AsnLong)
+	}
+	if v.AuthKey != nil {
+		s.WriteString(schemas.NewBGPPeer_authKey, *v.AuthKey)
+	}
+	if v.CustomerAddress != nil {
+		s.WriteString(schemas.NewBGPPeer_customerAddress, *v.CustomerAddress)
+	}
+}
+func (v *NewBGPPeer) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NewBGPPeer, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NewBGPPeer_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.NewBGPPeer_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = AddressFamily(ev)
+			return nil
+		case schemas.NewBGPPeer_amazonAddress:
+			v.AmazonAddress = new(string)
+			return d.ReadString(schemas.NewBGPPeer_amazonAddress, v.AmazonAddress)
+		case schemas.NewBGPPeer_asn:
+			return d.ReadInt32(schemas.NewBGPPeer_asn, &v.Asn)
+		case schemas.NewBGPPeer_asnLong:
+			v.AsnLong = new(int64)
+			return d.ReadInt64(schemas.NewBGPPeer_asnLong, v.AsnLong)
+		case schemas.NewBGPPeer_authKey:
+			v.AuthKey = new(string)
+			return d.ReadString(schemas.NewBGPPeer_authKey, v.AuthKey)
+		case schemas.NewBGPPeer_customerAddress:
+			v.CustomerAddress = new(string)
+			return d.ReadString(schemas.NewBGPPeer_customerAddress, v.CustomerAddress)
+		}
+		return nil
+	})
 }
 
 // Information about a private virtual interface.
@@ -770,6 +1835,99 @@ type NewPrivateVirtualInterface struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NewPrivateVirtualInterface) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NewPrivateVirtualInterface)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NewPrivateVirtualInterface) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.NewPrivateVirtualInterface_addressFamily, string(v.AddressFamily))
+	}
+	if v.AmazonAddress != nil {
+		s.WriteString(schemas.NewPrivateVirtualInterface_amazonAddress, *v.AmazonAddress)
+	}
+	if v.Asn != 0 {
+		s.WriteInt32(schemas.NewPrivateVirtualInterface_asn, v.Asn)
+	}
+	if v.AsnLong != nil {
+		s.WriteInt64(schemas.NewPrivateVirtualInterface_asnLong, *v.AsnLong)
+	}
+	if v.AuthKey != nil {
+		s.WriteString(schemas.NewPrivateVirtualInterface_authKey, *v.AuthKey)
+	}
+	if v.CustomerAddress != nil {
+		s.WriteString(schemas.NewPrivateVirtualInterface_customerAddress, *v.CustomerAddress)
+	}
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.NewPrivateVirtualInterface_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.EnableSiteLink != nil {
+		s.WriteBool(schemas.NewPrivateVirtualInterface_enableSiteLink, *v.EnableSiteLink)
+	}
+	if v.Mtu != nil {
+		s.WriteInt32(schemas.NewPrivateVirtualInterface_mtu, *v.Mtu)
+	}
+	serializeTagList(s, schemas.NewPrivateVirtualInterface_tags, v.Tags)
+	if v.VirtualGatewayId != nil {
+		s.WriteString(schemas.NewPrivateVirtualInterface_virtualGatewayId, *v.VirtualGatewayId)
+	}
+	if v.VirtualInterfaceName != nil {
+		s.WriteString(schemas.NewPrivateVirtualInterface_virtualInterfaceName, *v.VirtualInterfaceName)
+	}
+	if v.Vlan != 0 {
+		s.WriteInt32(schemas.NewPrivateVirtualInterface_vlan, v.Vlan)
+	}
+}
+func (v *NewPrivateVirtualInterface) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NewPrivateVirtualInterface, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NewPrivateVirtualInterface_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.NewPrivateVirtualInterface_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = AddressFamily(ev)
+			return nil
+		case schemas.NewPrivateVirtualInterface_amazonAddress:
+			v.AmazonAddress = new(string)
+			return d.ReadString(schemas.NewPrivateVirtualInterface_amazonAddress, v.AmazonAddress)
+		case schemas.NewPrivateVirtualInterface_asn:
+			return d.ReadInt32(schemas.NewPrivateVirtualInterface_asn, &v.Asn)
+		case schemas.NewPrivateVirtualInterface_asnLong:
+			v.AsnLong = new(int64)
+			return d.ReadInt64(schemas.NewPrivateVirtualInterface_asnLong, v.AsnLong)
+		case schemas.NewPrivateVirtualInterface_authKey:
+			v.AuthKey = new(string)
+			return d.ReadString(schemas.NewPrivateVirtualInterface_authKey, v.AuthKey)
+		case schemas.NewPrivateVirtualInterface_customerAddress:
+			v.CustomerAddress = new(string)
+			return d.ReadString(schemas.NewPrivateVirtualInterface_customerAddress, v.CustomerAddress)
+		case schemas.NewPrivateVirtualInterface_directConnectGatewayId:
+			v.DirectConnectGatewayId = new(string)
+			return d.ReadString(schemas.NewPrivateVirtualInterface_directConnectGatewayId, v.DirectConnectGatewayId)
+		case schemas.NewPrivateVirtualInterface_enableSiteLink:
+			v.EnableSiteLink = new(bool)
+			return d.ReadBool(schemas.NewPrivateVirtualInterface_enableSiteLink, v.EnableSiteLink)
+		case schemas.NewPrivateVirtualInterface_mtu:
+			v.Mtu = new(int32)
+			return d.ReadInt32(schemas.NewPrivateVirtualInterface_mtu, v.Mtu)
+		case schemas.NewPrivateVirtualInterface_tags:
+			return deserializeTagList(d, schemas.NewPrivateVirtualInterface_tags, &v.Tags)
+		case schemas.NewPrivateVirtualInterface_virtualGatewayId:
+			v.VirtualGatewayId = new(string)
+			return d.ReadString(schemas.NewPrivateVirtualInterface_virtualGatewayId, v.VirtualGatewayId)
+		case schemas.NewPrivateVirtualInterface_virtualInterfaceName:
+			v.VirtualInterfaceName = new(string)
+			return d.ReadString(schemas.NewPrivateVirtualInterface_virtualInterfaceName, v.VirtualInterfaceName)
+		case schemas.NewPrivateVirtualInterface_vlan:
+			return d.ReadInt32(schemas.NewPrivateVirtualInterface_vlan, &v.Vlan)
+		}
+		return nil
+	})
+}
+
 // Information about a private virtual interface to be provisioned on a connection.
 type NewPrivateVirtualInterfaceAllocation struct {
 
@@ -835,6 +1993,81 @@ type NewPrivateVirtualInterfaceAllocation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NewPrivateVirtualInterfaceAllocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NewPrivateVirtualInterfaceAllocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NewPrivateVirtualInterfaceAllocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.NewPrivateVirtualInterfaceAllocation_addressFamily, string(v.AddressFamily))
+	}
+	if v.AmazonAddress != nil {
+		s.WriteString(schemas.NewPrivateVirtualInterfaceAllocation_amazonAddress, *v.AmazonAddress)
+	}
+	if v.Asn != 0 {
+		s.WriteInt32(schemas.NewPrivateVirtualInterfaceAllocation_asn, v.Asn)
+	}
+	if v.AsnLong != nil {
+		s.WriteInt64(schemas.NewPrivateVirtualInterfaceAllocation_asnLong, *v.AsnLong)
+	}
+	if v.AuthKey != nil {
+		s.WriteString(schemas.NewPrivateVirtualInterfaceAllocation_authKey, *v.AuthKey)
+	}
+	if v.CustomerAddress != nil {
+		s.WriteString(schemas.NewPrivateVirtualInterfaceAllocation_customerAddress, *v.CustomerAddress)
+	}
+	if v.Mtu != nil {
+		s.WriteInt32(schemas.NewPrivateVirtualInterfaceAllocation_mtu, *v.Mtu)
+	}
+	serializeTagList(s, schemas.NewPrivateVirtualInterfaceAllocation_tags, v.Tags)
+	if v.VirtualInterfaceName != nil {
+		s.WriteString(schemas.NewPrivateVirtualInterfaceAllocation_virtualInterfaceName, *v.VirtualInterfaceName)
+	}
+	if v.Vlan != 0 {
+		s.WriteInt32(schemas.NewPrivateVirtualInterfaceAllocation_vlan, v.Vlan)
+	}
+}
+func (v *NewPrivateVirtualInterfaceAllocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NewPrivateVirtualInterfaceAllocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NewPrivateVirtualInterfaceAllocation_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.NewPrivateVirtualInterfaceAllocation_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = AddressFamily(ev)
+			return nil
+		case schemas.NewPrivateVirtualInterfaceAllocation_amazonAddress:
+			v.AmazonAddress = new(string)
+			return d.ReadString(schemas.NewPrivateVirtualInterfaceAllocation_amazonAddress, v.AmazonAddress)
+		case schemas.NewPrivateVirtualInterfaceAllocation_asn:
+			return d.ReadInt32(schemas.NewPrivateVirtualInterfaceAllocation_asn, &v.Asn)
+		case schemas.NewPrivateVirtualInterfaceAllocation_asnLong:
+			v.AsnLong = new(int64)
+			return d.ReadInt64(schemas.NewPrivateVirtualInterfaceAllocation_asnLong, v.AsnLong)
+		case schemas.NewPrivateVirtualInterfaceAllocation_authKey:
+			v.AuthKey = new(string)
+			return d.ReadString(schemas.NewPrivateVirtualInterfaceAllocation_authKey, v.AuthKey)
+		case schemas.NewPrivateVirtualInterfaceAllocation_customerAddress:
+			v.CustomerAddress = new(string)
+			return d.ReadString(schemas.NewPrivateVirtualInterfaceAllocation_customerAddress, v.CustomerAddress)
+		case schemas.NewPrivateVirtualInterfaceAllocation_mtu:
+			v.Mtu = new(int32)
+			return d.ReadInt32(schemas.NewPrivateVirtualInterfaceAllocation_mtu, v.Mtu)
+		case schemas.NewPrivateVirtualInterfaceAllocation_tags:
+			return deserializeTagList(d, schemas.NewPrivateVirtualInterfaceAllocation_tags, &v.Tags)
+		case schemas.NewPrivateVirtualInterfaceAllocation_virtualInterfaceName:
+			v.VirtualInterfaceName = new(string)
+			return d.ReadString(schemas.NewPrivateVirtualInterfaceAllocation_virtualInterfaceName, v.VirtualInterfaceName)
+		case schemas.NewPrivateVirtualInterfaceAllocation_vlan:
+			return d.ReadInt32(schemas.NewPrivateVirtualInterfaceAllocation_vlan, &v.Vlan)
+		}
+		return nil
+	})
+}
+
 // Information about a public virtual interface.
 type NewPublicVirtualInterface struct {
 
@@ -896,6 +2129,78 @@ type NewPublicVirtualInterface struct {
 	Tags []Tag
 
 	noSmithyDocumentSerde
+}
+
+func (v *NewPublicVirtualInterface) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NewPublicVirtualInterface)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NewPublicVirtualInterface) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.NewPublicVirtualInterface_addressFamily, string(v.AddressFamily))
+	}
+	if v.AmazonAddress != nil {
+		s.WriteString(schemas.NewPublicVirtualInterface_amazonAddress, *v.AmazonAddress)
+	}
+	if v.Asn != 0 {
+		s.WriteInt32(schemas.NewPublicVirtualInterface_asn, v.Asn)
+	}
+	if v.AsnLong != nil {
+		s.WriteInt64(schemas.NewPublicVirtualInterface_asnLong, *v.AsnLong)
+	}
+	if v.AuthKey != nil {
+		s.WriteString(schemas.NewPublicVirtualInterface_authKey, *v.AuthKey)
+	}
+	if v.CustomerAddress != nil {
+		s.WriteString(schemas.NewPublicVirtualInterface_customerAddress, *v.CustomerAddress)
+	}
+	serializeRouteFilterPrefixList(s, schemas.NewPublicVirtualInterface_routeFilterPrefixes, v.RouteFilterPrefixes)
+	serializeTagList(s, schemas.NewPublicVirtualInterface_tags, v.Tags)
+	if v.VirtualInterfaceName != nil {
+		s.WriteString(schemas.NewPublicVirtualInterface_virtualInterfaceName, *v.VirtualInterfaceName)
+	}
+	if v.Vlan != 0 {
+		s.WriteInt32(schemas.NewPublicVirtualInterface_vlan, v.Vlan)
+	}
+}
+func (v *NewPublicVirtualInterface) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NewPublicVirtualInterface, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NewPublicVirtualInterface_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.NewPublicVirtualInterface_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = AddressFamily(ev)
+			return nil
+		case schemas.NewPublicVirtualInterface_amazonAddress:
+			v.AmazonAddress = new(string)
+			return d.ReadString(schemas.NewPublicVirtualInterface_amazonAddress, v.AmazonAddress)
+		case schemas.NewPublicVirtualInterface_asn:
+			return d.ReadInt32(schemas.NewPublicVirtualInterface_asn, &v.Asn)
+		case schemas.NewPublicVirtualInterface_asnLong:
+			v.AsnLong = new(int64)
+			return d.ReadInt64(schemas.NewPublicVirtualInterface_asnLong, v.AsnLong)
+		case schemas.NewPublicVirtualInterface_authKey:
+			v.AuthKey = new(string)
+			return d.ReadString(schemas.NewPublicVirtualInterface_authKey, v.AuthKey)
+		case schemas.NewPublicVirtualInterface_customerAddress:
+			v.CustomerAddress = new(string)
+			return d.ReadString(schemas.NewPublicVirtualInterface_customerAddress, v.CustomerAddress)
+		case schemas.NewPublicVirtualInterface_routeFilterPrefixes:
+			return deserializeRouteFilterPrefixList(d, schemas.NewPublicVirtualInterface_routeFilterPrefixes, &v.RouteFilterPrefixes)
+		case schemas.NewPublicVirtualInterface_tags:
+			return deserializeTagList(d, schemas.NewPublicVirtualInterface_tags, &v.Tags)
+		case schemas.NewPublicVirtualInterface_virtualInterfaceName:
+			v.VirtualInterfaceName = new(string)
+			return d.ReadString(schemas.NewPublicVirtualInterface_virtualInterfaceName, v.VirtualInterfaceName)
+		case schemas.NewPublicVirtualInterface_vlan:
+			return d.ReadInt32(schemas.NewPublicVirtualInterface_vlan, &v.Vlan)
+		}
+		return nil
+	})
 }
 
 // Information about a public virtual interface to be provisioned on a connection.
@@ -963,6 +2268,78 @@ type NewPublicVirtualInterfaceAllocation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NewPublicVirtualInterfaceAllocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NewPublicVirtualInterfaceAllocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NewPublicVirtualInterfaceAllocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.NewPublicVirtualInterfaceAllocation_addressFamily, string(v.AddressFamily))
+	}
+	if v.AmazonAddress != nil {
+		s.WriteString(schemas.NewPublicVirtualInterfaceAllocation_amazonAddress, *v.AmazonAddress)
+	}
+	if v.Asn != 0 {
+		s.WriteInt32(schemas.NewPublicVirtualInterfaceAllocation_asn, v.Asn)
+	}
+	if v.AsnLong != nil {
+		s.WriteInt64(schemas.NewPublicVirtualInterfaceAllocation_asnLong, *v.AsnLong)
+	}
+	if v.AuthKey != nil {
+		s.WriteString(schemas.NewPublicVirtualInterfaceAllocation_authKey, *v.AuthKey)
+	}
+	if v.CustomerAddress != nil {
+		s.WriteString(schemas.NewPublicVirtualInterfaceAllocation_customerAddress, *v.CustomerAddress)
+	}
+	serializeRouteFilterPrefixList(s, schemas.NewPublicVirtualInterfaceAllocation_routeFilterPrefixes, v.RouteFilterPrefixes)
+	serializeTagList(s, schemas.NewPublicVirtualInterfaceAllocation_tags, v.Tags)
+	if v.VirtualInterfaceName != nil {
+		s.WriteString(schemas.NewPublicVirtualInterfaceAllocation_virtualInterfaceName, *v.VirtualInterfaceName)
+	}
+	if v.Vlan != 0 {
+		s.WriteInt32(schemas.NewPublicVirtualInterfaceAllocation_vlan, v.Vlan)
+	}
+}
+func (v *NewPublicVirtualInterfaceAllocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NewPublicVirtualInterfaceAllocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NewPublicVirtualInterfaceAllocation_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.NewPublicVirtualInterfaceAllocation_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = AddressFamily(ev)
+			return nil
+		case schemas.NewPublicVirtualInterfaceAllocation_amazonAddress:
+			v.AmazonAddress = new(string)
+			return d.ReadString(schemas.NewPublicVirtualInterfaceAllocation_amazonAddress, v.AmazonAddress)
+		case schemas.NewPublicVirtualInterfaceAllocation_asn:
+			return d.ReadInt32(schemas.NewPublicVirtualInterfaceAllocation_asn, &v.Asn)
+		case schemas.NewPublicVirtualInterfaceAllocation_asnLong:
+			v.AsnLong = new(int64)
+			return d.ReadInt64(schemas.NewPublicVirtualInterfaceAllocation_asnLong, v.AsnLong)
+		case schemas.NewPublicVirtualInterfaceAllocation_authKey:
+			v.AuthKey = new(string)
+			return d.ReadString(schemas.NewPublicVirtualInterfaceAllocation_authKey, v.AuthKey)
+		case schemas.NewPublicVirtualInterfaceAllocation_customerAddress:
+			v.CustomerAddress = new(string)
+			return d.ReadString(schemas.NewPublicVirtualInterfaceAllocation_customerAddress, v.CustomerAddress)
+		case schemas.NewPublicVirtualInterfaceAllocation_routeFilterPrefixes:
+			return deserializeRouteFilterPrefixList(d, schemas.NewPublicVirtualInterfaceAllocation_routeFilterPrefixes, &v.RouteFilterPrefixes)
+		case schemas.NewPublicVirtualInterfaceAllocation_tags:
+			return deserializeTagList(d, schemas.NewPublicVirtualInterfaceAllocation_tags, &v.Tags)
+		case schemas.NewPublicVirtualInterfaceAllocation_virtualInterfaceName:
+			v.VirtualInterfaceName = new(string)
+			return d.ReadString(schemas.NewPublicVirtualInterfaceAllocation_virtualInterfaceName, v.VirtualInterfaceName)
+		case schemas.NewPublicVirtualInterfaceAllocation_vlan:
+			return d.ReadInt32(schemas.NewPublicVirtualInterfaceAllocation_vlan, &v.Vlan)
+		}
+		return nil
+	})
+}
+
 // Information about a transit virtual interface.
 type NewTransitVirtualInterface struct {
 
@@ -1028,6 +2405,93 @@ type NewTransitVirtualInterface struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NewTransitVirtualInterface) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NewTransitVirtualInterface)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NewTransitVirtualInterface) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.NewTransitVirtualInterface_addressFamily, string(v.AddressFamily))
+	}
+	if v.AmazonAddress != nil {
+		s.WriteString(schemas.NewTransitVirtualInterface_amazonAddress, *v.AmazonAddress)
+	}
+	if v.Asn != 0 {
+		s.WriteInt32(schemas.NewTransitVirtualInterface_asn, v.Asn)
+	}
+	if v.AsnLong != nil {
+		s.WriteInt64(schemas.NewTransitVirtualInterface_asnLong, *v.AsnLong)
+	}
+	if v.AuthKey != nil {
+		s.WriteString(schemas.NewTransitVirtualInterface_authKey, *v.AuthKey)
+	}
+	if v.CustomerAddress != nil {
+		s.WriteString(schemas.NewTransitVirtualInterface_customerAddress, *v.CustomerAddress)
+	}
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.NewTransitVirtualInterface_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.EnableSiteLink != nil {
+		s.WriteBool(schemas.NewTransitVirtualInterface_enableSiteLink, *v.EnableSiteLink)
+	}
+	if v.Mtu != nil {
+		s.WriteInt32(schemas.NewTransitVirtualInterface_mtu, *v.Mtu)
+	}
+	serializeTagList(s, schemas.NewTransitVirtualInterface_tags, v.Tags)
+	if v.VirtualInterfaceName != nil {
+		s.WriteString(schemas.NewTransitVirtualInterface_virtualInterfaceName, *v.VirtualInterfaceName)
+	}
+	if v.Vlan != 0 {
+		s.WriteInt32(schemas.NewTransitVirtualInterface_vlan, v.Vlan)
+	}
+}
+func (v *NewTransitVirtualInterface) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NewTransitVirtualInterface, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NewTransitVirtualInterface_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.NewTransitVirtualInterface_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = AddressFamily(ev)
+			return nil
+		case schemas.NewTransitVirtualInterface_amazonAddress:
+			v.AmazonAddress = new(string)
+			return d.ReadString(schemas.NewTransitVirtualInterface_amazonAddress, v.AmazonAddress)
+		case schemas.NewTransitVirtualInterface_asn:
+			return d.ReadInt32(schemas.NewTransitVirtualInterface_asn, &v.Asn)
+		case schemas.NewTransitVirtualInterface_asnLong:
+			v.AsnLong = new(int64)
+			return d.ReadInt64(schemas.NewTransitVirtualInterface_asnLong, v.AsnLong)
+		case schemas.NewTransitVirtualInterface_authKey:
+			v.AuthKey = new(string)
+			return d.ReadString(schemas.NewTransitVirtualInterface_authKey, v.AuthKey)
+		case schemas.NewTransitVirtualInterface_customerAddress:
+			v.CustomerAddress = new(string)
+			return d.ReadString(schemas.NewTransitVirtualInterface_customerAddress, v.CustomerAddress)
+		case schemas.NewTransitVirtualInterface_directConnectGatewayId:
+			v.DirectConnectGatewayId = new(string)
+			return d.ReadString(schemas.NewTransitVirtualInterface_directConnectGatewayId, v.DirectConnectGatewayId)
+		case schemas.NewTransitVirtualInterface_enableSiteLink:
+			v.EnableSiteLink = new(bool)
+			return d.ReadBool(schemas.NewTransitVirtualInterface_enableSiteLink, v.EnableSiteLink)
+		case schemas.NewTransitVirtualInterface_mtu:
+			v.Mtu = new(int32)
+			return d.ReadInt32(schemas.NewTransitVirtualInterface_mtu, v.Mtu)
+		case schemas.NewTransitVirtualInterface_tags:
+			return deserializeTagList(d, schemas.NewTransitVirtualInterface_tags, &v.Tags)
+		case schemas.NewTransitVirtualInterface_virtualInterfaceName:
+			v.VirtualInterfaceName = new(string)
+			return d.ReadString(schemas.NewTransitVirtualInterface_virtualInterfaceName, v.VirtualInterfaceName)
+		case schemas.NewTransitVirtualInterface_vlan:
+			return d.ReadInt32(schemas.NewTransitVirtualInterface_vlan, &v.Vlan)
+		}
+		return nil
+	})
+}
+
 // Information about a transit virtual interface to be provisioned on a connection.
 type NewTransitVirtualInterfaceAllocation struct {
 
@@ -1089,6 +2553,81 @@ type NewTransitVirtualInterfaceAllocation struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NewTransitVirtualInterfaceAllocation) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NewTransitVirtualInterfaceAllocation)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NewTransitVirtualInterfaceAllocation) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.NewTransitVirtualInterfaceAllocation_addressFamily, string(v.AddressFamily))
+	}
+	if v.AmazonAddress != nil {
+		s.WriteString(schemas.NewTransitVirtualInterfaceAllocation_amazonAddress, *v.AmazonAddress)
+	}
+	if v.Asn != 0 {
+		s.WriteInt32(schemas.NewTransitVirtualInterfaceAllocation_asn, v.Asn)
+	}
+	if v.AsnLong != nil {
+		s.WriteInt64(schemas.NewTransitVirtualInterfaceAllocation_asnLong, *v.AsnLong)
+	}
+	if v.AuthKey != nil {
+		s.WriteString(schemas.NewTransitVirtualInterfaceAllocation_authKey, *v.AuthKey)
+	}
+	if v.CustomerAddress != nil {
+		s.WriteString(schemas.NewTransitVirtualInterfaceAllocation_customerAddress, *v.CustomerAddress)
+	}
+	if v.Mtu != nil {
+		s.WriteInt32(schemas.NewTransitVirtualInterfaceAllocation_mtu, *v.Mtu)
+	}
+	serializeTagList(s, schemas.NewTransitVirtualInterfaceAllocation_tags, v.Tags)
+	if v.VirtualInterfaceName != nil {
+		s.WriteString(schemas.NewTransitVirtualInterfaceAllocation_virtualInterfaceName, *v.VirtualInterfaceName)
+	}
+	if v.Vlan != 0 {
+		s.WriteInt32(schemas.NewTransitVirtualInterfaceAllocation_vlan, v.Vlan)
+	}
+}
+func (v *NewTransitVirtualInterfaceAllocation) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NewTransitVirtualInterfaceAllocation, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NewTransitVirtualInterfaceAllocation_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.NewTransitVirtualInterfaceAllocation_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = AddressFamily(ev)
+			return nil
+		case schemas.NewTransitVirtualInterfaceAllocation_amazonAddress:
+			v.AmazonAddress = new(string)
+			return d.ReadString(schemas.NewTransitVirtualInterfaceAllocation_amazonAddress, v.AmazonAddress)
+		case schemas.NewTransitVirtualInterfaceAllocation_asn:
+			return d.ReadInt32(schemas.NewTransitVirtualInterfaceAllocation_asn, &v.Asn)
+		case schemas.NewTransitVirtualInterfaceAllocation_asnLong:
+			v.AsnLong = new(int64)
+			return d.ReadInt64(schemas.NewTransitVirtualInterfaceAllocation_asnLong, v.AsnLong)
+		case schemas.NewTransitVirtualInterfaceAllocation_authKey:
+			v.AuthKey = new(string)
+			return d.ReadString(schemas.NewTransitVirtualInterfaceAllocation_authKey, v.AuthKey)
+		case schemas.NewTransitVirtualInterfaceAllocation_customerAddress:
+			v.CustomerAddress = new(string)
+			return d.ReadString(schemas.NewTransitVirtualInterfaceAllocation_customerAddress, v.CustomerAddress)
+		case schemas.NewTransitVirtualInterfaceAllocation_mtu:
+			v.Mtu = new(int32)
+			return d.ReadInt32(schemas.NewTransitVirtualInterfaceAllocation_mtu, v.Mtu)
+		case schemas.NewTransitVirtualInterfaceAllocation_tags:
+			return deserializeTagList(d, schemas.NewTransitVirtualInterfaceAllocation_tags, &v.Tags)
+		case schemas.NewTransitVirtualInterfaceAllocation_virtualInterfaceName:
+			v.VirtualInterfaceName = new(string)
+			return d.ReadString(schemas.NewTransitVirtualInterfaceAllocation_virtualInterfaceName, v.VirtualInterfaceName)
+		case schemas.NewTransitVirtualInterfaceAllocation_vlan:
+			return d.ReadInt32(schemas.NewTransitVirtualInterfaceAllocation_vlan, &v.Vlan)
+		}
+		return nil
+	})
+}
+
 // Information about a tag associated with an Direct Connect resource.
 type ResourceTag struct {
 
@@ -1101,6 +2640,31 @@ type ResourceTag struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ResourceTag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ResourceTag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ResourceTag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ResourceArn != nil {
+		s.WriteString(schemas.ResourceTag_resourceArn, *v.ResourceArn)
+	}
+	serializeTagList(s, schemas.ResourceTag_tags, v.Tags)
+}
+func (v *ResourceTag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ResourceTag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ResourceTag_resourceArn:
+			v.ResourceArn = new(string)
+			return d.ReadString(schemas.ResourceTag_resourceArn, v.ResourceArn)
+		case schemas.ResourceTag_tags:
+			return deserializeTagList(d, schemas.ResourceTag_tags, &v.Tags)
+		}
+		return nil
+	})
+}
+
 // Information about a route filter prefix that a customer can advertise through
 // Border Gateway Protocol (BGP) over a public virtual interface.
 type RouteFilterPrefix struct {
@@ -1110,6 +2674,28 @@ type RouteFilterPrefix struct {
 	Cidr *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *RouteFilterPrefix) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouteFilterPrefix)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouteFilterPrefix) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cidr != nil {
+		s.WriteString(schemas.RouteFilterPrefix_cidr, *v.Cidr)
+	}
+}
+func (v *RouteFilterPrefix) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouteFilterPrefix, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouteFilterPrefix_cidr:
+			v.Cidr = new(string)
+			return d.ReadString(schemas.RouteFilterPrefix_cidr, v.Cidr)
+		}
+		return nil
+	})
 }
 
 // Information about the virtual router.
@@ -1137,6 +2723,58 @@ type RouterType struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RouterType) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RouterType)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RouterType) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Platform != nil {
+		s.WriteString(schemas.RouterType_platform, *v.Platform)
+	}
+	if v.RouterTypeIdentifier != nil {
+		s.WriteString(schemas.RouterType_routerTypeIdentifier, *v.RouterTypeIdentifier)
+	}
+	if v.Software != nil {
+		s.WriteString(schemas.RouterType_software, *v.Software)
+	}
+	if v.Vendor != nil {
+		s.WriteString(schemas.RouterType_vendor, *v.Vendor)
+	}
+	if v.XsltTemplateName != nil {
+		s.WriteString(schemas.RouterType_xsltTemplateName, *v.XsltTemplateName)
+	}
+	if v.XsltTemplateNameForMacSec != nil {
+		s.WriteString(schemas.RouterType_xsltTemplateNameForMacSec, *v.XsltTemplateNameForMacSec)
+	}
+}
+func (v *RouterType) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RouterType, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RouterType_platform:
+			v.Platform = new(string)
+			return d.ReadString(schemas.RouterType_platform, v.Platform)
+		case schemas.RouterType_routerTypeIdentifier:
+			v.RouterTypeIdentifier = new(string)
+			return d.ReadString(schemas.RouterType_routerTypeIdentifier, v.RouterTypeIdentifier)
+		case schemas.RouterType_software:
+			v.Software = new(string)
+			return d.ReadString(schemas.RouterType_software, v.Software)
+		case schemas.RouterType_vendor:
+			v.Vendor = new(string)
+			return d.ReadString(schemas.RouterType_vendor, v.Vendor)
+		case schemas.RouterType_xsltTemplateName:
+			v.XsltTemplateName = new(string)
+			return d.ReadString(schemas.RouterType_xsltTemplateName, v.XsltTemplateName)
+		case schemas.RouterType_xsltTemplateNameForMacSec:
+			v.XsltTemplateNameForMacSec = new(string)
+			return d.ReadString(schemas.RouterType_xsltTemplateNameForMacSec, v.XsltTemplateNameForMacSec)
+		}
+		return nil
+	})
+}
+
 // Information about a tag.
 type Tag struct {
 
@@ -1149,6 +2787,34 @@ type Tag struct {
 	Value *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Tag) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Tag)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Tag) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Key != nil {
+		s.WriteString(schemas.Tag_key, *v.Key)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Tag_value, *v.Value)
+	}
+}
+func (v *Tag) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Tag, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Tag_key:
+			v.Key = new(string)
+			return d.ReadString(schemas.Tag_key, v.Key)
+		case schemas.Tag_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Tag_value, v.Value)
+		}
+		return nil
+	})
 }
 
 // Information about a virtual private gateway for a private virtual interface.
@@ -1170,6 +2836,34 @@ type VirtualGateway struct {
 	VirtualGatewayState *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualGateway) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualGateway)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualGateway) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.VirtualGatewayId != nil {
+		s.WriteString(schemas.VirtualGateway_virtualGatewayId, *v.VirtualGatewayId)
+	}
+	if v.VirtualGatewayState != nil {
+		s.WriteString(schemas.VirtualGateway_virtualGatewayState, *v.VirtualGatewayState)
+	}
+}
+func (v *VirtualGateway) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualGateway, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualGateway_virtualGatewayId:
+			v.VirtualGatewayId = new(string)
+			return d.ReadString(schemas.VirtualGateway_virtualGatewayId, v.VirtualGatewayId)
+		case schemas.VirtualGateway_virtualGatewayState:
+			v.VirtualGatewayState = new(string)
+			return d.ReadString(schemas.VirtualGateway_virtualGatewayState, v.VirtualGatewayState)
+		}
+		return nil
+	})
 }
 
 // Information about a virtual interface.
@@ -1317,6 +3011,181 @@ type VirtualInterface struct {
 	noSmithyDocumentSerde
 }
 
+func (v *VirtualInterface) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualInterface)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualInterface) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AddressFamily != "" {
+		s.WriteString(schemas.VirtualInterface_addressFamily, string(v.AddressFamily))
+	}
+	if v.AmazonAddress != nil {
+		s.WriteString(schemas.VirtualInterface_amazonAddress, *v.AmazonAddress)
+	}
+	if v.AmazonSideAsn != nil {
+		s.WriteInt64(schemas.VirtualInterface_amazonSideAsn, *v.AmazonSideAsn)
+	}
+	if v.Asn != 0 {
+		s.WriteInt32(schemas.VirtualInterface_asn, v.Asn)
+	}
+	if v.AsnLong != nil {
+		s.WriteInt64(schemas.VirtualInterface_asnLong, *v.AsnLong)
+	}
+	if v.AuthKey != nil {
+		s.WriteString(schemas.VirtualInterface_authKey, *v.AuthKey)
+	}
+	if v.AwsDeviceV2 != nil {
+		s.WriteString(schemas.VirtualInterface_awsDeviceV2, *v.AwsDeviceV2)
+	}
+	if v.AwsLogicalDeviceId != nil {
+		s.WriteString(schemas.VirtualInterface_awsLogicalDeviceId, *v.AwsLogicalDeviceId)
+	}
+	serializeBGPPeerList(s, schemas.VirtualInterface_bgpPeers, v.BgpPeers)
+	if v.ConnectionId != nil {
+		s.WriteString(schemas.VirtualInterface_connectionId, *v.ConnectionId)
+	}
+	if v.CustomerAddress != nil {
+		s.WriteString(schemas.VirtualInterface_customerAddress, *v.CustomerAddress)
+	}
+	if v.CustomerRouterConfig != nil {
+		s.WriteString(schemas.VirtualInterface_customerRouterConfig, *v.CustomerRouterConfig)
+	}
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.VirtualInterface_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.JumboFrameCapable != nil {
+		s.WriteBool(schemas.VirtualInterface_jumboFrameCapable, *v.JumboFrameCapable)
+	}
+	if v.Location != nil {
+		s.WriteString(schemas.VirtualInterface_location, *v.Location)
+	}
+	if v.Mtu != nil {
+		s.WriteInt32(schemas.VirtualInterface_mtu, *v.Mtu)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.VirtualInterface_ownerAccount, *v.OwnerAccount)
+	}
+	if v.Region != nil {
+		s.WriteString(schemas.VirtualInterface_region, *v.Region)
+	}
+	serializeRouteFilterPrefixList(s, schemas.VirtualInterface_routeFilterPrefixes, v.RouteFilterPrefixes)
+	if v.SiteLinkEnabled != nil {
+		s.WriteBool(schemas.VirtualInterface_siteLinkEnabled, *v.SiteLinkEnabled)
+	}
+	serializeTagList(s, schemas.VirtualInterface_tags, v.Tags)
+	if v.VirtualGatewayId != nil {
+		s.WriteString(schemas.VirtualInterface_virtualGatewayId, *v.VirtualGatewayId)
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.VirtualInterface_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+	if v.VirtualInterfaceName != nil {
+		s.WriteString(schemas.VirtualInterface_virtualInterfaceName, *v.VirtualInterfaceName)
+	}
+	if v.VirtualInterfaceState != "" {
+		s.WriteString(schemas.VirtualInterface_virtualInterfaceState, string(v.VirtualInterfaceState))
+	}
+	if v.VirtualInterfaceType != nil {
+		s.WriteString(schemas.VirtualInterface_virtualInterfaceType, *v.VirtualInterfaceType)
+	}
+	if v.Vlan != 0 {
+		s.WriteInt32(schemas.VirtualInterface_vlan, v.Vlan)
+	}
+}
+func (v *VirtualInterface) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualInterface, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualInterface_addressFamily:
+			var ev string
+			if err := d.ReadString(schemas.VirtualInterface_addressFamily, &ev); err != nil {
+				return err
+			}
+			v.AddressFamily = AddressFamily(ev)
+			return nil
+		case schemas.VirtualInterface_amazonAddress:
+			v.AmazonAddress = new(string)
+			return d.ReadString(schemas.VirtualInterface_amazonAddress, v.AmazonAddress)
+		case schemas.VirtualInterface_amazonSideAsn:
+			v.AmazonSideAsn = new(int64)
+			return d.ReadInt64(schemas.VirtualInterface_amazonSideAsn, v.AmazonSideAsn)
+		case schemas.VirtualInterface_asn:
+			return d.ReadInt32(schemas.VirtualInterface_asn, &v.Asn)
+		case schemas.VirtualInterface_asnLong:
+			v.AsnLong = new(int64)
+			return d.ReadInt64(schemas.VirtualInterface_asnLong, v.AsnLong)
+		case schemas.VirtualInterface_authKey:
+			v.AuthKey = new(string)
+			return d.ReadString(schemas.VirtualInterface_authKey, v.AuthKey)
+		case schemas.VirtualInterface_awsDeviceV2:
+			v.AwsDeviceV2 = new(string)
+			return d.ReadString(schemas.VirtualInterface_awsDeviceV2, v.AwsDeviceV2)
+		case schemas.VirtualInterface_awsLogicalDeviceId:
+			v.AwsLogicalDeviceId = new(string)
+			return d.ReadString(schemas.VirtualInterface_awsLogicalDeviceId, v.AwsLogicalDeviceId)
+		case schemas.VirtualInterface_bgpPeers:
+			return deserializeBGPPeerList(d, schemas.VirtualInterface_bgpPeers, &v.BgpPeers)
+		case schemas.VirtualInterface_connectionId:
+			v.ConnectionId = new(string)
+			return d.ReadString(schemas.VirtualInterface_connectionId, v.ConnectionId)
+		case schemas.VirtualInterface_customerAddress:
+			v.CustomerAddress = new(string)
+			return d.ReadString(schemas.VirtualInterface_customerAddress, v.CustomerAddress)
+		case schemas.VirtualInterface_customerRouterConfig:
+			v.CustomerRouterConfig = new(string)
+			return d.ReadString(schemas.VirtualInterface_customerRouterConfig, v.CustomerRouterConfig)
+		case schemas.VirtualInterface_directConnectGatewayId:
+			v.DirectConnectGatewayId = new(string)
+			return d.ReadString(schemas.VirtualInterface_directConnectGatewayId, v.DirectConnectGatewayId)
+		case schemas.VirtualInterface_jumboFrameCapable:
+			v.JumboFrameCapable = new(bool)
+			return d.ReadBool(schemas.VirtualInterface_jumboFrameCapable, v.JumboFrameCapable)
+		case schemas.VirtualInterface_location:
+			v.Location = new(string)
+			return d.ReadString(schemas.VirtualInterface_location, v.Location)
+		case schemas.VirtualInterface_mtu:
+			v.Mtu = new(int32)
+			return d.ReadInt32(schemas.VirtualInterface_mtu, v.Mtu)
+		case schemas.VirtualInterface_ownerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.VirtualInterface_ownerAccount, v.OwnerAccount)
+		case schemas.VirtualInterface_region:
+			v.Region = new(string)
+			return d.ReadString(schemas.VirtualInterface_region, v.Region)
+		case schemas.VirtualInterface_routeFilterPrefixes:
+			return deserializeRouteFilterPrefixList(d, schemas.VirtualInterface_routeFilterPrefixes, &v.RouteFilterPrefixes)
+		case schemas.VirtualInterface_siteLinkEnabled:
+			v.SiteLinkEnabled = new(bool)
+			return d.ReadBool(schemas.VirtualInterface_siteLinkEnabled, v.SiteLinkEnabled)
+		case schemas.VirtualInterface_tags:
+			return deserializeTagList(d, schemas.VirtualInterface_tags, &v.Tags)
+		case schemas.VirtualInterface_virtualGatewayId:
+			v.VirtualGatewayId = new(string)
+			return d.ReadString(schemas.VirtualInterface_virtualGatewayId, v.VirtualGatewayId)
+		case schemas.VirtualInterface_virtualInterfaceId:
+			v.VirtualInterfaceId = new(string)
+			return d.ReadString(schemas.VirtualInterface_virtualInterfaceId, v.VirtualInterfaceId)
+		case schemas.VirtualInterface_virtualInterfaceName:
+			v.VirtualInterfaceName = new(string)
+			return d.ReadString(schemas.VirtualInterface_virtualInterfaceName, v.VirtualInterfaceName)
+		case schemas.VirtualInterface_virtualInterfaceState:
+			var ev string
+			if err := d.ReadString(schemas.VirtualInterface_virtualInterfaceState, &ev); err != nil {
+				return err
+			}
+			v.VirtualInterfaceState = VirtualInterfaceState(ev)
+			return nil
+		case schemas.VirtualInterface_virtualInterfaceType:
+			v.VirtualInterfaceType = new(string)
+			return d.ReadString(schemas.VirtualInterface_virtualInterfaceType, v.VirtualInterfaceType)
+		case schemas.VirtualInterface_vlan:
+			return d.ReadInt32(schemas.VirtualInterface_vlan, &v.Vlan)
+		}
+		return nil
+	})
+}
+
 // Information about the virtual interface failover test.
 type VirtualInterfaceTestHistory struct {
 
@@ -1346,6 +3215,67 @@ type VirtualInterfaceTestHistory struct {
 	VirtualInterfaceId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *VirtualInterfaceTestHistory) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.VirtualInterfaceTestHistory)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *VirtualInterfaceTestHistory) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBGPPeerIdList(s, schemas.VirtualInterfaceTestHistory_bgpPeers, v.BgpPeers)
+	if v.EndTime != nil {
+		s.WriteTime(schemas.VirtualInterfaceTestHistory_endTime, *v.EndTime)
+	}
+	if v.OwnerAccount != nil {
+		s.WriteString(schemas.VirtualInterfaceTestHistory_ownerAccount, *v.OwnerAccount)
+	}
+	if v.StartTime != nil {
+		s.WriteTime(schemas.VirtualInterfaceTestHistory_startTime, *v.StartTime)
+	}
+	if v.Status != nil {
+		s.WriteString(schemas.VirtualInterfaceTestHistory_status, *v.Status)
+	}
+	if v.TestDurationInMinutes != nil {
+		s.WriteInt32(schemas.VirtualInterfaceTestHistory_testDurationInMinutes, *v.TestDurationInMinutes)
+	}
+	if v.TestId != nil {
+		s.WriteString(schemas.VirtualInterfaceTestHistory_testId, *v.TestId)
+	}
+	if v.VirtualInterfaceId != nil {
+		s.WriteString(schemas.VirtualInterfaceTestHistory_virtualInterfaceId, *v.VirtualInterfaceId)
+	}
+}
+func (v *VirtualInterfaceTestHistory) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.VirtualInterfaceTestHistory, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.VirtualInterfaceTestHistory_bgpPeers:
+			return deserializeBGPPeerIdList(d, schemas.VirtualInterfaceTestHistory_bgpPeers, &v.BgpPeers)
+		case schemas.VirtualInterfaceTestHistory_endTime:
+			v.EndTime = new(time.Time)
+			return d.ReadTime(schemas.VirtualInterfaceTestHistory_endTime, v.EndTime)
+		case schemas.VirtualInterfaceTestHistory_ownerAccount:
+			v.OwnerAccount = new(string)
+			return d.ReadString(schemas.VirtualInterfaceTestHistory_ownerAccount, v.OwnerAccount)
+		case schemas.VirtualInterfaceTestHistory_startTime:
+			v.StartTime = new(time.Time)
+			return d.ReadTime(schemas.VirtualInterfaceTestHistory_startTime, v.StartTime)
+		case schemas.VirtualInterfaceTestHistory_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.VirtualInterfaceTestHistory_status, v.Status)
+		case schemas.VirtualInterfaceTestHistory_testDurationInMinutes:
+			v.TestDurationInMinutes = new(int32)
+			return d.ReadInt32(schemas.VirtualInterfaceTestHistory_testDurationInMinutes, v.TestDurationInMinutes)
+		case schemas.VirtualInterfaceTestHistory_testId:
+			v.TestId = new(string)
+			return d.ReadString(schemas.VirtualInterfaceTestHistory_testId, v.TestId)
+		case schemas.VirtualInterfaceTestHistory_virtualInterfaceId:
+			v.VirtualInterfaceId = new(string)
+			return d.ReadString(schemas.VirtualInterfaceTestHistory_virtualInterfaceId, v.VirtualInterfaceId)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

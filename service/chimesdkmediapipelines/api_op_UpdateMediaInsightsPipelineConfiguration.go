@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -52,6 +54,27 @@ type UpdateMediaInsightsPipelineConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMediaInsightsPipelineConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateMediaInsightsPipelineConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateMediaInsightsPipelineConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMediaInsightsPipelineConfigurationElements(s, schemas.UpdateMediaInsightsPipelineConfigurationRequest_Elements, v.Elements)
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateMediaInsightsPipelineConfigurationRequest_Identifier, *v.Identifier)
+	}
+	if v.RealTimeAlertConfiguration != nil {
+		s.WriteStruct(schemas.UpdateMediaInsightsPipelineConfigurationRequest_RealTimeAlertConfiguration)
+		v.RealTimeAlertConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ResourceAccessRoleArn != nil {
+		s.WriteString(schemas.UpdateMediaInsightsPipelineConfigurationRequest_ResourceAccessRoleArn, *v.ResourceAccessRoleArn)
+	}
+}
+
 type UpdateMediaInsightsPipelineConfigurationOutput struct {
 
 	// The updated configuration settings.
@@ -63,16 +86,24 @@ type UpdateMediaInsightsPipelineConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateMediaInsightsPipelineConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateMediaInsightsPipelineConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration:
+			v.MediaInsightsPipelineConfiguration = &types.MediaInsightsPipelineConfiguration{}
+			return v.MediaInsightsPipelineConfiguration.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateMediaInsightsPipelineConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpUpdateMediaInsightsPipelineConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMediaInsightsPipelineConfiguration, schemas.UpdateMediaInsightsPipelineConfigurationRequest, schemas.UpdateMediaInsightsPipelineConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpUpdateMediaInsightsPipelineConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateMediaInsightsPipelineConfiguration, schemas.UpdateMediaInsightsPipelineConfigurationRequest, schemas.UpdateMediaInsightsPipelineConfigurationResponse), output: &UpdateMediaInsightsPipelineConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateMediaInsightsPipelineConfiguration"); err != nil {

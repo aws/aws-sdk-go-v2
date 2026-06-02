@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/neptunedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,21 @@ type GetMLModelTrainingJobInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMLModelTrainingJobInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetMLModelTrainingJobInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetMLModelTrainingJobInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.GetMLModelTrainingJobInput_id, *v.Id)
+	}
+	if v.NeptuneIamRoleArn != nil {
+		s.WriteString(schemas.GetMLModelTrainingJobInput_neptuneIamRoleArn, *v.NeptuneIamRoleArn)
+	}
+}
+
 type GetMLModelTrainingJobOutput struct {
 
 	// The HPO job.
@@ -75,16 +92,38 @@ type GetMLModelTrainingJobOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetMLModelTrainingJobOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetMLModelTrainingJobOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetMLModelTrainingJobOutput_hpoJob:
+			v.HpoJob = &types.MlResourceDefinition{}
+			return v.HpoJob.Deserialize(d)
+		case schemas.GetMLModelTrainingJobOutput_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.GetMLModelTrainingJobOutput_id, v.Id)
+		case schemas.GetMLModelTrainingJobOutput_mlModels:
+			return deserializeMlModels(d, schemas.GetMLModelTrainingJobOutput_mlModels, &v.MlModels)
+		case schemas.GetMLModelTrainingJobOutput_modelTransformJob:
+			v.ModelTransformJob = &types.MlResourceDefinition{}
+			return v.ModelTransformJob.Deserialize(d)
+		case schemas.GetMLModelTrainingJobOutput_processingJob:
+			v.ProcessingJob = &types.MlResourceDefinition{}
+			return v.ProcessingJob.Deserialize(d)
+		case schemas.GetMLModelTrainingJobOutput_status:
+			v.Status = new(string)
+			return d.ReadString(schemas.GetMLModelTrainingJobOutput_status, v.Status)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetMLModelTrainingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetMLModelTrainingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLModelTrainingJob, schemas.GetMLModelTrainingJobInput, schemas.GetMLModelTrainingJobOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetMLModelTrainingJob{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetMLModelTrainingJob, schemas.GetMLModelTrainingJobInput, schemas.GetMLModelTrainingJobOutput), output: &GetMLModelTrainingJobOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetMLModelTrainingJob"); err != nil {

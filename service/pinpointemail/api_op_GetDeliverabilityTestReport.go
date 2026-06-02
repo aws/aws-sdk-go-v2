@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type GetDeliverabilityTestReportInput struct {
 	ReportId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetDeliverabilityTestReportInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDeliverabilityTestReportRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDeliverabilityTestReportInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ReportId != nil {
+		s.WriteString(schemas.GetDeliverabilityTestReportRequest_ReportId, *v.ReportId)
+	}
 }
 
 // The results of the predictive inbox placement test.
@@ -73,16 +87,34 @@ type GetDeliverabilityTestReportOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDeliverabilityTestReportOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDeliverabilityTestReportResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDeliverabilityTestReportResponse_DeliverabilityTestReport:
+			v.DeliverabilityTestReport = &types.DeliverabilityTestReport{}
+			return v.DeliverabilityTestReport.Deserialize(d)
+		case schemas.GetDeliverabilityTestReportResponse_IspPlacements:
+			return deserializeIspPlacements(d, schemas.GetDeliverabilityTestReportResponse_IspPlacements, &v.IspPlacements)
+		case schemas.GetDeliverabilityTestReportResponse_Message:
+			v.Message = new(string)
+			return d.ReadString(schemas.GetDeliverabilityTestReportResponse_Message, v.Message)
+		case schemas.GetDeliverabilityTestReportResponse_OverallPlacement:
+			v.OverallPlacement = &types.PlacementStatistics{}
+			return v.OverallPlacement.Deserialize(d)
+		case schemas.GetDeliverabilityTestReportResponse_Tags:
+			return deserializeTagList(d, schemas.GetDeliverabilityTestReportResponse_Tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDeliverabilityTestReportMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetDeliverabilityTestReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeliverabilityTestReport, schemas.GetDeliverabilityTestReportRequest, schemas.GetDeliverabilityTestReportResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetDeliverabilityTestReport{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDeliverabilityTestReport, schemas.GetDeliverabilityTestReportRequest, schemas.GetDeliverabilityTestReportResponse), output: &GetDeliverabilityTestReportOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDeliverabilityTestReport"); err != nil {

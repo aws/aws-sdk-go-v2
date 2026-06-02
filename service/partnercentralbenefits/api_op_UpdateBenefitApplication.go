@@ -7,7 +7,10 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/document"
+	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/partnercentralbenefits/types"
+	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -74,6 +77,36 @@ type UpdateBenefitApplicationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBenefitApplicationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateBenefitApplicationInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateBenefitApplicationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	s.WriteDocument(schemas.UpdateBenefitApplicationInput_BenefitApplicationDetails, &smithydocument.Opaque{Value: v.BenefitApplicationDetails})
+	if v.Catalog != nil {
+		s.WriteString(schemas.UpdateBenefitApplicationInput_Catalog, *v.Catalog)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.UpdateBenefitApplicationInput_ClientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateBenefitApplicationInput_Description, *v.Description)
+	}
+	serializeFileInputDetails(s, schemas.UpdateBenefitApplicationInput_FileDetails, v.FileDetails)
+	if v.Identifier != nil {
+		s.WriteString(schemas.UpdateBenefitApplicationInput_Identifier, *v.Identifier)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.UpdateBenefitApplicationInput_Name, *v.Name)
+	}
+	serializeContacts(s, schemas.UpdateBenefitApplicationInput_PartnerContacts, v.PartnerContacts)
+	if v.Revision != nil {
+		s.WriteString(schemas.UpdateBenefitApplicationInput_Revision, *v.Revision)
+	}
+}
+
 type UpdateBenefitApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated benefit application.
@@ -91,16 +124,30 @@ type UpdateBenefitApplicationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateBenefitApplicationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateBenefitApplicationOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateBenefitApplicationOutput_Arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.UpdateBenefitApplicationOutput_Arn, v.Arn)
+		case schemas.UpdateBenefitApplicationOutput_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.UpdateBenefitApplicationOutput_Id, v.Id)
+		case schemas.UpdateBenefitApplicationOutput_Revision:
+			v.Revision = new(string)
+			return d.ReadString(schemas.UpdateBenefitApplicationOutput_Revision, v.Revision)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateBenefitApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpUpdateBenefitApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBenefitApplication, schemas.UpdateBenefitApplicationInput, schemas.UpdateBenefitApplicationOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpUpdateBenefitApplication{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateBenefitApplication, schemas.UpdateBenefitApplicationInput, schemas.UpdateBenefitApplicationOutput), output: &UpdateBenefitApplicationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateBenefitApplication"); err != nil {

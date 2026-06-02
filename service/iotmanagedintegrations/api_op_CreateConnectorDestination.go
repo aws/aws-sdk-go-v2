@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/iotmanagedintegrations/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -63,6 +65,40 @@ type CreateConnectorDestinationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorDestinationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConnectorDestinationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConnectorDestinationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthConfig != nil {
+		s.WriteStruct(schemas.CreateConnectorDestinationRequest_AuthConfig)
+		v.AuthConfig.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.AuthType != "" {
+		s.WriteString(schemas.CreateConnectorDestinationRequest_AuthType, string(v.AuthType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateConnectorDestinationRequest_ClientToken, *v.ClientToken)
+	}
+	if v.CloudConnectorId != nil {
+		s.WriteString(schemas.CreateConnectorDestinationRequest_CloudConnectorId, *v.CloudConnectorId)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConnectorDestinationRequest_Description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateConnectorDestinationRequest_Name, *v.Name)
+	}
+	if v.SecretsManager != nil {
+		s.WriteStruct(schemas.CreateConnectorDestinationRequest_SecretsManager)
+		v.SecretsManager.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type CreateConnectorDestinationOutput struct {
 
 	// The identifier of the C2C connector destination creation request.
@@ -74,16 +110,24 @@ type CreateConnectorDestinationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConnectorDestinationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConnectorDestinationResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConnectorDestinationResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateConnectorDestinationResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConnectorDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateConnectorDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectorDestination, schemas.CreateConnectorDestinationRequest, schemas.CreateConnectorDestinationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateConnectorDestination{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConnectorDestination, schemas.CreateConnectorDestinationRequest, schemas.CreateConnectorDestinationResponse), output: &CreateConnectorDestinationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConnectorDestination"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -65,6 +67,36 @@ type ListAgreementCancellationRequestsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgreementCancellationRequestsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListAgreementCancellationRequestsInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListAgreementCancellationRequestsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgreementId != nil {
+		s.WriteString(schemas.ListAgreementCancellationRequestsInput_agreementId, *v.AgreementId)
+	}
+	if v.AgreementType != nil {
+		s.WriteString(schemas.ListAgreementCancellationRequestsInput_agreementType, *v.AgreementType)
+	}
+	if v.Catalog != nil {
+		s.WriteString(schemas.ListAgreementCancellationRequestsInput_catalog, *v.Catalog)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListAgreementCancellationRequestsInput_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListAgreementCancellationRequestsInput_nextToken, *v.NextToken)
+	}
+	if v.PartyType != nil {
+		s.WriteString(schemas.ListAgreementCancellationRequestsInput_partyType, *v.PartyType)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListAgreementCancellationRequestsInput_status, string(v.Status))
+	}
+}
+
 type ListAgreementCancellationRequestsOutput struct {
 
 	// An array of AgreementCancellationRequestSummary objects containing summary
@@ -80,16 +112,26 @@ type ListAgreementCancellationRequestsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListAgreementCancellationRequestsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListAgreementCancellationRequestsOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListAgreementCancellationRequestsOutput_items:
+			return deserializeAgreementCancellationRequestSummaryList(d, schemas.ListAgreementCancellationRequestsOutput_items, &v.Items)
+		case schemas.ListAgreementCancellationRequestsOutput_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListAgreementCancellationRequestsOutput_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListAgreementCancellationRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListAgreementCancellationRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgreementCancellationRequests, schemas.ListAgreementCancellationRequestsInput, schemas.ListAgreementCancellationRequestsOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListAgreementCancellationRequests{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListAgreementCancellationRequests, schemas.ListAgreementCancellationRequestsInput, schemas.ListAgreementCancellationRequestsOutput), output: &ListAgreementCancellationRequestsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListAgreementCancellationRequests"); err != nil {

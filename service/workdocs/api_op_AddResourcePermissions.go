@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/workdocs/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -51,6 +53,27 @@ type AddResourcePermissionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddResourcePermissionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AddResourcePermissionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AddResourcePermissionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AuthenticationToken != nil {
+		s.WriteString(schemas.AddResourcePermissionsRequest_AuthenticationToken, *v.AuthenticationToken)
+	}
+	if v.NotificationOptions != nil {
+		s.WriteStruct(schemas.AddResourcePermissionsRequest_NotificationOptions)
+		v.NotificationOptions.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serializeSharePrincipalList(s, schemas.AddResourcePermissionsRequest_Principals, v.Principals)
+	if v.ResourceId != nil {
+		s.WriteString(schemas.AddResourcePermissionsRequest_ResourceId, *v.ResourceId)
+	}
+}
+
 type AddResourcePermissionsOutput struct {
 
 	// The share results.
@@ -62,16 +85,23 @@ type AddResourcePermissionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *AddResourcePermissionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AddResourcePermissionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AddResourcePermissionsResponse_ShareResults:
+			return deserializeShareResultsList(d, schemas.AddResourcePermissionsResponse_ShareResults, &v.ShareResults)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationAddResourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpAddResourcePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddResourcePermissions, schemas.AddResourcePermissionsRequest, schemas.AddResourcePermissionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpAddResourcePermissions{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.AddResourcePermissions, schemas.AddResourcePermissionsRequest, schemas.AddResourcePermissionsResponse), output: &AddResourcePermissionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "AddResourcePermissions"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,21 @@ type GetFailureModeFindingInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFailureModeFindingInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetFailureModeFindingRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetFailureModeFindingInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.FindingId != nil {
+		s.WriteString(schemas.GetFailureModeFindingRequest_findingId, *v.FindingId)
+	}
+	if v.ServiceArn != nil {
+		s.WriteString(schemas.GetFailureModeFindingRequest_serviceArn, *v.ServiceArn)
+	}
+}
+
 type GetFailureModeFindingOutput struct {
 
 	// The requested finding.
@@ -53,16 +70,24 @@ type GetFailureModeFindingOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetFailureModeFindingOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetFailureModeFindingResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetFailureModeFindingResponse_finding:
+			v.Finding = &types.Finding{}
+			return v.Finding.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetFailureModeFindingMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetFailureModeFinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFailureModeFinding, schemas.GetFailureModeFindingRequest, schemas.GetFailureModeFindingResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetFailureModeFinding{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetFailureModeFinding, schemas.GetFailureModeFindingRequest, schemas.GetFailureModeFindingResponse), output: &GetFailureModeFindingOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetFailureModeFinding"); err != nil {

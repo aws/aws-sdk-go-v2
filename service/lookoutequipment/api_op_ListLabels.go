@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -58,6 +60,36 @@ type ListLabelsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLabelsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListLabelsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListLabelsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Equipment != nil {
+		s.WriteString(schemas.ListLabelsRequest_Equipment, *v.Equipment)
+	}
+	if v.FaultCode != nil {
+		s.WriteString(schemas.ListLabelsRequest_FaultCode, *v.FaultCode)
+	}
+	if v.IntervalEndTime != nil {
+		s.WriteTime(schemas.ListLabelsRequest_IntervalEndTime, *v.IntervalEndTime)
+	}
+	if v.IntervalStartTime != nil {
+		s.WriteTime(schemas.ListLabelsRequest_IntervalStartTime, *v.IntervalStartTime)
+	}
+	if v.LabelGroupName != nil {
+		s.WriteString(schemas.ListLabelsRequest_LabelGroupName, *v.LabelGroupName)
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListLabelsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListLabelsRequest_NextToken, *v.NextToken)
+	}
+}
+
 type ListLabelsOutput struct {
 
 	//  A summary of the items in the label group.
@@ -77,16 +109,26 @@ type ListLabelsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListLabelsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListLabelsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListLabelsResponse_LabelSummaries:
+			return deserializeLabelSummaries(d, schemas.ListLabelsResponse_LabelSummaries, &v.LabelSummaries)
+		case schemas.ListLabelsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListLabelsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpListLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLabels, schemas.ListLabelsRequest, schemas.ListLabelsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpListLabels{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListLabels, schemas.ListLabelsRequest, schemas.ListLabelsResponse), output: &ListLabelsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListLabels"); err != nil {

@@ -3,6 +3,8 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/schemas"
+	smithy "github.com/aws/smithy-go"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
@@ -18,6 +20,33 @@ type Bucket struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Bucket) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Bucket)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Bucket) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != 0 {
+		s.WriteInt64(schemas.Bucket_count, v.Count)
+	}
+	if v.Value != nil {
+		s.WriteString(schemas.Bucket_value, *v.Value)
+	}
+}
+func (v *Bucket) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Bucket, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Bucket_count:
+			return d.ReadInt64(schemas.Bucket_count, &v.Count)
+		case schemas.Bucket_value:
+			v.Value = new(string)
+			return d.ReadString(schemas.Bucket_value, v.Value)
+		}
+		return nil
+	})
+}
+
 // A container for the calculated facet values and counts.
 type BucketInfo struct {
 
@@ -25,6 +54,25 @@ type BucketInfo struct {
 	Buckets []Bucket
 
 	noSmithyDocumentSerde
+}
+
+func (v *BucketInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.BucketInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *BucketInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeBucketList(s, schemas.BucketInfo_buckets, v.Buckets)
+}
+func (v *BucketInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.BucketInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.BucketInfo_buckets:
+			return deserializeBucketList(d, schemas.BucketInfo_buckets, &v.Buckets)
+		}
+		return nil
+	})
 }
 
 // A warning returned by the document service when an issue is discovered while
@@ -35,6 +83,28 @@ type DocumentServiceWarning struct {
 	Message *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DocumentServiceWarning) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DocumentServiceWarning)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DocumentServiceWarning) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Message != nil {
+		s.WriteString(schemas.DocumentServiceWarning_message, *v.Message)
+	}
+}
+func (v *DocumentServiceWarning) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DocumentServiceWarning, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DocumentServiceWarning_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DocumentServiceWarning_message, v.Message)
+		}
+		return nil
+	})
 }
 
 // The statistics for a field calculated in the request.
@@ -91,6 +161,65 @@ type FieldStats struct {
 	noSmithyDocumentSerde
 }
 
+func (v *FieldStats) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.FieldStats)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *FieldStats) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Count != 0 {
+		s.WriteInt64(schemas.FieldStats_count, v.Count)
+	}
+	if v.Max != nil {
+		s.WriteString(schemas.FieldStats_max, *v.Max)
+	}
+	if v.Mean != nil {
+		s.WriteString(schemas.FieldStats_mean, *v.Mean)
+	}
+	if v.Min != nil {
+		s.WriteString(schemas.FieldStats_min, *v.Min)
+	}
+	if v.Missing != 0 {
+		s.WriteInt64(schemas.FieldStats_missing, v.Missing)
+	}
+	if v.Stddev != 0 {
+		s.WriteFloat64(schemas.FieldStats_stddev, v.Stddev)
+	}
+	if v.Sum != 0 {
+		s.WriteFloat64(schemas.FieldStats_sum, v.Sum)
+	}
+	if v.SumOfSquares != 0 {
+		s.WriteFloat64(schemas.FieldStats_sumOfSquares, v.SumOfSquares)
+	}
+}
+func (v *FieldStats) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.FieldStats, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.FieldStats_count:
+			return d.ReadInt64(schemas.FieldStats_count, &v.Count)
+		case schemas.FieldStats_max:
+			v.Max = new(string)
+			return d.ReadString(schemas.FieldStats_max, v.Max)
+		case schemas.FieldStats_mean:
+			v.Mean = new(string)
+			return d.ReadString(schemas.FieldStats_mean, v.Mean)
+		case schemas.FieldStats_min:
+			v.Min = new(string)
+			return d.ReadString(schemas.FieldStats_min, v.Min)
+		case schemas.FieldStats_missing:
+			return d.ReadInt64(schemas.FieldStats_missing, &v.Missing)
+		case schemas.FieldStats_stddev:
+			return d.ReadFloat64(schemas.FieldStats_stddev, &v.Stddev)
+		case schemas.FieldStats_sum:
+			return d.ReadFloat64(schemas.FieldStats_sum, &v.Sum)
+		case schemas.FieldStats_sumOfSquares:
+			return d.ReadFloat64(schemas.FieldStats_sumOfSquares, &v.SumOfSquares)
+		}
+		return nil
+	})
+}
+
 // Information about a document that matches the search request.
 type Hit struct {
 
@@ -107,6 +236,37 @@ type Hit struct {
 	Id *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *Hit) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Hit)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Hit) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeExprs(s, schemas.Hit_exprs, v.Exprs)
+	serializeFields(s, schemas.Hit_fields, v.Fields)
+	serializeHighlights(s, schemas.Hit_highlights, v.Highlights)
+	if v.Id != nil {
+		s.WriteString(schemas.Hit_id, *v.Id)
+	}
+}
+func (v *Hit) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Hit, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Hit_exprs:
+			return deserializeExprs(d, schemas.Hit_exprs, &v.Exprs)
+		case schemas.Hit_fields:
+			return deserializeFields(d, schemas.Hit_fields, &v.Fields)
+		case schemas.Hit_highlights:
+			return deserializeHighlights(d, schemas.Hit_highlights, &v.Highlights)
+		case schemas.Hit_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.Hit_id, v.Id)
+		}
+		return nil
+	})
 }
 
 // The collection of documents that match the search request.
@@ -128,6 +288,41 @@ type Hits struct {
 	noSmithyDocumentSerde
 }
 
+func (v *Hits) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.Hits)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *Hits) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Cursor != nil {
+		s.WriteString(schemas.Hits_cursor, *v.Cursor)
+	}
+	if v.Found != 0 {
+		s.WriteInt64(schemas.Hits_found, v.Found)
+	}
+	serializeHitList(s, schemas.Hits_hit, v.Hit)
+	if v.Start != 0 {
+		s.WriteInt64(schemas.Hits_start, v.Start)
+	}
+}
+func (v *Hits) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.Hits, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.Hits_cursor:
+			v.Cursor = new(string)
+			return d.ReadString(schemas.Hits_cursor, v.Cursor)
+		case schemas.Hits_found:
+			return d.ReadInt64(schemas.Hits_found, &v.Found)
+		case schemas.Hits_hit:
+			return deserializeHitList(d, schemas.Hits_hit, &v.Hit)
+		case schemas.Hits_start:
+			return d.ReadInt64(schemas.Hits_start, &v.Start)
+		}
+		return nil
+	})
+}
+
 // Contains the resource id ( rid ) and the time it took to process the request (
 // timems ).
 type SearchStatus struct {
@@ -139,6 +334,33 @@ type SearchStatus struct {
 	Timems int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SearchStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SearchStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SearchStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rid != nil {
+		s.WriteString(schemas.SearchStatus_rid, *v.Rid)
+	}
+	if v.Timems != 0 {
+		s.WriteInt64(schemas.SearchStatus_timems, v.Timems)
+	}
+}
+func (v *SearchStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SearchStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SearchStatus_rid:
+			v.Rid = new(string)
+			return d.ReadString(schemas.SearchStatus_rid, v.Rid)
+		case schemas.SearchStatus_timems:
+			return d.ReadInt64(schemas.SearchStatus_timems, &v.Timems)
+		}
+		return nil
+	})
 }
 
 // An autocomplete suggestion that matches the query string specified in a
@@ -157,6 +379,39 @@ type SuggestionMatch struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuggestionMatch) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuggestionMatch)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuggestionMatch) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.SuggestionMatch_id, *v.Id)
+	}
+	if v.Score != 0 {
+		s.WriteInt64(schemas.SuggestionMatch_score, v.Score)
+	}
+	if v.Suggestion != nil {
+		s.WriteString(schemas.SuggestionMatch_suggestion, *v.Suggestion)
+	}
+}
+func (v *SuggestionMatch) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuggestionMatch, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuggestionMatch_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SuggestionMatch_id, v.Id)
+		case schemas.SuggestionMatch_score:
+			return d.ReadInt64(schemas.SuggestionMatch_score, &v.Score)
+		case schemas.SuggestionMatch_suggestion:
+			v.Suggestion = new(string)
+			return d.ReadString(schemas.SuggestionMatch_suggestion, v.Suggestion)
+		}
+		return nil
+	})
+}
+
 // Container for the suggestion information returned in a SuggestResponse .
 type SuggestModel struct {
 
@@ -172,6 +427,36 @@ type SuggestModel struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SuggestModel) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuggestModel)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuggestModel) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Found != 0 {
+		s.WriteInt64(schemas.SuggestModel_found, v.Found)
+	}
+	if v.Query != nil {
+		s.WriteString(schemas.SuggestModel_query, *v.Query)
+	}
+	serializeSuggestions(s, schemas.SuggestModel_suggestions, v.Suggestions)
+}
+func (v *SuggestModel) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuggestModel, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuggestModel_found:
+			return d.ReadInt64(schemas.SuggestModel_found, &v.Found)
+		case schemas.SuggestModel_query:
+			v.Query = new(string)
+			return d.ReadString(schemas.SuggestModel_query, v.Query)
+		case schemas.SuggestModel_suggestions:
+			return deserializeSuggestions(d, schemas.SuggestModel_suggestions, &v.Suggestions)
+		}
+		return nil
+	})
+}
+
 // Contains the resource id ( rid ) and the time it took to process the request (
 // timems ).
 type SuggestStatus struct {
@@ -183,6 +468,33 @@ type SuggestStatus struct {
 	Timems int64
 
 	noSmithyDocumentSerde
+}
+
+func (v *SuggestStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SuggestStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SuggestStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Rid != nil {
+		s.WriteString(schemas.SuggestStatus_rid, *v.Rid)
+	}
+	if v.Timems != 0 {
+		s.WriteInt64(schemas.SuggestStatus_timems, v.Timems)
+	}
+}
+func (v *SuggestStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SuggestStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SuggestStatus_rid:
+			v.Rid = new(string)
+			return d.ReadString(schemas.SuggestStatus_rid, v.Rid)
+		case schemas.SuggestStatus_timems:
+			return d.ReadInt64(schemas.SuggestStatus_timems, &v.Timems)
+		}
+		return nil
+	})
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde

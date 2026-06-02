@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/location/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -43,6 +45,34 @@ type ListGeofenceCollectionsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGeofenceCollectionsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGeofenceCollectionsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGeofenceCollectionsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListGeofenceCollectionsRequest_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGeofenceCollectionsRequest_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGeofenceCollectionsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGeofenceCollectionsRequest, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGeofenceCollectionsRequest_MaxResults:
+			v.MaxResults = new(int32)
+			return d.ReadInt32(schemas.ListGeofenceCollectionsRequest_MaxResults, v.MaxResults)
+		case schemas.ListGeofenceCollectionsRequest_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGeofenceCollectionsRequest_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
+
 type ListGeofenceCollectionsOutput struct {
 
 	// Lists the geofence collections that exist in your Amazon Web Services account.
@@ -60,16 +90,38 @@ type ListGeofenceCollectionsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListGeofenceCollectionsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListGeofenceCollectionsResponse)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListGeofenceCollectionsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeListGeofenceCollectionsResponseEntryList(s, schemas.ListGeofenceCollectionsResponse_Entries, v.Entries)
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListGeofenceCollectionsResponse_NextToken, *v.NextToken)
+	}
+}
+func (v *ListGeofenceCollectionsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListGeofenceCollectionsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListGeofenceCollectionsResponse_Entries:
+			return deserializeListGeofenceCollectionsResponseEntryList(d, schemas.ListGeofenceCollectionsResponse_Entries, &v.Entries)
+		case schemas.ListGeofenceCollectionsResponse_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListGeofenceCollectionsResponse_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListGeofenceCollectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListGeofenceCollections{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGeofenceCollections, schemas.ListGeofenceCollectionsRequest, schemas.ListGeofenceCollectionsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListGeofenceCollections{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListGeofenceCollections, schemas.ListGeofenceCollectionsRequest, schemas.ListGeofenceCollectionsResponse), output: &ListGeofenceCollectionsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListGeofenceCollections"); err != nil {

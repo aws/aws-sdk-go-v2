@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcore/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -44,6 +46,21 @@ type ListBatchEvaluationsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBatchEvaluationsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListBatchEvaluationsRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListBatchEvaluationsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListBatchEvaluationsRequest_maxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListBatchEvaluationsRequest_nextToken, *v.NextToken)
+	}
+}
+
 type ListBatchEvaluationsOutput struct {
 
 	// The list of batch evaluation summaries.
@@ -62,16 +79,26 @@ type ListBatchEvaluationsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListBatchEvaluationsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListBatchEvaluationsResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListBatchEvaluationsResponse_batchEvaluations:
+			return deserializeBatchEvaluationSummaryList(d, schemas.ListBatchEvaluationsResponse_batchEvaluations, &v.BatchEvaluations)
+		case schemas.ListBatchEvaluationsResponse_nextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListBatchEvaluationsResponse_nextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListBatchEvaluationsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListBatchEvaluations{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBatchEvaluations, schemas.ListBatchEvaluationsRequest, schemas.ListBatchEvaluationsResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListBatchEvaluations{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListBatchEvaluations, schemas.ListBatchEvaluationsRequest, schemas.ListBatchEvaluationsResponse), output: &ListBatchEvaluationsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListBatchEvaluations"); err != nil {

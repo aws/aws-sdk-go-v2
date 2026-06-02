@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/gameliftstreams/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -60,6 +62,27 @@ type ListStreamSessionsByAccountInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamSessionsByAccountInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ListStreamSessionsByAccountInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ListStreamSessionsByAccountInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExportFilesStatus != "" {
+		s.WriteString(schemas.ListStreamSessionsByAccountInput_ExportFilesStatus, string(v.ExportFilesStatus))
+	}
+	if v.MaxResults != nil {
+		s.WriteInt32(schemas.ListStreamSessionsByAccountInput_MaxResults, *v.MaxResults)
+	}
+	if v.NextToken != nil {
+		s.WriteString(schemas.ListStreamSessionsByAccountInput_NextToken, *v.NextToken)
+	}
+	if v.Status != "" {
+		s.WriteString(schemas.ListStreamSessionsByAccountInput_Status, string(v.Status))
+	}
+}
+
 type ListStreamSessionsByAccountOutput struct {
 
 	// A collection of Amazon GameLift Streams stream sessions that are associated
@@ -77,16 +100,26 @@ type ListStreamSessionsByAccountOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ListStreamSessionsByAccountOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ListStreamSessionsByAccountOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ListStreamSessionsByAccountOutput_Items:
+			return deserializeStreamSessionSummaryList(d, schemas.ListStreamSessionsByAccountOutput_Items, &v.Items)
+		case schemas.ListStreamSessionsByAccountOutput_NextToken:
+			v.NextToken = new(string)
+			return d.ReadString(schemas.ListStreamSessionsByAccountOutput_NextToken, v.NextToken)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationListStreamSessionsByAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpListStreamSessionsByAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamSessionsByAccount, schemas.ListStreamSessionsByAccountInput, schemas.ListStreamSessionsByAccountOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpListStreamSessionsByAccount{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ListStreamSessionsByAccount, schemas.ListStreamSessionsByAccountInput, schemas.ListStreamSessionsByAccountOutput), output: &ListStreamSessionsByAccountOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ListStreamSessionsByAccount"); err != nil {

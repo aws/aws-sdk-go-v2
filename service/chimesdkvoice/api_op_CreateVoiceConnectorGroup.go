@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,6 +47,19 @@ type CreateVoiceConnectorGroupInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVoiceConnectorGroupInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateVoiceConnectorGroupRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateVoiceConnectorGroupInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.CreateVoiceConnectorGroupRequest_Name, *v.Name)
+	}
+	serializeVoiceConnectorItemList(s, schemas.CreateVoiceConnectorGroupRequest_VoiceConnectorItems, v.VoiceConnectorItems)
+}
+
 type CreateVoiceConnectorGroupOutput struct {
 
 	// The details of the Voice Connector group.
@@ -56,16 +71,24 @@ type CreateVoiceConnectorGroupOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateVoiceConnectorGroupOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateVoiceConnectorGroupResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateVoiceConnectorGroupResponse_VoiceConnectorGroup:
+			v.VoiceConnectorGroup = &types.VoiceConnectorGroup{}
+			return v.VoiceConnectorGroup.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateVoiceConnectorGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVoiceConnectorGroup, schemas.CreateVoiceConnectorGroupRequest, schemas.CreateVoiceConnectorGroupResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateVoiceConnectorGroup{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateVoiceConnectorGroup, schemas.CreateVoiceConnectorGroupRequest, schemas.CreateVoiceConnectorGroupResponse), output: &CreateVoiceConnectorGroupOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateVoiceConnectorGroup"); err != nil {

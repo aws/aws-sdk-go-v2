@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -133,6 +135,36 @@ type CreateConstraintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConstraintInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateConstraintInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateConstraintInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.CreateConstraintInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateConstraintInput_Description, *v.Description)
+	}
+	if v.IdempotencyToken != nil {
+		s.WriteString(schemas.CreateConstraintInput_IdempotencyToken, *v.IdempotencyToken)
+	}
+	if v.Parameters != nil {
+		s.WriteString(schemas.CreateConstraintInput_Parameters, *v.Parameters)
+	}
+	if v.PortfolioId != nil {
+		s.WriteString(schemas.CreateConstraintInput_PortfolioId, *v.PortfolioId)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.CreateConstraintInput_ProductId, *v.ProductId)
+	}
+	if v.Type != nil {
+		s.WriteString(schemas.CreateConstraintInput_Type, *v.Type)
+	}
+}
+
 type CreateConstraintOutput struct {
 
 	// Information about the constraint.
@@ -150,16 +182,34 @@ type CreateConstraintOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateConstraintOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateConstraintOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateConstraintOutput_ConstraintDetail:
+			v.ConstraintDetail = &types.ConstraintDetail{}
+			return v.ConstraintDetail.Deserialize(d)
+		case schemas.CreateConstraintOutput_ConstraintParameters:
+			v.ConstraintParameters = new(string)
+			return d.ReadString(schemas.CreateConstraintOutput_ConstraintParameters, v.ConstraintParameters)
+		case schemas.CreateConstraintOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.CreateConstraintOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateConstraint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConstraint, schemas.CreateConstraintInput, schemas.CreateConstraintOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateConstraint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateConstraint, schemas.CreateConstraintInput, schemas.CreateConstraintOutput), output: &CreateConstraintOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateConstraint"); err != nil {

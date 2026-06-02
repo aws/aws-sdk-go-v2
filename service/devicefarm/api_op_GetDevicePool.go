@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/devicefarm/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -38,6 +40,18 @@ type GetDevicePoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDevicePoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetDevicePoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetDevicePoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Arn != nil {
+		s.WriteString(schemas.GetDevicePoolRequest_arn, *v.Arn)
+	}
+}
+
 // Represents the result of a get device pool request.
 type GetDevicePoolOutput struct {
 
@@ -50,16 +64,24 @@ type GetDevicePoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetDevicePoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetDevicePoolResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetDevicePoolResult_devicePool:
+			v.DevicePool = &types.DevicePool{}
+			return v.DevicePool.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetDevicePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetDevicePool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevicePool, schemas.GetDevicePoolRequest, schemas.GetDevicePoolResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetDevicePool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetDevicePool, schemas.GetDevicePoolRequest, schemas.GetDevicePoolResult), output: &GetDevicePoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetDevicePool"); err != nil {

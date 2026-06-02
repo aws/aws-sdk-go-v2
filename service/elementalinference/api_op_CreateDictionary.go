@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/elementalinference/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/elementalinference/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,25 @@ type CreateDictionaryInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDictionaryInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDictionaryRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDictionaryInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Entries != nil {
+		s.WriteString(schemas.CreateDictionaryRequest_entries, *v.Entries)
+	}
+	if v.Language != "" {
+		s.WriteString(schemas.CreateDictionaryRequest_language, string(v.Language))
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateDictionaryRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreateDictionaryRequest_tags, v.Tags)
+}
+
 type CreateDictionaryOutput struct {
 
 	// The ARN of the dictionary.
@@ -93,16 +114,48 @@ type CreateDictionaryOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDictionaryOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDictionaryResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDictionaryResponse_arn:
+			v.Arn = new(string)
+			return d.ReadString(schemas.CreateDictionaryResponse_arn, v.Arn)
+		case schemas.CreateDictionaryResponse_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateDictionaryResponse_id, v.Id)
+		case schemas.CreateDictionaryResponse_language:
+			var ev string
+			if err := d.ReadString(schemas.CreateDictionaryResponse_language, &ev); err != nil {
+				return err
+			}
+			v.Language = types.DictionaryLanguage(ev)
+			return nil
+		case schemas.CreateDictionaryResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.CreateDictionaryResponse_name, v.Name)
+		case schemas.CreateDictionaryResponse_references:
+			return deserializeFeedReferences(d, schemas.CreateDictionaryResponse_references, &v.References)
+		case schemas.CreateDictionaryResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateDictionaryResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.DictionaryStatus(ev)
+			return nil
+		case schemas.CreateDictionaryResponse_tags:
+			return deserializeTagMap(d, schemas.CreateDictionaryResponse_tags, &v.Tags)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDictionaryMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateDictionary{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDictionary, schemas.CreateDictionaryRequest, schemas.CreateDictionaryResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateDictionary{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDictionary, schemas.CreateDictionaryRequest, schemas.CreateDictionaryResponse), output: &CreateDictionaryOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDictionary"); err != nil {

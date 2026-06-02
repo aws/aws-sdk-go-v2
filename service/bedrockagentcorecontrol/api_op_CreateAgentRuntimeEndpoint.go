@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentcorecontrol/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -57,6 +59,31 @@ type CreateAgentRuntimeEndpointInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentRuntimeEndpointInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateAgentRuntimeEndpointRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateAgentRuntimeEndpointInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AgentRuntimeId != nil {
+		s.WriteString(schemas.CreateAgentRuntimeEndpointRequest_agentRuntimeId, *v.AgentRuntimeId)
+	}
+	if v.AgentRuntimeVersion != nil {
+		s.WriteString(schemas.CreateAgentRuntimeEndpointRequest_agentRuntimeVersion, *v.AgentRuntimeVersion)
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateAgentRuntimeEndpointRequest_clientToken, *v.ClientToken)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateAgentRuntimeEndpointRequest_description, *v.Description)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateAgentRuntimeEndpointRequest_name, *v.Name)
+	}
+	serializeTagsMap(s, schemas.CreateAgentRuntimeEndpointRequest_tags, v.Tags)
+}
+
 type CreateAgentRuntimeEndpointOutput struct {
 
 	// The Amazon Resource Name (ARN) of the AgentCore Runtime.
@@ -96,16 +123,46 @@ type CreateAgentRuntimeEndpointOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateAgentRuntimeEndpointOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateAgentRuntimeEndpointResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateAgentRuntimeEndpointResponse_agentRuntimeArn:
+			v.AgentRuntimeArn = new(string)
+			return d.ReadString(schemas.CreateAgentRuntimeEndpointResponse_agentRuntimeArn, v.AgentRuntimeArn)
+		case schemas.CreateAgentRuntimeEndpointResponse_agentRuntimeEndpointArn:
+			v.AgentRuntimeEndpointArn = new(string)
+			return d.ReadString(schemas.CreateAgentRuntimeEndpointResponse_agentRuntimeEndpointArn, v.AgentRuntimeEndpointArn)
+		case schemas.CreateAgentRuntimeEndpointResponse_agentRuntimeId:
+			v.AgentRuntimeId = new(string)
+			return d.ReadString(schemas.CreateAgentRuntimeEndpointResponse_agentRuntimeId, v.AgentRuntimeId)
+		case schemas.CreateAgentRuntimeEndpointResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.CreateAgentRuntimeEndpointResponse_createdAt, v.CreatedAt)
+		case schemas.CreateAgentRuntimeEndpointResponse_endpointName:
+			v.EndpointName = new(string)
+			return d.ReadString(schemas.CreateAgentRuntimeEndpointResponse_endpointName, v.EndpointName)
+		case schemas.CreateAgentRuntimeEndpointResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.CreateAgentRuntimeEndpointResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.AgentRuntimeEndpointStatus(ev)
+			return nil
+		case schemas.CreateAgentRuntimeEndpointResponse_targetVersion:
+			v.TargetVersion = new(string)
+			return d.ReadString(schemas.CreateAgentRuntimeEndpointResponse_targetVersion, v.TargetVersion)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateAgentRuntimeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateAgentRuntimeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentRuntimeEndpoint, schemas.CreateAgentRuntimeEndpointRequest, schemas.CreateAgentRuntimeEndpointResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateAgentRuntimeEndpoint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateAgentRuntimeEndpoint, schemas.CreateAgentRuntimeEndpointRequest, schemas.CreateAgentRuntimeEndpointResponse), output: &CreateAgentRuntimeEndpointOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateAgentRuntimeEndpoint"); err != nil {

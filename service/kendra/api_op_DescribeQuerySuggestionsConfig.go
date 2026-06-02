@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,18 @@ type DescribeQuerySuggestionsConfigInput struct {
 	IndexId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *DescribeQuerySuggestionsConfigInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeQuerySuggestionsConfigRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeQuerySuggestionsConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IndexId != nil {
+		s.WriteString(schemas.DescribeQuerySuggestionsConfigRequest_IndexId, *v.IndexId)
+	}
 }
 
 type DescribeQuerySuggestionsConfigOutput struct {
@@ -113,16 +127,59 @@ type DescribeQuerySuggestionsConfigOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeQuerySuggestionsConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeQuerySuggestionsConfigResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeQuerySuggestionsConfigResponse_AttributeSuggestionsConfig:
+			v.AttributeSuggestionsConfig = &types.AttributeSuggestionsDescribeConfig{}
+			return v.AttributeSuggestionsConfig.Deserialize(d)
+		case schemas.DescribeQuerySuggestionsConfigResponse_IncludeQueriesWithoutUserInformation:
+			v.IncludeQueriesWithoutUserInformation = new(bool)
+			return d.ReadBool(schemas.DescribeQuerySuggestionsConfigResponse_IncludeQueriesWithoutUserInformation, v.IncludeQueriesWithoutUserInformation)
+		case schemas.DescribeQuerySuggestionsConfigResponse_LastClearTime:
+			v.LastClearTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeQuerySuggestionsConfigResponse_LastClearTime, v.LastClearTime)
+		case schemas.DescribeQuerySuggestionsConfigResponse_LastSuggestionsBuildTime:
+			v.LastSuggestionsBuildTime = new(time.Time)
+			return d.ReadTime(schemas.DescribeQuerySuggestionsConfigResponse_LastSuggestionsBuildTime, v.LastSuggestionsBuildTime)
+		case schemas.DescribeQuerySuggestionsConfigResponse_MinimumNumberOfQueryingUsers:
+			v.MinimumNumberOfQueryingUsers = new(int32)
+			return d.ReadInt32(schemas.DescribeQuerySuggestionsConfigResponse_MinimumNumberOfQueryingUsers, v.MinimumNumberOfQueryingUsers)
+		case schemas.DescribeQuerySuggestionsConfigResponse_MinimumQueryCount:
+			v.MinimumQueryCount = new(int32)
+			return d.ReadInt32(schemas.DescribeQuerySuggestionsConfigResponse_MinimumQueryCount, v.MinimumQueryCount)
+		case schemas.DescribeQuerySuggestionsConfigResponse_Mode:
+			var ev string
+			if err := d.ReadString(schemas.DescribeQuerySuggestionsConfigResponse_Mode, &ev); err != nil {
+				return err
+			}
+			v.Mode = types.Mode(ev)
+			return nil
+		case schemas.DescribeQuerySuggestionsConfigResponse_QueryLogLookBackWindowInDays:
+			v.QueryLogLookBackWindowInDays = new(int32)
+			return d.ReadInt32(schemas.DescribeQuerySuggestionsConfigResponse_QueryLogLookBackWindowInDays, v.QueryLogLookBackWindowInDays)
+		case schemas.DescribeQuerySuggestionsConfigResponse_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeQuerySuggestionsConfigResponse_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.QuerySuggestionsStatus(ev)
+			return nil
+		case schemas.DescribeQuerySuggestionsConfigResponse_TotalSuggestionsCount:
+			v.TotalSuggestionsCount = new(int32)
+			return d.ReadInt32(schemas.DescribeQuerySuggestionsConfigResponse_TotalSuggestionsCount, v.TotalSuggestionsCount)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeQuerySuggestionsConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeQuerySuggestionsConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuerySuggestionsConfig, schemas.DescribeQuerySuggestionsConfigRequest, schemas.DescribeQuerySuggestionsConfigResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeQuerySuggestionsConfig{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeQuerySuggestionsConfig, schemas.DescribeQuerySuggestionsConfigRequest, schemas.DescribeQuerySuggestionsConfigResponse), output: &DescribeQuerySuggestionsConfigOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeQuerySuggestionsConfig"); err != nil {

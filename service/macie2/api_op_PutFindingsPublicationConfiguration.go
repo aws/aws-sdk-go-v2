@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/macie2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,6 +42,23 @@ type PutFindingsPublicationConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFindingsPublicationConfigurationInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.PutFindingsPublicationConfigurationRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *PutFindingsPublicationConfigurationInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.PutFindingsPublicationConfigurationRequest_clientToken, *v.ClientToken)
+	}
+	if v.SecurityHubConfiguration != nil {
+		s.WriteStruct(schemas.PutFindingsPublicationConfigurationRequest_securityHubConfiguration)
+		v.SecurityHubConfiguration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+
 type PutFindingsPublicationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -47,16 +66,21 @@ type PutFindingsPublicationConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *PutFindingsPublicationConfigurationOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.PutFindingsPublicationConfigurationResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationPutFindingsPublicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpPutFindingsPublicationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFindingsPublicationConfiguration, schemas.PutFindingsPublicationConfigurationRequest, schemas.PutFindingsPublicationConfigurationResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpPutFindingsPublicationConfiguration{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.PutFindingsPublicationConfiguration, schemas.PutFindingsPublicationConfigurationRequest, schemas.PutFindingsPublicationConfigurationResponse), output: &PutFindingsPublicationConfigurationOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "PutFindingsPublicationConfiguration"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -102,6 +104,27 @@ type UpdateConstraintInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConstraintInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.UpdateConstraintInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *UpdateConstraintInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.UpdateConstraintInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.UpdateConstraintInput_Description, *v.Description)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.UpdateConstraintInput_Id, *v.Id)
+	}
+	if v.Parameters != nil {
+		s.WriteString(schemas.UpdateConstraintInput_Parameters, *v.Parameters)
+	}
+}
+
 type UpdateConstraintOutput struct {
 
 	// Information about the constraint.
@@ -119,16 +142,34 @@ type UpdateConstraintOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *UpdateConstraintOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.UpdateConstraintOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.UpdateConstraintOutput_ConstraintDetail:
+			v.ConstraintDetail = &types.ConstraintDetail{}
+			return v.ConstraintDetail.Deserialize(d)
+		case schemas.UpdateConstraintOutput_ConstraintParameters:
+			v.ConstraintParameters = new(string)
+			return d.ReadString(schemas.UpdateConstraintOutput_ConstraintParameters, v.ConstraintParameters)
+		case schemas.UpdateConstraintOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.UpdateConstraintOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationUpdateConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpUpdateConstraint{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConstraint, schemas.UpdateConstraintInput, schemas.UpdateConstraintOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpUpdateConstraint{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.UpdateConstraint, schemas.UpdateConstraintInput, schemas.UpdateConstraintOutput), output: &UpdateConstraintOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "UpdateConstraint"); err != nil {

@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/qbusiness/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -42,6 +44,21 @@ type GetRetrieverInput struct {
 	RetrieverId *string
 
 	noSmithyDocumentSerde
+}
+
+func (v *GetRetrieverInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetRetrieverRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetRetrieverInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ApplicationId != nil {
+		s.WriteString(schemas.GetRetrieverRequest_applicationId, *v.ApplicationId)
+	}
+	if v.RetrieverId != nil {
+		s.WriteString(schemas.GetRetrieverRequest_retrieverId, *v.RetrieverId)
+	}
 }
 
 type GetRetrieverOutput struct {
@@ -84,16 +101,58 @@ type GetRetrieverOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetRetrieverOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetRetrieverResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetRetrieverResponse_applicationId:
+			v.ApplicationId = new(string)
+			return d.ReadString(schemas.GetRetrieverResponse_applicationId, v.ApplicationId)
+		case schemas.GetRetrieverResponse_configuration:
+			return deserializeRetrieverConfiguration(d, schemas.GetRetrieverResponse_configuration, &v.Configuration)
+		case schemas.GetRetrieverResponse_createdAt:
+			v.CreatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRetrieverResponse_createdAt, v.CreatedAt)
+		case schemas.GetRetrieverResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetRetrieverResponse_displayName, v.DisplayName)
+		case schemas.GetRetrieverResponse_retrieverArn:
+			v.RetrieverArn = new(string)
+			return d.ReadString(schemas.GetRetrieverResponse_retrieverArn, v.RetrieverArn)
+		case schemas.GetRetrieverResponse_retrieverId:
+			v.RetrieverId = new(string)
+			return d.ReadString(schemas.GetRetrieverResponse_retrieverId, v.RetrieverId)
+		case schemas.GetRetrieverResponse_roleArn:
+			v.RoleArn = new(string)
+			return d.ReadString(schemas.GetRetrieverResponse_roleArn, v.RoleArn)
+		case schemas.GetRetrieverResponse_status:
+			var ev string
+			if err := d.ReadString(schemas.GetRetrieverResponse_status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.RetrieverStatus(ev)
+			return nil
+		case schemas.GetRetrieverResponse_type:
+			var ev string
+			if err := d.ReadString(schemas.GetRetrieverResponse_type, &ev); err != nil {
+				return err
+			}
+			v.Type = types.RetrieverType(ev)
+			return nil
+		case schemas.GetRetrieverResponse_updatedAt:
+			v.UpdatedAt = new(time.Time)
+			return d.ReadTime(schemas.GetRetrieverResponse_updatedAt, v.UpdatedAt)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetRetrieverMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetRetriever{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRetriever, schemas.GetRetrieverRequest, schemas.GetRetrieverResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetRetriever{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetRetriever, schemas.GetRetrieverRequest, schemas.GetRetrieverResponse), output: &GetRetrieverOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetRetriever"); err != nil {

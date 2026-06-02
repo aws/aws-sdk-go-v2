@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/mturk/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -53,6 +55,22 @@ type NotifyWorkersInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyWorkersInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NotifyWorkersRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NotifyWorkersInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.MessageText != nil {
+		s.WriteString(schemas.NotifyWorkersRequest_MessageText, *v.MessageText)
+	}
+	if v.Subject != nil {
+		s.WriteString(schemas.NotifyWorkersRequest_Subject, *v.Subject)
+	}
+	serializeCustomerIdList(s, schemas.NotifyWorkersRequest_WorkerIds, v.WorkerIds)
+}
+
 type NotifyWorkersOutput struct {
 
 	//  When MTurk sends notifications to the list of Workers, it returns back any
@@ -65,16 +83,23 @@ type NotifyWorkersOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *NotifyWorkersOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NotifyWorkersResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NotifyWorkersResponse_NotifyWorkersFailureStatuses:
+			return deserializeNotifyWorkersFailureStatusList(d, schemas.NotifyWorkersResponse_NotifyWorkersFailureStatuses, &v.NotifyWorkersFailureStatuses)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationNotifyWorkersMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpNotifyWorkers{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyWorkers, schemas.NotifyWorkersRequest, schemas.NotifyWorkersResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpNotifyWorkers{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.NotifyWorkers, schemas.NotifyWorkersRequest, schemas.NotifyWorkersResponse), output: &NotifyWorkersOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "NotifyWorkers"); err != nil {

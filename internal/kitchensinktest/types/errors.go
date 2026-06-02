@@ -4,6 +4,7 @@ package types
 
 import (
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/kitchensinktest/schemas"
 	smithy "github.com/aws/smithy-go"
 )
 
@@ -31,3 +32,10 @@ func (e *ItemNotFound) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *ItemNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+func (v *ItemNotFound) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ItemNotFound, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}

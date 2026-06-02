@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/finspacedata/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -110,6 +112,26 @@ type CreateChangesetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChangesetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateChangesetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateChangesetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ChangeType != "" {
+		s.WriteString(schemas.CreateChangesetRequest_changeType, string(v.ChangeType))
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateChangesetRequest_clientToken, *v.ClientToken)
+	}
+	if v.DatasetId != nil {
+		s.WriteString(schemas.CreateChangesetRequest_datasetId, *v.DatasetId)
+	}
+	serializeFormatParams(s, schemas.CreateChangesetRequest_formatParams, v.FormatParams)
+	serializeSourceParams(s, schemas.CreateChangesetRequest_sourceParams, v.SourceParams)
+}
+
 // The response from a CreateChangeset operation.
 type CreateChangesetOutput struct {
 
@@ -125,16 +147,27 @@ type CreateChangesetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateChangesetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateChangesetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateChangesetResponse_changesetId:
+			v.ChangesetId = new(string)
+			return d.ReadString(schemas.CreateChangesetResponse_changesetId, v.ChangesetId)
+		case schemas.CreateChangesetResponse_datasetId:
+			v.DatasetId = new(string)
+			return d.ReadString(schemas.CreateChangesetResponse_datasetId, v.DatasetId)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateChangesetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateChangeset{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChangeset, schemas.CreateChangesetRequest, schemas.CreateChangesetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateChangeset{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateChangeset, schemas.CreateChangesetRequest, schemas.CreateChangesetResponse), output: &CreateChangesetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateChangeset"); err != nil {

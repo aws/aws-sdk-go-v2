@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/directconnect/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -57,6 +59,26 @@ type CreateDirectConnectGatewayAssociationProposalInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDirectConnectGatewayAssociationProposalInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateDirectConnectGatewayAssociationProposalRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateDirectConnectGatewayAssociationProposalInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeRouteFilterPrefixList(s, schemas.CreateDirectConnectGatewayAssociationProposalRequest_addAllowedPrefixesToDirectConnectGateway, v.AddAllowedPrefixesToDirectConnectGateway)
+	if v.DirectConnectGatewayId != nil {
+		s.WriteString(schemas.CreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId, *v.DirectConnectGatewayId)
+	}
+	if v.DirectConnectGatewayOwnerAccount != nil {
+		s.WriteString(schemas.CreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayOwnerAccount, *v.DirectConnectGatewayOwnerAccount)
+	}
+	if v.GatewayId != nil {
+		s.WriteString(schemas.CreateDirectConnectGatewayAssociationProposalRequest_gatewayId, *v.GatewayId)
+	}
+	serializeRouteFilterPrefixList(s, schemas.CreateDirectConnectGatewayAssociationProposalRequest_removeAllowedPrefixesToDirectConnectGateway, v.RemoveAllowedPrefixesToDirectConnectGateway)
+}
+
 type CreateDirectConnectGatewayAssociationProposalOutput struct {
 
 	// Information about the Direct Connect gateway proposal.
@@ -68,16 +90,24 @@ type CreateDirectConnectGatewayAssociationProposalOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateDirectConnectGatewayAssociationProposalOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateDirectConnectGatewayAssociationProposalResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociationProposal:
+			v.DirectConnectGatewayAssociationProposal = &types.DirectConnectGatewayAssociationProposal{}
+			return v.DirectConnectGatewayAssociationProposal.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateDirectConnectGatewayAssociationProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateDirectConnectGatewayAssociationProposal{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDirectConnectGatewayAssociationProposal, schemas.CreateDirectConnectGatewayAssociationProposalRequest, schemas.CreateDirectConnectGatewayAssociationProposalResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateDirectConnectGatewayAssociationProposal{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateDirectConnectGatewayAssociationProposal, schemas.CreateDirectConnectGatewayAssociationProposalRequest, schemas.CreateDirectConnectGatewayAssociationProposalResult), output: &CreateDirectConnectGatewayAssociationProposalOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateDirectConnectGatewayAssociationProposal"); err != nil {

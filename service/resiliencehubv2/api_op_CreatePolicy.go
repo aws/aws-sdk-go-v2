@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehubv2/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -62,6 +64,48 @@ type CreatePolicyInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePolicyInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreatePolicyRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreatePolicyInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AvailabilitySlo != nil {
+		s.WriteStruct(schemas.CreatePolicyRequest_availabilitySlo)
+		v.AvailabilitySlo.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreatePolicyRequest_clientToken, *v.ClientToken)
+	}
+	if v.DataRecovery != nil {
+		s.WriteStruct(schemas.CreatePolicyRequest_dataRecovery)
+		v.DataRecovery.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreatePolicyRequest_description, *v.Description)
+	}
+	if v.KmsKeyId != nil {
+		s.WriteString(schemas.CreatePolicyRequest_kmsKeyId, *v.KmsKeyId)
+	}
+	if v.MultiAz != nil {
+		s.WriteStruct(schemas.CreatePolicyRequest_multiAz)
+		v.MultiAz.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.MultiRegion != nil {
+		s.WriteStruct(schemas.CreatePolicyRequest_multiRegion)
+		v.MultiRegion.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreatePolicyRequest_name, *v.Name)
+	}
+	serializeTagMap(s, schemas.CreatePolicyRequest_tags, v.Tags)
+}
+
 type CreatePolicyOutput struct {
 
 	// The created resilience policy.
@@ -75,16 +119,24 @@ type CreatePolicyOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreatePolicyOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreatePolicyResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreatePolicyResponse_policy:
+			v.Policy = &types.Policy{}
+			return v.Policy.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreatePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePolicy, schemas.CreatePolicyRequest, schemas.CreatePolicyResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreatePolicy{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreatePolicy, schemas.CreatePolicyRequest, schemas.CreatePolicyResponse), output: &CreatePolicyOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreatePolicy"); err != nil {

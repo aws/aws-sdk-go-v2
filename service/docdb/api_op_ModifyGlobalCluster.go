@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/docdb/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -64,6 +66,24 @@ type ModifyGlobalClusterInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyGlobalClusterInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ModifyGlobalClusterMessage)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *ModifyGlobalClusterInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.DeletionProtection != nil {
+		s.WriteBool(schemas.ModifyGlobalClusterMessage_DeletionProtection, *v.DeletionProtection)
+	}
+	if v.GlobalClusterIdentifier != nil {
+		s.WriteString(schemas.ModifyGlobalClusterMessage_GlobalClusterIdentifier, *v.GlobalClusterIdentifier)
+	}
+	if v.NewGlobalClusterIdentifier != nil {
+		s.WriteString(schemas.ModifyGlobalClusterMessage_NewGlobalClusterIdentifier, *v.NewGlobalClusterIdentifier)
+	}
+}
+
 type ModifyGlobalClusterOutput struct {
 
 	// A data type representing an Amazon DocumentDB global cluster.
@@ -75,16 +95,24 @@ type ModifyGlobalClusterOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *ModifyGlobalClusterOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.ModifyGlobalClusterResult, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.ModifyGlobalClusterResult_GlobalCluster:
+			v.GlobalCluster = &types.GlobalCluster{}
+			return v.GlobalCluster.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationModifyGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsquery_serializeOpModifyGlobalCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyGlobalCluster, schemas.ModifyGlobalClusterMessage, schemas.ModifyGlobalClusterResult)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsquery_deserializeOpModifyGlobalCluster{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.ModifyGlobalCluster, schemas.ModifyGlobalClusterMessage, schemas.ModifyGlobalClusterResult), output: &ModifyGlobalClusterOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "ModifyGlobalCluster"); err != nil {

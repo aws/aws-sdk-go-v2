@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -59,6 +61,36 @@ type DescribeProvisioningArtifactInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProvisioningArtifactInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DescribeProvisioningArtifactInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DescribeProvisioningArtifactInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AcceptLanguage != nil {
+		s.WriteString(schemas.DescribeProvisioningArtifactInput_AcceptLanguage, *v.AcceptLanguage)
+	}
+	if v.IncludeProvisioningArtifactParameters != false {
+		s.WriteBool(schemas.DescribeProvisioningArtifactInput_IncludeProvisioningArtifactParameters, v.IncludeProvisioningArtifactParameters)
+	}
+	if v.ProductId != nil {
+		s.WriteString(schemas.DescribeProvisioningArtifactInput_ProductId, *v.ProductId)
+	}
+	if v.ProductName != nil {
+		s.WriteString(schemas.DescribeProvisioningArtifactInput_ProductName, *v.ProductName)
+	}
+	if v.ProvisioningArtifactId != nil {
+		s.WriteString(schemas.DescribeProvisioningArtifactInput_ProvisioningArtifactId, *v.ProvisioningArtifactId)
+	}
+	if v.ProvisioningArtifactName != nil {
+		s.WriteString(schemas.DescribeProvisioningArtifactInput_ProvisioningArtifactName, *v.ProvisioningArtifactName)
+	}
+	if v.Verbose != false {
+		s.WriteBool(schemas.DescribeProvisioningArtifactInput_Verbose, v.Verbose)
+	}
+}
+
 type DescribeProvisioningArtifactOutput struct {
 
 	// The URL of the CloudFormation template in Amazon S3 or GitHub in JSON format.
@@ -79,16 +111,35 @@ type DescribeProvisioningArtifactOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DescribeProvisioningArtifactOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DescribeProvisioningArtifactOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DescribeProvisioningArtifactOutput_Info:
+			return deserializeProvisioningArtifactInfo(d, schemas.DescribeProvisioningArtifactOutput_Info, &v.Info)
+		case schemas.DescribeProvisioningArtifactOutput_ProvisioningArtifactDetail:
+			v.ProvisioningArtifactDetail = &types.ProvisioningArtifactDetail{}
+			return v.ProvisioningArtifactDetail.Deserialize(d)
+		case schemas.DescribeProvisioningArtifactOutput_ProvisioningArtifactParameters:
+			return deserializeProvisioningArtifactParameters(d, schemas.DescribeProvisioningArtifactOutput_ProvisioningArtifactParameters, &v.ProvisioningArtifactParameters)
+		case schemas.DescribeProvisioningArtifactOutput_Status:
+			var ev string
+			if err := d.ReadString(schemas.DescribeProvisioningArtifactOutput_Status, &ev); err != nil {
+				return err
+			}
+			v.Status = types.Status(ev)
+			return nil
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDescribeProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpDescribeProvisioningArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProvisioningArtifact, schemas.DescribeProvisioningArtifactInput, schemas.DescribeProvisioningArtifactOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpDescribeProvisioningArtifact{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DescribeProvisioningArtifact, schemas.DescribeProvisioningArtifactInput, schemas.DescribeProvisioningArtifactOutput), output: &DescribeProvisioningArtifactOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DescribeProvisioningArtifact"); err != nil {

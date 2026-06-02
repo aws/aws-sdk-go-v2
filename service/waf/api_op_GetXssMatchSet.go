@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/waf/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -49,6 +51,18 @@ type GetXssMatchSetInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetXssMatchSetInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetXssMatchSetRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetXssMatchSetInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.XssMatchSetId != nil {
+		s.WriteString(schemas.GetXssMatchSetRequest_XssMatchSetId, *v.XssMatchSetId)
+	}
+}
+
 // The response to a GetXssMatchSet request.
 type GetXssMatchSetOutput struct {
 
@@ -71,16 +85,24 @@ type GetXssMatchSetOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetXssMatchSetOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetXssMatchSetResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetXssMatchSetResponse_XssMatchSet:
+			v.XssMatchSet = &types.XssMatchSet{}
+			return v.XssMatchSet.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetXssMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpGetXssMatchSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetXssMatchSet, schemas.GetXssMatchSetRequest, schemas.GetXssMatchSetResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpGetXssMatchSet{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetXssMatchSet, schemas.GetXssMatchSetRequest, schemas.GetXssMatchSetResponse), output: &GetXssMatchSetOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetXssMatchSet"); err != nil {

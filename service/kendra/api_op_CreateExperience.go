@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/kendra/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -68,6 +70,35 @@ type CreateExperienceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExperienceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateExperienceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateExperienceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateExperienceRequest_ClientToken, *v.ClientToken)
+	}
+	if v.Configuration != nil {
+		s.WriteStruct(schemas.CreateExperienceRequest_Configuration)
+		v.Configuration.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.Description != nil {
+		s.WriteString(schemas.CreateExperienceRequest_Description, *v.Description)
+	}
+	if v.IndexId != nil {
+		s.WriteString(schemas.CreateExperienceRequest_IndexId, *v.IndexId)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.CreateExperienceRequest_Name, *v.Name)
+	}
+	if v.RoleArn != nil {
+		s.WriteString(schemas.CreateExperienceRequest_RoleArn, *v.RoleArn)
+	}
+}
+
 type CreateExperienceOutput struct {
 
 	// The identifier of your Amazon Kendra experience.
@@ -81,16 +112,24 @@ type CreateExperienceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateExperienceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateExperienceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateExperienceResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.CreateExperienceResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateExperienceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson11_serializeOpCreateExperience{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExperience, schemas.CreateExperienceRequest, schemas.CreateExperienceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson11_deserializeOpCreateExperience{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateExperience, schemas.CreateExperienceRequest, schemas.CreateExperienceResponse), output: &CreateExperienceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateExperience"); err != nil {

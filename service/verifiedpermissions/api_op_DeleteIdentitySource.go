@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -58,6 +60,21 @@ type DeleteIdentitySourceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdentitySourceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteIdentitySourceInput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteIdentitySourceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.IdentitySourceId != nil {
+		s.WriteString(schemas.DeleteIdentitySourceInput_identitySourceId, *v.IdentitySourceId)
+	}
+	if v.PolicyStoreId != nil {
+		s.WriteString(schemas.DeleteIdentitySourceInput_policyStoreId, *v.PolicyStoreId)
+	}
+}
+
 type DeleteIdentitySourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -65,16 +82,21 @@ type DeleteIdentitySourceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteIdentitySourceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteIdentitySourceOutput, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteIdentitySourceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsAwsjson10_serializeOpDeleteIdentitySource{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdentitySource, schemas.DeleteIdentitySourceInput, schemas.DeleteIdentitySourceOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsAwsjson10_deserializeOpDeleteIdentitySource{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteIdentitySource, schemas.DeleteIdentitySourceInput, schemas.DeleteIdentitySourceOutput), output: &DeleteIdentitySourceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteIdentitySource"); err != nil {

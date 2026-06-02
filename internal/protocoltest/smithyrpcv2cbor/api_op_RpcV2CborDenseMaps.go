@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/schemas"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/smithyrpcv2cbor/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,6 +43,37 @@ type RpcV2CborDenseMapsInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RpcV2CborDenseMapsInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RpcV2CborDenseMapsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RpcV2CborDenseMapsInput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDenseBooleanMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseBooleanMap, v.DenseBooleanMap)
+	serializeDenseNumberMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseNumberMap, v.DenseNumberMap)
+	serializeDenseSetMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseSetMap, v.DenseSetMap)
+	serializeDenseStringMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseStringMap, v.DenseStringMap)
+	serializeDenseStructMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseStructMap, v.DenseStructMap)
+}
+func (v *RpcV2CborDenseMapsInput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RpcV2CborDenseMapsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RpcV2CborDenseMapsInputOutput_denseBooleanMap:
+			return deserializeDenseBooleanMap(d, schemas.RpcV2CborDenseMapsInputOutput_denseBooleanMap, &v.DenseBooleanMap)
+		case schemas.RpcV2CborDenseMapsInputOutput_denseNumberMap:
+			return deserializeDenseNumberMap(d, schemas.RpcV2CborDenseMapsInputOutput_denseNumberMap, &v.DenseNumberMap)
+		case schemas.RpcV2CborDenseMapsInputOutput_denseSetMap:
+			return deserializeDenseSetMap(d, schemas.RpcV2CborDenseMapsInputOutput_denseSetMap, &v.DenseSetMap)
+		case schemas.RpcV2CborDenseMapsInputOutput_denseStringMap:
+			return deserializeDenseStringMap(d, schemas.RpcV2CborDenseMapsInputOutput_denseStringMap, &v.DenseStringMap)
+		case schemas.RpcV2CborDenseMapsInputOutput_denseStructMap:
+			return deserializeDenseStructMap(d, schemas.RpcV2CborDenseMapsInputOutput_denseStructMap, &v.DenseStructMap)
+		}
+		return nil
+	})
+}
+
 type RpcV2CborDenseMapsOutput struct {
 	DenseBooleanMap map[string]bool
 
@@ -58,16 +91,44 @@ type RpcV2CborDenseMapsOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *RpcV2CborDenseMapsOutput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.RpcV2CborDenseMapsInputOutput)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *RpcV2CborDenseMapsOutput) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeDenseBooleanMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseBooleanMap, v.DenseBooleanMap)
+	serializeDenseNumberMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseNumberMap, v.DenseNumberMap)
+	serializeDenseSetMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseSetMap, v.DenseSetMap)
+	serializeDenseStringMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseStringMap, v.DenseStringMap)
+	serializeDenseStructMap(s, schemas.RpcV2CborDenseMapsInputOutput_denseStructMap, v.DenseStructMap)
+}
+func (v *RpcV2CborDenseMapsOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.RpcV2CborDenseMapsInputOutput, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.RpcV2CborDenseMapsInputOutput_denseBooleanMap:
+			return deserializeDenseBooleanMap(d, schemas.RpcV2CborDenseMapsInputOutput_denseBooleanMap, &v.DenseBooleanMap)
+		case schemas.RpcV2CborDenseMapsInputOutput_denseNumberMap:
+			return deserializeDenseNumberMap(d, schemas.RpcV2CborDenseMapsInputOutput_denseNumberMap, &v.DenseNumberMap)
+		case schemas.RpcV2CborDenseMapsInputOutput_denseSetMap:
+			return deserializeDenseSetMap(d, schemas.RpcV2CborDenseMapsInputOutput_denseSetMap, &v.DenseSetMap)
+		case schemas.RpcV2CborDenseMapsInputOutput_denseStringMap:
+			return deserializeDenseStringMap(d, schemas.RpcV2CborDenseMapsInputOutput_denseStringMap, &v.DenseStringMap)
+		case schemas.RpcV2CborDenseMapsInputOutput_denseStructMap:
+			return deserializeDenseStructMap(d, schemas.RpcV2CborDenseMapsInputOutput_denseStructMap, &v.DenseStructMap)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationRpcV2CborDenseMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&smithyRpcv2cbor_serializeOpRpcV2CborDenseMaps{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RpcV2CborDenseMaps, schemas.RpcV2CborDenseMapsInputOutput, schemas.RpcV2CborDenseMapsInputOutput)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&smithyRpcv2cbor_deserializeOpRpcV2CborDenseMaps{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.RpcV2CborDenseMaps, schemas.RpcV2CborDenseMapsInputOutput, schemas.RpcV2CborDenseMapsInputOutput), output: &RpcV2CborDenseMapsOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "RpcV2CborDenseMaps"); err != nil {

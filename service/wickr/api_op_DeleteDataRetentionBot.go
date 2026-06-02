@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/wickr/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type DeleteDataRetentionBotInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataRetentionBotInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDataRetentionBotRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDataRetentionBotInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.NetworkId != nil {
+		s.WriteString(schemas.DeleteDataRetentionBotRequest_networkId, *v.NetworkId)
+	}
+}
+
 type DeleteDataRetentionBotOutput struct {
 
 	// A message indicating that the data retention bot and all associated data were
@@ -49,16 +63,24 @@ type DeleteDataRetentionBotOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDataRetentionBotOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDataRetentionBotResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeleteDataRetentionBotResponse_message:
+			v.Message = new(string)
+			return d.ReadString(schemas.DeleteDataRetentionBotResponse_message, v.Message)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDataRetentionBotMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDataRetentionBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataRetentionBot, schemas.DeleteDataRetentionBotRequest, schemas.DeleteDataRetentionBotResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDataRetentionBot{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDataRetentionBot, schemas.DeleteDataRetentionBotRequest, schemas.DeleteDataRetentionBotResponse), output: &DeleteDataRetentionBotOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDataRetentionBot"); err != nil {

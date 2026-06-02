@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -66,6 +68,29 @@ type CreateSafetyRuleInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSafetyRuleInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.CreateSafetyRuleRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *CreateSafetyRuleInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssertionRule != nil {
+		s.WriteStruct(schemas.CreateSafetyRuleRequest_AssertionRule)
+		v.AssertionRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	if v.ClientToken != nil {
+		s.WriteString(schemas.CreateSafetyRuleRequest_ClientToken, *v.ClientToken)
+	}
+	if v.GatingRule != nil {
+		s.WriteStruct(schemas.CreateSafetyRuleRequest_GatingRule)
+		v.GatingRule.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	serialize__mapOf__stringMin0Max256PatternS(s, schemas.CreateSafetyRuleRequest_Tags, v.Tags)
+}
+
 type CreateSafetyRuleOutput struct {
 
 	// The assertion rule created.
@@ -80,16 +105,27 @@ type CreateSafetyRuleOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *CreateSafetyRuleOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.CreateSafetyRuleResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.CreateSafetyRuleResponse_AssertionRule:
+			v.AssertionRule = &types.AssertionRule{}
+			return v.AssertionRule.Deserialize(d)
+		case schemas.CreateSafetyRuleResponse_GatingRule:
+			v.GatingRule = &types.GatingRule{}
+			return v.GatingRule.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationCreateSafetyRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpCreateSafetyRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSafetyRule, schemas.CreateSafetyRuleRequest, schemas.CreateSafetyRuleResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpCreateSafetyRule{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.CreateSafetyRule, schemas.CreateSafetyRuleRequest, schemas.CreateSafetyRuleResponse), output: &CreateSafetyRuleOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "CreateSafetyRule"); err != nil {

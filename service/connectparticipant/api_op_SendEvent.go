@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -79,6 +81,27 @@ type SendEventInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendEventInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.SendEventRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *SendEventInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ClientToken != nil {
+		s.WriteString(schemas.SendEventRequest_ClientToken, *v.ClientToken)
+	}
+	if v.ConnectionToken != nil {
+		s.WriteString(schemas.SendEventRequest_ConnectionToken, *v.ConnectionToken)
+	}
+	if v.Content != nil {
+		s.WriteString(schemas.SendEventRequest_Content, *v.Content)
+	}
+	if v.ContentType != nil {
+		s.WriteString(schemas.SendEventRequest_ContentType, *v.ContentType)
+	}
+}
+
 type SendEventOutput struct {
 
 	// The time when the event was sent.
@@ -96,16 +119,27 @@ type SendEventOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *SendEventOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.SendEventResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.SendEventResponse_AbsoluteTime:
+			v.AbsoluteTime = new(string)
+			return d.ReadString(schemas.SendEventResponse_AbsoluteTime, v.AbsoluteTime)
+		case schemas.SendEventResponse_Id:
+			v.Id = new(string)
+			return d.ReadString(schemas.SendEventResponse_Id, v.Id)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationSendEventMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpSendEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendEvent, schemas.SendEventRequest, schemas.SendEventResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpSendEvent{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.SendEvent, schemas.SendEventRequest, schemas.SendEventResponse), output: &SendEventOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "SendEvent"); err != nil {

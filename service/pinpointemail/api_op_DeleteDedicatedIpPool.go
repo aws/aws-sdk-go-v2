@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,6 +39,18 @@ type DeleteDedicatedIpPoolInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDedicatedIpPoolInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeleteDedicatedIpPoolRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeleteDedicatedIpPoolInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PoolName != nil {
+		s.WriteString(schemas.DeleteDedicatedIpPoolRequest_PoolName, *v.PoolName)
+	}
+}
+
 // An HTTP 200 response if the request succeeds, or an error message if the
 // request fails.
 type DeleteDedicatedIpPoolOutput struct {
@@ -46,16 +60,21 @@ type DeleteDedicatedIpPoolOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeleteDedicatedIpPoolOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeleteDedicatedIpPoolResponse, func(s *smithy.Schema) error {
+		switch s {
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeleteDedicatedIpPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeleteDedicatedIpPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDedicatedIpPool, schemas.DeleteDedicatedIpPoolRequest, schemas.DeleteDedicatedIpPoolResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeleteDedicatedIpPool{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeleteDedicatedIpPool, schemas.DeleteDedicatedIpPoolRequest, schemas.DeleteDedicatedIpPoolResponse), output: &DeleteDedicatedIpPoolOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeleteDedicatedIpPool"); err != nil {

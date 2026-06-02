@@ -6,6 +6,8 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/codecatalyst/schemas"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,6 +38,18 @@ type GetSpaceInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSpaceInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.GetSpaceRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *GetSpaceInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Name != nil {
+		s.WriteString(schemas.GetSpaceRequest_name, *v.Name)
+	}
+}
+
 type GetSpaceOutput struct {
 
 	// The name of the space.
@@ -60,16 +74,33 @@ type GetSpaceOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *GetSpaceOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.GetSpaceResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.GetSpaceResponse_description:
+			v.Description = new(string)
+			return d.ReadString(schemas.GetSpaceResponse_description, v.Description)
+		case schemas.GetSpaceResponse_displayName:
+			v.DisplayName = new(string)
+			return d.ReadString(schemas.GetSpaceResponse_displayName, v.DisplayName)
+		case schemas.GetSpaceResponse_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.GetSpaceResponse_name, v.Name)
+		case schemas.GetSpaceResponse_regionName:
+			v.RegionName = new(string)
+			return d.ReadString(schemas.GetSpaceResponse_regionName, v.RegionName)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationGetSpaceMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpGetSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSpace, schemas.GetSpaceRequest, schemas.GetSpaceResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpGetSpace{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.GetSpace, schemas.GetSpaceRequest, schemas.GetSpaceResponse), output: &GetSpaceOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "GetSpace"); err != nil {

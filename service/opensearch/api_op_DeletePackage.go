@@ -6,7 +6,9 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	"github.com/aws/aws-sdk-go-v2/service/opensearch/schemas"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -42,6 +44,18 @@ type DeletePackageInput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePackageInput) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.DeletePackageRequest)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *DeletePackageInput) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.PackageID != nil {
+		s.WriteString(schemas.DeletePackageRequest_PackageID, *v.PackageID)
+	}
+}
+
 // Container for the response parameters to the DeletePackage operation.
 type DeletePackageOutput struct {
 
@@ -54,16 +68,24 @@ type DeletePackageOutput struct {
 	noSmithyDocumentSerde
 }
 
+func (v *DeletePackageOutput) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.DeletePackageResponse, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.DeletePackageResponse_PackageDetails:
+			v.PackageDetails = &types.PackageDetails{}
+			return v.PackageDetails.Deserialize(d)
+		}
+		return nil
+	})
+}
 func (c *Client) addOperationDeletePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {
 	if err := stack.Serialize.Add(&setOperationInputMiddleware{}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Serialize.Add(&awsRestjson1_serializeOpDeletePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Serialize.Add(&serializeRequestMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePackage, schemas.DeletePackageRequest, schemas.DeletePackageResponse)}, middleware.After); err != nil {
 		return err
 	}
-	err = stack.Deserialize.Add(&awsRestjson1_deserializeOpDeletePackage{}, middleware.After)
-	if err != nil {
+	if err := stack.Deserialize.Add(&deserializeResponseMiddleware{options: &options, operationSchema: smithy.NewOperationSchema(schemas.DeletePackage, schemas.DeletePackageRequest, schemas.DeletePackageResponse), output: &DeletePackageOutput{}}, middleware.After); err != nil {
 		return err
 	}
 	if err := addProtocolFinalizerMiddlewares(stack, options, "DeletePackage"); err != nil {
