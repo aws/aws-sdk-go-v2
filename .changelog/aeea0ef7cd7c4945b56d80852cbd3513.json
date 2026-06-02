@@ -1,0 +1,8 @@
+{
+    "id": "aeea0ef7-cd7c-4945-b56d-80852cbd3513",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/ssm"
+    ]
+}

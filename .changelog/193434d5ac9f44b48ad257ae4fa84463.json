@@ -1,0 +1,8 @@
+{
+    "id": "193434d5-ac9f-44b4-8ad2-57ae4fa84463",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/managedblockchain"
+    ]
+}

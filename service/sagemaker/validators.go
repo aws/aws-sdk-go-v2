@@ -930,6 +930,26 @@ func (m *validateOpCreateInferenceRecommendationsJob) HandleInitialize(ctx conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateJob struct {
+}
+
+func (*validateOpCreateJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLabelingJob struct {
 }
 
@@ -2290,6 +2310,26 @@ func (m *validateOpDeleteInferenceExperiment) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteJob struct {
+}
+
+func (*validateOpDeleteJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteMlflowApp struct {
 }
 
@@ -3630,6 +3670,46 @@ func (m *validateOpDescribeInferenceRecommendationsJob) HandleInitialize(ctx con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeJob struct {
+}
+
+func (*validateOpDescribeJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeJobSchemaVersion struct {
+}
+
+func (*validateOpDescribeJobSchemaVersion) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeJobSchemaVersion) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeJobSchemaVersionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeJobSchemaVersionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeLabelingJob struct {
 }
 
@@ -4670,6 +4750,46 @@ func (m *validateOpListInferenceRecommendationsJobSteps) HandleInitialize(ctx co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListJobSchemaVersions struct {
+}
+
+func (*validateOpListJobSchemaVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListJobSchemaVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListJobSchemaVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListJobSchemaVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListJobs struct {
+}
+
+func (*validateOpListJobs) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListJobs) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListJobsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListLabelingJobsForWorkteam struct {
 }
 
@@ -5405,6 +5525,26 @@ func (m *validateOpStopInferenceRecommendationsJob) HandleInitialize(ctx context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStopInferenceRecommendationsJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopJob struct {
+}
+
+func (*validateOpStopJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -6674,6 +6814,10 @@ func addOpCreateInferenceRecommendationsJobValidationMiddleware(stack *middlewar
 	return stack.Initialize.Add(&validateOpCreateInferenceRecommendationsJob{}, middleware.After)
 }
 
+func addOpCreateJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateJob{}, middleware.After)
+}
+
 func addOpCreateLabelingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLabelingJob{}, middleware.After)
 }
@@ -6946,6 +7090,10 @@ func addOpDeleteInferenceExperimentValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpDeleteInferenceExperiment{}, middleware.After)
 }
 
+func addOpDeleteJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteJob{}, middleware.After)
+}
+
 func addOpDeleteMlflowAppValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteMlflowApp{}, middleware.After)
 }
@@ -7214,6 +7362,14 @@ func addOpDescribeInferenceRecommendationsJobValidationMiddleware(stack *middlew
 	return stack.Initialize.Add(&validateOpDescribeInferenceRecommendationsJob{}, middleware.After)
 }
 
+func addOpDescribeJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeJob{}, middleware.After)
+}
+
+func addOpDescribeJobSchemaVersionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeJobSchemaVersion{}, middleware.After)
+}
+
 func addOpDescribeLabelingJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeLabelingJob{}, middleware.After)
 }
@@ -7422,6 +7578,14 @@ func addOpListInferenceRecommendationsJobStepsValidationMiddleware(stack *middle
 	return stack.Initialize.Add(&validateOpListInferenceRecommendationsJobSteps{}, middleware.After)
 }
 
+func addOpListJobSchemaVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListJobSchemaVersions{}, middleware.After)
+}
+
+func addOpListJobsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListJobs{}, middleware.After)
+}
+
 func addOpListLabelingJobsForWorkteamValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListLabelingJobsForWorkteam{}, middleware.After)
 }
@@ -7568,6 +7732,10 @@ func addOpStopInferenceExperimentValidationMiddleware(stack *middleware.Stack) e
 
 func addOpStopInferenceRecommendationsJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStopInferenceRecommendationsJob{}, middleware.After)
+}
+
+func addOpStopJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopJob{}, middleware.After)
 }
 
 func addOpStopLabelingJobValidationMiddleware(stack *middleware.Stack) error {
@@ -17346,6 +17514,38 @@ func validateOpCreateInferenceRecommendationsJobInput(v *CreateInferenceRecommen
 	}
 }
 
+func validateOpCreateJobInput(v *CreateJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateJobInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if len(v.JobCategory) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("JobCategory"))
+	}
+	if v.JobConfigSchemaVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobConfigSchemaVersion"))
+	}
+	if v.JobConfigDocument == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobConfigDocument"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateLabelingJobInput(v *CreateLabelingJobInput) error {
 	if v == nil {
 		return nil
@@ -19088,6 +19288,24 @@ func validateOpDeleteInferenceExperimentInput(v *DeleteInferenceExperimentInput)
 	}
 }
 
+func validateOpDeleteJobInput(v *DeleteJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteJobInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if len(v.JobCategory) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("JobCategory"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteMlflowAppInput(v *DeleteMlflowAppInput) error {
 	if v == nil {
 		return nil
@@ -20129,6 +20347,39 @@ func validateOpDescribeInferenceRecommendationsJobInput(v *DescribeInferenceReco
 	}
 }
 
+func validateOpDescribeJobInput(v *DescribeJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if len(v.JobCategory) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("JobCategory"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeJobSchemaVersionInput(v *DescribeJobSchemaVersionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeJobSchemaVersionInput"}
+	if len(v.JobCategory) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("JobCategory"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeLabelingJobInput(v *DescribeLabelingJobInput) error {
 	if v == nil {
 		return nil
@@ -20955,6 +21206,36 @@ func validateOpListInferenceRecommendationsJobStepsInput(v *ListInferenceRecomme
 	}
 }
 
+func validateOpListJobSchemaVersionsInput(v *ListJobSchemaVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListJobSchemaVersionsInput"}
+	if len(v.JobCategory) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("JobCategory"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListJobsInput(v *ListJobsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListJobsInput"}
+	if len(v.JobCategory) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("JobCategory"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListLabelingJobsForWorkteamInput(v *ListLabelingJobsForWorkteamInput) error {
 	if v == nil {
 		return nil
@@ -21593,6 +21874,24 @@ func validateOpStopInferenceRecommendationsJobInput(v *StopInferenceRecommendati
 	invalidParams := smithy.InvalidParamsError{Context: "StopInferenceRecommendationsJobInput"}
 	if v.JobName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopJobInput(v *StopJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopJobInput"}
+	if v.JobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobName"))
+	}
+	if len(v.JobCategory) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("JobCategory"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

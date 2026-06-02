@@ -1,0 +1,8 @@
+{
+    "id": "6f33c26f-4e4e-447c-80fa-3561e1de197c",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/mediaconvert"
+    ]
+}

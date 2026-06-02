@@ -1,0 +1,8 @@
+{
+    "id": "6fdfb419-6716-47db-b6e2-65417c7350df",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/pinpoint"
+    ]
+}

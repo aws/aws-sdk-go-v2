@@ -711,6 +711,27 @@ func (PackageType) Values() []PackageType {
 	}
 }
 
+type PropagateTagsMode string
+
+// Enum values for PropagateTagsMode
+const (
+	// Tag propagation is disabled. No tags are applied to managed resources.
+	PropagateTagsModeNone PropagateTagsMode = "None"
+	// Tags specified in ExplicitTags are applied to managed resources at launch.
+	PropagateTagsModeExplicit PropagateTagsMode = "Explicit"
+)
+
+// Values returns all known values for PropagateTagsMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PropagateTagsMode) Values() []PropagateTagsMode {
+	return []PropagateTagsMode{
+		"None",
+		"Explicit",
+	}
+}
+
 type ProvisionedConcurrencyStatusEnum string
 
 // Enum values for ProvisionedConcurrencyStatusEnum

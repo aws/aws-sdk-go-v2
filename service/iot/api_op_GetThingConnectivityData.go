@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Retrieves the live connectivity status per device.
+// Retrieves the live connectivity status per device. If a device has never
+// connected to IoT Core or was disconnected for more than 1 hour before fleet
+// indexing's thingConnectivityIndexingMode was enabled, the response will have
+// the connected field set to false with no additional session details.
 func (c *Client) GetThingConnectivityData(ctx context.Context, params *GetThingConnectivityDataInput, optFns ...func(*Options)) (*GetThingConnectivityDataOutput, error) {
 	if params == nil {
 		params = &GetThingConnectivityDataInput{}
@@ -56,9 +59,7 @@ type GetThingConnectivityDataOutput struct {
 	// A Boolean that indicates the connectivity status.
 	Connected *bool
 
-	// The reason why the client is disconnecting. When you enable or update the
-	// indexing configuration, this value might be UNKNOWN for devices that have never
-	// connected or have been disconnected for more than an hour.
+	// The reason that the client is disconnected.
 	DisconnectReason types.DisconnectReasonValue
 
 	// The keep-alive interval in seconds that the client specified when establishing
@@ -87,9 +88,7 @@ type GetThingConnectivityDataOutput struct {
 	// The name of your IoT thing.
 	ThingName *string
 
-	// The timestamp of when the event occurred. When you enable or update the
-	// indexing configuration, this value might be the Unix epoch time (0) for devices
-	// that have never connected or have been disconnected for more than an hour.
+	// The timestamp of when the device connected or disconnected.
 	Timestamp *time.Time
 
 	// The ID of the VPC endpoint. Present for clients connected to Amazon Web

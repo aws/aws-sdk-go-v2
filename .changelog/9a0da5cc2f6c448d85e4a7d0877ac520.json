@@ -1,0 +1,8 @@
+{
+    "id": "9a0da5cc-2f6c-448d-85e4-a7d0877ac520",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/snowball"
+    ]
+}

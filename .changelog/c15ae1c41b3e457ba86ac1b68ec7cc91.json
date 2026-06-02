@@ -1,0 +1,8 @@
+{
+    "id": "c15ae1c4-1b3e-457b-a86a-c1b68ec7cc91",
+    "type": "feature",
+    "description": "Added iterator description to the GetRecords API response for Amazon Keyspaces Change Data Capture (CDC) streams, enabling consumers to track their current position within the stream.",
+    "modules": [
+        "service/keyspacesstreams"
+    ]
+}

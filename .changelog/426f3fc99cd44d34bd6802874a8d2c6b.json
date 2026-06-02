@@ -1,0 +1,8 @@
+{
+    "id": "426f3fc9-9cd4-4d34-bd68-02874a8d2c6b",
+    "type": "feature",
+    "description": "Amazon SageMaker Job is a new service to help you manage various workloads related to model fine tuning, evaluation etc. Two job categories are supported today, AgentRFT for multi-turn agentic reinforcement fine tuning, and AgentRFTEvaluation for evaluating base model or trained model from AgentRFT.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

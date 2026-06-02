@@ -1,0 +1,8 @@
+{
+    "id": "c3fa3195-33be-4a65-94d8-8c13e72d82e6",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/lexruntimeservice"
+    ]
+}

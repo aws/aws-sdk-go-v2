@@ -322,6 +322,66 @@ func (RoadSnapTravelMode) Values() []RoadSnapTravelMode {
 	}
 }
 
+type RouteAccessibilityAttribute string
+
+// Enum values for RouteAccessibilityAttribute
+const (
+	RouteAccessibilityAttributeWheelchair RouteAccessibilityAttribute = "Wheelchair"
+)
+
+// Values returns all known values for RouteAccessibilityAttribute. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteAccessibilityAttribute) Values() []RouteAccessibilityAttribute {
+	return []RouteAccessibilityAttribute{
+		"Wheelchair",
+	}
+}
+
+type RouteAccessibilityAvailability string
+
+// Enum values for RouteAccessibilityAvailability
+const (
+	RouteAccessibilityAvailabilityAvailable   RouteAccessibilityAvailability = "Available"
+	RouteAccessibilityAvailabilityLimited     RouteAccessibilityAvailability = "Limited"
+	RouteAccessibilityAvailabilityUnavailable RouteAccessibilityAvailability = "Unavailable"
+	RouteAccessibilityAvailabilityUnknown     RouteAccessibilityAvailability = "Unknown"
+)
+
+// Values returns all known values for RouteAccessibilityAvailability. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteAccessibilityAvailability) Values() []RouteAccessibilityAvailability {
+	return []RouteAccessibilityAvailability{
+		"Available",
+		"Limited",
+		"Unavailable",
+		"Unknown",
+	}
+}
+
+type RouteAttributionType string
+
+// Enum values for RouteAttributionType
+const (
+	RouteAttributionTypeDisclaimer RouteAttributionType = "Disclaimer"
+	RouteAttributionTypeTariff     RouteAttributionType = "Tariff"
+)
+
+// Values returns all known values for RouteAttributionType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteAttributionType) Values() []RouteAttributionType {
+	return []RouteAttributionType{
+		"Disclaimer",
+		"Tariff",
+	}
+}
+
 type RouteDirection string
 
 // Enum values for RouteDirection
@@ -493,6 +553,29 @@ func (RouteHazardousCargoType) Values() []RouteHazardousCargoType {
 	}
 }
 
+type RouteIntermodalEnabledLegs string
+
+// Enum values for RouteIntermodalEnabledLegs
+const (
+	RouteIntermodalEnabledLegsFirstLeg    RouteIntermodalEnabledLegs = "FirstLeg"
+	RouteIntermodalEnabledLegsLastLeg     RouteIntermodalEnabledLegs = "LastLeg"
+	RouteIntermodalEnabledLegsEntireRoute RouteIntermodalEnabledLegs = "EntireRoute"
+	RouteIntermodalEnabledLegsNone        RouteIntermodalEnabledLegs = "None"
+)
+
+// Values returns all known values for RouteIntermodalEnabledLegs. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteIntermodalEnabledLegs) Values() []RouteIntermodalEnabledLegs {
+	return []RouteIntermodalEnabledLegs{
+		"FirstLeg",
+		"LastLeg",
+		"EntireRoute",
+		"None",
+	}
+}
+
 type RouteLegAdditionalFeature string
 
 // Enum values for RouteLegAdditionalFeature
@@ -506,6 +589,9 @@ const (
 	RouteLegAdditionalFeatureTruckRoadTypes         RouteLegAdditionalFeature = "TruckRoadTypes"
 	RouteLegAdditionalFeatureTypicalDuration        RouteLegAdditionalFeature = "TypicalDuration"
 	RouteLegAdditionalFeatureZones                  RouteLegAdditionalFeature = "Zones"
+	RouteLegAdditionalFeatureBookings               RouteLegAdditionalFeature = "Bookings"
+	RouteLegAdditionalFeatureIntermediateStops      RouteLegAdditionalFeature = "IntermediateStops"
+	RouteLegAdditionalFeatureNextDepartures         RouteLegAdditionalFeature = "NextDepartures"
 )
 
 // Values returns all known values for RouteLegAdditionalFeature. Note that this
@@ -523,6 +609,9 @@ func (RouteLegAdditionalFeature) Values() []RouteLegAdditionalFeature {
 		"TruckRoadTypes",
 		"TypicalDuration",
 		"Zones",
+		"Bookings",
+		"IntermediateStops",
+		"NextDepartures",
 	}
 }
 
@@ -530,12 +619,26 @@ type RouteLegTravelMode string
 
 // Enum values for RouteLegTravelMode
 const (
-	RouteLegTravelModeCar             RouteLegTravelMode = "Car"
-	RouteLegTravelModeFerry           RouteLegTravelMode = "Ferry"
-	RouteLegTravelModePedestrian      RouteLegTravelMode = "Pedestrian"
-	RouteLegTravelModeScooter         RouteLegTravelMode = "Scooter"
-	RouteLegTravelModeTruck           RouteLegTravelMode = "Truck"
-	RouteLegTravelModeCarShuttleTrain RouteLegTravelMode = "CarShuttleTrain"
+	RouteLegTravelModeCar                RouteLegTravelMode = "Car"
+	RouteLegTravelModeFerry              RouteLegTravelMode = "Ferry"
+	RouteLegTravelModePedestrian         RouteLegTravelMode = "Pedestrian"
+	RouteLegTravelModeScooter            RouteLegTravelMode = "Scooter"
+	RouteLegTravelModeTruck              RouteLegTravelMode = "Truck"
+	RouteLegTravelModeCarShuttleTrain    RouteLegTravelMode = "CarShuttleTrain"
+	RouteLegTravelModeAerialTramway      RouteLegTravelMode = "AerialTramway"
+	RouteLegTravelModeAirplane           RouteLegTravelMode = "Airplane"
+	RouteLegTravelModeBus                RouteLegTravelMode = "Bus"
+	RouteLegTravelModeBusRapidTransit    RouteLegTravelMode = "BusRapidTransit"
+	RouteLegTravelModeCityTrain          RouteLegTravelMode = "CityTrain"
+	RouteLegTravelModeFunicularRailway   RouteLegTravelMode = "FunicularRailway"
+	RouteLegTravelModeHighSpeedTrain     RouteLegTravelMode = "HighSpeedTrain"
+	RouteLegTravelModeIntercityTrain     RouteLegTravelMode = "IntercityTrain"
+	RouteLegTravelModeInterregionalTrain RouteLegTravelMode = "InterregionalTrain"
+	RouteLegTravelModeLightRail          RouteLegTravelMode = "LightRail"
+	RouteLegTravelModeMonorail           RouteLegTravelMode = "Monorail"
+	RouteLegTravelModePrivateBus         RouteLegTravelMode = "PrivateBus"
+	RouteLegTravelModeRegionalTrain      RouteLegTravelMode = "RegionalTrain"
+	RouteLegTravelModeSubway             RouteLegTravelMode = "Subway"
 )
 
 // Values returns all known values for RouteLegTravelMode. Note that this can be
@@ -550,6 +653,20 @@ func (RouteLegTravelMode) Values() []RouteLegTravelMode {
 		"Scooter",
 		"Truck",
 		"CarShuttleTrain",
+		"AerialTramway",
+		"Airplane",
+		"Bus",
+		"BusRapidTransit",
+		"CityTrain",
+		"FunicularRailway",
+		"HighSpeedTrain",
+		"IntercityTrain",
+		"InterregionalTrain",
+		"LightRail",
+		"Monorail",
+		"PrivateBus",
+		"RegionalTrain",
+		"Subway",
 	}
 }
 
@@ -560,6 +677,9 @@ const (
 	RouteLegTypeFerry      RouteLegType = "Ferry"
 	RouteLegTypePedestrian RouteLegType = "Pedestrian"
 	RouteLegTypeVehicle    RouteLegType = "Vehicle"
+	RouteLegTypeRental     RouteLegType = "Rental"
+	RouteLegTypeTaxi       RouteLegType = "Taxi"
+	RouteLegTypeTransit    RouteLegType = "Transit"
 )
 
 // Values returns all known values for RouteLegType. Note that this can be
@@ -571,6 +691,9 @@ func (RouteLegType) Values() []RouteLegType {
 		"Ferry",
 		"Pedestrian",
 		"Vehicle",
+		"Rental",
+		"Taxi",
+		"Transit",
 	}
 }
 
@@ -729,6 +852,24 @@ func (RouteNoticeImpact) Values() []RouteNoticeImpact {
 	}
 }
 
+type RoutePedestrianAfterTravelStepType string
+
+// Enum values for RoutePedestrianAfterTravelStepType
+const (
+	RoutePedestrianAfterTravelStepTypeWait RoutePedestrianAfterTravelStepType = "Wait"
+)
+
+// Values returns all known values for RoutePedestrianAfterTravelStepType. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RoutePedestrianAfterTravelStepType) Values() []RoutePedestrianAfterTravelStepType {
+	return []RoutePedestrianAfterTravelStepType{
+		"Wait",
+	}
+}
+
 type RoutePedestrianNoticeCode string
 
 // Enum values for RoutePedestrianNoticeCode
@@ -753,6 +894,29 @@ func (RoutePedestrianNoticeCode) Values() []RoutePedestrianNoticeCode {
 		"ViolatedAvoidTunnel",
 		"ViolatedPedestrianOption",
 		"ViolatedAvoidAreas",
+	}
+}
+
+type RoutePedestrianPlaceType string
+
+// Enum values for RoutePedestrianPlaceType
+const (
+	RoutePedestrianPlaceTypeAccessPoint    RoutePedestrianPlaceType = "AccessPoint"
+	RoutePedestrianPlaceTypeDockingStation RoutePedestrianPlaceType = "DockingStation"
+	RoutePedestrianPlaceTypeParkingLot     RoutePedestrianPlaceType = "ParkingLot"
+	RoutePedestrianPlaceTypeStation        RoutePedestrianPlaceType = "Station"
+)
+
+// Values returns all known values for RoutePedestrianPlaceType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RoutePedestrianPlaceType) Values() []RoutePedestrianPlaceType {
+	return []RoutePedestrianPlaceType{
+		"AccessPoint",
+		"DockingStation",
+		"ParkingLot",
+		"Station",
 	}
 }
 
@@ -788,6 +952,121 @@ func (RoutePedestrianTravelStepType) Values() []RoutePedestrianTravelStepType {
 	}
 }
 
+type RouteRentalAfterTravelStepType string
+
+// Enum values for RouteRentalAfterTravelStepType
+const (
+	RouteRentalAfterTravelStepTypePark RouteRentalAfterTravelStepType = "Park"
+)
+
+// Values returns all known values for RouteRentalAfterTravelStepType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteRentalAfterTravelStepType) Values() []RouteRentalAfterTravelStepType {
+	return []RouteRentalAfterTravelStepType{
+		"Park",
+	}
+}
+
+type RouteRentalBeforeTravelStepType string
+
+// Enum values for RouteRentalBeforeTravelStepType
+const (
+	RouteRentalBeforeTravelStepTypeSetup RouteRentalBeforeTravelStepType = "Setup"
+)
+
+// Values returns all known values for RouteRentalBeforeTravelStepType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteRentalBeforeTravelStepType) Values() []RouteRentalBeforeTravelStepType {
+	return []RouteRentalBeforeTravelStepType{
+		"Setup",
+	}
+}
+
+type RouteRentalMode string
+
+// Enum values for RouteRentalMode
+const (
+	RouteRentalModeAll RouteRentalMode = "All"
+	RouteRentalModeCar RouteRentalMode = "Car"
+)
+
+// Values returns all known values for RouteRentalMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteRentalMode) Values() []RouteRentalMode {
+	return []RouteRentalMode{
+		"All",
+		"Car",
+	}
+}
+
+type RouteRentalPlaceType string
+
+// Enum values for RouteRentalPlaceType
+const (
+	RouteRentalPlaceTypeAccessPoint    RouteRentalPlaceType = "AccessPoint"
+	RouteRentalPlaceTypeDockingStation RouteRentalPlaceType = "DockingStation"
+	RouteRentalPlaceTypeParkingLot     RouteRentalPlaceType = "ParkingLot"
+	RouteRentalPlaceTypeStation        RouteRentalPlaceType = "Station"
+)
+
+// Values returns all known values for RouteRentalPlaceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteRentalPlaceType) Values() []RouteRentalPlaceType {
+	return []RouteRentalPlaceType{
+		"AccessPoint",
+		"DockingStation",
+		"ParkingLot",
+		"Station",
+	}
+}
+
+type RouteRentalTravelStepType string
+
+// Enum values for RouteRentalTravelStepType
+const (
+	RouteRentalTravelStepTypeArrive          RouteRentalTravelStepType = "Arrive"
+	RouteRentalTravelStepTypeContinue        RouteRentalTravelStepType = "Continue"
+	RouteRentalTravelStepTypeDepart          RouteRentalTravelStepType = "Depart"
+	RouteRentalTravelStepTypeExit            RouteRentalTravelStepType = "Exit"
+	RouteRentalTravelStepTypeKeep            RouteRentalTravelStepType = "Keep"
+	RouteRentalTravelStepTypeRamp            RouteRentalTravelStepType = "Ramp"
+	RouteRentalTravelStepTypeRoundaboutEnter RouteRentalTravelStepType = "RoundaboutEnter"
+	RouteRentalTravelStepTypeRoundaboutExit  RouteRentalTravelStepType = "RoundaboutExit"
+	RouteRentalTravelStepTypeRoundaboutPass  RouteRentalTravelStepType = "RoundaboutPass"
+	RouteRentalTravelStepTypeTurn            RouteRentalTravelStepType = "Turn"
+	RouteRentalTravelStepTypeUTurn           RouteRentalTravelStepType = "UTurn"
+)
+
+// Values returns all known values for RouteRentalTravelStepType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteRentalTravelStepType) Values() []RouteRentalTravelStepType {
+	return []RouteRentalTravelStepType{
+		"Arrive",
+		"Continue",
+		"Depart",
+		"Exit",
+		"Keep",
+		"Ramp",
+		"RoundaboutEnter",
+		"RoundaboutExit",
+		"RoundaboutPass",
+		"Turn",
+		"UTurn",
+	}
+}
+
 type RouteResponseNoticeCode string
 
 // Enum values for RouteResponseNoticeCode
@@ -795,6 +1074,9 @@ const (
 	RouteResponseNoticeCodeMainLanguageNotFound             RouteResponseNoticeCode = "MainLanguageNotFound"
 	RouteResponseNoticeCodeOther                            RouteResponseNoticeCode = "Other"
 	RouteResponseNoticeCodeTravelTimeExceedsDriverWorkHours RouteResponseNoticeCode = "TravelTimeExceedsDriverWorkHours"
+	RouteResponseNoticeCodeTransitDataUnavailable           RouteResponseNoticeCode = "TransitDataUnavailable"
+	RouteResponseNoticeCodeTransitRouteUnavailable          RouteResponseNoticeCode = "TransitRouteUnavailable"
+	RouteResponseNoticeCodeNoTransitStationsFound           RouteResponseNoticeCode = "NoTransitStationsFound"
 )
 
 // Values returns all known values for RouteResponseNoticeCode. Note that this can
@@ -806,6 +1088,9 @@ func (RouteResponseNoticeCode) Values() []RouteResponseNoticeCode {
 		"MainLanguageNotFound",
 		"Other",
 		"TravelTimeExceedsDriverWorkHours",
+		"TransitDataUnavailable",
+		"TransitRouteUnavailable",
+		"NoTransitStationsFound",
 	}
 }
 
@@ -1106,6 +1391,136 @@ func (RouteSteeringDirection) Values() []RouteSteeringDirection {
 	}
 }
 
+type RouteTaxiAfterTravelStepType string
+
+// Enum values for RouteTaxiAfterTravelStepType
+const (
+	RouteTaxiAfterTravelStepTypePark RouteTaxiAfterTravelStepType = "Park"
+)
+
+// Values returns all known values for RouteTaxiAfterTravelStepType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTaxiAfterTravelStepType) Values() []RouteTaxiAfterTravelStepType {
+	return []RouteTaxiAfterTravelStepType{
+		"Park",
+	}
+}
+
+type RouteTaxiBeforeTravelStepType string
+
+// Enum values for RouteTaxiBeforeTravelStepType
+const (
+	RouteTaxiBeforeTravelStepTypeWait RouteTaxiBeforeTravelStepType = "Wait"
+)
+
+// Values returns all known values for RouteTaxiBeforeTravelStepType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTaxiBeforeTravelStepType) Values() []RouteTaxiBeforeTravelStepType {
+	return []RouteTaxiBeforeTravelStepType{
+		"Wait",
+	}
+}
+
+type RouteTaxiMode string
+
+// Enum values for RouteTaxiMode
+const (
+	RouteTaxiModeAll RouteTaxiMode = "All"
+	RouteTaxiModeCar RouteTaxiMode = "Car"
+)
+
+// Values returns all known values for RouteTaxiMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTaxiMode) Values() []RouteTaxiMode {
+	return []RouteTaxiMode{
+		"All",
+		"Car",
+	}
+}
+
+type RouteTaxiNoticeCode string
+
+// Enum values for RouteTaxiNoticeCode
+const (
+	RouteTaxiNoticeCodeAccuratePolylineUnavailable RouteTaxiNoticeCode = "AccuratePolylineUnavailable"
+	RouteTaxiNoticeCodeOther                       RouteTaxiNoticeCode = "Other"
+)
+
+// Values returns all known values for RouteTaxiNoticeCode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTaxiNoticeCode) Values() []RouteTaxiNoticeCode {
+	return []RouteTaxiNoticeCode{
+		"AccuratePolylineUnavailable",
+		"Other",
+	}
+}
+
+type RouteTaxiPlaceType string
+
+// Enum values for RouteTaxiPlaceType
+const (
+	RouteTaxiPlaceTypeAccessPoint RouteTaxiPlaceType = "AccessPoint"
+	RouteTaxiPlaceTypeStation     RouteTaxiPlaceType = "Station"
+)
+
+// Values returns all known values for RouteTaxiPlaceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTaxiPlaceType) Values() []RouteTaxiPlaceType {
+	return []RouteTaxiPlaceType{
+		"AccessPoint",
+		"Station",
+	}
+}
+
+type RouteTaxiTravelStepType string
+
+// Enum values for RouteTaxiTravelStepType
+const (
+	RouteTaxiTravelStepTypeArrive          RouteTaxiTravelStepType = "Arrive"
+	RouteTaxiTravelStepTypeContinue        RouteTaxiTravelStepType = "Continue"
+	RouteTaxiTravelStepTypeDepart          RouteTaxiTravelStepType = "Depart"
+	RouteTaxiTravelStepTypeExit            RouteTaxiTravelStepType = "Exit"
+	RouteTaxiTravelStepTypeKeep            RouteTaxiTravelStepType = "Keep"
+	RouteTaxiTravelStepTypeRamp            RouteTaxiTravelStepType = "Ramp"
+	RouteTaxiTravelStepTypeRoundaboutEnter RouteTaxiTravelStepType = "RoundaboutEnter"
+	RouteTaxiTravelStepTypeRoundaboutExit  RouteTaxiTravelStepType = "RoundaboutExit"
+	RouteTaxiTravelStepTypeRoundaboutPass  RouteTaxiTravelStepType = "RoundaboutPass"
+	RouteTaxiTravelStepTypeTurn            RouteTaxiTravelStepType = "Turn"
+	RouteTaxiTravelStepTypeUTurn           RouteTaxiTravelStepType = "UTurn"
+)
+
+// Values returns all known values for RouteTaxiTravelStepType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTaxiTravelStepType) Values() []RouteTaxiTravelStepType {
+	return []RouteTaxiTravelStepType{
+		"Arrive",
+		"Continue",
+		"Depart",
+		"Exit",
+		"Keep",
+		"Ramp",
+		"RoundaboutEnter",
+		"RoundaboutExit",
+		"RoundaboutPass",
+		"Turn",
+		"UTurn",
+	}
+}
+
 type RouteTollPassValidityPeriodType string
 
 // Enum values for RouteTollPassValidityPeriodType
@@ -1180,6 +1595,273 @@ func (RouteTollVehicleCategory) Values() []RouteTollVehicleCategory {
 	}
 }
 
+type RouteTransitAfterTravelStepType string
+
+// Enum values for RouteTransitAfterTravelStepType
+const (
+	RouteTransitAfterTravelStepTypeDeboard RouteTransitAfterTravelStepType = "Deboard"
+)
+
+// Values returns all known values for RouteTransitAfterTravelStepType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTransitAfterTravelStepType) Values() []RouteTransitAfterTravelStepType {
+	return []RouteTransitAfterTravelStepType{
+		"Deboard",
+	}
+}
+
+type RouteTransitBeforeTravelStepType string
+
+// Enum values for RouteTransitBeforeTravelStepType
+const (
+	RouteTransitBeforeTravelStepTypeBoard RouteTransitBeforeTravelStepType = "Board"
+)
+
+// Values returns all known values for RouteTransitBeforeTravelStepType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTransitBeforeTravelStepType) Values() []RouteTransitBeforeTravelStepType {
+	return []RouteTransitBeforeTravelStepType{
+		"Board",
+	}
+}
+
+type RouteTransitIncidentEffect string
+
+// Enum values for RouteTransitIncidentEffect
+const (
+	RouteTransitIncidentEffectDelayed          RouteTransitIncidentEffect = "Delayed"
+	RouteTransitIncidentEffectDetoured         RouteTransitIncidentEffect = "Detoured"
+	RouteTransitIncidentEffectOther            RouteTransitIncidentEffect = "Other"
+	RouteTransitIncidentEffectServiceAdded     RouteTransitIncidentEffect = "ServiceAdded"
+	RouteTransitIncidentEffectServiceCancelled RouteTransitIncidentEffect = "ServiceCancelled"
+	RouteTransitIncidentEffectServiceModified  RouteTransitIncidentEffect = "ServiceModified"
+	RouteTransitIncidentEffectServiceReduced   RouteTransitIncidentEffect = "ServiceReduced"
+	RouteTransitIncidentEffectStopMoved        RouteTransitIncidentEffect = "StopMoved"
+)
+
+// Values returns all known values for RouteTransitIncidentEffect. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTransitIncidentEffect) Values() []RouteTransitIncidentEffect {
+	return []RouteTransitIncidentEffect{
+		"Delayed",
+		"Detoured",
+		"Other",
+		"ServiceAdded",
+		"ServiceCancelled",
+		"ServiceModified",
+		"ServiceReduced",
+		"StopMoved",
+	}
+}
+
+type RouteTransitIncidentType string
+
+// Enum values for RouteTransitIncidentType
+const (
+	RouteTransitIncidentTypeAccident         RouteTransitIncidentType = "Accident"
+	RouteTransitIncidentTypeConstruction     RouteTransitIncidentType = "Construction"
+	RouteTransitIncidentTypeDemonstration    RouteTransitIncidentType = "Demonstration"
+	RouteTransitIncidentTypeHoliday          RouteTransitIncidentType = "Holiday"
+	RouteTransitIncidentTypeMaintenance      RouteTransitIncidentType = "Maintenance"
+	RouteTransitIncidentTypeMedicalEmergency RouteTransitIncidentType = "MedicalEmergency"
+	RouteTransitIncidentTypeOther            RouteTransitIncidentType = "Other"
+	RouteTransitIncidentTypePoliceActivity   RouteTransitIncidentType = "PoliceActivity"
+	RouteTransitIncidentTypeStrike           RouteTransitIncidentType = "Strike"
+	RouteTransitIncidentTypeTechnicalProblem RouteTransitIncidentType = "TechnicalProblem"
+	RouteTransitIncidentTypeWeather          RouteTransitIncidentType = "Weather"
+)
+
+// Values returns all known values for RouteTransitIncidentType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTransitIncidentType) Values() []RouteTransitIncidentType {
+	return []RouteTransitIncidentType{
+		"Accident",
+		"Construction",
+		"Demonstration",
+		"Holiday",
+		"Maintenance",
+		"MedicalEmergency",
+		"Other",
+		"PoliceActivity",
+		"Strike",
+		"TechnicalProblem",
+		"Weather",
+	}
+}
+
+type RouteTransitIntermediateStopAttribute string
+
+// Enum values for RouteTransitIntermediateStopAttribute
+const (
+	RouteTransitIntermediateStopAttributeNoEntry RouteTransitIntermediateStopAttribute = "NoEntry"
+	RouteTransitIntermediateStopAttributeNoExit  RouteTransitIntermediateStopAttribute = "NoExit"
+)
+
+// Values returns all known values for RouteTransitIntermediateStopAttribute. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTransitIntermediateStopAttribute) Values() []RouteTransitIntermediateStopAttribute {
+	return []RouteTransitIntermediateStopAttribute{
+		"NoEntry",
+		"NoExit",
+	}
+}
+
+type RouteTransitMode string
+
+// Enum values for RouteTransitMode
+const (
+	RouteTransitModeAerialTramway      RouteTransitMode = "AerialTramway"
+	RouteTransitModeAirplane           RouteTransitMode = "Airplane"
+	RouteTransitModeAll                RouteTransitMode = "All"
+	RouteTransitModeBus                RouteTransitMode = "Bus"
+	RouteTransitModeBusRapidTransit    RouteTransitMode = "BusRapidTransit"
+	RouteTransitModeCityTrain          RouteTransitMode = "CityTrain"
+	RouteTransitModeFerry              RouteTransitMode = "Ferry"
+	RouteTransitModeFunicularRailway   RouteTransitMode = "FunicularRailway"
+	RouteTransitModeHighSpeedTrain     RouteTransitMode = "HighSpeedTrain"
+	RouteTransitModeIntercityTrain     RouteTransitMode = "IntercityTrain"
+	RouteTransitModeInterregionalTrain RouteTransitMode = "InterregionalTrain"
+	RouteTransitModeLightRail          RouteTransitMode = "LightRail"
+	RouteTransitModeMonorail           RouteTransitMode = "Monorail"
+	RouteTransitModePrivateBus         RouteTransitMode = "PrivateBus"
+	RouteTransitModeRegionalTrain      RouteTransitMode = "RegionalTrain"
+	RouteTransitModeSubway             RouteTransitMode = "Subway"
+)
+
+// Values returns all known values for RouteTransitMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTransitMode) Values() []RouteTransitMode {
+	return []RouteTransitMode{
+		"AerialTramway",
+		"Airplane",
+		"All",
+		"Bus",
+		"BusRapidTransit",
+		"CityTrain",
+		"Ferry",
+		"FunicularRailway",
+		"HighSpeedTrain",
+		"IntercityTrain",
+		"InterregionalTrain",
+		"LightRail",
+		"Monorail",
+		"PrivateBus",
+		"RegionalTrain",
+		"Subway",
+	}
+}
+
+type RouteTransitNoticeCode string
+
+// Enum values for RouteTransitNoticeCode
+const (
+	RouteTransitNoticeCodeAccuratePolylineUnavailable              RouteTransitNoticeCode = "AccuratePolylineUnavailable"
+	RouteTransitNoticeCodeIntermediateStopsUnavailable             RouteTransitNoticeCode = "IntermediateStopsUnavailable"
+	RouteTransitNoticeCodeNoSchedule                               RouteTransitNoticeCode = "NoSchedule"
+	RouteTransitNoticeCodeOther                                    RouteTransitNoticeCode = "Other"
+	RouteTransitNoticeCodePotentialViolatedVehicleRestrictionUsage RouteTransitNoticeCode = "PotentialViolatedVehicleRestrictionUsage"
+	RouteTransitNoticeCodeScheduledTimes                           RouteTransitNoticeCode = "ScheduledTimes"
+	RouteTransitNoticeCodeSeasonalClosure                          RouteTransitNoticeCode = "SeasonalClosure"
+	RouteTransitNoticeCodeViolatedAvoidFerry                       RouteTransitNoticeCode = "ViolatedAvoidFerry"
+	RouteTransitNoticeCodeViolatedAvoidRailFerry                   RouteTransitNoticeCode = "ViolatedAvoidRailFerry"
+	RouteTransitNoticeCodeViolatedExcludedTransitMode              RouteTransitNoticeCode = "ViolatedExcludedTransitMode"
+	RouteTransitNoticeCodeViolatedVehicleRestriction               RouteTransitNoticeCode = "ViolatedVehicleRestriction"
+	RouteTransitNoticeCodeViolatedAvoidAreas                       RouteTransitNoticeCode = "ViolatedAvoidAreas"
+)
+
+// Values returns all known values for RouteTransitNoticeCode. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTransitNoticeCode) Values() []RouteTransitNoticeCode {
+	return []RouteTransitNoticeCode{
+		"AccuratePolylineUnavailable",
+		"IntermediateStopsUnavailable",
+		"NoSchedule",
+		"Other",
+		"PotentialViolatedVehicleRestrictionUsage",
+		"ScheduledTimes",
+		"SeasonalClosure",
+		"ViolatedAvoidFerry",
+		"ViolatedAvoidRailFerry",
+		"ViolatedExcludedTransitMode",
+		"ViolatedVehicleRestriction",
+		"ViolatedAvoidAreas",
+	}
+}
+
+type RouteTransitPlaceType string
+
+// Enum values for RouteTransitPlaceType
+const (
+	RouteTransitPlaceTypeStation RouteTransitPlaceType = "Station"
+)
+
+// Values returns all known values for RouteTransitPlaceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTransitPlaceType) Values() []RouteTransitPlaceType {
+	return []RouteTransitPlaceType{
+		"Station",
+	}
+}
+
+type RouteTransitTravelStepType string
+
+// Enum values for RouteTransitTravelStepType
+const (
+	RouteTransitTravelStepTypeDepart RouteTransitTravelStepType = "Depart"
+)
+
+// Values returns all known values for RouteTransitTravelStepType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTransitTravelStepType) Values() []RouteTransitTravelStepType {
+	return []RouteTransitTravelStepType{
+		"Depart",
+	}
+}
+
+type RouteTransitTripStatus string
+
+// Enum values for RouteTransitTripStatus
+const (
+	RouteTransitTripStatusAdded     RouteTransitTripStatus = "Added"
+	RouteTransitTripStatusCancelled RouteTransitTripStatus = "Cancelled"
+	RouteTransitTripStatusReplaced  RouteTransitTripStatus = "Replaced"
+	RouteTransitTripStatusScheduled RouteTransitTripStatus = "Scheduled"
+)
+
+// Values returns all known values for RouteTransitTripStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteTransitTripStatus) Values() []RouteTransitTripStatus {
+	return []RouteTransitTripStatus{
+		"Added",
+		"Cancelled",
+		"Replaced",
+		"Scheduled",
+	}
+}
+
 type RouteTravelMode string
 
 // Enum values for RouteTravelMode
@@ -1188,6 +1870,8 @@ const (
 	RouteTravelModePedestrian RouteTravelMode = "Pedestrian"
 	RouteTravelModeScooter    RouteTravelMode = "Scooter"
 	RouteTravelModeTruck      RouteTravelMode = "Truck"
+	RouteTravelModeIntermodal RouteTravelMode = "Intermodal"
+	RouteTravelModeTransit    RouteTravelMode = "Transit"
 )
 
 // Values returns all known values for RouteTravelMode. Note that this can be
@@ -1200,6 +1884,8 @@ func (RouteTravelMode) Values() []RouteTravelMode {
 		"Pedestrian",
 		"Scooter",
 		"Truck",
+		"Intermodal",
+		"Transit",
 	}
 }
 
@@ -1264,6 +1950,24 @@ func (RouteTurnIntensity) Values() []RouteTurnIntensity {
 	}
 }
 
+type RouteVehicleAfterTravelStepType string
+
+// Enum values for RouteVehicleAfterTravelStepType
+const (
+	RouteVehicleAfterTravelStepTypePark RouteVehicleAfterTravelStepType = "Park"
+)
+
+// Values returns all known values for RouteVehicleAfterTravelStepType. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteVehicleAfterTravelStepType) Values() []RouteVehicleAfterTravelStepType {
+	return []RouteVehicleAfterTravelStepType{
+		"Park",
+	}
+}
+
 type RouteVehicleIncidentSeverity string
 
 // Enum values for RouteVehicleIncidentSeverity
@@ -1322,6 +2026,25 @@ func (RouteVehicleIncidentType) Values() []RouteVehicleIncidentType {
 		"RoadClosure",
 		"RoadHazard",
 		"Weather",
+	}
+}
+
+type RouteVehicleMode string
+
+// Enum values for RouteVehicleMode
+const (
+	RouteVehicleModeAll RouteVehicleMode = "All"
+	RouteVehicleModeCar RouteVehicleMode = "Car"
+)
+
+// Values returns all known values for RouteVehicleMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteVehicleMode) Values() []RouteVehicleMode {
+	return []RouteVehicleMode{
+		"All",
+		"Car",
 	}
 }
 
@@ -1396,6 +2119,29 @@ func (RouteVehicleNoticeCode) Values() []RouteVehicleNoticeCode {
 	}
 }
 
+type RouteVehiclePlaceType string
+
+// Enum values for RouteVehiclePlaceType
+const (
+	RouteVehiclePlaceTypeAccessPoint    RouteVehiclePlaceType = "AccessPoint"
+	RouteVehiclePlaceTypeDockingStation RouteVehiclePlaceType = "DockingStation"
+	RouteVehiclePlaceTypeParkingLot     RouteVehiclePlaceType = "ParkingLot"
+	RouteVehiclePlaceTypeStation        RouteVehiclePlaceType = "Station"
+)
+
+// Values returns all known values for RouteVehiclePlaceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteVehiclePlaceType) Values() []RouteVehiclePlaceType {
+	return []RouteVehiclePlaceType{
+		"AccessPoint",
+		"DockingStation",
+		"ParkingLot",
+		"Station",
+	}
+}
+
 type RouteVehicleTravelStepType string
 
 // Enum values for RouteVehicleTravelStepType
@@ -1434,6 +2180,27 @@ func (RouteVehicleTravelStepType) Values() []RouteVehicleTravelStepType {
 		"RoundaboutPass",
 		"Turn",
 		"UTurn",
+	}
+}
+
+type RouteWebLinkDeviceType string
+
+// Enum values for RouteWebLinkDeviceType
+const (
+	RouteWebLinkDeviceTypeAndroid RouteWebLinkDeviceType = "Android"
+	RouteWebLinkDeviceTypeIos     RouteWebLinkDeviceType = "Ios"
+	RouteWebLinkDeviceTypeWeb     RouteWebLinkDeviceType = "Web"
+)
+
+// Values returns all known values for RouteWebLinkDeviceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RouteWebLinkDeviceType) Values() []RouteWebLinkDeviceType {
+	return []RouteWebLinkDeviceType{
+		"Android",
+		"Ios",
+		"Web",
 	}
 }
 

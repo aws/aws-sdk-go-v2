@@ -4728,6 +4728,99 @@ func (IsTrackingServerActive) Values() []IsTrackingServerActive {
 	}
 }
 
+type JobCategory string
+
+// Enum values for JobCategory
+const (
+	JobCategoryAgentRft           JobCategory = "AgentRFT"
+	JobCategoryAgentRftEvaluation JobCategory = "AgentRFTEvaluation"
+)
+
+// Values returns all known values for JobCategory. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobCategory) Values() []JobCategory {
+	return []JobCategory{
+		"AgentRFT",
+		"AgentRFTEvaluation",
+	}
+}
+
+type JobSecondaryStatus string
+
+// Enum values for JobSecondaryStatus
+const (
+	JobSecondaryStatusStarting           JobSecondaryStatus = "Starting"
+	JobSecondaryStatusDownloading        JobSecondaryStatus = "Downloading"
+	JobSecondaryStatusTraining           JobSecondaryStatus = "Training"
+	JobSecondaryStatusUploading          JobSecondaryStatus = "Uploading"
+	JobSecondaryStatusStopping           JobSecondaryStatus = "Stopping"
+	JobSecondaryStatusStopped            JobSecondaryStatus = "Stopped"
+	JobSecondaryStatusMaxRuntimeExceeded JobSecondaryStatus = "MaxRuntimeExceeded"
+	JobSecondaryStatusInterrupted        JobSecondaryStatus = "Interrupted"
+	JobSecondaryStatusFailed             JobSecondaryStatus = "Failed"
+	JobSecondaryStatusCompleted          JobSecondaryStatus = "Completed"
+	JobSecondaryStatusRestarting         JobSecondaryStatus = "Restarting"
+	JobSecondaryStatusPending            JobSecondaryStatus = "Pending"
+	JobSecondaryStatusEvaluating         JobSecondaryStatus = "Evaluating"
+	JobSecondaryStatusDeleting           JobSecondaryStatus = "Deleting"
+	JobSecondaryStatusDeleteFailed       JobSecondaryStatus = "DeleteFailed"
+)
+
+// Values returns all known values for JobSecondaryStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobSecondaryStatus) Values() []JobSecondaryStatus {
+	return []JobSecondaryStatus{
+		"Starting",
+		"Downloading",
+		"Training",
+		"Uploading",
+		"Stopping",
+		"Stopped",
+		"MaxRuntimeExceeded",
+		"Interrupted",
+		"Failed",
+		"Completed",
+		"Restarting",
+		"Pending",
+		"Evaluating",
+		"Deleting",
+		"DeleteFailed",
+	}
+}
+
+type JobStatus string
+
+// Enum values for JobStatus
+const (
+	JobStatusInProgress   JobStatus = "InProgress"
+	JobStatusCompleted    JobStatus = "Completed"
+	JobStatusFailed       JobStatus = "Failed"
+	JobStatusStopping     JobStatus = "Stopping"
+	JobStatusStopped      JobStatus = "Stopped"
+	JobStatusDeleting     JobStatus = "Deleting"
+	JobStatusDeleteFailed JobStatus = "DeleteFailed"
+)
+
+// Values returns all known values for JobStatus. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobStatus) Values() []JobStatus {
+	return []JobStatus{
+		"InProgress",
+		"Completed",
+		"Failed",
+		"Stopping",
+		"Stopped",
+		"Deleting",
+		"DeleteFailed",
+	}
+}
+
 type JobType string
 
 // Enum values for JobType

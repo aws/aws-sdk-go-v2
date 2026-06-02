@@ -1,0 +1,8 @@
+{
+    "id": "9cb10390-41fa-4acf-91cb-6d9defdfa715",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/storagegateway"
+    ]
+}

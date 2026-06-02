@@ -58,6 +58,10 @@ type CreateCapacityProviderInput struct {
 	// provider.
 	KmsKeyArn *string
 
+	// The tag propagation configuration for the capacity provider. Specifies tags to
+	// apply to managed resources at launch.
+	PropagateTags *types.PropagateTags
+
 	// A list of tags to associate with the capacity provider.
 	Tags map[string]string
 

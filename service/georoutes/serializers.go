@@ -41,7 +41,7 @@ func (m *awsRestjson1_serializeOpCalculateIsolines) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/isolines")
+	opPath, opQuery := httpbinding.SplitURI("/v2/isolines")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -230,7 +230,7 @@ func (m *awsRestjson1_serializeOpCalculateRouteMatrix) HandleSerialize(ctx conte
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/route-matrix")
+	opPath, opQuery := httpbinding.SplitURI("/v2/route-matrix")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -390,7 +390,7 @@ func (m *awsRestjson1_serializeOpCalculateRoutes) HandleSerialize(ctx context.Co
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/routes")
+	opPath, opQuery := httpbinding.SplitURI("/v2/routes")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -624,7 +624,7 @@ func (m *awsRestjson1_serializeOpOptimizeWaypoints) HandleSerialize(ctx context.
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/optimize-waypoints")
+	opPath, opQuery := httpbinding.SplitURI("/v2/optimize-waypoints")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -800,7 +800,7 @@ func (m *awsRestjson1_serializeOpSnapToRoads) HandleSerialize(ctx context.Contex
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/snap-to-roads")
+	opPath, opQuery := httpbinding.SplitURI("/v2/snap-to-roads")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
 	request.Method = "POST"
@@ -1926,6 +1926,17 @@ func awsRestjson1_serializeDocumentRoadSnapTruckOptions(v *types.RoadSnapTruckOp
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRouteAccessibilityAttributeList(v []types.RouteAccessibilityAttribute, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRouteAllowOptions(v *types.RouteAllowOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2309,6 +2320,213 @@ func awsRestjson1_serializeDocumentRouteHazardousCargoTypeList(v []types.RouteHa
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouteIntermodalEnabledLegsList(v []types.RouteIntermodalEnabledLegs, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouteIntermodalOptions(v *types.RouteIntermodalOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessibilityAttributes != nil {
+		ok := object.Key("AccessibilityAttributes")
+		if err := awsRestjson1_serializeDocumentRouteAccessibilityAttributeList(v.AccessibilityAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxTransfers != nil {
+		ok := object.Key("MaxTransfers")
+		ok.Integer(*v.MaxTransfers)
+	}
+
+	if v.Pedestrian != nil {
+		ok := object.Key("Pedestrian")
+		if err := awsRestjson1_serializeDocumentRouteIntermodalPedestrianOptions(v.Pedestrian, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Rental != nil {
+		ok := object.Key("Rental")
+		if err := awsRestjson1_serializeDocumentRouteIntermodalRentalOptions(v.Rental, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Taxi != nil {
+		ok := object.Key("Taxi")
+		if err := awsRestjson1_serializeDocumentRouteIntermodalTaxiOptions(v.Taxi, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Transit != nil {
+		ok := object.Key("Transit")
+		if err := awsRestjson1_serializeDocumentRouteIntermodalTransitOptions(v.Transit, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Vehicle != nil {
+		ok := object.Key("Vehicle")
+		if err := awsRestjson1_serializeDocumentRouteIntermodalVehicleOptions(v.Vehicle, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouteIntermodalPedestrianOptions(v *types.RouteIntermodalPedestrianOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxDistance != nil {
+		ok := object.Key("MaxDistance")
+		ok.Long(*v.MaxDistance)
+	}
+
+	if v.Speed != nil {
+		ok := object.Key("Speed")
+		switch {
+		case math.IsNaN(*v.Speed):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Speed, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Speed, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Speed)
+
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouteIntermodalRentalOptions(v *types.RouteIntermodalRentalOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedModes != nil {
+		ok := object.Key("AllowedModes")
+		if err := awsRestjson1_serializeDocumentRouteRentalModeList(v.AllowedModes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EnabledFor != nil {
+		ok := object.Key("EnabledFor")
+		if err := awsRestjson1_serializeDocumentRouteIntermodalEnabledLegsList(v.EnabledFor, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExcludedModes != nil {
+		ok := object.Key("ExcludedModes")
+		if err := awsRestjson1_serializeDocumentRouteRentalModeList(v.ExcludedModes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouteIntermodalTaxiOptions(v *types.RouteIntermodalTaxiOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedModes != nil {
+		ok := object.Key("AllowedModes")
+		if err := awsRestjson1_serializeDocumentRouteTaxiModeList(v.AllowedModes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EnabledFor != nil {
+		ok := object.Key("EnabledFor")
+		if err := awsRestjson1_serializeDocumentRouteIntermodalEnabledLegsList(v.EnabledFor, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExcludedModes != nil {
+		ok := object.Key("ExcludedModes")
+		if err := awsRestjson1_serializeDocumentRouteTaxiModeList(v.ExcludedModes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouteIntermodalTransitOptions(v *types.RouteIntermodalTransitOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedModes != nil {
+		ok := object.Key("AllowedModes")
+		if err := awsRestjson1_serializeDocumentRouteTransitModeList(v.AllowedModes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EnabledFor != nil {
+		ok := object.Key("EnabledFor")
+		if err := awsRestjson1_serializeDocumentRouteIntermodalEnabledLegsList(v.EnabledFor, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExcludedModes != nil {
+		ok := object.Key("ExcludedModes")
+		if err := awsRestjson1_serializeDocumentRouteTransitModeList(v.ExcludedModes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouteIntermodalVehicleOptions(v *types.RouteIntermodalVehicleOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AllowedModes != nil {
+		ok := object.Key("AllowedModes")
+		if err := awsRestjson1_serializeDocumentRouteVehicleModeList(v.AllowedModes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EnabledFor != nil {
+		ok := object.Key("EnabledFor")
+		if err := awsRestjson1_serializeDocumentRouteIntermodalEnabledLegsList(v.EnabledFor, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExcludedModes != nil {
+		ok := object.Key("ExcludedModes")
+		if err := awsRestjson1_serializeDocumentRouteVehicleModeList(v.ExcludedModes, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -3138,6 +3356,17 @@ func awsRestjson1_serializeDocumentRoutePedestrianOptions(v *types.RoutePedestri
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRouteRentalModeList(v []types.RouteRentalMode, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRouteScooterOptions(v *types.RouteScooterOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3200,6 +3429,17 @@ func awsRestjson1_serializeDocumentRouteSideOfStreetOptions(v *types.RouteSideOf
 }
 
 func awsRestjson1_serializeDocumentRouteSpanAdditionalFeatureList(v []types.RouteSpanAdditionalFeature, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouteTaxiModeList(v []types.RouteTaxiMode, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -3278,6 +3518,87 @@ func awsRestjson1_serializeDocumentRouteTrailerOptions(v *types.RouteTrailerOpti
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRouteTransitModeList(v []types.RouteTransitMode, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouteTransitOptions(v *types.RouteTransitOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessibilityAttributes != nil {
+		ok := object.Key("AccessibilityAttributes")
+		if err := awsRestjson1_serializeDocumentRouteAccessibilityAttributeList(v.AccessibilityAttributes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AllowedModes != nil {
+		ok := object.Key("AllowedModes")
+		if err := awsRestjson1_serializeDocumentRouteTransitModeList(v.AllowedModes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExcludedModes != nil {
+		ok := object.Key("ExcludedModes")
+		if err := awsRestjson1_serializeDocumentRouteTransitModeList(v.ExcludedModes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxTransfers != nil {
+		ok := object.Key("MaxTransfers")
+		ok.Integer(*v.MaxTransfers)
+	}
+
+	if v.Pedestrian != nil {
+		ok := object.Key("Pedestrian")
+		if err := awsRestjson1_serializeDocumentRouteTransitPedestrianOptions(v.Pedestrian, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouteTransitPedestrianOptions(v *types.RouteTransitPedestrianOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxDistance != nil {
+		ok := object.Key("MaxDistance")
+		ok.Long(*v.MaxDistance)
+	}
+
+	if v.Speed != nil {
+		ok := object.Key("Speed")
+		switch {
+		case math.IsNaN(*v.Speed):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Speed, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Speed, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Speed)
+
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRouteTravelModeOptions(v *types.RouteTravelModeOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3285,6 +3606,13 @@ func awsRestjson1_serializeDocumentRouteTravelModeOptions(v *types.RouteTravelMo
 	if v.Car != nil {
 		ok := object.Key("Car")
 		if err := awsRestjson1_serializeDocumentRouteCarOptions(v.Car, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Intermodal != nil {
+		ok := object.Key("Intermodal")
+		if err := awsRestjson1_serializeDocumentRouteIntermodalOptions(v.Intermodal, ok); err != nil {
 			return err
 		}
 	}
@@ -3299,6 +3627,13 @@ func awsRestjson1_serializeDocumentRouteTravelModeOptions(v *types.RouteTravelMo
 	if v.Scooter != nil {
 		ok := object.Key("Scooter")
 		if err := awsRestjson1_serializeDocumentRouteScooterOptions(v.Scooter, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Transit != nil {
+		ok := object.Key("Transit")
+		if err := awsRestjson1_serializeDocumentRouteTransitOptions(v.Transit, ok); err != nil {
 			return err
 		}
 	}
@@ -3445,6 +3780,17 @@ func awsRestjson1_serializeDocumentRouteVehicleLicensePlate(v *types.RouteVehicl
 		ok.String(*v.LastCharacter)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRouteVehicleModeList(v []types.RouteVehicleMode, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

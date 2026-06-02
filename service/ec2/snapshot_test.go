@@ -842,6 +842,18 @@ func TestCheckSnapshot_CreateCapacityReservationBySplitting(t *testing.T) {
 	}
 }
 
+func TestCheckSnapshot_CreateCapacityReservationCancellationQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityReservationCancellationQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "CreateCapacityReservationCancellationQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestCheckSnapshot_CreateCapacityReservationFleet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCapacityReservationFleet(context.Background(), nil, func(o *Options) {
@@ -3451,6 +3463,18 @@ func TestCheckSnapshot_DescribeCapacityReservationBillingRequests(t *testing.T) 
 	_, err := svc.DescribeCapacityReservationBillingRequests(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return testSnapshot(stack, "DescribeCapacityReservationBillingRequests")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestCheckSnapshot_DescribeCapacityReservationCancellationQuotes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationCancellationQuotes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return testSnapshot(stack, "DescribeCapacityReservationCancellationQuotes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {
@@ -10021,6 +10045,18 @@ func TestUpdateSnapshot_CreateCapacityReservationBySplitting(t *testing.T) {
 	}
 }
 
+func TestUpdateSnapshot_CreateCapacityReservationCancellationQuote(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.CreateCapacityReservationCancellationQuote(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "CreateCapacityReservationCancellationQuote")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestUpdateSnapshot_CreateCapacityReservationFleet(t *testing.T) {
 	svc := New(Options{})
 	_, err := svc.CreateCapacityReservationFleet(context.Background(), nil, func(o *Options) {
@@ -12630,6 +12666,18 @@ func TestUpdateSnapshot_DescribeCapacityReservationBillingRequests(t *testing.T)
 	_, err := svc.DescribeCapacityReservationBillingRequests(context.Background(), nil, func(o *Options) {
 		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
 			return updateSnapshot(stack, "DescribeCapacityReservationBillingRequests")
+		})
+	})
+	if _, ok := err.(snapshotOK); !ok && err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestUpdateSnapshot_DescribeCapacityReservationCancellationQuotes(t *testing.T) {
+	svc := New(Options{})
+	_, err := svc.DescribeCapacityReservationCancellationQuotes(context.Background(), nil, func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(stack *middleware.Stack) error {
+			return updateSnapshot(stack, "DescribeCapacityReservationCancellationQuotes")
 		})
 	})
 	if _, ok := err.(snapshotOK); !ok && err != nil {

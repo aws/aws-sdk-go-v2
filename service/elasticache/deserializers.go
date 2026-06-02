@@ -21348,6 +21348,32 @@ func awsAwsquery_deserializeDocumentReplicationGroup(v **types.ReplicationGroup,
 				sv.Description = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("Durability", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Durability = types.Durability(xtv)
+			}
+
+		case strings.EqualFold("EffectiveDurability", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.EffectiveDurability = types.EffectiveDurability(xtv)
+			}
+
 		case strings.EqualFold("Engine", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -21533,6 +21559,19 @@ func awsAwsquery_deserializeDocumentReplicationGroup(v **types.ReplicationGroup,
 			{
 				xtv := string(val)
 				sv.Status = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("StorageEncryptionType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StorageEncryptionType = types.StorageEncryptionType(xtv)
 			}
 
 		case strings.EqualFold("TransitEncryptionEnabled", t.Name.Local):
@@ -23290,6 +23329,19 @@ func awsAwsquery_deserializeDocumentServerlessCache(v **types.ServerlessCache, d
 				sv.Status = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("StorageEncryptionType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.StorageEncryptionType = types.StorageEncryptionType(xtv)
+			}
+
 		case strings.EqualFold("SubnetIds", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentSubnetIdsList(&sv.SubnetIds, nodeDecoder); err != nil {
@@ -24552,6 +24604,19 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 			{
 				xtv := string(val)
 				sv.DataTiering = types.DataTieringStatus(xtv)
+			}
+
+		case strings.EqualFold("Durability", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.Durability = types.Durability(xtv)
 			}
 
 		case strings.EqualFold("Engine", t.Name.Local):

@@ -11,7 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The query search index.
+// Searches the specified index.
+//
+// If a device has never connected to IoT Core or was disconnected for more than 1
+// hour before fleet indexing's thingConnectivityIndexingMode was enabled, the
+// connectivity object for this device in the response will have the connected
+// field set to false with no additional session details.
 //
 // Requires permission to access the [SearchIndex] action.
 //

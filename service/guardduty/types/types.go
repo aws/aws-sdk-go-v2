@@ -3761,6 +3761,15 @@ type RuntimeContext struct {
 	// Example of the command line involved in the suspicious activity.
 	CommandLineExample *string
 
+	// Represents the type of file operation that triggered the finding, such as
+	// Write, Delete, Rename, Link, or Symlink.
+	FileOperation *string
+
+	// The path of the sensitive file that was modified. Modification includes write,
+	// delete, rename, link, or symlink operations. This field is indexed for
+	// filtering.
+	FilePath *string
+
 	// Represents the type of mounted fileSystem.
 	FileSystemType *string
 
@@ -3804,6 +3813,10 @@ type RuntimeContext struct {
 
 	// The path in the container that is mapped to the host directory.
 	MountTarget *string
+
+	// All file paths modified by the same process that triggered the finding, up to a
+	// maximum of 25 paths.
+	RelatedFilePaths []string
 
 	// The path in the container that modified the release agent file.
 	ReleaseAgentPath *string

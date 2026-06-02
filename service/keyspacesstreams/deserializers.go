@@ -768,6 +768,46 @@ func awsAwsjson10_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentIteratorDescription(v **types.IteratorDescription, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IteratorDescription
+	if *v == nil {
+		sv = &types.IteratorDescription{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "iteratorPosition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IteratorPosition to be of type string, got %T instead", value)
+				}
+				sv.IteratorPosition = types.IteratorPosition(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentKeyspacesCell(v **types.KeyspacesCell, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1999,6 +2039,11 @@ func awsAwsjson10_deserializeOpDocumentGetRecordsOutput(v **GetRecordsOutput, va
 		switch key {
 		case "changeRecords":
 			if err := awsAwsjson10_deserializeDocumentRecordList(&sv.ChangeRecords, value); err != nil {
+				return err
+			}
+
+		case "iteratorDescription":
+			if err := awsAwsjson10_deserializeDocumentIteratorDescription(&sv.IteratorDescription, value); err != nil {
 				return err
 			}
 

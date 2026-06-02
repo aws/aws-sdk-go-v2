@@ -1,0 +1,8 @@
+{
+    "id": "2bc7d6a6-18a1-42e4-a241-5f46b41b6d10",
+    "type": "feature",
+    "description": "Amazon EC2 now supports self-service cancellation of future-dated Capacity Reservations. A cancellation charge applies based on remaining commitment. Customers can generate a cancellation quote to review charges before confirming.",
+    "modules": [
+        "service/ec2"
+    ]
+}

@@ -7,6 +7,24 @@ import (
 	"time"
 )
 
+// Provides information about the current iterator.
+type IteratorDescription struct {
+
+	//  Indicates the current iterator's position within the shard. The possible
+	// values are:
+	//
+	//   - AT_TIP - No more records are currently available.
+	//
+	//   - BEHIND_TIP - Additional records may be available.
+	//
+	// Stream progresses in absence of customer records. BEHIND_TIP with an empty
+	// changeRecords list indicates the stream is progressing but no customer records
+	// are available at this position. Continue polling normally.
+	IteratorPosition IteratorPosition
+
+	noSmithyDocumentSerde
+}
+
 // Represents a cell in an Amazon Keyspaces table, containing both the value and
 // metadata about the cell.
 type KeyspacesCell struct {

@@ -19625,6 +19625,11 @@ func awsRestjson1_deserializeDocumentCapacityProvider(v **types.CapacityProvider
 				return err
 			}
 
+		case "PropagateTags":
+			if err := awsRestjson1_deserializeDocumentPropagateTags(&sv.PropagateTags, value); err != nil {
+				return err
+			}
+
 		case "State":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -26370,6 +26375,51 @@ func awsRestjson1_deserializeDocumentPreconditionFailedException(v **types.Preco
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Type = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPropagateTags(v **types.PropagateTags, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PropagateTags
+	if *v == nil {
+		sv = &types.PropagateTags{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ExplicitTags":
+			if err := awsRestjson1_deserializeDocumentTags(&sv.ExplicitTags, value); err != nil {
+				return err
+			}
+
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PropagateTagsMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.PropagateTagsMode(jtv)
 			}
 
 		default:

@@ -25131,6 +25131,42 @@ func awsRestjson1_deserializeDocumentRecoveryPointDetails(v **types.RecoveryPoin
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRelatedFilePathsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected String to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRemoteAccountDetails(v **types.RemoteAccountDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25918,6 +25954,24 @@ func awsRestjson1_deserializeDocumentRuntimeContext(v **types.RuntimeContext, va
 				sv.CommandLineExample = ptr.String(jtv)
 			}
 
+		case "fileOperation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FileOperation = ptr.String(jtv)
+			}
+
+		case "filePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.FilePath = ptr.String(jtv)
+			}
+
 		case "fileSystemType":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -26032,6 +26086,11 @@ func awsRestjson1_deserializeDocumentRuntimeContext(v **types.RuntimeContext, va
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.MountTarget = ptr.String(jtv)
+			}
+
+		case "relatedFilePaths":
+			if err := awsRestjson1_deserializeDocumentRelatedFilePathsList(&sv.RelatedFilePaths, value); err != nil {
+				return err
 			}
 
 		case "releaseAgentPath":

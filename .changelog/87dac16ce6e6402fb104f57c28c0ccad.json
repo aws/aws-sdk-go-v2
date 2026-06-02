@@ -1,0 +1,8 @@
+{
+    "id": "87dac16c-e6e6-402f-b104-f57c28c0ccad",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/xray"
+    ]
+}

@@ -4473,9 +4473,7 @@ type ThingConnectivity struct {
 	// false if it is not connected.
 	Connected *bool
 
-	// The reason why the client is disconnected. When you enable or update the
-	// indexing configuration, this value might be missing for devices that have never
-	// connected or have been disconnected for more than an hour.
+	// The reason that the client is disconnected.
 	DisconnectReason *string
 
 	// The keep-alive interval in seconds that the client specified when establishing
@@ -4488,10 +4486,6 @@ type ThingConnectivity struct {
 	SessionExpiry *int64
 
 	// The epoch time (in milliseconds) when the thing last connected or disconnected.
-	// If the thing has been disconnected for approximately an hour, the time value
-	// might be missing. When you enable or update the indexing configuration, this
-	// value might be 0 (the Unix epoch time) for devices that have never connected or
-	// have been disconnected for more than an hour.
 	Timestamp *int64
 
 	noSmithyDocumentSerde

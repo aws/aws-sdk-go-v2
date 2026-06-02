@@ -1,0 +1,8 @@
+{
+    "id": "16d63e9e-c58f-421f-990a-b5cb1ba920eb",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/s3"
+    ]
+}

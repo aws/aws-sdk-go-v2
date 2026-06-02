@@ -1,0 +1,8 @@
+{
+    "id": "83b67499-eba0-4860-81b0-7ec99e6d043d",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/sfn"
+    ]
+}

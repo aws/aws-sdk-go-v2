@@ -12561,6 +12561,98 @@ type IntegerParameterRangeSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Provides summary information about a job configuration schema version.
+type JobConfigSchemaVersionSummary struct {
+
+	// The version of the job configuration schema.
+	//
+	// This member is required.
+	JobConfigSchemaVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents a secondary status transition for a job. Jobs progress through
+// multiple secondary statuses during execution. Each transition records the
+// status, start time, optional end time, and an optional message with additional
+// details.
+type JobSecondaryStatusTransition struct {
+
+	// The date and time that the status transition started.
+	//
+	// This member is required.
+	StartTime *time.Time
+
+	// The secondary status of the job at this transition point.
+	//
+	// This member is required.
+	Status JobSecondaryStatus
+
+	// The date and time that the status transition ended.
+	EndTime *time.Time
+
+	// A detailed message about the status transition.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Metadata for a SageMaker job step.
+type JobStepMetadata struct {
+
+	// The Amazon Resource Name (ARN) of the SageMaker job that was run by this step
+	// execution.
+	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides summary information about a job, returned by the ListJobs operation.
+// Use DescribeJob to get full details for a specific job.
+type JobSummary struct {
+
+	// The date and time that the job was created.
+	//
+	// This member is required.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the job.
+	//
+	// This member is required.
+	JobArn *string
+
+	// The category of the job.
+	//
+	// This member is required.
+	JobCategory JobCategory
+
+	// The name of the job.
+	//
+	// This member is required.
+	JobName *string
+
+	// The secondary status of the job, providing more granular information about the
+	// job's progress. Secondary statuses may change between releases.
+	//
+	// This member is required.
+	JobSecondaryStatus JobSecondaryStatus
+
+	// The current status of the job.
+	//
+	// This member is required.
+	JobStatus JobStatus
+
+	// The date and time that the job was last modified.
+	//
+	// This member is required.
+	LastModifiedTime *time.Time
+
+	// The date and time that the job ended.
+	EndTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for the file system and kernels in a SageMaker AI image
 // running as a JupyterLab app. The FileSystemConfig object is not supported.
 type JupyterLabAppImageConfig struct {
@@ -17004,6 +17096,9 @@ type PipelineExecutionStepMetadata struct {
 
 	//  The metadata of the inference component used in pipeline execution step.
 	InferenceComponent *InferenceComponentMetadata
+
+	// The metadata for a SageMaker job used in a pipeline execution step.
+	Job *JobStepMetadata
 
 	// The Amazon Resource Name (ARN) of the Lambda function that was run by this step
 	// execution and a list of output parameters.

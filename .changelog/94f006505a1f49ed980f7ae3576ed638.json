@@ -1,0 +1,8 @@
+{
+    "id": "94f00650-5a1f-49ed-980f-7ae3576ed638",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/personalizeruntime"
+    ]
+}

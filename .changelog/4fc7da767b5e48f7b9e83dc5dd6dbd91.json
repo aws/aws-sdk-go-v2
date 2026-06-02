@@ -1,0 +1,8 @@
+{
+    "id": "4fc7da76-7b5e-48f7-b9e8-3dc5dd6dbd91",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/mturk"
+    ]
+}

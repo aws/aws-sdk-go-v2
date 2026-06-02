@@ -1,0 +1,8 @@
+{
+    "id": "ce923cfa-36a7-4384-befb-11663ad7e836",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/secretsmanager"
+    ]
+}

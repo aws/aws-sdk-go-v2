@@ -1,0 +1,8 @@
+{
+    "id": "121b566d-1149-4eb2-a7e4-8d1c25462a4f",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/route53"
+    ]
+}
