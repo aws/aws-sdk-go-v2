@@ -1,3 +1,7 @@
+# v1.56.1 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.56.0 (2026-06-02)
 
 * **Feature**: Release new Language locales including am-ET, es-MX, fa-AF, ht-HT, jv-ID, km-KH, my-MM, sq-AL, ne-NP. The commit shows past locales that have already been release which include cy-gb, ga-ie, gd-gb.

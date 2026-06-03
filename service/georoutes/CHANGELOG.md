@@ -1,3 +1,8 @@
+# v1.12.0 (2026-06-03)
+
+* **Feature**: Add "standardRegionalEndpoints" back to fix 'Could not connect to the endpoint URL'
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.11.0 (2026-06-02)
 
 * **Feature**: Added Transit and Intermodal travel modes to CalculateRoutes. Plan routes using public transit (bus, subway, train, ferry) or combine transit with driving, taxi, and rental car segments in a single multi-modal route.

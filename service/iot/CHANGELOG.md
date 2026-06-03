@@ -1,3 +1,7 @@
+# v1.75.2 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.75.1 (2026-06-02)
 
 * **Documentation**: Fleet indexing documentation update

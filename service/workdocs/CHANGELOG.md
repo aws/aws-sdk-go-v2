@@ -1,3 +1,7 @@
+# v1.30.26 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.25 (2026-06-02)
 
 * **Dependency Update**: Updated to the latest SDK module versions

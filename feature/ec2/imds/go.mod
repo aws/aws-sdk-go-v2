@@ -3,7 +3,7 @@ module github.com/aws/aws-sdk-go-v2/feature/ec2/imds
 go 1.24
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.41.10
+	github.com/aws/aws-sdk-go-v2 v1.41.11
 	github.com/aws/smithy-go v1.27.0
 )
 

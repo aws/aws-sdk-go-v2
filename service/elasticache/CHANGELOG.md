@@ -1,3 +1,7 @@
+# v1.54.1 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.54.0 (2026-06-02)
 
 * **Feature**: Amazon ElastiCache for Valkey now supports durability. This new capability is enabled through a Multi-AZ transactional log, enabling fast recovery and restart during failures.

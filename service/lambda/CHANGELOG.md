@@ -1,3 +1,7 @@
+# v1.92.1 (2026-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.92.0 (2026-06-02)
 
 * **Feature**: Adds configuration for tag propagation to Lambda-managed resources.

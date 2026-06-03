@@ -1,3 +1,14 @@
+# Release (2026-06-03)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.41.11
+  * **Bug Fix**: Replace usages of deprecated io/ioutil package with io.
+* `github.com/aws/aws-sdk-go-v2/service/georoutes`: [v1.12.0](service/georoutes/CHANGELOG.md#v1120-2026-06-03)
+  * **Feature**: Add "standardRegionalEndpoints" back to fix 'Could not connect to the endpoint URL'
+
 # Release (2026-06-02)
 
 ## General Highlights
