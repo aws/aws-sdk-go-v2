@@ -40,7 +40,7 @@ type ListRoute53HealthChecksInput struct {
 	// The hosted zone ID for the health checks.
 	HostedZoneId *string
 
-	// The number of objects that you want to return with this call.
+	// The maximum number of results to return in the response.
 	MaxResults *int32
 
 	// Specifies that you want to receive the next page of results. Valid only if you
@@ -88,10 +88,8 @@ type ListRoute53HealthChecksOutput struct {
 	// List of the health checks requested.
 	HealthChecks []types.Route53HealthCheck
 
-	// Specifies that you want to receive the next page of results. Valid only if you
-	// received a nextToken response in the previous request. If you did, it indicates
-	// that more output is available. Set this parameter to the value provided by the
-	// previous call's nextToken response to request the next page of results.
+	// A pagination token. A response may contain no results while still including a
+	// nextToken . Continue paginating until nextToken is null to retrieve all results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -213,7 +211,7 @@ func (c *Client) addOperationListRoute53HealthChecksMiddlewares(stack *middlewar
 // ListRoute53HealthChecksPaginatorOptions is the paginator options for
 // ListRoute53HealthChecks
 type ListRoute53HealthChecksPaginatorOptions struct {
-	// The number of objects that you want to return with this call.
+	// The maximum number of results to return in the response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

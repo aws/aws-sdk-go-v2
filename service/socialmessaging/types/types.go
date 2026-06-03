@@ -521,6 +521,402 @@ func (v *LinkedWhatsAppBusinessAccountSummary) Deserialize(d smithy.ShapeDeseria
 	})
 }
 
+// Contains the Meta application metadata associated with a WhatsApp Flow.
+type MetaFlowApplicationInfo struct {
+
+	// The unique identifier of the Meta application.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the Meta application.
+	//
+	// This member is required.
+	Name *string
+
+	// The URL link for the Meta application.
+	Link *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MetaFlowApplicationInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaFlowApplicationInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaFlowApplicationInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Id != nil {
+		s.WriteString(schemas.MetaFlowApplicationInfo_id, *v.Id)
+	}
+	if v.Link != nil {
+		s.WriteString(schemas.MetaFlowApplicationInfo_link, *v.Link)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MetaFlowApplicationInfo_name, *v.Name)
+	}
+}
+func (v *MetaFlowApplicationInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaFlowApplicationInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaFlowApplicationInfo_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MetaFlowApplicationInfo_id, v.Id)
+		case schemas.MetaFlowApplicationInfo_link:
+			v.Link = new(string)
+			return d.ReadString(schemas.MetaFlowApplicationInfo_link, v.Link)
+		case schemas.MetaFlowApplicationInfo_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MetaFlowApplicationInfo_name, v.Name)
+		}
+		return nil
+	})
+}
+
+// Represents a single asset file associated with a WhatsApp Flow, including a
+// presigned download URL.
+type MetaFlowAsset struct {
+
+	// The type of asset. Currently the only supported value is FLOW_JSON.
+	//
+	// This member is required.
+	AssetType *string
+
+	// A presigned URL from Meta for downloading the asset. The URL expires after a
+	// short period.
+	//
+	// This member is required.
+	DownloadUrl *string
+
+	// The filename of the asset (for example, flow.json).
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MetaFlowAsset) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaFlowAsset)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaFlowAsset) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.AssetType != nil {
+		s.WriteString(schemas.MetaFlowAsset_assetType, *v.AssetType)
+	}
+	if v.DownloadUrl != nil {
+		s.WriteString(schemas.MetaFlowAsset_downloadUrl, *v.DownloadUrl)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MetaFlowAsset_name, *v.Name)
+	}
+}
+func (v *MetaFlowAsset) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaFlowAsset, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaFlowAsset_assetType:
+			v.AssetType = new(string)
+			return d.ReadString(schemas.MetaFlowAsset_assetType, v.AssetType)
+		case schemas.MetaFlowAsset_downloadUrl:
+			v.DownloadUrl = new(string)
+			return d.ReadString(schemas.MetaFlowAsset_downloadUrl, v.DownloadUrl)
+		case schemas.MetaFlowAsset_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MetaFlowAsset_name, v.Name)
+		}
+		return nil
+	})
+}
+
+// Represents a single entity in the health status check for a WhatsApp Flow.
+type MetaFlowHealthEntity struct {
+
+	// The messaging availability status for this entity (for example, AVAILABLE,
+	// LIMITED, or BLOCKED).
+	//
+	// This member is required.
+	CanSendMessage *string
+
+	// The type of entity (for example, FLOW, WABA, BUSINESS, or APP).
+	//
+	// This member is required.
+	EntityType *string
+
+	// The unique identifier of the entity.
+	//
+	// This member is required.
+	Id *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MetaFlowHealthEntity) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaFlowHealthEntity)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaFlowHealthEntity) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanSendMessage != nil {
+		s.WriteString(schemas.MetaFlowHealthEntity_canSendMessage, *v.CanSendMessage)
+	}
+	if v.EntityType != nil {
+		s.WriteString(schemas.MetaFlowHealthEntity_entityType, *v.EntityType)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.MetaFlowHealthEntity_id, *v.Id)
+	}
+}
+func (v *MetaFlowHealthEntity) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaFlowHealthEntity, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaFlowHealthEntity_canSendMessage:
+			v.CanSendMessage = new(string)
+			return d.ReadString(schemas.MetaFlowHealthEntity_canSendMessage, v.CanSendMessage)
+		case schemas.MetaFlowHealthEntity_entityType:
+			v.EntityType = new(string)
+			return d.ReadString(schemas.MetaFlowHealthEntity_entityType, v.EntityType)
+		case schemas.MetaFlowHealthEntity_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MetaFlowHealthEntity_id, v.Id)
+		}
+		return nil
+	})
+}
+
+// Contains the overall health status and per-entity breakdown for a WhatsApp Flow.
+type MetaFlowHealthStatus struct {
+
+	// The overall messaging availability status (for example, AVAILABLE, LIMITED, or
+	// BLOCKED).
+	//
+	// This member is required.
+	CanSendMessage *string
+
+	// A list of health status entities with per-entity availability information.
+	Entities []MetaFlowHealthEntity
+
+	noSmithyDocumentSerde
+}
+
+func (v *MetaFlowHealthStatus) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaFlowHealthStatus)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaFlowHealthStatus) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CanSendMessage != nil {
+		s.WriteString(schemas.MetaFlowHealthStatus_canSendMessage, *v.CanSendMessage)
+	}
+	serializeMetaFlowHealthEntityList(s, schemas.MetaFlowHealthStatus_entities, v.Entities)
+}
+func (v *MetaFlowHealthStatus) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaFlowHealthStatus, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaFlowHealthStatus_canSendMessage:
+			v.CanSendMessage = new(string)
+			return d.ReadString(schemas.MetaFlowHealthStatus_canSendMessage, v.CanSendMessage)
+		case schemas.MetaFlowHealthStatus_entities:
+			return deserializeMetaFlowHealthEntityList(d, schemas.MetaFlowHealthStatus_entities, &v.Entities)
+		}
+		return nil
+	})
+}
+
+// Contains the preview URL for testing a WhatsApp Flow and its expiration
+// timestamp.
+type MetaFlowPreviewInfo struct {
+
+	// The timestamp when the preview URL expires.
+	//
+	// This member is required.
+	ExpiresAt *string
+
+	// The web URL for previewing the Flow. Can be shared with stakeholders for review.
+	//
+	// This member is required.
+	PreviewUrl *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MetaFlowPreviewInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaFlowPreviewInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaFlowPreviewInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.ExpiresAt != nil {
+		s.WriteString(schemas.MetaFlowPreviewInfo_expiresAt, *v.ExpiresAt)
+	}
+	if v.PreviewUrl != nil {
+		s.WriteString(schemas.MetaFlowPreviewInfo_previewUrl, *v.PreviewUrl)
+	}
+}
+func (v *MetaFlowPreviewInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaFlowPreviewInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaFlowPreviewInfo_expiresAt:
+			v.ExpiresAt = new(string)
+			return d.ReadString(schemas.MetaFlowPreviewInfo_expiresAt, v.ExpiresAt)
+		case schemas.MetaFlowPreviewInfo_previewUrl:
+			v.PreviewUrl = new(string)
+			return d.ReadString(schemas.MetaFlowPreviewInfo_previewUrl, v.PreviewUrl)
+		}
+		return nil
+	})
+}
+
+// Contains summary information about a WhatsApp Flow, including its ID, name,
+// status, and categories.
+type MetaFlowSummary struct {
+
+	// The categories that classify the business purpose of the Flow.
+	//
+	// This member is required.
+	FlowCategories []MetaFlowCategory
+
+	// The unique identifier of the Flow assigned by Meta.
+	//
+	// This member is required.
+	FlowId *string
+
+	// The name of the Flow.
+	//
+	// This member is required.
+	FlowName *string
+
+	// The lifecycle status of the Flow (DRAFT, PUBLISHED, DEPRECATED, BLOCKED, or
+	// THROTTLED).
+	//
+	// This member is required.
+	FlowStatus *string
+
+	// A list of validation errors from Meta, if any.
+	//
+	// This member is required.
+	ValidationErrors []string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MetaFlowSummary) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaFlowSummary)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaFlowSummary) SerializeMembers(s smithy.ShapeSerializer) {
+	serializeMetaFlowCategoryList(s, schemas.MetaFlowSummary_flowCategories, v.FlowCategories)
+	if v.FlowId != nil {
+		s.WriteString(schemas.MetaFlowSummary_flowId, *v.FlowId)
+	}
+	if v.FlowName != nil {
+		s.WriteString(schemas.MetaFlowSummary_flowName, *v.FlowName)
+	}
+	if v.FlowStatus != nil {
+		s.WriteString(schemas.MetaFlowSummary_flowStatus, *v.FlowStatus)
+	}
+	serializeValidationErrorList(s, schemas.MetaFlowSummary_validationErrors, v.ValidationErrors)
+}
+func (v *MetaFlowSummary) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaFlowSummary, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaFlowSummary_flowCategories:
+			return deserializeMetaFlowCategoryList(d, schemas.MetaFlowSummary_flowCategories, &v.FlowCategories)
+		case schemas.MetaFlowSummary_flowId:
+			v.FlowId = new(string)
+			return d.ReadString(schemas.MetaFlowSummary_flowId, v.FlowId)
+		case schemas.MetaFlowSummary_flowName:
+			v.FlowName = new(string)
+			return d.ReadString(schemas.MetaFlowSummary_flowName, v.FlowName)
+		case schemas.MetaFlowSummary_flowStatus:
+			v.FlowStatus = new(string)
+			return d.ReadString(schemas.MetaFlowSummary_flowStatus, v.FlowStatus)
+		case schemas.MetaFlowSummary_validationErrors:
+			return deserializeValidationErrorList(d, schemas.MetaFlowSummary_validationErrors, &v.ValidationErrors)
+		}
+		return nil
+	})
+}
+
+// Contains WhatsApp Business Account metadata associated with a Flow, as returned
+// by Meta.
+type MetaFlowWhatsAppBusinessAccountInfo struct {
+
+	// The WhatsApp Business Account ID from Meta.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the WhatsApp Business Account.
+	//
+	// This member is required.
+	Name *string
+
+	// The currency code for the WhatsApp Business Account (for example, USD).
+	Currency *string
+
+	// The message template namespace for the WhatsApp Business Account.
+	MessageTemplateNamespace *string
+
+	// The timezone ID for the WhatsApp Business Account.
+	TimezoneId *string
+
+	noSmithyDocumentSerde
+}
+
+func (v *MetaFlowWhatsAppBusinessAccountInfo) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.MetaFlowWhatsAppBusinessAccountInfo)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *MetaFlowWhatsAppBusinessAccountInfo) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Currency != nil {
+		s.WriteString(schemas.MetaFlowWhatsAppBusinessAccountInfo_currency, *v.Currency)
+	}
+	if v.Id != nil {
+		s.WriteString(schemas.MetaFlowWhatsAppBusinessAccountInfo_id, *v.Id)
+	}
+	if v.MessageTemplateNamespace != nil {
+		s.WriteString(schemas.MetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace, *v.MessageTemplateNamespace)
+	}
+	if v.Name != nil {
+		s.WriteString(schemas.MetaFlowWhatsAppBusinessAccountInfo_name, *v.Name)
+	}
+	if v.TimezoneId != nil {
+		s.WriteString(schemas.MetaFlowWhatsAppBusinessAccountInfo_timezoneId, *v.TimezoneId)
+	}
+}
+func (v *MetaFlowWhatsAppBusinessAccountInfo) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.MetaFlowWhatsAppBusinessAccountInfo, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.MetaFlowWhatsAppBusinessAccountInfo_currency:
+			v.Currency = new(string)
+			return d.ReadString(schemas.MetaFlowWhatsAppBusinessAccountInfo_currency, v.Currency)
+		case schemas.MetaFlowWhatsAppBusinessAccountInfo_id:
+			v.Id = new(string)
+			return d.ReadString(schemas.MetaFlowWhatsAppBusinessAccountInfo_id, v.Id)
+		case schemas.MetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace:
+			v.MessageTemplateNamespace = new(string)
+			return d.ReadString(schemas.MetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace, v.MessageTemplateNamespace)
+		case schemas.MetaFlowWhatsAppBusinessAccountInfo_name:
+			v.Name = new(string)
+			return d.ReadString(schemas.MetaFlowWhatsAppBusinessAccountInfo_name, v.Name)
+		case schemas.MetaFlowWhatsAppBusinessAccountInfo_timezoneId:
+			v.TimezoneId = new(string)
+			return d.ReadString(schemas.MetaFlowWhatsAppBusinessAccountInfo_timezoneId, v.TimezoneId)
+		}
+		return nil
+	})
+}
+
 // Represents a template from Meta's library with customization options.
 type MetaLibraryTemplate struct {
 

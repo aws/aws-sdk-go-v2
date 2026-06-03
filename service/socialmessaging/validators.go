@@ -30,6 +30,26 @@ func (m *validateOpAssociateWhatsAppBusinessAccount) HandleInitialize(ctx contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateWhatsAppFlow struct {
+}
+
+func (*validateOpCreateWhatsAppFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWhatsAppFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWhatsAppFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWhatsAppFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateWhatsAppMessageTemplateFromLibrary struct {
 }
 
@@ -90,6 +110,26 @@ func (m *validateOpCreateWhatsAppMessageTemplateMedia) HandleInitialize(ctx cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteWhatsAppFlow struct {
+}
+
+func (*validateOpDeleteWhatsAppFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWhatsAppFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWhatsAppFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWhatsAppFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteWhatsAppMessageMedia struct {
 }
 
@@ -125,6 +165,26 @@ func (m *validateOpDeleteWhatsAppMessageTemplate) HandleInitialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteWhatsAppMessageTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeprecateWhatsAppFlow struct {
+}
+
+func (*validateOpDeprecateWhatsAppFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeprecateWhatsAppFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeprecateWhatsAppFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeprecateWhatsAppFlowInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -190,6 +250,46 @@ func (m *validateOpGetLinkedWhatsAppBusinessAccountPhoneNumber) HandleInitialize
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetWhatsAppFlow struct {
+}
+
+func (*validateOpGetWhatsAppFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWhatsAppFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWhatsAppFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWhatsAppFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetWhatsAppFlowPreview struct {
+}
+
+func (*validateOpGetWhatsAppFlowPreview) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetWhatsAppFlowPreview) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetWhatsAppFlowPreviewInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetWhatsAppFlowPreviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetWhatsAppMessageMedia struct {
 }
 
@@ -250,6 +350,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListWhatsAppFlowAssets struct {
+}
+
+func (*validateOpListWhatsAppFlowAssets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWhatsAppFlowAssets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWhatsAppFlowAssetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWhatsAppFlowAssetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListWhatsAppFlows struct {
+}
+
+func (*validateOpListWhatsAppFlows) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWhatsAppFlows) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWhatsAppFlowsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWhatsAppFlowsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListWhatsAppMessageTemplates struct {
 }
 
@@ -305,6 +445,26 @@ func (m *validateOpPostWhatsAppMessageMedia) HandleInitialize(ctx context.Contex
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpPostWhatsAppMessageMediaInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPublishWhatsAppFlow struct {
+}
+
+func (*validateOpPublishWhatsAppFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPublishWhatsAppFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PublishWhatsAppFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPublishWhatsAppFlowInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -390,6 +550,46 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateWhatsAppFlowAssets struct {
+}
+
+func (*validateOpUpdateWhatsAppFlowAssets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateWhatsAppFlowAssets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateWhatsAppFlowAssetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateWhatsAppFlowAssetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateWhatsAppFlow struct {
+}
+
+func (*validateOpUpdateWhatsAppFlow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateWhatsAppFlow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateWhatsAppFlowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateWhatsAppFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateWhatsAppMessageTemplate struct {
 }
 
@@ -414,6 +614,10 @@ func addOpAssociateWhatsAppBusinessAccountValidationMiddleware(stack *middleware
 	return stack.Initialize.Add(&validateOpAssociateWhatsAppBusinessAccount{}, middleware.After)
 }
 
+func addOpCreateWhatsAppFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWhatsAppFlow{}, middleware.After)
+}
+
 func addOpCreateWhatsAppMessageTemplateFromLibraryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWhatsAppMessageTemplateFromLibrary{}, middleware.After)
 }
@@ -426,12 +630,20 @@ func addOpCreateWhatsAppMessageTemplateMediaValidationMiddleware(stack *middlewa
 	return stack.Initialize.Add(&validateOpCreateWhatsAppMessageTemplateMedia{}, middleware.After)
 }
 
+func addOpDeleteWhatsAppFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWhatsAppFlow{}, middleware.After)
+}
+
 func addOpDeleteWhatsAppMessageMediaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWhatsAppMessageMedia{}, middleware.After)
 }
 
 func addOpDeleteWhatsAppMessageTemplateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWhatsAppMessageTemplate{}, middleware.After)
+}
+
+func addOpDeprecateWhatsAppFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeprecateWhatsAppFlow{}, middleware.After)
 }
 
 func addOpDisassociateWhatsAppBusinessAccountValidationMiddleware(stack *middleware.Stack) error {
@@ -446,6 +658,14 @@ func addOpGetLinkedWhatsAppBusinessAccountPhoneNumberValidationMiddleware(stack 
 	return stack.Initialize.Add(&validateOpGetLinkedWhatsAppBusinessAccountPhoneNumber{}, middleware.After)
 }
 
+func addOpGetWhatsAppFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWhatsAppFlow{}, middleware.After)
+}
+
+func addOpGetWhatsAppFlowPreviewValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetWhatsAppFlowPreview{}, middleware.After)
+}
+
 func addOpGetWhatsAppMessageMediaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetWhatsAppMessageMedia{}, middleware.After)
 }
@@ -458,6 +678,14 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
+func addOpListWhatsAppFlowAssetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWhatsAppFlowAssets{}, middleware.After)
+}
+
+func addOpListWhatsAppFlowsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWhatsAppFlows{}, middleware.After)
+}
+
 func addOpListWhatsAppMessageTemplatesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListWhatsAppMessageTemplates{}, middleware.After)
 }
@@ -468,6 +696,10 @@ func addOpListWhatsAppTemplateLibraryValidationMiddleware(stack *middleware.Stac
 
 func addOpPostWhatsAppMessageMediaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPostWhatsAppMessageMedia{}, middleware.After)
+}
+
+func addOpPublishWhatsAppFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPublishWhatsAppFlow{}, middleware.After)
 }
 
 func addOpPutWhatsAppBusinessAccountEventDestinationsValidationMiddleware(stack *middleware.Stack) error {
@@ -484,6 +716,14 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateWhatsAppFlowAssetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateWhatsAppFlowAssets{}, middleware.After)
+}
+
+func addOpUpdateWhatsAppFlowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateWhatsAppFlow{}, middleware.After)
 }
 
 func addOpUpdateWhatsAppMessageTemplateValidationMiddleware(stack *middleware.Stack) error {
@@ -740,6 +980,27 @@ func validateOpAssociateWhatsAppBusinessAccountInput(v *AssociateWhatsAppBusines
 	}
 }
 
+func validateOpCreateWhatsAppFlowInput(v *CreateWhatsAppFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWhatsAppFlowInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.FlowName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowName"))
+	}
+	if v.Categories == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Categories"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateWhatsAppMessageTemplateFromLibraryInput(v *CreateWhatsAppMessageTemplateFromLibraryInput) error {
 	if v == nil {
 		return nil
@@ -800,6 +1061,24 @@ func validateOpCreateWhatsAppMessageTemplateMediaInput(v *CreateWhatsAppMessageT
 	}
 }
 
+func validateOpDeleteWhatsAppFlowInput(v *DeleteWhatsAppFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWhatsAppFlowInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.FlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteWhatsAppMessageMediaInput(v *DeleteWhatsAppMessageMediaInput) error {
 	if v == nil {
 		return nil
@@ -828,6 +1107,24 @@ func validateOpDeleteWhatsAppMessageTemplateInput(v *DeleteWhatsAppMessageTempla
 	}
 	if v.TemplateName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeprecateWhatsAppFlowInput(v *DeprecateWhatsAppFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeprecateWhatsAppFlowInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.FlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -873,6 +1170,42 @@ func validateOpGetLinkedWhatsAppBusinessAccountPhoneNumberInput(v *GetLinkedWhat
 	invalidParams := smithy.InvalidParamsError{Context: "GetLinkedWhatsAppBusinessAccountPhoneNumberInput"}
 	if v.Id == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetWhatsAppFlowInput(v *GetWhatsAppFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWhatsAppFlowInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.FlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetWhatsAppFlowPreviewInput(v *GetWhatsAppFlowPreviewInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetWhatsAppFlowPreviewInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.FlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -939,6 +1272,39 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpListWhatsAppFlowAssetsInput(v *ListWhatsAppFlowAssetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWhatsAppFlowAssetsInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.FlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListWhatsAppFlowsInput(v *ListWhatsAppFlowsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWhatsAppFlowsInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListWhatsAppMessageTemplatesInput(v *ListWhatsAppMessageTemplatesInput) error {
 	if v == nil {
 		return nil
@@ -986,6 +1352,24 @@ func validateOpPostWhatsAppMessageMediaInput(v *PostWhatsAppMessageMediaInput) e
 		if err := validateS3File(v.SourceS3File); err != nil {
 			invalidParams.AddNested("SourceS3File", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPublishWhatsAppFlowInput(v *PublishWhatsAppFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PublishWhatsAppFlowInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.FlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1069,6 +1453,45 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateWhatsAppFlowAssetsInput(v *UpdateWhatsAppFlowAssetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateWhatsAppFlowAssetsInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.FlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowId"))
+	}
+	if v.FlowJson == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowJson"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateWhatsAppFlowInput(v *UpdateWhatsAppFlowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateWhatsAppFlowInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.FlowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FlowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1,0 +1,8 @@
+{
+    "id": "46521ea7-4d1d-48b3-830f-0a57c82c9bec",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/iotevents"
+    ]
+}

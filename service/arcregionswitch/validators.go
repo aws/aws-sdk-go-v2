@@ -556,6 +556,45 @@ func validateAssociatedAlarmMap(v map[string]types.AssociatedAlarm) error {
 	}
 }
 
+func validateAuroraProvisionedScalingConfiguration(v *types.AuroraProvisionedScalingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuroraProvisionedScalingConfiguration"}
+	if v.GlobalClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if v.RegionDatabaseClusterArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionDatabaseClusterArns"))
+	}
+	if v.InstanceArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAuroraServerlessScalingConfiguration(v *types.AuroraServerlessScalingConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuroraServerlessScalingConfiguration"}
+	if v.GlobalClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if v.RegionDatabaseClusterArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionDatabaseClusterArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCustomActionLambdaConfiguration(v *types.CustomActionLambdaConfiguration) error {
 	if v == nil {
 		return nil
@@ -790,6 +829,16 @@ func validateExecutionBlockConfiguration(v types.ExecutionBlockConfiguration) er
 			invalidParams.AddNested("[arcRoutingControlConfig]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig:
+		if err := validateAuroraProvisionedScalingConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[auroraProvisionedScalingConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig:
+		if err := validateAuroraServerlessScalingConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[auroraServerlessScalingConfig]", err.(smithy.InvalidParamsError))
+		}
+
 	case *types.ExecutionBlockConfigurationMemberCustomActionLambdaConfig:
 		if err := validateCustomActionLambdaConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[customActionLambdaConfig]", err.(smithy.InvalidParamsError))
@@ -828,6 +877,11 @@ func validateExecutionBlockConfiguration(v types.ExecutionBlockConfiguration) er
 	case *types.ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig:
 		if err := validateLambdaEventSourceMappingConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[lambdaEventSourceMappingConfig]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig:
+		if err := validateNeptuneGlobalDatabaseConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[neptuneGlobalDatabaseConfig]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.ExecutionBlockConfigurationMemberParallelConfig:
@@ -968,6 +1022,27 @@ func validateLambdaEventSourceMappingConfiguration(v *types.LambdaEventSourceMap
 		if err := validateRegionEventSourceMappingMap(v.RegionEventSourceMappings); err != nil {
 			invalidParams.AddNested("RegionEventSourceMappings", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNeptuneGlobalDatabaseConfiguration(v *types.NeptuneGlobalDatabaseConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NeptuneGlobalDatabaseConfiguration"}
+	if len(v.Behavior) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Behavior"))
+	}
+	if v.GlobalClusterIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GlobalClusterIdentifier"))
+	}
+	if v.RegionDatabaseClusterArns == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RegionDatabaseClusterArns"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

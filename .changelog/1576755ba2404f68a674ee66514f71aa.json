@@ -1,0 +1,8 @@
+{
+    "id": "1576755b-a240-4f68-a674-ee66514f71aa",
+    "type": "feature",
+    "description": "ARC Region Switch now supports three new execution blocks for multi-Region database workloads-Amazon Aurora Serverless scaling, Amazon Aurora Provisioned scaling, and Amazon Neptune Global Database failover.",
+    "modules": [
+        "service/arcregionswitch"
+    ]
+}

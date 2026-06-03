@@ -1,0 +1,8 @@
+{
+    "id": "9b45484e-e8f6-46a4-92fe-9dd8207efd1a",
+    "type": "feature",
+    "description": "Inspector support for enhanced scanning",
+    "modules": [
+        "service/inspector2"
+    ]
+}

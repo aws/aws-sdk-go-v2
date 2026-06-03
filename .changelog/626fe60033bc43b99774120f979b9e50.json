@@ -1,0 +1,8 @@
+{
+    "id": "626fe600-33bc-43b9-9774-120f979b9e50",
+    "type": "feature",
+    "description": "Added support for target-coverage-based Savings Plans purchase analysis. The StartCommitmentPurchaseAnalysis API now accepts a new TARGET AVERAGE COVERAGE value for AnalysisType, as well as an optional SavingsPlansTargetCoverage field in SavingsPlansPurchaseAnalysisConfiguration",
+    "modules": [
+        "service/costexplorer"
+    ]
+}

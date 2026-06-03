@@ -1,0 +1,8 @@
+{
+    "id": "a1d6e419-3136-40ab-a120-0c21c93140ea",
+    "type": "feature",
+    "description": "This release lets customers extend the lookback period for Amazon EBS volume and Amazon ECS rightsizing recommendations to 32 days.",
+    "modules": [
+        "service/computeoptimizer"
+    ]
+}

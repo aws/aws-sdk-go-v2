@@ -63904,6 +63904,11 @@ func awsRestjson1_deserializeDocumentContactSearchSummary(v **types.ContactSearc
 				return err
 			}
 
+		case "AiAgentInfo":
+			if err := awsRestjson1_deserializeDocumentContactSearchSummaryAiAgentInfoList(&sv.AiAgentInfo, value); err != nil {
+				return err
+			}
+
 		case "Arn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -64102,6 +64107,98 @@ func awsRestjson1_deserializeDocumentContactSearchSummaryAgentInfo(v **types.Con
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentContactSearchSummaryAiAgentInfo(v **types.ContactSearchSummaryAiAgentInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ContactSearchSummaryAiAgentInfo
+	if *v == nil {
+		sv = &types.ContactSearchSummaryAiAgentInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AiAgentEscalated":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AiAgentEscalated = ptr.Bool(jtv)
+			}
+
+		case "AiAgentVersionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AiAgentVersionId to be of type string, got %T instead", value)
+				}
+				sv.AiAgentVersionId = ptr.String(jtv)
+			}
+
+		case "AiUseCase":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AiUseCase to be of type string, got %T instead", value)
+				}
+				sv.AiUseCase = types.AiUseCase(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentContactSearchSummaryAiAgentInfoList(v *[]types.ContactSearchSummaryAiAgentInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ContactSearchSummaryAiAgentInfo
+	if *v == nil {
+		cv = []types.ContactSearchSummaryAiAgentInfo{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ContactSearchSummaryAiAgentInfo
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentContactSearchSummaryAiAgentInfo(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

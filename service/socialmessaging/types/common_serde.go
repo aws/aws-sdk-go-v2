@@ -19,6 +19,56 @@ func serializeLinkedWhatsAppBusinessAccountSummaryList(s smithy.ShapeSerializer,
 	s.CloseList()
 }
 
+func serializeMetaFlowAssetList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetaFlowAsset) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeMetaFlowCategoryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetaFlowCategory) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
+func serializeMetaFlowHealthEntityList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetaFlowHealthEntity) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
+func serializeMetaFlowSummaryList(s smithy.ShapeSerializer, schema *smithy.Schema, v []MetaFlowSummary) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteStruct(schema.ListMember())
+		vv.SerializeMembers(s)
+		s.CloseStruct()
+	}
+	s.CloseList()
+}
+
 func serializeMetaIndustries(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
 	if v == nil {
 		return
@@ -128,6 +178,17 @@ func serializeTemplateSummaryList(s smithy.ShapeSerializer, schema *smithy.Schem
 	s.CloseList()
 }
 
+func serializeValidationErrorList(s smithy.ShapeSerializer, schema *smithy.Schema, v []string) {
+	if v == nil {
+		return
+	}
+	s.WriteList(schema)
+	for _, vv := range v {
+		s.WriteString(schema.ListMember(), string(vv))
+	}
+	s.CloseList()
+}
+
 func serializeWabaPhoneNumberSetupFinalizationList(s smithy.ShapeSerializer, schema *smithy.Schema, v []WabaPhoneNumberSetupFinalization) {
 	if v == nil {
 		return
@@ -184,6 +245,58 @@ func deserializeLinkedWhatsAppBusinessAccountSummaryList(d smithy.ShapeDeseriali
 	var vv LinkedWhatsAppBusinessAccountSummary
 	return smithy.ReadList(d, s, func() error {
 		vv = LinkedWhatsAppBusinessAccountSummary{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMetaFlowAssetList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MetaFlowAsset) error {
+	var vv MetaFlowAsset
+	return smithy.ReadList(d, s, func() error {
+		vv = MetaFlowAsset{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMetaFlowCategoryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MetaFlowCategory) error {
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
+			return err
+		}
+
+		*v = append(*v, MetaFlowCategory(vv))
+		return nil
+	})
+}
+
+func deserializeMetaFlowHealthEntityList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MetaFlowHealthEntity) error {
+	var vv MetaFlowHealthEntity
+	return smithy.ReadList(d, s, func() error {
+		vv = MetaFlowHealthEntity{}
+		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeMetaFlowSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]MetaFlowSummary) error {
+	var vv MetaFlowSummary
+	return smithy.ReadList(d, s, func() error {
+		vv = MetaFlowSummary{}
 		if err := vv.Deserialize(d); err != nil {
 			return err
 		}
@@ -302,6 +415,19 @@ func deserializeTemplateSummaryList(d smithy.ShapeDeserializer, s *smithy.Schema
 	return smithy.ReadList(d, s, func() error {
 		vv = TemplateSummary{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		*v = append(*v, vv)
+		return nil
+	})
+}
+
+func deserializeValidationErrorList(d smithy.ShapeDeserializer, s *smithy.Schema, v *[]string) error {
+	var vv string
+	return smithy.ReadList(d, s, func() error {
+
+		if err := d.ReadString(s.ListMember(), &vv); err != nil {
 			return err
 		}
 

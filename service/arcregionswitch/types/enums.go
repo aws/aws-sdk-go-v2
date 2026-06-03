@@ -235,6 +235,9 @@ const (
 	ExecutionBlockTypeRdsPromoteReadReplica       ExecutionBlockType = "RdsPromoteReadReplica"
 	ExecutionBlockTypeRdsCreateCrossRegionReplica ExecutionBlockType = "RdsCreateCrossRegionReplica"
 	ExecutionBlockTypeLambdaEventSourceMapping    ExecutionBlockType = "LambdaEventSourceMapping"
+	ExecutionBlockTypeAuroraServerlessScaling     ExecutionBlockType = "AuroraServerlessScaling"
+	ExecutionBlockTypeAuroraProvisionedScaling    ExecutionBlockType = "AuroraProvisionedScaling"
+	ExecutionBlockTypeNeptune                     ExecutionBlockType = "NeptuneGlobalDatabase"
 )
 
 // Values returns all known values for ExecutionBlockType. Note that this can be
@@ -257,6 +260,9 @@ func (ExecutionBlockType) Values() []ExecutionBlockType {
 		"RdsPromoteReadReplica",
 		"RdsCreateCrossRegionReplica",
 		"LambdaEventSourceMapping",
+		"AuroraServerlessScaling",
+		"AuroraProvisionedScaling",
+		"NeptuneGlobalDatabase",
 	}
 }
 
@@ -473,6 +479,42 @@ const (
 func (LambdaUngracefulBehavior) Values() []LambdaUngracefulBehavior {
 	return []LambdaUngracefulBehavior{
 		"skip",
+	}
+}
+
+type NeptuneDefaultBehavior string
+
+// Enum values for NeptuneDefaultBehavior
+const (
+	NeptuneDefaultBehaviorSwitchoverOnly NeptuneDefaultBehavior = "switchoverOnly"
+	NeptuneDefaultBehaviorFailover       NeptuneDefaultBehavior = "failover"
+)
+
+// Values returns all known values for NeptuneDefaultBehavior. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NeptuneDefaultBehavior) Values() []NeptuneDefaultBehavior {
+	return []NeptuneDefaultBehavior{
+		"switchoverOnly",
+		"failover",
+	}
+}
+
+type NeptuneUngracefulBehavior string
+
+// Enum values for NeptuneUngracefulBehavior
+const (
+	NeptuneUngracefulBehaviorFailover NeptuneUngracefulBehavior = "failover"
+)
+
+// Values returns all known values for NeptuneUngracefulBehavior. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (NeptuneUngracefulBehavior) Values() []NeptuneUngracefulBehavior {
+	return []NeptuneUngracefulBehavior{
+		"failover",
 	}
 }
 

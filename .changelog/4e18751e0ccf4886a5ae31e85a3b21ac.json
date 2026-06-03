@@ -1,0 +1,8 @@
+{
+    "id": "4e18751e-0ccf-4886-a5ae-31e85a3b21ac",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/macie2"
+    ]
+}

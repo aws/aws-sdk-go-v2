@@ -37251,6 +37251,60 @@ func awsRestjson1_serializeDocumentAgentStatusSearchFilter(v *types.AgentStatusS
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAiAgentsCriteria(v *types.AiAgentsCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Criteria != nil {
+		ok := object.Key("Criteria")
+		if err := awsRestjson1_serializeDocumentAiAgentSearchCriteriaList(v.Criteria, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAiAgentSearchCriteria(v *types.AiAgentSearchCriteria, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AiAgentEscalated != nil {
+		ok := object.Key("AiAgentEscalated")
+		ok.Boolean(*v.AiAgentEscalated)
+	}
+
+	if len(v.AiUseCase) > 0 {
+		ok := object.Key("AiUseCase")
+		ok.String(string(v.AiUseCase))
+	}
+
+	if v.Id != nil {
+		ok := object.Key("Id")
+		ok.String(*v.Id)
+	}
+
+	if v.VersionNumber != nil {
+		ok := object.Key("VersionNumber")
+		ok.Integer(*v.VersionNumber)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAiAgentSearchCriteriaList(v []types.AiAgentSearchCriteria, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAiAgentSearchCriteria(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAliasConfiguration(v *types.AliasConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -43577,6 +43631,13 @@ func awsRestjson1_serializeDocumentSearchCriteria(v *types.SearchCriteria, value
 	if v.AgentIds != nil {
 		ok := object.Key("AgentIds")
 		if err := awsRestjson1_serializeDocumentAgentResourceIdList(v.AgentIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AiAgents != nil {
+		ok := object.Key("AiAgents")
+		if err := awsRestjson1_serializeDocumentAiAgentsCriteria(v.AiAgents, ok); err != nil {
 			return err
 		}
 	}

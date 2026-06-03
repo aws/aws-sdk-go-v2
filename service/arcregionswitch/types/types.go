@@ -549,6 +549,163 @@ func (v *AssociatedAlarm) Deserialize(d smithy.ShapeDeserializer) error {
 	})
 }
 
+// Configuration for Amazon Aurora provisioned cluster scaling used in a Region
+// switch plan.
+type AuroraProvisionedScalingConfiguration struct {
+
+	// The global cluster identifier for a global database.
+	//
+	// This member is required.
+	GlobalClusterIdentifier *string
+
+	// Per-Region configuration that maps each Region to the Aurora database instance
+	// ARN for scaling.
+	//
+	// This member is required.
+	InstanceArns map[string]string
+
+	// Per-Region configuration that maps each Region to the Aurora database cluster
+	// ARN for scaling.
+	//
+	// This member is required.
+	RegionDatabaseClusterArns map[string]string
+
+	// The cross account role for the configuration.
+	CrossAccountRole *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *AuroraProvisionedScalingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuroraProvisionedScalingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuroraProvisionedScalingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccountRole != nil {
+		s.WriteString(schemas.AuroraProvisionedScalingConfiguration_crossAccountRole, *v.CrossAccountRole)
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.AuroraProvisionedScalingConfiguration_externalId, *v.ExternalId)
+	}
+	if v.GlobalClusterIdentifier != nil {
+		s.WriteString(schemas.AuroraProvisionedScalingConfiguration_globalClusterIdentifier, *v.GlobalClusterIdentifier)
+	}
+	serializeRegionAuroraInstanceArnMap(s, schemas.AuroraProvisionedScalingConfiguration_instanceArns, v.InstanceArns)
+	serializeRegionAuroraClusterMap(s, schemas.AuroraProvisionedScalingConfiguration_regionDatabaseClusterArns, v.RegionDatabaseClusterArns)
+	if v.TimeoutMinutes != nil {
+		s.WriteInt32(schemas.AuroraProvisionedScalingConfiguration_timeoutMinutes, *v.TimeoutMinutes)
+	}
+}
+func (v *AuroraProvisionedScalingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuroraProvisionedScalingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuroraProvisionedScalingConfiguration_crossAccountRole:
+			v.CrossAccountRole = new(string)
+			return d.ReadString(schemas.AuroraProvisionedScalingConfiguration_crossAccountRole, v.CrossAccountRole)
+		case schemas.AuroraProvisionedScalingConfiguration_externalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.AuroraProvisionedScalingConfiguration_externalId, v.ExternalId)
+		case schemas.AuroraProvisionedScalingConfiguration_globalClusterIdentifier:
+			v.GlobalClusterIdentifier = new(string)
+			return d.ReadString(schemas.AuroraProvisionedScalingConfiguration_globalClusterIdentifier, v.GlobalClusterIdentifier)
+		case schemas.AuroraProvisionedScalingConfiguration_instanceArns:
+			return deserializeRegionAuroraInstanceArnMap(d, schemas.AuroraProvisionedScalingConfiguration_instanceArns, &v.InstanceArns)
+		case schemas.AuroraProvisionedScalingConfiguration_regionDatabaseClusterArns:
+			return deserializeRegionAuroraClusterMap(d, schemas.AuroraProvisionedScalingConfiguration_regionDatabaseClusterArns, &v.RegionDatabaseClusterArns)
+		case schemas.AuroraProvisionedScalingConfiguration_timeoutMinutes:
+			v.TimeoutMinutes = new(int32)
+			return d.ReadInt32(schemas.AuroraProvisionedScalingConfiguration_timeoutMinutes, v.TimeoutMinutes)
+		}
+		return nil
+	})
+}
+
+// Configuration for Amazon Aurora Serverless scaling used in a Region switch plan.
+type AuroraServerlessScalingConfiguration struct {
+
+	// The global cluster identifier for a global database.
+	//
+	// This member is required.
+	GlobalClusterIdentifier *string
+
+	// Per-Region configuration that maps each Region to the Aurora database cluster
+	// ARN for scaling.
+	//
+	// This member is required.
+	RegionDatabaseClusterArns map[string]string
+
+	// The cross account role for the configuration.
+	CrossAccountRole *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
+
+	// The target capacity percentage for Aurora Serverless scaling.
+	TargetPercent *int32
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	noSmithyDocumentSerde
+}
+
+func (v *AuroraServerlessScalingConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.AuroraServerlessScalingConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *AuroraServerlessScalingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.CrossAccountRole != nil {
+		s.WriteString(schemas.AuroraServerlessScalingConfiguration_crossAccountRole, *v.CrossAccountRole)
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.AuroraServerlessScalingConfiguration_externalId, *v.ExternalId)
+	}
+	if v.GlobalClusterIdentifier != nil {
+		s.WriteString(schemas.AuroraServerlessScalingConfiguration_globalClusterIdentifier, *v.GlobalClusterIdentifier)
+	}
+	serializeRegionAuroraClusterMap(s, schemas.AuroraServerlessScalingConfiguration_regionDatabaseClusterArns, v.RegionDatabaseClusterArns)
+	if v.TargetPercent != nil {
+		s.WriteInt32(schemas.AuroraServerlessScalingConfiguration_targetPercent, *v.TargetPercent)
+	}
+	if v.TimeoutMinutes != nil {
+		s.WriteInt32(schemas.AuroraServerlessScalingConfiguration_timeoutMinutes, *v.TimeoutMinutes)
+	}
+}
+func (v *AuroraServerlessScalingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.AuroraServerlessScalingConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.AuroraServerlessScalingConfiguration_crossAccountRole:
+			v.CrossAccountRole = new(string)
+			return d.ReadString(schemas.AuroraServerlessScalingConfiguration_crossAccountRole, v.CrossAccountRole)
+		case schemas.AuroraServerlessScalingConfiguration_externalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.AuroraServerlessScalingConfiguration_externalId, v.ExternalId)
+		case schemas.AuroraServerlessScalingConfiguration_globalClusterIdentifier:
+			v.GlobalClusterIdentifier = new(string)
+			return d.ReadString(schemas.AuroraServerlessScalingConfiguration_globalClusterIdentifier, v.GlobalClusterIdentifier)
+		case schemas.AuroraServerlessScalingConfiguration_regionDatabaseClusterArns:
+			return deserializeRegionAuroraClusterMap(d, schemas.AuroraServerlessScalingConfiguration_regionDatabaseClusterArns, &v.RegionDatabaseClusterArns)
+		case schemas.AuroraServerlessScalingConfiguration_targetPercent:
+			v.TargetPercent = new(int32)
+			return d.ReadInt32(schemas.AuroraServerlessScalingConfiguration_targetPercent, v.TargetPercent)
+		case schemas.AuroraServerlessScalingConfiguration_timeoutMinutes:
+			v.TimeoutMinutes = new(int32)
+			return d.ReadInt32(schemas.AuroraServerlessScalingConfiguration_timeoutMinutes, v.TimeoutMinutes)
+		}
+		return nil
+	})
+}
+
 // Configuration for Amazon Web Services Lambda functions that perform custom
 // actions during a Region switch.
 type CustomActionLambdaConfiguration struct {
@@ -1252,6 +1409,8 @@ func (v *ExecutionApprovalConfiguration) Deserialize(d smithy.ShapeDeserializer)
 // The following types satisfy this interface:
 //
 //	ExecutionBlockConfigurationMemberArcRoutingControlConfig
+//	ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig
+//	ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig
 //	ExecutionBlockConfigurationMemberCustomActionLambdaConfig
 //	ExecutionBlockConfigurationMemberDocumentDbConfig
 //	ExecutionBlockConfigurationMemberEc2AsgCapacityIncreaseConfig
@@ -1260,6 +1419,7 @@ func (v *ExecutionApprovalConfiguration) Deserialize(d smithy.ShapeDeserializer)
 //	ExecutionBlockConfigurationMemberExecutionApprovalConfig
 //	ExecutionBlockConfigurationMemberGlobalAuroraConfig
 //	ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig
+//	ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig
 //	ExecutionBlockConfigurationMemberParallelConfig
 //	ExecutionBlockConfigurationMemberRdsCreateCrossRegionReadReplicaConfig
 //	ExecutionBlockConfigurationMemberRdsPromoteReadReplicaConfig
@@ -1283,6 +1443,42 @@ func (v *ExecutionBlockConfigurationMemberArcRoutingControlConfig) Serialize(s s
 	s.CloseStruct()
 }
 func (v *ExecutionBlockConfigurationMemberArcRoutingControlConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// An Aurora provisioned cluster scaling execution block.
+type ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig struct {
+	Value AuroraProvisionedScalingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig) isExecutionBlockConfiguration() {
+}
+func (v *ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionBlockConfiguration_auroraProvisionedScalingConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// An Aurora Serverless scaling execution block.
+type ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig struct {
+	Value AuroraServerlessScalingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig) isExecutionBlockConfiguration() {
+}
+func (v *ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionBlockConfiguration_auroraServerlessScalingConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -1422,6 +1618,24 @@ func (v *ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig) Serial
 	s.CloseStruct()
 }
 func (v *ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig) Deserialize(d smithy.ShapeDeserializer) error {
+	return v.Value.Deserialize(d)
+}
+
+// A Neptune global database execution block.
+type ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig struct {
+	Value NeptuneGlobalDatabaseConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig) isExecutionBlockConfiguration() {
+}
+func (v *ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.ExecutionBlockConfiguration_neptuneGlobalDatabaseConfig)
+	v.Value.SerializeMembers(s)
+	s.CloseStruct()
+}
+func (v *ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig) Deserialize(d smithy.ShapeDeserializer) error {
 	return v.Value.Deserialize(d)
 }
 
@@ -2160,6 +2374,137 @@ func (v *MinimalWorkflow) Deserialize(d smithy.ShapeDeserializer) error {
 		case schemas.MinimalWorkflow_name:
 			v.Name = new(string)
 			return d.ReadString(schemas.MinimalWorkflow_name, v.Name)
+		}
+		return nil
+	})
+}
+
+// Configuration for Amazon Neptune global databases used in a Region switch plan.
+type NeptuneGlobalDatabaseConfiguration struct {
+
+	// The behavior for a global database, that is, only allow switchover or also
+	// allow failover.
+	//
+	// This member is required.
+	Behavior NeptuneDefaultBehavior
+
+	// The global cluster identifier for a Neptune global database.
+	//
+	// This member is required.
+	GlobalClusterIdentifier *string
+
+	// The database cluster Amazon Resource Names (ARNs) for a Neptune global database.
+	//
+	// This member is required.
+	RegionDatabaseClusterArns map[string]string
+
+	// The cross account role for the configuration.
+	CrossAccountRole *string
+
+	// The external ID (secret key) for the configuration.
+	ExternalId *string
+
+	// The timeout value specified for the configuration.
+	TimeoutMinutes *int32
+
+	// The settings for ungraceful execution.
+	Ungraceful *NeptuneUngraceful
+
+	noSmithyDocumentSerde
+}
+
+func (v *NeptuneGlobalDatabaseConfiguration) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NeptuneGlobalDatabaseConfiguration)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NeptuneGlobalDatabaseConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Behavior != "" {
+		s.WriteString(schemas.NeptuneGlobalDatabaseConfiguration_behavior, string(v.Behavior))
+	}
+	if v.CrossAccountRole != nil {
+		s.WriteString(schemas.NeptuneGlobalDatabaseConfiguration_crossAccountRole, *v.CrossAccountRole)
+	}
+	if v.ExternalId != nil {
+		s.WriteString(schemas.NeptuneGlobalDatabaseConfiguration_externalId, *v.ExternalId)
+	}
+	if v.GlobalClusterIdentifier != nil {
+		s.WriteString(schemas.NeptuneGlobalDatabaseConfiguration_globalClusterIdentifier, *v.GlobalClusterIdentifier)
+	}
+	serializeRegionNeptuneClusterArnMap(s, schemas.NeptuneGlobalDatabaseConfiguration_regionDatabaseClusterArns, v.RegionDatabaseClusterArns)
+	if v.TimeoutMinutes != nil {
+		s.WriteInt32(schemas.NeptuneGlobalDatabaseConfiguration_timeoutMinutes, *v.TimeoutMinutes)
+	}
+	if v.Ungraceful != nil {
+		s.WriteStruct(schemas.NeptuneGlobalDatabaseConfiguration_ungraceful)
+		v.Ungraceful.SerializeMembers(s)
+		s.CloseStruct()
+	}
+}
+func (v *NeptuneGlobalDatabaseConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NeptuneGlobalDatabaseConfiguration, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NeptuneGlobalDatabaseConfiguration_behavior:
+			var ev string
+			if err := d.ReadString(schemas.NeptuneGlobalDatabaseConfiguration_behavior, &ev); err != nil {
+				return err
+			}
+			v.Behavior = NeptuneDefaultBehavior(ev)
+			return nil
+		case schemas.NeptuneGlobalDatabaseConfiguration_crossAccountRole:
+			v.CrossAccountRole = new(string)
+			return d.ReadString(schemas.NeptuneGlobalDatabaseConfiguration_crossAccountRole, v.CrossAccountRole)
+		case schemas.NeptuneGlobalDatabaseConfiguration_externalId:
+			v.ExternalId = new(string)
+			return d.ReadString(schemas.NeptuneGlobalDatabaseConfiguration_externalId, v.ExternalId)
+		case schemas.NeptuneGlobalDatabaseConfiguration_globalClusterIdentifier:
+			v.GlobalClusterIdentifier = new(string)
+			return d.ReadString(schemas.NeptuneGlobalDatabaseConfiguration_globalClusterIdentifier, v.GlobalClusterIdentifier)
+		case schemas.NeptuneGlobalDatabaseConfiguration_regionDatabaseClusterArns:
+			return deserializeRegionNeptuneClusterArnMap(d, schemas.NeptuneGlobalDatabaseConfiguration_regionDatabaseClusterArns, &v.RegionDatabaseClusterArns)
+		case schemas.NeptuneGlobalDatabaseConfiguration_timeoutMinutes:
+			v.TimeoutMinutes = new(int32)
+			return d.ReadInt32(schemas.NeptuneGlobalDatabaseConfiguration_timeoutMinutes, v.TimeoutMinutes)
+		case schemas.NeptuneGlobalDatabaseConfiguration_ungraceful:
+			v.Ungraceful = &NeptuneUngraceful{}
+			return v.Ungraceful.Deserialize(d)
+		}
+		return nil
+	})
+}
+
+// Configuration for handling failures when performing operations on Neptune
+// global databases.
+type NeptuneUngraceful struct {
+
+	// The settings for ungraceful execution.
+	Ungraceful NeptuneUngracefulBehavior
+
+	noSmithyDocumentSerde
+}
+
+func (v *NeptuneUngraceful) Serialize(s smithy.ShapeSerializer) {
+	s.WriteStruct(schemas.NeptuneUngraceful)
+	v.SerializeMembers(s)
+	s.CloseStruct()
+}
+
+func (v *NeptuneUngraceful) SerializeMembers(s smithy.ShapeSerializer) {
+	if v.Ungraceful != "" {
+		s.WriteString(schemas.NeptuneUngraceful_ungraceful, string(v.Ungraceful))
+	}
+}
+func (v *NeptuneUngraceful) Deserialize(d smithy.ShapeDeserializer) error {
+	return smithy.ReadStruct(d, schemas.NeptuneUngraceful, func(s *smithy.Schema) error {
+		switch s {
+		case schemas.NeptuneUngraceful_ungraceful:
+			var ev string
+			if err := d.ReadString(schemas.NeptuneUngraceful_ungraceful, &ev); err != nil {
+				return err
+			}
+			v.Ungraceful = NeptuneUngracefulBehavior(ev)
+			return nil
 		}
 		return nil
 	})

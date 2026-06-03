@@ -15,6 +15,18 @@ func serializeExecutionBlockConfiguration(s smithy.ShapeSerializer, schema *smit
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
+	case *ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig:
+		s.WriteUnion(schema, schemas.ExecutionBlockConfiguration_auroraProvisionedScalingConfig)
+		s.WriteStruct(schemas.ExecutionBlockConfiguration_auroraProvisionedScalingConfig)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig:
+		s.WriteUnion(schema, schemas.ExecutionBlockConfiguration_auroraServerlessScalingConfig)
+		s.WriteStruct(schemas.ExecutionBlockConfiguration_auroraServerlessScalingConfig)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
 	case *ExecutionBlockConfigurationMemberCustomActionLambdaConfig:
 		s.WriteUnion(schema, schemas.ExecutionBlockConfiguration_customActionLambdaConfig)
 		s.WriteStruct(schemas.ExecutionBlockConfiguration_customActionLambdaConfig)
@@ -60,6 +72,12 @@ func serializeExecutionBlockConfiguration(s smithy.ShapeSerializer, schema *smit
 	case *ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig:
 		s.WriteUnion(schema, schemas.ExecutionBlockConfiguration_lambdaEventSourceMappingConfig)
 		s.WriteStruct(schemas.ExecutionBlockConfiguration_lambdaEventSourceMappingConfig)
+		vv.Value.SerializeMembers(s)
+		s.CloseStruct()
+		s.CloseUnion()
+	case *ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig:
+		s.WriteUnion(schema, schemas.ExecutionBlockConfiguration_neptuneGlobalDatabaseConfig)
+		s.WriteStruct(schemas.ExecutionBlockConfiguration_neptuneGlobalDatabaseConfig)
 		vv.Value.SerializeMembers(s)
 		s.CloseStruct()
 		s.CloseUnion()
@@ -131,6 +149,14 @@ func deserializeExecutionBlockConfiguration(d smithy.ShapeDeserializer, s *smith
 			vv := &ExecutionBlockConfigurationMemberArcRoutingControlConfig{}
 			*v = vv
 			return vv.Deserialize(d)
+		case schemas.ExecutionBlockConfiguration_auroraProvisionedScalingConfig:
+			vv := &ExecutionBlockConfigurationMemberAuroraProvisionedScalingConfig{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ExecutionBlockConfiguration_auroraServerlessScalingConfig:
+			vv := &ExecutionBlockConfigurationMemberAuroraServerlessScalingConfig{}
+			*v = vv
+			return vv.Deserialize(d)
 		case schemas.ExecutionBlockConfiguration_customActionLambdaConfig:
 			vv := &ExecutionBlockConfigurationMemberCustomActionLambdaConfig{}
 			*v = vv
@@ -161,6 +187,10 @@ func deserializeExecutionBlockConfiguration(d smithy.ShapeDeserializer, s *smith
 			return vv.Deserialize(d)
 		case schemas.ExecutionBlockConfiguration_lambdaEventSourceMappingConfig:
 			vv := &ExecutionBlockConfigurationMemberLambdaEventSourceMappingConfig{}
+			*v = vv
+			return vv.Deserialize(d)
+		case schemas.ExecutionBlockConfiguration_neptuneGlobalDatabaseConfig:
+			vv := &ExecutionBlockConfigurationMemberNeptuneGlobalDatabaseConfig{}
 			*v = vv
 			return vv.Deserialize(d)
 		case schemas.ExecutionBlockConfiguration_parallelConfig:
@@ -890,6 +920,30 @@ func serializeRegionAndRoutingControls(s smithy.ShapeSerializer, schema *smithy.
 	s.CloseMap()
 }
 
+func serializeRegionAuroraClusterMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
+func serializeRegionAuroraInstanceArnMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
+	}
+	s.CloseMap()
+}
+
 func serializeRegionEventSourceMappingMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]EventSourceMapping) {
 	if v == nil {
 		return
@@ -900,6 +954,18 @@ func serializeRegionEventSourceMappingMap(s smithy.ShapeSerializer, schema *smit
 		s.WriteStruct(schema.MapValue())
 		vv.SerializeMembers(s)
 		s.CloseStruct()
+	}
+	s.CloseMap()
+}
+
+func serializeRegionNeptuneClusterArnMap(s smithy.ShapeSerializer, schema *smithy.Schema, v map[string]string) {
+	if v == nil {
+		return
+	}
+	s.WriteMap(schema)
+	for k, vv := range v {
+		s.WriteKey(schema.MapKey(), k)
+		s.WriteString(schema.MapValue(), string(vv))
 	}
 	s.CloseMap()
 }
@@ -986,12 +1052,54 @@ func deserializeRegionAndRoutingControls(d smithy.ShapeDeserializer, s *smithy.S
 	})
 }
 
+func deserializeRegionAuroraClusterMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeRegionAuroraInstanceArnMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
 func deserializeRegionEventSourceMappingMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]EventSourceMapping) error {
 	*v = make(map[string]EventSourceMapping)
 	var vv EventSourceMapping
 	return smithy.ReadMap(d, s, func(k string) error {
 		vv = EventSourceMapping{}
 		if err := vv.Deserialize(d); err != nil {
+			return err
+		}
+
+		(*v)[k] = vv
+		return nil
+	})
+}
+
+func deserializeRegionNeptuneClusterArnMap(d smithy.ShapeDeserializer, s *smithy.Schema, v *map[string]string) error {
+	*v = make(map[string]string)
+	var vv string
+	return smithy.ReadMap(d, s, func(k string) error {
+
+		if err := d.ReadString(s.MapValue(), &vv); err != nil {
 			return err
 		}
 

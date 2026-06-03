@@ -2689,6 +2689,15 @@ func deserializeCBOR_EBSEffectiveRecommendationPreferences(v smithycbor.Value) (
 			}
 			ds.SavingsEstimationMode = dv
 		}
+
+		if key == "lookBackPeriod" {
+
+			dv, err := deserializeCBOR_LookBackPeriodPreference(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.LookBackPeriod = dv
+		}
 	}
 	return ds, nil
 }
@@ -2869,6 +2878,15 @@ func deserializeCBOR_ECSEffectiveRecommendationPreferences(v smithycbor.Value) (
 				return nil, err
 			}
 			ds.SavingsEstimationMode = dv
+		}
+
+		if key == "lookBackPeriod" {
+
+			dv, err := deserializeCBOR_LookBackPeriodPreference(sv)
+			if err != nil {
+				return nil, err
+			}
+			ds.LookBackPeriod = dv
 		}
 	}
 	return ds, nil

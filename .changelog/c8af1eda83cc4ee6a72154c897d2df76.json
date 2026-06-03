@@ -1,0 +1,8 @@
+{
+    "id": "c8af1eda-83cc-4ee6-a721-54c897d2df76",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/apigatewaymanagementapi"
+    ]
+}

@@ -372,6 +372,35 @@ type AiAgentInfo struct {
 	noSmithyDocumentSerde
 }
 
+// AI Agent search criteria definitions.
+type AiAgentsCriteria struct {
+
+	// The list of criteria based on AI Agent metadata.
+	Criteria []AiAgentSearchCriteria
+
+	noSmithyDocumentSerde
+}
+
+// The search criteria based on AI Agents metadata.
+type AiAgentSearchCriteria struct {
+
+	// A boolean flag indicating whether the contact initially handled by this AI
+	// agent was escalated to a human agent.
+	AiAgentEscalated *bool
+
+	// The use case or scenario for which the AI agent is involved in the contact.
+	AiUseCase AiUseCase
+
+	// ID of the AI Agent that was involved in the contact.
+	Id *string
+
+	// Version of the AI agent that was involved in the contact. ID is required if
+	// VersionNumber is passed.
+	VersionNumber *int32
+
+	noSmithyDocumentSerde
+}
+
 // Configuration information of an email alias.
 type AliasConfiguration struct {
 
@@ -1274,16 +1303,14 @@ type ChatEvent struct {
 // A chat message.
 type ChatMessage struct {
 
-	// The content of the chat message.
+	// The content of the chat message. Maximum of 16,384 bytes for all content types (
+	// text/plain , text/markdown , application/json , and
+	// application/vnd.amazonaws.connect.message.interactive.response ).
 	//
-	//   - For text/plain and text/markdown , the Length Constraints are Minimum of 1,
-	//   Maximum of 1024.
+	// Some messaging channels enforce lower limits. For channel-specific message size
+	// limits, see [Chat message size limits by channel]in the Amazon Connect Customer Administrator Guide.
 	//
-	//   - For application/json , the Length Constraints are Minimum of 1, Maximum of
-	//   12000.
-	//
-	//   - For application/vnd.amazonaws.connect.message.interactive.response , the
-	//   Length Constraints are Minimum of 1, Maximum of 12288.
+	// [Chat message size limits by channel]: https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html#chat-message-size-limits
 	//
 	// This member is required.
 	Content *string
@@ -2166,6 +2193,9 @@ type ContactSearchSummary struct {
 	// Information about the agent who accepted the contact.
 	AgentInfo *ContactSearchSummaryAgentInfo
 
+	// Information about the AI agents involved in the contact.
+	AiAgentInfo []ContactSearchSummaryAiAgentInfo
+
 	// The Amazon Resource Name (ARN) of the contact.
 	Arn *string
 
@@ -2232,6 +2262,24 @@ type ContactSearchSummaryAgentInfo struct {
 
 	// The identifier of the agent who accepted the contact.
 	Id *string
+
+	noSmithyDocumentSerde
+}
+
+// Information of the AI agent involved in the contact.
+type ContactSearchSummaryAiAgentInfo struct {
+
+	// A boolean flag indicating whether the contact initially handled by this AI
+	// agent was escalated to a human agent.
+	AiAgentEscalated *bool
+
+	// The unique identifier that specifies both the AI agent ID and its version
+	// number that was involved in the contact.
+	AiAgentVersionId *string
+
+	// The use case or scenario for which the AI agent is involved in the contact.
+	// Valid values are AgentAssistance and SelfService .
+	AiUseCase AiUseCase
 
 	noSmithyDocumentSerde
 }
@@ -9488,6 +9536,9 @@ type SearchCriteria struct {
 
 	// The identifiers of agents who handled the contacts.
 	AgentIds []string
+
+	// AI Agent search criteria definitions.
+	AiAgents *AiAgentsCriteria
 
 	// The list of channels associated with contacts.
 	Channels []Channel

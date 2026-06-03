@@ -1,0 +1,8 @@
+{
+    "id": "49173c77-a03c-4016-9adb-c92aae03e377",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/securitylake"
+    ]
+}

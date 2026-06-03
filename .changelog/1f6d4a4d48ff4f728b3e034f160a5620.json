@@ -1,0 +1,8 @@
+{
+    "id": "1f6d4a4d-48ff-4f72-8b3e-034f160a5620",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/dax"
+    ]
+}

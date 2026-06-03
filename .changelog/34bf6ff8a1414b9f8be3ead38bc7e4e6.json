@@ -1,0 +1,8 @@
+{
+    "id": "34bf6ff8-a141-4b9f-8be3-ead38bc7e4e6",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/firehose"
+    ]
+}

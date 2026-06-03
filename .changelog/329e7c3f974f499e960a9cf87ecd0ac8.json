@@ -1,0 +1,8 @@
+{
+    "id": "329e7c3f-974f-499e-960a-9cf87ecd0ac8",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/cloudwatchlogs"
+    ]
+}

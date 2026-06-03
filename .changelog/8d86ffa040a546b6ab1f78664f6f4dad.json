@@ -1,0 +1,8 @@
+{
+    "id": "8d86ffa0-40a5-46b6-ab1f-78664f6f4dad",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/rds"
+    ]
+}

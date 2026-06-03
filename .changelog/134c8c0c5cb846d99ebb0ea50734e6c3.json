@@ -1,0 +1,8 @@
+{
+    "id": "134c8c0c-5cb8-46d9-9ebb-0ea50734e6c3",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/lakeformation"
+    ]
+}

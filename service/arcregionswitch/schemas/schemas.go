@@ -297,6 +297,43 @@ var _AuroraClusterArns = smithy.NewSchema(smithy.ShapeID{
 }, smithy.ShapeTypeList, 1)
 var _AuroraClusterArns_member *smithy.Schema
 
+var _AuroraInstanceArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "AuroraInstanceArn",
+}, smithy.ShapeTypeString, 0)
+
+var AuroraProvisionedScalingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "AuroraProvisionedScalingConfiguration",
+}, smithy.ShapeTypeStructure, 6)
+var AuroraProvisionedScalingConfiguration_timeoutMinutes *smithy.Schema
+
+var AuroraProvisionedScalingConfiguration_crossAccountRole *smithy.Schema
+
+var AuroraProvisionedScalingConfiguration_externalId *smithy.Schema
+
+var AuroraProvisionedScalingConfiguration_globalClusterIdentifier *smithy.Schema
+
+var AuroraProvisionedScalingConfiguration_regionDatabaseClusterArns *smithy.Schema
+
+var AuroraProvisionedScalingConfiguration_instanceArns *smithy.Schema
+
+var AuroraServerlessScalingConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "AuroraServerlessScalingConfiguration",
+}, smithy.ShapeTypeStructure, 6)
+var AuroraServerlessScalingConfiguration_timeoutMinutes *smithy.Schema
+
+var AuroraServerlessScalingConfiguration_crossAccountRole *smithy.Schema
+
+var AuroraServerlessScalingConfiguration_externalId *smithy.Schema
+
+var AuroraServerlessScalingConfiguration_globalClusterIdentifier *smithy.Schema
+
+var AuroraServerlessScalingConfiguration_regionDatabaseClusterArns *smithy.Schema
+
+var AuroraServerlessScalingConfiguration_targetPercent *smithy.Schema
+
 var CustomActionLambdaConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "CustomActionLambdaConfiguration",
@@ -543,7 +580,7 @@ var ExecutionApprovalConfiguration_approvalRole *smithy.Schema
 var ExecutionBlockConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "ExecutionBlockConfiguration",
-}, smithy.ShapeTypeUnion, 14)
+}, smithy.ShapeTypeUnion, 17)
 var ExecutionBlockConfiguration_customActionLambdaConfig *smithy.Schema
 
 var ExecutionBlockConfiguration_ec2AsgCapacityIncreaseConfig *smithy.Schema
@@ -572,10 +609,16 @@ var ExecutionBlockConfiguration_rdsCreateCrossRegionReadReplicaConfig *smithy.Sc
 
 var ExecutionBlockConfiguration_lambdaEventSourceMappingConfig *smithy.Schema
 
+var ExecutionBlockConfiguration_auroraServerlessScalingConfig *smithy.Schema
+
+var ExecutionBlockConfiguration_auroraProvisionedScalingConfig *smithy.Schema
+
+var ExecutionBlockConfiguration_neptuneGlobalDatabaseConfig *smithy.Schema
+
 var ExecutionBlockType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "ExecutionBlockType",
-}, smithy.ShapeTypeEnum, 14)
+}, smithy.ShapeTypeEnum, 17)
 var ExecutionBlockType_CUSTOM_ACTION_LAMBDA *smithy.Schema
 
 var ExecutionBlockType_EXECUTION_APPROVAL *smithy.Schema
@@ -603,6 +646,12 @@ var ExecutionBlockType_RDS_PROMOTE_READ_REPLICA *smithy.Schema
 var ExecutionBlockType_RDS_CREATE_CROSS_REGION_REPLICA *smithy.Schema
 
 var ExecutionBlockType_LAMBDA_EVENT_SOURCE_MAPPING *smithy.Schema
+
+var ExecutionBlockType_AURORA_SERVERLESS_SCALING *smithy.Schema
+
+var ExecutionBlockType_AURORA_PROVISIONED_SCALING *smithy.Schema
+
+var ExecutionBlockType_NEPTUNE *smithy.Schema
 
 var _ExecutionComment = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
@@ -952,6 +1001,54 @@ var MinimalWorkflow_action *smithy.Schema
 
 var MinimalWorkflow_name *smithy.Schema
 
+var _NeptuneClusterArn = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "NeptuneClusterArn",
+}, smithy.ShapeTypeString, 0)
+
+var NeptuneDefaultBehavior = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "NeptuneDefaultBehavior",
+}, smithy.ShapeTypeEnum, 2)
+var NeptuneDefaultBehavior_SWITCHOVER_ONLY *smithy.Schema
+
+var NeptuneDefaultBehavior_FAILOVER *smithy.Schema
+
+var _NeptuneGlobalClusterIdentifier = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "NeptuneGlobalClusterIdentifier",
+}, smithy.ShapeTypeString, 0)
+
+var NeptuneGlobalDatabaseConfiguration = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "NeptuneGlobalDatabaseConfiguration",
+}, smithy.ShapeTypeStructure, 7)
+var NeptuneGlobalDatabaseConfiguration_timeoutMinutes *smithy.Schema
+
+var NeptuneGlobalDatabaseConfiguration_crossAccountRole *smithy.Schema
+
+var NeptuneGlobalDatabaseConfiguration_externalId *smithy.Schema
+
+var NeptuneGlobalDatabaseConfiguration_behavior *smithy.Schema
+
+var NeptuneGlobalDatabaseConfiguration_ungraceful *smithy.Schema
+
+var NeptuneGlobalDatabaseConfiguration_globalClusterIdentifier *smithy.Schema
+
+var NeptuneGlobalDatabaseConfiguration_regionDatabaseClusterArns *smithy.Schema
+
+var NeptuneUngraceful = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "NeptuneUngraceful",
+}, smithy.ShapeTypeStructure, 1)
+var NeptuneUngraceful_ungraceful *smithy.Schema
+
+var NeptuneUngracefulBehavior = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "NeptuneUngracefulBehavior",
+}, smithy.ShapeTypeEnum, 1)
+var NeptuneUngracefulBehavior_FAILOVER *smithy.Schema
+
 var _NextToken = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "NextToken",
@@ -1090,6 +1187,22 @@ var _RegionAndRoutingControls_key *smithy.Schema
 
 var _RegionAndRoutingControls_value *smithy.Schema
 
+var _RegionAuroraClusterMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "RegionAuroraClusterMap",
+}, smithy.ShapeTypeMap, 2)
+var _RegionAuroraClusterMap_key *smithy.Schema
+
+var _RegionAuroraClusterMap_value *smithy.Schema
+
+var _RegionAuroraInstanceArnMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "RegionAuroraInstanceArnMap",
+}, smithy.ShapeTypeMap, 2)
+var _RegionAuroraInstanceArnMap_key *smithy.Schema
+
+var _RegionAuroraInstanceArnMap_value *smithy.Schema
+
 var _RegionEventSourceMappingMap = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
 	Name:      "RegionEventSourceMappingMap",
@@ -1103,6 +1216,14 @@ var _RegionList = smithy.NewSchema(smithy.ShapeID{
 	Name:      "RegionList",
 }, smithy.ShapeTypeList, 1)
 var _RegionList_member *smithy.Schema
+
+var _RegionNeptuneClusterArnMap = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.arcregionswitch",
+	Name:      "RegionNeptuneClusterArnMap",
+}, smithy.ShapeTypeMap, 2)
+var _RegionNeptuneClusterArnMap_key *smithy.Schema
+
+var _RegionNeptuneClusterArnMap_value *smithy.Schema
 
 var RegionSwitchPlanConfiguration = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.arcregionswitch",
@@ -2074,6 +2195,38 @@ func init() {
 
 	_AuroraClusterArns_member = _AuroraClusterArns.AddMember("member", _AuroraClusterArn)
 
+	_RegionAuroraClusterMap_key = _RegionAuroraClusterMap.AddMember("key", _Region)
+
+	_RegionAuroraClusterMap_value = _RegionAuroraClusterMap.AddMember("value", _AuroraClusterArn)
+
+	_RegionAuroraInstanceArnMap_key = _RegionAuroraInstanceArnMap.AddMember("key", _Region)
+
+	_RegionAuroraInstanceArnMap_value = _RegionAuroraInstanceArnMap.AddMember("value", _AuroraInstanceArn)
+
+	AuroraProvisionedScalingConfiguration_timeoutMinutes = AuroraProvisionedScalingConfiguration.AddMember("timeoutMinutes", smithyprelude.Integer)
+
+	AuroraProvisionedScalingConfiguration_crossAccountRole = AuroraProvisionedScalingConfiguration.AddMember("crossAccountRole", _IamRoleArn)
+
+	AuroraProvisionedScalingConfiguration_externalId = AuroraProvisionedScalingConfiguration.AddMember("externalId", smithyprelude.String)
+
+	AuroraProvisionedScalingConfiguration_globalClusterIdentifier = AuroraProvisionedScalingConfiguration.AddMember("globalClusterIdentifier", _GlobalClusterIdentifier)
+
+	AuroraProvisionedScalingConfiguration_regionDatabaseClusterArns = AuroraProvisionedScalingConfiguration.AddMember("regionDatabaseClusterArns", _RegionAuroraClusterMap)
+
+	AuroraProvisionedScalingConfiguration_instanceArns = AuroraProvisionedScalingConfiguration.AddMember("instanceArns", _RegionAuroraInstanceArnMap)
+
+	AuroraServerlessScalingConfiguration_timeoutMinutes = AuroraServerlessScalingConfiguration.AddMember("timeoutMinutes", smithyprelude.Integer)
+
+	AuroraServerlessScalingConfiguration_crossAccountRole = AuroraServerlessScalingConfiguration.AddMember("crossAccountRole", _IamRoleArn)
+
+	AuroraServerlessScalingConfiguration_externalId = AuroraServerlessScalingConfiguration.AddMember("externalId", smithyprelude.String)
+
+	AuroraServerlessScalingConfiguration_globalClusterIdentifier = AuroraServerlessScalingConfiguration.AddMember("globalClusterIdentifier", _GlobalClusterIdentifier)
+
+	AuroraServerlessScalingConfiguration_regionDatabaseClusterArns = AuroraServerlessScalingConfiguration.AddMember("regionDatabaseClusterArns", _RegionAuroraClusterMap)
+
+	AuroraServerlessScalingConfiguration_targetPercent = AuroraServerlessScalingConfiguration.AddMember("targetPercent", smithyprelude.Integer)
+
 	Lambdas_crossAccountRole = Lambdas.AddMember("crossAccountRole", _IamRoleArn)
 
 	Lambdas_externalId = Lambdas.AddMember("externalId", smithyprelude.String)
@@ -2288,6 +2441,12 @@ func init() {
 
 	ExecutionBlockType_LAMBDA_EVENT_SOURCE_MAPPING = ExecutionBlockType.AddMember("LAMBDA_EVENT_SOURCE_MAPPING", smithyprelude.Unit)
 
+	ExecutionBlockType_AURORA_SERVERLESS_SCALING = ExecutionBlockType.AddMember("AURORA_SERVERLESS_SCALING", smithyprelude.Unit)
+
+	ExecutionBlockType_AURORA_PROVISIONED_SCALING = ExecutionBlockType.AddMember("AURORA_PROVISIONED_SCALING", smithyprelude.Unit)
+
+	ExecutionBlockType_NEPTUNE = ExecutionBlockType.AddMember("NEPTUNE", smithyprelude.Unit)
+
 	Step_name = Step.AddMember("name", _StepName)
 
 	Step_description = Step.AddMember("description", smithyprelude.String)
@@ -2360,6 +2519,32 @@ func init() {
 
 	LambdaEventSourceMappingConfiguration_ungraceful = LambdaEventSourceMappingConfiguration.AddMember("ungraceful", LambdaEventSourceMappingUngraceful)
 
+	NeptuneDefaultBehavior_SWITCHOVER_ONLY = NeptuneDefaultBehavior.AddMember("SWITCHOVER_ONLY", smithyprelude.Unit)
+
+	NeptuneDefaultBehavior_FAILOVER = NeptuneDefaultBehavior.AddMember("FAILOVER", smithyprelude.Unit)
+
+	NeptuneUngracefulBehavior_FAILOVER = NeptuneUngracefulBehavior.AddMember("FAILOVER", smithyprelude.Unit)
+
+	NeptuneUngraceful_ungraceful = NeptuneUngraceful.AddMember("ungraceful", NeptuneUngracefulBehavior)
+
+	_RegionNeptuneClusterArnMap_key = _RegionNeptuneClusterArnMap.AddMember("key", _Region)
+
+	_RegionNeptuneClusterArnMap_value = _RegionNeptuneClusterArnMap.AddMember("value", _NeptuneClusterArn)
+
+	NeptuneGlobalDatabaseConfiguration_timeoutMinutes = NeptuneGlobalDatabaseConfiguration.AddMember("timeoutMinutes", smithyprelude.Integer)
+
+	NeptuneGlobalDatabaseConfiguration_crossAccountRole = NeptuneGlobalDatabaseConfiguration.AddMember("crossAccountRole", _IamRoleArn)
+
+	NeptuneGlobalDatabaseConfiguration_externalId = NeptuneGlobalDatabaseConfiguration.AddMember("externalId", smithyprelude.String)
+
+	NeptuneGlobalDatabaseConfiguration_behavior = NeptuneGlobalDatabaseConfiguration.AddMember("behavior", NeptuneDefaultBehavior)
+
+	NeptuneGlobalDatabaseConfiguration_ungraceful = NeptuneGlobalDatabaseConfiguration.AddMember("ungraceful", NeptuneUngraceful)
+
+	NeptuneGlobalDatabaseConfiguration_globalClusterIdentifier = NeptuneGlobalDatabaseConfiguration.AddMember("globalClusterIdentifier", _NeptuneGlobalClusterIdentifier)
+
+	NeptuneGlobalDatabaseConfiguration_regionDatabaseClusterArns = NeptuneGlobalDatabaseConfiguration.AddMember("regionDatabaseClusterArns", _RegionNeptuneClusterArnMap)
+
 	ExecutionBlockConfiguration_customActionLambdaConfig = ExecutionBlockConfiguration.AddMember("customActionLambdaConfig", CustomActionLambdaConfiguration)
 
 	ExecutionBlockConfiguration_ec2AsgCapacityIncreaseConfig = ExecutionBlockConfiguration.AddMember("ec2AsgCapacityIncreaseConfig", Ec2AsgCapacityIncreaseConfiguration)
@@ -2387,6 +2572,12 @@ func init() {
 	ExecutionBlockConfiguration_rdsCreateCrossRegionReadReplicaConfig = ExecutionBlockConfiguration.AddMember("rdsCreateCrossRegionReadReplicaConfig", RdsCreateCrossRegionReplicaConfiguration)
 
 	ExecutionBlockConfiguration_lambdaEventSourceMappingConfig = ExecutionBlockConfiguration.AddMember("lambdaEventSourceMappingConfig", LambdaEventSourceMappingConfiguration)
+
+	ExecutionBlockConfiguration_auroraServerlessScalingConfig = ExecutionBlockConfiguration.AddMember("auroraServerlessScalingConfig", AuroraServerlessScalingConfiguration)
+
+	ExecutionBlockConfiguration_auroraProvisionedScalingConfig = ExecutionBlockConfiguration.AddMember("auroraProvisionedScalingConfig", AuroraProvisionedScalingConfiguration)
+
+	ExecutionBlockConfiguration_neptuneGlobalDatabaseConfig = ExecutionBlockConfiguration.AddMember("neptuneGlobalDatabaseConfig", NeptuneGlobalDatabaseConfiguration)
 
 	ExecutionEventType_UNKNOWN = ExecutionEventType.AddMember("UNKNOWN", smithyprelude.Unit)
 

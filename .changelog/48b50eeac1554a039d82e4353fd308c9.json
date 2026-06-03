@@ -1,0 +1,8 @@
+{
+    "id": "48b50eea-c155-4a03-9d82-e4353fd308c9",
+    "type": "feature",
+    "description": "SearchContacts Connect API now supports filtering contacts by the AI Agents involved in handling them",
+    "modules": [
+        "service/connect"
+    ]
+}

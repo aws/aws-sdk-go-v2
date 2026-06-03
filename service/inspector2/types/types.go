@@ -1748,7 +1748,7 @@ type CoverageFilterCriteria struct {
 	ResourceType []CoverageStringFilter
 
 	// The filter to search for Amazon EC2 instance coverage by scan mode. Valid
-	// values are EC2_SSM_AGENT_BASED and EC2_AGENTLESS .
+	// values are EC2_SSM_AGENT_BASED , EC2_AGENTLESS , and EC2_INSPECTOR_AGENT_BASED .
 	ScanMode []CoverageStringFilter
 
 	// The scan status code to filter on. Valid values are: ValidationException ,
@@ -2113,6 +2113,9 @@ type Ec2Configuration struct {
 	// This member is required.
 	ScanMode Ec2ScanMode
 
+	// Whether to activate Amazon Inspector VM scanner for Amazon EC2 scanning.
+	ActivateVMScanner *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -2121,6 +2124,10 @@ type Ec2ConfigurationState struct {
 
 	// An object that contains details about the state of the Amazon EC2 scan mode.
 	ScanModeState *Ec2ScanModeState
+
+	// An object that contains details about the state of the Amazon Inspector VM
+	// scanner.
+	VmScannerState *VMScannerState
 
 	noSmithyDocumentSerde
 }
@@ -4355,6 +4362,21 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The state of the Amazon Inspector VM scanner.
+type VMScannerState struct {
+
+	// Whether the VM scanner is activated.
+	Activated *bool
+
+	// The date and time the VM scanner was activated.
+	ActivatedAt *time.Time
+
+	// The status of the VM scanner.
+	Status VMScannerStatus
 
 	noSmithyDocumentSerde
 }

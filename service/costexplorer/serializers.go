@@ -3623,6 +3623,11 @@ func awsAwsjson11_serializeDocumentSavingsPlansPurchaseAnalysisConfiguration(v *
 		}
 	}
 
+	if v.SavingsPlansTargetCoverage != nil {
+		ok := object.Key("SavingsPlansTargetCoverage")
+		ok.Integer(*v.SavingsPlansTargetCoverage)
+	}
+
 	if v.SavingsPlansToAdd != nil {
 		ok := object.Key("SavingsPlansToAdd")
 		if err := awsAwsjson11_serializeDocumentSavingsPlansToAdd(v.SavingsPlansToAdd, ok); err != nil {

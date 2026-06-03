@@ -2020,8 +2020,9 @@ type ScanMode string
 
 // Enum values for ScanMode
 const (
-	ScanModeEc2SsmAgentBased ScanMode = "EC2_SSM_AGENT_BASED"
-	ScanModeEc2Agentless     ScanMode = "EC2_AGENTLESS"
+	ScanModeEc2SsmAgentBased       ScanMode = "EC2_SSM_AGENT_BASED"
+	ScanModeEc2Agentless           ScanMode = "EC2_AGENTLESS"
+	ScanModeEc2InspectorAgentBased ScanMode = "EC2_INSPECTOR_AGENT_BASED"
 )
 
 // Values returns all known values for ScanMode. Note that this can be expanded in
@@ -2032,6 +2033,7 @@ func (ScanMode) Values() []ScanMode {
 	return []ScanMode{
 		"EC2_SSM_AGENT_BASED",
 		"EC2_AGENTLESS",
+		"EC2_INSPECTOR_AGENT_BASED",
 	}
 }
 
@@ -2434,6 +2436,27 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"CANNOT_PARSE",
 		"FIELD_VALIDATION_FAILED",
 		"OTHER",
+	}
+}
+
+type VMScannerStatus string
+
+// Enum values for VMScannerStatus
+const (
+	VMScannerStatusSuccess VMScannerStatus = "SUCCESS"
+	VMScannerStatusPending VMScannerStatus = "PENDING"
+	VMScannerStatusFailed  VMScannerStatus = "FAILED"
+)
+
+// Values returns all known values for VMScannerStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VMScannerStatus) Values() []VMScannerStatus {
+	return []VMScannerStatus{
+		"SUCCESS",
+		"PENDING",
+		"FAILED",
 	}
 }
 

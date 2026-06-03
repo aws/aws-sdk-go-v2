@@ -87,8 +87,9 @@ type GetEffectiveRecommendationPreferencesOutput struct {
 	//
 	// To validate that the preference is applied to your last generated set of
 	// recommendations, review the effectiveRecommendationPreferences value in the
-	// response of the GetAutoScalingGroupRecommendations or
-	// GetEC2InstanceRecommendations actions.
+	// response of the GetAutoScalingGroupRecommendations,
+	// GetEC2InstanceRecommendations, GetEBSVolumeRecommendations,
+	// GetECSServiceRecommendations, or GetRDSDatabaseRecommendations actions.
 	LookBackPeriod types.LookBackPeriodPreference
 
 	//  The resource type values that are considered as candidates when generating
