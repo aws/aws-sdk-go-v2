@@ -1,0 +1,8 @@
+{
+    "id": "a3fe0a77-a35b-4bc1-92e3-bf30f572bcd3",
+    "type": "feature",
+    "description": "Add \"standardRegionalEndpoints\" back to fix 'Could not connect to the endpoint URL'",
+    "modules": [
+        "service/georoutes"
+    ]
+}
