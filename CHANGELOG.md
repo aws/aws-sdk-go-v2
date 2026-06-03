@@ -1,3 +1,75 @@
+# Release (2026-06-03.2)
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigatewaymanagementapi`: [v1.30.0](service/apigatewaymanagementapi/CHANGELOG.md#v1300-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/appconfigdata`: [v1.24.0](service/appconfigdata/CHANGELOG.md#v1240-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/appfabric`: [v1.17.0](service/appfabric/CHANGELOG.md#v1170-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.42.0](service/applicationautoscaling/CHANGELOG.md#v1420-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/arcregionswitch`: [v1.9.0](service/arcregionswitch/CHANGELOG.md#v190-2026-06-032)
+  * **Feature**: ARC Region Switch now supports three new execution blocks for multi-Region database workloads-Amazon Aurora Serverless scaling, Amazon Aurora Provisioned scaling, and Amazon Neptune Global Database failover.
+* `github.com/aws/aws-sdk-go-v2/service/cloudfront`: [v1.65.0](service/cloudfront/CHANGELOG.md#v1650-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/cloudtraildata`: [v1.18.0](service/cloudtraildata/CHANGELOG.md#v1180-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.75.0](service/cloudwatchlogs/CHANGELOG.md#v1750-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/computeoptimizer`: [v1.52.0](service/computeoptimizer/CHANGELOG.md#v1520-2026-06-032)
+  * **Feature**: This release lets customers extend the lookback period for Amazon EBS volume and Amazon ECS rightsizing recommendations to 32 days.
+* `github.com/aws/aws-sdk-go-v2/service/connect`: [v1.176.0](service/connect/CHANGELOG.md#v11760-2026-06-032)
+  * **Feature**: SearchContacts Connect API now supports filtering contacts by the AI Agents involved in handling them
+* `github.com/aws/aws-sdk-go-v2/service/connectcampaigns`: [v1.21.0](service/connectcampaigns/CHANGELOG.md#v1210-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.64.0](service/costexplorer/CHANGELOG.md#v1640-2026-06-032)
+  * **Feature**: Added support for target-coverage-based Savings Plans purchase analysis. The StartCommitmentPurchaseAnalysis API now accepts a new TARGET AVERAGE COVERAGE value for AnalysisType, as well as an optional SavingsPlansTargetCoverage field in SavingsPlansPurchaseAnalysisConfiguration
+* `github.com/aws/aws-sdk-go-v2/service/dax`: [v1.30.0](service/dax/CHANGELOG.md#v1300-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/directconnect`: [v1.39.0](service/directconnect/CHANGELOG.md#v1390-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/firehose`: [v1.43.0](service/firehose/CHANGELOG.md#v1430-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/inspector2`: [v1.49.0](service/inspector2/CHANGELOG.md#v1490-2026-06-032)
+  * **Feature**: Inspector support for enhanced scanning
+* `github.com/aws/aws-sdk-go-v2/service/iotevents`: [v1.34.0](service/iotevents/CHANGELOG.md#v1340-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling`: [v1.34.0](service/iotsecuretunneling/CHANGELOG.md#v1340-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/kinesis`: [v1.44.0](service/kinesis/CHANGELOG.md#v1440-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/lakeformation`: [v1.48.0](service/lakeformation/CHANGELOG.md#v1480-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/macie2`: [v1.52.0](service/macie2/CHANGELOG.md#v1520-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoice`: [v1.30.0](service/pinpointsmsvoice/CHANGELOG.md#v1300-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/rds`: [v1.119.0](service/rds/CHANGELOG.md#v11190-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/resourcegroups`: [v1.34.0](service/resourcegroups/CHANGELOG.md#v1340-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/route53profiles`: [v1.10.0](service/route53profiles/CHANGELOG.md#v1100-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/s3outposts`: [v1.35.0](service/s3outposts/CHANGELOG.md#v1350-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/securitylake`: [v1.26.0](service/securitylake/CHANGELOG.md#v1260-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ses`: [v1.35.0](service/ses/CHANGELOG.md#v1350-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/snowdevicemanagement`: [v1.26.0](service/snowdevicemanagement/CHANGELOG.md#v1260-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/socialmessaging`: [v1.11.0](service/socialmessaging/CHANGELOG.md#v1110-2026-06-032)
+  * **Feature**: Adding support for WhatsApp flow APIs and adding AccessDeniedByMetaException for Template APIs
+* `github.com/aws/aws-sdk-go-v2/service/transcribestreaming`: [v1.35.0](service/transcribestreaming/CHANGELOG.md#v1350-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/vpclattice`: [v1.22.0](service/vpclattice/CHANGELOG.md#v1220-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/wafregional`: [v1.31.0](service/wafregional/CHANGELOG.md#v1310-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/wisdom`: [v1.33.0](service/wisdom/CHANGELOG.md#v1330-2026-06-032)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+
 # Release (2026-06-03)
 
 ## General Highlights

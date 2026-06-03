@@ -1,8 +1,0 @@
-{
-    "id": "84f0e0a1-9792-443c-b7d9-35eb03743ede",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/s3outposts"
-    ]
-}

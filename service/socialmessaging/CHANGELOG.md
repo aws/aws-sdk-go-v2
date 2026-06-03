@@ -1,3 +1,7 @@
+# v1.11.0 (2026-06-03.2)
+
+* **Feature**: Adding support for WhatsApp flow APIs and adding AccessDeniedByMetaException for Template APIs
+
 # v1.10.3 (2026-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

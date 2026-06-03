@@ -1,8 +1,0 @@
-{
-    "id": "821f6ad9-eb6c-4c69-9633-c638e3f38457",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/cloudtraildata"
-    ]
-}

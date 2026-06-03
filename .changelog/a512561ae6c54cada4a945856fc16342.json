@@ -1,8 +1,0 @@
-{
-    "id": "a512561a-e6c5-4cad-a4a9-45856fc16342",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/appfabric"
-    ]
-}

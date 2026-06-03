@@ -1,8 +1,0 @@
-{
-    "id": "284c9f55-9e55-4a21-9018-19dff912e0ad",
-    "type": "feature",
-    "description": "Adding support for WhatsApp flow APIs and adding AccessDeniedByMetaException for Template APIs",
-    "modules": [
-        "service/socialmessaging"
-    ]
-}

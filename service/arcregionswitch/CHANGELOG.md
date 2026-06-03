@@ -1,3 +1,7 @@
+# v1.9.0 (2026-06-03.2)
+
+* **Feature**: ARC Region Switch now supports three new execution blocks for multi-Region database workloads-Amazon Aurora Serverless scaling, Amazon Aurora Provisioned scaling, and Amazon Neptune Global Database failover.
+
 # v1.8.3 (2026-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

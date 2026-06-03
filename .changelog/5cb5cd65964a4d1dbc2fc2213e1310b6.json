@@ -1,8 +1,0 @@
-{
-    "id": "5cb5cd65-964a-4d1d-bc2f-c2213e1310b6",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/snowdevicemanagement"
-    ]
-}

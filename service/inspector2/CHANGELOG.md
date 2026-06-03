@@ -1,3 +1,7 @@
+# v1.49.0 (2026-06-03.2)
+
+* **Feature**: Inspector support for enhanced scanning
+
 # v1.48.4 (2026-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

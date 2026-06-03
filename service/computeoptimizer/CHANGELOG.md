@@ -1,3 +1,7 @@
+# v1.52.0 (2026-06-03.2)
+
+* **Feature**: This release lets customers extend the lookback period for Amazon EBS volume and Amazon ECS rightsizing recommendations to 32 days.
+
 # v1.51.4 (2026-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

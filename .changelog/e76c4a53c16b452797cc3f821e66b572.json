@@ -1,8 +1,0 @@
-{
-    "id": "e76c4a53-c16b-4527-97cc-3f821e66b572",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/directconnect"
-    ]
-}

@@ -1,3 +1,7 @@
+# v1.64.0 (2026-06-03.2)
+
+* **Feature**: Added support for target-coverage-based Savings Plans purchase analysis. The StartCommitmentPurchaseAnalysis API now accepts a new TARGET AVERAGE COVERAGE value for AnalysisType, as well as an optional SavingsPlansTargetCoverage field in SavingsPlansPurchaseAnalysisConfiguration
+
 # v1.63.12 (2026-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

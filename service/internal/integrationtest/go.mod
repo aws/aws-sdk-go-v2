@@ -12,7 +12,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/s3control v1.71.3
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.43.1
 	github.com/aws/aws-sdk-go-v2/service/sts v1.43.1
-	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.34.11
+	github.com/aws/aws-sdk-go-v2/service/transcribestreaming v1.35.0
 	github.com/aws/smithy-go v1.27.0
 )
 

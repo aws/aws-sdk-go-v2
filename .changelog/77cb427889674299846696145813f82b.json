@@ -1,8 +1,0 @@
-{
-    "id": "77cb4278-8967-4299-8466-96145813f82b",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/cloudfront"
-    ]
-}

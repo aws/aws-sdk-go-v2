@@ -1,8 +1,0 @@
-{
-    "id": "ceff2e96-5aa6-45db-8e67-b3e6bea259a3",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/vpclattice"
-    ]
-}

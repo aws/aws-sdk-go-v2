@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2 v1.41.11
 	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.7.12
 	github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting v1.6.48
-	github.com/aws/aws-sdk-go-v2/service/kinesis v1.43.11
+	github.com/aws/aws-sdk-go-v2/service/kinesis v1.44.0
 	github.com/aws/smithy-go v1.27.0
 )
 

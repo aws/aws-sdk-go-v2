@@ -1,3 +1,7 @@
+# v1.176.0 (2026-06-03.2)
+
+* **Feature**: SearchContacts Connect API now supports filtering contacts by the AI Agents involved in handling them
+
 # v1.175.4 (2026-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

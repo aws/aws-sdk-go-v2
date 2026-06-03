@@ -1,8 +1,0 @@
-{
-    "id": "07e4741b-786e-420b-bfcf-2ad703477953",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/iotsecuretunneling"
-    ]
-}

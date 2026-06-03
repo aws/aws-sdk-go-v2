@@ -1,8 +1,0 @@
-{
-    "id": "7d5618c8-4d1a-48d4-a22c-9f8e67642c5e",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/connectcampaigns"
-    ]
-}
