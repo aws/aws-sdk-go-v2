@@ -1655,6 +1655,12 @@
                     "traits": {
                         "smithy.api#enumValue": "CUSTOM_COMMITMENT"
                     }
+                },
+                "TARGET_AVERAGE_COVERAGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TARGET_AVERAGE_COVERAGE"
+                    }
                 }
             }
         },
@@ -9767,6 +9773,12 @@
                         "smithy.api#documentation": "<p>The time period associated with the analysis.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "SavingsPlansTargetCoverage": {
+                    "target": "com.amazonaws.costexplorer#SavingsPlansTargetCoverage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the target Savings Plans coverage as a percentage from <code>10</code> to\n            <code>100</code>. This field is required when <code>AnalysisType</code> is\n            <code>TARGET_AVERAGE_COVERAGE</code>. It defines the target average hourly coverage\n            that the recommended Savings Plans commitment should achieve over the lookback\n            period.</p>"
+                    }
                 }
             },
             "traits": {
@@ -10197,6 +10209,15 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The amount of savings that you're accumulating, against the public On-Demand rate of\n            the usage accrued in an account.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#SavingsPlansTargetCoverage": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 10,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.costexplorer#SavingsPlansToAdd": {

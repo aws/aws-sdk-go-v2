@@ -2035,6 +2035,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Describes the savings estimation mode preference applied for calculating savings opportunity for Amazon EBS volumes.\n        </p>"
                     }
+                },
+                "lookBackPeriod": {
+                    "target": "com.amazonaws.computeoptimizer#LookBackPeriodPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of days for which utilization metrics were analyzed for the volume.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2243,6 +2249,12 @@
                     "target": "com.amazonaws.computeoptimizer#ECSSavingsEstimationMode",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            Describes the savings estimation mode preference applied for calculating savings opportunity for Amazon ECS services.\n        </p>"
+                    }
+                },
+                "lookBackPeriod": {
+                    "target": "com.amazonaws.computeoptimizer#LookBackPeriodPreference",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The number of days the Amazon ECS service utilization metrics were analyzed.\n        </p>"
                     }
                 }
             },
@@ -4400,6 +4412,12 @@
                     "traits": {
                         "smithy.api#enumValue": "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
                     }
+                },
+                "EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EffectiveRecommendationPreferencesLookBackPeriod"
+                    }
                 }
             }
         },
@@ -6044,6 +6062,12 @@
                     "traits": {
                         "smithy.api#enumValue": "RecommendationOptionsEstimatedMonthlySavingsValueAfterDiscounts"
                     }
+                },
+                "EFFECTIVE_RECOMMENDATION_PREFERENCES_LOOKBACK_PERIOD": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EffectiveRecommendationPreferencesLookBackPeriod"
+                    }
                 }
             }
         },
@@ -7009,7 +7033,7 @@
                 "lookBackPeriod": {
                     "target": "com.amazonaws.computeoptimizer#LookBackPeriodPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The number of days the utilization metrics of the Amazon Web Services resource are analyzed. \n        </p>\n         <p>To validate that the preference is applied to your last generated set of recommendations, review \n            the <code>effectiveRecommendationPreferences</code> value in the response of the \n            GetAutoScalingGroupRecommendations or GetEC2InstanceRecommendations actions.</p>"
+                        "smithy.api#documentation": "<p>\n            The number of days the utilization metrics of the Amazon Web Services resource are analyzed.\n        </p>\n         <p>To validate that the preference is applied to your last generated set of recommendations, review\n            the <code>effectiveRecommendationPreferences</code> value in the response of the\n            GetAutoScalingGroupRecommendations, GetEC2InstanceRecommendations, GetEBSVolumeRecommendations,\n            GetECSServiceRecommendations, or GetRDSDatabaseRecommendations actions.</p>"
                     }
                 },
                 "utilizationPreferences": {
@@ -10626,7 +10650,7 @@
                 "lookBackPeriod": {
                     "target": "com.amazonaws.computeoptimizer#LookBackPeriodPreference",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. \n            When this preference isn't specified, we use the default value <code>DAYS_14</code>.\n        </p>\n         <p>You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types.\n            </p>\n         <note>\n            <ul>\n               <li>\n                  <p>Amazon EC2 instance lookback preferences can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Auto Scaling group lookback preferences can only be set at the resource level.</p>\n               </li>\n            </ul>\n         </note>"
+                        "smithy.api#documentation": "<p>\n            The preference to control the number of days the utilization metrics of the Amazon Web Services resource are analyzed. \n            When this preference isn't specified, we use the default value <code>DAYS_14</code>.\n        </p>\n         <p>You can only set this preference for the Amazon EC2 instance, Auto Scaling group, Amazon EBS volume, Amazon ECS service on Fargate, Amazon RDS DB instance, and Aurora DB cluster storage resource types.\n            </p>\n         <note>\n            <ul>\n               <li>\n                  <p>Lookback period preferences for Amazon EC2 instances, Amazon EBS volumes, Amazon ECS services, Amazon RDS DB instances, and Aurora DB cluster storage resource types can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Auto Scaling group lookback preferences can only be set at the resource level.</p>\n               </li>\n               <li>\n                  <p>Amazon EBS volume lookback preferences can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Amazon ECS service on Fargate lookback preferences can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Amazon RDS DB instance lookback preferences can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Aurora DB cluster storage lookback preferences can be set at the organization, account, and resource levels.</p>\n               </li>\n               <li>\n                  <p>Changing the lookback period for Amazon EBS volumes to 14 days does not affect the 32-day lookback period used to determine whether an Amazon EBS volume is unattached.</p>\n               </li>\n            </ul>\n         </note>"
                     }
                 },
                 "utilizationPreferences": {
@@ -10638,7 +10662,7 @@
                 "preferredResources": {
                     "target": "com.amazonaws.computeoptimizer#PreferredResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            The preference to control which resource type values are considered when generating rightsizing recommendations. \n            You can specify this preference as a combination of include and exclude lists. You must specify either an \n            <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values, \n            an error occurs.\n        </p>\n         <note>\n            <p>You can only set this preference for the Amazon EC2 instance and Auto Scaling group resource types.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>\n            The preference to control which resource type values are considered when generating rightsizing recommendations. \n            You can specify this preference as a combination of include and exclude lists. You must specify either an \n            <code>includeList</code> or <code>excludeList</code>. If the preference is an empty set of resource type values, \n            an error occurs.\n        </p>\n         <note>\n            <p>You can only set this preference for the Amazon EC2 instance, Auto Scaling group, Amazon EBS volume, Amazon ECS service, Amazon RDS DB instance, and Aurora DB cluster storage resource types.</p>\n         </note>"
                     }
                 },
                 "savingsEstimationMode": {
