@@ -1,0 +1,8 @@
+{
+    "id": "1c88b192-e747-436c-998a-32096006308c",
+    "type": "bugfix",
+    "description": "Loose download directory check to allow downloading objects with double dot",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
