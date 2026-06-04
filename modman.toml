@@ -1,6 +1,5 @@
 
 [dependencies]
-  "github.com/aws/aws-sdk-go" = "v1.44.28"
   "github.com/aws/smithy-go" = "v1.27.0"
 
 [modules]
@@ -81,9 +80,6 @@
     no_tag = true
 
   [modules."internal/repotools/changes"]
-    no_tag = true
-
-  [modules."service/internal/benchmark"]
     no_tag = true
 
   [modules."service/internal/integrationtest"]
