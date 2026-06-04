@@ -1338,9 +1338,7 @@ func (v *BrowserSigningConfigInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BrowserSigningConfigInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Enabled != false {
-		s.WriteBool(schemas.BrowserSigningConfigInput_enabled, v.Enabled)
-	}
+	s.WriteBool(schemas.BrowserSigningConfigInput_enabled, v.Enabled)
 }
 func (v *BrowserSigningConfigInput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BrowserSigningConfigInput, func(s *smithy.Schema) error {
@@ -1372,9 +1370,7 @@ func (v *BrowserSigningConfigOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *BrowserSigningConfigOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Enabled != false {
-		s.WriteBool(schemas.BrowserSigningConfigOutput_enabled, v.Enabled)
-	}
+	s.WriteBool(schemas.BrowserSigningConfigOutput_enabled, v.Enabled)
 }
 func (v *BrowserSigningConfigOutput) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.BrowserSigningConfigOutput, func(s *smithy.Schema) error {

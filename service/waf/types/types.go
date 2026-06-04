@@ -2748,9 +2748,7 @@ func (v *SampledHTTPRequest) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Timestamp != nil {
 		s.WriteTime(schemas.SampledHTTPRequest_Timestamp, *v.Timestamp)
 	}
-	if v.Weight != 0 {
-		s.WriteInt64(schemas.SampledHTTPRequest_Weight, v.Weight)
-	}
+	s.WriteInt64(schemas.SampledHTTPRequest_Weight, v.Weight)
 }
 func (v *SampledHTTPRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SampledHTTPRequest, func(s *smithy.Schema) error {
@@ -2930,9 +2928,7 @@ func (v *SizeConstraint) SerializeMembers(s smithy.ShapeSerializer) {
 		v.FieldToMatch.SerializeMembers(s)
 		s.CloseStruct()
 	}
-	if v.Size != 0 {
-		s.WriteInt64(schemas.SizeConstraint_Size, v.Size)
-	}
+	s.WriteInt64(schemas.SizeConstraint_Size, v.Size)
 	if v.TextTransformation != "" {
 		s.WriteString(schemas.SizeConstraint_TextTransformation, string(v.TextTransformation))
 	}

@@ -1063,9 +1063,7 @@ func (v *EncryptionConfig) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *EncryptionConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Enabled != false {
-		s.WriteBool(schemas.EncryptionConfig_enabled, v.Enabled)
-	}
+	s.WriteBool(schemas.EncryptionConfig_enabled, v.Enabled)
 	if v.EncryptionType != "" {
 		s.WriteString(schemas.EncryptionConfig_encryptionType, string(v.EncryptionType))
 	}

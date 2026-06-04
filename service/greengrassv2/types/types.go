@@ -1760,9 +1760,7 @@ func (v *IoTJobAbortCriteria) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MinNumberOfExecutedThings != nil {
 		s.WriteInt32(schemas.IoTJobAbortCriteria_minNumberOfExecutedThings, *v.MinNumberOfExecutedThings)
 	}
-	if v.ThresholdPercentage != 0 {
-		s.WriteFloat64(schemas.IoTJobAbortCriteria_thresholdPercentage, v.ThresholdPercentage)
-	}
+	s.WriteFloat64(schemas.IoTJobAbortCriteria_thresholdPercentage, v.ThresholdPercentage)
 }
 func (v *IoTJobAbortCriteria) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IoTJobAbortCriteria, func(s *smithy.Schema) error {

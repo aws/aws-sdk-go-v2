@@ -62,9 +62,7 @@ func (v *CreateReservationInput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CreateReservationInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Capacity != 0 {
-		s.WriteInt32(schemas.CreateReservationRequest_capacity, v.Capacity)
-	}
+	s.WriteInt32(schemas.CreateReservationRequest_capacity, v.Capacity)
 	if v.ClientToken != nil {
 		s.WriteString(schemas.CreateReservationRequest_clientToken, *v.ClientToken)
 	}

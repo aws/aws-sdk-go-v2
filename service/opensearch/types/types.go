@@ -9439,12 +9439,8 @@ func (v *WindowStartTime) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WindowStartTime) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Hours != 0 {
-		s.WriteInt64(schemas.WindowStartTime_Hours, v.Hours)
-	}
-	if v.Minutes != 0 {
-		s.WriteInt64(schemas.WindowStartTime_Minutes, v.Minutes)
-	}
+	s.WriteInt64(schemas.WindowStartTime_Hours, v.Hours)
+	s.WriteInt64(schemas.WindowStartTime_Minutes, v.Minutes)
 }
 func (v *WindowStartTime) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WindowStartTime, func(s *smithy.Schema) error {

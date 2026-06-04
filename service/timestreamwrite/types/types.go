@@ -862,9 +862,7 @@ func (v *Endpoint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Address != nil {
 		s.WriteString(schemas.Endpoint_Address, *v.Address)
 	}
-	if v.CachePeriodInMinutes != 0 {
-		s.WriteInt64(schemas.Endpoint_CachePeriodInMinutes, v.CachePeriodInMinutes)
-	}
+	s.WriteInt64(schemas.Endpoint_CachePeriodInMinutes, v.CachePeriodInMinutes)
 }
 func (v *Endpoint) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Endpoint, func(s *smithy.Schema) error {

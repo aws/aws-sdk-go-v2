@@ -610,12 +610,8 @@ func (v *IcmpTypeCode) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *IcmpTypeCode) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Code != 0 {
-		s.WriteInt32(schemas.IcmpTypeCode_code, v.Code)
-	}
-	if v.Type != 0 {
-		s.WriteInt32(schemas.IcmpTypeCode_type, v.Type)
-	}
+	s.WriteInt32(schemas.IcmpTypeCode_code, v.Code)
+	s.WriteInt32(schemas.IcmpTypeCode_type, v.Type)
 }
 func (v *IcmpTypeCode) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.IcmpTypeCode, func(s *smithy.Schema) error {
@@ -2636,12 +2632,8 @@ func (v *PortRange) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PortRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.From != 0 {
-		s.WriteInt32(schemas.PortRange_from, v.From)
-	}
-	if v.To != 0 {
-		s.WriteInt32(schemas.PortRange_to, v.To)
-	}
+	s.WriteInt32(schemas.PortRange_from, v.From)
+	s.WriteInt32(schemas.PortRange_to, v.To)
 }
 func (v *PortRange) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PortRange, func(s *smithy.Schema) error {

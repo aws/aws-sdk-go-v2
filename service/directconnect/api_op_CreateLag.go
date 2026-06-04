@@ -122,9 +122,7 @@ func (v *CreateLagInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Location != nil {
 		s.WriteString(schemas.CreateLagRequest_location, *v.Location)
 	}
-	if v.NumberOfConnections != 0 {
-		s.WriteInt32(schemas.CreateLagRequest_numberOfConnections, v.NumberOfConnections)
-	}
+	s.WriteInt32(schemas.CreateLagRequest_numberOfConnections, v.NumberOfConnections)
 	if v.ProviderName != nil {
 		s.WriteString(schemas.CreateLagRequest_providerName, *v.ProviderName)
 	}

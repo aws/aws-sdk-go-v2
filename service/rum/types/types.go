@@ -1358,9 +1358,7 @@ func (v *TimeRange) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TimeRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.After != 0 {
-		s.WriteInt64(schemas.TimeRange_After, v.After)
-	}
+	s.WriteInt64(schemas.TimeRange_After, v.After)
 	if v.Before != 0 {
 		s.WriteInt64(schemas.TimeRange_Before, v.Before)
 	}

@@ -2973,12 +2973,8 @@ func (v *PortRange) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *PortRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.FromPort != 0 {
-		s.WriteInt32(schemas.PortRange_FromPort, v.FromPort)
-	}
-	if v.ToPort != 0 {
-		s.WriteInt32(schemas.PortRange_ToPort, v.ToPort)
-	}
+	s.WriteInt32(schemas.PortRange_FromPort, v.FromPort)
+	s.WriteInt32(schemas.PortRange_ToPort, v.ToPort)
 }
 func (v *PortRange) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PortRange, func(s *smithy.Schema) error {

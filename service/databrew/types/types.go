@@ -3128,9 +3128,7 @@ func (v *Threshold) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Unit != "" {
 		s.WriteString(schemas.Threshold_Unit, string(v.Unit))
 	}
-	if v.Value != 0 {
-		s.WriteFloat64(schemas.Threshold_Value, v.Value)
-	}
+	s.WriteFloat64(schemas.Threshold_Value, v.Value)
 }
 func (v *Threshold) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Threshold, func(s *smithy.Schema) error {

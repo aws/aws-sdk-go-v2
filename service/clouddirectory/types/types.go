@@ -607,9 +607,7 @@ func (v *BatchCreateIndex) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.BatchReferenceName != nil {
 		s.WriteString(schemas.BatchCreateIndex_BatchReferenceName, *v.BatchReferenceName)
 	}
-	if v.IsUnique != false {
-		s.WriteBool(schemas.BatchCreateIndex_IsUnique, v.IsUnique)
-	}
+	s.WriteBool(schemas.BatchCreateIndex_IsUnique, v.IsUnique)
 	if v.LinkName != nil {
 		s.WriteString(schemas.BatchCreateIndex_LinkName, *v.LinkName)
 	}

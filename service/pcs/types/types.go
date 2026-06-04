@@ -1846,12 +1846,8 @@ func (v *ScalingConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ScalingConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxInstanceCount != 0 {
-		s.WriteInt32(schemas.ScalingConfiguration_maxInstanceCount, v.MaxInstanceCount)
-	}
-	if v.MinInstanceCount != 0 {
-		s.WriteInt32(schemas.ScalingConfiguration_minInstanceCount, v.MinInstanceCount)
-	}
+	s.WriteInt32(schemas.ScalingConfiguration_maxInstanceCount, v.MaxInstanceCount)
+	s.WriteInt32(schemas.ScalingConfiguration_minInstanceCount, v.MinInstanceCount)
 }
 func (v *ScalingConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScalingConfiguration, func(s *smithy.Schema) error {
@@ -1888,12 +1884,8 @@ func (v *ScalingConfigurationRequest) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ScalingConfigurationRequest) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.MaxInstanceCount != 0 {
-		s.WriteInt32(schemas.ScalingConfigurationRequest_maxInstanceCount, v.MaxInstanceCount)
-	}
-	if v.MinInstanceCount != 0 {
-		s.WriteInt32(schemas.ScalingConfigurationRequest_minInstanceCount, v.MinInstanceCount)
-	}
+	s.WriteInt32(schemas.ScalingConfigurationRequest_maxInstanceCount, v.MaxInstanceCount)
+	s.WriteInt32(schemas.ScalingConfigurationRequest_minInstanceCount, v.MinInstanceCount)
 }
 func (v *ScalingConfigurationRequest) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScalingConfigurationRequest, func(s *smithy.Schema) error {

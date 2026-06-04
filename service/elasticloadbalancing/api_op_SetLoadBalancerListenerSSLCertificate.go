@@ -66,9 +66,7 @@ func (v *SetLoadBalancerListenerSSLCertificateInput) SerializeMembers(s smithy.S
 	if v.LoadBalancerName != nil {
 		s.WriteString(schemas.SetLoadBalancerListenerSSLCertificateInput_LoadBalancerName, *v.LoadBalancerName)
 	}
-	if v.LoadBalancerPort != 0 {
-		s.WriteInt32(schemas.SetLoadBalancerListenerSSLCertificateInput_LoadBalancerPort, v.LoadBalancerPort)
-	}
+	s.WriteInt32(schemas.SetLoadBalancerListenerSSLCertificateInput_LoadBalancerPort, v.LoadBalancerPort)
 	if v.SSLCertificateId != nil {
 		s.WriteString(schemas.SetLoadBalancerListenerSSLCertificateInput_SSLCertificateId, *v.SSLCertificateId)
 	}

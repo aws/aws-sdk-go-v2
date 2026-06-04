@@ -148,9 +148,7 @@ func (v *DescribePackageVersionOutput) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *DescribePackageVersionOutput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IsLatestPatch != false {
-		s.WriteBool(schemas.DescribePackageVersionResponse_IsLatestPatch, v.IsLatestPatch)
-	}
+	s.WriteBool(schemas.DescribePackageVersionResponse_IsLatestPatch, v.IsLatestPatch)
 	if v.OwnerAccount != nil {
 		s.WriteString(schemas.DescribePackageVersionResponse_OwnerAccount, *v.OwnerAccount)
 	}

@@ -85,15 +85,11 @@ func (v *AccountLimit) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *AccountLimit) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Max != 0 {
-		s.WriteInt64(schemas.AccountLimit_Max, v.Max)
-	}
+	s.WriteInt64(schemas.AccountLimit_Max, v.Max)
 	if v.Name != "" {
 		s.WriteString(schemas.AccountLimit_Name, string(v.Name))
 	}
-	if v.Used != 0 {
-		s.WriteInt64(schemas.AccountLimit_Used, v.Used)
-	}
+	s.WriteInt64(schemas.AccountLimit_Used, v.Used)
 }
 func (v *AccountLimit) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.AccountLimit, func(s *smithy.Schema) error {
@@ -862,9 +858,7 @@ func (v *NotifyConfigurationInformation) SerializeMembers(s smithy.ShapeSerializ
 	if v.DefaultTemplateId != nil {
 		s.WriteString(schemas.NotifyConfigurationInformation_DefaultTemplateId, *v.DefaultTemplateId)
 	}
-	if v.DeletionProtectionEnabled != false {
-		s.WriteBool(schemas.NotifyConfigurationInformation_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
-	}
+	s.WriteBool(schemas.NotifyConfigurationInformation_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
 	if v.DisplayName != nil {
 		s.WriteString(schemas.NotifyConfigurationInformation_DisplayName, *v.DisplayName)
 	}
@@ -1006,9 +1000,7 @@ func (v *NotifyCountryInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CountryName != nil {
 		s.WriteString(schemas.NotifyCountryInformation_CountryName, *v.CountryName)
 	}
-	if v.CustomerOwnedIdentityRequired != false {
-		s.WriteBool(schemas.NotifyCountryInformation_CustomerOwnedIdentityRequired, v.CustomerOwnedIdentityRequired)
-	}
+	s.WriteBool(schemas.NotifyCountryInformation_CustomerOwnedIdentityRequired, v.CustomerOwnedIdentityRequired)
 	if v.IsoCountryCode != nil {
 		s.WriteString(schemas.NotifyCountryInformation_IsoCountryCode, *v.IsoCountryCode)
 	}
@@ -1294,9 +1286,7 @@ func (v *OptedOutNumberInformation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *OptedOutNumberInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EndUserOptedOut != false {
-		s.WriteBool(schemas.OptedOutNumberInformation_EndUserOptedOut, v.EndUserOptedOut)
-	}
+	s.WriteBool(schemas.OptedOutNumberInformation_EndUserOptedOut, v.EndUserOptedOut)
 	if v.OptedOutNumber != nil {
 		s.WriteString(schemas.OptedOutNumberInformation_OptedOutNumber, *v.OptedOutNumber)
 	}
@@ -1612,9 +1602,7 @@ func (v *PhoneNumberInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.PhoneNumberInformation_CreatedTimestamp, *v.CreatedTimestamp)
 	}
-	if v.DeletionProtectionEnabled != false {
-		s.WriteBool(schemas.PhoneNumberInformation_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
-	}
+	s.WriteBool(schemas.PhoneNumberInformation_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
 	if v.InternationalSendingEnabled != false {
 		s.WriteBool(schemas.PhoneNumberInformation_InternationalSendingEnabled, v.InternationalSendingEnabled)
 	}
@@ -1649,9 +1637,7 @@ func (v *PhoneNumberInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RegistrationId != nil {
 		s.WriteString(schemas.PhoneNumberInformation_RegistrationId, *v.RegistrationId)
 	}
-	if v.SelfManagedOptOutsEnabled != false {
-		s.WriteBool(schemas.PhoneNumberInformation_SelfManagedOptOutsEnabled, v.SelfManagedOptOutsEnabled)
-	}
+	s.WriteBool(schemas.PhoneNumberInformation_SelfManagedOptOutsEnabled, v.SelfManagedOptOutsEnabled)
 	if v.Status != "" {
 		s.WriteString(schemas.PhoneNumberInformation_Status, string(v.Status))
 	}
@@ -1661,9 +1647,7 @@ func (v *PhoneNumberInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TwoWayChannelRole != nil {
 		s.WriteString(schemas.PhoneNumberInformation_TwoWayChannelRole, *v.TwoWayChannelRole)
 	}
-	if v.TwoWayEnabled != false {
-		s.WriteBool(schemas.PhoneNumberInformation_TwoWayEnabled, v.TwoWayEnabled)
-	}
+	s.WriteBool(schemas.PhoneNumberInformation_TwoWayEnabled, v.TwoWayEnabled)
 }
 func (v *PhoneNumberInformation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PhoneNumberInformation, func(s *smithy.Schema) error {
@@ -1873,9 +1857,7 @@ func (v *PoolInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.PoolInformation_CreatedTimestamp, *v.CreatedTimestamp)
 	}
-	if v.DeletionProtectionEnabled != false {
-		s.WriteBool(schemas.PoolInformation_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
-	}
+	s.WriteBool(schemas.PoolInformation_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
 	if v.MessageType != "" {
 		s.WriteString(schemas.PoolInformation_MessageType, string(v.MessageType))
 	}
@@ -1888,12 +1870,8 @@ func (v *PoolInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PoolId != nil {
 		s.WriteString(schemas.PoolInformation_PoolId, *v.PoolId)
 	}
-	if v.SelfManagedOptOutsEnabled != false {
-		s.WriteBool(schemas.PoolInformation_SelfManagedOptOutsEnabled, v.SelfManagedOptOutsEnabled)
-	}
-	if v.SharedRoutesEnabled != false {
-		s.WriteBool(schemas.PoolInformation_SharedRoutesEnabled, v.SharedRoutesEnabled)
-	}
+	s.WriteBool(schemas.PoolInformation_SelfManagedOptOutsEnabled, v.SelfManagedOptOutsEnabled)
+	s.WriteBool(schemas.PoolInformation_SharedRoutesEnabled, v.SharedRoutesEnabled)
 	if v.Status != "" {
 		s.WriteString(schemas.PoolInformation_Status, string(v.Status))
 	}
@@ -1903,9 +1881,7 @@ func (v *PoolInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TwoWayChannelRole != nil {
 		s.WriteString(schemas.PoolInformation_TwoWayChannelRole, *v.TwoWayChannelRole)
 	}
-	if v.TwoWayEnabled != false {
-		s.WriteBool(schemas.PoolInformation_TwoWayEnabled, v.TwoWayEnabled)
-	}
+	s.WriteBool(schemas.PoolInformation_TwoWayEnabled, v.TwoWayEnabled)
 }
 func (v *PoolInformation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.PoolInformation, func(s *smithy.Schema) error {
@@ -2126,15 +2102,11 @@ func (v *ProtectConfigurationInformation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProtectConfigurationInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AccountDefault != false {
-		s.WriteBool(schemas.ProtectConfigurationInformation_AccountDefault, v.AccountDefault)
-	}
+	s.WriteBool(schemas.ProtectConfigurationInformation_AccountDefault, v.AccountDefault)
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.ProtectConfigurationInformation_CreatedTimestamp, *v.CreatedTimestamp)
 	}
-	if v.DeletionProtectionEnabled != false {
-		s.WriteBool(schemas.ProtectConfigurationInformation_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
-	}
+	s.WriteBool(schemas.ProtectConfigurationInformation_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
 	if v.ProtectConfigurationArn != nil {
 		s.WriteString(schemas.ProtectConfigurationInformation_ProtectConfigurationArn, *v.ProtectConfigurationArn)
 	}
@@ -2406,9 +2378,7 @@ func (v *RcsAgentInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CreatedTimestamp != nil {
 		s.WriteTime(schemas.RcsAgentInformation_CreatedTimestamp, *v.CreatedTimestamp)
 	}
-	if v.DeletionProtectionEnabled != false {
-		s.WriteBool(schemas.RcsAgentInformation_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
-	}
+	s.WriteBool(schemas.RcsAgentInformation_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
 	if v.OptOutListName != nil {
 		s.WriteString(schemas.RcsAgentInformation_OptOutListName, *v.OptOutListName)
 	}
@@ -2421,9 +2391,7 @@ func (v *RcsAgentInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.RcsAgentId != nil {
 		s.WriteString(schemas.RcsAgentInformation_RcsAgentId, *v.RcsAgentId)
 	}
-	if v.SelfManagedOptOutsEnabled != false {
-		s.WriteBool(schemas.RcsAgentInformation_SelfManagedOptOutsEnabled, v.SelfManagedOptOutsEnabled)
-	}
+	s.WriteBool(schemas.RcsAgentInformation_SelfManagedOptOutsEnabled, v.SelfManagedOptOutsEnabled)
 	if v.Status != "" {
 		s.WriteString(schemas.RcsAgentInformation_Status, string(v.Status))
 	}
@@ -2438,9 +2406,7 @@ func (v *RcsAgentInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.TwoWayChannelRole != nil {
 		s.WriteString(schemas.RcsAgentInformation_TwoWayChannelRole, *v.TwoWayChannelRole)
 	}
-	if v.TwoWayEnabled != false {
-		s.WriteBool(schemas.RcsAgentInformation_TwoWayEnabled, v.TwoWayEnabled)
-	}
+	s.WriteBool(schemas.RcsAgentInformation_TwoWayEnabled, v.TwoWayEnabled)
 }
 func (v *RcsAgentInformation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RcsAgentInformation, func(s *smithy.Schema) error {
@@ -4112,9 +4078,7 @@ func (v *SenderIdInformation) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SenderIdInformation) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeletionProtectionEnabled != false {
-		s.WriteBool(schemas.SenderIdInformation_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
-	}
+	s.WriteBool(schemas.SenderIdInformation_DeletionProtectionEnabled, v.DeletionProtectionEnabled)
 	if v.IsoCountryCode != nil {
 		s.WriteString(schemas.SenderIdInformation_IsoCountryCode, *v.IsoCountryCode)
 	}
@@ -4122,9 +4086,7 @@ func (v *SenderIdInformation) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MonthlyLeasingPrice != nil {
 		s.WriteString(schemas.SenderIdInformation_MonthlyLeasingPrice, *v.MonthlyLeasingPrice)
 	}
-	if v.Registered != false {
-		s.WriteBool(schemas.SenderIdInformation_Registered, v.Registered)
-	}
+	s.WriteBool(schemas.SenderIdInformation_Registered, v.Registered)
 	if v.RegistrationId != nil {
 		s.WriteString(schemas.SenderIdInformation_RegistrationId, *v.RegistrationId)
 	}
@@ -4241,18 +4203,12 @@ func (v *SpendLimit) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SpendLimit) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EnforcedLimit != 0 {
-		s.WriteInt64(schemas.SpendLimit_EnforcedLimit, v.EnforcedLimit)
-	}
-	if v.MaxLimit != 0 {
-		s.WriteInt64(schemas.SpendLimit_MaxLimit, v.MaxLimit)
-	}
+	s.WriteInt64(schemas.SpendLimit_EnforcedLimit, v.EnforcedLimit)
+	s.WriteInt64(schemas.SpendLimit_MaxLimit, v.MaxLimit)
 	if v.Name != "" {
 		s.WriteString(schemas.SpendLimit_Name, string(v.Name))
 	}
-	if v.Overridden != false {
-		s.WriteBool(schemas.SpendLimit_Overridden, v.Overridden)
-	}
+	s.WriteBool(schemas.SpendLimit_Overridden, v.Overridden)
 }
 func (v *SpendLimit) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SpendLimit, func(s *smithy.Schema) error {
@@ -4477,9 +4433,7 @@ func (v *TemplateVariableMetadata) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Pattern != nil {
 		s.WriteString(schemas.TemplateVariableMetadata_Pattern, *v.Pattern)
 	}
-	if v.Required != false {
-		s.WriteBool(schemas.TemplateVariableMetadata_Required, v.Required)
-	}
+	s.WriteBool(schemas.TemplateVariableMetadata_Required, v.Required)
 	if v.Sample != nil {
 		s.WriteString(schemas.TemplateVariableMetadata_Sample, *v.Sample)
 	}

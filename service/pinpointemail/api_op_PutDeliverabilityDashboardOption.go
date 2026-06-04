@@ -74,9 +74,7 @@ func (v *PutDeliverabilityDashboardOptionInput) Serialize(s smithy.ShapeSerializ
 }
 
 func (v *PutDeliverabilityDashboardOptionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DashboardEnabled != false {
-		s.WriteBool(schemas.PutDeliverabilityDashboardOptionRequest_DashboardEnabled, v.DashboardEnabled)
-	}
+	s.WriteBool(schemas.PutDeliverabilityDashboardOptionRequest_DashboardEnabled, v.DashboardEnabled)
 	serializeDomainDeliverabilityTrackingOptions(s, schemas.PutDeliverabilityDashboardOptionRequest_SubscribedDomains, v.SubscribedDomains)
 }
 

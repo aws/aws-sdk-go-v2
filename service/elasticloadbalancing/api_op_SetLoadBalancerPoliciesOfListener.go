@@ -71,9 +71,7 @@ func (v *SetLoadBalancerPoliciesOfListenerInput) SerializeMembers(s smithy.Shape
 	if v.LoadBalancerName != nil {
 		s.WriteString(schemas.SetLoadBalancerPoliciesOfListenerInput_LoadBalancerName, *v.LoadBalancerName)
 	}
-	if v.LoadBalancerPort != 0 {
-		s.WriteInt32(schemas.SetLoadBalancerPoliciesOfListenerInput_LoadBalancerPort, v.LoadBalancerPort)
-	}
+	s.WriteInt32(schemas.SetLoadBalancerPoliciesOfListenerInput_LoadBalancerPort, v.LoadBalancerPort)
 	serializePolicyNames(s, schemas.SetLoadBalancerPoliciesOfListenerInput_PolicyNames, v.PolicyNames)
 }
 

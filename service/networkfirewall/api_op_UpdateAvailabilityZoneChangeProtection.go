@@ -81,9 +81,7 @@ func (v *UpdateAvailabilityZoneChangeProtectionInput) Serialize(s smithy.ShapeSe
 }
 
 func (v *UpdateAvailabilityZoneChangeProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AvailabilityZoneChangeProtection != false {
-		s.WriteBool(schemas.UpdateAvailabilityZoneChangeProtectionRequest_AvailabilityZoneChangeProtection, v.AvailabilityZoneChangeProtection)
-	}
+	s.WriteBool(schemas.UpdateAvailabilityZoneChangeProtectionRequest_AvailabilityZoneChangeProtection, v.AvailabilityZoneChangeProtection)
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.UpdateAvailabilityZoneChangeProtectionRequest_FirewallArn, *v.FirewallArn)
 	}

@@ -3074,12 +3074,8 @@ func (v *RouteDriverScheduleInterval) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteDriverScheduleInterval) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DriveDuration != 0 {
-		s.WriteInt64(schemas.RouteDriverScheduleInterval_DriveDuration, v.DriveDuration)
-	}
-	if v.RestDuration != 0 {
-		s.WriteInt64(schemas.RouteDriverScheduleInterval_RestDuration, v.RestDuration)
-	}
+	s.WriteInt64(schemas.RouteDriverScheduleInterval_DriveDuration, v.DriveDuration)
+	s.WriteInt64(schemas.RouteDriverScheduleInterval_RestDuration, v.RestDuration)
 }
 func (v *RouteDriverScheduleInterval) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteDriverScheduleInterval, func(s *smithy.Schema) error {
@@ -3339,9 +3335,7 @@ func (v *RouteFerryAfterTravelStep) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteFerryAfterTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RouteFerryAfterTravelStep_Duration, v.Duration)
-	}
+	s.WriteInt64(schemas.RouteFerryAfterTravelStep_Duration, v.Duration)
 	if v.Instruction != nil {
 		s.WriteString(schemas.RouteFerryAfterTravelStep_Instruction, *v.Instruction)
 	}
@@ -3443,9 +3437,7 @@ func (v *RouteFerryBeforeTravelStep) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteFerryBeforeTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RouteFerryBeforeTravelStep_Duration, v.Duration)
-	}
+	s.WriteInt64(schemas.RouteFerryBeforeTravelStep_Duration, v.Duration)
 	if v.Instruction != nil {
 		s.WriteString(schemas.RouteFerryBeforeTravelStep_Instruction, *v.Instruction)
 	}
@@ -3716,12 +3708,8 @@ func (v *RouteFerryOverviewSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteFerryOverviewSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Distance != 0 {
-		s.WriteInt64(schemas.RouteFerryOverviewSummary_Distance, v.Distance)
-	}
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RouteFerryOverviewSummary_Duration, v.Duration)
-	}
+	s.WriteInt64(schemas.RouteFerryOverviewSummary_Distance, v.Distance)
+	s.WriteInt64(schemas.RouteFerryOverviewSummary_Duration, v.Duration)
 }
 func (v *RouteFerryOverviewSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteFerryOverviewSummary, func(s *smithy.Schema) error {
@@ -3938,9 +3926,7 @@ func (v *RouteFerryTravelOnlySummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteFerryTravelOnlySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RouteFerryTravelOnlySummary_Duration, v.Duration)
-	}
+	s.WriteInt64(schemas.RouteFerryTravelOnlySummary_Duration, v.Duration)
 }
 func (v *RouteFerryTravelOnlySummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteFerryTravelOnlySummary, func(s *smithy.Schema) error {
@@ -3991,9 +3977,7 @@ func (v *RouteFerryTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Distance != 0 {
 		s.WriteInt64(schemas.RouteFerryTravelStep_Distance, v.Distance)
 	}
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RouteFerryTravelStep_Duration, v.Duration)
-	}
+	s.WriteInt64(schemas.RouteFerryTravelStep_Duration, v.Duration)
 	if v.GeometryOffset != nil {
 		s.WriteInt32(schemas.RouteFerryTravelStep_GeometryOffset, *v.GeometryOffset)
 	}
@@ -5413,12 +5397,8 @@ func (v *RouteMatrixEntry) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RouteMatrixEntry) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Distance != 0 {
-		s.WriteInt64(schemas.RouteMatrixEntry_Distance, v.Distance)
-	}
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RouteMatrixEntry_Duration, v.Duration)
-	}
+	s.WriteInt64(schemas.RouteMatrixEntry_Distance, v.Distance)
+	s.WriteInt64(schemas.RouteMatrixEntry_Duration, v.Duration)
 	if v.Error != "" {
 		s.WriteString(schemas.RouteMatrixEntry_Error, string(v.Error))
 	}
@@ -6781,12 +6761,8 @@ func (v *RoutePedestrianOverviewSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RoutePedestrianOverviewSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Distance != 0 {
-		s.WriteInt64(schemas.RoutePedestrianOverviewSummary_Distance, v.Distance)
-	}
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RoutePedestrianOverviewSummary_Duration, v.Duration)
-	}
+	s.WriteInt64(schemas.RoutePedestrianOverviewSummary_Distance, v.Distance)
+	s.WriteInt64(schemas.RoutePedestrianOverviewSummary_Duration, v.Duration)
 }
 func (v *RoutePedestrianOverviewSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RoutePedestrianOverviewSummary, func(s *smithy.Schema) error {
@@ -7144,9 +7120,7 @@ func (v *RoutePedestrianTravelOnlySummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *RoutePedestrianTravelOnlySummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RoutePedestrianTravelOnlySummary_Duration, v.Duration)
-	}
+	s.WriteInt64(schemas.RoutePedestrianTravelOnlySummary_Duration, v.Duration)
 }
 func (v *RoutePedestrianTravelOnlySummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RoutePedestrianTravelOnlySummary, func(s *smithy.Schema) error {
@@ -7238,9 +7212,7 @@ func (v *RoutePedestrianTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Distance != 0 {
 		s.WriteInt64(schemas.RoutePedestrianTravelStep_Distance, v.Distance)
 	}
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RoutePedestrianTravelStep_Duration, v.Duration)
-	}
+	s.WriteInt64(schemas.RoutePedestrianTravelStep_Duration, v.Duration)
 	serializeLocalizedStringList(s, schemas.RoutePedestrianTravelStep_ExitNumber, v.ExitNumber)
 	if v.GeometryOffset != nil {
 		s.WriteInt32(schemas.RoutePedestrianTravelStep_GeometryOffset, *v.GeometryOffset)
@@ -13131,12 +13103,8 @@ func (v *RouteVehicleOverviewSummary) SerializeMembers(s smithy.ShapeSerializer)
 	if v.BestCaseDuration != 0 {
 		s.WriteInt64(schemas.RouteVehicleOverviewSummary_BestCaseDuration, v.BestCaseDuration)
 	}
-	if v.Distance != 0 {
-		s.WriteInt64(schemas.RouteVehicleOverviewSummary_Distance, v.Distance)
-	}
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RouteVehicleOverviewSummary_Duration, v.Duration)
-	}
+	s.WriteInt64(schemas.RouteVehicleOverviewSummary_Distance, v.Distance)
+	s.WriteInt64(schemas.RouteVehicleOverviewSummary_Duration, v.Duration)
 	if v.TypicalDuration != 0 {
 		s.WriteInt64(schemas.RouteVehicleOverviewSummary_TypicalDuration, v.TypicalDuration)
 	}
@@ -13582,9 +13550,7 @@ func (v *RouteVehicleTravelOnlySummary) SerializeMembers(s smithy.ShapeSerialize
 	if v.BestCaseDuration != 0 {
 		s.WriteInt64(schemas.RouteVehicleTravelOnlySummary_BestCaseDuration, v.BestCaseDuration)
 	}
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RouteVehicleTravelOnlySummary_Duration, v.Duration)
-	}
+	s.WriteInt64(schemas.RouteVehicleTravelOnlySummary_Duration, v.Duration)
 	if v.TypicalDuration != 0 {
 		s.WriteInt64(schemas.RouteVehicleTravelOnlySummary_TypicalDuration, v.TypicalDuration)
 	}
@@ -13703,9 +13669,7 @@ func (v *RouteVehicleTravelStep) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Distance != 0 {
 		s.WriteInt64(schemas.RouteVehicleTravelStep_Distance, v.Distance)
 	}
-	if v.Duration != 0 {
-		s.WriteInt64(schemas.RouteVehicleTravelStep_Duration, v.Duration)
-	}
+	s.WriteInt64(schemas.RouteVehicleTravelStep_Duration, v.Duration)
 	if v.EnterHighwayStepDetails != nil {
 		s.WriteStruct(schemas.RouteVehicleTravelStep_EnterHighwayStepDetails)
 		v.EnterHighwayStepDetails.SerializeMembers(s)
@@ -14302,9 +14266,7 @@ func (v *RouteWeightConstraint) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Type != "" {
 		s.WriteString(schemas.RouteWeightConstraint_Type, string(v.Type))
 	}
-	if v.Value != 0 {
-		s.WriteInt64(schemas.RouteWeightConstraint_Value, v.Value)
-	}
+	s.WriteInt64(schemas.RouteWeightConstraint_Value, v.Value)
 }
 func (v *RouteWeightConstraint) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.RouteWeightConstraint, func(s *smithy.Schema) error {
@@ -14770,24 +14732,16 @@ func (v *WaypointOptimizationConnection) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WaypointOptimizationConnection) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Distance != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationConnection_Distance, v.Distance)
-	}
+	s.WriteInt64(schemas.WaypointOptimizationConnection_Distance, v.Distance)
 	if v.From != nil {
 		s.WriteString(schemas.WaypointOptimizationConnection_From, *v.From)
 	}
-	if v.RestDuration != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationConnection_RestDuration, v.RestDuration)
-	}
+	s.WriteInt64(schemas.WaypointOptimizationConnection_RestDuration, v.RestDuration)
 	if v.To != nil {
 		s.WriteString(schemas.WaypointOptimizationConnection_To, *v.To)
 	}
-	if v.TravelDuration != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationConnection_TravelDuration, v.TravelDuration)
-	}
-	if v.WaitDuration != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationConnection_WaitDuration, v.WaitDuration)
-	}
+	s.WriteInt64(schemas.WaypointOptimizationConnection_TravelDuration, v.TravelDuration)
+	s.WriteInt64(schemas.WaypointOptimizationConnection_WaitDuration, v.WaitDuration)
 }
 func (v *WaypointOptimizationConnection) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WaypointOptimizationConnection, func(s *smithy.Schema) error {
@@ -15298,12 +15252,8 @@ func (v *WaypointOptimizationRestCycleDurations) Serialize(s smithy.ShapeSeriali
 }
 
 func (v *WaypointOptimizationRestCycleDurations) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RestDuration != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationRestCycleDurations_RestDuration, v.RestDuration)
-	}
-	if v.WorkDuration != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationRestCycleDurations_WorkDuration, v.WorkDuration)
-	}
+	s.WriteInt64(schemas.WaypointOptimizationRestCycleDurations_RestDuration, v.RestDuration)
+	s.WriteInt64(schemas.WaypointOptimizationRestCycleDurations_WorkDuration, v.WorkDuration)
 }
 func (v *WaypointOptimizationRestCycleDurations) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WaypointOptimizationRestCycleDurations, func(s *smithy.Schema) error {
@@ -15488,18 +15438,10 @@ func (v *WaypointOptimizationTimeBreakdown) Serialize(s smithy.ShapeSerializer) 
 }
 
 func (v *WaypointOptimizationTimeBreakdown) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.RestDuration != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationTimeBreakdown_RestDuration, v.RestDuration)
-	}
-	if v.ServiceDuration != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationTimeBreakdown_ServiceDuration, v.ServiceDuration)
-	}
-	if v.TravelDuration != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationTimeBreakdown_TravelDuration, v.TravelDuration)
-	}
-	if v.WaitDuration != 0 {
-		s.WriteInt64(schemas.WaypointOptimizationTimeBreakdown_WaitDuration, v.WaitDuration)
-	}
+	s.WriteInt64(schemas.WaypointOptimizationTimeBreakdown_RestDuration, v.RestDuration)
+	s.WriteInt64(schemas.WaypointOptimizationTimeBreakdown_ServiceDuration, v.ServiceDuration)
+	s.WriteInt64(schemas.WaypointOptimizationTimeBreakdown_TravelDuration, v.TravelDuration)
+	s.WriteInt64(schemas.WaypointOptimizationTimeBreakdown_WaitDuration, v.WaitDuration)
 }
 func (v *WaypointOptimizationTimeBreakdown) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.WaypointOptimizationTimeBreakdown, func(s *smithy.Schema) error {

@@ -80,9 +80,7 @@ func (v *UpdateSubnetChangeProtectionInput) SerializeMembers(s smithy.ShapeSeria
 	if v.FirewallName != nil {
 		s.WriteString(schemas.UpdateSubnetChangeProtectionRequest_FirewallName, *v.FirewallName)
 	}
-	if v.SubnetChangeProtection != false {
-		s.WriteBool(schemas.UpdateSubnetChangeProtectionRequest_SubnetChangeProtection, v.SubnetChangeProtection)
-	}
+	s.WriteBool(schemas.UpdateSubnetChangeProtectionRequest_SubnetChangeProtection, v.SubnetChangeProtection)
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.UpdateSubnetChangeProtectionRequest_UpdateToken, *v.UpdateToken)
 	}

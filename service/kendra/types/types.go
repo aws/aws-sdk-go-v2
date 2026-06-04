@@ -4805,9 +4805,7 @@ func (v *FaqStatistics) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *FaqStatistics) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IndexedQuestionAnswersCount != 0 {
-		s.WriteInt32(schemas.FaqStatistics_IndexedQuestionAnswersCount, v.IndexedQuestionAnswersCount)
-	}
+	s.WriteInt32(schemas.FaqStatistics_IndexedQuestionAnswersCount, v.IndexedQuestionAnswersCount)
 }
 func (v *FaqStatistics) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FaqStatistics, func(s *smithy.Schema) error {
@@ -9849,9 +9847,7 @@ func (v *SpellCorrectionConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *SpellCorrectionConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IncludeQuerySpellCheckSuggestions != false {
-		s.WriteBool(schemas.SpellCorrectionConfiguration_IncludeQuerySpellCheckSuggestions, v.IncludeQuerySpellCheckSuggestions)
-	}
+	s.WriteBool(schemas.SpellCorrectionConfiguration_IncludeQuerySpellCheckSuggestions, v.IncludeQuerySpellCheckSuggestions)
 }
 func (v *SpellCorrectionConfiguration) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.SpellCorrectionConfiguration, func(s *smithy.Schema) error {
@@ -10423,12 +10419,8 @@ func (v *TextDocumentStatistics) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TextDocumentStatistics) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.IndexedTextBytes != 0 {
-		s.WriteInt64(schemas.TextDocumentStatistics_IndexedTextBytes, v.IndexedTextBytes)
-	}
-	if v.IndexedTextDocumentsCount != 0 {
-		s.WriteInt32(schemas.TextDocumentStatistics_IndexedTextDocumentsCount, v.IndexedTextDocumentsCount)
-	}
+	s.WriteInt64(schemas.TextDocumentStatistics_IndexedTextBytes, v.IndexedTextBytes)
+	s.WriteInt32(schemas.TextDocumentStatistics_IndexedTextDocumentsCount, v.IndexedTextDocumentsCount)
 }
 func (v *TextDocumentStatistics) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TextDocumentStatistics, func(s *smithy.Schema) error {

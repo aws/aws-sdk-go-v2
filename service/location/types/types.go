@@ -1554,9 +1554,7 @@ func (v *ForecastedEvent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.IsDeviceInGeofence != nil {
 		s.WriteBool(schemas.ForecastedEvent_IsDeviceInGeofence, *v.IsDeviceInGeofence)
 	}
-	if v.NearestDistance != 0 {
-		s.WriteFloat64(schemas.ForecastedEvent_NearestDistance, v.NearestDistance)
-	}
+	s.WriteFloat64(schemas.ForecastedEvent_NearestDistance, v.NearestDistance)
 }
 func (v *ForecastedEvent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ForecastedEvent, func(s *smithy.Schema) error {
@@ -3221,9 +3219,7 @@ func (v *LteCellDetails) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LteCellDetails) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CellId != 0 {
-		s.WriteInt32(schemas.LteCellDetails_CellId, v.CellId)
-	}
+	s.WriteInt32(schemas.LteCellDetails_CellId, v.CellId)
 	if v.LocalId != nil {
 		s.WriteStruct(schemas.LteCellDetails_LocalId)
 		v.LocalId.SerializeMembers(s)
@@ -3312,12 +3308,8 @@ func (v *LteLocalId) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LteLocalId) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Earfcn != 0 {
-		s.WriteInt32(schemas.LteLocalId_Earfcn, v.Earfcn)
-	}
-	if v.Pci != 0 {
-		s.WriteInt32(schemas.LteLocalId_Pci, v.Pci)
-	}
+	s.WriteInt32(schemas.LteLocalId_Earfcn, v.Earfcn)
+	s.WriteInt32(schemas.LteLocalId_Pci, v.Pci)
 }
 func (v *LteLocalId) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.LteLocalId, func(s *smithy.Schema) error {
@@ -3367,15 +3359,9 @@ func (v *LteNetworkMeasurements) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *LteNetworkMeasurements) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CellId != 0 {
-		s.WriteInt32(schemas.LteNetworkMeasurements_CellId, v.CellId)
-	}
-	if v.Earfcn != 0 {
-		s.WriteInt32(schemas.LteNetworkMeasurements_Earfcn, v.Earfcn)
-	}
-	if v.Pci != 0 {
-		s.WriteInt32(schemas.LteNetworkMeasurements_Pci, v.Pci)
-	}
+	s.WriteInt32(schemas.LteNetworkMeasurements_CellId, v.CellId)
+	s.WriteInt32(schemas.LteNetworkMeasurements_Earfcn, v.Earfcn)
+	s.WriteInt32(schemas.LteNetworkMeasurements_Pci, v.Pci)
 	if v.Rsrp != nil {
 		s.WriteInt32(schemas.LteNetworkMeasurements_Rsrp, *v.Rsrp)
 	}
