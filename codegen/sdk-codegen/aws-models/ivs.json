@@ -102,7 +102,7 @@
                 "mediaTailorPlaybackConfigurations": {
                     "target": "com.amazonaws.ivs#MediaTailorPlaybackConfigurationsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of integration configurations with media tailor resources.</p>",
+                        "smithy.api#documentation": "<p>List of integration configurations with MediaTailor resources. The first item in the list is the default playback configuration used for the ad configuration. To select a different configuration per viewing session, see <a href=\"https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html\">Generate and Sign IVS Playback Tokens</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -162,7 +162,7 @@
                 "mediaTailorPlaybackConfigurations": {
                     "target": "com.amazonaws.ivs#MediaTailorPlaybackConfigurationsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of integration configurations with media tailor resources.</p>",
+                        "smithy.api#documentation": "<p>List of integration configurations with MediaTailor resources. The first item in the list is the default playback configuration used for the ad configuration. To select a different configuration per viewing session, see <a href=\"https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html\">Generate and Sign IVS Playback Tokens</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -303,6 +303,9 @@
                 },
                 {
                     "target": "com.amazonaws.ivs#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.ivs#UpdateAdConfiguration"
                 },
                 {
                     "target": "com.amazonaws.ivs#UpdateChannel"
@@ -1700,7 +1703,7 @@
                 "type": {
                     "target": "com.amazonaws.ivs#ChannelType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html\">Channel Types</a>.</p>"
+                        "smithy.api#documentation": "<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html\">Channel Types</a>.</p>"
                     }
                 },
                 "recordingConfigurationArn": {
@@ -1987,7 +1990,7 @@
                 "type": {
                     "target": "com.amazonaws.ivs#ChannelType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html\">Channel Types</a>.</p>"
+                        "smithy.api#documentation": "<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html\">Channel Types</a>.</p>"
                     }
                 },
                 "preset": {
@@ -2189,7 +2192,7 @@
                 "mediaTailorPlaybackConfigurations": {
                     "target": "com.amazonaws.ivs#MediaTailorPlaybackConfigurationsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of integration configurations with media tailor resources.</p>",
+                        "smithy.api#documentation": "<p>List of integration configurations with MediaTailor resources. The first item in the list is the default playback configuration used for the ad configuration. To select a different configuration per viewing session, see <a href=\"https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html\">Generate and Sign IVS Playback Tokens</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2270,7 +2273,7 @@
                 "type": {
                     "target": "com.amazonaws.ivs#ChannelType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html\">Channel Types</a>.</p>"
+                        "smithy.api#documentation": "<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html\">Channel Types</a>.</p>"
                     }
                 },
                 "authorized": {
@@ -3487,7 +3490,7 @@
                 "durationSeconds": {
                     "target": "com.amazonaws.ivs#AdDurationSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum duration of the ad break, in seconds.</p>",
+                        "smithy.api#documentation": "<p>Duration of the ad break, in seconds.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5284,7 +5287,7 @@
                 "exceptionMessage": {
                     "target": "com.amazonaws.ivs#errorMessage",
                     "traits": {
-                        "smithy.api#documentation": "<p/>"
+                        "smithy.api#documentation": "<p>The service is temporarily unavailable.</p>"
                     }
                 }
             },
@@ -6268,6 +6271,90 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.ivs#UpdateAdConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.ivs#UpdateAdConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.ivs#UpdateAdConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.ivs#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.ivs#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.ivs#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.ivs#PendingVerification"
+                },
+                {
+                    "target": "com.amazonaws.ivs#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.ivs#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.ivs#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.ivs#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a specified ad configuration.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/UpdateAdConfiguration"
+                }
+            }
+        },
+        "com.amazonaws.ivs#UpdateAdConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.ivs#AdConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>ARN of the ad configuration to be updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.ivs#AdConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Ad configuration name. The value does not need to be unique.</p>"
+                    }
+                },
+                "mediaTailorPlaybackConfigurations": {
+                    "target": "com.amazonaws.ivs#MediaTailorPlaybackConfigurationsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of integration configurations with MediaTailor resources. The first item in the list is the default playback configuration used for the ad configuration. To select a different configuration per viewing session, see <a href=\"https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html\">Generate and Sign IVS Playback Tokens</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.ivs#UpdateAdConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "adConfiguration": {
+                    "target": "com.amazonaws.ivs#AdConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Object specifying the updated ad configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.ivs#UpdateChannel": {
             "type": "operation",
             "input": {
@@ -6326,7 +6413,7 @@
                 "type": {
                     "target": "com.amazonaws.ivs#ChannelType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html\">Channel Types</a>.</p>"
+                        "smithy.api#documentation": "<p>Channel type, which determines the allowable resolution and bitrate. <i>If you exceed the allowable input resolution or bitrate, the stream probably will disconnect immediately.</i> Default: <code>STANDARD</code>. For details, see <a href=\"https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html\">Channel Types</a>.</p>"
                     }
                 },
                 "authorized": {

@@ -464,7 +464,7 @@
                 "ProvisionedThroughputInMibps": {
                     "target": "com.amazonaws.efs#ProvisionedThroughputInMibps",
                     "traits": {
-                        "smithy.api#documentation": "<p>The throughput, measured in mebibytes per second (MiBps), that you want to provision for a\n      file system that you're creating. Required if <code>ThroughputMode</code> is set to\n        <code>provisioned</code>. Valid values are 1-3414 MiBps, with the upper limit depending on\n      Region. To increase this limit, contact Amazon Web ServicesSupport. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits\">Amazon EFS quotas\n        that you can increase</a> in the <i>Amazon EFS User\n      Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The throughput, measured in mebibytes per second (MiBps), that you want to provision for a\n      file system that you're creating. Required if <code>ThroughputMode</code> is set to\n        <code>provisioned</code>. Valid values are 1-3414 MiBps, with the upper limit depending on\n      Region. To increase this limit, contact Amazon Web Services Support. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits\">Amazon EFS quotas\n        that you can increase</a> in the <i>Amazon EFS User\n      Guide</i>.</p>"
                     }
                 },
                 "AvailabilityZoneName": {
@@ -2891,6 +2891,257 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<fullname>Amazon Elastic File System</fullname>\n         <p>Amazon Elastic File System (Amazon EFS) provides simple, scalable file storage for\n      use with Amazon EC2 Linux and Mac instances in the Amazon Web Services Cloud. With\n        Amazon EFS, storage capacity is elastic, growing and shrinking automatically as you\n      add and remove files, so that your applications have the storage they need, when they need it.\n      For more information, see the <a href=\"https://docs.aws.amazon.com/efs/latest/ug/api-reference.html\">Amazon Elastic File System API Reference</a> and\n      the <a href=\"https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html\">Amazon Elastic File System\n        User Guide</a>.</p>",
                 "smithy.api#title": "Amazon Elastic File System",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        },
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-us-gov"
+                            ]
+                        },
+                        {
+                            "fn": "stringEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "name"
+                                    ]
+                                },
+                                "aws-cn"
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://efs.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://efs-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://elasticfilesystem-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://elasticfilesystem-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://elasticfilesystem.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://elasticfilesystem.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 18,
+                    "nodes": "/////wAAAAH/////AAAAAAAAABAAAAADAAAAAQAAAAQF9eENAAAAAgAAAAUF9eENAAAAAwAAAAgAAAAGAAAACAAAAAcF9eEMAAAACQX14QgF9eEJAAAABAAAAA8AAAAJAAAABQAAAA8AAAAKAAAABgAAAA8AAAALAAAABwAAAA0AAAAMAAAACAX14QcF9eELAAAACAAAAA4F9eEKAAAACQX14QYF9eEHAAAACAX14QUF9eEEAAAAAwAAABIAAAARAAAACAX14QEF9eEDAAAACAX14QEF9eEC"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
@@ -5429,7 +5680,7 @@
                 "ProvisionedThroughputInMibps": {
                     "target": "com.amazonaws.efs#ProvisionedThroughputInMibps",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) The throughput, measured in mebibytes per second (MiBps), that you want to\n      provision for a file system that you're creating. Required if <code>ThroughputMode</code>\n      is set to <code>provisioned</code>. Valid values are 1-3414 MiBps, with the upper limit\n      depending on Region. To increase this limit, contact Amazon Web ServicesSupport. For more information,\n      see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits\">Amazon EFS\n        quotas that you can increase</a> in the <i>Amazon EFS User\n        Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>(Optional) The throughput, measured in mebibytes per second (MiBps), that you want to\n      provision for a file system that you're creating. Required if <code>ThroughputMode</code>\n      is set to <code>provisioned</code>. Valid values are 1-3414 MiBps, with the upper limit\n      depending on Region. To increase this limit, contact Amazon Web Services Support. For more information,\n      see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits\">Amazon EFS\n        quotas that you can increase</a> in the <i>Amazon EFS User\n        Guide</i>.</p>"
                     }
                 }
             },

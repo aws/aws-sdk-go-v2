@@ -298,6 +298,12 @@
                         "smithy.api#documentation": "<p>A list of tags to associate with a resource. Tags are user-defined key-value pairs that\n         consist of a required key string with a maximum of 128 characters, and an optional value\n         string with a maximum of 256 characters.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ClusterId": {
+                    "target": "com.amazonaws.emr#ClusterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the cluster that scopes the tag operation. Required when the resource being tagged is a session-scoped resource.</p>"
+                    }
                 }
             },
             "traits": {
@@ -803,6 +809,35 @@
                 }
             }
         },
+        "com.amazonaws.emr#CertificateAuthority": {
+            "type": "structure",
+            "members": {
+                "CertificateArn": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the certificate authority in Amazon Web Services Private CA that issued the Spark Connect server certificate.</p>"
+                    }
+                },
+                "CertificateData": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The PEM-encoded root CA certificate data. Provide this certificate to your client's trust store when connecting directly to the Spark Connect server over VPC peering.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the certificate authority used to establish an mTLS connection to the Spark Connect server when connecting directly over VPC peering.</p>"
+            }
+        },
+        "com.amazonaws.emr#ClientRequestToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 36
+                }
+            }
+        },
         "com.amazonaws.emr#CloudWatchAlarmDefinition": {
             "type": "structure",
             "members": {
@@ -1131,6 +1166,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains Cloudwatch log configuration metadata and settings.</p>"
                     }
+                },
+                "SessionEnabled": {
+                    "target": "com.amazonaws.emr#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether Spark Connect sessions are enabled on the cluster.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1138,7 +1179,13 @@
             }
         },
         "com.amazonaws.emr#ClusterId": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
         },
         "com.amazonaws.emr#ClusterState": {
             "type": "enum",
@@ -2949,6 +2996,12 @@
                     "target": "com.amazonaws.emr#GetPersistentAppUIPresignedURL"
                 },
                 {
+                    "target": "com.amazonaws.emr#GetSession"
+                },
+                {
+                    "target": "com.amazonaws.emr#GetSessionEndpoint"
+                },
+                {
                     "target": "com.amazonaws.emr#GetStudioSessionMapping"
                 },
                 {
@@ -2974,6 +3027,9 @@
                 },
                 {
                     "target": "com.amazonaws.emr#ListSecurityConfigurations"
+                },
+                {
+                    "target": "com.amazonaws.emr#ListSessions"
                 },
                 {
                     "target": "com.amazonaws.emr#ListSteps"
@@ -3039,10 +3095,16 @@
                     "target": "com.amazonaws.emr#StartNotebookExecution"
                 },
                 {
+                    "target": "com.amazonaws.emr#StartSession"
+                },
+                {
                     "target": "com.amazonaws.emr#StopNotebookExecution"
                 },
                 {
                     "target": "com.amazonaws.emr#TerminateJobFlows"
+                },
+                {
+                    "target": "com.amazonaws.emr#TerminateSession"
                 },
                 {
                     "target": "com.amazonaws.emr#UpdateStudio"
@@ -4759,6 +4821,148 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.emr#GetSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emr#GetSessionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#GetSessionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns detailed information about a session.</p>"
+            }
+        },
+        "com.amazonaws.emr#GetSessionEndpoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emr#GetSessionEndpointInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#GetSessionEndpointOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the Spark Connect endpoint URL and a time-limited authentication token for the specified session. Use the endpoint and token to connect a PySpark client to the session. Call this operation again when the token expires to obtain a new one.</p>"
+            }
+        },
+        "com.amazonaws.emr#GetSessionEndpointInput": {
+            "type": "structure",
+            "members": {
+                "ClusterId": {
+                    "target": "com.amazonaws.emr#ClusterId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the cluster that the session belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.emr#SessionId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the <code>GetSessionEndpoint</code> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emr#GetSessionEndpointOutput": {
+            "type": "structure",
+            "members": {
+                "Endpoint": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Spark Connect endpoint URL to use in the PySpark client.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AuthToken": {
+                    "target": "com.amazonaws.emr#SensitiveString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A time-limited authentication token used to connect to the Spark Connect endpoint.</p>"
+                    }
+                },
+                "AuthTokenExpirationTime": {
+                    "target": "com.amazonaws.emr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the authentication token expires. After this time, call <code>GetSessionEndpoint</code> again to obtain a new token.</p>"
+                    }
+                },
+                "Credentials": {
+                    "target": "com.amazonaws.emr#Credentials",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Username and password used to authenticate with the Spark Connect server when connecting directly over VPC peering.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of the <code>GetSessionEndpoint</code> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.emr#GetSessionInput": {
+            "type": "structure",
+            "members": {
+                "ClusterId": {
+                    "target": "com.amazonaws.emr#ClusterId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the cluster that the session belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.emr#SessionId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the <code>GetSession</code> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emr#GetSessionOutput": {
+            "type": "structure",
+            "members": {
+                "Session": {
+                    "target": "com.amazonaws.emr#Session",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The output displays information about the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of the <code>GetSession</code> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.emr#GetStudioSessionMapping": {
             "type": "operation",
             "input": {
@@ -5181,7 +5385,13 @@
             }
         },
         "com.amazonaws.emr#InstanceFleetId": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
         },
         "com.amazonaws.emr#InstanceFleetList": {
             "type": "list",
@@ -5767,7 +5977,13 @@
             }
         },
         "com.amazonaws.emr#InstanceGroupId": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
         },
         "com.amazonaws.emr#InstanceGroupIdsList": {
             "type": "list",
@@ -7553,6 +7769,87 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.emr#ListSessions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emr#ListSessionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#ListSessionsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists the sessions on a cluster. You can filter the results by session state. Newer sessions are returned first.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "Sessions"
+                }
+            }
+        },
+        "com.amazonaws.emr#ListSessionsInput": {
+            "type": "structure",
+            "members": {
+                "ClusterId": {
+                    "target": "com.amazonaws.emr#ClusterId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the cluster to list sessions for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionStates": {
+                    "target": "com.amazonaws.emr#SessionStateList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional filter that limits the results to sessions in the specified states.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token returned by a previous <code>ListSessions</code> call. Use it to retrieve the next page of results.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.emr#MaxResultsNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of sessions to return in each page of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the <code>ListSessions</code> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emr#ListSessionsOutput": {
+            "type": "structure",
+            "members": {
+                "Sessions": {
+                    "target": "com.amazonaws.emr#SessionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sessions that match the request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token to use in a subsequent <code>ListSessions</code> call to retrieve the next page of results. This field is absent when there are no more results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of the <code>ListSessions</code> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.emr#ListSteps": {
             "type": "operation",
             "input": {
@@ -9289,6 +9586,12 @@
                         "smithy.api#documentation": "<p>A list of tag keys to remove from the resource.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ClusterId": {
+                    "target": "com.amazonaws.emr#ClusterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the cluster that scopes the tag operation. Required when the resource being untagged is a session-scoped resource.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9548,6 +9851,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Contains CloudWatch log configuration metadata and settings.</p>"
                     }
+                },
+                "SessionEnabled": {
+                    "target": "com.amazonaws.emr#BooleanObject",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether Spark Connect sessions are enabled on the cluster. When set to <code>true</code>, you can start Spark Connect sessions using the <code>StartSession</code> operation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -9582,7 +9891,7 @@
                 "LogTypeUploadPolicy": {
                     "target": "com.amazonaws.emr#LogTypeMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map that specifies the upload policy for each log type. The key is the log type, and the value is the upload policy.</p>\n         <p>Valid log types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>system-logs</code>: System-level logs including daemon logs, bootstrap logs, and other infrastructure logs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>application-logs</code>: Application-level logs from frameworks like Hadoop, Spark, Hive, etc.</p>\n            </li>\n            <li>\n               <p>\n                  <code>persistent-ui-logs</code>: Logs for persistent application UIs like Spark History Server.</p>\n            </li>\n         </ul>\n         <p>Valid upload policies:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>emr-managed</code>: Logs are uploaded to both the EMR-managed S3 bucket and the customer-specified S3 bucket (if LogUri is provided).</p>\n            </li>\n            <li>\n               <p>\n                  <code>on-customer-s3only</code>: Logs are uploaded only to the customer-specified S3 bucket. Requires LogUri to be specified in the cluster configuration.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disabled</code>: Log upload is disabled for this log type.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A map that specifies the upload policy for each log type. The key is the log type, and the value is the upload policy.</p>\n         <p>Valid log types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>system-logs</code>: EMR Daemon logs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>application-logs</code>: Framework logs from Hadoop, Spark, Hive and other applications running on the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>persistent-ui-logs</code>: Logs required for persistent application UIs such as Spark History Server and Tez UI.</p>\n            </li>\n         </ul>\n         <p>Valid upload policies:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>emr-managed</code>: Standard behavior. Logs are uploaded to S3 bucket as configured in your\n                LogUri, with certain logs retained by the service for operational\n                support and troubleshooting purposes.</p>\n            </li>\n            <li>\n               <p>\n                  <code>on-customer-s3only</code>: Logs are uploaded only to the customer-specified S3 bucket. This requires you to specify a LogUri\n                when creating the cluster. Persistent-ui-logs cannot have\n                on-customer-s3only policy. Allowed policies for persistent-ui-logs\n                are emr-managed and disabled.</p>\n            </li>\n            <li>\n               <p>\n                  <code>disabled</code>: No S3 upload for this log type.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -9804,6 +10113,221 @@
                 "target": "com.amazonaws.emr#XmlStringMaxLen256"
             }
         },
+        "com.amazonaws.emr#SensitiveString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.emr#Session": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.emr#SessionId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterId": {
+                    "target": "com.amazonaws.emr#ClusterId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the cluster that the session belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the session, if one was provided at creation time.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.emr#ArnType",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.emr#SessionState",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The current state of the session. Valid values are <code>SUBMITTED</code>, <code>STARTING</code>, <code>STARTED</code>, <code>IDLE</code>, <code>BUSY</code>, <code>TERMINATING</code>, <code>TERMINATED</code>, and <code>FAILED</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "StateChangeReason": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A human-readable message describing the most recent state change.</p>"
+                    }
+                },
+                "ReleaseLabel": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EMR release label of the cluster that the session is running on.</p>"
+                    }
+                },
+                "ExecutionRoleArn": {
+                    "target": "com.amazonaws.emr#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution role ARN for the session. Amazon EMR uses this role to access Amazon Web Services resources on your behalf during session execution.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the session.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.emr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the session was created.</p>"
+                    }
+                },
+                "UpdatedAt": {
+                    "target": "com.amazonaws.emr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the session was last updated.</p>"
+                    }
+                },
+                "StartedAt": {
+                    "target": "com.amazonaws.emr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the session entered the <code>STARTED</code> state.</p>"
+                    }
+                },
+                "EndedAt": {
+                    "target": "com.amazonaws.emr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the session was terminated or failed.</p>"
+                    }
+                },
+                "IdleSince": {
+                    "target": "com.amazonaws.emr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the session last entered the <code>IDLE</code> state.</p>"
+                    }
+                },
+                "EngineConfigurations": {
+                    "target": "com.amazonaws.emr#ConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration overrides for the session. Only runtime configuration overrides are supported.</p>"
+                    }
+                },
+                "MonitoringConfiguration": {
+                    "target": "com.amazonaws.emr#SessionMonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The monitoring configuration for the session.</p>"
+                    }
+                },
+                "SessionIdleTimeoutInMinutes": {
+                    "target": "com.amazonaws.emr#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The idle timeout, in minutes. If the session is idle for this duration, Amazon EMR automatically terminates it.</p>"
+                    }
+                },
+                "CertificateAuthority": {
+                    "target": "com.amazonaws.emr#CertificateAuthority",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate authority used to establish an mTLS connection to the Spark Connect server when connecting directly over VPC peering.</p>"
+                    }
+                },
+                "ServerUrl": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Spark Connect server URL for the session. Use this URL with the <code>Credentials</code> returned by <code>GetSessionEndpoint</code> to connect directly to the session over VPC peering.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.emr#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags associated with the session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Detailed information about a Spark Connect session.</p>"
+            }
+        },
+        "com.amazonaws.emr#SessionCloudWatchLoggingConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.emr#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether CloudWatch Logs is enabled for the session.</p>"
+                    }
+                },
+                "LogGroup": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the log group where session logs are published.</p>"
+                    }
+                },
+                "LogStreamNamePrefix": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix applied to the log stream name where session logs are published.</p>"
+                    }
+                },
+                "EncryptionKeyArn": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the logs published to CloudWatch Logs.</p>"
+                    }
+                },
+                "LogTypes": {
+                    "target": "com.amazonaws.emr#LogTypesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of log component names (for example, <code>SPARK_DRIVER</code>, <code>SPARK_EXECUTOR</code>) to the list of log types to publish for that component (for example, <code>stdout</code>, <code>stderr</code>).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The CloudWatch Logs configuration for a session.</p>"
+            }
+        },
+        "com.amazonaws.emr#SessionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.emr#SessionList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emr#Session"
+            }
+        },
+        "com.amazonaws.emr#SessionManagedLoggingConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.emr#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether Amazon EMR-managed logging is enabled for the session.</p>"
+                    }
+                },
+                "EncryptionKeyArn": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the managed logs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon EMR-managed logging configuration for a session.</p>"
+            }
+        },
         "com.amazonaws.emr#SessionMappingDetail": {
             "type": "structure",
             "members": {
@@ -9902,6 +10426,123 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.emr#SessionMappingSummary"
+            }
+        },
+        "com.amazonaws.emr#SessionMonitoringConfiguration": {
+            "type": "structure",
+            "members": {
+                "CloudWatchLoggingConfiguration": {
+                    "target": "com.amazonaws.emr#SessionCloudWatchLoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CloudWatch Logs configuration for the session.</p>"
+                    }
+                },
+                "ManagedLoggingConfiguration": {
+                    "target": "com.amazonaws.emr#SessionManagedLoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon EMR-managed logging configuration for the session.</p>"
+                    }
+                },
+                "S3LoggingConfiguration": {
+                    "target": "com.amazonaws.emr#SessionS3LoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 logging configuration for the session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The monitoring configuration for a session. Controls where session logs are published.</p>"
+            }
+        },
+        "com.amazonaws.emr#SessionS3LoggingConfiguration": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.emr#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether Amazon S3 logging is enabled for the session.</p>"
+                    }
+                },
+                "LogUri": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 destination URI where session logs are published.</p>"
+                    }
+                },
+                "EncryptionKeyArn": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt logs published to Amazon S3.</p>"
+                    }
+                },
+                "LogTypes": {
+                    "target": "com.amazonaws.emr#LogTypesMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of log component names (for example, <code>SPARK_DRIVER</code>, <code>SPARK_EXECUTOR</code>) to the list of log types to publish for that component (for example, <code>stdout</code>, <code>stderr</code>).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 logging configuration for a session.</p>"
+            }
+        },
+        "com.amazonaws.emr#SessionState": {
+            "type": "enum",
+            "members": {
+                "SUBMITTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUBMITTED"
+                    }
+                },
+                "STARTING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTING"
+                    }
+                },
+                "STARTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STARTED"
+                    }
+                },
+                "IDLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IDLE"
+                    }
+                },
+                "BUSY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "BUSY"
+                    }
+                },
+                "TERMINATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATING"
+                    }
+                },
+                "TERMINATED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "TERMINATED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emr#SessionStateList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emr#SessionState"
             }
         },
         "com.amazonaws.emr#SetKeepJobFlowAliveWhenNoSteps": {
@@ -10370,6 +11011,126 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.emr#StartSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emr#StartSessionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#StartSessionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates and starts a new Spark Connect session on the specified cluster. The cluster must be in the <code>RUNNING</code> or <code>WAITING</code> state and have sessions enabled. This operation is supported in Amazon EMR Spark 8.0.0 and later.</p>"
+            }
+        },
+        "com.amazonaws.emr#StartSessionInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional name for the session.</p>"
+                    }
+                },
+                "ClusterId": {
+                    "target": "com.amazonaws.emr#ClusterId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the cluster on which to start the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutionRoleArn": {
+                    "target": "com.amazonaws.emr#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution role ARN for the session. Amazon EMR uses this role to access Amazon Web Services resources on your behalf during session execution.</p>"
+                    }
+                },
+                "EngineConfigurations": {
+                    "target": "com.amazonaws.emr#ConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration overrides for the session. Only runtime configuration overrides are supported.</p>"
+                    }
+                },
+                "MonitoringConfiguration": {
+                    "target": "com.amazonaws.emr#SessionMonitoringConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The monitoring configuration that controls where session logs are published, such as Amazon S3, CloudWatch, or managed logging.</p>"
+                    }
+                },
+                "SessionIdleTimeoutInMinutes": {
+                    "target": "com.amazonaws.emr#Long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The idle timeout, in minutes. If the session is idle for this duration, Amazon EMR EC2 automatically terminates it.</p>"
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.emr#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. If you retry a request that completed successfully using the same client request token, the service returns the original response without performing the operation again.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.emr#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to assign to the session.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the <code>StartSession</code> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emr#StartSessionOutput": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.emr#SessionId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The output contains the ID of the session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClusterId": {
+                    "target": "com.amazonaws.emr#ClusterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the cluster that the session was started on.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.emr#ArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output contains the ARN of the session.</p>"
+                    }
+                },
+                "AccountId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the session.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.emr#SessionState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the session at the time the request returned. When a session is first created, it enters the <code>SUBMITTED</code> state.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of the <code>StartSession</code> operation.</p>",
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.emr#Statistic": {
             "type": "enum",
             "members": {
@@ -10453,7 +11214,7 @@
                 "EncryptionKeyArn": {
                     "target": "com.amazonaws.emr#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key ARN to encrypt the logs published to the given Amazon S3 \n         destination.</p>"
+                        "smithy.api#documentation": "<p>The KMS key ARN to encrypt the logs published to the given Amazon S3\n         destination.</p>"
                     }
                 }
             },
@@ -11274,6 +12035,84 @@
             "traits": {
                 "smithy.api#documentation": "<p> Input to the <a>TerminateJobFlows</a> operation. </p>",
                 "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emr#TerminateSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emr#TerminateSessionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#TerminateSessionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Terminates an active session. After you call this operation, the session enters the <code>TERMINATING</code> state and then transitions to <code>TERMINATED</code>.</p>"
+            }
+        },
+        "com.amazonaws.emr#TerminateSessionInput": {
+            "type": "structure",
+            "members": {
+                "ClusterId": {
+                    "target": "com.amazonaws.emr#ClusterId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the cluster that the session belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.emr#SessionId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the session to terminate.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Input to the <code>TerminateSession</code> operation.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emr#TerminateSessionOutput": {
+            "type": "structure",
+            "members": {
+                "ClusterId": {
+                    "target": "com.amazonaws.emr#ClusterId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the cluster that the session belonged to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.emr#SessionId",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The ID of the terminated session.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.emr#SessionState",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The state of the session after the terminate request has been accepted.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output of the <code>TerminateSession</code> operation.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.emr#ThroughputVal": {

@@ -1219,7 +1219,7 @@
                 "CustomerProfiles": {
                     "target": "com.amazonaws.appflow#CustomerProfilesMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p> The connector metadata specific to Amazon Connect Customer Profiles. </p>"
+                        "smithy.api#documentation": "<p> The connector metadata specific to Connect Customer Customer Profiles. </p>"
                     }
                 },
                 "Honeycode": {
@@ -2588,26 +2588,26 @@
                 "domainName": {
                     "target": "com.amazonaws.appflow#DomainName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The unique name of the Amazon Connect Customer Profiles domain. </p>",
+                        "smithy.api#documentation": "<p> The unique name of the Connect Customer Customer Profiles domain. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "objectTypeName": {
                     "target": "com.amazonaws.appflow#ObjectTypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p> The object specified in the Amazon Connect Customer Profiles flow destination.\n    </p>"
+                        "smithy.api#documentation": "<p> The object specified in the Connect Customer Customer Profiles flow destination.\n    </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The properties that are applied when Amazon Connect Customer Profiles is used as a\n      destination. </p>"
+                "smithy.api#documentation": "<p> The properties that are applied when Connect Customer Customer Profiles is used as a\n      destination. </p>"
             }
         },
         "com.amazonaws.appflow#CustomerProfilesMetadata": {
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p> The connector metadata specific to Amazon Connect Customer Profiles. </p>"
+                "smithy.api#documentation": "<p> The connector metadata specific to Connect Customer Customer Profiles. </p>"
             }
         },
         "com.amazonaws.appflow#DataApiRoleArn": {
@@ -3612,7 +3612,7 @@
                 "CustomerProfiles": {
                     "target": "com.amazonaws.appflow#CustomerProfilesDestinationProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p> The properties required to query Amazon Connect Customer Profiles. </p>"
+                        "smithy.api#documentation": "<p> The properties required to query Connect Customer Customer Profiles. </p>"
                     }
                 },
                 "Zendesk": {
@@ -7100,13 +7100,13 @@
                 "connectorProfileName": {
                     "target": "com.amazonaws.appflow#ConnectorProfileName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the connector profile that you want to reset cached metadata for.</p>\n         <p>You can omit this parameter if you're resetting the cache for any of the following\n      connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you're resetting the cache for any other connector, you must include this\n      parameter in your request.</p>"
+                        "smithy.api#documentation": "<p>The name of the connector profile that you want to reset cached metadata for.</p>\n         <p>You can omit this parameter if you're resetting the cache for any of the following\n      connectors: Connect Customer, Amazon EventBridge, Amazon Lookout for Metrics, Amazon S3, or Upsolver. If you're resetting the cache for any other connector, you must include this\n      parameter in your request.</p>"
                     }
                 },
                 "connectorType": {
                     "target": "com.amazonaws.appflow#ConnectorType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of connector to reset cached metadata for.</p>\n         <p>You must include this parameter in your request if you're resetting the cache for any of\n      the following connectors: Amazon Connect, Amazon EventBridge, Amazon Lookout for Metrics,\n        Amazon S3, or Upsolver. If you're resetting the cache for any other connector, you\n      can omit this parameter from your request. </p>"
+                        "smithy.api#documentation": "<p>The type of connector to reset cached metadata for.</p>\n         <p>You must include this parameter in your request if you're resetting the cache for any of\n      the following connectors: Connect Customer, Amazon EventBridge, Amazon Lookout for Metrics,\n        Amazon S3, or Upsolver. If you're resetting the cache for any other connector, you\n      can omit this parameter from your request. </p>"
                     }
                 },
                 "connectorEntityName": {
@@ -8151,6 +8151,194 @@
                 "aws.protocols#restJson1": {},
                 "smithy.api#documentation": "<p>Welcome to the Amazon AppFlow API reference. This guide is for developers who need\n      detailed information about the Amazon AppFlow API operations, data types, and errors. </p>\n         <p>Amazon AppFlow is a fully managed integration service that enables you to securely\n      transfer data between software as a service (SaaS) applications like Salesforce, Marketo,\n      Slack, and ServiceNow, and Amazon Web Services like Amazon S3 and Amazon Redshift. </p>\n         <p>Use the following links to get started on the Amazon AppFlow API:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all Amazon AppFlow API operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Types.html\">Data\n            types</a>: An alphabetical list of all Amazon AppFlow data types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonParameters.html\">Common parameters</a>: Parameters that all Query operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonErrors.html\">Common\n            errors</a>: Client and server errors that all operations can return.</p>\n            </li>\n         </ul>\n         <p>If you're new to Amazon AppFlow, we recommend that you review the <a href=\"https://docs.aws.amazon.com/appflow/latest/userguide/what-is-appflow.html\">Amazon AppFlow\n        User Guide</a>.</p>\n         <p>Amazon AppFlow API users can use vendor-specific mechanisms for OAuth, and include\n      applicable OAuth attributes (such as <code>auth-code</code> and <code>redirecturi</code>) with\n      the connector-specific <code>ConnectorProfileProperties</code> when creating a new connector\n      profile using Amazon AppFlow API operations. For example, Salesforce users can refer to\n      the <a href=\"https://help.salesforce.com/articleView?id=remoteaccess_authenticate.htm\">\n               <i>Authorize Apps with OAuth</i>\n            </a> documentation.</p>",
                 "smithy.api#title": "Amazon Appflow",
+                "smithy.rules#endpointBdd": {
+                    "version": "1.1",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "string"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "string"
+                        }
+                    },
+                    "conditions": [
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Endpoint"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "isSet",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ]
+                        },
+                        {
+                            "fn": "aws.partition",
+                            "argv": [
+                                {
+                                    "ref": "Region"
+                                }
+                            ],
+                            "assign": "PartitionResult"
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseFIPS"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "ref": "UseDualStack"
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsDualStack"
+                                    ]
+                                },
+                                true
+                            ]
+                        },
+                        {
+                            "fn": "booleanEquals",
+                            "argv": [
+                                {
+                                    "fn": "getAttr",
+                                    "argv": [
+                                        {
+                                            "ref": "PartitionResult"
+                                        },
+                                        "supportsFIPS"
+                                    ]
+                                },
+                                true
+                            ]
+                        }
+                    ],
+                    "results": [
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": {
+                                    "ref": "Endpoint"
+                                },
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://appflow-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://appflow-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "FIPS is enabled but this partition does not support FIPS",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://appflow.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "DualStack is enabled but this partition does not support DualStack",
+                            "type": "error"
+                        },
+                        {
+                            "conditions": [],
+                            "endpoint": {
+                                "url": "https://appflow.{Region}.{PartitionResult#dnsSuffix}",
+                                "properties": {},
+                                "headers": {}
+                            },
+                            "type": "endpoint"
+                        },
+                        {
+                            "conditions": [],
+                            "error": "Invalid Configuration: Missing Region",
+                            "type": "error"
+                        }
+                    ],
+                    "root": 2,
+                    "nodeCount": 13,
+                    "nodes": "/////wAAAAH/////AAAAAAAAAAwAAAADAAAAAQAAAAQF9eELAAAAAgAAAAUF9eELAAAAAwAAAAgAAAAGAAAABAAAAAcF9eEKAAAABQX14QgF9eEJAAAABAAAAAoAAAAJAAAABgX14QYF9eEHAAAABQAAAAsF9eEFAAAABgX14QQF9eEFAAAAAwX14QEAAAANAAAABAX14QIF9eED"
+                },
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
                     "parameters": {
