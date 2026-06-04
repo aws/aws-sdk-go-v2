@@ -1,0 +1,8 @@
+{
+    "id": "fe943599-0742-4147-aae7-9dd0a171aab4",
+    "type": "bugfix",
+    "description": "Fix the concurrent reader to return cached read error instead of panic when called again",
+    "modules": [
+        "feature/s3/transfermanager"
+    ]
+}
