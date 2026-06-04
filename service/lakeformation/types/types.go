@@ -49,9 +49,7 @@ func (v *AddObjectInput) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.AddObjectInput_ETag, *v.ETag)
 	}
 	serializePartitionValuesList(s, schemas.AddObjectInput_PartitionValues, v.PartitionValues)
-	if v.Size != 0 {
-		s.WriteInt64(schemas.AddObjectInput_Size, v.Size)
-	}
+	s.WriteInt64(schemas.AddObjectInput_Size, v.Size)
 	if v.Uri != nil {
 		s.WriteString(schemas.AddObjectInput_Uri, *v.Uri)
 	}
@@ -2880,12 +2878,8 @@ func (v *WorkUnitRange) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WorkUnitRange) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.WorkUnitIdMax != 0 {
-		s.WriteInt64(schemas.WorkUnitRange_WorkUnitIdMax, v.WorkUnitIdMax)
-	}
-	if v.WorkUnitIdMin != 0 {
-		s.WriteInt64(schemas.WorkUnitRange_WorkUnitIdMin, v.WorkUnitIdMin)
-	}
+	s.WriteInt64(schemas.WorkUnitRange_WorkUnitIdMax, v.WorkUnitIdMax)
+	s.WriteInt64(schemas.WorkUnitRange_WorkUnitIdMin, v.WorkUnitIdMin)
 	if v.WorkUnitToken != nil {
 		s.WriteString(schemas.WorkUnitRange_WorkUnitToken, *v.WorkUnitToken)
 	}

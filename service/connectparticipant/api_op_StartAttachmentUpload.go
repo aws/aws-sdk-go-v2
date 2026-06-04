@@ -86,9 +86,7 @@ func (v *StartAttachmentUploadInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AttachmentName != nil {
 		s.WriteString(schemas.StartAttachmentUploadRequest_AttachmentName, *v.AttachmentName)
 	}
-	if v.AttachmentSizeInBytes != 0 {
-		s.WriteInt64(schemas.StartAttachmentUploadRequest_AttachmentSizeInBytes, v.AttachmentSizeInBytes)
-	}
+	s.WriteInt64(schemas.StartAttachmentUploadRequest_AttachmentSizeInBytes, v.AttachmentSizeInBytes)
 	if v.ClientToken != nil {
 		s.WriteString(schemas.StartAttachmentUploadRequest_ClientToken, *v.ClientToken)
 	}

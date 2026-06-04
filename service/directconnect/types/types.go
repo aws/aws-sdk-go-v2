@@ -1876,9 +1876,7 @@ func (v *NewPrivateVirtualInterface) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.VirtualInterfaceName != nil {
 		s.WriteString(schemas.NewPrivateVirtualInterface_virtualInterfaceName, *v.VirtualInterfaceName)
 	}
-	if v.Vlan != 0 {
-		s.WriteInt32(schemas.NewPrivateVirtualInterface_vlan, v.Vlan)
-	}
+	s.WriteInt32(schemas.NewPrivateVirtualInterface_vlan, v.Vlan)
 }
 func (v *NewPrivateVirtualInterface) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NewPrivateVirtualInterface, func(s *smithy.Schema) error {
@@ -2025,9 +2023,7 @@ func (v *NewPrivateVirtualInterfaceAllocation) SerializeMembers(s smithy.ShapeSe
 	if v.VirtualInterfaceName != nil {
 		s.WriteString(schemas.NewPrivateVirtualInterfaceAllocation_virtualInterfaceName, *v.VirtualInterfaceName)
 	}
-	if v.Vlan != 0 {
-		s.WriteInt32(schemas.NewPrivateVirtualInterfaceAllocation_vlan, v.Vlan)
-	}
+	s.WriteInt32(schemas.NewPrivateVirtualInterfaceAllocation_vlan, v.Vlan)
 }
 func (v *NewPrivateVirtualInterfaceAllocation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NewPrivateVirtualInterfaceAllocation, func(s *smithy.Schema) error {
@@ -2161,9 +2157,7 @@ func (v *NewPublicVirtualInterface) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.VirtualInterfaceName != nil {
 		s.WriteString(schemas.NewPublicVirtualInterface_virtualInterfaceName, *v.VirtualInterfaceName)
 	}
-	if v.Vlan != 0 {
-		s.WriteInt32(schemas.NewPublicVirtualInterface_vlan, v.Vlan)
-	}
+	s.WriteInt32(schemas.NewPublicVirtualInterface_vlan, v.Vlan)
 }
 func (v *NewPublicVirtualInterface) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NewPublicVirtualInterface, func(s *smithy.Schema) error {
@@ -2298,9 +2292,7 @@ func (v *NewPublicVirtualInterfaceAllocation) SerializeMembers(s smithy.ShapeSer
 	if v.VirtualInterfaceName != nil {
 		s.WriteString(schemas.NewPublicVirtualInterfaceAllocation_virtualInterfaceName, *v.VirtualInterfaceName)
 	}
-	if v.Vlan != 0 {
-		s.WriteInt32(schemas.NewPublicVirtualInterfaceAllocation_vlan, v.Vlan)
-	}
+	s.WriteInt32(schemas.NewPublicVirtualInterfaceAllocation_vlan, v.Vlan)
 }
 func (v *NewPublicVirtualInterfaceAllocation) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.NewPublicVirtualInterfaceAllocation, func(s *smithy.Schema) error {

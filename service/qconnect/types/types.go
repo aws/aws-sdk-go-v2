@@ -6263,9 +6263,7 @@ func (v *GuardrailContextualGroundingFilterConfig) Serialize(s smithy.ShapeSeria
 }
 
 func (v *GuardrailContextualGroundingFilterConfig) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Threshold != 0 {
-		s.WriteFloat64(schemas.GuardrailContextualGroundingFilterConfig_threshold, v.Threshold)
-	}
+	s.WriteFloat64(schemas.GuardrailContextualGroundingFilterConfig_threshold, v.Threshold)
 	if v.Type != "" {
 		s.WriteString(schemas.GuardrailContextualGroundingFilterConfig_type, string(v.Type))
 	}

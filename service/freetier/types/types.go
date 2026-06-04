@@ -390,9 +390,7 @@ func (v *MonetaryAmount) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *MonetaryAmount) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Amount != 0 {
-		s.WriteFloat64(schemas.MonetaryAmount_amount, v.Amount)
-	}
+	s.WriteFloat64(schemas.MonetaryAmount_amount, v.Amount)
 	if v.Unit != "" {
 		s.WriteString(schemas.MonetaryAmount_unit, string(v.Unit))
 	}

@@ -96,9 +96,7 @@ func (v *AllocateHostedConnectionInput) SerializeMembers(s smithy.ShapeSerialize
 		s.WriteString(schemas.AllocateHostedConnectionRequest_ownerAccount, *v.OwnerAccount)
 	}
 	serializeTagList(s, schemas.AllocateHostedConnectionRequest_tags, v.Tags)
-	if v.Vlan != 0 {
-		s.WriteInt32(schemas.AllocateHostedConnectionRequest_vlan, v.Vlan)
-	}
+	s.WriteInt32(schemas.AllocateHostedConnectionRequest_vlan, v.Vlan)
 }
 
 // Information about an Direct Connect connection.

@@ -511,12 +511,8 @@ func (v *HandOffTime) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *HandOffTime) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.HourOfDay != 0 {
-		s.WriteInt32(schemas.HandOffTime_HourOfDay, v.HourOfDay)
-	}
-	if v.MinuteOfHour != 0 {
-		s.WriteInt32(schemas.HandOffTime_MinuteOfHour, v.MinuteOfHour)
-	}
+	s.WriteInt32(schemas.HandOffTime_HourOfDay, v.HourOfDay)
+	s.WriteInt32(schemas.HandOffTime_MinuteOfHour, v.MinuteOfHour)
 }
 func (v *HandOffTime) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.HandOffTime, func(s *smithy.Schema) error {

@@ -82,9 +82,7 @@ func (v *CountPercent) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Count != nil {
 		s.WriteInt32(schemas.CountPercent_Count, *v.Count)
 	}
-	if v.Percentage != 0 {
-		s.WriteFloat32(schemas.CountPercent_Percentage, v.Percentage)
-	}
+	s.WriteFloat32(schemas.CountPercent_Percentage, v.Percentage)
 }
 func (v *CountPercent) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CountPercent, func(s *smithy.Schema) error {

@@ -313,9 +313,7 @@ func (v *ActionThreshold) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.ActionThresholdType != "" {
 		s.WriteString(schemas.ActionThreshold_ActionThresholdType, string(v.ActionThresholdType))
 	}
-	if v.ActionThresholdValue != 0 {
-		s.WriteFloat64(schemas.ActionThreshold_ActionThresholdValue, v.ActionThresholdValue)
-	}
+	s.WriteFloat64(schemas.ActionThreshold_ActionThresholdValue, v.ActionThresholdValue)
 }
 func (v *ActionThreshold) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ActionThreshold, func(s *smithy.Schema) error {
@@ -1562,9 +1560,7 @@ func (v *Notification) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.NotificationType != "" {
 		s.WriteString(schemas.Notification_NotificationType, string(v.NotificationType))
 	}
-	if v.Threshold != 0 {
-		s.WriteFloat64(schemas.Notification_Threshold, v.Threshold)
-	}
+	s.WriteFloat64(schemas.Notification_Threshold, v.Threshold)
 	if v.ThresholdType != "" {
 		s.WriteString(schemas.Notification_ThresholdType, string(v.ThresholdType))
 	}

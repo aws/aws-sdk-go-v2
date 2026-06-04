@@ -78,9 +78,7 @@ func (v *UpdateFirewallDeleteProtectionInput) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *UpdateFirewallDeleteProtectionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.DeleteProtection != false {
-		s.WriteBool(schemas.UpdateFirewallDeleteProtectionRequest_DeleteProtection, v.DeleteProtection)
-	}
+	s.WriteBool(schemas.UpdateFirewallDeleteProtectionRequest_DeleteProtection, v.DeleteProtection)
 	if v.FirewallArn != nil {
 		s.WriteString(schemas.UpdateFirewallDeleteProtectionRequest_FirewallArn, *v.FirewallArn)
 	}

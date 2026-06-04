@@ -63,9 +63,7 @@ func (v *GetWorkUnitResultsInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.QueryId != nil {
 		s.WriteString(schemas.GetWorkUnitResultsRequest_QueryId, *v.QueryId)
 	}
-	if v.WorkUnitId != 0 {
-		s.WriteInt64(schemas.GetWorkUnitResultsRequest_WorkUnitId, v.WorkUnitId)
-	}
+	s.WriteInt64(schemas.GetWorkUnitResultsRequest_WorkUnitId, v.WorkUnitId)
 	if v.WorkUnitToken != nil {
 		s.WriteString(schemas.GetWorkUnitResultsRequest_WorkUnitToken, *v.WorkUnitToken)
 	}

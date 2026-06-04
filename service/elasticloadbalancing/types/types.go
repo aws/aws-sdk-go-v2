@@ -44,9 +44,7 @@ func (v *AccessLog) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.EmitInterval != nil {
 		s.WriteInt32(schemas.AccessLog_EmitInterval, *v.EmitInterval)
 	}
-	if v.Enabled != false {
-		s.WriteBool(schemas.AccessLog_Enabled, v.Enabled)
-	}
+	s.WriteBool(schemas.AccessLog_Enabled, v.Enabled)
 	if v.S3BucketName != nil {
 		s.WriteString(schemas.AccessLog_S3BucketName, *v.S3BucketName)
 	}
@@ -219,9 +217,7 @@ func (v *ConnectionDraining) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ConnectionDraining) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Enabled != false {
-		s.WriteBool(schemas.ConnectionDraining_Enabled, v.Enabled)
-	}
+	s.WriteBool(schemas.ConnectionDraining_Enabled, v.Enabled)
 	if v.Timeout != nil {
 		s.WriteInt32(schemas.ConnectionDraining_Timeout, *v.Timeout)
 	}
@@ -291,9 +287,7 @@ func (v *CrossZoneLoadBalancing) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CrossZoneLoadBalancing) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Enabled != false {
-		s.WriteBool(schemas.CrossZoneLoadBalancing_Enabled, v.Enabled)
-	}
+	s.WriteBool(schemas.CrossZoneLoadBalancing_Enabled, v.Enabled)
 }
 func (v *CrossZoneLoadBalancing) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CrossZoneLoadBalancing, func(s *smithy.Schema) error {
@@ -674,9 +668,7 @@ func (v *Listener) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.InstanceProtocol != nil {
 		s.WriteString(schemas.Listener_InstanceProtocol, *v.InstanceProtocol)
 	}
-	if v.LoadBalancerPort != 0 {
-		s.WriteInt32(schemas.Listener_LoadBalancerPort, v.LoadBalancerPort)
-	}
+	s.WriteInt32(schemas.Listener_LoadBalancerPort, v.LoadBalancerPort)
 	if v.Protocol != nil {
 		s.WriteString(schemas.Listener_Protocol, *v.Protocol)
 	}

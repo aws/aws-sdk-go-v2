@@ -69,9 +69,7 @@ func (v *CreateWirelessGatewayTaskDefinitionInput) Serialize(s smithy.ShapeSeria
 }
 
 func (v *CreateWirelessGatewayTaskDefinitionInput) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.AutoCreateTasks != false {
-		s.WriteBool(schemas.CreateWirelessGatewayTaskDefinitionRequest_AutoCreateTasks, v.AutoCreateTasks)
-	}
+	s.WriteBool(schemas.CreateWirelessGatewayTaskDefinitionRequest_AutoCreateTasks, v.AutoCreateTasks)
 	if v.ClientRequestToken != nil {
 		s.WriteString(schemas.CreateWirelessGatewayTaskDefinitionRequest_ClientRequestToken, *v.ClientRequestToken)
 	}

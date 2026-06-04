@@ -68,9 +68,7 @@ func (v *CreateIndexInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DirectoryArn != nil {
 		s.WriteString(schemas.CreateIndexRequest_DirectoryArn, *v.DirectoryArn)
 	}
-	if v.IsUnique != false {
-		s.WriteBool(schemas.CreateIndexRequest_IsUnique, v.IsUnique)
-	}
+	s.WriteBool(schemas.CreateIndexRequest_IsUnique, v.IsUnique)
 	if v.LinkName != nil {
 		s.WriteString(schemas.CreateIndexRequest_LinkName, *v.LinkName)
 	}

@@ -84,9 +84,7 @@ func (v *CreateLogPatternInput) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.PatternSetName != nil {
 		s.WriteString(schemas.CreateLogPatternRequest_PatternSetName, *v.PatternSetName)
 	}
-	if v.Rank != 0 {
-		s.WriteInt32(schemas.CreateLogPatternRequest_Rank, v.Rank)
-	}
+	s.WriteInt32(schemas.CreateLogPatternRequest_Rank, v.Rank)
 	if v.ResourceGroupName != nil {
 		s.WriteString(schemas.CreateLogPatternRequest_ResourceGroupName, *v.ResourceGroupName)
 	}

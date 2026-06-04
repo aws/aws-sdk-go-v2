@@ -916,9 +916,7 @@ func (v *TrustedAdvisorCheckRefreshStatus) SerializeMembers(s smithy.ShapeSerial
 	if v.CheckId != nil {
 		s.WriteString(schemas.TrustedAdvisorCheckRefreshStatus_checkId, *v.CheckId)
 	}
-	if v.MillisUntilNextRefreshable != 0 {
-		s.WriteInt64(schemas.TrustedAdvisorCheckRefreshStatus_millisUntilNextRefreshable, v.MillisUntilNextRefreshable)
-	}
+	s.WriteInt64(schemas.TrustedAdvisorCheckRefreshStatus_millisUntilNextRefreshable, v.MillisUntilNextRefreshable)
 	if v.Status != nil {
 		s.WriteString(schemas.TrustedAdvisorCheckRefreshStatus_status, *v.Status)
 	}
@@ -1150,12 +1148,8 @@ func (v *TrustedAdvisorCostOptimizingSummary) Serialize(s smithy.ShapeSerializer
 }
 
 func (v *TrustedAdvisorCostOptimizingSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.EstimatedMonthlySavings != 0 {
-		s.WriteFloat64(schemas.TrustedAdvisorCostOptimizingSummary_estimatedMonthlySavings, v.EstimatedMonthlySavings)
-	}
-	if v.EstimatedPercentMonthlySavings != 0 {
-		s.WriteFloat64(schemas.TrustedAdvisorCostOptimizingSummary_estimatedPercentMonthlySavings, v.EstimatedPercentMonthlySavings)
-	}
+	s.WriteFloat64(schemas.TrustedAdvisorCostOptimizingSummary_estimatedMonthlySavings, v.EstimatedMonthlySavings)
+	s.WriteFloat64(schemas.TrustedAdvisorCostOptimizingSummary_estimatedPercentMonthlySavings, v.EstimatedPercentMonthlySavings)
 }
 func (v *TrustedAdvisorCostOptimizingSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TrustedAdvisorCostOptimizingSummary, func(s *smithy.Schema) error {
@@ -1280,18 +1274,10 @@ func (v *TrustedAdvisorResourcesSummary) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *TrustedAdvisorResourcesSummary) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ResourcesFlagged != 0 {
-		s.WriteInt64(schemas.TrustedAdvisorResourcesSummary_resourcesFlagged, v.ResourcesFlagged)
-	}
-	if v.ResourcesIgnored != 0 {
-		s.WriteInt64(schemas.TrustedAdvisorResourcesSummary_resourcesIgnored, v.ResourcesIgnored)
-	}
-	if v.ResourcesProcessed != 0 {
-		s.WriteInt64(schemas.TrustedAdvisorResourcesSummary_resourcesProcessed, v.ResourcesProcessed)
-	}
-	if v.ResourcesSuppressed != 0 {
-		s.WriteInt64(schemas.TrustedAdvisorResourcesSummary_resourcesSuppressed, v.ResourcesSuppressed)
-	}
+	s.WriteInt64(schemas.TrustedAdvisorResourcesSummary_resourcesFlagged, v.ResourcesFlagged)
+	s.WriteInt64(schemas.TrustedAdvisorResourcesSummary_resourcesIgnored, v.ResourcesIgnored)
+	s.WriteInt64(schemas.TrustedAdvisorResourcesSummary_resourcesProcessed, v.ResourcesProcessed)
+	s.WriteInt64(schemas.TrustedAdvisorResourcesSummary_resourcesSuppressed, v.ResourcesSuppressed)
 }
 func (v *TrustedAdvisorResourcesSummary) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.TrustedAdvisorResourcesSummary, func(s *smithy.Schema) error {

@@ -92,9 +92,7 @@ func (v *AllocateConnectionOnInterconnectInput) SerializeMembers(s smithy.ShapeS
 	if v.OwnerAccount != nil {
 		s.WriteString(schemas.AllocateConnectionOnInterconnectRequest_ownerAccount, *v.OwnerAccount)
 	}
-	if v.Vlan != 0 {
-		s.WriteInt32(schemas.AllocateConnectionOnInterconnectRequest_vlan, v.Vlan)
-	}
+	s.WriteInt32(schemas.AllocateConnectionOnInterconnectRequest_vlan, v.Vlan)
 }
 
 // Information about an Direct Connect connection.

@@ -371,9 +371,7 @@ func (v *DevEnvironmentSummary) SerializeMembers(s smithy.ShapeSerializer) {
 		s.WriteString(schemas.DevEnvironmentSummary_id, *v.Id)
 	}
 	serializeIdes(s, schemas.DevEnvironmentSummary_ides, v.Ides)
-	if v.InactivityTimeoutMinutes != 0 {
-		s.WriteInt32(schemas.DevEnvironmentSummary_inactivityTimeoutMinutes, v.InactivityTimeoutMinutes)
-	}
+	s.WriteInt32(schemas.DevEnvironmentSummary_inactivityTimeoutMinutes, v.InactivityTimeoutMinutes)
 	if v.InstanceType != "" {
 		s.WriteString(schemas.DevEnvironmentSummary_instanceType, string(v.InstanceType))
 	}

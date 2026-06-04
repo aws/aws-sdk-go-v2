@@ -1519,9 +1519,7 @@ func (v *Dimension) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DimensionKey != nil {
 		s.WriteString(schemas.Dimension_dimensionKey, *v.DimensionKey)
 	}
-	if v.DimensionValue != 0 {
-		s.WriteInt32(schemas.Dimension_dimensionValue, v.DimensionValue)
-	}
+	s.WriteInt32(schemas.Dimension_dimensionValue, v.DimensionValue)
 }
 func (v *Dimension) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.Dimension, func(s *smithy.Schema) error {

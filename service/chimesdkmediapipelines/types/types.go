@@ -858,9 +858,7 @@ func (v *ChannelDefinition) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ChannelDefinition) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelId != 0 {
-		s.WriteInt32(schemas.ChannelDefinition_ChannelId, v.ChannelId)
-	}
+	s.WriteInt32(schemas.ChannelDefinition_ChannelId, v.ChannelId)
 	if v.ParticipantRole != "" {
 		s.WriteString(schemas.ChannelDefinition_ParticipantRole, string(v.ParticipantRole))
 	}
@@ -2093,9 +2091,7 @@ func (v *KinesisVideoStreamSourceTaskConfiguration) Serialize(s smithy.ShapeSeri
 }
 
 func (v *KinesisVideoStreamSourceTaskConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.ChannelId != 0 {
-		s.WriteInt32(schemas.KinesisVideoStreamSourceTaskConfiguration_ChannelId, v.ChannelId)
-	}
+	s.WriteInt32(schemas.KinesisVideoStreamSourceTaskConfiguration_ChannelId, v.ChannelId)
 	if v.FragmentNumber != nil {
 		s.WriteString(schemas.KinesisVideoStreamSourceTaskConfiguration_FragmentNumber, *v.FragmentNumber)
 	}

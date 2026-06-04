@@ -84,9 +84,7 @@ func (v *UpdateFirewallPolicyChangeProtectionInput) SerializeMembers(s smithy.Sh
 	if v.FirewallName != nil {
 		s.WriteString(schemas.UpdateFirewallPolicyChangeProtectionRequest_FirewallName, *v.FirewallName)
 	}
-	if v.FirewallPolicyChangeProtection != false {
-		s.WriteBool(schemas.UpdateFirewallPolicyChangeProtectionRequest_FirewallPolicyChangeProtection, v.FirewallPolicyChangeProtection)
-	}
+	s.WriteBool(schemas.UpdateFirewallPolicyChangeProtectionRequest_FirewallPolicyChangeProtection, v.FirewallPolicyChangeProtection)
 	if v.UpdateToken != nil {
 		s.WriteString(schemas.UpdateFirewallPolicyChangeProtectionRequest_UpdateToken, *v.UpdateToken)
 	}

@@ -62,9 +62,7 @@ func (v *DeleteDocumentVersionInput) SerializeMembers(s smithy.ShapeSerializer) 
 	if v.AuthenticationToken != nil {
 		s.WriteString(schemas.DeleteDocumentVersionRequest_AuthenticationToken, *v.AuthenticationToken)
 	}
-	if v.DeletePriorVersions != false {
-		s.WriteBool(schemas.DeleteDocumentVersionRequest_DeletePriorVersions, v.DeletePriorVersions)
-	}
+	s.WriteBool(schemas.DeleteDocumentVersionRequest_DeletePriorVersions, v.DeletePriorVersions)
 	if v.DocumentId != nil {
 		s.WriteString(schemas.DeleteDocumentVersionRequest_DocumentId, *v.DocumentId)
 	}

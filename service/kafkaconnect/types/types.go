@@ -141,15 +141,9 @@ func (v *AutoScaling) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxAutoscalingTaskCount != 0 {
 		s.WriteInt32(schemas.AutoScaling_maxAutoscalingTaskCount, v.MaxAutoscalingTaskCount)
 	}
-	if v.MaxWorkerCount != 0 {
-		s.WriteInt32(schemas.AutoScaling_maxWorkerCount, v.MaxWorkerCount)
-	}
-	if v.McuCount != 0 {
-		s.WriteInt32(schemas.AutoScaling_mcuCount, v.McuCount)
-	}
-	if v.MinWorkerCount != 0 {
-		s.WriteInt32(schemas.AutoScaling_minWorkerCount, v.MinWorkerCount)
-	}
+	s.WriteInt32(schemas.AutoScaling_maxWorkerCount, v.MaxWorkerCount)
+	s.WriteInt32(schemas.AutoScaling_mcuCount, v.McuCount)
+	s.WriteInt32(schemas.AutoScaling_minWorkerCount, v.MinWorkerCount)
 	if v.ScaleInPolicy != nil {
 		s.WriteStruct(schemas.AutoScaling_scaleInPolicy)
 		v.ScaleInPolicy.SerializeMembers(s)
@@ -307,15 +301,9 @@ func (v *AutoScalingUpdate) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.MaxAutoscalingTaskCount != 0 {
 		s.WriteInt32(schemas.AutoScalingUpdate_maxAutoscalingTaskCount, v.MaxAutoscalingTaskCount)
 	}
-	if v.MaxWorkerCount != 0 {
-		s.WriteInt32(schemas.AutoScalingUpdate_maxWorkerCount, v.MaxWorkerCount)
-	}
-	if v.McuCount != 0 {
-		s.WriteInt32(schemas.AutoScalingUpdate_mcuCount, v.McuCount)
-	}
-	if v.MinWorkerCount != 0 {
-		s.WriteInt32(schemas.AutoScalingUpdate_minWorkerCount, v.MinWorkerCount)
-	}
+	s.WriteInt32(schemas.AutoScalingUpdate_maxWorkerCount, v.MaxWorkerCount)
+	s.WriteInt32(schemas.AutoScalingUpdate_mcuCount, v.McuCount)
+	s.WriteInt32(schemas.AutoScalingUpdate_minWorkerCount, v.MinWorkerCount)
 	if v.ScaleInPolicy != nil {
 		s.WriteStruct(schemas.AutoScalingUpdate_scaleInPolicy)
 		v.ScaleInPolicy.SerializeMembers(s)
@@ -504,9 +492,7 @@ func (v *CloudWatchLogsLogDelivery) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *CloudWatchLogsLogDelivery) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Enabled != false {
-		s.WriteBool(schemas.CloudWatchLogsLogDelivery_enabled, v.Enabled)
-	}
+	s.WriteBool(schemas.CloudWatchLogsLogDelivery_enabled, v.Enabled)
 	if v.LogGroup != nil {
 		s.WriteString(schemas.CloudWatchLogsLogDelivery_logGroup, *v.LogGroup)
 	}
@@ -900,9 +886,7 @@ func (v *CustomPlugin) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.CustomPluginArn != nil {
 		s.WriteString(schemas.CustomPlugin_customPluginArn, *v.CustomPluginArn)
 	}
-	if v.Revision != 0 {
-		s.WriteInt64(schemas.CustomPlugin_revision, v.Revision)
-	}
+	s.WriteInt64(schemas.CustomPlugin_revision, v.Revision)
 }
 func (v *CustomPlugin) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.CustomPlugin, func(s *smithy.Schema) error {
@@ -1257,9 +1241,7 @@ func (v *FirehoseLogDelivery) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.DeliveryStream != nil {
 		s.WriteString(schemas.FirehoseLogDelivery_deliveryStream, *v.DeliveryStream)
 	}
-	if v.Enabled != false {
-		s.WriteBool(schemas.FirehoseLogDelivery_enabled, v.Enabled)
-	}
+	s.WriteBool(schemas.FirehoseLogDelivery_enabled, v.Enabled)
 }
 func (v *FirehoseLogDelivery) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.FirehoseLogDelivery, func(s *smithy.Schema) error {
@@ -1694,12 +1676,8 @@ func (v *ProvisionedCapacity) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProvisionedCapacity) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.McuCount != 0 {
-		s.WriteInt32(schemas.ProvisionedCapacity_mcuCount, v.McuCount)
-	}
-	if v.WorkerCount != 0 {
-		s.WriteInt32(schemas.ProvisionedCapacity_workerCount, v.WorkerCount)
-	}
+	s.WriteInt32(schemas.ProvisionedCapacity_mcuCount, v.McuCount)
+	s.WriteInt32(schemas.ProvisionedCapacity_workerCount, v.WorkerCount)
 }
 func (v *ProvisionedCapacity) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProvisionedCapacity, func(s *smithy.Schema) error {
@@ -1776,12 +1754,8 @@ func (v *ProvisionedCapacityUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ProvisionedCapacityUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.McuCount != 0 {
-		s.WriteInt32(schemas.ProvisionedCapacityUpdate_mcuCount, v.McuCount)
-	}
-	if v.WorkerCount != 0 {
-		s.WriteInt32(schemas.ProvisionedCapacityUpdate_workerCount, v.WorkerCount)
-	}
+	s.WriteInt32(schemas.ProvisionedCapacityUpdate_mcuCount, v.McuCount)
+	s.WriteInt32(schemas.ProvisionedCapacityUpdate_workerCount, v.WorkerCount)
 }
 func (v *ProvisionedCapacityUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ProvisionedCapacityUpdate, func(s *smithy.Schema) error {
@@ -1925,9 +1899,7 @@ func (v *S3LogDelivery) SerializeMembers(s smithy.ShapeSerializer) {
 	if v.Bucket != nil {
 		s.WriteString(schemas.S3LogDelivery_bucket, *v.Bucket)
 	}
-	if v.Enabled != false {
-		s.WriteBool(schemas.S3LogDelivery_enabled, v.Enabled)
-	}
+	s.WriteBool(schemas.S3LogDelivery_enabled, v.Enabled)
 	if v.Prefix != nil {
 		s.WriteString(schemas.S3LogDelivery_prefix, *v.Prefix)
 	}
@@ -2016,9 +1988,7 @@ func (v *ScaleInPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ScaleInPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CpuUtilizationPercentage != 0 {
-		s.WriteInt32(schemas.ScaleInPolicy_cpuUtilizationPercentage, v.CpuUtilizationPercentage)
-	}
+	s.WriteInt32(schemas.ScaleInPolicy_cpuUtilizationPercentage, v.CpuUtilizationPercentage)
 }
 func (v *ScaleInPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScaleInPolicy, func(s *smithy.Schema) error {
@@ -2080,9 +2050,7 @@ func (v *ScaleInPolicyUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ScaleInPolicyUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CpuUtilizationPercentage != 0 {
-		s.WriteInt32(schemas.ScaleInPolicyUpdate_cpuUtilizationPercentage, v.CpuUtilizationPercentage)
-	}
+	s.WriteInt32(schemas.ScaleInPolicyUpdate_cpuUtilizationPercentage, v.CpuUtilizationPercentage)
 }
 func (v *ScaleInPolicyUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScaleInPolicyUpdate, func(s *smithy.Schema) error {
@@ -2113,9 +2081,7 @@ func (v *ScaleOutPolicy) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ScaleOutPolicy) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CpuUtilizationPercentage != 0 {
-		s.WriteInt32(schemas.ScaleOutPolicy_cpuUtilizationPercentage, v.CpuUtilizationPercentage)
-	}
+	s.WriteInt32(schemas.ScaleOutPolicy_cpuUtilizationPercentage, v.CpuUtilizationPercentage)
 }
 func (v *ScaleOutPolicy) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScaleOutPolicy, func(s *smithy.Schema) error {
@@ -2177,9 +2143,7 @@ func (v *ScaleOutPolicyUpdate) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *ScaleOutPolicyUpdate) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.CpuUtilizationPercentage != 0 {
-		s.WriteInt32(schemas.ScaleOutPolicyUpdate_cpuUtilizationPercentage, v.CpuUtilizationPercentage)
-	}
+	s.WriteInt32(schemas.ScaleOutPolicyUpdate_cpuUtilizationPercentage, v.CpuUtilizationPercentage)
 }
 func (v *ScaleOutPolicyUpdate) Deserialize(d smithy.ShapeDeserializer) error {
 	return smithy.ReadStruct(d, schemas.ScaleOutPolicyUpdate, func(s *smithy.Schema) error {
@@ -2325,9 +2289,7 @@ func (v *WorkerConfiguration) Serialize(s smithy.ShapeSerializer) {
 }
 
 func (v *WorkerConfiguration) SerializeMembers(s smithy.ShapeSerializer) {
-	if v.Revision != 0 {
-		s.WriteInt64(schemas.WorkerConfiguration_revision, v.Revision)
-	}
+	s.WriteInt64(schemas.WorkerConfiguration_revision, v.Revision)
 	if v.WorkerConfigurationArn != nil {
 		s.WriteString(schemas.WorkerConfiguration_workerConfigurationArn, *v.WorkerConfigurationArn)
 	}
