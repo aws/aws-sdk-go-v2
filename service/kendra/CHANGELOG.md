@@ -1,3 +1,7 @@
+# v1.61.1 (2026-06-04.2)
+
+* **Bug Fix**: Fixed a schema-serde bug where required, default-value input members weren't serialized.
+
 # v1.61.0 (2026-06-04)
 
 * **Feature**: Adding new BDD representation of endpoint ruleset

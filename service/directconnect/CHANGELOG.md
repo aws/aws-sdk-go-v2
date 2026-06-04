@@ -1,3 +1,7 @@
+# v1.39.2 (2026-06-04.2)
+
+* **Bug Fix**: Fixed a schema-serde bug where required, default-value input members weren't serialized.
+
 # v1.39.1 (2026-06-04)
 
 * **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.

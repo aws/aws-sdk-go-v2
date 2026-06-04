@@ -1,3 +1,8 @@
+# Release (2026-06-04.2)
+
+## General Highlights
+* **Bug Fix**: Fixed a schema-serde bug where required, default-value input members weren't serialized.
+
 # Release (2026-06-04)
 
 ## General Highlights
