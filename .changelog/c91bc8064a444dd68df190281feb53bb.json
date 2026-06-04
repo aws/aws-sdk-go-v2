@@ -1,8 +1,0 @@
-{
-    "id": "c91bc806-4a44-4dd6-8df1-90281feb53bb",
-    "type": "feature",
-    "description": "AWS Wickr now allows network administrators to configure a maximum session duration for non-SSO users in security groups, and display customizable consent popups to users at login for terms of use or compliance acknowledgements.",
-    "modules": [
-        "service/wickr"
-    ]
-}

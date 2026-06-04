@@ -1,3 +1,9 @@
+# v1.64.0 (2026-06-04)
+
+* **Feature**: AWS Config now supports internal service-linked rules, allowing AWS service partners to deploy Config rules for customers and use the evaluation results to build enhanced features.
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.63.2 (2026-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

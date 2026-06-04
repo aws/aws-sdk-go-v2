@@ -1,8 +1,0 @@
-{
-    "id": "df8eb43b-750f-432c-84ae-64992314d807",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/kendra"
-    ]
-}

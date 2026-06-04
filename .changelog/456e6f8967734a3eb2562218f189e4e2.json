@@ -1,8 +1,0 @@
-{
-    "id": "456e6f89-6773-4a3e-b256-2218f189e4e2",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/mediapackage"
-    ]
-}

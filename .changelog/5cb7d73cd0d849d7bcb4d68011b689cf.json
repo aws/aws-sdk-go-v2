@@ -1,8 +1,0 @@
-{
-    "id": "5cb7d73c-d0d8-49d7-bcb4-d68011b689cf",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/uxc"
-    ]
-}

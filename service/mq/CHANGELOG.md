@@ -1,3 +1,9 @@
+# v1.35.0 (2026-06-04)
+
+* **Feature**: BDD bulk update change rollout
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.34.26 (2026-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -1,8 +1,0 @@
-{
-    "id": "6564c3c2-3bf9-4cb3-b239-0c729a42ad16",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/mediapackagevod"
-    ]
-}

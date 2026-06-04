@@ -1,8 +1,0 @@
-{
-    "id": "6e12a0d5-b090-49b9-a58b-4dbdf431c733",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/opensearchserverless"
-    ]
-}

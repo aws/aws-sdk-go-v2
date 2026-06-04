@@ -1,8 +1,0 @@
-{
-    "id": "9933c85f-0024-42c3-9531-2f3cef3aeda3",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/ec2instanceconnect"
-    ]
-}

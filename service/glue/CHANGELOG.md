@@ -1,3 +1,9 @@
+# v1.143.0 (2026-06-04)
+
+* **Feature**: AWS Glue Interactive Sessions now supports Apache Spark Connect, enabling remote Spark execution over gRPC with minimal client-side dependencies. Adds GetSessionEndpoint and GetDashboardUrl APIs. Modifies CreateSession now accepts SPARK CONNECT session type.
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.142.4 (2026-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

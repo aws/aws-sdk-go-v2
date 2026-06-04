@@ -1,8 +1,0 @@
-{
-    "id": "138f3983-0002-42c4-bf9c-8310ce64d27e",
-    "type": "feature",
-    "description": "BDD bulk update change rollout",
-    "modules": [
-        "service/mq"
-    ]
-}

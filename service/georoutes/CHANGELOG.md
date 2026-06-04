@@ -1,3 +1,8 @@
+# v1.12.1 (2026-06-04)
+
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2026-06-03)
 
 * **Feature**: Add "standardRegionalEndpoints" back to fix 'Could not connect to the endpoint URL'

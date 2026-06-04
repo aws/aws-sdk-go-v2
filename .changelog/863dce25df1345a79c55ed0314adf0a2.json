@@ -1,8 +1,0 @@
-{
-    "id": "863dce25-df13-45a7-9c55-ed0314adf0a2",
-    "type": "feature",
-    "description": "adds UpdateAdConfiguration operation to AWS IVS low-latency APIs",
-    "modules": [
-        "service/ivs"
-    ]
-}

@@ -1,8 +1,0 @@
-{
-    "id": "07661fdd-b052-4e55-89bf-5e0ad9fd6688",
-    "type": "feature",
-    "description": "AWS Config now supports internal service-linked rules, allowing AWS service partners to deploy Config rules for customers and use the evaluation results to build enhanced features.",
-    "modules": [
-        "service/configservice"
-    ]
-}

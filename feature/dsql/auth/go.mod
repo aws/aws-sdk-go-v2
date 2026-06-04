@@ -2,7 +2,7 @@ module github.com/aws/aws-sdk-go-v2/feature/dsql/auth
 
 go 1.24
 
-require github.com/aws/aws-sdk-go-v2 v1.41.11
+require github.com/aws/aws-sdk-go-v2 v1.41.12
 
 require github.com/aws/smithy-go v1.27.1 // indirect
 

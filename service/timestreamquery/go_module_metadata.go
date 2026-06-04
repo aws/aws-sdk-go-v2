@@ -3,4 +3,4 @@
 package timestreamquery
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.36.21"
+const goModuleVersion = "1.36.22"

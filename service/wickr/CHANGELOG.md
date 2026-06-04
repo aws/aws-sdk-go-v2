@@ -1,3 +1,9 @@
+# v1.3.0 (2026-06-04)
+
+* **Feature**: AWS Wickr now allows network administrators to configure a maximum session duration for non-SSO users in security groups, and display customizable consent popups to users at login for terms of use or compliance acknowledgements.
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.3 (2026-06-03)
 
 * **Dependency Update**: Updated to the latest SDK module versions

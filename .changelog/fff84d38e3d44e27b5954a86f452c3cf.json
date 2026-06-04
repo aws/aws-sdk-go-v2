@@ -1,8 +1,0 @@
-{
-    "id": "fff84d38-e3d4-4e27-b595-4a86f452c3cf",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/sustainability"
-    ]
-}

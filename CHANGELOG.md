@@ -1,3 +1,85 @@
+# Release (2026-06-04)
+
+## General Highlights
+* **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2`: v1.41.12
+  * **Bug Fix**: Replace usages of deprecated io/ioutil package with io.
+* `github.com/aws/aws-sdk-go-v2/service/amplifybackend`: [v1.33.0](service/amplifybackend/CHANGELOG.md#v1330-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.52.0](service/appflow/CHANGELOG.md#v1520-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/appintegrations`: [v1.38.0](service/appintegrations/CHANGELOG.md#v1380-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/auditmanager`: [v1.47.0](service/auditmanager/CHANGELOG.md#v1470-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkvoice`: [v1.29.0](service/chimesdkvoice/CHANGELOG.md#v1290-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/cloudformation`: [v1.72.0](service/cloudformation/CHANGELOG.md#v1720-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.64.0](service/configservice/CHANGELOG.md#v1640-2026-06-04)
+  * **Feature**: AWS Config now supports internal service-linked rules, allowing AWS service partners to deploy Config rules for customers and use the evaluation results to build enhanced features.
+* `github.com/aws/aws-sdk-go-v2/service/connectparticipant`: [v1.37.0](service/connectparticipant/CHANGELOG.md#v1370-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.65.0](service/costexplorer/CHANGELOG.md#v1650-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ec2instanceconnect`: [v1.33.0](service/ec2instanceconnect/CHANGELOG.md#v1330-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/efs`: [v1.42.0](service/efs/CHANGELOG.md#v1420-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.61.0](service/emr/CHANGELOG.md#v1610-2026-06-04)
+  * **Feature**: Added support for Spark Connect interactive sessions on Amazon EMR on EC2 with new APIs - StartSession, GetSession, GetSessionEndpoint, ListSessions, and TerminateSession. Added sessionEnabled field in RunJobFlow and DescribeCluster to enable Spark Connect endpoints on EMR clusters.
+* `github.com/aws/aws-sdk-go-v2/service/geomaps`: [v1.11.0](service/geomaps/CHANGELOG.md#v1110-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/glue`: [v1.143.0](service/glue/CHANGELOG.md#v11430-2026-06-04)
+  * **Feature**: AWS Glue Interactive Sessions now supports Apache Spark Connect, enabling remote Spark execution over gRPC with minimal client-side dependencies. Adds GetSessionEndpoint and GetDashboardUrl APIs. Modifies CreateSession now accepts SPARK CONNECT session type.
+* `github.com/aws/aws-sdk-go-v2/service/guardduty`: [v1.79.2](service/guardduty/CHANGELOG.md#v1792-2026-06-04)
+  * **Documentation**: Remove unsupported RDS field for filter
+* `github.com/aws/aws-sdk-go-v2/service/interconnect`: [v1.1.0](service/interconnect/CHANGELOG.md#v110-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/ivs`: [v1.52.0](service/ivs/CHANGELOG.md#v1520-2026-06-04)
+  * **Feature**: adds UpdateAdConfiguration operation to AWS IVS low-latency APIs
+* `github.com/aws/aws-sdk-go-v2/service/kendra`: [v1.61.0](service/kendra/CHANGELOG.md#v1610-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/mediaconnect`: [v1.50.0](service/mediaconnect/CHANGELOG.md#v1500-2026-06-04)
+  * **Feature**: BDD bulk update change rollout
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.40.0](service/mediapackage/CHANGELOG.md#v1400-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/mediapackagevod`: [v1.40.0](service/mediapackagevod/CHANGELOG.md#v1400-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/mq`: [v1.35.0](service/mq/CHANGELOG.md#v1350-2026-06-04)
+  * **Feature**: BDD bulk update change rollout
+* `github.com/aws/aws-sdk-go-v2/service/mwaaserverless`: [v1.1.0](service/mwaaserverless/CHANGELOG.md#v110-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/opensearchserverless`: [v1.32.0](service/opensearchserverless/CHANGELOG.md#v1320-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/route53recoveryreadiness`: [v1.27.0](service/route53recoveryreadiness/CHANGELOG.md#v1270-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/s3files`: [v1.1.0](service/s3files/CHANGELOG.md#v110-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.252.0](service/sagemaker/CHANGELOG.md#v12520-2026-06-04)
+  * **Feature**: Adds the IncludedData parameter to DescribeModelCard and DescribeModelPackage. Set it to MetadataOnly to retrieve a model card without decrypt permission on the customer managed AWS KMS key (default AllData returns full content). Adds support for the MTRL Job resource in SageMaker Search.
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntimehttp2`: [v1.1.0](service/sagemakerruntimehttp2/CHANGELOG.md#v110-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/signerdata`: [v1.1.0](service/signerdata/CHANGELOG.md#v110-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/sns`: [v1.40.0](service/sns/CHANGELOG.md#v1400-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/sustainability`: [v1.1.0](service/sustainability/CHANGELOG.md#v110-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/taxsettings`: [v1.17.0](service/taxsettings/CHANGELOG.md#v1170-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/uxc`: [v1.1.0](service/uxc/CHANGELOG.md#v110-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/wickr`: [v1.3.0](service/wickr/CHANGELOG.md#v130-2026-06-04)
+  * **Feature**: AWS Wickr now allows network administrators to configure a maximum session duration for non-SSO users in security groups, and display customizable consent popups to users at login for terms of use or compliance acknowledgements.
+* `github.com/aws/aws-sdk-go-v2/service/workdocs`: [v1.31.0](service/workdocs/CHANGELOG.md#v1310-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+* `github.com/aws/aws-sdk-go-v2/service/workspaces`: [v1.69.0](service/workspaces/CHANGELOG.md#v1690-2026-06-04)
+  * **Feature**: Adding new BDD representation of endpoint ruleset
+
 # Release (2026-06-03.2)
 
 ## Module Highlights

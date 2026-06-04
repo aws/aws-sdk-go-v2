@@ -1,8 +1,0 @@
-{
-    "id": "1fa9442a-286b-4e2c-ac9a-e618cbbd6e36",
-    "type": "feature",
-    "description": "Adding new BDD representation of endpoint ruleset",
-    "modules": [
-        "service/costexplorer"
-    ]
-}
