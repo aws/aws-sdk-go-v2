@@ -15017,6 +15017,15 @@ func awsAwsjson11_deserializeDocumentConfigRule(v **types.ConfigRule, value inte
 				sv.MaximumExecutionFrequency = types.MaximumExecutionFrequency(jtv)
 			}
 
+		case "RuleEvaluationVisibility":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleEvaluationVisibility to be of type string, got %T instead", value)
+				}
+				sv.RuleEvaluationVisibility = types.RuleEvaluationVisibility(jtv)
+			}
+
 		case "Scope":
 			if err := awsAwsjson11_deserializeDocumentScope(&sv.Scope, value); err != nil {
 				return err
@@ -23658,6 +23667,11 @@ func awsAwsjson11_deserializeDocumentScope(v **types.Scope, value interface{}) e
 				return err
 			}
 
+		case "ServicePrincipals":
+			if err := awsAwsjson11_deserializeDocumentServicePrincipals(&sv.ServicePrincipals, value); err != nil {
+				return err
+			}
+
 		case "TagKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -23682,6 +23696,42 @@ func awsAwsjson11_deserializeDocumentScope(v **types.Scope, value interface{}) e
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentServicePrincipals(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected StringWithCharLimit128 to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

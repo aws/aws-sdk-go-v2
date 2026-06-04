@@ -1,0 +1,8 @@
+{
+    "id": "631360a8-e5c0-448c-b356-3c473d82610a",
+    "type": "feature",
+    "description": "AWS Glue Interactive Sessions now supports Apache Spark Connect, enabling remote Spark execution over gRPC with minimal client-side dependencies. Adds GetSessionEndpoint and GetDashboardUrl APIs. Modifies CreateSession now accepts SPARK CONNECT session type.",
+    "modules": [
+        "service/glue"
+    ]
+}

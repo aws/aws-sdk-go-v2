@@ -6209,6 +6209,11 @@ func awsAwsjson11_serializeDocumentConfigRule(v *types.ConfigRule, value smithyj
 		ok.String(string(v.MaximumExecutionFrequency))
 	}
 
+	if len(v.RuleEvaluationVisibility) > 0 {
+		ok := object.Key("RuleEvaluationVisibility")
+		ok.String(string(v.RuleEvaluationVisibility))
+	}
+
 	if v.Scope != nil {
 		ok := object.Key("Scope")
 		if err := awsAwsjson11_serializeDocumentScope(v.Scope, ok); err != nil {
@@ -6643,6 +6648,11 @@ func awsAwsjson11_serializeDocumentDescribeConfigRulesFilters(v *types.DescribeC
 	if len(v.EvaluationMode) > 0 {
 		ok := object.Key("EvaluationMode")
 		ok.String(string(v.EvaluationMode))
+	}
+
+	if len(v.RuleEvaluationVisibility) > 0 {
+		ok := object.Key("RuleEvaluationVisibility")
+		ok.String(string(v.RuleEvaluationVisibility))
 	}
 
 	return nil
@@ -7573,6 +7583,13 @@ func awsAwsjson11_serializeDocumentScope(v *types.Scope, value smithyjson.Value)
 		}
 	}
 
+	if v.ServicePrincipals != nil {
+		ok := object.Key("ServicePrincipals")
+		if err := awsAwsjson11_serializeDocumentServicePrincipals(v.ServicePrincipals, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.TagKey != nil {
 		ok := object.Key("TagKey")
 		ok.String(*v.TagKey)
@@ -7583,6 +7600,17 @@ func awsAwsjson11_serializeDocumentScope(v *types.Scope, value smithyjson.Value)
 		ok.String(*v.TagValue)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentServicePrincipals(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 

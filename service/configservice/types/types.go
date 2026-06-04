@@ -659,6 +659,11 @@ type ConfigRule struct {
 	// parameter.
 	MaximumExecutionFrequency MaximumExecutionFrequency
 
+	// Indicates whether you can get Evaluations for the Config rule. You can get Evaluations for the
+	// Amazon Web Services Config rule if this value is EXTERNAL . You cannot get Evaluations
+	// for the Amazon Web Services Config rule if this value is INTERNAL .
+	RuleEvaluationVisibility RuleEvaluationVisibility
+
 	// Defines which resources can trigger an evaluation for the rule. The scope can
 	// include one or more resource types, a combination of one resource type and one
 	// resource ID, or a combination of a tag key and value. Specify a scope to
@@ -1580,6 +1585,9 @@ type DescribeConfigRulesFilters struct {
 
 	// The mode of an evaluation. The valid values are Detective or Proactive.
 	EvaluationMode EvaluationMode
+
+	// Filters the results by RuleEvaluationVisibility .
+	RuleEvaluationVisibility RuleEvaluationVisibility
 
 	noSmithyDocumentSerde
 }
@@ -3320,6 +3328,12 @@ type Scope struct {
 	// trigger an evaluation for the rule. You can only specify one type if you also
 	// specify a resource ID for ComplianceResourceId .
 	ComplianceResourceTypes []string
+
+	// The service principals of the Amazon Web Services services for the rule.
+	//
+	// The field is populated only if the service-linked rule is created by a service.
+	// The field is empty if you create your own rule.
+	ServicePrincipals []string
 
 	// The tag key that is applied to only those Amazon Web Services resources that
 	// you want to trigger an evaluation for the rule.

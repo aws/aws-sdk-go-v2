@@ -12561,6 +12561,57 @@ type IntegerParameterRangeSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Search shape for Job. Mirrors DescribeJobResponse fields. If you update
+// DescribeJobResponse, update this structure as well.
+type Job struct {
+
+	// The date and time that the job was created.
+	CreationTime *time.Time
+
+	// The date and time that the job ended.
+	EndTime *time.Time
+
+	// If the job failed, the reason it failed.
+	FailureReason *string
+
+	// The Amazon Resource Name (ARN) of the job.
+	JobArn *string
+
+	// The category of the job.
+	JobCategory JobCategory
+
+	// The JSON configuration document for the job.
+	JobConfigDocument *string
+
+	// The schema version used for the job configuration document.
+	JobConfigSchemaVersion *string
+
+	// The name of the job.
+	JobName *string
+
+	// The current status of the job.
+	JobStatus JobStatus
+
+	// The date and time that the job was last modified.
+	LastModifiedTime *time.Time
+
+	// The ARN of the IAM role associated with the job.
+	RoleArn *string
+
+	// The detailed secondary status of the job, providing more granular information
+	// about the job's progress.
+	SecondaryStatus JobSecondaryStatus
+
+	// A list of secondary status transitions for the job, with timestamps and
+	// optional status messages.
+	SecondaryStatusTransitions []JobSecondaryStatusTransition
+
+	// The tags associated with the job.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 // Provides summary information about a job configuration schema version.
 type JobConfigSchemaVersionSummary struct {
 
@@ -20266,6 +20317,10 @@ type SearchRecord struct {
 
 	// The properties of a hyperparameter tuning job.
 	HyperParameterTuningJob *HyperParameterTuningJobSearchEntity
+
+	// Search shape for Job. Mirrors DescribeJobResponse fields. If you update
+	// DescribeJobResponse, update this structure as well.
+	Job *Job
 
 	// A model displayed in the Amazon SageMaker Model Dashboard.
 	Model *ModelDashboardModel

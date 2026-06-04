@@ -76,6 +76,9 @@ type CreateSessionInput struct {
 	// The name of the SecurityConfiguration structure to be used with the session
 	SecurityConfiguration *string
 
+	// The type of session to create.
+	SessionType types.SessionType
+
 	// The map of key value pairs (tags) belonging to the session.
 	Tags map[string]string
 

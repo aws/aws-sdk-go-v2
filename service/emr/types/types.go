@@ -220,6 +220,22 @@ type CancelStepsInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the certificate authority used to establish an mTLS connection to the
+// Spark Connect server when connecting directly over VPC peering.
+type CertificateAuthority struct {
+
+	// The Amazon Resource Name (ARN) of the certificate authority in Amazon Web
+	// Services Private CA that issued the Spark Connect server certificate.
+	CertificateArn *string
+
+	// The PEM-encoded root CA certificate data. Provide this certificate to your
+	// client's trust store when connecting directly to the Spark Connect server over
+	// VPC peering.
+	CertificateData *string
+
+	noSmithyDocumentSerde
+}
+
 // The definition of a CloudWatch metric alarm, which determines when an automatic
 // scaling activity is triggered. When the defined alarm conditions are satisfied,
 // scaling activity begins.
@@ -443,6 +459,9 @@ type Cluster struct {
 	// The IAM role that Amazon EMR assumes in order to access Amazon Web Services
 	// resources on your behalf.
 	ServiceRole *string
+
+	// Indicates whether Spark Connect sessions are enabled on the cluster.
+	SessionEnabled *bool
 
 	// The current status details about the cluster.
 	Status *ClusterStatus
@@ -2470,24 +2489,26 @@ type S3LoggingConfiguration struct {
 	//
 	// Valid log types:
 	//
-	//   - system-logs : System-level logs including daemon logs, bootstrap logs, and
-	//   other infrastructure logs.
+	//   - system-logs : EMR Daemon logs.
 	//
-	//   - application-logs : Application-level logs from frameworks like Hadoop,
-	//   Spark, Hive, etc.
+	//   - application-logs : Framework logs from Hadoop, Spark, Hive and other
+	//   applications running on the cluster.
 	//
-	//   - persistent-ui-logs : Logs for persistent application UIs like Spark History
-	//   Server.
+	//   - persistent-ui-logs : Logs required for persistent application UIs such as
+	//   Spark History Server and Tez UI.
 	//
 	// Valid upload policies:
 	//
-	//   - emr-managed : Logs are uploaded to both the EMR-managed S3 bucket and the
-	//   customer-specified S3 bucket (if LogUri is provided).
+	//   - emr-managed : Standard behavior. Logs are uploaded to S3 bucket as
+	//   configured in your LogUri, with certain logs retained by the service for
+	//   operational support and troubleshooting purposes.
 	//
 	//   - on-customer-s3only : Logs are uploaded only to the customer-specified S3
-	//   bucket. Requires LogUri to be specified in the cluster configuration.
+	//   bucket. This requires you to specify a LogUri when creating the cluster.
+	//   Persistent-ui-logs cannot have on-customer-s3only policy. Allowed policies for
+	//   persistent-ui-logs are emr-managed and disabled.
 	//
-	//   - disabled : Log upload is disabled for this log type.
+	//   - disabled : No S3 upload for this log type.
 	LogTypeUploadPolicy map[string]LogUploadPolicyValue
 
 	noSmithyDocumentSerde
@@ -2616,6 +2637,123 @@ type SecurityConfigurationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Detailed information about a Spark Connect session.
+type Session struct {
+
+	// The Amazon Resource Name (ARN) of the session.
+	//
+	// This member is required.
+	Arn *string
+
+	// The ID of the cluster that the session belongs to.
+	//
+	// This member is required.
+	ClusterId *string
+
+	// The ID of the session.
+	//
+	// This member is required.
+	Id *string
+
+	// The current state of the session. Valid values are SUBMITTED , STARTING ,
+	// STARTED , IDLE , BUSY , TERMINATING , TERMINATED , and FAILED .
+	//
+	// This member is required.
+	State SessionState
+
+	// The Amazon Web Services account ID that owns the session.
+	AccountId *string
+
+	// The certificate authority used to establish an mTLS connection to the Spark
+	// Connect server when connecting directly over VPC peering.
+	CertificateAuthority *CertificateAuthority
+
+	// The date and time that the session was created.
+	CreatedAt *time.Time
+
+	// The date and time that the session was terminated or failed.
+	EndedAt *time.Time
+
+	// The configuration overrides for the session. Only runtime configuration
+	// overrides are supported.
+	EngineConfigurations []Configuration
+
+	// The execution role ARN for the session. Amazon EMR uses this role to access
+	// Amazon Web Services resources on your behalf during session execution.
+	ExecutionRoleArn *string
+
+	// The date and time that the session last entered the IDLE state.
+	IdleSince *time.Time
+
+	// The monitoring configuration for the session.
+	MonitoringConfiguration *SessionMonitoringConfiguration
+
+	// The name of the session, if one was provided at creation time.
+	Name *string
+
+	// The Amazon EMR release label of the cluster that the session is running on.
+	ReleaseLabel *string
+
+	// The Spark Connect server URL for the session. Use this URL with the Credentials
+	// returned by GetSessionEndpoint to connect directly to the session over VPC
+	// peering.
+	ServerUrl *string
+
+	// The idle timeout, in minutes. If the session is idle for this duration, Amazon
+	// EMR automatically terminates it.
+	SessionIdleTimeoutInMinutes *int64
+
+	// The date and time that the session entered the STARTED state.
+	StartedAt *time.Time
+
+	// A human-readable message describing the most recent state change.
+	StateChangeReason *string
+
+	// The tags associated with the session.
+	Tags []Tag
+
+	// The date and time that the session was last updated.
+	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The CloudWatch Logs configuration for a session.
+type SessionCloudWatchLoggingConfiguration struct {
+
+	// Whether CloudWatch Logs is enabled for the session.
+	Enabled *bool
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the logs
+	// published to CloudWatch Logs.
+	EncryptionKeyArn *string
+
+	// The name of the log group where session logs are published.
+	LogGroup *string
+
+	// The prefix applied to the log stream name where session logs are published.
+	LogStreamNamePrefix *string
+
+	// A map of log component names (for example, SPARK_DRIVER , SPARK_EXECUTOR ) to
+	// the list of log types to publish for that component (for example, stdout ,
+	// stderr ).
+	LogTypes map[string][]string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon EMR-managed logging configuration for a session.
+type SessionManagedLoggingConfiguration struct {
+
+	// Whether Amazon EMR-managed logging is enabled for the session.
+	Enabled *bool
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the managed logs.
+	EncryptionKeyArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Details for an Amazon EMR Studio session mapping including creation time, user
 // or group ID, Studio ID, and so on.
 type SessionMappingDetail struct {
@@ -2678,6 +2816,43 @@ type SessionMappingSummary struct {
 
 	// The ID of the Amazon EMR Studio.
 	StudioId *string
+
+	noSmithyDocumentSerde
+}
+
+// The monitoring configuration for a session. Controls where session logs are
+// published.
+type SessionMonitoringConfiguration struct {
+
+	// The CloudWatch Logs configuration for the session.
+	CloudWatchLoggingConfiguration *SessionCloudWatchLoggingConfiguration
+
+	// The Amazon EMR-managed logging configuration for the session.
+	ManagedLoggingConfiguration *SessionManagedLoggingConfiguration
+
+	// The Amazon S3 logging configuration for the session.
+	S3LoggingConfiguration *SessionS3LoggingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon S3 logging configuration for a session.
+type SessionS3LoggingConfiguration struct {
+
+	// Whether Amazon S3 logging is enabled for the session.
+	Enabled *bool
+
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt logs published to
+	// Amazon S3.
+	EncryptionKeyArn *string
+
+	// A map of log component names (for example, SPARK_DRIVER , SPARK_EXECUTOR ) to
+	// the list of log types to publish for that component (for example, stdout ,
+	// stderr ).
+	LogTypes map[string][]string
+
+	// The Amazon S3 destination URI where session logs are published.
+	LogUri *string
 
 	noSmithyDocumentSerde
 }

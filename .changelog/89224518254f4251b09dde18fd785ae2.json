@@ -1,0 +1,8 @@
+{
+    "id": "89224518-254f-4251-b09d-de18fd785ae2",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/sns"
+    ]
+}

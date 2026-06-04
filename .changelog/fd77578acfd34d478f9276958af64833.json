@@ -1,0 +1,8 @@
+{
+    "id": "fd77578a-cfd3-4d47-8f92-76958af64833",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/mwaaserverless"
+    ]
+}

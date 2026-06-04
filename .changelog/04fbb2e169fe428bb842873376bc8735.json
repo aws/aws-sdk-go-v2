@@ -1,0 +1,8 @@
+{
+    "id": "04fbb2e1-69fe-428b-b842-873376bc8735",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/auditmanager"
+    ]
+}

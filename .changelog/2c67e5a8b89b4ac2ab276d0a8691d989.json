@@ -1,0 +1,8 @@
+{
+    "id": "2c67e5a8-b89b-4ac2-ab27-6d0a8691d989",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/efs"
+    ]
+}

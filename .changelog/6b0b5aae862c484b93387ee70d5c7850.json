@@ -1,0 +1,8 @@
+{
+    "id": "6b0b5aae-862c-484b-9338-7ee70d5c7850",
+    "type": "feature",
+    "description": "Adds the IncludedData parameter to DescribeModelCard and DescribeModelPackage. Set it to MetadataOnly to retrieve a model card without decrypt permission on the customer managed AWS KMS key (default AllData returns full content). Adds support for the MTRL Job resource in SageMaker Search.",
+    "modules": [
+        "service/sagemaker"
+    ]
+}

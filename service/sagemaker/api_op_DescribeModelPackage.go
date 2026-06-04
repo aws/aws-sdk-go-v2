@@ -16,7 +16,10 @@ import (
 // SageMaker models or list them on Amazon Web Services Marketplace.
 //
 // If you provided a KMS Key ID when you created your model package, you will see
-// the [KMS Decrypt]API call in your CloudTrail logs when you use this API.
+// the [KMS Decrypt]API call in your CloudTrail logs when you use this API. To call this
+// operation without requiring kms:Decrypt permission on the customer-managed key,
+// set IncludedData to MetadataOnly ; the response is returned with the embedded
+// ModelCard.ModelCardContent field sanitized.
 //
 // To create models in SageMaker, buyers can subscribe to model packages listed on
 // Amazon Web Services Marketplace.
@@ -46,6 +49,29 @@ type DescribeModelPackageInput struct {
 	//
 	// This member is required.
 	ModelPackageName *string
+
+	// Specifies the level of model package data to include in the response. Use this
+	// parameter to call DescribeModelPackage on a model package that has an
+	// associated model card without requiring kms:Decrypt permission on the
+	// customer-managed KMS key associated with the embedded model card.
+	//
+	//   - AllData : Returns the full model package response, including the unredacted
+	//   ModelCard.ModelCardContent . This option requires kms:Decrypt permission on
+	//   the customer-managed key, if one is associated with the embedded model card.
+	//   This is the default.
+	//
+	//   - MetadataOnly : Returns the full model package response, but with the
+	//   embedded ModelCard.ModelCardContent sanitized to include only a small set of
+	//   unencrypted metadata fields. This option does not require kms:Decrypt
+	//   permission. All other top-level response fields, including
+	//   InferenceSpecification , ModelMetrics , DriftCheckBaselines , and
+	//   SecurityConfig , are returned unchanged. For the list of fields preserved
+	//   within ModelCardContent , see [ModelCard].
+	//
+	// If you don't specify a value, SageMaker returns AllData .
+	//
+	// [ModelCard]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeModelPackage.html#sagemaker-DescribeModelPackage-response-ModelCard
+	IncludedData types.IncludedData
 
 	noSmithyDocumentSerde
 }
@@ -133,6 +159,27 @@ type DescribeModelPackageOutput struct {
 	// model_overview is composed of the model_creator and model_artifact properties.
 	// For more information about the model package model card schema, see [Model package model card schema]. For more
 	// information about the model card associated with the model package, see [View the Details of a Model Version].
+	//
+	// When you set IncludedData to MetadataOnly in the request, ModelCardStatus is
+	// preserved and ModelCardContent is sanitized to include only the following JSON
+	// paths, when present in the model card:
+	//
+	//   - model_overview.model_id
+	//
+	//   - model_overview.model_name
+	//
+	//   - intended_uses.risk_rating
+	//
+	//   - model_package_details.model_package_group_name
+	//
+	//   - model_package_details.model_package_arn
+	//
+	// Because the ModelPackageModelCard schema does not include model_package_details
+	// and limits model_overview to model_creator and model_artifact , the sanitized
+	// ModelCardContent for a model package typically contains only
+	// intended_uses.risk_rating if it was provided when the model card was created. To
+	// retrieve the complete ModelCardContent , set IncludedData to AllData or omit
+	// the parameter.
 	//
 	// [Model package model card schema]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
 	// [View the Details of a Model Version]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html

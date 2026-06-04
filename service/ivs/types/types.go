@@ -16,7 +16,11 @@ type AdConfiguration struct {
 	// This member is required.
 	Arn *string
 
-	// List of integration configurations with media tailor resources.
+	// List of integration configurations with MediaTailor resources. The first item
+	// in the list is the default playback configuration used for the ad configuration.
+	// To select a different configuration per viewing session, see [Generate and Sign IVS Playback Tokens].
+	//
+	// [Generate and Sign IVS Playback Tokens]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html
 	//
 	// This member is required.
 	MediaTailorPlaybackConfigurations []MediaTailorPlaybackConfiguration
@@ -44,7 +48,11 @@ type AdConfigurationSummary struct {
 	// This member is required.
 	Arn *string
 
-	// List of integration configurations with media tailor resources.
+	// List of integration configurations with MediaTailor resources. The first item
+	// in the list is the default playback configuration used for the ad configuration.
+	// To select a different configuration per viewing session, see [Generate and Sign IVS Playback Tokens].
+	//
+	// [Generate and Sign IVS Playback Tokens]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html
 	//
 	// This member is required.
 	MediaTailorPlaybackConfigurations []MediaTailorPlaybackConfiguration
@@ -221,7 +229,7 @@ type Channel struct {
 	// exceed the allowable input resolution or bitrate, the stream probably will
 	// disconnect immediately. Default: STANDARD . For details, see [Channel Types].
 	//
-	// [Channel Types]: https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html
+	// [Channel Types]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html
 	Type ChannelType
 
 	noSmithyDocumentSerde
@@ -278,7 +286,7 @@ type ChannelSummary struct {
 	// exceed the allowable input resolution or bitrate, the stream probably will
 	// disconnect immediately. Default: STANDARD . For details, see [Channel Types].
 	//
-	// [Channel Types]: https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html
+	// [Channel Types]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html
 	Type ChannelType
 
 	noSmithyDocumentSerde

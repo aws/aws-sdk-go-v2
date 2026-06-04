@@ -1,0 +1,8 @@
+{
+    "id": "88ad2495-edd5-4912-aaf9-0d10b53bfe3d",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/taxsettings"
+    ]
+}

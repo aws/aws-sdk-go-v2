@@ -1,0 +1,8 @@
+{
+    "id": "321e58ad-dd70-42d7-9a24-57a4b7bd9787",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/sagemakerruntimehttp2"
+    ]
+}

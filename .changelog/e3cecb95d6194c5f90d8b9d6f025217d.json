@@ -1,0 +1,8 @@
+{
+    "id": "e3cecb95-d619-4c5f-90d8-b9d6f025217d",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/cloudformation"
+    ]
+}

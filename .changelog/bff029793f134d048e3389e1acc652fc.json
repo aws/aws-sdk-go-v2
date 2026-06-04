@@ -1,0 +1,8 @@
+{
+    "id": "bff02979-3f13-4d04-8e33-89e1acc652fc",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/amplifybackend"
+    ]
+}

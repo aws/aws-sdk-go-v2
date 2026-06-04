@@ -1,0 +1,8 @@
+{
+    "id": "e6e7fa5c-210c-43ff-b330-423479848485",
+    "type": "feature",
+    "description": "Added support for Spark Connect interactive sessions on Amazon EMR on EC2 with new APIs - StartSession, GetSession, GetSessionEndpoint, ListSessions, and TerminateSession. Added sessionEnabled field in RunJobFlow and DescribeCluster to enable Spark Connect endpoints on EMR clusters.",
+    "modules": [
+        "service/emr"
+    ]
+}

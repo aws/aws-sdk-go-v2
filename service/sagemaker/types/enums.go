@@ -4104,6 +4104,25 @@ func (ImageVersionStatus) Values() []ImageVersionStatus {
 	}
 }
 
+type IncludedData string
+
+// Enum values for IncludedData
+const (
+	IncludedDataAllData      IncludedData = "AllData"
+	IncludedDataMetadataOnly IncludedData = "MetadataOnly"
+)
+
+// Values returns all known values for IncludedData. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IncludedData) Values() []IncludedData {
+	return []IncludedData{
+		"AllData",
+		"MetadataOnly",
+	}
+}
+
 type InferenceComponentCapacitySizeType string
 
 // Enum values for InferenceComponentCapacitySizeType
@@ -8248,6 +8267,7 @@ const (
 	ResourceTypeHyperParameterTuningJob  ResourceType = "HyperParameterTuningJob"
 	ResourceTypeModelCard                ResourceType = "ModelCard"
 	ResourceTypePipelineVersion          ResourceType = "PipelineVersion"
+	ResourceTypeJob                      ResourceType = "Job"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
@@ -8274,6 +8294,7 @@ func (ResourceType) Values() []ResourceType {
 		"HyperParameterTuningJob",
 		"ModelCard",
 		"PipelineVersion",
+		"Job",
 	}
 }
 

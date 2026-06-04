@@ -1545,6 +1545,25 @@ func (GlueRecordType) Values() []GlueRecordType {
 	}
 }
 
+type GlueResourceType string
+
+// Enum values for GlueResourceType
+const (
+	GlueResourceTypeJob     GlueResourceType = "JOB"
+	GlueResourceTypeSession GlueResourceType = "SESSION"
+)
+
+// Values returns all known values for GlueResourceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (GlueResourceType) Values() []GlueResourceType {
+	return []GlueResourceType{
+		"JOB",
+		"SESSION",
+	}
+}
+
 type HTTPMethod string
 
 // Enum values for HTTPMethod
@@ -2818,6 +2837,25 @@ func (SessionStatus) Values() []SessionStatus {
 		"TIMEOUT",
 		"STOPPING",
 		"STOPPED",
+	}
+}
+
+type SessionType string
+
+// Enum values for SessionType
+const (
+	SessionTypeLivy         SessionType = "LIVY"
+	SessionTypeSparkConnect SessionType = "SPARK_CONNECT"
+)
+
+// Values returns all known values for SessionType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SessionType) Values() []SessionType {
+	return []SessionType{
+		"LIVY",
+		"SPARK_CONNECT",
 	}
 }
 

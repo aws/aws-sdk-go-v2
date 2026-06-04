@@ -10,8 +10,8 @@
 // The Amazon AppIntegrations service enables you to configure and reuse
 // connections to external applications.
 //
-// For information about how you can use external applications with Amazon
-// Connect, see the following topics in the Amazon Connect Administrator Guide:
+// For information about how you can use external applications with Connect
+// Customer, see the following topics in the Connect Customer Administrator Guide:
 //
 // [Third-party applications (3p apps) in the agent workspace]
 //

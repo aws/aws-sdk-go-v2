@@ -1,0 +1,8 @@
+{
+    "id": "6e281604-aa25-403b-81a6-57e6b792b8aa",
+    "type": "documentation",
+    "description": "Remove unsupported RDS field for filter",
+    "modules": [
+        "service/guardduty"
+    ]
+}

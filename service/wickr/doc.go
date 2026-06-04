@@ -52,9 +52,22 @@
 // that includes a brief discussion about HTTP status codes. We recommend looking
 // there as part of your investigation when you get an error.
 //
+// # Regional availability
+//
+// The Amazon Web Services Wickr API is available in several Amazon Web Services
+// Regions and it provides an endpoint for each of these Regions. For a list of all
+// the Regions and endpoints where the API is currently available, see [Amazon Web Services Wickr endpoints and quotas]in the
+// Amazon Web Services General Reference Guide.
+//
+// Wickr API endpoints are region-specific and include a region code in the
+// format: https://admin.wickr.[regioncode].amazonaws.com . For example, for the US
+// East (N.Virginia) us-east-1 , the API endpoint is
+// https://admin.wickr.us-east-1.amazonaws.com .
+//
 // [Identity and access management for Amazon Web Services Wickr]: https://docs.aws.amazon.com/wickr/latest/adminguide/security-iam.html
 // [Getting started with the Amazon Web Services CLI]: https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-getting-started.html
 // [Authentication and access using Amazon Web Services SDKs and tools]: https://docs.aws.amazon.com/sdkref/latest/guide/access.html
 // [Amazon Web Services Signature Version 4 for API requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_sigv.html
 // [Amazon Web ServicesWickrFullAccess]: https://docs.aws.amazon.com/wickr/latest/adminguide/security-iam-awsmanpol.html#security-iam-awsmanpol-AWSWickrFullAccess
+// [Amazon Web Services Wickr endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/wickr.html
 package wickr

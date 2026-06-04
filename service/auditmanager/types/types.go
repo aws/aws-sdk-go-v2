@@ -133,10 +133,10 @@ type AssessmentEvidenceFolder struct {
 	EvidenceAwsServiceSourceCount int32
 
 	//  The number of evidence that falls under the compliance check category. This
-	// evidence is collected from Config or Security Hub.
+	// evidence is collected from Config or Security Hub CSPM.
 	EvidenceByTypeComplianceCheckCount int32
 
-	//  The total number of issues that were reported directly from Security Hub,
+	//  The total number of issues that were reported directly from Security Hub CSPM,
 	// Config, or both.
 	EvidenceByTypeComplianceCheckIssuesCount int32
 
@@ -743,22 +743,22 @@ type ControlMappingSource struct {
 	// text.
 	//
 	// For automated evidence, this keyword identifies a specific CloudTrail event,
-	// Config rule, Security Hub control, or Amazon Web Services API name.
+	// Config rule, Security Hub CSPM control, or Amazon Web Services API name.
 	//
 	// To learn more about the supported keywords that you can use when mapping a
 	// control data source, see the following pages in the Audit Manager User Guide:
 	//
 	// [Config rules supported by Audit Manager]
 	//
-	// [Security Hub controls supported by Audit Manager]
+	// [Security Hub CSPM controls supported by Audit Manager]
 	//
 	// [API calls supported by Audit Manager]
 	//
 	// [CloudTrail event names supported by Audit Manager]
 	//
 	// [Config rules supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html
+	// [Security Hub CSPM controls supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html
 	// [CloudTrail event names supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html
-	// [Security Hub controls supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html
 	// [API calls supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html
 	SourceKeyword *SourceKeyword
 
@@ -874,22 +874,22 @@ type CreateControlMappingSource struct {
 	// text.
 	//
 	// For automated evidence, this keyword identifies a specific CloudTrail event,
-	// Config rule, Security Hub control, or Amazon Web Services API name.
+	// Config rule, Security Hub CSPM control, or Amazon Web Services API name.
 	//
 	// To learn more about the supported keywords that you can use when mapping a
 	// control data source, see the following pages in the Audit Manager User Guide:
 	//
 	// [Config rules supported by Audit Manager]
 	//
-	// [Security Hub controls supported by Audit Manager]
+	// [Security Hub CSPM controls supported by Audit Manager]
 	//
 	// [API calls supported by Audit Manager]
 	//
 	// [CloudTrail event names supported by Audit Manager]
 	//
 	// [Config rules supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html
+	// [Security Hub CSPM controls supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html
 	// [CloudTrail event names supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html
-	// [Security Hub controls supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html
 	// [API calls supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html
 	SourceKeyword *SourceKeyword
 
@@ -1088,18 +1088,18 @@ type Evidence struct {
 	// The evaluation status for automated evidence that falls under the compliance
 	// check category.
 	//
-	//   - Audit Manager classes evidence as non-compliant if Security Hub reports a
-	//   Fail result, or if Config reports a Non-compliant result.
+	//   - Audit Manager classes evidence as non-compliant if Security Hub CSPM
+	//   reports a Fail result, or if Config reports a Non-compliant result.
 	//
-	//   - Audit Manager classes evidence as compliant if Security Hub reports a Pass
-	//   result, or if Config reports a Compliant result.
+	//   - Audit Manager classes evidence as compliant if Security Hub CSPM reports a
+	//   Pass result, or if Config reports a Compliant result.
 	//
 	//   - If a compliance check isn't available or applicable, then no compliance
 	//   evaluation can be made for that evidence. This is the case if the evidence uses
-	//   Config or Security Hub as the underlying data source type, but those services
-	//   aren't enabled. This is also the case if the evidence uses an underlying data
-	//   source type that doesn't support compliance checks (such as manual evidence,
-	//   Amazon Web Services API calls, or CloudTrail).
+	//   Config or Security Hub CSPM as the underlying data source type, but those
+	//   services aren't enabled. This is also the case if the evidence uses an
+	//   underlying data source type that doesn't support compliance checks (such as
+	//   manual evidence, Amazon Web Services API calls, or CloudTrail).
 	ComplianceCheck *string
 
 	//  The data source where the evidence was collected from.
@@ -1192,23 +1192,23 @@ type EvidenceFinderEnablement struct {
 type EvidenceInsights struct {
 
 	// The number of compliance check evidence that Audit Manager classified as
-	// compliant. This includes evidence that was collected from Security Hub with a
-	// Pass ruling, or collected from Config with a Compliant ruling.
+	// compliant. This includes evidence that was collected from Security Hub CSPM with
+	// a Pass ruling, or collected from Config with a Compliant ruling.
 	CompliantEvidenceCount *int32
 
 	// The number of evidence that a compliance check ruling isn't available for.
-	// Evidence is inconclusive when the associated control uses Security Hub or Config
-	// as a data source but you didn't enable those services. This is also the case
-	// when a control uses a data source that doesn’t support compliance checks (for
-	// example, manual evidence, API calls, or CloudTrail).
+	// Evidence is inconclusive when the associated control uses Security Hub CSPM or
+	// Config as a data source but you didn't enable those services. This is also the
+	// case when a control uses a data source that doesn’t support compliance checks
+	// (for example, manual evidence, API calls, or CloudTrail).
 	//
 	// If evidence has a compliance check status of not applicable in the console,
 	// it's classified as inconclusive in EvidenceInsights data.
 	InconclusiveEvidenceCount *int32
 
 	// The number of compliance check evidence that Audit Manager classified as
-	// non-compliant. This includes evidence that was collected from Security Hub with
-	// a Fail ruling, or collected from Config with a Non-compliant ruling.
+	// non-compliant. This includes evidence that was collected from Security Hub CSPM
+	// with a Fail ruling, or collected from Config with a Non-compliant ruling.
 	NoncompliantEvidenceCount *int32
 
 	noSmithyDocumentSerde
@@ -1322,13 +1322,13 @@ type Insights struct {
 
 	// The number of compliance check evidence that Audit Manager classified as
 	// compliant on the lastUpdated date. This includes evidence that was collected
-	// from Security Hub with a Pass ruling, or collected from Config with a Compliant
-	// ruling.
+	// from Security Hub CSPM with a Pass ruling, or collected from Config with a
+	// Compliant ruling.
 	CompliantEvidenceCount *int32
 
 	// The number of evidence without a compliance check ruling. Evidence is
-	// inconclusive when the associated control uses Security Hub or Config as a data
-	// source but you didn't enable those services. This is also the case when a
+	// inconclusive when the associated control uses Security Hub CSPM or Config as a
+	// data source but you didn't enable those services. This is also the case when a
 	// control uses a data source that doesn’t support compliance checks (for example:
 	// manual evidence, API calls, or CloudTrail).
 	//
@@ -1341,8 +1341,8 @@ type Insights struct {
 
 	// The number of compliance check evidence that Audit Manager classified as
 	// non-compliant on the lastUpdated date. This includes evidence that was
-	// collected from Security Hub with a Fail ruling, or collected from Config with a
-	// Non-compliant ruling.
+	// collected from Security Hub CSPM with a Fail ruling, or collected from Config
+	// with a Non-compliant ruling.
 	NoncompliantEvidenceCount *int32
 
 	// The total number of controls across all active assessments.
@@ -1380,15 +1380,15 @@ type InsightsByAssessment struct {
 	AssessmentControlsCountByNoncompliantEvidence *int32
 
 	// The number of compliance check evidence that Audit Manager classified as
-	// compliant. This includes evidence that was collected from Security Hub with a
-	// Pass ruling, or collected from Config with a Compliant ruling.
+	// compliant. This includes evidence that was collected from Security Hub CSPM with
+	// a Pass ruling, or collected from Config with a Compliant ruling.
 	CompliantEvidenceCount *int32
 
 	// The amount of evidence without a compliance check ruling. Evidence is
-	// inconclusive if the associated control uses Security Hub or Config as a data
-	// source and you didn't enable those services. This is also the case if a control
-	// uses a data source that doesn’t support compliance checks (for example, manual
-	// evidence, API calls, or CloudTrail).
+	// inconclusive if the associated control uses Security Hub CSPM or Config as a
+	// data source and you didn't enable those services. This is also the case if a
+	// control uses a data source that doesn’t support compliance checks (for example,
+	// manual evidence, API calls, or CloudTrail).
 	//
 	// If evidence has a compliance check status of not applicable, it's classified as
 	// inconclusive in InsightsByAssessment data.
@@ -1398,8 +1398,8 @@ type InsightsByAssessment struct {
 	LastUpdated *time.Time
 
 	// The number of compliance check evidence that Audit Manager classified as
-	// non-compliant. This includes evidence that was collected from Security Hub with
-	// a Fail ruling, or collected from Config with a Non-compliant ruling.
+	// non-compliant. This includes evidence that was collected from Security Hub CSPM
+	// with a Fail ruling, or collected from Config with a Non-compliant ruling.
 	NoncompliantEvidenceCount *int32
 
 	// The total number of controls in the assessment.
@@ -1471,18 +1471,18 @@ type Resource struct {
 	//  The evaluation status for a resource that was assessed when collecting
 	// compliance check evidence.
 	//
-	//   - Audit Manager classes the resource as non-compliant if Security Hub reports
-	//   a Fail result, or if Config reports a Non-compliant result.
+	//   - Audit Manager classes the resource as non-compliant if Security Hub CSPM
+	//   reports a Fail result, or if Config reports a Non-compliant result.
 	//
-	//   - Audit Manager classes the resource as compliant if Security Hub reports a
-	//   Pass result, or if Config reports a Compliant result.
+	//   - Audit Manager classes the resource as compliant if Security Hub CSPM
+	//   reports a Pass result, or if Config reports a Compliant result.
 	//
 	//   - If a compliance check isn't available or applicable, then no compliance
 	//   evaluation can be made for that resource. This is the case if a resource
-	//   assessment uses Config or Security Hub as the underlying data source type, but
-	//   those services aren't enabled. This is also the case if the resource assessment
-	//   uses an underlying data source type that doesn't support compliance checks (such
-	//   as manual evidence, Amazon Web Services API calls, or CloudTrail).
+	//   assessment uses Config or Security Hub CSPM as the underlying data source type,
+	//   but those services aren't enabled. This is also the case if the resource
+	//   assessment uses an underlying data source type that doesn't support compliance
+	//   checks (such as manual evidence, Amazon Web Services API calls, or CloudTrail).
 	ComplianceCheck *string
 
 	//  The value of the resource.
@@ -1607,22 +1607,22 @@ type Settings struct {
 // text.
 //
 // For automated evidence, this keyword identifies a specific CloudTrail event,
-// Config rule, Security Hub control, or Amazon Web Services API name.
+// Config rule, Security Hub CSPM control, or Amazon Web Services API name.
 //
 // To learn more about the supported keywords that you can use when mapping a
 // control data source, see the following pages in the Audit Manager User Guide:
 //
 // [Config rules supported by Audit Manager]
 //
-// [Security Hub controls supported by Audit Manager]
+// [Security Hub CSPM controls supported by Audit Manager]
 //
 // [API calls supported by Audit Manager]
 //
 // [CloudTrail event names supported by Audit Manager]
 //
 // [Config rules supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html
+// [Security Hub CSPM controls supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html
 // [CloudTrail event names supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-cloudtrail.html
-// [Security Hub controls supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html
 // [API calls supported by Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html
 type SourceKeyword struct {
 
@@ -1632,8 +1632,8 @@ type SourceKeyword struct {
 	//
 	//   - When keywordInputType is SELECT_FROM_LIST , a keyword must be selected to
 	//   collect automated evidence. For example, this keyword can be a CloudTrail event
-	//   name, a rule name for Config, a Security Hub control, or the name of an Amazon
-	//   Web Services API call.
+	//   name, a rule name for Config, a Security Hub CSPM control, or the name of an
+	//   Amazon Web Services API call.
 	//
 	//   - UPLOAD_FILE and INPUT_TEXT are only used when mapping a data source for
 	//   manual evidence.
@@ -1647,7 +1647,7 @@ type SourceKeyword struct {
 
 	//  The value of the keyword that's used when mapping a control data source. For
 	// example, this can be a CloudTrail event name, a rule name for Config, a Security
-	// Hub control, or the name of an Amazon Web Services API call.
+	// Hub CSPM control, or the name of an Amazon Web Services API call.
 	//
 	// If you’re mapping a data source to a rule in Config, the keywordValue that you
 	// specify depends on the type of rule:
@@ -1706,8 +1706,8 @@ type SourceKeyword struct {
 	//   vary. For accuracy, we recommend that you visit the [Config console]to verify your custom
 	//   rule name.
 	//
-	//   - For Security Hub: The format varies for Security Hub control names. For
-	//   accuracy, we recommend that you reference the list of [supported Security Hub controls].
+	//   - For Security Hub CSPM: The format varies for Security Hub CSPM control
+	//   names. For accuracy, we recommend that you reference the list of [supported Security Hub CSPM controls].
 	//
 	//   - For Amazon Web Services API calls: Make sure that the keywordValue is
 	//   written as serviceprefix_ActionName . For example, iam_ListGroups . For
@@ -1721,13 +1721,13 @@ type SourceKeyword struct {
 	// [custom rules]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_develop-rules.html
 	// [service-linked rules]: https://docs.aws.amazon.com/config/latest/developerguide/service-linked-awsconfig-rules.html
 	// [supported API calls]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-api.html
+	// [supported Security Hub CSPM controls]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html
 	// [Service Authorization Reference]: https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html
 	// [list of Config managed rules]: https://docs.aws.amazon.com/config/latest/developerguide/managed-rules-by-aws-config.html
 	// [s3-bucket-acl-prohibited]: https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-acl-prohibited.html
 	// [Config console]: https://console.aws.amazon.com/config/
 	// [managed rules]: https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html
 	// [supported Config managed rules]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-config.html
-	// [supported Security Hub controls]: https://docs.aws.amazon.com/audit-manager/latest/userguide/control-data-sources-ash.html
 	KeywordValue *string
 
 	noSmithyDocumentSerde

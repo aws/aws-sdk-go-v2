@@ -83,7 +83,7 @@ type CreateChannelInput struct {
 	// exceed the allowable input resolution or bitrate, the stream probably will
 	// disconnect immediately. Default: STANDARD . For details, see [Channel Types].
 	//
-	// [Channel Types]: https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html
+	// [Channel Types]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/channel-types.html
 	Type types.ChannelType
 
 	noSmithyDocumentSerde

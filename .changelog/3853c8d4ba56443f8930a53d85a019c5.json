@@ -1,0 +1,8 @@
+{
+    "id": "3853c8d4-ba56-443f-8930-a53d85a019c5",
+    "type": "feature",
+    "description": "BDD bulk update change rollout",
+    "modules": [
+        "service/mediaconnect"
+    ]
+}

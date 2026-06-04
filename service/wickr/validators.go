@@ -1077,6 +1077,38 @@ func validateBatchCreateUserRequestItems(v []types.BatchCreateUserRequestItem) e
 	}
 }
 
+func validateConsentPopupConfig(v *types.ConsentPopupConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConsentPopupConfig"}
+	if v.Enabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateNetworkSettings(v *types.NetworkSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "NetworkSettings"}
+	if v.ConsentPopup != nil {
+		if err := validateConsentPopupConfig(v.ConsentPopup); err != nil {
+			invalidParams.AddNested("ConsentPopup", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePermittedWickrEnterpriseNetwork(v *types.PermittedWickrEnterpriseNetwork) error {
 	if v == nil {
 		return nil
@@ -1914,6 +1946,10 @@ func validateOpUpdateNetworkSettingsInput(v *UpdateNetworkSettingsInput) error {
 	}
 	if v.Settings == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Settings"))
+	} else if v.Settings != nil {
+		if err := validateNetworkSettings(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

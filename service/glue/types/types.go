@@ -10352,6 +10352,9 @@ type Session struct {
 	// The name of the SecurityConfiguration structure to be used with the session.
 	SecurityConfiguration *string
 
+	// The type of the session.
+	SessionType SessionType
+
 	// The session status.
 	Status SessionStatus
 
@@ -10372,6 +10375,28 @@ type SessionCommand struct {
 	// Specifies the Python version. The Python version indicates the version
 	// supported for jobs of type Spark.
 	PythonVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the Spark Connect endpoint details for an interactive session,
+// including the URL and authentication credentials.
+type SessionEndpoint struct {
+
+	// The authentication token to include in requests to the Spark Connect endpoint.
+	//
+	// This member is required.
+	AuthToken *string
+
+	// The time at which the authentication token expires.
+	//
+	// This member is required.
+	AuthTokenExpirationTime *time.Time
+
+	// The Spark Connect endpoint URL for the session.
+	//
+	// This member is required.
+	Url *string
 
 	noSmithyDocumentSerde
 }

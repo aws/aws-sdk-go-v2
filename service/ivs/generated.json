@@ -46,6 +46,7 @@
         "api_op_StopStream.go",
         "api_op_TagResource.go",
         "api_op_UntagResource.go",
+        "api_op_UpdateAdConfiguration.go",
         "api_op_UpdateChannel.go",
         "api_op_UpdatePlaybackRestrictionPolicy.go",
         "auth.go",

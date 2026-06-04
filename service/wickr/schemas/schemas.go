@@ -545,6 +545,18 @@ var _ClientToken = smithy.NewSchema(smithy.ShapeID{
 	Name:      "ClientToken",
 }, smithy.ShapeTypeString, 0)
 
+var ConsentPopupConfig = smithy.NewSchema(smithy.ShapeID{
+	Namespace: "com.amazonaws.wickr",
+	Name:      "ConsentPopupConfig",
+}, smithy.ShapeTypeStructure, 4)
+var ConsentPopupConfig_enabled *smithy.Schema
+
+var ConsentPopupConfig_header *smithy.Schema
+
+var ConsentPopupConfig_content *smithy.Schema
+
+var ConsentPopupConfig_closeButtonLabel *smithy.Schema
+
 var DataRetentionActionType = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wickr",
 	Name:      "DataRetentionActionType",
@@ -658,7 +670,7 @@ var _NetworkList_member *smithy.Schema
 var NetworkSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wickr",
 	Name:      "NetworkSettings",
-}, smithy.ShapeTypeStructure, 4)
+}, smithy.ShapeTypeStructure, 5)
 var NetworkSettings_enableClientMetrics *smithy.Schema
 
 var NetworkSettings_readReceiptConfig *smithy.Schema
@@ -666,6 +678,8 @@ var NetworkSettings_readReceiptConfig *smithy.Schema
 var NetworkSettings_dataRetention *smithy.Schema
 
 var NetworkSettings_enableTrustedDataFormat *smithy.Schema
+
+var NetworkSettings_consentPopup *smithy.Schema
 
 var OidcConfigInfo = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wickr",
@@ -809,7 +823,7 @@ var _SecurityGroupList_member *smithy.Schema
 var SecurityGroupSettings = smithy.NewSchema(smithy.ShapeID{
 	Namespace: "com.amazonaws.wickr",
 	Name:      "SecurityGroupSettings",
-}, smithy.ShapeTypeStructure, 35)
+}, smithy.ShapeTypeStructure, 36)
 var SecurityGroupSettings_alwaysReauthenticate *smithy.Schema
 
 var SecurityGroupSettings_atakPackageValues *smithy.Schema
@@ -869,6 +883,8 @@ var SecurityGroupSettings_showMasterRecoveryKey *smithy.Schema
 var SecurityGroupSettings_shredder *smithy.Schema
 
 var SecurityGroupSettings_ssoMaxIdleMinutes *smithy.Schema
+
+var SecurityGroupSettings_maxNonSsoSessionMinutes *smithy.Schema
 
 var SecurityGroupSettings_federationMode *smithy.Schema
 
@@ -2188,6 +2204,14 @@ func init() {
 
 	CallingSettings_forceTcpCall = CallingSettings.AddMember("forceTcpCall", smithyprelude.Boolean)
 
+	ConsentPopupConfig_enabled = ConsentPopupConfig.AddMember("enabled", smithyprelude.Boolean)
+
+	ConsentPopupConfig_header = ConsentPopupConfig.AddMember("header", _GenericString)
+
+	ConsentPopupConfig_content = ConsentPopupConfig.AddMember("content", _GenericString)
+
+	ConsentPopupConfig_closeButtonLabel = ConsentPopupConfig.AddMember("closeButtonLabel", _GenericString)
+
 	DataRetentionActionType_ENABLE = DataRetentionActionType.AddMember("ENABLE", smithyprelude.Unit)
 
 	DataRetentionActionType_DISABLE = DataRetentionActionType.AddMember("DISABLE", smithyprelude.Unit)
@@ -2255,6 +2279,8 @@ func init() {
 	NetworkSettings_dataRetention = NetworkSettings.AddMember("dataRetention", smithyprelude.Boolean)
 
 	NetworkSettings_enableTrustedDataFormat = NetworkSettings.AddMember("enableTrustedDataFormat", smithyprelude.Boolean)
+
+	NetworkSettings_consentPopup = NetworkSettings.AddMember("consentPopup", ConsentPopupConfig)
 
 	OidcConfigInfo_applicationName = OidcConfigInfo.AddMember("applicationName", _GenericString)
 
@@ -2391,6 +2417,8 @@ func init() {
 	SecurityGroupSettings_shredder = SecurityGroupSettings.AddMember("shredder", ShredderSettings)
 
 	SecurityGroupSettings_ssoMaxIdleMinutes = SecurityGroupSettings.AddMember("ssoMaxIdleMinutes", smithyprelude.Integer)
+
+	SecurityGroupSettings_maxNonSsoSessionMinutes = SecurityGroupSettings.AddMember("maxNonSsoSessionMinutes", smithyprelude.Integer)
 
 	SecurityGroupSettings_federationMode = SecurityGroupSettings.AddMember("federationMode", smithyprelude.Integer)
 

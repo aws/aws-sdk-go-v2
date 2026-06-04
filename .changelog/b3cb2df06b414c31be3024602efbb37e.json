@@ -1,0 +1,8 @@
+{
+    "id": "b3cb2df0-6b41-4c31-be30-24602efbb37e",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/appflow"
+    ]
+}

@@ -15,7 +15,7 @@ import (
 // Retrieves the AuthenticationUrl for the current authentication session for the
 // AuthenticateCustomer flow block.
 //
-// For security recommendations, see [Amazon Connect Chat security best practices].
+// For security recommendations, see [Connect Customer Chat security best practices].
 //
 //   - This API can only be called within one minute of receiving the
 //     authenticationInitiated event.
@@ -27,8 +27,8 @@ import (
 //
 // The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
 //
+// [Connect Customer Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 // [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
-// [Amazon Connect Chat security best practices]: https://docs.aws.amazon.com/connect/latest/adminguide/security-best-practices.html#bp-security-chat
 func (c *Client) GetAuthenticationUrl(ctx context.Context, params *GetAuthenticationUrlInput, optFns ...func(*Options)) (*GetAuthenticationUrlOutput, error) {
 	if params == nil {
 		params = &GetAuthenticationUrlInput{}

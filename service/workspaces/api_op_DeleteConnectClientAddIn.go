@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a client-add-in for Amazon Connect that is configured within a
+// Deletes a client-add-in for Connect Customer that is configured within a
 // directory.
 func (c *Client) DeleteConnectClientAddIn(ctx context.Context, params *DeleteConnectClientAddInInput, optFns ...func(*Options)) (*DeleteConnectClientAddInOutput, error) {
 	if params == nil {

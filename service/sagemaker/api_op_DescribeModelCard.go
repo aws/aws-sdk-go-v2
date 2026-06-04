@@ -14,6 +14,12 @@ import (
 
 // Describes the content, creation time, and security configuration of an Amazon
 // SageMaker Model Card.
+//
+// To retrieve only metadata about a model card without requiring kms:Decrypt
+// permission on the associated customer-managed Amazon Web Services KMS key, set
+// IncludedData to MetadataOnly . The default is AllData , which returns the full
+// model card Content and requires kms:Decrypt permission when a customer-managed
+// key is configured.
 func (c *Client) DescribeModelCard(ctx context.Context, params *DescribeModelCardInput, optFns ...func(*Options)) (*DescribeModelCardOutput, error) {
 	if params == nil {
 		params = &DescribeModelCardInput{}
@@ -36,6 +42,22 @@ type DescribeModelCardInput struct {
 	// This member is required.
 	ModelCardName *string
 
+	// Specifies the level of model card data to include in the response. Use this
+	// parameter to call DescribeModelCard without requiring kms:Decrypt permission on
+	// the customer-managed Amazon Web Services KMS key.
+	//
+	//   - AllData : Returns the full model card Content . This option requires
+	//   kms:Decrypt permission on the customer-managed key, if one is associated with
+	//   the model card. This is the default.
+	//
+	//   - MetadataOnly : Returns the model card with sanitized Content that includes
+	//   only a small set of unencrypted metadata fields. This option does not require
+	//   kms:Decrypt permission. For the list of fields preserved in the response, see
+	//   Content .
+	//
+	// If you don't specify a value, SageMaker returns AllData .
+	IncludedData types.IncludedData
+
 	// The version of the model card to describe. If a version is not provided, then
 	// the latest version of the model card is described.
 	ModelCardVersion *int32
@@ -45,7 +67,28 @@ type DescribeModelCardInput struct {
 
 type DescribeModelCardOutput struct {
 
-	// The content of the model card.
+	// The content of the model card. Content is provided as a string in the [model card JSON schema].
+	//
+	// When you set IncludedData to MetadataOnly in the request, SageMaker returns a
+	// sanitized version of Content that includes only the following JSON paths, when
+	// present in the model card:
+	//
+	//   - model_overview.model_id
+	//
+	//   - model_overview.model_name
+	//
+	//   - intended_uses.risk_rating
+	//
+	//   - model_package_details.model_package_group_name
+	//
+	//   - model_package_details.model_package_arn
+	//
+	// All other fields are removed from Content when IncludedData is MetadataOnly ,
+	// including model description, training details, evaluation details, business
+	// details, and additional information. To retrieve the complete Content , set
+	// IncludedData to AllData or omit the parameter.
+	//
+	// [model card JSON schema]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html#model-cards-json-schema
 	//
 	// This member is required.
 	Content *string

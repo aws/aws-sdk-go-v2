@@ -1865,6 +1865,25 @@ func (ResourceValueType) Values() []ResourceValueType {
 	}
 }
 
+type RuleEvaluationVisibility string
+
+// Enum values for RuleEvaluationVisibility
+const (
+	RuleEvaluationVisibilityExternal RuleEvaluationVisibility = "EXTERNAL"
+	RuleEvaluationVisibilityInternal RuleEvaluationVisibility = "INTERNAL"
+)
+
+// Values returns all known values for RuleEvaluationVisibility. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RuleEvaluationVisibility) Values() []RuleEvaluationVisibility {
+	return []RuleEvaluationVisibility{
+		"EXTERNAL",
+		"INTERNAL",
+	}
+}
+
 type SortBy string
 
 // Enum values for SortBy

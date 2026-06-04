@@ -1,0 +1,8 @@
+{
+    "id": "585ebd28-b7ac-4f41-875f-3c093838fc81",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/route53recoveryreadiness"
+    ]
+}

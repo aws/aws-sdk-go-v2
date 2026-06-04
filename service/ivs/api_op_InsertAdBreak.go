@@ -41,7 +41,7 @@ type InsertAdBreakInput struct {
 	// This member is required.
 	ChannelArn *string
 
-	// Maximum duration of the ad break, in seconds.
+	// Duration of the ad break, in seconds.
 	//
 	// This member is required.
 	DurationSeconds *int32

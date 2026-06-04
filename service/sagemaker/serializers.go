@@ -44318,6 +44318,11 @@ func awsAwsjson11_serializeOpDocumentDescribeModelCardInput(v *DescribeModelCard
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.IncludedData) > 0 {
+		ok := object.Key("IncludedData")
+		ok.String(string(v.IncludedData))
+	}
+
 	if v.ModelCardName != nil {
 		ok := object.Key("ModelCardName")
 		ok.String(*v.ModelCardName)
@@ -44370,6 +44375,11 @@ func awsAwsjson11_serializeOpDocumentDescribeModelPackageGroupInput(v *DescribeM
 func awsAwsjson11_serializeOpDocumentDescribeModelPackageInput(v *DescribeModelPackageInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if len(v.IncludedData) > 0 {
+		ok := object.Key("IncludedData")
+		ok.String(string(v.IncludedData))
+	}
 
 	if v.ModelPackageName != nil {
 		ok := object.Key("ModelPackageName")

@@ -1,0 +1,8 @@
+{
+    "id": "0cdb65bc-b90d-4300-943e-33c45f06e1be",
+    "type": "feature",
+    "description": "Adding new BDD representation of endpoint ruleset",
+    "modules": [
+        "service/chimesdkvoice"
+    ]
+}

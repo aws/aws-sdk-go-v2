@@ -29,7 +29,11 @@ func (c *Client) CreateAdConfiguration(ctx context.Context, params *CreateAdConf
 
 type CreateAdConfigurationInput struct {
 
-	// List of integration configurations with media tailor resources.
+	// List of integration configurations with MediaTailor resources. The first item
+	// in the list is the default playback configuration used for the ad configuration.
+	// To select a different configuration per viewing session, see [Generate and Sign IVS Playback Tokens].
+	//
+	// [Generate and Sign IVS Playback Tokens]: https://docs.aws.amazon.com/ivs/latest/LowLatencyUserGuide/private-channels-generate-tokens.html
 	//
 	// This member is required.
 	MediaTailorPlaybackConfigurations []types.MediaTailorPlaybackConfiguration
