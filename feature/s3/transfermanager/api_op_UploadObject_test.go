@@ -1099,6 +1099,7 @@ func TestUploadWithContextCanceledWhenUploadPart(t *testing.T) {
 	}
 	u := New(c, func(o *Options) {
 		o.FailTimeout = 5 * time.Second
+		o.Concurrency = 1
 	})
 
 	_, err := u.UploadObject(ctx, &UploadObjectInput{
