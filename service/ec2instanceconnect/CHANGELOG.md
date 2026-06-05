@@ -1,3 +1,7 @@
+# v1.33.1 (2026-06-05.2)
+
+* **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.
+
 # v1.33.0 (2026-06-04)
 
 * **Feature**: Adding new BDD representation of endpoint ruleset

@@ -1,3 +1,7 @@
+# v1.42.1 (2026-06-05.2)
+
+* **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.
+
 # v1.42.0 (2026-06-05)
 
 * **Feature**: Adds support for updating max capacity and custom fields while application is started

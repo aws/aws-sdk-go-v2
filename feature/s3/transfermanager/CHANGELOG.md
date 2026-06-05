@@ -1,3 +1,7 @@
+# v0.2.8 (2026-06-05.2)
+
+* **Bug Fix**: Fix the concurrent reader to return cached read error instead of panic when called again
+
 # v0.2.7 (2026-06-05)
 
 * **Bug Fix**: Fix upload object flaky test to avoid repeat closing test ctx channel

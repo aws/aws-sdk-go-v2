@@ -1,3 +1,7 @@
+# v1.34.5 (2026-06-05.2)
+
+* **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.
+
 # v1.34.4 (2026-06-04)
 
 * **Dependency Update**: Update to smithy-go v1.27.1 to fix several union-related deserialization bugs in schema-serde-enabled services.

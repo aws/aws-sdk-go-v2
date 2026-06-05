@@ -1,3 +1,7 @@
+# v1.3.1 (2026-06-05.2)
+
+* **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.
+
 # v1.3.0 (2026-06-04)
 
 * **Feature**: AWS Wickr now allows network administrators to configure a maximum session duration for non-SSO users in security groups, and display customizable consent popups to users at login for terms of use or compliance acknowledgements.

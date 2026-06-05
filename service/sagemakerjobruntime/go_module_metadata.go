@@ -3,4 +3,4 @@
 package sagemakerjobruntime
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.0.2"
+const goModuleVersion = "1.0.3"

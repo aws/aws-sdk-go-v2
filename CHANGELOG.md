@@ -1,3 +1,12 @@
+# Release (2026-06-05.2)
+
+## General Highlights
+* **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/feature/s3/transfermanager`: [v0.2.8](feature/s3/transfermanager/CHANGELOG.md#v028-2026-06-052)
+  * **Bug Fix**: Fix the concurrent reader to return cached read error instead of panic when called again
+
 # Release (2026-06-05)
 
 ## General Highlights

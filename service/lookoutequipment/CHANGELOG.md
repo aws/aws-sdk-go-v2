@@ -1,3 +1,7 @@
+# v1.37.6 (2026-06-05.2)
+
+* **Bug Fix**: Undo the initial wave of schema-serde releases due to several customer-reported regressions.
+
 # v1.37.5 (2026-06-04.2)
 
 * **Bug Fix**: Fixed a schema-serde bug where required, default-value input members weren't serialized.
