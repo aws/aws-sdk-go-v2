@@ -1091,10 +1091,8 @@ func TestUploadWithContextCanceledWhenUploadPart(t *testing.T) {
 	ctx.Error = fmt.Errorf("error that should not occur in output")
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
 	var index atomic.Int64
-
 	var once sync.Once
 	c.UploadPartFn = func(context.Context, *s3testing.TransferManagerLoggingClient, *s3.UploadPartInput) (out *s3.UploadPartOutput, err error) {
-		fmt.Println("upload part ", index.Load())
 		if i := index.Load(); i > 0 {
 			once.Do(func() {
 				close(ctx.DoneCh)
