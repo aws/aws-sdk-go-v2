@@ -64,7 +64,9 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 MiddlewareRegistrar.builder()
                                         .resolvedFunction(buildPackageSymbol("addClientRequestID"))
                                         .build()
-                        ).build(),
+                        )
+                        .isCommon(true)
+                        .build(),
 
                 // Add ContentLengthMiddleware to operation stack
                 RuntimeClientPlugin.builder()
@@ -159,6 +161,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                         buildPackageSymbol("c")
                                 ))
                                 .build())
+                        .isCommon(true)
                         .build(),
 
                 // Add middleware to store raw response omn metadata
@@ -167,7 +170,9 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 MiddlewareRegistrar.builder()
                                         .resolvedFunction(buildPackageSymbol("addRawResponseToMetadata"))
                                         .build()
-                        ).build(),
+                        )
+                        .isCommon(true)
+                        .build(),
 
                 // Add recordResponseTiming middleware to operation stack
                 RuntimeClientPlugin.builder()
@@ -175,7 +180,8 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                 MiddlewareRegistrar.builder()
                                         .resolvedFunction(buildPackageSymbol("addRecordResponseTiming"))
                                         .build()
-                        ).build(),
+                        )
+                        .build(),
 
                 // wrap the retry loop in a span
                 RuntimeClientPlugin.builder()
@@ -184,7 +190,9 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                         .resolvedFunction(buildPackageSymbol("addSpanRetryLoop"))
                                         .useClientOptions()
                                         .build()
-                        ).build(),
+                        )
+                        .isCommon(true)
+                        .build(),
 
                 // Add Client UserAgent
                 RuntimeClientPlugin.builder()
@@ -193,6 +201,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                                         AwsClientUserAgent.MIDDLEWARE_RESOLVER).build())
                                 .useClientOptions()
                                 .build())
+                        .isCommon(true)
                         .build(),
 
                 // Add REST-JSON Content-Type Adjuster
@@ -270,7 +279,7 @@ public class AssembleMiddlewareStack implements GoIntegration {
                 }
 
                 func addComputeContentLength(stack *middleware.Stack) error {
-                    return stack.Build.Add(&smithyhttp.ComputeContentLength{}, middleware.After)
+                    return stack.Build.Insert(&smithyhttp.ComputeContentLength{}, "ClientRequestID", middleware.After)
                 }
 
                 func addRawResponseToMetadata(stack *middleware.Stack) error {
