@@ -13,6 +13,8 @@ import (
 	"slices"
 	"strconv"
 	"strings"
+	"sync"
+	"sync/atomic"
 	"testing"
 	"time"
 
@@ -1086,20 +1088,26 @@ func TestUploadWithContextCanceled(t *testing.T) {
 
 func TestUploadWithContextCanceledWhenUploadPart(t *testing.T) {
 	ctx := &awstesting.FakeContext{DoneCh: make(chan struct{})}
-	ctx.Error = fmt.Errorf("context canceled error which shouldn't be returned finally")
+	ctx.Error = fmt.Errorf("error that should not occur in output")
 	c, invocations, _ := s3testing.NewUploadLoggingClient(nil)
-	index := 0
-	c.UploadPartFn = func(context.Context, *s3testing.TransferManagerLoggingClient, *s3.UploadPartInput) (*s3.UploadPartOutput, error) {
-		if index > 0 {
-			close(ctx.DoneCh)
-			return &s3.UploadPartOutput{}, fmt.Errorf("upload part error due to context canceled")
+	var index atomic.Int64
+
+	var once sync.Once
+	c.UploadPartFn = func(context.Context, *s3testing.TransferManagerLoggingClient, *s3.UploadPartInput) (out *s3.UploadPartOutput, err error) {
+		fmt.Println("upload part ", index.Load())
+		if i := index.Load(); i > 0 {
+			once.Do(func() {
+				close(ctx.DoneCh)
+				out = &s3.UploadPartOutput{}
+				err = fmt.Errorf("upload part error due to context canceled")
+			})
 		}
-		index++
-		return &s3.UploadPartOutput{}, nil
+		out = &s3.UploadPartOutput{}
+		index.Add(1)
+		return
 	}
 	u := New(c, func(o *Options) {
 		o.FailTimeout = 5 * time.Second
-		o.Concurrency = 1
 	})
 
 	_, err := u.UploadObject(ctx, &UploadObjectInput{
@@ -1111,13 +1119,16 @@ func TestUploadWithContextCanceledWhenUploadPart(t *testing.T) {
 		t.Fatalf("expect error, got nil")
 	}
 	if e, a := "upload part error due to context canceled", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expected error message to contain %q, but did not %q", e, a)
-	} else if noe := "context canceled error which shouldn't be returned finally"; strings.Contains(a, noe) {
-		t.Errorf("expect %q to not be within %q", noe, a)
+		t.Errorf("expected %q to be within %q", e, a)
+	} else if e = "error that should not occur in output"; strings.Contains(a, e) {
+		t.Errorf("expect %q to not be within %q", e, a)
 	}
 
-	if diff := cmpDiff([]string{"CreateMultipartUpload", "UploadPart", "UploadPart", "AbortMultipartUpload"}, *invocations); len(diff) > 0 {
-		t.Error(diff)
+	withTwo := []string{"CreateMultipartUpload", "UploadPart", "UploadPart", "AbortMultipartUpload"}
+	// third chunk might reach s3 client due to concurrency
+	withThree := []string{"CreateMultipartUpload", "UploadPart", "UploadPart", "UploadPart", "AbortMultipartUpload"}
+	if !reflect.DeepEqual(withTwo, *invocations) && !reflect.DeepEqual(withThree, *invocations) {
+		t.Errorf("expect either %v or %v, but got %v", withTwo, withThree, *invocations)
 	}
 }
 
